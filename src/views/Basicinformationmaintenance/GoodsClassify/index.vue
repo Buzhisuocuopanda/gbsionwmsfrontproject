@@ -29,21 +29,20 @@
                         <hr />
                         <div class="shangponfenlei-middle">
                             <el-row>
-                                <el-col>
-                                    <el-form-item label="分类编号" prop="cbpa11" 
-                                        >
-                                        <el-input v-model="form.cbpa11" maxlength="30" style="width: 400px;"
+                                <el-col style="margin-left: 120px;">
+                                    <el-form-item label="分类编号" prop="cbpa11">
+                                        <el-input v-model="form.cbpa11" maxlength="30" style="width: 400px;border:solid #eee thin;"
                                              />
                                     </el-form-item>
                                 </el-col>
-                                <el-col>
+                                <el-col style="margin-left: 120px;">
                                     <el-form-item label="名称" prop="cbpa07" >
-                                        <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;" />
+                                        <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;border:solid #eee thin;" />
                                     </el-form-item>
                                 </el-col>
                                 <el-col v-if="false">
                                     <el-form-item label="id" prop="cbpa09" >
-                                        <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
+                                        <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;border:solid #eee thin;" />
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -215,12 +214,12 @@ export default {
             ClassifyTreeselect().then(response => {
                 console.log(response.data, 123)
                 response.data.forEach((res) => {
-                    res.code = res.label ? res.label.substring(res.label.indexOf("~") + 1) : ""
-                    res.label = res.label ? res.label.substring(0, res.label.indexOf("~")) : ""
+                    res.code = res.label ? res.label.substring(res.label.indexOf("-") + 1) : ""
+                    res.label = res.label ? res.label.substring(0, res.label.indexOf("-")) : ""
                     if (res.children) {
                         res.children.forEach((i) => {
-                            i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
-                            i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
+                            i.code = i.label ? i.label.substring(i.label.indexOf("-") + 1) : ""
+                            i.label = i.label ? i.label.substring(0, i.label.indexOf("-")) : ""
                         })
                     }
                 })
@@ -242,16 +241,16 @@ export default {
             // console.log(data.label,88888);
             // const v1=data.label.substring(0, data.label.indexOf("-"));
             this.form.cbpa11 = "";
-            for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
+            for (let i = 0; i < (data.code.split("-")).length - 1; i++) {
                 if (i != 0) {
-                    this.form.cbpa11 += ("~" + (data.code.split("~"))[i])
+                    this.form.cbpa11 += ("-" + (data.code.split("-"))[i])
                 } else {
-                    this.form.cbpa11 += (data.code.split("~"))[i]
+                    this.form.cbpa11 += (data.code.split("-"))[i]
                 }
             }
             // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
             this.form.cbpa07 = data.label
-            this.form.cbpa09 = (data.code.split("~"))[data.code.split("~").length - 1]
+            this.form.cbpa09 = (data.code.split("-"))[data.code.split("-").length - 1]
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
             this.handleQuery();
         },

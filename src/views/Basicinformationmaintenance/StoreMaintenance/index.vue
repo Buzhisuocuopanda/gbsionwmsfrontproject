@@ -16,7 +16,7 @@
                         </el-button>
                         <!-- <el-button type="danger" class="biaoto-buttonshanchu" @click="handleDelete">删除</el-button> -->
 
-                        <el-button type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
                             v-hasPermi="['system:user:remove']">删除
                         </el-button>
 
@@ -27,24 +27,24 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table v-loading="loading" height="600" :data="userList"
+                <el-table border :header-cell-style="headClassSM" v-loading="loading" height="600" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="库位码" align="center" key="cbla09" prop="cbla09" sortable />
-                    <el-table-column label="库位容量" align="center" key="cbla11" prop="cbla11" locationNum />
-                    <el-table-column label="库位顺序" align="center" key="cbla07" prop="cbla07" sortable />
-                    <el-table-column label="空" align="center" key="cbla10" prop="cbla10" sortable />
-                    <el-table-column label="空" align="center" key="cbla12" prop="cbla12" sortable />
-                    <el-table-column label="空" align="center" key="cbla13" prop="cbla13" sortable />
-                    <el-table-column label="状态" align="center" key="cbla08" prop="cbla08" sortable />
-                    <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+                    <el-table-column label="库位码" align="left" key="cbla09" prop="cbla09" sortable />
+                    <el-table-column label="库位容量" align="left" key="cbla11" prop="cbla11" locationNum />
+                    <el-table-column label="库位顺序" align="left" key="cbla07" prop="cbla07" sortable />
+                    <el-table-column label="空" align="left" key="cbla10" prop="cbla10" sortable />
+                    <el-table-column label="空" align="left" key="cbla12" prop="cbla12" sortable />
+                    <el-table-column label="空" align="left" key="cbla13" prop="cbla13" sortable />
+                    <el-table-column label="状态" align="left" key="cbla08" prop="cbla08" sortable />
+                    <el-table-column label="操作" align="left" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
                                 @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -148,7 +148,7 @@
                         <el-form-item label="状态:" prop="cbla08">
                             <!-- <el-input v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
                                 maxlength="30" /> -->
-                            <el-select v-model="form.cbla08" placeholder="" style="width:77%">
+                            <el-select v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;">
                                 <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
                                     :value="item.label">
                                 </el-option>
@@ -169,43 +169,43 @@
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="库位码" prop="cbla09">
-                            <el-input v-model="form1.cbla09" placeholder="" maxlength="30" />
+                            <el-input v-model="form1.cbla09" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="库位顺序" prop="cbla07">
-                            <el-input v-model="form1.cbla07" placeholder="" maxlength="30" />
+                            <el-input v-model="form1.cbla07" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="库位容量" prop="cbla11">
-                            <el-input v-model="form1.cbla11" placeholder="" maxlength="30" />
+                            <el-input v-model="form1.cbla11" placeholder="" maxlength="30" style="border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="空" prop="cbla10">
-                            <el-input v-model="form1.cbla10" placeholder="" maxlength="30" />
+                            <el-input v-model="form1.cbla10" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="空" prop="cbla12">
-                            <el-input v-model="form1.cbla12" placeholder="" maxlength="30" />
+                            <el-input v-model="form1.cbla12" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="空" prop="cbla13">
-                            <el-input v-model="form1.cbla13" placeholder="" maxlength="30" />
+                            <el-input v-model="form1.cbla13" placeholder="" maxlength="30" style="border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="状态" prop="cbla08">
-                            <el-input v-model="form1.cbla08" placeholder="" maxlength="30" />
+                            <el-input v-model="form1.cbla08" placeholder="" maxlength="30" style="border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -269,7 +269,7 @@
                         <el-form-item label="状态:" prop="cbla08">
                             <!-- <el-input v-model="form2.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
                                 maxlength="30" id="shurukuangnr" /> -->
-                            <el-select v-model="form2.cbla08" placeholder="" style="width:77%">
+                            <el-select v-model="form2.cbla08" placeholder="" style="width:77%;style="border:solid #eee thin;"">
                                 <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
                                     :value="item.label">
                                 </el-option>
@@ -543,6 +543,14 @@ export default {
         // this.form.type = this.dict[0].label;
     },
     methods: {
+      //列表表头设置
+      headClassSM() {
+        return {
+          'text-align': 'left',
+          height: '30px',
+          padding: '0'
+        }
+      },
         selected(name) {
             console.log(name, 123456)
             this.form.aaa = name.substring(0, name.indexOf("-"))
@@ -718,7 +726,7 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                      
+
                         this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
@@ -889,7 +897,7 @@ export default {
             // row.upc = this.form.upc;
             // row.description = this.form.description;
             // row.ifEnabled = this.form.ifEnabled;
-            // row.id=this.form.id;   
+            // row.id=this.form.id;
             this.userIds = {}
             // let userIds = [row.id].length > 0 ? [row.id] :this.ids;
             let userIds = this.ids.length > 0 ? this.ids : row
@@ -902,7 +910,7 @@ export default {
             // }
             // console.log(a,456)
             // // console.log(JSON.stringify(userIds),123456852)
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.StoreRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -925,6 +933,26 @@ export default {
 
 
         },
+
+      /** 普通删除按钮操作 */
+      handleDelete01(row) {
+
+        // row.classifyId = this.form.classifyId;
+        // row.brand = this.form.brand;
+        // row.model = this.form.model;
+        // row.upc = this.form.upc;
+        // row.description = this.form.description;
+        // row.ifEnabled = this.form.ifEnabled;
+        // row.id=this.form.id;
+        // console.log(row, 2222);
+        this.$modal.confirm('是否确认删除ID为"' + row.cbla01 + '"的数据项？').then(function () {
+          return StoreRemove(JSON.stringify(row));
+        }).then((response) => {
+          this.submitShangpin();
+          this.getList();
+          this.$modal.msgSuccess("删除成功");
+        }).catch(() => { });
+      },
         /** 导出按钮操作 */
         handleExport() {
             this.download('/system/store/export', {

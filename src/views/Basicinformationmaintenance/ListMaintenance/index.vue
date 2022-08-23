@@ -8,35 +8,35 @@
                     label-width="68px">
                     <el-form-item prop="typeName">
                         <el-input v-model="queryParams.typeName" id="miaoshu" placeholder="请输入类别" clearable
-                            style="width: 240px" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button>
 
-                        <el-button type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
+                        <el-button size="mini"  type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
                             v-hasPermi="['system:user:remove']">删除
                         </el-button>
 
                     </el-form-item>
                 </el-form>
 
-                <el-table v-loading="loading" height="600" :data="userList"
+                <el-table border :header-cell-style="headClassLM" v-loading="loading" height="600" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="名称" align="center" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="名称" align="left" key="cala08" prop="cala08" sortable />
                     <!-- <el-table-column label="名称1" align="center" key="cala09" prop="cala09" locationNum /> -->
-                    <el-table-column label="类别" align="center" key="cala10" prop="cala10" sortable />
-                    <el-table-column label="联系电话" align="center" key="cala11" prop="cala11" sortable />
-                    <el-table-column label="从事业务范围" align="center" key="cala12" prop="cala12" sortable />
+                    <el-table-column label="类别" align="left" key="cala10" prop="cala10" sortable />
+                    <el-table-column label="联系电话" align="left" key="cala11" prop="cala11" sortable />
+                    <el-table-column label="从事业务范围" align="left" key="cala12" prop="cala12" sortable />
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
                                 @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -57,12 +57,12 @@
                 <el-row>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称" prop="cala08">
-                            <el-input v-model="form.cala08" maxlength="30" style="width:50%" />
+                            <el-input v-model="form.cala08" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称1" prop="cala09">
-                            <el-input v-model="form.cala09" placeholder="" maxlength="30" style="width:50%" />
+                            <el-input v-model="form.cala09" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -70,7 +70,7 @@
                     <el-col style="margin-top:1%;">
                         <el-form-item label="类别" prop="cala10">
                             <!-- <el-input v-model="form.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
-                            <el-select v-model="form.cala10" placeholder="" style="width:50%">
+                            <el-select v-model="form.cala10" placeholder="" style="width:50%;border:solid #eee thin;">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
                             </el-select>
@@ -78,14 +78,14 @@
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="联系电话" prop="cala11">
-                            <el-input v-model="form.cala11" placeholder="" maxlength="30" style="width:50%" />
+                            <el-input v-model="form.cala11" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="从事业务范围" prop="cala12">
-                            <el-input v-model="form.cala12" placeholder="" maxlength="30" style="width:50%" />
+                            <el-input v-model="form.cala12" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -102,31 +102,31 @@
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="类别" prop="cala08">
-                            <el-input v-model="form1.cala08" placeholder="请输入类别" maxlength="30" style="width:75%" />
+                            <el-input v-model="form1.cala08" placeholder="请输入类别" maxlength="30" style="width:75%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="类别名称" prop="cala09">
-                            <el-input v-model="form1.cala09" placeholder="请输入类别名称" maxlength="30" style="width:75%" />
+                            <el-input v-model="form1.cala09" placeholder="请输入类别名称" maxlength="30" style="width:75%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="索引" prop="cala10">
-                            <el-input v-model="form1.cala10" placeholder="请输入索引" maxlength="30" style="width:75%" />
+                            <el-input v-model="form1.cala10" placeholder="请输入索引" maxlength="30" style="width:75%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="名称" prop="cala11">
-                            <el-input v-model="form1.cala11" placeholder="请输入名称" maxlength="30" style="width:75%" />
+                            <el-input v-model="form1.cala11" placeholder="请输入名称" maxlength="30" style="width:75%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="索引" prop="cala12">
-                            <el-input v-model="form1.cala12" placeholder="请输入索引" maxlength="30" style="width:75%" />
+                            <el-input v-model="form1.cala12" placeholder="请输入索引" maxlength="30" style="width:75%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -143,16 +143,16 @@
                 <span style="font-size:20px;">列表管理</span>
                 <hr />
             </div>
-            <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;">
+            <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;border:solid #eee thin;">
                 <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称:" prop="cala08">
-                            <el-input v-model="form2.cala08" placeholder="" maxlength="30" style="width:50%" />
+                            <el-input v-model="form2.cala08" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称1:" prop="cala09">
-                            <el-input v-model="form2.cala09" placeholder="" maxlength="30" style="width:50%" />
+                            <el-input v-model="form2.cala09" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -160,7 +160,7 @@
                     <el-col style="margin-top:1%;">
                         <el-form-item label="类别:" prop="cala10">
                             <!-- <el-input v-model="form2.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
-                            <el-select v-model="form2.cala10" placeholder="" style="width:50%">
+                            <el-select v-model="form2.cala10" placeholder="" style="width:50%;border:solid #eee thin;">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
                             </el-select>
@@ -170,12 +170,12 @@
                 <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
                         <el-form-item label="联系电话:" prop="cala11">
-                            <el-input v-model="form2.cala11" placeholder="" maxlength="30" style="width:50%" />
+                            <el-input v-model="form2.cala11" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="从事业务范围:" prop="cala12">
-                            <el-input v-model="form2.cala12" placeholder="" maxlength="30" style="width:50%" />
+                            <el-input v-model="form2.cala12" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -385,6 +385,14 @@ export default {
         // this.form2.ifEnabled = this.ifEnabledoptions[0].label;
     },
     methods: {
+      //列表表头设置
+      headClassLM() {
+        return {
+          'text-align': 'left',
+          height: '30px',
+          padding: '0'
+        }
+      },
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -681,7 +689,7 @@ export default {
             // row.upc = this.form.upc;
             // row.description = this.form.description;
             // row.ifEnabled = this.form.ifEnabled;
-            // row.id=this.form.id;   
+            // row.id=this.form.id;
             this.userIds = {}
             // let userIds = [row.id].length > 0 ? [row.id] :this.ids;
             let userIds = this.ids.length > 0 ? this.ids : row
@@ -694,7 +702,7 @@ export default {
             // }
             // console.log(a,456)
             // // console.log(JSON.stringify(userIds),123456852)
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.ListRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -718,6 +726,26 @@ export default {
 
 
         },
+
+      /** 普通删除按钮操作 */
+      handleDelete01(row) {
+
+        // row.classifyId = this.form.classifyId;
+        // row.brand = this.form.brand;
+        // row.model = this.form.model;
+        // row.upc = this.form.upc;
+        // row.description = this.form.description;
+        // row.ifEnabled = this.form.ifEnabled;
+        // row.id=this.form.id;
+        // console.log(row, 2222);
+        this.$modal.confirm('是否确认删除ID为"' + row.cala01 + '"的数据项？').then(function () {
+          return ListRemove(JSON.stringify(row));
+        }).then((response) => {
+          this.submitShangpin();
+          this.getList();
+          this.$modal.msgSuccess("删除成功");
+        }).catch(() => { });
+      },
         /** 导出按钮操作 */
         handleExport() {
             this.download('/system/classify/SwJsGoodsClassifyimportTemplate', {

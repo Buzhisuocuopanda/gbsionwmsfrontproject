@@ -6,15 +6,20 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                    <el-form-item label="创建时间">
-                        <el-date-picker v-model="housingTime" style="width: 240px" value-format="yyyy-MM-dd"
-                            type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期">
-                        </el-date-picker>
-                    </el-form-item>
-                    <el-form-item prop="sn">
-                        <el-input v-model="queryParams.sn" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
+                  <el-form-item prop="cbsa08" label="供应商">
+                    <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
+                              style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                  </el-form-item>
+                  <el-form-item prop="cbwa09" label="仓库">
+                    <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                              style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                  </el-form-item>
+                  <el-form-item label="创建时间" style="margin-left:1%;">
+                    <el-date-picker :size="mini" v-model="dateRange" type="daterange"
+                                    :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                                    range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+                    </el-date-picker>
+                  </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
@@ -517,6 +522,7 @@ export default {
             // 默认密码
             initPassword: undefined,
             // 日期范围
+             dateRange:[],
             housingTime: [],
             // 供应商选项
             postOptions: [],
@@ -692,8 +698,10 @@ export default {
                 page: 1,
                 size: 10,
                 total: this.total,
-                name: undefined,
-                address: undefined
+              cbpc07:undefined,
+              cbsa08:undefined,
+              cbwa09:undefined,
+              dateRange:undefined
             },
             // 列信息
             //  columns: [
@@ -715,7 +723,118 @@ export default {
                     { required: true, message: "金额不能为空!", trigger: "blur" }
                 ]
             },
-
+          pickerOptions: {
+            shortcuts: [{
+              text: '今日',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime());
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '昨日',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24);
+                picker.$emit('pick', [start, start]);
+              }
+            }, {
+              text: '本周',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                let day = start.getDay();
+                let date = start.getDate();
+                if (day != 0) {
+                  start.setDate(date - (day - 1));
+                }
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '上周',
+              onClick(picker) {
+                var oDate = new Date()
+                oDate.setTime(oDate.getTime() - 3600 * 1000 * 24 * 7);
+                let day = oDate.getDay()
+                let start = new Date(),
+                  end = new Date();
+                if (day == 0) {
+                  start.setDate(oDate.getDate());
+                  end.setDate(oDate.getDate() + 6);
+                } else {
+                  start.setTime(oDate.getTime() - 3600 * 1000 * 24 * (day - 1));
+                  end.setTime(oDate.getTime() + 3600 * 1000 * 24 * (7 - day));
+                }
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '本月',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setDate(1);
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '上月',
+              onClick(picker) {
+                var oDate = new Date()
+                let year = oDate.getFullYear();
+                let month = oDate.getMonth();
+                let start, end;
+                if (month == 0) {
+                  year--
+                  start = new Date(year, 11, 1)
+                  end = new Date(year, 11, 31)
+                } else {
+                  start = new Date(year, month - 1, 1)
+                  end = new Date(year, month, 0);
+                }
+                picker.$emit('pick', [start, end]);
+              }
+            },
+              {
+                text: '本季度',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                  picker.$emit('pick', [start, end]);
+                }
+              }, {
+                text: '上季度',
+                onClick(picker) {
+                  var oDate = new Date()
+                  let year = oDate.getFullYear();
+                  let month = oDate.getMonth() + 1;
+                  let n = Math.ceil(month / 3); // 季度，上一个季度则-1
+                  let prevN = n - 1;
+                  if (n == 1) {
+                    year--
+                    prevN = 4;
+                  }
+                  month = prevN * 3; // 月份
+                  const start = new Date(year, month - 3, 1);
+                  const end = new Date(year, month, 0);
+                  picker.$emit('pick', [start, end]);
+                }
+              },
+              {
+                text: '本年',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setMonth(0);
+                  start.setDate(1);
+                  picker.$emit('pick', [start, end]);
+                }
+              }
+            ]
+          },
+          // value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+          daterange: ''
         };
     },
     watch: {

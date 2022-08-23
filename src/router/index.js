@@ -52,7 +52,7 @@ export const constantRoutes = [
     component: () => import('@/views/register'),
     hidden: true
   },
-  
+
   {
     path: '/404',
     component: () => import('@/views/error/404'),
@@ -134,7 +134,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpc01(\\d+)',
+        path: 'role/:cbsb01(\\d+)',
          name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentxq/index'),
         meta: { title: '销售出库详情', activeMenu: '/Warehousemanagement/SalesShipment' }

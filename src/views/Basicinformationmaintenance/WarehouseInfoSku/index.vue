@@ -8,41 +8,41 @@
                     label-width="68px">
                     <el-form-item prop="name">
                         <el-input v-model="queryParams.name" id="miaoshu" placeholder="请输入仓库名称" clearable
-                            style="width: 240px" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button>
-                        <el-button type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
                             v-hasPermi="['system:user:remove']">删除
                         </el-button>
                     </el-form-item>
                 </el-form>
 
-                <el-table v-loading="loading" height="600" :data="userList"
+                <el-table border :header-cell-style="headClassWSS" v-loading="loading" height="600" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92%;height: 8%; margin-left:-1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="仓库名称" align="center" key="cbwa09" prop="cbwa09" sortable />
-                    <el-table-column label="仓库类型" align="center" key="cbwa11" prop="cbwa11" sortable>
+                    <el-table-column label="仓库名称" align="left" key="cbwa09" prop="cbwa09" sortable />
+                    <el-table-column label="仓库类型" align="left" key="cbwa11" prop="cbwa11" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.type == 1 ? "普通仓库" : scope.row.type == 2 ? "CDC仓库" : "仓库未知" }}
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="出库优先级" align="center" key="cbwa07" prop="cbwa07" sortable>
+                    <el-table-column label="出库优先级" align="left" key="cbwa07" prop="cbwa07" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa07 <= 1 ? "优先出库" : "正常出库" }} </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="商品管理方式" align="center" key="cbwa12" prop="cbwa12" sortable>
+                    <el-table-column label="商品管理方式" align="left" key="cbwa12" prop="cbwa12" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa12 == 1 ? "条码管理" : scope.row.cbwa12 == 2 ? "数量管理" : "管理方式未知"
                             }}
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="是否启用总订单" align="center" key="cbwa13" prop="cbwa13" sortable>
+                    <el-table-column label="是否启用总订单" align="left" key="cbwa13" prop="cbwa13" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa13 == 1 ? "是" : scope.row.cbwa13 == 0 ?
                             "否" : "状态不确定"
@@ -50,7 +50,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="是否启用提货单" align="center" key="cbwa14" prop="cbwa14" sortable>
+                    <el-table-column label="是否启用提货单" align="left" key="cbwa14" prop="cbwa14" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa14 == 1 ? "是" : scope.row.cbwa14 == 0 ? "否" :
                             "状态不确定"
@@ -58,7 +58,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="是否启用" align="center" key="cbwa08" prop="cbwa08" sortable>
+                    <el-table-column label="是否启用" align="left" key="cbwa08" prop="cbwa08" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa15 == -1 ? "启用" : scope.row.cbwa15 == 1 ? "禁用" : "状态不确定" }}
                             </div>
@@ -70,7 +70,7 @@
                                 @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button>
                         </template>
@@ -92,12 +92,12 @@
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
-                                <el-input v-model="form.cbwa09" placeholder="" maxlength="30" style="width:55%" />
+                                <el-input v-model="form.cbwa09" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             </el-form-item>
                         </el-col>
                         <el-col>
                             <el-form-item label="名称1:" prop="cbwa10">
-                                <el-input v-model="form.cbwa10" placeholder="" maxlength="30" style="width:55%" />
+                                <el-input v-model="form.cbwa10" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                                 <!-- <el-select v-model="cangkuxialakuang.enableTotalOrder" placeholder="请选择类型"
                                     style="width:55%">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
@@ -109,12 +109,12 @@
                     <el-row>
                         <el-col>
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form.cbwa07" maxlength="30" style="width:55%" />
+                                <el-input v-model="form.cbwa07" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             </el-form-item>
                         </el-col>
                         <el-col>
                             <el-form-item label="状态:" prop="cbwa08">
-                                <el-input v-model="form.cbwa08" maxlength="30" style="width:55%" />
+                                <el-input v-model="form.cbwa08" maxlength="30" style="width:55%;border:solid #eee thin;" />
                                 <!-- <el-select v-model="cangkuxialakuang.type" placeholder="请选择类型" style="width:55%">
                                     <el-option v-for="dict in dict.type.sw_js_store_type" :key="dict.value"
                                         :label="dict.label" :value="dict.value"></el-option>
@@ -131,7 +131,7 @@
                     <el-row>
                         <el-col>
                             <el-form-item label="类型:" prop="cbwa11">
-                                <el-input v-model="form.cbwa11" placeholder="" maxlength="30" style="width:55%" />
+                                <el-input v-model="form.cbwa11" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                                 <!-- <el-select v-model="cangkuxialakuang.enableTakeGoods" placeholder="请选择类型"
                                     style="width:55%">
                                     <el-option v-for="dict in Tihuodan" :key="dict.value" :label="dict.label"
@@ -141,7 +141,7 @@
                         </el-col>
                         <el-col>
                             <el-form-item label="管理模式:" prop="cbwa12">
-                                <el-input v-model="form.cbwa12" placeholder="" maxlength="30" style="width:55%" />
+                                <el-input v-model="form.cbwa12" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                                 <!-- <el-select v-model="cangkuxialakuang.manageMode" placeholder="请输入商品管理方式"
                                     style="width:55%">
                                     <el-option v-for="dict in dict.type.sw_js_store_type_manage_mode" :key="dict.value"
@@ -153,7 +153,7 @@
                     <el-row>
                         <el-col>
                             <el-form-item label="是否启用总订单:" prop="cbwa13">
-                                <el-input v-model="form.cbwa13" placeholder="" maxlength="30" style="width:55%" />
+                                <el-input v-model="form.cbwa13" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                                 <!-- <el-select v-model="cangkuxialakuang.ifEnabled" placeholder="请选择类型" style="width:55%">
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
@@ -162,12 +162,12 @@
                         </el-col>
                         <el-col>
                             <el-form-item label="是否启用提货单:" prop="cbwa14">
-                                <el-input v-model="form.cbwa14" placeholder="" style="width:55%" maxlength="30" />
+                                <el-input v-model="form.cbwa14" placeholder="" style="width:55%;border:solid #eee thin;" maxlength="30" />
                             </el-form-item>
                         </el-col>
                         <el-col>
                             <el-form-item label="是否可用:" prop="cbwa15">
-                                <el-input v-model="form.cbwa15" placeholder="" style="width:55%" maxlength="30" />
+                                <el-input v-model="form.cbwa15" placeholder="" style="width:55%;border:solid #eee thin;" maxlength="30" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -187,12 +187,12 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="名称:" prop="cbwa09">
-                            <el-input v-model="form1.cbwa09" placeholder="" maxlength="30" style="width:55%" />
+                            <el-input v-model="form1.cbwa09" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col>
                         <el-form-item label="名称1:" prop="cbwa10">
-                            <el-input v-model="form1.cbwa10" placeholder="" maxlength="30" style="width:55%" />
+                            <el-input v-model="form1.cbwa10" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             <!-- <el-select v-model="cangkuxialakuang.enableTotalOrder" placeholder="请选择类型"
                                     style="width:55%">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
@@ -204,12 +204,12 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="出库优先级:" prop="cbwa07">
-                            <el-input v-model="form1.cbwa07" maxlength="30" style="width:55%" />
+                            <el-input v-model="form1.cbwa07" maxlength="30" style="width:55%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <el-col>
                         <el-form-item label="状态:" prop="cbwa08">
-                            <el-input v-model="form1.cbwa08" maxlength="30" style="width:55%" />
+                            <el-input v-model="form1.cbwa08" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             <!-- <el-select v-model="cangkuxialakuang.type" placeholder="请选择类型" style="width:55%">
                                     <el-option v-for="dict in dict.type.sw_js_store_type" :key="dict.value"
                                         :label="dict.label" :value="dict.value"></el-option>
@@ -226,7 +226,7 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="类型:" prop="cbwa11">
-                            <el-input v-model="form1.cbwa11" placeholder="" maxlength="30" style="width:55%" />
+                            <el-input v-model="form1.cbwa11" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             <!-- <el-select v-model="cangkuxialakuang.enableTakeGoods" placeholder="请选择类型"
                                     style="width:55%">
                                     <el-option v-for="dict in Tihuodan" :key="dict.value" :label="dict.label"
@@ -236,7 +236,7 @@
                     </el-col>
                     <el-col>
                         <el-form-item label="管理模式:" prop="cbwa12">
-                            <el-input v-model="form1.cbwa12" placeholder="" maxlength="30" style="width:55%" />
+                            <el-input v-model="form1.cbwa12" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             <!-- <el-select v-model="cangkuxialakuang.manageMode" placeholder="请输入商品管理方式"
                                     style="width:55%">
                                     <el-option v-for="dict in dict.type.sw_js_store_type_manage_mode" :key="dict.value"
@@ -248,7 +248,7 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="是否启用总订单:" prop="cbwa13">
-                            <el-input v-model="form1.cbwa13" placeholder="" maxlength="30" style="width:55%" />
+                            <el-input v-model="form1.cbwa13" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             <!-- <el-select v-model="cangkuxialakuang.ifEnabled" placeholder="请选择类型" style="width:55%">
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
@@ -257,12 +257,12 @@
                     </el-col>
                     <el-col>
                         <el-form-item label="是否启用提货单:" prop="cbwa14">
-                            <el-input v-model="form1.cbwa14" placeholder="" style="width:55%" maxlength="30" />
+                            <el-input v-model="form1.cbwa14" placeholder="" style="width:55%;border:solid #eee thin;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col>
                         <el-form-item label="是否可用:" prop="cbwa15">
-                            <el-input v-model="form1.cbwa15" placeholder="" style="width:55%" maxlength="30" />
+                            <el-input v-model="form1.cbwa15" placeholder="" style="width:55%;border:solid #eee thin;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -282,12 +282,12 @@
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
-                                <el-input v-model="form2.cbwa09" placeholder="" maxlength="30" style="width:55%" />
+                                <el-input v-model="form2.cbwa09" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             </el-form-item>
                         </el-col>
                         <el-col>
                             <el-form-item label="名称1:" prop="cbwa10">
-                                <el-input v-model="form2.cbwa10" placeholder="" maxlength="30" style="width:55%" />
+                                <el-input v-model="form2.cbwa10" placeholder="" maxlength="30" style="width:55%;border:solid #eee thin;" />
                                 <!-- <el-select v-model="cangkuxialakuang.enableTotalOrder" placeholder="请选择类型"
                                     style="width:55%">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
@@ -299,7 +299,7 @@
                     <el-row>
                         <el-col>
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form2.cbwa07" maxlength="30" style="width:55%" />
+                                <el-input v-model="form2.cbwa07" maxlength="30" style="width:55%;border:solid #eee thin;" />
                             </el-form-item>
                         </el-col>
 
@@ -310,7 +310,7 @@
                         <el-col>
                             <el-form-item label="类型:" prop="cbwa11">
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
-                                <el-select v-model="form2.cbwa11" placeholder="" style="width:55%">
+                                <el-select v-model="form2.cbwa11" placeholder="" style="width:55%;border:solid #eee thin;">
                                     <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
                                         :value="dict.value">
                                     </el-option>
@@ -320,7 +320,7 @@
                         <el-col>
                             <el-form-item label="管理模式:" prop="cbwa12">
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
-                                <el-select v-model="form2.cbwa12" placeholder="" style="width:55%">
+                                <el-select v-model="form2.cbwa12" placeholder="" style="width:55%;border:solid #eee thin;">
                                     <el-option v-for="dict in CangGuanlimshi" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
                                 </el-select>
@@ -331,7 +331,7 @@
                         <el-col>
                             <el-form-item label="是否启用总订单:" prop="cbwa13">
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
-                                <el-select v-model="form2.cbwa13" placeholder="" style="width:55%">
+                                <el-select v-model="form2.cbwa13" placeholder="" style="width:55%;border:solid #eee thin;">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
                                 </el-select>
@@ -340,7 +340,7 @@
                         <el-col>
                             <el-form-item label="是否启用提货单:" prop="cbwa14">
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
-                                <el-select v-model="form2.cbwa14" placeholder="" style="width:55%">
+                                <el-select v-model="form2.cbwa14" placeholder="" style="width:55%;border:solid #eee thin;">
                                     <el-option v-for="dict in Tihuodan" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
                                 </el-select>
@@ -349,7 +349,7 @@
                         <el-col>
                             <el-form-item label="状态:" prop="cbwa08">
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
-                                <el-select v-model="form2.cbwa08" placeholder="" style="width:55%">
+                                <el-select v-model="form2.cbwa08" placeholder="" style="width:55%;border:solid #eee thin;">
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
                                 </el-select>
@@ -358,7 +358,7 @@
                         <el-col>
                             <el-form-item label="是否可用:" prop="cbwa15">
                                 <!-- <el-input v-model="form2.cbwa15" placeholder="" style="width:55%" maxlength="30" /> -->
-                                <el-select v-model="form2.cbwa15" placeholder="" style="width:55%">
+                                <el-select v-model="form2.cbwa15" placeholder="" style="width:55%;border:solid #eee thin;">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
                                 </el-select>
@@ -626,6 +626,14 @@ export default {
         // this.form.type = this.dict[0].label;
     },
     methods: {
+      //列表表头设置
+      headClassWSS() {
+        return {
+          'text-align': 'left',
+          height: '30px',
+          padding: '0'
+        }
+      },
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -941,7 +949,7 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             console.log(userIds, 123)
             console.log(typeof userIds)
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.StoreyRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -958,6 +966,26 @@ export default {
 
 
         },
+
+      /** 普通删除按钮操作 */
+      handleDelete01(row) {
+
+        // row.classifyId = this.form.classifyId;
+        // row.brand = this.form.brand;
+        // row.model = this.form.model;
+        // row.upc = this.form.upc;
+        // row.description = this.form.description;
+        // row.ifEnabled = this.form.ifEnabled;
+        // row.id=this.form.id;
+        // console.log(row, 2222);
+        this.$modal.confirm('是否确认删除ID编号为"' + row.cbwa01 + '"的数据项？').then(function () {
+          return StoreyRemove(JSON.stringify(row));
+        }).then((response) => {
+          this.submitShangpin();
+          this.getList();
+          this.$modal.msgSuccess("删除成功");
+        }).catch(() => { });
+      },
         /** 导出按钮操作 */
         handleExport() {
             this.download('/system/classify/SwJsGoodsClassifyimportTemplate', {

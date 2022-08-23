@@ -20,12 +20,7 @@
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
                         </el-date-picker>
                     </el-form-item>
-                    <el-form-item>
-
-                    </el-form-item>
-                </el-form>
-                <el-form>
-                    <el-form-item style="margin-left:48%;">
+                    <el-form-item >
                       <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                       <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
@@ -1407,7 +1402,7 @@ export default {
         },
         /** 分配角色操作 */
         handleAuthRole: function (row) {
-            const userId = row.cbpc01;
+            const userId = row.cbsb01;
             this.$router.push("/system/user-authhh/role/" + userId);
         },
 

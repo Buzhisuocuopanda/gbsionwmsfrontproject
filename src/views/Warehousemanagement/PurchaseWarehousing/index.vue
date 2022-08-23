@@ -7,10 +7,10 @@
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
 
-                    <el-form-item prop="cbpc07" label="编号">
-                        <el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
+                    <!--<el-form-item prop="cbpc07" label="编号">-->
+                        <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
+                            <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
+                    <!--</el-form-item>-->
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
@@ -26,12 +26,6 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-
-                    </el-form-item>
-                </el-form>
-
-                <el-form>
-                    <el-form-item style="margin-left:48%;">
                       <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                       <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->

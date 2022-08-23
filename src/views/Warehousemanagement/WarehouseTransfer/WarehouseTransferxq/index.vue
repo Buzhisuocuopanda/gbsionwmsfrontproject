@@ -1,22 +1,22 @@
 <template>
     <div>
-        <div class="Purchase_caigou">采购入库单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) | null " :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpc07 | null }}</span>
-            <span class="Purchase_riqi">日期：{{ value.cbpc08.slice(0, 10) | null }}</span>
+        <div class="Purchase_caigou">调拨单</div>
+        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
+            <span class="Purchase_bianhao">编号：{{ value.cbaa07  }}</span>
+            <span class="Purchase_riqi">日期：{{ value.cbaa08.slice(0, 10)  }}</span>
         </div>
         <div style="width:98%; margin-left: 1%; margin-top: 1%;">
             <!-- 横向 -->
             <el-descriptions class="margin-top" title="" :column="3" border
-                v-for="(value, key) in userList.slice(0, 1) | null" :key="key">
+                v-for="(value, key) in userList.slice(0, 1)" :key="key">
                 <el-descriptions-item>
-                    <template slot="label">供料单位</template>{{ value.cbsa08 }}
+                    <template slot="label">调出仓库</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
                 <el-descriptions-item>
-                    <template slot="label">仓库</template>{{ value.cbwa09 }}
+                    <template slot="label">调入仓库</template>{{ value.cbwa09 }}
                 </el-descriptions-item>
                 <el-descriptions-item>
-                    <template slot="label">结算货币</template>USD
+                    <template slot="label">结算货币</template>{{ value.cala08 }}
                 </el-descriptions-item>
             </el-descriptions>
 
@@ -25,19 +25,25 @@
             <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="400"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
+                <el-table-column prop="cbwa09" key="cbwa09" label="供应商">
                 </el-table-column>
-                <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="型号">
+                <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="订单分类">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="数量">
+                <el-table-column prop="cbla09" key="cbla09" align="right" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="已扫数量">
+                <el-table-column prop="cbpb12" key="cbpb12" align="right" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" align="right" label="单价">
+                <el-table-column prop="cbpd11" key="cbpd11" align="right" label="描述">
                 </el-table-column>
-                <el-table-column prop="cbpd12" key="cbpd12" align="right" label="金额">
+                <el-table-column prop="cbab09" key="cbab09" align="right" label="数量">
                 </el-table-column>
-                <el-table-column prop="cbpc17" key="cbpc17" label="备注">
+              <el-table-column prop="cbab15" key="cbab15" align="right" label="已扫数量">
+              </el-table-column>
+              <el-table-column prop="cbpb10" key="cbpb10" align="right" label="单价">
+              </el-table-column>
+              <el-table-column prop="cbab11" key="cbab11" align="right" label="金额">
+              </el-table-column>
+                <el-table-column prop="cbpc17" key="cbpb08" label="备注">
                 </el-table-column>
             </el-table>
             <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
@@ -190,10 +196,10 @@ export default {
         //详情列表
         getList() {
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbpc01;
+            const userId = this.$route.params && this.$route.params.cbaa01;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+              PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);
@@ -227,14 +233,14 @@ export default {
         totalCount: function () {
             var totalCount = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalCount += this.userList[i].cbpd09;
+                totalCount += this.userList[i].cbab09;
             }
             return totalCount;
         },
         totalPrice: function () {
             var totalPrice = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalPrice += this.userList[i].cbpd09 * this.userList[i].cbpd11;
+                totalPrice += this.userList[i].cbab09 * this.userList[i].cbab11;
             }
             return totalPrice;
         }

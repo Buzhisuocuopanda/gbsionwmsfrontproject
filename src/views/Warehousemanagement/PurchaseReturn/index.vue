@@ -7,10 +7,10 @@
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
 
-                    <el-form-item prop="cbpg07" label="编号">
-                        <el-input v-model="queryParams.cbpg07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
+                    <!--<el-form-item prop="cbpg07" label="编号">-->
+                        <!--<el-input v-model="queryParams.cbpg07" id="miaoshu" placeholder="请输入编号" clearable-->
+                            <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
+                    <!--</el-form-item>-->
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
@@ -19,19 +19,14 @@
                         <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间">
+                    <el-form-item label="日期" style="margin-left: 1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
                         </el-date-picker>
                     </el-form-item>
+
                     <el-form-item>
-
-
-                    </el-form-item>
-                </el-form>
-                <el-form>
-                    <el-form-item style="margin-left:48%;">
                       <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                       <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
@@ -473,7 +468,7 @@ export default {
             // 非多个禁用
             multiple: true,
             // 显示搜索条件
-            showSearch: false,
+            showSearch: true,
             // 总条数
             total: 0,
             // 用户表格数据
@@ -1020,15 +1015,10 @@ export default {
         /** 搜索按钮操作 */
         handleQuery() {
             // var neirong = $('#miaoshu').val();
-            this.userList.sn = this.form.sn;
 
-            this.getList();
+
             this.queryParams.pageNum = 1;
-            this.queryParams.sn = "";
-            // this.getList();
-            //  this.queryParams.pageNum = this.form.classifyName;
-            console.log(this.queryParams);
-            // this.getList();
+          this.getList();
 
         },
         /** 重置按钮操作 */
