@@ -26,14 +26,15 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+
                     </el-form-item>
                 </el-form>
 
                 <el-form>
                     <el-form-item style="margin-left:48%;">
-                        <el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>
+                      <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                      <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handleChuangJiangone">创建
@@ -43,21 +44,21 @@
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button>
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审
-                        </el-button>
+                        <!--<el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"-->
+                            <!--@click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>-->
+                        <!--<el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"-->
+                            <!--@click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审-->
+                        <!--</el-button>-->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu"
-                            @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">标记完成
-                        </el-button>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen"
-                            @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">取消完成
-                        </el-button>
+                        <!--<el-button plain size="mini" class="biaoto-buttondaochu"-->
+                            <!--@click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"-->
+                            <!--v-hasPermi="['system:user:export']">标记完成-->
+                        <!--</el-button>-->
+                        <!--<el-button plain size="mini" class="biaoto-buttonfanshen"-->
+                            <!--@click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"-->
+                            <!--v-hasPermi="['system:user:export']">取消完成-->
+                        <!--</el-button>-->
                     </el-form-item>
                 </el-form>
 
@@ -549,7 +550,7 @@ export default {
             // 非多个禁用
             multiple: true,
             // 显示搜索条件
-            showSearch: false,
+            showSearch: true,
             // 总条数
             total: 0,
             // 用户表格数据
@@ -699,7 +700,7 @@ export default {
                 cbpd12: "",
                 cbpc166:"",
                 cbpc16:""
-                
+
             },
             form1: {
                 // classifyId: "",
@@ -903,7 +904,7 @@ export default {
     },
     created() {
 
-       
+
         //仓库明细初始化
         this.getList();
         //供应商
@@ -928,13 +929,9 @@ export default {
         this.form2.cbpd11 ="20"
 
         console.log(this.form.cbpc16,123456);
-        
+
     },
     methods: {
-
-        show() {
-            this.showSearch =! this.showSearch;           
-        },
         //列表表头设置
         headClasspw() {
             return {
@@ -946,19 +943,19 @@ export default {
         //父子传值
         sendParams(row) {
             this.$router.push({
-                
+
                 path: '/warehouer',
                 name: 'index',
                 query: {
                     name: '页面1',
                     // data: this.form2.cbpc01,
                     data: row.cbpc01,
-                    
+
                 }
             })
         },
         chen()
-        { 
+        {
             this.form2.cbpd11 = "20"
             this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
         },
@@ -1022,7 +1019,7 @@ export default {
         deletData(index) {
             this.tianjiahang.splice(index, 1);
         },
-        
+
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -1179,7 +1176,7 @@ export default {
             // var neirong = $('#miaoshu').val();
             // this.userList.cbpc07 = this.form.cbpc07;
 
-           
+
             this.queryParams.pageNum = 1;
             this.getList();
             // this.queryParams.sn = "";
@@ -1197,7 +1194,7 @@ export default {
         },
         // 多选框选中数据
         handleSelectionChange(selection) {
-            this.ids = selection;        
+            this.ids = selection;
             this.idss = selection.map(item => item.cbpc01);
             this.shenpiids = selection;
             this.single = selection.length != 1;
@@ -1225,7 +1222,7 @@ export default {
         PurchaseinboundShenpi(row) {
             this.$modal.confirm('是否要审批为ID"' + row.cbpc01 + '"的数据项？').then(() => {
             console.log(row.cbpc01,8888);
-           
+
             PurchaseinboundSH(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();

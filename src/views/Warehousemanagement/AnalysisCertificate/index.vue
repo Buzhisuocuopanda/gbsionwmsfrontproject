@@ -18,13 +18,14 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+
                     </el-form-item>
                 </el-form>
                 <el-form>
                     <el-form-item style="margin-left:58%;">
-                        <el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>
+                      <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                      <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlezhijiandanone">创建
                         </el-button>
@@ -466,7 +467,7 @@ export default {
             // 非多个禁用
             multiple: true,
             // 显示搜索条件
-            showSearch: false,
+            showSearch: true,
             // 总条数
             total: 0,
             // 用户表格数据
@@ -830,9 +831,6 @@ export default {
         this.chen();
     },
     methods: {
-        show() {
-            this.showSearch = !this.showSearch;
-        },
         //列表表头设置
         headClassac() {
             return {
@@ -1027,7 +1025,7 @@ export default {
         handleQuery() {
             // var neirong = $('#miaoshu').val();
 
-            
+
             this.queryParams.pageNum = 1;
             this.getList();
             // this.getList();
