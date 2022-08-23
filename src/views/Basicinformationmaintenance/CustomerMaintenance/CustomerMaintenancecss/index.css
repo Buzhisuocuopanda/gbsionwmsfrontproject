@@ -1,0 +1,276 @@
+.right-backtools {
+    margin-left: 1100px;
+    margin-top: -55px;
+}
+
+.right-buttonback {
+    margin-left: 10px;
+    font-weight: 900;
+    font-family: "华文琥珀";
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #000000;
+    background-image: -moz-linear-gradient(#000000, #000000);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+    background-image: -webkit-linear-gradient(#000000, #000000);
+    background-image: -o-linear-gradient(#000000, #000000);
+    background-image: -ms-linear-gradient(#000000, #000000);
+    background-image: linear-gradient(#000000, #000000) !important;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.biaoto-buttonchaxuen {
+    color: white !important;
+    /*width: 20px;*/
+    /*font-family:"宋体";*/
+    text-decoration: none;
+    font-size: 16px;
+    border: 2px solid #47acca !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #44a9c7;
+    background-image: -moz-linear-gradient(#469ab9, #5bdcff);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#469ab9), to(#5bdcff));
+    background-image: -webkit-linear-gradient(#469ab9, #5bdcff);
+    background-image: -o-linear-gradient(#469ab9, #5bdcff);
+    background-image: -ms-linear-gradient(#469ab9, #5bdcff);
+    background-image: linear-gradient(#47b7d6, #58cdf0);
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+    /*-moz-box-shadow: 0 1px 0 rgba(0, 135, 245, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+    /*-webkit-box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+    /*box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 1px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+
+}
+
+.el-button {
+    /*color: white;*/
+    border: 1px solid #3f93ac !important;
+}
+
+.biaoto-buttonchuangjian {
+    border: 2px solid #007fdf !important;
+    /*width: 20px;*/
+    /*font-family:"宋体";*/
+    text-decoration: none;
+    font-size: 16px;
+    color: white !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #005ab3;
+    background-image: -moz-linear-gradient(#469ab9, #005ab3);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#469ab9), to(#005ab3));
+    background-image: -webkit-linear-gradient(#469ab9, #005ab3);
+    background-image: -o-linear-gradient(#469ab9, #005ab3);
+    background-image: -ms-linear-gradient(#469ab9, #005ab3);
+    background-image: linear-gradient(#469ab9, #005ab3);
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+    /*-moz-box-shadow: 0 1px 0 rgba(0, 135, 245, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+    /*-webkit-box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+    /*box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+
+}
+
+.biaoto-buttonshanchu {
+    /*width: 20px;*/
+    text-decoration: none;
+    border: 2px solid#a03834 !important;
+    font-size: 16px;
+    color: white !important;
+    height: 35px;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #a03834 !important;
+    background-image: -moz-linear-gradient(#a03834, #a03834);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#a03834), to(#a03834));
+    background-image: -webkit-linear-gradient(#a03834, #a03834);
+    background-image: -o-linear-gradient(#a03834, #a03834);
+    background-image: -ms-linear-gradient(#a03834, #a03834);
+    background-image: linear-gradient(#f65953, #a03834);
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+    /*-moz-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
+    /*-webkit-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
+    /*box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
+
+}
+
+.biaoto-buttondaoru {
+    border: 2px solid #007fdf !important;
+    /*width: 20px;*/
+    /*font-family:"宋体";*/
+    text-decoration: none;
+    font-size: 16px;
+    color: white !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #005ab3;
+    background-image: -moz-linear-gradient(#469ab9, #005ab3);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#469ab9), to(#005ab3));
+    background-image: -webkit-linear-gradient(#469ab9, #005ab3);
+    background-image: -o-linear-gradient(#469ab9, #005ab3);
+    background-image: -ms-linear-gradient(#469ab9, #005ab3);
+    background-image: linear-gradient(#489cbb, #0061bd) !important;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+
+}
+
+.biaoto-buttondaochu {
+
+    border: 2px solid #59b259 !important;
+    /*width: 20px;*/
+    /*font-family:"宋体";*/
+    text-decoration: none;
+    font-size: 16px;
+    color: white !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #5fbd5f;
+    background-image: -moz-linear-gradient(#5ab35a, #52a252);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#5db95d), to(#52a252));
+    background-image: -webkit-linear-gradient(#5fbd5f, #52a252);
+    background-image: -o-linear-gradient(#5fbd5f, #52a252);
+    background-image: -ms-linear-gradient(#5fbd5f, #52a252);
+    background-image: linear-gradient(#5fbd5f, #52a252) !important;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+}
+
+.button-caozuoxougai {
+    border: 0 !important;
+}
+
+.caozuoxiangqeng {
+    border: 0 !important;
+}
+
+.shuzhuangliebiaofenlei {
+
+    color: white;
+    background-color: #f8ac59;
+    width: 65px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.shuzhuangliebiaofenlei:hover {
+
+    color: white;
+    background-color: #f8ac59;
+    width: 65px;
+
+}
+
+.is-disabled {
+    /*width: 20px;*/
+    text-decoration: none !important;
+    border: 2px solid #b7413c !important;
+    font-size: 16px !important;
+    color: white !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #d84c47 !important;
+    background-image: -moz-linear-gradient(#d84c47, #a03834) !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d84c47), to(#a03834)) !important;
+    background-image: -webkit-linear-gradient(#d84c47, #a03834) !important;
+    background-image: -o-linear-gradient(#d84c47, #a03834) !important;
+    background-image: -ms-linear-gradient(#d84c47, #a03834) !important;
+    background-image: linear-gradient(#d84c47, #a03834) !important;
+    -moz-border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    border-radius: 8px !important;
+}
+
+.biaoto-buttonshanchu:hover {
+    /*width: 20px;*/
+    text-decoration: none !important;
+    border: 2px solid #b7413c !important;
+    font-size: 16px !important;
+    color: white !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #d84c47 !important;
+    background-image: -moz-linear-gradient(#d84c47, #a03834) !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d84c47), to(#a03834)) !important;
+    background-image: -webkit-linear-gradient(#d84c47, #a03834) !important;
+    background-image: -o-linear-gradient(#d84c47, #a03834) !important;
+    background-image: -ms-linear-gradient(#d84c47, #a03834) !important;
+    background-image: linear-gradient(#d84c47, #a03834) !important;
+    -moz-border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    border-radius: 8px !important;
+}
+
+.is-plain:visited {
+    /*width: 20px;*/
+    text-decoration: none !important;
+    border: 2px solid #b7413c !important;
+    font-size: 16px !important;
+    color: white !important;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #a03834 !important;
+    background-image: -moz-linear-gradient(#a03834, #a03834) !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d84c47), to(#a03834)) !important;
+    background-image: -webkit-linear-gradient(#a03834, #a03834) !important;
+    background-image: -o-linear-gradient(#a03834, #a03834) !important;
+    background-image: -ms-linear-gradient(#d84c47, #a03834) !important;
+    background-image: linear-gradient(#a03834, #a03834) !important;
+    -moz-border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    border-radius: 8px !important;
+}
+
+.pagination-container {
+    background: #fff;
+    padding: 32px 16px;
+}
+
+.pagination-container.hidden {
+    display: none;
+}
+
+.tooltup {
+    margin-left: 10%;
+}
+
+.pagintotal {
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.chuangjianformcust {
+    margin-right: 10%;
+    margin-top: 3%;
+}
+.el-table_1_column_4{
+    width:400px;
+}
+.kehuxxweihucss{
+    margin-top: -2%;
+    margin-left: -560px;
+    width: 3080px !important;
+    height: 100% !important;
+}
+.el-table__header-wrapper {
+    padding: 0 !important;
+    height: 40px;
+
+}
