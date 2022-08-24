@@ -19,7 +19,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSS" v-loading="loading" height="600" :data="userList"
+                <el-table border :header-cell-style="headClassWSS" v-loading="loading" height="500" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92%;height: 8%; margin-left:-1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -84,11 +84,11 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" append-to-body>
-            <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div>
+        <el-dialog :title="title1" :visible.sync="open"  class="abow_dialog"  append-to-body>
+            <!-- <div style="padding-top:-1%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
             <hr />
-            <el-form ref="form" :model="form" label-width="30%" class="chuangjianformWare">
-                <div style="margin-left:-10%;margin-top: 3%;">
+            <el-form ref="form" :model="form" label-width="30%" >
+                <div style="margin-left:-10%;">
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
@@ -121,8 +121,6 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-
-
                     </el-row>
                     <el-row>
                         <el-col>
@@ -174,18 +172,21 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                        <el-col>
+                             <div style="margin-left:79%;margin-top: 3%;">
+                               <el-button type="primary" @click="handleUpdate">确定</el-button>
+                               <el-button @click="cancel">取 消</el-button>
+                            </div>
+                        </el-col>
                     </el-row>
                 </div>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="handleUpdate">确定</el-button>
-                <el-button @click="cancel">取 消</el-button>
-            </div>
+            
         </el-dialog>
 
         <!-- 详情 -->
-        <el-dialog :title="title2" :visible.sync="open1" append-to-body>
-            <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div>
+        <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog" append-to-body>
+            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
             <hr />
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-top:3%;margin-left:-8%;">
                 <el-row>
@@ -278,8 +279,8 @@
         </el-dialog>
 
         <!-- 创建 -->
-        <el-dialog :title="title" :visible.sync="open2" append-to-body>
-            <div style="margin-top:-4%; font-weight: 900; font-size: 20px; color: black;">仓库信息</div>
+        <el-dialog :title="title" :visible.sync="open2" class="abow_dialog" append-to-body>
+            <!-- <div style="margin-top:-4%; font-weight: 900; font-size: 20px; color: black;">仓库信息</div> -->
             <hr />
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" class="chuangjianformWare">
                 <div style="margin-left:-10%;">
@@ -368,13 +369,16 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                         <el-col>
+                            <div style="margin-left:79%;margin-top: 3%;">
+                               <el-button type="primary" @click="handleUpdate">确定</el-button>
+                               <el-button @click="cancel">取 消</el-button>
+                            </div>
+                        </el-col>
                     </el-row>
                 </div>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="handleAdd">确 定</el-button>
-                <el-button @click="cancells">取 消</el-button>
-            </div>
+            
         </el-dialog>
 
         <!-- 用户导入对话框 -->
