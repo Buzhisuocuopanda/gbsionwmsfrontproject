@@ -8,7 +8,7 @@
                     label-width="68px">
                     <el-form-item prop="typeName">
                         <el-input v-model="queryParams.typeName" id="miaoshu" placeholder="请输入类别" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
@@ -57,12 +57,12 @@
                 <el-row>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称" prop="cala08">
-                            <el-input v-model="form.cala08" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form.cala08" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称1" prop="cala09">
-                            <el-input v-model="form.cala09" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form.cala09" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -70,7 +70,7 @@
                     <el-col style="margin-top:1%;">
                         <el-form-item label="类别" prop="cala10">
                             <!-- <el-input v-model="form.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
-                            <el-select v-model="form.cala10" placeholder="" style="width:50%;border:solid #eee thin;">
+                            <el-select v-model="form.cala10" placeholder="" style="width:50%;">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
                             </el-select>
@@ -78,14 +78,14 @@
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="联系电话" prop="cala11">
-                            <el-input v-model="form.cala11" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form.cala11" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="从事业务范围" prop="cala12">
-                            <el-input v-model="form.cala12" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form.cala12" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -102,31 +102,31 @@
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="类别" prop="cala08">
-                            <el-input v-model="form1.cala08" placeholder="请输入类别" maxlength="30" style="width:75%;border:solid #eee thin;" />
+                            <el-input v-model="form1.cala08" placeholder="请输入类别" maxlength="30" style="width:75%;" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="类别名称" prop="cala09">
-                            <el-input v-model="form1.cala09" placeholder="请输入类别名称" maxlength="30" style="width:75%;border:solid #eee thin;" />
+                            <el-input v-model="form1.cala09" placeholder="请输入类别名称" maxlength="30" style="width:75%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="索引" prop="cala10">
-                            <el-input v-model="form1.cala10" placeholder="请输入索引" maxlength="30" style="width:75%;border:solid #eee thin;" />
+                            <el-input v-model="form1.cala10" placeholder="请输入索引" maxlength="30" style="width:75%;" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="名称" prop="cala11">
-                            <el-input v-model="form1.cala11" placeholder="请输入名称" maxlength="30" style="width:75%;border:solid #eee thin;" />
+                            <el-input v-model="form1.cala11" placeholder="请输入名称" maxlength="30" style="width:75%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="索引" prop="cala12">
-                            <el-input v-model="form1.cala12" placeholder="请输入索引" maxlength="30" style="width:75%;border:solid #eee thin;" />
+                            <el-input v-model="form1.cala12" placeholder="请输入索引" maxlength="30" style="width:75%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -143,16 +143,16 @@
                 <span style="font-size:20px;">列表管理</span>
                 <hr />
             </div>
-            <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;border:solid #eee thin;">
+            <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;">
                 <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称:" prop="cala08">
-                            <el-input v-model="form2.cala08" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form2.cala08" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="名称1:" prop="cala09">
-                            <el-input v-model="form2.cala09" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form2.cala09" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -160,7 +160,7 @@
                     <el-col style="margin-top:1%;">
                         <el-form-item label="类别:" prop="cala10">
                             <!-- <el-input v-model="form2.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
-                            <el-select v-model="form2.cala10" placeholder="" style="width:50%;border:solid #eee thin;">
+                            <el-select v-model="form2.cala10" placeholder="" style="width:50%;">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
                             </el-select>
@@ -170,12 +170,12 @@
                 <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
                         <el-form-item label="联系电话:" prop="cala11">
-                            <el-input v-model="form2.cala11" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form2.cala11" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="从事业务范围:" prop="cala12">
-                            <el-input v-model="form2.cala12" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form2.cala12" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>

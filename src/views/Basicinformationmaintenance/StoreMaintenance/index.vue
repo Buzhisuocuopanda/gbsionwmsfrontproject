@@ -8,7 +8,7 @@
                     label-width="68px">
                     <el-form-item prop="locationNum">
                         <el-input v-model="queryParams.locationNum" id="miaoshu" placeholder="请输入库位码" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
@@ -104,7 +104,7 @@
                 <el-row style="margin-top:6%;">
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
-                            <el-input v-model="form.cbla09" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form.cbla09" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -113,12 +113,12 @@
                     <el-col>
                         <el-form-item label="库位顺序:" prop="cbla07">
                             <el-input v-model="form.cbla07" placeholder="" maxlength="30"
-                                style="width:77%;border:solid #eee thin;" />
+                                style="width:77%;" />
                         </el-form-item>
                     </el-col>
                     <el-col>
                         <el-form-item label="库位容量:" prop="cbla11">
-                            <el-input v-model="form.cbla11" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form.cbla11" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -126,13 +126,13 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="空:" prop="cbla10">
-                            <el-input v-model="form.cbla10" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form.cbla10" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col>
                         <el-form-item label="空:" prop="cbla12">
-                            <el-input v-model="form.cbla12" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form.cbla12" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -140,7 +140,7 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="空:" prop="cbla13">
-                            <el-input v-model="form.cbla13" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form.cbla13" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -148,7 +148,7 @@
                         <el-form-item label="状态:" prop="cbla08">
                             <!-- <el-input v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
                                 maxlength="30" /> -->
-                            <el-select v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;">
+                            <el-select v-model="form.cbla08" placeholder="" style="width:77%;">
                                 <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
                                     :value="item.label">
                                 </el-option>
@@ -169,43 +169,43 @@
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="库位码" prop="cbla09">
-                            <el-input v-model="form1.cbla09" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
+                            <el-input v-model="form1.cbla09" placeholder="" maxlength="30" style=""/>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="库位顺序" prop="cbla07">
-                            <el-input v-model="form1.cbla07" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
+                            <el-input v-model="form1.cbla07" placeholder="" maxlength="30" style=""/>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="库位容量" prop="cbla11">
-                            <el-input v-model="form1.cbla11" placeholder="" maxlength="30" style="border:solid #eee thin;" />
+                            <el-input v-model="form1.cbla11" placeholder="" maxlength="30" style="" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="空" prop="cbla10">
-                            <el-input v-model="form1.cbla10" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
+                            <el-input v-model="form1.cbla10" placeholder="" maxlength="30" style=""/>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="空" prop="cbla12">
-                            <el-input v-model="form1.cbla12" placeholder="" maxlength="30" style="border:solid #eee thin;"/>
+                            <el-input v-model="form1.cbla12" placeholder="" maxlength="30" style=""/>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="空" prop="cbla13">
-                            <el-input v-model="form1.cbla13" placeholder="" maxlength="30" style="border:solid #eee thin;" />
+                            <el-input v-model="form1.cbla13" placeholder="" maxlength="30" style="" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="状态" prop="cbla08">
-                            <el-input v-model="form1.cbla08" placeholder="" maxlength="30" style="border:solid #eee thin;" />
+                            <el-input v-model="form1.cbla08" placeholder="" maxlength="30" style="" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -224,14 +224,14 @@
                 <el-row style="margin-top:6%;">
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
-                            <el-input v-model="form2.cbla09" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form2.cbla09" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
 
                     </el-col>
                     <el-col>
                         <el-form-item label="库位顺序:" prop="cbla07">
-                            <el-input v-model="form2.cbla07" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form2.cbla07" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -240,12 +240,12 @@
                     <el-col>
                         <el-form-item label="库位容量:" prop="cbla11">
                             <el-input v-model="form2.cbla11" placeholder="" maxlength="30"
-                                style="width:77%;border:solid #eee thin;" />
+                                style="width:77%;" />
                         </el-form-item>
                     </el-col>
                     <el-col>
                         <el-form-item label="空:" prop="cbla10">
-                            <el-input v-model="form2.cbla10" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form2.cbla10" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -253,13 +253,13 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="空:" prop="cbla12">
-                            <el-input v-model="form2.cbla12" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form2.cbla12" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col>
                         <el-form-item label="空:" prop="cbla13">
-                            <el-input v-model="form2.cbla13" placeholder="" style="width:77%;border:solid #eee thin;"
+                            <el-input v-model="form2.cbla13" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -269,7 +269,7 @@
                         <el-form-item label="状态:" prop="cbla08">
                             <!-- <el-input v-model="form2.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
                                 maxlength="30" id="shurukuangnr" /> -->
-                            <el-select v-model="form2.cbla08" placeholder="" style="width:77%;style="border:solid #eee thin;"">
+                            <el-select v-model="form2.cbla08" placeholder="" style="width:77%;">
                                 <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
                                     :value="item.label">
                                 </el-option>

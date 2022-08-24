@@ -31,18 +31,18 @@
                             <el-row>
                                 <el-col style="margin-left: 120px;">
                                     <el-form-item label="分类编号" prop="cbpa11">
-                                        <el-input v-model="form.cbpa11" maxlength="30" style="width: 400px;border:solid #eee thin;"
+                                        <el-input v-model="form.cbpa11" maxlength="30" style="width: 400px;"
                                              />
                                     </el-form-item>
                                 </el-col>
                                 <el-col style="margin-left: 120px;">
                                     <el-form-item label="名称" prop="cbpa07" >
-                                        <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;border:solid #eee thin;" />
+                                        <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;" />
                                     </el-form-item>
                                 </el-col>
                                 <el-col v-if="false">
                                     <el-form-item label="id" prop="cbpa09" >
-                                        <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;border:solid #eee thin;" />
+                                        <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
                                     </el-form-item>
                                 </el-col>
                             </el-row>
