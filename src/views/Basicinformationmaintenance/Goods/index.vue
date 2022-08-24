@@ -585,12 +585,12 @@ export default {
         getTreeselect() {
             ClassifyTreeselect().then(response => {
                 response.data.forEach((res) => {
-                    res.code = res.label ? res.label.substring(res.label.indexOf("-") + 1) : ""
-                    res.label = res.label ? res.label.substring(0, res.label.indexOf("-")) : ""
+                    res.code = res.label ? res.label.substring(res.label.indexOf("~") + 1) : ""
+                    res.label = res.label ? res.label.substring(0, res.label.indexOf("~")) : ""
                     if (res.children) {
                         res.children.forEach((i) => {
-                            i.code = i.label ? i.label.substring(i.label.indexOf("-") + 1) : ""
-                            i.label = i.label ? i.label.substring(0, i.label.indexOf("-")) : ""
+                            i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
+                            i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
                         })
                     }
                 })
@@ -623,16 +623,16 @@ export default {
             // console.log(data.label,88888);
             // const v1=data.label.substring(0, data.label.indexOf("-"));
             this.form.classifyNum = "";
-            for (let i = 0; i < (data.code.split("-")).length - 1; i++) {
+            for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
                 if (i != 0) {
-                    this.form.classifyNum += ("-" + (data.code.split("-"))[i])
+                    this.form.classifyNum += ("~" + (data.code.split("~"))[i])
                 } else {
-                    this.form.classifyNum += (data.code.split("-"))[i]
+                    this.form.classifyNum += (data.code.split("~"))[i]
                 }
             }
             // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
             this.form.classifyName = data.label
-            this.form.id = (data.code.split("-"))[data.code.split("-").length - 1]
+            this.form.id = (data.code.split("~"))[data.code.split("~").length - 1]
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
             this.handleQuery();
 
