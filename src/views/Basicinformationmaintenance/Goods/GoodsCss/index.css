@@ -1,3 +1,6 @@
+html,body{ height:100%;}
+
+
 .right-backtools {
     margin-left: 1100px;
     margin-top: -55px;
@@ -298,5 +301,31 @@
 }
 .el-table__header-wrapper{
     height: 40px;
+
+}
+
+.abow_dialog {
+    display: flex;
+    justify-content: center;
+    align-items: Center;
+    overflow: hidden;
+}
+
+.abow_dialog .el-dialog {
+    margin: 0 auto !important;
+    height: 95%;
+    overflow: hidden;
+}
+
+.abow_dialog .el-dialog .el-dialog__body {
+    position: absolute;
+    left: 0;
+    top: 54px;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    z-index: 1;
+    overflow: hidden;
+    overflow-y: auto;
 
 }

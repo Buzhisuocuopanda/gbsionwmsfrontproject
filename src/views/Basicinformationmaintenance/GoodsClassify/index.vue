@@ -8,8 +8,8 @@
             </el-col>
         </el-row>
 
-        <el-row :span="11">
-            <el-col style="width:300px;" :span="11">
+        <el-row :span="50">
+            <el-col style="width:270px;" :span="8">
                 <div class="head-container">
                     <a @click="submitShangpin" class="shuzhuangliebiaofenlei">商品分类</a>
                     <el-tree :data="deptOptions" :props="defaultProps" style="height:650px;"
@@ -19,7 +19,7 @@
             </el-col>
 
             <!--用户数据-->
-            <el-col :span="19">
+            <el-col :span="18">
                 <el-form ref="form" :model="form" :rules="rules" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
                     <div class="shangponfenlei-lase">
@@ -29,15 +29,16 @@
                         <hr />
                         <div class="shangponfenlei-middle">
                             <el-row>
+                                
+                                <el-col style="margin-left: 120px;">
+                                    <el-form-item label="名称" prop="cbpa07" >
+                                        <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;" />
+                                    </el-form-item>
+                                </el-col>
                                 <el-col style="margin-left: 120px;">
                                     <el-form-item label="分类编号" prop="cbpa11">
                                         <el-input v-model="form.cbpa11" maxlength="30" style="width: 400px;"
                                              />
-                                    </el-form-item>
-                                </el-col>
-                                <el-col style="margin-left: 120px;">
-                                    <el-form-item label="名称" prop="cbpa07" >
-                                        <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;" />
                                     </el-form-item>
                                 </el-col>
                                 <el-col v-if="false">

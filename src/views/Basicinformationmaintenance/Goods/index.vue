@@ -3,16 +3,16 @@
         <div style="width:102.5%;">
             <el-row :gutter="20">
                 <!--部门数据-->
-                <el-col :span="30" :xs="24">
+                <el-col :span="40" :xs="24">
                     <div style="width:250px;">
                         <!--树状菜单-->
                         <a @click="submitShangpin" class="shuzhuangliebiaofenlei">商品分类</a>
                         <el-tree :data="deptOptions" :props="defaultProps" :expand-on-click-node="false" ref="tree"
-                            default-expand-all highlight-current style="height:650px;" @node-click="handleNodeClick" />
+                            default-expand-all highlight-current style="height:550px;" @node-click="handleNodeClick" />
                     </div>
                 </el-col>
                 <!--用户数据-->
-                <el-col :span="40" class="tooltup" style="width:81.7%; margin-left: 2%;">
+                <el-col :span="45" class="tooltup" style="width:77.7%; margin-left: 1%;">
                     <!-- 表头内容  -->
                     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                         label-width="68px">
@@ -37,7 +37,7 @@
                         </el-form-item>
                     </el-form>
 
-                    <el-table border :header-cell-style="headClassGDC" v-loading="loading" height="600" :data="userList"
+                    <el-table :max-height="maxheight"  border :header-cell-style="headClassGDC" v-loading="loading" height="490" :data="userList"
                         :default-sort="{ prop: 'name', order: 'descending' }" style="margin-left: -1.5%; width:100%;"
                         @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
@@ -71,8 +71,8 @@
             </el-row>
         </div>
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open">
-            <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">商品信息</div>
+        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog">
+            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">商品信息</div> -->
             <hr />
             <el-form ref="form" :model="form" label-width="30%">
                 <div style="margin-left:-13%;margin-top:3%;">
@@ -132,18 +132,21 @@
                                 <el-input v-model="form.cbpb15" placeholder="" maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
+                        <el-col>
+                             <div slot="footer" class="dialog-footer">
+                                  <el-button type="primary" @click="handleUpdate">确 定</el-button>
+                                  <el-button @click="cancel">取 消</el-button>
+                            </div>
+                        </el-col>
                     </el-row>
                 </div>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="handleUpdate">确 定</el-button>
-                <el-button @click="cancel">取 消</el-button>
-            </div>
+    
         </el-dialog>
 
         <!-- 详情 -->
-        <el-dialog :title="title2" :visible.sync="open1" append-to-body>
-            <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">商品信息</div>
+        <el-dialog :title="title2" :visible.sync="open1" append-to-body class="abow_dialog">
+            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">商品信息</div> -->
             <hr />
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-top:3%;">
                 <el-row>
@@ -210,9 +213,9 @@
         </el-dialog>
 
         <!-- 创建 -->
-        <el-dialog :title="title" :visible.sync="open2" width="90%;" style="margin-top:-2%;" append-to-body>
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">商品基础信息</span>
+        <el-dialog :title="title" :visible.sync="open2" width="90%;" style="" append-to-body class="abow_dialog">
+            <div>
+                <!-- <span style="font-size:20px;">商品基础信息</span> -->
                 <hr />
             </div>
             <el-form ref="form2" :model="form2" :rules="rules2" style="margin-top:20px;" label-width="100px">
@@ -306,12 +309,14 @@
                             <el-input v-model="form2.tprice" placeholder="" maxlength="30" style="width:60%;" />
                         </el-form-item>
                     </el-col>
+                      <el-col>
+                             <div slot="footer" class="dialog-footer">
+                                  <el-button type="primary" @click="handleAdd">确 定</el-button>
+                                  <el-button @click="cancells">取 消</el-button>
+                            </div>
+                        </el-col>
                 </el-row>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="handleAdd">确 定</el-button>
-                <el-button @click="cancells">取 消</el-button>
-            </div>
         </el-dialog>
 
         <!-- 用户导入对话框 -->
@@ -355,6 +360,7 @@ export default {
     components: { Treeselect },
     data() {
         return {
+            maxheight: window.innerHeight - 50,
             // 遮罩层
             loading: true,
             // 选中数组
@@ -997,7 +1003,16 @@ export default {
         //   console.log(data);
         // }
 
+    },mounted () {
+    window.onresize = () => {
+      return (() => {
+          this.maxheight = window.innerHeight - 50
+      })()
     }
+  },
+  activated () {
+    this.maxheight = window.innerHeight - 50
+},
 };
 </script>
 <style src="./GoodsCss/index.css">
