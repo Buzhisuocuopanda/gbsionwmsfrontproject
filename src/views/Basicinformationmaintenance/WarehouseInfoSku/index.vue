@@ -19,7 +19,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSS" v-loading="loading" height="500" :data="userList"
+                <el-table border :header-cell-style="headClassWSS" v-loading="loading" height="495" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92%;height: 8%; margin-left:-1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -86,7 +86,7 @@
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title1" :visible.sync="open"  class="abow_dialog"  append-to-body>
             <!-- <div style="padding-top:-1%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
-            <hr />
+            <!-- <hr /> -->
             <el-form ref="form" :model="form" label-width="30%" >
                 <div style="margin-left:-10%;">
                     <el-row>
@@ -187,7 +187,7 @@
         <!-- 详情 -->
         <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog" append-to-body>
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
-            <hr />
+            <!-- <hr /> -->
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-top:3%;margin-left:-8%;">
                 <el-row>
                     <el-col>
@@ -281,7 +281,7 @@
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" class="abow_dialog" append-to-body>
             <!-- <div style="margin-top:-4%; font-weight: 900; font-size: 20px; color: black;">仓库信息</div> -->
-            <hr />
+            <!-- <hr /> -->
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" class="chuangjianformWare">
                 <div style="margin-left:-10%;">
                     <el-row>

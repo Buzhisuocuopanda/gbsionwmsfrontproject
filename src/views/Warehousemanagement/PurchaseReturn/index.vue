@@ -24,11 +24,12 @@
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
                         </el-date-picker>
-                    </el-form-item>
-
-                    <el-form-item>
                       <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                       <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                    </el-form-item>
+
+                    <el-form-item style="margin-left:45%;">
+                   
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangtuione">创建
@@ -37,24 +38,24 @@
                             删除</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
-                        <!--<el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"-->
-                            <!--@click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>-->
-                        <!--<el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"-->
-                            <!--@click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>-->
+                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
+                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <!--<el-button plain size="mini" class="biaoto-buttondaochu"-->
-                            <!--@click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"-->
-                            <!--v-hasPermi="['system:user:export']">标记完成-->
-                        <!--</el-button>-->
-                        <!--<el-button plain size="mini" class="biaoto-buttonfanshen"-->
-                            <!--@click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"-->
-                            <!--v-hasPermi="['system:user:export']">取消完成-->
-                        <!--</el-button>-->
+                            v-hasPermi="['system:user:import']">导入</el-button>  -->
+                        <el-button plain size="mini" class="biaoto-buttondaochu"
+                            @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
+                            v-hasPermi="['system:user:export']">标记完成
+                        </el-button>
+                        <el-button plain size="mini" class="biaoto-buttonfanshen"
+                            @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
+                            v-hasPermi="['system:user:export']">取消完成
+                        </el-button>
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClasspr" v-loading="loading" :data="userList" height="550"
+                <el-table border :header-cell-style="headClasspr" v-loading="loading" :data="userList" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:92.5%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />

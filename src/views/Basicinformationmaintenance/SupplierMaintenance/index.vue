@@ -6,8 +6,8 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px" style="margin-left:2%;">
-                    <el-form-item prop="name">
-                        <el-input v-model="queryParams.name" id="miaoshu" placeholder="请输入公司名称" clearable
+                    <el-form-item prop="cbsa08">
+                        <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入公司名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
@@ -25,7 +25,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassSPM" v-loading="loading" height="600" :data="userList"
+                <el-table :max-height="maxheight"  border :header-cell-style="headClassSPM" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="公司名称" align="left" key="cbsa08" prop="cbsa08" sortable />
@@ -67,9 +67,9 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title" :visible.sync="open" style="margin-top:-2%">
-            <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div>
-            <hr />
+        <el-dialog :title="title" :visible.sync="open"  class="abow_dialogg">
+            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
+            <!-- <hr /> -->
             <el-form ref="form" :model="form" label-width="25%" lable-height="20%" class="chuangjianform">
                 <div style="margin-top:3%;">
                     <el-row>
@@ -168,9 +168,9 @@
         </el-dialog>
 
         <!-- 详情 -->
-        <el-dialog :title="title" :visible.sync="open1" style="margin-top:-2%">
-            <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div>
-            <hr />
+        <el-dialog :title="title" :visible.sync="open1"  class="abow_dialogg">
+            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
+            <!-- <hr /> -->
             <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%" class="chuangjianform">
                 <div style="margin-top:3%;">
                     <el-row>
@@ -265,10 +265,10 @@
         </el-dialog>
 
         <!-- 创建 -->
-        <el-dialog :title="title" :visible.sync="open2" style="margin-top:-2%">
-            <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div>
-            <hr />
-            <el-form ref="form2" :model="form2" label-width="25%" lable-height="20%" :rules="rules"
+        <el-dialog :title="title" :visible.sync="open2"  class="abow_dialogg">
+            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
+            <!-- <hr /> -->
+            <el-form ref="form2" :model="form2" label-width="25%" :rules="rules"
                 class="chuangjianform">
                 <div style="margin-top:3%;">
                     <el-row>
@@ -414,6 +414,7 @@ export default {
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect },
     data() {
+        
         const phoneValidator11 = (rule, value, callback) => {
             if (/^1[3456789]\d{9}$/.test(value)) { // 利用正则表达式校验手机号
                 callback()
@@ -422,6 +423,7 @@ export default {
             }
         }
         return {
+             maxheight: window.innerHeight - 50,
             // 遮罩层
             loading: true,
             // 选中数组
@@ -563,7 +565,7 @@ export default {
                 page: 1,
                 size: 10,
                 total: this.total,
-                name: undefined,
+                cbsa08: undefined,
                 address: undefined
             },
             // 列信息
@@ -767,14 +769,10 @@ export default {
         /** 搜索按钮操作 */
         handleQuery() {
             // var neirong = $('#miaoshu').val();
-            this.userList.name = this.form.name;
-            this.getList();
+           
+           
             this.queryParams.pageNum = 1;
-            this.queryParams.name = "";
-            // this.getList();
-            //  this.queryParams.pageNum = this.form.classifyName;
-            console.log(this.queryParams);
-            // this.getList();
+            this.getList();
         },
         /** 重置按钮操作 */
         resetQuery() {
@@ -1083,7 +1081,16 @@ export default {
         // handleNodeClick(data) {
         //   console.log(data);
         // }
+    },mounted () {
+    window.onresize = () => {
+      return (() => {
+          this.maxheight = window.innerHeight - 50
+      })()
     }
+  },
+  activated () {
+    this.maxheight = window.innerHeight - 50
+},
 };
 </script>
 <style src="./SupplierMaintenancecss/index.css">

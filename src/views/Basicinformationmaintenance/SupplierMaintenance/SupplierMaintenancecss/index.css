@@ -260,10 +260,37 @@
 .GongyingShangjiaoyan {
     position: absolute;
     top: 110%;
-    margin-left: 80%;
+    margin-left: 75%;
 }
 .el-table__header-wrapper {
     padding: 0 !important;
     height: 40px;
+
+}
+
+.abow_dialogg {
+    display: flex;
+    justify-content: center;
+    align-items: Center;
+    overflow: hidden;
+}
+
+.abow_dialogg .el-dialog {
+    margin: 0 auto !important;
+    height: 95%;
+    width: 60%;
+    overflow: hidden;
+}
+
+.abow_dialogg .el-dialog .el-dialog__body {
+    position: absolute;
+    left: 0;
+    top: 54px;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    z-index: 1;
+    overflow: hidden;
+    overflow-y: auto;
 
 }

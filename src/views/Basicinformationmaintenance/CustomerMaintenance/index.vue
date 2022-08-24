@@ -6,8 +6,8 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                    <el-form-item prop="name">
-                        <el-input v-model="queryParams.name" id="miaoshu" placeholder="请输入客户名称" clearable
+                    <el-form-item prop="cbca08">
+                        <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="请输入客户名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
@@ -25,7 +25,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassCMC" v-loading="loading" height="600" :data="userList"
+                <el-table border :header-cell-style="headClassCMC" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%; margin-left: -1.5%;" class="tong"
                     @selection-change="handleSelectionChange">
@@ -69,9 +69,8 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" class="kehuxxweihucss">
-            <div style="margin-top:-2%;font-weight: 900;font-size: 20px; color: black;">客户信息</div>
-            <hr />
+        <el-dialog :title="title1" :visible.sync="open" class="kehuxxweihucss abow_dialog3">
+            
             <el-form ref="form" :model="form" label-width="45%" class="chuangjianformcust">
                 <el-row>
                     <el-col :span="11">
@@ -207,20 +206,25 @@
                             <el-input v-model="form.cbca26" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
+                    
+                </el-row>
+                <el-row>
+                    <el-col>
+                         <div slot="footer" style="margin-top:10%;margin-left:20%;">
+                              <el-button type="primary" @click="handleUpdate">确定</el-button>
+                              <el-button @click="cancel">取 消</el-button>
+                         </div>
+                    </el-col>
                 </el-row>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="handleUpdate">确定</el-button>
-                <el-button @click="cancel">取 消</el-button>
-            </div>
+            
         </el-dialog>
 
         <!-- 详情 -->
         <!-- <el-dialog :title="title" :visible.sync="open">
             <el-form ref="form" :model="form" label-width="45%" class="chuangjianform"> -->
-        <el-dialog :title="title2" :visible.sync="open1" class="kehuxxweihucss">
-            <div style="margin-top:-2%;font-weight: 900;font-size: 20px; color: black;">客户信息</div>
-            <hr />
+        <el-dialog :title="title2" :visible.sync="open1" class="kehuxxweihucss  abow_dialog3">
+           
             <el-form ref="form1" :model="form1" label-width="45%" class="chuangjianformcust">
                 <el-row>
                     <el-col :span="11">
@@ -362,9 +366,8 @@
         <!-- 创建 -->
         <!-- <el-dialog :title="title" :visible.sync="open2" append-to-body>
             <el-form ref="form2" :model="form2" :rules="rules" label-width="30%" class="chuangjianform"> -->
-        <el-dialog :title="title" :visible.sync="open2" class="kehuxxweihucss">
-            <div style="margin-top:-2%;font-weight: 900;font-size: 20px; color: black;">客户信息</div>
-            <hr />
+        <el-dialog :title="title" :visible.sync="open2" class="kehuxxweihucss  abow_dialog3">
+           
             <el-form ref="form2" :model="form2" label-width="45%" :rules="rules2" class="chuangjianformcust">
                 <el-row>
                     <el-col :span="11">
@@ -501,11 +504,16 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
+                <el-row>
+                    <el-col>
+                       <div slot="footer" class="">
+                            <el-button type="primary" @click="handleAdd">确 定</el-button>
+                            <el-button @click="cancells">取 消</el-button>
+                       </div>
+                    </el-col>
+                </el-row>
             </el-form>
-            <div slot="footer" class="">
-                <el-button type="primary" @click="handleAdd">确 定</el-button>
-                <el-button @click="cancells">取 消</el-button>
-            </div>
+           
         </el-dialog>
 
         <!-- 用户导入对话框 -->
@@ -704,6 +712,7 @@ export default {
                 size: 10,
                 total: this.total,
                 locationNum: undefined,
+                cbca08: undefined,
                 sort: undefined
             },
             // 列信息
@@ -893,14 +902,10 @@ export default {
         /** 搜索按钮操作 */
         handleQuery() {
             // var neirong = $('#miaoshu').val();
-            this.userList.name = this.form.name;
-            this.getList();
+           
+           
             this.queryParams.pageNum = 1;
-            this.queryParams.name = "";
-            // this.getList();
-            //  this.queryParams.pageNum = this.form.classifyName;
-            console.log(this.queryParams);
-            // this.getList();
+             this.getList();
         },
         /** 重置按钮操作 */
         resetQuery() {

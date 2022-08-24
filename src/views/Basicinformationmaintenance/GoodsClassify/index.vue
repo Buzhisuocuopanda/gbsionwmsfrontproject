@@ -12,7 +12,7 @@
             <el-col style="width:270px;" :span="8">
                 <div class="head-container">
                     <a @click="submitShangpin" class="shuzhuangliebiaofenlei">商品分类</a>
-                    <el-tree :data="deptOptions" :props="defaultProps" style="height:650px;"
+                    <el-tree :data="deptOptions" :props="defaultProps" style="height:520px;"
                         :expand-on-click-node="false" ref="tree" default-expand-all highlight-current
                         @node-click="handleNodeClick" />
                 </div>

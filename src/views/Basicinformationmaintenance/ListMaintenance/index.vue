@@ -6,8 +6,8 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                    <el-form-item prop="typeName">
-                        <el-input v-model="queryParams.typeName" id="miaoshu" placeholder="请输入类别" clearable
+                    <el-form-item prop="cala10">
+                        <el-input v-model="queryParams.cala10" id="miaoshu" placeholder="请输入类别" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
@@ -21,7 +21,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassLM" v-loading="loading" height="600" :data="userList"
+                <el-table border :header-cell-style="headClassLM" v-loading="loading" height="470" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -49,10 +49,6 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title2" :visible.sync="open">
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">列表管理</span>
-                <hr />
-            </div>
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
                 <el-row>
                     <el-col style="margin-top:1%;">
@@ -139,10 +135,6 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" append-to-body>
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">列表管理</span>
-                <hr />
-            </div>
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;">
                 <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
@@ -342,7 +334,7 @@ export default {
                 page: 10,
                 size: 1,
                 total: this.total,
-                classifyName: undefined,
+                cala10: undefined,
                 classifyNum: undefined,
             },
             // 列信息
@@ -498,13 +490,9 @@ export default {
         handleQuery() {
             // var neirong = $('#miaoshu').val();
 
-            this.userList.typeName = this.form.typeName;
+           
             this.queryParams.pageNum = 1;
             this.getList();
-            this.queryParams.typeName = "";
-
-            //  this.queryParams.pageNum = this.form.classifyName;
-            console.log(this.queryParams);
         },
         /** 重置按钮操作 */
         resetQuery() {

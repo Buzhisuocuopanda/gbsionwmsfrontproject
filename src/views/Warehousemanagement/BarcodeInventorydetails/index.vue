@@ -11,15 +11,15 @@
                         <el-input v-model="queryParams.cbie07" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间" style="margin-left:2%;">
+                    <el-form-item label="创建时间" style="margin-left:1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
                         </el-date-picker>
+                             <el-button size="mini"  class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                             <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item>
-                      <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                      <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                    <el-form-item style="margin-left:40%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlekucunone">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
@@ -27,28 +27,28 @@
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
-                        <!--<el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"-->
-                            <!--@click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>-->
-                        <!--<el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"-->
-                            <!--@click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>-->
+                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
+                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
-                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
+                        <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:user:export']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
                             v-hasPermi="['system:user:export']">取消完成
-                        </el-button> -->
+                        </el-button>
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassac" v-loading="loading" :data="userList" height="580"
+                <el-table border :header-cell-style="headClassac" v-loading="loading" :data="userList" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbie07" prop="cbie07" sortable />
+                    <el-table-column label="编号" align="left" key="cbie07" width="180px;" prop="cbie07" sortable />
                     <el-table-column label="日期" width="400px;" align="left" key="cbie02" prop="cbie02"
                         :formatter="formatDate" sortable>
                     </el-table-column>

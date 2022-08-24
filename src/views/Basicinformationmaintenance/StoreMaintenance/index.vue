@@ -7,7 +7,7 @@
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
                     <el-form-item prop="locationNum">
-                        <el-input v-model="queryParams.locationNum" id="miaoshu" placeholder="请输入库位码" clearable
+                        <el-input v-model="queryParams.cbla09" id="miaoshu" placeholder="请输入库位码" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
@@ -27,7 +27,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassSM" v-loading="loading" height="600" :data="userList"
+                <el-table border :header-cell-style="headClassSM" v-loading="loading" height="470" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -99,8 +99,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row> -->
-                <div style="margin-top:-6%;font-weight: 900;font-size: 20px; color: black;">库位信息</div>
-                <hr class="hrred" />
+                
                 <el-row style="margin-top:6%;">
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
@@ -219,8 +218,7 @@
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" append-to-body style="width:70%;margin-left:15%;">
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="20%" class="chuangjianformstore">
-                <div style="margin-top:-6%;font-weight: 900;font-size: 20px; color: black;">库位信息</div>
-                <hr class="hrred" />
+               
                 <el-row style="margin-top:6%;">
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
@@ -483,7 +481,7 @@ export default {
                 page: 1,
                 size: 10,
                 total: this.total,
-                locationNum: undefined,
+                cbla09: undefined,
                 sort: undefined
             },
             // 列信息
@@ -673,21 +671,8 @@ export default {
         handleQuery() {
             // var neirong = $('#miaoshu').val();
 
-
-            this.userList.locationNum = this.form.locationNum;
-            this.getList();
-
-
-
             this.queryParams.pageNum = 1;
-            this.queryParams.locationNum = "";
-            // this.getList();
-
-
-            //  this.queryParams.pageNum = this.form.classifyName;
-
-            console.log(this.queryParams);
-            // this.getList();
+            this.getList();
 
         },
         /** 重置按钮操作 */
