@@ -137,11 +137,9 @@
                                 <el-input v-model="form.cbpb15" placeholder="" maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
-                        <el-col>
-                             <div slot="footer" class="dialog-footer">
+                        <el-col style="margin-left:75%;margin-top:2%;">
                                   <el-button type="primary" @click="handleUpdate">确 定</el-button>
                                   <el-button @click="cancel">取 消</el-button>
-                            </div>
                         </el-col>
                     </el-row>
                 </div>
@@ -314,12 +312,10 @@
                             <el-input v-model="form2.tprice" placeholder="" maxlength="30" style="width:60%;" />
                         </el-form-item>
                     </el-col>
-                      <el-col>
-                             <div slot="footer" class="dialog-footer">
-                                  <el-button type="primary" @click="handleAdd">确 定</el-button>
-                                  <el-button @click="cancells">取 消</el-button>
-                            </div>
-                        </el-col>
+                    <el-col style="margin-left:75%;margin-top:2%;">
+                            <el-button type="primary" @click="handleAdd">确 定</el-button>
+                            <el-button @click="cancells">取 消</el-button>
+                    </el-col>
                 </el-row>
             </el-form>
         </el-dialog>
