@@ -52,6 +52,7 @@
 
 <script>
 import { PurchaseinboundAdds } from "@/api/Warehousemanagement/SalesShipment";
+
 export default {
     name: 'BulkAdd',
     props: {

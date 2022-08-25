@@ -994,7 +994,7 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
-            if (this.form.name != undefined) {
+           
                 let row = {}
                 row.cbca07 = this.form.cbca07;
                 row.cbca08 = this.form.cbca08;
@@ -1037,10 +1037,6 @@ export default {
                     this.$message({ message: '恭喜你，修改成功', type: 'success' });
 
                 });
-
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
 
         },
         /** 详情按钮操作**/
