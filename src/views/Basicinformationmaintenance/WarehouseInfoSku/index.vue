@@ -11,8 +11,11 @@
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbwa11" label="仓库类型">
-                        <el-input v-model="queryParams.cbwa11" id="miaoshu" placeholder="请输入仓库类型"  clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                        <el-select v-model="queryParams.cbwa11" placeholder="请输入仓库类型" style="width: 240px;" clearable @keyup.enter.native="handleQuery">
+                            <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
+                                        :value="dict.label">
+                            </el-option>
+                        </el-select>
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
