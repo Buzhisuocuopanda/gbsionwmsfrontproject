@@ -18,7 +18,7 @@
                         label-width="68px">
                         <el-form-item prop="cbpb08">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
-                            <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入品牌" clearable
+                            <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入商品分类" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
                         <el-form-item>
@@ -44,11 +44,11 @@
                         <el-table-column label="商品分类" align="left" key="cbpb08" prop="cbpb08" width="290"
                             locationNum />
                         <!-- <el-table-column label="商品分类" align="center" key="cbpb09" prop="cbpb09" sortable /> -->
-                        <el-table-column label="是否启用" align="left" key="cbpb10" prop="cbpb10" sortable />
+                        <el-table-column label="是否启用" align="left" key="cbpb10" width="110px;" prop="cbpb10" sortable />
                         <!--<el-table-column label="空" align="left" key="cbpb11" prop="cbpb11" sortable />-->
                         <el-table-column label="优先型号" align="left" key="cbpb12" width="150" prop="cbpb12" locationNum />
-                        <el-table-column label="库位顺序" align="left" key="cbpb13" prop="cbpb13" sortable />
-                        <el-table-column label="库位容量" align="left" key="cbpb14" prop="cbpb14" sortable />
+                        <el-table-column label="库位顺序" align="left" key="cbpb13" width="110px;" prop="cbpb13" sortable />
+                        <el-table-column label="库位容量" align="left" key="cbpb14" width="110px;" prop="cbpb14" sortable />
                         <el-table-column label="UPC" align="left" key="cbpb15" width="150" prop="cbpb15" sortable />
                         <el-table-column label="状态" align="left" key="cbpb07" prop="cbpb07" sortable />
                         <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
@@ -682,14 +682,10 @@ export default {
         },
         /** 搜索按钮操作 */
         handleQuery() {
-            this.userList.cbpb08 = this.form.cbpb08;
-            this.getList();
+           
+           
             this.queryParams.pageNum = 1;
-            this.queryParams.cbpb08 = "";
-            // this.getList();
-            //  this.queryParams.pageNum = this.form.classifyName;
-            console.log(this.queryParams);
-
+             this.getList();
         },
         /** 重置按钮操作 */
         resetQuery() {

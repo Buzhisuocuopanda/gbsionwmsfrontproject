@@ -1053,7 +1053,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/supplier/SwJsSupplierimportTemplate', {
+            this.download('/system/supplier/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
