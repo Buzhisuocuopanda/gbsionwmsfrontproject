@@ -20,7 +20,7 @@
 
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
-                        <el-button plain size="mini" class="biaoto-buttondaochu" @click="handleExport"
+                        <el-button plain size="mini" class="biaoto-buttondaochuu" @click="handleExport"
                             v-hasPermi="['system:user:export']">导出</el-button>
                     </el-form-item>
                 </el-form>
@@ -71,7 +71,7 @@
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
             <el-form ref="form" :model="form" label-width="25%" lable-height="20%" class="chuangjianform">
-                <div style="margin-top:3%;">
+                <div style="margin-top:1.5%;">
                     <el-row>
                         <el-col>
                             <el-form-item label="公司名称:" prop="cbsa08">
@@ -172,7 +172,7 @@
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
             <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%" class="chuangjianform">
-                <div style="margin-top:3%;">
+                <div style="margin-top:1.5%;">
                     <el-row>
                         <el-col>
                             <el-form-item label="公司名称:" prop="cbsa08">
@@ -270,7 +270,7 @@
             <!-- <hr /> -->
             <el-form ref="form2" :model="form2" label-width="25%" :rules="rules"
                 class="chuangjianform">
-                <div style="margin-top:3%;">
+                <div style="margin-top:1.5%;">
                     <el-row>
                         <el-col>
                             <el-form-item label="公司名称:" prop="cbsa08">

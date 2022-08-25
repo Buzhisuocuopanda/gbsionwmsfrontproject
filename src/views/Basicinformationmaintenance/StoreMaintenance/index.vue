@@ -38,7 +38,7 @@
                     <el-table-column label="空" align="left" key="cbla12" prop="cbla12" sortable />
                     <el-table-column label="空" align="left" key="cbla13" prop="cbla13" sortable />
                     <el-table-column label="状态" align="left" key="cbla08" prop="cbla08" sortable />
-                    <el-table-column label="操作" align="left" width="160" class-name="small-padding fixed-width">
+                    <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
                                 @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
@@ -100,7 +100,7 @@
                     </el-col>
                 </el-row> -->
                 
-                <el-row style="margin-top:6%;">
+                <el-row style="margin-top:3%;">
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
                             <el-input v-model="form.cbla09" placeholder="" style="width:77%;"
@@ -219,7 +219,7 @@
         <el-dialog :title="title" :visible.sync="open2" append-to-body style="width:70%;margin-left:15%;">
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="20%" class="chuangjianformstore">
                
-                <el-row style="margin-top:6%;">
+                <el-row style="margin-top:3%;">
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
                             <el-input v-model="form2.cbla09" placeholder="" style="width:77%;"

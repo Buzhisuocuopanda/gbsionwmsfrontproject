@@ -26,28 +26,28 @@
 
 .biaoto-buttonchaxuen {
     color: white !important;
-    /*width: 20px;*/
-    /*font-family:"宋体";*/
-    text-decoration: none;
-    font-size: 16px;
-    border: 2px solid #47acca !important;
-    /*font: bold 14px Arial, Helvetica;*/
-    /*font-family:"微软雅黑";*/
-    background-color: #44a9c7;
-    background-image: -moz-linear-gradient(#469ab9, #5bdcff);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#469ab9), to(#5bdcff));
-    background-image: -webkit-linear-gradient(#469ab9, #5bdcff);
-    background-image: -o-linear-gradient(#469ab9, #5bdcff);
-    background-image: -ms-linear-gradient(#469ab9, #5bdcff);
-    background-image: linear-gradient(#47b7d6, #58cdf0);
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
-    /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
-    /*-moz-box-shadow: 0 1px 0 rgba(0, 135, 245, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
-    /*-webkit-box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
-    /*box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 1px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
-
+        /*width: 20px;*/
+        /*font-family:"宋体";*/
+        text-decoration: none;
+        font-size: 16px;
+        border: 2px solid #153c4a !important;
+        height: 34px;
+        /*font: bold 14px Arial, Helvetica;*/
+        /*font-family:"微软雅黑";*/
+        background-color: #153c4a;
+        background-image: -moz-linear-gradient(#3db0d0, #307690);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#3db0d0), to(#307690));
+        background-image: -webkit-linear-gradient(#3db0d0, #307690);
+        background-image: -o-linear-gradient(#3db0d0, #307690);
+        background-image: -ms-linear-gradient(#3db0d0, #307690);
+        background-image: linear-gradient(#3db0d0, #307690) !important;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+        /*-moz-box-shadow: 0 1px 0 rgba(0, 135, 245, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+        /*-webkit-box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+        /*box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 1px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
 }
 
 .el-button {
@@ -130,7 +130,7 @@
 
 }
 
-.biaoto-buttondaochu {
+.biaoto-buttondaochuu {
 
     border: 2px solid #59b259 !important;
     /*width: 20px;*/

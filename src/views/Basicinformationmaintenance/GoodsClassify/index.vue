@@ -222,6 +222,7 @@ export default {
                             i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
                             i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
                         })
+                        
                     }
                 })
                 this.deptOptions = response.data;

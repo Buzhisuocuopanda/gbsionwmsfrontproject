@@ -69,7 +69,7 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" class="kehuxxweihucss abow_dialog3">
+        <el-dialog :title="title1" :visible.sync="open" class=" abow_dialog3">
             
             <el-form ref="form" :model="form" label-width="45%" class="chuangjianformcust">
                 <el-row>
@@ -206,14 +206,11 @@
                             <el-input v-model="form.cbca26" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                    
                 </el-row>
                 <el-row>
-                    <el-col>
-                         <div slot="footer" style="margin-top:10%;margin-left:20%;">
-                              <el-button type="primary" @click="handleUpdate">确定</el-button>
-                              <el-button @click="cancel">取 消</el-button>
-                         </div>
+                    <el-col :span="11" style="margin-left:80%;">
+                        <el-button type="primary" @click="handleUpdate">确定</el-button>
+                        <el-button @click="cancel">取 消</el-button>
                     </el-col>
                 </el-row>
             </el-form>
@@ -223,7 +220,7 @@
         <!-- 详情 -->
         <!-- <el-dialog :title="title" :visible.sync="open">
             <el-form ref="form" :model="form" label-width="45%" class="chuangjianform"> -->
-        <el-dialog :title="title2" :visible.sync="open1" class="kehuxxweihucss  abow_dialog3">
+        <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog3">
            
             <el-form ref="form1" :model="form1" label-width="45%" class="chuangjianformcust">
                 <el-row>
@@ -366,7 +363,7 @@
         <!-- 创建 -->
         <!-- <el-dialog :title="title" :visible.sync="open2" append-to-body>
             <el-form ref="form2" :model="form2" :rules="rules" label-width="30%" class="chuangjianform"> -->
-        <el-dialog :title="title" :visible.sync="open2" class="kehuxxweihucss  abow_dialog3">
+        <el-dialog :title="title" :visible.sync="open2" class="abow_dialog3">
            
             <el-form ref="form2" :model="form2" label-width="45%" :rules="rules2" class="chuangjianformcust">
                 <el-row>
@@ -505,11 +502,9 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
-                       <div slot="footer" class="">
-                            <el-button type="primary" @click="handleAdd">确 定</el-button>
+                    <el-col :span="11" style="margin-left:56%;">
+                            <el-button type="primary" style="margin-left:49%;" @click="handleAdd">确 定</el-button>
                             <el-button @click="cancells">取 消</el-button>
-                       </div>
                     </el-col>
                 </el-row>
             </el-form>
