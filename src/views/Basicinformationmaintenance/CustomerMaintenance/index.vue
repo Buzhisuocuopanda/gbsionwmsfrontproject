@@ -6,9 +6,16 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                    <el-form-item prop="cbca08">
+                    <el-form-item prop="cbca08" label="客户名称">
                         <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="请输入客户名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                     <el-form-item prop="cbca24" label="发票类型">
+                            <el-select v-model="queryParams.cbca24" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
+                                    <el-option v-for="item in fapiaoleix" :key="item.label" :label="item.label"
+                                        :value="item.label">
+                                    </el-option>
+                                </el-select>
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
@@ -708,6 +715,7 @@ export default {
                 total: this.total,
                 locationNum: undefined,
                 cbca08: undefined,
+                cbca24: undefined,
                 sort: undefined
             },
             // 列信息

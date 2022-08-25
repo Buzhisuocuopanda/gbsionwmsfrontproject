@@ -6,8 +6,12 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                    <el-form-item prop="cbwa09">
+                    <el-form-item prop="cbwa09" label="仓库名称">
                         <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库名称"  clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                    <el-form-item prop="cbwa11" label="仓库类型">
+                        <el-input v-model="queryParams.cbwa11" id="miaoshu" placeholder="请输入仓库类型"  clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>

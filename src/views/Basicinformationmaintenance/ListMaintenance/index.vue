@@ -6,9 +6,17 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                    <el-form-item prop="cala10">
-                        <el-input v-model="queryParams.cala10" id="miaoshu" placeholder="请输入类别" clearable
+                    <el-form-item prop="cala08" label="名称">
+                        <el-input v-model="queryParams.cala08" id="miaoshu" placeholder="请输入名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                    <el-form-item prop="cala10" label="类别">
+                        <!-- <el-input v-model="queryParams.cala10" id="miaoshu" placeholder="请输入类别" clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" /> -->
+                            <el-select v-model="queryParams.cala10" placeholder="请输入类别" style="width: 240px;" clearable @keyup.enter.native="handleQuery">
+                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
+                                    :value="dict.label"></el-option>
+                            </el-select>
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
@@ -335,6 +343,7 @@ export default {
                 size: 1,
                 total: this.total,
                 cala10: undefined,
+                cala08: undefined,
                 classifyNum: undefined,
             },
             // 列信息

@@ -6,9 +6,16 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px" style="margin-left:2%;">
-                    <el-form-item prop="cbsa08">
+                    <el-form-item prop="cbsa08" label="公司名称">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入公司名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                     <el-form-item prop="cbsa18" label="发票类型">
+                            <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
+                                    <el-option v-for="item in fapiaoleix" :key="item.label" :label="item.label"
+                                        :value="item.value">
+                                    </el-option>
+                                </el-select>
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>

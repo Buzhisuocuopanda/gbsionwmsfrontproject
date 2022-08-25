@@ -16,9 +16,14 @@
                     <!-- 表头内容  -->
                     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                         label-width="68px">
-                        <el-form-item prop="cbpb08">
+                        <el-form-item prop="cbpb08" label="商品分类">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
                             <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入商品分类" clearable
+                                style="width: 240px;" @keyup.enter.native="handleQuery" />
+                        </el-form-item>
+                         <el-form-item prop="cbpb12" label="型号">
+                            <!-- placeholder="描述/助记符/品牌/UPC/" -->
+                            <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
                         <el-form-item>
@@ -44,9 +49,9 @@
                         <el-table-column label="商品分类" align="left" key="cbpb08" prop="cbpb08" width="290"
                             locationNum />
                         <!-- <el-table-column label="商品分类" align="center" key="cbpb09" prop="cbpb09" sortable /> -->
-                        <el-table-column label="是否启用" align="left" key="cbpb10" width="110px;" prop="cbpb10" sortable />
+                        
                         <!--<el-table-column label="空" align="left" key="cbpb11" prop="cbpb11" sortable />-->
-                        <el-table-column label="优先型号" align="left" key="cbpb12" width="150" prop="cbpb12" locationNum />
+                        <el-table-column label="型号" align="left" key="cbpb12" width="150" prop="cbpb12" locationNum />
                         <el-table-column label="库位顺序" align="left" key="cbpb13" width="110px;" prop="cbpb13" sortable />
                         <el-table-column label="库位容量" align="left" key="cbpb14" width="110px;" prop="cbpb14" sortable />
                         <el-table-column label="UPC" align="left" key="cbpb15" width="150" prop="cbpb15" sortable />
@@ -514,6 +519,8 @@ export default {
                 size: 10,
                 total: this.total,
                 brand: undefined,
+                cbpb12: undefined,
+                cbpb08: undefined,
                 model: undefined,
             },
             // //列信息
