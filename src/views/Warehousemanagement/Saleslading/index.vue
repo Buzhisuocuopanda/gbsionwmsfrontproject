@@ -18,11 +18,15 @@
                     <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                                     :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                                     range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                    </el-date-picker>
-                       <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                    </el-date-picker>                      
                   </el-form-item>
-                    <el-form-item style="margin-left:50%;">
-                     
+                  <el-form-item>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                  </el-form-item>
+                  <el-form-item>
+                        <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                  </el-form-item>
+                    <el-form-item style="margin-left:50%;">                    
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handletihuoone">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"

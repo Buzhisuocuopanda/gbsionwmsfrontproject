@@ -5,19 +5,26 @@
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
-
-                    <el-form-item prop="sn" label="编号">
+                    label-width="auto">
+                    <el-form-item prop="cbie07" label="编号">
                         <el-input v-model="queryParams.cbie07" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间" style="margin-left:1%;">
+                    <el-form-item prop="cbwa09" label="仓库">
+                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                    <el-form-item label="日期" style="margin-left:0.5%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                        </el-date-picker>
-                             <el-button size="mini"  class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                             <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        </el-date-picker>                           
+                    </el-form-item>
+                    <el-form-item >
+                             <el-button style="margin-left:0.1%;" size="mini"  class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                            <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:40%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
@@ -656,6 +663,7 @@ export default {
                 size: 10,
                 total: this.total,
                 cbie07: undefined,
+                cbwa09: undefined,
                 daterange: undefined
             },
             // 列信息

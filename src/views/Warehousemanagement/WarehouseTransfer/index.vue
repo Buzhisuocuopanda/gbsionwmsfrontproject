@@ -10,7 +10,7 @@
                         <el-input v-model="queryParams.cbaa07" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间" style="margin-left:2%;">
+                    <el-form-item label="日期">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
@@ -27,10 +27,10 @@
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <!--<el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"-->
-                            <!--@click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>-->
-                        <!--<el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"-->
-                            <!--@click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>-->
+                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
+                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -48,7 +48,7 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="left" />
-                    <el-table-column label="编号" align="left" key="cbaa07" prop="cbaa07" sortable />
+                    <el-table-column label="编号" align="left" key="cbaa07" width="180px;" prop="cbaa07" sortable />
                     <el-table-column label="日期" align="left" key="cbaa08" prop="cbaa08" :formatter="formatDate"
                         sortable>
                     </el-table-column>

@@ -10,7 +10,7 @@
                         <el-input v-model="queryParams.cbsh07" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间" style="margin-left:2%;">
+                    <el-form-item label="日期">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
@@ -26,8 +26,8 @@
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <!--<el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"-->
-                            <!--@click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">盘点完成</el-button>-->
+                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">盘点完成</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -36,10 +36,10 @@
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:user:export']">标记完成
                         </el-button> -->
-                        <!--<el-button plain size="mini" class="biaoto-buttonfanshen"-->
-                            <!--@click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"-->
-                            <!--v-hasPermi="['system:user:export']">取消完成-->
-                        <!--</el-button>-->
+                        <el-button plain size="mini" class="biaoto-buttonfanshen"
+                            @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
+                            v-hasPermi="['system:user:export']">取消完成
+                        </el-button>
                     </el-form-item>
                 </el-form>
 

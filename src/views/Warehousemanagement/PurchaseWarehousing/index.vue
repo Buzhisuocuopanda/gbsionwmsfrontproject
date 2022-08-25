@@ -19,15 +19,19 @@
                         <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
                             style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间" style="margin-left:1%;">
+                    <el-form-item label="日期" style="margin-left:1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                        </el-date-picker>
-                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                      <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        </el-date-picker>                      
                     </el-form-item>
-                    <el-form-item style="margin-left:42%;"> 
+                    <el-form-item>
+                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                         <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                    </el-form-item>
+                    <el-form-item style="margin-left:40%;"> 
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
