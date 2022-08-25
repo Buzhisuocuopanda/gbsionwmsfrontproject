@@ -82,12 +82,12 @@
                 <el-row>
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
-                            <el-input v-model="form.cbca08" placeholder="" style="width:100%;border:solid #eee thin;" />
+                            <el-input v-model="form.cbca08" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
                         <el-form-item label="简称:" prop="cbca10">
-                            <el-input v-model="form.cbca10" placeholder="" style="width:100%;border:solid #eee thin;" maxlength="30" />
+                            <el-input v-model="form.cbca10" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
 
@@ -142,7 +142,7 @@
                                 maxlength="30" /> -->
                             <el-select v-model="form.cbca24" placeholder="" style="width:100%;">
                                 <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
-                                    :value="item.value">
+                                    :value="item.label">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -288,10 +288,10 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="发票类型:" prop="cbca24">
+                        <el-form-item label="发票类型:" prop="cbca24" >
                             <!-- <el-input v-model="form2.invoiceType" placeholder="请输入发票类型" style="width:98%"
                                 maxlength="30" /> -->
-                            <el-select v-model="form1.cbca24" placeholder="" style="width:100%;">
+                            <el-select v-model="form1.cbca24" :disabled="true" placeholder="" style="width:100%;">
                                 <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
                                     :value="item.value">
                                 </el-option>

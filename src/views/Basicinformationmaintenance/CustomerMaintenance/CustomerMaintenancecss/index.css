@@ -178,14 +178,11 @@
 
 }
 
-.is-disabled {
-    /*width: 20px;*/
+/* .is-disabled {
     text-decoration: none !important;
     border: 2px solid #b7413c !important;
     font-size: 16px !important;
     color: white !important;
-    /*font: bold 14px Arial, Helvetica;*/
-    /*font-family:"微软雅黑";*/
     background-color: #d84c47 !important;
     background-image: -moz-linear-gradient(#d84c47, #a03834) !important;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#d84c47), to(#a03834)) !important;
@@ -196,7 +193,7 @@
     -moz-border-radius: 8px !important;
     -webkit-border-radius: 8px !important;
     border-radius: 8px !important;
-}
+} */
 
 .biaoto-buttonshanchu:hover {
     /*width: 20px;*/
@@ -218,14 +215,12 @@
     border-radius: 8px !important;
 }
 
-.is-plain:visited {
-    /*width: 20px;*/
+/* .is-plain:visited {
+
     text-decoration: none !important;
     border: 2px solid #b7413c !important;
     font-size: 16px !important;
     color: white !important;
-    /*font: bold 14px Arial, Helvetica;*/
-    /*font-family:"微软雅黑";*/
     background-color: #a03834 !important;
     background-image: -moz-linear-gradient(#a03834, #a03834) !important;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#d84c47), to(#a03834)) !important;
@@ -236,7 +231,7 @@
     -moz-border-radius: 8px !important;
     -webkit-border-radius: 8px !important;
     border-radius: 8px !important;
-}
+} */
 
 .pagination-container {
     background: #fff;

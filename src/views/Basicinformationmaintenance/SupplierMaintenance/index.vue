@@ -232,7 +232,7 @@
                         <el-col>
                             <el-form-item label="发票类型:" prop="cbsa18">
                                 <!-- <el-input v-model="form2.invoiceType" placeholder="请输入发票类型" maxlength="30" /> -->
-                                <el-select v-model="form1.cbsa18" placeholder="" style="width:70%;">
+                                <el-select v-model="form1.cbsa18" placeholder="" :disabled="true" style="width:70%;">
                                     <el-option v-for="item in fapiaoleix" :key="item.label" :label="item.label"
                                         :value="item.value">
                                     </el-option>
@@ -923,6 +923,18 @@ export default {
             this.form1.cbsa16 = row.cbsa16;
             this.form1.cbsa17 = row.cbsa17;
             this.form1.cbsa18 = row.cbsa18;
+            if(this.form1.cbsa18=="1")
+            {
+                this.form1.cbsa18="增值税专用发票"
+            }else if(this.form1.cbsa18=="2")
+            {
+                this.form1.cbsa18="增值税普通发票"
+            }else if(this.form1.cbsa18=="3")
+            {
+                this.form1.cbsa18="个人普通发票"
+            }else{
+                this.form1.cbsa18="不开发票"
+            }
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {

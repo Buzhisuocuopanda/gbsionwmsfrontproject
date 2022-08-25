@@ -56,7 +56,7 @@
                         <el-table-column label="库位容量" align="left" key="cbpb14" width="110px;" prop="cbpb14" sortable />
                         <el-table-column label="UPC" align="left" key="cbpb15" width="150" prop="cbpb15" sortable />
                         <el-table-column label="状态" align="left" key="cbpb07" prop="cbpb07" sortable />
-                        <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+                        <el-table-column label="操作" align="center" fixed="right" width="160" class-name="small-padding fixed-width">
                             <template slot-scope="scope">
                                 <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
                                     @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
