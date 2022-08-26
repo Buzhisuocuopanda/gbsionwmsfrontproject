@@ -12,7 +12,7 @@
                     </el-form-item>
                      <el-form-item prop="cbca24" label="发票类型">
                             <el-select v-model="queryParams.cbca24" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
-                                    <el-option v-for="item in fapiaoleix" :key="item.label" :label="item.label"
+                                    <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
                                         :value="item.label">
                                     </el-option>
                                 </el-select>

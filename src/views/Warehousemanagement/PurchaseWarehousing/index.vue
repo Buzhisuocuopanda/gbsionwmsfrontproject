@@ -1508,7 +1508,7 @@ export default {
         /** 详情操作 */
         handleAuthRole: function (row) {
             const cbpc01 = row.cbpc01;
-            console.log(JSON.stringify(row.cbpc01));
+            console.log(row.cbpc01);
             
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-auth/role/" + cbpc01);

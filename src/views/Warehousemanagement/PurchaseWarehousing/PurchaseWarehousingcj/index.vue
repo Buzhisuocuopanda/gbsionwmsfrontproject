@@ -166,7 +166,7 @@
                 </div>
             </div> -->
     <div>
-        <div class="dialog-content" width="1050px" style="margin-top:4%;" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
+        <div class="dialog-content" width="1050px" style="margin-top:3%;" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
             
             <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
                 <el-button plain type="primary" @click="_ly_addFrom">新增一行</el-button>

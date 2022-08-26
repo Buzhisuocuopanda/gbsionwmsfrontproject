@@ -46,7 +46,8 @@
                         :default-sort="{ prop: 'name', order: 'descending' }" style="margin-left: -1.5%; width:100%;"
                         @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
-                        <el-table-column label="商品分类" align="left" key="cbpb08" prop="cbpb08" width="450px;"
+                        <el-table-column label="商品分类" align="left" key="cbpa07" prop="cala08"/>
+                        <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" width="450px;"
                             locationNum />
                         <!-- <el-table-column label="商品分类" align="center" key="cbpb09" prop="cbpb09" sortable /> -->
                         

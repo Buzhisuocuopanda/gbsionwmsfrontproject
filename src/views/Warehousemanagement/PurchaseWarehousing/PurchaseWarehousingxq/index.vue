@@ -22,7 +22,7 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="400"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="370"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
@@ -193,7 +193,7 @@ export default {
             const userId = this.$route.params &&  this.$route.params.cbpc01;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundLists(JSON.stringify(userId), this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);

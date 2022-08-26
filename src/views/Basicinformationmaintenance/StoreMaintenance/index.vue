@@ -6,7 +6,11 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                    <el-form-item prop="locationNum">
+                    <el-form-item prop="cbwa09" label="仓库">
+                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                    <el-form-item prop="cbla09" label="库位码">
                         <el-input v-model="queryParams.cbla09" id="miaoshu" placeholder="请输入库位码" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
@@ -31,6 +35,7 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
+                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09"></el-table-column>
                     <el-table-column label="库位码" align="left" key="cbla09" prop="cbla09" sortable />
                     <el-table-column label="库位容量" align="left" key="cbla11" prop="cbla11" locationNum />
                     <el-table-column label="库位顺序" align="left" key="cbla07" prop="cbla07" sortable />

@@ -26,7 +26,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSS" v-loading="loading" height="495" :data="userList"
+                <el-table border :header-cell-style="headClassWSS" v-loading="loading" height="490" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92%;height: 8%; margin-left:-1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -42,14 +42,14 @@
                             <div>{{ scope.row.cbwa07 <= 1 ? "优先出库" : "正常出库" }} </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="商品管理方式" align="left" key="cbwa12" prop="cbwa12" sortable>
+                    <el-table-column label="管理方式" align="left" key="cbwa12" prop="cbwa12" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa12 == 1 ? "条码管理" : scope.row.cbwa12 == 2 ? "数量管理" : "管理方式未知"
                             }}
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="是否启用总订单" align="left" key="cbwa13" prop="cbwa13" sortable>
+                    <el-table-column label="启用总订单" align="left" key="cbwa13" prop="cbwa13" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa13 == 0 ? "是" : scope.row.cbwa13 == 1 ?
                             "否" : "状态不确定"
@@ -57,7 +57,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="是否启用提货单" align="left" key="cbwa14" prop="cbwa14" sortable>
+                    <el-table-column label="启用提货单" align="left" key="cbwa14" prop="cbwa14" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa14 == 0 ? "是" : scope.row.cbwa14 == 1 ? "否" :
                             "状态不确定"
@@ -65,7 +65,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="是否启用" align="left" key="cbwa08" prop="cbwa08" sortable>
+                    <el-table-column label="启用" align="left" key="cbwa08" prop="cbwa08" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa15 == -1 ? "启用" : scope.row.cbwa15 == 1 ? "禁用" : "状态不确定" }}
                             </div>
@@ -378,8 +378,8 @@
                         </el-col>
                          <el-col>
                             <div style="margin-left:79%;margin-top: 3%;">
-                               <el-button type="primary" @click="handleUpdate">确定</el-button>
-                               <el-button @click="cancel">取 消</el-button>
+                               <el-button type="primary" @click="handleAdd">确定</el-button>
+                               <el-button @click="cancells">取 消</el-button>
                             </div>
                         </el-col>
                     </el-row>
