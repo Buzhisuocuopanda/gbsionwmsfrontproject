@@ -46,11 +46,11 @@
                         :default-sort="{ prop: 'name', order: 'descending' }" style="margin-left: -1.5%; width:100%;"
                         @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
-                        <el-table-column label="商品分类" align="left" key="cbpb08" prop="cbpb08" width="290"
+                        <el-table-column label="商品分类" align="left" key="cbpb08" prop="cbpb08" width="450px;"
                             locationNum />
                         <!-- <el-table-column label="商品分类" align="center" key="cbpb09" prop="cbpb09" sortable /> -->
                         
-                        <!--<el-table-column label="空" align="left" key="cbpb11" prop="cbpb11" sortable />-->
+                        <el-table-column label="商品品牌" align="left" key="cbpb10" prop="cbpb10" width="180px;" sortable />
                         <el-table-column label="型号" align="left" key="cbpb12" width="150" prop="cbpb12" locationNum />
                         <el-table-column label="库位顺序" align="left" key="cbpb13" width="110px;" prop="cbpb13" sortable />
                         <el-table-column label="库位容量" align="left" key="cbpb14" width="110px;" prop="cbpb14" sortable />
@@ -95,13 +95,12 @@
                     </el-row>
                     <el-row>
                         <el-col>
-                            <el-form-item label="状态:" prop="cbpb07">
-                                <el-input v-model="form.cbpb07" maxlength="30" style="width:55%;" />
-                            </el-form-item>
-                        </el-col>
-                        <el-col>
-                            <el-form-item label="是否启用:" prop="cbpb10">
-                                <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" />
+                            <el-form-item label="商品品牌:" prop="cbpb10">
+                                <!-- <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" /> -->
+                            <el-select v-model="form.cbpb10" placeholder="" style="width:55%;">
+                                <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
+                                    :value="dict.value"></el-option>
+                            </el-select>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -137,6 +136,15 @@
                                 <el-input v-model="form.cbpb15" placeholder="" maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
+                         <el-col>
+                            <el-form-item label="状态:" prop="cbpb07">
+                                <!-- <el-input v-model="form.cbpb07" maxlength="30" style="width:55%;" /> -->
+                                <el-select v-model="form.cbpb07" placeholder="" style="width:55%;">
+                                <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
+                                    :value="dict.label"></el-option>
+                            </el-select>
+                            </el-form-item>
+                        </el-col>
                         <el-col style="margin-left:75%;margin-top:2%;">
                                   <el-button type="primary" @click="handleUpdate">确 定</el-button>
                                   <el-button @click="cancel">取 消</el-button>
@@ -166,14 +174,14 @@
                 </el-row>
                 <el-row>
 
+                   
                     <el-col>
-                        <el-form-item label="状态:" prop="cbpb07">
-                            <el-input v-model="form1.cbpb07" placeholder="" maxlength="30" style="width:70%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col>
-                        <el-form-item label="是否启用:" prop="cbpb10">
-                            <el-input v-model="form1.cbpb10" placeholder="" maxlength="30" style="width:70%;" />
+                        <el-form-item label="商品品牌:" prop="cbpb10">
+                            <!-- <el-input v-model="form1.cbpb10" placeholder="" maxlength="30" style="width:70%;" /> -->
+                             <el-select v-model="form1.cbpb10" :disabled="true"  placeholder="" style="width:70%;">
+                                <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
+                                    :value="dict.value"></el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -205,6 +213,11 @@
                     <el-col>
                         <el-form-item label="UPC:" prop="cbpb15">
                             <el-input v-model="form1.cbpb15" placeholder="" maxlength="30" style="width:70%;" />
+                        </el-form-item>
+                    </el-col>
+                     <el-col>
+                        <el-form-item label="状态:" prop="cbpb07">
+                            <el-input v-model="form1.cbpb07" placeholder="" maxlength="30" style="width:70%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -266,7 +279,7 @@
                     </el-col>
 
                     <el-col :span="12">
-                        <el-form-item label="是否启用:" prop="cbpb10">
+                        <el-form-item label="商品品牌:" prop="cbpb10">
                             <!-- <el-input v-model="form2.cbpb10" placeholder="" maxlength="30" style="width:70%;" /> -->
                             <el-select v-model="form2.cbpb10" placeholder="" style="width:70%;">
                                 <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
@@ -281,7 +294,7 @@
                             <!-- <el-input v-model="form2.cbpb07" placeholder="" maxlength="30" style="width:70%;" /> -->
                             <el-select v-model="form2.cbpb07" placeholder="" style="width:70%;">
                                 <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
-                                    :value="dict.value"></el-option>
+                                    :value="dict.label"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -437,13 +450,25 @@ export default {
             }],
             value: '',
 
-            //是否启用总订单
+            //商品品牌
             ZongDingdan: [{
-                value: '0',
-                label: '是'
-            }, {
                 value: '1',
-                label: '否'
+                label: 'Epiphone'
+            }, {
+                value: '2',
+                label: 'Gibson'
+            }, {
+                value: '3',
+                label: 'Kramer'
+            }, {
+                value: '4',
+                label: 'Steinberger'
+            }, {
+                value: '5',
+                label: 'Mesa/Boogie'
+            }, {
+                value: '6',
+                label: 'Maestro'
             }],
             value: '',
 
@@ -823,6 +848,24 @@ export default {
             this.form1.cbpb13 = row.cbpb13;
             this.form1.cbpb14 = row.cbpb14;
             this.form1.cbpb15 = row.cbpb15;
+            if(this.form1.cbpb10=="1")
+            {
+                this.form1.cbpb10="Epiphone"
+            }else if(this.form1.cbpb10=="2")
+            {
+                 this.form1.cbpb10="Gibson"
+            }else if(this.form1.cbpb10=="3")
+            { 
+                 this.form1.cbpb10="Kramer"
+            }else if(this.form1.cbpb10=="4")
+            { 
+                 this.form1.cbpb10="Steinberger"
+            }else if(this.form1.cbpd10=="5")
+            {
+                 this.form1.cbpb10="Mesa/Boogie"
+            }else{
+                this.form1.cbpb10="Maestro"
+            }
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {

@@ -165,7 +165,7 @@
                     </div>
                 </div>
             </div> -->
-           <div>
+    <div>
         <div class="dialog-content" width="1050px" style="margin-top:4%;" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
             
             <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
@@ -178,45 +178,45 @@
                    <th style="padding-left:50px;">商品id</th>
                    <th style="padding-left:100px;">数量</th>
                    <th style="padding-left:100px;">状态</th>
-                   <th style="padding-left:100px;">单价</th>
+                   <th style="padding-left:120px;">单价</th>
                    <th style="padding-left:100px;">金额</th>
                    <th style="padding-left:100px;">备注</th>
-                   <th style="padding-left:70px;">销售主表id</th>
-                   <th style="padding-left:30px;">销售订单明细表id</th>
+                   <th style="padding-left:90px;">销售主表id</th>
+                   <th style="padding-left:40px;">销售订单明细表id</th>
                    <th style="padding-left:40px;">供应商</th>
                 </tr>
             </table>
-                <el-row v-for="(form, index) in formArr" :key="index">
+                <el-row v-for="(form, index) in formArr" style="width:110%;" :key="index">
                     <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
                         :inline="true">                        
-                        <el-form-item label="" size="small" prop="name" style="margin-left:1%;">
+                        <el-form-item label="" size="small" prop="name" style="margin-left:0.5%;">
                             <el-input v-model="form.cbsc08" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="nickname" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="nickname" style="margin-left:-4%;">
                             <el-input type="number" v-model="form.cbsc09" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc10" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc11" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc12" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc13" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsb01" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc14" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4.5%;">
+                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc15" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-button v-if="index != 0" type="danger" style="margin-left:4%;"  size="small" icon="el-icon-delete" circle
+                        <el-button v-if="index != 0" type="danger" style="position: absolute; left: 87%;"  size="small" icon="el-icon-delete"  circle
                             @click="_ly_delFrom(index)"></el-button>
                     </el-form>
                 </el-row>

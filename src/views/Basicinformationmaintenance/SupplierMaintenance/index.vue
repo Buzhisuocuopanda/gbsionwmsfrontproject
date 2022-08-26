@@ -48,7 +48,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="状态" align="center" key="cbsa07" prop="cbsa07" sortable>
+                    <el-table-column label="状态" align="left" key="cbsa07" prop="cbsa07" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.ifEnabled == -1 ? "启用" : scope.row.ifEnabled == 1 ? "禁用" : "状态不确定" }}
                             </div>
@@ -253,9 +253,9 @@
                             </el-form-item>
                         </el-col>
                         <el-col>
-                            <el-form-item label="状态:" prop="cbsa07">
+                            <el-form-item label="状态:"  prop="cbsa07">
                                 <!-- <el-input v-model="form2.ifEnabled" placeholder="请输入状态" maxlength="30" /> -->
-                                <el-select v-model="form1.cbsa07" placeholder="" style="width:70%;">
+                                <el-select v-model="form1.cbsa07" placeholder="" :disabled="true" style="width:70%;">
                                     <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
                                         :value="item.label">
                                     </el-option>

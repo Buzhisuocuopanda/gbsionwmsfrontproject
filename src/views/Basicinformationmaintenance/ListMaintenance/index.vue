@@ -56,7 +56,7 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title2" :visible.sync="open">
+        <el-dialog :title="title2" :visible.sync="open" append-to-body>
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
                 <el-row>
                     <el-col style="margin-top:1%;">
@@ -585,7 +585,6 @@ export default {
         /** 修改按钮操作 */
         handleUpdate() {
             this.open = true;
-            if (this.form.cala09 != undefined) {
                 let row = {}
                 row.cala08 = this.form.cala08;
                 row.cala09 = this.form.cala09;
@@ -609,10 +608,6 @@ export default {
 
                 });
 
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
-
         },
         /** 详情按钮操作**/
         handleSelect(row) {
@@ -633,7 +628,6 @@ export default {
             this.form.cala10 = row.cala10;
             this.form.cala11 = row.cala11;
             this.form.cala12 = row.cala12;
-            this.getList();
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
