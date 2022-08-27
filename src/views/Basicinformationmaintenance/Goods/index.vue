@@ -1005,7 +1005,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/goods/SwJsGoodsimportTemplate', {
+            this.download('/system/goods/importTemplate', {
             }, `user_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
