@@ -16,9 +16,9 @@
                     <!-- 表头内容  -->
                     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                         label-width="68px">
-                        <el-form-item prop="cbpb08" label="商品分类">
+                        <el-form-item prop="cbpa07" label="商品分类">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
-                            <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入商品分类" clearable
+                            <el-input v-model="queryParams.cbpa07" id="miaoshu" placeholder="请输入商品分类" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
                          <el-form-item prop="cbpb12" label="型号">
@@ -46,7 +46,7 @@
                         :default-sort="{ prop: 'name', order: 'descending' }" style="margin-left: -1.5%; width:100%;"
                         @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
-                        <el-table-column label="商品分类" align="left" key="cbpa07" prop="cala08"/>
+                        <el-table-column label="商品分类" align="left" key="cbpa07" prop="cbpa07"/>
                         <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" width="450px;"
                             locationNum />
                         <!-- <el-table-column label="商品分类" align="center" key="cbpb09" prop="cbpb09" sortable /> -->
@@ -542,7 +542,7 @@ export default {
                 total: this.total,
                 brand: undefined,
                 cbpb12: undefined,
-                cbpb08: undefined,
+                cbpa07: undefined,
                 model: undefined,
             },
             // //列信息
