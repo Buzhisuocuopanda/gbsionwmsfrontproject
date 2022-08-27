@@ -51,7 +51,7 @@
                             locationNum />
                         <!-- <el-table-column label="商品分类" align="center" key="cbpb09" prop="cbpb09" sortable /> -->
                         
-                        <el-table-column label="商品品牌" align="left" key="cbpb10" prop="cbpb10" width="180px;" sortable />
+                        <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable />
                         <el-table-column label="型号" align="left" key="cbpb12" width="150" prop="cbpb12" locationNum />
                         <el-table-column label="库位顺序" align="left" key="cbpb13" width="110px;" prop="cbpb13" sortable />
                         <el-table-column label="库位容量" align="left" key="cbpb14" width="110px;" prop="cbpb14" sortable />
