@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="Purchase_caigou">采购入库单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) | null " :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpc07 | null }}</span>
-            <span class="Purchase_riqi">日期：{{ value.cbpc08.slice(0, 10) | null }}</span>
+        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
+            <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
+            <span class="Purchase_riqi">日期：{{ value.cbpc08.slice(0, 10) }}</span>
         </div>
         <div style="width:98%; margin-left: 1%; margin-top: 1%;">
             <!-- 横向 -->
             <el-descriptions class="margin-top" title="" :column="3" border
-                v-for="(value, key) in userList.slice(0, 1) | null" :key="key">
+                v-for="(value, key) in userList.slice(0, 1)" :key="key">
                 <el-descriptions-item>
                     <template slot="label">供料单位</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
@@ -22,7 +22,7 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="370"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
