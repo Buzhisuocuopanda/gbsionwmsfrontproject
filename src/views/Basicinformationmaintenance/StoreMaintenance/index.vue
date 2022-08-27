@@ -39,9 +39,7 @@
                     <el-table-column label="库位码" align="left" key="cbla09" prop="cbla09" sortable />
                     <el-table-column label="库位容量" align="left" key="cbla11" prop="cbla11" locationNum />
                     <el-table-column label="库位顺序" align="left" key="cbla07" prop="cbla07" sortable />
-                    <el-table-column label="空" align="left" key="cbla10" prop="cbla10" sortable />
-                    <el-table-column label="空" align="left" key="cbla12" prop="cbla12" sortable />
-                    <el-table-column label="空" align="left" key="cbla13" prop="cbla13" sortable />
+                    <el-table-column label="优先型号" align="left" key="cbla12" prop="cbla12" sortable />
                     <el-table-column label="状态" align="left" key="cbla08" prop="cbla08" sortable />
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">

@@ -1203,7 +1203,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/customer/SwJsCustomerimportTemplate', {
+            this.download('/system/customer/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
