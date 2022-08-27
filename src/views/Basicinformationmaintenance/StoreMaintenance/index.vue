@@ -968,7 +968,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/store/SwJsStoreimportTemplate', {
+            this.download('/system/store/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
