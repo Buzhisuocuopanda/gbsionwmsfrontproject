@@ -487,13 +487,13 @@ export default {
 
             rules: {
                 cbpc099: [
-                    { required: true, message: "供料单位不能为空!", trigger: "blur" }
+                    { required: true, message: "供料单位不能为空!", trigger: 'change' }
                 ],
                 cbpc100: [
-                    { required: true, message: "仓库不能为空!", trigger: "blur" }
+                    { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
                 cbpc16: [
-                    { required: true, message: "结算货币不能为空!", trigger: "blur" }
+                    { required: true, message: "结算货币不能为空!", trigger: 'change' }
                 ],
                 // cbpc07: [
                 //     { required: true, message: "编号不能为空!", trigger: "blur" }

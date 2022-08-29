@@ -13,7 +13,7 @@
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="日期:" style="margin-left:20%;">
-                        <el-date-picker type="date" placeholder="" v-model="form2.cbpg13" style="width: 50%;">
+                        <el-date-picker type="date" placeholder="" v-model="form2.cbpg08" style="width: 50%;">
                         </el-date-picker>
                     </el-form-item>
 
@@ -40,6 +40,12 @@
                 </el-col>
             </el-row>
             <el-row>
+                <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+                    <el-form-item label="主副表id:" prop="cbpg161">
+                        <el-input v-model="form2.cbpg161" placeholder="" maxlength="30"
+                            style="width:80%;border:solid #eee thin" />
+                    </el-form-item>
+                </el-col>
                 <el-col style="margin-left: 2%;" :span="7">
                     <el-form-item label="供料单位:" prop="cbpc099">
                         <el-popover placement="bottom-start" trigger="click">
@@ -248,7 +254,7 @@
             <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
               <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
                 <el-button plain type="primary" @click="_ly_addFrom">新增一行</el-button>
-                <el-button type="primary" @click="_ly_ok">保 存</el-button>
+                <el-button type="primary" @click="handleAdd">保 存</el-button>
                 <el-button @click="_ly_cancelDialog">取 消</el-button>
               </span>
                <table style="margin-top:2%;">
@@ -268,7 +274,7 @@
                     <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
                         :inline="true">                        
                         <el-form-item label="" size="small" prop="name" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbsc08" style="border:solid #eee thin;width:70%;"></el-input>
+                            <el-input v-model="form.cbpg01" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="nickname" style="margin-left:-4%;">
                             <el-input type="number" v-model="form.cbsc09" style="border:solid #eee thin;width:70%;"></el-input>
@@ -439,7 +445,9 @@ export default {
             dateRange: [],
             postCangKu: [],
             //修改下拉框首选值
-
+ 
+            //主副表id
+            zfb:[],
             //仓库类型
             LeixingOptions: [{
                 value: '1',
@@ -575,6 +583,7 @@ export default {
                 cbph09:"",
                 cbph10: "",
                 cbph11: "",
+                cbpg161:""
             },
             defaultProps: {
                 children: "children",
@@ -619,9 +628,9 @@ export default {
                 cbpg16: [
                     { required: true, message: "结算货币不能为空!", trigger: "blur" }
                 ],
-                cbpc07: [
-                    { required: true, message: "编号不能为空!", trigger: "blur" }
-                ]
+                // cbpc07: [
+                //     { required: true, message: "编号不能为空!", trigger: "blur" }
+                // ]
             },
 
 
@@ -639,6 +648,8 @@ export default {
         },
     },
     created() {
+       
+        this.form.cbpg01=this.form2.cbpg161;  
 
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
@@ -700,6 +711,11 @@ export default {
             }
             console.log('_ly_ok:' + JSON.stringify(this.formArr))
         },
+
+   
+
+
+
         // 存储表单数据
         _ly_save() {
             this.$message.success('添加成功')
@@ -863,21 +879,22 @@ export default {
                 if (item) {
                     PurchasereturnordersAdd(this.form2).then(response => {
                         // console.log(response.posts, 12345678);
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
                         this.submitShangpin();
 
                         this.open2 = false;
                         this.reset01();
+                        this.form2.cbpg161=response.data.id;
 
-                        console.log(this.item, 123456);
+                        console.log(this.form2.cbpg161, 123456);
                     });
                 } else {
                     this.$message.error('请注意规范');
                 }
             })
-
+           this._ly_ok();
         },
 
         /** 返回操作 */
