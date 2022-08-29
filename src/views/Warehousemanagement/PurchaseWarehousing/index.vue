@@ -72,19 +72,19 @@
                     </el-table-column>
                     <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
-                    <el-table-column label="结算货币" align="left" key="cbpc16" prop="cbpc16" sortable>
-                        <template scope="scope">
-                            <div>{{ scope.row.cbpc16 == 5 ? "USD" : scope.row.cbpc16 == 6 ?
+                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable>
+                        <!-- <template scope="scope">
+                            <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
                             "CNY" : "未确定状态"
                             }}
                             </div>
-                        </template>
+                        </template> -->
                     </el-table-column>
                     <el-table-column label="状态" align="left" key="cbpc11" prop="cbpc11" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbpc11 == 1 ? "审核" : scope.row.cbpc11 == 4 ?
+                            <div>{{ scope.row.cbpc11 == 0 ? "审核" : scope.row.cbpc11 == 1 ?
                             "已完成" : scope.row.cbpc11 == 2 ? "未审核" : scope.row.cbpc11 == 3 ?
-                            "已审核" : "未确定状态"
+                            "已完成" : scope.row.cbpc11 == 4 ? "已审核" : "未确定状态"
                             }}
                             </div>
                         </template>
@@ -98,7 +98,7 @@
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 2"
+                               
                                 v-hasPermi="['system:user:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
@@ -109,14 +109,14 @@
                                 v-if="scope.row.cbpc11 == 2">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 3">反审</el-button>
+                                v-if="scope.row.cbpc11 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']" v-if="scope.row.cbpc11 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 3 | scope.row.cbpc11 == 1">标记完成</el-button>
+                                v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 1">标记完成</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -516,7 +516,7 @@
 </template>
 <script>
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList01, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
 import * as req from "@/api/Warehousemanagement/PurchaseWarehousing";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -744,7 +744,7 @@ export default {
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
                 // 上传的地址
-                url: process.env.VUE_APP_BASE_API + "/system/barcode/importSwJsSkuBarcode"
+                url: process.env.VUE_APP_BASE_API + "/system/Purchaseinbound/SwJsGoodsexport"
             },
             // 查询参数
             queryParams: {
@@ -901,8 +901,6 @@ export default {
         },
     },
     created() {
-
-
         //仓库明细初始化
         this.getList();
         //供应商
@@ -930,6 +928,8 @@ export default {
 
     },
     methods: {
+
+       
         //列表表头设置
         headClasspw() {
             return {
@@ -1062,7 +1062,7 @@ export default {
 
         //商品信息维护
         getList03() {
-            GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            GoodsList01(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
@@ -1414,7 +1414,7 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-            console.log(row)
+            console.log(row,98999)
             this.open = true;
             // console.log(row, 7788521);
             this.form.cbpc01 = row.cbpc01;
@@ -1617,7 +1617,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/barcode/importSwJsSkuBarcodeimportTemplate', {
+            this.download('/system/Purchaseinbound/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理

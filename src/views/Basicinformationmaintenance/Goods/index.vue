@@ -46,7 +46,7 @@
                         :default-sort="{ prop: 'name', order: 'descending' }" style="margin-left: -1.5%; width:100%;"
                         @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
-                        <el-table-column label="商品分类" align="left" key="cbpa07" prop="cbpa07"/>
+                        <el-table-column label="商品分类" align="left" key="cbpa07" width="190px;" prop="cbpa07"/>
                         <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" width="480px;"
                             locationNum />
                         <!-- <el-table-column label="商品分类" align="center" key="cbpb09" prop="cbpb09" sortable /> -->
@@ -231,7 +231,7 @@
                 <hr />
             </div>
             <el-form ref="form2" :model="form2" :rules="rules2" style="margin-top:20px;" label-width="100px">
-                <el-row style="margin-left:8%;">
+                   <el-row style="margin-left:0%;">
                      <el-col>
                             <el-form-item label="商品分类:" prop="cbpa07">
                                 <el-input v-model="form2.cbpa07" placeholder="" maxlength="30" style="width:55%;" />
@@ -315,8 +315,6 @@
                         <el-form-item prop="tprice" label="价格2">
                             <el-input v-model="form2.tprice" placeholder="" maxlength="30" style="width:60%;" />
                         </el-form-item>
-                    </el-col>
-                    <el-col style="margin-left:75%;margin-top:2%;">
                             <el-button type="primary" @click="handleAdd">确 定</el-button>
                             <el-button @click="cancells">取 消</el-button>
                     </el-col>

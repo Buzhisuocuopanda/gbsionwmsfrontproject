@@ -109,11 +109,20 @@ export function SupplierList(query) {
 }
 
 //商品信息维护
-export function GoodsList(query) {
+export function GoodsList(cbpb12) {
+  return request({
+    url: '/system/goods/SwJsGoodslist?cbpb12='+cbpb12,
+    method: 'get',
+  })
+}
+
+
+//商品信息维护
+export function GoodsList01(query) {
   return request({
     url: '/system/goods/SwJsGoodslist',
     method: 'get',
-    params: query
+     params: query
   })
 }
 
@@ -134,3 +143,12 @@ export function StoreSkuList(query) {
     params: query
   })
 }
+
+// // 商品分类信息导入
+// export function ClassifyImport(data) {
+//   return request({
+//     url: '/system/Purchaseinbound/SwJsGoodsexport',
+//     method: 'post',
+//     data:data
+//   })
+// }
