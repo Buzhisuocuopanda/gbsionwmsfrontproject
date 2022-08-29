@@ -112,13 +112,13 @@
           </span>
             <table class="table-style-zhongjiang">
                 <tr>
-                   <th style="padding-left:60px;">型号</th>                              
-                   <th style="padding-left:140px;">描述</th>
-                   <th style="padding-left:150px;">品牌</th>
-                   <th style="padding-left:100px;">数量</th>
+                   <th style="padding-left:90px;">型号</th>                              
+                   <th style="padding-left:180px;">描述</th>
+                   <th style="padding-left:180px;">品牌</th>
+                   <th style="padding-left:130px;">数量</th>
                    <th style="padding-left:100px;">单价</th>
                    <th style="padding-left:100px;">金额</th>
-                   <th style="padding-left:135px;">备注</th>
+                   <th style="padding-left:125px;">备注</th>
                    <th style="padding-left:115px;"></th>
                 </tr>
             </table>
@@ -129,25 +129,25 @@
                     <div style="float: left;margin-top: 2%; margin-left: 1%;">
                         <span > 
                             <el-form-item label="" size="small" prop="cbpb12" style="margin-left:-3%; float: left">
-                                <el-input v-model="form2.cbpb12" v-focus  @focus="getList" style="border:solid #eee thin;width:100%;"></el-input>
+                                <el-input v-model="form2.cbpb12" v-focus  @focus="getList" style="border:solid #eee thin;width:152%;"></el-input>
                              </el-form-item>
-                             <el-form-item label="" size="small" prop="cbpd080" style="margin-left:-4%; float: left">
+                             <el-form-item label="" size="small" prop="cbpd080" style="margin-left:1.5%; float: left">
                                 <el-input v-model="form2.cbpd080" style="border:solid #eee thin;width:160%;"></el-input>
                              </el-form-item>
                             
                               <el-form-item  label="" size="small" prop="cbpe088" style="margin-left:2%;float: left">
-                                <el-input  v-model="form2.cbpe088" style="border:solid #eee thin;width:118%;"></el-input>
+                                <el-input  v-model="form2.cbpe088" style="border:solid #eee thin;width:148%;"></el-input>
                             </el-form-item>
                                                              
-                           <el-form-item label="" size="small" prop="cbpd09" style="margin-left:-2%;float: left">
+                           <el-form-item label="" size="small" prop="cbpd09" style="margin-left:1%;float: left">
                                <el-input  v-model="form2.cbpd09" @blur="chen()" style="border:solid #eee thin;width:100%;"></el-input>
                            </el-form-item>
                                             
-                           <el-form-item label="" size="small" prop="cbpd11" style="margin-left:-3%;float: left">
+                           <el-form-item label="" size="small" prop="cbpd11" style="margin-left:-4%;float: left">
                                 <el-input v-model="form2.cbpd11"  style="border:solid #eee thin;width:100%;"></el-input>
                             </el-form-item>
                        
-                           <el-form-item label="" size="small" prop="cbpd12" style="margin-left:-3%;float: left">
+                           <el-form-item label="" size="small" prop="cbpd12" style="margin-left:-4%;float: left">
                                <el-input-number v-model="form2.cbpd12" :min="0" :controls="false"
                                             :precision="2" style="border:solid #eee thin;width:100%;"></el-input-number>
                            </el-form-item>
