@@ -10,12 +10,12 @@ export function PurchaseinboundAdd(data) {
   })
 }
 
-// 查询列表
-export function PurchaseinboundList(query) {
+// 订单查询
+export function Purchaseinbounddingdancx(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsSkuBarcodelists',
-    method: 'get',
-    params: query
+    url: '/whmanagement/takeOrderList',
+    method: 'post',
+    data: data
   })
 }
 

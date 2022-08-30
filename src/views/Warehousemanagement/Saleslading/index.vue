@@ -56,9 +56,18 @@
                     <el-table-column label="日期" align="left" key="cbpc08" prop="cbpc08" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
+                    <el-table-column label="客户订单号" align="left" key="cbsa08" prop="cbsa08" sortable />
+                    <el-table-column label="客户" align="left" key="cbwa09" prop="cbwa09" sortable />
+                    <el-table-column label="客户等级" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="联系人" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="电话" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="销售人员" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="仓库" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="收货地址" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="收货人" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="收货电话" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="关联订单" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="状态" align="left" key="cbpc11" prop="cbpc11" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbpc11 == 1 ? "审核" : scope.row.cbpc11 == 4 ?
@@ -68,6 +77,7 @@
                             </div>
                         </template>
                     </el-table-column>
+                    <el-table-column label="提货建议表" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
@@ -480,7 +490,7 @@
 </template>
 <script>
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/Saleslading";
+import { PurchaseinboundAdd, Purchaseinbounddingdancx, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/Saleslading";
 import * as req from "@/api/Warehousemanagement/Saleslading";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -916,14 +926,10 @@ export default {
         /** 查询用户列表 */
         getList() {
             this.loading = true;
-            PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            Purchaseinbounddingdancx(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList = response.data.rows;
                 this.total = response.data.total;
-                // //供应商
-                // this.postOptions = response.data.content;
-                // console.log(this.userList, 3369);
                 console.log(response, 339688);
-                // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
             }
             );

@@ -1184,6 +1184,7 @@ export default {
                                         saleUser:row.saleUser}])
                 }
             })
+            location.reload();
         },
         // /** 提交按钮 */
         // submitForm: function () {

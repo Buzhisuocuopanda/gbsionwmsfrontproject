@@ -887,14 +887,20 @@ export default {
                         this.open2 = false;
                         this.reset01();
                         this.form2.cbpg161=response.data.id;
-                        this.form.cbpg01=this.form2.cbpg161;
-                        console.log(this.form.cbpg01, 123456);
+                        this.form.cbpg01=response.data.id;
+                        // console.log(this.form2.cbpg161,111);
+                        // console.log(this.form.cbpg01,222);
+                        // console.log(this.formArr,333)
+                        this.formArr.forEach((item)=>{
+                            item.cbpg01=response.data.id
+                        })
+                        this._ly_ok()
                     });
                 } else {
                     this.$message.error('请注意规范');
                 }
             })
-           this._ly_ok();
+        //    this._ly_ok();
         },
 
         /** 返回操作 */
