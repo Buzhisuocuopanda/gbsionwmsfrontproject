@@ -10,7 +10,7 @@
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="日期:" style="margin-left:20%;">
-                        <el-date-picker type="date" placeholder="" v-model="form2.cbpc08" style="width: 50%;">
+                        <el-date-picker type="date" placeholder="" v-model="form2.cbsb08" style="width: 50%;">
                         </el-date-picker>
                     </el-form-item>
 
@@ -18,19 +18,20 @@
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;" :span="7">
-                    <el-form-item label="客户:" prop="cbpc099">
-                        <el-popover placement="bottom-start" trigger="click">
+                    <el-form-item label="客户:" prop="cbca08">
+                        <!-- <el-popover placement="bottom-start" trigger="click">
                             <supplierMaintenance ref="supplierMaintenance" @selected="selected02"
                                 style="width:220px!important;" />
                             <el-input slot="reference" class="cur" v-model="form2.cbpc099" placeholder="" readonly
                                 style="border:solid #eee thin; width:77%;">
                             </el-input>
-                        </el-popover>
+                        </el-popover> -->
+                        <el-input type="text" v-model="form2.cbca08" style="border:solid #eee thin; width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
                     <el-form-item label="仓库:" prop="cbpc100">
-                        <el-popover placement="bottom-start" trigger="click">
+                        <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
                             <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
                                 style="border:solid #eee thin; width:87%;">
@@ -50,18 +51,18 @@
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;" :span="7">
-                    <el-form-item label="联系人:" prop="cbpc1000">
-                        <el-input type="text" v-model="form2.cbpc1000" style="border:solid #eee thin; width:77%;" />
+                    <el-form-item label="联系人:" prop="cbsb18">
+                        <el-input type="text" v-model="form2.cbsb18" style="border:solid #eee thin; width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
-                    <el-form-item label="电话:" prop="cbpc10000">
-                        <el-input type="text" v-model="form2.cbpc10000" style="border:solid #eee thin; width:77%;" />
+                    <el-form-item label="电话:" prop="cbsb19">
+                        <el-input type="text" v-model="form2.cbsb19" style="border:solid #eee thin; width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
-                    <el-form-item label="客户等级:" prop="cbpc16">
-                        <el-select v-model="form2.cbpc16" placeholder="" style="width:80%; border: solid #eee thin;">
+                    <el-form-item label="客户等级:" prop="cbca28">
+                        <el-select v-model="form2.cbca28" placeholder="" style="width:80%; border: solid #eee thin;">
                             <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -82,8 +83,8 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
-                    <el-form-item label="收货人:" prop="cbpc10010">
-                        <el-input type="text" v-model="form2.cbpc10010" style="border:solid #eee thin; width:77%;" />
+                    <el-form-item label="收货人:" prop="cbsb18">
+                        <el-input type="text" v-model="form2.cbsb18" style="border:solid #eee thin; width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
@@ -98,13 +99,13 @@
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;" :span="7">
-                    <el-form-item label="收货电话:" prop="cbpc0990">
-                        <el-input type="text" v-model="form2.cbpc0990" style="border:solid #eee thin; width:77%;" />
+                    <el-form-item label="收货电话:" prop="cbsb19">
+                        <el-input type="text" v-model="form2.cbsb19" style="border:solid #eee thin; width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
-                    <el-form-item label="收货地址:" prop="cbpc100120">
-                        <el-input type="text" v-model="form2.cbpc100120" style="border:solid #eee thin; width:77%;" />
+                    <el-form-item label="收货地址:" prop="cbsb21">
+                        <el-input type="text" v-model="form2.cbsb21" style="border:solid #eee thin; width:77%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -116,7 +117,7 @@
                 </el-col>
                 <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
                     <el-form-item label="仓库id:" prop="cbpc10">
-                        <el-input v-model="form2.cbpc10" placeholder="" maxlength="30"
+                        <el-input v-model="form2.cbwa09" placeholder="" maxlength="30"
                             style="width:80%;border:solid #eee thin" />
                     </el-form-item>
                 </el-col>
@@ -329,6 +330,8 @@ export default {
             // 遮罩层
             loading: true,
             tianjiahang: [],
+            ListUser:[],
+            zhuangh:[],
             // 选中数组
             ids: [],
             shenpiids: [],
@@ -489,7 +492,7 @@ export default {
             form2: {
                 cbpc07: "",
                 cbpc08: "",
-                cbsa08: "",
+                cbca08: "",
                 cbwa09: "",
                 cala08: "",
                 cbpc100: "",
@@ -538,10 +541,10 @@ export default {
             },
             rules: {
                 cbpc100: [
-                    { required: true, message: "仓库不能为空!", trigger: "blur" }
+                    { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
                 cbpg16: [
-                    { required: true, message: "结算货币不能为空!", trigger: "blur" }
+                    { required: true, message: "结算货币不能为空!", trigger: 'change' }
                 ],
                 cbsb07: [
                     { required: true, message: "编号不能为空!", trigger: "blur" }
@@ -575,7 +578,12 @@ export default {
         },
     },
     created() {
+        
 
+        this.form2.cbca08=this.ListUser.customerName;
+        //父子页面传值
+         
+        this.getParams();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -592,6 +600,31 @@ export default {
 
     },
     methods: {
+
+        getParams() {
+             let routerParams = this.$route.query;
+               this.ListUser = routerParams.data; 
+               let zhuangh = JSON.parse(this.ListUser); 
+               //客户
+               this.form2.cbca08=zhuangh[0].address;
+               //仓库
+               this.form2.cbpc100 = zhuangh[0].whName;
+               //联系人
+               this.form2.cbsb18 = zhuangh[0].contacts;
+               //电话
+               this.form2.cbsb19 = zhuangh[0].phone;
+               //关联订单
+               this.form2.cbpc16 = zhuangh[0].saleUser;
+               //收货地址
+               this.form2.cbsb21 = zhuangh[0].address;
+               //客户等级
+               this.form2.cbca28 =zhuangh[0].customerLevel;
+            //    this.form2.cbpc16 =zhuangh[0].customerNo;
+              console.log(JSON.parse(this.ListUser),852369);
+
+           },
+        
+ 
 
         show() {
             this.showSearch = !this.showSearch;

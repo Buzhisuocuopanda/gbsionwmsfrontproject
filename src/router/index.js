@@ -63,6 +63,11 @@ export const constantRoutes = [
     component: () => import('@/views/Warehousemanagement/Abpcltj/index'),
     hidden: true
   },
+    {
+    path: '/chuanzhi',
+    component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentcj/index'),
+    hidden: true
+  },
   {
     path: '/401',
     component: () => import('@/views/error/401'),
@@ -529,6 +534,20 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/BarcodeInventorydetails/index'),
         meta: { title: '库存明细初始化', activeMenu: '/Warehousemanagement/BarcodeInventorydetails' }
+      }
+    ]
+  },
+  {
+    path: '/system/user-authhhchuanj',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+         name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentcj/index'),
+        meta: { title: '销售出库创建', activeMenu: '/Warehousemanagement/SalesShipment' }
       }
     ]
   },

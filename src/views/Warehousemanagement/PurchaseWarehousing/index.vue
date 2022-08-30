@@ -438,58 +438,6 @@
             </div>
         </el-dialog>
 
-        <el-dialog :visible.sync="open1" append-to-body>
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">采购入库单</span>
-                <hr />
-            </div>
-            <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbpc07">
-                            <el-input v-model="form1.cbpc07" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                    <!-- <el-col style="margin-top:1%;">
-                        <el-form-item label="日期:" prop="cbpc08">
-                            <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
-                                style="width:50%" />
-                        </el-form-item>
-                    </el-col> -->
-                </el-row>
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="供应商:" prop="cbsa08">
-                            <el-input v-model="form1.cbsa08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="结算货币:" prop="cala08">
-                            <el-input v-model="form1.cala08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="仓库:" prop="cbwa09">
-                            <el-input v-model="form1.cbwa09" placeholder="" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <!-- <el-button type="primary" @click="handleAdd">确 定</el-button> -->
-                <!-- <el-button @click="cancells">取 消</el-button> -->
-            </div>
-        </el-dialog>
-
-
         <!-- 用户导入对话框 -->
         <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
             <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"

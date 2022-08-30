@@ -2,9 +2,9 @@
     <div>
         <div class="Purchase_caigou">销售出库单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
-            <span class="Purchase_bianhao" style="margin-left:15%;">客户订单号：{{ value.cbpc07 }}</span>
-            <span class="Purchase_riqii">日期：{{ value.cbpc08.slice(0, 10) }}</span>
+            <span class="Purchase_bianhao">编号：{{ value.cbsb07 }}</span>
+            <span class="Purchase_bianhao" style="margin-left:15%;">客户订单号：{{ value.cbca09 }}</span>
+            <span class="Purchase_riqii">日期：{{ value.cbsb08.slice(0, 10) }}</span>
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
             <!-- 横向 -->
@@ -12,7 +12,7 @@
                 :key="key">
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">客户</template>{{
-                    value.cbsa08 }}
+                    value.cbca08 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
@@ -24,13 +24,13 @@
             <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
                 :key="key">
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">联系人</template>{{ value.cbsa08 }}
+                    <template slot="label">联系人</template>{{ value.cbsb18 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">电话</template>{{ value.cbwa09 }}
+                    <template slot="label">电话</template>{{ value.cbsb19 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">客户等级</template>USD
+                    <template slot="label">客户等级</template>{{ value.cbca28 }}
                 </el-descriptions-item>
             </el-descriptions>
             <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
@@ -39,10 +39,12 @@
                     <template slot="label">结算货币</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">收货人</template>{{ value.cbwa09 }}
+                    <template slot="label">收货人</template>{{ value.cbsb18 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">关联订单/提货单</template>USD
+                    <template slot="label">关联订单/提货单</template>{{
+                        value.cbsb31
+                    }}
                 </el-descriptions-item>
             </el-descriptions>
             <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
@@ -51,7 +53,7 @@
                     <template slot="label">收货电话</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell02">
-                    <template slot="label">收货地址</template>{{ value.cbwa09 }}
+                    <template slot="label">收货地址</template>{{ value.cbsb21 }}
                 </el-descriptions-item>
             </el-descriptions>
 
@@ -60,23 +62,23 @@
             <el-table v-loading="loading" :data="userList" height="250"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="供应商">
+                <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
                 </el-table-column>
                 <el-table-column prop="cbwa09" key="cbwa09" label="订单分类">
                 </el-table-column>
                 <el-table-column prop="cbpd09" key="cbpc16" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd12" label="描述">
+                <el-table-column prop="cbpb08" key="cbpb08" label="描述">
                 </el-table-column>
-                <el-table-column prop="cbpd12" key="cbpd11" label="数量">
+                <el-table-column prop="cbsc09" key="cbsc09" label="数量">
                 </el-table-column>
                 <el-table-column prop="cbpd11" key="cbpd11" label="已扫数量">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" label="单价">
+                <el-table-column prop="cbsc11" key="cbsc11" label="单价">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" label="金额">
+                <el-table-column prop="cbsc12" key="cbsc12" label="金额">
                 </el-table-column>
                 <el-table-column prop="cbpd11" key="cbpd11" label="备注">
                 </el-table-column>
@@ -173,7 +175,7 @@
 
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { PurchaseinboundLists } from "@/api/Warehousemanagement/SalesShipment";
 export default {
 
     data() {
@@ -262,14 +264,14 @@ export default {
         totalCount: function () {
             var totalCount = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalCount += this.userList[i].cbpd09;
+                totalCount += this.userList[i].cbsc09;
             }
             return totalCount;
         },
         totalPrice: function () {
             var totalPrice = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalPrice += this.userList[i].cbpd09 * this.userList[i].cbpd11;
+                totalPrice += this.userList[i].cbsc09 * this.userList[i].cbsc11;
             }
             return totalPrice;
         }

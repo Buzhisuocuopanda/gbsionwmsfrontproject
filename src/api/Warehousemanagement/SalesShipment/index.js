@@ -22,9 +22,18 @@ export function PurchaseinboundAdds(data) {
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
-    url: '/system/Selloutofwarehouse/SwJsSkuBarcodelist',
+    url: '/system/Selloutofwarehouse//SwJsSkuBarcodelists',
     method: 'get',
     params: query
+  })
+}
+
+// 订单查询
+export function Purchaseinbounddingdancx(data) {
+  return request({
+    url: '/whmanagement/takeOrderList',
+    method: 'post',
+    data: data
   })
 }
 
@@ -32,7 +41,7 @@ export function PurchaseinboundList(query) {
 // 详情
 export function PurchaseinboundLists(CBPC01) {
   return request({
-    url: '/system/Purchaseinbound/SwJsSkuBarcodelist?cbpc01='+ CBPC01,
+    url: '/system/Selloutofwarehouse/SwJsSkuBarcodelistss?cbsb01='+ CBPC01,
     method: 'get'
   })
 }
@@ -40,7 +49,7 @@ export function PurchaseinboundLists(CBPC01) {
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundedit',
+    url: '/system/Selloutofwarehouse/Selloutofwarehousedeit',
     method: 'post',
     data: data
   })

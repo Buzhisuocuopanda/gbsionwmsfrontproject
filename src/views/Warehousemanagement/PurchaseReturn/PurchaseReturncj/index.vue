@@ -273,7 +273,7 @@
                 <el-row v-for="(form, index) in formArr" style="width:110%;" :key="index">
                     <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
                         :inline="true">                        
-                        <el-form-item label="" size="small" prop="name" style="margin-left:0.8%;">
+                        <el-form-item label=""  prop="name" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpg01" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="nickname" style="margin-left:-4%;">
@@ -551,8 +551,8 @@ export default {
                 cbpd11: "",
                 cbpd12: "",
                 cbpc166: "",
-                cbpc16: ""
-
+                cbpc16: "",
+                cbpg01:""
             },
             form1: {
                 // classifyId: "",
@@ -583,7 +583,8 @@ export default {
                 cbph09:"",
                 cbph10: "",
                 cbph11: "",
-                cbpg161:""
+                cbpg161:"",
+                cbpg01:""
             },
             defaultProps: {
                 children: "children",
@@ -649,8 +650,7 @@ export default {
     },
     created() {
        
-        this.form.cbpg01=this.form2.cbpg161;  
-
+       
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -701,6 +701,9 @@ export default {
                         if (count-- === 1) {
                             this._ly_save()
                         }
+                    //    this.formArr.cbpg01="1234567";
+                    //    this.form.cbpg01=this.formArr.cbpg01;
+                    //    console.log(this.form.cbpg01,85203);
                     });
 
                     } else {
@@ -736,7 +739,8 @@ export default {
                 cbsc08: '',
                 cbsc09: '',
                 cbsc10: '',
-                branch: ''
+                branch: '',
+                cbpg01: this.form2.cbpg161,
             })
         },
         // 删除一行表单
@@ -878,17 +882,13 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     PurchasereturnordersAdd(this.form2).then(response => {
-                        // console.log(response.posts, 12345678);
                         this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
                         this.submitShangpin();
-
                         this.open2 = false;
                         this.reset01();
                         this.form2.cbpg161=response.data.id;
-
-                        console.log(this.form2.cbpg161, 123456);
+                        this.form.cbpg01=this.form2.cbpg161;
+                        console.log(this.form.cbpg01, 123456);
                     });
                 } else {
                     this.$message.error('请注意规范');
