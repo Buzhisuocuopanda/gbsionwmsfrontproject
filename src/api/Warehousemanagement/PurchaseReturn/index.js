@@ -10,6 +10,15 @@ export function PurchasereturnordersAdd(data) {
   })
 }
 
+// 明细新增配置
+export function PurchasereturnordersAdds(data) {
+  return request({
+    url: '/system/Purchasereturnorders/SwJsPurchasereturnordersadds',
+    method: 'post',
+    data: data
+  })
+}
+
 // 查询列表
 export function SkuBarcodeLists(query) {
   return request({

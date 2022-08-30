@@ -82,9 +82,8 @@
                     </el-table-column>
                     <el-table-column label="状态" align="left" key="cbpc11" prop="cbpc11" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbpc11 == 0 ? "审核" : scope.row.cbpc11 == 1 ?
-                            "已完成" : scope.row.cbpc11 == 2 ? "未审核" : scope.row.cbpc11 == 3 ?
-                            "已完成" : scope.row.cbpc11 == 4 ? "已审核" : "未确定状态"
+                            <div>{{ scope.row.cbpc11 == 0 ? "未审核" : scope.row.cbpc11 == 1 ?
+                            "已审核" : scope.row.cbpc11 == 4 ? "已完成" : "未确定状态"
                             }}
                             </div>
                         </template>
@@ -93,20 +92,20 @@
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 2" v-hasPermi="['system:user:edit']">
+                                v-if="scope.row.cbpc11 == 0 | scope.row.cbpc11 == 2" v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                               
+                               v-if="scope.row.cbpc11 == 0 | scope.row.cbpc11 == ' '"
                                 v-hasPermi="['system:user:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbpc11 == 4 | scope.row.cbpc11 == 1"  v-hasPermi="['system:user:listselect']">详情
                             </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 2">审核</el-button>
+                                v-if="scope.row.cbpc11 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
                                 v-if="scope.row.cbpc11 == 1">反审</el-button>

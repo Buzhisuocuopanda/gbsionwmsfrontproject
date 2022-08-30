@@ -260,14 +260,14 @@
                <table style="margin-top:2%;">
                 <tr>
                    <th style="padding-left:50px;">商品id</th>
-                   <th style="padding-left:100px;">数量</th>
-                   <th style="padding-left:100px;">状态</th>
+                   <th style="padding-left:100px;">数量</th>                   
                    <th style="padding-left:120px;">单价</th>
                    <th style="padding-left:100px;">金额</th>
                    <th style="padding-left:100px;">备注</th>
-                   <th style="padding-left:90px;">销售主表id</th>
+                   <!-- <th style="padding-left:100px;">状态</th> -->
+                   <!-- <th style="padding-left:90px;">销售主表id</th>
                    <th style="padding-left:40px;">销售订单明细表id</th>
-                   <th style="padding-left:40px;">供应商</th>
+                   <th style="padding-left:40px;">供应商</th> -->
                 </tr>
             </table>
                 <el-row v-for="(form, index) in formArr" style="width:110%;" :key="index">
@@ -277,18 +277,18 @@
                             <el-input v-model="form.cbpg01" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="nickname" style="margin-left:-4%;">
-                            <el-input type="number" v-model="form.cbsc09" style="border:solid #eee thin;width:70%;"></el-input>
+                            <el-input type="number" v-model="form.cbph09" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc10" style="border:solid #eee thin;width:70%;"></el-input>
+                            <el-input v-model="form.cbph10" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc11" style="border:solid #eee thin;width:70%;"></el-input>
+                            <el-input v-model="form.cbph11" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc12" style="border:solid #eee thin;width:70%;"></el-input>
+                            <el-input v-model="form.cbph13" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
+                        <!-- <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc13" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
@@ -299,7 +299,7 @@
                         </el-form-item>
                         <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc15" style="border:solid #eee thin;width:70%;"></el-input>
-                        </el-form-item>
+                        </el-form-item> -->
                         <el-button v-if="index != 0" type="danger" style="position: absolute; left: 87.5%;"  size="small" icon="el-icon-delete"  circle
                             @click="_ly_delFrom(index)"></el-button>
                     </el-form>
@@ -315,7 +315,7 @@
 import { PurchaseinboundAdds } from "@/api/Warehousemanagement/SalesShipment";
 
 
-import { PurchasereturnordersAdd } from "@/api/Warehousemanagement/PurchaseReturn";
+import { PurchasereturnordersAdd,PurchasereturnordersAdds  } from "@/api/Warehousemanagement/PurchaseReturn";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -620,13 +620,13 @@ export default {
 
             rules: {
                 cbpc099: [
-                    { required: true, message: "供料单位不能为空!", trigger: "blur" }
+                    { required: true, message: "供料单位不能为空!", trigger: 'change' }
                 ],
                 cbpc100: [
-                    { required: true, message: "仓库不能为空!", trigger: "blur" }
+                    { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
                 cbpg16: [
-                    { required: true, message: "结算货币不能为空!", trigger: "blur" }
+                    { required: true, message: "结算货币不能为空!", trigger: 'change' }
                 ],
                 // cbpc07: [
                 //     { required: true, message: "编号不能为空!", trigger: "blur" }
@@ -697,7 +697,7 @@ export default {
                     if (valid) {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
-                        PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
+                        PurchasereturnordersAdds(JSON.stringify(this.formArr)).then(response => {
                         if (count-- === 1) {
                             this._ly_save()
                         }

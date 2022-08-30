@@ -22,7 +22,7 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table border v-loading="loading" :data="userList" height="400" :header-cell-style="headClassprxq"
+            <el-table border v-loading="loading" :data="userList" height="290" :header-cell-style="headClassprxq"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbpc07" key="cbpc07" label="品牌">

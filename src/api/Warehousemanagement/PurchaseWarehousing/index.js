@@ -10,6 +10,15 @@ export function PurchaseinboundAdd(data) {
   })
 }
 
+// 明细新增配置
+export function PurchaseinboundAdds(data) {
+  return request({
+    url: '/system/Purchaseinbound/SwJsPurchseinboundadds',
+    method: 'post',
+    data: data
+  })
+}
+
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({

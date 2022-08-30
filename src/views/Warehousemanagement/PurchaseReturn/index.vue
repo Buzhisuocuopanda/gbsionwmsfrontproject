@@ -71,9 +71,8 @@
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="状态" align="left" key="cbpg11" prop="cbpg11" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbpg11 == 1 ? "审核" : scope.row.cbpg11 == 4 ?
-                            "已完成" : scope.row.cbpg11 == 2 ? "未审核" : scope.row.cbpg11 == 3 ?
-                            "已审核" : "未确定状态"
+                            <div>{{ scope.row.cbpg11 == 0 ? "未审核" : scope.row.cbpg11 == 1 ?
+                            "已审核" : scope.row.cbpg11 == 4 ? "已完成" : "未确定状态"
                             }}
                             </div>
                         </template>
