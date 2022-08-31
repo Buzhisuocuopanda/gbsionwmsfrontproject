@@ -20,7 +20,7 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+                <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">
                     <el-form-item label="主副表id:" prop="cbpg161">
                         <el-input v-model="form2.cbpg161" placeholder="" maxlength="30"
                             style="width:80%;border:solid #eee thin" />
@@ -233,8 +233,8 @@
               </span>
                <table style="margin-top:2%;">
                 <tr>
-                   <th style="padding-left:50px;">商品id</th>
-                   <th style="padding-left:100px;">数量</th>                   
+                   <!-- <th style="padding-left:50px;">商品id</th> -->
+                   <th style="padding-left:50px;">数量</th>                   
                    <th style="padding-left:120px;">单价</th>
                    <th style="padding-left:100px;">金额</th>
                    <th style="padding-left:100px;">备注</th>
@@ -247,10 +247,10 @@
                 <el-row v-for="(form, index) in formArr" style="width:110%;" :key="index">
                     <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
                         :inline="true">                        
-                        <el-form-item label=""  prop="name" style="margin-left:0.8%;">
+                        <el-form-item label=""  v-if="false" prop="name" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpc01" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="nickname" style="margin-left:-4%;">
+                        <el-form-item label="" size="small" prop="nickname" style="margin-left:0.8%;">
                             <el-input type="number" v-model="form.cbpd09" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="code" style="margin-left:-4%;">
