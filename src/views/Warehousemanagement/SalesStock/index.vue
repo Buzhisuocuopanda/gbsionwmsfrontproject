@@ -6,8 +6,8 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                  <el-form-item prop="cbsa08" label="供应商">
-                    <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
+                  <el-form-item prop="cbse07" label="编号">
+                    <el-input v-model="queryParams.cbse07" id="miaoshu" placeholder="请输入编号" clearable
                               style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
                   </el-form-item>
                   <el-form-item prop="cbwa09" label="仓库">
@@ -676,7 +676,9 @@ export default {
                 size: 10,
                 total: this.total,
                 name: undefined,
-                address: undefined
+                address: undefined,
+                cbwa09: undefined,
+                cbse07: undefined
             },
             // 列信息
             //  columns: [

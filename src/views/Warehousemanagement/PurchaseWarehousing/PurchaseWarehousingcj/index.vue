@@ -672,9 +672,37 @@ export default {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
                         PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
+                            if(response.code=="200"){
+                                this.formArr=[]
+                                this.form2={
+                                    cbpc07: "",
+                                    cbpc08: "",
+                                    cbsa08: "",
+                                    cbwa09: "",
+                                    cala08: "",
+                                    cbpc100: "",
+                                    cbpc099: "",
+                                    cbpc166: "",
+                                    cbpc10: "",
+                                    cbpc09: "",
+                                    cbpd09: "",
+                                    cbpd11: "",
+                                    cbpd12: "",
+                                    cbpc16: "",
+                                    cbpc12: "",
+                                    cbpc14: "",
+                                    cbpd08: "",
+                                    cbph09:"",
+                                    cbph10: "",
+                                    cbph11: "",
+                                    cbpg161:"",
+                                    cbpc01:""
+                                }
+                            }
                         if (count-- === 1) {
                             this._ly_save()
                         }
+                        this._ly_addFrom()
                     //    this.formArr.cbpg01="1234567";
                     //    this.form.cbpg01=this.formArr.cbpg01;
                     //    console.log(this.form.cbpg01,85203);
@@ -823,17 +851,18 @@ export default {
 
         // 表单重置
         reset01() {
-            this.form2 = {
-                brand: undefined,
-                description: undefined,
-                model: undefined,
-                remark: undefined,
-                skuName: undefined,
-                sn: undefined,
-                spuplierName: undefined,
-                type: undefined
-            };
-            this.resetForm("form2");
+            // this.form2 = {
+            //     brand: undefined,
+            //     description: undefined,
+            //     model: undefined,
+            //     remark: undefined,
+            //     skuName: undefined,
+            //     sn: undefined,
+            //     spuplierName: undefined,
+            //     type: undefined
+            // };
+            // this.resetForm("form2");
+            this.$refs["form2"].resetFields();
         },
 
         /** 重置按钮操作 */
@@ -859,7 +888,7 @@ export default {
                         this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         this.submitShangpin();
                         this.open2 = false;
-                        this.reset01();
+                        this.reset01()
                         this.form2.cbpg161=response.data.id;
                         this.form.cbpc01=response.data.id;
                         // console.log(this.form2.cbpg161,111);

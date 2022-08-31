@@ -151,7 +151,7 @@
                             <el-input  v-model="form.supplierId" style="border:solid #eee thin;width:40%;"></el-input>                           
                         </el-form-item>
                         <el-form-item label="" size="small" prop="cbsc17" style="margin-left:-7%; ">
-                            <el-input  v-model="form.orderClass" style="border:solid #eee thin;width:50%;"></el-input>
+                            <el-input  v-model="form.cbsc17" style="border:solid #eee thin;width:50%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="cbsd133" style="margin-left:-7%;">
                             <el-input v-model="form.brand" style="border:solid #eee thin;width:55%;"></el-input>
@@ -227,6 +227,7 @@ export default {
             // 选中数组
             ids: [],
             shenpiids: [],
+            userList01:[],
             // 非单个禁用
             single: true,
             // 非多个禁用
@@ -373,7 +374,8 @@ export default {
                 cbpc16: "",
                 cbsd133:"",
                 cbsd134:"",
-                cbsd135:""
+                cbsd135:"",
+                cbsc17:""
             },
             form1: {
                 // classifyId: "",
@@ -783,10 +785,21 @@ export default {
                let zhuangh = JSON.parse(this.ListUser);  
                 // console.log(zhuangh[0].id,889999);          
                PurchaseinListxiangq(zhuangh[0].id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                response.data.goods.forEach((item)=>{
+                    item.cbsc17=item.orderClass
+                })
+                
                 this.userList = response.data.goods;
                 this.total = response.data.total;
                 console.log(response.data.goods, 339688);
-                // this.deleteFlag = response.data.rows.deleteFlag;
+                // this.userList01 = JSON.stringify(this.userList);
+                // response.data.goods.forEach((e)=>{
+                //   this.form.cbsc17=e.orderClass;
+                // })
+                // let 
+                console.log( JSON.stringify(this.userList,852369));
+                console.log(this.userList01.orderClass,852147777);
+                // this.deleteFlag = response.data.rows.deleteFlag;   this.form.cbsc17
             }
             );
         },
