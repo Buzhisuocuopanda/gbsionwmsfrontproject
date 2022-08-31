@@ -35,11 +35,11 @@
                              <i class="el-icon-caret-bottom el-icon--right "></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                           <el-dropdown-item class="clearfix" @click.native="tong">
+                           <el-dropdown-item class="clearfix" >
                               通过订单创建
                              <el-badge class="mark"/>
                            </el-dropdown-item>
-                        <el-dropdown-item class="clearfix">
+                        <el-dropdown-item class="clearfix" @click.native="tong">
                               通过提货单创建
                             <el-badge class="mark"/>
                         </el-dropdown-item>
@@ -1175,13 +1175,15 @@ export default {
                 path: '/system/user-authhhchuanj/role/',
                 name: 'index',
                 query: {
-                    name: '页面1',
+                    // name: '页面1',
                     // data: this.form2.cbpc01,
                     // data: JSON.stringify(this.userList01),
                     data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
                                           customerLevel:row.customerLevel,contacts:row.contacts,
                                         whName:row.whName,phone:row.phone,address:row.address,
-                                        saleUser:row.saleUser}])
+                                        saleUser:row.saleUser,id:row.id}]),
+                    data01:JSON.stringify(row)
+                        //  JSON.stringify(this.userList)
                 }
             })
             location.reload();

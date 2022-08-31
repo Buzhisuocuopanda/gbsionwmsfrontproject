@@ -537,6 +537,7 @@ export const dynamicRoutes = [
       }
     ]
   },
+  //根据提货单创建
   {
     path: '/system/user-authhhchuanj',
     component: Layout,
@@ -548,6 +549,21 @@ export const dynamicRoutes = [
          name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentcj/index'),
         meta: { title: '销售出库创建', activeMenu: '/Warehousemanagement/SalesShipment' }
+      }
+    ]
+  },
+    //根据销售订单创建
+  {
+    path: '/system/user-authhhxsdingdan',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+         name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesStock/SalesStockcj/index'),
+        meta: { title: '销售退库创建', activeMenu: '/Warehousemanagement/SalesStock' }
       }
     ]
   },

@@ -30,18 +30,17 @@ export function PurchaseinboundLists(CBPC01) {
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundedit',
+    url: '/whmanagement/mdfTakeGoodsOrder',
     method: 'post',
     data: data
   })
 }
 
 // 删除
-export function PurchaseinboundRemove(data) {
+export function PurchaseinboundRemove(id) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundremove',
+    url: '/whmanagement/delTakeGoodsOrder?id='+id,
     method: 'post',
-    data:data
   })
 }
 

@@ -52,59 +52,59 @@
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:92.5%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbpc07" prop="cbpc07" sortable />
-                    <el-table-column label="日期" align="left" key="cbpc08" prop="cbpc08" :formatter="formatDate"
+                    <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" width="150px;" sortable fixed />
+                    <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" width="120px;" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="客户订单号" align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="客户" align="left" key="cbwa09" prop="cbwa09" sortable />
-                    <el-table-column label="客户等级" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="联系人" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="电话" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="销售人员" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="仓库" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="收货地址" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="收货人" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="收货电话" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="关联订单" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="状态" align="left" key="cbpc11" prop="cbpc11" sortable>
-                        <template scope="scope">
+                    <el-table-column label="客户订单号" align="left" key="customerNo" width="120px;" prop="customerNo" sortable />
+                    <el-table-column label="客户" align="left" key="customerName" width="320px;" prop="customerName" sortable />
+                    <el-table-column label="客户等级" align="left" key="customerLevel" width="120px;" prop="customerLevel" sortable />
+                    <el-table-column label="联系人" align="left" key="contacts" width="120px;" prop="contacts" sortable />
+                    <el-table-column label="电话" align="left" key="phone" width="120px;" prop="phone" sortable />
+                    <el-table-column label="销售人员" align="left" key="saleUser" width="120px;" prop="saleUser" sortable />
+                    <el-table-column label="仓库" align="left" key="whName" width="120px;" prop="whName" sortable />
+                    <el-table-column label="结算货币" align="left" key="cala08" width="120px;" prop="cala08" sortable />
+                    <el-table-column label="收货地址" align="left" key="address" width="120px;" prop="address" sortable />
+                    <el-table-column label="收货人" align="left" key="contacts" width="120px;" prop="contacts" sortable />
+                    <el-table-column label="收货电话" align="left" key="phone" width="120px;" prop="phone" sortable />
+                    <el-table-column label="关联订单" align="left" key="cala08" width="120px;" prop="cala08" sortable />
+                    <el-table-column label="状态" align="left" key="statusMsg" width="120px;" prop="statusMsg" sortable>
+                        <!-- <template scope="scope">
                             <div>{{ scope.row.cbpc11 == 1 ? "审核" : scope.row.cbpc11 == 4 ?
                                 "已完成" : scope.row.cbpc11 == 2 ? "未审核" : scope.row.cbpc11 == 3 ?
                                 "已审核" : "未确定状态"
                                 }}
                             </div>
-                        </template>
+                        </template> -->
                     </el-table-column>
-                    <el-table-column label="提货建议表" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
+                    <el-table-column label="提货建议表" align="left" key="checkStatusMsg" width="120px;" prop="checkStatusMsg" sortable />
+                    <el-table-column label="操作" align="center" width="250" fixed="right" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 2" v-hasPermi="['system:user:edit']">
+                                v-if="scope.row.status == 1 | scope.row.status == 2" v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 2"
+                                v-if="scope.row.status == 1 | scope.row.status == 2"
                                 v-hasPermi="['system:user:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 2">审核</el-button>
+                                v-if="scope.row.status == 2">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 3">反审</el-button>
+                                v-if="scope.row.status == 3">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbpc11 == 4">取消完成</el-button>
+                                v-hasPermi="['system:user:listselect']" v-if="scope.row.status == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 3 | scope.row.cbpc11 == 1">标记完成</el-button>
+                                v-if="scope.row.status == 3 | scope.row.status == 1">标记完成</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -364,14 +364,14 @@
         <!--修改-->
         <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
-                <span style="font-size:20px;">采购入库单</span>
+                <span style="font-size:20px;">销售提货单</span>
                 <hr />
             </div>
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
                 <el-row>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbpc07">
-                            <el-input v-model="form.cbpc07" maxlength="30" style="width:50%" />
+                        <el-form-item label="编号:" prop="orderNo">
+                            <el-input v-model="form.orderNo" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                     <!-- <el-col style="margin-top:1%;">
@@ -383,8 +383,8 @@
                 </el-row>
                 <el-row>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="供应商:" prop="cbsa08">
-                            <el-input v-model="form.cbsa08" placeholder="" maxlength="30" style="width:50%" />
+                        <el-form-item label="客户:" prop="customerName">
+                            <el-input v-model="form.customerName" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                             <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
@@ -392,8 +392,8 @@
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="结算货币:" prop="cala08">
-                            <el-input v-model="form.cala08" placeholder="" maxlength="30" style="width:50%" />
+                        <el-form-item label="联系人:" prop="contacts">
+                            <el-input v-model="form.contacts" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                             <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
@@ -401,8 +401,8 @@
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="仓库:" prop="cbwa09">
-                            <el-input v-model="form.cbwa09" placeholder="" maxlength="30" style="width:50%" />
+                        <el-form-item label="联系人电话:" prop="phone">
+                            <el-input v-model="form.phone" placeholder="" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -412,58 +412,6 @@
                 <el-button @click="cancells">取 消</el-button>
             </div>
         </el-dialog>
-
-        <el-dialog :visible.sync="open1" append-to-body>
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">采购入库单</span>
-                <hr />
-            </div>
-            <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbpc07">
-                            <el-input v-model="form1.cbpc07" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                    <!-- <el-col style="margin-top:1%;">
-                        <el-form-item label="日期:" prop="cbpc08">
-                            <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
-                                style="width:50%" />
-                        </el-form-item>
-                    </el-col> -->
-                </el-row>
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="供应商:" prop="cbsa08">
-                            <el-input v-model="form1.cbsa08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="结算货币:" prop="cala08">
-                            <el-input v-model="form1.cala08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="仓库:" prop="cbwa09">
-                            <el-input v-model="form1.cbwa09" placeholder="" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <!-- <el-button type="primary" @click="handleAdd">确 定</el-button> -->
-                <!-- <el-button @click="cancells">取 消</el-button> -->
-            </div>
-        </el-dialog>
-
 
         <!-- 用户导入对话框 -->
         <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
@@ -655,15 +603,15 @@ export default {
                 cbsa08: "",
                 cbwa09: "",
                 cala08: "",
-                invoiceNumber: "",
-                invoicePhone: "",
-                invoiceTaxpayerNumber: "",
-                invoiceType: "",
+                orderNo:"",
+                customerName:"",
+                contacts:"",
+                phone:"",
                 name: "",
                 phone: "",
                 skuSort: "",
                 telPeople: "",
-
+                
             },
             form1: {
                 // classifyId: "",
@@ -887,7 +835,7 @@ export default {
         headClassSld() {
             return {
                 'text-align': 'left',
-                height: '30px',
+                height: '40px',
                 padding: '0'
             }
         },
@@ -1093,7 +1041,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbpc01);
+            this.idss = selection.map(item => item.id);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -1125,7 +1073,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，审批成功', type: 'success' });
+                this.$message({ message: '审批成功', type: 'success' });
 
             });
         },
@@ -1138,7 +1086,7 @@ export default {
                 req.PurchaseinboundSH(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，审批成功");
+                    this.$modal.msgSuccess("审批成功");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1153,7 +1101,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，反审成功', type: 'success' });
+                this.$message({ message: '反审成功', type: 'success' });
 
             });
         },
@@ -1167,7 +1115,7 @@ export default {
                 req.PurchaseinboundShs(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，反审成功");
+                    this.$modal.msgSuccess("反审成功");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1180,11 +1128,11 @@ export default {
             // console.log(row.cbpc01, 8888);
 
             PurchaseinboundShss(row).then(response => {
-                console.log(this.form.cbpc01, 789)
+                console.log(this.form.id, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，标记完成', type: 'success' });
+                this.$message({ message: '标记完成', type: 'success' });
 
             });
         },
@@ -1198,7 +1146,7 @@ export default {
                 req.PurchaseinboundShss(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，标记完成");
+                    this.$modal.msgSuccess("标记完成");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1218,11 +1166,11 @@ export default {
             // });
 
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记为ID"' + row.id + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
-                    console.log(this.form.cbpc01, 789);
+                    console.log(this.form.id, 789);
                     this.getList();
-                    this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
+                    this.$message({ message: '取消标记成功', type: 'success' });
 
                 });
             }).catch(() => { });
@@ -1236,7 +1184,7 @@ export default {
                 req.Purchaseinbounds(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，取消标记成功");
+                    this.$modal.msgSuccess("取消标记成功");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1247,18 +1195,18 @@ export default {
         handleUpdate() {
             if (this.form.name != undefined) {
                 let row = {}
-                row.cbpc07 = this.form.cbpc07;
-                row.cbsa08 = this.form.cbsa08;
-                row.cbwa09 = this.form.cbwa09;
-                row.cala08 = this.form.cala08;
-                row.cbpc01 = this.form.cbpc01;
+                row.id = this.form.id;
+                row.customerName = this.form.customerName;
+                row.contacts = this.form.contacts;
+                row.phone = this.form.phone;
+                row.orderNo = this.form.orderNo;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
 
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1283,7 +1231,7 @@ export default {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1308,11 +1256,11 @@ export default {
             console.log(row)
             this.open = true;
             // console.log(row, 7788521);
-            this.form.cbpc01 = row.cbpc01;
-            this.form.cbpc07 = row.cbpc07;
-            this.form.cbsa08 = row.cbsa08;
-            this.form.cbwa09 = row.cbwa09;
-            this.form.cala08 = row.cala08;
+            this.form.id = row.id;
+            this.form.customerName = row.customerName;
+            this.form.contacts = row.contacts;
+            this.form.phone  = row.phone ;
+            this.form.orderNo = row.orderNo;
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -1329,7 +1277,7 @@ export default {
             //     if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
                 // console.log(response.posts, 12345678);
-                this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
                 // this.submitShangpin();
                 this.submitShangpin();
@@ -1459,8 +1407,8 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.cbpc01 + '"的数据项？').then(function () {
-                return PurchaseinboundRemove(JSON.stringify(row));
+            this.$modal.confirm('是否确认删除用户编号为"' + row.id + '"的数据项？').then(function () {
+                return PurchaseinboundRemove(JSON.stringify(row.id));
             }).then((response) => {
                 this.submitShangpin();
                 this.getList();

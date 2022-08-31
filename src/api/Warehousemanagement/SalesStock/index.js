@@ -18,14 +18,33 @@ export function PurchaseinboundList(cbpg01) {
   })
 }
 
+
 // 查询列表
 export function SkuBarcodeLists(query) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsSkuBarcodelists',
+    url: '/system/Salesreturnorderss/SwJsSkuBarcodelists',
     method: 'get',
     params: query
   })
 }
+
+//销售订单
+export function SkuBarcodeListsxs(data) {
+  return request({
+    url: '/sale/saleOrderList',
+    method: 'post',
+    data: data
+  })
+}
+
+// 详情
+// export function PurchaseinboundList(cbpg01) {
+//   return request({
+//     url: '/system/Purchasereturnorders/SwJsSkuBarcodelist?cbpg01='+ cbpg01,
+//     method: 'get'
+//   })
+// }
+
 
 // 修改
 export function PurchaseinboundEdit(data) {
@@ -39,7 +58,7 @@ export function PurchaseinboundEdit(data) {
 // 删除
 export function PurchasereturnorderRemove(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchasereturnorderremove',
+    url: '/system/Salesreturnorderss/Selloutofwarehousedel',
     method: 'post',
     data:data
   })
@@ -48,7 +67,7 @@ export function PurchasereturnorderRemove(data) {
 // 审核
 export function Purchaseinboundsho(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundsho',
+    url: '/system/Salesreturnorderss/Selloutofwarehouseaddsh',
     method: 'post',
     data: data
   })
@@ -57,7 +76,7 @@ export function Purchaseinboundsho(data) {
 //采购入库标记完成
 export function PurchaseinBoundshf(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundshf',
+    url: '/system/Salesreturnorderss/Selloutofwarehouseqxwc',
     method: 'post',
     data: data
   })
@@ -66,7 +85,7 @@ export function PurchaseinBoundshf(data) {
 //采购入库取消完成
 export function PurchaseinboundShtt(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundshtt',
+    url: '/system/Salesreturnorderss/Selloutofwareehouseqxwc',
     method: 'post',
     data: data
   })
@@ -75,7 +94,7 @@ export function PurchaseinboundShtt(data) {
 //采购入库单反审
 export function PurchaseinboundSht(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundsht',
+    url: '/system/Salesreturnorderss/Selloutofwarehouseaddfs',
     method: 'post',
     data: data
   })

@@ -48,11 +48,11 @@
                     <el-table-column label="类型" align="center" key="cbpa07" prop="cbpa07" sortable />
                     <el-table-column label="品牌" align="center" key="cbsa08" prop="cbsa08" sortable>
                     </el-table-column>
-                    <el-table-column label="型号" align="center" key="cbpb12" prop="cbpb12" sortable />
+                    <el-table-column label="型号" align="center" key="cbpb12" width="120px;" prop="cbpb12" sortable />
                     <el-table-column label="描述" align="center" key="cbpb08" prop="cbpb08" width="550px;" sortable />
-                    <el-table-column label="SN" align="center" key="cbic10" prop="cbic10" sortable />
+                    <el-table-column label="SN" align="center" key="cbic10" prop="cbic10" width="130px;" sortable />
                     <el-table-column label="库位" align="center" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="入库日期" align="center" key="cbic02" prop="cbic02" :formatter="formatDate"
+                    <el-table-column label="入库日期" align="center" width="180px;" key="cbic02" prop="cbic02" :formatter="formatDate"
                         sortable>
                     </el-table-column>
                     <!-- <el-table-column label="状态" align="center" key="cbpg11" prop="cbpg11" sortable>
@@ -889,61 +889,6 @@ export default {
             });
         },
 
-        // /** 查询部门下拉树结构 */
-        // getTreeselect() {
-        //     treeselectt().then(response => {
-        //         response.data.forEach((res) => {
-        //             res.code = res.label ? res.label.substring(res.label.indexOf("-") + 1) : ""
-        //             res.label = res.label ? res.label.substring(0, res.label.indexOf("-")) : ""
-        //             if (res.children) {
-        //                 res.children.forEach((i) => {
-        //                     i.code = i.label ? i.label.substring(i.label.indexOf("-") + 1) : ""
-        //                     i.label = i.label ? i.label.substring(0, i.label.indexOf("-")) : ""
-        //                 })
-        //             }
-        //         })
-        //         this.deptOptions = response.data;
-        //         // this.deptOptions = response.data[0].label.substring(0, response.data[0].label.indexOf("-"));
-        //         // console.log(response.data[response.data.length].label.substring(0, response.data[response.data.length].label.indexOf("-")),123456789);
-        //         // console.log(response.data.label);
-        //         // console.log(JSON.stringify(Object.assign({}, response.data)));
-        //         // var j = JSON.stringify(Object.assign({}, response.data))
-        //         // for(var key in j)
-        //         // {
-        //         //   //  alert();
-        //         //   // console.log(key);
-        //         // }
-        //         // console.log(response);
-        //         // console.log(response.data);
-        //     });
-        // },
-        // 筛选节点
-        // filterNode(value, data) {
-        //
-        //   if (!value) return true;
-        //   alert("ddd");
-        //   return data.indexOf(value) !== -1;
-        // },
-        // 节点单击事件
-        // handleNodeClick(data) {
-        //     // console.log(data)
-        //     // this.queryParams.deptId = data.id;
-        //     // console.log(data.label,88888);
-        //     // const v1=data.label.substring(0, data.label.indexOf("-"));
-        //     this.form.classifyNum = "";
-        //     for (let i = 0; i < (data.code.split("-")).length - 1; i++) {
-        //         if (i != 0) {
-        //             this.form.classifyNum += ("-" + (data.code.split("-"))[i])
-        //         } else {
-        //             this.form.classifyNum += (data.code.split("-"))[i]
-        //         }
-        //     }
-        //     // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
-        //     this.form.classifyName = data.label
-        //     this.form.id = (data.code.split("-"))[data.code.split("-").length - 1]
-        //     // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
-        //     this.handleQuery();
-        // },
         // 取消按钮
         cancel() {
             this.open2 = false;
@@ -1027,7 +972,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，审批成功', type: 'success' });
+                this.$message({ message: '审批成功', type: 'success' });
 
             });
         },
@@ -1040,7 +985,7 @@ export default {
                 req.Purchaseinboundsho(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，审批成功");
+                    this.$modal.msgSuccess("审批成功");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1055,7 +1000,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，反审成功', type: 'success' });
+                this.$message({ message: '反审成功', type: 'success' });
 
             });
         },
@@ -1069,7 +1014,7 @@ export default {
                 req.PurchaseinboundSht(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，反审成功");
+                    this.$modal.msgSuccess("反审成功");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1086,7 +1031,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，标记完成', type: 'success' });
+                this.$message({ message: '标记完成', type: 'success' });
 
             });
         },
@@ -1100,7 +1045,7 @@ export default {
                 req.PurchaseinBoundshf(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，标记完成");
+                    this.$modal.msgSuccess("标记完成");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1113,7 +1058,7 @@ export default {
                 PurchaseinboundShtt(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
-                    this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
+                    this.$message({ message: '取消标记成功', type: 'success' });
 
                 });
             }).catch(() => { });
@@ -1135,7 +1080,7 @@ export default {
                 req.PurchaseinboundShtt(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，取消标记成功");
+                    this.$modal.msgSuccess("取消标记成功");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1175,7 +1120,7 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1230,7 +1175,7 @@ export default {
             //     if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
                 console.log(response.posts, 12345678);
-                this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
                 // this.submitShangpin();
                 this.submitShangpin();
@@ -1325,7 +1270,7 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
-                    req.PurchasereturnorderRemove(JSON.stringify(item)).then((res) => {
+                    req.PurchaseInboundremove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
@@ -1356,7 +1301,7 @@ export default {
             // row.id=this.form.id;
             console.log(row, 2222);
             this.$modal.confirm('是否确认删除用户编号为"' + row.cbic01 + '"的数据项？').then(function () {
-                return PurchasereturnorderRemove(JSON.stringify(row));
+                return PurchaseInboundremove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();
                 this.getList();
