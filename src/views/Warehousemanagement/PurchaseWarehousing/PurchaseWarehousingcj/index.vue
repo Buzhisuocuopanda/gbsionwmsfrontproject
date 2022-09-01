@@ -650,7 +650,7 @@ export default {
         // 增加一行表单
         _ly_addFrom() {
             if (this.formArr.length >= 10) {
-                this.$message.warning('最多只能添加5行')
+                this.$message.warning('最多只能添加10行')
                 this.reset01();
                 // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
                 return

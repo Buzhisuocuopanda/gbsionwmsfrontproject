@@ -8,11 +8,11 @@
                     label-width="68px">
                     <el-form-item prop="cbsb07" label="编号">
                         <el-input v-model="queryParams.cbsb07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbca08" label="客户">
                         <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="请输入客户" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="创建时间" style="margin-left:2%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
@@ -181,7 +181,7 @@
                 <el-row>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="编号:" prop="cbsb07">
-                            <el-input v-model="form.cbsb07" maxlength="30" style="width:50%;border: solid #eee thin;" />
+                            <el-input v-model="form.cbsb07" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                     <!-- <el-col style="margin-top:1%;">
@@ -194,7 +194,7 @@
                 <el-row>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="联系人:" prop="cbsb18">
-                            <el-input v-model="form.cbsb18" placeholder="" maxlength="30" style="width:50%;border: solid #eee thin;" />
+                            <el-input v-model="form.cbsb18" placeholder="" maxlength="30" style="width:50%;" />
                             <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
@@ -203,7 +203,7 @@
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="电话:" prop="cbsb19">
-                            <el-input v-model="form.cbsb19" placeholder="" maxlength="30" style="width:50%;border: solid #eee thin;" />
+                            <el-input v-model="form.cbsb19" placeholder="" maxlength="30" style="width:50%;" />
                             <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
@@ -212,7 +212,7 @@
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="客户订单号:" prop="cbwa09">
-                            <el-input v-model="form.cbsb30" placeholder="" maxlength="30" style="width:50%;border: solid #eee thin;" />
+                            <el-input v-model="form.cbsb30" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>

@@ -1069,7 +1069,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，审批成功', type: 'success' });
+                this.$message({ message: '审批成功', type: 'success' });
             });
           }).catch(() => { });
         },
@@ -1084,7 +1084,7 @@ export default {
                 req.QualityinSH(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，审批成功");
+                    this.$modal.msgSuccess("审批成功");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1101,7 +1101,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，反审成功', type: 'success' });
+                this.$message({ message: '反审成功', type: 'success' });
             });
           }).catch(() => { });
         },
@@ -1116,7 +1116,7 @@ export default {
                 req.QualityinfShs(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，反审成功");
+                    this.$modal.msgSuccess("反审成功");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1134,7 +1134,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，标记完成', type: 'success' });
+                this.$message({ message: '标记完成', type: 'success' });
 
             });
         },
@@ -1148,7 +1148,7 @@ export default {
                 req.PurchaseinboundShss(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，标记完成");
+                    this.$modal.msgSuccess("标记完成");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1172,7 +1172,7 @@ export default {
                 Purchaseinbounds(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
-                    this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
+                    this.$message({ message: '取消标记成功', type: 'success' });
 
                 });
             }).catch(() => { });
@@ -1186,7 +1186,7 @@ export default {
                 req.Purchaseinbounds(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，取消标记成功");
+                    this.$modal.msgSuccess("取消标记成功");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1208,7 +1208,7 @@ export default {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1233,7 +1233,7 @@ export default {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1279,7 +1279,7 @@ export default {
             //     if (item) {
             QualityinAdd(this.form2).then(response => {
                 // console.log(response.posts, 12345678);
-                this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
                 // this.submitShangpin();
                 this.submitShangpin();

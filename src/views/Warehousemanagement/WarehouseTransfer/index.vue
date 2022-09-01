@@ -8,7 +8,7 @@
                     label-width="68px">
                     <el-form-item prop="cbaa07" label="编号">
                         <el-input v-model="queryParams.cbaa07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"

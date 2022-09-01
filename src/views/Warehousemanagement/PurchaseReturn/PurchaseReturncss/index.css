@@ -430,9 +430,9 @@
     width: 80px !important;
 }
 
-.el-input .el-input__inner {
+/* .el-input .el-input__inner {
     border: none !important;
-}
+} */
 
 .table-body {
     width: 1459px;

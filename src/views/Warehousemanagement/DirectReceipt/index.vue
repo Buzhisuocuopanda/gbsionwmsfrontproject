@@ -9,7 +9,7 @@
 
                     <el-form-item prop="sn" label="型号">
                         <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="创建时间" style="margin-left:2%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"

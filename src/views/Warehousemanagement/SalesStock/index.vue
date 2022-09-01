@@ -8,11 +8,11 @@
                     label-width="68px">
                   <el-form-item prop="cbse07" label="编号">
                     <el-input v-model="queryParams.cbse07" id="miaoshu" placeholder="请输入编号" clearable
-                              style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                              style="width: 240px;" @keyup.enter.native="handleQuery" />
                   </el-form-item>
                   <el-form-item prop="cbwa09" label="仓库">
                     <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
-                              style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                              style="width: 240px;" @keyup.enter.native="handleQuery" />
                   </el-form-item>
                   <el-form-item label="创建时间" style="margin-left:1%;">
                     <el-date-picker :size="mini" v-model="dateRange" type="daterange"

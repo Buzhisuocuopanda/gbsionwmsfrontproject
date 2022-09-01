@@ -8,11 +8,11 @@
                     label-width="auto">
                     <el-form-item prop="cbie07" label="编号">
                         <el-input v-model="queryParams.cbie07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbwa09" label="仓库">
                         <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left:0.5%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
@@ -1076,7 +1076,7 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     // this.open = false;
-                    this.$message({ message: '恭喜你，审批成功', type: 'success' });
+                    this.$message({ message: '审批成功', type: 'success' });
                 });
             }).catch(() => { });
         },
@@ -1091,7 +1091,7 @@ export default {
                     req.PurchaseinboundSH(item).then((res) => {
                         // console.log(res, 123)
                         this.getList();
-                        this.$modal.msgSuccess("恭喜你，审批成功");
+                        this.$modal.msgSuccess("审批成功");
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1108,7 +1108,7 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     // this.open = false;
-                    this.$message({ message: '恭喜你，反审成功', type: 'success' });
+                    this.$message({ message: '反审成功', type: 'success' });
                 });
             }).catch(() => { });
         },
@@ -1123,7 +1123,7 @@ export default {
                     req.PurchaseinboundShs(item).then((res) => {
                         // console.log(res, 123)
                         this.getList();
-                        this.$modal.msgSuccess("恭喜你，反审成功");
+                        this.$modal.msgSuccess("反审成功");
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1141,7 +1141,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，标记完成', type: 'success' });
+                this.$message({ message: '标记完成', type: 'success' });
 
             });
         },
@@ -1155,7 +1155,7 @@ export default {
                 req.PurchaseinboundShss(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，标记完成");
+                    this.$modal.msgSuccess("标记完成");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1179,7 +1179,7 @@ export default {
                 Purchaseinbounds(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
-                    this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
+                    this.$message({ message: '取消标记成功', type: 'success' });
 
                 });
             }).catch(() => { });
@@ -1193,7 +1193,7 @@ export default {
                 req.Purchaseinbounds(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，取消标记成功");
+                    this.$modal.msgSuccess("取消标记成功");
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1215,7 +1215,7 @@ export default {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1240,12 +1240,12 @@ export default {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
             } else {
-                this.$message.error('错了哦，商品名称没有填呢');
+                this.$message.error('商品名称没有填呢');
             }
 
         },
@@ -1286,7 +1286,7 @@ export default {
             //     if (item) {
             QualityinAdd(this.form2).then(response => {
                 // console.log(response.posts, 12345678);
-                this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
                 // this.submitShangpin();
                 this.submitShangpin();

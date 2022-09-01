@@ -13,11 +13,11 @@
                     <!--</el-form-item>-->
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbwa09" label="仓库">
                         <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left: 1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
@@ -349,7 +349,7 @@
                                 <supplierMaintenance ref="supplierMaintenance" @selected="selected03"
                                     style="width:320px;" />
                                 <el-select slot="reference" v-model="form.cbsa08" placeholder="" readonly
-                                    style="border:solid #eee thin; width: 50%;">
+                                    style=" width: 50%;">
                                 </el-select>
                             </el-popover>
                         </el-form-item>
@@ -359,7 +359,7 @@
                             <el-popover placement="bottom-start" trigger="click">
                                 <kuweixxweihu ref="kuweixxweihu" @selected="selected04" style="width:320px;" />
                                 <el-select slot="reference" v-model="form.cbwa09" placeholder="" readonly
-                                    style="border:solid #eee thin; width: 50%;">
+                                    style=" width: 50%;">
                                 </el-select>
                             </el-popover>
                         </el-form-item>
@@ -368,13 +368,13 @@
                 <el-row v-if="false">
                     <el-col>
                         <el-form-item label="供料单位id" prop="cbsa01">
-                            <el-input v-model="form.cbsa01" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form.cbsa01" maxlength="30" style="width:50%;" />
                         </el-form-item>
                         <!-- <el-form-item label="结算货币id" prop="cala01">
                             <el-input v-model="form.cala01" maxlength="30" style="width:50%;border:solid #eee thin;" />
                         </el-form-item> -->
                         <el-form-item label="仓库id" prop="cbwa01">
-                            <el-input v-model="form.cbwa01" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                            <el-input v-model="form.cbwa01" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
