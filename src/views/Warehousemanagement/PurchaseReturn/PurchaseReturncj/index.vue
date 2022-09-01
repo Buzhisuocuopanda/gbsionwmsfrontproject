@@ -23,19 +23,19 @@
             <el-row v-if="false">
                 <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">
                     <el-form-item label="供应商id:" prop="cbpg09">
-                        <el-input v-model="form2.cbpg09" maxlength="30" style="width:80%;border:solid #eee thin" />
+                        <el-input v-model="form2.cbpg09" maxlength="30" style="width:80%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
                     <el-form-item label="仓库id:" prop="cbpg10">
                         <el-input v-model="form2.cbpg10" placeholder="" maxlength="30"
-                            style="width:80%;border:solid #eee thin" />
+                            style="width:80%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
                     <el-form-item label="结算货币id:" prop="cbpg16">
                         <el-input v-model="form2.cbpg16" placeholder="" maxlength="30"
-                            style="width:80%;border:solid #eee thin" />
+                            style="width:80%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -52,7 +52,7 @@
                             <supplierMaintenance ref="supplierMaintenance" @selected="selected02"
                                 style="width:220px!important;" />
                             <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly
-                                style="border:solid #eee thin; width:77%;">
+                                style="width:77%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
@@ -62,14 +62,14 @@
                         <el-popover placement="bottom-start" trigger="click">
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
                             <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
-                                style="border:solid #eee thin; width:87%;">
+                                style="width:87%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
                     <el-form-item label="结算货币:" prop="cbpg16">
-                        <el-select v-model="form2.cbpg16" placeholder="" style="width:80%; border: solid #eee thin;">
+                        <el-select v-model="form2.cbpg16" placeholder="" style="width:80%; ">
                             <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -103,64 +103,105 @@
                             style="width:80%;border:solid #eee thin" />
                     </el-form-item>
                 </el-col>
+                <!-- 商品信息维护 -->
+                <el-col> 
+                   <el-form-item label="" v-if="false"  prop="cbpd08" style="margin-left:0.8%;">
+                        <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
+                   </el-form-item>
+                 </el-col>
             </el-row>
-        <div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-              <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
-                <el-button plain type="primary" @click="_ly_addFrom">新增一行</el-button>
-                <el-button type="primary" @click="handleAdd">保 存</el-button>
-                <!-- <el-button @click="_ly_cancelDialog">取 消</el-button> -->
-              </span>
-               <table style="margin-top:2%;">
-                <tr>
-                   <th style="padding-left:70px;">品牌</th>
-                   <th style="padding-left:100px;">型号</th> 
-                   <th style="padding-left:100px;">描述</th>
-                   <th style="padding-left:110px;">数量</th>                  
-                   <th style="padding-left:110px;">单价</th>
-                   <th style="padding-left:100px;">金额</th>
-                   <th style="padding-left:100px;">备注</th>
-                   <!-- <th style="padding-left:100px;">状态</th> -->
-                   <!-- <th style="padding-left:90px;">销售主表id</th>
-                   <th style="padding-left:40px;">销售订单明细表id</th>
-                   <th style="padding-left:40px;">供应商</th> -->
-                </tr>
-            </table>
-                <el-row v-for="(form, index) in formArr" style="width:110%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
-                        :inline="true">  
-                         <el-form-item label="" size="small" prop="cbpp03" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbpp03" style="border:solid #eee thin;width:70%;"></el-input>
+      <div>
+            <div style="margin-left:3%; margin-top: 2%;">
+               <el-button plain  type="primary" @click="_ly_addFrom">新增一行</el-button>
+            </div>
+            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
+                <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
+                    <div class="box1">
+                      <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
+                            class="tablebiankuan table-heads" width="95%" height="20px">
+                            <thead style="">
+                                <tr style="height:30px; ">
+                                    <th style="width: 130px;height: 30px;">品牌</th>  
+                                    <th style="width: 130px;height: 30px;">型号</th> 
+                                    <th style="width: 130px;height: 30px;">描述</th> 
+                                    <th style="width: 140px;height: 30px;">数量</th>                   
+                                    <th style="width: 140px;height: 30px;">单价</th>
+                                    <th style="width: 140px;height: 30px;">金额</th>
+                                    <th style="width: 350px;height: 30px;">备注</th>
+                                    <th style="width: 50px;height: 30px;">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    <div class="table-bodys" >
+                     <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
+                                cellspacing="0" class="tablebiankuan">
+                      <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
+                          <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
+                        :inline="true">                        
+                        <el-form-item label="" v-if="false" prop="CBPG01" style="margin-left:0.8%;">
+                            <el-input v-model="form.cbpg01" style="width:70%;"></el-input>
+                        </el-form-item>                      
+                            <el-col style="margin-left: 0%;" :span="7">
+                                <el-form-item label="" prop="cbpc000">
+                                   <el-popover placement="bottom-start" trigger="click">
+                                       <Goodsone01 ref="Goodsone01" @selected="selected08"
+                                             style="width:370px!important;" />
+                                      <el-input slot="reference" v-model="form2.cbpc000" placeholder="" readonly
+                                          style="width:205.6%;">
+                                      </el-input>
+                                    </el-popover>
+                                </el-form-item>
+                            </el-col>
+                        <el-form-item label="" size="small" prop="cbph09" style="margin-left:5.1%;">
+                            <el-input type="text" v-model="form2.cbph09" @blur="chen()" style="width:73.2%;"></el-input>
                         </el-form-item>
-                         <el-form-item label="" size="small" prop="cbpf02" style="margin-left:-4%;">
-                            <el-input v-model="form.cbpf02" style="border:solid #eee thin;width:70%;"></el-input>
-                        </el-form-item>   
-                        <el-form-item label="" size="small" prop="cbpm01" style="margin-left:-4%;">
-                            <el-input v-model="form.cbpm01" style="border:solid #eee thin;width:70%;"></el-input>
-                        </el-form-item>                                           
-                        <el-form-item label="" size="small" prop="cbph09" style="margin-left:-4%;">
-                            <el-input type="number" v-model="form.cbph09" style="border:solid #eee thin;width:70%;"></el-input>
+                        <el-form-item label="" size="small" prop="cbph10" style="margin-left:-5.3%;">
+                            <el-input-number v-model="form2.cbph10" @blur="chen()" :min="0" :controls="false"
+                                            :precision="2"  style="width:74%;"></el-input-number>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="cbph10" style="margin-left:-4%;">
-                            <el-input v-model="form.cbph10" style="border:solid #eee thin;width:70%;"></el-input>
+                        <el-form-item label="" size="small" prop="cbph11" style="margin-left:-5.3%;">
+                            <el-input-number v-model="form2.cbph11" @blur="chen()" :min="0" :controls="false"
+                                            :precision="2" style="width:74%;"></el-input-number>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="cbph11" style="margin-left:-4%;">
-                            <el-input v-model="form.cbph11" style="border:solid #eee thin;width:70%;"></el-input>
+                        <el-form-item label="" size="small" prop="cbpd13" style="margin-left:-5.2%;">
+                            <el-input v-model="form.cbph13" style="width:184.1%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="cbph13" style="margin-left:-4%;">
-                            <el-input v-model="form.cbph13" style="border:solid #eee thin;width:70%;"></el-input>
+
+
+                        <el-form-item label="" v-if="false"  size="small" prop="cbpd09" style="margin-left:0.8%;">
+                            <el-input type="text" v-model="form.cbph09"  style="width:70%;"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="false" label=""  prop="cbpg01" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbpg01" style="border:solid #eee thin;width:70%;"></el-input>
+                        <el-form-item label=""  v-if="false" size="small" prop="cbpd11" style="margin-left:-4%;">
+                            <el-input-number v-model="form.cbph10" :min="0" :controls="false"
+                                            :precision="2"  style="width:70%;"></el-input-number>
                         </el-form-item>
-                        <el-button v-if="index != 0" type="danger" style="position: absolute; left: 68.5%;"  size="small" icon="el-icon-delete"  circle
+                        <el-form-item label=""  v-if="false" size="small" prop="cbpd12" style="margin-left:-4%;">
+                            <el-input-number v-model="form.cbph11"  :min="0" :controls="false"
+                                            :precision="2" style="width:70%;"></el-input-number>
+                        </el-form-item>
+                        <el-form-item  v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
+                            <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
+                        </el-form-item>
+                        <el-form-item label="" v-if="false"  prop="cbph08" style="margin-left:0.8%;">
+                            <el-input v-model="form.cbph08" style="border:solid #eee thin;width:70%;"></el-input>
+                        </el-form-item>
+                        <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;"  size="small" icon="el-icon-delete"  circle
                             @click="_ly_delFrom(index)"></el-button>
                     </el-form>
                 </el-row>
-            </div>
+             </table>
+                       </div>
+                    </div>
+                 </div>
+             </div>
+          </div>
+         </el-form>
+         <div class="tinajia_dingwei">
+            <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
+                <el-button type="primary" @click="handleAdd">保 存</el-button>
+                <el-button @click="_ly_cancelDialog">取 消</el-button>
+            <!-- </span> -->
         </div>
-      </el-form>
-        
     </div>
 </template>
 
@@ -175,7 +216,10 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 //供应商
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
-//供应商
+//商品信息维护
+import Goodsone01 from "@/components/Goodsone";
+
+//列表
 import ListLists from "@/components/ListMaintenance";
 
 export default {
@@ -184,7 +228,7 @@ export default {
      props: {
         visible: { type: Boolean, default() { return false } }
     },
-    components: { kuweixxweihu, supplierMaintenance, ListLists },
+    components: { kuweixxweihu, supplierMaintenance, ListLists,Goodsone01},
     data() {
         return {
             dialogVisible: this.visible,
@@ -392,14 +436,6 @@ export default {
                 cbsa08: "",
                 cbwa09: "",
                 cala08: "",
-                // invoiceNumber: "",
-                // invoicePhone: "",
-                // invoiceTaxpayerNumber: "",
-                // invoiceType: "",
-                // name: "",
-                // phone: "",
-                // skuSort: "",
-                // telPeople: "",
                 cbpd09: "",
                 cbpd11: "",
                 cbpd12: "",
@@ -445,7 +481,8 @@ export default {
                 cbph10: "",
                 cbph11: "",
                 cbpg161:"",
-                cbpg01:""
+                cbpg01:"",
+                cbpc000:""
             },
             defaultProps: {
                 children: "children",
@@ -559,10 +596,42 @@ export default {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
                         PurchasereturnordersAdds(JSON.stringify(this.formArr)).then(response => {
+
+                             if(response.code=="200"){
+                                this.formArr=[]
+                                this.form2={
+                                    cbpc07: "",
+                                    cbpc08: "",
+                                    cbsa08: "",
+                                    cbwa09: "",
+                                    cala08: "",
+                                    cbpc100: "",
+                                    cbpc099: "",
+                                    cbpc166: "",
+                                    cbpc10: "",
+                                    cbpc09: "",
+                                    cbpd09: "",
+                                    cbpd11: "",
+                                    cbpd12: "",
+                                    cbpc16: "",
+                                    cbpc12: "",
+                                    cbpc14: "",
+                                    cbpd08: "",
+                                    cbph09:"",
+                                    cbph10: "",
+                                    cbph11: "",
+                                    cbpg161:"",
+                                    cbpc01:"",
+                                    cbpc000:"",
+                                    cbpd09:"",
+                                    cbpd11:"",
+                                    cbpd12:""
+                                }
+                            }
                         if (count-- === 1) {
                             this._ly_save()
                         }
-                        
+                        this._ly_addFrom()
                         //  this.reset03();
                     //    this.formArr.cbpg01="1234567";
                     //    this.form.cbpg01=this.formArr.cbpg01;
@@ -591,8 +660,9 @@ export default {
         },
         // 增加一行表单
         _ly_addFrom() {
-            if (this.formArr.length >= 5) {
-                this.$message.warning('最多只能添加5行')
+            if (this.formArr.length >= 10) {
+                this.$message.warning('最多只能添加10行')
+                this.reset03();
                 // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
                 return
             }
@@ -673,6 +743,18 @@ export default {
             this.form.cbsa08 = name.substring(0, name.indexOf("-"));
             // this.form2.icon = name;
         },
+        
+         //查询商品信息维护
+        selected08(name) {
+            console.log(name, 123)
+            console.log(name.substring(name.indexOf("-") + 1), 963);
+            // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+            // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
+            // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+            this.form2.cbpc000 = name;
+            this.form2.cbpd08  =  name.substring(name.indexOf(".") +1);
+            console.log(this.form2.cbpd08,852369421);
+        },
 
         //添加行
         addData() {
@@ -728,14 +810,7 @@ export default {
 
         //子表表单重置
         reset03(){
-            this.form ={
-                cbpg01 :undefined,
-                cbph09 :undefined,
-                cbph10 :undefined,
-                cbph11 :undefined,
-                cbph13 :undefined
-            };
-            this.resetForm("form");
+            this.$refs["form2"].resetFields();
         },
 
         /** 重置按钮操作 */
@@ -761,15 +836,18 @@ export default {
                         this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         this.submitShangpin();
                         this.open2 = false;
-                        this.reset01();
                         this.reset03();
                         this.form2.cbpg161=response.data.id;
                         this.form.cbpg01=response.data.id;
                         // console.log(this.form2.cbpg161,111);
                         // console.log(this.form.cbpg01,222);
                         // console.log(this.formArr,333)
-                        this.formArr.forEach((item)=>{
+                         this.formArr.forEach((item)=>{
                             item.cbpg01=response.data.id
+                            item.cbph08= this.form2.cbph08;
+                            item.cbph09= this.form2.cbph09;
+                            item.cbph11= this.form2.cbph11;
+                            item.cbph10= this.form2.cbph10;
                         })
                         this._ly_ok()
                     });

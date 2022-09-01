@@ -97,7 +97,7 @@
 }
 
 .table-bodys {
-    width: 100%;
+    width: 95%;
     height: 300px;
     overflow-y: scroll;
 }
@@ -113,8 +113,14 @@
     width: 80px !important;
 }
 
-.table-bodys {
-    width: 1629px;
+/* .table-bodys {
+    width: 1429px;
     height: 360px;
     overflow: auto;
+} */
+
+.tinajia_dingwei {
+    position: absolute;
+    top: 90%;
+    left: 80%;
 }
