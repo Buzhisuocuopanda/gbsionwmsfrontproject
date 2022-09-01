@@ -17,7 +17,7 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item >
-                      <el-button size="mini" type="danger" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                      <el-button size="mini"  class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                       <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
