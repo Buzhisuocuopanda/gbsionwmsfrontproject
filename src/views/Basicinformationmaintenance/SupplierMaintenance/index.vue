@@ -77,7 +77,7 @@
         <el-dialog :title="title" :visible.sync="open"  class="abow_dialogg">
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
-            <el-form ref="form" :model="form" label-width="25%" lable-height="20%" class="chuangjianform">
+            <el-form ref="form" :model="form" label-width="25%" lable-height="20%" :rules="rules01" class="chuangjianform">
                 <div style="margin-top:1.5%;">
                     <el-row>
                         <el-col>
@@ -604,8 +604,45 @@ export default {
                 cbsa09: [
                     { required: true, message: "出库顺序不能为空!", trigger: "blur" }
                 ],
-                cbsa11: [
-                    { required: true, message: "发票地址不能为空!", trigger: "blur" }
+                
+                cbsa10: [
+                    { required: true, message: "发票账号不能为空!", trigger: "blur" }
+                ],
+                cbsa12: [
+                    { required: true, message: "发票电话不能为空!", trigger: "blur" },
+                    { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的手机号码", trigger: "blur" }
+                ],
+                cbsa18: [
+                    { required: true, message: "发票类型不能为空!", trigger: "blur" }
+                ],
+                cbsa16: [
+                    { required: true, message: "发票开户行不能为空!", trigger: "blur" }
+                ],
+                cbsa17: [
+                    { required: true, message: "纳税人识别号不能为空!", trigger: "blur" }
+                ],
+                cbsa07: [
+                    { required: true, message: "状态不能为空!", trigger: "blur" }
+                ]
+            },
+
+                //表单校验
+            rules01: {
+                cbsa08: [
+                    { required: true, message: "公司名称不能为空!", trigger: "blur" }
+                ],
+                cbsa14: [
+                    { required: true, message: "联系人不能为空!", trigger: "blur" }
+                ],
+                cbsa13: [
+                    { required: true, message: "公司地址不能为空!", trigger: "blur" }
+                ],
+                cbsa15: [
+                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
+                    { validator: phoneValidator11, trigger: 'blur' }
+                ],
+                cbsa09: [
+                    { required: true, message: "出库顺序不能为空!", trigger: "blur" }
                 ],
                 cbsa10: [
                     { required: true, message: "发票账号不能为空!", trigger: "blur" }
@@ -790,7 +827,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbsa01);
+            this.idss = selection.map(item => item.cbsa08);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -816,7 +853,7 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
                         this.submitShangpin();
@@ -898,7 +935,7 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -909,6 +946,22 @@ export default {
         },
         /** 详情按钮操作**/
         handleSelect(row) {
+            if(row.cbsa18=="1")
+            {
+                this.form1.cbsa18="增值税专用发票";
+                row.cbsa18= "1";
+            }else if(row.cbsa18=="2")
+            {
+                this.form1.cbsa18="增值税普通发票"
+                row.cbsa18= "2";
+            }else if(row.cbsa18=="3")
+            {
+                this.form1.cbsa18="个人普通发票"
+                row.cbsa18= "3";
+            }else if(row.cbsa18=="4"){
+                this.form1.cbsa18="不开发票"
+                row.cbsa18= "4";
+            }
             this.open1 = true;
             this.form1.cbsa01 = row.cbsa01;
             this.form1.cbsa07 = row.cbsa07;
@@ -923,21 +976,26 @@ export default {
             this.form1.cbsa16 = row.cbsa16;
             this.form1.cbsa17 = row.cbsa17;
             this.form1.cbsa18 = row.cbsa18;
-            if(this.form1.cbsa18=="1")
-            {
-                this.form1.cbsa18="增值税专用发票"
-            }else if(this.form1.cbsa18=="2")
-            {
-                this.form1.cbsa18="增值税普通发票"
-            }else if(this.form1.cbsa18=="3")
-            {
-                this.form1.cbsa18="个人普通发票"
-            }else{
-                this.form1.cbsa18="不开发票"
-            }
+            
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+             if(row.cbsa18=="1")
+            {
+                this.form.cbsa18="增值税专用发票";
+                row.cbsa18="1";
+            }else if(row.cbsa18=="2")
+            {
+                this.form.cbsa18="增值税普通发票"
+                row.cbsa18= "2";
+            }else if(row.cbsa18=="3")
+            {
+                this.form.cbsa18="个人普通发票"
+                row.cbsa18= "3";
+            }else if(row.cbsa18=="4"){
+                this.form.cbsa18="不开发票"
+                row.cbsa18= "4";
+            }
             console.log(row)
             // this.getList();
             this.open = true;
@@ -1009,7 +1067,7 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             console.log(userIds, 123)
             console.log(typeof userIds)
-            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除供应商为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.SupplierRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -1037,7 +1095,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除ID为"' + row.cbsa01 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
           return SupplierRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();

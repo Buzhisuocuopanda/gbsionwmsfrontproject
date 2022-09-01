@@ -279,6 +279,7 @@
 .abow_dialog3 .el-dialog {
     margin: 0 auto !important;
     height: 95%;
+    width: 85%;
     overflow: hidden;
 }
 
@@ -293,4 +294,8 @@
     overflow: hidden;
     overflow-y: auto;
 
+}
+
+.jieshuxx{
+   
 }

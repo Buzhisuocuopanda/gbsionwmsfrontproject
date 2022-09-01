@@ -1067,7 +1067,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除仓库为"' + row.cbwa08 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除仓库为"' + row.cbwa09 + '"的数据项？').then(function () {
           return StoreyRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();

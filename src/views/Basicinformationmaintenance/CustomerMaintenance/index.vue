@@ -76,10 +76,10 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" class=" abow_dialog3">
+        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3">
             
-            <el-form ref="form" :model="form" label-width="45%" class="chuangjianformcust">
-                <el-row>
+            <el-form ref="form" :model="form" :rules="rules3"  label-width="50%" class="chuangjianformcust">
+                                 <el-row>
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
                             <el-input v-model="form.cbca08" placeholder="" style="width:100%;" />
@@ -94,7 +94,19 @@
                 </el-row>
                 <el-row>
                     <el-col :span="11">
-                        <el-form-item label="客户地址:" prop="cbca15">
+                        <el-form-item label="联系人:" prop="cbca14">
+                            <el-input v-model="form.cbca14" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="电话:" prop="cbca16">
+                            <el-input v-model="form.cbca16" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="地址:" prop="cbca15">
                             <el-input v-model="form.cbca15" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -105,35 +117,60 @@
                     </el-col>
                 </el-row>
                 <el-row>
-
                     <el-col :span="11">
-                        <el-form-item label="发票地址:" prop="cbca25">
-                            <el-input v-model="form.cbca25" placeholder="" style="width:100%;" maxlength="30" />
+                        <el-form-item label="联系人1:" prop="cbca18">
+                            <el-input v-model="form.cbca18" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="联系电话:" prop="cbca16">
-                            <el-input v-model="form.cbca16" placeholder="" style="width:100%;" maxlength="30" />
+                     <el-col :span="11">
+                        <el-form-item label="联系人1办公室电话:" prop="cbca19">
+                            <el-input v-model="form.cbca19" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="11">
+                        <el-form-item label="联系人2:" prop="cbca21">
+                            <el-input v-model="form.cbca21" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="联系人2办公室电话:" prop="cbca20">
+                            <el-input v-model="form.cbca20" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <div style="height:50px;">
+                    <span></span>
+                </div>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="纳税人识别号:" prop="cbca13">
+                            <el-input v-model="form.cbca13" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="地址:" prop="cbca25">
+                            <el-input v-model="form.cbca25" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                     <el-col :span="11">
+                        <el-form-item label="发票电话:" prop="cbca27">
+                            <el-input v-model="form.cbca27" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                     <el-col :span="11">
                         <el-form-item label="发票开户行:" prop="cbca11">
                             <el-input v-model="form.cbca11" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="订单号:" prop="cbca09">
-                            <el-input v-model="form.cbca09" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-
                 </el-row>
                 <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="发票电话:" prop="cbca27">
-                            <el-input v-model="form.cbca27" placeholder="" style="width:100%;" maxlength="30" />
+                   <el-col :span="11">
+                        <el-form-item label="银行账号:" prop="cbca12">
+                            <el-input v-model="form.cbca12"  placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
@@ -155,67 +192,13 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="联系人1:" prop="cbca18">
-                            <el-input v-model="form.cbca18" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="联系人1手机:" prop="cbca19">
-                            <el-input v-model="form.cbca19" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="状态:" prop="cbca07">
-                            <!-- <el-input v-model="form.cbca07" placeholder="" style="width:100%" maxlength="30" /> -->
-                            <el-select v-model="form.cbca07" placeholder="" style="width:100%;">
-                                <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
-                                    :value="item.label">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="联系人2:" prop="cbca14">
-                            <el-input v-model="form.cbca14" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="联系人2手机:" prop="cbca20">
-                            <el-input v-model="form.cbca20" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="身份证:" prop="cbca12">
-                            <el-input v-model="form.cbca12" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="身份证1:" prop="cbca13">
-                            <el-input v-model="form.cbca13" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="备注:" prop="cbca17">
+                        <el-form-item label="其他:" prop="cbca17">
                             <el-input v-model="form.cbca17" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="其他:" prop="cbca26">
-                            <el-input v-model="form.cbca26" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="11" style="margin-left:80%;">
+                    <el-col :span="11" style="margin-left:88%; margin-top: 5%;">
                         <el-button type="primary" @click="handleUpdate">确定</el-button>
                         <el-button @click="cancel">取 消</el-button>
                     </el-col>
@@ -230,7 +213,7 @@
         <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog3">
            
             <el-form ref="form1" :model="form1" label-width="45%" class="chuangjianformcust">
-                <el-row>
+                 <el-row>
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
                             <el-input v-model="form1.cbca08" placeholder="" style="width:100%;" />
@@ -245,7 +228,19 @@
                 </el-row>
                 <el-row>
                     <el-col :span="11">
-                        <el-form-item label="客户地址:" prop="cbca15">
+                        <el-form-item label="联系人:" prop="cbca14">
+                            <el-input v-model="form1.cbca14" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="电话:" prop="cbca16">
+                            <el-input v-model="form1.cbca16" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="地址:" prop="cbca15">
                             <el-input v-model="form1.cbca15" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -256,44 +251,69 @@
                     </el-col>
                 </el-row>
                 <el-row>
-
                     <el-col :span="11">
-                        <el-form-item label="发票地址:" prop="cbca25">
+                        <el-form-item label="联系人1:" prop="cbca18">
+                            <el-input v-model="form1.cbca18" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                     <el-col :span="11">
+                        <el-form-item label="联系人1办公室电话:" prop="cbca19">
+                            <el-input v-model="form1.cbca19" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="联系人2:" prop="cbca21">
+                            <el-input v-model="form1.cbca21" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="联系人2办公室电话:" prop="cbca20">
+                            <el-input v-model="form1.cbca20" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <div style="height:60px;">
+                    
+                </div>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="纳税人识别号:" prop="cbca13">
+                            <el-input v-model="form1.cbca13" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="地址:" prop="cbca25">
                             <el-input v-model="form1.cbca25" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="联系电话:" prop="cbca16">
-                            <el-input v-model="form1.cbca16" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="发票开户行:" prop="cbca11">
-                            <el-input v-model="form1.cbca11" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="订单号:" prop="cbca09">
-                            <el-input v-model="form1.cbca09" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
+                     <el-col :span="11">
                         <el-form-item label="发票电话:" prop="cbca27">
                             <el-input v-model="form1.cbca27" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
+                     <el-col :span="11">
+                        <el-form-item label="发票开户行:" prop="cbca11">
+                            <el-input v-model="form1.cbca11" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                   <el-col :span="11">
+                        <el-form-item label="银行账号:" prop="cbca12">
+                            <el-input v-model="form1.cbca12" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
                     <el-col :span="11">
-                        <el-form-item label="发票类型:" prop="cbca24" >
+                        <el-form-item label="发票类型:" prop="cbca24">
                             <!-- <el-input v-model="form2.invoiceType" placeholder="请输入发票类型" style="width:98%"
                                 maxlength="30" /> -->
-                            <el-select v-model="form1.cbca24" :disabled="true" placeholder="" style="width:100%;">
+                            <el-select v-model="form1.cbca24" placeholder="" style="width:100%;">
                                 <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
-                                    :value="item.value">
+                                    :value="item.label">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -306,60 +326,17 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="联系人1:" prop="cbca18">
-                            <el-input v-model="form1.cbca18" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="联系人1手机:" prop="cbca19">
-                            <el-input v-model="form1.cbca19" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="状态:" prop="cbca07">
-                            <el-input v-model="form1.cbca07" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="联系人2:" prop="cbca14">
-                            <el-input v-model="form1.cbca14" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="联系人2手机:" prop="cbca20">
-                            <el-input v-model="form1.cbca20" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="身份证:" prop="cbca12">
-                            <el-input v-model="form1.cbca12" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="身份证1:" prop="cbca13">
-                            <el-input v-model="form1.cbca13" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="备注:" prop="cbca17">
+                        <el-form-item label="其他:" prop="cbca17">
                             <el-input v-model="form1.cbca17" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="其他:" prop="cbca26">
-                            <el-input v-model="form1.cbca26" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
                 </el-row>
+                <!-- <el-row>
+                    <el-col :span="11" style="margin-left:56%;">
+                            <el-button type="primary" style="margin-left:49%;" @click="handleAdd">确 定</el-button>
+                            <el-button @click="cancells">取 消</el-button>
+                    </el-col>
+                </el-row> -->
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <!-- <el-button type="primary" @click="handleAdd">确 定</el-button> -->
@@ -368,11 +345,8 @@
         </el-dialog>
 
         <!-- 创建 -->
-        <!-- <el-dialog :title="title" :visible.sync="open2" append-to-body>
-            <el-form ref="form2" :model="form2" :rules="rules" label-width="30%" class="chuangjianform"> -->
         <el-dialog :title="title" :visible.sync="open2" class="abow_dialog3">
-           
-            <el-form ref="form2" :model="form2" label-width="45%" :rules="rules2" class="chuangjianformcust">
+            <el-form ref="form2" :model="form2" label-width="50%" :rules="rules2" class="chuangjianformcust">
                 <el-row>
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
@@ -388,7 +362,19 @@
                 </el-row>
                 <el-row>
                     <el-col :span="11">
-                        <el-form-item label="客户地址:" prop="cbca15">
+                        <el-form-item label="联系人:" prop="cbca14">
+                            <el-input v-model="form2.cbca14" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="电话:" prop="cbca16">
+                            <el-input v-model="form2.cbca16" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="地址:" prop="cbca15">
                             <el-input v-model="form2.cbca15" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -399,35 +385,60 @@
                     </el-col>
                 </el-row>
                 <el-row>
-
                     <el-col :span="11">
-                        <el-form-item label="发票地址:" prop="cbca25">
-                            <el-input v-model="form2.cbca25" placeholder="" style="width:100%;" maxlength="30" />
+                        <el-form-item label="联系人1:" prop="cbca18">
+                            <el-input v-model="form2.cbca18" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="联系电话:" prop="cbca16">
-                            <el-input v-model="form2.cbca16" placeholder="" style="width:100%;" maxlength="30" />
+                     <el-col :span="11">
+                        <el-form-item label="联系人1办公室电话:" prop="cbca19">
+                            <el-input v-model="form2.cbca19" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="11">
+                        <el-form-item label="联系人2:" prop="cbca21">
+                            <el-input v-model="form2.cbca21" placeholder="" style="width:100%;" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="联系人2办公室电话:" prop="cbca20">
+                            <el-input v-model="form2.cbca20" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <div style="height:60px;">
+                    
+                </div>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="纳税人识别号:" prop="cbca13">
+                            <el-input v-model="form2.cbca13" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="地址:" prop="cbca25">
+                            <el-input v-model="form2.cbca25" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                     <el-col :span="11">
+                        <el-form-item label="发票电话:" prop="cbca27">
+                            <el-input v-model="form2.cbca27" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                     <el-col :span="11">
                         <el-form-item label="发票开户行:" prop="cbca11">
                             <el-input v-model="form2.cbca11" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="订单号:" prop="cbca09">
-                            <el-input v-model="form2.cbca09" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-
                 </el-row>
                 <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="发票电话:" prop="cbca27">
-                            <el-input v-model="form2.cbca27" placeholder="" style="width:100%;" maxlength="30" />
+                   <el-col :span="11">
+                        <el-form-item label="银行账号:" prop="cbca12">
+                            <el-input v-model="form2.cbca12" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
@@ -449,62 +460,8 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="联系人1:" prop="cbca18">
-                            <el-input v-model="form2.cbca18" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="联系人1手机:" prop="cbca19">
-                            <el-input v-model="form2.cbca19" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="状态:" prop="cbca07">
-                            <!-- <el-input v-model="form2.cbca07" placeholder="" style="width:100%" maxlength="30" /> -->
-                            <el-select v-model="form2.cbca07" placeholder="" style="width:100%;">
-                                <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
-                                    :value="item.label">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="联系人2:" prop="cbca14">
-                            <el-input v-model="form2.cbca14" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="联系人2手机:" prop="cbca20">
-                            <el-input v-model="form2.cbca20" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="身份证:" prop="cbca12">
-                            <el-input v-model="form2.cbca12" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="身份证1:" prop="cbca13">
-                            <el-input v-model="form2.cbca13" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="备注:" prop="cbca17">
+                        <el-form-item label="其他:" prop="cbca17">
                             <el-input v-model="form2.cbca17" placeholder="" style="width:100%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-form-item label="其他:" prop="cbca26">
-                            <el-input v-model="form2.cbca26" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -514,8 +471,7 @@
                             <el-button @click="cancells">取 消</el-button>
                     </el-col>
                 </el-row>
-            </el-form>
-           
+            </el-form>   
         </el-dialog>
 
         <!-- 用户导入对话框 -->
@@ -560,6 +516,118 @@ export default {
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect },
     data() {
+ 
+//       let checkRegNo = (rule,value,callback) => {
+//       setTimeout(() => {
+//         const rr = /^[1-9]\d{1}(.{13}|.{16})$/
+//         if(rr.test(value)){
+//             if(value.length==18){
+//                 //加权因子
+//                 let weight_factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+//                 // 校验位
+//                 let check_code = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2]
+//                 let idWiSum = 0
+//                 for(let i =0; i<17 ;i++){
+//                     idWiSum += value.substring(i,i+1)*weight_factor[i]
+//                 }
+//                 //计算模
+//                 let idMod = idWiSum % 11  
+//                 let idLastCode = check_code[idMod]
+//                 if(value[17] == idLastCode){
+//                     callback
+//                 }
+//                 callback(new Error('身份证最后一位校验码不正确'))
+//             }
+//         }else{
+//             callback(new Error('身份证仅能为15位或18位且前两位为有效行政区划代码'))
+//         }
+//     },1000)
+// }
+ var telephoneNumber=(rule, value, callback) =>{
+    if (value && (!(/^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/).test(value))) {
+      callback(new Error('纳税人识别号不符合规范'))
+    } else {
+      callback()
+    }
+  }
+    var checkIdentitytionId = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("身份证号不能为空"));
+      }
+      if (!/(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(value)) {
+        callback(new Error("你输入的身份证长度或格式错误"));
+      }
+      //身份证城市
+      var aCity = {
+        11: "北京",
+        12: "天津",
+        13: "河北",
+        14: "山西",
+        15: "内蒙古",
+        21: "辽宁",
+        22: "吉林",
+        23: "黑龙江",
+        31: "上海",
+        32: "江苏",
+        33: "浙江",
+        34: "安徽",
+        35: "福建",
+        36: "江西",
+        37: "山东",
+        41: "河南",
+        42: "湖北",
+        43: "湖南",
+        44: "广东",
+        45: "广西",
+        46: "海南",
+        50: "重庆",
+        51: "四川",
+        52: "贵州",
+        53: "云南",
+        54: "西藏",
+        61: "陕西",
+        62: "甘肃",
+        63: "青海",
+        64: "宁夏",
+        65: "新疆",
+        71: "台湾",
+        81: "香港",
+        82: "澳门",
+        91: "国外"
+      };
+      if (!aCity[parseInt(value.substr(0, 2))]) {
+        callback(new Error("你的身份证地区非法"));
+      }
+      // 出生日期验证
+      var sBirthday = (
+          value.substr(6, 4) +
+          "-" +
+          Number(value.substr(10, 2)) +
+          "-" +
+          Number(value.substr(12, 2))
+        ).replace(/-/g, "/"),
+        d = new Date(sBirthday);
+      if (
+        sBirthday !=
+        d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
+      ) {
+        callback(new Error("身份证上的出生日期非法"));
+      }
+
+      // 身份证号码校验
+      var sum = 0,
+        weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2],
+        codes = "10X98765432";
+      for (var i = 0; i < value.length - 1; i++) {
+        sum += value[i] * weights[i];
+      }
+      var last = codes[sum % 11]; //计算出来的最后一位身份证号码
+      if (value[value.length - 1] != last) {
+        callback(new Error("你输入的身份证号非法"));
+      }
+      callback();
+    }
+
         return {
             // 遮罩层
             loading: true,
@@ -638,25 +706,20 @@ export default {
             form: {
 
 
-                cbca07: "",
-                cbca08: "",
-                cbca09: "",
-                cbca10: "",
-                cbca11: "",
-                cbca12: "",
-                cbca13: "",
-                cbca14: "",
-                cbca15: "",
-                cbca16: "",
-                cbca17: "",
-                cbca18: "",
-                cbca19: "",
-                cbca20: "",
-                cbca24: "",
-                cbca25: "",
-                cbca26: "",
-                cbca27: "",
-                cbca28: "",
+                cbca08:"",
+                cbca10:"",
+                cbca14:"",
+                cbca16:"",
+                cbca15:"",
+                cbca28:"",
+                cbca18:"",
+                cbca19:"",
+                cbca13:"",
+                cbca25:"",
+                cbca27:"",
+                cbca11:"",
+                cbca12:"",
+                cbca24:""
             },
             form1: {
                 // classifyId: "",
@@ -667,25 +730,20 @@ export default {
                 // ifEnabled: ""
             },
             form2: {
-                cbca07: "",
-                cbca08: "",
-                cbca09: "",
-                cbca10: "",
-                cbca11: "",
-                cbca12: "",
-                cbca13: "",
-                cbca14: "",
-                cbca15: "",
-                cbca16: "",
-                cbca17: "",
-                cbca18: "",
-                cbca19: "",
-                cbca20: "",
-                cbca24: "",
-                cbca25: "",
-                cbca26: "",
-                cbca27: "",
-                cbca28: "",
+                cbca08:"",
+                cbca10:"",
+                cbca14:"",
+                cbca16:"",
+                cbca15:"",
+                cbca28:"",
+                cbca18:"",
+                cbca19:"",
+                cbca13:"",
+                cbca25:"",
+                cbca27:"",
+                cbca11:"",
+                cbca12:"",
+                cbca24:""
             },
             defaultProps: {
                 children: "children",
@@ -729,41 +787,51 @@ export default {
             // 表单校验
             rules2: {
                 cbca08: [
-                    { required: true, message: "客户名称不能为空!", trigger: "blur" }
+                    { required: true, message: "名称不能为空!", trigger: "blur" }
+                  ],                
+                cbca13: [
+                    { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
+                    { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
                 ],
-                cbca15: [
-                    { required: true, message: "客户地址不能为空!", trigger: "blur" }
+                 cbca25: [
+                    { required: true, message: "地址不能为空!", trigger: "blur" },
+                   
                 ],
-                cbca25: [
-                    { required: true, message: "发票地址不能为空!", trigger: "blur" }
+                   cbca27: [
+                    { required: true, message: "发票电话不能为空!", trigger: "blur" },
+                    { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的发票电话", trigger: "blur" }
                 ],
-                cbca16: [
-                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
-                    { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的手机号码", trigger: "blur" }
-                ],
-                cbca11: [
+                 cbca11: [
                     { required: true, message: "发票开户行不能为空!", trigger: "blur" }
                 ],
-                cbca09: [
-                    { required: true, message: "订单号不能为空!", trigger: "blur" }
-                ],
-                cbca24: [
-                    { required: true, message: "发票类型不能为空!", trigger: "blur" }
-                ],
-                cbca25: [
-                    { required: true, message: "邮寄地址不能为空!", trigger: "blur" }
-                ],
-                invoiceBank: [
-                    { required: true, message: "发票开户行不能为空!", trigger: "blur" }
-                ],
-                invoiceTaxpayerNumber: [
-                    { required: true, message: "纳税人识别号不能为空!", trigger: "blur" }
-                ],
-                invoiceMailingAdress: [
-                    { required: true, message: "状态不能为空!", trigger: "blur" }
+                cbca12: [
+                    { required: true, message: "银行账号不能为空!", trigger: "blur" }
                 ]
             },
-
+            // 表单校验
+            rules3: {
+                 cbca08: [
+                    { required: true, message: "名称不能为空!", trigger: "blur" }
+                  ],                
+                cbca13: [
+                    { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
+                    { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
+                ],
+                 cbca25: [
+                    { required: true, message: "地址不能为空!", trigger: "blur" },
+                   
+                ],
+                   cbca27: [
+                    { required: true, message: "发票电话不能为空!", trigger: "blur" },
+                    { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的发票电话", trigger: "blur" }
+                ],
+                 cbca11: [
+                    { required: true, message: "发票开户行不能为空!", trigger: "blur" }
+                ],
+                cbca12: [
+                    { required: true, message: "银行账号不能为空!", trigger: "blur" }
+                ]
+            },
         };
     },
     watch: {
@@ -919,7 +987,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbca01);
+            this.idss = selection.map(item => item.cbca08);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -946,7 +1014,7 @@ export default {
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
                         console.log(this.form2, 997445);
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
                         this.submitShangpin();
@@ -1034,7 +1102,7 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1065,6 +1133,23 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+
+             if(row.cbca24=="1")
+            {
+                this.form.cbca24="增值税专用发票";
+                row.cbca24="1";
+            }else if(row.cbca24=="2")
+            {
+                this.form.cbca24="增值税普通发票"
+                row.cbca24= "2";
+            }else if(row.cbca24=="3")
+            {
+                this.form.cbca24="个人普通发票"
+                row.cbca24= "3";
+            }else if(row.cbca24=="4"){
+                this.form.cbca24="不开发票"
+                row.cbca24= "4";
+            }
             console.log(row)
             // this.getList();
             this.open = true;
@@ -1143,7 +1228,7 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             console.log(userIds, 123)
             console.log(typeof userIds)
-            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除客户为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.CustomeRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -1168,7 +1253,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除ID为"' + row.cbca01 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除客户为"' + row.cbca08 + '"的数据项？').then(function () {
           return CustomeRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();
