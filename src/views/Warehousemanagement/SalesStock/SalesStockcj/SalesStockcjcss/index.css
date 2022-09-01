@@ -113,10 +113,6 @@
     width: 80px !important;
 }
 
-.el-input .el-input__inner {
-    border: none !important;
-}
-
 .table-bodys {
     width: 1629px;
     height: 360px;
