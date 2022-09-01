@@ -584,6 +584,7 @@ export default {
         this.open = true;
         this.title = "修改用户";
         this.form.password = "";
+        console.log(response.data,123456);
       });
     },
     /** 重置密码按钮操作 */

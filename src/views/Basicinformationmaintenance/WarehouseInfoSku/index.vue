@@ -94,7 +94,7 @@
         <el-dialog :title="title1" :visible.sync="open"  class="abow_dialog"  append-to-body>
             <!-- <div style="padding-top:-1%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
             <!-- <hr /> -->
-            <el-form ref="form" :model="form" label-width="30%" >
+            <el-form ref="form" :model="form" :rules="rules1" label-width="30%" >
                 <div style="margin-left:-10%;">
                     <el-row>
                         <el-col>
@@ -141,11 +141,15 @@
                             </el-form-item>
                         </el-col>
                         <el-col>
+                                   <!-- :value="dict.label"
+                                        :key="item.postId"
+                                        :label="item.postName"
+                                        :value="item.postId"
+                                        :disabled="item.status == 1" -->
                             <el-form-item label="管理模式:" prop="cbwa12">
                                 <!-- <el-input v-model="form.cbwa12" placeholder="" maxlength="30" style="width:55%;" /> -->
                                 <el-select v-model="form.cbwa12" placeholder="" style="width:55%;">
-                                    <el-option v-for="dict in CangGuanlimshi" :key="dict.value" :label="dict.label"
-                                        :value="dict.label"></el-option>
+                                    <el-option v-for="dict in CangGuanlimshi" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -324,7 +328,7 @@
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa11" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label">
+                                        :value="dict.label" >
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -334,7 +338,7 @@
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa12" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangGuanlimshi" :key="dict.value" :label="dict.label"
-                                        :value="dict.label"></el-option>
+                                        :value="dict.label"  ></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -345,7 +349,7 @@
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa13" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value"></el-option>
+                                        :value="dict.value" ></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -354,7 +358,7 @@
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
                                 <el-select v-model="form2.cbwa14" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Tihuodan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value"></el-option>
+                                        :value="dict.value" ></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -363,7 +367,7 @@
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa08" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label"></el-option>
+                                        :value="dict.label" ></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -621,6 +625,30 @@ export default {
                 cbwa12: [
                     { required: true, message: "管理模式不能为空!", trigger: "blur" }
                 ]
+            },
+              // 表单校验
+            rules1: {
+                cbwa09: [
+                    { required: true, message: "名称不能为空!", trigger: "blur" }
+                ],
+                cbwa13: [
+                    { required: true, message: "是否启用总订单不能为空!", trigger: "change" }
+                ],
+                cbwa14: [
+                    { required: true, message: "是否启用提货单不能为空!", trigger: "change" }
+                ],
+                cbwa15: [
+                    { required: true, message: "是否可用不能为空!", trigger: "change" }
+                ],
+                cbwa08: [
+                    { required: true, message: "状态不能为空!", trigger: "change" }
+                ],
+                cbwa11: [
+                    { required: true, message: "类型不能为空!", trigger: "change" }
+                ],
+                cbwa12: [
+                    { required: true, message: "管理模式不能为空!", trigger: "change" }
+                ]
             }
         };
     },
@@ -768,6 +796,7 @@ export default {
         handleSelectionChange(selection) {
             this.ids = selection;
             this.idss = selection.map(item => item.cbwa01);
+             this.idsss = selection.map(item => item.cbwa09);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -792,7 +821,7 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
                         this.submitShangpin();
@@ -803,7 +832,7 @@ export default {
                         console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
-                    this.$message.error('请注意规范' + this.form.cbwa09 + '初五');
+                    this.$message.error('请注意规范' + this.form.cbwa09 + '');
                 }
             })
             // if (this.form2.name != undefined || this.form2.type != undefined || this.form2.manageMode != undefined) {
@@ -867,7 +896,7 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -911,6 +940,34 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+            if(row.cbwa13=="0"){
+               this.form.cbwa13="是"
+               row.cbwa13="0"
+            }else if(row.cbwa13=="1")
+            {
+               this.form.cbwa13="否"
+               row.cbwa13="1"
+            }
+            
+
+             if(row.cbwa14=="0"){
+               this.form.cbwa14="是"
+               row.cbwa14="0"
+            }else if(row.cbwa14=="1")
+            {
+               this.form.cbwa14="否"
+               row.cbwa14="1"
+            }
+
+
+            if(row.cbwa15=="0"){
+               this.form.cbwa15="是"
+               row.cbwa15="0"
+            }else if(row.cbwa15=="1")
+            {
+               this.form.cbwa15="否"
+                row.cbwa15="1"
+            }
             console.log(row)
             // this.getList();
             this.open = true;
@@ -926,34 +983,7 @@ export default {
             this.form.cbwa14 = row.cbwa14;
             this.form.cbwa15 = row.cbwa15;
 
-           if(row.cbwa13=="0"){
-               this.form.cbwa13==="是"
-               row.cbwa13=="0"
-            }else if(row.cbwa13=="1")
-            {
-               this.form.cbwa13==="否"
-               row.cbwa13=="1"
-            }
-            
-
-             if(row.cbwa14=="0"){
-               this.form.cbwa14==="是"
-               row.cbwa14=="0"
-            }else if(row.cbwa14=="1")
-            {
-               this.form.cbwa14==="否"
-               row.cbwa14=="1"
-            }
-
-
-            if(row.cbwa15=="0"){
-               this.form.cbwa15==="是"
-               row.cbwa15=="0"
-            }else if(row.cbwa15=="1")
-            {
-               this.form.cbwa15==="否"
-                row.cbwa15=="0"
-            }
+           
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -1008,7 +1038,7 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             console.log(userIds, 123)
             console.log(typeof userIds)
-            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idsss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.StoreyRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -1037,7 +1067,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除ID编号为"' + row.cbwa01 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除仓库为"' + row.cbwa08 + '"的数据项？').then(function () {
           return StoreyRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();
