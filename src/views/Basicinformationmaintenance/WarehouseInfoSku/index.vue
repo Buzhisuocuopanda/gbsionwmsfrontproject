@@ -958,8 +958,6 @@ export default {
                this.form.cbwa14="否"
                row.cbwa14="1"
             }
-
-
             if(row.cbwa15=="0"){
                this.form.cbwa15="是"
                row.cbwa15="0"
@@ -968,20 +966,11 @@ export default {
                this.form.cbwa15="否"
                 row.cbwa15="1"
             }
-            console.log(row)
+            // console.log(row)
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-            this.form.cbwa01 = row.cbwa01;
-            this.form.cbwa07 = row.cbwa07;
-            this.form.cbwa08 = row.cbwa08;
-            this.form.cbwa09 = row.cbwa09;
-            this.form.cbwa10 = row.cbwa10;
-            this.form.cbwa11 = row.cbwa11;
-            this.form.cbwa12 = row.cbwa12;
-            this.form.cbwa13 = row.cbwa13;
-            this.form.cbwa14 = row.cbwa14;
-            this.form.cbwa15 = row.cbwa15;
+            this.form= row
 
            
         },

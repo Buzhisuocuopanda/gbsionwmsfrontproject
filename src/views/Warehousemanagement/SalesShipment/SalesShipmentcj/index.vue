@@ -144,41 +144,51 @@
                     <th style=" width: 64px;text-align: left;">操作</th>
                 </tr>
             </table>
-               <el-row v-for="(form, index) in userList" style="width:110%;margin-bottom: -2%;" :key="index">
+               <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -2%;" :key="index">
                     <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
-                        :inline="true">    
+                        :inline="true"> 
+                        <!--  supplierId -->   
                         <el-form-item label="" size="small" prop="cbsc15" style="margin-left:0.8%;">
-                            <el-input  v-model="form.supplierId" style="border:solid #eee thin;width:40%;"></el-input>                           
+                            <el-input  v-model="form.cbsc15" style="border:solid #eee thin;width:40%;"></el-input>                           
                         </el-form-item>
                         <el-form-item label="" size="small" prop="cbsc17" style="margin-left:-7%; ">
                             <el-input  v-model="form.cbsc17" style="border:solid #eee thin;width:50%;"></el-input>
                         </el-form-item>
+                        <!-- brand  -->
                         <el-form-item label="" size="small" prop="cbsd133" style="margin-left:-7%;">
-                            <el-input v-model="form.brand" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsd133" style="border:solid #eee thin;width:55%;"></el-input>
                         </el-form-item>
+                        <!-- model -->
                         <el-form-item label="" size="small" prop="cbsd134" style="margin-left:-6%;">
-                            <el-input v-model="form.model" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsd134" style="border:solid #eee thin;width:55%;"></el-input>
                         </el-form-item>
+                        <!--description  -->
                         <el-form-item label="" size="small" prop="cbsd135" style="margin-left:-6%;">
-                            <el-input v-model="form.description" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsd135" style="border:solid #eee thin;width:55%;"></el-input>
                         </el-form-item>
+                        <!--qty-->
                         <el-form-item label="" size="small" prop="cbsc09" style="margin-left:-6%;">
-                            <el-input v-model="form.qty" style="border:solid #eee thin; width:50%;"></el-input>
+                            <el-input v-model="form.cbsc09" style="border:solid #eee thin; width:50%;"></el-input>
                         </el-form-item>
+                        <!-- price -->
                         <el-form-item label="" size="small" prop="cbsc11" style="margin-left:-6%;">
-                            <el-input v-model="form.price" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsc11" style="border:solid #eee thin;width:55%;"></el-input>
                         </el-form-item>
+                        <!-- totalPrice -->
                         <el-form-item label="" size="small" prop="cbsc12" style="margin-left:-6%;">
-                            <el-input v-model="form.totalPrice" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsc12" style="border:solid #eee thin;width:55%;"></el-input>
                         </el-form-item>
+                        <!-- scanQty -->
                         <el-form-item label="" size="small" prop="cbsc13" style="margin-left:-6%;">
-                            <el-input v-model="form.scanQty" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsc13" style="border:solid #eee thin;width:55%;"></el-input>
                         </el-form-item>
+                        <!-- noSendQty -->
                         <el-form-item label="" size="small" prop="cbsc14" style="margin-left:-6%;">
-                            <el-input v-model="form.noSendQty" style="border:solid #eee thin;width:66%;"></el-input>
+                            <el-input v-model="form.cbsc14" style="border:solid #eee thin;width:66%;"></el-input>
                         </el-form-item>
+                        <!-- remark  -->
                         <el-form-item label="" size="small" prop="cbsc15" style="margin-left:-4%;">
-                            <el-input v-model="form.remark" style="border:solid #eee thin;width:60%;"></el-input>
+                            <el-input v-model="form.cbsc15" style="border:solid #eee thin;width:60%;"></el-input>
                         </el-form-item>
                         <el-form-item v-if="false" label=""  prop="cbsb01" style="margin-left:0.8%;">
                             <el-input v-model="form.cbsb01" style="border:solid #eee thin;width:70%;"></el-input>
@@ -781,15 +791,26 @@ export default {
          /** 销售提货单 */
         getList() {
             let routerParams = this.$route.query;
-               this.ListUser = routerParams.data; 
-               let zhuangh = JSON.parse(this.ListUser);  
+               this.formArr = routerParams.data; 
+               let zhuangh = JSON.parse(this.formArr);  
                 // console.log(zhuangh[0].id,889999);          
                PurchaseinListxiangq(zhuangh[0].id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 response.data.goods.forEach((item)=>{
-                    item.cbsc17=item.orderClass
+                    item.cbsc17=item.orderClass;
+                    item.cbsc15 = item.supplierId;
+                    item.cbsd133 = item.brand;
+                    item.cbsd134 = item.model;
+                    item.cbsd135 = item.description;
+                    item.cbsc09 = item.qty;
+                    item.cbsc11 = item.price;
+                    item.cbsc12 = item.totalPrice;
+                    item.cbsc13 = item.scanQty;
+                    item.cbsc14 = item.noSendQty;
+                    item.cbsc15 = item.remark;
+
                 })
                 
-                this.userList = response.data.goods;
+                this.formArr = response.data.goods;
                 this.total = response.data.total;
                 console.log(response.data.goods, 339688);
                 // this.userList01 = JSON.stringify(this.userList);
@@ -797,8 +818,8 @@ export default {
                 //   this.form.cbsc17=e.orderClass;
                 // })
                 // let 
-                console.log( JSON.stringify(this.userList,852369));
-                console.log(this.userList01.orderClass,852147777);
+                console.log( JSON.stringify(this.formArr,852369));
+                // console.log(this.userList01.orderClass,852147777);
                 // this.deleteFlag = response.data.rows.deleteFlag;   this.form.cbsc17
             }
             );
@@ -821,7 +842,7 @@ export default {
     mounted() {
        // 初始化表单数据，至少有一行表单数据
         this.formArr = []
-        this._ly_addFrom()
+        // this._ly_addFrom()
     },
     watch: {
         visible(newVal) {
@@ -829,7 +850,7 @@ export default {
             if (this.dialogVisible === false) {
                 // 重新打开弹窗时，初始化表单数据，至少有一行表单数据
                 this.formArr = []
-                this._ly_addFrom()
+                // this._ly_addFrom()
             }
         }
     }
