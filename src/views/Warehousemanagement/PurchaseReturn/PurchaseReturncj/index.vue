@@ -144,40 +144,27 @@
                             <el-col style="margin-left: 0%;" :span="7">
                                 <el-form-item label="" prop="cbpc000">
                                    <el-popover placement="bottom-start" trigger="click">
-                                       <Goodsone01 ref="Goodsone01" @selected="selected08"
+                                       <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
                                              style="width:370px!important;" />
-                                      <el-input slot="reference" v-model="form2.cbpc000" placeholder="" readonly
+                                      <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
                                           style="width:205.6%;">
                                       </el-input>
                                     </el-popover>
                                 </el-form-item>
                             </el-col>
                         <el-form-item label="" size="small" prop="cbph09" style="margin-left:5.1%;">
-                            <el-input type="text" v-model="form2.cbph09" @blur="chen()" style="width:73.2%;"></el-input>
+                            <el-input type="text" v-model="form.cbph09" @blur="chen(form)" style="width:73.2%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="cbph10" style="margin-left:-5.3%;">
-                            <el-input-number v-model="form2.cbph10" @blur="chen()" :min="0" :controls="false"
+                            <el-input-number v-model="form.cbph10" @blur="chen(form)" :min="0" :controls="false"
                                             :precision="2"  style="width:74%;"></el-input-number>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="cbph11" style="margin-left:-5.3%;">
-                            <el-input-number v-model="form2.cbph11" @blur="chen()" :min="0" :controls="false"
+                            <el-input-number v-model="form.cbph11"  :min="0" :controls="false"
                                             :precision="2" style="width:74%;"></el-input-number>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="cbpd13" style="margin-left:-5.2%;">
                             <el-input v-model="form.cbph13" style="width:184.1%;"></el-input>
-                        </el-form-item>
-
-
-                        <el-form-item label="" v-if="false"  size="small" prop="cbpd09" style="margin-left:0.8%;">
-                            <el-input type="text" v-model="form.cbph09"  style="width:70%;"></el-input>
-                        </el-form-item>
-                        <el-form-item label=""  v-if="false" size="small" prop="cbpd11" style="margin-left:-4%;">
-                            <el-input-number v-model="form.cbph10" :min="0" :controls="false"
-                                            :precision="2"  style="width:70%;"></el-input-number>
-                        </el-form-item>
-                        <el-form-item label=""  v-if="false" size="small" prop="cbpd12" style="margin-left:-4%;">
-                            <el-input-number v-model="form.cbph11"  :min="0" :controls="false"
-                                            :precision="2" style="width:70%;"></el-input-number>
                         </el-form-item>
                         <el-form-item  v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
                             <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
@@ -712,9 +699,11 @@ export default {
             this.showSearch = !this.showSearch;
         },
 
-        chen() {
-            this.form2.cbph10 = "20"
-            this.form2.cbph11 = this.form2.cbph10 * this.form2.cbph09;
+       chen(item) {
+            if(item.cbph09>0&&item.cbph10>0){
+                this.$set(item,'cbph11',(parseFloat(item.cbph09)*parseFloat(item.cbph10)))
+            }
+            // this.form2.cbpd12 = this.form2.cbpd09 * this.form2.cbpd11;
         },
         //添加模块-仓库
         selected01(name) {
@@ -744,16 +733,22 @@ export default {
             // this.form2.icon = name;
         },
         
-         //查询商品信息维护
-        selected08(name) {
-            console.log(name, 123)
-            console.log(name.substring(name.indexOf("-") + 1), 963);
+          //查询商品信息维护
+        selected08(e,index) {
+            console.log(e, 111)
+            console.log(index,222)
+            this.$set(this.formArr[index],"cbpc000",e)
+            
+            // this.formArr[index].cbpc000=''
+            // this.formArr[index].cbpc000=e
+            // console.log(this.formArr)
+            // console.log(name.substring(name.indexOf("-") + 1), 963);
             // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
             // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
             // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-            this.form2.cbpc000 = name;
-            this.form2.cbpd08  =  name.substring(name.indexOf(".") +1);
-            console.log(this.form2.cbpd08,852369421);
+            // this.form.cbpc000 = name;
+            // this.form.cbpd08  =  name.substring(name.indexOf(".") +1);
+            // console.log(this.form2.cbpd08,852369421);
         },
 
         //添加行
@@ -845,9 +840,9 @@ export default {
                          this.formArr.forEach((item)=>{
                             item.cbpg01=response.data.id
                             item.cbph08= this.form2.cbph08;
-                            item.cbph09= this.form2.cbph09;
-                            item.cbph11= this.form2.cbph11;
-                            item.cbph10= this.form2.cbph10;
+                            // item.cbph09= this.form2.cbph09;
+                            // item.cbph11= this.form2.cbph11;
+                            // item.cbph10= this.form2.cbph10;
                         })
                         this._ly_ok()
                     });

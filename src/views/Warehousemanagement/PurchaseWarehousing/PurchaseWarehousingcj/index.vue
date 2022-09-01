@@ -718,6 +718,7 @@ export default {
             console.log(e, 111)
             console.log(index,222)
             this.$set(this.formArr[index],"cbpc000",e)
+            
             // this.formArr[index].cbpc000=''
             // this.formArr[index].cbpc000=e
             // console.log(this.formArr)
