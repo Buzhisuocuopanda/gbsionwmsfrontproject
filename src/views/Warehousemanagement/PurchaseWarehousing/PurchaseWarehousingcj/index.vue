@@ -815,10 +815,13 @@ export default {
                             console.log(response.data.id,333);
                             this.formArr.forEach((item)=>{
                                 item.cbpc01=response.data.id
-                                item.cbpd08= this.form2.cbpd08;
+                                // item.cbpd08= this.form2.cbpd08;
                                 // item.cbpd09= this.form.cbpd09;
                                 // item.cbpd11= this.form.cbpd11;
                                 // item.cbpd12= this.form.cbpd12;
+                                let t=item.cbpc000;
+                                item.cbpd08 = t.substring(t.indexOf(".") +1);
+                                console.log(t.substring(t.indexOf(".") +1),33333);
                             })
                             console.log(this.formArr,888)
                             this._ly_ok()
