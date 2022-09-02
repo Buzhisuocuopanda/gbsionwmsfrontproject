@@ -11,7 +11,7 @@
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                 <!-- <span>{{ item }}</span> -->
                 <el-row style="margin-top: 5%;">
-                    <el-col :span="24"> <span>{{ item }}</span></el-col>
+                    <el-col :span="24"> <span>{{ item.match(/(\S*)\-/)[1] }}</span></el-col>
                 </el-row>
             </div>
         </div>
@@ -32,7 +32,7 @@ export default {
             params: null,
             top: null,
             // iconList: ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            iconList: []
+            iconList: [],
         }
     },
     created() {
@@ -55,7 +55,7 @@ export default {
                     this.iconList = []
                 } else {
                     response.data.rows.forEach((item) => {
-                        this.iconList.push(item.cbwa09 + "-" + item.cbwa01)
+                        this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
                     })
                 }
                 if (this.name) {

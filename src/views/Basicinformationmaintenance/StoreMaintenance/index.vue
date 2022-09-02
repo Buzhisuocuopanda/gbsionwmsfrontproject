@@ -62,49 +62,18 @@
         <!-- 修改用户配置对话框 -->
 
         <el-dialog :title="title1" :visible.sync="open" append-to-body style="width:70%;margin-left:15%;">
-            <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">
-                <!-- <el-row>
-                    <el-col :span="9">
-                        <el-form-item label="仓库" prop="swJsStoreId">
-                            <el-input v-model="form.swJsStoreId" maxlength="30" />
+            <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">                
+                 <el-row style="margin-top:3%;">
+                  <el-col>
+                         <el-form-item label="仓库:" prop="cbpc100">
+                           <el-popover placement="bottom-start" trigger="click">
+                               <kuweixxweihu ref="kuweixxweihu" @selected="selected02" />
+                              <el-input slot="reference" v-model="form.cbpc100" placeholder="" 
+                                style="width:77%;">
+                              </el-input>
+                           </el-popover>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="9" style="margin-left:10%;">
-                        <el-form-item label="库位码">
-                            <el-input v-model="form.locationNum" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="9">
-                        <el-form-item label="库位顺序" prop="sort">
-                            <el-input v-model="form.sort" placeholder="请输入库位顺序" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="9" style="margin-left:10%;">
-                        <el-form-item label="库位容量" prop="locationSku">
-                            <el-input v-model="form.locationSku" placeholder="请输入库位容量" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="9">
-                        <el-form-item label="优先型号" prop="preferredModel">
-                            <el-input v-model="form.preferredModel" placeholder="请输入优先型号" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="9" style="margin-left:10%;">
-                        <el-form-item label="状态" prop="ifEnabled">
-                            <el-select v-model="kuweixxweih.ifEnabled" placeholder="请输入状态">
-                                <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
-                                    :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row> -->
-                
-                <el-row style="margin-top:3%;">
+                  </el-col>
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
                             <el-input v-model="form.cbla09" placeholder="" style="width:77%;"
@@ -128,25 +97,19 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <el-form-item label="空:" prop="cbla10">
-                            <el-input v-model="form.cbla10" placeholder="" style="width:77%;"
+                        <el-form-item label="优先型号:" prop="cbla12">
+                            <el-input v-model="form.cbla12" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col>
-                        <el-form-item label="空:" prop="cbla12">
-                            <el-input v-model="form.cbla12" placeholder="" style="width:77%;"
+                        <el-form-item label="备注:" prop="cbla13">
+                            <el-input v-model="form.cbla13" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
-                        <el-form-item label="空:" prop="cbla13">
-                            <el-input v-model="form.cbla13" placeholder="" style="width:77%;"
-                                maxlength="30" />
-                        </el-form-item>
-                    </el-col>
                     <el-col>
                         <el-form-item label="状态:" prop="cbla08">
                             <!-- <el-input v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
@@ -156,6 +119,12 @@
                                     :value="item.label">
                                 </el-option>
                             </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col v-if="false">
+                        <el-form-item label="仓库id:" prop="cbla10">
+                            <el-input v-model="form.cbla10" placeholder="" style="width:77%;"
+                                maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -169,46 +138,58 @@
         <!-- 详情 -->
         <el-dialog :title="title2" :visible.sync="open1" append-to-body>
             <el-form ref="form1" :model="form1" label-width="30%">
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="库位码" prop="cbla09">
-                            <el-input v-model="form1.cbla09" placeholder="" maxlength="30" style=""/>
+                <el-row style="margin-top:3%;">
+                     <el-col>
+                        <el-form-item label="仓库:" prop="cbla09">
+                            <el-input v-model="form1.cbla09" placeholder="" style="width:77%;"
+                                maxlength="30" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="库位顺序" prop="cbla07">
-                            <el-input v-model="form1.cbla07" placeholder="" maxlength="30" style=""/>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="库位容量" prop="cbla11">
-                            <el-input v-model="form1.cbla11" placeholder="" maxlength="30" style="" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="空" prop="cbla10">
-                            <el-input v-model="form1.cbla10" placeholder="" maxlength="30" style=""/>
+                    <el-col>
+                        <el-form-item label="库位码:" prop="cbla09">
+                            <el-input v-model="form1.cbla09" placeholder="" style="width:77%;"
+                                maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="空" prop="cbla12">
-                            <el-input v-model="form1.cbla12" placeholder="" maxlength="30" style=""/>
+                    <el-col>
+                        <el-form-item label="库位顺序:" prop="cbla07">
+                            <el-input v-model="form1.cbla07" placeholder="" maxlength="30"
+                                style="width:77%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="空" prop="cbla13">
-                            <el-input v-model="form1.cbla13" placeholder="" maxlength="30" style="" />
+                    <el-col>
+                        <el-form-item label="库位容量:" prop="cbla11">
+                            <el-input v-model="form1.cbla11" placeholder="" style="width:77%;"
+                                maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="状态" prop="cbla08">
-                            <el-input v-model="form1.cbla08" placeholder="" maxlength="30" style="" />
+                    <el-col>
+                        <el-form-item label="优先型号:" prop="cbla10">
+                            <el-input v-model="form1.cbla10" placeholder="" style="width:77%;"
+                                maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col>
+                        <el-form-item label="备注:" prop="cbla12">
+                            <el-input v-model="form1.cbla12" placeholder="" style="width:77%;"
+                                maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <el-form-item label="状态:" prop="cbla08">
+                            <!-- <el-input v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
+                                maxlength="30" /> -->
+                            <el-select v-model="form1.cbla08" placeholder="" style="width:77%;">
+                                <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
+                                    :value="item.label">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -223,44 +204,47 @@
         <el-dialog :title="title" :visible.sync="open2" append-to-body style="width:70%;margin-left:15%;">
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="20%" class="chuangjianformstore">
                
-                <el-row style="margin-top:3%;">
+               <el-row style="margin-top:3%;">
+                  <el-col>
+                       <el-form-item label="仓库:" prop="cbpc100">
+                           <el-popover placement="bottom-start" trigger="click">
+                               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" />
+                              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" 
+                                style="width:77%;">
+                              </el-input>
+                           </el-popover>
+                        </el-form-item>
+                  </el-col>
                     <el-col>
                         <el-form-item label="库位码:" prop="cbla09">
                             <el-input v-model="form2.cbla09" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
-
-                    </el-col>
-                    <el-col>
-                        <el-form-item label="库位顺序:" prop="cbla07">
-                            <el-input v-model="form2.cbla07" placeholder="" style="width:77%;"
-                                maxlength="30" />
-                        </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col>
-                        <el-form-item label="库位容量:" prop="cbla11">
-                            <el-input v-model="form2.cbla11" placeholder="" maxlength="30"
+                        <el-form-item label="库位顺序:" prop="cbla07">
+                            <el-input v-model="form2.cbla07" placeholder="" maxlength="30"
                                 style="width:77%;" />
                         </el-form-item>
                     </el-col>
                     <el-col>
-                        <el-form-item label="空:" prop="cbla10">
-                            <el-input v-model="form2.cbla10" placeholder="" style="width:77%;"
+                        <el-form-item label="库位容量:" prop="cbla11">
+                            <el-input v-model="form2.cbla11" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col>
-                        <el-form-item label="空:" prop="cbla12">
+                        <el-form-item label="优先型号:" prop="cbla12">
                             <el-input v-model="form2.cbla12" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col>
-                        <el-form-item label="空:" prop="cbla13">
+                        <el-form-item label="备注:" prop="cbla13">
                             <el-input v-model="form2.cbla13" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
@@ -269,13 +253,25 @@
                 <el-row>
                     <el-col>
                         <el-form-item label="状态:" prop="cbla08">
-                            <!-- <el-input v-model="form2.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
-                                maxlength="30" id="shurukuangnr" /> -->
+                            <!-- <el-input v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
+                                maxlength="30" /> -->
                             <el-select v-model="form2.cbla08" placeholder="" style="width:77%;">
                                 <el-option v-for="item in ZhuangTaivalue" :key="item.value" :label="item.label"
                                     :value="item.label">
                                 </el-option>
                             </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col v-if="false">
+                        <el-form-item label="仓库id:" prop="cbla10">
+                            <el-input v-model="form2.cbla10" placeholder="" style="width:77%;"
+                                maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col v-if="false">
+                        <el-form-item label="备注:" prop="cbla12">
+                            <el-input v-model="form2.cbla12" placeholder="" style="width:77%;"
+                                maxlength="30" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -322,12 +318,15 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 // import kuweixxweihu from "@/components/kuweixxweihu";
 
+//仓库
+import kuweixxweihu from "@/components/WarehouseInfoSku";
+
 import Vue from "vue";
 export default {
     name: "store",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     // components: { Treeselect, kuweixxweihu },
-    components: { Treeselect },
+    components: { Treeselect,kuweixxweihu},
     data() {
         var validatePass2 = (rule, value, callback) => {
             if (value == this.form.locationNum01) {
@@ -440,7 +439,9 @@ export default {
                 cbla10: "",
                 cbla12: "",
                 cbla13: "",
-                cbla08: ""
+                cbla08: "",
+                cbpc100:"",
+                cbla13:""
             },
             form1: {
                 // classifyId: "",
@@ -457,7 +458,8 @@ export default {
                 cbla10: "",
                 cbla12: "",
                 cbla13: "",
-                cbla08: ""
+                cbla08: "",
+                cbpc100:""
             },
             defaultProps: {
                 children: "children",
@@ -560,13 +562,24 @@ export default {
             // this.form2.icon = name;
         },
 
+        //添加模块-仓库
         selected01(name) {
             console.log(name, 123)
             console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form2.swJsStoreId01 = name.substring(0, name.indexOf("-"))
-            this.form2.swJsStoreId = name.substring(name.indexOf("-") + 1)
+            this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
+            this.form2.cbla10 = name.substring(name.indexOf("-") + 1)
             // this.form2.icon = name;
         },
+
+          //修改模块-仓库
+        selected02(name) {
+            console.log(name, 123)
+            console.log(name.substring(name.indexOf("-") + 1), 963);
+            this.form.cbpc100 = name.substring(0, name.indexOf("-"))
+            this.form.cbla10  = name.substring(name.indexOf("-") + 1)
+            // this.form2.icon = name;
+        },
+
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -582,13 +595,13 @@ export default {
             );
         },
         //仓库信息维护
-        getList02() {
-            listUserStore(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                this.postCangKu = response.data.rows;
-                // this.XinghaoOptions = response.data.rows;
-                console.log(response.data.rows, 1655);
-            });
-        },
+        // getList02() {
+        //     listUserStore(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+        //         this.postCangKu = response.data.rows;
+        //         // this.XinghaoOptions = response.data.rows;
+        //         console.log(response.data.rows, 1655);
+        //     });
+        // },
         // /** 查询部门下拉树结构 */
         // getTreeselect() {
         //     treeselectt().then(response => {
@@ -689,7 +702,7 @@ export default {
         handleSelectionChange(selection) {
             // this.ids = selection.map(item => item.id);
             this.ids = selection;
-            this.idss = selection.map(item => item.cbla01);
+            this.idss = selection.map(item => item.cbwa09);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -716,7 +729,7 @@ export default {
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
 
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
                         this.submitShangpin();
@@ -787,7 +800,7 @@ export default {
                         // this.submitShangpin();
                         this.getList();
                         this.open = false;
-                        this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                        this.$message({ message: '修改成功', type: 'success' });
 
                     });
                 } else {
@@ -814,7 +827,7 @@ export default {
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-             this.form= row
+             this.form= row;
         },
          handleSelect(row) {
             this.open1 = true;
@@ -910,7 +923,7 @@ export default {
             // }
             // console.log(a,456)
             // // console.log(JSON.stringify(userIds),123456852)
-            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.StoreRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -945,7 +958,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除ID为"' + row.cbla01 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除仓库为"' + row.cbwa09 + '"的数据项？').then(function () {
           return StoreRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();
