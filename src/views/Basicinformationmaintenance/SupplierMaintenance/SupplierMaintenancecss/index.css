@@ -253,8 +253,8 @@
 
 .GongyingShangjiaoyan {
     position: absolute;
-    top: 180%;
-    margin-left: 75%;
+    top: 300%;
+    margin-left: 55%;
 }
 .el-table__header-wrapper {
     padding: 0 !important;
@@ -272,7 +272,7 @@
 .abow_dialogg .el-dialog {
     margin: 0 auto !important;
     height: 95%;
-    width: 80%;
+    width: 50%;
     overflow: hidden;
 }
 

@@ -79,7 +79,11 @@
         <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3">
             
             <el-form ref="form" :model="form" :rules="rules3"  label-width="50%" class="chuangjianformcust">
-                                 <el-row>
+                 <div>
+                     <span style="margin-left:2%;">发票信息</span>
+                    <hr style="width:190%;"/>
+                </div>
+                <el-row style="margin-top:2%;">
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
                             <el-input v-model="form.cbca08" placeholder="" style="width:100%;" />
@@ -141,7 +145,8 @@
                     </el-col>
                 </el-row>
                 <div style="height:50px;">
-                    <span></span>
+                     <span style="margin-left:2%;">发票信息</span>
+                    <hr style="width:190%;"/>
                 </div>
                 <el-row>
                     <el-col :span="11">
@@ -198,7 +203,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="11" style="margin-left:88%; margin-top: 5%;">
+                    <el-col :span="11" style="margin-left:88%; margin-top: 2%;">
                         <el-button type="primary" @click="handleUpdate">确定</el-button>
                         <el-button @click="cancel">取 消</el-button>
                     </el-col>
@@ -213,7 +218,11 @@
         <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog3">
            
             <el-form ref="form1" :model="form1" label-width="45%" class="chuangjianformcust">
-                 <el-row>
+                <div>
+                     <span style="margin-left:2%;">发票信息</span>
+                    <hr style="width:190%;"/>
+                </div>
+                 <el-row style="margin-top:2%;">
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
                             <el-input v-model="form1.cbca08" placeholder="" style="width:100%;" />
@@ -275,7 +284,8 @@
                     </el-col>
                 </el-row>
                 <div style="height:60px;">
-                    
+                    <span style="margin-left:2%;">发票信息</span>
+                    <hr style="width:190%;"/>
                 </div>
                 <el-row>
                     <el-col :span="11">
@@ -347,7 +357,11 @@
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" class="abow_dialog3">
             <el-form ref="form2" :model="form2" label-width="50%" :rules="rules2" class="chuangjianformcust">
-                <el-row>
+                 <div>
+                     <span style="margin-left:2%;">发票信息</span>
+                   <hr style="width:190%;"/>
+                </div>
+                <el-row style="margin-top:2%;">
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
                             <el-input v-model="form2.cbca08" placeholder="" style="width:100%;" />
@@ -409,7 +423,8 @@
                     </el-col>
                 </el-row>
                 <div style="height:60px;">
-                    
+                     <span style="margin-left:2%;">发票信息</span>
+                    <hr style="width:190%;"/>
                 </div>
                 <el-row>
                     <el-col :span="11">
@@ -466,7 +481,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="11" style="margin-left:56%;">
+                    <el-col :span="11" style="margin-left:70%; margin-top: 2%;">
                             <el-button type="primary" style="margin-left:49%;" @click="handleAdd">确 定</el-button>
                             <el-button @click="cancells">取 消</el-button>
                     </el-col>

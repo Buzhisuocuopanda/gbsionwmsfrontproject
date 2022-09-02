@@ -61,8 +61,8 @@
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
                                 @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button>
+                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                                @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>
@@ -77,7 +77,7 @@
         <el-dialog :title="title" :visible.sync="open"  class="abow_dialogg">
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
-            <el-form ref="form" :model="form" label-width="28%" lable-height="20%" :rules="rules01" class="chuangjianform">
+            <el-form ref="form" :model="form" label-width="55%" lable-height="20%" :rules="rules01" class="chuangjianform">
                 <div style="margin-top:1.5%;">
                      <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
@@ -85,27 +85,27 @@
                         </span>
                         <hr/>
                     </div>
-                    <el-row style="margin-left:15%;">
+                   <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="公司名称:" prop="cbsa08">
-                                <el-input v-model="form.cbsa08" maxlength="30" placeholder="" style="width:70%;" />
+                                <el-input v-model="form.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="联系人:" prop="cbsa14">
-                                <el-input v-model="form.cbsa14" maxlength="30" placeholder="" style="width:70%;" />
+                                <el-input v-model="form.cbsa14" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="公司地址:" prop="cbsa13">
-                                <el-input v-model="form.cbsa13" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa13" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="联系电话:" prop="cbsa15">
-                                <el-input v-model="form.cbsa15" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -115,35 +115,35 @@
                         </span>
                         <hr/>
                     </div>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="出库顺序:" prop="cbsa09">
-                                <el-input v-model="form.cbsa09" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa09" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票账号:" prop="cbsa10">
-                                <el-input v-model="form.cbsa10" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa10" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="发票地址:" prop="cbsa11">
-                                <el-input v-model="form.cbsa11" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa11" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票电话:" prop="cbsa12">
-                                <el-input v-model="form.cbsa12" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa12" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                   <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="发票类型:" prop="cbsa18">
                                 <!-- <el-input v-model="form2.invoiceType" placeholder="请输入发票类型" maxlength="30" /> -->
-                                <el-select v-model="form.cbsa18" placeholder="" style="width:70%;">
+                                <el-select v-model="form.cbsa18" placeholder="" style="width:100%;">
                                     <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
                                         :value="item.value">
                                     </el-option>
@@ -153,20 +153,20 @@
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票开户行:" prop="cbsa16">
-                                <el-input v-model="form.cbsa16" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="纳税人识别号:" prop="cbsa17">
-                                <el-input v-model="form.cbsa17" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="状态:" prop="cbsa07">
                                 <!-- <el-input v-model="form2.ifEnabled" placeholder="请输入状态" maxlength="30" /> -->
-                                <el-select v-model="form.cbsa07" placeholder="" style="width:70%;">
+                                <el-select v-model="form.cbsa07" placeholder="" style="width:100%;">
                                     <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
                                         :value="item.label">
                                     </el-option>
@@ -190,7 +190,7 @@
         <el-dialog :title="title" :visible.sync="open1"  class="abow_dialogg">
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
-            <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%" class="chuangjianform">
+            <el-form ref="form1" :model="form1" label-width="55%" lable-height="20%" class="chuangjianform">
                 <div style="margin-top:1.5%;">
                      <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
@@ -198,27 +198,27 @@
                         </span>
                         <hr/>
                     </div>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="公司名称:" prop="cbsa08">
-                                <el-input v-model="form1.cbsa08" maxlength="30" placeholder="" style="width:70%;" />
+                                <el-input v-model="form1.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="联系人:" prop="cbsa14">
-                                <el-input v-model="form1.cbsa14" maxlength="30" placeholder="" style="width:70%;" />
+                                <el-input v-model="form1.cbsa14" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="公司地址:" prop="cbsa13">
-                                <el-input v-model="form1.cbsa13" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa13" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="联系电话:" prop="cbsa15">
-                                <el-input v-model="form1.cbsa15" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -228,35 +228,35 @@
                         </span>
                         <hr/>
                     </div>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="出库顺序:" prop="cbsa09">
-                                <el-input v-model="form1.cbsa09" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa09" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票账号:" prop="cbsa10">
-                                <el-input v-model="form1.cbsa10" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa10" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="发票地址:" prop="cbsa11">
-                                <el-input v-model="form1.cbsa11" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa11" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票电话:" prop="cbsa12">
-                                <el-input v-model="form1.cbsa12" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa12" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="发票类型:" prop="cbsa18">
                                 <!-- <el-input v-model="form2.invoiceType" placeholder="请输入发票类型" maxlength="30" /> -->
-                                <el-select v-model="form1.cbsa18" placeholder="" style="width:70%;">
+                                <el-select v-model="form1.cbsa18" placeholder="" style="width:100%;">
                                     <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
                                         :value="item.value">
                                     </el-option>
@@ -266,32 +266,32 @@
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票开户行:" prop="cbsa16">
-                                <el-input v-model="form1.cbsa16" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="纳税人识别号:" prop="cbsa17">
-                                <el-input v-model="form1.cbsa17" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form1.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="状态:" prop="cbsa07">
                                 <!-- <el-input v-model="form2.ifEnabled" placeholder="请输入状态" maxlength="30" /> -->
-                                <el-select v-model="form1.cbsa07"  placeholder="" style="width:70%;">
+                                <el-select v-model="form1.cbsa07"  placeholder="" style="width:100%;">
                                     <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
                                         :value="item.label">
                                     </el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="12" class="GongyingShangjiaoyan">
+                        <!-- <el-col :span="12" class="GongyingShangjiaoyan">
                             <el-form-item>
-                                <el-button type="primary" @click="handleSelect">确定</el-button>
+                                <el-button type="primary" @click="handleAdd">确定</el-button>
                                 <el-button @click="cancel">取消</el-button>
                             </el-form-item>
-                        </el-col>
+                        </el-col> -->
                     </el-row>
                 </div>
             </el-form>
@@ -305,7 +305,7 @@
         <el-dialog :title="title" :visible.sync="open2"  class="abow_dialogg">
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
-            <el-form ref="form2" :model="form2" label-width="26%" :rules="rules"
+            <el-form ref="form2" :model="form2" label-width="45%" :rules="rules"
                 class="chuangjianform">
                 <div style="margin-top:1.5%;">
                      <div style="margin-top:3%;margin-bottom:2%;">
@@ -314,27 +314,27 @@
                         </span>
                         <hr/>
                     </div>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="公司名称:" prop="cbsa08">
-                                <el-input v-model="form2.cbsa08" maxlength="30" placeholder="" style="width:70%;" />
+                                <el-input v-model="form2.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="联系人:" prop="cbsa14">
-                                <el-input v-model="form2.cbsa14" maxlength="30" placeholder="" style="width:70%;" />
+                                <el-input v-model="form2.cbsa14" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="公司地址:" prop="cbsa13">
-                                <el-input v-model="form2.cbsa13" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa13" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="联系电话:" prop="cbsa15">
-                                <el-input v-model="form2.cbsa15" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -344,35 +344,35 @@
                         </span>
                         <hr/>
                     </div>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;margin-top:3%;">
                         <el-col :span="11">
                             <el-form-item label="出库顺序:" prop="cbsa09">
-                                <el-input v-model="form2.cbsa09" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa09" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票账号:" prop="cbsa10">
-                                <el-input v-model="form2.cbsa10" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa10" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="发票地址:" prop="cbsa11">
-                                <el-input v-model="form2.cbsa11" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa11" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票电话:" prop="cbsa12">
-                                <el-input v-model="form2.cbsa12" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa12" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="发票类型:" prop="cbsa18">
                                 <!-- <el-input v-model="form2.invoiceType" placeholder="请输入发票类型" maxlength="30" /> -->
-                                <el-select v-model="form2.cbsa18" placeholder="" style="width:70%;">
+                                <el-select v-model="form2.cbsa18" placeholder="" style="width:100%;">
                                     <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
                                         :value="item.value">
                                     </el-option>
@@ -382,20 +382,20 @@
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="发票开户行:" prop="cbsa16">
-                                <el-input v-model="form2.cbsa16" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:15%;">
+                    <el-row style="margin-left:5%;">
                         <el-col :span="11">
                             <el-form-item label="纳税人识别号:" prop="cbsa17">
-                                <el-input v-model="form2.cbsa17" placeholder="" maxlength="30" style="width:70%;" />
+                                <el-input v-model="form2.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="状态:" prop="cbsa07">
                                 <!-- <el-input v-model="form2.ifEnabled" placeholder="请输入状态" maxlength="30" /> -->
-                                <el-select v-model="form2.cbsa07" placeholder="" style="width:70%;">
+                                <el-select v-model="form2.cbsa07" placeholder="" style="width:100%;">
                                     <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
                                         :value="item.label">
                                     </el-option>

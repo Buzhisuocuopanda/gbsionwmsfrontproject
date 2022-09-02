@@ -192,6 +192,7 @@ export default {
         }
     },
     created() {
+        this.form.cbpa09 = "0";
         this.getList();
         this.getTreeselect();
         this.getConfigKey("sys.user.initPassword").then(response => {
@@ -312,6 +313,7 @@ export default {
                         this.submitShangpin();
                         this.getList();
                         this.reset();
+                        this.form.cbpa09 = "0";
                     });
                 } else {
                     this.$message.error('请注意规范');
@@ -346,12 +348,14 @@ export default {
                 // console.log(row)
                 row.cbpa11 = this.form.cbpa11;
                 row.cbpa07 = this.form.cbpa07;
+                row.cbpa09 = this.form.cbpa09;
                 row.cbpa01 = this.form.cbpa09;
                 ClassifyEdit(JSON.stringify(row)).then(response => {
                     this.form = response.data;
                     this.cbpa07 = response.cbpa07;
                     this.cbpa11 = response.cbpa11;
-                    this.cbpa01 = response.cbpa09;
+                    this.cbpa09 = response.cbpa09;
+                    this.cbpa01 = response.cbpa01;
                     this.getTreeselect();
                     this.submitShangpin();
                     this.$message({ message: '恭喜你，修改成功', type: 'success' });
