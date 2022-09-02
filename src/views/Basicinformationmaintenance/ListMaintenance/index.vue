@@ -622,12 +622,7 @@ export default {
         handlexiangqengSelect(row) {
             this.open = true;
             console.log(row, 7788521);
-            this.form.cala01 = row.cala01;
-            this.form.cala08 = row.cala08;
-            this.form.cala09 = row.cala09;
-            this.form.cala10 = row.cala10;
-            this.form.cala11 = row.cala11;
-            this.form.cala12 = row.cala12;
+             this.form= row
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

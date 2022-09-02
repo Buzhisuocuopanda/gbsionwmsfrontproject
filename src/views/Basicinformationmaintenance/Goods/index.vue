@@ -856,15 +856,8 @@ export default {
         handlexiangqengSelect(row) {
             this.open = true;
             console.log(row, 7788521);
-            this.form.cbpa07 = row.cbpa07;
-            this.form.cbpb08 = row.cbpb08;
-            this.form.cala08 = row.cala08;
-            this.form.cbpb14 = row.cbpb14;
-            this.form.cbpb12 = row.cbpb12;
-            this.form.cbpb13 = row.cbpb13;
-            this.form.cbpb15 = row.cbpb15;
-            this.form.cbpb07 = row.cbpb07;
-            this.getList();
+             this.form= row
+            // this.getList();
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

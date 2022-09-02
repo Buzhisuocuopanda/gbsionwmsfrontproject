@@ -1000,19 +1000,7 @@ export default {
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-            this.form.cbsa01 = row.cbsa01;
-            this.form.cbsa07 = row.cbsa07;
-            this.form.cbsa08 = row.cbsa08;
-            this.form.cbsa09 = row.cbsa09;
-            this.form.cbsa10 = row.cbsa10;
-            this.form.cbsa11 = row.cbsa11;
-            this.form.cbsa12 = row.cbsa12;
-            this.form.cbsa13 = row.cbsa13;
-            this.form.cbsa14 = row.cbsa14;
-            this.form.cbsa15 = row.cbsa15;
-            this.form.cbsa16 = row.cbsa16;
-            this.form.cbsa17 = row.cbsa17;
-            this.form.cbsa18 = row.cbsa18;
+            this.form= row
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

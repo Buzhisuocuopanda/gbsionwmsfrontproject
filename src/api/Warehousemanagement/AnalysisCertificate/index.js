@@ -126,6 +126,23 @@ export function StoreList(query) {
   })
 }
 
+// 提货单查询
+export function Purchaseintihuadang(data) {
+  return request({
+    url: '/whmanagement/takeOrderList',
+    method: 'post',
+    data: data
+  })
+}
+
+//提货单详情
+export function PurchaseinboundSellout(CBPC01) {
+  return request({
+    url: '/whmanagement/takeOrderDetail?cbpk01='+ CBPC01,
+    method: 'get'
+  })
+}
+
 // 仓库列表
 export function StoreSkuList(query) {
   return request({

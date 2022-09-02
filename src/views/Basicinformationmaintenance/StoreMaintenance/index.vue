@@ -812,14 +812,7 @@ export default {
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-            this.form.cbla01 = row.cbla01;
-            this.form.cbla09 = row.cbla09;
-            this.form.cbla07 = row.cbla07;
-            this.form.cbla11 = row.cbla11;
-            this.form.cbla10 = row.cbla10;
-            this.form.cbla12 = row.cbla12;
-            this.form.cbla13 = row.cbla13;
-            this.form.cbla08 = row.cbla08;
+             this.form= row
         },
         //创建
         handlexiangqengchuangjian(row) {

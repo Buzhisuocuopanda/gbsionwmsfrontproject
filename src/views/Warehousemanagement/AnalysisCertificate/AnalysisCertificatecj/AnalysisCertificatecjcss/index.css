@@ -119,3 +119,20 @@
     height: 360px;
     overflow: auto;
 }
+.tihuanshangp {
+    position: absolute;
+    top:19%;
+    left:18.2%;
+}
+
+.table-bodys {
+    width: 95%;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.tinajia_dingwei {
+    position: absolute;
+    top: 90%;
+    left: 80%;
+}

@@ -1154,26 +1154,7 @@ export default {
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-            this.form.cbca01 = row.cbca01;
-            this.form.cbca07 = row.cbca07;
-            this.form.cbca08 = row.cbca08;
-            this.form.cbca09 = row.cbca09;
-            this.form.cbca10 = row.cbca10;
-            this.form.cbca11 = row.cbca11;
-            this.form.cbca12 = row.cbca12;
-            this.form.cbca13 = row.cbca13;
-            this.form.cbca14 = row.cbca14;
-            this.form.cbca15 = row.cbca15;
-            this.form.cbca16 = row.cbca16;
-            this.form.cbca17 = row.cbca17;
-            this.form.cbca18 = row.cbca18;
-            this.form.cbca19 = row.cbca19;
-            this.form.cbca20 = row.cbca20;
-            this.form.cbca24 = row.cbca24;
-            this.form.cbca25 = row.cbca25;
-            this.form.cbca26 = row.cbca26;
-            this.form.cbca27 = row.cbca27;
-            this.form.cbca28 = row.cbca28;
+            this.form= row
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

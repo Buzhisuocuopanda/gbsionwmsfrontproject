@@ -567,6 +567,21 @@ export const dynamicRoutes = [
       }
     ]
   },
+  ,
+   //质检单返回
+   {
+    path: '/system/user-zhijiandan',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/AnalysisCertificate/AnalysisCertificatecj/index'),
+        meta: { title: '质检单', activeMenu: '/Warehousemanagement/AnalysisCertificate' }
+      }
+    ]
+  },
   {
     path: '/system/role-auth',
     component: Layout,
