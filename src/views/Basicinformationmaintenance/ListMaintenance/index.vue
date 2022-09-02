@@ -33,13 +33,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="名称" align="left" key="cala08" prop="cala08" sortable />
-                    <!-- <el-table-column label="名称1" align="center" key="cala09" prop="cala09" locationNum /> -->
                     <el-table-column label="类别" align="left" key="cala10" prop="cala10" sortable />
-                    <el-table-column label="联系电话" align="left" key="cala11" prop="cala11" sortable />
-                    <el-table-column label="从事业务范围" align="left" key="cala12" prop="cala12" sortable />
+                    <el-table-column label="索引" align="left" key="cala02" prop="cala02" sortable />
+                    <el-table-column label="名称" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
+                             <el-button size="mini" type="text" icon="el-icon-share" class="button-caozuoxougai"
+                                @click="handleSelect(scope.row)" v-hasPermi="['system:user:edit']">详情
+                            </el-button>
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
                                 @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
                             </el-button>
@@ -58,22 +59,10 @@
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title2" :visible.sync="open" append-to-body>
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
-                <el-row>
+                  <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="名称" prop="cala08">
-                            <el-input v-model="form.cala08" maxlength="30" style="width:50%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="名称1" prop="cala09">
-                            <el-input v-model="form.cala09" placeholder="" maxlength="30" style="width:50%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="类别" prop="cala10">
-                            <!-- <el-input v-model="form.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
+                        <el-form-item label="类别:" prop="cala10">
+                            <!-- <el-input v-model="form2.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
                             <el-select v-model="form.cala10" placeholder="" style="width:50%;">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
@@ -81,15 +70,13 @@
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="联系电话" prop="cala11">
-                            <el-input v-model="form.cala11" placeholder="" maxlength="30" style="width:50%;" />
+                        <el-form-item label="索引:" prop="cala11">
+                            <el-input v-model="form.cala02" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="从事业务范围" prop="cala12">
-                            <el-input v-model="form.cala12" placeholder="" maxlength="30" style="width:50%;" />
+                        <el-form-item label="名称:" prop="cala08">
+                            <el-input v-model="form.cala08" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -101,61 +88,54 @@
         </el-dialog>
 
         <!-- 详情 -->
-        <el-dialog :title="title1" :visible.sync="open1" append-to-body>
-            <el-form ref="form1" :model="form1" label-width="30%">
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="类别" prop="cala08">
-                            <el-input v-model="form1.cala08" placeholder="请输入类别" maxlength="30" style="width:75%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="类别名称" prop="cala09">
-                            <el-input v-model="form1.cala09" placeholder="请输入类别名称" maxlength="30" style="width:75%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="索引" prop="cala10">
-                            <el-input v-model="form1.cala10" placeholder="请输入索引" maxlength="30" style="width:75%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="名称" prop="cala11">
-                            <el-input v-model="form1.cala11" placeholder="请输入名称" maxlength="30" style="width:75%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="索引" prop="cala12">
-                            <el-input v-model="form1.cala12" placeholder="请输入索引" maxlength="30" style="width:75%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
+        <el-dialog :title="title" :visible.sync="open1"  class="abow_dialogg">
+            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
+            <!-- <hr /> -->
+            <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%" class="chuangjianform">
+                <div style="margin-top:1.5%;">
+                    <el-row>
+                        <el-col>
+                            <el-form-item label="类别:" prop="cala10">
+                                <el-input v-model="form1.cala10" maxlength="30" placeholder="" style="width:70%;" />
+                            </el-form-item>
+                        </el-col>
+                        <el-col>
+                            <el-form-item label="索引:" prop="cala02">
+                                <el-input v-model="form1.cala02" maxlength="30" placeholder="" style="width:70%;" />
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col>
+                            <el-form-item label="名称:" prop="cala08">
+                                <el-input v-model="form1.cala08" placeholder="" maxlength="30" style="width:70%;" />
+                            </el-form-item>
+                        </el-col>
+                        <el-col>
+                            <el-form-item label="联系电话:" prop="cala11">
+                                <el-input v-model="form1.cala11" placeholder="" maxlength="30" style="width:70%;" />
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col>
+                            <el-form-item label="从事业务范围:" prop="cala12">
+                                <el-input v-model="form1.cala12" placeholder="" maxlength="30" style="width:70%;" />
+                            </el-form-item>
+                        </el-col>
+                       
+                    </el-row>
+                </div>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <!-- <el-button type="primary" @click="handleAdd">确 定</el-button> -->
-                <!-- <el-button @click="cancells">取 消</el-button> -->
+                <!-- <el-button type="primary" @click="handleUpdate">确定</el-button> -->
+                <!-- <el-button @click="cancel">取 消</el-button> -->
             </div>
         </el-dialog>
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" append-to-body>
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;">
-                <el-row style="margin-left:-15%;">
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="名称:" prop="cala08">
-                            <el-input v-model="form2.cala08" placeholder="" maxlength="30" style="width:50%;" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="名称1:" prop="cala09">
-                            <el-input v-model="form2.cala09" placeholder="" maxlength="30" style="width:50%;" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
                 <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
                         <el-form-item label="类别:" prop="cala10">
@@ -166,16 +146,14 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="联系电话:" prop="cala11">
-                            <el-input v-model="form2.cala11" placeholder="" maxlength="30" style="width:50%;" />
+                        <el-form-item label="索引:" prop="cala02">
+                            <el-input v-model="form2.cala02" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="从事业务范围:" prop="cala12">
-                            <el-input v-model="form2.cala12" placeholder="" maxlength="30" style="width:50%;" />
+                        <el-form-item label="名称:" prop="cala08">
+                            <el-input v-model="form2.cala08" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -512,7 +490,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cala01);
+            this.idss = selection.map(item => item.cala10);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -537,7 +515,7 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
                         this.submitShangpin();
@@ -551,33 +529,6 @@ export default {
                     this.$message.error('请注意规范');
                 }
             })
-            // if (this.form2.sort != undefined || this.form2.type != undefined || this.form2.typeName != undefined || this.form2.name != undefined) {
-            //     // console.log(this.form.id, 123456);
-
-            //     addUserSyslist(this.form2).then(response => {
-            //         // console.log(this.from.parent_id, 123456789);
-            //         // this.classifyId = response.posts;
-            //         // console.log(response.posts,123456);
-            //         this.title = "添加用户";
-            //         this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
-            //         // this.getTreeselect();
-            //         // this.submitShangpin();
-            //         this.submitShangpin();
-            //         this.getList();
-            //         this.open2 = false;
-            //         this.reset01();
-
-            //         console.log(this.form2.ifEnabled, 123456);
-            //     });
-            // } else {
-            //     this.$message.error('输入的内容不能为空呀');
-            // }
-
-            // // this.reset();
-            // // } else {
-            // //   this.$message.error('错了哦，商品名称没有填呢');
-            // // }
-
         },
         handlechuangjiang() {
             this.open2 = true;
@@ -604,25 +555,31 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
-        },
-        /** 详情按钮操作**/
-        handleSelect(row) {
-            this.open1 = true;
-            this.form1.cala08 = row.cala08;
-            this.form1.cala09 = row.cala09;
-            this.form1.cala10 = row.cala10;
-            this.form1.cala11 = row.cala11;
-            this.form1.cala12 = row.cala12;
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
             this.open = true;
             console.log(row, 7788521);
-             this.form= row
+             this.form= row;
+        },
+
+          /** 详情按钮操作**/
+        handleSelect(row) {
+            this.open1 = true;
+            this.form1.cala01 = row.cala01;
+            this.form1.cala02 = row.cala02;
+            this.form1.cala09 = row.cala09;
+            this.form1.cala07 = row.cala07;
+            this.form1.cala11 = row.cala11;
+            this.form1.cala10 = row.cala10;
+            this.form1.cala12 = row.cala12;
+            this.form1.cala13 = row.cala13;
+            this.form1.cala08 = row.cala08;
+            
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -688,7 +645,7 @@ export default {
             // }
             // console.log(a,456)
             // // console.log(JSON.stringify(userIds),123456852)
-            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除类别为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.ListRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -724,7 +681,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除ID为"' + row.cala01 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除类别为"' + row.cala10 + '"的数据项？').then(function () {
           return ListRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();

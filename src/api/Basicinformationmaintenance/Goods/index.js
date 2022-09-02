@@ -9,6 +9,16 @@ export function GoodsAdd(data) {
   })
 }
 
+
+// 新增商品信息维护关联表
+export function GoodsAddss(data) {
+  return request({
+    url: '/system/goods/SwJsGoodsadds',
+    method: 'post',
+    data: data
+  })
+}
+
 // 查询用户列表
 export function GoodsList(query) {
   return request({
@@ -17,6 +27,7 @@ export function GoodsList(query) {
     params: query
   })
 }
+
 
 // 修改用户
 export function GoodsEdit(data) {

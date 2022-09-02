@@ -43,6 +43,7 @@
                     <el-table-column label="状态" align="left" key="cbla08" prop="cbla08" sortable />
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
+                           
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
                                 @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
                             </el-button>
@@ -805,6 +806,7 @@ export default {
             this.form1.cbla12 = row.cbla12;
             this.form1.cbla13 = row.cbla13;
             this.form1.cbla08 = row.cbla08;
+            
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
@@ -813,6 +815,23 @@ export default {
             this.open = true;
             console.log(row, 7788521);
              this.form= row
+        },
+         handleSelect(row) {
+            this.open1 = true;
+            this.form1.cbsa01 = row.cbsa01;
+            this.form1.cbsa07 = row.cbsa07;
+            this.form1.cbsa08 = row.cbsa08;
+            this.form1.cbsa09 = row.cbsa09;
+            this.form1.cbsa10 = row.cbsa10;
+            this.form1.cbsa11 = row.cbsa11;
+            this.form1.cbsa12 = row.cbsa12;
+            this.form1.cbsa13 = row.cbsa13;
+            this.form1.cbsa14 = row.cbsa14;
+            this.form1.cbsa15 = row.cbsa15;
+            this.form1.cbsa16 = row.cbsa16;
+            this.form1.cbsa17 = row.cbsa17;
+            this.form1.cbsa18 = row.cbsa18;
+            
         },
         //创建
         handlexiangqengchuangjian(row) {
