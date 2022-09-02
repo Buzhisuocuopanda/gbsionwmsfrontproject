@@ -169,6 +169,9 @@
                         <el-form-item  v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
                             <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
                         </el-form-item>
+                        <el-form-item label="" v-if="false"  prop="cbph12" style="margin-left:0.8%;">
+                            <el-input v-model="form.cbph12" style="border:solid #eee thin;width:70%;"></el-input>
+                        </el-form-item>
                         <el-form-item label="" v-if="false"  prop="cbph08" style="margin-left:0.8%;">
                             <el-input v-model="form.cbph08" style="border:solid #eee thin;width:70%;"></el-input>
                         </el-form-item>
@@ -839,10 +842,14 @@ export default {
                         // console.log(this.formArr,333)
                          this.formArr.forEach((item)=>{
                             item.cbpg01=response.data.id
-                            item.cbph08= this.form2.cbph08;
+                            // item.cbph08= this.form2.cbph08;
                             // item.cbph09= this.form2.cbph09;
                             // item.cbph11= this.form2.cbph11;
                             // item.cbph10= this.form2.cbph10;
+                            item.cbph12 = item.cbph11;
+                            let t=item.cbpc000;
+                            item.cbph08 = t.substring(t.indexOf(".") +1);
+                            console.log(t.substring(t.indexOf(".") +1),33333);
                         })
                         this._ly_ok()
                     });
