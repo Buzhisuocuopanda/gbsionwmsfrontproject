@@ -981,6 +981,7 @@ export default {
         //列表刷新
         liebiaoshuax() {
             this.getList();
+            
         },
         /** 重置密码按钮操作 */
         handleResetPwd(row) {
