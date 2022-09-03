@@ -866,6 +866,7 @@ export default {
             this.form.cbpa07 = data.label
             this.form.cbpb14 = (data.code.split("~"))[data.code.split("~").length - 1]
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
+            this.open1 = false;
             this.handleQuery();
         },
 
@@ -883,6 +884,7 @@ export default {
             this.form2.cbpa07 = data.label
             this.form2.cbpb14 = (data.code.split("~"))[data.code.split("~").length - 1]
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
+             this.open4 = false;
             this.handleQuery();
         },
         // 取消按钮

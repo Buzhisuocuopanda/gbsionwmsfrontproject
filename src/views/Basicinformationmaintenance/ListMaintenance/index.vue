@@ -58,9 +58,9 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title2" :visible.sync="open" append-to-body>
-            <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
+            <el-form ref="form" :model="form" label-width="30%" :rules="rules22" style="margin-left:-15%;margin-top:3%;">
                   <el-row style="margin-left:-15%;">
-                    <el-col style="margin-top:1%;">
+                    <el-col style="margin-top:1%;margin-left:5%;">
                         <el-form-item label="类别:" prop="cala10">
                             <!-- <el-input v-model="form2.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
                             <el-select v-model="form.cala10" placeholder="" style="width:50%;">
@@ -69,12 +69,12 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col style="margin-top:1%;">
+                    <el-col style="margin-top:1%;margin-left:5%;">
                         <el-form-item label="索引:" prop="cala11">
                             <el-input v-model="form.cala02" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col style="margin-top:1%;">
+                    <el-col style="margin-top:1%;margin-left:5%;">
                         <el-form-item label="名称:" prop="cala08">
                             <el-input v-model="form.cala08" placeholder="" maxlength="30" style="width:50%;" />
                         </el-form-item>
@@ -92,7 +92,7 @@
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
             <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%" class="chuangjianform">
-                <div style="margin-top:1.5%;">
+                <div style="margin-top:3%;">
                     <el-row>
                         <el-col>
                             <el-form-item label="类别:" prop="cala10">
@@ -335,19 +335,28 @@ export default {
             // 表单校验
             rules2: {
                 cala08: [
-                    { required: true, message: "类别不能为空!", trigger: "blur" }
-                ],
-                cala12: [
-                    { required: true, message: "类别名称不能为空!", trigger: "blur" }
-                ],
-                cala10: [
-                    { required: true, message: "索引不能为空!", trigger: "blur" }
-                ],
-                cala11: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
+                cala10: [
+                    { required: true, message: "类别不能为空!", trigger: "blur" }
+                ],
+                cala02:[
+                    {
+                    required: true, message: "索引不能为空!", trigger: "blur"
+                }]
             },
-
+         rules22: {
+                cala08: [
+                    { required: true, message: "名称不能为空!", trigger: "blur" }
+                ],
+                cala10: [
+                    { required: true, message: "类别不能为空!", trigger: "blur" }
+                ],
+                cala02:[
+                    {
+                    required: true, message: "索引不能为空!", trigger: "blur"
+                }]
+            },
         };
     },
     watch: {

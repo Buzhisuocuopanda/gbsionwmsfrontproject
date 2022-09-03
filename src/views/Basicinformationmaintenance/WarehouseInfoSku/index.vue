@@ -91,12 +91,12 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open"  class="abow_dialog"  append-to-body>
+        <el-dialog :title="title1" :visible.sync="open"  class="abow_dialogy"  append-to-body>
             <!-- <div style="padding-top:-1%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
             <!-- <hr /> -->
             <el-form ref="form" :model="form" :rules="rules1" label-width="30%" >
-               <div style="margin-left:0%;">
-                <div>仓库信息</div>
+                <div style="margin-top:0%;">
+                <div style="margin-left:2%; font-size: 15px; color: black;">仓库信息</div>
                 <hr style="margin-bottom:4%;"/>
                     <el-row>
                         <el-col>
@@ -106,14 +106,14 @@
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form.cbwa07" maxlength="30" style="width:55%;" />
+                                <el-input v-model="form.cbwa07"  maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="类型:" prop="cbwa11">
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa11" placeholder="" style="width:55%;">
@@ -123,7 +123,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="商品管理模式:" prop="cbwa12">
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa12" placeholder="" style="width:55%;">
@@ -134,7 +134,7 @@
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="启用总订单:" prop="cbwa13">
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa13" placeholder="" style="width:55%;">
@@ -143,7 +143,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="启用提货单:" prop="cbwa14">
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
                                 <el-select v-model="form.cbwa14" placeholder="" style="width:55%;">
@@ -152,7 +152,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="状态:" prop="cbwa08">
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa08" placeholder="" style="width:55%;">
@@ -162,7 +162,7 @@
                             </el-form-item>
                         </el-col>
                          <el-col style="margin-top:2%;"> 
-                            <div style="margin-left:79%;margin-top: 9%;">
+                            <div style="margin-left:75%;margin-top: 0%;">
                                <el-button type="primary" @click="handleUpdate">确定</el-button>
                                <el-button @click="cancells">取 消</el-button>
                             </div>
@@ -173,7 +173,7 @@
         </el-dialog>
 
         <!-- 详情 -->
-        <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog" append-to-body>
+        <el-dialog :title="title2" :visible.sync="open1" class="abow_dialogy" append-to-body>
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
             <!-- <hr /> -->
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-top:3%;">
@@ -190,7 +190,7 @@
                     <el-row>
                         <el-col style="margin-top:2%;">
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form1.cbwa07" maxlength="30" style="width:55%;" />
+                                <el-input v-model="form1.cbwa07" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')"  maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -253,10 +253,10 @@
         </el-dialog>
 
         <!-- 创建 -->
-        <el-dialog :title="title" :visible.sync="open2" class="abow_dialog" append-to-body>
+        <el-dialog :title="title" :visible.sync="open2" class="abow_dialogy" append-to-body>
 
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" class="chuangjianformWare">
-                <div style="margin-left:0%;">
+                <div style="margin-top:-3%;">
                 <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">仓库信息</div>
                 <hr style="margin-bottom:4%;"/>
                     <el-row>
@@ -267,14 +267,14 @@
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form2.cbwa07" maxlength="30" style="width:55%;" />
+                                <el-input v-model="form2.cbwa07"   maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="类型:" prop="cbwa11">
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa11" placeholder="" style="width:55%;">
@@ -284,7 +284,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="商品管理模式:" prop="cbwa12">
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa12" placeholder="" style="width:55%;">
@@ -295,7 +295,7 @@
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="启用总订单:" prop="cbwa13">
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa13" placeholder="" style="width:55%;">
@@ -304,7 +304,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="启用提货单:" prop="cbwa14">
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
                                 <el-select v-model="form2.cbwa14" placeholder="" style="width:55%;">
@@ -313,7 +313,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:2%;">
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="状态:" prop="cbwa08">
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa08" placeholder="" style="width:55%;">
@@ -323,7 +323,7 @@
                             </el-form-item>
                         </el-col>
                          <el-col style="margin-top:2%;"> 
-                            <div style="margin-left:79%;margin-top: 10%;">
+                            <div style="margin-left:82%;margin-top: 0%;">
                                <el-button type="primary" @click="handleAdd">确定</el-button>
                                <el-button @click="cancells">取 消</el-button>
                             </div>
@@ -374,6 +374,19 @@ export default {
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect },
     data() {
+         const validateNumber = (rule, value, callback) => {
+         let numberReg = /^\d+$|^\d+[.]?\d+$/
+         if (value !== '') {
+             if (!numberReg.test(value)) {
+                 callback(new Error('出库优先级只能输入数字'))
+              } else {
+                 callback()
+           }
+        } else {
+             callback(new Error('请输入值'))
+             }
+      }
+
         return {
             // 遮罩层
             loading: true,
@@ -566,30 +579,38 @@ export default {
                 ],
                 cbwa12: [
                     { required: true, message: "管理模式不能为空!", trigger: "blur" }
+                ],
+                cbwa07:[
+                     { required: true, message: "出库优先级不能为空!", trigger: "blur" },
+                     { validator: validateNumber, trigger: 'blur' }
                 ]
             },
               // 表单校验
             rules1: {
-                cbwa09: [
+                 cbwa09: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
                 cbwa13: [
-                    { required: true, message: "是否启用总订单不能为空!", trigger: "change" }
+                    { required: true, message: "是否启用总订单不能为空!", trigger: "blur" }
                 ],
                 cbwa14: [
-                    { required: true, message: "是否启用提货单不能为空!", trigger: "change" }
+                    { required: true, message: "是否启用提货单不能为空!", trigger: "blur" }
                 ],
                 cbwa15: [
-                    { required: true, message: "是否可用不能为空!", trigger: "change" }
+                    { required: true, message: "是否可用不能为空!", trigger: "blur" }
                 ],
                 cbwa08: [
-                    { required: true, message: "状态不能为空!", trigger: "change" }
+                    { required: true, message: "状态不能为空!", trigger: "blur" }
                 ],
                 cbwa11: [
-                    { required: true, message: "类型不能为空!", trigger: "change" }
+                    { required: true, message: "类型不能为空!", trigger: "blur" }
                 ],
                 cbwa12: [
-                    { required: true, message: "管理模式不能为空!", trigger: "change" }
+                    { required: true, message: "管理模式不能为空!", trigger: "blur" }
+                ],
+                cbwa07:[
+                     { required: true, message: "出库优先级不能为空!", trigger: "blur" },
+                     { validator: validateNumber, trigger: 'blur' }
                 ]
             }
         };
@@ -602,7 +623,6 @@ export default {
     },
     created() {
         //下拉框默认选中第一项
-        this.xiaolaok();
         this.getList();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;

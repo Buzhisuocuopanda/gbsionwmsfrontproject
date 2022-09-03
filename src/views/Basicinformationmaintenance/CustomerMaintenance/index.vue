@@ -203,7 +203,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="11" style="margin-left:88%; margin-top: 2%;">
+                    <el-col :span="11" style="margin-left:88%; margin-top: 0%;">
                         <el-button type="primary" @click="handleUpdate">确定</el-button>
                         <el-button @click="cancel">取 消</el-button>
                     </el-col>
@@ -481,7 +481,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="11" style="margin-left:70%; margin-top: 2%;">
+                    <el-col :span="11" style="margin-left:70%; margin-top: 0%;">
                             <el-button type="primary" style="margin-left:49%;" @click="handleAdd">确 定</el-button>
                             <el-button @click="cancells">取 消</el-button>
                     </el-col>

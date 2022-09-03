@@ -268,20 +268,21 @@ color: white !important;
 
 }
 
-.abow_dialog {
+.abow_dialogy {
     display: flex;
     justify-content: center;
     align-items: Center;
     overflow: hidden;
 }
  
-.abow_dialog  .el-dialog  {
+.abow_dialogy  .el-dialog  {
     margin: 0 auto !important;
     height: 95%;
+    width: 70%;
     overflow: hidden;
 }
 
-.abow_dialog .el-dialog .el-dialog__body {
+.abow_dialogy .el-dialog .el-dialog__body {
         position: absolute;
         left: 0;
         top: 54px;
