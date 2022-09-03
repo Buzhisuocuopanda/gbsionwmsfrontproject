@@ -304,6 +304,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
+            </el-form>
                   <div style="margin-top:7%;">
                     <span style="font-size:15px;margin-left: 3%;">结算货币</span>
                     <hr />
@@ -318,14 +319,14 @@
                       <table  class="tablebiankuan table-heads" width="95%" height="20px">
                             <thead style="">
                                 <tr style="height:30px; ">
-                                    <th style="width: 90px;height: 30px;">客户等级</th>  
+                                    <th style="width: 60px;height: 30px;">客户等级</th>  
                                     <th style="width: 70px;height: 30px;">结算类型</th> 
                                     <th style="width: 70px;height: 30px;">标准进价</th> 
                                     <th style="width: 90px;height: 30px;">标准销货价</th>                   
-                                    <th style="width: 100px;height: 30px;">生效日期</th>
+                                    <th style="width: 80px;height: 30px;">生效日期</th>
                                     <th style="width: 50px;height: 30px;font-size:23px;">
                                       <!-- <el-button plain  type="primary" @click="_ly_addFrom">+</el-button> -->
-                                      <i class="el-icon-circle-plus-outline" @click="_ly_addFrom"></i>
+                                      <!-- <i class="el-icon-circle-plus-outline" @click="_ly_addFrom"></i> -->
                                     </th>
                                 </tr>
                             </thead>
@@ -333,39 +334,39 @@
                     <div class="table-bodyss" >
                      <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
                                 cellspacing="0" class="tablebiankuan">
-                      <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                          <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
+                      <el-row >
+                     <el-form label-position="right" ref="form5" :model="form5" label-width="50px" style="margin-top:1%;"
                         :inline="true">                        
                         <!-- <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpc01" style="width:50%;"></el-input>
                         </el-form-item>                       -->
-                            <el-col style="margin-left: 8%;" :span="7">
+                            <el-col style="margin-left: 1%;" :span="7">
                                 <el-form-item label="" prop="cbpf02">
-                                      <el-select v-model="form.cbpf02" placeholder="" style="width:78%;">
+                                      <el-select v-model="form5.cbpf02" placeholder="" style="width:70%;">
                                          <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
+                                    :value="dict.value"></el-option>
                             </el-select>
                                 </el-form-item>
                          </el-col>
-                        <el-form-item  style="margin-left:-13%;"  label="" size="small" prop="cbpf06" >
+                        <el-form-item  style="margin-left:-10%;"  label="" size="small" prop="cbpf06" >
                             <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
-                             <el-select v-model="form.cbpf06" placeholder="" style="width:78%;">
+                             <el-select v-model="form5.cbpf06" placeholder="" style="width:78%;">
                                          <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
+                                    :value="dict.value"></el-option>
                             </el-select>
                         </el-form-item>
                         <el-form-item label="" style="margin-left:-1%;" size="small" prop="cbpf04" >
-                            <el-input v-model="form.cbpf04" style="width:74%;"></el-input>
+                            <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" style="margin-left:0%;" prop="cbpf05" >
-                            <el-input v-model="form.cbpf05" style="width:74%;"></el-input>
+                        <el-form-item label="" size="small" style="margin-left:2%;" prop="cbpf05" >
+                            <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" style="margin-left:1%;" prop="cbpf07">
-                        <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 60%;">
+                        <el-form-item label="" size="small" style="position: absolute;left: 85%;" prop="cbpf07">
+                        <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
                         </el-date-picker>
                             <!-- <el-input v-model="form.cbpd13" style="width:55.1%;"></el-input> -->
                         </el-form-item>
-                        <i class="el-icon-remove-outline" style="position: absolute; left: 98.7%;font-size:23px;"  @click="_ly_delFrom(index)"></i>
+                        <!-- <i class="el-icon-remove-outline" style="position: absolute; left: 98.7%;font-size:23px;"  @click="_ly_delFrom(index)"></i> -->
 
                     </el-form>
                 </el-row>
@@ -375,7 +376,6 @@
                  </div>
              </div>
           </div>
-         </el-form>
          <div class="tinajia_dingweii">
             <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
                 <el-button type="primary" @click="handleAdd">保 存</el-button>
@@ -562,6 +562,12 @@ export default {
                 cala08: "",
                 cbpa07:""
             },
+            form5: {
+                cbpf02:"",
+                cbpf04:"",
+                cbpf05:"",
+                cbpf06:""
+            },
             form1: {
                 // classifyId: "",
                 // brand: "",
@@ -700,7 +706,6 @@ export default {
             let count = this.formArr.length // 记录当前有多少个表单
             for (var index in this.formArr) {
                 var form = this.formArr[index]
-                console.log(form)
                 console.log(form)
                 // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
                 this.$refs[form.formName][0].validate((valid, obj) => {
@@ -983,13 +988,30 @@ export default {
                         // this.submitShangpin();
                         this.getList();
                         this.reset01();
-                        this._ly_ok();
+                        this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
                     this.$message.error('请注意规范');
                 }
             })
+        },
+
+         /** 新增按钮操作 GoodsAddss */
+             handleAdds() {
+                    GoodsAddss(this.form5).then(response => {
+                        // console.log(this.from.parent_id, 123456789);
+                        // this.classifyId = response.posts;
+                        // console.log(response.posts,123456);
+                        // this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        // this.getTreeselect();
+                        // this.submitShangpin();
+                        this.getTreeselect();
+                        // this.submitShangpin();
+                        this.getList();
+                        this.reset01();
+                        // console.log(this.form2.ifEnabled, 123456);
+                    });
         },
 
         handlechuangjiang() {
