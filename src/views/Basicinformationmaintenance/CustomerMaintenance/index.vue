@@ -41,7 +41,7 @@
                         sortable />
                     <!-- <el-table-column label="客户等级" align="left" key="cbca28" prop="cbca28" width="190" sortable /> -->
                     <el-table-column label="客户地址" align="left" key="cbca15" prop="cbca15" width="480" sortable />
-                    <el-table-column label="联系人" align="left" key="cbca24" prop="cbca14" width="200" sortable>
+                    <el-table-column label="联系人" align="left" key="cbca14" prop="cbca14" width="200" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.invoiceType == 1 ? "增值税专用发票" : scope.row.invoiceType == 2 ?
                                 "增值税普通发票" : scope.row.invoiceType == 3 ? "个人普通发票" : scope.row.invoiceType == 4 ? "不开发票"
