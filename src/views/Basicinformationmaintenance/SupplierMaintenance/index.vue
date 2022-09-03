@@ -1150,7 +1150,7 @@ export default {
         handleFileUploadProgress(event, file, fileList) {
             this.upload.isUploading = true;
         },
-        // 文件上传成功处理
+         // 文件上传成功处理
         handleFileSuccess(response, file, fileList) {
             this.upload.open = false;
             this.upload.isUploading = false;

@@ -63,7 +63,7 @@
         </el-row>
 
         <!-- 用户导入对话框 -->
-        <el-dialog :title="upload.title" :visible.sync="upload.open" width="90%" append-to-body class="dialog-yhdrdhk">
+        <el-dialog :title="upload.title" :visible.sync="upload.open" width="30%" append-to-body class="dialog-yhdrdhk">
             <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
                 :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
                 :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
@@ -308,7 +308,7 @@ export default {
                         // this.form.parent_id=this.form.id;
                         // console.log(this.from.parent_id,123456789);
                         this.title = "添加用户";
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         this.getTreeselect();
                         this.submitShangpin();
                         this.getList();
@@ -358,7 +358,7 @@ export default {
                     this.cbpa01 = response.cbpa01;
                     this.getTreeselect();
                     this.submitShangpin();
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
