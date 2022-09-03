@@ -88,10 +88,10 @@
         </el-dialog>
 
         <!-- 详情 -->
-        <el-dialog :title="title" :visible.sync="open1"  class="abow_dialogg">
+        <el-dialog :title="title" :visible.sync="open1">
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
-            <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%" class="chuangjianform">
+            <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%">
                 <div style="margin-top:3%;">
                     <el-row>
                         <el-col>
