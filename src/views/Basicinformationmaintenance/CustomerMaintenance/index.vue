@@ -790,7 +790,7 @@ export default {
       headClassCMC() {
         return {
           'text-align': 'left',
-          height: '30px',
+          height: '40px',
           padding: '0'
         }
       },
