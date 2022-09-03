@@ -147,6 +147,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
+                 </el-form>
                   <div style="margin-top:7%;">
                     <span style="font-size:15px;margin-left: 3%;">结算货币</span>
                     <hr />
@@ -155,20 +156,20 @@
             <div style="margin-left:3%; margin-top: 2%;">
               
             </div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
+                        <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
                 <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
                     <div class="box1">
                       <table  class="tablebiankuan table-heads" width="95%" height="20px">
                             <thead style="">
                                 <tr style="height:30px; ">
-                                    <th style="width: 90px;height: 30px;">客户等级</th>  
+                                    <th style="width: 60px;height: 30px;">客户等级</th>  
                                     <th style="width: 70px;height: 30px;">结算类型</th> 
                                     <th style="width: 70px;height: 30px;">标准进价</th> 
                                     <th style="width: 90px;height: 30px;">标准销货价</th>                   
-                                    <th style="width: 100px;height: 30px;">生效日期</th>
+                                    <th style="width: 80px;height: 30px;">生效日期</th>
                                     <th style="width: 50px;height: 30px;font-size:23px;">
                                       <!-- <el-button plain  type="primary" @click="_ly_addFrom">+</el-button> -->
-                                      <i class="el-icon-circle-plus-outline" @click="_ly_addFrom"></i>
+                                      <!-- <i class="el-icon-circle-plus-outline" @click="_ly_addFrom"></i> -->
                                     </th>
                                 </tr>
                             </thead>
@@ -176,46 +177,48 @@
                     <div class="table-bodyss" >
                      <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
                                 cellspacing="0" class="tablebiankuan">
-                      <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                          <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
+                      <el-row >
+                     <el-form label-position="right" ref="form5" :model="form5" label-width="50px" style="margin-top:1%;"
                         :inline="true">                        
-                        <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
+                        <!-- <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpc01" style="width:50%;"></el-input>
-                        </el-form-item>                      
-                            <el-col style="margin-left: 8%;" :span="7">
-                                <el-form-item label="" prop="cbpc000">
-                                   <el-popover placement="bottom-start" trigger="click">
-                                       <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                                             style="width:370px!important;" />
-                                      <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                                          style="width:70.6%;">
-                                      </el-input>
-                                    </el-popover>
+                        </el-form-item>                       -->
+                            <el-col style="margin-left: 1%;" :span="7">
+                                <el-form-item label="" prop="cbpf02">
+                                      <el-select v-model="form5.cbpf02" placeholder="" style="width:70%;">
+                                         <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label"
+                                    :value="dict.value"></el-option>
+                            </el-select>
                                 </el-form-item>
                          </el-col>
-                        <el-form-item  style="margin-left:-13%;" label="" size="small" prop="nickname" >
-                            <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input>
+                        <el-form-item  style="margin-left:-10%;"  label="" size="small" prop="cbpf06" >
+                            <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
+                             <el-select v-model="form5.cbpf06" placeholder="" style="width:78%;">
+                                         <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
+                                    :value="dict.value"></el-option>
+                            </el-select>
                         </el-form-item>
-                        <el-form-item label="" style="margin-left:-1%;" size="small" prop="cbpd11" >
-                            <el-input v-model="form.cbpd11" style="width:74%;"></el-input>
+                        <el-form-item label="" style="margin-left:-1%;" size="small" prop="cbpf04" >
+                            <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" style="margin-left:0%;" prop="cbpd12" >
-                            <el-input v-model="form.cbpd12" style="width:74%;"></el-input>
+                        <el-form-item label="" size="small" style="margin-left:2%;" prop="cbpf05" >
+                            <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" style="margin-left:5%;"  prop="cbpd13">
-                            <el-input v-model="form.cbpd13" style="width:55.1%;"></el-input>
+                        <el-form-item label="" size="small" style="position: absolute;left: 85%;" prop="cbpf07">
+                        <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
+                        </el-date-picker>
+                            <!-- <el-input v-model="form.cbpd13" style="width:55.1%;"></el-input> -->
                         </el-form-item>
-                        <i class="el-icon-remove-outline" style="position: absolute; left: 98.7%;font-size:23px;"  @click="_ly_delFrom(index)"></i>
+                        <!-- <i class="el-icon-remove-outline" style="position: absolute; left: 98.7%;font-size:23px;"  @click="_ly_delFrom(index)"></i> -->
 
-                      </el-form>
-                   </el-row>
-                  </table>
+                    </el-form>
+                </el-row>
+             </table>
                        </div>
                     </div>
                  </div>
              </div>
           </div>
-         </el-form>
             <div class="tinajia_dingweii">
                 <el-button type="primary" @click="handleUpdate">确 定</el-button>
                 <el-button @click="cancel">取 消</el-button>
@@ -1045,6 +1048,7 @@ export default {
                     this.open = false;
                     // this.submitShangpin();
                     this.getList();
+                    this.handleAdds();
 
                     this.$message({ message: '恭喜你，修改成功', type: 'success' });
 

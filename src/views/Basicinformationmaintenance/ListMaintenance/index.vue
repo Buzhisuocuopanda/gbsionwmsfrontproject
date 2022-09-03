@@ -352,10 +352,9 @@ export default {
                 cala10: [
                     { required: true, message: "类别不能为空!", trigger: "blur" }
                 ],
-                cala02:[
-                    {
-                    required: true, message: "索引不能为空!", trigger: "blur"
-                }]
+                cala02: [
+                    { required: true, message: "索引不能为空!", trigger: "blur" }
+                ]
             },
         };
     },

@@ -64,8 +64,8 @@
         <el-dialog :title="title1" :visible.sync="open" append-to-body style="width:70%;margin-left:15%;">
             <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">                
                  <el-row style="margin-top:3%;">
-                  <el-col>
-                         <el-form-item label="仓库:" prop="cbpc100">
+                   <el-col>
+                       <el-form-item label="仓库:" prop="cbpc100">
                            <el-popover placement="bottom-start" trigger="click">
                                <kuweixxweihu ref="kuweixxweihu" @selected="selected02" />
                               <el-input slot="reference" v-model="form.cbpc100" placeholder="" 
@@ -265,12 +265,6 @@
                     <el-col v-if="false">
                         <el-form-item label="仓库id:" prop="cbla10">
                             <el-input v-model="form2.cbla10" placeholder="" style="width:77%;"
-                                maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                    <el-col v-if="false">
-                        <el-form-item label="备注:" prop="cbla12">
-                            <el-input v-model="form2.cbla12" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -513,7 +507,7 @@ export default {
                     { required: true, message: "优先型号不能为空!", trigger: "blur" }
                 ],
                 cbpc100:[
-                    { required: true, message: "仓库不能为空!", trigger: "blur" }
+                    { required: true, message: "仓库不能为空!", trigger: "change" }
                 ],
                 cbla12:[{
                       required: true, message: "优先型号不能为空!", trigger: "blur" 
@@ -539,7 +533,7 @@ export default {
                     { required: true, message: "优先型号不能为空!", trigger: "blur" }
                 ],
                 cbpc100:[
-                    { required: true, message: "仓库不能为空!", trigger: "blur" }
+                    { required: true, message: "仓库不能为空!", trigger: "change" }
                 ],
                 cbla12:[{
                       required: true, message: "优先型号不能为空!", trigger: "blur" 
@@ -857,7 +851,7 @@ export default {
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-             this.form= row;
+             this.form = row;
         },
          handleSelect(row) {
             this.open1 = true;

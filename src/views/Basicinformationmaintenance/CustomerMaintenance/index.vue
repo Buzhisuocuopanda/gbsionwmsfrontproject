@@ -39,9 +39,9 @@
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="客户名称" align="left" key="cbca08" prop="cbca08" fixed width="300"
                         sortable />
-                    <el-table-column label="客户等级" align="left" key="cbca28" prop="cbca28" width="190" sortable />
+                    <!-- <el-table-column label="客户等级" align="left" key="cbca28" prop="cbca28" width="190" sortable /> -->
                     <el-table-column label="客户地址" align="left" key="cbca15" prop="cbca15" width="480" sortable />
-                    <el-table-column label="发票类型" align="left" key="cbca24" prop="cbca24" width="200" sortable>
+                    <el-table-column label="联系人" align="left" key="cbca24" prop="cbca14" width="200" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.invoiceType == 1 ? "增值税专用发票" : scope.row.invoiceType == 2 ?
                                 "增值税普通发票" : scope.row.invoiceType == 3 ? "个人普通发票" : scope.row.invoiceType == 4 ? "不开发票"
@@ -51,7 +51,7 @@
                         </template> -->
                     </el-table-column>
                     <el-table-column label="联系电话" align="left" key="cbca16" prop="cbca16" width="200" sortable />
-                    <el-table-column label="备注" align="left" key="cbca17" prop="cbca17" width="180" sortable />
+                    <!-- <el-table-column label="备注" align="left" key="cbca17" prop="cbca17" width="180" sortable /> -->
 
 
                     <el-table-column label="操作" align="center" fixed="right" width="160"
@@ -195,13 +195,13 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
-                    <el-col :span="11">
+                <el-row style="margin-left:-54%;">
+                    <el-col>
                         <el-form-item label="邮寄地址:" prop="cbca25">
                             <el-input v-model="form.cbca25" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
+                    <el-col>
                         <el-form-item label="其他:" prop="cbca17">
                             <el-input v-model="form.cbca17" placeholder="" style="width:100%;" />
                         </el-form-item>
@@ -213,6 +213,7 @@
                         <el-button @click="cancel">取 消</el-button>
                     </el-col>
                 </el-row>
+                <div style="height:50px;"></div>
             </el-form>
             
         </el-dialog>
@@ -334,13 +335,13 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
-                    <el-col :span="11">
+                <el-row style="margin-left:-55%;">
+                    <el-col>
                         <el-form-item label="邮寄地址:" prop="cbca25">
                             <el-input v-model="form1.cbca25" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
+                    <el-col>
                         <el-form-item label="其他:" prop="cbca17">
                             <el-input v-model="form1.cbca17" placeholder="" style="width:100%;" />
                         </el-form-item>
@@ -478,15 +479,15 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
-                    <el-col :span="11">
+                <el-row style="margin-left:-54%;">
+                    <el-col>
                         <el-form-item label="邮寄地址:" prop="cbca25">
-                            <el-input v-model="form2.cbca25" placeholder="" style="width:100%;" maxlength="30" />
+                            <el-input v-model="form2.cbca25" placeholder="" style="width:89%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col :span="11">
+                    <el-col>
                         <el-form-item label="其他:" prop="cbca17">
-                            <el-input v-model="form2.cbca17" placeholder="" style="width:100%;" />
+                            <el-input v-model="form2.cbca17" placeholder="" style="width:89%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -496,6 +497,7 @@
                             <el-button @click="cancells">取 消</el-button>
                     </el-col>
                 </el-row>
+                <div style="height:50px;"></div>
             </el-form>   
         </el-dialog>
 

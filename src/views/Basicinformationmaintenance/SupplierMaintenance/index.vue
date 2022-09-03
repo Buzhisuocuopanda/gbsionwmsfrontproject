@@ -615,33 +615,33 @@ export default {
                 cbsa08: [
                     { required: true, message: "公司名称不能为空!", trigger: "blur" }
                 ],
-                cbsa14: [
-                    { required: true, message: "联系人不能为空!", trigger: "blur" }
-                ],
-                cbsa13: [
-                    { required: true, message: "公司地址不能为空!", trigger: "blur" }
-                ],
-                cbsa15: [
-                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
-                    { validator: phoneValidator11, trigger: 'blur' }
-                ]
-                ,
-                cbsa10: [
-                    { required: true, message: "开户行不能为空!", trigger: "blur" }
-                ],
-                cbsa12: [
-                    { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
-                ],
-                cbsa18: [
-                    { required: true, message: "出库顺序不能为空!", trigger: "blur" }
-                ],
-                cbsa16: [
-                    { required: true, message: "发票电话不能为空!", trigger: "blur" },
-                    { validator: phoneValidator11, trigger: 'blur' }
-                ],
-                cbsa17: [
-                    { required: true, message: "发票地址不能为空!", trigger: "blur" }
-                ],
+                // cbsa14: [
+                //     { required: true, message: "联系人不能为空!", trigger: "blur" }
+                // ],
+                // cbsa13: [
+                //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
+                // ],
+                // cbsa15: [
+                //     { required: true, message: "联系电话不能为空!", trigger: "blur" },
+                //     { validator: phoneValidator11, trigger: 'blur' }
+                // ]
+                // ,
+                // cbsa10: [
+                //     { required: true, message: "开户行不能为空!", trigger: "blur" }
+                // ],
+                // cbsa12: [
+                //     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
+                // ],
+                // cbsa18: [
+                //     { required: true, message: "出库顺序不能为空!", trigger: "blur" }
+                // ],
+                // cbsa16: [
+                //     { required: true, message: "发票电话不能为空!", trigger: "blur" },
+                //     { validator: phoneValidator11, trigger: 'blur' }
+                // ],
+                // cbsa17: [
+                //     { required: true, message: "发票地址不能为空!", trigger: "blur" }
+                // ],
                 cbsa07: [
                     { required: true, message: "状态不能为空!", trigger: "blur" }
                 ]
@@ -652,33 +652,33 @@ export default {
                cbsa08: [
                     { required: true, message: "公司名称不能为空!", trigger: "blur" }
                 ],
-                cbsa14: [
-                    { required: true, message: "联系人不能为空!", trigger: "blur" }
-                ],
-                cbsa13: [
-                    { required: true, message: "公司地址不能为空!", trigger: "blur" }
-                ],
-                cbsa15: [
-                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
-                    { validator: phoneValidator11, trigger: 'blur' }
-                ]
-                ,
-                cbsa10: [
-                    { required: true, message: "开户行不能为空!", trigger: "blur" }
-                ],
-                cbsa12: [
-                    { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
-                ],
-                cbsa18: [
-                    { required: true, message: "出库顺序不能为空!", trigger: "blur" }
-                ],
-                cbsa16: [
-                    { required: true, message: "发票电话不能为空!", trigger: "blur" },
-                    { validator: phoneValidator11, trigger: 'blur' }
-                ],
-                cbsa17: [
-                    { required: true, message: "发票地址不能为空!", trigger: "blur" }
-                ],
+                // cbsa14: [
+                //     { required: true, message: "联系人不能为空!", trigger: "blur" }
+                // ],
+                // cbsa13: [
+                //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
+                // ],
+                // cbsa15: [
+                //     { required: true, message: "联系电话不能为空!", trigger: "blur" },
+                //     { validator: phoneValidator11, trigger: 'blur' }
+                // ]
+                // ,
+                // cbsa10: [
+                //     { required: true, message: "开户行不能为空!", trigger: "blur" }
+                // ],
+                // cbsa12: [
+                //     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
+                // ],
+                // cbsa18: [
+                //     { required: true, message: "出库顺序不能为空!", trigger: "blur" }
+                // ],
+                // cbsa16: [
+                //     { required: true, message: "发票电话不能为空!", trigger: "blur" },
+                //     { validator: phoneValidator11, trigger: 'blur' }
+                // ],
+                // cbsa17: [
+                //     { required: true, message: "发票地址不能为空!", trigger: "blur" }
+                // ],
                 cbsa07: [
                     { required: true, message: "状态不能为空!", trigger: "blur" }
                 ]
