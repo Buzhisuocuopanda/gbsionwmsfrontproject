@@ -170,7 +170,7 @@
                         <el-col :span="12" class="GongyingShangjiaoyan">
                             <el-form-item>
                                 <el-button type="primary" @click="handleUpdate">确定</el-button>
-                                <el-button @click="cancel">取消</el-button>
+                                <el-button @click="cancello">取消</el-button>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -797,6 +797,11 @@ export default {
         // 取消按钮
         cancel() {
             this.open2 = false;
+            this.reset01();
+        },
+
+         cancello() {
+            this.open = false;
             this.reset01();
         },
         cancel01() {

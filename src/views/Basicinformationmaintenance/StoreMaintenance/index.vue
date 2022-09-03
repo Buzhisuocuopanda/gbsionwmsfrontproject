@@ -511,15 +511,45 @@ export default {
                 ],
                 preferredModel: [
                     { required: true, message: "优先型号不能为空!", trigger: "blur" }
-                ]
+                ],
+                cbpc100:[
+                    { required: true, message: "仓库不能为空!", trigger: "blur" }
+                ],
+                cbla12:[{
+                      required: true, message: "优先型号不能为空!", trigger: "blur" 
+                }],
+                cbla13:[{
+                    required: true, message: "备注不能为空!", trigger: "blur" 
+                }],
+                cbla08:[{
+                     required: true, message: "状态不能为空!", trigger: "blur" 
+                }]
             },
             rules: {
-                locationNum: [
-                    { validator: validatePass2, trigger: 'blur' }
+               cbla09: [
+                    { required: true, message: "库位码不能为空!", trigger: "blur" }
                 ],
-                sort: [
-                    { validator: validatePass3, trigger: 'blur' }
-                ]
+                cbla07: [
+                    { required: true, message: "库位顺序不能为空!", trigger: "blur" }
+                ],
+                cbla11: [
+                    { required: true, message: "库位容量不能为空!", trigger: "blur" }
+                ],
+                preferredModel: [
+                    { required: true, message: "优先型号不能为空!", trigger: "blur" }
+                ],
+                cbpc100:[
+                    { required: true, message: "仓库不能为空!", trigger: "blur" }
+                ],
+                cbla12:[{
+                      required: true, message: "优先型号不能为空!", trigger: "blur" 
+                }],
+                cbla13:[{
+                    required: true, message: "备注不能为空!", trigger: "blur" 
+                }],
+                cbla08:[{
+                     required: true, message: "状态不能为空!", trigger: "blur" 
+                }]
             }
 
         };

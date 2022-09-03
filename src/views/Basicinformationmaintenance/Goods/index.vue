@@ -49,7 +49,18 @@
                         <el-table-column label="商品分类" align="left" key="cbpa07" width="190px;" prop="cbpa07"/>
                         <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" width="480px;"
                             locationNum />
-                        <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable />
+                        <el-table-column label="商品品牌" align="left" key="cbpb10" prop="cbpb10" width="180px;" sortable >
+                            <template scope="scope">
+                            <div>{{ scope.row.cbpb10 == 1 ? "Epiphone" : scope.row.cbpb10 == 2 ?
+                            "Gibson" : scope.row.cbpb10 == 3 ? "Kramer" : scope.row.cbpb10 == 4 ? 
+                            "Steinberger" : scope.row.cbpb10 == 5 ?  "Mesa/Boogie" : scope.row.cbpb10 == 6 ?  
+                            "Maestro" : "发票类型不确定"
+                            }}
+                            </div>
+                        </template>
+                        </el-table-column>
+
+
                         <el-table-column label="型号" align="left" key="cbpb12" width="150" prop="cbpb12" locationNum />
                         <el-table-column label="库位顺序" align="left" key="cbpb13" width="110px;" prop="cbpb13" sortable />
                         <el-table-column label="库位容量" align="left" key="cbpb14" width="110px;" prop="cbpb14" sortable />
@@ -87,7 +98,7 @@
                         <el-col :span="11" style="margin-left:-1%;">
                             <el-form-item label="商品品牌:" prop="cbpb10">
                                 <!-- <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" /> -->
-                            <el-select v-model="form.cala08" placeholder="" style="width:80%;">
+                            <el-select v-model="form.cbpb10" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
@@ -241,7 +252,7 @@
                         <el-col :span="11">
                             <el-form-item label="商品品牌:" prop="cbpb10">
                                 <!-- <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" /> -->
-                            <el-select v-model="form2.cala08" placeholder="" style="width:80%;">
+                            <el-select v-model="form2.cbpb10" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
@@ -1020,6 +1031,29 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+           if(row.cbpb10=="1")
+            {
+                this.form.cbpb10="Epiphone";
+                row.cbpb10= "1";
+            }else if(row.cbpb10=="2")
+            {
+                this.form.cbpb10="Gibson"
+                row.cbpb10= "2";
+            }else if(row.cbpb10=="3")
+            {
+                this.form.cbpb10="Kramer"
+                row.cbpb10= "3";
+            }else if(row.cbpb10=="4"){
+                this.form.cbpb10="Steinberger"
+                row.cbpb10= "4";
+            }
+            else if(row.cbpb10=="5"){
+                this.form.cbpb10="Mesa/Boogie"
+                row.cbpb10= "5";
+            } else if(row.cbpb10=="6"){
+                this.form.cbpb10="Maestro"
+                row.cbpb10= "6";
+            }
             this.open = true;
             console.log(row, 7788521);
              this.form= row;

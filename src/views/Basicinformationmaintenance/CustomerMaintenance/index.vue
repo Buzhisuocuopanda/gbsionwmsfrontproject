@@ -63,8 +63,8 @@
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
                                 @click="handleDelete01(scope.row)" style="border:0px;" v-hasPermi="['system:user:remove']">删除</el-button>
 
-                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button>
+                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                                @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>
@@ -116,7 +116,12 @@
                     </el-col>
                     <el-col :span="11">
                         <el-form-item label="客户等级:" prop="cbca28">
-                            <el-input v-model="form.cbca28" placeholder="" style="width:100%;" />
+                            <!-- <el-input v-model="form.cbca28" placeholder="" style="width:100%;" /> -->
+                            <el-select v-model="form.cbca28" placeholder="" style="width:100%;">
+                                <el-option v-for="item in Zhuangkehudengjie" :key="item.value" :label="item.value"
+                                    :value="item.label">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -255,7 +260,7 @@
                     </el-col>
                     <el-col :span="11">
                         <el-form-item label="客户等级:" prop="cbca28">
-                            <el-input v-model="form1.cbca28" placeholder="" style="width:100%;" />
+                            <el-input v-model="form1.cbca28" placeholder="" style="width:100%;" />                            
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -394,7 +399,12 @@
                     </el-col>
                     <el-col :span="11">
                         <el-form-item label="客户等级:" prop="cbca28">
-                            <el-input v-model="form2.cbca28" placeholder="" style="width:100%;" />
+                            <!-- <el-input v-model="form2.cbca28" placeholder="" style="width:100%;" /> -->
+                            <el-select v-model="form2.cbca28" placeholder="" style="width:100%;">
+                                <el-option v-for="item in Zhuangkehudengjie" :key="item.value" :label="item.value"
+                                    :value="item.label">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -608,6 +618,19 @@ export default {
             }, {
                 value: '1',
                 label: '禁用'
+            }],
+            value: '',
+
+            //客户等级
+            Zhuangkehudengjie: [{
+                value: '1[1]',
+                label: '1'
+            }, {
+                value: '2[2]',
+                label: '2'
+            }, {
+                value: '3[3]',
+                label: '3'
             }],
             value: '',
             // 角色选项
@@ -1019,6 +1042,19 @@ export default {
         },
         /** 详情按钮操作**/
         handleSelect(row) {
+             if(row.cbca28=="1")
+            {
+                this.form1.cbca28="1[1]";
+                row.cbca28="1";
+            }else if(row.cbca28=="2")
+            {
+                this.form1.cbca28="2[2]"
+                row.cbca28= "2";
+            }else if(row.cbca28=="3")
+            {
+                this.form1.cbca28="3[3]"
+                row.cbca28= "3";
+            }
             this.open1 = true;
             this.form1.cbca01 = row.cbca01;
             this.form1.cbca07 = row.cbca07;
@@ -1041,7 +1077,7 @@ export default {
             this.form1.cbca27 = row.cbca27;
             this.form1.cbca28 = row.cbca28;
         },
-        /** 修改详情按钮操作**/
+        /** 修改详情按钮操作 cbca28**/
         handlexiangqengSelect(row) {
 
              if(row.cbca24=="1")
@@ -1060,6 +1096,22 @@ export default {
                 this.form.cbca24="不开发票"
                 row.cbca24= "4";
             }
+
+
+         if(row.cbca28=="1")
+            {
+                this.form.cbca28="1[1]";
+                row.cbca28="1";
+            }else if(row.cbca28=="2")
+            {
+                this.form.cbca28="2[2]"
+                row.cbca28= "2";
+            }else if(row.cbca28=="3")
+            {
+                this.form.cbca28="3[3]"
+                row.cbca28= "3";
+            }
+
             console.log(row)
             // this.getList();
             this.open = true;
