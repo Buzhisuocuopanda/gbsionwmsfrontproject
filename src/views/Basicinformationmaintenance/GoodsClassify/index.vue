@@ -222,8 +222,22 @@ export default {
                         res.children.forEach((i) => {
                             i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
                             i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
+                            console.log(i.children,666)
+                            if(i.children){
+                                i.children.forEach((it)=>{
+                                     console.log(it)
+                                    it.code = it.label ? it.label.substring(it.label.indexOf("~") + 1) : ""
+                                    it.label = it.label ? it.label.substring(0, it.label.indexOf("~")) : ""
+                                })
+                            }
                         })
                         
+                        // if(res.children.children){
+                        //     res.children.children.forEach((i) => {
+                        //         i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
+                        //         i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
+                        //     })
+                        // }
                     }
                 })
                 this.deptOptions = response.data;

@@ -557,7 +557,7 @@ export default {
     created() {
         this.getList();
         //库位信息维护
-        this.getList02();
+        // this.getList02();
 
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
@@ -597,10 +597,12 @@ export default {
 
           //修改模块-仓库
         selected02(name) {
-            console.log(name, 123)
-            console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form.cbpc100 = name.substring(0, name.indexOf("-"))
+            // console.log(name, 123)
+            // console.log(name.substring(name.indexOf("-") + 1), 963);
+            this.$set(this.form,"cbpc100",name.substring(0, name.indexOf("-")))
             this.form.cbla10  = name.substring(name.indexOf("-") + 1)
+            this.$forceUpdate()
+            // console.log("1112")
             // this.form2.icon = name;
         },
 
@@ -847,11 +849,16 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-            console.log(row)
+            console.log(this.form,111)
+            console.log(row,222)
+            // console.log(row)
             // this.getList();
             this.open = true;
-            console.log(row, 7788521);
-             this.form = row;
+            // console.log(row, 7788521);
+            this.form = Object.assign({},row);
+            this.form.cbpc100=this.form.cbwa09
+            // this.
+            // console.log(this.form)
         },
          handleSelect(row) {
             this.open1 = true;
