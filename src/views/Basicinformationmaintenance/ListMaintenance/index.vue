@@ -534,7 +534,7 @@ export default {
                         // console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
         },

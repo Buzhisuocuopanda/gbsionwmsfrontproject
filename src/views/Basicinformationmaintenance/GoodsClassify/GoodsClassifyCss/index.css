@@ -30,8 +30,8 @@
 
 .shuzhuangliebiaofenlei {
 
-    color: white;
-    background-color: #f8ac59;
+    color: rgb(6, 6, 6);
+    /* background-color: #f8ac59; */
     width: 65px;
     font-size: 13px;
     margin-left: 10px;
@@ -39,8 +39,8 @@
 
 .shuzhuangliebiaofenlei:hover {
 
-    color: white;
-    background-color: #f8ac59;
+    color: rgb(6, 6, 6);
+    /* background-color: #f8ac59; */
     width: 65px;
 
 }

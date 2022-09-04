@@ -68,7 +68,7 @@
         </el-row>
 
         <!-- 用户导入对话框 -->
-        <el-dialog :title="upload.title" :visible.sync="upload.open" width="30%" append-to-body class="dialog-yhdrdhk">
+        <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body class="dialog-yhdrdhk">
             <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
                 :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
                 :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
@@ -343,7 +343,7 @@ export default {
                         
                     });
                 } else {
-                    this.$message.error('请注意规范');
+                   
                 }
             })
             // if(this.form.classifyName!=undefined)

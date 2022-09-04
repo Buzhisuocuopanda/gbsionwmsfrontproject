@@ -638,7 +638,7 @@ export default {
       headClassWSS() {
         return {
           'text-align': 'left',
-          height: '30px',
+          height: '40px',
           padding: '0'
         }
       },
@@ -798,7 +798,7 @@ export default {
                         console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
-                    this.$message.error('请注意规范' + this.form.cbwa09 + '');
+                    // this.$message.error('请注意规范' + this.form.cbwa09 + '');
                 }
             })
             // if (this.form2.name != undefined || this.form2.type != undefined || this.form2.manageMode != undefined) {

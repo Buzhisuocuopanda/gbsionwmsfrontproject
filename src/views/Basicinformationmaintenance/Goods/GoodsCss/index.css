@@ -166,8 +166,8 @@ color: white !important;
 
 .shuzhuangliebiaofenlei {
 
-    color: white;
-    background-color: #f8ac59;
+    color: rgb(11, 10, 10);
+    /* background-color: #f8ac59; */
     width: 65px;
     font-size: 13px;
     margin-left: 10px;
@@ -175,8 +175,8 @@ color: white !important;
 
 .shuzhuangliebiaofenlei:hover {
 
-    color: white;
-    background-color: #f8ac59;
+    color: rgb(9, 9, 9);
+    /* background-color: #f8ac59; */
     width: 65px;
 
 }

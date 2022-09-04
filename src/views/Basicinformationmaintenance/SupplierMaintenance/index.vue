@@ -722,7 +722,7 @@ export default {
       headClassSPM() {
         return {
           'text-align': 'left',
-          height: '30px',
+          height: '40px',
           padding: '0'
         }
       },
@@ -888,7 +888,7 @@ export default {
                     });
                 } else {
                     // alert("不可提交");
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
 

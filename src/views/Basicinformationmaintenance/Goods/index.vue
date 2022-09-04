@@ -830,7 +830,7 @@ export default {
       headClassGDC() {
         return {
           'text-align': 'left',
-          height: '30px',
+          height: '40px',
           padding: '0'
         }
       },
@@ -997,7 +997,7 @@ export default {
                         // console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
         },
