@@ -1021,6 +1021,8 @@ export default {
                 row.cbca01 = this.form.cbca01;
 
                 console.log(row, 778899);
+                 this.$refs["form"].validate((item) => {
+                if (item) {
                 // console.log(this.form.id);
                 CustomeRedit(JSON.stringify(row)).then(response => {
                     // console.log(response,789)
@@ -1041,6 +1043,10 @@ export default {
 
                 });
 
+                } else {
+                    // this.$message.error('请注意规范');
+                }
+            })
         },
         /** 详情按钮操作**/
         handleSelect(row) {

@@ -6,7 +6,7 @@
                 <el-col :span="40" :xs="24">
                     <div style="width:250px;">
                         <!--树状菜单-->
-                        <a @click="submitShangpin" class="shuzhuangliebiaofenlei">商品分类</a>
+                        <a @click="submitShangpin" class="shuzhuangliebiaofenleih">商品分类</a>
                         <el-tree :data="deptOptions" :props="defaultProps" :expand-on-click-node="false" ref="tree"
                             default-expand-all highlight-current style="height:550px;"  />
                     </div>
@@ -88,7 +88,7 @@
                 <span style="font-size:15px;margin-left: 3%;">商品基础信息</span>
                 <hr />
             </div>
-            <el-form ref="form" :model="form" :rules="rules2"  style="margin-top:20px;" label-width="100px">
+            <el-form ref="form" :model="form" :rules="rules3"  style="margin-top:20px;" label-width="100px">
                    <el-row style="margin-left:5.2%;" :gutter="20"  class="el-row">
                         <el-col :span="11">
                             <el-form-item label="商品分类:" prop="cbpa07">
@@ -651,7 +651,26 @@ export default {
                     { required: true, message: '价格不能为空', trigger: 'blur' },
                 ]
             },
-
+          rules3: {
+                cbpb08: [
+                    { required: true, message: '商品名称不能为空', trigger: 'blur' },
+                ],
+                cbpb12: [
+                    { required: true, message: '型号不能为空', trigger: 'blur' },
+                ],
+                upc: [
+                    { required: true, message: 'upc不能为空', trigger: 'blur' },
+                ],
+                currency: [
+                    { required: true, message: '结算货币不能为空', trigger: 'blur' },
+                ],
+                fprice: [
+                    { required: true, message: '价格不能为空', trigger: 'blur' },
+                ],
+                tprice: [
+                    { required: true, message: '价格不能为空', trigger: 'blur' },
+                ]
+            },
         };
     },
     watch: {
@@ -1037,6 +1056,9 @@ export default {
                 row.cbpb07 = this.form.cbpb07;
                 row.cbpb10 = this.form.cbpb10;
                 console.log(this.form.cbpb01);
+
+                 this.$refs["form"].validate((item) => {
+                if (item) {
                 GoodsEdit(JSON.stringify(row)).then(response => {
 
                     // this.form = response.data;
@@ -1055,6 +1077,11 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
+
+            } else {
+                    // this.$message.error('请注意规范');
+        }
+    })
 
         },
         /** 修改详情按钮操作**/

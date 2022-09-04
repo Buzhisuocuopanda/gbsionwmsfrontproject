@@ -322,21 +322,6 @@ export default {
     // components: { Treeselect, kuweixxweihu },
     components: { Treeselect,kuweixxweihu},
     data() {
-        var validatePass2 = (rule, value, callback) => {
-            if (value == this.form.locationNum01) {
-                callback(new Error('库位码与上一次相同'));
-            } else {
-                callback()
-            }
-        };
-
-        var validatePass3 = (rule, value, callback) => {
-            if (value == this.form.sort01) {
-                callback(new Error('库位顺序与上一次相同'));
-            } else {
-                callback()
-            }
-        }
         return {
             //库位信息维护
             // kwxxwh: kuweixxweihu,
@@ -588,10 +573,9 @@ export default {
 
         //添加模块-仓库
         selected01(name) {
-            console.log(name, 123)
-            console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
-            this.form2.cbla10 = name.substring(name.indexOf("-") + 1)
+             this.$set(this.form2,"cbpc100",name.substring(0, name.indexOf("-")))
+            this.form2.cbla10  = name.substring(name.indexOf("-") + 1)
+            this.$forceUpdate()
             // this.form2.icon = name;
         },
 
@@ -830,7 +814,7 @@ export default {
 
                     });
                 } else {
-                    this.$message.error('库位码或库位顺序不能相同');
+                    // this.$message.error('库位码或库位顺序不能相同');
                 }
             })
         },

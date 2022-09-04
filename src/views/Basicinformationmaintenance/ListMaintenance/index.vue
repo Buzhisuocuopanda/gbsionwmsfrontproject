@@ -338,7 +338,7 @@ export default {
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
                 cala10: [
-                    { required: true, message: "类别不能为空!", trigger: "blur" }
+                    { required: true, message: "类别不能为空!", trigger: "change" }
                 ],
                 cala02:[
                     {
@@ -350,7 +350,7 @@ export default {
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
                 cala10: [
-                    { required: true, message: "类别不能为空!", trigger: "blur" }
+                    { required: true, message: "类别不能为空!", trigger: "change" }
                 ],
                 cala02: [
                     { required: true, message: "索引不能为空!", trigger: "blur" }
@@ -552,6 +552,8 @@ export default {
                 row.cala12 = this.form.cala12;
                 row.cala01 = this.form.cala01;
                 console.log(this.form.cala01);
+                 this.$refs["form"].validate((item) => {
+                if (item) {
                 ListEdit(JSON.stringify(row)).then(response => {
 
                     // this.form = response.data;
@@ -566,7 +568,10 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
-
+          } else {
+                    // this.$message.error('请注意规范');
+                }
+            })
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
