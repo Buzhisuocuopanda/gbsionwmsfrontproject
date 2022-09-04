@@ -42,8 +42,13 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col v-if="false">
-                                    <el-form-item label="id" prop="cbpa09" >
+                                    <el-form-item label="父字节编号" prop="cbpa09" >
                                         <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
+                                    </el-form-item>
+                                </el-col>
+                                <el-col v-if="false">
+                                    <el-form-item label="id" prop="cbpa01" >
+                                        <el-input v-model="form.cbpa01" maxlength="30" style="width: 400px;" />
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -260,7 +265,8 @@ export default {
             this.form.cbpa11 = "";
             for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
                 if (i != 0) {
-                    this.form.cbpa11 += ("~" + (data.code.split("~"))[i])
+                    this.form.cbpa011 += ("~" + (data.code.split("~"))[i])
+                    this.form.cbpa11 += ("~" + (data.code.split("~"))[i]).substring(data.code.indexOf("~") + 1)
                 } else {
                     this.form.cbpa11 += (data.code.split("~"))[i]
                 }
@@ -268,6 +274,11 @@ export default {
             // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
             this.form.cbpa07 = data.label
             this.form.cbpa09 = (data.code.split("~"))[data.code.split("~").length - 1]
+            // this.form.cbpa01 = this.form.cbpa011.substring(data.code.indexOf("~")+6);
+            this.form.cbpa01 = (this.form.cbpa011.split("~"))[this.form.cbpa011.split("~").length - 1]
+            console.log(this.form.cbpa09,88880099);
+            console.log(this.form.cbpa11,111111111);
+            console.log(this.form.cbpa01,1010101);
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
             this.handleQuery();
         },
@@ -363,7 +374,7 @@ export default {
                 row.cbpa11 = this.form.cbpa11;
                 row.cbpa07 = this.form.cbpa07;
                 row.cbpa09 = this.form.cbpa09;
-                row.cbpa01 = this.form.cbpa09;
+                row.cbpa01 = this.form.cbpa01;
                 ClassifyEdit(JSON.stringify(row)).then(response => {
                     this.form = response.data;
                     this.cbpa07 = response.cbpa07;
