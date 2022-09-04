@@ -883,10 +883,12 @@ export default {
             }
             // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
             this.form.cbpa07 = data.label
-            this.form.cbpb14 = (data.code.split("~"))[data.code.split("~").length - 1]
+            this.form.cbpb14 = (this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1]
+            console.log((this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1],19991119);
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
             this.open1 = false;
             this.handleQuery();
+            
         },
 
         // 节点单击事件
@@ -901,7 +903,7 @@ export default {
             }
             // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
             this.form2.cbpa07 = data.label
-            this.form2.cbpb14 = (data.code.split("~"))[data.code.split("~").length - 1]
+            this.form2.cbpb14 = (this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1]
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
              this.open4 = false;
             this.handleQuery();
@@ -958,7 +960,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbpb01);
+            this.idss = selection.map(item => item.cbpa07);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -1050,7 +1052,7 @@ export default {
                     this.getList();
                     this.handleAdds();
 
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
@@ -1151,7 +1153,7 @@ export default {
             // }
             // console.log(a,456)
             // // console.log(JSON.stringify(userIds),123456852)
-            this.$modal.confirm('是否确认删除ID为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除商品分类为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.GoodsRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -1187,7 +1189,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除ID为"' + row.cbpb01 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除商品分类为"' + row.cbpa07 + '"的数据项？').then(function () {
           return GoodsRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();
@@ -1217,7 +1219,7 @@ export default {
 
         /** 导入按钮操作 */
         handleImport() {
-            this.upload.title = "商品分类";
+            this.upload.title = "商品信息维护";
             this.upload.open = true;
         },
         /** 下载模板操作 */

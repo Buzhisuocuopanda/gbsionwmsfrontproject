@@ -1019,7 +1019,7 @@ export default {
 
         /** 导入按钮操作 */
         handleImport() {
-            this.upload.title = "商品分类";
+            this.upload.title = "库位信息维护";
             this.upload.open = true;
         },
         /** 下载模板操作 */

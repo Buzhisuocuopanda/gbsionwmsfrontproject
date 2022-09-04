@@ -563,22 +563,22 @@ export default {
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
                 cbwa13: [
-                    { required: true, message: "是否启用总订单不能为空!", trigger: "blur" }
+                    { required: true, message: "是否启用总订单不能为空!", trigger: "change" }
                 ],
                 cbwa14: [
-                    { required: true, message: "是否启用提货单不能为空!", trigger: "blur" }
+                    { required: true, message: "是否启用提货单不能为空!", trigger: "change" }
                 ],
                 cbwa15: [
-                    { required: true, message: "是否可用不能为空!", trigger: "blur" }
+                    { required: true, message: "是否可用不能为空!", trigger: "change" }
                 ],
                 cbwa08: [
-                    { required: true, message: "状态不能为空!", trigger: "blur" }
+                    { required: true, message: "状态不能为空!", trigger: "change" }
                 ],
                 cbwa11: [
-                    { required: true, message: "类型不能为空!", trigger: "blur" }
+                    { required: true, message: "类型不能为空!", trigger: "change" }
                 ],
                 cbwa12: [
-                    { required: true, message: "管理模式不能为空!", trigger: "blur" }
+                    { required: true, message: "管理模式不能为空!", trigger: "change" }
                 ],
                 cbwa07:[
                      { required: true, message: "出库优先级不能为空!", trigger: "blur" },
@@ -591,22 +591,22 @@ export default {
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
                 cbwa13: [
-                    { required: true, message: "是否启用总订单不能为空!", trigger: "blur" }
+                    { required: true, message: "是否启用总订单不能为空!", trigger: "change" }
                 ],
                 cbwa14: [
-                    { required: true, message: "是否启用提货单不能为空!", trigger: "blur" }
+                    { required: true, message: "是否启用提货单不能为空!", trigger: "change" }
                 ],
                 cbwa15: [
-                    { required: true, message: "是否可用不能为空!", trigger: "blur" }
+                    { required: true, message: "是否可用不能为空!", trigger: "change" }
                 ],
                 cbwa08: [
-                    { required: true, message: "状态不能为空!", trigger: "blur" }
+                    { required: true, message: "状态不能为空!", trigger: "change" }
                 ],
                 cbwa11: [
-                    { required: true, message: "类型不能为空!", trigger: "blur" }
+                    { required: true, message: "类型不能为空!", trigger: "change" }
                 ],
                 cbwa12: [
-                    { required: true, message: "管理模式不能为空!", trigger: "blur" }
+                    { required: true, message: "管理模式不能为空!", trigger: "change" }
                 ],
                 cbwa07:[
                      { required: true, message: "出库优先级不能为空!", trigger: "blur" },
