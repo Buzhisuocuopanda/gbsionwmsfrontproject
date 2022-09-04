@@ -327,6 +327,7 @@ export default {
         },
         /** 新增按钮操作 */
         handleAdd() {
+            this.form.cbpa01= "";
             this.$refs["form"].validate((item) => {
                 if (item) {
                     ClassifyAdd(this.form).then(response => {
@@ -339,6 +340,7 @@ export default {
                         this.getList();
                         this.reset();
                         this.form.cbpa09 = "0";
+                        
                     });
                 } else {
                     this.$message.error('请注意规范');
@@ -443,7 +445,7 @@ export default {
             let row = {}
             row.cbpa07 = this.form.cbpa07;
             row.cbpa11 = this.form.cbpa11;
-            row.cbpa01 = this.form.cbpa09;
+            row.cbpa01 = this.form.cbpa01;
             // removeSys(JSON.stringify(row)).then(response => {
             //   this.form = response.data;
             //   this.classifyName = response.classifyName;
@@ -455,7 +457,7 @@ export default {
             // });
 
 
-            this.$modal.confirm('是否确认删除用户编号为"' + JSON.stringify(row.cbpa01) + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除名称为"' + JSON.stringify(row.cbpa07) + '"的数据项？').then(function () {
                 return ClassifyRemove(JSON.stringify(row));
             }).then((response) => {
                 this.getTreeselect();
