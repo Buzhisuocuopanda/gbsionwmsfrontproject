@@ -49,15 +49,15 @@
                         <el-table-column label="商品分类" align="left" key="cbpa07" width="190px;" prop="cbpa07"/>
                         <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" width="480px;"
                             locationNum />
-                        <el-table-column label="商品品牌" align="left" key="cbpb10" prop="cbpb10" width="180px;" sortable >
-                            <template scope="scope">
+                        <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable >
+                            <!-- <template scope="scope">
                             <div>{{ scope.row.cbpb10 == 1 ? "Epiphone" : scope.row.cbpb10 == 2 ?
                             "Gibson" : scope.row.cbpb10 == 3 ? "Kramer" : scope.row.cbpb10 == 4 ? 
                             "Steinberger" : scope.row.cbpb10 == 5 ?  "Mesa/Boogie" : scope.row.cbpb10 == 6 ?  
                             "Maestro" : "商品品牌不确定"
                             }}
                             </div>
-                        </template>
+                        </template> -->
                         </el-table-column>
 
 
@@ -98,7 +98,7 @@
                         <el-col :span="11" style="margin-left:-1%;">
                             <el-form-item label="商品品牌:" prop="cbpb10">
                                 <!-- <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" /> -->
-                            <el-select v-model="form.cbpb10" placeholder="" style="width:80%;">
+                            <el-select v-model="form.cala08" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
@@ -422,10 +422,13 @@ import { treeselect } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
+ //列表
+import ListMaintenance from "@/components/ListMaintenance";
+
 export default {
     name: "User",
     dicts: ['sys_normal_disable', 'sys_user_sex', 'sw_js_goods_if_enabled'],
-    components: { Treeselect },
+    components: { Treeselect,ListMaintenance },
     data() {
         return {
             maxheight: window.innerHeight - 50,

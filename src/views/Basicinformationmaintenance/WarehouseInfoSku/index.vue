@@ -846,6 +846,8 @@ export default {
                 row.cbwa15 = this.form.cbwa15;
                 row.cbwa01 = this.form.cbwa01;
                 // console.log(this.form.id);
+                 this.$refs["form"].validate((item) => {
+                if (item) {
                 StoreSkuEdit(JSON.stringify(row)).then(response => {
                     // console.log(response,789)
                     // this.form = response.data;
@@ -864,7 +866,11 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
-        },
+           } else {
+                    // this.$message.error('请注意规范' + this.form.cbwa09 + '');
+       }
+    })
+},
         /** 详情按钮操作**/
         handleSelect(row) {
             this.open1 = true;

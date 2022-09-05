@@ -106,7 +106,7 @@
             <el-col style="margin-left: 0%;" :span="7">
               <el-form-item label="" prop="cbpc000">
                   <el-popover placement="bottom-start" trigger="click">
-                       <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
+                       <Goodsone01 ref="Goodsone01" @selected="selected08"
                           style="width:100% !important;" />
                         <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
                             style="width:205.6%;">
@@ -865,10 +865,10 @@
       },
 
       //查询商品信息维护
-      selected08(e, index) {
-        console.log(e, 111)
-        console.log(index, 222)
-        this.$set(this.tableData[index], "cbpc000", e)
+      selected08(name) {
+        console.log(name, 111)
+        // console.log(index, 222)
+        // this.$set(this.tableData, "cbpc000", e)
 
         // this.formArr[index].cbpc000=''
         // this.formArr[index].cbpc000=e

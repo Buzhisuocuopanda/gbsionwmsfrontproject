@@ -929,7 +929,7 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
-            if (this.form.cbsa08 != undefined) {
+            // if (this.form.cbsa08 != undefined) {
                 let row = {}
                 row.cbsa07 = this.form.cbsa07;
                 row.cbsa08 = this.form.cbsa08;
@@ -945,6 +945,8 @@ export default {
                 row.cbsa18 = this.form.cbsa18;
                 row.cbsa01 = this.form.cbsa01;
                 // console.log(this.form.id);
+                 this.$refs["form"].validate((item) => {
+                if (item) {
                 SupplieRedit(JSON.stringify(row)).then(response => {
                     // console.log(response,789)
                     // this.form = response.data;
@@ -963,10 +965,15 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
+           } else {
+                    // alert("不可提交");
+                    // this.$message.error('请注意规范');
+        }
+    })
 
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
+            // } else {
+            //     // this.$message.error('错了哦，商品名称没有填呢');
+            // }
 
         },
         /** 详情按钮操作**/
