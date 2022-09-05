@@ -872,6 +872,7 @@ export default {
         /** 查询部门下拉树结构 */
         getTreeselect() {
             ClassifyTreeselect().then(response => {
+                console.log(response.data, 123)
                 response.data.forEach((res) => {
                     res.code = res.label ? res.label.substring(res.label.indexOf("~") + 1) : ""
                     res.label = res.label ? res.label.substring(0, res.label.indexOf("~")) : ""
@@ -879,7 +880,22 @@ export default {
                         res.children.forEach((i) => {
                             i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
                             i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
+                            console.log(i.children,666)
+                            if(i.children){
+                                i.children.forEach((it)=>{
+                                     console.log(it)
+                                    it.code = it.label ? it.label.substring(it.label.indexOf("~") + 1) : ""
+                                    it.label = it.label ? it.label.substring(0, it.label.indexOf("~")) : ""
+                                })
+                            }
                         })
+                        
+                        // if(res.children.children){
+                        //     res.children.children.forEach((i) => {
+                        //         i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
+                        //         i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
+                        //     })
+                        // }
                     }
                 })
                 this.deptOptions = response.data;
