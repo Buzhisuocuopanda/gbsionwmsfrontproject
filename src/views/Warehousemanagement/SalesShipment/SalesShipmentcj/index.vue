@@ -10,7 +10,7 @@
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="客户订单:" style="margin-left:20%;" prop="cbsb30">
-                        <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 60%;"/>
+                        <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 100%;"/>
                     </el-form-item>
 
                 </el-col>
@@ -18,7 +18,7 @@
             <el-row>
                 <el-col style="margin-left: 2%;" :span="7">
                     <el-form-item label="客户:" prop="cbsb09">
-                        <el-input type="text" v-model="form2.cbsb09" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb09" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
@@ -26,31 +26,31 @@
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
                             <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
-                                style="border:solid #eee thin; width:87%;">
+                                style="width:87%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
                     <el-form-item label="销售人员:" prop="cbsb17">
-                        <el-input type="text" v-model="form2.cbsb17" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb17" style="width:77%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="联系人:" prop="cbsb18">
-                        <el-input type="text" v-model="form2.cbsb18" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb18" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7" style="margin-top: -1%;">
                     <el-form-item label="电话:" prop="cbsb19">
-                        <el-input type="text" v-model="form2.cbsb19" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb19" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="客户等级:" prop="cbca28">
-                        <el-select v-model="form2.cbca28" placeholder="" style="width:80%; border: solid #eee thin;">
+                        <el-select v-model="form2.cbca28" placeholder="" style="width:80%;">
                             <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -61,12 +61,12 @@
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="结算货币:" prop="cbsb16">
-                         <el-input type="text" v-model="form2.cbsb16" style="border:solid #eee thin; width:77%;" />
+                         <el-input type="text" v-model="form2.cbsb16" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="收货人:" prop="cbsb18">
-                        <el-input type="text" v-model="form2.cbsb18" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb18" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
@@ -76,29 +76,29 @@
                                 :value="item.value">
                             </el-option>
                         </el-select> -->
-                        <el-input type="text" v-model="form2.cbsb31" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb31" style="width:77%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="收货电话:" prop="cbsb19">
-                        <el-input type="text" v-model="form2.cbsb19" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb19" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="收货地址:" prop="cbsb21">
-                        <el-input type="text" v-model="form2.cbsb21" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb21" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                   <el-col style="margin-top: -1%;" :span="7" v-if="false">
                     <el-form-item label="主明细键:" prop="cbsb21">
-                        <el-input type="text" v-model="form2.cbsb211" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb211" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7" v-if="false">
                     <el-form-item label="提货单id:" prop="cbsb2118">
-                        <el-input type="text" v-model="form2.cbsb2118" style="border:solid #eee thin; width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb2118" style="width:77%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -111,7 +111,7 @@
                 <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
                     <el-form-item label="仓库id:" prop="cbsb10">
                         <el-input v-model="form2.cbsb10" placeholder="" maxlength="30"
-                            style="width:80%;border:solid #eee thin" />
+                            style="width:80%;" />
                     </el-form-item>
                 </el-col>
                 <!-- <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
@@ -145,59 +145,62 @@
                 </tr>
             </table>
                <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -2%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
+                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
                         :inline="true"> 
                         <!--  supplierId -->   
                         <el-form-item label="" size="small" prop="cbsc15" style="margin-left:0.8%;">
-                            <el-input  v-model="form.cbsc15" style="border:solid #eee thin;width:40%;"></el-input>                           
+                            <el-input  v-model="form.cbsc15" style="width:40%;"></el-input>                           
                         </el-form-item>
-                        <el-form-item label="" size="small" prop="cbsc17" style="margin-left:-7%; ">
-                            <el-input  v-model="form.cbsc17" style="border:solid #eee thin;width:50%;"></el-input>
+                        <el-form-item label="" size="small" prop="cbsc177" style="margin-left:-7%; ">
+                            <el-input  v-model="form.cbsc177" style="width:50%;"></el-input>
                         </el-form-item>
                         <!-- brand  -->
                         <el-form-item label="" size="small" prop="cbsd133" style="margin-left:-7%;">
-                            <el-input v-model="form.cbsd133" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsd133" style="width:55%;"></el-input>
                         </el-form-item>
                         <!-- model -->
                         <el-form-item label="" size="small" prop="cbsd134" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsd134" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsd134" style="width:55%;"></el-input>
                         </el-form-item>
                         <!--description  -->
                         <el-form-item label="" size="small" prop="cbsd135" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsd135" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsd135" style="width:55%;"></el-input>
                         </el-form-item>
                         <!--qty-->
                         <el-form-item label="" size="small" prop="cbsc09" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc09" style="border:solid #eee thin; width:50%;"></el-input>
+                            <el-input v-model="form.cbsc09" style=" width:50%;"></el-input>
                         </el-form-item>
                         <!-- price -->
                         <el-form-item label="" size="small" prop="cbsc11" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc11" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsc11" style="width:55%;"></el-input>
                         </el-form-item>
                         <!-- totalPrice -->
                         <el-form-item label="" size="small" prop="cbsc12" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc12" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsc12" style="width:55%;"></el-input>
                         </el-form-item>
                         <!-- scanQty -->
                         <el-form-item label="" size="small" prop="cbsc13" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc13" style="border:solid #eee thin;width:55%;"></el-input>
+                            <el-input v-model="form.cbsc13" style="width:55%;"></el-input>
                         </el-form-item>
                         <!-- noSendQty -->
                         <el-form-item label="" size="small" prop="cbsc14" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc14" style="border:solid #eee thin;width:66%;"></el-input>
+                            <el-input v-model="form.cbsc14" style="width:66%;"></el-input>
                         </el-form-item>
                         <!-- remark  -->
                         <el-form-item label="" size="small" prop="cbsc15" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc15" style="border:solid #eee thin;width:60%;"></el-input>
+                            <el-input v-model="form.cbsc15" style="width:60%;"></el-input>
+                        </el-form-item>
+                        <el-form-item v-if="false" label="" size="small" prop="cbsc17" style="margin-left:-7%; ">
+                            <el-input  v-model="form.cbsc17" style="width:50%;"></el-input>
                         </el-form-item>
                         <el-form-item v-if="false" label=""  prop="cbsb01" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbsb01" style="border:solid #eee thin;width:70%;"></el-input>
+                            <el-input v-model="form.cbsb01" style="width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item v-if="false" label="" size="small" prop="cbsc08" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc08" style="border:solid #eee thin;width:60%;"></el-input>
+                            <el-input v-model="form.cbsc08" style="width:60%;"></el-input>
                         </el-form-item>
                         <el-form-item v-if="false" label="" size="small" prop="cbsc10" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc10" style="border:solid #eee thin;width:60%;"></el-input>
+                            <el-input v-model="form.cbsc10" style="width:60%;"></el-input>
                         </el-form-item>
                     </el-form>
                 </el-row>
@@ -545,11 +548,41 @@ export default {
                 console.log(form)
                 console.log(JSON.stringify(form))
                 // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-                this.$refs[form.formName][0].validate((valid, obj) => {
-                    if (valid) {
+                // this.$refs[form.formName][0].validate((valid, obj) => {
+                    // if (valid) {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
                         PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
+                             if(response.code=="200"){
+                                this.formArr=[]
+                                // this.form2= {
+                                //    cbpc07: "",
+                                //     cbpc08: "",
+                                //     cbca08: "",
+                                //     cbwa09: "",
+                                //     cala08: "",
+                                //     cbpc100: "",
+                                //     cbpc099: "",
+                                //     cbpc166: "",
+                                //     cbpc10: "",
+                                //     cbpc09: "",
+                                //     cbpd09: "",
+                                //     cbpd11: "",
+                                //     cbpd12: "",
+                                //     cbpc16: "",
+                                //     cbpc12: "",
+                                //     cbpc14: "",
+                                //     cbpd08: "",
+                                //     cbsb07:"",
+                                //     cbsb09:"",
+                                //     cbsb10:"",
+                                //     cbsb17:"",
+                                //     cbsb18:"",
+                                //     cbsb19:"",
+                                //     cbsb21:"",
+                                //     cbsb30:""
+                                // }
+                            }
                         if (count-- === 1) {
                             this._ly_save()
                         }
@@ -560,11 +593,11 @@ export default {
                     //    console.log(this.form.cbpg01,85203);
                     });
 
-                    } else {
-                        console.log(obj)
-                        return false
-                    }
-              })
+                    // } else {
+                    //     console.log(obj)
+                    //     return false
+                    // }
+            //   })
             }
             console.log('_ly_ok:' + JSON.stringify(this.formArr))
         },
@@ -647,9 +680,11 @@ export default {
                //收货地址
                this.form2.cbsb21 = zhuangh[0].address;
                //客户等级
-               this.form2.cbca28 =zhuangh[0].customerLevel;
+               this.form2.cbsb20 =zhuangh[0].customerLevel;
                //客户订单
                this.form2.cbsb30 = zhuangh[0].customerNo;
+               //销售人员
+               this.form2.cbsb17 =zhuangh[0].saleUser;
             //    this.form2.cbpc16 =zhuangh[0].customerNo;
               console.log(JSON.parse(this.ListUser),852369);
               console.log(JSON.parse(routerParams.data01),55555);
@@ -773,7 +808,6 @@ export default {
 
                         this.open2 = false;
                         this.reset01();
-                        this.form2.cbsb211 = response.data.id;
                         this.formArr.forEach((item)=>{
                             item.cbsb01=response.data.id
                         })
@@ -782,7 +816,7 @@ export default {
                         this._ly_ok();
                     });
                 } else {
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
 
@@ -796,7 +830,7 @@ export default {
                 // console.log(zhuangh[0].id,889999);          
                PurchaseinListxiangq(zhuangh[0].id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 response.data.goods.forEach((item)=>{
-                    item.cbsc17=item.orderClass;
+                    item.cbsc177=item.orderClass;
                     item.cbsc15 = item.supplierId;
                     item.cbsd133 = item.brand;
                     item.cbsd134 = item.model;
@@ -807,6 +841,9 @@ export default {
                     item.cbsc13 = item.scanQty;
                     item.cbsc14 = item.noSendQty;
                     item.cbsc15 = item.remark;
+                    if(item.cbsc177=="国内订单"){
+                          item.cbsc17="1";
+                    }
 
                 })
                 

@@ -10,6 +10,16 @@ export function QualityinAdd(data) {
   })
 }
 
+
+// 质检单新增
+export function QualityinAdds(data) {
+  return request({
+    url: '/system/Qualityin//SwJsPurchaseinboundadds',
+    method: 'post',
+    data: data
+  })
+}
+
 // 质检单查询列表
 export function QualityinList(query) {
   return request({
@@ -138,7 +148,7 @@ export function Purchaseintihuadang(data) {
 //提货单详情
 export function PurchaseinboundSellout(CBPC01) {
   return request({
-    url: '/whmanagement/takeOrderDetail?cbpk01='+ CBPC01,
+    url: '/whmanagement/takeOrderDetail?id='+ CBPC01,
     method: 'get'
   })
 }

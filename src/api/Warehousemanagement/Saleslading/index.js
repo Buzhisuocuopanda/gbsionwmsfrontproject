@@ -10,10 +10,19 @@ export function PurchaseinboundAdd(data) {
   })
 }
 
-// 订单查询
+// 销售提货单查询
 export function Purchaseinbounddingdancx(data) {
   return request({
     url: '/whmanagement/takeOrderList',
+    method: 'post',
+    data: data
+  })
+}
+
+// 销售订单查询
+export function Purchaseinbounddingdanxsdd(data) {
+  return request({
+    url: '/sale/saleOrderList',
     method: 'post',
     data: data
   })

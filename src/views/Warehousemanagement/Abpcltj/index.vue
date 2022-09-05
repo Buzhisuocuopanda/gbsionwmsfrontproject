@@ -93,7 +93,7 @@
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope">
-              <sapn>
+              <!-- <sapn> -->
                 <!-- <el-select v-model="scope.row.date" filterable clearable placeholder="请选择" style="width: 100%;">
                   <el-option
                     v-for="item in options"
@@ -109,7 +109,7 @@
                             style="width:100%;">
                         </el-input>
                   </el-popover>
-              </sapn>
+              <!-- </sapn> -->
             </template>
             <!-- <el-col style="margin-left: 0%;" :span="7">
               <el-form-item label="" prop="cbpc000">
@@ -894,13 +894,15 @@
           // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
         //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
           // this.form.cbpc000 = name;
-          // this.$set(row,"cbpc000",name)
-          // name.cbla10  = name.substring(name.indexOf(".") + 1)
-          // this.$forceUpdate()
-          // console.log(this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
-          this.tableData.cbpc000 = "123";
-          this.tableData.num = "23344";
-          console.log(name,556623);
+          this.$set(this.tableData,"cbpc000",name);
+          // this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1));
+          this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
+          this.$forceUpdate()
+          // console.log(this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
+          // this.tableData.cbpc000 = "123";
+          // this.tableData.num = "23344";
+          // console.log(name,556623);
+          console.log(this.tableData.cbpc000,20220905);
       },
 
       //添加行

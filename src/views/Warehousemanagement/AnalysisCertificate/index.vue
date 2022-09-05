@@ -21,13 +21,13 @@
                          <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                         <el-button class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item>                      
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlezhijiandanone">创建
+                        <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button>
                         <el-dropdown trigger="click">
-                          <span class="el-dropdown-link xialaxuanxang">
+                          <span class="el-dropdown-link xialaxuanxangnnn">
                               <i class="el-icon-caret-bottom el-icon--right "></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
@@ -37,13 +37,19 @@
                            </el-dropdown-item>
                         </el-dropdown-menu>
                        </el-dropdown>
+                    </el-form-item>
+                    <el-form-item>
                         <el-button size="mini" type="danger" style="margin-left:1%;"  class="biaoto-buttonshanchu" :disabled="multiple"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
+                    </el-form-item>
+                    <el-form-item>
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
+                    </el-form-item>                        
+                    <el-form-item>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -1282,7 +1288,7 @@ export default {
                 path: '/system/user-zhijiandan/role/',
                 name: 'index',
                 query: {                  
-                    data:JSON.stringify([{id:row.id}]),
+                    data: row.id,
                 }
             })
             location.reload();

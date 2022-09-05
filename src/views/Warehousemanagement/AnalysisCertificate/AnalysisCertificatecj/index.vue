@@ -4,16 +4,21 @@
             <div class="chuangjiancaigous">质检单</div>
             <el-row>
                 <el-col :span="7">
-                    <el-form-item label="编号:" prop="cbpc07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbpc07" style="width: 50%;" />
+                    <el-form-item label="编号:" prop="cbqa07" style="margin-left:10%;">
+                        <el-input type="text" v-model="form2.cbqa07" style="width: 50%;" />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="日期:" style="margin-left:20%;">
-                        <el-date-picker type="date" placeholder="" v-model="form2.cbpc08" style="width: 70%;">
+                        <el-date-picker type="date" placeholder="" v-model="form2.cbqa11"  style="width: 70%;">
                         </el-date-picker>
                     </el-form-item>
-
+                </el-col>
+                <el-col  v-if="false" :span="7">
+                    <el-form-item label="是否删除:" style="margin-left:20%;">
+                        <el-date-picker type="text" placeholder="" v-model="form2.cbqa06"  style="width: 70%;">
+                        </el-date-picker>
+                    </el-form-item>
                 </el-col>
             </el-row>
       <div>
@@ -48,8 +53,8 @@
                             <el-col style="margin-left: 0%;" :span="7">
                                 <el-form-item label="" prop="cbpc000">
                                    <el-popover placement="bottom-start" trigger="click">
-                                       <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                                             style="width:370px!important;" />
+                                       <!-- <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
+                                             style="width:370px!important;" /> -->
                                       <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
                                           style="width:469%">
                                       </el-input>
@@ -57,13 +62,19 @@
                                 </el-form-item>
                             </el-col>
                         <el-form-item label="" size="small" prop="cbpd09" class="tihuanshangp" style="margin-left:60%;">
-                            <el-input type="text" v-model="form.cbpd09"  style="width:125%;"></el-input>
+                            <el-input type="text" v-model="form.cbpb09"  style="width:125%;"></el-input>
                         </el-form-item>
                         <el-form-item  v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
                             <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" v-if="false"  prop="name" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
+                        </el-form-item>
+                         <el-form-item label="质检单主表id" v-if="false"  prop="cbqa01" style="margin-left:0.8%;">
+                            <el-input v-model="form.cbqa01" style="border:solid #eee thin;width:70%;"></el-input>
+                        </el-form-item>
+                        <el-form-item v-if="false" label="" size="small" prop="cbqb10" class="tihuanshangp" style="margin-left:60%;">
+                            <el-input type="text" v-model="form.cbqb10"  style="width:125%;"></el-input>
                         </el-form-item>
                         <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;"  size="small" icon="el-icon-delete"  circle
                             @click="_ly_delFrom(index)"></el-button>
@@ -88,7 +99,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchaseinboundSellout } from "@/api/Warehousemanagement/AnalysisCertificate";
+import { PurchaseinboundSellout,QualityinAdd,QualityinAdds } from "@/api/Warehousemanagement/AnalysisCertificate";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -341,7 +352,10 @@ export default {
         },
     },
     created() {
+      
+        this.form2.cbqa06 ="0";
 
+        this.getList();
         this.getParams();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
@@ -364,7 +378,42 @@ export default {
              this.ListUser = routerParams.data; 
              let zhuangh = JSON.parse(this.ListUser); 
              console.log(zhuangh,88888);
+
            },
+
+
+             /** 销售提货单 */
+        getList() {
+            let routerParams = this.$route.query;
+               this.formArr = routerParams.data; 
+                // console.log(zhuangh[0].id,889999);          
+               PurchaseinboundSellout(this.formArr,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                response.data.scans.forEach((item)=>{
+                    // item.cbsc177=item.orderClass;
+                    item.cbpb09 = item.sku;
+                    // if(item.cbsc177=="国内订单"){
+                    //       item.cbsc17="1";
+                    // }
+                    item.cbpc000 = item.brand +"-"+item.model+"-"+item.description+"-"+item.sn;
+                    item.cbqb10 = item.sn;
+                    console.log(item.cbpd09,19991119);
+
+                })
+                
+                this.formArr = response.data.scans;
+                this.total = response.data.total;
+                console.log(response.data.scans, 339688);
+                // this.userList01 = JSON.stringify(this.userList);
+                // response.data.goods.forEach((e)=>{
+                //   this.form.cbsc17=e.orderClass;
+                // })
+                // let 
+                console.log( JSON.stringify(this.formArr,852369));
+                // console.log(this.userList01.orderClass,852147777);
+                // this.deleteFlag = response.data.rows.deleteFlag;   this.form.cbsc17
+            }
+            );
+        },
 
         show() {
             this.showSearch = !this.showSearch;
@@ -469,23 +518,25 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
-
+            this.form2.cbqa06 ="0";
             this.$refs["form2"].validate((item) => {
                 if (item) {
-                    PurchaseinboundAdd(this.form2).then(response => {
+                    QualityinAdd(this.form2).then(response => {
                         // console.log(response.posts, 12345678);
-                        this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         this.submitShangpin();
-
                         this.open2 = false;
                         this.reset01();
-
                         console.log(this.item, 123456);
+                        this.formArr.forEach((item)=>{
+                                item.cbqa01=response.data.id
+                        })
+                        console.log(item.cbqa01,896523);
+
+                        this._ly_ok();
                     });
                 } else {
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
 
@@ -524,11 +575,11 @@ export default {
                 console.log(form)
                 console.log(JSON.stringify(form))
                 // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-                this.$refs[form.formName][0].validate((valid, obj) => {
-                    if (valid) {
+                // this.$refs[form.formName][0].validate((valid, obj) => {
+                //     if (valid) {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
-                        PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
+                        QualityinAdds(JSON.stringify(this.formArr)).then(response => {
                             if(response.code=="200"){
                                 this.formArr=[]
                                 this.form2={
@@ -569,11 +620,11 @@ export default {
                     //    console.log(this.form.cbpg01,85203);
                     });
 
-                    } else {
-                        console.log(obj)
-                        return false
-                    }
-              })
+            //         } else {
+            //             console.log(obj)
+            //             return false
+            //         }
+            //   })
             }
             console.log('_ly_ok:' + JSON.stringify(this.formArr))
         },

@@ -28,8 +28,25 @@
                   </el-form-item>
                     <el-form-item style="margin-left:50%;">                    
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handletihuoone">创建</el-button>
-                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                        <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;" @click="handletihuoone">创建</el-button>
+                         <el-dropdown trigger="click">
+                         <span class="xialaxuanxanggdd">
+                             <i class="el-icon-caret-bottom el-icon--right "></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                           <el-dropdown-item class="clearfix"  @click.native="tong">
+                              通过订单创建
+                             <el-badge class="mark"/>
+                           </el-dropdown-item>
+                        <!-- <el-dropdown-item class="clearfix">
+                              通过提货单创建
+                            <el-badge class="mark"/>
+                        </el-dropdown-item> -->
+                        </el-dropdown-menu>
+                       </el-dropdown>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button size="mini" type="danger"  class="biaoto-buttonshanchu" :disabled="multiple"
                             @click="handleDelete">删除</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
@@ -114,6 +131,30 @@
                     class="pagintotal" />
             </el-col>
         </el-row>
+
+          <!--订单创建-->
+        <el-dialog :visible.sync="open3">
+            <el-table border :header-cell-style="headClassssmtt" v-loading="loading" :data="userList01" height="440"
+                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
+                    @selection-change="handleSelectionChange">
+                    <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
+                      <template slot-scope="scope" style="margin-left:-10%;">
+                            <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
+                                v-hasPermi="['system:user:edit']">
+                            </el-button>
+                       </template>
+                       </el-table-column>
+                    <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable style="padding-top:60px !important;" width="260px;" />
+                     <el-table-column label="单据日期" align="left" key="orderDate" prop="orderDate" width="180px;" sortable />
+                    <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
+                    <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
+                    </el-table-column>
+                    <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
+                     
+            </el-table>
+            <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
+        </el-dialog>
+
 
         <!-- 创建测试 -->
         <el-dialog :visible.sync="open2" class="chuangjiandialog">
@@ -413,6 +454,9 @@
             </div>
         </el-dialog>
 
+
+      
+
         <!-- 用户导入对话框 -->
         <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
             <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
@@ -438,7 +482,7 @@
 </template>
 <script>
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { PurchaseinboundAdd, Purchaseinbounddingdancx, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/Saleslading";
+import { PurchaseinboundAdd, Purchaseinbounddingdancx, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists,Purchaseinbounddingdanxsdd } from "@/api/Warehousemanagement/Saleslading";
 import * as req from "@/api/Warehousemanagement/Saleslading";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -470,8 +514,10 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+             totall: 0,
             // 用户表格数据
             userList: null,
+            userList01:null,
             // 弹出层标题
             title: "",
             // 部门树选项
@@ -480,6 +526,7 @@ export default {
             open: false,
             open1: false,
             open2: false,
+            open3:false,
             // 部门名称
             deptName: undefined,
             // 默认密码
@@ -661,6 +708,7 @@ export default {
                 page: 1,
                 size: 10,
                 total: this.total,
+                totall: this.totall,
               cbpc07:undefined,
               cbsa08:undefined,
               cbwa09:undefined,
@@ -818,6 +866,9 @@ export default {
         //仓库
         this.getList04();
 
+        //销售订单
+        this.getList09();
+
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -831,6 +882,22 @@ export default {
         this.form2.cbsa09 = "20"
     },
     methods: {
+     
+        //列表表头设置
+        headClassssmtt() {
+            return {
+                'text-align': 'left',
+                height: '40px',
+                padding: '0'
+            }
+        },
+
+        //销售订单
+           tong(){
+          this.open3 = true;
+        },
+
+
         //列表表头设置
         headClassSld() {
             return {
@@ -871,13 +938,30 @@ export default {
             this.tianjiahang.splice(index, 1);
         },
 
-        /** 查询用户列表 */
+        /** 销售提货单列表 */
         getList() {
             this.loading = true;
             Purchaseinbounddingdancx(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 console.log(response, 339688);
+                this.loading = false;
+            }
+            );
+        },
+
+
+        /** 销售订单列表 */
+        getList09() {
+            this.loading = true;
+            Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                this.userList01 = response.data.rows;
+                this.totall = response.data.total;
+                // //供应商
+                // this.postOptions = response.data.content;
+                // console.log(this.userList, 3369);
+                console.log(response,199911196914);
+                // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
             }
             );
@@ -1460,6 +1544,26 @@ export default {
         // 提交上传文件
         submitFileForm() {
             this.$refs.upload.submit();
+        },
+
+       sendParams(row) {
+            this.$router.push({
+
+                path: '/system/user-authhhxsxiaosdingdantihuo/role/',
+                name: 'index',
+                query: {
+                    // name: '页面1',
+                    // data: this.form2.cbpc01,
+                    // data: JSON.stringify(this.userList01),
+                    data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
+                                          customerLevel:row.customerLevel,contacts:row.contacts,
+                                        whName:row.whName,phone:row.phone,address:row.address,
+                                        saleUser:row.saleUser,id:row.id}]),
+                    data01:JSON.stringify(row)
+                        //  JSON.stringify(this.userList)
+                }
+            })
+            location.reload();
         },
 
         //测试树状菜单

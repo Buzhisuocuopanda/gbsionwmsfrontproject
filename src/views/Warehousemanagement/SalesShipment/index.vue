@@ -148,7 +148,7 @@
         </el-row>
 
 
-        <!--订单创建-->
+        <!--提货单创建-->
         <el-dialog :visible.sync="open3">
             <el-table border :header-cell-style="headClassssmt" v-loading="loading" :data="userList01" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
@@ -281,6 +281,7 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+             totall: 0,
             // 用户表格数据
             userList: null,
              // 用户表格数据
@@ -293,7 +294,7 @@ export default {
             open: false,
             open1: false,
             open2: false,
-             open3: false,
+            open3: false,
             // 部门名称
             deptName: undefined,
             // 默认密码
@@ -475,6 +476,7 @@ export default {
                 page: 1,
                 size: 10,
                 total: this.total,
+                totall: this.totall,
                 cbsb07: undefined,
                 cbca08:undefined,
                 dateRange: undefined
@@ -715,7 +717,7 @@ export default {
             this.loading = true;
             Purchaseinbounddingdancx(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList01 = response.data.rows;
-                this.total = response.data.total;
+                this.totall = response.data.total;
                 // //供应商
                 // this.postOptions = response.data.content;
                 // console.log(this.userList, 3369);

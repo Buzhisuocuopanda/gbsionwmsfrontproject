@@ -24,13 +24,13 @@
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                   </el-form-item>
                   <el-form-item>
-                        <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button class="biaoto-buttonchuangjiannmnm" size="mini" @click="resetQuery">重置</el-button>
                   </el-form-item>
                     <el-form-item style="margin-left:45%;">                      
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handletuikuone">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjiannmnm" @click="handletuikuone">创建</el-button>
                         <el-dropdown trigger="click">
-                        <span class="el-dropdown-link xialaxuanxang">
+                        <span class="el-dropdown-link xialaxuanxangjjj">
                              <i class="el-icon-caret-bottom el-icon--right "></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
@@ -337,7 +337,6 @@
                     <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
                      
             </el-table>
-            <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
         </el-dialog>
        
 
@@ -486,6 +485,7 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+            totall: 0,
             // 用户表格数据
             userList: null,
             // 弹出层标题
@@ -675,6 +675,7 @@ export default {
                 page: 1,
                 size: 10,
                 total: this.total,
+                totall: this.totall,
                 name: undefined,
                 address: undefined,
                 cbwa09: undefined,
@@ -912,7 +913,7 @@ export default {
             this.loading = true;
             SkuBarcodeListsxs(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList01 = response.data.rows;
-                this.total = response.data.total;
+                this.totall = response.data.total;
                 // //供应商
                 // this.postOptions = response.data.content;
                 // console.log(this.userList, 3369);
@@ -1391,7 +1392,6 @@ export default {
                                         settleCurrentMsg:row.settleCurrentMsg, status:row.status,
                                          statusMsg:row.statusMsg,                
                                     }]),
-                    data01:JSON.stringify(row)
                         //  JSON.stringify(this.userList)
                 }
             })

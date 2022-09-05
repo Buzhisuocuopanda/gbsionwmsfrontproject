@@ -28,7 +28,7 @@ export function PurchaseinboundList(query) {
   })
 }
 
-// 订单查询
+//销售提货单查询
 export function Purchaseinbounddingdancx(data) {
   return request({
     url: '/whmanagement/takeOrderList',
@@ -46,7 +46,7 @@ export function PurchaseinboundLists(CBPC01) {
   })
 }
 
-// 提货单详情
+//销售提货单详情
 export function PurchaseinListxiangq(CBPC01) {
   return request({
     url: '/whmanagement/takeOrderDetail?id='+ CBPC01,

@@ -567,7 +567,21 @@ export const dynamicRoutes = [
       }
     ]
   },
-  ,
+      //根据销售订单创建
+  {
+    path: '/system/user-authhhxsxiaosdingdantihuo',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+         name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/Saleslading/Salesladingcj/index'),
+        meta: { title: '销售提货单创建', activeMenu: '/Warehousemanagement/Saleslading' }
+      }
+    ]
+  },
    //质检单返回
    {
     path: '/system/user-zhijiandan',
