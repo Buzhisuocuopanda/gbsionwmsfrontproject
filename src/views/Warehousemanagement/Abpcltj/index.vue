@@ -103,7 +103,7 @@
                   </el-option>
                 </el-select> -->
                 <el-popover placement="bottom-start" trigger="click">
-                       <Goodsone01 ref="Goodsone01" @selected="selected08"
+                       <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
                           style="width:100% !important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
@@ -125,31 +125,46 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column prop="num" label="数量" width="150">
+          <el-table-column prop="cbpd09" label="数量" width="150">
             <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.num" placeholder="数量" style=""></el-input>
-              </sapn>
+              <!-- <sapn> -->
+                <el-input v-model="scope.row.cbpd09" @blur="chen(scope.row)" placeholder="数量" style=""></el-input>
+              <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="address" label="单价" width="150">
+          <el-table-column prop="cbpd11" label="单价"  width="150">
             <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.address" placeholder="数量" style=""></el-input>
-              </sapn>
+              <!-- <sapn> -->
+                <el-input v-model="scope.row.cbpd11" @blur="chen(scope.row)" placeholder="单价" style=""></el-input>
+              <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="moner" label="金额" width="150">
+          <el-table-column prop="cbpd12" label="金额" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.moner" placeholder="金额" style="" disabled></el-input>
+                <el-input v-model="scope.row.cbpd12" placeholder="金额" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.province" type="textarea" placeholder="备注"></el-input>
+                <el-input v-model="scope.row.cbpd13" type="textarea" placeholder="备注"></el-input>
+              </sapn>
+            </template>
+          </el-table-column>
+
+          <el-table-column v-if="false" prop="cbpc01" label="id" width="150">
+            <template slot-scope="scope">
+              <sapn>
+                <el-input v-model="scope.row.cbpc01" placeholder="id" style=""></el-input>
+              </sapn>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="cbpc08" label="商品编号" width="150">
+            <template slot-scope="scope">
+              <sapn>
+                <el-input v-model="scope.row.cbpc08" placeholder="商品编号" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -669,6 +684,13 @@
 
     },
     methods: {
+
+
+       chen(item) {
+            if(item.cbpd09>0&&item.cbpd11>0){
+                this.$set(item,'cbpd12',(parseFloat(item.cbpd09)*parseFloat(item.cbpd11)))
+            }
+          },
       // 合并单元格
       arraySpanMethod({
         row,
@@ -702,19 +724,19 @@
       },
       // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
       _ly_ok() {
-        let count = this.formArr.length // 记录当前有多少个表单
-        for (var index in this.formArr) {
-          var form = this.formArr[index]
+        let count = this.tableData.length // 记录当前有多少个表单
+        for (var index in this.tableData) {
+          var form = this.tableData[index]
           console.log(form)
           console.log(JSON.stringify(form))
           // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-          this.$refs[form.formName][0].validate((valid, obj) => {
-            if (valid) {
+          // this.$refs[form.formName][0].validate((valid, obj) => {
+            // if (valid) {
               // 如果检查通过，则对count减1。
               // 当count为1时，表示是最后一个表单，则存储数据
-              PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
+              PurchaseinboundAdds(JSON.stringify(this.tableData)).then(response => {
                 if (response.code == "200") {
-                  this.formArr = []
+                  this.tableData = []
                   this.form2 = {
                     cbpc07: "",
                     cbpc08: "",
@@ -753,13 +775,13 @@
                 //    console.log(this.form.cbpg01,85203);
               });
 
-            } else {
-              console.log(obj)
-              return false
-            }
-          })
+          //   } else {
+          //     console.log(obj)
+          //     return false
+          //   }
+          // })
         }
-        console.log('_ly_ok:' + JSON.stringify(this.formArr))
+        console.log('_ly_ok:' + JSON.stringify(this.tableData))
       },
 
 
@@ -771,7 +793,7 @@
         this.$message.success('添加成功')
         // 将数据传递给父组件。
         // 如果要将数据存储到后台，可在此处自行实现
-        this.$emit('on-ok', this.formArr)
+        this.$emit('on-ok', this.tableData)
       },
       // 增加一行表单
       _ly_addFrom() {
@@ -828,7 +850,7 @@
         this.formArr[index].branch = data.label
 
         // 选择后收起下拉框
-        let formName = this.formArr[index].formName
+        let formName = this.tableData[index].formName
         this.$refs[formName + '_select'][0].blur() // myform1648431132399_select
       },
 
@@ -875,8 +897,15 @@
       },
 
       //查询商品信息维护
-      selected08(name) {
-        console.log(name, 111)
+      selected08(e,row) {
+        // row.cbpc000=e
+        this.$set(row,"cbpc000",e.substring(0,e.indexOf(".")))
+        console.log(e,111)
+        console.log(row,222)
+        // row.cbpc08 = e.substring(e.indexOf(".") + 1)
+        this.$set(row,"cbpc08",e.substring(e.indexOf(".") +1),8523642)
+        // console.log(row.cbpc08,96325412);
+        // console.log(name, 111)
         // console.log(index, 222)
         // this.$set(this.tableData, "cbpc000", e)
 
@@ -894,15 +923,15 @@
           // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
         //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
           // this.form.cbpc000 = name;
-          this.$set(this.tableData,"cbpc000",name);
+          // this.$set(this.tableData,"cbpc000",name);
           // this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1));
-          this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
-          this.$forceUpdate()
+          // this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
+          // this.$forceUpdate()
           // console.log(this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
           // this.tableData.cbpc000 = "123";
           // this.tableData.num = "23344";
           // console.log(name,556623);
-          console.log(this.tableData.cbpc000,20220905);
+          // console.log(this.tableData.cbpc000,20220905);
       },
 
       //添加行
@@ -986,22 +1015,13 @@
                 this.submitShangpin();
                 this.open2 = false;
                 this.reset01()
-                this.form2.cbpg161 = response.data.id;
-                this.form.cbpc01 = response.data.id;
                 // console.log(this.form2.cbpg161,111);
                 // console.log(this.form.cbpg01,222);
                 console.log(response.data.id, 333);
-                this.formArr.forEach((item) => {
-                  item.cbpc01 = response.data.id
-                  // item.cbpd08= this.form2.cbpd08;
-                  // item.cbpd09= this.form.cbpd09;
-                  // item.cbpd11= this.form.cbpd11;
-                  // item.cbpd12= this.form.cbpd12;
-                  let t = item.cbpc000;
-                  item.cbpd08 = t.substring(t.indexOf(".") + 1);
-                  console.log(t.substring(t.indexOf(".") + 1), 33333);
+                this.tableData.forEach((item) => {
+                  item.cbpc01 = response.data.id;
+                  console.log(item.cbpc01,8523697412);
                 })
-                console.log(this.formArr, 888)
                 this._ly_ok()
               }
             });
@@ -1025,7 +1045,7 @@
     },
     mounted() {
       // 初始化表单数据，至少有一行表单数据
-      this.formArr = []
+      this.tableData = []
       this._ly_addFrom()
     },
     watch: {
@@ -1033,7 +1053,7 @@
         this.dialogVisible = newVal
         if (this.dialogVisible === false) {
           // 重新打开弹窗时，初始化表单数据，至少有一行表单数据
-          this.formArr = []
+          this.tableData = []
           this._ly_addFrom()
         }
       }

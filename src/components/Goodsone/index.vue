@@ -11,7 +11,7 @@
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                 <!-- <span>{{ item }}</span> -->
                 <el-row style="margin-top: 0%;">
-                    <el-col :span="24"> <span>{{ item }}</span></el-col>
+                    <el-col :span="24"> <span>{{ item.substring(0,item.lastIndexOf(".")) }}</span></el-col>
                 </el-row>
             </div>
         </div>
