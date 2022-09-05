@@ -90,30 +90,38 @@
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="date" label="品牌" width="">
-            <!-- <template slot-scope="scope">
+         <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
+          <el-table-column prop="cbpc000" label="品牌" width="">
+            <template slot-scope="scope">
               <sapn>
-                <el-select v-model="scope.row.date" filterable clearable placeholder="请选择" style="width: 100%;">
+                <!-- <el-select v-model="scope.row.date" filterable clearable placeholder="请选择" style="width: 100%;">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
                   </el-option>
-                </el-select>
+                </el-select> -->
+                <el-popover placement="bottom-start" trigger="click">
+                       <Goodsone01 ref="Goodsone01" @selected="selected08"
+                          style="width:100% !important;" />
+                        <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
+                            style="width:100%;">
+                        </el-input>
+                  </el-popover>
               </sapn>
-            </template> -->
-            <el-col style="margin-left: 0%;" :span="7">
+            </template>
+            <!-- <el-col style="margin-left: 0%;" :span="7">
               <el-form-item label="" prop="cbpc000">
                   <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08"
                           style="width:100% !important;" />
                         <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                            style="width:205.6%;">
+                            style="width:100%;">
                         </el-input>
                   </el-popover>
               </el-form-item>
-            </el-col>
+            </el-col> -->
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
@@ -152,6 +160,7 @@
               </span>
             </template>
           </el-table-column>
+          <!-- </el-form> -->
         </el-table>
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
@@ -514,7 +523,8 @@
           cbpd12: "",
           cbpc166: "",
           cbpc16: "",
-          cbpc01: ""
+          cbpc01: "",
+          cbpc000:""
         },
         form1: {
           // classifyId: "",
@@ -652,7 +662,7 @@
       // this.form.type = this.dict[0].label;
       // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
       // console.log(this.userList,123456789);
-      this.chen();
+      // this.chen();
       this.form2.cbph10 = "20"
 
       console.log(this.form.cbpc16, 123456);
@@ -789,6 +799,7 @@
           address: '',
           moner: '',
           province: '',
+          cbpc000: ''
         })
         this.dataId++
         console.log(this.tableData,852369);
@@ -830,12 +841,11 @@
         this.showSearch = !this.showSearch;
       },
 
-      chen(item) {
-        if (item.cbpd09 > 0 && item.cbpd11 > 0) {
-          this.$set(item, 'cbpd12', (parseFloat(item.cbpd09) * parseFloat(item.cbpd11)))
-        }
-        // this.form2.cbpd12 = this.form2.cbpd09 * this.form2.cbpd11;
-      },
+      // chen(item) {
+      //   if (item.cbpd09 > 0 && item.cbpd11 > 0) {
+      //     this.$set(item, 'cbpd12', (parseFloat(item.cbpd09) * parseFloat(item.cbpd11)))
+      //   }
+      // },
       //添加模块-仓库
       selected01(name) {
         console.log(name, 123)
@@ -874,12 +884,23 @@
         // this.formArr[index].cbpc000=e
         // console.log(this.formArr)
         // console.log(name.substring(name.indexOf("-") + 1), 963);
-        // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+        // this.form.cbpc000 = name.substring(0, name.indexOf("-"));
         // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
         // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
         // this.form.cbpc000 = name;
         // this.form.cbpd08  =  name.substring(name.indexOf(".") +1);
         // console.log(this.form2.cbpd08,852369421);
+
+          // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
+        //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
+          // this.form.cbpc000 = name;
+          // this.$set(row,"cbpc000",name)
+          // name.cbla10  = name.substring(name.indexOf(".") + 1)
+          // this.$forceUpdate()
+          // console.log(this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
+          this.tableData.cbpc000 = "123";
+          this.tableData.num = "23344";
+          console.log(name,556623);
       },
 
       //添加行

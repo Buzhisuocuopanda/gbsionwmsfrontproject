@@ -8,7 +8,7 @@
                         <!--树状菜单-->
                         <a @click="submitShangpin" class="shuzhuangliebiaofenleih">商品分类</a>
                         <el-tree :data="deptOptions" :props="defaultProps" :expand-on-click-node="false" ref="tree"
-                            default-expand-all highlight-current style="height:550px;"  />
+                            default-expand-all highlight-current style="height:550px;"  @node-click="handleNodeClickll" />
                     </div>
                 </el-col>
                 <!--用户数据-->
@@ -967,6 +967,25 @@ export default {
         //   alert("ddd");
         //   return data.indexOf(value) !== -1;
         // },
+         handleNodeClickll(data) {
+            this.form.cbpa11 = "";
+            for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
+                if (i != 0) {
+                    this.form.cbpa11 += ("~" + (data.code.split("~"))[i])
+                } else {
+                    this.form.cbpa11 += (data.code.split("~"))[i]
+                }
+            }
+            // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
+            this.form.cbpa07 = data.label;
+             this.queryParams.cbpa07 = data.label;
+            this.form.cbpb14 = (this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1]
+            console.log((this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1],19991119);
+            // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
+            this.handleQuery();
+            
+            
+        },
 
             // 节点单击事件
      handleNodeClick(data) {
