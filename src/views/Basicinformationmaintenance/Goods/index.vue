@@ -96,13 +96,22 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="11" style="margin-left:-1%;">
-                            <el-form-item label="商品品牌:" prop="cbpb10">
+                            <!-- <el-form-item label="商品品牌:" prop="cbpb10"> -->
                                 <!-- <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" /> -->
-                            <el-select v-model="form.cala08" placeholder="" style="width:80%;">
+                            <!-- <el-select v-model="form.cala08" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
-                            </el-form-item>
+                            </el-form-item> -->
+
+                        <el-form-item label="商品品牌:" prop="cbpc099">
+                            <el-popover placement="bottom-start" trigger="click">
+                                <ListMaintenance ref="ListMaintenance" @selected="selected02" />
+                                <el-select slot="reference" v-model="form.cbpc099" placeholder="" readonly
+                                    style="width:77%;">
+                                </el-select>
+                            </el-popover>
+                        </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row style="margin-left:6%;">
@@ -144,6 +153,11 @@
                         <el-col :span="11">
                             <el-form-item label="商品描述:" prop="cbpb07">
                                <el-input v-model="form.cbpb09" placeholder="" maxlength="30" style="width:78%;" />
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="11">
+                            <el-form-item label="商品品牌:" prop="cbpb10">
+                               <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:78%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -253,13 +267,21 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
-                            <el-form-item label="商品品牌:" prop="cbpb10">
+                            <!-- <el-form-item label="商品品牌:" prop="cbpb10"> -->
                                 <!-- <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" /> -->
-                            <el-select v-model="form2.cbpb10" placeholder="" style="width:80%;">
+                            <!-- <el-select v-model="form2.cbpb10" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
-                            </el-form-item>
+                            </el-form-item> -->
+                        <el-form-item label="商品品牌:" prop="cbpc099">
+                            <el-popover placement="bottom-start" trigger="click">
+                                <ListMaintenance ref="ListMaintenance" @selected="selected01" />
+                                <el-select slot="reference" v-model="form2.cbpc099" placeholder="" readonly
+                                    style="width:77%;">
+                                </el-select>
+                            </el-popover>
+                        </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row style="margin-left:6%;">
@@ -300,10 +322,15 @@
                         <el-col :span="11">
                             <el-form-item label="状态:" prop="cbpb07">
                                 <!-- <el-input v-model="form.cbpb07" maxlength="30" style="width:55%;" /> -->
-                                <el-select v-model="form.cbpb07" placeholder="" style="width:78%;">
+                                <el-select v-model="form2.cbpb077" placeholder="" style="width:78%;">
                                 <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
                             </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="11">
+                            <el-form-item label="商品品牌:" prop="cbpb10">
+                               <el-input v-model="form2.cbpb10" placeholder="" maxlength="30" style="width:78%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -566,7 +593,8 @@ export default {
                 cbpb14: "",
                 cbpb15: "",
                 cala08: "",
-                cbpa07:""
+                cbpa07:"",
+                cbpc099:""
             },
             form5: {
                 cbpf02:"",
@@ -584,16 +612,17 @@ export default {
             },
             form2: {
                  cbpb07: "",
-                cbpb08: "",
-                cbpb09: "",
-                cbpb10: "",
-                cbpb11: "",
-                cbpb12: "",
-                cbpb13: "",
-                cbpb14: "",
-                cbpb15: "",
-                cala08: "",
-                cbpa07:""
+                 cbpb08: "",
+                 cbpb09: "",
+                 cbpb10: "",
+                 cbpb11: "",
+                 cbpb12: "",
+                 cbpb13: "",
+                 cbpb14: "",
+                 cbpb15: "",
+                 cala08: "",
+                 cbpa07:"",
+                 cbpc099:""
             },
             defaultProps: {
                 children: "children",
@@ -697,6 +726,36 @@ export default {
         // this.form2.ifEnabled = this.ifEnabledoptions[0].label;
     },
     methods: {
+
+
+          //修改模块-列表
+        selected02(name) {
+            // console.log(name, 123)
+            // console.log(name.substring(name.indexOf("-") + 1), 963);
+            // this.form.cbpc099 = name.substring(0, name.indexOf("-"));
+            // this.form.cbpc09 = name.substring(name.indexOf("-") + 1);
+            // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+            // this.form2.icon = name;
+
+             this.$set(this.form,"cbpc099",name.substring(0, name.indexOf("-")))
+            this.form.cbpb10  = name.substring(name.indexOf("-") + 1)
+            this.$forceUpdate()
+        },
+
+        
+          //添加模块-列表
+        selected01(name) {
+            // console.log(name, 123)
+            // console.log(name.substring(name.indexOf("-") + 1), 963);
+            // this.form.cbpc099 = name.substring(0, name.indexOf("-"));
+            // this.form.cbpc09 = name.substring(name.indexOf("-") + 1);
+            // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+            // this.form2.icon = name;
+
+            this.$set(this.form2,"cbpc099",name.substring(0, name.indexOf("-")))
+            this.form2.cbpb10  = name.substring(name.indexOf("-") + 1)
+            this.$forceUpdate()
+        },
          
         //修改树状列表
         shuzhuangliebiao(){
@@ -1130,7 +1189,9 @@ export default {
             }
             this.open = true;
             console.log(row, 7788521);
-             this.form= row;
+            //  this.form= row;
+            this.form = Object.assign({},row);
+            this.form.cbpc099=this.form.cala08
             // this.getList();
         },
         /** 数形列表的商品分类按钮**/
