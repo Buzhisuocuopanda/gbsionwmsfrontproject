@@ -75,6 +75,7 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title" :visible.sync="open"  class="abow_dialogg">
+            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">供应商信息维护</div>
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
             <el-form ref="form" :model="form" label-width="55%" lable-height="20%" :rules="rules01" class="chuangjianform">
@@ -291,8 +292,7 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2"  class="abow_dialogg">
-            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
-            <!-- <hr /> -->
+            <div style="margin-top:1%;font-weight: 700;font-size: 17px; color: black;margin-left:44%; position: relative;">供应商信息维护</div>
             <el-form ref="form2" :model="form2" label-width="45%" :rules="rules"
                 class="chuangjianform">
                 <div style="margin-top:1.5%;">
@@ -327,6 +327,13 @@
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="联系电话:" prop="cbsa15">
+                                <el-input v-model="form2.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row style="margin-left:5%;margin-top:2%;">
+                        <el-col :span="11">
+                            <el-form-item label="编号:" prop="cbsa15">
                                 <el-input v-model="form2.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
@@ -615,16 +622,16 @@ export default {
                 cbsa08: [
                     { required: true, message: "公司名称不能为空!", trigger: "blur" }
                 ],
-                // cbsa14: [
-                //     { required: true, message: "联系人不能为空!", trigger: "blur" }
-                // ],
+                cbsa14: [
+                    { required: true, message: "联系人不能为空!", trigger: "blur" }
+                ],
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
                 // ],
-                // cbsa15: [
-                //     { required: true, message: "联系电话不能为空!", trigger: "blur" },
-                //     { validator: phoneValidator11, trigger: 'blur' }
-                // ]
+                cbsa15: [
+                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
+                    { validator: phoneValidator11, trigger: 'blur' }
+                ],
                 // ,
                 // cbsa10: [
                 //     { required: true, message: "开户行不能为空!", trigger: "blur" }
@@ -652,17 +659,17 @@ export default {
                cbsa08: [
                     { required: true, message: "公司名称不能为空!", trigger: "blur" }
                 ],
-                // cbsa14: [
-                //     { required: true, message: "联系人不能为空!", trigger: "blur" }
-                // ],
+                cbsa14: [
+                    { required: true, message: "联系人不能为空!", trigger: "blur" }
+                ],
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
                 // ],
-                // cbsa15: [
-                //     { required: true, message: "联系电话不能为空!", trigger: "blur" },
-                //     { validator: phoneValidator11, trigger: 'blur' }
-                // ]
-                // ,
+                cbsa15: [
+                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
+                    { validator: phoneValidator11, trigger: 'blur' }
+                ]
+                 ,
                 // cbsa10: [
                 //     { required: true, message: "开户行不能为空!", trigger: "blur" }
                 // ],

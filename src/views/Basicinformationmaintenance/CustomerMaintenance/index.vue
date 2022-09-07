@@ -77,10 +77,10 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3" >
-            <div class="kehuxxweih">客户信息维护</div>
+           <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护</div>
             <el-form ref="form" :model="form" :rules="rules3"  label-width="50%" class="chuangjianformcust">
                  <div>
-                     <swiper-test style="margin-left:2%;">发票信息</swiper-test>
+                     <swiper-test style="margin-left:2%;">基本信息</swiper-test>
                     <hr style="width:190%;"/>
                 </div>
                 <el-row style="margin-top:2%;">
@@ -204,8 +204,8 @@
                 </el-row>
                 <el-row style="margin-left:-54%;">
                     <el-col>
-                        <el-form-item label="邮寄地址:" prop="cbca25">
-                            <el-input v-model="form.cbca25" placeholder="" style="width:100%;" maxlength="30" />
+                        <el-form-item label="邮寄地址:" prop="cbca26">
+                            <el-input v-model="form.cbca26" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col>
@@ -229,10 +229,10 @@
         <!-- <el-dialog :title="title" :visible.sync="open">
             <el-form ref="form" :model="form" label-width="45%" class="chuangjianform"> -->
         <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog3">
-           
+           <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护</div>
             <el-form ref="form1" :model="form1" label-width="45%" class="chuangjianformcust">
                 <div>
-                     <span style="margin-left:2%;">发票信息</span>
+                     <span style="margin-left:2%;">基本信息</span>
                     <hr style="width:190%;"/>
                 </div>
                  <el-row style="margin-top:2%;">
@@ -369,9 +369,10 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" class="abow_dialog3">
+            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护</div>
             <el-form ref="form2" :model="form2" label-width="50%" :rules="rules2" class="chuangjianformcust">
                  <div>
-                     <span style="margin-left:2%;">发票信息</span>
+                     <span style="margin-left:2%;">基本信息</span>
                    <hr style="width:190%;"/>
                 </div>
                 <el-row style="margin-top:2%;">
@@ -1206,7 +1207,7 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             console.log(userIds, 123)
             console.log(typeof userIds)
-            this.$modal.confirm('是否确认删除客户为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否删除客户为"' + JSON.stringify(this.idss) + '"？').then(() => {
                 userIds.forEach((item) => {
                     req.CustomeRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -1231,7 +1232,7 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除客户为"' + row.cbca08 + '"的数据项？').then(function () {
+        this.$modal.confirm('是否删除客户为"' + row.cbca08 + '"？').then(function () {
           return CustomeRemove(JSON.stringify(row));
         }).then((response) => {
           this.submitShangpin();

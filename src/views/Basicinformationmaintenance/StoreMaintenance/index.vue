@@ -213,12 +213,11 @@
                <el-row style="margin-top:3%; ">
                   <el-col style="margin-left:7%;">
                        <el-form-item label="仓库:" prop="cbpc100">
-                           <el-popover placement="bottom-start" trigger="click">
-                               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" />
-                              <el-input slot="reference" v-model="form2.cbpc100" readonly placeholder=""  
-                                style="width:77%;">
-                              </el-input>
-                           </el-popover>
+                            <el-popover placement="bottom-start" trigger="click">
+                                  <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
+                                <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:77%;">
+                                </el-input>
+                             </el-popover>
                         </el-form-item>
                   </el-col>
                     <el-col style="margin-left:7%;">
@@ -318,8 +317,8 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 // import kuweixxweihu from "@/components/kuweixxweihu";
 
-//仓库
-import kuweixxweihu from "@/components/WarehouseInfoSku";
+ //仓库
+  import kuweixxweihu from "@/components/WarehouseInfoSku";
 
 import Vue from "vue";
 export default {
@@ -498,7 +497,7 @@ export default {
                     { required: true, message: "优先型号不能为空!", trigger: "blur" }
                 ],
                 cbpc100:[
-                    { required: true, message: "仓库不能为空!", trigger: "change" }
+                    { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
                 cbla12:[{
                       required: true, message: "优先型号不能为空!", trigger: "blur" 
@@ -524,7 +523,7 @@ export default {
                     { required: true, message: "优先型号不能为空!", trigger: "blur" }
                 ],
                 cbpc100:[
-                    { required: true, message: "仓库不能为空!", trigger: "change" }
+                    { required: true, message: "仓库不能为空!", trigger:  'change'  }
                 ],
                 cbla12:[{
                       required: true, message: "优先型号不能为空!", trigger: "blur" 
@@ -577,13 +576,13 @@ export default {
             // this.form2.icon = name;
         },
 
-        //添加模块-仓库
-        selected01(name) {
-             this.$set(this.form2,"cbpc100",name.substring(0, name.indexOf("-")))
-            this.form2.cbla10  = name.substring(name.indexOf("-") + 1)
-            this.$forceUpdate()
-            // this.form2.icon = name;
-        },
+   selected01(name) {
+        console.log(name, 123)
+        console.log(name.substring(name.indexOf("-") + 1), 963);
+        this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
+        this.form2.cbpc10 = name.substring(name.indexOf("-") + 1)
+        // this.form2.icon = name;
+      },
 
           //修改模块-仓库
         selected02(name) {
