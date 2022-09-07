@@ -1,10 +1,19 @@
 import request from '@/utils/request'
 import { parseStrEmpty } from "@/utils/ruoyi";
 
-// 新增配置
+// 库存汇总新增配置
 export function PurchaseinboundAdd(data) {
   return request({
     url: '/system/WarehouseInventoryrollup/SwJsStoreadd',
+    method: 'post',
+    data: data
+  })
+}
+
+// 库存汇总明细新增配置
+export function PurchaseinboundAdds(data) {
+  return request({
+    url: '/system/WarehouseInventoryrollup/SwJsStoreadds',
     method: 'post',
     data: data
   })

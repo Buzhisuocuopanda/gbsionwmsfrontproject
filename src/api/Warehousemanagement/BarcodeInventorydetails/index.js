@@ -4,11 +4,21 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 库存明细初始化新增
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundadd',
+    url: '/system/Warehousedetailsinitialize/SwJsStoreadd',
     method: 'post',
     data: data
   })
 }
+
+// 库存明细初始化明细新增
+export function PurchaseinboundAdds(data) {
+  return request({
+    url: '/system/Warehousedetailsinitialize/SwJsStoreadds',
+    method: 'post',
+    data: data
+  })
+}
+
 
 // 库存明细初始化列表
 export function PurchaseinboundList(query) {

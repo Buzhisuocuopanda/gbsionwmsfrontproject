@@ -79,14 +79,15 @@
                         <el-checkbox v-model="upload.updateSupport" /> 是否更新已经存在的用户数据
                     </div>
                     <span>仅允许导入xls、xlsx格式文件。</span>
-                    <!--<el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;" @click="importTemplate">下载模板</el-link>-->
+                    <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;"
+                        @click="importTemplate">下载模板</el-link>
                 </div>
             </el-upload>
             <div slot="footer" class="dialog-footer">
-                <el-button type="success" :underline="false" style="font-size:12px;vertical-align: baseline;"
-                    @click="importTemplate" class="dialog-footer-xzmb">下载模板</el-button>
-                <el-button type="primary" @click="submitFileForm" class="dialog-footer-queding">确 定</el-button>
-                <!--<el-button @click="upload.open = false">取 消</el-button>-->
+                <!-- <el-button type="success" :underline="false" style="font-size:12px;vertical-align: baseline;"
+                    @click="importTemplate" class="dialog-footer-xzmb">下载模板</el-button> -->
+                <el-button type="primary" @click="submitFileForm" >确 定</el-button>
+                <el-button @click="upload.open = false">取 消</el-button>
             </div>
         </el-dialog>
     </div>

@@ -62,13 +62,17 @@
         <!-- 修改用户配置对话框 -->
 
         <el-dialog :title="title1" :visible.sync="open" append-to-body style="width:70%;margin-left:15%;">
+           <div style="margin-top:-8%">修改库位信息</div>
+            <hr/> 
             <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">                
-                 <el-row style="margin-top:3%;">
+                 
+                <el-row style="margin-top:3%;">
+                    
                    <el-col>
                        <el-form-item label="仓库:" prop="cbpc100">
                            <el-popover placement="bottom-start" trigger="click">
                                <kuweixxweihu ref="kuweixxweihu" @selected="selected02" />
-                              <el-input slot="reference" v-model="form.cbpc100" placeholder="" 
+                              <el-input slot="reference" v-model="form.cbpc100" readonly  placeholder="" 
                                 style="width:77%;">
                               </el-input>
                            </el-popover>
@@ -141,7 +145,7 @@
                 <el-row style="margin-top:3%;">
                      <el-col>
                         <el-form-item label="仓库:" prop="cbla09">
-                            <el-input v-model="form1.cbla09" placeholder="" style="width:77%;"
+                            <el-input v-model="form1.cbla09" placeholder="" readonly style="width:77%;" 
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -202,6 +206,8 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" append-to-body style="width:70%;margin-left:15%;">
+            <div style="margin-top:-8%">创建库位信息</div>
+            <hr/> 
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="20%" class="chuangjianformstore">
                
                <el-row style="margin-top:3%;">
@@ -209,7 +215,7 @@
                        <el-form-item label="仓库:" prop="cbpc100">
                            <el-popover placement="bottom-start" trigger="click">
                                <kuweixxweihu ref="kuweixxweihu" @selected="selected01" />
-                              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" 
+                              <el-input slot="reference" v-model="form2.cbpc100" readonly placeholder=""  
                                 style="width:77%;">
                               </el-input>
                            </el-popover>
@@ -497,9 +503,9 @@ export default {
                 cbla12:[{
                       required: true, message: "优先型号不能为空!", trigger: "blur" 
                 }],
-                cbla13:[{
-                    required: true, message: "备注不能为空!", trigger: "blur" 
-                }],
+                // cbla13:[{
+                //     required: true, message: "备注不能为空!", trigger: "blur" 
+                // }],
                 cbla08:[{
                      required: true, message: "状态不能为空!", trigger: "blur" 
                 }]
@@ -523,9 +529,9 @@ export default {
                 cbla12:[{
                       required: true, message: "优先型号不能为空!", trigger: "blur" 
                 }],
-                cbla13:[{
-                    required: true, message: "备注不能为空!", trigger: "blur" 
-                }],
+                // cbla13:[{
+                //     required: true, message: "备注不能为空!", trigger: "blur" 
+                // }],
                 cbla08:[{
                      required: true, message: "状态不能为空!", trigger: "blur" 
                 }]
@@ -1016,6 +1022,7 @@ export default {
             this.upload.isUploading = true;
         },
         // 文件上传成功处理
+         // 文件上传成功处理
         handleFileSuccess(response, file, fileList) {
             this.upload.open = false;
             this.upload.isUploading = false;

@@ -92,12 +92,13 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title1" :visible.sync="open"  class="abow_dialogy"  append-to-body>
+            <div style="margin-left:2%;margin-top: 0; font-size: 15px; color: black;"> 修改仓库信息</div>
+            <hr style="margin-bottom:4%;"/>
             <!-- <div style="padding-top:-1%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
             <!-- <hr /> -->
             <el-form ref="form" :model="form" :rules="rules1" label-width="30%" >
                 <div style="margin-top:0%;">
-                <div style="margin-left:2%; font-size: 15px; color: black;">仓库信息</div>
-                <hr style="margin-bottom:4%;"/>
+                
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
@@ -164,7 +165,7 @@
                          <el-col style="margin-top:2%;"> 
                             <div style="margin-left:75%;margin-top: 0%;">
                                <el-button type="primary" @click="handleUpdate">确定</el-button>
-                               <el-button @click="cancells">取 消</el-button>
+                               <el-button @click="cancel">取 消</el-button>
                             </div>
                         </el-col>
                     </el-row>
@@ -257,7 +258,7 @@
 
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" class="chuangjianformWare">
                 <div style="margin-top:-3%;">
-                <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">仓库信息</div>
+                <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">创建仓库信息</div>
                 <hr style="margin-bottom:4%;"/>
                     <el-row>
                         <el-col>
@@ -715,6 +716,11 @@ export default {
             this.reset();
         },
         cancells() {
+            this.open2 = false;
+            this.reset01();
+        },
+
+         cancellss() {
             this.open2 = false;
             this.reset01();
         },

@@ -11,7 +11,7 @@
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                 <!-- <span>{{ item }}</span> -->
                 <el-row style="margin-top: 5%;">
-                    <el-col :span="24"> <span>{{ item }}</span></el-col>
+                    <el-col :span="24"> <span>{{ item.match(/(\S*)\-/)[1] }}</span></el-col>
                 </el-row>
             </div>
         </div>

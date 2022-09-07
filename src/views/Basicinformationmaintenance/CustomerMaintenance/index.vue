@@ -51,7 +51,7 @@
                         </template> -->
                     </el-table-column>
                     <el-table-column label="联系电话" align="left" key="cbca16" prop="cbca16" width="200" sortable />
-                    <!-- <el-table-column label="备注" align="left" key="cbca17" prop="cbca17" width="180" sortable /> -->
+                    <el-table-column label="状态" align="left" key="cbca07" prop="cbca07" width="180" sortable />
 
 
                     <el-table-column label="操作" align="center" fixed="right" width="160"
@@ -76,11 +76,11 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3">
-            
+        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3" >
+            <div class="kehuxxweih">客户信息维护</div>
             <el-form ref="form" :model="form" :rules="rules3"  label-width="50%" class="chuangjianformcust">
                  <div>
-                     <span style="margin-left:2%;">发票信息</span>
+                     <swiper-test style="margin-left:2%;">发票信息</swiper-test>
                     <hr style="width:190%;"/>
                 </div>
                 <el-row style="margin-top:2%;">
@@ -146,6 +146,13 @@
                     <el-col :span="11">
                         <el-form-item label="联系人2办公室电话:" prop="cbca20">
                             <el-input v-model="form.cbca20" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                 <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="联系人2:" prop="cbca21">
+                            <el-input v-model="form.cbca21" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -734,14 +741,24 @@ export default {
                 ],
                    cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
-                    { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的发票电话", trigger: "blur" }
+                   { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
                 ],
                  cbca11: [
                     { required: true, message: "发票开户行不能为空!", trigger: "blur" }
                 ],
                 cbca12: [
                     { required: true, message: "银行账号不能为空!", trigger: "blur" }
-                ]
+                ],
+                cbca28: [
+                    { required: true, message: "客户等级不能为空!", trigger: "change" },
+                ],
+                cbca20:[
+                    { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },
+                    { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                ],
+                cbca24: [
+                    { required: true, message: "发票类型不能为空!", trigger: "change" },
+                ],
             },
             // 表单校验
             rules3: {
@@ -758,14 +775,24 @@ export default {
                 ],
                    cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
-                    { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: "请输入正确的发票电话", trigger: "blur" }
+                    { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
                 ],
                  cbca11: [
                     { required: true, message: "发票开户行不能为空!", trigger: "blur" }
                 ],
                 cbca12: [
                     { required: true, message: "银行账号不能为空!", trigger: "blur" }
-                ]
+                ],
+                 cbca28: [
+                    { required: true, message: "客户等级不能为空!", trigger: "change" }
+                ],
+                cbca20:[
+                    { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },
+                   { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                ],
+                cbca24: [
+                    { required: true, message: "发票类型不能为空!", trigger: "change" },
+                ],
             },
         };
     },

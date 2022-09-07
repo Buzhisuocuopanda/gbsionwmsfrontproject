@@ -299,3 +299,13 @@
 .jieshuxx{
    
 }
+.kehuxxweih{
+    position: absolute;
+    left: 50%;
+    top: -2%;
+    font-size: 15px;
+    font-weight: 600;
+    z-index: 1000 !important;
+    
+    
+}
