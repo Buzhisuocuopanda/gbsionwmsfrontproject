@@ -92,10 +92,10 @@
                    <el-row style="margin-left:5.2%;" :gutter="20"  class="el-row">
                         <el-col :span="11">
                             <el-form-item label="商品分类:" prop="cbpa07">
-                                <el-input v-model="form.cbpa07" @focus="shuzhuangliebiao" placeholder="" maxlength="30" style="width:80%;" />
+                                <el-input v-model="form.cbpa07" @focus="shuzhuangliebiao" placeholder="" maxlength="30" style="width:82%;" />
                             </el-form-item>
                         </el-col>
-                        <el-col :span="11" style="margin-left:-1%;">
+                        <el-col :span="11" style="margin-left:-0.7%;">
                             <!-- <el-form-item label="商品品牌:" prop="cbpb10"> -->
                                 <!-- <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:55%;" /> -->
                             <!-- <el-select v-model="form.cala08" placeholder="" style="width:80%;">
@@ -108,7 +108,7 @@
                             <el-popover placement="bottom-start" trigger="click">
                                 <ListMaintenance ref="ListMaintenance" @selected="selected02" />
                                 <el-select slot="reference" v-model="form.cbpc099" placeholder="" readonly
-                                    style="width:77%;">
+                                    style="width:82%;">
                                 </el-select>
                             </el-popover>
                         </el-form-item>
@@ -117,26 +117,26 @@
                     <el-row style="margin-left:6%;">
                         <el-col :span="11">
                             <el-form-item label="商品描述:" prop="cbpb08">
-                                <el-input v-model="form.cbpb08" placeholder="" maxlength="30" style="width:78%;" />
+                                <el-input v-model="form.cbpb08" placeholder="" maxlength="30" style="width:80%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="型号:" prop="cbpb12">
                                 <!-- <el-input v-model="form.ifEnabled" placeholder="是否启用" maxlength="30" /> -->
-                                <el-input v-model="form.cbpb12" placeholder="" maxlength="30" style="width:78%;" />
+                                <el-input v-model="form.cbpb12" placeholder="" maxlength="30" style="width:80%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row style="margin-left:6%;">                          
                         <el-col :span="11">
                             <el-form-item label="UPC:" prop="cbpb15">
-                                <el-input v-model="form.cbpb15" placeholder="" maxlength="30" style="width:78%;" />
+                                <el-input v-model="form.cbpb15" placeholder="" maxlength="30" style="width:80%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="状态:" prop="cbpb07">
                                 <!-- <el-input v-model="form.cbpb07" maxlength="30" style="width:55%;" /> -->
-                                <el-select v-model="form.cbpb07" placeholder="" style="width:78%;">
+                                <el-select v-model="form.cbpb07" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
                             </el-select>
@@ -147,17 +147,17 @@
                     <el-row v-if="false">                          
                         <el-col :span="11">
                             <el-form-item label="商品分类id" prop="cbpb14">
-                                <el-input v-model="form.cbpb14" placeholder="" maxlength="30" style="width:78%;" />
+                                <el-input v-model="form.cbpb14" placeholder="" maxlength="30" style="width:80%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="商品描述:" prop="cbpb07">
-                               <el-input v-model="form.cbpb09" placeholder="" maxlength="30" style="width:78%;" />
+                               <el-input v-model="form.cbpb09" placeholder="" maxlength="30" style="width:80%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="商品品牌:" prop="cbpb10">
-                               <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:78%;" />
+                               <el-input v-model="form.cbpb10" placeholder="" maxlength="30" style="width:80%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>

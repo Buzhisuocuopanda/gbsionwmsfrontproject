@@ -344,8 +344,8 @@
                 </el-row>
                 <el-row style="margin-left:-55%;">
                     <el-col>
-                        <el-form-item label="邮寄地址:" prop="cbca25">
-                            <el-input v-model="form1.cbca25" placeholder="" style="width:100%;" maxlength="30" />
+                        <el-form-item label="邮寄地址:" prop="cbca26">
+                            <el-input v-model="form1.cbca26" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col>
@@ -488,8 +488,8 @@
                 </el-row>
                 <el-row style="margin-left:-54%;">
                     <el-col>
-                        <el-form-item label="邮寄地址:" prop="cbca25">
-                            <el-input v-model="form2.cbca25" placeholder="" style="width:89%;" />
+                        <el-form-item label="邮寄地址:" prop="cbca26">
+                            <el-input v-model="form2.cbca26" placeholder="" style="width:89%;" />
                         </el-form-item>
                     </el-col>
                     <el-col>

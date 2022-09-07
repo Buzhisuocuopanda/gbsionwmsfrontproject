@@ -68,7 +68,7 @@
                  
                 <el-row style="margin-top:3%;">
                     
-                   <el-col>
+                   <el-col style="margin-left:7%;">
                        <el-form-item label="仓库:" prop="cbpc100">
                            <el-popover placement="bottom-start" trigger="click">
                                <kuweixxweihu ref="kuweixxweihu" @selected="selected02" />
@@ -78,7 +78,7 @@
                            </el-popover>
                         </el-form-item>
                   </el-col>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="库位码:" prop="cbla09">
                             <el-input v-model="form.cbla09" placeholder="" style="width:77%;"
                                 maxlength="30" />
@@ -86,13 +86,13 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="库位顺序:" prop="cbla07">
                             <el-input v-model="form.cbla07" placeholder="" maxlength="30"
                                 style="width:77%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="库位容量:" prop="cbla11">
                             <el-input v-model="form.cbla11" placeholder="" style="width:77%;"
                                 maxlength="30" />
@@ -100,13 +100,13 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="优先型号:" prop="cbla12">
                             <el-input v-model="form.cbla12" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="备注:" prop="cbla13">
                             <el-input v-model="form.cbla13" placeholder="" style="width:77%;"
                                 maxlength="30" />
@@ -114,7 +114,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="状态:" prop="cbla08">
                             <!-- <el-input v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
                                 maxlength="30" /> -->
@@ -210,8 +210,8 @@
             <hr/> 
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="20%" class="chuangjianformstore">
                
-               <el-row style="margin-top:3%;">
-                  <el-col>
+               <el-row style="margin-top:3%; ">
+                  <el-col style="margin-left:7%;">
                        <el-form-item label="仓库:" prop="cbpc100">
                            <el-popover placement="bottom-start" trigger="click">
                                <kuweixxweihu ref="kuweixxweihu" @selected="selected01" />
@@ -221,7 +221,7 @@
                            </el-popover>
                         </el-form-item>
                   </el-col>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="库位码:" prop="cbla09">
                             <el-input v-model="form2.cbla09" placeholder="" style="width:77%;"
                                 maxlength="30" />
@@ -229,13 +229,13 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="库位顺序:" prop="cbla07">
                             <el-input v-model="form2.cbla07" placeholder="" maxlength="30"
                                 style="width:77%;" />
                         </el-form-item>
                     </el-col>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="库位容量:" prop="cbla11">
                             <el-input v-model="form2.cbla11" placeholder="" style="width:77%;"
                                 maxlength="30" />
@@ -243,13 +243,13 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="优先型号:" prop="cbla12">
                             <el-input v-model="form2.cbla12" placeholder="" style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="备注:" prop="cbla13">
                             <el-input v-model="form2.cbla13" placeholder="" style="width:77%;"
                                 maxlength="30" />
@@ -257,7 +257,7 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col>
+                    <el-col style="margin-left:7%;">
                         <el-form-item label="状态:" prop="cbla08">
                             <!-- <el-input v-model="form.cbla08" placeholder="" style="width:77%;border:solid #eee thin;"
                                 maxlength="30" /> -->
