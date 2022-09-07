@@ -1555,11 +1555,8 @@ export default {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
                     // data: JSON.stringify(this.userList01),
-                    data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
-                                          customerLevel:row.customerLevel,contacts:row.contacts,
-                                        whName:row.whName,phone:row.phone,address:row.address,
-                                        saleUser:row.saleUser,id:row.id}]),
-                    data01:JSON.stringify(row)
+                    data:row.id,
+                    // data01:JSON.stringify(row)
                         //  JSON.stringify(this.userList)
                 }
             })

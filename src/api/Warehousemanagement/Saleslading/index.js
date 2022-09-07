@@ -4,7 +4,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundadd',
+    url: '/whmanagement/addTakeGoodsOrder',
     method: 'post',
     data: data
   })
@@ -25,6 +25,14 @@ export function Purchaseinbounddingdanxsdd(data) {
     url: '/sale/saleOrderList',
     method: 'post',
     data: data
+  })
+}
+
+// 销售订单详情查询
+export function Purchaseinxiaoshoudingdan(CBPC01) {
+  return request({
+    url: '/sale/saleOderDetail?orderId='+ CBPC01,
+    method: 'get'
   })
 }
 

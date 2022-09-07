@@ -4,7 +4,17 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchasereturnordersAdd(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchasereturnordersadd',
+    url: '/system/Salesreturnorderss/Selloutofwarehouseadd',
+    method: 'post',
+    data: data
+  })
+}
+
+
+// 新增明细配置
+export function PurchasereturnordersAdds(data) {
+  return request({
+    url: '/system/Salesreturnorderss/Selloutofwarehouseadds',
     method: 'post',
     data: data
   })
