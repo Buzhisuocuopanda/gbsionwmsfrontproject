@@ -218,7 +218,7 @@
                         <el-form-item label=" " size="small" style="margin-left:-4%;" prop="cbpf05" >
                             <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label=" " size="small" style="position: absolute;left: 85%;top:-14%;" prop="cbpf07">
+                        <el-form-item label=" " size="small" style="position: absolute;left: 85%;top:-15%;" prop="cbpf07">
                         <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
                         </el-date-picker>
                             <!-- <el-input v-model="form.cbpd13" style="width:55.1%;"></el-input> -->
@@ -702,10 +702,10 @@ export default {
             },
             rules5: {
                   cbpf02:[
-                    { required: true, message: '客户等级不能为空', trigger: 'blur' },
+                    { required: true, message: '客户等级不能为空', trigger: 'change' },
                  ],
                  cbpf06:[
-                    { required: true, message: '结算类型不能为空', trigger: 'blur' },
+                    { required: true, message: '结算类型不能为空', trigger: 'change' },
                  ],
                  cbpf04:[
                     { required: true, message: '标准进价不能为空', trigger: 'blur' },
@@ -782,8 +782,7 @@ export default {
         },
         // 点击【取消】按钮关闭弹窗
         _ly_cancelDialog(done) {
-            console.log('_ly_cancelDialog')
-            this.$emit('on-close')
+           this.open2=false;
         },
         // 关闭弹窗前，二次询问是否关闭
         _ly_beforeClose(done) {
@@ -1118,10 +1117,30 @@ export default {
                         this.getList();
                         this.reset01();
                        
-                        this.handleAdds();
+                        // this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
+                    // this.$message.error('请注意规范');
+                }
+            })
+
+            this.$refs["form5"].validate((item) => {
+                if (item) {
+                    GoodsAddss(this.form5).then(response => {
+                        // console.log(this.from.parent_id, 123456789);
+                        // this.classifyId = response.posts;
+                        // console.log(response.posts,123456);
+                        // this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        // this.getTreeselect();
+                        // this.submitShangpin();
+                        this.getTreeselect();
+                        // this.submitShangpin();
+                        this.getList();
+                        this.reset01();
+                        // console.log(this.form2.ifEnabled, 123456);
+                    });
+                  } else {
                     // this.$message.error('请注意规范');
                 }
             })
@@ -1155,6 +1174,8 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
+
+           
             this.open = true;           
                 let row = {}
                 row.cbpb01 = this.form.cbpb01;
@@ -1168,8 +1189,22 @@ export default {
                 row.cbpb07 = this.form.cbpb07;
                 row.cbpb10 = this.form.cbpb10;
                 console.log(this.form.cbpb01);
-
-                 this.$refs["form"].validate((item) => {
+          this.$refs["form5"].validate((item) => {
+            if (item) {
+                 GoodsAddss(this.form5).then(response => {
+                        // console.log(this.from.parent_id, 123456789);
+                        // this.classifyId = response.posts;
+                        // console.log(response.posts,123456);
+                        // this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        // this.getTreeselect();
+                        // this.submitShangpin();
+                        this.getTreeselect();
+                        // this.submitShangpin();
+                        this.getList();
+                        this.reset01();
+                        // console.log(this.form2.ifEnabled, 123456);
+                    });
+              this.$refs["form"].validate((item) => {
                 if (item) {
                 GoodsEdit(JSON.stringify(row)).then(response => {
 
@@ -1184,7 +1219,8 @@ export default {
                     this.open = false;
                     // this.submitShangpin();
                     this.getList();
-                    this.handleAdds();
+                    // this.handleAdds();
+            
 
                     this.$message({ message: '修改成功', type: 'success' });
 
@@ -1192,6 +1228,10 @@ export default {
 
             } else {
                     // this.$message.error('请注意规范');
+              }
+           })
+        }else{
+            
         }
     })
 
