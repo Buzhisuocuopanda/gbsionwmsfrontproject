@@ -69,11 +69,11 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbse07" prop="cbse07" sortable />
+                    <el-table-column label="编号" align="left" key="cbse07" prop="cbse07" width="230px;" sortable />
                     <el-table-column label="日期" align="left" key="cbse08" prop="cbse08" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="客户" align="left" key="cbca08" prop="cbca08" sortable />
+                    <el-table-column label="客户" align="left" key="cbca08" prop="cbca08" width="230px;" sortable />
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" sortable />

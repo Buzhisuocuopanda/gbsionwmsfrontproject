@@ -1,10 +1,19 @@
 import request from '@/utils/request'
 import { parseStrEmpty } from "@/utils/ruoyi";
 
-// 新增配置
+// 主表添加配置
 export function PurchasereturnordersAdd(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchasereturnordersadd',
+    url: '/system/WarehousetransferordersController/Warehousetransferordersadd',
+    method: 'post',
+    data: data
+  })
+}
+
+//明细添加配置
+export function PurchasereturnordersAdds(data) {
+  return request({
+    url: '/system/WarehousetransferordersController/Warehousetransferordersadds',
     method: 'post',
     data: data
   })

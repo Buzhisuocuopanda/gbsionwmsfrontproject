@@ -843,6 +843,8 @@ export default {
                     item.cbsc15 = item.remark;
                     if(item.cbsc177=="国内订单"){
                           item.cbsc17="1";
+                    }else{
+                        item.cbsc17 = "2";
                     }
 
                 })

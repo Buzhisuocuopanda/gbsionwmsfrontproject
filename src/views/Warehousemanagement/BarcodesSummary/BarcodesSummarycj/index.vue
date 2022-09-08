@@ -108,16 +108,16 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">新增一行</el-button>
+            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
         
          <el-table-column prop="cbpc000" label="品牌" width="">
            <template slot-scope="scope">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:100% !important;" />
+                          style="width:500px !important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
@@ -145,24 +145,24 @@
                 <el-input v-model="scope.row.cbif14" placeholder="供应商id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbif09" label="数量" width="150">
+          <el-table-column prop="cbif09" label="数量" width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbif09" @blur="chen(scope.row)" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbif09" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbif11" label="单价"   width="150">
+          <el-table-column prop="cbif11" label="单价"   width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbif11" @blur="chen(scope.row)" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbif11" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbif12" label="金额" width="150">
+          <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbif12" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbif12" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbif13" type="textarea" placeholder=""></el-input>
+                <el-input v-model="scope.row.cbif13"  placeholder=""></el-input>
             </template>
           </el-table-column>
 
@@ -183,7 +183,7 @@
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-error" style="color: red;"></i>
+                <i class="el-icon-delete" style="color: red;"></i>
               </span>
             </template>
           </el-table-column>

@@ -27,7 +27,7 @@
         <el-col style="" :span="8">
           <el-form-item label="供料单位:" prop="cbpc099">
             <el-popover placement="bottom-start" trigger="click">
-              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />
+              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:210px!important;" />
               <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">
               </el-input>
             </el-popover>
@@ -36,7 +36,7 @@
         <el-col style="" :span="8">
           <el-form-item label="仓库:" prop="cbpc100">
             <el-popover placement="bottom-start" trigger="click">
-              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
+              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
               <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">
               </el-input>
             </el-popover>
@@ -81,30 +81,21 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
+            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
+
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
-            <template slot-scope="scope">
-              <!-- <sapn> -->
-                <!-- <el-select v-model="scope.row.date" filterable clearable placeholder="请选择" style="width: 100%;">
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select> -->
+            <template slot-scope="scope" style="width:200%;">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:100% !important;" />
+                          style="width:630px!important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
                   </el-popover>
-              <!-- </sapn> -->
             </template>
             <!-- <el-col style="margin-left: 0%;" :span="7">
               <el-form-item label="" prop="cbpc000">
@@ -120,31 +111,31 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column prop="cbpd09" label="数量" width="150">
+          <el-table-column prop="cbpd09" label="数量" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbpd09" @blur="chen(scope.row)" placeholder="数量" style=""></el-input>
+                <el-input v-model="scope.row.cbpd09" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="单价"  width="150">
+          <el-table-column prop="cbpd11" label="单价"  width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbpd11" @blur="chen(scope.row)" placeholder="单价" style=""></el-input>
+                <el-input v-model="scope.row.cbpd11" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="金额" width="150">
+          <el-table-column prop="cbpd12" label="金额" width="100">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbpd12" placeholder="金额" style=""></el-input>
+                <el-input v-model="scope.row.cbpd12" placeholder="" class="shuzicaoyou" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbpd13" type="textarea" placeholder="备注"></el-input>
+                <el-input v-model="scope.row.cbpd13" placeholder=""></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -166,7 +157,7 @@
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-error" style="color: red;"></i>
+                <i class="el-icon-delete" style="color: red;"></i>
               </span>
             </template>
           </el-table-column>
@@ -868,20 +859,21 @@
       //添加模块-仓库
       selected01(name) {
         console.log(name, 123)
-        console.log(name.substring(name.indexOf("-") + 1), 963);
+        // console.log(name.substring(name.indexOf("-") + 1), 963);
         this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
         this.form2.cbpc10 = name.substring(name.indexOf("-") + 1)
+        console.log(this.form2.cbpc10,8888888);
         // this.form2.icon = name;
       },
 
-      //添加模块-货币类型
-      selected004(name) {
-        console.log(name, 123)
-        console.log(name.substring(name.indexOf("-") + 1), 963);
-        this.form2.cbpc166 = name.substring(0, name.indexOf("-"));
-        this.form2.cbpc16 = name.substring(name.indexOf("-") + 1)
-        // this.form2.icon = name;
-      },
+      // //添加模块-货币类型
+      // selected004(name) {
+      //   console.log(name, 123)
+      //   console.log(name.substring(name.indexOf("-") + 1), 963);
+      //   this.form2.cbpc166 = name.substring(0, name.indexOf("-"));
+      //   this.form2.cbpc16 = name.substring(name.indexOf("-") + 1)
+      //   // this.form2.icon = name;
+      // },
 
       //添加模块-供应商
       selected02(name) {
@@ -1024,7 +1016,7 @@
               }
             });
           } else {
-            this.$message.error('请注意规范');
+            // this.$message.error('请注意规范');
           }
         })
         //    this._ly_ok();

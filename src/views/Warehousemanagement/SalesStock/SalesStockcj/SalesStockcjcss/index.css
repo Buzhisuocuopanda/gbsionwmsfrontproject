@@ -118,3 +118,12 @@
     height: 360px;
     overflow: auto;
 }
+.shuzicaoyou {
+    text-align: right;
+    direction: rtl;
+}
+input {
+    background: transparent;
+    color: #aaa;
+    border: 1px solid #aaa;
+}
