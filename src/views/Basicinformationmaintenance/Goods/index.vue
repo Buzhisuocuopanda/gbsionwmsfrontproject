@@ -170,7 +170,7 @@
             <div style="margin-left:3%; margin-top: 2%;">
               
             </div>
-                        <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
+            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
                 <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
                     <div class="box1">
                       <table  class="tablebiankuan table-heads" width="95%" height="20px">
@@ -189,36 +189,36 @@
                             </thead>
                         </table>
                     <div class="table-bodyss" >
-                     <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
+                  <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
                                 cellspacing="0" class="tablebiankuan">
                       <el-row >
-                     <el-form label-position="right" ref="form5" :model="form5" label-width="50px" style="margin-top:1%;"
+                     <el-form label-position="right" ref="form5" :rules="rules5" :model="form5" label-width="50px" style="margin-top:1%;"
                         :inline="true">                        
                         <!-- <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpc01" style="width:50%;"></el-input>
                         </el-form-item>                       -->
-                            <el-col style="margin-left: 1%;" :span="7">
-                                <el-form-item label="" prop="cbpf02">
+                            <el-col style="margin-left: -2%;" :span="7">
+                                <el-form-item label=" " prop="cbpf02">
                                       <el-select v-model="form5.cbpf02" placeholder="" style="width:70%;">
                                          <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
                                 </el-form-item>
                          </el-col>
-                        <el-form-item  style="margin-left:-10%;"  label="" size="small" prop="cbpf06" >
+                        <el-form-item  style="margin-left:-11%;"  label=" " size="small" prop="cbpf06" >
                             <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
                              <el-select v-model="form5.cbpf06" placeholder="" style="width:78%;">
                                          <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="" style="margin-left:-1%;" size="small" prop="cbpf04" >
+                        <el-form-item label=" " style="margin-left:-6%;" size="small" prop="cbpf04" >
                             <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" style="margin-left:2%;" prop="cbpf05" >
+                        <el-form-item label=" " size="small" style="margin-left:-4%;" prop="cbpf05" >
                             <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label="" size="small" style="position: absolute;left: 85%;" prop="cbpf07">
+                        <el-form-item label=" " size="small" style="position: absolute;left: 85%;top:-14%;" prop="cbpf07">
                         <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
                         </el-date-picker>
                             <!-- <el-input v-model="form.cbpd13" style="width:55.1%;"></el-input> -->
@@ -334,7 +334,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-            </el-form>
+                 </el-form>
                   <div style="margin-top:7%;">
                     <span style="font-size:15px;margin-left: 3%;">结算货币</span>
                     <hr />
@@ -346,7 +346,7 @@
             <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
                 <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
                     <div class="box1">
-                      <table  class="tablebiankuan table-heads" width="95%" height="20px">
+                      <table  class="tablebiankuan table-heads"   width="95%" height="20px">
                             <thead style="">
                                 <tr style="height:30px; ">
                                     <th style="width: 60px;height: 30px;">客户等级</th>  
@@ -365,27 +365,24 @@
                      <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
                                 cellspacing="0" class="tablebiankuan">
                       <el-row >
-                     <el-form label-position="right" ref="form5" :model="form5" label-width="50px" style="margin-top:1%;"
-                        :inline="true">                        
-                        <!-- <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbpc01" style="width:50%;"></el-input>
-                        </el-form-item>                       -->
-                            <el-col style="margin-left: 1%;" :span="7">
-                                <el-form-item label="" prop="cbpf02">
+                    <el-form label-position="right" ref="form5" :rules="rules5"  :model="form5" label-width="50px" style="margin-top:1%;"
+                        :inline="true">  
+                            <el-col style="margin-left: -2%;" :span="7">
+                                <el-form-item label=" " prop="cbpf02">
                                       <el-select v-model="form5.cbpf02" placeholder="" style="width:70%;">
                                          <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
                                 </el-form-item>
                          </el-col>
-                        <el-form-item  style="margin-left:-10%;"  label="" size="small" prop="cbpf06" >
+                        <el-form-item  style="margin-left:-10%;"  label=" " size="small" prop="cbpf06" >
                             <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
                              <el-select v-model="form5.cbpf06" placeholder="" style="width:78%;">
                                          <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="" style="margin-left:-1%;" size="small" prop="cbpf04" >
+                        <el-form-item label=" " style="margin-left:-1%;" size="small" prop="cbpf04" >
                             <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" style="margin-left:2%;" prop="cbpf05" >
@@ -703,6 +700,17 @@ export default {
                     { required: true, message: '价格不能为空', trigger: 'blur' },
                 ]
             },
+            rules5: {
+                  cbpf02:[
+                    { required: true, message: '客户等级不能为空', trigger: 'blur' },
+                 ],
+                 cbpf06:[
+                    { required: true, message: '结算类型不能为空', trigger: 'blur' },
+                 ],
+                 cbpf04:[
+                    { required: true, message: '标准进价不能为空', trigger: 'blur' },
+                 ],
+            }
         };
     },
     watch: {
@@ -1109,6 +1117,7 @@ export default {
                         // this.submitShangpin();
                         this.getList();
                         this.reset01();
+                       
                         this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
@@ -1120,6 +1129,8 @@ export default {
 
          /** 新增按钮操作 GoodsAddss */
              handleAdds() {
+                this.$refs["form5"].validate((item) => {
+                if (item) {
                     GoodsAddss(this.form5).then(response => {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
@@ -1133,6 +1144,10 @@ export default {
                         this.reset01();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
+                  } else {
+                    // this.$message.error('请注意规范');
+                }
+            })
         },
 
         handlechuangjiang() {

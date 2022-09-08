@@ -4,7 +4,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchasereturnordersAdd(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchasereturnordersadd',
+    url: '/system/Warehouseinventoryschedule/SwJsStoreadd',
     method: 'post',
     data: data
   })
@@ -22,7 +22,7 @@ export function SkuBarcodeLists(query) {
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundedit',
+    url: '/system/Warehouseinventoryschedule/SwJsPurchaseinboundedit',
     method: 'post',
     data: data
   })
@@ -40,7 +40,7 @@ export function PurchasereturnorderRemove(data) {
 // 审核
 export function Purchaseinboundsho(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundsho',
+    url: '/system/Warehouseinventoryschedule/SwJsPurchaseinboundsho',
     method: 'post',
     data: data
   })
@@ -58,7 +58,7 @@ export function PurchaseinBoundshf(data) {
 //仓库盘点明细表取消完成
 export function PurchaseinboundShtt(data) {
   return request({
-    url: '/system/Warehouseinventoryschedule/swJsStoreendd',
+    url: '/system/Warehouseinventoryschedule/swJsStoreenddqxwc',
     method: 'post',
     data: data
   })
@@ -67,7 +67,7 @@ export function PurchaseinboundShtt(data) {
 //采购入库单反审
 export function PurchaseinboundSht(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundsht',
+    url: '/system/Warehouseinventoryschedule/swJsStoreendfs',
     method: 'post',
     data: data
   })

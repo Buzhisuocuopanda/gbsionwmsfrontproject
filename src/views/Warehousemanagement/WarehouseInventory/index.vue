@@ -1033,20 +1033,20 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，审批成功', type: 'success' });
+                this.$message({ message: '审批成功', type: 'success' });
 
             });
         },
-        //审批上面内容
+        //盘点完成上面内容
         PurchaseinboundShenpi01(row) {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbpc01, 8888);
 
             userIds.forEach((item) => {
-                req.Purchaseinboundsho(item).then((res) => {
+                req.PurchaseinBoundshf(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，审批成功");
+                    this.$modal.msgSuccess("审批成功");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1061,7 +1061,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，反审成功', type: 'success' });
+                this.$message({ message: '反审成功', type: 'success' });
 
             });
         },
@@ -1075,7 +1075,7 @@ export default {
                 req.PurchaseinboundSht(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，反审成功");
+                    this.$modal.msgSuccess("反审成功");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1109,7 +1109,7 @@ export default {
                 req.PurchaseinBoundshf(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，盘点完成");
+                    this.$modal.msgSuccess("盘点完成");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1124,7 +1124,7 @@ export default {
                 PurchaseinboundShtt(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
-                    this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
+                    this.$message({ message: '取消标记成功', type: 'success' });
 
                 });
             }).catch(() => { });
@@ -1147,7 +1147,7 @@ export default {
                 req.PurchaseinboundShtt(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，取消成功");
+                    this.$modal.msgSuccess("取消成功");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1188,12 +1188,12 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     this.open = false;
-                    this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    this.$message({ message: '修改成功', type: 'success' });
 
                 });
 
             } else {
-                this.$message.error('错了哦，商品名称没有填呢');
+                // this.$message.error('错了哦，商品名称没有填呢');
             }
 
         },
@@ -1243,7 +1243,7 @@ export default {
             //     if (item) {
             PurchasereturnordersAdd(this.form2).then(response => {
                 console.log(response.posts, 12345678);
-                this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
                 // this.submitShangpin();
                 this.submitShangpin();
