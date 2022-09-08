@@ -111,13 +111,13 @@
             <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
         </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
         
-         <el-table-column prop="cbpc000" label="品牌" width="">
+         <el-table-column prop="cbpc000" label="品牌" width="150">
            <template slot-scope="scope">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:100% !important;" />
+                          style="width:380px !important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
@@ -129,8 +129,8 @@
                 <el-input v-model="scope.row.cbig09" placeholder="商品id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="型号" width="" />
-          <el-table-column label="描述" width="" />
+          <el-table-column label="型号" width="150" />
+          <el-table-column label="描述" width="150" />
            <el-table-column prop="cbpc099" label="供应商"  width="150">
             <template slot-scope="scope">
             <el-popover placement="bottom-start" trigger="click">
@@ -165,20 +165,20 @@
                 <el-input v-model="scope.row.cbig10" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="价格"  width="150">
+          <el-table-column prop="cbpd11" label="价格"  width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbig13" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbig13" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="入库时间" width="150">
+          <el-table-column prop="cbpd12" label="入库时间" width="160">
             <template slot-scope="scope">
                 <!-- <el-input v-model="scope.row.cbig15" placeholder="入库时间" style=""></el-input> -->
                 <el-date-picker type="date" placeholder="" v-model="scope.row.cbig15" style="width: 100%;"></el-date-picker>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="province" label="备注" width="150">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbig12" type="textarea" placeholder=""></el-input>
+                <el-input v-model="scope.row.cbig12"  placeholder=""></el-input>
             </template>
           </el-table-column>
 
@@ -199,7 +199,7 @@
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-error" style="color: red;"></i>
+                <i class="el-icon-delete" style="color: red;"></i>
               </span>
             </template>
           </el-table-column>

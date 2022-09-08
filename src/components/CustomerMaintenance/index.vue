@@ -20,10 +20,10 @@
 
 <script>
 // import icons from './requireIcons'
-import { SupplierList } from "@/api/Basicinformationmaintenance/SupplierMaintenance/index";
+import { CustomerList } from "@/api/Basicinformationmaintenance/CustomerMaintenance/index";
 // import { StoreSkuList } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 export default {
-    name: 'SupplierListsssssssss',
+    name: 'CustomerList',
     data() {
         return {
             name: '',
@@ -43,7 +43,7 @@ export default {
     methods: {
         filterIcons() {
             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            SupplierList().then(response => {
+            CustomerList().then(response => {
                 // this.userList = response.data.rows;
                 //this.top = JSON.stringify(this.userList)
                 // console.log(response.data.rows, 3369);
@@ -54,7 +54,7 @@ export default {
                     this.iconList = []
                 } else {
                     response.data.rows.forEach((item) => {
-                        this.iconList.push(item.cbsa08 + "-" + item.cbsa01)
+                        this.iconList.push(item.cbca08 + "-" + item.cbca01)
                     })
                 }
                 if (this.name) {
