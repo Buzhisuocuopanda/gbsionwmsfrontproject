@@ -1,51 +1,43 @@
 <template>
     <div>
-        <div class="Purchase_caigou">仓库盘点表</div>
-        <!-- <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpg07 }}</span>
-            <span class="Purchase_riqii">日期：{{ value.cbpg08.slice(0, 10) }}</span>
-        </div> -->
-        <div style="width:90%; margin-left: 5%; margin-top: 1%;">
+        <div class="Purchase_caigou">采购入库单</div>
+        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
+            <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
+            <span class="Purchase_riqi">日期：{{ value.cbpc08.slice(0, 10) }}</span>
+        </div>
+        <div style="width:98%; margin-left: 1%; margin-top: 1%;">
             <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">客户</template>{{
-                    value.cbsa08
-                    }}
+            <el-descriptions class="margin-top" title="" :column="3" border
+                v-for="(value, key) in userList.slice(0, 1)" :key="key">
+                <el-descriptions-item>
+                    <template slot="label">供料单位</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
+                <el-descriptions-item>
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
                 </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
+                <el-descriptions-item>
                     <template slot="label">结算货币</template>USD
                 </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">关联订单</template>USD
-                </el-descriptions-item>
-            </el-descriptions> -->
-
+            </el-descriptions>
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table v-loading="loading" :data="userList" height="500"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbwa09" key="cbwa09" label="UPC">
+                <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
+                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="数量">
                 </el-table-column>
-                <el-table-column prop="cbpb08" width="450" key="cbpb08" label="描述">
+                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="已扫数量">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd12" label="商品SN">
+                <el-table-column prop="cbpd11" key="cbpd11" align="right" label="单价">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="库位">
+                <el-table-column prop="cbpd12" key="cbpd12" align="right" label="金额">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="状态">
-                </el-table-column>
-                <el-table-column prop="cbph10" key="cbph10" label="备注">
+                <el-table-column prop="cbpc17" key="cbpc17" label="备注">
                 </el-table-column>
             </el-table>
             <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
@@ -101,48 +93,46 @@
             </el-descriptions> -->
 
             <!-- 横向 -->
-            <!-- <div style="margin-top:3%;">
+            <div style="margin-top:3%;">
                 <el-descriptions class="margin-top" title="" :column="2" border style="margin-top:3%;">
-                    <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                        :labelStyle="{ 'text-align': 'center' }">
-                        <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
-                            slot="label">本页数量小记</template>{{ totalCount }}
+                    <el-descriptions-item :contentStyle="{'text-align': 'right'}"
+                        :labelStyle="{ 'text-align': 'center'}">
+                        <template :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
+                            slot="label">本页数量小记</template>{{totalCount}}
                     </el-descriptions-item>
-                    <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                        :labelStyle="{ 'text-align': 'center' }">
-                        <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
+                    <el-descriptions-item :contentStyle="{'text-align': 'right'}"
+                        :labelStyle="{ 'text-align': 'center'}">
+                        <template :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
                             slot="label">本页金额小记</template>{{ parseFloat(totalPrice).toFixed(2) }}
                     </el-descriptions-item>
                 </el-descriptions>
-            </div> -->
+            </div>
             <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" :column="2" border>
-                <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                    :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">合计数量</template>{{ totalCount }}
+            <el-descriptions class="margin-top" title="" :column="2" border>
+                <el-descriptions-item :contentStyle="{ 'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}">
+                    <template slot="label">合计数量</template>{{totalCount}}
                 </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                    :labelStyle="{ 'text-align': 'center' }">
+                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}">
                     <template slot="label">合计金额</template>{{ parseFloat(totalPrice).toFixed(2) }}
                 </el-descriptions-item>
-            </el-descriptions> -->
+            </el-descriptions>
 
             <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" border>
-                <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
-                    :labelStyle="{ 'text-align': 'center' }">
+            <el-descriptions class="margin-top" title="" border>
+                <el-descriptions-item label-class-name="my-label" :contentStyle="{'text-align': 'left'}"
+                    :labelStyle="{ 'text-align': 'center'}">
                     <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
                 </el-descriptions-item>
-            </el-descriptions> -->
+            </el-descriptions>
         </div>
 
     </div>
 
 </template>
 <script>
-import { PurchaseinboundList } from "@/api/Warehousemanagement/SalesStock";
+import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
 export default {
-
+    
     data() {
         return {
             // 遮罩层
@@ -160,20 +150,28 @@ export default {
                 total: this.total,
                 name: undefined,
                 address: undefined,
-                userId: undefined
+                userId:undefined
             },
-            CBPC01: ""
+            CBPC01:""
 
         };
     },
     watch: {
-
+       
     },
     created() {
         this.getList();
-
+        
     },
     methods: {
+        //列表表头设置
+        headClass() {
+            return {
+                'text-align': 'center',
+                 height: '30px',
+                padding: '0'
+            }
+        },
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
@@ -185,17 +183,17 @@ export default {
         //父子页面传值
         getParams() {
             let routerParams = this.$route.query;
-            this.cbpc01 = routerParams.data;
-            console.log(this.cbpc01, 852369);
+            this.cbpc01 = routerParams.data;            
+            console.log(this.cbpc01,852369);
         },
 
         //详情列表
-        getList() {
+        getList(){
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbpg01;
+            const userId = this.$route.params &&  this.$route.params.cbpc01;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);
@@ -203,7 +201,7 @@ export default {
                 });
             }
         },
-
+        
         //时间的转换
         smallToBig(money) {
             var cnMoney = "零元整";
@@ -229,19 +227,18 @@ export default {
         totalCount: function () {
             var totalCount = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalCount += this.userList[i].cbph09;
+                totalCount += this.userList[i].cbpd09;
             }
             return totalCount;
         },
         totalPrice: function () {
             var totalPrice = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalPrice += this.userList[i].cbph09 * this.userList[i].cbph10;
+                totalPrice += this.userList[i].cbpd09 * this.userList[i].cbpd11;
             }
             return totalPrice;
         }
     }
 };
 </script>
-<style src="./PurchaseOrderxqcss/index.css">
-</style>
+<style src="./SalesOnshelvescss/index.css"></style>

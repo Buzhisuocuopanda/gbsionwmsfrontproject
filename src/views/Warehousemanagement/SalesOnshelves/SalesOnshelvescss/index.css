@@ -88,7 +88,7 @@
     border: 2px solid#a03834 !important;
     font-size: 16px;
     color: white !important;
-    height: 35px;
+    height: 34px;
     /*font: bold 14px Arial, Helvetica;*/
     /*font-family:"微软雅黑";*/
     background-color: #a03834 !important;
@@ -218,7 +218,7 @@
     border: 2px solid#a03834 !important;
     font-size: 16px;
     color: white !important;
-    height: 35px;
+    height: 34px;
     /*font: bold 14px Arial, Helvetica;*/
     /*font-family:"微软雅黑";*/
     background-color: #a03834 !important;
@@ -227,7 +227,7 @@
     background-image: -webkit-linear-gradient(#a03834, #a03834);
     background-image: -o-linear-gradient(#a03834, #a03834);
     background-image: -ms-linear-gradient(#a03834, #a03834);
-    background-image: linear-gradient(#f65953, #a03834) !important;
+    background-image: linear-gradient(#f65953, #a03834);
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
@@ -291,7 +291,7 @@
 
 .chuangjianziti {
     margin-left: 8%;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -433,13 +433,12 @@
     width: 80px !important;
 }
 
-/* 
-.el-input .el-input__inner {
+/* .el-input .el-input__inner {
     border: none !important;
 } */
 
 .table-body {
-    width: 1458px;
+    width: 1459px;
     height: 360px;
     overflow: auto;
 }
@@ -457,4 +456,9 @@
     top: 4%;
     font-weight: 900;
     font-size: 20px;
+}
+
+.elDatePicker .el-picker-panel {
+    width: 20px !important;
+    background: #002450 !important;
 }

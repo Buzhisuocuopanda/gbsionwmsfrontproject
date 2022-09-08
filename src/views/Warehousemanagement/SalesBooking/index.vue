@@ -1597,5 +1597,5 @@ export default {
     }
 };
 </script>
-<style src="./PurchaseOrdercss/index.css">
+<style src="./SalesBookingcss/index.css">
 </style>

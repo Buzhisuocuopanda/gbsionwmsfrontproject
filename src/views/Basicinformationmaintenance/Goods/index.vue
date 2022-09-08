@@ -106,10 +106,10 @@
 
                         <el-form-item label="商品品牌:" prop="cbpc099">
                             <el-popover placement="bottom-start" trigger="click">
-                                <ListMaintenance ref="ListMaintenance" @selected="selected02" />
-                                <el-select slot="reference" v-model="form.cbpc099" placeholder="" readonly
+                                <ListMaintenance ref="ListMaintenance" @selected="selected02" style="width:350px !important;" />
+                                <el-input slot="reference" v-model="form.cbpc099" placeholder="" readonly
                                     style="width:82%;">
-                                </el-select>
+                                </el-input>
                             </el-popover>
                         </el-form-item>
                         </el-col>
@@ -207,15 +207,15 @@
                          </el-col>
                         <el-form-item  style="margin-left:-11%;"  label=" " size="small" prop="cbpf06" >
                             <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
-                             <el-select v-model="form5.cbpf06" placeholder="" style="width:78%;">
+                             <el-select v-model="form5.cbpf06" placeholder="" style="width:68%;">
                                          <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label=" " style="margin-left:-6%;" size="small" prop="cbpf04" >
+                        <el-form-item label=" " style="margin-left:-7%;" size="small" prop="cbpf04" >
                             <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
                         </el-form-item>
-                        <el-form-item label=" " size="small" style="margin-left:-4%;" prop="cbpf05" >
+                        <el-form-item label=" " size="small" style="margin-left:-3%;" prop="cbpf05" >
                             <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
                         </el-form-item>
                         <el-form-item label=" " size="small" style="position: absolute;left: 85%;top:-15%;" prop="cbpf07">
@@ -276,10 +276,10 @@
                             </el-form-item> -->
                         <el-form-item label="商品品牌:" prop="cbpc099">
                             <el-popover placement="bottom-start" trigger="click">
-                                <ListMaintenance ref="ListMaintenance" @selected="selected01" />
-                                <el-select slot="reference" v-model="form2.cbpc099" placeholder="" readonly
-                                    style="width:77%;">
-                                </el-select>
+                                <ListMaintenance ref="ListMaintenance" @selected="selected01"  style="width:350px !important" />
+                                <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly
+                                    style="width:80%;">
+                                </el-input>
                             </el-popover>
                         </el-form-item>
                         </el-col>
@@ -377,12 +377,12 @@
                          </el-col>
                         <el-form-item  style="margin-left:-10%;"  label=" " size="small" prop="cbpf06" >
                             <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
-                             <el-select v-model="form5.cbpf06" placeholder="" style="width:78%;">
+                             <el-select v-model="form5.cbpf06" placeholder="" style="width:68%;">
                                          <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label=" " style="margin-left:-1%;" size="small" prop="cbpf04" >
+                        <el-form-item label=" " style="margin-left:-8%;" size="small" prop="cbpf04" >
                             <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" style="margin-left:2%;" prop="cbpf05" >
@@ -1231,7 +1231,7 @@ export default {
               }
            })
         }else{
-            
+
         }
     })
 

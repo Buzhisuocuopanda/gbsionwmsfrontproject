@@ -1341,9 +1341,9 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除仓库为"' + this.idss + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
-                    req.PurchasereturnorderRemove(JSON.stringify(item)).then((res) => {
+                    req.PurchasereturnorderRemove(item).then((res) => {
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
