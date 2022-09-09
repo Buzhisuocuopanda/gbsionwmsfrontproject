@@ -995,5 +995,5 @@
     }
   };
 </script>
-<style src="./SalesBookingcss/index.css">
+<style src="./SalesReceiptcjcss/index.css">
 </style>
