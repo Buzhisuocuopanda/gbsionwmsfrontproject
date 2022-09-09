@@ -397,6 +397,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+  //采购订单添加
+   {
+    path: '/system/user-cgddtj',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrdercj/index'),
+        meta: { title: '采购订单创建', activeMenu: '/Warehousemanagement/PurchaseOrder' }
+      }
+    ]
+  },
   //仓库调拨单添加
    {
     path: '/system/user-ckdb',
