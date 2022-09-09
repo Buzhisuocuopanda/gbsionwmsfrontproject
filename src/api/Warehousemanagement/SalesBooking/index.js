@@ -4,7 +4,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundadd',
+    url: '/system/SalesScheduledOrders/addSalesScheduledOrders',
     method: 'post',
     data: data
   })

@@ -245,7 +245,6 @@
 <script>
   // import { PurchaseinboundAdds } from "@/api/Warehousemanagement/SalesShipment";
 
-
   import {
     PurchaseinboundAdd,
     PurchaseinboundAdds

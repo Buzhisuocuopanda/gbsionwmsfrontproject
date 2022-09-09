@@ -72,7 +72,7 @@
         sortable
       ></el-table-column>
       <el-table-column prop="address" label="操作">
-        <template slot-scope="scope">
+        <template>
           <el-button size="mini">修改</el-button>
           <el-button size="mini" >删除</el-button>
         </template>

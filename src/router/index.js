@@ -411,6 +411,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //销售预订单添加
+   {
+    path: '/system/user-cjxsydd',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesBooking/SalesBookingcj/index'),
+        meta: { title: '销售预订单创建', activeMenu: '/Warehousemanagement/SalesBooking' }
+      }
+    ]
+  },
   //仓库调拨单添加
    {
     path: '/system/user-ckdb',

@@ -1463,7 +1463,7 @@ export default {
         /** 创建操作 */
         handleChuangJiangone: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-cj/role/");
+            this.$router.push("/system/user-cjxsydd/role/");
         },
 
         // /** 提交按钮 */
