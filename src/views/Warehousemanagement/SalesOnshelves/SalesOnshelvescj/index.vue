@@ -18,7 +18,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row :gutter="20">
+      <!-- <el-row :gutter="20">
         <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">
           <el-form-item label="主副表id:" prop="cbpg161">
             <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />
@@ -48,7 +48,7 @@
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
           <!-- <el-form-item label="结算货币:" prop="cbpc166">
                   <el-popover placement="bottom-start" trigger="click">
                       <ListLists ref="ListLists" @selected="selected004" />
@@ -57,10 +57,10 @@
                       </el-select>
                   </el-popover>
               </el-form-item> -->
-        </el-col>
+        <!-- </el-col> -->
         <!--商品信息维护-->
-      </el-row>
-      <el-row v-if="false">
+      <!-- </el-row> -->
+      <!-- <el-row v-if="false">
         <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">
           <el-form-item label="供应商id:" prop="cbpc09">
             <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />
@@ -70,14 +70,14 @@
           <el-form-item label="仓库id:" prop="cbpc10">
             <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <!-- 商品信息维护 -->
-        <el-col>
+        <!-- <el-col>
           <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">
             <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
           </el-form-item>
         </el-col>
-      </el-row>
+      </el-row> -->
       <div>
         <el-row>
           <el-col :span="24">
@@ -85,17 +85,18 @@
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border  :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="cbpc000" label="品牌" width="">
+          <el-table-column prop="customerNo" label="客户编号" width="">
             <template slot-scope="scope" style="width:200%;">
-                <el-popover placement="bottom-start" trigger="click">
+                <!-- <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
                           style="width:630px!important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
-                  </el-popover>
+                  </el-popover> -->
+                  <el-input v-model="scope.row.customerNo"  placeholder="" style=""></el-input>
             </template>
             <!-- <el-col style="margin-left: 0%;" :span="7">
               <el-form-item label="" prop="cbpc000">
@@ -109,48 +110,56 @@
               </el-form-item>
             </el-col> -->
           </el-table-column>
-          <el-table-column label="型号" width="" />
-          <el-table-column label="描述" width="" />
-          <el-table-column prop="cbpd09" label="数量" width="100">
+          <el-table-column label="客户名称" prop="customerName" width="">
+             <template slot-scope="scope">
+                  <el-input v-model="scope.row.customerName"  placeholder=""  style=""></el-input>
+             </template>       
+          </el-table-column>
+          <el-table-column label="客户等级" prop="customerLevel" width="">
+              <template slot-scope="scope">
+                  <el-input v-model="scope.row.customerLevel"  placeholder=""  style=""></el-input>
+             </template>  
+          </el-table-column>
+          <el-table-column prop="contacts" label="联系人" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbpd09" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.contacts"  placeholder=""  style=""></el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="单价"  width="100">
+          <el-table-column prop="phone" label="联系电话"  width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbpd11" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.phone"   placeholder="" style=""></el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="金额" width="100">
+          <el-table-column prop="saleUser" label="销售用户" width="100">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbpd12" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.saleUser" placeholder="" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="sn" label="sn" width="100">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbpd13" placeholder=""></el-input>
+                <el-input v-model="scope.row.sn" placeholder="" style=""></el-input>
+              </sapn>
+            </template>
+          </el-table-column>
+          <el-table-column prop="whName" label="仓库名称" width="">
+            <template slot-scope="scope">
+              <sapn>
+                <el-input v-model="scope.row.whName" placeholder=""></el-input>
               </sapn>
             </template>
           </el-table-column>
 
-          <el-table-column v-if="false" prop="cbpc01" label="id" width="150">
+          <el-table-column  prop="address" label="地址" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbpc01" placeholder="id" style=""></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
-          <el-table-column v-if="false" prop="cbpd08" label="商品编号" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.cbpd08" placeholder="商品编号" style=""></el-input>
+                <el-input v-model="scope.row.address" placeholder="" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -249,7 +258,7 @@
   import {
     PurchaseinboundAdd,
     PurchaseinboundAdds
-  } from "@/api/Warehousemanagement/PurchaseWarehousing";
+  } from "@/api/Warehousemanagement/SalesOnshelves";
   import {
     getToken
   } from "@/utils/auth";
@@ -620,7 +629,7 @@
         },
 
         //表格参数
-        tableData: [],
+        tableData: {},
         dataId: 0,
         options: [{
           value: '选项1',
@@ -678,18 +687,18 @@
             }
           },
       // 合并单元格
-      arraySpanMethod({
-        row,
-        column,
-        rowIndex,
-        columnIndex
-      }) {
-        if (columnIndex === 0) {
-          return [1, 3];
-        } else if (columnIndex < 3) {
-          return [0, 0];
-        }
-      },
+      // arraySpanMethod({
+      //   row,
+      //   column,
+      //   rowIndex,
+      //   columnIndex
+      // }) {
+      //   if (columnIndex === 0) {
+      //     return [1, 3];
+      //   } else if (columnIndex < 3) {
+      //     return [0, 0];
+      //   }
+      // },
       // 点击右上角关闭弹窗
       _ly_closeDialog(done) {
         console.log('_ly_closeDialog')
@@ -722,9 +731,9 @@
               // 如果检查通过，则对count减1。
               // 当count为1时，表示是最后一个表单，则存储数据
               console.log(this.tableData,333)
-              PurchaseinboundAdds(JSON.stringify(this.tableData)).then(response => {
+              PurchaseinboundAdd(JSON.stringify(this.tableData)).then(response => {
                 if (response.code == "200") {
-                  this.tableData = []
+                  this.tableData = {}
                   this.form2 = {
                     cbpc07: "",
                     cbpd08: "",
@@ -993,34 +1002,31 @@
       /** 新增按钮操作 */
       handleAdd() {
 
-        this.$refs["form2"].validate((item) => {
-          if (item) {
-            PurchaseinboundAdd(this.form2).then(response => {
-              if (response.code == "200") {
-                this.$message({
-                  message: '添加成功',
-                  type: 'success',
-                  style: 'color:red;!important'
-                });
-                this.submitShangpin();
-                this.open2 = false;
-                this.reset01()
-                // console.log(this.form2.cbpg161,111);
-                // console.log(this.form.cbpg01,222);
-                console.log(response.data.id, 333);
-                this.tableData.forEach((item) => {
-                  item.cbpc01 = response.data.id;
-                  console.log(item.cbpc01,8523697412);
-                })
-                this._ly_ok()
-              }
-            });
-          } else {
-            // this.$message.error('请注意规范');
-          }
-        })
-        //    this._ly_ok();
-      },
+        // this.$refs["form2"].validate((item) => {
+        //   if (item) {
+        //     PurchaseinboundAdd(this.form2).then(response => {
+        //       if (response.code == "200") {
+        //         this.$message({
+        //           message: '添加成功',
+        //           type: 'success',
+        //           style: 'color:red;!important'
+        //         });
+        //         this.submitShangpin();
+        //         this.open2 = false;
+        //         this.reset01()
+        //         // console.log(this.form2.cbpg161,111);
+        //         // console.log(this.form.cbpg01,222);
+        //         console.log(response.data.id, 333);
+
+        //       }
+              this._ly_ok();
+      //       });
+      //     } else {
+      //       // this.$message.error('请注意规范');
+      //     }
+      //   })
+      //   //    this._ly_ok();
+       },
 
       /** 返回操作 */
       handleChuangJiangone: function(row) {

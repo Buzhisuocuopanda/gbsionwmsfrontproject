@@ -22,7 +22,7 @@ export function PurchaseinboundAdds(data) {
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
-    url: '/system/Purchaseinbound/SwJsSkuBarcodelist',
+    url: '/system/SalesScheduledOrders/saleOrderList',
     method: 'get',
     params: query
   })

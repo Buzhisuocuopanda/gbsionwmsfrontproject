@@ -4,7 +4,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundadd',
+    url: '/system/Sellinglistings/SwJsPurchaseinboundadd',
     method: 'post',
     data: data
   })
@@ -22,7 +22,7 @@ export function PurchaseinboundAdds(data) {
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
-    url: '/system/Purchaseinbound/SwJsSkuBarcodelist',
+    url: '/system/Sellinglistings/SwJsSkuBarcodelist',
     method: 'get',
     params: query
   })
@@ -39,7 +39,7 @@ export function PurchaseinboundLists(CBPC01) {
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundedit',
+    url: '/system/Sellinglistings/SwJsPurchaseinboundadd',
     method: 'post',
     data: data
   })
@@ -48,7 +48,7 @@ export function PurchaseinboundEdit(data) {
 // 删除
 export function PurchaseinboundRemove(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundremove',
+    url: '/system/Sellinglistings/SwJsPurchaseinbounddelete',
     method: 'post',
     data:data
   })

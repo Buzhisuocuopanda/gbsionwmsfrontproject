@@ -65,14 +65,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbpc07" :show-overflow-tooltip="true" prop="cbpc07"
+                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
                         sortable />
-                    <el-table-column label="日期" align="left" key="cbpc08" prop="cbpc08" :formatter="formatDate"
+                    <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable>
+                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable />
+                    <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable />
+                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
                             "CNY" : "未确定状态"
@@ -80,10 +80,10 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="状态" align="left" key="cbpc11" prop="cbpc11" sortable>
+                    <el-table-column label="状态" align="left" key="status" prop="status" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbpc11 == 0 ? "未审核" : scope.row.cbpc11 == 1 ?
-                            "已审核" : scope.row.cbpc11 == 4 ? "已完成" : "未确定状态"
+                            <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
+                            "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
                             }}
                             </div>
                         </template>
@@ -463,7 +463,7 @@
 </template>
 <script>
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList01, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList01, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/SalesBooking";
 import * as req from "@/api/Warehousemanagement/PurchaseWarehousing";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";

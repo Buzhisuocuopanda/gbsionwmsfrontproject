@@ -425,6 +425,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //销售上架单添加
+   {
+    path: '/system/user-xssjdan',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesOnshelves/SalesOnshelvescj/index'),
+        meta: { title: '销售上架单创建', activeMenu: '/Warehousemanagement/SalesOnshelves' }
+      }
+    ]
+  },
   //仓库调拨单添加
    {
     path: '/system/user-ckdb',

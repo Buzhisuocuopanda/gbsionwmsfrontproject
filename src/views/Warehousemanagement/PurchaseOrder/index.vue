@@ -89,7 +89,7 @@
                             </el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                               
+                                v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:user:remove']">删除</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)"  v-hasPermi="['system:user:listselect']">详情
@@ -97,16 +97,20 @@
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                v-if="scope.row.status == 0"
                                >审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                v-if="scope.row.status == 1"
                                 >反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
+                                v-if="scope.row.status == 4"
                                 v-hasPermi="['system:user:listselect']">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']"
+                                 v-if="scope.row.status == 1 | scope.row.status == 1"
                                 >标记完成</el-button>
                         </template>
                     </el-table-column>
@@ -820,7 +824,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.id);
+            this.idss = selection.map(item => item.cbsa08);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -845,7 +849,7 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
             console.log(row.cbpc01,8888);
 
             PurchaseinboundSH(row).then(response => {
@@ -859,7 +863,7 @@ export default {
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
-            this.$modal.confirm('是否要审批为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批供应商为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -876,7 +880,7 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShs(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
@@ -890,7 +894,7 @@ export default {
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
-            this.$modal.confirm('是否要反审为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审供应商为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -909,7 +913,7 @@ export default {
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
-            this.$modal.confirm('是否要标记完成为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成 供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShss(row).then(response => {
                 console.log(this.form.cbpc01, 789)
@@ -923,7 +927,7 @@ export default {
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
-            this.$modal.confirm('是否要标记完成为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成  供应商为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
@@ -951,7 +955,7 @@ export default {
             // });
 
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记 供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
@@ -962,7 +966,7 @@ export default {
         },
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
-            this.$modal.confirm('是否要取消标记为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记 供应商为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1177,7 +1181,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除供应商为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
                         // console.log(res, 123)
@@ -1209,7 +1213,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.id + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除用户供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();
