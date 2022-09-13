@@ -35,10 +35,10 @@
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handleChuangJiangone">创建
-                        </el-button>
-                        <el-button type="mini" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
-                            删除</el-button>
+                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handleChuangJiangone">创建
+                        </el-button> -->
+                        <!-- <el-button type="mini" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
+                            删除</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button>
@@ -85,7 +85,7 @@
                     </el-table-column>
                       <el-table-column label="检测状态" align="left" key="checkStatusMsg" prop="checkStatusMsg" sortable width="180px;">
                     </el-table-column>
-                    <el-table-column label="商品状态" align="left" key="statusMsg" prop="statusMsg" sortable width="180px;">
+                    <el-table-column label="商品状态" align="left" key="statusMsg" prop="statusMsg" sortable width="90px;">
                         <!-- <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
                             "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
@@ -93,7 +93,7 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
+                    <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"

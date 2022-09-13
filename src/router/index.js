@@ -425,6 +425,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+  //销售预订单变更单添加
+   {
+    path: '/system/user-SalesAdvance',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesAdvance/SalesAdvancecj/index'),
+        meta: { title: '销售预订单变更单创建', activeMenu: '/Warehousemanagement/SalesAdvance' }
+      }
+    ]
+  },
    //销售上架单添加
    {
     path: '/system/user-xssjdan',

@@ -25,7 +25,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="6">
-          <el-form-item label="客户名称:" prop="cbpc099">
+          <el-form-item label="客户名称:" prop="cbpc0999">
             <el-popover placement="bottom-start" trigger="click">
               <CustomerMainten ref="CustomerMainten" @selected="selected022" style="width:210px!important;" />
               <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly style="width:100%;">
@@ -655,7 +655,7 @@
             // if (valid) {
               // 如果检查通过，则对count减1。
               // 当count为1时，表示是最后一个表单，则存储数据
-              console.log(this.tableData,333)
+              console.log(this.tableData,456)
               PurchaseinboundAdd(JSON.stringify(this.tableData)).then(response => {
                 if (response.code == "200") {
                   this.tableData = []
@@ -686,7 +686,8 @@
                     cbpd09: "",
                     cbpd11: "",
                     cbpd12: "",
-                    orderDate:""
+                    orderDate:"",
+                    cbpc0999:""
                   }
                 }
                 if (count-- === 1) {
@@ -940,6 +941,7 @@
 
         this.$refs["form2"].validate((item) => {
           if (item) {
+            this.form2.goods=this.tableData
             PurchaseinboundAdd(this.form2).then(response => {
               if (response.code == "200") {
                 this.$message({
