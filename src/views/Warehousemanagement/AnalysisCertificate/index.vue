@@ -65,7 +65,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassac" v-loading="loading" :data="userList" height="470"
+                <el-table border :header-cell-style="headClassac" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="470"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -594,9 +594,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 15,
                 page: 1,
-                size: 10,
+                size: 15,
                 total: this.total,
                 cbqa07:undefined,
                 daterange:undefined

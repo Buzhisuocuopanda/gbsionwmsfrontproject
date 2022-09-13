@@ -1,11 +1,11 @@
 <template>
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">销售预订单</div>
+      <div class="chuangjiancaigous">销售预订单入库单</div>
 
       <!-- 编号:56221589223 -->
 
-      <el-row :gutter="20" style="margin-top: 20px;">
+      <!-- <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="编号:" prop="orderNo">
             <el-input type="text" v-model="form2.orderNo" style="width: 60%;" />
@@ -17,8 +17,8 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row :gutter="20">
+      </el-row> -->
+      <!-- <el-row :gutter="20">
         <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">
           <el-form-item label="主副表id:" prop="cbpg161">
             <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />
@@ -57,7 +57,7 @@
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
           <!-- <el-form-item label="结算货币:" prop="cbpc166">
                   <el-popover placement="bottom-start" trigger="click">
                       <ListLists ref="ListLists" @selected="selected004" />
@@ -66,10 +66,10 @@
                       </el-select>
                   </el-popover>
               </el-form-item> -->
-        </el-col>
+        <!-- </el-col> -->
         <!--商品信息维护-->
-      </el-row>
-      <el-row v-if="false">
+      <!-- </el-row> -->
+      <!-- <el-row v-if="false">
         <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">
           <el-form-item label="供应商id:" prop="supplierId">
             <el-input v-model="form2.supplierId" maxlength="30" style="width:80%;border:solid #eee thin" />
@@ -85,13 +85,12 @@
             <el-input v-model="form2.customerId" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
           </el-form-item>
         </el-col>
-        <!-- 商品信息维护 -->
         <el-col>
           <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">
             <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
           </el-form-item>
         </el-col>
-      </el-row>
+      </el-row> -->
       <div>
         <el-row>
           <el-col :span="24">
@@ -114,23 +113,23 @@
           </el-table-column>
            <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column label="数量" width="100" >
+          <el-table-column label="入库数量" width="100" prop="inQty" >
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.qty"  placeholder="" class="shuzicaoyou" style=""></el-input>
+                  <el-input v-model="scope.row.inQty"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="价格" width="100" >
+          <el-table-column label="PONumber" width="100" prop="ponumber">
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.price" placeholder="" class="shuzicaoyou" style=""></el-input>
+                  <el-input v-model="scope.row.ponumber" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="remark" label="备注" width="">
+          <!-- <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
               
                 <el-input v-model="scope.row.remark" placeholder=""></el-input>
               
             </template>
-          </el-table-column>
+          </el-table-column> -->
 
           <el-table-column v-if="false" prop="purchaseOrderId" label="id" width="150">
             <template slot-scope="scope">
@@ -173,7 +172,7 @@
   import {
     PurchaseinboundAdd,
     PurchaseinboundAdds
-  } from "@/api/Warehousemanagement/SalesBooking";
+  } from "@/api/Warehousemanagement/SalesReceipt";
   import {
     getToken
   } from "@/utils/auth";
@@ -554,7 +553,7 @@
         },
 
         //表格参数
-        tableData: [],
+        tableData: null,
         dataId: 0,
         options: [{
           value: '选项1',
@@ -937,34 +936,7 @@
 
       /** 新增按钮操作 */
       handleAdd() {
-
-        this.$refs["form2"].validate((item) => {
-          if (item) {
-            PurchaseinboundAdd(this.form2).then(response => {
-              if (response.code == "200") {
-                this.$message({
-                  message: '添加成功',
-                  type: 'success',
-                  style: 'color:red;!important'
-                });
-                this.submitShangpin();
-                this.open2 = false;
-                this.reset01()
-                // console.log(this.form2.cbpg161,111);
-                // console.log(this.form.cbpg01,222);
-                console.log(response.data.id, 333);
-                this.tableData.forEach((item) => {
-                  item.purchaseOrderId = response.data.id;
-                  console.log(item.purchaseOrderId,8523697412);
-                })
-                this._ly_ok();
-              }
-            });
-          } else {
-            // this.$message.error('请注意规范');
-          }
-        })
-        //    this._ly_ok();
+        this._ly_ok();
       },
 
       /** 返回操作 */

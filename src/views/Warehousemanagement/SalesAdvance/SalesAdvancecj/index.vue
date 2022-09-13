@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">销售预订单</div>
+      <div class="chuangjiancaigous">销售预订变更单</div>
 
       <!-- 编号:56221589223 -->
 
@@ -822,11 +822,11 @@
 
          //添加模块-供应商
       selected02(e,row) {
-        this.$set(row,"cbpc099",e.substring(0,e.indexOf(".")))
+        this.$set(row,"cbpc099",e.substring(0,e.indexOf("-")))
         console.log(e,111)
         console.log(row,222)
         // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-        this.$set(row,"supplierId",e.substring(e.indexOf(".") +1),8523642)
+        this.$set(row,"supplierId",e.substring(e.indexOf("-") +1),8523642)
         console.log(row,555)
         // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
         // this.form2.icon = name;
@@ -942,8 +942,7 @@
       /** 新增按钮操作 */
       handleAdd() {
 
-        
-                this._ly_ok();
+        this._ly_ok();
 
       },
 

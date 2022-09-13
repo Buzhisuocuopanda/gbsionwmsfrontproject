@@ -31,7 +31,7 @@
                     <el-form-item>
                          <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:40%;"> 
+                    <el-form-item style="margin-left:50%;"> 
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -39,9 +39,9 @@
                         </el-button>
                         <el-button type="mini" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
                             删除</el-button>
-                        <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
@@ -61,7 +61,7 @@
                 </el-form>
 
 
-                <el-table border :header-cell-style="headClasspw" v-loading="loading" :data="userList" height="430"
+                <el-table border :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  v-loading="loading" :data="userList" height="430"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -444,9 +444,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 15,
                 page: 1,
-                size: 10,
+                size: 15,
                 total: this.total,
                 cbpc07:undefined,
                 cbsa08:undefined,

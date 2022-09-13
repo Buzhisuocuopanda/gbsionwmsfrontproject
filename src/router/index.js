@@ -623,6 +623,21 @@ export const dynamicRoutes = [
       }
     ]
   },
+      //根据销售预订单入库单创建
+  {
+    path: '/system/user-xsyddrukudang',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+         name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesReceipt/SalesReceiptcj/index'),
+        meta: { title: '销售退库创建', activeMenu: '/Warehousemanagement/SalesReceipt' }
+      }
+    ]
+  },
       //根据销售订单创建
   {
     path: '/system/user-authhhxsxiaosdingdantihuo',

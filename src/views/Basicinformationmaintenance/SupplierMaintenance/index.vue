@@ -32,7 +32,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table :max-height="maxheight"  border :header-cell-style="headClassSPM" v-loading="loading" height="480" :data="userList"
+                <el-table :max-height="maxheight"  border :header-cell-style="headClassSPM" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="公司名称" align="left" key="cbsa08" prop="cbsa08" sortable />
@@ -599,9 +599,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 15,
                 page: 1,
-                size: 10,
+                size: 15,
                 total: this.total,
                 cbsa08: undefined,
                 address: undefined
