@@ -9,7 +9,7 @@
 
                     <el-form-item prop="sn" label="编号">
                         <el-input v-model="queryParams.cbqa07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="创建时间" style="margin-left:2%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
@@ -24,7 +24,9 @@
                          <el-button class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item>                      
-                        <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
+                        <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
+                        </el-button> -->
+                        <el-button size="mini" class="biaoto-buttonchuangjianllnm">创建
                         </el-button>
                         <el-dropdown trigger="click">
                           <span class="el-dropdown-link xialaxuanxangnnn">

@@ -32,7 +32,7 @@ export default {
             userList: null,
             params: null,
             top: null,
-             total:0,
+            total:0,
             // iconList: ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
             iconList: [],
              // 查询参数
