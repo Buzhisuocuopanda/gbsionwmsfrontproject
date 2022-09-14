@@ -13,7 +13,7 @@ export function StoreSkuAdd(data) {
 // 查询列表
 export function StoreSkuList(query) {
   return request({
-    url: '/system/sku/SwJsStorelist',
+    url: '/system/sku/cangkuliebiao',
     method: 'get',
     params: query
   })

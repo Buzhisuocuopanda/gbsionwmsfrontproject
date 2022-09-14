@@ -884,7 +884,7 @@
         console.log(name, 123)
         console.log(name.substring(name.indexOf("-") + 1), 963);
         this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
-        this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
+        this.form2.cbpg09 = name.substring(name.indexOf("-") + 1);
         this.form.cbsa08 = name.substring(0, name.indexOf("-"));
         // this.form2.icon = name;
       },

@@ -6,7 +6,7 @@
             <i slot="suffix" class="el-icon-search el-input__icon" />
         </el-input>
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
-        <div>
+          <div>
             <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
                 @click="selectedIcon(item)">
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
@@ -15,7 +15,7 @@
                     <el-col :span="24"> <span>{{ item.match(/(\S*)\-/)[1] }}</span></el-col>
                 </el-row>
             </div>
-        </div>
+          </div>
        </el-form>
         <!-- <pagination  v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="iconList" :page-sizes="[2, 5, 10, 15, 20]"
