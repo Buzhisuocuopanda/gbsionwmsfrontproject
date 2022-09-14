@@ -667,6 +667,26 @@ export const dynamicRoutes = [
       }
     ]
   },
+
+  {
+    path: '/totalOrder',
+    component: Layout,
+    redirect: 'totalOrder',
+    name: 'totalOrder',
+    meta: {
+      title: '生产总订单',
+      icon: 'component'
+    },
+    children: [
+      {
+        path: 'totalOrder',
+        component: () => import('@/views/Salesmanagement/ProductionoOrders/index'),
+        name: 'totalOrder',
+        meta: { title: '生产总订单', icon: 'component', noCache: true, affix: true }
+      },
+    ]
+  },
+
   {
     path: '/system/role-auth',
     component: Layout,
@@ -709,6 +729,7 @@ export const dynamicRoutes = [
       }
     ]
   },
+
   {
     path: '/tool/gen-edit',
     component: Layout,
@@ -722,7 +743,10 @@ export const dynamicRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
     ]
-  }
+  },
+
+
+
 ]
 
 // 防止连续点击多次路由报错
