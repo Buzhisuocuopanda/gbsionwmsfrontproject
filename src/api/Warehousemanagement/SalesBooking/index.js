@@ -31,7 +31,7 @@ export function PurchaseinboundList(query) {
 // 详情
 export function PurchaseinboundLists(CBPC01) {
   return request({
-    url: '/system/Purchaseinbound/SwJsSkuBarcodelistss?cbpc01='+ CBPC01,
+    url: '/system/SalesScheduledOrders/saleOrderListdetail?cbpc01='+ CBPC01,
     method: 'get'
   })
 }
@@ -39,7 +39,7 @@ export function PurchaseinboundLists(CBPC01) {
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundedit',
+    url: '/system/SalesScheduledOrders/editSalesScheduledOrders',
     method: 'post',
     data: data
   })
@@ -48,43 +48,43 @@ export function PurchaseinboundEdit(data) {
 // 删除
 export function PurchaseinboundRemove(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundremove',
+    url: '/system/SalesScheduledOrders/deleteSalesScheduledOrders',
     method: 'post',
-    data:data
+    data: data
   })
 }
 
 // 审核
 export function PurchaseinboundSH(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundsh',
+    url: '/system/SalesScheduledOrders/SalesScheduledOrderssh',
     method: 'post',
     data: data
   })
 }
 
-//采购入库标记完成
+//标记完成
 export function PurchaseinboundShss(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundshss',
+    url: '/system/SalesScheduledOrders/SalesScheduledOrdersbjwc',
     method: 'post',
     data: data
   })
 }
 
-//采购入库取消完成
+//取消完成
 export function Purchaseinbounds(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinbounds',
+    url: '/system/SalesScheduledOrders/SalesScheduledOrdersqxwc',
     method: 'post',
     data: data
   })
 }
 
-//采购入库单反审
+//反审
 export function PurchaseinboundShs(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundshs',
+    url: '/system/SalesScheduledOrders/SalesScheduledOrdersfs',
     method: 'post',
     data: data
   })

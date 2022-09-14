@@ -61,9 +61,9 @@
                 </el-form>
 
 
-                <el-table border  :header-cell-style="headClasspw"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="430"
+                <el-table border  :header-cell-style="headClasspw"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="460"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
+                    style="width:92.5%;height: 8%;margin-left: -2%; margin-top: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
                         sortable  width="180px;"/>
@@ -81,11 +81,11 @@
                     </el-table-column>
                     <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="180px;">
                     </el-table-column>
-                      <el-table-column label="地址" align="left" key="address" prop="address" sortable width="180px;">
+                      <el-table-column label="地址" align="left" key="address" prop="address" sortable width="500px;">
                     </el-table-column>
                       <el-table-column label="检测状态" align="left" key="checkStatusMsg" prop="checkStatusMsg" sortable width="180px;">
                     </el-table-column>
-                    <el-table-column label="商品状态" align="left" key="statusMsg" prop="statusMsg" sortable width="90px;">
+                    <el-table-column label="商品状态" align="left" key="statusMsg" prop="statusMsg" sortable width="120px;">
                         <!-- <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
                             "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"

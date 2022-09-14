@@ -31,7 +31,7 @@
                     <el-form-item>
                          <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:40%;"> 
+                    <el-form-item style="margin-left:50%;"> 
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -39,9 +39,9 @@
                         </el-button>
                         <el-button type="mini" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
                             删除</el-button>
-                        <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
@@ -72,7 +72,7 @@
                     </el-table-column>
                     <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable />
                     <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable />
-                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" sortable>
+                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="300px;" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
                             "CNY" : "未确定状态"
@@ -162,18 +162,19 @@
                                 </el-select>
                             </el-popover>
                         </el-form-item> -->
-                        <el-form-item label="结算货币:" prop="cbpc16">
-                            <el-select v-model="form.cbpc16" placeholder=""
-                                style="width: 50%; ">
-                                <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
-                                    :value="item.value">
-                                </el-option>
-                            </el-select>
+                        <el-form-item label="客户名称:" prop="cbpc16">
+                            <el-popover placement="bottom-start" trigger="click">
+                                <CustomerMaintenance ref="CustomerMaintenance" @selected="selected05"
+                                    style="width:320px;" />
+                                <el-select slot="reference" v-model="form.custom" placeholder="" readonly
+                                    style=" width: 50%;">
+                                </el-select>
+                            </el-popover>
                         </el-form-item>
 
                     </el-col>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="仓库:" prop="cbwa09">
+                        <el-form-item label="仓库名称:" prop="cbwa09">
                             <el-popover placement="bottom-start" trigger="click">
                                 <kuweixxweihu ref="kuweixxweihu" @selected="selected04" style="width:320px;" />
                                 <el-select slot="reference" v-model="form.cbwa09" placeholder="" readonly
@@ -186,13 +187,13 @@
                 <el-row v-if="false">
                     <el-col>
                         <el-form-item label="供料单位id" prop="cbsa01">
-                            <el-input v-model="form.cbsa01" maxlength="30" style="width:50%;" />
+                            <el-input v-model="form.supplierId" maxlength="30" style="width:50%;" />
                         </el-form-item>
-                        <!-- <el-form-item label="结算货币id" prop="cala01">
-                            <el-input v-model="form.cala01" maxlength="30" style="width:50%;border:solid #eee thin;" />
-                        </el-form-item> -->
+                        <el-form-item label="客户id" prop="cala01">
+                            <el-input v-model="form.customerId" maxlength="30" style="width:50%;border:solid #eee thin;" />
+                        </el-form-item>
                         <el-form-item label="仓库id" prop="cbwa01">
-                            <el-input v-model="form.cbwa01" maxlength="30" style="width:50%;" />
+                            <el-input v-model="form.whId" maxlength="30" style="width:50%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -229,7 +230,7 @@
 <script>
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
 import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList01, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/SalesBooking";
-import * as req from "@/api/Warehousemanagement/PurchaseWarehousing";
+import * as req from "@/api/Warehousemanagement/SalesBooking";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
@@ -243,10 +244,13 @@ import supplierMaintenance from "@/components/SupplierMaintenance";
 //供应商
 import ListLists from "@/components/ListMaintenance";
 
+//客户
+import CustomerMaintenance from "@/components/CustomerMaintenance";
+
 export default {
     name: "store",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
-    components: { Treeselect, kuweixxweihu, supplierMaintenance, ListLists },
+    components: { Treeselect, kuweixxweihu, supplierMaintenance, ListLists,CustomerMaintenance },
     data() {
         return {
             // 遮罩层
@@ -718,6 +722,15 @@ export default {
             this.form.cbsa08 = name.substring(0, name.indexOf("-"));
             // this.form2.icon = name;
         },
+
+         //修改模块-供应商
+        selected05(name) {
+            console.log(name, 123)
+            console.log(name.substring(name.indexOf("-") + 1), 963);
+            this.form.custom = name.substring(name.indexOf("-") + 1);
+            this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+            // this.form2.icon = name;
+        },
         //添加行
         addData() {
             this.tianjiahang.push({
@@ -905,7 +918,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbpc01);
+            this.idss = selection.map(item => item.orderNo);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -930,7 +943,7 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + row.orderNo + '"的数据项？').then(() => {
             console.log(row.cbpc01,8888);
 
             PurchaseinboundSH(row).then(response => {
@@ -944,7 +957,7 @@ export default {
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
-            this.$modal.confirm('是否要审批为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -994,7 +1007,7 @@ export default {
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
-            this.$modal.confirm('是否要标记完成为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成,编号为"' + row.orderNo + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShss(row).then(response => {
                 console.log(this.form.cbpc01, 789)
@@ -1008,7 +1021,7 @@ export default {
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
-            this.$modal.confirm('是否要标记完成为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
@@ -1036,7 +1049,7 @@ export default {
             // });
 
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + row.orderNo + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
@@ -1047,7 +1060,7 @@ export default {
         },
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
-            this.$modal.confirm('是否要取消标记为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1262,7 +1275,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
                         // console.log(res, 123)
@@ -1294,7 +1307,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.cbpc01 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();
