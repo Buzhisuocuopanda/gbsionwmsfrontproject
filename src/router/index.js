@@ -65,7 +65,7 @@ export const constantRoutes = [
   },
     {
     path: '/chuanzhi',
-    component: () => import('@/components/CustomerMaintenance/index'),
+    component: () => import('@/components/WarehouseInfoSku/index'),
     hidden: true
   },
   {
