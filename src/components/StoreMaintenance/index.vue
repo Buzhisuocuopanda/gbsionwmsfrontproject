@@ -1,7 +1,7 @@
 <!-- @author zhengjie -->
 <template>
     <div class="icon-body" style="width:190px;">
-        <el-input v-model="name" style="position: relative;border:solid #eee thin;" clearable placeholder=""
+        <el-input v-model="name" style="position: relative;" clearable placeholder=""
             @clear="filterIcons" @input.native="filterIcons">
             <i slot="suffix" class="el-icon-search el-input__icon" />
         </el-input>

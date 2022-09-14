@@ -139,3 +139,7 @@
     text-align: right;
     direction: rtl;
 }
+
+.el-form--inline{
+    height: 100px;
+}

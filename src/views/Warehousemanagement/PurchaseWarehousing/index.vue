@@ -466,7 +466,7 @@
 
 
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList01, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList01, StoreList, StoreSkuList } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
 
 import * as req from "@/api/Warehousemanagement/PurchaseWarehousing";
@@ -477,6 +477,7 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
+
 //供应商
 import supplierMaintenance from "@/components/SupplierMaintenance";
 

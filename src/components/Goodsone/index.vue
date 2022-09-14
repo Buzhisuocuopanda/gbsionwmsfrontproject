@@ -5,6 +5,7 @@
             @clear="filterIcons" @input.native="filterIcons">
             <i slot="suffix" class="el-icon-search el-input__icon" />
         </el-input>
+         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true"></el-form>
         <div>
             <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
                 @click="selectedIcon(item)">
@@ -15,6 +16,7 @@
                 </el-row>
             </div>
         </div>
+         </el-form>
     </div>
 </template>
 

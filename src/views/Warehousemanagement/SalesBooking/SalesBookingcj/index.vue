@@ -27,13 +27,13 @@
         <el-col style="" :span="6">
           <el-form-item label="客户名称:" prop="cbpc0999">
             <el-popover placement="bottom-start" trigger="click">
-              <CustomerMainten ref="CustomerMainten" @selected="selected022" style="width:210px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly style="width:100%;">
+              <CustomerMainten ref="CustomerMainten" @selected="selected022" style="width:210px!important; height:100px!important;" />
+              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly  style="width:110%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="" :span="6">
+        <el-col style="margin-left:-2%;" :span="6">
           <el-form-item label="供料单位:" prop="cbpc099">
             <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:210px!important;" />
@@ -42,7 +42,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="" :span="6">
+        <el-col style="margin-left:-4%;" :span="6">
           <el-form-item label="仓库:" prop="cbpc100">
             <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
@@ -51,7 +51,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="" :span="6">
+        <el-col style="margin-left:-2%;" :span="6">
           <el-form-item label="销售人员:" prop="salerId">
             <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
