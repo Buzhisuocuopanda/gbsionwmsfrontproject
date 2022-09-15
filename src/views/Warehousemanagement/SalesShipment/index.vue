@@ -1102,7 +1102,7 @@ export default {
             //     if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
                 // console.log(response.posts, 12345678);
-                this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
                 // this.submitShangpin();
                 this.submitShangpin();
@@ -1181,11 +1181,12 @@ export default {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
                     // data: JSON.stringify(this.userList01),
-                    data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
-                                          customerLevel:row.customerLevel,contacts:row.contacts,
-                                        whName:row.whName,phone:row.phone,address:row.address,
-                                        saleUser:row.saleUser,id:row.id}]),
-                    data01:JSON.stringify(row)
+                    // data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
+                    //                       customerLevel:row.customerLevel,contacts:row.contacts,
+                    //                     whName:row.whName,phone:row.phone,address:row.address,
+                    //                     saleUser:row.saleUser,id:row.id}]),
+                      data: row.id,                    
+                    // data01:JSON.stringify(row)
                         //  JSON.stringify(this.userList)
                 }
             })

@@ -17,6 +17,11 @@
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;" :span="7">
+                    <el-form-item label="客户:" prop="cbsb099">
+                        <el-input type="text" v-model="form2.cbsb099" style="width:77%;" />
+                    </el-form-item>
+                </el-col>
+                <el-col v-if="false" style="margin-left: 2%;" :span="7">
                     <el-form-item label="客户:" prop="cbsb09">
                         <el-input type="text" v-model="form2.cbsb09" style="width:77%;" />
                     </el-form-item>
@@ -32,7 +37,12 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
-                    <el-form-item label="销售人员:" prop="cbsb17">
+                    <el-form-item label="销售人员:" prop="cbsb177">
+                        <el-input type="text" v-model="form2.cbsb177" style="width:77%;" />
+                    </el-form-item>
+                </el-col>
+                <el-col style="" :span="7">
+                    <el-form-item v-if="false" label="销售人员id:" prop="cbsb17">
                         <el-input type="text" v-model="form2.cbsb17" style="width:77%;" />
                     </el-form-item>
                 </el-col>
@@ -60,13 +70,18 @@
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
-                    <el-form-item label="结算货币:" prop="cbsb16">
+                    <el-form-item label="结算货币:" prop="cbsb166">
+                         <el-input type="text" v-model="form2.cbsb166" style="width:77%;" />
+                    </el-form-item>
+                </el-col>
+                <el-col v-if="false" style="margin-left: 2%;margin-top: -1%;" :span="7">
+                    <el-form-item label="结算货币id:" prop="cbsb16">
                          <el-input type="text" v-model="form2.cbsb16" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
-                    <el-form-item label="收货人:" prop="cbsb18">
-                        <el-input type="text" v-model="form2.cbsb18" style="width:77%;" />
+                    <el-form-item label="收货人:" prop="cbsb22">
+                        <el-input type="text" v-model="form2.cbsb22" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
@@ -82,17 +97,22 @@
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
-                    <el-form-item label="收货电话:" prop="cbsb19">
-                        <el-input type="text" v-model="form2.cbsb19" style="width:77%;" />
+                    <el-form-item label="收货电话:" prop="cbsb29">
+                        <el-input type="text" v-model="form2.cbsb29" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
+                    <el-form-item label="收货地址:" prop="cbsb28">
+                        <el-input type="text" v-model="form2.cbsb28" style="width:77%;" />
+                    </el-form-item>
+                </el-col>
+                <el-col v-if="false" style="margin-top: -1%;" :span="7">
                     <el-form-item label="收货地址:" prop="cbsb21">
                         <el-input type="text" v-model="form2.cbsb21" style="width:77%;" />
                     </el-form-item>
                 </el-col>
                   <el-col style="margin-top: -1%;" :span="7" v-if="false">
-                    <el-form-item label="主明细键:" prop="cbsb21">
+                    <el-form-item label="主明细键:" prop="cbsb211">
                         <el-input type="text" v-model="form2.cbsb211" style="width:77%;" />
                     </el-form-item>
                 </el-col>
@@ -144,7 +164,7 @@
                     <th style=" width: 64px;text-align: left;">操作</th>
                 </tr>
             </table>
-               <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -2%;" :key="index">
+               <el-row v-for="(form, index) in formArrr" style="width:110%;margin-bottom: -2%;" :key="index">
                     <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
                         :inline="true"> 
                         <!--  supplierId -->   
@@ -232,6 +252,7 @@ export default {
         return {
             // 表单结构数组
             formArr: [], 
+            formArrr:[],
             // 遮罩层
             loading: true,
             tianjiahang: [],
@@ -420,12 +441,19 @@ export default {
 
                 cbsb07:"",
                 cbsb09:"",
+                cbsb099:"",
                 cbsb10:"",
                 cbsb17:"",
+                cbsb177:"",
                 cbsb18:"",
                 cbsb19:"",
                 cbsb21:"",
-                cbsb30:""
+                cbsb30:"",
+                cbsb16:"",
+                cbsb166:"",
+                cbsb22:"",
+                cbsb29:"",
+                cbsb28:""
             },
             defaultProps: {
                 children: "children",
@@ -500,11 +528,11 @@ export default {
 
         this.form.cbsc17=this.form.brand;
         //销售提货单详情
-         this. getList();
+         this.getList();
         this.form2.cbca08=this.ListUser.customerName;
         //父子页面传值
          
-        this.getParams();
+        // this.getParams();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -542,9 +570,9 @@ export default {
         },
         // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
         _ly_ok() {
-            let count = this.formArr.length // 记录当前有多少个表单
-            for (var index in this.formArr) {
-                var form = this.formArr[index]
+            let count = this.formArrr.length // 记录当前有多少个表单
+            for (var index in this.formArrr) {
+                var form = this.formArrr[index]
                 console.log(form)
                 console.log(JSON.stringify(form))
                 // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
@@ -552,9 +580,9 @@ export default {
                     // if (valid) {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
-                        PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
+                        PurchaseinboundAdds(JSON.stringify(this.formArrr)).then(response => {
                              if(response.code=="200"){
-                                this.formArr=[]
+                                this.formArrr=[]
                                 // this.form2= {
                                 //    cbpc07: "",
                                 //     cbpc08: "",
@@ -599,7 +627,7 @@ export default {
                     // }
             //   })
             }
-            console.log('_ly_ok:' + JSON.stringify(this.formArr))
+            console.log('_ly_ok:' + JSON.stringify(this.formArrr))
         },
 
    
@@ -615,13 +643,13 @@ export default {
         },
         // 增加一行表单
         _ly_addFrom() {
-            if (this.formArr.length >= 5) {
+            if (this.formArrr.length >= 5) {
                 this.$message.warning('最多只能添加5行')
                 // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
                 return
             }
 
-            this.formArr.push({
+            this.formArrr.push({
                 formName: 'myform' + (new Date()).getTime(), // myform1648431132399
                 cbsc08: '',
                 cbsc09: '',
@@ -635,7 +663,7 @@ export default {
         // 删除一行表单
         _ly_delFrom(index) {
             console.log('index: ' + index)
-            this.formArr.splice(index, 1)
+            this.formArrr.splice(index, 1)
         },
         // 点击select的时候，缓存下行号
         // 如果一行有多个树状结构的select，可以通过缓存列号，区分是哪个select
@@ -652,10 +680,10 @@ export default {
             }
             // 通过缓存的行号，找到对应的表单，并且将数据存储起来。
             // 如果需要缓存更多的数据，可以在此处自行实现
-            this.formArr[index].branch = data.label
+            this.formArrr[index].branch = data.label
 
             // 选择后收起下拉框
-            let formName = this.formArr[index].formName
+            let formName = this.formArrr[index].formName
             this.$refs[formName + '_select'][0].blur() // myform1648431132399_select
         },
 
@@ -663,33 +691,33 @@ export default {
 
 
 
-        getParams() {
-             let routerParams = this.$route.query;
-               this.ListUser = routerParams.data; 
-               let zhuangh = JSON.parse(this.ListUser); 
-               //客户
-               this.form2.cbsb09=zhuangh[0].customerName;
-               //仓库
-               this.form2.cbpc100 = zhuangh[0].whName;
-               //联系人
-               this.form2.cbsb18 = zhuangh[0].contacts;
-               //电话
-               this.form2.cbsb19 = zhuangh[0].phone;
-            //    //关联订单
-            //    this.form2.cbpc16 = zhuangh[0].saleUser;
-               //收货地址
-               this.form2.cbsb21 = zhuangh[0].address;
-               //客户等级
-               this.form2.cbsb20 =zhuangh[0].customerLevel;
-               //客户订单
-               this.form2.cbsb30 = zhuangh[0].customerNo;
-               //销售人员
-               this.form2.cbsb17 =zhuangh[0].saleUser;
-            //    this.form2.cbpc16 =zhuangh[0].customerNo;
-              console.log(JSON.parse(this.ListUser),852369);
-              console.log(JSON.parse(routerParams.data01),55555);
+        // getParams() {
+        //      let routerParams = this.$route.query;
+        //        this.ListUser = routerParams.data; 
+        //        let zhuangh = JSON.parse(this.ListUser); 
+        //        //客户
+        //        this.form2.cbsb09=zhuangh[0].customerName;
+        //        //仓库
+        //        this.form2.cbpc100 = zhuangh[0].whName;
+        //        //联系人
+        //        this.form2.cbsb18 = zhuangh[0].contacts;
+        //        //电话
+        //        this.form2.cbsb19 = zhuangh[0].phone;
+        //     //    //关联订单
+        //     //    this.form2.cbpc16 = zhuangh[0].saleUser;
+        //        //收货地址
+        //        this.form2.cbsb21 = zhuangh[0].address;
+        //        //客户等级
+        //        this.form2.cbsb20 =zhuangh[0].customerLevel;
+        //        //客户订单
+        //        this.form2.cbsb30 = zhuangh[0].customerNo;
+        //        //销售人员
+        //        this.form2.cbsb17 =zhuangh[0].saleUser;
+        //     //    this.form2.cbpc16 =zhuangh[0].customerNo;
+        //       console.log(JSON.parse(this.ListUser),852369);
+        //       console.log(JSON.parse(routerParams.data01),55555);
 
-           },
+        //    },
         
  
 
@@ -808,7 +836,7 @@ export default {
 
                         this.open2 = false;
                         this.reset01();
-                        this.formArr.forEach((item)=>{
+                        this.formArrr.forEach((item)=>{
                             item.cbsb01=response.data.id
                         })
                         console.log(response.data.id,123456);
@@ -826,9 +854,43 @@ export default {
         getList() {
             let routerParams = this.$route.query;
                this.formArr = routerParams.data; 
-               let zhuangh = JSON.parse(this.formArr);  
+            //    let zhuangh = JSON.parse(this.formArr);  
                 // console.log(zhuangh[0].id,889999);          
-               PurchaseinListxiangq(zhuangh[0].id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+               PurchaseinListxiangq(this.formArr,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                
+                //客户名称
+                this.form2.cbsb099 = response.data.customerName;
+                //客户名称ID
+                this.form2.cbsb09 = response.data.customerId;
+                //仓库名称
+                this.form2.cbpc100 = response.data.whName;
+                //仓库名称ID
+                this.form2.cbsb10  = response.data.whId;
+                //销售人员名称
+                this.form2.cbsb177 = response.data.saleUserName;
+                //销售人员ID
+                this.form2.cbsb17  = response.data.saleUserId;
+                //联系人
+                this.form2.cbsb18  = response.data.contacts;
+                //电话
+                this.form2.cbsb19  = response.data.phone;
+                //客户等级
+                this.form2.cbca28  = response.data.customerLevel;
+                //结算货币名称
+                this.form2.cbsb166 = response.data.currencyMsg;
+                //结算货币名称id 
+                this.form2.cbsb16 = response.data.currency;
+                //收货人
+                this.form2.cbsb22 = response.data.receiver;
+                //收货电话
+                this.form2.cbsb29 = response.data.receivPhone;
+                //收货地址
+                this.form2.cbsb28 = response.data.receiveAdress;
+                //收货地址
+                this.form2.cbsb21 = response.data.receiveAdress;
+                //客户订单
+                this.form2.cbsb30 = response.data.customerNo;
+                console.log(this.form2.cbsb09,85200000);
                 response.data.goods.forEach((item)=>{
                     item.cbsc177=item.orderClass;
                     item.cbsc15 = item.supplierId;
@@ -848,18 +910,15 @@ export default {
                     }
 
                 })
-                
-                this.formArr = response.data.goods;
+                //------------
+                this.formArr = response.data;
+                this.formArrr = response.data.goods;
                 this.total = response.data.total;
                 console.log(response.data.goods, 339688);
-                // this.userList01 = JSON.stringify(this.userList);
-                // response.data.goods.forEach((e)=>{
-                //   this.form.cbsc17=e.orderClass;
-                // })
-                // let 
-                console.log( JSON.stringify(this.formArr,852369));
-                // console.log(this.userList01.orderClass,852147777);
-                // this.deleteFlag = response.data.rows.deleteFlag;   this.form.cbsc17
+              
+                console.log(response.data,1709916);
+
+ 
             }
             );
         },
