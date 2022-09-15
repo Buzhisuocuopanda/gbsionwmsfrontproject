@@ -230,7 +230,7 @@
           </el-table-column>
           <el-table-column prop="province" label="订单占用量" width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbsc14" placeholder=""></el-input>
+                <el-input v-model="scope.row.cbsc144" placeholder=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -252,6 +252,11 @@
            <el-table-column v-if="false" prop="cbsc15" label="供应商id" width="150">
             <template slot-scope="scope">
                 <el-input v-model="scope.row.cbsc15" placeholder="供应商id" style=""></el-input>
+            </template>
+          </el-table-column>
+           <el-table-column v-if="false" prop="cbsc14" label="销售订单id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbsc14" placeholder="销售订单id" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -1130,8 +1135,9 @@ export default {
                     item.cbsc11 = item.price;
                     item.cbsc12 = item.totalPrice;
                     item.cbsc13 = item.scanQty;
-                    item.cbsc14 = item.noSendQty;
+                    item.cbsc144 = item.noSendQty;
                     item.cbsc15 = item.remark;
+                    item.cbsc14 = item.saleOrderId;
                     item.cbpc000 =item.brand + "~" + item.model + "~" + item.description;
                     if(item.cbsc177=="国内订单"){
                           item.cbsc17="1";
