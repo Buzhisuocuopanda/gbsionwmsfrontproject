@@ -9,8 +9,10 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
-                    <el-form-item label="日期:" style="margin-left:20%;" prop="cbsb30">
-                        <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 60%;"/>
+                    <el-form-item label="日期:" style="margin-left:20%;" prop="cbaa08">
+                        <!-- <el-input type="text" placeholder="" v-model="form2.CBAA08" style="width: 60%;"/> -->
+                        <el-date-picker type="date" placeholder="" v-model="form2.cbaa08" style="width: 100%;">
+                        </el-date-picker>
                     </el-form-item>
 
                 </el-col>
@@ -47,10 +49,14 @@
                         <el-input type="text" v-model="form2.cbse16" style="width:100%;" />
                     </el-form-item>
                 </el-col> -->
-                <!--结算货币展示-->
+                <!--结算货币展示  jiageLeixeng-->
                 <el-col  style="margin-left: 2%;" :span="5">
                     <el-form-item label="结算货币:" prop="cbaa16">
-                        <el-input type="text" v-model="form2.cbaa16" style="width:100%;" />
+                        <!-- <el-input type="text" v-model="form2.cbaa16" style="width:100%;" /> -->
+                      <el-select v-model="form2.cbaa16" placeholder="" style="width:100%;">
+                         <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
+                         </el-option>
+                      </el-select>
                     </el-form-item>
                 </el-col>
                 <!--订单类型展示-->

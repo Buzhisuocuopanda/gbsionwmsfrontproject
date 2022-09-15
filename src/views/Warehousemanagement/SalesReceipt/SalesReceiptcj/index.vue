@@ -104,7 +104,7 @@
             <template slot-scope="scope" style="width:200%;">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:230px!important;" />
+                          style="width:850px!important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
@@ -113,12 +113,12 @@
           </el-table-column>
            <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column label="入库数量" width="100" prop="inQty" >
+          <el-table-column label="入库数量" width="150" prop="inQty" >
             <template slot-scope="scope" style="width:200%;">
                   <el-input v-model="scope.row.inQty"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="PONumber" width="100" prop="ponumber">
+          <el-table-column label="PONumber" width="150" prop="ponumber">
             <template slot-scope="scope" style="width:200%;">
                   <el-input v-model="scope.row.ponumber" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>

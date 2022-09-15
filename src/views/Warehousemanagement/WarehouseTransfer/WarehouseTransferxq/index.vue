@@ -46,9 +46,9 @@
                 <el-table-column prop="cbpc17" key="cbpb08" label="备注">
                 </el-table-column>
             </el-table>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+            <!-- <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
-                class="pagintotal" />
+                class="pagintotal" /> -->
             <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="品牌">
@@ -150,9 +150,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 99999,
                 page: 1,
-                size: 10,
+                size: 99999,
                 total: this.total,
                 name: undefined,
                 address: undefined,

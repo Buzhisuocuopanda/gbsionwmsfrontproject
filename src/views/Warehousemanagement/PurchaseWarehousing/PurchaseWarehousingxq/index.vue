@@ -21,7 +21,7 @@
             </el-descriptions>
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
-
+        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
             <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
@@ -40,6 +40,7 @@
                 <el-table-column prop="cbpc17" key="cbpc17" label="备注">
                 </el-table-column>
             </el-table>
+        </el-form>
             <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
                 class="pagintotal" />
@@ -144,9 +145,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 99999,
                 page: 1,
-                size: 10,
+                size: 99999,
                 total: this.total,
                 name: undefined,
                 address: undefined,
@@ -193,7 +194,7 @@ export default {
             const userId = this.$route.params &&  this.$route.params.cbpc01;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinboundLists(userId, this.addDateRange(this.queryParams)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);

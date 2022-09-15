@@ -70,7 +70,7 @@
                     <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable />
+                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable  width="300"/>
                     <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable />
                     <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="300px;" sortable>
                         <!-- <template scope="scope">

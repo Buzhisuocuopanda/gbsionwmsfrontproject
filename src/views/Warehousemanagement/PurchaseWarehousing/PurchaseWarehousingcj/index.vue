@@ -586,9 +586,9 @@
         // 查询参数
         queryParams: {
           pageNum: 1,
-          pageSize: 10,
+          pageSize: 99999,
           page: 1,
-          size: 10,
+          size: 99999,
           total: this.total,
           cbpc07: undefined,
           cbsa08: undefined,

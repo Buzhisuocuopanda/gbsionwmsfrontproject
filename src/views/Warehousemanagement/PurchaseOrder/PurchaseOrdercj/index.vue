@@ -28,7 +28,7 @@
           <el-form-item label="客户名称:" prop="cbpc099">
             <el-popover placement="bottom-start" trigger="click">
               <CustomerMainten ref="CustomerMainten" @selected="selected022" style="width:210px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly style="width:100%;">
+              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly style="width:120%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -42,7 +42,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="" :span="6">
+        <el-col style="margin-left:-5%;" :span="6" >
           <el-form-item label="仓库:" prop="cbpc100">
             <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
@@ -51,7 +51,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="" :span="6">
+        <el-col style="margin-left:-4%;" :span="6">
           <el-form-item label="销售人员:" prop="salerId">
             <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
@@ -101,19 +101,19 @@
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="cbpc000" label="品牌" width="">
+          <el-table-column prop="cbpc000" label="品牌" width="230">
             <template slot-scope="scope" style="width:200%;">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:230px!important;" />
+                          style="width:650px!important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
                   </el-popover>
             </template>
           </el-table-column>
-           <el-table-column label="型号" width="" />
-          <el-table-column label="描述" width="" />
+           <el-table-column label="型号" width="230" />
+          <el-table-column label="描述" width="230" />
           <el-table-column label="数量" width="100" >
             <template slot-scope="scope" style="width:200%;">
                   <el-input v-model="scope.row.qty"  placeholder="" class="shuzicaoyou" style=""></el-input>

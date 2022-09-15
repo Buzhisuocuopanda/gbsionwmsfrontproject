@@ -28,7 +28,8 @@
                   </el-form-item>
                     <el-form-item style="margin-left:50%;">                    
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;" @click="handletihuoone">创建</el-button>
+                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;" @click="handletihuoone">创建</el-button> -->
+                         <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;">创建</el-button>
                          <el-dropdown trigger="click">
                          <span class="xialaxuanxanggdd">
                              <i class="el-icon-caret-bottom el-icon--right "></i>
