@@ -101,18 +101,20 @@
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="cbpc000" label="商品名称" width="">
+          <el-table-column prop="cbpc000" label="品牌" width="200">
             <template slot-scope="scope" style="width:200%;">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:230px!important;" />
+                          style="width:600px!important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
                   </el-popover>
             </template>
           </el-table-column>
-          <el-table-column label="供应商" prop="cbpc099" width="100" >
+           <el-table-column label="型号" width="200" />
+          <el-table-column label="描述" width="200" />
+          <el-table-column label="供应商" prop="cbpc099" width="180" >
             <template slot-scope="scope" style="width:200%;">
                  <el-popover placement="bottom-start" trigger="click">
                      <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)" style="width:210px!important;" />
@@ -126,19 +128,31 @@
                   <el-input v-model="scope.row.qty"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="商品型号" width="100" prop="goodsclassify">
+          <!-- <el-table-column label="商品型号" width="100" prop="goodsclassify">
             <template slot-scope="scope" style="width:200%;">
                   <el-input v-model="scope.row.goodsclassify" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
-          </el-table-column>
-          <el-table-column label="销售预订单主表id" width="100" prop="gsSalesOrders">
+          </el-table-column> -->
+          <el-table-column label="销售预订单主表" width="200" prop="cbpc09916">
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.gsSalesOrders" placeholder="" class="shuzicaoyou" style=""></el-input>
-            </template>
+                  <!-- <el-input v-model="scope.row.gsSalesOrders" placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                   <el-popover placement="bottom-start" trigger="click">
+                     <SalesBooking ref="SalesBooking" @selected="selected09916($event,scope.row)" style="width:210px!important;" />
+                     <el-input slot="reference" v-model="scope.row.cbpc09916" placeholder="" readonly style="width:100%;">
+                     </el-input>
+                 </el-popover>
+                </template>
           </el-table-column>
-          <el-table-column prop="salerId" label="销售人员" width="">
+          <el-table-column prop="salerId" label="销售人员" width="100">
             <template slot-scope="scope">
                 <el-input v-model="scope.row.salerId" placeholder=""></el-input>              
+            </template>
+          </el-table-column>
+          <el-table-column prop="orderDate" label="订单日期" width="180">
+            <template slot-scope="scope">
+                <!-- <el-input v-model="scope.row.salerId" placeholder=""></el-input>  -->
+                <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;">
+            </el-date-picker>             
             </template>
           </el-table-column>
 
@@ -147,9 +161,24 @@
                 <el-input v-model="scope.row.supplierId" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
+          <el-table-column v-if="false" prop="goodsclassify" label="型号" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.goodsclassify" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="goodsclassifyy" label="型号" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.goodsclassifyy" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
           <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
             <template slot-scope="scope">
                 <el-input v-model="scope.row.goodsId" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="gsSalesOrders" label="销售预订单id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.gsSalesOrders" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -197,6 +226,9 @@
     //客户
   import CustomerMainten from "@/components/CustomerMaintenance";
 
+  //销售预订单
+  import SalesBooking from "@/components/SalesBooking";
+
   export default {
     name: "store",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
@@ -213,7 +245,8 @@
       supplierMaintenance,
       ListLists,
       Goodsone01,
-      CustomerMainten
+      CustomerMainten,
+      SalesBooking
     },
     data() {
       return {
@@ -789,6 +822,21 @@
       //     this.$set(item, 'cbpd12', (parseFloat(item.cbpd09) * parseFloat(item.cbpd11)))
       //   }
       // },
+
+
+      // 合并单元格
+      arraySpanMethod({
+        row,
+        column,
+        rowIndex,
+        columnIndex
+      }) {
+        if (columnIndex === 0) {
+          return [1, 3];
+        } else if (columnIndex < 3) {
+          return [0, 0];
+        }
+      },
       //添加模块-仓库
       selected01(name) {
         console.log(name, 123)
@@ -832,6 +880,17 @@
         // this.form2.icon = name;
       },
 
+       selected09916(e,row) {
+        this.$set(row,"cbpc09916",e.substring(0,e.indexOf("-")))
+        console.log(e,111)
+        console.log(row,222)
+        // row.cbpc08 = e.substring(e.indexOf(".") + 1)
+        this.$set(row,"gsSalesOrders",e.substring(e.indexOf("-") +1),8523642)
+        console.log(row,555)
+        // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+        // this.form2.icon = name;
+      },
+
       //查询商品信息维护
       selected08(e,row) {
         // row.cbpc000=e
@@ -840,7 +899,8 @@
         console.log(row,222)
         // row.cbpc08 = e.substring(e.indexOf(".") + 1)
         this.$set(row,"goodsId",e.substring(e.indexOf(".") +1),8523642)
-        console.log(row,555)
+        this.$set(row,"goodsclassifyy",e.substring(e.indexOf("~")+1),8523642)
+        this.$set(row,"goodsclassify",row.goodsclassifyy.substring(0,row.goodsclassifyy.indexOf("~")),555)
         // console.log(row.cbpc08,96325412);
         // console.log(name, 111)
         // console.log(index, 222)

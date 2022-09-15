@@ -5,27 +5,28 @@
             @clear="filterIcons" @input.native="filterIcons">
             <i slot="suffix" class="el-icon-search el-input__icon" />
         </el-input>
-       <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
-        <div>
+      <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
+          <div>
             <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
                 @click="selectedIcon(item)">
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                 <!-- <span>{{ item }}</span> -->
-                <el-row style="margin-top: 0%;">
-                    <el-col :span="24"> <span>{{ item.substring(0,item.lastIndexOf(".")) }}</span></el-col>
+                <el-row style="margin-top: 5%;">
+                    <el-col :span="24"> <span>{{ item.match(/(\S*)\-/)[1] }}</span></el-col>
                 </el-row>
             </div>
-        </div>
-      </el-form>
+          </div>
+        </el-form>
     </div>
 </template>
 
 <script>
 // import icons from './requireIcons'
-import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
-// import { StoreSkuList } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
+// import { addUserSysStoreku, listUserStoreku, updateUserStoreku, removeSysStoreku } from "@/api/WareSys/Kuweixxweihu";
+// import { addUserSysStore, listUserStore, updateUserStore, removeSysStore } from "@/api/WareSys/Cangkuxxguanli";
+import {  PurchaseinboundList } from "@/api/Warehousemanagement/SalesBooking/index";
 export default {
-    name: 'kuweixxweihu',
+    name: 'PurchaseinboundList',
     data() {
         return {
             name: '',
@@ -35,7 +36,7 @@ export default {
             total:0,
             // iconList: ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
             iconList: [],
-             // 查询参数
+            // 查询参数
             queryParams: {
                 pageNum: 1,
                 pageSize: 999999,
@@ -55,27 +56,27 @@ export default {
     methods: {
         filterIcons() {
             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            GoodsList(this.addDateRange(this.queryParams)).then(response => {
+            PurchaseinboundList(this.addDateRange(this.queryParams)).then(response => {
                 // this.userList = response.data.rows;
                 //this.top = JSON.stringify(this.userList)
                 // console.log(response.data.rows, 3369);
                 // console.log(this.top,888888);
                 // this.icons =[]
-                this.total =  response.data.total;
+                this.total =  response.data.rows;
                 this.iconList = []
                 if (response.data.rows <= 0) {
                     this.iconList = []
                 } else {
-                  if(response.data.rows.length > 0){
+                 
                     response.data.rows.forEach((item) => {
-                        this.iconList.push(item.cbpb10+ "~" + item.cbpb12+ "~" +  item.cbpb08 + "." + item.cbpb01)
+                        this.iconList.push(item.orderNo +"-"+item.id);
                     })
-                  }
+                  
                 }
                 if (this.name) {
                     this.iconList = this.iconList.filter(item => item.includes(this.name))
                 }
-                console.log(response.data.rows, 339688);
+                console.log(response, 339688);
             }
             );
 

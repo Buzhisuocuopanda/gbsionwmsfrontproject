@@ -70,7 +70,7 @@
                     <el-table-column label="日期" align="left" key="cbpc08" prop="cbpc08" :formatter="formatDate"
                         sortable>
                     </el-table-column> -->
-                    <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" sortable />
+                    <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" sortable width="550" />
                     <el-table-column label="PONumber" align="left" key="ponumber" prop="ponumber" sortable />
                     <el-table-column label="入库数量" align="left" key="inQty" prop="inQty" sortable>
                         <!-- <template scope="scope">
