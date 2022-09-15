@@ -18,17 +18,17 @@
                                 </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:customer:list']" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:customer:add']" @click="handlechuangjiang">创建</el-button>
 
-                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                            v-hasPermi="['system:user:remove']">删除
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" v-hasPermi="['system:customer:remove']" :disabled="multiple" @click="handleDelete"
+                            >删除
                         </el-button>
 
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button>
+                            v-hasPermi="['system:customer:import']">导入</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaochu" @click="handleExport"
-                            v-hasPermi="['system:user:export']">导出</el-button>
+                            v-hasPermi="['system:customer:export']">导出</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -58,10 +58,10 @@
                         class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
-                                @click="handlexiangqengSelect(scope.row)" style="border:0px;"  v-hasPermi="['system:user:edit']">修改
+                                @click="handlexiangqengSelect(scope.row)" style="border:0px;"  v-hasPermi="['system:customer:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete01(scope.row)" style="border:0px;" v-hasPermi="['system:user:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" style="border:0px;" v-hasPermi="['system:customer:remove']">删除</el-button>
 
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button> -->
@@ -222,7 +222,7 @@
                 </el-row>
                 <div style="height:50px;"></div>
             </el-form>
-            
+
         </el-dialog>
 
         <!-- 详情 -->
@@ -268,7 +268,7 @@
                     </el-col>
                     <el-col :span="11">
                         <el-form-item label="客户等级:" prop="cbca28">
-                            <el-input v-model="form1.cbca28" placeholder="" style="width:100%;" />                            
+                            <el-input v-model="form1.cbca28" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -506,7 +506,7 @@
                     </el-col>
                 </el-row>
                 <div style="height:50px;"></div>
-            </el-form>   
+            </el-form>
         </el-dialog>
 
         <!-- 用户导入对话框 -->
@@ -731,14 +731,14 @@ export default {
             rules2: {
                 cbca08: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
-                  ],                
+                  ],
                 cbca13: [
                     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
                     { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
                 ],
                  cbca25: [
                     { required: true, message: "地址不能为空!", trigger: "blur" },
-                   
+
                 ],
                    cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
@@ -765,14 +765,14 @@ export default {
             rules3: {
                  cbca08: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
-                  ],                
+                  ],
                 cbca13: [
                     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
                     { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
                 ],
                  cbca25: [
                     { required: true, message: "地址不能为空!", trigger: "blur" },
-                   
+
                 ],
                    cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
@@ -936,8 +936,8 @@ export default {
         /** 搜索按钮操作 */
         handleQuery() {
             // var neirong = $('#miaoshu').val();
-           
-           
+
+
             this.queryParams.pageNum = 1;
              this.getList();
         },
@@ -1025,7 +1025,7 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
-           
+
                 let row = {}
                 row.cbca07 = this.form.cbca07;
                 row.cbca08 = this.form.cbca08;

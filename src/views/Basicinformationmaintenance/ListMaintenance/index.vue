@@ -19,11 +19,11 @@
                             </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:list:list']" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:list:add']" @click="handlechuangjiang">创建</el-button>
 
                         <el-button size="mini"  type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                            v-hasPermi="['system:user:remove']">删除
+                            v-hasPermi="['system:list:remove']">删除
                         </el-button>
 
                     </el-form-item>
@@ -39,13 +39,13 @@
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                              <el-button size="mini" type="text" icon="el-icon-share" class="button-caozuoxougai"
-                                @click="handleSelect(scope.row)" v-hasPermi="['system:user:edit']">详情
+                                @click="handleSelect(scope.row)" v-hasPermi="['system:list:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
-                                @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
+                                @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:list:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" v-hasPermi="['system:list:remove']">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -123,7 +123,7 @@
                                 <el-input v-model="form1.cala12" placeholder="" maxlength="30" style="width:70%;" />
                             </el-form-item>
                         </el-col>
-                       
+
                     </el-row>
                 </div>
             </el-form>
@@ -485,7 +485,7 @@ export default {
         handleQuery() {
             // var neirong = $('#miaoshu').val();
 
-           
+
             this.queryParams.pageNum = 1;
             this.getList();
         },
@@ -592,7 +592,7 @@ export default {
             this.form1.cala12 = row.cala12;
             this.form1.cala13 = row.cala13;
             this.form1.cala08 = row.cala08;
-            
+
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

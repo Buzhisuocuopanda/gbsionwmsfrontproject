@@ -1,4 +1,5 @@
 <template>
+  <!--库存汇总初始化-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -19,7 +20,7 @@
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                        </el-date-picker>                    
+                        </el-date-picker>
                     </el-form-item>
                     <el-form-item>
                           <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
