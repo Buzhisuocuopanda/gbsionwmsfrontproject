@@ -27,18 +27,18 @@
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
                         <el-form-item>
-                            <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                            <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
+                            <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:goods:list']" @click="handleQuery">查询</el-button>
+                            <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:goods:add']" @click="handlechuangjiang">创建
                             </el-button>
 
                             <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
-                                @click="handleDelete" v-hasPermi="['system:user:remove']">删除
+                                @click="handleDelete" v-hasPermi="['system:goods:remove']">删除
                             </el-button>
 
                             <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                                v-hasPermi="['system:user:import']">导入</el-button>
+                                v-hasPermi="['system:goods:import']">导入</el-button>
                             <el-button plain size="mini" class="biaoto-buttondaochu" @click="handleExport"
-                                v-hasPermi="['system:user:export']">导出</el-button>
+                                v-hasPermi="['system:goods:export']">导出</el-button>
                         </el-form-item>
                     </el-form>
 
@@ -52,8 +52,8 @@
                         <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable >
                             <!-- <template scope="scope">
                             <div>{{ scope.row.cbpb10 == 1 ? "Epiphone" : scope.row.cbpb10 == 2 ?
-                            "Gibson" : scope.row.cbpb10 == 3 ? "Kramer" : scope.row.cbpb10 == 4 ? 
-                            "Steinberger" : scope.row.cbpb10 == 5 ?  "Mesa/Boogie" : scope.row.cbpb10 == 6 ?  
+                            "Gibson" : scope.row.cbpb10 == 3 ? "Kramer" : scope.row.cbpb10 == 4 ?
+                            "Steinberger" : scope.row.cbpb10 == 5 ?  "Mesa/Boogie" : scope.row.cbpb10 == 6 ?
                             "Maestro" : "商品品牌不确定"
                             }}
                             </div>
@@ -69,10 +69,10 @@
                         <el-table-column label="操作" align="center" fixed="right" width="160" class-name="small-padding fixed-width">
                             <template slot-scope="scope">
                                 <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
-                                    @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
+                                    @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:goods:edit']">修改
                                 </el-button>
                                 <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                    @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
+                                    @click="handleDelete01(scope.row)" v-hasPermi="['system:goods:remove']">删除</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -127,7 +127,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:6%;">                          
+                    <el-row style="margin-left:6%;">
                         <el-col :span="11">
                             <el-form-item label="UPC:" prop="cbpb15">
                                 <el-input v-model="form.cbpb15" placeholder="" maxlength="30" style="width:80%;" />
@@ -144,7 +144,7 @@
                         </el-col>
                     </el-row>
 
-                    <el-row v-if="false">                          
+                    <el-row v-if="false">
                         <el-col :span="11">
                             <el-form-item label="商品分类id" prop="cbpb14">
                                 <el-input v-model="form.cbpb14" placeholder="" maxlength="30" style="width:80%;" />
@@ -168,18 +168,18 @@
                 </div>
                <div>
             <div style="margin-left:3%; margin-top: 2%;">
-              
+
             </div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
+            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
                 <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
                     <div class="box1">
                       <table  class="tablebiankuan table-heads" width="95%" height="20px">
                             <thead style="">
                                 <tr style="height:30px; ">
-                                    <th style="width: 60px;height: 30px;">客户等级</th>  
-                                    <th style="width: 70px;height: 30px;">结算类型</th> 
-                                    <th style="width: 70px;height: 30px;">标准进价</th> 
-                                    <th style="width: 90px;height: 30px;">标准销货价</th>                   
+                                    <th style="width: 60px;height: 30px;">客户等级</th>
+                                    <th style="width: 70px;height: 30px;">结算类型</th>
+                                    <th style="width: 70px;height: 30px;">标准进价</th>
+                                    <th style="width: 90px;height: 30px;">标准销货价</th>
                                     <th style="width: 80px;height: 30px;">生效日期</th>
                                     <th style="width: 50px;height: 30px;font-size:23px;">
                                       <!-- <el-button plain  type="primary" @click="_ly_addFrom">+</el-button> -->
@@ -193,7 +193,7 @@
                                 cellspacing="0" class="tablebiankuan">
                       <el-row >
                      <el-form label-position="right" ref="form5" :rules="rules5" :model="form5" label-width="50px" style="margin-top:1%;"
-                        :inline="true">                        
+                        :inline="true">
                         <!-- <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpc01" style="width:50%;"></el-input>
                         </el-form-item>                       -->
@@ -238,7 +238,7 @@
                 <el-button @click="cancel">取 消</el-button>
             </div>
         </el-dialog>
-       
+
         <!--修改树状菜单-->
         <el-dialog :visible.sync="open1" append-to-body>
            <el-tree :data="deptOptions" :props="defaultProps" style="height:500px;"
@@ -297,7 +297,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:6%;">                          
+                    <el-row style="margin-left:6%;">
                         <el-col :span="11">
                             <el-form-item label="UPC:" prop="cbpb15">
                                 <el-input v-model="form2.cbpb15" placeholder="" maxlength="30" style="width:80%;" />
@@ -313,7 +313,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                     <el-row v-if="false">                          
+                     <el-row v-if="false">
                         <el-col :span="11">
                             <el-form-item label="商品分类id" prop="cbpb14">
                                 <el-input v-model="form2.cbpb14" placeholder="" maxlength="30" style="width:78%;" />
@@ -341,18 +341,18 @@
                 </div>
                <div>
             <div style="margin-left:3%; margin-top: 2%;">
-              
+
             </div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
+            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
                 <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
                     <div class="box1">
                       <table  class="tablebiankuan table-heads"   width="95%" height="20px">
                             <thead style="">
                                 <tr style="height:30px; ">
-                                    <th style="width: 60px;height: 30px;">客户等级</th>  
-                                    <th style="width: 70px;height: 30px;">结算类型</th> 
-                                    <th style="width: 70px;height: 30px;">标准进价</th> 
-                                    <th style="width: 90px;height: 30px;">标准销货价</th>                   
+                                    <th style="width: 60px;height: 30px;">客户等级</th>
+                                    <th style="width: 70px;height: 30px;">结算类型</th>
+                                    <th style="width: 70px;height: 30px;">标准进价</th>
+                                    <th style="width: 90px;height: 30px;">标准销货价</th>
                                     <th style="width: 80px;height: 30px;">生效日期</th>
                                     <th style="width: 50px;height: 30px;font-size:23px;">
                                       <!-- <el-button plain  type="primary" @click="_ly_addFrom">+</el-button> -->
@@ -366,7 +366,7 @@
                                 cellspacing="0" class="tablebiankuan">
                       <el-row >
                     <el-form label-position="right" ref="form5" :rules="rules5"  :model="form5" label-width="50px" style="margin-top:1%;"
-                        :inline="true">  
+                        :inline="true">
                             <el-col style="margin-left: -2%;" :span="7">
                                 <el-form-item label=" " prop="cbpf02">
                                       <el-select v-model="form5.cbpf02" placeholder="" style="width:70%;">
@@ -720,7 +720,7 @@ export default {
         }
     },
     created() {
-       this.form.cbpb09 =  this.form.cbpb08; 
+       this.form.cbpb09 =  this.form.cbpb08;
 
         this.getList();
         this.getTreeselect();
@@ -750,7 +750,7 @@ export default {
             this.$forceUpdate()
         },
 
-        
+
           //添加模块-列表
         selected01(name) {
             // console.log(name, 123)
@@ -764,7 +764,7 @@ export default {
             this.form2.cbpb10  = name.substring(name.indexOf("-") + 1)
             this.$forceUpdate()
         },
-         
+
         //修改树状列表
         shuzhuangliebiao(){
             this.open1 = true;
@@ -853,7 +853,7 @@ export default {
             console.log('_ly_ok:' + JSON.stringify(this.formArr))
         },
 
-   
+
 
 
 
@@ -871,7 +871,7 @@ export default {
                 this.reset01();
                 // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
                 return
-                
+
             }
 
             this.formArr.push({
@@ -955,7 +955,7 @@ export default {
                                 })
                             }
                         })
-                        
+
                         // if(res.children.children){
                         //     res.children.children.forEach((i) => {
                         //         i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
@@ -990,8 +990,8 @@ export default {
             console.log((this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1],19991119);
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
             this.handleQuery();
-            
-            
+
+
         },
 
             // 节点单击事件
@@ -1011,7 +1011,7 @@ export default {
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
             this.open1 = false;
             this.handleQuery();
-            
+
         },
 
         // 节点单击事件
@@ -1069,8 +1069,8 @@ export default {
         },
         /** 搜索按钮操作 */
         handleQuery() {
-           
-           
+
+
             this.queryParams.pageNum = 1;
              this.getList();
         },
@@ -1116,7 +1116,7 @@ export default {
                         // this.submitShangpin();
                         this.getList();
                         this.reset01();
-                       
+
                         // this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
@@ -1175,8 +1175,8 @@ export default {
         /** 修改按钮操作 */
         handleUpdate() {
 
-           
-            this.open = true;           
+
+            this.open = true;
                 let row = {}
                 row.cbpb01 = this.form.cbpb01;
                 row.cbpa07 = this.form.cbpa07;
@@ -1220,7 +1220,7 @@ export default {
                     // this.submitShangpin();
                     this.getList();
                     // this.handleAdds();
-            
+
 
                     this.$message({ message: '修改成功', type: 'success' });
 

@@ -4,7 +4,7 @@
             <el-col :span="1.5">
                 <el-button type="info" plain icon="el-icon-upload2" size="mini"
                     style="margin-bottom: 20px;font-weight: bold;" @click="handleImport"
-                    v-hasPermi="['system:user:import']" class="app-container-dr">导入</el-button>
+                    v-hasPermi="['system:classify:import']" class="app-container-dr">导入</el-button>
             </el-col>
         </el-row>
 
@@ -29,7 +29,7 @@
                         <hr />
                         <div class="shangponfenlei-middle">
                             <el-row>
-                                
+
                                 <el-col style="margin-left: 120px;">
                                     <el-form-item label="名称" prop="cbpa07" >
                                         <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;" />
@@ -55,10 +55,10 @@
                         </div>
                         <div class="shangponfenlei-following">
                             <div class="button-style">
-                                <el-button type="primary" class="button-fontsize-xg" @click="handleUpdate">修改
+                                <el-button type="primary" class="button-fontsize-xg" v-hasPermi="['system:classify:edit']" @click="handleUpdate">修改
                                 </el-button>
-                                <el-button type="success" class="button-fontsize-xz" @click="handleAdd">新增</el-button>
-                                <el-button type="danger" class="button-fontsize-sc" @click="handleDelete">删除</el-button>
+                                <el-button type="success" class="button-fontsize-xz" v-hasPermi="['system:classify:add']" @click="handleAdd">新增</el-button>
+                                <el-button type="danger" class="button-fontsize-sc" v-hasPermi="['system:classify:remove']" @click="handleDelete">删除</el-button>
                             </div>
                         </div>
                     </div>
@@ -237,7 +237,7 @@ export default {
                                 })
                             }
                         })
-                        
+
                         // if(res.children.children){
                         //     res.children.children.forEach((i) => {
                         //         i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
@@ -341,10 +341,10 @@ export default {
                         this.getList();
                         this.reset();
                         this.form.cbpa09 = "0";
-                        
+
                     });
                 } else {
-                   
+
                 }
             })
             // if(this.form.classifyName!=undefined)
