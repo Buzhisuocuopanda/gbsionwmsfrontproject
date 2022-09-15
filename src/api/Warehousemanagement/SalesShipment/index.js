@@ -22,7 +22,16 @@ export function PurchaseinboundAdds(data) {
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
-    url: '/system/Selloutofwarehouse//SwJsSkuBarcodelists',
+    url: '/system/Selloutofwarehouse/SwJsSkuBarcodelists',
+    method: 'get',
+    params: query
+  })
+}
+
+//销售人员查询列表
+export function PurchaseinxiaosoList(query) {
+  return request({
+    url: '/system/Approval/salerman',
     method: 'get',
     params: query
   })
