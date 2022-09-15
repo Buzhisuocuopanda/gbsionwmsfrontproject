@@ -8,7 +8,7 @@
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="编号:" prop="cbpc07">
-            <el-input type="text" v-model="form2.cbpc07" style="width: 60%;" />
+            <!-- <el-input type="text" v-model="form2.cbpc07" style="width: 60%;" /> -->
           </el-form-item>
         </el-col>
         <el-col :span="8">

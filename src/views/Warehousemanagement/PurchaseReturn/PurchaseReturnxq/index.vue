@@ -23,9 +23,10 @@
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
             <el-table border v-loading="loading" :data="userList" height="290" :header-cell-style="headClassprxq"
-                :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                :cell-style="{ padding:'5px 0' }" :row-style="{ height:'10px' }"
+            :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
+                <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" label="型号">
                 </el-table-column>
@@ -128,6 +129,29 @@
                     <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
                 </el-descriptions-item>
             </el-descriptions>
+             <div >
+                <span class="saomiaojluu">制单(wanghui):</span>
+                <span class="saomiaojluuu">审核:</span>
+                <span class="saomiaojluuuu">财务:</span>
+            </div>
+             <div class="saomiaojlu">扫描记录</div>
+             <el-table style="margin-top:10%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
+                :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
+                <el-table-column prop="cala08" key="cala08" label="品牌">
+                </el-table-column>
+                <el-table-column prop="cbpa07" key="cbpa07"  label="类型">
+                </el-table-column>
+                <el-table-column prop="cbpb12" key="cbpb12" align="right" label="型号">
+                </el-table-column>
+                <el-table-column prop="cbpb08" key="cbpb08" align="right" label="描述">
+                </el-table-column>
+                <el-table-column prop="cbpe09" key="cbpe09" align="right" label="SN">
+                </el-table-column>
+                <el-table-column prop="cbpe10" key="cbpe10" align="right" label="库位">
+                </el-table-column>
+                <el-table-column prop="cbpg08" key="cbpg08" :formatter="formatDate" label="入库时间">
+                </el-table-column>
+            </el-table>
         </div>
 
     </div>

@@ -126,9 +126,14 @@
                     <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
                 </el-descriptions-item>
             </el-descriptions>
-             <el-table style="margin-top:4%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
+            <div >
+                <span class="saomiaojluu">制单(wanghui):</span>
+                <span class="saomiaojluuu">审核:</span>
+                <span class="saomiaojluuuu">财务:</span>
+            </div>
+            <div class="saomiaojlu">扫描记录</div>
+             <el-table style="margin-top:10%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
-            
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
                 <el-table-column prop="cbpa07" key="cbpa07"  label="类型">
