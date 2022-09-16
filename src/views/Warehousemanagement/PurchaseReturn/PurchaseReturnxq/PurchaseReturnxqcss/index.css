@@ -27,37 +27,35 @@
     width: 250px !important;
 }
 .saomiaojlu {
-    position: absolute;
-    top: 62%;
+
+    margin-top: 10%;
     font-family: "宋体";
     font-weight: 500;
     margin-left: 45%;
 }
+
 .saomiaojluu {
-    position: absolute;
-    top: 55%;
-    left: -40%;
+
+    margin-top: 2%;
     font-family: "宋体";
     font-weight: 500;
-    margin-left: 50%;
+    margin-left: 20%;
 }
 
 .saomiaojluuu {
-    position: absolute;
-    top: 55%;
-    left: -10%;
+
+    margin-top: 2%;
     font-family: "宋体";
     font-weight: 500;
-    margin-left: 50%;
+    margin-left: 20%;
 }
 
 .saomiaojluuuu {
-    position: absolute;
-    top: 55%;
-    left: 20%;
+
+    margin-top: 2%;
     font-family: "宋体";
     font-weight: 500;
-    margin-left: 50%;
+    margin-left: 20%;
 }
 
 .Purchase_bianhao{

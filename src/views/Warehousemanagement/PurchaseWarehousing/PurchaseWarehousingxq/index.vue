@@ -17,7 +17,7 @@
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
                 </el-descriptions-item>
                 <el-descriptions-item>
-                    <template slot="label">结算货币</template>USD
+                    <template slot="label">结算货币</template>{{ value.cala08s }}
                 </el-descriptions-item>
             </el-descriptions>
 
@@ -29,7 +29,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" label="型号">
                 </el-table-column>
-                 <el-table-column prop="cbpb08" key="cbpb08" label="描述">
+                 <el-table-column prop="cbpb08" key="cbpb08" label="描述" width="250">
                 </el-table-column>
                 <el-table-column prop="cbpd09" key="cbpd09" align="right" label="数量">
                 </el-table-column>
@@ -139,13 +139,13 @@
                 </el-table-column>
                 <el-table-column prop="cbpa07" key="cbpa07"  label="类型">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" align="right" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" align="right" label="描述">
+                <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="250">
                 </el-table-column>
-                <el-table-column prop="cbpe09" key="cbpe09" align="right" label="SN">
+                <el-table-column prop="cbpe09" key="cbpe09" align="" label="SN">
                 </el-table-column>
-                <el-table-column prop="cbpe10" key="cbpe10" align="right" label="库位">
+                <el-table-column prop="cbpe10" key="cbpe10" align="" label="库位">
                 </el-table-column>
                 <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="入库时间">
                 </el-table-column>
@@ -295,6 +295,38 @@ export default {
   #printRecord table {
     table-layout: auto !important;
   }
+  /**  内容描述  */
+  #printRecord .el-table__body .el-table__row .el-table_1_column_3 .cell{
+       width: 280 !important;
+  }
+/**  表头描述  */
+ #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_3 .cell{
+       width: 280 !important;
+  }
+   /** 型号内容  */
+ #printRecord .el-table__body .el-table__row .el-table_1_column_2 .cell{
+      width: 200 !important;
+  }
+
+  /**  表头型号  */
+ #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell{
+       width: 200 !important;
+  }
+
+   /**  表头品牌  */
+ #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell{
+      width: 60 !important;
+  }
+     /** 品牌内容  */
+ #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell{
+     width: 60 !important;
+  }
+
+     /**  表头数量  */
+ #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
+      
+  }
+
   #printRecord .el-table__header-wrapper .el-table__header {
     width: 100% !important;
     border: solid 1px #f2f2f2;
