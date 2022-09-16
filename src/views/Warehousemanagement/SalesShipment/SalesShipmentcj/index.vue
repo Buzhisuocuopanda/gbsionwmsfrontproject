@@ -269,93 +269,6 @@
           <!-- </el-form> -->
         </el-table>
       </div>
-
-
-
-        <!-- <div> -->
-            <!-- <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog"> -->
-              <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">             
-                <el-button type="primary" @click="handleAdd">保 存</el-button>
-              </span> -->
-               <!-- <table style="margin-top:2%;">
-                <tr style="width: 100%;">
-                    <th style="width:123px; text-align: left;padding-left: 2%;">供应商</th>
-                    <th style="width:122px; text-align: left;">订单分类</th>
-                    <th style="width:113px; text-align: left;">品牌</th>
-                    <th style="width:110px; text-align: left;">型号</th>
-                    <th style=" width:100px; text-align: left;">描述</th>
-                    <th style=" width:110px;text-align: left;">数量</th>
-                    <th style=" width:108px;text-align: left;">单价</th>
-                    <th style=" width:100px;text-align: left;">金额</th>
-                    <th style=" width:118px;text-align: left;padding-left: -2%;">剩余未发量</th>
-                    <th style=" width:110px;text-align: left;">订单占用量</th>
-                    <th style=" width: 130px;text-align: center;">备注</th>
-                    <th style=" width: 64px;text-align: left;">操作</th>
-                </tr>
-               </table> -->
-               <!-- <el-row v-for="(form, index) in formArrr" style="width:110%;margin-bottom: -2%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
-                        :inline="true"> 
-                        
-                        <el-form-item label="" size="small" prop="cbsc15" style="margin-left:0.8%;">
-                            <el-input  v-model="form.cbsc15" style="width:40%;"></el-input>                           
-                        </el-form-item>
-                        <el-form-item label="" size="small" prop="cbsc177" style="margin-left:-7%; ">
-                            <el-input  v-model="form.cbsc177" style="width:50%;"></el-input>
-                        </el-form-item>
-                        
-                        <el-form-item label="" size="small" prop="cbsd133" style="margin-left:-7%;">
-                            <el-input v-model="form.cbsd133" style="width:55%;"></el-input>
-                        </el-form-item>
-                       
-                        <el-form-item label="" size="small" prop="cbsd134" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsd134" style="width:55%;"></el-input>
-                        </el-form-item>
-                       
-                        <el-form-item label="" size="small" prop="cbsd135" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsd135" style="width:55%;"></el-input>
-                        </el-form-item>
-                       
-                        <el-form-item label="" size="small" prop="cbsc09" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc09" style=" width:50%;"></el-input>
-                        </el-form-item>
-                       
-                        <el-form-item label="" size="small" prop="cbsc11" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc11" style="width:55%;"></el-input>
-                        </el-form-item>
-                        
-                        <el-form-item label="" size="small" prop="cbsc12" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc12" style="width:55%;"></el-input>
-                        </el-form-item>
-                       
-                        <el-form-item label="" size="small" prop="cbsc13" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc13" style="width:55%;"></el-input>
-                        </el-form-item>
-                        
-                        <el-form-item label="" size="small" prop="cbsc14" style="margin-left:-6%;">
-                            <el-input v-model="form.cbsc14" style="width:66%;"></el-input>
-                        </el-form-item>
-                       
-                        <el-form-item label="" size="small" prop="cbsc15" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc15" style="width:60%;"></el-input>
-                        </el-form-item>
-                        <el-form-item v-if="false" label="" size="small" prop="cbsc17" style="margin-left:-7%; ">
-                            <el-input  v-model="form.cbsc17" style="width:50%;"></el-input>
-                        </el-form-item>
-                        <el-form-item v-if="false" label=""  prop="cbsb01" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbsb01" style="width:70%;"></el-input>
-                        </el-form-item>
-                        <el-form-item v-if="false" label="" size="small" prop="cbsc08" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc08" style="width:60%;"></el-input>
-                        </el-form-item>
-                        <el-form-item v-if="false" label="" size="small" prop="cbsc10" style="margin-left:-4%;">
-                            <el-input v-model="form.cbsc10" style="width:60%;"></el-input>
-                        </el-form-item>
-                    </el-form>
-                </el-row> -->
-              <!-- <div style="height:100px;"></div>
-            </div> -->
-        <!-- </div> -->
       </el-form>
       <div style="height:100px;"></div>
       <div class="tinajia_dingwei">
@@ -840,7 +753,7 @@ export default {
 
         // 存储表单数据
         _ly_save() {
-            this.$message.success('添加成功')
+            // this.$message.success('添加成功')
             // 将数据传递给父组件。
             // 如果要将数据存储到后台，可在此处自行实现
             this.$emit('on-ok', this.formArr)

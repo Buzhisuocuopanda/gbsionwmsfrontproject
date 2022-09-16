@@ -36,10 +36,10 @@
                              <i class="el-icon-caret-bottom el-icon--right "></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                           <el-dropdown-item class="clearfix" >
+                           <!-- <el-dropdown-item class="clearfix" >
                               通过订单创建
                              <el-badge class="mark"/>
-                           </el-dropdown-item>
+                           </el-dropdown-item> -->
                         <el-dropdown-item class="clearfix" @click.native="tong">
                               通过提货单创建
                             <el-badge class="mark"/>
