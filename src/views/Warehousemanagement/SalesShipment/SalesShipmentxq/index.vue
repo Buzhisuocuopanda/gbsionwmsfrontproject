@@ -76,7 +76,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="180">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" label="描述" width="200">
+                <el-table-column prop="cbpb08" key="cbpb08" label="描述" width="320">
                 </el-table-column>
                 <el-table-column prop="cbsc09" key="cbsc09" label="数量">
                 </el-table-column>
@@ -132,14 +132,14 @@
         </section>
          <section ref="print" class="recordImg" id="printRecord">
             <div class="saomiaojlu">出库建议表</div>
-             <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
+             <el-descriptions class="margin-top" style="width:90%;margin-left: 5%; margin-top: 1%;"  title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
                 :key="key">
                 <el-descriptions-item label-class-name="my-labell012">
                     <template slot="label">客户</template>{{
                     value.cbca08 }}
                 </el-descriptions-item>
              </el-descriptions>
-             <el-table  :header-cell-style="headClass" v-loading="loading" border :data="userList"
+             <el-table  :header-cell-style="headClass" v-loading="loading" border :data="userList"  style="width: 90%;margin-left: 5%;"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">  
                 <el-table-column type="index" :index="table_index" label="序号" width="50" align="center"></el-table-column>           
                 <el-table-column prop="cala08" key="cala08" label="品牌">

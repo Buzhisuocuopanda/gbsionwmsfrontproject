@@ -13,6 +13,7 @@
 
 .Purchase_riqii {
     margin-left: 20%;
+    font-size: 10px;
 }
 
 .el-descriptions-row th {
@@ -85,4 +86,10 @@
     font-family: "宋体";
     font-weight: 500;
     margin-left: 20%;
+}
+
+.Purchase_bianhao{
+
+    font-size: 10px;
+    font-weight: 500;
 }
