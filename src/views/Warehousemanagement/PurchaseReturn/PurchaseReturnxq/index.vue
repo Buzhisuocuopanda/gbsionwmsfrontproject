@@ -29,17 +29,17 @@
 
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="200px;">
                 </el-table-column>
                 <el-table-column prop="cbpb08" key="cbpb08" label="描述" width="450px;">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="数量">
+                <el-table-column prop="cbph09" key="cbph09" align="right"  label="数量">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="已扫数量">
+                <el-table-column prop="cbph09" key="cbph09" align="right" label="已扫数量">
                 </el-table-column>
-                <el-table-column prop="cbph10" key="cbph10" label="单价">
+                <el-table-column prop="cbph10" key="cbph10" align="right" label="单价">
                 </el-table-column>
-                <el-table-column prop="cbph11" key="cbph11" label="金额">
+                <el-table-column prop="cbph11" key="cbph11" align="right" label="金额">
                 </el-table-column>
                 <el-table-column prop="cbph13" key="cbph13" label="备注">
                 </el-table-column>
@@ -144,7 +144,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="300">
+                <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="390">
                 </el-table-column>
                 <el-table-column prop="cbpi09" key="cbpi09" align="" label="SN">
                 </el-table-column>
@@ -157,6 +157,7 @@
        <div style="height:100px;"></div>
      </section>
        <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+       <el-button type="primary" @click="handlefanhui">取消</el-button>
        <div style="height:100px;"></div>
     </div>
 
@@ -197,6 +198,13 @@ export default {
 
     },
     methods: {
+       
+         //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-cktkfh/role/");
+        },
+
         //写在methods里面的方法
        PrintRow(index, row){
             this.$print(this.$refs.print) 

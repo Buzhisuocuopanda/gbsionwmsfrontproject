@@ -154,6 +154,7 @@
        </section>
        <div style="height:20px;"></div>
         <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+        <el-button type="primary" @click="handlefanhui">取消</el-button>
         <div style="height:20px;"></div>
     </div>
 
@@ -194,6 +195,11 @@ export default {
     },
     methods: {
 
+        //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-ckrkfh/role/");
+        },
         //打印
         PrintRow(index, row){
             this.$print(this.$refs.print) 
