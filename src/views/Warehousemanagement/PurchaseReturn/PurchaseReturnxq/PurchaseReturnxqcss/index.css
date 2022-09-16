@@ -28,14 +28,14 @@
 }
 .saomiaojlu {
     position: absolute;
-    top: 68.5%;
+    top: 62%;
     font-family: "宋体";
     font-weight: 500;
     margin-left: 45%;
 }
 .saomiaojluu {
     position: absolute;
-    top: 60%;
+    top: 55%;
     left: -40%;
     font-family: "宋体";
     font-weight: 500;
@@ -44,7 +44,7 @@
 
 .saomiaojluuu {
     position: absolute;
-    top: 60%;
+    top: 55%;
     left: -10%;
     font-family: "宋体";
     font-weight: 500;
@@ -53,9 +53,17 @@
 
 .saomiaojluuuu {
     position: absolute;
-    top: 60%;
+    top: 55%;
     left: 20%;
     font-family: "宋体";
     font-weight: 500;
     margin-left: 50%;
+}
+
+.Purchase_bianhao{
+    font-family: "宋体";
+}
+
+.Purchase_riqi{
+    font-family: "宋体";
 }

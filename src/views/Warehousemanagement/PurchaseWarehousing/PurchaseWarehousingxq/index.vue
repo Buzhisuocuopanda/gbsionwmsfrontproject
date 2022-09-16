@@ -1,5 +1,6 @@
 <template>
     <div>
+      <section ref="print" class="recordImg" id="printRecord">
         <div class="Purchase_caigou">采购入库单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
@@ -26,7 +27,7 @@
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" :formatter="formatDate" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
                 </el-table-column>
                  <el-table-column prop="cbpb08" key="cbpb08" label="描述">
                 </el-table-column>
@@ -42,8 +43,8 @@
                 </el-table-column>
             </el-table>
         </el-form>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+            <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
                 class="pagintotal" />
             <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
@@ -126,13 +127,13 @@
                     <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
                 </el-descriptions-item>
             </el-descriptions>
-            <div >
+            <div>
                 <span class="saomiaojluu">制单(wanghui):</span>
                 <span class="saomiaojluuu">审核:</span>
                 <span class="saomiaojluuuu">财务:</span>
             </div>
-            <div class="saomiaojlu">扫描记录</div>
-             <el-table style="margin-top:10%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
+         <div class="saomiaojlu">扫描记录</div>
+             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
@@ -149,8 +150,11 @@
                 <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="入库时间">
                 </el-table-column>
             </el-table>
-        </div>
-
+          </div>
+       </section>
+       <div style="height:20px;"></div>
+        <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+        <div style="height:20px;"></div>
     </div>
 
 </template>
@@ -189,6 +193,11 @@ export default {
         
     },
     methods: {
+
+        //打印
+        PrintRow(index, row){
+            this.$print(this.$refs.print) 
+        },
         //列表表头设置
         headClass() {
             return {
@@ -267,3 +276,36 @@ export default {
 };
 </script>
 <style src="./PurchaseWarehouscss/index.css"></style>
+<style>
+  
+@page {
+  size: auto;
+  margin: 3mm;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+  body {
+    border: solid 1px #ffffff;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+  #printRecord table {
+    table-layout: auto !important;
+  }
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printRecord #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+
+	
+</style>

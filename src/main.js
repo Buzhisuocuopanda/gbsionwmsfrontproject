@@ -37,9 +37,14 @@ import DictTag from '@/components/DictTag'
 import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
+//打印组件
+// import Print from 'vue-print-nb'
 
 //时间转化
 import dateMoment from '@/api/Warehousemanagement/PurchaseWarehousing/data.js'
+
+//打印组件
+import Print from '@/api/Warehousemanagement/PurchaseWarehousing/print.js'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -65,6 +70,8 @@ Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)
 Vue.use(dateMoment)
+//打印组件
+Vue.use(Print)
 DictData.install()
 
 /**

@@ -139,21 +139,21 @@
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpa07" key="cbpa07"  label="类型">
+                <el-table-column prop="cbsa08" key="cbsa08"  label="类型">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" align="right" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" align="right" label="描述">
+                <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="300">
                 </el-table-column>
-                <el-table-column prop="cbpe09" key="cbpe09" align="right" label="SN">
+                <el-table-column prop="cbpi09" key="cbpi09" align="" label="SN">
                 </el-table-column>
-                <el-table-column prop="cbpe10" key="cbpe10" align="right" label="库位">
+                <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
                 </el-table-column>
                 <el-table-column prop="cbpg08" key="cbpg08" :formatter="formatDate" label="入库时间">
                 </el-table-column>
             </el-table>
         </div>
-
+       <div style="height:100px;"></div>
     </div>
 
 </template>

@@ -10,7 +10,7 @@
     font-weight: 200;
 }
 .Purchase_riqi{
-    margin-left: 50%;
+    margin-left: 30%;
 }
 .el-descriptions-row th{
     width: 120px;
@@ -24,36 +24,33 @@
 }
 
 .saomiaojlu {
-   position: absolute;
-   top: 68.5%;
+   
+   margin-top: 10%;
    font-family: "宋体";
    font-weight: 500;
    margin-left: 45%;
 }
 
 .saomiaojluu {
-    position: absolute;
-    top: 60%;
-    left: -40%;
+    
+    margin-top: 2%;
     font-family: "宋体";
     font-weight: 500;
-    margin-left: 50%;
+    margin-left: 20%;
 }
 
 .saomiaojluuu {
-    position: absolute;
-    top: 60%;
-    left: -10%;
+
+    margin-top: 2%; 
     font-family: "宋体";
     font-weight: 500;
-    margin-left: 50%;
+    margin-left: 20%;
 }
 
 .saomiaojluuuu {
-    position: absolute;
-    top: 60%;
-    left: 20%;
-    font-family: "宋体";
-    font-weight: 500;
-    margin-left: 50%;
+    
+   margin-top: 2%; 
+   font-family: "宋体";
+   font-weight: 500;
+   margin-left: 20%;
 }
