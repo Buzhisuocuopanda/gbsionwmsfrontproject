@@ -1,22 +1,23 @@
 <template>
-  <!--销售库存查询-->
+
+  <!--商品占用查询-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
-        <el-form-item label="商品分类"   class="item-r" >
-          <el-input v-model="cbwa09" class="filter-item"  placeholder="商品分类" />
-        </el-form-item>
+      <el-form-item label="商品分类"   class="item-r" >
+        <el-input v-model="cbpa07" class="filter-item"  placeholder="商品分类" />
+      </el-form-item>
 
-        <el-form-item label="品牌"   class="item-r" >
-          <el-input v-model="cala08" class="filter-item"  placeholder="品牌" />
-        </el-form-item>
-        <el-form-item label="商品"   class="item-r" >
-          <el-input v-model="cbpb01" class="filter-item"  placeholder="商品" />
-          <!--<el-select v-model="status"  placeholder="商品" class="middle-input">
-            <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>-->
-        </el-form-item>
+      <el-form-item label="品牌"   class="item-r" >
+        <el-input v-model="cala08" class="filter-item"  placeholder="品牌" />
+      </el-form-item>
+      <el-form-item label="商品"   class="item-r" >
+        <el-input v-model="cbpb01" class="filter-item"  placeholder="商品" />
+        <!--<el-select v-model="status"  placeholder="商品" class="middle-input">
+          <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>-->
+      </el-form-item>
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
@@ -26,16 +27,17 @@
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
-        <el-table-column fixed align="center" label="序号" type="index" width="50"></el-table-column>
-        <el-table-column fixed label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
-        <el-table-column fixed label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
-        <el-table-column  label="品牌" align="center" prop="cala08" min-width="120px;"/>
-        <el-table-column  label="型号" align="center" prop="cbpb12" min-width="100px;"/>
-        <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
-        <el-table-column  label="描述" align="center" prop="cbpb08"  min-width="240px;"/>
-        <el-table-column  label="数量" align="center" prop="cbif09" min-width="100px;"/>
-        <el-table-column  label="可用库存数量" align="center" prop="lockQty" min-width="100px;"/>
-        <!--<el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />-->
+        <el-table-column fixed align="center" label="序号" type="index" width="50"/>
+        <el-table-column fixed label="销售订单号" align="center" prop="cboa25"  min-width="80px;"/>
+        <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="200px;"/>
+        <el-table-column  label="客户订单号" align="center" prop="cboa25" min-width="200px;"/>
+        <el-table-column  label="分类" align="center" prop="cbpa07" min-width="100px;"/>
+        <el-table-column  label="品牌" align="center" prop="cala08" min-width="60px;"/>
+        <el-table-column  label="型号" align="center" prop="cbpb12"  min-width="100px;"/>
+        <el-table-column  label="占用数量" align="center" prop="lockQty" min-width="60px;"/>
+        <el-table-column  label="订单数量" align="center" prop="cbob09" min-width="60px;"/>
+        <el-table-column label="已发数量" align="center" prop="cbob10" min-width="60px;" />
+        <el-table-column label="取消数量" align="center" prop="cbob15" min-width="60px;" />
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
@@ -59,13 +61,13 @@
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getInnnvsentorsysummaryList } from "@/api/statisticAnalysis/index";
+import { getInventorysmsmaryList } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
-  name: "inventsorysummary",
+  name: "inventorysumsmary",
   data() {
     return {
-      cbwa09: "",
+      cbpa07: "",
       cala08: "",
       cbpb01:"",
       formData: {
@@ -124,7 +126,7 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.cbwa09 = "";
+      this.cbpa07 = "";
       this.cala08 = "";
       this.cbpb01 = "";
       this.queryParams.pageNum = 1;
@@ -140,11 +142,11 @@ export default {
       this.onSearch();
     },
     onSearch() {
-      this.queryParams.cbwa09 = this.cbwa09;
+      this.queryParams.cbpa07 = this.cbpa07;
       this.queryParams.cala08 = this.cala08;
       this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;
-      getInnnvsentorsysummaryList(this.queryParams).then(response => {
+      getInventorysmsmaryList(this.queryParams).then(response => {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows

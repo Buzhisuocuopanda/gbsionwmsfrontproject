@@ -1,10 +1,16 @@
 <template>
-  <!--仓库台账-->
+  <!--库存情况报表-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
-        <el-form-item label="单据类型/仓库"   class="item-r" >
-          <el-input v-model="cbwa09" class="filter-item"  placeholder="单据类型/仓库" />
+
+        <el-form-item label="仓库"   class="item-r" >
+          <el-input v-model="whId" class="filter-item"  placeholder="仓库" />
+          <el-form-item label="品牌"   class="item-r" >
+            <el-input v-model="brandId" class="filter-item"  placeholder="品牌" />
+          </el-form-item>
+        </el-form-item><el-form-item label="商品"   class="item-r" >
+        <el-input v-model="goodsId" class="filter-item"  placeholder="商品" />
         </el-form-item>
         <el-form-item  label="日期">
           <el-date-picker size="mini" v-model="dateRange" type="daterange"
@@ -12,13 +18,6 @@
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
-        <!--<el-form-item label="品牌"   class="item-r" >
-          <el-input v-model="cala08" class="filter-item"  placeholder="品牌" />
-        </el-form-item>
-        <el-form-item label="商品"   class="item-r" >
-          <el-input v-model="cbpb01" class="filter-item"  placeholder="商品" />
-
-        </el-form-item>-->
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
@@ -26,23 +25,24 @@
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
-        <el-table-column label="仓库" align="center" header-align="center" prop="cbwa09" min-width="80px;" />
-        <el-table-column  label="单据日期" align="center" prop="cbib04"  min-width="80px;"/>
-        <el-table-column  label="单据类型" align="center" prop="cbib17" min-width="80px;"/>
-        <el-table-column  label="单据编号" align="center" prop="cbib03" min-width="120px;"/>
-        <el-table-column  label="摘要" align="center" prop="cbpb12" min-width="130px;"/>
-        <el-table-column  label="往来单位" align="center" prop="cbib06" min-width="100px;"/>
-        <el-table-column  label="商品" align="center" prop="cbpb08"  min-width="270px;"/>
-        <el-table-column  label="上次结存数量" align="center" prop="cbib09" min-width="100px;"/>
-        <el-table-column  label="上次结存成本金额" align="center" prop="cbib10" min-width="100px;"/>
-        <el-table-column  label="本次入库数量" align="center" prop="cbwa11" min-width="100px;"/>
-        <el-table-column  label="本次入库金额" align="center" prop="cbib12" min-width="100px;"/>
-        <el-table-column  label="本次出库数量" align="center" prop="cbib13" min-width="100px;"/>
-        <el-table-column  label="本次出库金额" align="center" prop="cbib14" min-width="100px;"/>
-        <el-table-column  label="本次结存数量" align="center" prop="cbib15" min-width="100px;"/>
-        <el-table-column  label="本次结存金额" align="center" prop="cbib16" min-width="100px;"/>
-        <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-
+        <!--<el-table-column label="仓库" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />-->
+        <el-table-column  label="供应商" align="center" prop="supplieName"  min-width="100px;"/>
+        <el-table-column  label="品牌" align="center" prop="brand" min-width="180px;"/>
+        <el-table-column  label="大类" align="center" prop="bClass" min-width="120px;"/>
+        <el-table-column  label="小类" align="center" prop="sClass" min-width="80px;"/>
+        <!--<el-table-column  label="SKU" align="center" prop="qty" min-width="60px;"/>-->
+        <el-table-column  label="型号" align="center" prop="model"  min-width="160px;"/>
+        <el-table-column  label="期初库存" align="center" prop="firstQty" min-width="100px;"/>
+        <el-table-column  label="生产入库" align="center" prop="makeQty" min-width="100px;"/>
+       <!-- <el-table-column  label="改型号" align="center" prop="suplierName" min-width="200px;"/>-->
+        <el-table-column  label="不良返工" align="center" prop="badQty" min-width="100px;"/>
+        <el-table-column  label="累计" align="center" prop="totalQty" min-width="100px;"/>
+        <el-table-column  label="销售出库" align="center" prop="outSaleQty" min-width="60px;"/>
+        <el-table-column  label="库存" align="center" prop="skuQty" min-width="160px;"/>
+        <!--<el-table-column  label="现有订单" align="center" prop="cgRprice" min-width="60px;"/>
+        <el-table-column  label="订单分配" align="center" prop="cgRprice" min-width="60px;"/>
+        <el-table-column  label="订单缺货" align="center" prop="cbib16" min-width="100px;"/>
+        <el-table-column  label="无订单" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
       <el-pagination
         :background="true"
@@ -59,25 +59,26 @@
   </div>
 </template>
 <script>
-// import x from ''
-// import { totalOrderList } from "@/api/saleordermanage";
-import { getInventorysummaryqueryList } from "@/api/statisticAnalysis/index";
+
+import { getfnSkuList } from "@/api/statisticAnalysis/index";
+//
+// import { formatDate } from '../../../utils';
 export default {
-  components: {},
-  name: "inventorysmmaryquerys",
+  name: "fnSkuList",
   data() {
     return {
-      cbwa09: "",
-
-      formData: {
+      brandId:"",
+      whId:"",
+      goodsId:"",
+      /*formData: {
         name: "",
-      },
+      },*/
       dateRange:[],
-      tableData: [],
-      loadingOut:false,
-      loadingState:false,
+     /* tableData: [],*/
+      /*loadingOut:false,*/
+  /*    loadingState:false,*/
       loading:false,
-      queryForm:{},
+      /*queryForm:{},*/
       /*listQuery: {
         pageNum: 1,
         pageSize: 10
@@ -86,12 +87,13 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        total: this.total,
-        cbwa09: "",
-        cbib17:"",
-        dateRange:undefined,
-        // cala08: "",
-        // cbpb01: ""
+        // total: this.total,
+        brandId: "",
+        whId:"",
+        goodsId:"",
+        startTime:"",
+        endTime:"",
+
       },
       inwuquList: [],
       total:0,
@@ -223,9 +225,9 @@ export default {
     this.onSearch()
   },
   methods: {
-    onSubmit() {},
-    handleSelectionChange() {},
-    formatStateType(row) {
+/*    onSubmit() {},*/
+    /*handleSelectionChange() {},*/
+   /* formatStateType(row) {
       if (row != null) {
         if (row.status == 0) {
           return "NO"
@@ -233,10 +235,13 @@ export default {
           return "OK"
         }
       }
-    },
+    },*/
     /** 重置按钮操作 */
     resetQuery() {
-      this.cbwa09 = "";
+      this.brandId = "";
+      this.whId = "";
+      this.goodsId = "";
+
       this.queryParams.pageNum = 1;
       this.resetForm("queryParams");
       this.onSearch();
@@ -248,17 +253,23 @@ export default {
       this.onSearch();
     },
     onSearch() {
-      this.queryParams.cbwa09 = this.cbwa09;
-      this.queryParams.dateRange = this.dateRange;
-      // this.queryParams.cbpb01 = this.cbpb01;
+      this.queryParams.brandId = this.brandId;
+      this.queryParams.whId = this.whId;
+      if(this.dateRange.length>=2){
+        this.queryParams.startTime = this.dateRange[0];
+        this.queryParams.endTime = this.dateRange[1];
+      }
+
+
+      this.queryParams.goodsId = this.goodsId;
       this.loading = true;
-      getInventorysummaryqueryList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      getfnSkuList(this.queryParams).then(response => {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows
           this.total = response.data.total
         } else {
-          this.deviceList = []
+     /*     this.deviceList = []*/
           this.total = 0
         }
       })

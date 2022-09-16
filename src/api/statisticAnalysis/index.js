@@ -43,6 +43,62 @@ export function getInnnvsentorsysummaryList(query) {
   })
 }
 
+// 获取商品占用列表
+export function getInventorysmsmaryList(query) {
+  return request({
+    url: '/countQuery/Inventorysmsmaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取库存明细列表
+export function getInventorysummaryquerysList(query) {
+  return request({
+    url: '/countQuery/Inventorysummaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+
+
+// 获取财务综合报表列表
+export function getfnSynthesisList(query) {
+  return request({
+    url: '/query/fnSynthesis',
+    method: 'get',
+    params: query
+  })
+}
+
+
+// 获取库存情况报表列表
+export function getfnSkuList(query) {
+  return request({
+    url: '/query/fnSkuList',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取财务库存明细列表
+export function getFnInventorysummaryquerysList(query) {
+  return request({
+    url: '/query/fnInventorysummaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取销售分析列表
+export function getSalesAnalysisList(query) {
+  return request({
+    url: '/query/salesAnalysis',
+    method: 'get',
+    params: query
+  })
+}
 
   // 查询定时任务调度详细
 //   export function getJob(jobId) {
