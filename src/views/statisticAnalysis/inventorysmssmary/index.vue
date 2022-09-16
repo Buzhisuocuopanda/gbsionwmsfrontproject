@@ -1,10 +1,16 @@
 <template>
-  <!--仓库台账-->
+  <!--销售订单明细-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
-        <el-form-item label="单据类型/仓库"   class="item-r" >
-          <el-input v-model="cbwa09" class="filter-item"  placeholder="单据类型/仓库" />
+        <el-form-item label="客户"   class="item-r" >
+          <el-input v-model="cbca08" class="filter-item"  placeholder="客户" />
+        </el-form-item>
+        <el-form-item label="销售人员"   class="item-r" >
+          <el-input v-model="caua17" class="filter-item"  placeholder="销售人员" />
+        </el-form-item>
+        <el-form-item label="商品"   class="item-r" >
+          <el-input v-model="cbwa09" class="filter-item"  placeholder="商品" />
         </el-form-item>
         <el-form-item  label="日期">
           <el-date-picker size="mini" v-model="dateRange" type="daterange"
@@ -26,21 +32,18 @@
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
-        <el-table-column label="仓库" align="center" header-align="center" prop="cbwa09" min-width="80px;" />
-        <el-table-column  label="单据日期" align="center" prop="cbib04"  min-width="80px;"/>
-        <el-table-column  label="单据类型" align="center" prop="cbib17" min-width="80px;"/>
-        <el-table-column  label="单据编号" align="center" prop="cbib03" min-width="120px;"/>
-        <el-table-column  label="摘要" align="center" prop="cbpb12" min-width="130px;"/>
-        <el-table-column  label="往来单位" align="center" prop="cbib06" min-width="100px;"/>
-        <el-table-column  label="商品" align="center" prop="cbpb08"  min-width="270px;"/>
-        <el-table-column  label="上次结存数量" align="center" prop="cbib09" min-width="100px;"/>
-        <el-table-column  label="上次结存成本金额" align="center" prop="cbib10" min-width="100px;"/>
-        <el-table-column  label="本次入库数量" align="center" prop="cbwa11" min-width="100px;"/>
-        <el-table-column  label="本次入库金额" align="center" prop="cbib12" min-width="100px;"/>
-        <el-table-column  label="本次出库数量" align="center" prop="cbib13" min-width="100px;"/>
-        <el-table-column  label="本次出库金额" align="center" prop="cbib14" min-width="100px;"/>
-        <el-table-column  label="本次结存数量" align="center" prop="cbib15" min-width="100px;"/>
-        <el-table-column  label="本次结存金额" align="center" prop="cbib16" min-width="100px;"/>
+        <el-table-column label="单据编号" align="center" header-align="center" prop="cboa07" min-width="80px;" />
+        <el-table-column  label="单据日期" align="center" prop="cboa08"  min-width="80px;"/>
+        <el-table-column  label="客户" align="center" prop="cbca08" min-width="80px;"/>
+        <el-table-column  label="销售人员" align="center" prop="caua17" min-width="120px;"/>
+        <el-table-column  label="品牌" align="center" prop="cala08" min-width="130px;"/>
+        <el-table-column  label="类型" align="center" prop="cbpa08" min-width="100px;"/>
+        <el-table-column  label="型号" align="center" prop="cbpb12"  min-width="270px;"/>
+        <el-table-column  label="数量" align="center" prop="num" min-width="100px;"/>
+        <el-table-column  label="已发货数量" align="center" prop="cbob10" min-width="100px;"/>
+        <el-table-column  label="未发货数量" align="center" prop="cbwa11" min-width="100px;"/>
+        <el-table-column  label="单价" align="center" prop="cbob11" min-width="100px;"/>
+        <el-table-column  label="金额" align="center" prop="cbob12" min-width="100px;"/>
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
@@ -64,11 +67,13 @@
 import { getInventorysummaryqueryList } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
-  name: "inventorysmmaryquerys",
+  name: "inventorysmssmary",
   data() {
     return {
-      cbwa09: "",
+      cbca08: "",
 
+      caua17: "",
+      cbpb01:"",
       formData: {
         name: "",
       },
@@ -236,7 +241,9 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.cbwa09 = "";
+      this.cbca08 = "";
+      this.caua17 = "";
+      this.cbpb01 = "";
       this.queryParams.pageNum = 1;
       this.resetForm("queryParams");
       this.onSearch();
@@ -248,7 +255,8 @@ export default {
       this.onSearch();
     },
     onSearch() {
-      this.queryParams.cbwa09 = this.cbwa09;
+      this.queryParams.cbca08 = this.cbca08;
+      this.queryParams.caua17 = this.caua17;
       this.queryParams.dateRange = this.dateRange;
       // this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;
