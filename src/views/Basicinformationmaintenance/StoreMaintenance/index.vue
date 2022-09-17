@@ -15,19 +15,19 @@
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiangqengchuangjian">创建
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:store:list']" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:store:add']" @click="handlexiangqengchuangjian">创建
                         </el-button>
                         <!-- <el-button type="danger" class="biaoto-buttonshanchu" @click="handleDelete">删除</el-button> -->
 
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                            v-hasPermi="['system:user:remove']">删除
+                            v-hasPermi="['system:store:remove']">删除
                         </el-button>
 
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button>
+                            v-hasPermi="['system:store:import']">导入</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaochu" @click="handleExport"
-                            v-hasPermi="['system:user:export']">导出</el-button>
+                            v-hasPermi="['system:store:export']">导出</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -43,12 +43,12 @@
                     <el-table-column label="状态" align="left" key="cbla08" prop="cbla08" sortable />
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
-                           
+
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
-                                @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
+                                @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:store:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -63,16 +63,16 @@
 
         <el-dialog :title="title1" :visible.sync="open" append-to-body style="width:70%;margin-left:15%;">
            <div style="margin-top:-8%">修改库位信息</div>
-            <hr/> 
-            <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">                
-                 
+            <hr/>
+            <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">
+
                 <el-row style="margin-top:3%;">
-                    
+
                    <el-col style="margin-left:7%;">
                        <el-form-item label="仓库:" prop="cbpc100">
                            <el-popover placement="bottom-start" trigger="click">
                                <kuweixxweihu ref="kuweixxweihu" @selected="selected02" />
-                              <el-input slot="reference" v-model="form.cbpc100" readonly  placeholder="" 
+                              <el-input slot="reference" v-model="form.cbpc100" readonly  placeholder=""
                                 style="width:77%;">
                               </el-input>
                            </el-popover>
@@ -145,7 +145,7 @@
                 <el-row style="margin-top:3%;">
                      <el-col>
                         <el-form-item label="仓库:" prop="cbla09">
-                            <el-input v-model="form1.cbla09" placeholder="" readonly style="width:77%;" 
+                            <el-input v-model="form1.cbla09" placeholder="" readonly style="width:77%;"
                                 maxlength="30" />
                         </el-form-item>
                     </el-col>
@@ -207,9 +207,9 @@
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" append-to-body style="width:70%;margin-left:15%;">
             <div style="margin-top:-8%">创建库位信息</div>
-            <hr/> 
+            <hr/>
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="20%" class="chuangjianformstore">
-               
+
                <el-row style="margin-top:3%; ">
                   <el-col style="margin-left:7%;">
                        <el-form-item label="仓库:" prop="cbpc100">
@@ -500,13 +500,13 @@ export default {
                     { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
                 cbla12:[{
-                      required: true, message: "优先型号不能为空!", trigger: "blur" 
+                      required: true, message: "优先型号不能为空!", trigger: "blur"
                 }],
                 // cbla13:[{
-                //     required: true, message: "备注不能为空!", trigger: "blur" 
+                //     required: true, message: "备注不能为空!", trigger: "blur"
                 // }],
                 cbla08:[{
-                     required: true, message: "状态不能为空!", trigger: "blur" 
+                     required: true, message: "状态不能为空!", trigger: "blur"
                 }]
             },
             rules: {
@@ -526,13 +526,13 @@ export default {
                     { required: true, message: "仓库不能为空!", trigger:  'change'  }
                 ],
                 cbla12:[{
-                      required: true, message: "优先型号不能为空!", trigger: "blur" 
+                      required: true, message: "优先型号不能为空!", trigger: "blur"
                 }],
                 // cbla13:[{
-                //     required: true, message: "备注不能为空!", trigger: "blur" 
+                //     required: true, message: "备注不能为空!", trigger: "blur"
                 // }],
                 cbla08:[{
-                     required: true, message: "状态不能为空!", trigger: "blur" 
+                     required: true, message: "状态不能为空!", trigger: "blur"
                 }]
             }
 
@@ -834,7 +834,7 @@ export default {
             this.form1.cbla12 = row.cbla12;
             this.form1.cbla13 = row.cbla13;
             this.form1.cbla08 = row.cbla08;
-            
+
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
@@ -864,7 +864,7 @@ export default {
             this.form1.cbsa16 = row.cbsa16;
             this.form1.cbsa17 = row.cbsa17;
             this.form1.cbsa18 = row.cbsa18;
-            
+
         },
         //创建
         handlexiangqengchuangjian(row) {

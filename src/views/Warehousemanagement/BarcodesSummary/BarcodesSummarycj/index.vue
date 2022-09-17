@@ -113,11 +113,11 @@
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
         
-         <el-table-column prop="cbpc000" label="品牌" width="">
+         <el-table-column prop="cbpc000" label="品牌" width="220">
            <template slot-scope="scope">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:500px !important;" />
+                          style="width:680px !important;" />
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
@@ -129,8 +129,8 @@
                 <el-input v-model="scope.row.cbif08" placeholder="商品id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="型号" width="" />
-          <el-table-column label="描述" width="" />
+          <el-table-column label="型号" width="220" />
+          <el-table-column label="描述" width="220" />
            <el-table-column prop="cbpc099" label="供应商"  width="150">
             <template slot-scope="scope">
             <el-popover placement="bottom-start" trigger="click">

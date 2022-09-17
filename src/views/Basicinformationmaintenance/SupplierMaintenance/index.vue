@@ -18,17 +18,17 @@
                                 </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:supplier:list']" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:supplier:add']" @click="handlechuangjiang">创建</el-button>
 
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                            v-hasPermi="['system:user:remove']">删除
+                                   v-hasPermi="['system:supplier:remove']">删除
                         </el-button>
 
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button>
+                            v-hasPermi="['system:supplier:import']">导入</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaochuu" @click="handleExport"
-                            v-hasPermi="['system:user:export']">导出</el-button>
+                            v-hasPermi="['system:supplier:export']">导出</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -57,10 +57,10 @@
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
-                                @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:user:edit']">修改
+                                @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:supplier:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete01(scope.row)" v-hasPermi="['system:user:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" v-hasPermi="['system:supplier:remove']">删除</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button> -->
                         </template>
@@ -452,7 +452,7 @@ export default {
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect },
     data() {
-        
+
         const phoneValidator11 = (rule, value, callback) => {
             if (/^1[3456789]\d{9}$/.test(value)) { // 利用正则表达式校验手机号
                 callback()
@@ -845,8 +845,8 @@ export default {
         /** 搜索按钮操作 */
         handleQuery() {
             // var neirong = $('#miaoshu').val();
-           
-           
+
+
             this.queryParams.pageNum = 1;
             this.getList();
         },
@@ -1015,7 +1015,7 @@ export default {
             this.form1.cbsa16 = row.cbsa16;
             this.form1.cbsa17 = row.cbsa17;
             this.form1.cbsa18 = row.cbsa18;
-            
+
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {

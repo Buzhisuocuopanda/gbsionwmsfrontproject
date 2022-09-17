@@ -10,7 +10,7 @@
     font-weight: 200;
 }
 .Purchase_riqi{
-    margin-left: 50%;
+    margin-left: 30%;
 }
 .el-descriptions-row th{
     width: 120px;
@@ -21,4 +21,36 @@
 
 .my-label{
     width: 250px !important;
+}
+
+.saomiaojlu {
+   
+   margin-top: 10%;
+   font-family: "宋体";
+   font-weight: 500;
+   margin-left: 45%;
+}
+
+.saomiaojluu {
+    
+    margin-top: 2%;
+    font-family: "宋体";
+    font-weight: 500;
+    margin-left: 20%;
+}
+
+.saomiaojluuu {
+
+    margin-top: 2%; 
+    font-family: "宋体";
+    font-weight: 500;
+    margin-left: 20%;
+}
+
+.saomiaojluuuu {
+    
+   margin-top: 2%; 
+   font-family: "宋体";
+   font-weight: 500;
+   margin-left: 20%;
 }

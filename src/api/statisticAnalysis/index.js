@@ -8,12 +8,98 @@ export function getGoodsList() {
     })
   }
   // 获取品牌分类列表
-export function getBrandList() {
+export function getBrandList(query) {
     return request({
       url: 'countQuery/Invsentorsysummaryquery',
       method: 'get',
+      params: query
     })
   }
+
+// 获取库存汇总列表
+export function getInventorySummaryList(query) {
+  return request({
+    url: '/countQuery/Inventorysummaryquery',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取库存汇总列表
+export function getInventorysummaryqueryList(query) {
+  return request({
+    url: '/countQuery/Inventorysummaryquery',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取销售库存列表
+export function getInnnvsentorsysummaryList(query) {
+  return request({
+    url: '/countQuery/Innnvsentorsysummaryquery',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取商品占用列表
+export function getInventorysmsmaryList(query) {
+  return request({
+    url: '/countQuery/Inventorysmsmaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取库存明细列表
+export function getInventorysummaryquerysList(query) {
+  return request({
+    url: '/countQuery/Inventorysummaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+
+
+// 获取财务综合报表列表
+export function getfnSynthesisList(query) {
+  return request({
+    url: '/query/fnSynthesis',
+    method: 'get',
+    params: query
+  })
+}
+
+
+// 获取库存情况报表列表
+export function getfnSkuList(query) {
+  return request({
+    url: '/query/fnSkuList',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取财务库存明细列表
+export function getFnInventorysummaryquerysList(query) {
+  return request({
+    url: '/query/fnInventorysummaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取销售分析列表
+export function getSalesAnalysisList(query) {
+  return request({
+    url: '/query/salesAnalysis',
+    method: 'get',
+    params: query
+  })
+}
+
   // 查询定时任务调度详细
 //   export function getJob(jobId) {
 //     return request({
@@ -21,7 +107,7 @@ export function getBrandList() {
 //       method: 'get'
 //     })
 //   }
-  
+
 //   // 新增定时任务调度
 //   export function addJob(data) {
 //     return request({
@@ -30,7 +116,7 @@ export function getBrandList() {
 //       data: data
 //     })
 //   }
-  
+
 //   // 修改定时任务调度
 //   export function updateJob(data) {
 //     return request({

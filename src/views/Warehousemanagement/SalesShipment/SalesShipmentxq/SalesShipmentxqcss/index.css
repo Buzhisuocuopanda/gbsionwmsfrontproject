@@ -13,6 +13,7 @@
 
 .Purchase_riqii {
     margin-left: 20%;
+    font-size: 10px;
 }
 
 .el-descriptions-row th {
@@ -28,6 +29,14 @@
     text-align: center!important;
     height: 20px !important;
 }
+
+.my-labell012{
+    width: 50px !important;
+    text-align: center !important;
+    height: 20px !important;
+    margin-left: 50%;
+}
+
 .my-labell02{
     width: 146px !important;
     text-align: center !important;
@@ -37,4 +46,50 @@
 .my-content{
     width: 357px !important;
     height: 10px !important;
+}
+
+.saomiaojlu {
+
+    margin-top: 10%;
+    font-family: "宋体";
+    font-weight: 500;
+    margin-left: 45%;
+}
+
+.saomiaojlub{
+        margin-top: 10%;
+        font-family: "宋体";
+        font-weight: 500;
+        margin-left: 46%;
+}
+
+
+.saomiaojluu {
+
+    margin-top: 2%;
+    font-family: "宋体";
+    font-weight: 500;
+    margin-left: 20%;
+}
+
+.saomiaojluuu {
+
+    margin-top: 2%;
+    font-family: "宋体";
+    font-weight: 500;
+    margin-left: 20%;
+}
+
+.saomiaojluuuu {
+
+    margin-top: 2%;
+    font-family: "宋体";
+    font-weight: 500;
+    margin-left: 20%;
+}
+
+.Purchase_bianhao{
+
+    font-size: 10px;
+    font-weight: 500;
 }

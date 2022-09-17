@@ -29,16 +29,17 @@
                     <el-form-item  style="margin-left:51%;">                     
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button>
+                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button> -->
+                        <el-button size="mini" class="biaoto-buttonchuangjian">创建</el-button>
                         <el-dropdown trigger="click">
                         <span class="el-dropdown-link xialaxuanxang">
                              <i class="el-icon-caret-bottom el-icon--right "></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                           <el-dropdown-item class="clearfix" >
+                           <!-- <el-dropdown-item class="clearfix" >
                               通过订单创建
                              <el-badge class="mark"/>
-                           </el-dropdown-item>
+                           </el-dropdown-item> -->
                         <el-dropdown-item class="clearfix" @click.native="tong">
                               通过提货单创建
                             <el-badge class="mark"/>
@@ -180,8 +181,8 @@
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
                 <el-row>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbsb07">
-                            <el-input v-model="form.cbsb07" maxlength="30" style="width:50%;" />
+                        <el-form-item label="编号:" prop="cbsb07" >
+                            <el-input v-model="form.cbsb07" maxlength="30" disabled style="width:50%;" />
                         </el-form-item>
                     </el-col>
                     <!-- <el-col style="margin-top:1%;">
@@ -886,7 +887,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbsb01);
+            this.idss = selection.map(item => item.cbsb07);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -911,7 +912,7 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批ID为"' + row.cbsb01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
             console.log(row.cbpc01, 8888);
 
             PurchaseinboundSH(row).then(response => {
@@ -925,7 +926,7 @@ export default {
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
-            this.$modal.confirm('是否要审批ID为"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
@@ -942,7 +943,7 @@ export default {
         //反审
         PurchaseinboundFanShenpi(row) {
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要反审ID为"' + row.cbsb01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
             PurchaseinboundShs(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
@@ -955,7 +956,7 @@ export default {
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
-            this.$modal.confirm('是否要反审ID为"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -975,7 +976,7 @@ export default {
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要标记完成为ID"' + row.cbsb01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
             PurchaseinboundShss(row).then(response => {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
@@ -989,7 +990,7 @@ export default {
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
-            this.$modal.confirm('是否要标记完成为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1018,7 +1019,7 @@ export default {
             // });
 
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记为ID"' + row.cbsb01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
@@ -1029,7 +1030,7 @@ export default {
         },
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
-            this.$modal.confirm('是否要取消标记为ID"' + row.cbsb01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1101,7 +1102,7 @@ export default {
             //     if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
                 // console.log(response.posts, 12345678);
-                this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
+                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
                 // this.submitShangpin();
                 this.submitShangpin();
@@ -1180,11 +1181,12 @@ export default {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
                     // data: JSON.stringify(this.userList01),
-                    data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
-                                          customerLevel:row.customerLevel,contacts:row.contacts,
-                                        whName:row.whName,phone:row.phone,address:row.address,
-                                        saleUser:row.saleUser,id:row.id}]),
-                    data01:JSON.stringify(row)
+                    // data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
+                    //                       customerLevel:row.customerLevel,contacts:row.contacts,
+                    //                     whName:row.whName,phone:row.phone,address:row.address,
+                    //                     saleUser:row.saleUser,id:row.id}]),
+                      data: row.id,                    
+                    // data01:JSON.stringify(row)
                         //  JSON.stringify(this.userList)
                 }
             })
@@ -1221,7 +1223,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
                         // console.log(res, 123)
@@ -1253,7 +1255,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.cbsb01 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除,编号为"' + row.cbsb07 + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();

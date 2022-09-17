@@ -28,7 +28,8 @@
                   </el-form-item>
                     <el-form-item style="margin-left:50%;">                    
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;" @click="handletihuoone">创建</el-button>
+                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;" @click="handletihuoone">创建</el-button> -->
+                         <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;">创建</el-button>
                          <el-dropdown trigger="click">
                          <span class="xialaxuanxanggdd">
                              <i class="el-icon-caret-bottom el-icon--right "></i>
@@ -149,8 +150,8 @@
                     <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
                     <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
                     </el-table-column>
-                    <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
-                     
+                    <el-table-column label="制单日期" align="left" key="createTime" prop="createTime" width="280px;" sortable />
+                    <el-table-column label="订单分类" align="left" key="orderClassMsg" prop="orderClassMsg" width="280px;" sortable />
             </el-table>
             <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
         </el-dialog>

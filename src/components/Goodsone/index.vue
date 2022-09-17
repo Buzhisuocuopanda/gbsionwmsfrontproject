@@ -32,7 +32,7 @@ export default {
             userList: null,
             params: null,
             top: null,
-             total:0,
+            total:0,
             // iconList: ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
             iconList: [],
              // 查询参数
@@ -68,7 +68,7 @@ export default {
                 } else {
                   if(response.data.rows.length > 0){
                     response.data.rows.forEach((item) => {
-                        this.iconList.push(item.cbpb08 + "~" + item.cbpb10 + "~" +  item.cbpb12 + "." + item.cbpb01)
+                        this.iconList.push(item.cbpb10+ "~" + item.cbpb12+ "~" +  item.cbpb08 + "." + item.cbpb01)
                     })
                   }
                 }

@@ -1,5 +1,6 @@
 <template v-if="userList.length=1">
     <div>
+       <section ref="print" class="recordImg" id="printRecord">
         <div class="Purchase_caigou">采购退货单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbpg07 }}</span>
@@ -22,28 +23,29 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table border v-loading="loading" :data="userList" height="290" :header-cell-style="headClassprxq"
-                :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+            <el-table border v-loading="loading" :data="userList"  :header-cell-style="headClassprxq"
+                :cell-style="{ padding:'5px 0' }" :row-style="{ height:'10px' }"
+            :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
+                <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="200px;">
                 </el-table-column>
                 <el-table-column prop="cbpb08" key="cbpb08" label="描述" width="450px;">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="数量">
+                <el-table-column prop="cbph09" key="cbph09" align="right"  label="数量">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="已扫数量">
+                <el-table-column prop="cbph09" key="cbph09" align="right" label="已扫数量">
                 </el-table-column>
-                <el-table-column prop="cbph10" key="cbph10" label="单价">
+                <el-table-column prop="cbph10" key="cbph10" align="right" label="单价">
                 </el-table-column>
-                <el-table-column prop="cbph11" key="cbph11" label="金额">
+                <el-table-column prop="cbph11" key="cbph11" align="right" label="金额">
                 </el-table-column>
                 <el-table-column prop="cbph13" key="cbph13" label="备注">
                 </el-table-column>
             </el-table>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+            <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[9999999]"
                 class="pagintotal" />
             <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
@@ -128,8 +130,35 @@
                     <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
                 </el-descriptions-item>
             </el-descriptions>
+             <div >
+                <span class="saomiaojluu">制单(wanghui):</span>
+                <span class="saomiaojluuu">审核:</span>
+                <span class="saomiaojluuuu">财务:</span>
+            </div>
+             <div class="saomiaojlu">扫描记录</div>
+             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" 
+                :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
+                <el-table-column prop="cala08" key="cala08" label="品牌">
+                </el-table-column>
+                <el-table-column prop="cbpa08" key="cbpa08"  label="类型">
+                </el-table-column>
+                <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
+                </el-table-column>
+                <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="390">
+                </el-table-column>
+                <el-table-column prop="cbpi09" key="cbpi09" align="" label="SN">
+                </el-table-column>
+                <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
+                </el-table-column>
+                <el-table-column prop="cbpg08" key="cbpg08" :formatter="formatDate" label="入库时间">
+                </el-table-column>
+            </el-table>
         </div>
-
+       <div style="height:100px;"></div>
+     </section>
+       <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+       <el-button type="primary" @click="handlefanhui">取消</el-button>
+       <div style="height:100px;"></div>
     </div>
 
 </template>
@@ -148,9 +177,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 99999,
                 page: 1,
-                size: 10,
+                size: 99999,
                 total: this.total,
                 name: undefined,
                 address: undefined,
@@ -169,6 +198,17 @@ export default {
 
     },
     methods: {
+       
+         //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-cktkfh/role/");
+        },
+
+        //写在methods里面的方法
+       PrintRow(index, row){
+            this.$print(this.$refs.print) 
+        },
         //列表表头设置
         headClassprxq() {
             return {
@@ -247,4 +287,70 @@ export default {
 };
 </script>
 <style src="./PurchaseReturnxqcss/index.css">
+</style>
+<style>
+@page {
+   size: auto;
+   margin: 3mm;
+}
+@media print {
+   html {
+     background-color: #ffffff;
+     height: auto;
+     margin: 0px;
+ }
+  body {
+   border: solid 1px #ffffff;
+   /* margin: 10mm 15mm 10mm 15mm; */
+  }
+   #printRecord table {
+    table-layout: auto !important;
+ }
+   /**  内容描述 */
+    /* #printRecord .el-table__body .el-table__row .el-table_1_column_3 .cell{
+      width: 280 !important;
+   } */
+/**  表头描述  */
+    /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_3 .cell{
+      width: 280 !important;
+    } */
+    /** 型号内容 */
+    /* #printRecord .el-table__body .el-table__row .el-table_1_column_2 .cell{
+       width: 200 !important;
+    } */
+
+
+    /** 表头型号 */
+   /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell{
+     width: 200 !important;
+    } */
+
+
+   /** 表头品牌 */
+  /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell{
+         width: 60 !important;
+   } */
+    /** 品牌内容 */
+   /* #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell{
+       width: 60 !important;
+   } */
+
+
+     /** 表头数量 */
+    /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
+ 
+   } */
+
+
+   #printRecord .el-table__header-wrapper .el-table__header {
+       width: 100% !important;
+       border: solid 1px #f2f2f2;
+   }
+   #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+   }
+  #printRecord #pagetable table {
+     table-layout: fixed !important;
+ }
+} 
 </style>

@@ -18,10 +18,10 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen"  v-hasPermi="['system:sku:list']" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:sku:add']" @click="handlechuangjiang">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                            v-hasPermi="['system:user:remove']">删除
+                            v-hasPermi="['system:sku:remove']">删除
                         </el-button>
                     </el-form-item>
                 </el-form>
@@ -99,7 +99,7 @@
             <!-- <hr /> -->
             <el-form ref="form" :model="form" :rules="rules1" label-width="30%" >
                 <div style="margin-top:0%;">
-                
+
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
@@ -163,7 +163,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                         <el-col style="margin-top:2%;"> 
+                         <el-col style="margin-top:2%;">
                             <div style="margin-left:75%;margin-top: 0%;">
                                <el-button type="primary" @click="handleUpdate">确定</el-button>
                                <el-button @click="cancel">取 消</el-button>
@@ -324,7 +324,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                         <el-col style="margin-top:4%;"> 
+                         <el-col style="margin-top:4%;">
                             <div style="margin-left:82%;margin-top: 0%;">
                                <el-button type="primary" @click="handleAdd">确定</el-button>
                                <el-button @click="cancells">取 消</el-button>
@@ -333,7 +333,7 @@
                     </el-row>
                 </div>
             </el-form>
-            
+
         </el-dialog>
 
         <!-- 用户导入对话框 -->
@@ -634,7 +634,7 @@ export default {
         });
         // this.form.type = this.dict[0].label;
     },
-    methods: { 
+    methods: {
     //下拉框默认选中第一项
       //列表表头设置
       headClassWSS() {
@@ -734,7 +734,7 @@ export default {
             // this.resetForm("form");
         },
 
-         
+
 
         // 表单重置
         reset01() {
@@ -755,7 +755,7 @@ export default {
         handleQuery() {
             // var neirong = $('#miaoshu').val();
             this.userList.name = this.form.name;
-            
+
             this.queryParams.pageNum = 1;
             this.getList();
         },
@@ -897,7 +897,7 @@ export default {
             {
                this.form1.cbwa13="否"
             }
-            
+
              if(this.form1.cbwa14=="0"){
                this.form1.cbwa14="是"
             }else if(this.form1.cbwa14=="1")
@@ -921,7 +921,7 @@ export default {
                this.form.cbwa13="否"
                row.cbwa13="1"
             }
-            
+
 
              if(row.cbwa14=="0"){
                this.form.cbwa14="是"
@@ -945,7 +945,7 @@ export default {
             console.log(row, 7788521);
             this.form= row
 
-           
+
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -954,7 +954,7 @@ export default {
         //列表刷新
         liebiaoshuax() {
             this.getList();
-            
+
         },
         /** 重置密码按钮操作 */
         handleResetPwd(row) {
