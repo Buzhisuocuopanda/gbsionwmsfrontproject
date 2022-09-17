@@ -1,7 +1,6 @@
 <template>
    <div>
        <div>
-       <section ref="printtt" class="recordImg" id="printRecord">
         <div class="Purchase_caigou">销售出库单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbsb07 }}</span>
@@ -129,8 +128,6 @@
                 <span class="saomiaojluuuu">财务:</span>
             </div>
         </div>
-        </section>
-         <section ref="print" class="recordImg" id="printRecord">
             <div class="saomiaojlu">出库建议表</div>
              <el-descriptions class="margin-top" style="width:90%;margin-left: 5%; margin-top: 1%;"  title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
                 :key="key">
@@ -161,10 +158,9 @@
                         </template>
                 </el-table-column>
              </el-table>
-           </section>
 
           
-        <section ref="printt" class="recordImg" id="printRecord">
+       
            <div class="saomiaojlub">扫描记录</div>
              <el-table style="margin-top:1%; width: 90%;margin-left: 5%;"  :header-cell-style="headClass" v-loading="loading" border :data="userList" 
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">     
@@ -182,17 +178,16 @@
                 <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
                 </el-table-column>
              </el-table>
-        </section>
           </div>
              <div style="height:50px;"></div>
-              <el-button style="margin-left:5%;" type="primary" @click="PrintRoxiaos">销售出库单打印</el-button>
-             <el-button style="margin-left:5%;" type="primary" @click="PrintRow">出库建议表打印</el-button>
-             <el-button style="margin-left:5%;" type="primary" @click="PrintRowsaomiao">扫描记录表打印</el-button>
+              <el-button style="margin-left:5%;" type="primary" @click="xiaoschukudandayin">销售出库单打印</el-button>
+             <el-button style="margin-left:5%;" type="primary" @click="xiaoschukujianyibiao">出库建议表打印</el-button>
+             <el-button style="margin-left:5%;" type="primary" @click="xiaoschukusaomiaojlubiao">扫描记录表打印</el-button>
             <div style="height:50px;"></div>
         </div>
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists,PurchaseinListxiandayin,PurchaseinListchukujianyibiao,PurchaseinListsaomiaojilubiao } from "@/api/Warehousemanagement/SalesShipment";
 export default {
 
     data() {
@@ -278,6 +273,47 @@ export default {
                     this.loading = false;
                 });
             }
+        },
+
+        //销售出库单详情打印
+        xiaoschukudandayin(){
+
+             const userId = this.$route.params && this.$route.params.cbsb01;
+            if (userId) {
+                // 获取表详细信息
+                PurchaseinListxiandayin(userId).then(res => {
+                    console.log(userId,9916);
+                });
+            }
+
+        },
+
+         //销售出库建议表打印
+        xiaoschukujianyibiao(){
+
+             const userId = this.$route.params && this.$route.params.cbsb01;
+            if (userId) {
+                // 获取表详细信息
+                PurchaseinListchukujianyibiao(userId).then(res => {
+                    console.log(userId,99166);
+                });
+            }
+
+        },
+
+        //PurchaseinListsaomiaojilubiao
+
+          //扫描记录表打印
+        xiaoschukusaomiaojlubiao(){
+
+             const userId = this.$route.params && this.$route.params.cbsb01;
+            if (userId) {
+                // 获取表详细信息
+                PurchaseinListsaomiaojilubiao(userId).then(res => {
+                    console.log(userId,991666);
+                });
+            }
+
         },
 
         //时间的转换

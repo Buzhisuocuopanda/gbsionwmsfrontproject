@@ -91,7 +91,7 @@
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 95%;  margin-left: 3%; margin-top: 10px;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
@@ -123,10 +123,10 @@
               <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="替换商品SN"  width="200">
+          <el-table-column prop="cbqb09" label="替换商品SN"  width="200">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbpd11" class="shuzicaoyou" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbqb09" class="shuzicaoyou" placeholder="" style=""></el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
@@ -140,14 +140,24 @@
                 <el-input v-model="scope.row.cbpd08" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
+           <el-table-column v-if="false" prop="cbqb08" label="销售提货单扫描记录表id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbqb08" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+           <el-table-column v-if="false" prop="cbqb10" label="原商品SN" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbqb10" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+           <el-table-column v-if="false" prop="cbqb08" label="销售提货单扫描记录表id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbqb08" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
            <el-table-column v-if="false" prop="cbqa01" label="质检单主表id" width="150">
             <template slot-scope="scope">
                 <el-input v-model="scope.row.cbqa01" placeholder="" style=""></el-input>
-            </template>
-          </el-table-column>
-           <el-table-column v-if="false" prop="cbqb10" label="" width="150">
-            <template slot-scope="scope">
-                <el-input v-model="scope.row.cbqb10" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -474,7 +484,9 @@ export default {
                     //       item.cbsc17="1";
                     // }
                     item.cbpc000 = item.brand +"-"+item.model+"-"+item.description+"-"+item.sn;
+                    item.cbqb09 = item.sku;
                     item.cbqb10 = item.sn;
+                    item.cbqb08 = '695414';
                     console.log(item.cbpd09,19991119);
 
                 })
@@ -730,13 +742,11 @@ export default {
             }
 
             this.tableData.push({
-                formName: 'myform' + (new Date()).getTime(), // myform1648431132399
+                cbpc000:'',
                 cbsc08: '',
                 cbsc09: '',
                 cbsc10: '',
                 branch: '',
-                cbpc01: this.form2.cbpg161,
-                cbpd08: this.form2.cbpd08,
             })
         },
         // 删除一行表单
