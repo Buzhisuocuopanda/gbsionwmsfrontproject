@@ -275,45 +275,36 @@ export default {
             }
         },
 
-        //销售出库单详情打印
+         //销售出库单详情打印
         xiaoschukudandayin(){
 
-             const userId = this.$route.params && this.$route.params.cbsb01;
-            if (userId) {
-                // 获取表详细信息
-                PurchaseinListxiandayin(userId).then(res => {
-                    console.log(userId,9916);
-                });
-            }
-
-        },
-
-         //销售出库建议表打印
-        xiaoschukujianyibiao(){
-
-             const userId = this.$route.params && this.$route.params.cbsb01;
-            if (userId) {
-                // 获取表详细信息
-                PurchaseinListchukujianyibiao(userId).then(res => {
-                    console.log(userId,99166);
-                });
-            }
+            const userId = this.$route.params && this.$route.params.cbsb01;
+            this.download('/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId='+userId, {
+            }, `销售出库单详情—_${new Date().getTime()}.xlsx`)
 
         },
 
         //PurchaseinListsaomiaojilubiao
 
-          //扫描记录表打印
-        xiaoschukusaomiaojlubiao(){
+          //销售出库建议表打印1
+        xiaoschukujianyibiao(){
 
+            const userId = this.$route.params && this.$route.params.cbsb01;
+            this.download('/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId='+userId, {
+            }, `销售出库建议表—_${new Date().getTime()}.xlsx`)
+
+        },
+         /** 导入按钮操作 */
+        handleImport() {
+            this.upload.title = "商品分类";
+            this.upload.open = true;
+        },
+
+        /** 扫描记录表打印 */
+        xiaoschukusaomiaojlubiao() {
              const userId = this.$route.params && this.$route.params.cbsb01;
-            if (userId) {
-                // 获取表详细信息
-                PurchaseinListsaomiaojilubiao(userId).then(res => {
-                    console.log(userId,991666);
-                });
-            }
-
+            this.download('/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId='+userId, {
+            }, `扫描记录表—_${new Date().getTime()}.xlsx`)
         },
 
         //时间的转换
