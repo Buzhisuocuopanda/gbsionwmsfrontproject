@@ -127,31 +127,23 @@
           </el-table-column>
           <el-table-column prop="cbpd12" label="金额" width="100">
             <template slot-scope="scope">
-              <sapn>
                 <el-input v-model="scope.row.cbpd12" placeholder="" class="shuzicaoyou" style=""></el-input>
-              </sapn>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
             <template slot-scope="scope">
-              <sapn>
                 <el-input v-model="scope.row.cbpd13" placeholder=""></el-input>
-              </sapn>
             </template>
           </el-table-column>
 
           <el-table-column v-if="false" prop="cbpc01" label="id" width="150">
             <template slot-scope="scope">
-              <sapn>
                 <el-input v-model="scope.row.cbpc01" placeholder="id" style=""></el-input>
-              </sapn>
             </template>
           </el-table-column>
           <el-table-column v-if="false" prop="cbpd08" label="商品编号" width="150">
             <template slot-scope="scope">
-              <sapn>
                 <el-input v-model="scope.row.cbpd08" placeholder="商品编号" style=""></el-input>
-              </sapn>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -163,74 +155,6 @@
           </el-table-column>
           <!-- </el-form> -->
         </el-table>
-        <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-          <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-            <div class="box1">
-              <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
-                class="tablebiankuan table-heads" width="95%" height="20px">
-                <thead style="">
-                  <tr style="height:30px; ">
-                    <th style="width: 130px;height: 30px;">品牌</th>
-                    <th style="width: 130px;height: 30px;">型号</th>
-                    <th style="width: 130px;height: 30px;">描述</th>
-                    <th style="width: 140px;height: 30px;">数量</th>
-                    <th style="width: 140px;height: 30px;">单价</th>
-                    <th style="width: 140px;height: 30px;">金额</th>
-                    <th style="width: 350px;height: 30px;">备注</th>
-                    <th style="width: 50px;height: 30px;">操作</th>
-                  </tr>
-                </thead>
-              </table>
-              <div class="table-bodys">
-                <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                  cellspacing="0" class="tablebiankuan">
-                  <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
-                      :ref="form.formName" :inline="true">
-                      <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpc01" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-col style="margin-left: 0%;" :span="7">
-                        <el-form-item label="" prop="cbpc000">
-                          <el-popover placement="bottom-start" trigger="click">
-                            <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                              style="width:370px!important;" />
-                            <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                              style="width:205.6%;">
-                            </el-input>
-                          </el-popover>
-                        </el-form-item>
-                      </el-col>
-                      <el-form-item label="" size="small" prop="nickname" style="margin-left:5.1%;">
-                        <el-input type="text" v-model="form.cbpd09" @blur="chen(form)" style="width:73.2%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd11" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd11" @blur="chen(form)" :min="0" :controls="false"
-                          :precision="2" style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd12" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd12" :min="0" :controls="false" :precision="2"
-                          style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd13" style="margin-left:-5.2%;">
-                        <el-input v-model="form.cbpd13" style="width:184.1%;"></el-input>
-                      </el-form-item>
-
-                      <el-form-item v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
-                        <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" v-if="false" prop="name" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
-                      </el-form-item>
-                      <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;" size="small"
-                        icon="el-icon-delete" circle @click="_ly_delFrom(index)"></el-button>
-                    </el-form>
-                  </el-row>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </el-form>
     <div class="tinajia_dingwei">

@@ -21,7 +21,7 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-      <div>
+          <!-- <div>
             <div style="margin-left:3%; margin-top: 2%;">
                <el-button plain  type="primary" @click="_ly_addFrom">新增一行</el-button>
             </div>
@@ -53,8 +53,6 @@
                             <el-col style="margin-left: 0%;" :span="7">
                                 <el-form-item label="" prop="cbpc000">
                                    <el-popover placement="bottom-start" trigger="click">
-                                       <!-- <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                                             style="width:370px!important;" /> -->
                                       <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
                                           style="width:469%">
                                       </el-input>
@@ -85,15 +83,91 @@
                     </div>
                  </div>
              </div>
-          </div>
-         </el-form>
-         <div class="tinajia_dingwei">
-            <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-                <el-button type="primary" @click="handleAdd">保 存</el-button>
-                <el-button @click="_ly_cancelDialog">取 消</el-button>
-            <!-- </span> -->
-        </div>
+          </div> -->
+              <div>
+        <el-row>
+          <el-col :span="24">
+            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+          </el-col>
+        </el-row>
+
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+         <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
+          <el-table-column prop="cbpc000" label="品牌" width="">
+            <template slot-scope="scope" style="width:200%;">
+                <el-popover placement="bottom-start" trigger="click">
+                        <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
+                            style="width:100%;">
+                        </el-input>
+                  </el-popover>
+            </template>
+            <!-- <el-col style="margin-left: 0%;" :span="7">
+              <el-form-item label="" prop="cbpc000">
+                  <el-popover placement="bottom-start" trigger="click">
+                       <Goodsone01 ref="Goodsone01" @selected="selected08"
+                          style="width:100% !important;" />
+                        <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
+                            style="width:100%;">
+                        </el-input>
+                  </el-popover>
+              </el-form-item>
+            </el-col> -->
+          </el-table-column>
+          <el-table-column label="型号" width="" />
+          <el-table-column label="描述" width="" />
+           <el-table-column label="SN" width="" />
+          <el-table-column v-if="false" prop="cbpd09" label="SN" width="100">
+            <template slot-scope="scope">
+              <!-- <sapn> -->
+                <el-input v-model="scope.row.cbpd09"  placeholder="" class="shuzicaoyou" style=""></el-input>
+              <!-- </sapn> -->
+            </template>
+          </el-table-column>
+          <el-table-column prop="cbpd11" label="替换商品SN"  width="200">
+            <template slot-scope="scope">
+              <!-- <sapn> -->
+                <el-input v-model="scope.row.cbpd11" class="shuzicaoyou" placeholder="" style=""></el-input>
+              <!-- </sapn> -->
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="cbpd13" label="id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbpd13" placeholder="id" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="cbpd08" label="" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbpd08" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+           <el-table-column v-if="false" prop="cbqa01" label="质检单主表id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbqa01" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+           <el-table-column v-if="false" prop="cbqb10" label="" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.cbqb10" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" align="center" width="80">
+            <template slot-scope="scope">
+              <span @click="_ly_delFrom(scope.row)">
+                <i class="el-icon-delete" style="color: red;"></i>
+              </span>
+            </template>
+          </el-table-column>
+          <!-- </el-form> -->
+        </el-table>
+      </div>
+    </el-form>
+    <div class="tinajia_dingwei">
+      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
+      <el-button type="primary" @click="handleAdd">保 存</el-button>
+      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <!-- </span> -->
     </div>
+  </div>
 </template>
 
 <script>
@@ -122,6 +196,7 @@ export default {
             ids: [],
             shenpiids: [],
             formArr:[],
+            tableData:[],
             // 非单个禁用
             single: true,
             // 非多个禁用
@@ -356,7 +431,6 @@ export default {
         this.form2.cbqa06 ="0";
 
         this.getList();
-        this.getParams();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -372,15 +446,20 @@ export default {
     },
     methods: {
 
-         //调用提货单列表
-         getParams() {
-             let routerParams = this.$route.query;
-             this.ListUser = routerParams.data; 
-             let zhuangh = JSON.parse(this.ListUser); 
-             console.log(zhuangh,88888);
-
-           },
-
+        //单元格合并
+         // 合并单元格
+      arraySpanMethod({
+        row,
+        column,
+        rowIndex,
+        columnIndex
+      }) {
+        if (columnIndex === 0) {
+          return [1, 4];
+        } else if (columnIndex < 4) {
+          return [0, 0];
+        }
+      },
 
              /** 销售提货单 */
         getList() {
@@ -400,7 +479,7 @@ export default {
 
                 })
                 
-                this.formArr = response.data.scans;
+                this.tableData = response.data.scans;
                 this.total = response.data.total;
                 console.log(response.data.scans, 339688);
                 // this.userList01 = JSON.stringify(this.userList);
@@ -408,7 +487,7 @@ export default {
                 //   this.form.cbsc17=e.orderClass;
                 // })
                 // let 
-                console.log( JSON.stringify(this.formArr,852369));
+                console.log( this.formArr,99916);
                 // console.log(this.userList01.orderClass,852147777);
                 // this.deleteFlag = response.data.rows.deleteFlag;   this.form.cbsc17
             }
@@ -528,7 +607,7 @@ export default {
                         this.open2 = false;
                         this.reset01();
                         console.log(this.item, 123456);
-                        this.formArr.forEach((item)=>{
+                        this.tableData.forEach((item)=>{
                                 item.cbqa01=response.data.id
                         })
                         console.log(item.cbqa01,896523);
@@ -569,9 +648,9 @@ export default {
         },
         // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
         _ly_ok() {
-            let count = this.formArr.length // 记录当前有多少个表单
-            for (var index in this.formArr) {
-                var form = this.formArr[index]
+            let count = this.tableData.length // 记录当前有多少个表单
+            for (var index in this.tableData) {
+                var form = this.tableData[index]
                 console.log(form)
                 console.log(JSON.stringify(form))
                 // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
@@ -579,9 +658,9 @@ export default {
                 //     if (valid) {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
-                        QualityinAdds(JSON.stringify(this.formArr)).then(response => {
+                        QualityinAdds(JSON.stringify(this.tableData)).then(response => {
                             if(response.code=="200"){
-                                this.formArr=[]
+                                this.tableData=[]
                                 this.form2={
                                     cbpc07: "",
                                     cbpc08: "",
@@ -626,7 +705,7 @@ export default {
             //         }
             //   })
             }
-            console.log('_ly_ok:' + JSON.stringify(this.formArr))
+            console.log('_ly_ok:' + JSON.stringify(this.tableData))
         },
 
    
@@ -638,19 +717,19 @@ export default {
             this.$message.success('添加成功')
             // 将数据传递给父组件。
             // 如果要将数据存储到后台，可在此处自行实现
-            this.$emit('on-ok', this.formArr)
+            this.$emit('on-ok', this.tableData)
         },
         // 增加一行表单
         _ly_addFrom() {
-            if (this.formArr.length >= 10) {
-                this.$message.warning('最多只能添加10行')
+            if (this.tableData.length >= 100) {
+                this.$message.warning('最多只能添加100行')
                 this.reset01();
                 // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
                 return
                 
             }
 
-            this.formArr.push({
+            this.tableData.push({
                 formName: 'myform' + (new Date()).getTime(), // myform1648431132399
                 cbsc08: '',
                 cbsc09: '',
@@ -663,7 +742,7 @@ export default {
         // 删除一行表单
         _ly_delFrom(index) {
             console.log('index: ' + index)
-            this.formArr.splice(index, 1)
+            this.tableData.splice(index, 1)
         },
         // 点击select的时候，缓存下行号
         // 如果一行有多个树状结构的select，可以通过缓存列号，区分是哪个select
@@ -680,10 +759,10 @@ export default {
             }
             // 通过缓存的行号，找到对应的表单，并且将数据存储起来。
             // 如果需要缓存更多的数据，可以在此处自行实现
-            this.formArr[index].branch = data.label
+            this.tableData[index].branch = data.label
 
             // 选择后收起下拉框
-            let formName = this.formArr[index].formName
+            let formName = this.tableData[index].formName
             this.$refs[formName + '_select'][0].blur() // myform1648431132399_select
         },
 
@@ -695,7 +774,7 @@ export default {
     },
     mounted() {
          // 初始化表单数据，至少有一行表单数据
-        this.formArr = []
+        this.tableData = []
         this._ly_addFrom()
     },
     watch: {
@@ -703,7 +782,7 @@ export default {
             this.dialogVisible = newVal
             if (this.dialogVisible === false) {
                 // 重新打开弹窗时，初始化表单数据，至少有一行表单数据
-                this.formArr = []
+                this.tableData = []
                 this._ly_addFrom()
             }
         }
