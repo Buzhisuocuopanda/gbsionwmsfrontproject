@@ -41,6 +41,7 @@
       </el-table-column>
       <el-table-column prop="name" label="生产数量" width="120" sortable>
       </el-table-column>
+
       <el-table-column
         prop="address"
         label="已发货数量"
