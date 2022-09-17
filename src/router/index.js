@@ -688,6 +688,42 @@ export const dynamicRoutes = [
   },
 
   {
+    path: '/saleOrderGn',
+    component: Layout,
+    redirect: 'saleOrderGn',
+    name: 'saleOrderGn',
+    meta: {
+      title: '国内销售订单',
+      icon: 'component'
+    },
+    children: [
+      {
+        path: 'saleOrderGn',
+        component: () => import('@/views/Salesmanagement/SaleOrderGn/index'),
+        name: 'saleOrderGn',
+        meta: { title: '国内销售订单', icon: 'component', noCache: true, affix: true }
+      },
+    ]
+  },
+  {
+    path: '/saleOrderDetail',
+    component: Layout,
+    redirect: 'saleOrderDetail',
+    name: 'saleOrderDetail',
+
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'saleOrderDetail',
+
+        name: 'saleOrderDetail',
+        component: () => import('@/views/Salesmanagement/saleOrderDetail/index'),
+
+        meta: { title: '国内销售订单', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  {
     path: '/system/role-auth',
     component: Layout,
     hidden: true,

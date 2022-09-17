@@ -6,16 +6,21 @@
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号"/>
         </el-form-item>
 
-        <el-form-item label="商品型号" class="item-r">
-          <el-input v-model="model" class="filter-item" placeholder="商品型号"/>
+        <el-form-item label="客户" class="item-r">
+          <el-input v-model="customer" class="filter-item" placeholder="客户"/>
         </el-form-item>
         <el-form-item label="状态" class="item-r">
-          <el-select v-model="status" placeholder="状态" class="middle-input" style="width:100px">
+          <el-select v-model="status" placeholder="状态" class="middle-input" style="width:120px">
             <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
-
+        <el-form-item label="日期" style="margin-left:1%;">
+          <el-date-picker  v-model="dateRange" type="daterange"
+                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+          </el-date-picker>
+        </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
                      @click="onSearch">搜索
@@ -35,26 +40,31 @@
 <!--            style="display: inline">-->
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
-          <el-button type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
-
           <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
                      style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
+
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
       <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
-                stripe>
-        <el-table-column fixed label="优先级" align="center" prop="priority" min-width="120px;"/>
-        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="120px;"/>
-        <el-table-column label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column label="描述" align="center" prop="description" min-width="200px;"/>
-        <el-table-column label="订单数量" align="left" prop="orderQty" min-width="100px;"/>
-        <el-table-column label="生产数量" align="left" prop="makeQty" min-width="100px;"/>
-        <el-table-column label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>
-        <el-table-column label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>
-        <el-table-column label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
-        <el-table-column label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>
+                stripe style="margin-top:1em">
+        <el-table-column fixed label="编号" align="center" prop="orderNo" min-width="120px;"/>
+        <el-table-column fixed label="客户订单号" align="center" prop="customerNo" min-width="120px;"/>
+        <el-table-column fixed label="日期" align="center" prop="orderDate" min-width="120px;"/>
+        <el-table-column label="客户" align="center" prop="customerName" min-width="200px;"/>
+        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
+        <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
+        <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="150px;"/>
+        <el-table-column label="电话" align="center" prop="phone" min-width="120px;"/>
+        <el-table-column label="订单类型" align="center" prop="orderClassMsg" min-width="120px;"/>
+        <el-table-column label="订单分类" align="center" prop="orderTypeMsg" min-width="120px;"/>
+        <el-table-column label="工厂账号" align="center" prop="fcNumber" min-width="120px;"/>
+        <el-table-column label="其他" align="center" prop="other" min-width="120px;"/>
+        <el-table-column label="制单时间" align="center" prop="createTime" min-width="120px;"/>
+        <el-table-column label="状态" align="center" prop="statusMsg" min-width="120px;"/>
+<!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
             <el-button size="small" type="primary" @click="showDetail(scope.row)">详情</el-button>
@@ -76,8 +86,10 @@
         @current-change="onSearch"/>
 
 
+
+
       <!--      创建-->
-      <el-dialog :visible.sync="showaddDialog" :close-on-click-modal="false" title="创建生产订单" width="55%"
+      <el-dialog :visible.sync="showaddDialog" :close-on-click-modal="false" title="创建销售订单" width="55%"
                  @close="closeAddDetail">
 
         <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
@@ -88,13 +100,13 @@
             <el-input v-model="formData.orderNo" style="width:50%">></el-input>
           </el-form-item>
           <el-form-item label="商品" prop="goods">
-<!--            <el-popover placement="bottom-start" trigger="click">-->
-<!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
-<!--                          style="width:370px!important;" />-->
-<!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
-<!--                        style="width:205.6%;">-->
-<!--              </el-input>-->
-<!--            </el-popover>-->
+            <!--            <el-popover placement="bottom-start" trigger="click">-->
+            <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
+            <!--                          style="width:370px!important;" />-->
+            <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
+            <!--                        style="width:205.6%;">-->
+            <!--              </el-input>-->
+            <!--            </el-popover>-->
 
             <template  style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
@@ -167,103 +179,81 @@
       </el-dialog>
 
 
-<!--            详情-->
-            <el-dialog :visible.sync="showDialog" :close-on-click-modal="false" title="生产订单详情" width="55%" @close="closeDetail">
-              <!--        <el-form ref="infoform" :inline="true" label-width="11em" label-position = "right">-->
-              <!--          <div class="divv" >-->
-              <!--            <span>基本信息</span>-->
-              <!--            <div style="width: 100%;height: 1px;border-top: solid #dfdfdf 0.2em"/>-->
-              <!--            <div style="height: auto;width: 100%">-->
+      <!--            详情-->
+      <el-dialog :visible.sync="showDialog" :close-on-click-modal="false" title="生产订单详情" width="55%" @close="closeDetail">
+        <!--        <el-form ref="infoform" :inline="true" label-width="11em" label-position = "right">-->
+        <!--          <div class="divv" >-->
+        <!--            <span>基本信息</span>-->
+        <!--            <div style="width: 100%;height: 1px;border-top: solid #dfdfdf 0.2em"/>-->
+        <!--            <div style="height: auto;width: 100%">-->
 
-              <!--              <table border="0" class="tableclss">-->
-              <!--                <tr><td>设备号:<span>{{ this.infoform.deviceNo }}</span>-->
-              <!--                </td>-->
-              <!--                </tr>-->
-              <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
-              <!--                </td>-->
-              <!--                </tr>-->
-              <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
-              <!--                </td>-->
-              <!--                </tr>-->
-              <!--              </table>-->
-              <!--            </div>-->
-              <!--          </div>-->
+        <!--              <table border="0" class="tableclss">-->
+        <!--                <tr><td>设备号:<span>{{ this.infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--              </table>-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-              <!--        </el-form>-->
+        <!--        </el-form>-->
 
-              <!--        <el-descriptions class="margin-top" title="设备信息" :column="3"  border>-->
-              <!--          <el-descriptions-item label="手机号">18100000000</el-descriptions-item>-->
+        <!--        <el-descriptions class="margin-top" title="设备信息" :column="3"  border>-->
+        <!--          <el-descriptions-item label="手机号">18100000000</el-descriptions-item>-->
 
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-
-
-              <!--        </el-descriptions>-->
-
-              <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
-                <el-form-item label="优先级" >
-                  <el-input v-model="formData.priority" style="width:50%" readonly></el-input>
-                </el-form-item>
-                <el-form-item label="订单号" >
-                  <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>
-                </el-form-item>
-                <el-form-item label="商品" >
-                  <!--            <el-popover placement="bottom-start" trigger="click">-->
-                  <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
-                  <!--                          style="width:370px!important;" />-->
-                  <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
-                  <!--                        style="width:205.6%;">-->
-                  <!--              </el-input>-->
-                  <!--            </el-popover>-->
-
-                  <el-input  v-model="formData.goods" placeholder=""
-                            style="width:70%;" readonly>
-                  </el-input>
-<!--                  <template  style="width:200%;">-->
-
-<!--                    <el-popover placement="bottom-start" trigger="click">-->
-<!--                      <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
-<!--                                  style="width:630px!important;" />-->
-
-<!--                    </el-popover>-->
-<!--                  </template>-->
-                </el-form-item>
-                <el-form-item label="数量" >
-                  <el-input v-model="formData.qty" style="width:50%" readonly></el-input>
-                </el-form-item>
-                <!--        <el-form-item >-->
-<!--                <div class="el-dialog__footer" >-->
-<!--                  <el-button size="medium" type="primary" @click="showDetail(scope.row)">保存</el-button>-->
-<!--                </div>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
 
 
-                <!--        </el-form-item>-->
-              </el-form>
-            </el-dialog>
+        <!--        </el-descriptions>-->
 
-      <!-- 用户导入对话框 -->
-      <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
-        <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
-                   :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
-                   :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip text-center" slot="tip">
-<!--            <div class="el-upload__tip" slot="tip">-->
-<!--              <el-checkbox v-model="upload.updateSupport" /> -->
-<!--            </div>-->
-            <span>仅允许导入xls、xlsx格式文件。</span>
-            <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;"
-                     @click="importTemplate">下载模板</el-link>
-          </div>
-        </el-upload>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="submitFileForm">确 定</el-button>
-          <el-button @click="upload.open = false">取 消</el-button>
-        </div>
+        <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
+          <el-form-item label="优先级" >
+            <el-input v-model="formData.priority" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <el-form-item label="订单号" >
+            <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <el-form-item label="商品" >
+            <!--            <el-popover placement="bottom-start" trigger="click">-->
+            <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
+            <!--                          style="width:370px!important;" />-->
+            <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
+            <!--                        style="width:205.6%;">-->
+            <!--              </el-input>-->
+            <!--            </el-popover>-->
+
+            <el-input  v-model="formData.goods" placeholder=""
+                       style="width:70%;" readonly>
+            </el-input>
+            <!--                  <template  style="width:200%;">-->
+
+            <!--                    <el-popover placement="bottom-start" trigger="click">-->
+            <!--                      <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
+            <!--                                  style="width:630px!important;" />-->
+
+            <!--                    </el-popover>-->
+            <!--                  </template>-->
+          </el-form-item>
+          <el-form-item label="数量" >
+            <el-input v-model="formData.qty" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <!--        <el-form-item >-->
+          <!--                <div class="el-dialog__footer" >-->
+          <!--                  <el-button size="medium" type="primary" @click="showDetail(scope.row)">保存</el-button>-->
+          <!--                </div>-->
+
+
+          <!--        </el-form-item>-->
+        </el-form>
       </el-dialog>
 
     </div>
@@ -271,7 +261,7 @@
 </template>
 <script>
   // import x from ''
-  import { totalOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -282,7 +272,122 @@
     },
     data() {
       return {
+
+        dateRange: [],
+        pickerOptions: {
+          shortcuts: [{
+            text: '今日',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime());
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '昨日',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', [start, start]);
+            }
+          }, {
+            text: '本周',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              let day = start.getDay();
+              let date = start.getDate();
+              if (day != 0) {
+                start.setDate(date - (day - 1));
+              }
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '上周',
+            onClick(picker) {
+              var oDate = new Date()
+              oDate.setTime(oDate.getTime() - 3600 * 1000 * 24 * 7);
+              let day = oDate.getDay()
+              let start = new Date(),
+                end = new Date();
+              if (day == 0) {
+                start.setDate(oDate.getDate());
+                end.setDate(oDate.getDate() + 6);
+              } else {
+                start.setTime(oDate.getTime() - 3600 * 1000 * 24 * (day - 1));
+                end.setTime(oDate.getTime() + 3600 * 1000 * 24 * (7 - day));
+              }
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '本月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setDate(1);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '上月',
+            onClick(picker) {
+              var oDate = new Date()
+              let year = oDate.getFullYear();
+              let month = oDate.getMonth();
+              let start, end;
+              if (month == 0) {
+                year--
+                start = new Date(year, 11, 1)
+                end = new Date(year, 11, 31)
+              } else {
+                start = new Date(year, month - 1, 1)
+                end = new Date(year, month, 0);
+              }
+              picker.$emit('pick', [start, end]);
+            }
+          },
+            {
+              text: '本季度',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                picker.$emit('pick', [start, end]);
+              }
+            }, {
+              text: '上季度',
+              onClick(picker) {
+                var oDate = new Date()
+                let year = oDate.getFullYear();
+                let month = oDate.getMonth() + 1;
+                let n = Math.ceil(month / 3); // 季度，上一个季度则-1
+                let prevN = n - 1;
+                if (n == 1) {
+                  year--
+                  prevN = 4;
+                }
+                month = prevN * 3; // 月份
+                const start = new Date(year, month - 3, 1);
+                const end = new Date(year, month, 0);
+                picker.$emit('pick', [start, end]);
+              }
+            },
+            {
+              text: '本年',
+              onClick(picker) {
+                const end = new Date();
+                const start = new Date();
+                start.setMonth(0);
+                start.setDate(1);
+                picker.$emit('pick', [start, end]);
+              }
+            }
+          ]
+        },
+        // value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        daterange: '',
         rule: {
+
           priority: [
             { required: true, message: '请输入优先级', trigger: 'blur' },
             // { type: 'number', message: '优先级必须为数字'}
@@ -311,6 +416,7 @@
         orderNo: '',
         model: '',
         status: '',
+        customer: "",
         formData: {},
         showDialog: false,
         showaddDialog: false,
@@ -320,34 +426,35 @@
         loadingState: false,
 
         orderList: [],
-        upload: {
-          // 是否显示弹出层（用户导入）
-          open: false,
-          // 弹出层标题（用户导入）
-          title: "",
-          // 是否禁用上传
-          isUploading: false,
-          // 是否更新已经存在的用户数据
-          updateSupport: 0,
-          // 设置上传的请求头部
-          headers: { Authorization: "Bearer " + getToken() },
-          // 上传的地址
-          url: process.env.VUE_APP_BASE_API + "/sale/importTotalOrder"
-        },
         statusType: [
           {
             value: 0,
-            label: 'NO'
+            label: '未提交'
+          },
+          {
+            value: 1,
+            label: '已提交'
+          },
+          {
+            value: 2,
+            label: '已审核'
           },
           {
             value: 4,
-            label: 'OK'
+            label: '已完成'
+          },
+          {
+            value: 5,
+            label: '已复审'
+          },
+          {
+            value: 6,
+            label: '指定结束'
           }
         ]
 
       }
     },
-
     computed: {},
     mounted() { // 自动触发写入的函数
       this.onSearch()
@@ -358,7 +465,10 @@
       handleSelectionChange() {
       },
 
-      //查询商品信息维护
+
+
+
+   //查询商品信息维护
       selected08(e,row) {
         // row.cbpc000=e
         // this.$set(row,"cbpc000",e.substring(0,e.indexOf(".")))
@@ -463,21 +573,21 @@
         //   }
         // })
       },
-      // downMub() {
-      //   this.download('/sale/totalOrderExcelListtmp', {
-      //     ...this.queryParams
-      //   }, `生产订单模板_${new Date().getTime()}.xlsx`)
-      //
-      //   // totalOrderExcelListtmp(param).then(response => {
-      //   //   if (response.data != null && response.data.rows != null) {
-      //   //     this.orderList = response.data.rows
-      //   //     this.totalItems = response.data.total
-      //   //   } else {
-      //   //     this.deviceList = []
-      //   //     this.totalItems = 0
-      //   //   }
-      //   // })
-      // },
+      downMub() {
+        this.download('/sale/totalOrderExcelListtmp', {
+          ...this.queryParams
+        }, `生产订单模板_${new Date().getTime()}.xlsx`)
+
+        // totalOrderExcelListtmp(param).then(response => {
+        //   if (response.data != null && response.data.rows != null) {
+        //     this.orderList = response.data.rows
+        //     this.totalItems = response.data.total
+        //   } else {
+        //     this.deviceList = []
+        //     this.totalItems = 0
+        //   }
+        // })
+      },
 
       addTotalOrder(){
         const param = {
@@ -490,13 +600,13 @@
 
         addTotalOrder(param).then(response => {
           if (response.code == 200) {
-            this.$message.success("添加成功")
+            this.$notify.success("添加成功")
 
             this.showaddDialog=false
             this.formData={}
-              this.onSearch();
+            this.onSearch();
           } else {
-            this.$message.error(response.data.msg)
+            this.$notify.error(response.data.msg)
 
           }
         })
@@ -521,9 +631,9 @@
           mdfTotalOrder(param).then(response => {
             // console.log(response)
             if ( response.code === 200) {
-              this.$message.success("删除成功")
+              this.$notify.success("删除成功")
             } else {
-              this.$message.error(response.data.msg)
+              this.$notify.error(response.data.msg)
             }
           })
         })
@@ -541,13 +651,13 @@
 
         mdfTotalOrder(param).then(response => {
           if (response.code == 200) {
-            this.$message.success("修改成功")
+            this.$notify.success("修改成功")
 
             this.showmdfDialog=false
             this.formData={}
             this.onSearch();
           } else {
-            this.$message.error(response.data.msg)
+            this.$notify.error(response.data.msg)
 
           }
         })
@@ -555,44 +665,44 @@
 
 
       },
-      // uploadSuccess(res, file, fileList) {
-      //   this.deviceRes = res.data
-      //   // console.info(this.deviceRes[0].row)
-      //   // console.info(this.deviceRes[0].columnList)
-      //   this.message = ''
-      //   this.loadingState = true
-      //   if (res.code === 200) {
-      //     this.loadingState = false
-      //     this.$message.warning({
-      //       dangerouslyUseHTMLString: true,
-      //       showClose: true,
-      //       message: '成功'
-      //     })
-      //     this.onSearch()
-      //
-      //   } else {
-      //     this.message = res.msg
-      //     this.$message.warning({
-      //       dangerouslyUseHTMLString: true,
-      //       showClose: true,
-      //       message: this.message.toString()
-      //     })
-      //     this.loadingState = false
-      //   }
-      // },
-      // beforeUploadExcel(file) {
-      //   var testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
-      //   const extension = testmsg === 'xls'
-      //   const extension2 = testmsg === 'xlsx'
-      //   this.loadingState = true
-      //   if (!extension && !extension2) {
-      //     this.$message({
-      //       message: '上传文件只能是 xls、xlsx格式!',
-      //       type: 'warning'
-      //     })
-      //   }
-      //   return extension || extension2
-      // },
+      uploadSuccess(res, file, fileList) {
+        this.deviceRes = res.data
+        // console.info(this.deviceRes[0].row)
+        // console.info(this.deviceRes[0].columnList)
+        this.message = ''
+        this.loadingState = true
+        if (res.code === 200) {
+          this.loadingState = false
+          this.$message.warning({
+            dangerouslyUseHTMLString: true,
+            showClose: true,
+            message: '成功'
+          })
+          this.onSearch()
+
+        } else {
+          this.message = res.msg
+          this.$message.warning({
+            dangerouslyUseHTMLString: true,
+            showClose: true,
+            message: this.message.toString()
+          })
+          this.loadingState = false
+        }
+      },
+      beforeUploadExcel(file) {
+        var testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
+        const extension = testmsg === 'xls'
+        const extension2 = testmsg === 'xlsx'
+        this.loadingState = true
+        if (!extension && !extension2) {
+          this.$message({
+            message: '上传文件只能是 xls、xlsx格式!',
+            type: 'warning'
+          })
+        }
+        return extension || extension2
+      },
 
       formatStateType(row) {
         if (row != null) {
@@ -603,50 +713,26 @@
           }
         }
       },
-      handleImport() {
-        this.upload.title = "生产总订单";
-        this.upload.open = true;
-      },
-      /** 下载模板操作 */
-      importTemplate() {
-        this.download('/sale/totalOrderExcelListtmp', {
-        }, `生产总订单模板_${new Date().getTime()}.xlsx`)
-      },
-      // 文件上传中处理
-      handleFileUploadProgress(event, file, fileList) {
-        this.upload.isUploading = true;
-      },
-      // 文件上传成功处理
-      handleFileSuccess(response, file, fileList) {
-        if(response.code == 200){
-          this.$message.success('上传成功')
-        }else {
-          this.$message.error(response.msg);
-
-
-        }
-        this.upload.open = false;
-        this.upload.isUploading = false;
-        this.$refs.upload.clearFiles();
-        // this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
-        this.onSearch();
-      },
-      // 提交上传文件
-      submitFileForm() {
-        this.$refs.upload.submit();
-      },
-
-
       onSearch() {
+        console.log('dateRange',this.dateRange)
+        var startTime=null
+        var endTime=null
+        if(this.dateRange!=null && this.dateRange.length==2){
+          startTime=this.dateRange[0];
+          endTime=this.dateRange[1];
+        }
+
         const param = {
           orderNo: this.orderNo,
           model: this.model,
           status: this.status,
+          startTime:startTime,
+          endTime:endTime,
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
         // console.info(param)
-        totalOrderList(param).then(response => {
+        saleOrderList(param).then(response => {
           if (response.data != null && response.data.rows != null) {
             this.orderList = response.data.rows
             this.totalItems = response.data.total

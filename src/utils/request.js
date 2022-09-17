@@ -99,12 +99,7 @@ service.interceptors.response.use(res => {
         type: 'error'
       })
       return Promise.reject(new Error(msg))
-    } else if (code !== 200) {
-      Notification.error({
-        title: msg
-      })
-      return Promise.reject('error')
-    } else {
+    }  else {
       return res.data
     }
   },
