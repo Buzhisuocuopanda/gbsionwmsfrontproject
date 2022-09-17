@@ -280,7 +280,7 @@ export default {
 
             const userId = this.$route.params && this.$route.params.cbsb01;
             this.download('/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId='+userId, {
-            }, `销售出库单详情—_${new Date().getTime()}.xlsx`)
+            }, `销售出库单详情—_${new Date().getTime()}.pdf`)
 
         },
 
@@ -291,7 +291,7 @@ export default {
 
             const userId = this.$route.params && this.$route.params.cbsb01;
             this.download('/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId='+userId, {
-            }, `销售出库建议表—_${new Date().getTime()}.xlsx`)
+            }, `销售出库建议表—_${new Date().getTime()}.pdf`)
 
         },
          /** 导入按钮操作 */
@@ -304,7 +304,7 @@ export default {
         xiaoschukusaomiaojlubiao() {
              const userId = this.$route.params && this.$route.params.cbsb01;
             this.download('/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId='+userId, {
-            }, `扫描记录表—_${new Date().getTime()}.xlsx`)
+            }, `扫描记录表—_${new Date().getTime()}.pdf`)
         },
 
         //时间的转换
