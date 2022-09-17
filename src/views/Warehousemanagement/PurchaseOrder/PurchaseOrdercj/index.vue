@@ -53,11 +53,16 @@
         </el-col>
         <el-col style="margin-left:-4%;" :span="6">
           <el-form-item label="销售人员:" prop="salerId">
-            <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
+            <!-- <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
-            </el-select>
-          </el-form-item>
+            </el-select> -->
+            <el-popover placement="bottom-start" trigger="click" clearable>
+                <salerman ref="salerman" @selected="selected011699" style="width:260px!important;" />
+                  <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly style="width:85%;">
+                  </el-input>
+                </el-popover>
+            </el-form-item>
           <!-- <el-form-item label="结算货币:" prop="cbpc166">
                   <el-popover placement="bottom-start" trigger="click">
                       <ListLists ref="ListLists" @selected="selected004" />
@@ -84,6 +89,11 @@
           <el-form-item label="客户id:" prop="customerId">
             <el-input v-model="form2.customerId" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
           </el-form-item>
+        </el-col>
+        <el-col v-if="false" style="" :span="7">
+            <el-form-item  label="销售人员id:" prop="salerId">
+                <el-input type="text" v-model="form2.salerId" style="width:85%;" />
+            </el-form-item>
         </el-col>
         <!-- 商品信息维护 -->
         <el-col>
@@ -280,6 +290,9 @@
     //客户
   import CustomerMainten from "@/components/CustomerMaintenance";
 
+  //销售人员
+import salerman from "@/components/salerman";
+
   export default {
     name: "store",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
@@ -296,7 +309,8 @@
       supplierMaintenance,
       ListLists,
       Goodsone01,
-      CustomerMainten
+      CustomerMainten,
+      salerman
     },
     data() {
       return {
@@ -584,7 +598,8 @@
           salerId:"",
           supplierId:"",
           whId:"",
-          orderDate:""
+          orderDate:"",
+          cbsb177:""
         },
         defaultProps: {
           children: "children",
@@ -889,6 +904,15 @@
         console.log(this.form2.cbpc10,8888888);
         // this.form2.icon = name;
       },
+
+       //添加模块-销售人员
+        selected011699(name) {
+            console.log(name, 123)
+            console.log(name.substring(name.indexOf("~") + 1), 963);
+            this.form2.cbsb177 = name.substring(0, name.indexOf("~"))
+            this.form2.salerId = name.substring(name.indexOf("~") + 1)
+            // this.form2.icon = name;
+        },
 
       // //添加模块-货币类型
       // selected004(name) {

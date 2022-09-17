@@ -10,7 +10,7 @@
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="客户订单:" style="margin-left:11.2%;" prop="cbsb30">
-                        <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 100%;"/>
+                        <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 85%;"/>
                     </el-form-item>
 
                 </el-col>
@@ -22,7 +22,7 @@
                          <el-form-item label="客户名称:" prop="cbpc0999">
                            <el-popover placement="bottom-start" trigger="click">
                               <CustomerMainten ref="CustomerMainten" @selected="selected022" style="width:210px!important; height:100px!important;" />
-                              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly  style="width:77%;">
+                              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly  style="width:85%;">
                               </el-input>
                             </el-popover>
                         </el-form-item>
@@ -30,7 +30,7 @@
                 </el-col>
                 <el-col v-if="false" style="margin-left: 2%;" :span="7">
                     <el-form-item label="客户:" prop="cbsb09">
-                        <el-input type="text" v-model="form2.cbsb09" style="width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb09" style="width:85%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
@@ -38,42 +38,41 @@
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
                             <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
-                                style="width:77%;">
+                                style="width:85%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
                     <el-form-item label="销售人员:" prop="cbsb177">
-                        <!-- <el-input type="text" v-model="form2.cbsb177" style="width:77%;" /> -->
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <salerman ref="salerman" @selected="selected011699" style="width:260px!important;" />
                             <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly
-                                style="width:77%;">
+                                style="width:85%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
                 </el-col>
                 <el-col v-if="false" style="" :span="7">
                     <el-form-item  label="销售人员id:" prop="cbsb17">
-                        <el-input type="text" v-model="form2.cbsb17" style="width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb17" style="width:85%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="联系人:" prop="cbsb18">
-                        <el-input type="text" v-model="form2.cbsb18" style="width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb18" style="width:85%;" />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7" style="margin-top: -1%;">
                     <el-form-item label="电话:" prop="cbsb19">
-                        <el-input type="text" v-model="form2.cbsb19" style="width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb19" style="width:85%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="客户等级:" prop="cbca28">
-                        <el-select v-model="form2.cbca28" placeholder="" style="width:80%;">
+                        <el-select v-model="form2.cbca28" placeholder="" style="width:85%;">
                             <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -85,7 +84,7 @@
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="结算货币:" prop="cbsb166">
                          <!-- <el-input type="text" v-model="form2.cbsb166" style="width:77%;" /> -->
-                         <el-select v-model="form2.cbsb166" placeholder="" style="width:77%;">
+                         <el-select v-model="form2.cbsb166" placeholder="" style="width:85%;">
                             <el-option v-for="item in jiageLeixenghuobi" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -94,17 +93,17 @@
                 </el-col>
                 <el-col v-if="false" style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="结算货币id:" prop="cbsb16">
-                         <el-input type="text" v-model="form2.cbsb16" style="width:77%;" />
+                         <el-input type="text" v-model="form2.cbsb16" style="width:85%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="收货人:" prop="cbsb22">
-                        <el-input type="text" v-model="form2.cbsb22" style="width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb22" style="width:85%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="关联订单/提货单:" prop="cbsb31">
-                        <el-select v-model="form2.cbsb31" placeholder="" style="width:80%;">
+                        <el-select v-model="form2.cbsb31" placeholder="" style="width:85%;">
                             <el-option v-for="item in jiageLeixengton" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -114,14 +113,14 @@
                 </el-col>
                 <el-col v-if="false" style="margin-top: -1%;" :span="7">
                     <el-form-item label="关联订单/提货单::" prop="cbsb32">
-                        <el-input type="text" v-model="form2.cbsb32" style="width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb32" style="width:85%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="收货电话:" prop="cbsb29">
-                        <el-input type="text" v-model="form2.cbsb29" style="width:77%;" />
+                        <el-input type="text" v-model="form2.cbsb29" style="width:85%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
@@ -297,6 +296,7 @@ import CustomerMainten from "@/components/CustomerMaintenance";
 
  //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
+
 //销售人员
 import salerman from "@/components/salerman";
 
@@ -305,6 +305,14 @@ export default {
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { kuweixxweihu, supplierMaintenance, ListLists,CustomerMainten,Goodsone01,salerman },
     data() {
+
+         const phoneValidator11 = (rule, value, callback) => {
+            if (/^1[3456789]\d{9}$/.test(value)) { // 利用正则表达式校验手机号
+                callback()
+            } else {
+                callback(new Error('请输入正确手机号'))
+            }
+        }
         return {
             // 表单结构数组
             formArr: [], 
@@ -607,14 +615,16 @@ export default {
                 cbpc0990: [
                     { required: true, message: "收货电话不能为空!", trigger: "blur" }
                 ], 
-                cbpc10000: [
-                    { required: true, message: "电话不能为空!", trigger: "blur" }
+                cbsb19: [
+                    { required: true, message: "电话不能为空!", trigger: "blur" },
+                    { validator: phoneValidator11, trigger: 'blur' }
+
                 ],
                 cbpc100120: [
                     { required: true, message: "收货地址不能为空!", trigger: "blur" }
                 ],
-                cbpc099: [
-                    { required: true, message: "客户不能为空!", trigger: "blur" }
+                cbpc0999: [
+                    { required: true, message: "客户名称不能为空!", trigger: "blur" }
                 ],
 
             },

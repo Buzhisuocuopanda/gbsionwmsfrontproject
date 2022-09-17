@@ -181,14 +181,14 @@
           </div>
              <div style="height:50px;"></div>
              <el-button style="margin-left:5%;" type="primary" @click="handleExport">导出</el-button>
-             <el-button style="margin-left:5%;" type="primary" @click="xiaoschukudandayin">销售出库单打印</el-button>
-             <el-button style="margin-left:5%;" type="primary" @click="xiaoschukujianyibiao">出库建议表打印</el-button>
-             <el-button style="margin-left:5%;" type="primary" @click="xiaoschukusaomiaojlubiao">扫描记录表打印</el-button>
+             <el-button style="margin-left:3%;" type="primary" @click="xiaoschukudandayin">销售出库单打印</el-button>
+             <el-button style="margin-left:3%;" type="primary" @click="xiaoschukujianyibiao">出库建议表打印</el-button>
+             <el-button style="margin-left:3%;" type="primary" @click="xiaoschukusaomiaojlubiao">扫描记录表打印</el-button>
             <div style="height:50px;"></div>
         </div>
 </template>
 <script>
-import { PurchaseinboundLists,PurchaseinListxiandayin,PurchaseinListchukujianyibiao,PurchaseinListsaomiaojilubiao } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists } from "@/api/Warehousemanagement/SalesShipment";
 export default {
 
     data() {

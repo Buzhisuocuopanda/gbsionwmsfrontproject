@@ -80,37 +80,40 @@
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
                     <el-table-column label="状态" width="350px;" align="left" key="cbqa09" prop="cbqa09" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbqa09 == 1 ? "未审核" : scope.row.cbqa09 == 2 ? "已审核" : "未确定状态"}}
+                           <div>{{ scope.row.cbqa09 == 0 ? "未审核" : scope.row.cbqa09 == 1 ?
+                            "已审核" : scope.row.cbqa09 == 4 ? "已完成" : "未审核"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+                    <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" type="text" icon="el-icon-edit"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
                                 v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 2" v-hasPermi="['system:user:edit']">
                                 修改
-                            </el-button>
+                            </el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-if="scope.row.cbqa09 == 1 | scope.row.cbpc11 == 2"
+                                v-if="scope.row.cbqa09 == 0 | scope.row.cbqa09 == ' '"
                                 v-hasPermi="['system:user:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                            v-if="scope.row.cbqa09 == 4 | scope.row.cbqa09 == 1"
                                 @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbqa09 == 1">审核</el-button>
+                                v-if="scope.row.cbqa09 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbqa09 == 2">反审</el-button>
+                                v-if="scope.row.cbqa09 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbpc11 == 4">取消完成</el-button>
+                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbqa09 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 3 | scope.row.cbpc11 == 1">标记完成</el-button>
+                                v-if="scope.row.cbqa09 == 1 | scope.row.cbqa09 == 1">标记完成</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -120,107 +123,6 @@
                     class="pagintotal" />
             </el-col>
         </el-row>
-
-
-
-
-        <!-- 创建 -->
-        <el-dialog :visible.sync="open2" class="chuangjiandialog">
-            <span class="chuangjiancaigou">采购入库单</span>
-            <span class="chuangjianziti">编号:56221589223</span>
-            <span class="chuangjianziti chuangjianriqi">日期:2022-07-12</span>
-            <el-form ref="form2" :model="form2" label-width="30%" style="">
-                <div class="hello" style="margin-top: 2%;">
-                    <div class="box1">
-                        <table border="1" style=" border: solid #eee thin;" cellspacing="0" cellpadding="1"
-                            class="tablebiankuan table-head" width="100%" height="40px">
-                            <thead style=" border: solid #eee thin;">
-                                <tr style="height:40px; border: solid #eee thin;">
-                                    <th style="width: 40px; border: solid #eee thin;text-align: left;">编号</th>
-                                    <th style="width:153px; border: solid #eee thin;text-align: left;">品牌</th>
-                                    <th style="width:162px; border: solid #eee thin;text-align: left;">型号</th>
-                                    <th style=" width:163px; border: solid #eee thin;text-align: left;">描述</th>
-                                    <th style=" border: solid #eee thin;width:120px;text-align: left;">SN</th>
-                                    <th style=" border: solid #eee thin;width:128px;text-align: left;">替换商品SN</th>
-                                    <!-- <th style=" border: solid #eee thin;width:110px;text-align: left;">金额</th>
-                                    <th style=" border: solid #eee thin;width: 130px;text-align: left;">备注</th> -->
-                                    <th style=" border: solid #eee thin;width: 64px;text-align: left;">操作</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <div class="table-body" style="">
-                            <table border="1" style=" border: solid #ffffff thin; width:1440px;height:42px;"
-                                cellspacing="0" class="tablebiankuan">
-                                <tr style="">
-                                    <td style="width: 45px;border:solid #eee thin;">1</td>
-                                    <td style="width: 172px;  border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa08" style="" />
-                                    </td>
-                                    <td style="width: 182px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa08" style="" />
-                                    </td>
-                                    <td style="width: 182px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa08" id="input1" style="" />
-                                    </td>
-                                    <td style="width: 135px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa07" style="" />
-                                    </td>
-                                    <td style=" width: 146px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa09" id="input3" style="" />
-                                    </td>
-                                    <!-- <td style="width: 124px;border:solid #eee thin;">
-                                        <el-input-number v-model="form2.cbsa10" :min="0" :controls="false"
-                                            :precision="2" style="width:81px;"></el-input-number>
-                                    </td>
-
-                                    <td style="width: 146px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa08" style="" />
-                                    </td> -->
-                                    <td style="width: 68px;border:solid #eee thin;" v-bind="true">
-                                        <el-button size="mini" type="text"
-                                            style=" border: 0 !important;margin-left: 10px;" icon="el-icon-plus"
-                                            @click="addData">添加
-                                        </el-button>
-                                    </td>
-                                </tr>
-                                <tr v-for="(item, index) in tianjiahang" :key="index">
-                                    <td style="width: 45px;border:solid #eee thin;">{{ (index + 1) + 1 }}</td>
-                                    <td style="width: 172px;  border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa08" style="" />
-                                    </td>
-                                    <td style="width: 182px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa08" style="" />
-                                    </td>
-                                    <td style="width: 182px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa08" id="input1" style="" />
-                                    </td>
-                                    <td style="width: 135px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa07" style="" />
-                                    </td>
-                                    <td style=" width: 146px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa09" id="input3" style="" />
-                                    </td>
-                                    <td style="width: 68px;border:solid #eee thin;">
-                                        <el-button size="mini" type="text"
-                                            style=" border: 0 !important;margin-left: 10px;" icon="el-icon-delete"
-                                            @click="deletData(index)">删除
-                                        </el-button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </el-form>
-            <div>
-                <div style="height:80px;"></div>
-                <el-button type="primary" class="buttonbaocuen" @click="handleAdd">保存</el-button>
-                <el-button @click="cancel9" style="margin-left:1%">取 消</el-button>
-            </div>
-        </el-dialog>
-
-
-        
         <!--提货单创建-->
         <el-dialog :visible.sync="open3">
             <el-table  v-loading="loading" :data="userList099" height="440" @selection-change="handleSelectionChange"
@@ -246,7 +148,7 @@
         <!--修改-->
         <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
-                <span style="font-size:20px;">采购入库单</span>
+                <span style="font-size:20px;">质检单</span>
                 <hr />
             </div>
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
@@ -297,7 +199,7 @@
 
         <el-dialog :visible.sync="open1" append-to-body>
             <div style="margin-top:-30px;">
-                <span style="font-size:20px;">采购入库单</span>
+                <span style="font-size:20px;">质检单</span>
                 <hr />
             </div>
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
@@ -934,7 +836,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbqa01);
+            this.idss = selection.map(item => item.cbqa07);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -959,7 +861,7 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批为ID"' + row.cbqa01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + row.cbqa07 + '"的数据项？').then(() => {
             console.log(row.cbpc01, 8888);
             QualityinSH(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
@@ -973,7 +875,7 @@ export default {
         //审批上面内容
         PurchaseinboundShenpi01(row) {
             console.log(row,777777);
-            this.$modal.confirm('是否要审批为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -990,7 +892,7 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审为ID"' + row.cbqa01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + row.cbqa07 + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
 
             QualityinfShs(row).then(response => {
@@ -1005,7 +907,7 @@ export default {
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
-            this.$modal.confirm('是否要反审为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1027,7 +929,7 @@ export default {
             // console.log(row.cbpc01, 8888);
 
             PurchaseinboundShss(row).then(response => {
-                console.log(this.form.cbpc01, 789)
+                console.log(this.form.cbqa07, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
@@ -1065,9 +967,9 @@ export default {
             // });
 
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + row.cbqa07 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
-                    console.log(this.form.cbpc01, 789);
+                    console.log(this.form.cbqa07, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
 
@@ -1223,7 +1125,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.QualityinRemove(JSON.stringify(item)).then((res) => {
                         // console.log(res, 123)
@@ -1255,7 +1157,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.cbqa01 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除,编号为"' + row.cbqa07 + '"的数据项？').then(function () {
                 return QualityinRemove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();
