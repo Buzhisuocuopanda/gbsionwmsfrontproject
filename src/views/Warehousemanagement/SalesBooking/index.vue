@@ -974,7 +974,7 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审为ID"' + row.cbpc01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + row.orderNo + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShs(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
@@ -988,7 +988,7 @@ export default {
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
-            this.$modal.confirm('是否要反审为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1078,7 +1078,7 @@ export default {
 
         /** 修改按钮操作 */
         handleUpdate() {
-            if (this.form.name != undefined) {
+           
                 let row = {}
                 row.cbpc07 = this.form.cbpc07;
                 row.cbpc09 = this.form.cbsa01;
@@ -1096,67 +1096,22 @@ export default {
 
                 });
 
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
-
         },
 
-        /** 详情按钮操作 */
-        handlexiangqeng() {
-            if (this.form.name != undefined) {
-                let row1 = {}
-                row.cbpc07 = this.form1.cbpc07;
-                row.cbsa08 = this.form1.cbsa08;
-                row.cbwa09 = this.form1.cbwa09;
-                row.cala08 = this.form1.cala08;
-                row.cbpc01 = this.form1.cbpc01;
-                // console.log(this.form.id);
-                PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-
-                    // console.log(this.form, 789)
-                    this.getList();
-                    this.open = false;
-                    this.$message({ message: '修改成功', type: 'success' });
-
-                });
-
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
-
-        },
-        /** 详情按钮操作**/
-        handleSelect(row) {
-            this.getList05();
-            this.open1 = true;
-            this.form1.cbpc01 = row.cbpc01;
-            this.form1.cbpc07 = row.cbpc07;
-            // this.form.cbpc08 = row.cbpc08;
-            this.form1.cbsa08 = row.cbsa08;
-            this.form1.cbwa09 = row.cbwa09;
-            this.form1.cala08 = row.cala08;
-        },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
             console.log(row,98999)
             this.open = true;
             // console.log(row, 7788521);
             this.form.cbpc01 = row.cbpc01;
-            this.form.cbpc07 = row.cbpc07;
-            this.form.cbsa08 = row.cbsa08;
+            //供应商
+            this.form.cbsa08 = row.supplier;
             this.form.cbwa09 = row.cbwa09;
             this.form.cala08 = row.cala08;
             this.form.cbsa01 = row.cbsa01;
             this.form.cala01 = row.cala01;
             this.form.cbwa01 = row.cbwa01;
             this.form.cbpc16 = row.cbpc16;
-
-            if (this.form.cbpc16 == 6) {
-                this.form.cbpc16 = 'CNY';
-            }else{
-                this.form.cbpc16 = 'USD';
-            }
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

@@ -27,7 +27,7 @@
                     <el-form-item>
                             <el-button class="biaoto-buttonchuangjian" v-hasPermi="['system:swJsStorea:list']" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:40%;">
+                    <el-form-item style="margin-left:55%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:swJsStorea:add']" @click="handlekucunone">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
@@ -42,14 +42,14 @@
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:swJsStorea:fs']">反审</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:swJsStorea:import']">导入</el-button>
-                        <el-button plain size="mini" class="biaoto-buttondaochu"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:swJsStorea:bjwc']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
                             v-hasPermi="['system:swJsStorea:qxwc']">取消完成
-                        </el-button>
+                        </el-button> -->
                     </el-form-item>
                 </el-form>
 
@@ -66,37 +66,40 @@
 
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
                     <el-table-column label="状态" width="350px;" align="left" key="cbie10" prop="cbie10" sortable>
-                        <template scope="scope">
-                            <div>{{ scope.row.cbie10 == 1 ? "未审核" : scope.row.cbie10 == 2 ? "已审核" : "未确定状态" }}
+                         <template scope="scope">
+                            <div>{{ scope.row.cbie10 == 0 ? "未审核" : scope.row.cbie10 == 1 ?
+                            "已审核" : scope.row.cbie10 == 4 ? "已完成" : "未确定状态"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="220" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" type="text" icon="el-icon-edit"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbie10 == 1" v-hasPermi="['system:swJsStorea:edit']">
+                                v-if="scope.row.cbie10 == 0 | scope.row.cbie10 == 2" v-hasPermi="['system:swJsStorea:edit']">
                                 修改
-                            </el-button>
+                            </el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-if="scope.row.cbie10 == 1 " v-hasPermi="['system:swJsStorea:remove']">删除</el-button>
+                                v-if="scope.row.cbie10 == 0 | scope.row.cbie10 == ' '" v-hasPermi="['system:swJsStorea:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:swJsStorea:detail']">详情
+                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbie10 == 4 | scope.row.cbie10 == 1" 
+                                v-hasPermi="['system:swJsStorea:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:swJsStorea:sh']"
-                                v-if="scope.row.cbie10 == 1">审核</el-button>
+                                v-if="scope.row.cbie10 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:swJsStorea:fs']"
-                                v-if="scope.row.cbie10 == 2">反审</el-button>
+                               v-if="scope.row.cbie10 == 1">反审</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbpc11 == 4">取消完成</el-button>
+                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbie10 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']"
-                                v-if="scope.row.cbpc11 == 3 | scope.row.cbpc11 == 1">标记完成</el-button> -->
+                                v-if="scope.row.cbie10 == 1 | scope.row.cbie10 == 1">标记完成</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>
@@ -108,7 +111,7 @@
         </el-row>
 
         <!--修改-->
-        <el-dialog :visible.sync="open">
+        <!-- <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
                 <span style="font-size:20px;">库存明细初始化</span>
                 <hr />
@@ -116,100 +119,34 @@
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
                 <el-row>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbpc07">
-                            <el-input v-model="form.cbpc07" maxlength="30" style="width:50%" />
+                        <el-form-item label="编号:" prop="cbie07">
+                            <el-input v-model="form.cbie07" maxlength="30" style="width:50%" />
                         </el-form-item>
                     </el-col>
-                    <!-- <el-col style="margin-top:1%;">
-                        <el-form-item label="日期:" prop="cbpc08">
-                            <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
-                                style="width:50%" />
-                        </el-form-item>
-                    </el-col> -->
                 </el-row>
                 <el-row>
                     <el-col style="margin-top:1%;">
-                        <el-form-item label="供应商:" prop="cbsa08">
-                            <el-input v-model="form.cbsa08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
+                         <el-form-item label="仓库:" prop="cbwa09">
+                            <el-popover placement="bottom-start" trigger="click">
+                                <kuweixxweihu ref="kuweixxweihu" @selected="selected04" style="width:320px;" />
+                                <el-select slot="reference" v-model="form.cbwa09" placeholder="" readonly
+                                    style=" width: 50%;">
+                                </el-select>
+                            </el-popover>
                         </el-form-item>
                     </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="结算货币:" prop="cala08">
-                            <el-input v-model="form.cala08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="仓库:" prop="cbwa09">
-                            <el-input v-model="form.cbwa09" placeholder="" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
+                </el-row>
+                <el-row v-if="false">
+                    <el-form-item label="仓库id:" prop="cbie09">
+                            <el-input v-model="form.cbie09" placeholder="" maxlength="30" style="width:50%" />
+                    </el-form-item>
                 </el-row>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="handleUpdate">确 定</el-button>
                 <el-button @click="cancells">取 消</el-button>
             </div>
-        </el-dialog>
-
-        <el-dialog :visible.sync="open1" append-to-body>
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">库存明细初始化</span>
-                <hr />
-            </div>
-            <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbpc07">
-                            <el-input v-model="form1.cbpc07" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                    <!-- <el-col style="margin-top:1%;">
-                        <el-form-item label="日期:" prop="cbpc08">
-                            <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
-                                style="width:50%" />
-                        </el-form-item>
-                    </el-col> -->
-                </el-row>
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="供应商:" prop="cbsa08">
-                            <el-input v-model="form1.cbsa08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="结算货币:" prop="cala08">
-                            <el-input v-model="form1.cala08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="仓库:" prop="cbwa09">
-                            <el-input v-model="form1.cbwa09" placeholder="" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <!-- <el-button type="primary" @click="handleAdd">确 定</el-button> -->
-                <!-- <el-button @click="cancells">取 消</el-button> -->
-            </div>
-        </el-dialog>
-
+        </el-dialog> -->
 
         <!-- 用户导入对话框 -->
         <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
@@ -237,7 +174,7 @@
 <script>
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
 // import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { QualityinAdd, PurchaseinboundList, QualityinEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/BarcodeInventorydetails";
+import { QualityinAdd, PurchaseinboundList, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/BarcodeInventorydetails";
 import * as req from "@/api/Warehousemanagement/BarcodeInventorydetails";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -659,6 +596,15 @@ export default {
             this.form2.cbpc09 = name.substring(name.indexOf("-") + 1)
             // this.form2.icon = name;
         },
+
+         //修改模块-仓库
+        selected04(name) {
+            console.log(name, 123)
+            console.log(name.substring(name.indexOf("-") + 1), 963);
+            this.form.cbwa09 = name.substring(0, name.indexOf("-"));
+            this.form.cbie09 = name.substring(name.indexOf("-") + 1)
+            // this.form2.icon = name;
+        },
         //添加行
         addData() {
             this.tianjiahang.push({
@@ -994,31 +940,8 @@ export default {
         handleUpdate() {
            
                 let row = {}
-                row.cbpc07 = this.form.cbpc07;
-                row.cbsa08 = this.form.cbsa08;
-                row.cbwa09 = this.form.cbwa09;
-                row.cala08 = this.form.cala08;
-                row.cbpc01 = this.form.cbpc01;
-                // console.log(this.form.id);
-                QualityinEdit(JSON.stringify(row)).then(response => {
-
-                    // console.log(this.form, 789)
-                    this.getList();
-                    this.open = false;
-                    this.$message({ message: '修改成功', type: 'success' });
-
-                });
-        },
-
-        /** 详情按钮操作 */
-        handlexiangqeng() {
-          
-                let row1 = {}
-                row.cbpc07 = this.form1.cbpc07;
-                row.cbsa08 = this.form1.cbsa08;
-                row.cbwa09 = this.form1.cbwa09;
-                row.cala08 = this.form1.cala08;
-                row.cbpc01 = this.form1.cbpc01;
+                row.cbie07 = this.form.cbie07;
+                row.cbie09 = this.form.cbie09;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
 
@@ -1029,28 +952,13 @@ export default {
 
                 });
         },
-        /** 详情按钮操作**/
-        handleSelect(row) {
-            this.getList05();
-            this.open1 = true;
-            this.form1.cbpc01 = row.cbpc01;
-            this.form1.cbpc07 = row.cbpc07;
-            // this.form.cbpc08 = row.cbpc08;
-            this.form1.cbsa08 = row.cbsa08;
-            this.form1.cbwa09 = row.cbwa09;
-            this.form1.cala08 = row.cala08;
-        },
-        /** 修改详情按钮操作**/
-        handlexiangqengSelect(row) {
-            console.log(row)
-            this.open = true;
-            // console.log(row, 7788521);
-            this.form.cbpc01 = row.cbpc01;
-            this.form.cbpc07 = row.cbpc07;
-            this.form.cbsa08 = row.cbsa08;
-            this.form.cbwa09 = row.cbwa09;
-            this.form.cala08 = row.cala08;
-        },
+        // /** 修改详情按钮操作**/
+        // handlexiangqengSelect(row) {
+        //     console.log(row)
+        //     this.open = true;
+        //     // console.log(row, 7788521);
+        //     this.form = row;
+        // },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
             this.reset();

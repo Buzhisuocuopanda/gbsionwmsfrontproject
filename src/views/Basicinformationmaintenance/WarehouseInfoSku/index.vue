@@ -363,7 +363,7 @@
 
 // import { addUserSysStore, listUserStore, updateUserStore, removeSysStore } from "@/api/WareSys/Cangkuxxguanli";
 
-import { StoreSkuAdd, StoreSkuList,StoreSkuEdit, StoreyRemove } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
+import { StoreSkuAdd, StoreSkuList01,StoreSkuEdit, StoreyRemove } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 import * as req from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 
 import { getToken } from "@/utils/auth";
@@ -647,11 +647,11 @@ export default {
         /** 查询用户列表 */
         getList() {
             this.loading = true;
-            StoreSkuList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            StoreSkuList01(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList = response.data.rows;
                 this.total = response.data.total;
-                console.log(response.data.rows, 3369);
-                this.deleteFlag = response.data.rows.deleteFlag;
+                console.log(response, 3369);
+                // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
             }
             );
