@@ -319,7 +319,7 @@
 
        <!--订单创建-->
         <el-dialog :visible.sync="open3">
-            <el-table border :header-cell-style="headClassssmt" v-loading="loading" :data="userList01" height="440"
+            <el-table border  v-loading="loading" :data="userList01" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
                     <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
@@ -1363,10 +1363,19 @@ export default {
                 });
             }).catch(() => { });
         },
-        /** 分配角色操作 */
+        // /** 分配角色操作 */
+        // handleAuthRole: function (row) {
+        //     const cbpg01 = row.cbpg01;
+        //     this.$router.push("/system/user-authhhhh/role/" + cbpg01);
+        // },
+
+         /** 详情操作 */
         handleAuthRole: function (row) {
-            const userId = row.cbpg01;
-            this.$router.push("/system/user-authhhhh/role/" + userId);
+            const cbse01 = row.cbse01;
+            console.log(row.cbse01,885522);
+
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-authhhhh/role/" + cbse01);
         },
         /** 创建操作 */
         handletuikuone: function (row) {
