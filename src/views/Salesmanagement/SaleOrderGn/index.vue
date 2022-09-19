@@ -65,7 +65,7 @@
         <el-table-column label="制单时间" align="center" prop="createTime" min-width="120px;"/>
         <el-table-column label="状态" align="center" prop="statusMsg" min-width="120px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作" min-width="220px;">
+        <el-table-column fixed="right" label="操作" min-width="220px;">
           <template slot-scope="scope">
             <el-button size="small" type="primary" @click="showDetail(scope.row)">详情</el-button>
             <el-button size="small" type="primary" @click="mdfDetail(scope.row)">修改</el-button>
@@ -515,11 +515,13 @@
         this.status = ''
       },
       createForm() {
-        this.showaddDialog = true
+        // this.showaddDialog = true
+        this.$router.push({path: "/Salesmanagement/saleOrderDetail", query: {id: 1}})
+
       },
       showDetail(row) {
-        this.showDialog = true
-        this.formData=row
+        this.$router.push({path: "/Salesmanagement/saleshowOrderDetail", query: {id: row.id}})
+
       },
       closeDetail() {
         this.showDialog = false
@@ -536,8 +538,10 @@
         this.formData={}
       },
       mdfDetail(row) {
-        this.formData=row
-        this.showmdfDialog = true
+        // this.formData=row
+        // this.showmdfDialog = true
+
+        this.$router.push({path: "/Salesmanagement/salemdfOrderDetail", query: {id: row.id}})
 
       },
 

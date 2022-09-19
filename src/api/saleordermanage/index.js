@@ -88,3 +88,21 @@ export function addSaleOrder(data) {
     data: data
   })
 }
+
+export function mdfSaleOrder(data) {
+  return request({
+    url: '/sale/mdfSaleOrder',
+    method: 'post',
+    data: data
+  })
+}
+
+
+
+export function saleOderDetail(data) {
+  return request({
+    url: '/sale/saleOderDetail',
+    method: 'get',
+    params: data
+  })
+}

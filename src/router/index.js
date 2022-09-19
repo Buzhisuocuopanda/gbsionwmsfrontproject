@@ -710,7 +710,9 @@ export const dynamicRoutes = [
     component: Layout,
     redirect: 'saleOrderDetail',
     name: 'saleOrderDetail',
-
+    query:{
+      id:''
+},
     children: [
       {
         // path: 'role/:cbpc01(\\d+)',
@@ -719,10 +721,100 @@ export const dynamicRoutes = [
         name: 'saleOrderDetail',
         component: () => import('@/views/Salesmanagement/saleOrderDetail/index'),
 
-        meta: { title: '国内销售订单', icon: 'component', noCache: true, affix: true }
+        meta: { title: '国内销售订单创建', icon: 'component', noCache: true, affix: true }
       }
     ]
   },
+  // 销售订单详情
+  {
+    path: '/saleshowOrderDetail',
+    component: Layout,
+    redirect: 'saleshowOrderDetail',
+    name: 'saleshowOrderDetail',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'saleshowOrderDetail',
+
+        name: 'saleshowOrderDetail',
+        component: () => import('@/views/Salesmanagement/saleOrderDetail/showDetail/index'),
+
+        meta: { title: '销售订单详情查看', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  // 销售修改订单详情
+  {
+    path: '/salemdfOrderDetail',
+    component: Layout,
+    redirect: 'salemdfOrderDetail',
+    name: 'salemdfOrderDetail',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'salemdfOrderDetail',
+
+        name: 'salemdfOrderDetail',
+        component: () => import('@/views/Salesmanagement/saleOrderDetail/mdfDetail/index'),
+
+        meta: { title: '销售订单修改', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  // {
+  //   path: '/saleorder',
+  //   component: Layout, // 一级这个component: Layout必填，除非是不需要在页面容器里打开的页面
+  //   hidden: true, // false：显示在侧边栏菜单
+  //   redirect: 'noRedirect', // noRedirect：面包屑不可点击，不写这个，父级标题样式就和首页一样，黑字可点击跳转
+  //   // meta: { title: '费用管理'}, // 一级标题，写了才能显示在面包屑上
+  //   children: [
+  //     {
+  //       path: '',
+  //       component:{ render: (e) => e("router-view") }, // 如果你的'feeConfig'路径已经在系统菜单中设置过了，这里的path和component就写得和我一样就行，直接跳转三级路由
+  //       hidden: true, // false：显示在侧边栏菜单
+  //       redirect: 'noRedirect', // noRedirect：面包屑不可点击，不写这个，父级标题样式就和首页一样，黑字可点击跳转
+  //       meta: { title: '费用配置'}, // 二级标题，写了才能显示在面包屑上
+  //       // 如果你不需要二级的父级标题，那你就直接把第二个children的内容写在第一个children就行
+  //       children: [
+  //         {
+  //           path: 'showOrderDetail',
+  //           component: () => import('@/views/Salesmanagement/saleOrderDetail/showDetail/index'),
+  //           name: 'showOrderDetail',
+  //           meta: { title: '费用配置', activeMenu: '/feeManage/feeConfig' } // meta.title：三级标题，meta.activeMenu：侧边栏父级菜单高亮
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/saleorder/showOrderDetail',
+  //   component: Layout,
+  //   hidden: true,
+  //   // permissions: ['system:user:edit'],
+  //   children: [
+  //     {
+  //       // path: 'role/:cbpc01(\\d+)',
+  //       path: '/saleorder/showOrderDetail',
+  //
+  //       name: 'saleOrderDetail',
+  //       component: () => import('@/views/Salesmanagement/saleOrderDetail/showDetail'),
+  //
+  //       meta: { title: '国内销售订单创建', icon: 'component', noCache: true, affix: true }
+  //     },
+  //     {
+  //       path: 'role/:cbpc01(\\d+)',
+  //       name: 'AuthUser',
+  //       component: () => import('@/views/Salesmanagement/saleOrderDetail/showDetail'),
+  //       meta: { title: '销售提货详情' }
+  //     }
+  //   ]
+  // },
   {
     path: '/system/role-auth',
     component: Layout,

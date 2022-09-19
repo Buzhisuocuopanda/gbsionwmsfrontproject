@@ -8,7 +8,7 @@
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="编号:" prop="orderNo">
-<!--            <el-input type="text" v-model="form2.cbpc07" style="width: 60%;" />-->
+                        <el-input type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -23,57 +23,57 @@
           </el-form-item>
         </el-col>
       </el-row>
-<!--      <el-row :gutter="20">-->
-<!--        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-<!--          <el-form-item label="主副表id:" prop="cbpg161">-->
-<!--            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col style="" :span="8">-->
-<!--          <el-form-item label="供料单位:" prop="cbpc099">-->
-<!--            <el-popover placement="bottom-start" trigger="click">-->
-<!--              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />-->
-<!--              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">-->
-<!--              </el-input>-->
-<!--            </el-popover>-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col style="" :span="8">-->
-<!--          <el-form-item label="仓库:" prop="cbpc100">-->
-<!--            <el-popover placement="bottom-start" trigger="click">-->
-<!--              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />-->
-<!--              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">-->
-<!--              </el-input>-->
-<!--            </el-popover>-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col style="" :span="8">-->
-<!--          <el-form-item label="结算货币:" prop="cbpc16">-->
-<!--            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">-->
-<!--              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">-->
-<!--              </el-option>-->
-<!--            </el-select>-->
-<!--          </el-form-item>-->
-<!--          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">-->
-<!--                  <el-popover placement="bottom-start" trigger="click">-->
-<!--                      <ListLists ref="ListLists" @selected="selected004" />-->
-<!--                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly-->
-<!--                          style="border:solid #eee thin; width:77%;">-->
-<!--                      </el-select>-->
-<!--                  </el-popover>-->
-<!--              </el-form-item> &ndash;&gt;-->
-<!--        </el-col>-->
-<!--        &lt;!&ndash;商品信息维护&ndash;&gt;-->
-<!--        <el-col v-if="false">-->
-<!--          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">-->
-<!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
+      <!--      <el-row :gutter="20">-->
+      <!--        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
+      <!--          <el-form-item label="主副表id:" prop="cbpg161">-->
+      <!--            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--        <el-col style="" :span="8">-->
+      <!--          <el-form-item label="供料单位:" prop="cbpc099">-->
+      <!--            <el-popover placement="bottom-start" trigger="click">-->
+      <!--              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />-->
+      <!--              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">-->
+      <!--              </el-input>-->
+      <!--            </el-popover>-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--        <el-col style="" :span="8">-->
+      <!--          <el-form-item label="仓库:" prop="cbpc100">-->
+      <!--            <el-popover placement="bottom-start" trigger="click">-->
+      <!--              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />-->
+      <!--              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">-->
+      <!--              </el-input>-->
+      <!--            </el-popover>-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--        <el-col style="" :span="8">-->
+      <!--          <el-form-item label="结算货币:" prop="cbpc16">-->
+      <!--            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">-->
+      <!--              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">-->
+      <!--              </el-option>-->
+      <!--            </el-select>-->
+      <!--          </el-form-item>-->
+      <!--          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">-->
+      <!--                  <el-popover placement="bottom-start" trigger="click">-->
+      <!--                      <ListLists ref="ListLists" @selected="selected004" />-->
+      <!--                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly-->
+      <!--                          style="border:solid #eee thin; width:77%;">-->
+      <!--                      </el-select>-->
+      <!--                  </el-popover>-->
+      <!--              </el-form-item> &ndash;&gt;-->
+      <!--        </el-col>-->
+      <!--        &lt;!&ndash;商品信息维护&ndash;&gt;-->
+      <!--        <el-col v-if="false">-->
+      <!--          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">-->
+      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--      </el-row>-->
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
-          <el-form-item label="客户:" prop="customerId">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+          <el-form-item label="客户:" prop="customerName">
+            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable   clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in customeroptions"
                 :key="item.value"
@@ -85,8 +85,8 @@
 
         </el-col>
         <el-col :span="8">
-          <el-form-item label="销售人员:" prop="saleUserId">
-            <el-select v-loadmore="saleUserloadMore" v-model="formData.saleUserId" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+          <el-form-item label="销售人员:" prop="saleUser">
+            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in saleUseroptions"
                 :key="item.value"
@@ -171,24 +171,24 @@
         </el-col>
       </el-row>
 
-<!--      <el-row v-if="false">-->
-<!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-<!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-<!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-<!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-<!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-<!--        <el-col>-->
-<!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-<!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
+      <!--      <el-row v-if="false">-->
+      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
+      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
+      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
+      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
+      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
+      <!--        <el-col>-->
+      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
+      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
+      <!--          </el-form-item>-->
+      <!--        </el-col>-->
+      <!--      </el-row>-->
       <div>
         <el-row>
           <el-col :span="24">
@@ -196,10 +196,10 @@
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsId" label="品牌" width="">
+          <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row)" v-loadmore="loadMore" v-model="scope.row.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
+                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -216,7 +216,7 @@
             <template slot-scope="scope">
               <sapn>
                 <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
-<!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
+                <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
               </sapn>
             </template>
           </el-table-column>
@@ -338,7 +338,7 @@
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button @click="cancel">取 消</el-button>
       <!-- </span> -->
     </div>
   </div>
@@ -352,7 +352,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import { swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -794,10 +794,10 @@
         //选择集合
         currencyoptions:[
           {
-            value: '6',
+            value: 6,
             label: 'CNY'
           }, {
-            value: '7',
+            value: 7,
             label: 'USD'
           }
         ],
@@ -866,17 +866,17 @@
     created() {
 
 
-      this.getConfigKey("sys.user.initPassword").then(response => {
-        // this.initPassword = response.msg;
-      });
-      this.getDicts("sw_js_store_type").then(response => {
-        this.form.type = response.rows;
-      });
+      // this.getConfigKey("sys.user.initPassword").then(response => {
+      //   // this.initPassword = response.msg;
+      // });
+      // this.getDicts("sw_js_store_type").then(response => {
+      //   this.form.type = response.rows;
+      // });
       // this.form.type = this.dict[0].label;
       // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
       // console.log(this.userList,123456789);
-      this.chen();
-      this.form2.cbph10 = "20"
+      // this.chen();
+      // this.form2.cbph10 = "20"
 
       console.log(this.form.cbpc16, 123456);
 
@@ -1124,7 +1124,8 @@
 
       // 取消按钮
       cancel() {
-        this.open2 = false;
+        this.$store.dispatch("tagsView/delView", this.$route)
+        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1172,7 +1173,7 @@
       },
       saleUserloadMore(){
         const param={
-          selectMsg: this.saleUserId,
+          selectMsg: this.saleUser,
           pageNum: this.saleUserListQuery.pageNum,
           pageSize: this.saleUserListQuery.pageSize
         }
@@ -1189,7 +1190,7 @@
       },
       customerloadMore(){
         const param={
-          selectMsg: this.customerId,
+          selectMsg: this.customerName,
           pageNum: this.customerListQuery.pageNum,
           pageSize: this.customerListQuery.pageSize
         }
@@ -1247,9 +1248,9 @@
       },
       saleUserdataFilter(val){
         this.saleUserListQuery.pageNum=1
-        this.saleUserId=val
+        this.saleUser=val
         const param={
-          selectMsg: this.saleUserId,
+          selectMsg: this.saleUser,
           pageNum: this.saleUserListQuery.pageNum,
           pageSize: this.saleUserListQuery.pageSize
         }
@@ -1266,7 +1267,7 @@
       },
       customerdataFilter(val){
         this.customerListQuery.pageNum=1
-        this.customerId=val
+        this.customerName=val
         const param={
           selectMsg: this.customerId,
           pageNum: this.customerListQuery.pageNum,
@@ -1309,16 +1310,18 @@
         }
       },
 
-      goodsOnChange(row){
+      goodsOnChange(row,val){
         // console.log(this.formData.customer)
         // console.log("val",val)
-        console.log("val",row)
+        console.log("row",row)
+        console.log("val",val)
+        row.goodsId=val
         // row.qty=0.5
 
         if(this.formData.customerId==null){
-            this.$message.error("请先选择客户")
+          this.$message.error("请先选择客户")
           return;
-          }
+        }
 
         //检查goodsid是否存在
         if(this.checkRepeat(this.tableData,row.goodsId)){
@@ -1333,7 +1336,6 @@
           goodsId: row.goodsId,
           customerId: this.formData.customerId,
           orderClass: 2
-
         }
 
         //
@@ -1357,26 +1359,28 @@
 
       },
       checkRepeat(arr,goodsId) {
-    console.log('arr',arr)
-    console.log('goodsId',goodsId)
-     var dupNum=0
-    arr.forEach((item) => {
-      if (item.goodsId == goodsId) {
-        console.log("重复了")
-        dupNum=dupNum+1;
+        console.log('arr',arr)
+        console.log('goodsId',goodsId)
+        var dupNum=0
+        arr.forEach((item) => {
+          if (item.goodsId == goodsId) {
+            console.log("重复了")
+            dupNum=dupNum+1;
+
+          }
+
+        });
+        console.log("重复了2")
+        if(dupNum == 1 || dupNum == 0){
+          return false
+        }else {
+          return true;
 
         }
-
-    });
-        console.log("重复了2")
-    if(dupNum == 1 || dupNum == 0){
-      return false
-    }else {
-      return true;
-
-    }
-  },
-
+      },
+      saleUserOnChange(val){
+        this.formData.saleUserId=val
+      },
       customerOnChange(val){
         // console.log(this.formData.customer)
         // console.log("val",val)
@@ -1396,6 +1400,7 @@
             this.formData.receivePhone=response.data.cbca16
             this.formData.receiveName=response.data.cbca14
             this.formData.address=response.data.cbca15
+            this.formData.customerId=response.data.cbca01
 
 
           }else {
@@ -1421,13 +1426,11 @@
         });
       },
       initSelect(){
-        const param={
-
-        }
+        const param={}
 
         swJsGoodslistBySelect(param).then(response => {
           if (response.code == "200") {
-                this.options=response.data.rows
+            this.options=response.data.rows
           }else {
             this.$message.error(response.msg)
           }
@@ -1439,21 +1442,21 @@
       /** 新增按钮操作 */
       handleAdd() {
 
-          this.formData.goods=this.tableData
-        addSaleOrder(this.formData).then(response => {
-          if (response.code == "200") {
-            this.$message.success("添加成功")
-            this.$store.dispatch("tagsView/delView", this.$route)
-            this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.formData.goods=this.tableData
+        mdfSaleOrder(this.formData).then(response => {
+            if (response.code == "200") {
+              this.$message.success("修改成功")
+              this.$store.dispatch("tagsView/delView", this.$route)
+              this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
 
-          }else {
+            }else {
 
-            this.$message.error(response.msg)
+              this.$message.error(response.msg)
 
-            // this.$router.go(-1)
+              // this.$router.go(-1)
 
+            }
           }
-        }
         )
 
 
@@ -1501,11 +1504,11 @@
         // this.$router.push("/system/user-auth/role/");
         this.$router.push("/system/user-cktkfh/role/");
       },
-    sum(row){
+      sum(row){
         if(row.qty!=null && row.currentPrice!=null){
           row.totalPrice=row.qty*row.currentPrice;
         }
-    },
+      },
 
     },
     mounted() {
@@ -1515,6 +1518,37 @@
       this.initSelect()
       this.initCustomerSelect()
       this.initSaleUserSelect()
+
+      const param={
+        orderId: this.$route.query.id
+      }
+      saleOderDetail(param).then(response => {
+          if (response.code == "200") {
+            // this.formData=response.data
+            this.formData.id =response.data.id
+            this.formData.orderNo =response.data.orderNo
+            this.formData.customerNo =response.data.customerNo
+            this.formData.customerId =response.data.customerId
+            this.formData.customerName =response.data.customerName
+            this.formData.orderDate =response.data.orderDate
+            this.formData.saleUserId =response.data.saleUserId
+            this.formData.saleUser =response.data.saleUser
+            this.formData.currency =response.data.currency
+            this.formData.receiveName =response.data.receiveName
+            this.formData.receivePhone =response.data.receivePhone
+            this.formData.invoiceType =response.data.invoiceType
+            this.formData.address =response.data.address
+            this.formData.fcNumber =response.data.fcNumber
+            this.formData.orderClassMsg =response.data.orderClassMsg
+            // this.tableData.push(...response.data.goods)
+            this.tableData=response.data.goods
+            console.log('tableData',this.tableData)
+
+          }else {
+            this.$message.error(response.msg)
+          }
+        }
+      )
     },
     watch: {
       visible(newVal) {
@@ -1528,7 +1562,7 @@
     }
   };
 </script>
-<style src="./PurchaseWarehousingcjcss/index.css">
+<style src=".././PurchaseWarehousingcjcss/index.css">
   .normQtyclass {
     background-color: #00afff;
   }

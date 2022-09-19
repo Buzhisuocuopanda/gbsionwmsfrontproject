@@ -153,7 +153,7 @@
             </template>
           </el-form-item>
           <el-form-item label="数量" prop="qty">
-            <el-input v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
+            <el-input v-model="formData.qty" style="width:50%"     oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"
             ></el-input>
           </el-form-item>
           <!--        <el-form-item >-->
