@@ -855,7 +855,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbpg01);
+            this.idss = selection.map(item => item.cbpg07);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -880,19 +880,23 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            console.log(row.cbpg01, 8888);
 
+         this.$modal.confirm('是否要审批,编号为"' + row.cbpg07 + '"的数据项？').then(() => {
+            console.log(row.cbpg01, 8888);
             Purchaseinboundsho(row).then(response => {
-                console.log(this.form.cbpg01, 789)
+                console.log(this.form.cbpg07, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '审批成功', type: 'success' });
 
             });
+
+          }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
+          this.$modal.confirm('是否要审批,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbpg01, 8888);
 
@@ -905,9 +909,11 @@ export default {
                     console.log(e, 456)
                 })
             })
+          }).catch(() => { });
         },
         //反审
         PurchaseinboundFanShenpi(row) {
+          this.$modal.confirm('是否要反审,编号为"' + row.cbpg07 + '"的数据项？').then(() => {
             console.log(row.cbpg01, 8888);
 
             PurchaseinboundSht(row).then(response => {
@@ -918,10 +924,12 @@ export default {
                 this.$message({ message: '反审成功', type: 'success' });
 
             });
+          }).catch(() => { });
         },
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
+         this.$modal.confirm('是否要反审,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbpg01, 8888);
 
@@ -933,12 +941,14 @@ export default {
                 }).catch((e) => {
                     console.log(e, 456)
                 })
-            })
+            });
+          }).catch(() => { });
         },
 
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
+         this.$modal.confirm('是否要标记完成,编号为"' + row.cbpg07 + '"的数据项？').then(() => {
             console.log(row.cbpg01, 8888);
 
             PurchaseinBoundshf(row).then(response => {
@@ -949,10 +959,12 @@ export default {
                 this.$message({ message: '标记完成', type: 'success' });
 
             });
+          }).catch(() => { });
         },
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
+          this.$modal.confirm('是否要标记完成,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbpg01, 8888);
 
@@ -964,12 +976,13 @@ export default {
                 }).catch((e) => {
                     console.log(e, 456)
                 })
-            })
+            });
+          }).catch(() => { });
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
             console.log(row.cbpg01, 8888);
-            this.$modal.confirm('是否要取消标记为"' + row.cbpg01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + row.cbpg07 + '"的数据项？').then(() => {
             PurchaseinboundShtt(row).then(response => {
                 console.log(this.form.cbpg01, 789);
                 this.getList();
@@ -988,6 +1001,7 @@ export default {
         },
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
+         this.$modal.confirm('是否要取消标记,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbpg01, 8888);
 
@@ -995,11 +1009,12 @@ export default {
                 req.PurchaseinboundShtt(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，取消标记成功");
+                    this.$modal.msgSuccess("取消标记成功");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
             })
+           }).catch(() => { });
         },
 
         /** 修改按钮操作 */
@@ -1156,7 +1171,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchasereturnorderRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
@@ -1188,7 +1203,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.cbpg01 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除,编号为"' + row.cbpg07 + '"的数据项？').then(function () {
                 return PurchasereturnorderRemove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();

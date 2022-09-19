@@ -31,8 +31,8 @@ export function PurchaseinboundList(query) {
 // 详情
 export function PurchaseinboundLists(CBPC01) {
   return request({
-    url: '/system/SalesScheduledOrders/saleOrderListdetail?cbpc01='+ CBPC01,
-    method: 'get'
+    url: '/system/SalesScheduledOrders/saleOrderListdetail?id='+ CBPC01,
+    method: 'post'
   })
 }
 

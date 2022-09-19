@@ -23,7 +23,7 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
@@ -84,7 +84,7 @@
                 <span class="saomiaojluuuu">财务:</span>
             </div>
          <div class="saomiaojlu">扫描记录</div>
-             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
+             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userList"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>

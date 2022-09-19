@@ -889,7 +889,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbsa08);
+            this.idss = selection.map(item => item.orderNo);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -914,7 +914,7 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批,供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + row.orderNo + '"的数据项？').then(() => {
             console.log(row.cbpc01,8888);
 
             PurchaseinboundSH(row).then(response => {
@@ -928,7 +928,7 @@ export default {
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
-            this.$modal.confirm('是否要审批,供应商为"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -945,7 +945,7 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审,供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + row.orderNo + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShs(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
@@ -959,7 +959,7 @@ export default {
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
-            this.$modal.confirm('是否要反审,供应商为"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -978,7 +978,7 @@ export default {
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
-            this.$modal.confirm('是否要标记完成,供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成,编号为"' + row.orderNo + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShss(row).then(response => {
                 console.log(this.form.cbpc01, 789)
@@ -992,7 +992,7 @@ export default {
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
-            this.$modal.confirm('是否要标记完成,供应商为"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
@@ -1020,7 +1020,7 @@ export default {
             // });
 
             // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记,供应商为"' + row.cbsa08 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + row.orderNo + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
@@ -1031,7 +1031,7 @@ export default {
         },
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
-            this.$modal.confirm('是否要取消标记,供应商为"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1049,7 +1049,7 @@ export default {
 
         /** 修改按钮操作 */
         handleUpdate() {
-            if (this.form.name != undefined) {
+           
                 let row = {}
                 row.orderNo = this.form.orderNo;
                 row.salerId = this.form.cbpc16;
@@ -1065,10 +1065,6 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
-
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
 
         },
 
@@ -1154,7 +1150,7 @@ export default {
                 // console.log(this.form2.ifEnabled, 123456);
             });
                 } else {
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
 
@@ -1245,7 +1241,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除,供应商为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+            this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
                         // console.log(res, 123)
@@ -1277,7 +1273,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除,供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();
@@ -1307,7 +1303,7 @@ export default {
 
         /** 导入按钮操作 */
         handleImport() {
-            this.upload.title = "商品分类";
+            this.upload.title = "销售预订单变更单";
             this.upload.open = true;
         },
         /** 下载模板操作 */

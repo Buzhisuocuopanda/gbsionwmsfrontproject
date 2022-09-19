@@ -65,14 +65,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
+                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo" 
                         sortable />
                     <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable  width="300"/>
+                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable  width="200"/>
                     <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable />
-                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="300px;" sortable>
+                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="200;" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
                             "CNY" : "未确定状态"
@@ -1189,11 +1189,11 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
-            const cbpc01 = row.cbpc01;
-            console.log(row.cbpc01);
+            const cbpc01 = row.id;
+            console.log(row.id);
             
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-auth/role/" + cbpc01);
+            this.$router.push("/system/user-authxiaoshouyudingdang/role/" + cbpc01);
         },
         /** 创建操作 */
         handleChuangJiangone: function (row) {
