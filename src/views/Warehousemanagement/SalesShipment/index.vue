@@ -78,7 +78,7 @@
                     <el-table-column label="客户等级" align="left" key="cbca28" prop="cbca28" width="160px;" sortable />
                     <el-table-column label="联系人" align="left" key="cbsb18" prop="cbsb18" width="160px;" sortable />
                     <el-table-column label="电话" align="left" key="cbsb19" prop="cbsb19" width="160px;" sortable />
-                    <el-table-column label="销售人员" align="left" key="cbsb17" prop="cbsb17" width="160px;" sortable />
+                    <el-table-column label="销售人员" align="left" key="caua15" prop="caua15" width="160px;" sortable />
                     <el-table-column label="仓库" align="left" key="cala08" prop="cala08" width="160px;" sortable />
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="160px;" sortable />
                     <el-table-column label="收货地址" align="left" key="cbsb21" prop="cbsb21" width="490px;" sortable />

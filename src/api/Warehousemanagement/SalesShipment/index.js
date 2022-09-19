@@ -64,6 +64,34 @@ export function PurchaseinListxiangq(CBPC01) {
 }
 
 
+//销售出库单打印1
+export function PurchaseinListxiandayin(data) {
+  return request({
+    url: '/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId='+ data,
+    method: 'post',
+    data: data
+  })
+}
+
+//销售出库建议表打印1
+export function PurchaseinListchukujianyibiao(data) {
+  return request({
+    url: '/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId='+ data,
+    method: 'post',
+    data: data
+  })
+}
+
+//销售扫描记录表
+export function PurchaseinListsaomiaojilubiao(data) {
+  return request({
+    url: '/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId='+ data,
+    method: 'post',
+    data: data
+  })
+}
+
+
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({

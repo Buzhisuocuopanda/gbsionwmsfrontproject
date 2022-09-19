@@ -57,10 +57,10 @@
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作"  min-width="110px;">
+        <el-table-column label="操作"  min-width="60px;">
           <template slot-scope="scope" >
-            <el-button size="small" type="primary" @click="resetPush(scope.row)">修改</el-button>
-            <el-button size="small" type="primary" @click="resetPush(scope.row)">删除</el-button>
+            <el-button size="small" type="primary" @click="resetPush(scope.row)">详情</el-button>
+<!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">删除</el-button>-->
           </template>
 
         </el-table-column>
@@ -92,7 +92,7 @@ export default {
       userList: null,
       total: 0,
 
-      totalItems: 0,
+       totalItems: 0,
       orderNo: "",
       model: "",
       formData: {

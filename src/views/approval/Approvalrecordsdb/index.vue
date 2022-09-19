@@ -50,7 +50,7 @@
         <el-table-column fixed label="单据类型" align="center" prop="cabraa07" min-width="120px;"/>
         <el-table-column fixed label="单据编号" align="center" prop="cabraa14" min-width="120px;"/>
         <el-table-column  label="单据日期" align="center" prop="cabraa15" min-width="120px;"  :formatter="formatDate"/>
-<!--        <el-table-column  label="审核日期" align="center" prop="cabraa02" min-width="200px;" :formatter="formatDate"/>-->
+        <el-table-column  label="审核日期" align="center" prop="cabraa02" min-width="200px;" :formatter="formatDate"/>
         <el-table-column  label="摘要" align="left" prop="cabraa17" min-width="100px;"/>
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { Unfinisheddocuments } from "@/api/Approval";
+import { Approvalrecordsdb } from "@/api/Approval";
 
 export default {
   components: {},
@@ -263,7 +263,7 @@ export default {
         pageSize: this.listQuery.pageSize
       }
       // console.info(param)
-      Unfinisheddocuments(param).then(response => {
+      Approvalrecordsdb(param).then(response => {
         if (response.data != null && response.data.rows != null) {
           this.orderList = response.data.rows
           this.totalItems = response.data.total
@@ -281,7 +281,7 @@ export default {
     },
     getList() {
       this.loading = true;
-      Unfinisheddocuments(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      Approvalrecordsdb(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.userList = response.data.rows;
           this.total = response.data.total;
           // //供应商
