@@ -19,3 +19,14 @@ export function Unfinisheddocuments(query) {
     params: query
   })
 }
+
+
+// 查询未完单据
+
+export function Approvalrecordsdb(query) {
+  return request({
+    url: '/system/Approval/Approvalrecordsdb',
+    method: 'get',
+    params: query
+  })
+}
