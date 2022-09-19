@@ -1106,6 +1106,8 @@ export default {
             this.form.cbpc01 = row.cbpc01;
             //供应商
             this.form.cbsa08 = row.supplier;
+            this.form.supplierId  = row.supplierId;
+            this.form.custom = row.customerId;
             this.form.cbwa09 = row.cbwa09;
             this.form.cala08 = row.cala08;
             this.form.cbsa01 = row.cbsa01;
