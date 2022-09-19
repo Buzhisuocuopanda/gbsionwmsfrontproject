@@ -1,5 +1,43 @@
 import request from '@/utils/request'
 
+
+
+// 获取商品列表(不分页)
+export function getSwJsGoodsAllList(query) {
+  return request({
+    url: '/countQuery/SwJsGoodsAll',
+    method: 'get',
+    params:query,
+  })
+}
+
+// 获取仓库列表(不分页)
+export function getSwJsStoreSkuAllList(query) {
+  return request({
+    url: '/countQuery/SwJsStoreSkuAll',
+    method: 'get',
+    params:query,
+  })
+}
+
+// 获取品牌列表(不分页)
+export function getswJsAllList(query) {
+  return request({
+    url: '/countQuery/swJsAll',
+    method: 'get',
+    params:query,
+  })
+}
+// 获取库位列表(不分页)
+export function getSwJsStoreAllList(query) {
+  return request({
+    url: '/countQuery/SwJsStoreAll',
+    method: 'get',
+    params:query,
+  })
+}
+
+
 // 获取商品分类列表
 export function getGoodsList() {
     return request({
@@ -16,10 +54,50 @@ export function getBrandList(query) {
     })
   }
 
+
+
+
+
 // 获取库存汇总列表
 export function getInventorySummaryList(query) {
   return request({
     url: '/countQuery/Inventorysummaryquery',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取库存台账列表
+export function getInventorysmmaryquerysList(query) {
+  return request({
+    url: '/countQuery/Inventorysmmaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取库存明细列表
+export function getInventorysummaryquerysList(query) {
+  return request({
+    url: '/countQuery/Inventorysummaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取缺货登记列表
+export function getInvsentorsysummaryqueryList(query) {
+  return request({
+    url: '/countQuery/Invsentorsysummaryquery',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取生产总订单查询列表
+export function getInvsensstorsysummaryqueryList(query) {
+  return request({
+    url: '/countQuery/Invsensstorsysummaryquery',
     method: 'get',
     params: query
   })
@@ -52,14 +130,6 @@ export function getInventorysmsmaryList(query) {
   })
 }
 
-// 获取库存明细列表
-export function getInventorysummaryquerysList(query) {
-  return request({
-    url: '/countQuery/Inventorysummaryquerys',
-    method: 'get',
-    params: query
-  })
-}
 
 
 

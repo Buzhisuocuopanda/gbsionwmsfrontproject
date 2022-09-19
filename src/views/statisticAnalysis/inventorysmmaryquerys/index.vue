@@ -3,15 +3,16 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
-        <el-form-item label="单据类型/仓库"   class="item-r" >
-          <el-input v-model="cbwa09" class="filter-item"  placeholder="单据类型/仓库" />
-        </el-form-item>
         <el-form-item  label="日期">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange"
+          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="width:400px;height: 32px;"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+                          range-separator="至" start-placeholder="单据日期起始" end-placeholder="单据日期截止" align="right">
           </el-date-picker>
         </el-form-item>
+        <el-form-item label="单据类型/仓库"   class="item-r" >
+          <el-input v-model="cbwa09" class="filter-item" style="width: 300px" placeholder="单据类型/仓库" />
+        </el-form-item>
+
         <!--<el-form-item label="品牌"   class="item-r" >
           <el-input v-model="cala08" class="filter-item"  placeholder="品牌" />
         </el-form-item>
@@ -27,19 +28,19 @@
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
         <el-table-column label="仓库" align="center" header-align="center" prop="cbwa09" min-width="80px;" />
-        <el-table-column  label="单据日期" align="center" prop="cbib04"  min-width="80px;"/>
+        <el-table-column  label="单据日期" align="center"  prop="cbib04" :formatter="formatTime2"  min-width="100px;"/>
         <el-table-column  label="单据类型" align="center" prop="cbib17" min-width="80px;"/>
         <el-table-column  label="单据编号" align="center" prop="cbib03" min-width="120px;"/>
         <el-table-column  label="摘要" align="center" prop="cbpb12" min-width="130px;"/>
         <el-table-column  label="往来单位" align="center" prop="cbib06" min-width="100px;"/>
         <el-table-column  label="商品" align="center" prop="cbpb08"  min-width="270px;"/>
-        <el-table-column  label="上次结存数量" align="center" prop="cbib09" min-width="100px;"/>
+        <el-table-column  label="上次结存数量" align="center" prop="cbib09" min-width="60px;"/>
         <el-table-column  label="上次结存成本金额" align="center" prop="cbib10" min-width="100px;"/>
-        <el-table-column  label="本次入库数量" align="center" prop="cbwa11" min-width="100px;"/>
+        <el-table-column  label="本次入库数量" align="center" prop="cbib11" min-width="60px;"/>
         <el-table-column  label="本次入库金额" align="center" prop="cbib12" min-width="100px;"/>
-        <el-table-column  label="本次出库数量" align="center" prop="cbib13" min-width="100px;"/>
+        <el-table-column  label="本次出库数量" align="center" prop="cbib13" min-width="60px;"/>
         <el-table-column  label="本次出库金额" align="center" prop="cbib14" min-width="100px;"/>
-        <el-table-column  label="本次结存数量" align="center" prop="cbib15" min-width="100px;"/>
+        <el-table-column  label="本次结存数量" align="center" prop="cbib15" min-width="60px;"/>
         <el-table-column  label="本次结存金额" align="center" prop="cbib16" min-width="100px;"/>
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
@@ -61,7 +62,8 @@
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getInventorysummaryqueryList } from "@/api/statisticAnalysis/index";
+import { formatDate2 } from '../../../utils';
+import { getInventorysmmaryquerysList } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
   name: "inventorysmmaryquerys",
@@ -234,6 +236,9 @@ export default {
         }
       }
     },
+    formatTime2(row){
+      return formatDate2(row.cbib04);
+    },
     /** 重置按钮操作 */
     resetQuery() {
       this.cbwa09 = "";
@@ -252,7 +257,7 @@ export default {
       this.queryParams.dateRange = this.dateRange;
       // this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;
-      getInventorysummaryqueryList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      getInventorysmmaryquerysList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows

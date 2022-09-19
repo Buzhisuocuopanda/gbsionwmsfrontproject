@@ -5,16 +5,29 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <el-input v-model="cbwa09" class="filter-item"  placeholder="仓库" />
+          <el-select style="width: 300px" v-model="cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
+            <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="库位"   class="item-r" >
-          <el-input v-model="cbla09" class="filter-item"  placeholder="库位" />
+          <el-select style="width: 300px" v-model="cblas" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getCblaList" :loading="loading3">
+            <el-option v-for="item in cblaList" :key="item.cbla09" :label="item.cbla09" :value="item.cbla09"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="商品"   class="item-r" >
-          <el-input v-model="cbpb01" class="filter-item"  placeholder="商品" />
+          <el-select v-model="queryParams.cbpb01" filterable remote reserve-keyword placeholder="请输入关键词"
+            :remote-method="getGoods"
+            :loading="loadingGood">
+            <el-option
+              v-for="item in goodList"
+              :key="item.cbpb01"
+              :label="item.cbpb08+item.cbwa12+item.cbpb15"
+              :value="item.cbpb01">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="商品SN"   class="item-r" >
-          <el-input v-model="cbig10" class="filter-item"  placeholder="商品SN" />
+          <el-input v-model="queryParams.cbig10" class="filter-item"  placeholder="商品SN" />
         </el-form-item>
 
         <el-form-item style="margin: -5px -10px 1px 1px">
@@ -58,30 +71,32 @@
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getInventorysummaryquerysList } from "@/api/statisticAnalysis/index";
+import { getInventorysummaryquerysList,getSwJsGoodsAllList,getSwJsStoreSkuAllList,getSwJsStoreAllList } from "@/api/statisticAnalysis/index";
 import { formatDate2 } from '../../../utils';
 export default {
   components: {},
   name: "inventorysummaryquerys",
   data() {
     return {
-      cbwa09: "",
-      cala09: "",
-      cbpb01:"",
-      cbig10:"",
-      formData: {
-        name: "",
-      },
       dateRange:[],
       tableData: [],
       loadingOut:false,
       loadingState:false,
       loading:false,
+      loading2:false,
+      loading3:false,
+      loadingGood:false,
       queryForm:{},
-      /*listQuery: {
-        pageNum: 1,
-        pageSize: 10
-      },*/
+      //商品下拉列表数据
+      goodList:[],
+      //下拉列表数据仓库
+      storeSkuList:[],
+      //下拉列表仓库多选 选中的数据
+      cbwa09s:[],
+      //下拉列表数据库位
+      cblaList:[],
+      //下拉列表库位多选 选中的数据
+      cblas:[],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -111,6 +126,8 @@ export default {
   computed: {},
   mounted() { // 自动触发写入的函数
     this.onSearch()
+    this.getStoreSkuList();
+    this.getCblaList();
   },
   methods: {
     formatTime2(row){
@@ -118,7 +135,7 @@ export default {
     },
     onSubmit() {},
     handleSelectionChange() {},
-    formatStateType(row) {
+    /*formatStateType(row) {
       if (row != null) {
         if (row.status == 0) {
           return "NO"
@@ -126,30 +143,24 @@ export default {
           return "OK"
         }
       }
-    },
+    },*/
     /** 重置按钮操作 */
     resetQuery() {
-      this.cbwa09 = "";
-      this.cala09 = "";
-      this.cbpb01 = "";
-      this.cbig10 = "";
+      this.queryParams.cbwa09 = "";
+      this.queryParams.cala09 = "";
+      this.queryParams.cbpb01 = "";
+      this.queryParams.cbig10 = "";
       this.queryParams.pageNum = 1;
-      this.resetForm("queryParams");
       this.onSearch();
     },
     /** 搜索按钮操作 */
     handleQuery() {
       // var neirong = $('#miaoshu').val();
 
-
       this.queryParams.pageNum = 1;
       this.onSearch();
     },
     onSearch() {
-      this.queryParams.cbwa09 = this.cbwa09;
-      this.queryParams.cala09 = this.cala08;
-      this.queryParams.cbpb01 = this.cbpb01;
-      this.queryParams.cbig10 = this.cbig10;
       this.loading = true;
       getInventorysummaryquerysList(this.queryParams).then(response => {
         this.loading = false;
@@ -162,7 +173,51 @@ export default {
         }
       })
     },
+    //获取下拉列表数据商品
+    getGoods(query){
+      if (query !== '') {
+        let param={cbpb08:query, cbpb15:query, cbpb12:query,};
+        this.loadingGood = true;
+        getSwJsGoodsAllList(param).then(response => {
+          this.loadingGood = false;
+          if (response.data != null) {
+            this.goodList = response.data;
+          } else {
+            this.goodList = [];
+          }
+        });
+      } else {
+        this.goodList = [];
+      }
+    },
+    //下拉列表数据仓库
+    getStoreSkuList(query){
+      let param={cbwa09:query};
+      this.loading2 = true;
+      getSwJsStoreSkuAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.storeSkuList = response.data;
+        } else {
+          this.storeSkuList = [];
+        }
+      });
+    },
+    //下拉列表数据库位
+    getCblaList(query){
+      let param={cbla09:query};
+      this.loading3 = true;
+      getSwJsStoreAllList(param).then(response => {
+        this.loading3 = false;
+        if (response.data != null) {
+          this.cblaList = response.data;
+        } else {
+          this.cblaList = [];
+        }
+      });
+    },
   },
+
 };
 </script>
 
