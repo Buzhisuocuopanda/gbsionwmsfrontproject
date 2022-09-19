@@ -74,7 +74,7 @@ export function QualityinfShs(data) {
 //质检单标记完成
 export function PurchaseinboundShss(data) {
   return request({
-    url: '/system/Qualityin/SwJsPurchaseinboundshss',
+    url: '/system/Qualityin/SwJsPurchaseinboundbjwc',
     method: 'post',
     data: data
   })
@@ -83,7 +83,7 @@ export function PurchaseinboundShss(data) {
 //质检单取消完成
 export function Purchaseinbounds(data) {
   return request({
-    url: '/system/Qualityin/SwJsPurchaseinbounds',
+    url: '/system/Qualityin/SwJsPurchaseinboundbqxwc',
     method: 'post',
     data: data
   })

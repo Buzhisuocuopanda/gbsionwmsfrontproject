@@ -180,14 +180,15 @@
              </el-table>
           </div>
              <div style="height:50px;"></div>
-              <el-button style="margin-left:5%;" type="primary" @click="xiaoschukudandayin">销售出库单打印</el-button>
-             <el-button style="margin-left:5%;" type="primary" @click="xiaoschukujianyibiao">出库建议表打印</el-button>
-             <el-button style="margin-left:5%;" type="primary" @click="xiaoschukusaomiaojlubiao">扫描记录表打印</el-button>
+             <el-button style="margin-left:5%;" type="primary" @click="handleExport">导出</el-button>
+             <el-button style="margin-left:3%;" type="primary" @click="xiaoschukudandayin">销售出库单打印</el-button>
+             <el-button style="margin-left:3%;" type="primary" @click="xiaoschukujianyibiao">出库建议表打印</el-button>
+             <el-button style="margin-left:3%;" type="primary" @click="xiaoschukusaomiaojlubiao">扫描记录表打印</el-button>
             <div style="height:50px;"></div>
         </div>
 </template>
 <script>
-import { PurchaseinboundLists,PurchaseinListxiandayin,PurchaseinListchukujianyibiao,PurchaseinListsaomiaojilubiao } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists } from "@/api/Warehousemanagement/SalesShipment";
 export default {
 
     data() {
@@ -280,7 +281,7 @@ export default {
 
             const userId = this.$route.params && this.$route.params.cbsb01;
             this.download('/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId='+userId, {
-            }, `销售出库单详情—_${new Date().getTime()}.pdf`)
+            }, `销售出库单详情— ${ new Date().toLocaleDateString() }.pdf`)
 
         },
 
@@ -291,7 +292,7 @@ export default {
 
             const userId = this.$route.params && this.$route.params.cbsb01;
             this.download('/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId='+userId, {
-            }, `销售出库建议表—_${new Date().getTime()}.pdf`)
+            }, `销售出库建议表— ${ new Date().toLocaleDateString() }.pdf`)
 
         },
          /** 导入按钮操作 */
@@ -304,7 +305,15 @@ export default {
         xiaoschukusaomiaojlubiao() {
              const userId = this.$route.params && this.$route.params.cbsb01;
             this.download('/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId='+userId, {
-            }, `扫描记录表—_${new Date().getTime()}.pdf`)
+            }, `扫描记录表—_${ new Date().toLocaleDateString() }.pdf`)
+        },
+
+           /** 导出按钮操作 */
+        handleExport() {
+            const userId = this.$route.params && this.$route.params.cbsb01;
+            this.download('/system/Selloutofwarehouse/saleoutOrderdetailsexport?orderId='+ userId, {
+                ...this.queryParams
+            }, `user_${new Date().toLocaleDateString()}.xlsx`)
         },
 
         //时间的转换

@@ -3,61 +3,11 @@
         <div class="Purchase_caigou">质检单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbpk07 }}</span>
-            <!-- <span class="Purchase_riqi">日期：{{ value.cbqa08.slice(0, 10) }}</span> -->
+            <span class="Purchase_riqi">日期：{{ value.cbqa08.slice(0, 10) }}</span>
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
-            <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">客户</template>{{
-                            value.cbsa08
-                    }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">仓库</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">销售人员</template>USD
-                </el-descriptions-item>
-            </el-descriptions>
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">联系人</template>{{ value.cbsa08 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">电话</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">客户等级</template>USD
-                </el-descriptions-item>
-            </el-descriptions>
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">结算货币</template>{{ value.cbsa08 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">收货人</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">关联订单/提货单</template>USD
-                </el-descriptions-item>
-            </el-descriptions>
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
-                <el-descriptions-item content-class-name="my-content" label-class-name="my-labell02">
-                    <template slot="label">收货电话</template>{{ value.cbsa08 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell02">
-                    <template slot="label">收货地址</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
-            </el-descriptions> -->
 
-            <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
-
-            <el-table border :header-cell-style="headClassACC" v-loading="loading" :data="userList" height="500"
+            <el-table border :header-cell-style="headClassACC" v-loading="loading" :data="userList" 
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cala08" key="cala08" label="品牌">
@@ -71,93 +21,11 @@
                 <el-table-column prop="cbqb09" key="cbqb09" label="替换商品SN">
                 </el-table-column>
             </el-table>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+            <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
                 class="pagintotal" />
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="品牌">
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="型号">
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" label-class-name="my-label"
-                    :contentStyle="{ 'text-align': 'center'}" label="描述">
-
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="数量"></el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="已扫数量">
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="单价"></el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="金额"></el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="备注"></el-descriptions-item>
-            </el-descriptions> -->
-            <!--100 -->
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border v-for="(value, key) in userList"
-                :key="key">
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">{{ value.cbpc07 }}
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">EA22VSNH3
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" label-class-name="my-label"
-                    :contentStyle="{ 'text-align': 'center'}" label="">
-                    J-45 Student J-45 Student J-45 Student
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">6</el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">18100000000
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">91.00</el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">546.00</el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">苏州市</el-descriptions-item>
-            </el-descriptions> -->
-
-            <!-- 横向 -->
-            <!-- <div style="margin-top:3%;">
-                <el-descriptions class="margin-top" title="" :column="2" border style="margin-top:3%;">
-                    <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                        :labelStyle="{ 'text-align': 'center' }">
-                        <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
-                            slot="label">本页数量小记</template>{{ totalCount }}
-                    </el-descriptions-item>
-                    <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                        :labelStyle="{ 'text-align': 'center' }">
-                        <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
-                            slot="label">本页金额小记</template>{{ parseFloat(totalPrice).toFixed(2) }}
-                    </el-descriptions-item>
-                </el-descriptions>
-            </div> -->
-            <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" :column="2" border>
-                <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                    :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">合计数量</template>{{ totalCount }}
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                    :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">合计金额</template>{{ parseFloat(totalPrice).toFixed(2) }}
-                </el-descriptions-item>
-            </el-descriptions> -->
-
-            <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" border>
-                <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
-                    :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
-                </el-descriptions-item>
-            </el-descriptions> -->
         </div>
+        <el-button @click="cancells">取 消</el-button>
 
     </div>
 
@@ -177,9 +45,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 999999,
                 page: 1,
-                size: 10,
+                size: 999999,
                 total: this.total,
                 name: undefined,
                 address: undefined,
