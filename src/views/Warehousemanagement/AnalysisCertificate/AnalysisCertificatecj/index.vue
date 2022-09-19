@@ -9,7 +9,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
-                    <el-form-item label="日期:" style="margin-left:20%;">
+                    <el-form-item label="日期:" prop="cbqa11" style="margin-left:20%;">
                         <el-date-picker type="date" placeholder="" v-model="form2.cbqa11"  style="width: 70%;">
                         </el-date-picker>
                     </el-form-item>
@@ -87,7 +87,7 @@
               <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float:left; margin-left:5%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
@@ -174,9 +174,10 @@
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button type="primary" @click="handlefanhui">取消</el-button>
       <!-- </span> -->
     </div>
+    <div style="height:100px;"></div>
   </div>
 </template>
 
@@ -419,10 +420,10 @@ export default {
                 cbpc100: [
                     { required: true, message: "仓库不能为空!", trigger: "blur" }
                 ],
-                cbpc16: [
-                    { required: true, message: "结算货币不能为空!", trigger: "blur" }
+                cbqa11: [
+                    { type: 'date', required: true, message: '日期不能为空!', trigger: 'change' }
                 ],
-                cbpc07: [
+                cbqa07: [
                     { required: true, message: "编号不能为空!", trigger: "blur" }
                 ]
             },
@@ -455,6 +456,12 @@ export default {
 
     },
     methods: {
+
+         //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-zjdfh/role/");
+        },
 
         //单元格合并
          // 合并单元格

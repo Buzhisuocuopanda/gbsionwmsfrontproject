@@ -189,14 +189,14 @@ export default {
         //父子页面传值
         getParams() {
             let routerParams = this.$route.query;
-            this.cbpc01 = routerParams.data;
-            console.log(this.cbpc01, 852369);
+            this.cbse01 = routerParams.data;
+            console.log(this.cbse01, 852369);
         },
 
         //详情列表
         getList() {
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbpg01;
+            const userId = this.$route.params && this.$route.params.cbse01;
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {

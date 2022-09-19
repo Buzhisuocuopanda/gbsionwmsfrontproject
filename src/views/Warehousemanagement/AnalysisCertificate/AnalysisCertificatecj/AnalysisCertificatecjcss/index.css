@@ -132,7 +132,9 @@
 }
 
 .tinajia_dingwei {
-    position: absolute;
+    /* position: absolute;
     top: 90%;
-    left: 80%;
+    left: 80%; */
+    margin-left: 10%;
+    margin-top: 2%;
 }

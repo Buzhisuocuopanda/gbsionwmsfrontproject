@@ -595,6 +595,12 @@
     methods: {
 
 
+       //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-zjdfh/role/");
+        },
+
        chen(item) {
             if(item.cbpd09>0&&item.cbpd11>0){
                 this.$set(item,'cbpd12',(parseFloat(item.cbpd09)*parseFloat(item.cbpd11)))

@@ -3,7 +3,7 @@
         <div class="Purchase_caigou">质检单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbpk07 }}</span>
-            <span class="Purchase_riqi">日期：{{ value.cbqa08.slice(0, 10) }}</span>
+            <!-- <span class="Purchase_riqi">日期：{{ value.cbqa08.slice(0, 10) }}</span> -->
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
 
@@ -25,8 +25,8 @@
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
                 class="pagintotal" />
         </div>
-        <el-button @click="cancells">取 消</el-button>
-
+        
+        <el-button type="primary" style="margin-left:10%;margin-top:4%;" @click="handlefanhui">返回</el-button>
     </div>
 
 </template>
@@ -65,6 +65,12 @@ export default {
 
     },
     methods: {
+
+         //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-zjdfh/role/");
+        },
         //列表表头设置
         headClassACC() {
             return {

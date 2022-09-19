@@ -21,9 +21,9 @@ export function PurchasereturnordersAdds(data) {
 }
 
 // 详情
-export function PurchaseinboundList(cbpg01) {
+export function PurchaseinboundList(CBPC01) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsSkuBarcodelist?cbpg01='+ cbpg01,
+    url: '/system/Salesreturnorderss/SwJsSkuBarcodelistss?cbse01='+ CBPC01,
     method: 'get'
   })
 }
