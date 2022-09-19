@@ -110,7 +110,7 @@
         <!--修改-->
         <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
-                <span style="font-size:20px;">采购入库单</span>
+                <span style="font-size:20px;">库存明细初始化</span>
                 <hr />
             </div>
             <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
@@ -161,7 +161,7 @@
 
         <el-dialog :visible.sync="open1" append-to-body>
             <div style="margin-top:-30px;">
-                <span style="font-size:20px;">采购入库单</span>
+                <span style="font-size:20px;">库存明细初始化</span>
                 <hr />
             </div>
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
@@ -843,7 +843,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbie01);
+            this.idss = selection.map(item => item.cbie07);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -868,7 +868,7 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批为ID"' + row.cbie01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + row.cbie07 + '"的数据项？').then(() => {
                 console.log(row.cbpc01, 8888);
                 PurchaseinboundSH(row).then(response => {
                     // console.log(this.form.cbpc01, 789)
@@ -882,7 +882,7 @@ export default {
         //审批上面内容
         PurchaseinboundShenpi01(row) {
             console.log(row, 777777);
-            this.$modal.confirm('是否要审批为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要审批,编号为"' + this.idss + '"的数据项？').then(() => {
                 let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
                 // console.log(row.cbpc01, 8888);
 
@@ -899,7 +899,7 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审为ID"' + row.cbie01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编号为"' + row.cbie07 + '"的数据项？').then(() => {
                 // console.log(row.cbpc01, 8888);
 
                 PurchaseinboundShs(row).then(response => {
@@ -914,7 +914,7 @@ export default {
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
-            this.$modal.confirm('是否要反审为ID"' + this.idss + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要反审,编写为"' + this.idss + '"的数据项？').then(() => {
                 let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
                 // console.log(row.cbpc01, 8888);
 
@@ -962,19 +962,7 @@ export default {
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
-            // console.log(row.cbpc01, 8888);
-
-            // Purchaseinbounds(row).then(response => {
-            //     console.log(this.form.cbpc01, 789)
-            //     // this.submitShangpin();
-            //     this.getList();
-            //     // this.open = false;
-            //     this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
-
-            // });
-
-            // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记为ID"' + row.cbie01 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要取消标记,编号为"' + row.cbie07 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
@@ -985,6 +973,7 @@ export default {
         },
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
+          this.$modal.confirm('是否要取消标记,编号为"' + row.cbie07 + '"的数据项？').then(() => {   
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -996,12 +985,14 @@ export default {
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
-            })
+            });
+
+          }).catch(() => { });
         },
 
         /** 修改按钮操作 */
         handleUpdate() {
-            if (this.form.name != undefined) {
+           
                 let row = {}
                 row.cbpc07 = this.form.cbpc07;
                 row.cbsa08 = this.form.cbsa08;
@@ -1017,16 +1008,11 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
-
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
-
         },
 
         /** 详情按钮操作 */
         handlexiangqeng() {
-            if (this.form.name != undefined) {
+          
                 let row1 = {}
                 row.cbpc07 = this.form1.cbpc07;
                 row.cbsa08 = this.form1.cbsa08;
@@ -1042,11 +1028,6 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
-
-            } else {
-                this.$message.error('商品名称没有填呢');
-            }
-
         },
         /** 详情按钮操作**/
         handleSelect(row) {
