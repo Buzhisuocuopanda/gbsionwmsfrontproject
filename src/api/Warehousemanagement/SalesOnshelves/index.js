@@ -21,6 +21,7 @@ export function PurchaseinboundAdds(data) {
 
 // 查询列表
 export function PurchaseinboundList(query) {
+  console.log(query,'接口')
   return request({
     url: '/system/Sellinglistings/SwJsSkuBarcodelist',
     method: 'get',

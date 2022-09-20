@@ -1492,8 +1492,8 @@ export default {
             // row.description = this.form.description;
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
-            // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.id + '"的数据项？').then(function () {
+            console.log(row, 2222);
+            this.$modal.confirm('是否确认删除编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row.id));
             }).then((response) => {
                 this.submitShangpin();

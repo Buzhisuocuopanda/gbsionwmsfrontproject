@@ -1106,7 +1106,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.cbic01 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除类型为"' + row.cala08 + '"的数据项？').then(function () {
                 return PurchaseInboundremove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();
