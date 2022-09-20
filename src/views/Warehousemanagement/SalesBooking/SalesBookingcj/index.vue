@@ -51,13 +51,18 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="margin-left:-2%;" :span="6">
-          <el-form-item label="销售人员:" prop="salerId">
-            <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
+        <el-col style="margin-left:-2%;" :span="6">     
+            <!-- <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
-            </el-select>
-          </el-form-item>
+            </el-select> -->
+             <el-form-item label="销售人员:" prop="salerId">
+            <el-popover placement="bottom-start" trigger="click" clearable>
+                <salerman ref="salerman" @selected="selected011699" style="width:220px!important;" />
+                  <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly style="width:85%;">
+                  </el-input>
+                </el-popover>
+            </el-form-item>
           <!-- <el-form-item label="结算货币:" prop="cbpc166">
                   <el-popover placement="bottom-start" trigger="click">
                       <ListLists ref="ListLists" @selected="selected004" />
@@ -83,6 +88,11 @@
          <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
           <el-form-item label="客户id:" prop="customerId">
             <el-input v-model="form2.customerId" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
+          </el-form-item>
+        </el-col>
+         <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+          <el-form-item label="销售人员id:" prop="salerId">
+            <el-input v-model="form2.salerId" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
           </el-form-item>
         </el-col>
         <!-- 商品信息维护 -->
@@ -191,6 +201,9 @@
     //客户
   import CustomerMainten from "@/components/CustomerMaintenance";
 
+    //销售人员
+import salerman from "@/components/salerman";
+
   export default {
     name: "store",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
@@ -207,7 +220,8 @@
       supplierMaintenance,
       ListLists,
       Goodsone01,
-      CustomerMainten
+      CustomerMainten,
+      salerman
     },
     data() {
       return {
@@ -495,7 +509,8 @@
           salerId:"",
           supplierId:"",
           whId:"",
-          orderDate:""
+          orderDate:"",
+          cbsb177:""
         },
         defaultProps: {
           children: "children",
@@ -606,6 +621,15 @@
     methods: {
 
 
+       //添加模块-销售人员
+        selected011699(name) {
+            console.log(name, 123)
+            console.log(name.substring(name.indexOf("~") + 1), 963);
+            this.form2.cbsb177 = name.substring(0, name.indexOf("~"))
+            this.form2.salerId = name.substring(name.indexOf("~") + 1)
+            // this.form2.icon = name;
+        }, 
+
        chen(item) {
             if(item.cbpd09>0&&item.cbpd11>0){
                 this.$set(item,'cbpd12',(parseFloat(item.cbpd09)*parseFloat(item.cbpd11)))
@@ -687,7 +711,8 @@
                     cbpd11: "",
                     cbpd12: "",
                     orderDate:"",
-                    cbpc0999:""
+                    cbpc0999:"",
+                    cbsb177:""
                   }
                 }
                 if (count-- === 1) {

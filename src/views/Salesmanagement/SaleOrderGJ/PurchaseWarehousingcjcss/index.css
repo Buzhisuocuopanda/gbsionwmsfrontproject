@@ -12,7 +12,6 @@
     margin-left: 46%;
     font-weight: 900;
     font-size: 20px;
-    margin-bottom: 1%;
 }
 
 
@@ -24,9 +23,9 @@
     margin-left: 85%;
 }
 
-.caozuoxiangqengs {
+/* .caozuoxiangqengs {
     border: 0 !important;
-}
+} */
 
 
 /*----------*/
@@ -98,12 +97,12 @@
 }
 
 .table-bodys {
-    width: 100%;
+    width: 95%;
     height: 300px;
     overflow-y: scroll;
 }
 
-.table-heads table,
+/* .table-heads table,
 .table-bodys table {
     width: 100%;
 }
@@ -112,19 +111,29 @@
 
 .todds {
     width: 80px !important;
-}
+} */
 
 
-.table-bodys {
+
+/* .table-bodys {
     width: 1629px;
     height: 360px;
     overflow: auto;
-}
-.shuzicaoyou {
-    text-align: right;
-    direction: rtl;
-}
+} */
 
+
+.table-style-zhongjiang{
+      
+     background-color:rgb(231, 227, 227);
+     position: absolute;
+     left:2%;
+}
 .tinajia_dingwei{
-    margin-top: 3%;
+    position: absolute;
+    top:90%;
+    left:80%;
+}
+.shuzicaoyou{
+    text-align: right;
+    direction: rtl;  
 }

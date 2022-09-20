@@ -1,22 +1,29 @@
 <template>
-
+<!--zgl-->
   <!--库存汇总查询-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <el-input v-model="cbwa09" class="filter-item"  placeholder="仓库" />
+          <!--<el-input v-model="queryParams.cbwa09" class="filter-item"  placeholder="请输入仓库" />-->
+          <el-select style="width: 300px" v-model="cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
+            <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item label="品牌"   class="item-r" >
-          <el-input v-model="cala08" class="filter-item"  placeholder="品牌" />
+
+          <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请选择">
+            <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
+          </el-select>
+          <!--<el-input v-model="queryParams.cala08" style="width: 300px" class="filter-item"  placeholder="请输入品牌" />-->
         </el-form-item>
+        <!-- multiple-->
         <el-form-item label="商品"   class="item-r" >
-          <el-input v-model="cbpb01" class="filter-item"  placeholder="商品" />
-          <!--<el-select v-model="status"  placeholder="商品" class="middle-input">
-            <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>-->
+          <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading3">
+            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
+          </el-select>
+
         </el-form-item>
 
         <el-form-item style="margin: -5px -10px 1px 1px">
@@ -59,23 +66,31 @@
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getGoodsList,getBrandList,getInventorySummaryList } from "@/api/statisticAnalysis/index";
+import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
   name: "inventorySummary",
   data() {
     return {
-      cbwa09: "",
-      cala08: "",
-      cbpb01:"",
       formData: {
         name: "",
       },
+      //下拉列表数据商品
+      goodList:[],
+      //下拉列表数据仓库
+      storeSkuList:[],
+      //下拉列表仓库多选 选中的数据
+      cbwa09s:[],
+      //下拉列表数据品牌
+      calaList:[],
       dateRange:[],
       tableData: [],
-      loadingOut:false,
-      loadingState:false,
+      /*loadingOut:false,
+      loadingState:false,*/
       loading:false,
+      loadingGood:false,
+      loading2:false,
+      loading3:false,
       queryForm:{},
       /*listQuery: {
         pageNum: 1,
@@ -85,7 +100,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        total: this.total,
+        // total: this.total,
         cbwa09: "",
         cala08: "",
         cbpb01: ""
@@ -108,12 +123,14 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
-    this.onSearch()
+    this.onSearch();
+    this.getStoreSkuList();
+    this.getCalaList();
   },
   methods: {
     onSubmit() {},
     handleSelectionChange() {},
-    formatStateType(row) {
+  /*  formatStateType(row) {
       if (row != null) {
         if (row.status == 0) {
           return "NO"
@@ -121,28 +138,23 @@ export default {
           return "OK"
         }
       }
-    },
+    },*/
     /** 重置按钮操作 */
     resetQuery() {
-      this.cbwa09 = "";
-      this.cala08 = "";
-      this.cbpb01 = "";
+      this.queryParams.cbwa09 = "";
+      this.queryParams.cala08 = "";
+      this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;
-      this.resetForm("queryParams");
+      this.goodList = [];
       this.onSearch();
     },
     /** 搜索按钮操作 */
     handleQuery() {
       // var neirong = $('#miaoshu').val();
-
-
       this.queryParams.pageNum = 1;
       this.onSearch();
     },
     onSearch() {
-      this.queryParams.cbwa09 = this.cbwa09;
-      this.queryParams.cala08 = this.cala08;
-      this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;
       getInventorySummaryList(this.queryParams).then(response => {
         this.loading = false;
@@ -155,6 +167,55 @@ export default {
         }
       })
     },
+    //获取下拉列表数据商品
+    getGoods(query){
+      if (query !== '') {
+        let param={cbpb08:query, cbpb15:query, cbpb12:query,};
+        this.loadingGood = true;
+        getSwJsGoodsAllList(param).then(response => {
+          this.loadingGood = false;
+          if (response.data != null) {
+            this.goodList = response.data;
+          } else {
+            this.goodList = [];
+          }
+        });
+      } else {
+        this.goodList = [];
+      }
+    },
+    //下拉列表数据仓库
+    getStoreSkuList(query){
+      let param={cbwa09:query};
+      this.loading3 = true;
+      getSwJsStoreSkuAllList(param).then(response => {
+        this.loading3 = false;
+        if (response.data != null) {
+          this.storeSkuList = response.data;
+        } else {
+          this.storeSkuList = [];
+        }
+      });
+      /*if (query !== '') {
+
+      } else {
+        this.storeSkuList = [];
+      }*/
+    },
+    //下拉列表数据品牌
+    getCalaList(){
+      let param={};
+      this.loading2 = true;
+      getswJsAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.calaList = response.data;
+        } else {
+          this.calaList = [];
+        }
+      });
+    },
+
   },
 };
 </script>

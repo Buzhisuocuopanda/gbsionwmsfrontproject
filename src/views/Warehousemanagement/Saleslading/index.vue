@@ -894,8 +894,9 @@ export default {
         },
 
         //销售订单
-           tong(){
+        tong(){
           this.open3 = true;
+          this.getList09()
         },
 
 

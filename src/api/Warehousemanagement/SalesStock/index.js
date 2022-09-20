@@ -42,11 +42,26 @@ export function SkuBarcodeLists(query) {
 export function SkuBarcodeListsxs(data) {
   return request({
     url: '/sale/saleOrderList',
-    method: 'post',
+    method: 'get',
     data: data
   })
 }
 
+// 销售提货单查询
+export function Purchaseinbounddingdancx(data) {
+  return request({
+    url: '/whmanagement/takeOrderList',
+    method: 'post',
+    data: data
+  })
+}
+// 提货订单详情查询
+export function Purchaseinxiaoshoudingdan(CBPC01) {
+  return request({
+    url: '/whmanagement/takeOrderDetail?id='+ CBPC01,
+    method: 'get'
+  })
+}
 // 详情
 // export function PurchaseinboundList(cbpg01) {
 //   return request({

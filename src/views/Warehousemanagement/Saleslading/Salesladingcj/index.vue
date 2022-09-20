@@ -369,7 +369,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchaseinboundAdds,PurchaseinboundAdd,PurchaseinListxiangq,Purchaseinxiaoshoudingdan } from "@/api/Warehousemanagement/Saleslading";
+import { PurchasereturnordersAdds,PurchaseinboundAdd,PurchaseinListxiangq,Purchaseinxiaoshoudingdan } from "@/api/Warehousemanagement/Saleslading";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -772,7 +772,7 @@ export default {
                     // if (valid) {
                         // 如果检查通过，则对count减1。
                         // 当count为1时，表示是最后一个表单，则存储数据
-                        PurchaseinboundAdds(JSON.stringify(this.tableData)).then(response => {
+                        PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(response => {
                              if(response.code=="200"){
                                 this.tableData=[]
                                 // this.form2= {
@@ -1100,7 +1100,7 @@ export default {
                 //仓库名称ID
                 this.form2.cbsb10  = response.data.whId;
                 //销售人员名称
-                this.form2.cbsb177 = response.data.saleUserName;
+                this.form2.cbsb177 = response.data.saleUser;
                 //销售人员ID
                 this.form2.cbsb17  = response.data.saleUserId;
                 //联系人
@@ -1114,13 +1114,13 @@ export default {
                 //结算货币名称id 
                 this.form2.cbsb16 = response.data.currency;
                 //收货人
-                this.form2.cbsb22 = response.data.receiver;
+                this.form2.cbsb22 = response.data.receiveName;
                 //收货电话
-                this.form2.cbsb29 = response.data.receivPhone;
+                this.form2.cbsb29 = response.data.receivePhone;
                 //收货地址
-                this.form2.cbsb28 = response.data.receiveAdress;
+                this.form2.cbsb28 = response.data.address;
                 //收货地址
-                this.form2.cbsb21 = response.data.receiveAdress;
+                this.form2.cbsb21 = response.data.address;
                 //客户订单
                 this.form2.cbsb30 = response.data.customerNo;
                 console.log(this.form2.cbsb09,85200000);

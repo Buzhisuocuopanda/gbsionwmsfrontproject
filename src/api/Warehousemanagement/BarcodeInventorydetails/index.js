@@ -40,7 +40,7 @@ export function PurchaseinboundLists(CBPC01) {
 // 库存明细初始化修改
 export function PurchaseinboundEdit(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundedit',
+    url: '/system/Warehousedetailsinitialize/SwJsPurchaseinboundedit',
     method: 'post',
     data: data
   })
@@ -64,25 +64,25 @@ export function PurchaseinboundSH(data) {
   })
 }
 
-//采购入库标记完成
+//库存明细初始化标记完成
 export function PurchaseinboundShss(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundshss',
+    url: '/system/Warehousedetailsinitialize/SwJsPurchaseinboundshss',
     method: 'post',
     data: data
   })
 }
 
-//采购入库取消完成
+//库存明细初始化取消完成
 export function Purchaseinbounds(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinbounds',
+    url: '/system/Warehousedetailsinitialize/SwJsPurchaseinbounds',
     method: 'post',
     data: data
   })
 }
 
-//采购入库单反审
+//库存明细初始化反审
 export function PurchaseinboundShs(data) {
   return request({
     url: '/system/Warehousedetailsinitialize/swJsStoreendds',
@@ -94,7 +94,7 @@ export function PurchaseinboundShs(data) {
 //导出采购入库单
 export function GoodSexport(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsGoodsexport',
+    url: '/system/Warehousedetailsinitialize/SwJsGoodsexport',
     method: 'post',
     data: data
   })
@@ -103,7 +103,7 @@ export function GoodSexport(data) {
 //导入采购入库单
 export function SwJsGoods(data) {
   return request({
-    url: '/system/Purchaseinbound/importSwJsGoods',
+    url: '/system/Warehousedetailsinitialize/importSwJsGoods',
     method: 'post',
     data: data
   })

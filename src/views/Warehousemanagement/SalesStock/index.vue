@@ -452,7 +452,7 @@
 </template>
 <script>
 // import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList } from "@/api/Warehousemanagement/PurchaseReturn";
-import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList,SkuBarcodeListsxs } from "@/api/Warehousemanagement/SalesStock";
+import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList,Purchaseinbounddingdancx } from "@/api/Warehousemanagement/SalesStock";
 import * as req from "@/api/Warehousemanagement/SalesStock";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -848,8 +848,9 @@ export default {
     },
     methods: {
           //销售订单添加
-          tong(){
+        tong(){
           this.open3 = true;
+          this.getList09()
         },
 
         //列表表头设置
@@ -909,9 +910,10 @@ export default {
         },
         
         /** 查询用户列表 */
+        // 查询提货订单列表
         getList09() {
             this.loading = true;
-            SkuBarcodeListsxs(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            Purchaseinbounddingdancx(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList01 = response.data.rows;
                 this.totall = response.data.total;
                 // //供应商
