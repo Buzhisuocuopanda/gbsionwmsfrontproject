@@ -2,9 +2,6 @@
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">销售预订单</div>
-
-      <!-- 编号:56221589223 -->
-
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="编号:" prop="orderNo">
@@ -144,9 +141,7 @@
 
           <el-table-column v-if="false" prop="purchaseOrderId" label="id" width="150">
             <template slot-scope="scope">
-             
                 <el-input v-model="scope.row.purchaseOrderId" placeholder="id" style=""></el-input>
-             
             </template>
           </el-table-column>
           <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
@@ -739,7 +734,7 @@ import salerman from "@/components/salerman";
 
       // 存储表单数据
       _ly_save() {
-        this.$message.success('添加成功')
+        // this.$message.success('添加成功')
         // 将数据传递给父组件。
         // 如果要将数据存储到后台，可在此处自行实现
         this.$emit('on-ok', this.tableData)
@@ -865,34 +860,6 @@ import salerman from "@/components/salerman";
         // row.cbpc08 = e.substring(e.indexOf(".") + 1)
         this.$set(row,"goodsId",e.substring(e.indexOf(".") +1),8523642)
         console.log(row,555)
-        // console.log(row.cbpc08,96325412);
-        // console.log(name, 111)
-        // console.log(index, 222)
-        // this.$set(this.tableData, "cbpc000", e)
-
-        // this.formArr[index].cbpc000=''
-        // this.formArr[index].cbpc000=e
-        // console.log(this.formArr)
-        // console.log(name.substring(name.indexOf("-") + 1), 963);
-        // this.form.cbpc000 = name.substring(0, name.indexOf("-"));
-        // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
-        // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-        // this.form.cbpc000 = name;
-        // this.form.cbpd08  =  name.substring(name.indexOf(".") +1);
-        // console.log(this.form2.cbpd08,852369421);
-
-          // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
-        //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
-          // this.form.cbpc000 = name;
-          // this.$set(this.tableData,"cbpc000",name);
-          // this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1));
-          // this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
-          // this.$forceUpdate()
-          // console.log(this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
-          // this.tableData.cbpc000 = "123";
-          // this.tableData.num = "23344";
-          // console.log(name,556623);
-          // console.log(this.tableData.cbpc000,20220905);
       },
 
       //添加行

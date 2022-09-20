@@ -10,6 +10,15 @@ export function PurchaseinboundAdd(data) {
   })
 }
 
+// 销售预订单新增配置
+export function PurchaseinboundAddydd(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/addSalesScheduledOrdersChange',
+    method: 'post',
+    data: data
+  })
+}
+
 // 明细新增配置
 export function PurchaseinboundAdds(data) {
   return request({
