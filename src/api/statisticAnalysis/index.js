@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 
 
-// 获取商品列表(不分页)
+// 获取商品下拉列表(不分页)
 export function getSwJsGoodsAllList(query) {
   return request({
     url: '/countQuery/SwJsGoodsAll',
@@ -10,8 +10,7 @@ export function getSwJsGoodsAllList(query) {
     params:query,
   })
 }
-
-// 获取仓库列表(不分页)
+// 获取仓库下拉列表(不分页)
 export function getSwJsStoreSkuAllList(query) {
   return request({
     url: '/countQuery/SwJsStoreSkuAll',
@@ -19,8 +18,7 @@ export function getSwJsStoreSkuAllList(query) {
     params:query,
   })
 }
-
-// 获取品牌列表(不分页)
+// 获取品牌下拉列表(不分页)
 export function getswJsAllList(query) {
   return request({
     url: '/countQuery/swJsAll',
@@ -28,7 +26,7 @@ export function getswJsAllList(query) {
     params:query,
   })
 }
-// 获取库位列表(不分页)
+// 获取库位下拉列表(不分页)
 export function getSwJsStoreAllList(query) {
   return request({
     url: '/countQuery/SwJsStoreAll',
@@ -36,16 +34,15 @@ export function getSwJsStoreAllList(query) {
     params:query,
   })
 }
-
-
-// 获取商品分类列表
-export function getGoodsList() {
+// 获取商品分类下拉列表
+export function getSwJsGoodsClassifyAllList(query) {
     return request({
-      url: '/system/classify/SwJsGoodsClassifytreeselect',
+      url: '/countQuery/SwJsGoodsClassifyAll',
       method: 'get',
+      params: query
     })
   }
-  // 获取品牌分类列表
+  // 获取品牌分类下拉列表
 export function getBrandList(query) {
     return request({
       url: 'countQuery/Invsentorsysummaryquery',
@@ -53,6 +50,26 @@ export function getBrandList(query) {
       params: query
     })
   }
+
+// 获取客户信息下拉列表
+export function getSwJsCustomerAllList(query) {
+  return request({
+    url: 'countQuery/SwJsCustomerAll',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取销售人员信息下拉列表
+export function getsalermanAllList(query) {
+  return request({
+    url: 'countQuery/salermanAll',
+    method: 'get',
+    params: query
+  })
+}
+
+
 
 
 
@@ -130,8 +147,14 @@ export function getInventorysmsmaryList(query) {
   })
 }
 
-
-
+// 获取商品占用列表
+export function getInventorysmssmaryquerysList(query) {
+  return request({
+    url: '/countQuery/Inventorysmssmaryquerys',
+    method: 'get',
+    params: query
+  })
+}
 
 // 获取财务综合报表列表
 export function getfnSynthesisList(query) {
