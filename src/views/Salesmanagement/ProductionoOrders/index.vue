@@ -48,18 +48,18 @@
         <el-table-column fixed label="优先级" align="center" prop="priority" min-width="120px;"/>
         <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="120px;"/>
         <el-table-column label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column label="描述" align="center" prop="description" min-width="200px;"/>
-        <el-table-column label="订单数量" align="left" prop="orderQty" min-width="100px;"/>
-        <el-table-column label="生产数量" align="left" prop="makeQty" min-width="100px;"/>
-        <el-table-column label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>
-        <el-table-column label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>
+        <el-table-column label="描述" align="center" prop="description" min-width="400px;"/>
+        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;"/>
         <el-table-column label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
         <el-table-column label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button size="small" type="primary" @click="showDetail(scope.row)">详情</el-button>
-            <el-button size="small" type="primary" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button size="small" type="primary" @click="delTotalOrder(scope.row)">删除</el-button>
+            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
           </template>
 
         </el-table-column>
@@ -96,18 +96,27 @@
 <!--              </el-input>-->
 <!--            </el-popover>-->
 
-            <template  style="width:200%;">
-              <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"
-                            style="width:630px!important;" />
-                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly
-                          style="width:100%;">
-                </el-input>
-              </el-popover>
-            </template>
+            <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+
+<!--            <template  style="width:200%;">-->
+<!--              <el-popover placement="bottom-start" trigger="click">-->
+<!--                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
+<!--                            style="width:630px!important;" />-->
+<!--                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly-->
+<!--                          style="width:100%;">-->
+<!--                </el-input>-->
+<!--              </el-popover>-->
+<!--            </template>-->
           </el-form-item>
           <el-form-item label="数量" prop="qty">
-            <el-input v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
+            <el-input  v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
             ></el-input>
           </el-form-item>
           <!--        <el-form-item >-->
@@ -141,19 +150,26 @@
             <!--                        style="width:205.6%;">-->
             <!--              </el-input>-->
             <!--            </el-popover>-->
-
-            <template  style="width:200%;">
-              <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"
-                            style="width:630px!important;" />
-                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly
-                          style="width:100%;">
-                </el-input>
-              </el-popover>
-            </template>
+            <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+<!--            <template  style="width:200%;">-->
+<!--              <el-popover placement="bottom-start" trigger="click">-->
+<!--                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
+<!--                            style="width:630px!important;" />-->
+<!--                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly-->
+<!--                          style="width:100%;">-->
+<!--                </el-input>-->
+<!--              </el-popover>-->
+<!--            </template>-->
           </el-form-item>
           <el-form-item label="数量" prop="qty">
-            <el-input v-model="formData.qty" style="width:50%"     oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"
+            <el-input  v-model="formData.qty" style="width:50%;text-align: right"     oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"
             ></el-input>
           </el-form-item>
           <!--        <el-form-item >-->
@@ -232,7 +248,10 @@
 <!--                  </template>-->
                 </el-form-item>
                 <el-form-item label="数量" >
-                  <el-input v-model="formData.qty" style="width:50%" readonly></el-input>
+<!--                  <el-input : v-model="formData.qty" style="width:50%;text-align: right" readonly></el-input>-->
+                  <span>
+                    {{parseFloat(formData.qty).toFixed(2)}}
+                  </span>
                 </el-form-item>
                 <!--        <el-form-item >-->
 <!--                <div class="el-dialog__footer" >-->
@@ -271,10 +290,34 @@
 </template>
 <script>
   // import x from ''
-  import { totalOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import {totalOrderDetail,swJsGoodslistBySelect, totalOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
+  import Vue from 'vue'
+  Vue.directive('loadmore', {
+    bind(el, binding) {
+
+      // 获取element-ui定义好的scroll盒子
+      const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+      SELECTWRAP_DOM.addEventListener('scroll', function() {
+
+        /*
+        * scrollHeight 获取元素内容高度(只读)
+        * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+        * clientHeight 读取元素的可见高度(只读)
+        * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+        * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+        */
+        const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+        if(CONDITION) {
+          binding.value();
+        }
+      });
+    }
+  })
   export default {
     components: {
       Goodsone01
@@ -298,6 +341,12 @@
             // { type: 'number', message: '数量必须为数字'}
           ],
         },
+        options:[],
+        listQuerySelect: {
+          pageNum: 1,
+          pageSize: 10
+        },
+        goodsMsg: '',
         listQuery: {
           pageNum: 1,
           pageSize: 10
@@ -311,7 +360,8 @@
         orderNo: '',
         model: '',
         status: '',
-        formData: {},
+        single: true,
+      formData: {},
         showDialog: false,
         showaddDialog: false,
         showmdfDialog: false,
@@ -351,6 +401,7 @@
     computed: {},
     mounted() { // 自动触发写入的函数
       this.onSearch()
+      this.initSelect()
     },
     methods: {
       onSubmit() {
@@ -408,8 +459,20 @@
         this.showaddDialog = true
       },
       showDetail(row) {
-        this.showDialog = true
-        this.formData=row
+        const  param={
+          id: row.id
+        }
+        totalOrderDetail(param).then(response => {
+          if (response.code == 200) {
+
+            this.showDialog = true
+            this.formData=response.data
+          } else {
+            this.$message.error(response.data.msg)
+
+          }
+        })
+
       },
       closeDetail() {
         this.showDialog = false
@@ -426,8 +489,20 @@
         this.formData={}
       },
       mdfDetail(row) {
-        this.formData=row
-        this.showmdfDialog = true
+        const  param={
+          id: row.id
+        }
+        totalOrderDetail(param).then(response => {
+          if (response.code == 200) {
+
+            this.showmdfDialog = true
+            this.formData=response.data
+          } else {
+            this.$message.error(response.data.msg)
+
+          }
+        })
+
 
       },
 
@@ -603,6 +678,102 @@
           }
         }
       },
+      goodsOnChange(val){
+        // console.log(this.formData.customer)
+        // console.log("val",val)
+        console.log("val",val)
+        this.formData.goodsId=val
+        // row.qty=0.5
+        //
+        // if(this.formData.customerId==null){
+        //   this.$message.error("请先选择客户")
+        //   return;
+        // }
+
+        //检查goodsid是否存在
+        // if(this.checkRepeat(this.tableData,row.goodsId)){
+        //   row.goodsId=null
+        //   row.normalPrice=0
+        //   row.canUseSku=0
+        //   this.$message.error("不能添加重复商品")
+        //
+        //   return
+        // }
+        // const param={
+        //   goodsId: row.goodsId,
+        //   customerId: this.formData.customerId,
+        //   orderClass: 2
+        // }
+        //
+        // //
+        // goodsPriceAndSku(param).then(response => {
+        //   if (response.code == "200") {
+        //     row.normalPrice=response.data.normalPrice
+        //     row.canUseSku=response.data.canUseSku
+        //
+        //   }else {
+        //     row.normalPrice=0.0
+        //     row.canUseSku=0.0
+        //
+        //     this.$message.error(response.msg)
+        //
+        //   }
+        // });
+
+      },
+      initSelect(){
+        const param={}
+
+        swJsGoodslistBySelect(param).then(response => {
+          if (response.code == "200") {
+            this.options=response.data.rows
+          }else {
+            this.$message.error(response.msg)
+          }
+        });
+      },
+
+      dataFilter(val){
+        this.listQuerySelect.pageNum=1
+        this.goodsMsg=val
+        const param={
+          goodsMsg: this.goodsMsg,
+          pageNum: this.listQuerySelect.pageNum,
+          pageSize: this.listQuerySelect.pageSize
+        }
+
+        swJsGoodslistBySelect(param).then(response => {
+          if (response.code == "200") {
+
+            this.listQuerySelect.pageNum=this.listQuerySelect.pageNum+1
+            this.options=response.data.rows
+          }else {
+            this.$message.error(response.msg)
+          }
+        });
+
+      },
+      loadMore() {
+//         console.log("滚动到底部了")
+// // 这里可以做你想做的任何事 到底执行
+//        this.options=this.options2
+        const param={
+          goodsMsg: this.formData.goods,
+          pageNum: this.listQuerySelect.pageNum,
+          pageSize: this.listQuerySelect.pageSize
+        }
+
+
+        swJsGoodslistBySelect(param).then(response => {
+          if (response.code == "200") {
+            this.listQuerySelect.pageNum=this.listQuerySelect.pageNum+1
+            // this.options.push.apply(this.options,response.data.rows)
+            this.options.push(...response.data.rows)
+          }else {
+            this.$message.error(response.msg)
+          }
+        });
+      },
       handleImport() {
         this.upload.title = "生产总订单";
         this.upload.open = true;
@@ -637,6 +808,10 @@
       },
 
 
+        rounding(row,column) {
+          return parseFloat(row[column.property]).toFixed(2)
+        },
+
       onSearch() {
         const param = {
           orderNo: this.orderNo,
@@ -660,7 +835,11 @@
   }
 </script>
 
+
 <style lang="scss">
+  .caozuoxiangqeng {
+    border: 0 !important;
+  }
   /*.el-dialog__footer {*/
   /*  padding: 15px;*/
   /*  padding-top: 10px;*/

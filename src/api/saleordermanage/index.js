@@ -97,11 +97,42 @@ export function mdfSaleOrder(data) {
   })
 }
 
+export function auditSaleOrder(data) {
+  return request({
+    url: '/sale/auditSaleOrder',
+    method: 'post',
+    data: data
+  })
+}
+
+export function auditFinSaleOrder(data) {
+  return request({
+    url: '/sale/auditFinSaleOrder',
+    method: 'post',
+    data: data
+  })
+}
+
+export function delSaleOrder(data) {
+  return request({
+    url: '/sale/delSaleOrder',
+    method: 'post',
+    data: data
+  })
+}
 
 
 export function saleOderDetail(data) {
   return request({
     url: '/sale/saleOderDetail',
+    method: 'get',
+    params: data
+  })
+}
+
+export function totalOrderDetail(data) {
+  return request({
+    url: '/sale/totalOrderDetail',
     method: 'get',
     params: data
   })

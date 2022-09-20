@@ -706,6 +706,24 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/saleOrderGJ',
+    component: Layout,
+    redirect: 'saleOrderGJ',
+    name: 'saleOrderGJ',
+    meta: {
+      title: '国际销售订单',
+      icon: 'component'
+    },
+    children: [
+      {
+        path: 'saleOrderGJ',
+        component: () => import('@/views/Salesmanagement/SaleOrderGJ/index'),
+        name: 'saleOrderGJ',
+        meta: { title: '国际销售订单', icon: 'component', noCache: true, affix: true }
+      },
+    ]
+  },
+  {
     path: '/saleOrderDetail',
     component: Layout,
     redirect: 'saleOrderDetail',
@@ -764,6 +782,28 @@ export const dynamicRoutes = [
         component: () => import('@/views/Salesmanagement/saleOrderDetail/mdfDetail/index'),
 
         meta: { title: '销售订单修改', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  // 销售修改订单详情
+  {
+    path: '/saleauditOrderDetail',
+    component: Layout,
+    redirect: 'saleauditOrderDetail',
+    name: 'saleauditOrderDetail',
+    query:{
+      id:'',
+      status: 0
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'saleauditOrderDetail',
+
+        name: 'saleauditOrderDetail',
+        component: () => import('@/views/Salesmanagement/saleOrderDetail/auditDetail/index'),
+
+        meta: { title: '销售订单审核', icon: 'component', noCache: true, affix: true }
       }
     ]
   },
