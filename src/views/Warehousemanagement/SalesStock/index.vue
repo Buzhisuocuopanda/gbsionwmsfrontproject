@@ -1273,15 +1273,19 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+            const cbse01 = row.cbse01;
             console.log(row)
+            this.$router.push("/system/user-authhhhhs/role/" + cbse01);
             // this.getList();
-            this.open = true;
-            console.log(row, 7788521);
-            this.form.cbpc01 = row.cbpc01;
-            this.form.cbpc07 = row.cbpc07;
-            // this.form.cbpc08 = row.cbpc08;
-            this.form.cbsa08 = row.cbsa08;
-            this.form.cbwa09 = row.cbwa09;
+            
+            // this.open = true;
+            // console.log(row, 7788521);
+            // this.form.cbpc01 = row.cbpc01;
+            // this.form.cbpc07 = row.cbpc07;
+            // // this.form.cbpc08 = row.cbpc08;
+            // this.form.cbsa08 = row.cbsa08;
+            // this.form.cbwa09 = row.cbwa09;
+
             // this.form.scanStatus = row.scanStatus;
             // this.form.skuName = row.skuName;
             // this.form.sn = row.sn;
@@ -1378,6 +1382,7 @@ export default {
 
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-authhhhh/role/" + cbse01);
+        
         },
         /** 创建操作 */
         handletuikuone: function (row) {
