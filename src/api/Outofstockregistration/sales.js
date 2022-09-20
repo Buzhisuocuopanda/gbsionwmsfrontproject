@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询售后列表
 export function listSales(query) {
   return request({
-    url: '/system/Aftersales/aftersaleslist',
+    url: '/system/Outofstockregistrationform/SwJsSkuBarcodelists',
     method: 'get',
     params: query
   })
@@ -38,7 +38,7 @@ export function updateSales(data) {
 // 删除售后
 export function delSales(data) {
   return request({
-    url: '/system/Aftersales/aftersalesdelete' ,
+    url: '/system/Outofstockregistrationform/SwJsPurchaseinboundremove' ,
     method: 'post',
     data: data
   })

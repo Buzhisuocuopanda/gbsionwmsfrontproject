@@ -1,5 +1,5 @@
 <template>
-
+<!--zgl-->
   <!--商品占用查询-->
   <div class="app-container">
     <div class="filter-container">
@@ -28,7 +28,7 @@
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
         <el-table-column fixed align="center" label="序号" type="index" width="50"/>
-        <el-table-column fixed label="销售订单号" align="center" prop="cboa25"  min-width="80px;"/>
+        <el-table-column fixed label="销售订单号" align="center" prop="cboa07"  min-width="80px;"/>
         <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="200px;"/>
         <el-table-column  label="客户订单号" align="center" prop="cboa25" min-width="200px;"/>
         <el-table-column  label="分类" align="center" prop="cbpa07" min-width="100px;"/>

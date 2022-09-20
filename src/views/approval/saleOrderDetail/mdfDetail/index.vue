@@ -575,16 +575,16 @@
         }],
         //发票类型
         invoiceoptions: [{
-          value: '增值税专用发票',
+          value: '1',
           label: '增值税专用发票'
         }, {
-          value: '增值税普通发票',
+          value: '2',
           label: '增值税普通发票'
         },{
-          value: '个人普通发票',
+          value: '3',
           label: '个人普通发票'
         },{
-          value: '不开发票',
+          value: '4',
           label: '不开发票'
         }],
 

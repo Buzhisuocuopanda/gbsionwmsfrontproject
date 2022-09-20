@@ -51,7 +51,7 @@
         <el-table-column fixed label="单据编号" align="center" prop="cabraa14" min-width="120px;"/>
         <el-table-column  label="单据日期" align="center" prop="cabraa15" min-width="120px;"  :formatter="formatDate"/>
 <!--        <el-table-column  label="审核日期" align="center" prop="cabraa02" min-width="200px;" :formatter="formatDate"/>-->
-        <el-table-column  label="摘要" align="left" prop="cabraa17" min-width="100px;"/>
+        <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="100px;"/>
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
@@ -60,7 +60,7 @@
         <el-table-column label="操作"  min-width="60px;">
           <template slot-scope="scope" >
 <!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">修改</el-button>-->
-            <el-button size="small" type="primary" @click="resetPush(scope.row)">详情</el-button>
+            <el-button size="small" type="primary" @click="showDetail(scope.row)">详情</el-button>
           </template>
 
         </el-table-column>
@@ -243,6 +243,10 @@ export default {
     this.getList();
     },
   methods: {
+    showDetail(row) {
+      this.$router.push({path: "/Salesmanagement/saleshowOrderDetail", query: {id: row.id}})
+
+    },
     onSubmit() {},
     handleSelectionChange() {},
     formatStateType(row) {

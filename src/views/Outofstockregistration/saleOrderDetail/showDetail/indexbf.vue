@@ -1,25 +1,32 @@
 <template>
   <div class="app-container">
-    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
+
+
+    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="" class="demo-ruleForm">
       <div class="chuangjiancaigous">销售订单</div>
 
       <!-- 编号:56221589223 -->
 
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
-          <el-form-item label="编号:" prop="orderNo">
-                        <el-input type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>
+          <el-form-item label="编号:" prop="orderNo" class="inputDeep">
+<!--                        <el-input class="inputDeep" type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>-->
+            <span>{{this.formData.orderNo}}</span>
           </el-form-item>
+
         </el-col>
         <el-col :span="8">
           <el-form-item label="客户单号:" prop="customerNo">
-            <el-input type="text" v-model="formData.customerNo" style="width: 70%;" />
+<!--            <el-input type="text" v-model="formData.customerNo" style="width: 70%;"  readonly/>-->
+            <span>{{this.formData.customerNo}}</span>
+
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:" prop="orderDate">
-            <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;">
-            </el-date-picker>
+<!--            <el-input type="text" v-model="formData.orderDate" style="width: 70%;"  readonly/>-->
+            <span>{{this.formData.customerNo}}</span>
+
           </el-form-item>
         </el-col>
       </el-row>
@@ -73,39 +80,48 @@
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerName">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable   clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
-              <el-option
-                v-for="item in customeroptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+<!--            <el-input type="text" v-model="formData.customerName" style="width: 70%;"  readonly/>-->
+            <span>{{this.formData.customerName}}</span>
+
+            <!--            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable   clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">-->
+<!--              <el-option-->
+<!--                v-for="item in customeroptions"-->
+<!--                :key="item.value"-->
+<!--                :label="item.label"-->
+<!--                :value="item.value">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
           </el-form-item>
 
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUser">
-            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
-              <el-option
-                v-for="item in saleUseroptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+<!--            <el-input type="text" v-model="formData.saleUser" style="width: 70%;"  readonly/>-->
+            <span>{{this.formData.saleUser}}</span>
+
+            <!--            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">-->
+<!--              <el-option-->
+<!--                v-for="item in saleUseroptions"-->
+<!--                :key="item.value"-->
+<!--                :label="item.label"-->
+<!--                :value="item.value">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="结算货币:" prop="currency">
-            <el-select  v-model="formData.currency"  clearable  placeholder="请选择" style="width: 70%;">
-              <el-option
-                v-for="item in currencyoptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+          <el-form-item label="结算货币:" prop="currencyMsg">
+<!--            <el-input type="text" v-model="formData.currency" style="width: 70%;"  readonly/>-->
+            <span>{{this.formData.currencyMsg}}</span>
+
+            <!--            <el-select  v-model="formData.currency"  clearable  placeholder="请选择" style="width: 70%;">-->
+<!--              <el-option-->
+<!--                v-for="item in currencyoptions"-->
+<!--                :key="item.value"-->
+<!--                :label="item.label"-->
+<!--                :value="item.value">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
           </el-form-item>
         </el-col>
       </el-row>
@@ -114,25 +130,31 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="收货人:" prop="receiveName">
-            <el-input type="text" v-model="formData.receiveName" style="width: 70%;" />
+<!--            <el-input type="text" v-model="formData.receiveName" style="width: 70%;" readonly />-->
+            <span>{{this.formData.receiveName}}</span>
+
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="电话:" prop="receivePhone">
-            <el-input type="text" v-model="formData.receivePhone" style="width: 70%;" />
+<!--            <el-input type="text" v-model="formData.receivePhone" style="width: 70%;" readonly/>-->
+            <span>{{this.formData.receivePhone}}</span>
+
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="发票类型:" prop="invoiceType">
+<!--            <el-input type="text" v-model="formData.invoiceType" style="width: 70%;"  readonly/>-->
+            <span>{{this.formData.invoiceType}}</span>
 
-            <el-select  v-model="formData.invoiceType"  clearable  placeholder="请选择" style="width: 70%;">
-              <el-option
-                v-for="item in invoiceoptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+            <!--            <el-select  v-model="formData.invoiceType"  clearable  placeholder="请选择" style="width: 70%;">-->
+<!--              <el-option-->
+<!--                v-for="item in invoiceoptions"-->
+<!--                :key="item.value"-->
+<!--                :label="item.label"-->
+<!--                :value="item.value">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
           </el-form-item>
         </el-col>
       </el-row>
@@ -141,18 +163,24 @@
 
         <el-col :span="8">
           <el-form-item label="订单类型:" prop="orderTypeMsg">
-            <el-input type="text" v-model="formData.orderTypeMsg" style="width: 70%;" disabled/>
+<!--            <el-input type="text" v-model="formData.orderTypeMsg" style="width: 70%;" readonly/>-->
+            <span>{{this.formData.orderTypeMsg}}</span>
+
           </el-form-item>
 
         </el-col>
         <el-col :span="8">
           <el-form-item label="工厂账号:" prop="fcNumber">
-            <el-input type="text" v-model="formData.fcNumber" style="width: 70%;" />
+<!--            <el-input type="text" v-model="formData.fcNumber" style="width: 70%;" readonly />-->
+            <span>{{this.formData.fcNumber}}</span>
+
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="订单分类:" prop="orderClassMsg">
-            <el-input type="text" v-model="formData.orderClassMsg" style="width: 70%;"  disabled/>
+<!--            <el-input type="text" v-model="formData.orderClassMsg" style="width: 70%;"  readonly/>-->
+            <span>{{this.formData.orderClassMsg}}</span>
+
           </el-form-item>
 
         </el-col>
@@ -160,13 +188,17 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="地址:" prop="address">
-            <el-input type="text" v-model="formData.address" style="width: 120%;" />
+<!--            <el-input type="text" v-model="formData.address" style="width: 120%;"  readonly/>-->
+            <span>{{this.formData.address}}</span>
+
           </el-form-item>
         </el-col>
 
         <el-col :span="8">
           <el-form-item label="备注:" prop="remark">
-            <el-input type="text" v-model="formData.remark" style="width: 120%;" />
+<!--            <el-input type="text" v-model="formData.remark" style="width: 120%;" readonly/>-->
+            <span>{{this.formData.remark}}</span>
+
           </el-form-item>
         </el-col>
       </el-row>
@@ -192,21 +224,24 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
+<!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
+<!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
+                <span>{{scope.row.goodsMsg}}</span>
+
+                <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
+<!--                  <el-option-->
+<!--                    v-for="item in options"-->
+<!--                    :key="item.value"-->
+<!--                    :label="item.label"-->
+<!--                    :value="item.value">-->
+<!--                  </el-option>-->
+<!--                </el-select>-->
               </sapn>
             </template>
           </el-table-column>
@@ -215,7 +250,9 @@
           <el-table-column prop="qty" label="数量" width="150" >
             <template slot-scope="scope">
               <sapn>
-                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+<!--                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>-->
+                <span>{{scope.row.qty}}</span>
+
                 <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
               </sapn>
             </template>
@@ -223,14 +260,18 @@
           <el-table-column prop="normalPrice" label="标准单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
+<!--                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>-->
+                <span>{{scope.row.normalPrice}}</span>
+
               </sapn>
             </template>
           </el-table-column>
           <el-table-column prop="currentPrice" label="本次单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+<!--                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>-->
+                <span>{{scope.row.currentPrice}}</span>
+
               </sapn>
             </template>
           </el-table-column>
@@ -238,32 +279,30 @@
           <el-table-column prop="totalPrice" label="金额" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>
+<!--                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>-->
+                <span>{{scope.row.totalPrice}}</span>
+
               </sapn>
             </template>
           </el-table-column>
 
-          <el-table-column prop="canUseSku" label="可用库存" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
+
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
+<!--                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注" readonly></el-input>-->
+                <span>{{scope.row.remark}}</span>
+
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" width="80">
-            <template slot-scope="scope">
-              <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-error" style="color: red;"></i>
-              </span>
-            </template>
-          </el-table-column>
+<!--          <el-table-column label="操作" align="center" width="80">-->
+<!--            <template slot-scope="scope">-->
+<!--              <span @click="_ly_delFrom(scope.row)">-->
+<!--                <i class="el-icon-error" style="color: red;"></i>-->
+<!--              </span>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
         </el-table>
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
@@ -335,11 +374,72 @@
         </div> -->
       </div>
     </el-form>
+
+    <el-descriptions :column="2" border >
+      <el-descriptions-item label="本页数量小计"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumQty}}</el-descriptions-item>
+      <el-descriptions-item label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>
+      <el-descriptions-item label="合计数量"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumQty}}</el-descriptions-item>
+      <el-descriptions-item label="合计金额"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>
+      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>
+    </el-descriptions>
+    <el-descriptions :column="3" border >
+      <el-descriptions-item label="制单"  labelStyle	="width: 20%;text-align:center">{{this.formData.makeUser}}</el-descriptions-item>
+      <el-descriptions-item label="审核"  labelStyle	="width: 20%;text-align:center">{{this.formData.auditUser}}</el-descriptions-item>
+      <el-descriptions-item label="仓库"  labelStyle	="width: 20%;text-align:center">{{this.formData.ck}}</el-descriptions-item>
+    </el-descriptions>
+    <div style="margin-top: 30px">
+      <el-row>
+<!--        <el-col :span="24">-->
+<!--          &lt;!&ndash;            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>&ndash;&gt;-->
+<!--        </el-col>-->
+      </el-row>
+      <el-table :data="auditData" border  style="width: 100%;margin-top: 10px; "  >
+
+        <el-table-column prop="auditUser" label=审批人 width="300%" style="text-align:center">
+          <template slot-scope="scope">
+            <sapn>
+<!--              <el-input v-model="scope.row.auditUser" placeholder="审批人" style="" readonly></el-input>-->
+              <span>{{scope.row.auditUser}}</span>
+
+            </sapn>
+          </template>
+        </el-table-column>
+        <el-table-column prop="description" label="审批详情" width="900%">
+          <template slot-scope="scope">
+            <sapn>
+<!--              <el-input v-model="scope.row.description" placeholder="审批详情" style=" "></el-input>-->
+              <span>{{scope.row.description}}</span>
+
+            </sapn>
+          </template>
+        </el-table-column>
+
+        <el-table-column prop="auditResult" label="审批结果" width="300%" >
+          <template slot-scope="scope">
+            <div>
+<!--              <el-input  class="inputDeep" v-model="scope.row.auditResult" placeholder="审批结果" style="" readonly></el-input>-->
+              <span>{{scope.row.auditResult}}</span>
+
+            </div>
+          </template>
+        </el-table-column>
+
+
+        <!--          <el-table-column label="操作" align="center" width="80">-->
+        <!--            <template slot-scope="scope">-->
+        <!--              <span @click="_ly_delFrom(scope.row)">-->
+        <!--                <i class="el-icon-error" style="color: red;"></i>-->
+        <!--              </span>-->
+        <!--            </template>-->
+        <!--          </el-table-column>-->
+      </el-table>
+
+    </div>
     <div class="tinajia_dingwei">
-      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-      <el-button type="primary" @click="handleAdd">保 存</el-button>
+       <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
+<!--      <el-button type="primary" @click="handleAdd">保 存</el-button>-->
       <el-button @click="cancel">取 消</el-button>
-      <!-- </span> -->
+       </span>
     </div>
   </div>
 </template>
@@ -414,6 +514,7 @@
     },
     data() {
       return {
+        infoform: {},
         dialogVisible: this.visible,
         formArr: [], // 表单结构数组
         goodsMsg: "",
@@ -575,16 +676,16 @@
         }],
         //发票类型
         invoiceoptions: [{
-          value: '增值税专用发票',
+          value: '1',
           label: '增值税专用发票'
         }, {
-          value: '增值税普通发票',
+          value: '2',
           label: '增值税普通发票'
         },{
-          value: '个人普通发票',
+          value: '3',
           label: '个人普通发票'
         },{
-          value: '不开发票',
+          value: '4',
           label: '不开发票'
         }],
 
@@ -785,6 +886,7 @@
         },
         //表格参数
         tableData: [],
+        auditData: [],
         dataId: 0,
         options: [],
         saleUseroptions: [],
@@ -1539,7 +1641,20 @@
             this.formData.invoiceType =response.data.invoiceType
             this.formData.address =response.data.address
             this.formData.fcNumber =response.data.fcNumber
-            this.formData.orderClassMsg =response.data.orderClassMsg
+            this.formData.sumQty =response.data.sumQty
+            this.formData.sumPrice =response.data.sumPrice
+            this.formData.CapPrice =response.data.CapPrice
+            this.formData.makeUser =response.data.makeUser
+            this.formData.auditUser =response.data.auditUser
+            this.formData.fpAdress =response.data.fpAdress
+            this.formData.taxpayerid =response.data.taxpayerid
+            this.formData.fpAdress =response.data.fpAdress
+            this.formData.fpPhone =response.data.fpPhone
+            this.formData.fpbank =response.data.fpbank
+            this.formData.fpNumber =response.data.fpNumber
+            this.formData.fpReceiveAddress =response.data.fpReceiveAddress
+            this.formData.other =response.data.other
+            this.auditData =response.data.audits
             // this.tableData.push(...response.data.goods)
             this.tableData=response.data.goods
             console.log('tableData',this.tableData)
@@ -1566,4 +1681,16 @@
   .normQtyclass {
     background-color: #00afff;
   }
+  .demo-ruleForm >>>.el-input__inner{
+    border: 0;
+  }
+
+  /*.inputDeep >>> .el-input__inner {*/
+  /*  -webkit-appearance: none;*/
+  /*  background-color: #FFF;*/
+  /*  background-image: none;*/
+  /*  border-radius: 4px;*/
+  /*  border: 0px;*/
+  /*width: 100%;*/
+  /*}*/
 </style>

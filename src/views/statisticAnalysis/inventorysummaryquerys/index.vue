@@ -205,7 +205,7 @@ export default {
     },
     //下拉列表数据库位
     getCblaList(query){
-      let param={cbla09:query};
+      let param={pageNum:1,pageSize:100, cbla09:query};
       this.loading3 = true;
       getSwJsStoreAllList(param).then(response => {
         this.loading3 = false;

@@ -10,7 +10,7 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="单据类型/仓库"   class="item-r" >
-          <el-input v-model="cbwa09" class="filter-item" style="width: 300px" placeholder="单据类型/仓库" />
+          <el-input v-model="queryParams.cbwa09" class="filter-item" style="width: 300px" placeholder="单据类型/仓库" />
         </el-form-item>
 
         <!--<el-form-item label="品牌"   class="item-r" >
@@ -23,7 +23,7 @@
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-         <!-- <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>-->
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
@@ -31,7 +31,7 @@
         <el-table-column  label="单据日期" align="center"  prop="cbib04" :formatter="formatTime2"  min-width="100px;"/>
         <el-table-column  label="单据类型" align="center" prop="cbib17" min-width="80px;"/>
         <el-table-column  label="单据编号" align="center" prop="cbib03" min-width="120px;"/>
-        <el-table-column  label="摘要" align="center" prop="cbpb12" min-width="130px;"/>
+        <el-table-column  label="摘要" align="center" prop="cbib17" min-width="130px;"/>
         <el-table-column  label="往来单位" align="center" prop="cbib06" min-width="100px;"/>
         <el-table-column  label="商品" align="center" prop="cbpb08"  min-width="270px;"/>
         <el-table-column  label="上次结存数量" align="center" prop="cbib09" min-width="60px;"/>
@@ -69,7 +69,6 @@ export default {
   name: "inventorysmmaryquerys",
   data() {
     return {
-      cbwa09: "",
 
       formData: {
         name: "",
@@ -91,7 +90,8 @@ export default {
         total: this.total,
         cbwa09: "",
         cbib17:"",
-        dateRange:undefined,
+        startTime:undefined,
+        endTime:undefined,
         // cala08: "",
         // cbpb01: ""
       },
@@ -241,9 +241,11 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.cbwa09 = "";
+      this.queryParams.cbib17 = "";
+      this.queryParams.cbwa09 = "";
       this.queryParams.pageNum = 1;
-      this.resetForm("queryParams");
+      this.dateRange = [];
+      // this.resetForm("queryParams");
       this.onSearch();
     },
     /** 搜索按钮操作 */
@@ -253,11 +255,18 @@ export default {
       this.onSearch();
     },
     onSearch() {
-      this.queryParams.cbwa09 = this.cbwa09;
-      this.queryParams.dateRange = this.dateRange;
+      if(this.dateRange.length>=2){
+        this.queryParams.startTime = this.dateRange[0];
+        this.queryParams.endTime = this.dateRange[1];
+      }else {
+        this.queryParams.startTime = undefined;
+        this.queryParams.endTime = undefined;
+      }
+
+
       // this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;
-      getInventorysmmaryquerysList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      getInventorysmmaryquerysList(this.queryParams).then(response => {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows

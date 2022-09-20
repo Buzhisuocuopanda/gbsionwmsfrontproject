@@ -243,6 +243,7 @@ export const dynamicRoutes = [
       }
     ]
   },
+  ,
   {
     path: '/system/user-authhhhhhhhhhh',
     component: Layout,
@@ -734,6 +735,24 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/saleOrderGJ',
+    component: Layout,
+    redirect: 'saleOrderGJ',
+    name: 'saleOrderGJ',
+    meta: {
+      title: '国际销售订单',
+      icon: 'component'
+    },
+    children: [
+      {
+        path: 'saleOrderGJ',
+        component: () => import('@/views/Salesmanagement/SaleOrderGJ/index'),
+        name: 'saleOrderGJ',
+        meta: { title: '国际销售订单', icon: 'component', noCache: true, affix: true }
+      },
+    ]
+  },
+  {
     path: '/saleOrderDetail',
     component: Layout,
     redirect: 'saleOrderDetail',
@@ -750,6 +769,27 @@ export const dynamicRoutes = [
         component: () => import('@/views/Salesmanagement/saleOrderDetail/index'),
 
         meta: { title: '国内销售订单创建', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  //售后单创建
+  {
+    path: '/aftersalesDetails',
+    component: Layout,
+    redirect: 'aftersalesDetails',
+    name: 'aftersalesDetails',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'aftersalesDetails',
+
+        name: 'aftersalesDetails',
+        component: () => import('@/views/aftersales/saleOrderDetail/index'),
+
+        meta: { title: '售后单创建', icon: 'component', noCache: true, affix: true }
       }
     ]
   },
@@ -792,6 +832,49 @@ export const dynamicRoutes = [
         component: () => import('@/views/Salesmanagement/saleOrderDetail/mdfDetail/index'),
 
         meta: { title: '销售订单修改', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+//修改售后
+  {
+    path: '/aftermdsalesDetails',
+    component: Layout,
+    redirect: 'aftermdsalesDetails',
+    name: 'aftermdsalesDetails',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'aftermdsalesDetails',
+
+        name: 'aftermdsalesDetails',
+        component: () => import('@/views/aftersales/saleOrderDetail/mdfDetail/index'),
+
+        meta: { title: '修改售后', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  // 销售修改订单详情
+  {
+    path: '/saleauditOrderDetail',
+    component: Layout,
+    redirect: 'saleauditOrderDetail',
+    name: 'saleauditOrderDetail',
+    query:{
+      id:'',
+      status: 0
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'saleauditOrderDetail',
+
+        name: 'saleauditOrderDetail',
+        component: () => import('@/views/Salesmanagement/saleOrderDetail/auditDetail/index'),
+
+        meta: { title: '销售订单审核', icon: 'component', noCache: true, affix: true }
       }
     ]
   },
