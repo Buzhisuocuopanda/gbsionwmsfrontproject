@@ -181,7 +181,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpg01(\\d+)',
+        path: 'role/:cbse01(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesStock/SalesStockxg/index'),
 
