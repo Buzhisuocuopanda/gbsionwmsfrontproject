@@ -19,7 +19,16 @@ export function StoreSkuList(query) {
   })
 }
 
-// 修改
+//查询列表01
+export function StoreSkuList01(query) {
+  return request({
+    url: '/system/sku/SwJsStorelist',
+    method: 'get',
+    params: query
+  })
+}
+
+// 修改  
 export function StoreSkuEdit(data) {
   return request({
     url: '/system/sku/SwJsStoreSkuedit',

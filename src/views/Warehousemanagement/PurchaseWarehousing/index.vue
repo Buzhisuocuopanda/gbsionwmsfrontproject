@@ -102,7 +102,8 @@
                                v-if="scope.row.cbpc11 == 0 | scope.row.cbpc11 == ' '"
                                 v-hasPermi="['system:user:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbpc11 == 4 | scope.row.cbpc11 == 1"  v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbpc11 == 4 | scope.row.cbpc11 == 1"  
+                                v-hasPermi="['system:user:listselect']">详情
                             </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"

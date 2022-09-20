@@ -1,97 +1,47 @@
 <template>
     <div>
+       <section ref="print" class="recordImg" id="printRecord">
         <div class="Purchase_caigou">采购入库单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
-            <span class="Purchase_riqi">日期：{{ value.cbpc08.slice(0, 10) }}</span>
+            <span class="Purchase_bianhao">编号：{{ value.orderNo }}</span>
+            <span class="Purchase_riqi">日期：{{ value.orderDate.slice(0, 10) }}</span>
         </div>
         <div style="width:98%; margin-left: 1%; margin-top: 1%;">
             <!-- 横向 -->
             <el-descriptions class="margin-top" title="" :column="3" border
                 v-for="(value, key) in userList.slice(0, 1)" :key="key">
                 <el-descriptions-item>
-                    <template slot="label">供料单位</template>{{ value.cbsa08 }}
+                    <template slot="label">供料单位</template>{{ value.supplier }}
                 </el-descriptions-item>
                 <el-descriptions-item>
-                    <template slot="label">仓库</template>{{ value.cbwa09 }}
+                    <template slot="label">仓库</template>{{ value.wh }}
                 </el-descriptions-item>
                 <el-descriptions-item>
-                    <template slot="label">结算货币</template>USD
+                    <template slot="label">销售人员</template>{{ value.saler }}
                 </el-descriptions-item>
             </el-descriptions>
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
                 </el-table-column>
                 <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="数量">
+                <el-table-column prop="qty" key="qty" align="right" label="数量">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="已扫数量">
-                </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" align="right" label="单价">
+                <el-table-column prop="price" key="price" align="right" label="单价">
                 </el-table-column>
                 <el-table-column prop="cbpd12" key="cbpd12" align="right" label="金额">
                 </el-table-column>
-                <el-table-column prop="cbpc17" key="cbpc17" label="备注">
+                <el-table-column prop="remark" key="remark" label="备注">
                 </el-table-column>
             </el-table>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+            <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
                 class="pagintotal" />
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="品牌">
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="型号">
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" label-class-name="my-label"
-                    :contentStyle="{ 'text-align': 'center'}" label="描述">
-
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="数量"></el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="已扫数量">
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="单价"></el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="金额"></el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="备注"></el-descriptions-item>
-            </el-descriptions> -->
-            <!--100 -->
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border v-for="(value, key) in userList"
-                :key="key">
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">{{ value.cbpc07 }}
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">EA22VSNH3
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" label-class-name="my-label"
-                    :contentStyle="{ 'text-align': 'center'}" label="">
-                    J-45 Student J-45 Student J-45 Student
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">6</el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">18100000000
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">91.00</el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">546.00</el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">苏州市</el-descriptions-item>
-            </el-descriptions> -->
-
             <!-- 横向 -->
             <div style="margin-top:3%;">
                 <el-descriptions class="margin-top" title="" :column="2" border style="margin-top:3%;">
@@ -125,12 +75,16 @@
                 </el-descriptions-item>
             </el-descriptions>
         </div>
-
+        </section>
+        <div style="height:20px;"></div>
+            <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+            <el-button type="primary" @click="handlefanhui">返回</el-button>
+        <div style="height:20px;"></div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { PurchaseinboundLists } from "@/api/Warehousemanagement/SalesBooking";
 export default {
     
     data() {
@@ -144,9 +98,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 10,
+                pageSize: 999999,
                 page: 1,
-                size: 10,
+                size: 999999,
                 total: this.total,
                 name: undefined,
                 address: undefined,
@@ -164,6 +118,17 @@ export default {
         
     },
     methods: {
+
+         //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-xiaosydd/role/");
+        },
+
+        //打印
+        PrintRow(index, row){
+            this.$print(this.$refs.print) 
+        },
         //列表表头设置
         headClass() {
             return {
@@ -190,7 +155,8 @@ export default {
         //详情列表
         getList(){
             this.loading = true;
-            const userId = this.$route.params &&  this.$route.params.cbpc01;
+            const userId = this.$route.params &&  this.$route.params.id;
+            console.log(userId,8000000);
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
@@ -242,3 +208,37 @@ export default {
 };
 </script>
 <style src="./SalesBookingcss/index.css"></style>
+<style>
+  
+@page {
+  size: auto;
+  margin: 3mm;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+  body {
+    border: solid 1px #ffffff;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+  #printRecord table {
+    table-layout: auto !important;
+  }
+
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printRecord #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+
+	
+</style>

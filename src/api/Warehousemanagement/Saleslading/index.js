@@ -4,7 +4,15 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/whmanagement/addTakeGoodsOrder',
+    url: '/system/Selloutofwarehouse/Selloutofwarehouseadd',
+    method: 'post',
+    data: data
+  })
+}
+// 新增明细配置
+export function PurchasereturnordersAdds(data) {
+  return request({
+    url: '/system/Salesreturnorderss/Selloutofwarehouseadds',
     method: 'post',
     data: data
   })
@@ -23,7 +31,7 @@ export function Purchaseinbounddingdancx(data) {
 export function Purchaseinbounddingdanxsdd(data) {
   return request({
     url: '/sale/saleOrderList',
-    method: 'post',
+    method: 'get',
     data: data
   })
 }

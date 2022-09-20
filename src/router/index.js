@@ -243,7 +243,6 @@ export const dynamicRoutes = [
       }
     ]
   },
-  ,
   {
     path: '/system/user-authhhhhhhhhhh',
     component: Layout,
@@ -257,7 +256,22 @@ export const dynamicRoutes = [
       }
     ]
   },
-//入库单添加
+  
+  {
+    path: '/system/user-authxiaoshouyudingdang',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesBooking/SalesBookingxq/index'),
+        meta: { title: '销售预订单详情', activeMenu: '/Warehousemanagement/SalesBooking' }
+      }
+    ]
+  },
+  //入库单添加
    {
     path: '/system/user-cj',
     component: Layout,
@@ -653,7 +667,21 @@ export const dynamicRoutes = [
       }
     ]
   },
-   //质检单返回
+   //销售预订单返回
+   {
+    path: '/system/user-xiaosydd',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesBooking/index'),
+        meta: { title: '销售预订单', activeMenu: '/Warehousemanagement/SalesBooking' }
+      }
+    ]
+  },
+  //质检单返回
    {
     path: '/system/user-zhijiandan',
     component: Layout,
