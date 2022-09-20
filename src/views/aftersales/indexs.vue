@@ -64,7 +64,7 @@
           icon="el-icon-edit"
           size="mini"
           :disabled="single"
-          @click="handleUpdate"
+          @click="mdfDetail(scope.row)"
           v-hasPermi="['system:sales:edit']"
         >修改</el-button>
       </el-col>
@@ -234,6 +234,14 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
+    },
+
+    mdfDetail(row) {
+      // this.formData=row
+      // this.showmdfDialog = true
+
+      this.$router.push({path: "/Salesmanagement/aftermdsalesDetails", query: {id: row.id}})
+
     },
     // 取消按钮
     cancel() {
