@@ -732,6 +732,8 @@
                     cbpd11: "",
                     cbpd12: ""
                   }
+                }else{
+                  this.$message({ message: res.msg, type: 'error' });
                 }
                 if (count-- === 1) {
                   this._ly_save()
@@ -1004,6 +1006,8 @@
                   console.log(item.cbie01,8523697412);
                 })
                 this._ly_ok()
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
               }
             });
           } else {

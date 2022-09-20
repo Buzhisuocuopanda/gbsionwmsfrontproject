@@ -19,6 +19,15 @@ export function PurchaseinboundAdds(data) {
   })
 }
 
+// 销售预订单新增配置
+export function PurchaseinboundAddydd(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/addSalesScheduledOrdersChange',
+    method: 'post',
+    data: data
+  })
+}
+
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
