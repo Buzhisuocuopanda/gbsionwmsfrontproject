@@ -1,15 +1,16 @@
 <template>
+  <!--zgl-->
   <!--销售订单明细-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
         <el-form-item label="客户" style="margin-left: 10px"  class="item-r" >
-          <el-select v-model="queryParams.cbca08"  style="width: 300px"  filterable placeholder="请选择" :loading="loading2">
+          <el-select v-model="queryParams.cbca08"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca08" :label="item.cbca08" :value="item.cbca08"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="销售人员" style="margin-left: 80px"   class="item-r" >
-          <el-select v-model="queryParams.caua17"  style="width: 300px"  filterable placeholder="请选择" :loading="loading3">
+          <el-select v-model="queryParams.caua17"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading3">
             <el-option v-for="item in cauaList" :key="item.caua17" :label="item.caua17" :value="item.caua17"></el-option>
           </el-select>
 

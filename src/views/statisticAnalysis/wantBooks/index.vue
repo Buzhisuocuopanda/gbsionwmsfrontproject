@@ -1,3 +1,4 @@
+<!-- zgl -->
 <!-- 缺货登记 -->
 <template>
   <div class="app-container">
@@ -21,7 +22,7 @@
       <el-form-item>
         <el-button type="primary" @click="handleQuery">查询</el-button>
         <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-        <el-button type="primary" @click="onSubmit">导出</el-button>
+        <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
       </el-form-item>
     </el-form>
     <!-- 表格 -->
@@ -122,6 +123,13 @@
             this.total = 0
           }
         })
+      },
+      //导出
+      exprotData(){
+        // this.loading=true;
+        this.download('/countQuery/InvsentorsysummaryqueryExcelList', {
+          ...this.queryParams
+        }, `缺货登记查询数据_${new Date().getTime()}.xlsx`)
       },
       //下拉列表数据商品分类
       getCbpaList(){

@@ -5,7 +5,6 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <!--<el-input v-model="queryParams.cbwa09" class="filter-item"  placeholder="请输入仓库" />-->
           <el-select style="width: 300px" v-model="cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
             <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
           </el-select>
