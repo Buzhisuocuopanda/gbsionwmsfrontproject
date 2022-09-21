@@ -88,7 +88,14 @@ export function PurchasereturnorderRemove(data) {
     data:data
   })
 }
-
+// 更新库存
+export function PurchasereturnorderRestKu(data) {
+  return request({
+    url: '/system/Salesreturnorderss/Selloutofwarehouseaddrgqr',
+    method: 'post',
+    data:data
+  })
+}
 // 审核
 export function Purchaseinboundsho(data) {
   return request({
