@@ -490,7 +490,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {orderChangeDetail,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1678,40 +1678,40 @@
       const param={
         orderId: this.$route.query.id
       }
-      saleOderDetail(param).then(response => {
+      orderChangeDetail(param).then(response => {
           if (response.code == "200") {
-            // this.formData=response.data
-            this.formData.id =response.data.id
-            this.formData.orderNo =response.data.orderNo
-            this.formData.customerNo =response.data.customerNo
-            this.formData.customerId =response.data.customerId
-            this.formData.customerName =response.data.customerName
-            this.formData.orderDate =response.data.orderDate
-            this.formData.saleUserId =response.data.saleUserId
-            this.formData.saleUser =response.data.saleUser
-            this.formData.currency =response.data.currency
-            this.formData.receiveName =response.data.receiveName
-            this.formData.receivePhone =response.data.receivePhone
-            this.formData.invoiceType =response.data.invoiceType
-            this.formData.address =response.data.address
-            this.formData.fcNumber =response.data.fcNumber
-            this.formData.sumQty =response.data.sumQty
-            this.formData.sumPrice =response.data.sumPrice
-            this.formData.CapPrice =response.data.CapPrice
-            this.formData.makeUser =response.data.makeUser
-            this.formData.auditUser =response.data.auditUser
-            this.formData.fpAdress =response.data.fpAdress
-            this.formData.taxpayerid =response.data.taxpayerid
-            this.formData.fpAdress =response.data.fpAdress
-            this.formData.fpPhone =response.data.fpPhone
-            this.formData.fpbank =response.data.fpbank
-            this.formData.fpNumber =response.data.fpNumber
-            this.formData.fpReceiveAddress =response.data.fpReceiveAddress
-            this.formData.other =response.data.other
+            this.formData=response.data
+            // this.formData.id =response.data.id
+            // this.formData.orderNo =response.data.orderNo
+            // this.formData.customerNo =response.data.customerNo
+            // this.formData.customerId =response.data.customerId
+            // this.formData.customerName =response.data.customerName
+            // this.formData.orderDate =response.data.orderDate
+            // this.formData.saleUserId =response.data.saleUserId
+            // this.formData.saleUser =response.data.saleUser
+            // this.formData.currency =response.data.currency
+            // this.formData.receiveName =response.data.receiveName
+            // this.formData.receivePhone =response.data.receivePhone
+            // this.formData.invoiceType =response.data.invoiceType
+            // this.formData.address =response.data.address
+            // this.formData.fcNumber =response.data.fcNumber
+            // this.formData.sumQty =response.data.sumQty
+            // this.formData.sumPrice =response.data.sumPrice
+            // this.formData.CapPrice =response.data.CapPrice
+            // this.formData.makeUser =response.data.makeUser
+            // this.formData.auditUser =response.data.auditUser
+            // this.formData.fpAdress =response.data.fpAdress
+            // this.formData.taxpayerid =response.data.taxpayerid
+            // this.formData.fpAdress =response.data.fpAdress
+            // this.formData.fpPhone =response.data.fpPhone
+            // this.formData.fpbank =response.data.fpbank
+            // this.formData.fpNumber =response.data.fpNumber
+            // this.formData.fpReceiveAddress =response.data.fpReceiveAddress
+            // this.formData.other =response.data.other
             this.auditData =response.data.audits
             // this.tableData.push(...response.data.goods)
             this.tableData=response.data.goods
-            console.log('tableData',this.tableData)
+            // console.log('tableData',this.tableData)
 
           }else {
             this.$message.error(response.msg)

@@ -27,9 +27,9 @@
           </el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-<!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">-->
-<!--            创建-->
-<!--          </el-button>-->
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
+            创建
+          </el-button>
 <!--          <el-upload-->
 <!--            ref="uploadExcel"-->
 <!--            :action="ExcelUploadUrl"-->
@@ -40,15 +40,9 @@
 <!--            style="display: inline">-->
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
-          <el-button type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
-
           <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
                      style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
-          <el-button type="primary" v-on:click="skuDistribution()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">库存分配
-          </el-button>
-
 
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
@@ -64,27 +58,25 @@
         <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
         <el-table-column label="地址" align="left" prop="address" min-width="300px;"/>
         <el-table-column label="电话" align="center" prop="phone" min-width="120px;"/>
-        <el-table-column label="订单类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
-        <el-table-column label="订单分类" align="center" prop="orderClassMsg" min-width="120px;"/>
+        <el-table-column label="订单类型" align="center" prop="orderClassMsg" min-width="120px;"/>
+        <el-table-column label="订单分类" align="center" prop="orderTypeMsg" min-width="120px;"/>
         <el-table-column label="工厂账号" align="center" prop="fcNumber" min-width="120px;"/>
         <el-table-column label="其他" align="center" prop="other" min-width="120px;"/>
         <el-table-column label="制单时间" align="center" prop="createTime" min-width="120px;"/>
-        <el-table-column  fixed="right"  label="确认库存状态" align="center" prop="confirmSkuStatusMsg" min-width="120px;"/>
         <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column fixed="right" label="操作" min-width="220px;">
+        <el-table-column fixed="right" label="操作" min-width="250px;">
           <template slot-scope="scope">
-            <el-button style="margin-left:8px; margin-top: 2px" size="mini" icon="el-icon-share" type="text" @click="showDetail(scope.row)">详情</el-button>
-<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>-->
-<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
-            <el-button style="margin-top: 2px" v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,3)">审核</el-button>
-<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==2" size="mini" type="primary" @click="auditDetail(scope.row,6)">反审</el-button>-->
-<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button style="margin-top: 2px" v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row)">确认库存</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" confirmSkuSaleOrder(scope.row,2)">取消库存</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)">删除</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete" plain size="mini"   type="text" @click="delSaleOrder(scope.row)">删除</el-button>
           </template>
 
         </el-table-column>
@@ -102,26 +94,173 @@
 
 
 
-      <!-- 用户导入对话框 -->
-      <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
-        <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
-                   :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
-                   :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip text-center" slot="tip">
-            <!--            <div class="el-upload__tip" slot="tip">-->
-            <!--              <el-checkbox v-model="upload.updateSupport" /> -->
-            <!--            </div>-->
-            <span>仅允许导入xls、xlsx格式文件。</span>
-            <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;"
-                     @click="importTemplate">下载模板</el-link>
+
+      <!--      创建-->
+      <el-dialog :visible.sync="showaddDialog" :close-on-click-modal="false" title="创建销售订单" width="55%"
+                 @close="closeAddDetail">
+
+        <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
+          <el-form-item label="优先级" prop="priority">
+            <el-input v-model="formData.priority" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"></el-input>
+          </el-form-item>
+          <el-form-item label="订单号" prop="orderNo">
+            <el-input v-model="formData.orderNo" style="width:50%">></el-input>
+          </el-form-item>
+          <el-form-item label="商品" prop="goods">
+            <!--            <el-popover placement="bottom-start" trigger="click">-->
+            <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
+            <!--                          style="width:370px!important;" />-->
+            <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
+            <!--                        style="width:205.6%;">-->
+            <!--              </el-input>-->
+            <!--            </el-popover>-->
+
+            <template  style="width:200%;">
+              <el-popover placement="bottom-start" trigger="click">
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"
+                            style="width:630px!important;" />
+                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly
+                          style="width:100%;">
+                </el-input>
+              </el-popover>
+            </template>
+          </el-form-item>
+          <el-form-item label="数量" prop="qty">
+            <el-input v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
+            ></el-input>
+          </el-form-item>
+          <!--        <el-form-item >-->
+          <div class="el-dialog__footer" >
+            <el-button size="medium" type="primary" @click="addTotalOrder()">保存</el-button>
           </div>
-        </el-upload>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="submitFileForm">确 定</el-button>
-          <el-button @click="upload.open = false">取 消</el-button>
-        </div>
+
+
+          <!--        </el-form-item>-->
+        </el-form>
+      </el-dialog>
+
+
+      <!--      修改生成订单-->
+      <el-dialog :visible.sync="showmdfDialog" :close-on-click-modal="false" title="修改生产订单" width="55%"
+                 @close="closeMdfDetail">
+
+        <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
+          <el-form-item label="优先级" prop="priority">
+            <el-input v-model="formData.priority" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="订单号" prop="orderNo">
+            <el-input v-model="formData.orderNo" style="width:50%"></el-input>
+          </el-form-item>
+          <el-form-item label="商品" prop="goods">
+            <!--            <el-popover placement="bottom-start" trigger="click">-->
+            <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
+            <!--                          style="width:370px!important;" />-->
+            <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
+            <!--                        style="width:205.6%;">-->
+            <!--              </el-input>-->
+            <!--            </el-popover>-->
+
+            <template  style="width:200%;">
+              <el-popover placement="bottom-start" trigger="click">
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"
+                            style="width:630px!important;" />
+                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly
+                          style="width:100%;">
+                </el-input>
+              </el-popover>
+            </template>
+          </el-form-item>
+          <el-form-item label="数量" prop="qty">
+            <el-input v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
+            ></el-input>
+          </el-form-item>
+          <!--        <el-form-item >-->
+          <div class="el-dialog__footer" >
+            <el-button size="medium" type="primary" @click="mdfTotalOrder()">保存</el-button>
+          </div>
+
+
+          <!--        </el-form-item>-->
+        </el-form>
+      </el-dialog>
+
+
+      <!--            详情-->
+      <el-dialog :visible.sync="showDialog" :close-on-click-modal="false" title="生产订单详情" width="55%" @close="closeDetail">
+        <!--        <el-form ref="infoform" :inline="true" label-width="11em" label-position = "right">-->
+        <!--          <div class="divv" >-->
+        <!--            <span>基本信息</span>-->
+        <!--            <div style="width: 100%;height: 1px;border-top: solid #dfdfdf 0.2em"/>-->
+        <!--            <div style="height: auto;width: 100%">-->
+
+        <!--              <table border="0" class="tableclss">-->
+        <!--                <tr><td>设备号:<span>{{ this.infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--              </table>-->
+        <!--            </div>-->
+        <!--          </div>-->
+
+        <!--        </el-form>-->
+
+        <!--        <el-descriptions class="margin-top" title="设备信息" :column="3"  border>-->
+        <!--          <el-descriptions-item label="手机号">18100000000</el-descriptions-item>-->
+
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+
+
+        <!--        </el-descriptions>-->
+
+        <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
+          <el-form-item label="优先级" >
+            <el-input v-model="formData.priority" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <el-form-item label="订单号" >
+            <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <el-form-item label="商品" >
+            <!--            <el-popover placement="bottom-start" trigger="click">-->
+            <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
+            <!--                          style="width:370px!important;" />-->
+            <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
+            <!--                        style="width:205.6%;">-->
+            <!--              </el-input>-->
+            <!--            </el-popover>-->
+
+            <el-input  v-model="formData.goods" placeholder=""
+                       style="width:70%;" readonly>
+            </el-input>
+            <!--                  <template  style="width:200%;">-->
+
+            <!--                    <el-popover placement="bottom-start" trigger="click">-->
+            <!--                      <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
+            <!--                                  style="width:630px!important;" />-->
+
+            <!--                    </el-popover>-->
+            <!--                  </template>-->
+          </el-form-item>
+          <el-form-item label="数量" >
+            <el-input v-model="formData.qty" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <!--        <el-form-item >-->
+          <!--                <div class="el-dialog__footer" >-->
+          <!--                  <el-button size="medium" type="primary" @click="showDetail(scope.row)">保存</el-button>-->
+          <!--                </div>-->
+
+
+          <!--        </el-form-item>-->
+        </el-form>
       </el-dialog>
 
     </div>
@@ -129,7 +268,7 @@
 </template>
 <script>
   // import x from ''
-  import { confirmSkuSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { saleChangeList,reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -140,20 +279,7 @@
     },
     data() {
       return {
-        upload: {
-          // 是否显示弹出层（用户导入）
-          open: false,
-          // 弹出层标题（用户导入）
-          title: "",
-          // 是否禁用上传
-          isUploading: false,
-          // 是否更新已经存在的用户数据
-          updateSupport: 0,
-          // 设置上传的请求头部
-          headers: { Authorization: "Bearer " + getToken() },
-          // 上传的地址
-          url: process.env.VUE_APP_BASE_API + "/sale/importySaleOrder"
-        },
+
         dateRange: [],
         pickerOptions: {
           shortcuts: [{
@@ -542,7 +668,7 @@
 
       },
       delTotalOrder(row){
-        this.$confirm('确认要删除'+row.orderNo+"生产总订单？", '确认操作', {
+        this.$confirm('确认要删除'+row.orderNo+"销售订单？", '确认操作', {
           type: 'warning',
           distinguishCancelAndClose: true,
           confirmButtonText: '确认',
@@ -560,7 +686,7 @@
             if ( response.code === 200) {
               this.$notify.success("删除成功")
             } else {
-              this.$notify.error(response.msg)
+              this.$notify.error(response.data.msg)
             }
           })
         })
@@ -584,7 +710,7 @@
             this.formData={}
             this.onSearch();
           } else {
-            this.$notify.error(response.msg)
+            this.$notify.error(response.data.msg)
 
           }
         })
@@ -630,38 +756,6 @@
         }
         return extension || extension2
       },
-      handleImport() {
-        this.upload.title = "生产总订单";
-        this.upload.open = true;
-      },
-      /** 下载模板操作 */
-      importTemplate() {
-        this.download('/sale/exportSaleOrderTmp', {
-        }, `国际销售订单模板_${new Date().getTime()}.xlsx`)
-      },
-      // 文件上传中处理
-      handleFileUploadProgress(event, file, fileList) {
-        this.upload.isUploading = true;
-      },
-      // 文件上传成功处理
-      handleFileSuccess(response, file, fileList) {
-        if(response.code == 200){
-          this.$message.success('上传成功')
-        }else {
-          this.$message.error(response.msg);
-
-
-        }
-        this.upload.open = false;
-        this.upload.isUploading = false;
-        this.$refs.upload.clearFiles();
-        // this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
-        this.onSearch();
-      },
-      // 提交上传文件
-      submitFileForm() {
-        this.$refs.upload.submit();
-      },
 
       formatStateType(row) {
         if (row != null) {
@@ -672,32 +766,29 @@
           }
         }
       },
-      showConfirmDetail(row){
-        this.$router.push({path: "/Salesmanagement/gjAuditOrderDetail", query: {id: row.id,confirmStatus:2}})
+      reAddDetail(row){
+        this.$confirm('确认要重新提交'+row.orderNo+"销售订单？", '确认操作', {
+          type: 'warning',
+          distinguishCancelAndClose: true,
+          confirmButtonText: '确认',
+          cancelButtonText: '取消',
+          confirmButtonClass: this.confirmClass
 
-      },
-
-      skuDistribution(){
-        this.$router.push({path: "/Salesmanagement/saleGjDistribution"})
-
-      },
-      confirmSkuSaleOrder(row,operate){
-        const param = {
-          id: row.id,
-          opearte: operate
-        }
-
-        confirmSkuSaleOrder(param).then(response => {
-          if (response.code == 200) {
-            this.message.success("修改成功")
-
-            this.onSearch();
-          } else {
-            this.message.error(response.msg)
+        }).then(() => {
+          const param = {
+            id: row.id,
+            delete: 1,
 
           }
+          reAddSaleOrder(param).then(response => {
+            // console.log(response)
+            if ( response.code === 200) {
+              this.$notify.success("提交成功")
+            } else {
+              this.$notify.error(response.data.msg)
+            }
+          })
         })
-
       },
       onSearch() {
         console.log('dateRange',this.dateRange)
@@ -711,7 +802,6 @@
         const param = {
           orderNo: this.orderNo,
           model: this.model,
-          type: 1,
           status: this.status,
           startTime:startTime,
           endTime:endTime,
@@ -719,7 +809,7 @@
           pageSize: this.listQuery.pageSize
         }
         // console.info(param)
-        saleOrderList(param).then(response => {
+        saleChangeList(param).then(response => {
           if (response.data != null && response.data.rows != null) {
             this.orderList = response.data.rows
             this.totalItems = response.data.total

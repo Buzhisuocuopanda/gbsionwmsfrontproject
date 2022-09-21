@@ -123,17 +123,17 @@
 
 
 .table-style-zhongjiang{
-      
+
      background-color:rgb(231, 227, 227);
      position: absolute;
      left:2%;
 }
 .tinajia_dingwei{
-    position: absolute;
+    position: relative;
     top:90%;
     left:80%;
 }
 .shuzicaoyou{
     text-align: right;
-    direction: rtl;  
+    direction: rtl;
 }

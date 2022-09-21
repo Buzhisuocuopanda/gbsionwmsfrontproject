@@ -49,14 +49,14 @@
       </el-form>
       <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
                 stripe style="margin-top:1em">
-        <el-table-column fixed label="编号" align="center" prop="orderNo" min-width="120px;"/>
+        <el-table-column fixed label="编号" align="center" prop="orderNo" min-width="150px;"/>
         <el-table-column  label="客户订单号" align="center" prop="customerNo" min-width="120px;"/>
         <el-table-column  label="日期" align="center" prop="orderDate" min-width="120px;"/>
         <el-table-column label="客户" align="center" prop="customerName" min-width="200px;"/>
         <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
         <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="150px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="300px;"/>
         <el-table-column label="电话" align="center" prop="phone" min-width="120px;"/>
         <el-table-column label="订单类型" align="center" prop="orderClassMsg" min-width="120px;"/>
         <el-table-column label="订单分类" align="center" prop="orderTypeMsg" min-width="120px;"/>
@@ -65,14 +65,14 @@
         <el-table-column label="制单时间" align="center" prop="createTime" min-width="120px;"/>
         <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column fixed="right" label="操作" min-width="220px;">
+        <el-table-column fixed="right" label="操作" min-width="250px;">
           <template slot-scope="scope">
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>
@@ -268,7 +268,7 @@
 </template>
 <script>
   // import x from ''
-  import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -668,7 +668,7 @@
 
       },
       delTotalOrder(row){
-        this.$confirm('确认要删除'+row.orderNo+"生产总订单？", '确认操作', {
+        this.$confirm('确认要删除'+row.orderNo+"销售订单？", '确认操作', {
           type: 'warning',
           distinguishCancelAndClose: true,
           confirmButtonText: '确认',
@@ -765,6 +765,30 @@
             return 'OK'
           }
         }
+      },
+      reAddDetail(row){
+        this.$confirm('确认要重新提交'+row.orderNo+"销售订单？", '确认操作', {
+          type: 'warning',
+          distinguishCancelAndClose: true,
+          confirmButtonText: '确认',
+          cancelButtonText: '取消',
+          confirmButtonClass: this.confirmClass
+
+        }).then(() => {
+          const param = {
+            id: row.id,
+            delete: 1,
+
+          }
+          reAddSaleOrder(param).then(response => {
+            // console.log(response)
+            if ( response.code === 200) {
+              this.$notify.success("提交成功")
+            } else {
+              this.$notify.error(response.data.msg)
+            }
+          })
+        })
       },
       onSearch() {
         console.log('dateRange',this.dateRange)

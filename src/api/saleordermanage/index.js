@@ -89,6 +89,16 @@ export function addSaleOrder(data) {
   })
 }
 
+
+export function reAddSaleOrder(data) {
+  return request({
+    url: '/sale/reAddSaleOrder',
+    method: 'post',
+    params: data
+  })
+}
+
+
 export function mdfSaleOrder(data) {
   return request({
     url: '/sale/mdfSaleOrder',
@@ -133,6 +143,44 @@ export function saleOderDetail(data) {
 export function totalOrderDetail(data) {
   return request({
     url: '/sale/totalOrderDetail',
+    method: 'get',
+    params: data
+  })
+}
+
+export function saleOrderSkuList(data) {
+  return request({
+    url: '/sale/saleOrderSkuList',
+    method: 'get',
+    params: data
+  })
+}
+
+export function updateGjQty(data) {
+  return request({
+    url: '/sale/updateGjQty',
+    method: 'post',
+    data: data
+  })
+}
+export function confirmSkuSaleOrder(data) {
+  return request({
+    url: '/sale/confirmSkuSaleOrder',
+    method: 'post',
+    data: data
+  })
+}
+export function saleChangeList(data) {
+  return request({
+    url: '/sale/saleChangeList',
+    method: 'post',
+    data: data
+  })
+}
+
+export function orderChangeDetail(data) {
+  return request({
+    url: '/sale/orderChangeDetail',
     method: 'get',
     params: data
   })

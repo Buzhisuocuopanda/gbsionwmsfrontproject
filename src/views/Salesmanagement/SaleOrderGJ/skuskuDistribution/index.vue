@@ -1,20 +1,15 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true" label-width="70px">
-        <el-form-item label="订单号" class="item-r">
-          <el-input v-model="orderNo" class="filter-item" placeholder="订单号"/>
+      <el-form :inline="true" label-width="120px">
+        <el-form-item label="销售订单号" class="item-r">
+          <el-input v-model="orderNo" class="filter-item" placeholder="销售订单号"/>
         </el-form-item>
 
-        <el-form-item label="商品型号" class="item-r">
-          <el-input v-model="model" class="filter-item" placeholder="商品型号"/>
+        <el-form-item label="生产总订单号" class="item-r">
+          <el-input v-model="totalOrderNo" class="filter-item" placeholder="生产总订单号"/>
         </el-form-item>
-        <el-form-item label="状态" class="item-r">
-          <el-select v-model="status" placeholder="状态" class="middle-input" style="width:100px">
-            <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
+
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
@@ -22,44 +17,53 @@
           </el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
-            创建
-          </el-button>
-<!--          <el-upload-->
-<!--            ref="uploadExcel"-->
-<!--            :action="ExcelUploadUrl"-->
-<!--            :show-file-list="false"-->
-<!--            :on-success="uploadSuccess"-->
-<!--            :before-upload="beforeUploadExcel"-->
-<!--            :headers="headers"-->
-<!--            style="display: inline">-->
-<!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
-<!--          </el-upload>-->
-          <el-button type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
+<!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">-->
+<!--            创建-->
+<!--          </el-button>-->
+          <!--          <el-upload-->
+          <!--            ref="uploadExcel"-->
+          <!--            :action="ExcelUploadUrl"-->
+          <!--            :show-file-list="false"-->
+          <!--            :on-success="uploadSuccess"-->
+          <!--            :before-upload="beforeUploadExcel"-->
+          <!--            :headers="headers"-->
+          <!--            style="display: inline">-->
+          <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
+          <!--          </el-upload>-->
+<!--          <el-button type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>-->
 
-          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">导出
-          </el-button>
-<!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
+<!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut-->
+<!--                     style="margin-bottom:0;margin-left: 1em">导出-->
+<!--          </el-button>-->
+          <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
+      <el-table :data="skuList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
                 stripe>
-        <el-table-column fixed label="优先级" align="center" prop="priority" min-width="120px;"/>
-        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="120px;"/>
-        <el-table-column label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column label="描述" align="center" prop="description" min-width="400px;"/>
-        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;"/>
-        <el-table-column label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
-        <el-table-column label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>
+        <el-table-column fixed label="销售订单号" align="center" prop="orderNo" min-width="150px;"/>
+        <el-table-column fixed label="生产总订单号" align="center" prop="totalOrderNo" min-width="120px;"/>
+        <el-table-column label="商品" align="center" prop="goodsMsg" min-width="400px;"/>
+        <el-table-column label="优先级" align="center" prop="priority" min-width="120px;"/>
+        <el-table-column :formatter="rounding" label="确认使用库存数量" align="right" prop="confirmQty" min-width="100px;">
+          <template slot-scope="scope">
+
+          <span v-if="scope.row.id==editId">
+            <el-input  v-model="scope.row.confirmQty" style="width:50%"   oninput="value=value.replace(/[^\d]/g,'')"/>
+          </span>
+            <span v-else>{{scope.row.confirmQty}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column :formatter="rounding" label="商品库存数量" align="right" prop="goodsNum" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="可用库存" align="right" prop="canUseQty" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="占用数量" align="right" prop="lockQty" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="分配数量" align="right" prop="makeQty" min-width="100px;"/>
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
+<!--            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>-->
+            <el-button v-if="scope.row.id==editId" icon="el-icon-edit" plain size="mini"   type="text" @click="updateDetail(scope.row)">保存</el-button>
+            <el-button v-else icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">库存分配</el-button>
+
+            <!--            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>-->
           </template>
 
         </el-table-column>
@@ -88,13 +92,13 @@
             <el-input v-model="formData.orderNo" style="width:50%">></el-input>
           </el-form-item>
           <el-form-item label="商品" prop="goods">
-<!--            <el-popover placement="bottom-start" trigger="click">-->
-<!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
-<!--                          style="width:370px!important;" />-->
-<!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
-<!--                        style="width:205.6%;">-->
-<!--              </el-input>-->
-<!--            </el-popover>-->
+            <!--            <el-popover placement="bottom-start" trigger="click">-->
+            <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
+            <!--                          style="width:370px!important;" />-->
+            <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
+            <!--                        style="width:205.6%;">-->
+            <!--              </el-input>-->
+            <!--            </el-popover>-->
 
             <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
               <el-option
@@ -105,15 +109,15 @@
               </el-option>
             </el-select>
 
-<!--            <template  style="width:200%;">-->
-<!--              <el-popover placement="bottom-start" trigger="click">-->
-<!--                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
-<!--                            style="width:630px!important;" />-->
-<!--                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly-->
-<!--                          style="width:100%;">-->
-<!--                </el-input>-->
-<!--              </el-popover>-->
-<!--            </template>-->
+            <!--            <template  style="width:200%;">-->
+            <!--              <el-popover placement="bottom-start" trigger="click">-->
+            <!--                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
+            <!--                            style="width:630px!important;" />-->
+            <!--                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly-->
+            <!--                          style="width:100%;">-->
+            <!--                </el-input>-->
+            <!--              </el-popover>-->
+            <!--            </template>-->
           </el-form-item>
           <el-form-item label="数量" prop="qty">
             <el-input  v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
@@ -143,6 +147,8 @@
             <el-input v-model="formData.orderNo" style="width:50%"></el-input>
           </el-form-item>
           <el-form-item label="商品" prop="goods">
+            <el-input v-model="formData.priority" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"/>
+
             <!--            <el-popover placement="bottom-start" trigger="click">-->
             <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
             <!--                          style="width:370px!important;" />-->
@@ -150,23 +156,23 @@
             <!--                        style="width:205.6%;">-->
             <!--              </el-input>-->
             <!--            </el-popover>-->
-            <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-<!--            <template  style="width:200%;">-->
-<!--              <el-popover placement="bottom-start" trigger="click">-->
-<!--                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
-<!--                            style="width:630px!important;" />-->
-<!--                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly-->
-<!--                          style="width:100%;">-->
-<!--                </el-input>-->
-<!--              </el-popover>-->
-<!--            </template>-->
+<!--            <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
+<!--              <el-option-->
+<!--                v-for="item in options"-->
+<!--                :key="item.value"-->
+<!--                :label="item.label"-->
+<!--                :value="item.value">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+            <!--            <template  style="width:200%;">-->
+            <!--              <el-popover placement="bottom-start" trigger="click">-->
+            <!--                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
+            <!--                            style="width:630px!important;" />-->
+            <!--                <el-input slot="reference" v-model="formData.goods" placeholder="" readonly-->
+            <!--                          style="width:100%;">-->
+            <!--                </el-input>-->
+            <!--              </el-popover>-->
+            <!--            </template>-->
           </el-form-item>
           <el-form-item label="数量" prop="qty">
             <el-input  v-model="formData.qty" style="width:50%;text-align: right"     oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"
@@ -183,85 +189,85 @@
       </el-dialog>
 
 
-<!--            详情-->
-            <el-dialog :visible.sync="showDialog" :close-on-click-modal="false" title="生产订单详情" width="55%" @close="closeDetail">
-              <!--        <el-form ref="infoform" :inline="true" label-width="11em" label-position = "right">-->
-              <!--          <div class="divv" >-->
-              <!--            <span>基本信息</span>-->
-              <!--            <div style="width: 100%;height: 1px;border-top: solid #dfdfdf 0.2em"/>-->
-              <!--            <div style="height: auto;width: 100%">-->
+      <!--            详情-->
+      <el-dialog :visible.sync="showDialog" :close-on-click-modal="false" title="生产订单详情" width="55%" @close="closeDetail">
+        <!--        <el-form ref="infoform" :inline="true" label-width="11em" label-position = "right">-->
+        <!--          <div class="divv" >-->
+        <!--            <span>基本信息</span>-->
+        <!--            <div style="width: 100%;height: 1px;border-top: solid #dfdfdf 0.2em"/>-->
+        <!--            <div style="height: auto;width: 100%">-->
 
-              <!--              <table border="0" class="tableclss">-->
-              <!--                <tr><td>设备号:<span>{{ this.infoform.deviceNo }}</span>-->
-              <!--                </td>-->
-              <!--                </tr>-->
-              <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
-              <!--                </td>-->
-              <!--                </tr>-->
-              <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
-              <!--                </td>-->
-              <!--                </tr>-->
-              <!--              </table>-->
-              <!--            </div>-->
-              <!--          </div>-->
+        <!--              <table border="0" class="tableclss">-->
+        <!--                <tr><td>设备号:<span>{{ this.infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--                <tr><td>设备号:<span>{{ infoform.deviceNo }}</span>-->
+        <!--                </td>-->
+        <!--                </tr>-->
+        <!--              </table>-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-              <!--        </el-form>-->
+        <!--        </el-form>-->
 
-              <!--        <el-descriptions class="margin-top" title="设备信息" :column="3"  border>-->
-              <!--          <el-descriptions-item label="手机号">18100000000</el-descriptions-item>-->
+        <!--        <el-descriptions class="margin-top" title="设备信息" :column="3"  border>-->
+        <!--          <el-descriptions-item label="手机号">18100000000</el-descriptions-item>-->
 
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
-              <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="设备号">{{this.infoform.deviceNo}}</el-descriptions-item>-->
 
 
-              <!--        </el-descriptions>-->
+        <!--        </el-descriptions>-->
 
-              <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
-                <el-form-item label="优先级" >
-                  <el-input v-model="formData.priority" style="width:50%" readonly></el-input>
-                </el-form-item>
-                <el-form-item label="订单号" >
-                  <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>
-                </el-form-item>
-                <el-form-item label="商品" >
-                  <!--            <el-popover placement="bottom-start" trigger="click">-->
-                  <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
-                  <!--                          style="width:370px!important;" />-->
-                  <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
-                  <!--                        style="width:205.6%;">-->
-                  <!--              </el-input>-->
-                  <!--            </el-popover>-->
+        <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
+          <el-form-item label="优先级" >
+            <el-input v-model="formData.priority" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <el-form-item label="订单号" >
+            <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>
+          </el-form-item>
+          <el-form-item label="商品" >
+            <!--            <el-popover placement="bottom-start" trigger="click">-->
+            <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
+            <!--                          style="width:370px!important;" />-->
+            <!--              <el-input slot="reference" v-model="formData.cbpc000" placeholder="" readonly-->
+            <!--                        style="width:205.6%;">-->
+            <!--              </el-input>-->
+            <!--            </el-popover>-->
 
-                  <el-input  v-model="formData.goods" placeholder=""
-                            style="width:70%;" readonly>
-                  </el-input>
-<!--                  <template  style="width:200%;">-->
+            <el-input  v-model="formData.goods" placeholder=""
+                       style="width:70%;" readonly>
+            </el-input>
+            <!--                  <template  style="width:200%;">-->
 
-<!--                    <el-popover placement="bottom-start" trigger="click">-->
-<!--                      <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
-<!--                                  style="width:630px!important;" />-->
+            <!--                    <el-popover placement="bottom-start" trigger="click">-->
+            <!--                      <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
+            <!--                                  style="width:630px!important;" />-->
 
-<!--                    </el-popover>-->
-<!--                  </template>-->
-                </el-form-item>
-                <el-form-item label="数量" >
-<!--                  <el-input : v-model="formData.qty" style="width:50%;text-align: right" readonly></el-input>-->
-                  <span>
+            <!--                    </el-popover>-->
+            <!--                  </template>-->
+          </el-form-item>
+          <el-form-item label="数量" >
+            <!--                  <el-input : v-model="formData.qty" style="width:50%;text-align: right" readonly></el-input>-->
+            <span>
                     {{parseFloat(formData.qty).toFixed(2)}}
                   </span>
-                </el-form-item>
-                <!--        <el-form-item >-->
-<!--                <div class="el-dialog__footer" >-->
-<!--                  <el-button size="medium" type="primary" @click="showDetail(scope.row)">保存</el-button>-->
-<!--                </div>-->
+          </el-form-item>
+          <!--        <el-form-item >-->
+          <!--                <div class="el-dialog__footer" >-->
+          <!--                  <el-button size="medium" type="primary" @click="showDetail(scope.row)">保存</el-button>-->
+          <!--                </div>-->
 
 
-                <!--        </el-form-item>-->
-              </el-form>
-            </el-dialog>
+          <!--        </el-form-item>-->
+        </el-form>
+      </el-dialog>
 
       <!-- 用户导入对话框 -->
       <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
@@ -271,9 +277,9 @@
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           <div class="el-upload__tip text-center" slot="tip">
-<!--            <div class="el-upload__tip" slot="tip">-->
-<!--              <el-checkbox v-model="upload.updateSupport" /> -->
-<!--            </div>-->
+            <!--            <div class="el-upload__tip" slot="tip">-->
+            <!--              <el-checkbox v-model="upload.updateSupport" /> -->
+            <!--            </div>-->
             <span>仅允许导入xls、xlsx格式文件。</span>
             <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;"
                      @click="importTemplate">下载模板</el-link>
@@ -290,7 +296,7 @@
 </template>
 <script>
   // import x from ''
-  import {totalOrderDetail,swJsGoodslistBySelect, totalOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import {updateGjQty,saleOrderSkuList,totalOrderDetail,swJsGoodslistBySelect, totalOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -358,10 +364,12 @@
         // 上传的地址
         ExcelUploadUrl: process.env.VUE_APP_BASE_API + '/sale/importTotalOrder',
         orderNo: '',
+        totalOrderNo:'',
         model: '',
         status: '',
         single: true,
-      formData: {},
+        formData: {},
+        editId: '',
         showDialog: false,
         showaddDialog: false,
         showmdfDialog: false,
@@ -370,6 +378,7 @@
         loadingState: false,
 
         orderList: [],
+        skuList: [],
         upload: {
           // 是否显示弹出层（用户导入）
           open: false,
@@ -401,7 +410,7 @@
     computed: {},
     mounted() { // 自动触发写入的函数
       this.onSearch()
-      this.initSelect()
+      // this.initSelect()
     },
     methods: {
       onSubmit() {
@@ -468,7 +477,7 @@
             this.showDialog = true
             this.formData=response.data
           } else {
-            this.$message.error(response.msg)
+            this.$message.error(response.data.msg)
 
           }
         })
@@ -489,19 +498,22 @@
         this.formData={}
       },
       mdfDetail(row) {
-        const  param={
-          id: row.id
-        }
-        totalOrderDetail(param).then(response => {
-          if (response.code == 200) {
 
-            this.showmdfDialog = true
-            this.formData=response.data
-          } else {
-            this.$message.error(response.msg)
+        this.editId=row.id
 
-          }
-        })
+        // const  param={
+        //   id: row.id
+        // }
+        // totalOrderDetail(param).then(response => {
+        //   if (response.code == 200) {
+        //
+        //     this.showmdfDialog = true
+        //     this.formData=response.data
+        //   } else {
+        //     this.$message.error(response.data.msg)
+        //
+        //   }
+        // })
 
 
       },
@@ -569,9 +581,9 @@
 
             this.showaddDialog=false
             this.formData={}
-              this.onSearch();
+            this.onSearch();
           } else {
-            this.$message.error(response.msg)
+            this.$message.error(response.data.msg)
 
           }
         })
@@ -598,12 +610,37 @@
             if ( response.code === 200) {
               this.$message.success("删除成功")
             } else {
-              this.$message.error(response.msg)
+              this.$message.error(response.data.msg)
             }
           })
         })
       },
 
+      updateDetail(row){
+        const param = {
+          id: row.id,
+          saleOrderNo: row.orderNo,
+          goodsId: row.goodsId,
+          qty: row.confirmQty
+
+        }
+
+        updateGjQty(param).then(response => {
+          if (response.code == 200) {
+            this.$message.success("修改成功")
+            this.editId=''
+            // this.showmdfDialog=false
+            // this.formData={}
+            this.onSearch();
+          } else {
+            this.$message.error(response.msg)
+
+          }
+        })
+
+
+
+      },
       mdfTotalOrder(){
         const param = {
           id: this.formData.id,
@@ -622,7 +659,7 @@
             this.formData={}
             this.onSearch();
           } else {
-            this.$message.error(response.msg)
+            this.$message.error(response.data.msg)
 
           }
         })
@@ -753,6 +790,7 @@
         });
 
       },
+
       loadMore() {
 //         console.log("滚动到底部了")
 // // 这里可以做你想做的任何事 到底执行
@@ -808,25 +846,24 @@
       },
 
 
-        rounding(row,column) {
-          return parseFloat(row[column.property]).toFixed(2)
-        },
+      rounding(row,column) {
+        return parseFloat(row[column.property]).toFixed(2)
+      },
 
       onSearch() {
         const param = {
           orderNo: this.orderNo,
-          model: this.model,
-          status: this.status,
+          totalOrderNo: this.totalOrderNo,
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
         // console.info(param)
-        totalOrderList(param).then(response => {
+        saleOrderSkuList(param).then(response => {
           if (response.data != null && response.data.rows != null) {
-            this.orderList = response.data.rows
+            this.skuList = response.data.rows
             this.totalItems = response.data.total
           } else {
-            this.orderList = []
+            this.skuList = []
             this.totalItems = 0
           }
         })

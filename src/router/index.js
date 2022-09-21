@@ -256,7 +256,7 @@ export const dynamicRoutes = [
       }
     ]
   },
-  
+
   {
     path: '/system/user-authxiaoshouyudingdang',
     component: Layout,
@@ -752,6 +752,43 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/saleOrderChange',
+    component: Layout,
+    redirect: 'saleOrderChange',
+    name: 'saleOrderChange',
+    meta: {
+      title: '销售变更',
+      icon: 'saleOrderChange'
+    },
+    children: [
+      {
+        path: 'saleOrderChange',
+        component: () => import('@/views/Salesmanagement/SaleOrderChange/index'),
+        name: 'saleOrderChange',
+        meta: { title: '销售变更', icon: 'component', noCache: true, affix: true }
+      },
+    ]
+  },
+  {
+    path: '/saleOrderFn',
+    component: Layout,
+    redirect: 'saleOrderFn',
+    name: 'saleOrderFn',
+    meta: {
+      title: '财务复审',
+      icon: 'saleOrderFn'
+    },
+    children: [
+      {
+        path: 'saleOrderFn',
+        component: () => import('@/views/Salesmanagement/SaleOrderFn/index'),
+        name: 'saleOrderFn',
+        meta: { title: '财务复审', icon: 'component', noCache: true, affix: true }
+      },
+    ]
+  },
+
+  {
     path: '/saleOrderDetail',
     component: Layout,
     redirect: 'saleOrderDetail',
@@ -832,6 +869,51 @@ export const dynamicRoutes = [
         component: () => import('@/views/Salesmanagement/saleOrderDetail/auditDetail/index'),
 
         meta: { title: '销售订单审核', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  // 国际销售审批订单详情
+  {
+    path: 'gjAuditOrderDetail',
+    component: Layout,
+    redirect: 'gjAuditOrderDetail',
+    name: 'gjAuditOrderDetail',
+    query:{
+      id:'',
+      status: 0
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'gjAuditOrderDetail',
+
+        name: 'gjAuditOrderDetail',
+        component: () => import('@/views/Salesmanagement/SaleOrderGJ/auditDetail/index'),
+
+        meta: { title: '国际销售审批订单详情', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+
+  // 库存分配页面
+  {
+    path: '/saleGjDistribution',
+    component: Layout,
+    redirect: 'saleGjDistribution',
+    name: 'saleGjDistribution',
+    // query:{
+    //   id:'',
+    //   status: 0
+    // },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'saleGjDistribution',
+
+        name: 'saleGjDistribution',
+        component: () => import('@/views/Salesmanagement/SaleOrderGJ/skuskuDistribution/index'),
+
+        meta: { title: '库存分配页面', icon: 'component', noCache: true, affix: true }
       }
     ]
   },
