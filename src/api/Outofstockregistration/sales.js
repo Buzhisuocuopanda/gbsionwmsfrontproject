@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询售后列表
 export function listSales(query) {
   return request({
-    url: '/system/Aftersales/aftersaleslist',
+    url: '/system/Outofstockregistrationform/SwJsSkuBarcodelists',
     method: 'get',
     params: query
   })
@@ -17,28 +17,28 @@ export function getSales(id) {
   })
 } */
 
-// 新增售后
+// 新增缺货登记表
 export function addSales(data) {
   return request({
-    url: '/system/Aftersales/aftersalesadd',
+    url: '/system/Outofstockregistrationform/Selloutofwarehouseadd',
     method: 'post',
     data: data
   })
 }
 
-// 修改售后
+// 修改缺货登记表
 export function updateSales(data) {
   return request({
-    url: '/system/Aftersales/aftersalesedit',
+    url: '/system/Outofstockregistrationform/Selloutofwarehouseedit',
     method: 'post',
     data: data
   })
 }
 
-// 删除售后
+// 删除缺货登记表
 export function delSales(data) {
   return request({
-    url: '/system/Aftersales/aftersalesdelete' ,
+    url: '/system/Outofstockregistrationform/SwJsPurchaseinboundremove' ,
     method: 'post',
     data: data
   })
@@ -46,7 +46,7 @@ export function delSales(data) {
 //销售订单详情
 export function saleOderDetailss(data) {
   return request({
-    url: '/system/Aftersales/saleOderDetail',
+    url: '/system/Outofstockregistrationform/saleOderDetail',
     method: 'get',
     params: data
   })

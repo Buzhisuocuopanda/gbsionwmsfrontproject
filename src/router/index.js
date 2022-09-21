@@ -175,6 +175,21 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/system/user-authhhhhs',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/:cbse01(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesStock/SalesStockxg/index'),
+
+        meta: { title: '销售退货修改', activeMenu: '/Warehousemanagement/SalesStock' }
+      }
+    ]
+  },
+  {
     path: '/system/user-authhhhhh',
     component: Layout,
     hidden: true,
@@ -216,7 +231,7 @@ export const dynamicRoutes = [
       }
     ]
   },
-   {
+  {
     path: '/system/user-authhhhhhhhh',
     component: Layout,
     hidden: true,
@@ -236,13 +251,14 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpg01(\\d+)',
+        path: 'role/:userId',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/WarehouseSummary/WarehouseSummaryxq/index'),
         meta: { title: '仓库盘点详情', activeMenu: '/Warehousemanagement/WarehouseSummary' }
       }
     ]
   },
+
   {
     path: '/system/user-authhhhhhhhhhh',
     component: Layout,
@@ -808,6 +824,27 @@ export const dynamicRoutes = [
       }
     ]
   },
+  //售后单创建
+  {
+    path: '/aftersalesDetails',
+    component: Layout,
+    redirect: 'aftersalesDetails',
+    name: 'aftersalesDetails',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'aftersalesDetails',
+
+        name: 'aftersalesDetails',
+        component: () => import('@/views/aftersales/saleOrderDetail/index'),
+
+        meta: { title: '售后单创建', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
   // 销售订单详情
   {
     path: '/saleshowOrderDetail',
@@ -850,6 +887,27 @@ export const dynamicRoutes = [
       }
     ]
   },
+//修改售后
+  {
+    path: '/aftermdsalesDetails',
+    component: Layout,
+    redirect: 'aftermdsalesDetails',
+    name: 'aftermdsalesDetails',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'aftermdsalesDetails',
+
+        name: 'aftermdsalesDetails',
+        component: () => import('@/views/aftersales/saleOrderDetail/mdfDetail/index'),
+
+        meta: { title: '修改售后', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
   // 销售修改订单详情
   {
     path: '/saleauditOrderDetail',
@@ -869,6 +927,49 @@ export const dynamicRoutes = [
         component: () => import('@/views/Salesmanagement/saleOrderDetail/auditDetail/index'),
 
         meta: { title: '销售订单审核', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+
+  //缺货登记创建
+  {
+    path: '/Outofstockregistrationadd',
+    component: Layout,
+    redirect: 'Outofstockregistrationadd',
+    name: 'Outofstockregistrationadd',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'Outofstockregistrationadd',
+
+        name: 'Outofstockregistrationadd',
+        component: () => import('@/views/Outofstockregistration/saleOrderDetail/index'),
+
+        meta: { title: '售后单创建', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  //修改缺货等级
+  {
+    path: '/Outofstockregistrationmd',
+    component: Layout,
+    redirect: 'Outofstockregistrationmd',
+    name: 'Outofstockregistrationmd',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'Outofstockregistrationmd',
+
+        name: 'Outofstockregistrationmd',
+        component: () => import('@/views/Outofstockregistration/saleOrderDetail/mdfDetail/index'),
+
+        meta: { title: '修改缺货等级', icon: 'component', noCache: true, affix: true }
       }
     ]
   },

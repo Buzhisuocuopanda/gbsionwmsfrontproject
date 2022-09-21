@@ -13,14 +13,14 @@
 
         <el-form-item label="品牌"   class="item-r" >
 
-          <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请选择">
+          <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请选择" :loading="loading3">
             <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
           </el-select>
           <!--<el-input v-model="queryParams.cala08" style="width: 300px" class="filter-item"  placeholder="请输入品牌" />-->
         </el-form-item>
         <!-- multiple-->
         <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading3">
+          <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
           </el-select>
 
@@ -72,9 +72,7 @@ export default {
   name: "inventorySummary",
   data() {
     return {
-      formData: {
-        name: "",
-      },
+
       //下拉列表数据商品
       goodList:[],
       //下拉列表数据仓库
@@ -85,17 +83,11 @@ export default {
       calaList:[],
       dateRange:[],
       tableData: [],
-      /*loadingOut:false,
-      loadingState:false,*/
       loading:false,
-      loadingGood:false,
+      loading1:false,
       loading2:false,
       loading3:false,
-      queryForm:{},
-      /*listQuery: {
-        pageNum: 1,
-        pageSize: 10
-      },*/
+
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -171,9 +163,9 @@ export default {
     getGoods(query){
       if (query !== '') {
         let param={cbpb08:query, cbpb15:query, cbpb12:query,};
-        this.loadingGood = true;
+        this.loading1 = true;
         getSwJsGoodsAllList(param).then(response => {
-          this.loadingGood = false;
+          this.loading1 = false;
           if (response.data != null) {
             this.goodList = response.data;
           } else {
