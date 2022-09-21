@@ -28,11 +28,12 @@
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-<!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
+          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
 
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
+        <el-table-column  v-if="false" align="center" prop="cbig01"  min-width="80px;"/>
         <el-table-column fixed label="仓库" align="center" prop="cbwa09"  min-width="80px;"/>
         <el-table-column fixed label="库位" align="center" prop="cbla09" min-width="80px;"/>
         <!--<el-table-column  label="大类" align="center" prop="cala08" min-width="120px;"/>-->
@@ -130,15 +131,7 @@ export default {
     },
     onSubmit() {},
     handleSelectionChange() {},
-    /*formatStateType(row) {
-      if (row != null) {
-        if (row.status == 0) {
-          return "NO"
-        } else if (row.status == 4) {
-          return "OK"
-        }
-      }
-    },*/
+
     /** 重置按钮操作 */
     resetQuery() {
       this.queryParams.cbwa09 = "";
@@ -168,6 +161,13 @@ export default {
         }
       })
     },
+    //导出
+    exprotData(){
+      this.download('/countQuery/InventorysummaryquerysExcelList', {
+        ...this.queryParams
+      }, `库存明细查询数据_${new Date().getTime()}.xlsx`)
+    },
+
     //获取下拉列表数据商品
     getGoods(query){
       if (query !== '') {
