@@ -100,9 +100,9 @@
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:salesReceipt:remove']">删除</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
-                            </el-button>
+                            </el-button> -->
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:salesReceipt:sh']"

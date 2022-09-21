@@ -956,9 +956,11 @@ import salerman from "@/components/salerman";
 
       /** 新增按钮操作 */
       handleAdd() {
-               this.$refs["form2"].validate((item) => {
+        this.$refs["form2"].validate((item) => {
           if (item) {
-            this.form2.goods=this.tableData
+            this.form2.goods=this.tableData;
+            this.form2.goodss = this.tableData;
+            this.form2.goodsss = this.tableData;
             PurchaseinboundAddydd(this.form2).then(response => {
               if (response.code == "200") {
                 this.$message({
@@ -973,8 +975,8 @@ import salerman from "@/components/salerman";
                 // console.log(this.form.cbpg01,222);
                 console.log(response, 333);
                 this.tableData.forEach((item) => {
-                  item.gsSalesOrders = response.data.id;
-                  console.log(item.gsSalesOrders,8523697412);
+                  // item.gsSalesOrders = response.data.id;
+                  // console.log(item.gsSalesOrders,8523697412);
                 })
                 this._ly_ok();
               }else{
