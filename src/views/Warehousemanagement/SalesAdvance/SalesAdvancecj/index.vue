@@ -87,11 +87,6 @@
             <el-input v-model="form2.customerId" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
           </el-form-item>
         </el-col>
-         <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
-          <el-form-item label="销售人员id:" prop="salerId">
-            <el-input v-model="form2.salerId" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
-          </el-form-item>
-        </el-col>
         <!-- 商品信息维护 -->
         <el-col>
           <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">
@@ -125,27 +120,17 @@
                   <el-input v-model="scope.row.qty"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="销售预订单主表" width="200" prop="cbpc09916">
-            <template slot-scope="scope" style="width:200%;">
-                   <el-popover placement="bottom-start" trigger="click">
-                     <SalesBooking ref="SalesBooking" @selected="selected09916($event,scope.row)" style="width:210px!important;" />
-                     <el-input slot="reference" v-model="scope.row.cbpc09916" placeholder="" readonly style="width:100%;">
-                     </el-input>
-                 </el-popover>
-                </template>
-          </el-table-column>
-          <el-table-column prop="salerId" label="销售人员" width="100">
-            <template slot-scope="scope">
-                <el-input v-model="scope.row.salerId" placeholder=""></el-input>              
-            </template>
-          </el-table-column>
           <el-table-column prop="orderDate" label="订单日期" width="180">
             <template slot-scope="scope">
                 <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;">
             </el-date-picker>             
             </template>
           </el-table-column>
-
+           <el-table-column prop="salerId" label="客户id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.salerId" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
           <el-table-column v-if="false" prop="supplierId" label="供应商id" width="150">
             <template slot-scope="scope">
                 <el-input v-model="scope.row.supplierId" placeholder="" style=""></el-input>
@@ -868,16 +853,6 @@ import salerman from "@/components/salerman";
         this.form2.supplierId = name.substring(name.indexOf("-") + 1);
       },
 
-       selected09916(e,row) {
-        this.$set(row,"cbpc09916",e.substring(0,e.indexOf("-")))
-        console.log(e,111)
-        console.log(row,222)
-        // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-        this.$set(row,"gsSalesOrders",e.substring(e.indexOf("-") +1),8523642)
-        console.log(row,555)
-        // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-        // this.form2.icon = name;
-      },
 
       //查询商品信息维护
       selected08(e,row) {
@@ -1011,9 +986,10 @@ import salerman from "@/components/salerman";
                 this.reset01()
                 // console.log(this.form2.cbpg161,111);
                 // console.log(this.form.cbpg01,222);
-                console.log(response.data.id, 333);
+                console.log(response, 333);
                 this.tableData.forEach((item) => {
-                  item.gsSalesOrders = response.data.id;
+                  // item.gsSalesOrders = response.data.id;
+                  // item.salerId = this.from2.customerId;
                   console.log(item.gsSalesOrders,8523697412);
                 })
                 this._ly_ok();

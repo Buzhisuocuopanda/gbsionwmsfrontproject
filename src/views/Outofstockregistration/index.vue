@@ -16,7 +16,7 @@
 <!--          <el-form-item>-->
 <!--            <el-button type="primary" @click="onSearch()">查询</el-button>-->
 <!--          </el-form-item>-->
-          <el-form-item label="订单号"   class="item-r" >
+          <el-form-item label="编号"   class="item-r" >
             <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />
           </el-form-item>
         </el-form>
@@ -49,11 +49,11 @@
         </el-form-item>
       </el-form>
       <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
-        <el-table-column fixed label="销售订单号" align="center" prop="saleOrderNo" min-width="120px;"/>
+        <el-table-column fixed label="编号" align="center" prop="cboe07" min-width="120px;"/>
         <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="120px;"/>
-        <el-table-column  label="问题原因" align="center" prop="question" min-width="120px;" />
-        <el-table-column  label="sn" align="center" prop="sn" min-width="200px;" />
-        <el-table-column  label="处理结果" align="left" prop="answerMsg" min-width="100px;"/>
+        <el-table-column  label="日期" align="center" prop="cboe08" min-width="120px;" :formatter="formatDate" />
+        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
+        <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
@@ -61,11 +61,16 @@
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
-            <el-button size="small" type="primary"  @click="mdfDetail(scope.row)"
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text" @click="mdfDetail(scope.row)"
             >修改</el-button>
 
-            <el-button size="small" type="primary"
-                       @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text"
+                       @click="showDetail(scope.row)">详情</el-button>
+
           </template>
 
         </el-table-column>
@@ -231,7 +236,7 @@
 </template>
 
 <script>
-import { listSales, getSales, delSales, addSales, updateSales } from "@/api/system/sales";
+import { listSales, getSales, delSales, addSales, updateSales } from "@/api/Outofstockregistration/sales";
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -267,6 +272,8 @@ export default {
       total: 0,
 
        totalItems: 0,
+      cboe07: "",
+
       orderNo: "",
       model: "",
       formData: {
@@ -481,12 +488,16 @@ export default {
       // this.formData=row
       // this.showmdfDialog = true
 
-      this.$router.push({path: "/Warehousemanagement/salemdfOrderDetail", query: {id: row.id}})
+      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationmd", query: {id: row.id}})
 
     },
     createForm() {
       // this.showaddDialog = true
-      this.$router.push({path: "/Warehousemanagement/aftersalesDetails", query: {id: 1}})
+      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationadd", query: {id: 1}})
+
+    },
+    showDetail(row) {
+      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationdetail", query: {id: row.id}})
 
     },
     cancel() {
@@ -510,7 +521,7 @@ export default {
     },
     onSearch() {
       const param = {
-        cabraa14: this.orderNo,
+        cboe07: this.orderNo,
         startTime: this.dateRange.startTime,
         endTime: this.dateRange.endTime,
         pageNum: this.listQuery.pageNum,

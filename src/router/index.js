@@ -272,7 +272,7 @@ export const dynamicRoutes = [
       }
     ]
   },
-  
+
   {
     path: '/system/user-authxiaoshouyudingdang',
     component: Layout,
@@ -890,6 +890,49 @@ export const dynamicRoutes = [
         component: () => import('@/views/Salesmanagement/saleOrderDetail/auditDetail/index'),
 
         meta: { title: '销售订单审核', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+
+  //缺货登记创建
+  {
+    path: '/Outofstockregistrationadd',
+    component: Layout,
+    redirect: 'Outofstockregistrationadd',
+    name: 'Outofstockregistrationadd',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'Outofstockregistrationadd',
+
+        name: 'Outofstockregistrationadd',
+        component: () => import('@/views/Outofstockregistration/saleOrderDetail/index'),
+
+        meta: { title: '售后单创建', icon: 'component', noCache: true, affix: true }
+      }
+    ]
+  },
+  //修改缺货等级
+  {
+    path: '/Outofstockregistrationmd',
+    component: Layout,
+    redirect: 'Outofstockregistrationmd',
+    name: 'Outofstockregistrationmd',
+    query:{
+      id:''
+    },
+    children: [
+      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'Outofstockregistrationmd',
+
+        name: 'Outofstockregistrationmd',
+        component: () => import('@/views/Outofstockregistration/saleOrderDetail/mdfDetail/index'),
+
+        meta: { title: '修改缺货等级', icon: 'component', noCache: true, affix: true }
       }
     ]
   },
