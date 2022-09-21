@@ -576,6 +576,7 @@ export default {
         cbse16: "",
         cbse18: "",
         cbse099: "",
+        cbse166: "",
       },
       defaultProps: {
         children: "children",
@@ -1008,7 +1009,6 @@ export default {
     //详情列表
     getList() {
       this.loading = true;
-      console.log(this.$route);
       const userId = this.$route.params && this.$route.params.cbse01;
       if (userId) {
         // 获取表详细信息
@@ -1022,8 +1022,10 @@ export default {
           //仓库名称
           this.form2.cbpc100 = response.cbwa09;
           //结算货币名称
-          this.form2.cbse166 = response.currencyMsg;
-          console.log(this.form2.cbsb09, 85200000);
+          this.form2.cbse166 = response.cala08;
+          // 日期
+          this.form2.cbsc08 = response.cbse08;
+          console.log(this.form2,response, 85200000,'年后1');
           response.goods.forEach((item) => {
             item.cbsc177 = item.orderClass;
             item.cbsc15 = item.supplierId;
@@ -1057,9 +1059,16 @@ export default {
     handleUpdate() {
       if (this.form.name != undefined) {
         let row = {};
-        row.cbpc07 = this.form.cbpc07;
-        row.cbsa08 = this.form.cbsa08;
-        row.cbwa09 = this.form.cbwa09;
+        // 编号
+        row.cbpg07 = this.form.cbpc07;
+        // 日期
+        row.cbpg08 = this.form2.cbsc08;
+        row.cbpg09 = this.form.cbpc07;
+        // 仓库
+        row.cbpg10 = this.form2.cbpc100;
+        row.cbpg11 = '';
+        // 结算货币
+        row.cbpg16 = this.form2.cbse166;
         // row.invoiceBank = this.form.remark;
         // row.invoiceNumber = this.form.skuName;
         // row.invoicePhone = this.form.sn;
@@ -1071,6 +1080,7 @@ export default {
         // row.telPeople = this.form.isQualified;
         row.cbpc01 = this.form.cbpc01;
         // console.log(this.form.id);
+        console.log(row,'数据',this.form2,'列表',this.tableData)
         PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
           // console.log(response,789)
           // this.form = response.data;
@@ -1082,7 +1092,8 @@ export default {
           // this.manageMode = response.manageMode;
           // this.ifEnabled = response.ifEnabled;
           // this.sysUserId = response.sysUserId;
-          console.log(this.form, 789);
+          console.log(response, 789);
+          return
           // this.submitShangpin();
           this.getList();
           this.open = false;

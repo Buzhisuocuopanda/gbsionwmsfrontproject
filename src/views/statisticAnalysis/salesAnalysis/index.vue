@@ -4,15 +4,26 @@
     <div class="filter-container">
       <el-form :inline="true"   >
 
-        <el-form-item label="经销商id"   class="item-r" >
+        <el-form-item label="经销商id" v-if="false"  class="item-r" >
           <el-input v-model="customerId" class="filter-item"  placeholder="经销商id" />
         </el-form-item>
 
-        <el-form-item label="供应商id"   class="item-r" >
+        <el-form-item label="供应商id" v-if="false"  class="item-r" >
           <el-input v-model="supplierId" class="filter-item"  placeholder="供应商id" />
         </el-form-item>
+        <el-form-item label="品牌"   class="item-r" >
+          <el-select v-model="queryParams.brand"  filterable placeholder="请输入关键词" :loading="loading3">
+            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
+          </el-select>
+        </el-form-item>
+
         <el-form-item label="型号"   class="item-r" >
           <el-input v-model="model" class="filter-item"  placeholder="型号" />
+        </el-form-item>
+        <el-form-item label="销售人员"   class="item-r" >
+          <el-select v-model="queryParams.saleUserId"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading4">
+            <el-option v-for="item in cauaList" :key="item.caua17" :label="item.caua17" :value="item.caua17"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item  label="日期"  class="item-r">
           <el-date-picker size="mini" v-model="dateRange"  type="daterange"
@@ -21,30 +32,25 @@
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="品牌"   class="item-r" >
-          <el-input v-model="brand" class="filter-item"  placeholder="品牌" />
-        </el-form-item>
 
-        <el-form-item label="销售人员id"   class="item-r" >
-          <el-input v-model="saleUserId" class="filter-item"  placeholder="销售人员id" />
-        </el-form-item>
+
 
 
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-         <!-- <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>-->
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
-        <el-table-column label="客户名称" align="center" header-align="center" prop="customerName" min-width="100px;" />
-        <el-table-column  label="下单时间" align="center" prop="createTimeMsg" min-width="120px;"/>
+        <el-table-column label="客户名称" align="center" header-align="center" prop="customerName" min-width="160px;" />
+        <el-table-column  label="下单时间" align="center" prop="createTime" :formatter="formatTime2" min-width="120px;"/>
         <el-table-column  label="供应商" align="center" prop="supplier" min-width="180px;"/>
         <el-table-column  label="销售人员" align="center" prop="saleUser"  min-width="160px;"/>
-        <el-table-column  label="销售订单号" align="center" prop="saleOrderNo" min-width="100px;"/>
-        <el-table-column  label="型号" align="center" prop="model" min-width="100px;"/>
-        <el-table-column  label="品牌" align="center" prop="brand" min-width="100px;"/>
-        <el-table-column  label="数量" align="center" prop="qty" min-width="100px;"/>
+        <el-table-column  label="销售订单号" align="center" prop="saleOrderNo" min-width="120px;"/>
+        <el-table-column  label="型号" align="center" prop="model" min-width="160px;"/>
+        <el-table-column  label="品牌" align="center" prop="brandName" min-width="100px;"/>
+        <el-table-column  label="数量" align="center" prop="qty" min-width="80px;"/>
         <el-table-column  label="金额" align="center" prop="price" min-width="100px;"/>
         <el-table-column  label="成本" align="center" prop="cost" min-width="100px;"/>
 
@@ -65,21 +71,23 @@
 </template>
 <script>
 
-import { getSalesAnalysisList } from "@/api/statisticAnalysis/index";
+import { getSalesAnalysisList,getswJsAllList,getsalermanAllList } from "@/api/statisticAnalysis/index";
+import {formatDate2} from "../../../utils";
 //
 // import { formatDate } from '../../../utils';
 export default {
   name: "salesAnalysis",
   data() {
     return {
-      customerId:"",
-      supplierId:"",
-      model:"",
-      brand:"",
-      saleUserId:"",
+      //下拉列表数据品牌
+      calaList:[],
+      //下拉列表数据销售人员
+      cauaList:[],
       dateRange:[],
 
       loading:false,
+      loading3:false,
+      loading4:false,
 
       // 查询参数
       queryParams: {
@@ -212,28 +220,21 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
-    this.onSearch()
+    this.onSearch();
+    this.getCalaList();
+    this.getCauaList();
   },
   methods: {
-/*    onSubmit() {},*/
-    /*handleSelectionChange() {},*/
-   /* formatStateType(row) {
-      if (row != null) {
-        if (row.status == 0) {
-          return "NO"
-        } else if (row.status == 4) {
-          return "OK"
-        }
-      }
-    },*/
     /** 重置按钮操作 */
     resetQuery() {
-      this.customerId = "";
-      this.supplierId = "";
-      this.model = "";
-
+      this.queryParams.customerId = "";
+      this.queryParams.supplierId = "";
+      this.queryParams.model = "";
+      this.queryParams.brand = "";
+      this.queryParams.saleUserId = "";
       this.queryParams.pageNum = 1;
-      this.resetForm("queryParams");
+      this.dateRange = [];
+      // this.resetForm("queryParams");
       this.onSearch();
     },
     /** 搜索按钮操作 */
@@ -242,20 +243,17 @@ export default {
       this.queryParams.pageNum = 1;
       this.onSearch();
     },
+    formatTime2(row){
+      return formatDate2(row.createTime);
+    },
     onSearch() {
-      this.queryParams.customerId = this.customerId;
-      this.queryParams.supplierId = this.supplierId;
-      this.queryParams.model = this.model;
-      this.queryParams.brand = this.brand;
-      this.queryParams.saleUserId = this.saleUserId;
       if(this.dateRange.length>=2){
         this.queryParams.startTime = this.dateRange[0];
         this.queryParams.endTime = this.dateRange[1];
+      }else {
+        this.queryParams.startTime = undefined;
+        this.queryParams.endTime = undefined;
       }
-      this.queryParams.endTime = this.endTime;
-
-
-      this.queryParams.goodsId = this.goodsId;
       this.loading = true;
       getSalesAnalysisList(this.queryParams).then(response => {
         this.loading = false;
@@ -268,6 +266,33 @@ export default {
         }
       })
     },
+    //下拉列表数据品牌
+    getCalaList(){
+      let param={};
+      this.loading2 = true;
+      getswJsAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.calaList = response.data;
+        } else {
+          this.calaList = [];
+        }
+      });
+    },
+    //下拉列表数据销售人员
+    getCauaList(){
+      let param={};
+      this.loading4 = true;
+      getsalermanAllList(param).then(response => {
+        this.loading4 = false;
+        if (response.data != null) {
+          this.cauaList = response.data;
+        } else {
+          this.cauaList = [];
+        }
+      });
+    },
+
   },
 };
 </script>

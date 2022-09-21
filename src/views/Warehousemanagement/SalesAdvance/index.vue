@@ -92,9 +92,9 @@
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:saleChange:remove']">删除</el-button>
-                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
-                            </el-button> -->
+                            </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:saleChange:sh']"
@@ -935,7 +935,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSH(item).then((res) => {
-                if (res.code == "200") { 
+                if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                 }else{
@@ -971,7 +971,7 @@ export default {
             userIds.forEach((item) => {
                 req.PurchaseinboundShs(item).then((res) => {
 
-                 if (res.code == "200") {   
+                 if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                   }else{
@@ -1011,7 +1011,7 @@ export default {
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
-                 if (res.code == "200") {  
+                 if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                  }else{
@@ -1048,7 +1048,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.Purchaseinbounds(item).then((res) => {
-  
+
                   if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
@@ -1066,7 +1066,7 @@ export default {
 
         /** 修改按钮操作 */
         handleUpdate() {
-           
+
                 let row = {}
                 row.orderNo = this.form.orderNo;
                 row.salerId = this.form.cbpc16;
@@ -1160,7 +1160,7 @@ export default {
             if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
 
-             if (response.code == "200") {    
+             if (response.code == "200") {
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 this.submitShangpin();
                 this.getList();
@@ -1267,14 +1267,14 @@ export default {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
 
-                    if (res.code == "200") { 
+                    if (res.code == "200") {
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
                      }else{
                         this.$message({ message: res.msg, type: 'error' });
-                     } 
+                     }
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1303,7 +1303,7 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
-             if (response.code == "200") { 
+             if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");

@@ -1,19 +1,27 @@
 <template>
+  <!--zgl-->
   <!--库存情况报表-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
 
         <el-form-item label="仓库"   class="item-r" >
-          <el-input v-model="whId" class="filter-item"  placeholder="仓库" />
-          <el-form-item label="品牌"   class="item-r" >
-            <el-input v-model="brandId" class="filter-item"  placeholder="品牌" />
-          </el-form-item>
-        </el-form-item><el-form-item label="商品"   class="item-r" >
-        <el-input v-model="goodsId" class="filter-item"  placeholder="商品" />
+          <el-select  v-model="queryParams.whId" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+            <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item  label="日期">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange"
+        <el-form-item label="品牌" style="margin-left: 20px"  class="item-r" >
+          <el-select v-model="queryParams.brandId" multiple  filterable placeholder="请输入关键词" :loading="loading3">
+            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="商品" style="margin-left: 20px"  class="item-r" >
+          <el-select v-model="queryParams.goodsId" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item  label="日期" style="margin-left: 20px">
+          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="height: 32px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
@@ -21,15 +29,16 @@
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-         <!-- <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>-->
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
         <!--<el-table-column label="仓库" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />-->
         <el-table-column  label="供应商" align="center" prop="supplieName"  min-width="100px;"/>
         <el-table-column  label="品牌" align="center" prop="brand" min-width="180px;"/>
-        <el-table-column  label="大类" align="center" prop="bClass" min-width="120px;"/>
-        <el-table-column  label="小类" align="center" prop="sClass" min-width="80px;"/>
+        <el-table-column  label="大类" align="center" prop="bclass" min-width="120px;"/>
+        <el-table-column  label="小类" align="center" prop="sclass" min-width="80px;"/>
         <!--<el-table-column  label="SKU" align="center" prop="qty" min-width="60px;"/>-->
         <el-table-column  label="型号" align="center" prop="model"  min-width="160px;"/>
         <el-table-column  label="期初库存" align="center" prop="firstQty" min-width="100px;"/>
@@ -60,29 +69,24 @@
 </template>
 <script>
 
-import { getfnSkuList } from "@/api/statisticAnalysis/index";
+import { getfnSkuList,getSwJsStoreSkuAllList,getswJsAllList,getSwJsGoodsAllList } from "@/api/statisticAnalysis/index";
 //
 // import { formatDate } from '../../../utils';
 export default {
   name: "fnSkuList",
   data() {
     return {
-      brandId:"",
-      whId:"",
-      goodsId:"",
-      /*formData: {
-        name: "",
-      },*/
+      //下拉列表数据商品
+      goodList:[],
+      //下拉列表数据仓库
+      storeSkuList:[],
+      //下拉列表数据品牌
+      calaList:[],
       dateRange:[],
-     /* tableData: [],*/
-      /*loadingOut:false,*/
-  /*    loadingState:false,*/
       loading:false,
-      /*queryForm:{},*/
-      /*listQuery: {
-        pageNum: 1,
-        pageSize: 10
-      },*/
+      loading1:false,
+      loading2:false,
+      loading3:false,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -222,46 +226,38 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
-    this.onSearch()
+    this.onSearch();
+    this.getStoreSkuList();
+    this.getCalaList();
   },
   methods: {
-/*    onSubmit() {},*/
-    /*handleSelectionChange() {},*/
-   /* formatStateType(row) {
-      if (row != null) {
-        if (row.status == 0) {
-          return "NO"
-        } else if (row.status == 4) {
-          return "OK"
-        }
-      }
-    },*/
     /** 重置按钮操作 */
     resetQuery() {
-      this.brandId = "";
-      this.whId = "";
-      this.goodsId = "";
-
+      this.queryParams.brandId = "";
+      this.queryParams.whId = "";
+      this.queryParams.goodsId = "";
+      this.dateRange = [];
       this.queryParams.pageNum = 1;
-      this.resetForm("queryParams");
+      // this.resetForm("queryParams");
       this.onSearch();
     },
     /** 搜索按钮操作 */
     handleQuery() {
       // var neirong = $('#miaoshu').val();
       this.queryParams.pageNum = 1;
+
       this.onSearch();
     },
     onSearch() {
-      this.queryParams.brandId = this.brandId;
-      this.queryParams.whId = this.whId;
+
       if(this.dateRange.length>=2){
         this.queryParams.startTime = this.dateRange[0];
         this.queryParams.endTime = this.dateRange[1];
+      }else {
+        this.queryParams.startTime = undefined;
+        this.queryParams.endTime = undefined;
       }
 
-
-      this.queryParams.goodsId = this.goodsId;
       this.loading = true;
       getfnSkuList(this.queryParams).then(response => {
         this.loading = false;
@@ -273,6 +269,56 @@ export default {
           this.total = 0
         }
       })
+    },
+    //导出
+    exprotData(){
+      this.download('/query/fnSkuListExcelList', {
+        ...this.queryParams
+      }, `库存情况报表查询数据_${new Date().getTime()}.xlsx`)
+    },
+
+    //获取下拉列表数据商品
+    getGoods(query){
+      if (query !== '') {
+        let param={cbpb08:query, cbpb15:query, cbpb12:query,};
+        this.loading1 = true;
+        getSwJsGoodsAllList(param).then(response => {
+          this.loading1 = false;
+          if (response.data != null) {
+            this.goodList = response.data;
+          } else {
+            this.goodList = [];
+          }
+        });
+      } else {
+        this.goodList = [];
+      }
+    },
+    //下拉列表数据仓库
+    getStoreSkuList(query){
+      let param={cbwa09:query};
+      this.loading3 = true;
+      getSwJsStoreSkuAllList(param).then(response => {
+        this.loading3 = false;
+        if (response.data != null) {
+          this.storeSkuList = response.data;
+        } else {
+          this.storeSkuList = [];
+        }
+      });
+    },
+    //下拉列表数据品牌
+    getCalaList(){
+      let param={};
+      this.loading2 = true;
+      getswJsAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.calaList = response.data;
+        } else {
+          this.calaList = [];
+        }
+      });
     },
   },
 };
