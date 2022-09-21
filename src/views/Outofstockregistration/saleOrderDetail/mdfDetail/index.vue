@@ -338,16 +338,16 @@
     </el-form>
 -->
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">售后单</div>
+      <div class="chuangjiancaigous">缺货登记单</div>
 
       <!-- 编号:56221589223 -->
 
       <el-row :gutter="20" style="margin-top: 20px;">
-        <el-col :span="8">
-          <el-form-item label="销售订单号:" prop="orderNo">
-            <el-input type="text" v-model="formData.saleOrderNo" style="width: 60%;" />
-          </el-form-item>
-        </el-col>
+        <!--        <el-col :span="8">
+                  <el-form-item label="销售订单号:" prop="orderNo">
+                    <el-input type="text" v-model="formData.saleOrderNo" style="width: 60%;" />
+                  </el-form-item>
+                </el-col>-->
 
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
@@ -361,10 +361,19 @@
             </el-select>
           </el-form-item>
 
+
+
         </el-col>
         <el-col :span="8">
-          <el-form-item label="问题原因:" prop="orderNo">
-            <el-input type="text" v-model="formData.question" style="width: 60%;" />
+          <el-form-item label="销售人员:" prop="saleUserId">
+            <el-select v-loadmore="saleUserloadMore" v-model="formData.saleUserId" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+              <el-option
+                v-for="item in saleUseroptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <!--        <el-col :span="8">
@@ -469,23 +478,25 @@
       -->
 
 
-      <el-row :gutter="20">
-        <el-col :span="8">
-          <el-form-item label="sn:" prop="receiveName">
-            <el-input type="text" v-model="formData.sn" style="width: 70%;" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
-          <el-form-item label="处理结果:" prop="receivePhone">
-            <el-input type="text" v-model="formData.answerMsg" style="width: 70%;" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
-          <el-form-item label="进度:" prop="fcNumber">
-            <el-input type="text" v-model="formData.process" style="width: 70%;" />
-          </el-form-item>
-        </el-col>
-      </el-row>
+      <!--
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="sn:" prop="receiveName">
+                  <el-input type="text" v-model="formData.sn" style="width: 70%;" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="处理结果:" prop="receivePhone">
+                  <el-input type="text" v-model="formData.answerMsg" style="width: 70%;" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="进度:" prop="fcNumber">
+                  <el-input type="text" v-model="formData.process" style="width: 70%;" />
+                </el-form-item>
+              </el-col>
+            </el-row>
+      -->
 
       <!--
             <el-row :gutter="20">
@@ -549,16 +560,16 @@
       <!--        </el-col>-->
       <!--      </el-row>-->
       <div>
-        <!--        <el-row>
-                  <el-col :span="24">
-                    <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
-                  </el-col>
-                </el-row>-->
+        <el-row>
+          <el-col :span="24">
+            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
+          </el-col>
+        </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsMsg" label="品牌" width="">
+          <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+                <el-select @change="goodsOnChange(scope.row)" v-loadmore="loadMore" v-model="scope.row.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -571,15 +582,16 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <!--          <el-table-column prop="qty" label="数量" width="150" >
-                      <template slot-scope="scope">
-                        <sapn>
-                          <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
-          &lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;
-                        </sapn>
-                      </template>
-                    </el-table-column>
-                    <el-table-column prop="normalPrice" label="标准单价" width="150">
+          <el-table-column prop="qty" label="数量" width="150" >
+            <template slot-scope="scope">
+              <sapn>
+                <el-input   v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+                <!--                @change="goodsQtyChange(scope.row)"-->
+                <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
+              </sapn>
+            </template>
+          </el-table-column>
+          <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
                       <template slot-scope="scope">
                         <sapn>
                           <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
@@ -608,14 +620,14 @@
                           <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>
                         </sapn>
                       </template>
-                    </el-table-column>
-                    <el-table-column prop="remark" label="备注" width="">
-                      <template slot-scope="scope">
-                        <sapn>
-                          <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
-                        </sapn>
-                      </template>
                     </el-table-column>-->
+          <el-table-column prop="remark" label="备注" width="">
+            <template slot-scope="scope">
+              <sapn>
+                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
+              </sapn>
+            </template>
+          </el-table-column>
           <!--          <el-table-column label="操作" align="center" width="80">
                       <template slot-scope="scope">
                         <span @click="_ly_delFrom(scope.row)">
@@ -727,7 +739,8 @@
 
   //供应商
   import ListLists from "@/components/ListMaintenance";
-  import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss } from "@/api/system/sales";
+
+  import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss } from "@/api/Outofstockregistration/sales";
 
   // //客户
   // import CustomerMainten from "@/components/CustomerMaintenance";
@@ -1038,6 +1051,7 @@
           cbpc01: ""
         },
         formData: {
+          cboe01: "",
           customerId: "",
           saleOrderNo: "",
           goodsId: "",
@@ -1815,7 +1829,7 @@
             if (response.code == "200") {
               this.$message.success("修改成功")
               this.$store.dispatch("tagsView/delView", this.$route)
-             this.$router.push({path: "/Warehousemanagement/sales", query: {id: 1}})
+             this.$router.push({path: "/Warehousemanagement/Outofstockregistration", query: {id: 1}})
 
             }else {
 
@@ -1893,6 +1907,7 @@
       console.log(param.id)
       saleOderDetailss(param).then(response => {
           if (response.code == "200") {
+            this.formData.cboe01 =response.data.cboe01
             this.formData.customerId =response.data.customerId
             this.formData.saleOrderNo =response.data.saleOrderNo
             this.formData.goodsId =response.data.goodsId
@@ -1917,8 +1932,8 @@
             this.formData.address =response.data.address
             this.formData.fcNumber =response.data.fcNumber
             this.formData.orderClassMsg =response.data.orderClassMsg
-            // this.tableData.push(...response.data.goods)
-            this.tableData=response.data.goodsId
+             this.tableData.push(...response.data.goods)
+            this.tableData=response.data.goods
             console.log(5555)
             console.log(this.formData)
 

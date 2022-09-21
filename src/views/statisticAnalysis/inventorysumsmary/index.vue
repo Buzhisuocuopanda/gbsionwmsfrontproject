@@ -195,7 +195,7 @@ export default {
         }
       });
     },
-    //下拉列表数据品牌
+    //下拉列表数据商品分类
     getCbpaList(){
       let param={};
       this.loading3 = true;

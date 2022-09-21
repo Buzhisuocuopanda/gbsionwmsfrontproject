@@ -6,13 +6,13 @@
       <div class="chuangjiancaigous">销售订单</div>
       <el-descriptions :column="3" border style="margin-top: 30px">
         <el-descriptions-item label="编号"  labelStyle	="width: 20%;text-align:center">{{this.formData.orderNo}}</el-descriptions-item>
-        <el-descriptions-item label="客户单号"  labelStyle	="width: 20%;text-align:center">{{this.formData.customerNo}}</el-descriptions-item>
-        <el-descriptions-item label="日期"  labelStyle	="width: 20%;text-align:center">{{this.formData.orderDate}}</el-descriptions-item>
+<!--        <el-descriptions-item label="客户单号"  labelStyle	="width: 20%;text-align:center">{{this.formData.customerNo}}</el-descriptions-item>-->
+        <el-descriptions-item label="日期"  labelStyle	="width: 20%;text-align:center">{{this.formData.orderDate }}</el-descriptions-item>
         <el-descriptions-item label="客户"  labelStyle	="width: 20%;text-align:center">{{this.formData.customerName}}</el-descriptions-item>
         <el-descriptions-item label="销售人员"  labelStyle	="width: 20%;text-align:center">{{this.formData.saleUser}}</el-descriptions-item>
-        <el-descriptions-item label="结算货币"  labelStyle	="width: 20%;text-align:center">{{this.formData.currencyMsg}}</el-descriptions-item>
-        <el-descriptions-item label="收货人"  labelStyle	="width: 20%;text-align:center">{{this.formData.receiveName}}</el-descriptions-item>
-        <el-descriptions-item label="电话"  labelStyle	="width: 20%;text-align:center">{{this.formData.receivePhone}}</el-descriptions-item>
+<!--        <el-descriptions-item label="结算货币"  labelStyle	="width: 20%;text-align:center">{{this.formData.currencyMsg}}</el-descriptions-item>-->
+<!--        <el-descriptions-item label="收货人"  labelStyle	="width: 20%;text-align:center">{{this.formData.receiveName}}</el-descriptions-item>-->
+<!--        <el-descriptions-item label="电话"  labelStyle	="width: 20%;text-align:center">{{this.formData.receivePhone}}</el-descriptions-item>
         <el-descriptions-item label="发票类型"  labelStyle	="width: 20%;text-align:center">{{this.formData.invoiceType}}</el-descriptions-item>
         <el-descriptions-item label="订单类型"  labelStyle	="width: 20%;text-align:center">{{this.formData.orderTypeMsg}}</el-descriptions-item>
         <el-descriptions-item label="工厂账号"  labelStyle	="width: 20%;text-align:center">{{this.formData.fcNumber}}</el-descriptions-item>
@@ -25,7 +25,7 @@
         <el-descriptions-item label="发票开户行"  labelStyle	="width: 20%;text-align:center">{{this.formData.fpbank}}</el-descriptions-item>
         <el-descriptions-item label="发票账号"  labelStyle	="width: 20%;text-align:center">{{this.formData.fpNumber}}</el-descriptions-item>
         <el-descriptions-item label="发票邮寄地址"  labelStyle	="width: 20%;text-align:center">{{this.formData.fpReceiveAddress}}</el-descriptions-item>
-        <el-descriptions-item label="其他"  labelStyle	="width: 20%;text-align:center">{{this.formData.other}}</el-descriptions-item>
+        <el-descriptions-item label="其他"  labelStyle	="width: 20%;text-align:center">{{this.formData.other}}</el-descriptions-item>-->
       </el-descriptions>
       <!-- 编号:56221589223 -->
 
@@ -279,10 +279,10 @@
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column prop="normalPrice" label="标准单价" width="150">
+<!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
             <template slot-scope="scope">
               <sapn>
-<!--                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>-->
+&lt;!&ndash;                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>&ndash;&gt;
                 <span>{{scope.row.normalPrice}}</span>
 
               </sapn>
@@ -291,7 +291,7 @@
           <el-table-column prop="currentPrice" label="本次单价" width="150">
             <template slot-scope="scope">
               <sapn>
-<!--                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>-->
+&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;
                 <span>{{scope.row.currentPrice}}</span>
 
               </sapn>
@@ -301,12 +301,12 @@
           <el-table-column prop="totalPrice" label="金额" width="150">
             <template slot-scope="scope">
               <sapn>
-<!--                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>-->
+&lt;!&ndash;                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>&ndash;&gt;
                 <span>{{scope.row.totalPrice}}</span>
 
               </sapn>
             </template>
-          </el-table-column>
+          </el-table-column>-->
 
 
           <el-table-column prop="remark" label="备注" width="">
@@ -399,15 +399,15 @@
 
     <el-descriptions :column="2" border >
       <el-descriptions-item label="本页数量小计"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumQty}}</el-descriptions-item>
-      <el-descriptions-item label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>
+<!--      <el-descriptions-item label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>-->
       <el-descriptions-item label="合计数量"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumQty}}</el-descriptions-item>
-      <el-descriptions-item label="合计金额"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>
-      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>
+<!--      <el-descriptions-item label="合计金额"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>-->
+<!--      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>-->
     </el-descriptions>
     <el-descriptions :column="3" border >
       <el-descriptions-item label="制单"  labelStyle	="width: 20%;text-align:center">{{this.formData.makeUser}}</el-descriptions-item>
-      <el-descriptions-item label="审核"  labelStyle	="width: 20%;text-align:center">{{this.formData.auditUser}}</el-descriptions-item>
-      <el-descriptions-item label="仓库"  labelStyle	="width: 20%;text-align:center">{{this.formData.ck}}</el-descriptions-item>
+<!--      <el-descriptions-item label="审核"  labelStyle	="width: 20%;text-align:center">{{this.formData.auditUser}}</el-descriptions-item>
+      <el-descriptions-item label="仓库"  labelStyle	="width: 20%;text-align:center">{{this.formData.ck}}</el-descriptions-item>-->
     </el-descriptions>
     <div style="margin-top: 30px">
       <el-row>
@@ -415,12 +415,13 @@
 <!--          &lt;!&ndash;            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>&ndash;&gt;-->
 <!--        </el-col>-->
       </el-row>
+<!--
       <el-table :data="auditData" border  style="width: 100%;margin-top: 10px; "  >
 
         <el-table-column prop="auditUser" label=审批人 width="300%" style="text-align:center">
           <template slot-scope="scope">
             <sapn>
-<!--              <el-input v-model="scope.row.auditUser" placeholder="审批人" style="" readonly></el-input>-->
+&lt;!&ndash;              <el-input v-model="scope.row.auditUser" placeholder="审批人" style="" readonly></el-input>&ndash;&gt;
               <span>{{scope.row.auditUser}}</span>
 
             </sapn>
@@ -429,7 +430,7 @@
         <el-table-column prop="description" label="审批详情" width="900%">
           <template slot-scope="scope">
             <sapn>
-<!--              <el-input v-model="scope.row.description" placeholder="审批详情" style=" "></el-input>-->
+&lt;!&ndash;              <el-input v-model="scope.row.description" placeholder="审批详情" style=" "></el-input>&ndash;&gt;
               <span>{{scope.row.description}}</span>
 
             </sapn>
@@ -439,7 +440,7 @@
         <el-table-column prop="auditResult" label="审批结果" width="300%" >
           <template slot-scope="scope">
             <div>
-<!--              <el-input  class="inputDeep" v-model="scope.row.auditResult" placeholder="审批结果" style="" readonly></el-input>-->
+&lt;!&ndash;              <el-input  class="inputDeep" v-model="scope.row.auditResult" placeholder="审批结果" style="" readonly></el-input>&ndash;&gt;
               <span>{{scope.row.auditResult}}</span>
 
             </div>
@@ -447,14 +448,15 @@
         </el-table-column>
 
 
-        <!--          <el-table-column label="操作" align="center" width="80">-->
-        <!--            <template slot-scope="scope">-->
-        <!--              <span @click="_ly_delFrom(scope.row)">-->
-        <!--                <i class="el-icon-error" style="color: red;"></i>-->
-        <!--              </span>-->
-        <!--            </template>-->
-        <!--          </el-table-column>-->
+        &lt;!&ndash;          <el-table-column label="操作" align="center" width="80">&ndash;&gt;
+        &lt;!&ndash;            <template slot-scope="scope">&ndash;&gt;
+        &lt;!&ndash;              <span @click="_ly_delFrom(scope.row)">&ndash;&gt;
+        &lt;!&ndash;                <i class="el-icon-error" style="color: red;"></i>&ndash;&gt;
+        &lt;!&ndash;              </span>&ndash;&gt;
+        &lt;!&ndash;            </template>&ndash;&gt;
+        &lt;!&ndash;          </el-table-column>&ndash;&gt;
       </el-table>
+-->
 
     </div>
     <div class="tinajia_dingwei">
@@ -492,6 +494,7 @@
 
   // //客户
   // import CustomerMainten from "@/components/CustomerMaintenance";
+  import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss } from "@/api/Outofstockregistration/sales";
 
   import Vue from 'vue';
   Vue.directive('loadmore', {
@@ -1249,7 +1252,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Warehousemanagement/Outofstockregistration", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1646,15 +1649,15 @@
       const param={
         orderId: this.$route.query.id
       }
-      saleOderDetail(param).then(response => {
+      saleOderDetailss(param).then(response => {
           if (response.code == "200") {
             // this.formData=response.data
             this.formData.id =response.data.id
-            this.formData.orderNo =response.data.orderNo
+            this.formData.orderNo =response.data.cboe07
             this.formData.customerNo =response.data.customerNo
             this.formData.customerId =response.data.customerId
             this.formData.customerName =response.data.customerName
-            this.formData.orderDate =response.data.orderDate
+            this.formData.orderDate =response.data.cboe08
             this.formData.saleUserId =response.data.saleUserId
             this.formData.saleUser =response.data.saleUser
             this.formData.currency =response.data.currency

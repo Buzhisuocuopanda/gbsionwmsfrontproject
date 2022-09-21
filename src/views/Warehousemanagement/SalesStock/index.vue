@@ -1274,9 +1274,9 @@ export default {
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
             const cbse01 = row.cbse01;
-            console.log(row)
+            console.log(row,cbse01)
             this.$router.push("/system/user-authhhhhs/role/" + cbse01);
-            // this.getList();
+            this.getList();
             
             // this.open = true;
             // console.log(row, 7788521);
