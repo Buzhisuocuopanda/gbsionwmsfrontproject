@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="Purchase_caigou">销售退货单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpg07 }}</span>
-            <span class="Purchase_riqii">日期：{{ value.cbpg08.slice(0, 10) }}</span>
+        <div class="Purchase_sum" v-for="(value, key) in userList" :key="key">
+            <span class="Purchase_bianhao">编号：{{ value.cbpg07 || '' }}</span>
+            <span class="Purchase_riqii">日期：{{ value.cbse08.slice(0,10) }}</span>
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
             <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList.slice(0, 1)"
+            <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList"
                 :key="key">
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">客户</template>{{
@@ -110,12 +110,12 @@
                     <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                         :labelStyle="{ 'text-align': 'center' }">
                         <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
-                            slot="label">本页数量小记</template>{{ totalCount }}
+                            slot="label">本页数量小记</template>{{ totalCount || '' }}
                     </el-descriptions-item>
                     <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                         :labelStyle="{ 'text-align': 'center' }">
                         <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
-                            slot="label">本页金额小记</template>{{ parseFloat(totalPrice).toFixed(2) }}
+                            slot="label">本页金额小记</template>{{ parseFloat(totalPrice).toFixed(2) || '' }}
                     </el-descriptions-item>
                 </el-descriptions>
             </div>
@@ -123,11 +123,11 @@
             <el-descriptions class="margin-top" title="" :column="2" border>
                 <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                     :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">合计数量</template>{{ totalCount }}
+                    <template slot="label">合计数量</template>{{ totalCount || '' }}
                 </el-descriptions-item>
                 <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                     :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">合计金额</template>{{ parseFloat(totalPrice).toFixed(2) }}
+                    <template slot="label">合计金额</template>{{ parseFloat(totalPrice).toFixed(2) || '' }}
                 </el-descriptions-item>
             </el-descriptions>
 
@@ -196,7 +196,7 @@ export default {
         //详情列表
         getList() {
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbse01;
+            const userId = this.$route.params && this.$route.params.cbpg01;
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
@@ -242,7 +242,12 @@ export default {
             for (let i = 0; i < this.userList.length; i++) {
                 totalPrice += this.userList[i].cbph09 * this.userList[i].cbph10;
             }
-            return totalPrice;
+            if(totalPrice){
+                return totalPrice
+            }else{
+                totalPrice = ''
+            }
+            
         }
     }
 };

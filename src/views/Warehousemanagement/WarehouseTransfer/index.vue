@@ -826,7 +826,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
-            this.idss = selection.map(item => item.cbpg01);
+            this.idss = selection.map(item => item.cbaa01);
             this.shenpiids = selection;
             this.single = selection.length != 1;
             this.multiple = !selection.length;
@@ -1191,7 +1191,7 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             console.log(row, 2222);
-            this.$modal.confirm('是否确认删除用户编号为"' + row.cbpg01 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除用户编号为"' + row.cbaa01 + '"的数据项？').then(function () {
                 return PurchasereturnorderRemove(JSON.stringify(row));
             }).then((response) => {
                 this.submitShangpin();

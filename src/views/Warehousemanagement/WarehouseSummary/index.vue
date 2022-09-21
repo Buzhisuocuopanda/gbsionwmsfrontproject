@@ -1296,8 +1296,13 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
+            console.log(row)
+            return
             const userId = row.cbpg01;
-            this.$router.push("/system/user-authhhhhhhhhh/role/" + userId);
+            this.$router.push({
+                path:"/system/user-authhhhhhhhhh/role/"+userId,
+            });
+            // this.$router.push("/system/user-pdhz/role/");
         },
         /** 创建操作 */
         handlepdhzone: function (row) {

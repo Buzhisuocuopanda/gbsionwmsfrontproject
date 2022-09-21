@@ -175,6 +175,21 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/system/user-authhhhhs',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/:cbse01(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesStock/SalesStockxg/index'),
+
+        meta: { title: '销售退货修改', activeMenu: '/Warehousemanagement/SalesStock' }
+      }
+    ]
+  },
+  {
     path: '/system/user-authhhhhh',
     component: Layout,
     hidden: true,
@@ -216,7 +231,7 @@ export const dynamicRoutes = [
       }
     ]
   },
-   {
+  {
     path: '/system/user-authhhhhhhhh',
     component: Layout,
     hidden: true,
@@ -236,7 +251,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpg01(\\d+)',
+        path: 'role/:userId',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/WarehouseSummary/WarehouseSummaryxq/index'),
         meta: { title: '仓库盘点详情', activeMenu: '/Warehousemanagement/WarehouseSummary' }
