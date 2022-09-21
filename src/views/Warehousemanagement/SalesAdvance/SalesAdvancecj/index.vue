@@ -986,10 +986,10 @@ import salerman from "@/components/salerman";
                 this.reset01()
                 // console.log(this.form2.cbpg161,111);
                 // console.log(this.form.cbpg01,222);
-                console.log(response.data.id, 333);
+                console.log(response, 333);
                 this.tableData.forEach((item) => {
-                  item.gsSalesOrders = response.data.id;
-                  item.salerId = this.from2.customerId;
+                  // item.gsSalesOrders = response.data.id;
+                  // item.salerId = this.from2.customerId;
                   console.log(item.gsSalesOrders,8523697412);
                 })
                 this._ly_ok();

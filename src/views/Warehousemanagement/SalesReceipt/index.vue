@@ -935,11 +935,14 @@ export default {
             console.log(row.cbpc01,8888);
 
             PurchaseinboundSH(row).then(response => {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
+             if (response.code == "200") {  
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '审批成功', type: 'success' });
+
+            }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             });
           }).catch(() => { });
         },
@@ -951,9 +954,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSH(item).then((res) => {
-                    // console.log(res, 123)
+                   if (res.code == "200") { 
                     this.getList();
                     this.$modal.msgSuccess("审批成功");
+
+                 }else{
+                   this.$message({ message: res.msg, type: 'error' });
+                }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -965,11 +972,13 @@ export default {
             this.$modal.confirm('是否要反审,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShs(row).then(response => {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
+             if (response.code == "200") { 
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '反审成功', type: 'success' });
+                }else{
+                   this.$message({ message: response.msg, type: 'error' });
+                }
             });
           }).catch(() => { });
         },
@@ -982,9 +991,12 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShs(item).then((res) => {
-                    // console.log(res, 123)
+                  if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess("反审成功");
+                    }else{
+                   this.$message({ message: res.msg, type: 'error' });
+                  } 
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -998,11 +1010,15 @@ export default {
             this.$modal.confirm('是否要标记完成,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShss(row).then(response => {
+              if (response.code == "200") {   
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '标记完成', type: 'success' });
+               }else{
+                 this.$message({ message: response.msg, type: 'error' });
+               }
             });
           }).catch(() => { });
         },
@@ -1014,9 +1030,12 @@ export default {
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
-                    // console.log(res, 123)
+                  if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess("标记完成");
+                  }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                  }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1025,23 +1044,17 @@ export default {
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
-            // console.log(row.cbpc01, 8888);
 
-            // Purchaseinbounds(row).then(response => {
-            //     console.log(this.form.cbpc01, 789)
-            //     // this.submitShangpin();
-            //     this.getList();
-            //     // this.open = false;
-            //     this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
-
-            // });
-
-            // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
+
+                   if (response.code == "200") { 
                     console.log(this.form.cbpc01, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
+                   }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                   } 
 
                 });
             }).catch(() => { });
@@ -1054,9 +1067,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.Purchaseinbounds(item).then((res) => {
+                  if (res.code == "200") {  
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("取消标记成功");
+                   }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                   }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1066,7 +1083,7 @@ export default {
 
         /** 修改按钮操作 */
         handleUpdate() {
-            if (this.form.name != undefined) {
+           
                 let row = {}
                 row.cbpc07 = this.form.cbpc07;
                 row.cbpc09 = this.form.cbsa01;
@@ -1076,23 +1093,22 @@ export default {
                 row.cbpc16 = this.form.cbpc16;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-
+                  if (response.code == "200") {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
+                  }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                 }
 
                 });
-
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
 
         },
 
         /** 详情按钮操作 */
         handlexiangqeng() {
-            if (this.form.name != undefined) {
+          
                 let row1 = {}
                 row.cbpc07 = this.form1.cbpc07;
                 row.cbsa08 = this.form1.cbsa08;
@@ -1101,18 +1117,17 @@ export default {
                 row.cbpc01 = this.form1.cbpc01;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-
+                if (response.code == "200") { 
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
-
+                 }else{
+                   this.$message({ message: response.msg, type: 'error' });
+                }
                 });
 
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
-
+           
         },
         /** 详情按钮操作**/
         handleSelect(row) {
@@ -1160,6 +1175,7 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
+
                 // console.log(response.posts, 12345678);
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
@@ -1266,10 +1282,16 @@ export default {
             this.$modal.confirm('是否确认删除,ponumber为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
+
+                     if (res.code == "200") {    
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                    }else{
+                        this.$message({ message: res.msg, type: 'error' });
+                    }
+
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1295,12 +1317,18 @@ export default {
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
             // console.log(row, 2222);
-            this.$modal.confirm('是否确认删除,ponumber为"' + row.cbpc01 + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除,ponumber为"' + row.ponumber + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
+
+            if (res.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
+              }else{
+                this.$message({ message: res.msg, type: 'error' });
+               }
+
             }).catch(() => { });
         },
         // /** 导出按钮操作 */
@@ -1325,7 +1353,7 @@ export default {
 
         /** 导入按钮操作 */
         handleImport() {
-            this.upload.title = "商品分类";
+            this.upload.title = "销售预订单入库单";
             this.upload.open = true;
         },
         /** 下载模板操作 */
