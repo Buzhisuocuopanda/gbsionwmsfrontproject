@@ -733,7 +733,7 @@
                     cbpd12: ""
                   }
                 }else{
-                  this.$message({ message: res.msg, type: 'error' });
+                  this.$message({ message: response.msg, type: 'error' });
                 }
                 if (count-- === 1) {
                   this._ly_save()
@@ -1011,7 +1011,7 @@
               }
             });
           } else {
-            this.$message.error('请注意规范');
+            // this.$message.error('请注意规范');
           }
         })
         //    this._ly_ok();

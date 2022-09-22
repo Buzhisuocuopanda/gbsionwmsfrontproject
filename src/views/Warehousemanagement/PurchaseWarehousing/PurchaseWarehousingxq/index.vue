@@ -194,12 +194,11 @@ export default {
                 //   item.cbpc01 = response.data.id;
                 //   console.log(item.cbpc01,8523697412);
                 // })
-
-                 this.userList.forEach((item)=>{
-                     this.userLists= item.goods;
-                     console.log(this.userLists,123456);
+                 let userlistss = res.data.rows.map(item=>{
+                    return item.goods;
                  })
-                 
+                 this.userLists = userlistss[0];
+                 console.log(this.userLists,123456);
                     console.log(res, 888999);
                     this.loading = false;
                 });

@@ -975,8 +975,8 @@ import salerman from "@/components/salerman";
                 // console.log(this.form.cbpg01,222);
                 console.log(response, 333);
                 this.tableData.forEach((item) => {
-                  // item.gsSalesOrders = response.data.id;
-                  // console.log(item.gsSalesOrders,8523697412);
+                  item.gsSalesOrders = response.data.id;
+                  console.log(response.data.id,8523697412);
                 })
                 this._ly_ok();
               }else{

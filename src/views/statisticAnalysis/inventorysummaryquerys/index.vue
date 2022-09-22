@@ -5,17 +5,17 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <el-select style="width: 300px" v-model="cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
+          <el-select style="width: 300px" v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
             <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="库位"   class="item-r" >
-          <el-select style="width: 300px" v-model="cblas" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getCblaList" :loading="loading3">
+          <el-select style="width: 300px" v-model="queryParams.cbla09s" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in cblaList" :key="item.cbla09" :label="item.cbla09" :value="item.cbla09"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" filterable remote reserve-keyword placeholder="请输入关键词"
+          <el-select v-model="queryParams.cbpb01" clearable filterable remote reserve-keyword placeholder="请输入关键词"
             :remote-method="getGoods"
             :loading="loadingGood">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
@@ -32,7 +32,8 @@
 
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column  v-if="false" align="center" prop="cbig01"  min-width="80px;"/>
         <el-table-column fixed label="仓库" align="center" prop="cbwa09"  min-width="80px;"/>
         <el-table-column fixed label="库位" align="center" prop="cbla09" min-width="80px;"/>
@@ -98,8 +99,8 @@ export default {
         pageNum: 1,
         pageSize: 10,
         total: this.total,
-        cbwa09: "",
-        cala09: "",
+        cbwa09s: [],
+        cbla09s: "",
         cbpb01: "",
         cbig10:"",
       },
@@ -134,8 +135,8 @@ export default {
 
     /** 重置按钮操作 */
     resetQuery() {
-      this.queryParams.cbwa09 = "";
-      this.queryParams.cala09 = "";
+      this.queryParams.cbwa09s = [];
+      this.queryParams.cbla09s = [];
       this.queryParams.cbpb01 = "";
       this.queryParams.cbig10 = "";
       this.queryParams.pageNum = 1;
@@ -200,7 +201,7 @@ export default {
     },
     //下拉列表数据库位
     getCblaList(query){
-      let param={pageNum:1,pageSize:100, cbla09:query};
+      let param={pageNum:1,pageSize:1000, cbla09:query};
       this.loading3 = true;
       getSwJsStoreAllList(param).then(response => {
         this.loading3 = false;

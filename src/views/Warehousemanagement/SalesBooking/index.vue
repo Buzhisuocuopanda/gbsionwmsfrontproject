@@ -747,6 +747,8 @@ export default {
         getList() {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            
+             if (response.code == "200") { 
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -755,6 +757,9 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              } 
             }
             );
         },
@@ -773,33 +778,50 @@ export default {
         //供应商
         getList01() {
             SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {   
                 this.postOptions = response.data.rows;
                 // console.log(response.data.rows,551100);
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             });
         },
         //库位
         getList02() {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {   
                 this.KuWeiOptions = response.data.rows;
                 // console.log(response.data.rows,663322);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }   
             });
         },
 
         //商品信息维护
         getList03() {
             GoodsList01(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+
+             if (response.code == "200") { 
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
                 // console.log(response.data.rows, 1655);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             } 
             });
         },
         //仓库信息维护
         getList04() {
             StoreSkuList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+              if (res.code == "200") {
                 this.postCangKu = response.data.rows;
                 // this.XinghaoOptions = response.data.rows;
                 // console.log(response.data.rows, 1655);
+              }else{
+               this.$message({ message: res.msg, type: 'error' });
+             }   
             });
         },
 

@@ -245,25 +245,25 @@
           <el-table-column
             label="收货人"
             align="left"
-            key="contacts"
+            key="contactss"
             width="120px;"
-            prop="contacts"
+            prop="contactss"
             sortable
           />
           <el-table-column
             label="收货电话"
             align="left"
-            key="phone"
+            key="phonee"
             width="120px;"
-            prop="phone"
+            prop="phonee"
             sortable
           />
           <el-table-column
             label="关联订单"
             align="left"
-            key="cala08"
+            key="cala089"
             width="120px;"
-            prop="cala08"
+            prop="cala089"
             sortable
           />
           <el-table-column
@@ -385,7 +385,7 @@
     </el-row>
 
     <!--订单创建-->
-    <el-dialog :visible.sync="open3">
+    <!-- <el-dialog :visible.sync="open3">
       <el-table
         border
         :header-cell-style="headClassssmtt"
@@ -465,579 +465,7 @@
           sortable
         />
       </el-table>
-      <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
-    </el-dialog>
-
-    <!-- 创建测试 -->
-    <el-dialog :visible.sync="open2" class="chuangjiandialog">
-      <span class="chuangjiancaigou">销售提货单</span>
-      <span class="chuangjianziti">编号:56221589223</span>
-      <span class="kehudingdang">客户订单号:56221589223</span>
-      <span class="chuangjianziti chuangjianriqi">日期:2022-07-12</span>
-      <el-form ref="form2" :model="form2" label-width="30%" style="">
-        <el-row>
-          <el-col style="margin-top: 2%; margin-left: 2%" :span="7">
-            <el-form-item label="客户:" prop="cala08">
-              <!--<el-input v-model="form.cala08" maxlength="30" style="width:80%" />-->
-              <el-select
-                v-model="form2.supplierId"
-                placeholder=""
-                style="width: 80%; border: solid #eee thin"
-              >
-                <el-option
-                  v-for="item in ponpaixenghaomiaoshu"
-                  :key="item.brand"
-                  :label="item.brand"
-                  :value="item.brand"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: 2%" :span="7">
-            <el-form-item label="仓库:" prop="cbpc100">
-              <el-popover placement="bottom-start" trigger="click">
-                <kuweixxweihu ref="kuweixxweihu" @selected="selected01" />
-                <el-select
-                  slot="reference"
-                  v-model="form2.cbpc100"
-                  placeholder=""
-                  readonly
-                  style="border: solid #eee thin; width: 77%"
-                >
-                </el-select>
-              </el-popover>
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: 2%; margin-left: -3%" :span="7">
-            <el-form-item label="销售人员:" prop="cala10">
-              <!--<el-input v-model="form.cala10" placeholder="" maxlength="30" style="width:80%" />-->
-              <el-select
-                v-model="form2.supplierId"
-                placeholder=""
-                style="width: 80%; border: solid #eee thin"
-              >
-                <el-option
-                  v-for="item in ponpaixenghaomiaoshu"
-                  :key="item.brand"
-                  :label="item.brand"
-                  :value="item.brand"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col style="margin-top: -0.4%; margin-left: 2%" :span="7">
-            <el-form-item label="联系人:" prop="cala08">
-              <el-input
-                v-model="form2.cala08"
-                maxlength="30"
-                style="width: 80%; border: solid #eee thin"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: -0.4%" :span="7">
-            <el-form-item label="电话:" prop="cala09">
-              <el-input
-                v-model="form2.cala09"
-                placeholder=""
-                maxlength="30"
-                style="width: 80%; border: solid #eee thin"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: -0.4%; margin-left: -3%" :span="7">
-            <el-form-item label="客户等级:" prop="cala10">
-              <!--<el-input v-model="form.cala10" placeholder="" maxlength="30" style="width:80%" />-->
-              <el-select
-                v-model="form2.supplierId"
-                placeholder=""
-                style="width: 80%; border: solid #eee thin"
-              >
-                <el-option
-                  v-for="item in ponpaixenghaomiaoshu"
-                  :key="item.brand"
-                  :label="item.brand"
-                  :value="item.brand"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col style="margin-top: -0.4%; margin-left: 2%" :span="7">
-            <el-form-item label="结算货币:" prop="cbpc16">
-              <!--<el-input v-model="form.cala10" placeholder="" maxlength="30" style="width:80%" />-->
-              <el-select
-                v-model="form2.cbpc16"
-                placeholder=""
-                style="width: 80%; border: solid #eee thin"
-              >
-                <el-option
-                  v-for="item in jiageLeixeng"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: -0.4%" :span="7">
-            <el-form-item label="收货人:" prop="cala09">
-              <el-input
-                v-model="form2.cala09"
-                placeholder=""
-                maxlength="30"
-                style="width: 80%; border: solid #eee thin"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: -0.4%; margin-left: -3%" :span="7">
-            <el-form-item label="关联订单:" prop="cala10">
-              <el-input
-                v-model="form2.cala10"
-                placeholder=""
-                maxlength="30"
-                style="width: 80%; border: solid #eee thin"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col style="margin-top: -0.4%; margin-left: 2%" :span="7">
-            <el-form-item label="收货电话:" prop="cala08">
-              <el-input
-                v-model="form2.cala08"
-                maxlength="30"
-                style="width: 80%; border: solid #eee thin"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: -0.4%" :span="7">
-            <el-form-item label="收货地址:" prop="cala09">
-              <el-input
-                v-model="form2.cala09"
-                placeholder=""
-                maxlength="30"
-                style="width: 80%; border: solid #eee thin"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-
-        <div class="hello" style="margin-top: 0.5%">
-          <div class="box1">
-            <table
-              border="1"
-              style="border: solid #eee thin"
-              cellspacing="0"
-              cellpadding="1"
-              class="tablebiankuan table-head"
-              width="100%"
-              height="40px"
-            >
-              <thead style="border: solid #eee thin">
-                <tr style="height: 40px; border: solid #eee thin">
-                  <th
-                    style="
-                      width: 40px;
-                      border: solid #eee thin;
-                      text-align: left;
-                    "
-                  >
-                    编号
-                  </th>
-                  <th
-                    style="
-                      width: 287px;
-                      border: solid #eee thin;
-                      text-align: left;
-                    "
-                  >
-                    供应商
-                  </th>
-                  <th
-                    style="
-                      width: 156px;
-                      border: solid #eee thin;
-                      text-align: left;
-                    "
-                  >
-                    订单分类
-                  </th>
-                  <th
-                    style="
-                      width: 151px;
-                      border: solid #eee thin;
-                      text-align: left;
-                    "
-                  >
-                    品牌
-                  </th>
-                  <th
-                    style="
-                      width: 162px;
-                      border: solid #eee thin;
-                      text-align: left;
-                    "
-                  >
-                    型号
-                  </th>
-                  <th
-                    style="
-                      width: 158px;
-                      border: solid #eee thin;
-                      text-align: left;
-                    "
-                  >
-                    描述
-                  </th>
-                  <th
-                    style="
-                      border: solid #eee thin;
-                      width: 122px;
-                      text-align: left;
-                    "
-                  >
-                    数量
-                  </th>
-                  <th
-                    style="
-                      border: solid #eee thin;
-                      width: 128px;
-                      text-align: left;
-                    "
-                  >
-                    单价
-                  </th>
-                  <th
-                    style="
-                      border: solid #eee thin;
-                      width: 120px;
-                      text-align: left;
-                    "
-                  >
-                    金额
-                  </th>
-                  <th
-                    style="
-                      border: solid #eee thin;
-                      width: 135px;
-                      text-align: left;
-                    "
-                  >
-                    剩余未发量
-                  </th>
-                  <th
-                    style="
-                      border: solid #eee thin;
-                      width: 130px;
-                      text-align: left;
-                    "
-                  >
-                    订单占用量
-                  </th>
-                  <th
-                    style="
-                      border: solid #eee thin;
-                      width: 130px;
-                      text-align: left;
-                    "
-                  >
-                    备注
-                  </th>
-                  <th
-                    style="
-                      border: solid #eee thin;
-                      width: 88px;
-                      text-align: left;
-                    "
-                  >
-                    操作
-                  </th>
-                </tr>
-              </thead>
-            </table>
-            <div class="table-body" style="">
-              <table
-                border="1"
-                style="border: solid #ffffff thin; width: 1440px; height: 42px"
-                cellspacing="0"
-                class="tablebiankuan"
-              >
-                <tr style="">
-                  <td style="width: 50px; border: solid #eee thin">1</td>
-                  <td style="width: 340px; border: solid #eee thin">
-                    <el-popover placement="bottom-start" trigger="click">
-                      <supplierMaintenance
-                        ref="supplierMaintenance"
-                        @selected="selected02"
-                      />
-                      <el-select
-                        slot="reference"
-                        v-model="form2.cbpc099"
-                        placeholder=""
-                        readonly
-                        style="width: 100%"
-                      >
-                      </el-select>
-                    </el-popover>
-                  </td>
-                  <td style="width: 175px; border: solid #eee thin">
-                    <el-select
-                      v-model="form2.supplierId"
-                      placeholder=""
-                      style=""
-                    >
-                      <el-option
-                        v-for="item in ponpaixenghaomiaoshu"
-                        :key="item.brand"
-                        :label="item.brand"
-                        :value="item.brand"
-                      >
-                      </el-option>
-                    </el-select>
-                  </td>
-                  <td style="width: 175px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 190px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 187px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 140px; border: solid #eee thin">
-                    <el-input
-                      type="text"
-                      v-model="form2.cbsa07"
-                      @blur="chen()"
-                      style=""
-                    />
-                  </td>
-                  <td style="width: 149px; border: solid #eee thin">
-                    <el-input
-                      type="text"
-                      v-model="form2.cbsa09"
-                      :disabled="true"
-                      style=""
-                    />
-                  </td>
-                  <td style="width: 104px; border: solid #eee thin">
-                    <!-- <el-input type="text" v-model="form2.supplierId" style="" /> -->
-                    <el-input-number
-                      v-model="form2.cbsa10"
-                      :min="0"
-                      :controls="false"
-                      :precision="2"
-                      style="width: 81px"
-                    ></el-input-number>
-                  </td>
-                  <td style="width: 156px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 150px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 151px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td
-                    style="width: 77px; border: solid #eee thin"
-                    v-bind="true"
-                  >
-                    <el-button
-                      size="mini"
-                      type="text"
-                      style="border: 0 !important; margin-left: 10px"
-                      icon="el-icon-plus"
-                      @click="addData"
-                      >添加
-                    </el-button>
-                  </td>
-                </tr>
-                <tr v-for="(item, index) in tianjiahang" :key="index">
-                  <td style="width: 50px; border: solid #eee thin">
-                    {{ index + 1 + 1 }}
-                  </td>
-                  <td style="width: 340px; border: solid #eee thin">
-                    <el-popover placement="bottom-start" trigger="click">
-                      <supplierMaintenance
-                        ref="supplierMaintenance"
-                        @selected="selected02"
-                      />
-                      <el-select
-                        slot="reference"
-                        v-model="form2.cbpc099"
-                        placeholder=""
-                        readonly
-                        style="width: 100%"
-                      >
-                      </el-select>
-                    </el-popover>
-                  </td>
-                  <td style="width: 175px; border: solid #eee thin">
-                    <el-select
-                      v-model="form2.supplierId"
-                      placeholder=""
-                      style=""
-                    >
-                      <el-option
-                        v-for="item in ponpaixenghaomiaoshu"
-                        :key="item.brand"
-                        :label="item.brand"
-                        :value="item.brand"
-                      >
-                      </el-option>
-                    </el-select>
-                  </td>
-                  <td style="width: 175px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 190px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 187px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 140px; border: solid #eee thin">
-                    <el-input
-                      type="text"
-                      v-model="form2.cbsa07"
-                      @blur="chen()"
-                      style=""
-                    />
-                  </td>
-                  <td style="width: 149px; border: solid #eee thin">
-                    <el-input
-                      type="text"
-                      v-model="form2.cbsa09"
-                      :disabled="true"
-                      style=""
-                    />
-                  </td>
-                  <td style="width: 104px; border: solid #eee thin">
-                    <!-- <el-input type="text" v-model="form2.supplierId" style="" /> -->
-                    <el-input-number
-                      v-model="form2.cbsa10"
-                      :min="0"
-                      :controls="false"
-                      :precision="2"
-                      style="width: 81px"
-                    ></el-input-number>
-                  </td>
-                  <td style="width: 156px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 150px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 151px; border: solid #eee thin">
-                    <el-input type="text" v-model="form2.supplierId" style="" />
-                  </td>
-                  <td style="width: 77px; border: solid #eee thin">
-                    <el-button
-                      size="mini"
-                      type="text"
-                      style="border: 0 !important; margin-left: 10px"
-                      icon="el-icon-delete"
-                      @click="deletData(index)"
-                      >删除
-                    </el-button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </el-form>
-      <div>
-        <el-button type="primary" class="buttonbaocuen" @click="handleAdd"
-          >保存</el-button
-        >
-        <el-button @click="cancel9" style="margin-left: 1%">取 消</el-button>
-      </div>
-    </el-dialog>
-
-    <!--修改-->
-    <el-dialog :visible.sync="open">
-      <div style="margin-top: -30px">
-        <span style="font-size: 20px">销售提货单</span>
-        <hr />
-      </div>
-      <el-form
-        ref="form"
-        :model="form"
-        label-width="30%"
-        style="margin-left: -15%; margin-top: 3%"
-      >
-        <el-row>
-          <el-col style="margin-top: 1%">
-            <el-form-item label="编号:" prop="orderNo">
-              <el-input
-                v-model="form.orderNo"
-                maxlength="30"
-                style="width: 50%"
-              />
-            </el-form-item>
-          </el-col>
-          <!-- <el-col style="margin-top:1%;">
-                        <el-form-item label="日期:" prop="cbpc08">
-                            <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
-                                style="width:50%" />
-                        </el-form-item>
-                    </el-col> -->
-        </el-row>
-        <el-row>
-          <el-col style="margin-top: 1%">
-            <el-form-item label="客户:" prop="customerName">
-              <el-input
-                v-model="form.customerName"
-                placeholder=""
-                maxlength="30"
-                style="width: 50%"
-              />
-              <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: 1%">
-            <el-form-item label="联系人:" prop="contacts">
-              <el-input
-                v-model="form.contacts"
-                placeholder=""
-                maxlength="30"
-                style="width: 50%"
-              />
-              <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-            </el-form-item>
-          </el-col>
-          <el-col style="margin-top: 1%">
-            <el-form-item label="联系人电话:" prop="phone">
-              <el-input
-                v-model="form.phone"
-                placeholder=""
-                maxlength="30"
-                style="width: 50%"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="handleUpdate">确 定</el-button>
-        <el-button @click="cancells">取 消</el-button>
-      </div>
-    </el-dialog>
+    </el-dialog> -->
 
     <!-- 用户导入对话框 -->
     <el-dialog
@@ -1100,6 +528,9 @@ import {
   PurchaseinboundLists,
   Purchaseinbounddingdanxsdd,
 } from "@/api/Warehousemanagement/Saleslading";
+
+import { PurchaseinboundList } from "@/api/Warehousemanagement/PurchaseWarehousing";
+
 import * as req from "@/api/Warehousemanagement/Saleslading";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -1517,8 +948,8 @@ export default {
     //仓库
     this.getList04();
 
-    //销售订单
-    this.getList09();
+    // //销售订单
+    // this.getList09();
 
     this.getConfigKey("sys.user.initPassword").then((response) => {
       // this.initPassword = response.msg;
@@ -1589,17 +1020,21 @@ export default {
     },
 
     /** 销售提货单列表 */
-    getList() {
-      this.loading = true;
-      Purchaseinbounddingdancx(
-        this.addDateRange(this.queryParams, this.dateRange)
-      ).then((response) => {
-        this.userList = response.data.rows;
-        this.total = response.data.total;
-        console.log(response, 339688);
-        this.loading = false;
-      });
-    },
+ /** 查询用户列表 */
+        getList() {
+            this.loading = true;
+            Purchaseinbounddingdancx(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                this.userList = response.data.rows;
+                this.total = response.data.total;
+                // //供应商
+                // this.postOptions = response.data.content;
+                // console.log(this.userList, daterange3369);
+                console.log(response, 339688);
+                // this.deleteFlag = response.data.rows.deleteFlag;
+                this.loading = false;
+            }
+            );
+        },
 
     /** 销售订单列表 */
     getList09() {
