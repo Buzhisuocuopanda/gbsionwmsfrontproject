@@ -681,7 +681,7 @@ export default {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
 
-             if (res.code == "200") {    
+            
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -690,11 +690,8 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
-              }else{
-                this.$message({ message: res.msg, type: 'error' });
-             }    
-            }
-            );
+                
+            });
         },
 
         /** 详情列表 */

@@ -100,201 +100,6 @@
             </el-col>
         </el-row>
 
-
-
-
-        <!-- 创建测试 -->
-        <el-dialog :visible.sync="open2" class="chuangjiandialog">
-            <span class="chuangjiancaigou">仓库盘点</span>
-            <span class="chuangjianziti">编号:56221589223</span>
-            <span class="chuangjianziti chuangjianriqi">日期:2022-07-12</span>
-            <el-form ref="form2" :model="form2" label-width="30%" style="">
-                <el-row>
-                    <el-col style="margin-top:2%;margin-left: 2%;" :span="7">
-                        <el-form-item label="客户:" prop="cala08">
-                            <!--<el-input v-model="form.cala08" maxlength="30" style="width:80%" />-->
-                            <el-select v-model="form.supplierId" placeholder=""
-                                style="width:80%; border: solid #eee thin;">
-                                <el-option v-for="item in ponpaixenghaomiaoshu" :key="item.brand" :label="item.brand"
-                                    :value="item.brand">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:2%;" :span="7">
-                        <el-form-item label="仓库:" prop="cbpc100">
-                            <el-popover placement="bottom-start" trigger="click">
-                                <kuweixxweihu ref="kuweixxweihu" @selected="selected01" />
-                                <el-select slot="reference" v-model="form2.cbpc100" placeholder="" readonly
-                                    style="border:solid #eee thin; width:77%;">
-                                </el-select>
-                            </el-popover>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">
-                        <el-form-item label="结算货币:" prop="cbpc16">
-                            <!--<el-input v-model="form.cala10" placeholder="" maxlength="30" style="width:80%" />-->
-                            <el-select v-model="form2.cbpc16" placeholder=""
-                                style="width:80%; border: solid #eee thin;">
-                                <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
-                                    :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:-0.4%;" :span="7">
-                        <el-form-item label="关联订单:" prop="cala10">
-                            <el-input v-model="form.cala10" placeholder="" maxlength="30"
-                                style="width:80%;border:solid #eee thin" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-
-                <div class="hello" style="margin-top: 0.5%;">
-                    <div class="box1">
-                        <table border="1" style=" border: solid #eee thin;" cellspacing="0" cellpadding="1"
-                            class="tablebiankuan table-head" width="100%" height="40px">
-                            <thead style=" border: solid #eee thin;">
-                                <tr style="height:40px; border: solid #eee thin;">
-                                    <th style="width: 40px; border: solid #eee thin;text-align: left;">编号</th>
-                                    <th style="width:287px; border: solid #eee thin;text-align: left;">供应商</th>
-                                    <th style="width:156px; border: solid #eee thin;text-align: left;">订单分类</th>
-                                    <th style="width:151px; border: solid #eee thin;text-align: left;">品牌</th>
-                                    <th style="width:162px; border: solid #eee thin;text-align: left;">型号</th>
-                                    <th style=" width:158px; border: solid #eee thin;text-align: left;">描述</th>
-                                    <th style=" border: solid #eee thin;width:122px;text-align: left;">数量</th>
-                                    <th style=" border: solid #eee thin;width:128px;text-align: left;">单价</th>
-                                    <th style=" border: solid #eee thin;width:120px;text-align: left;">金额</th>
-                                    <!-- <th style=" border: solid #eee thin; width: 135px;text-align: left;">剩余未发量</th>
-                                    <th style=" border: solid #eee thin; width: 130px;text-align: left;">订单占用量</th> -->
-                                    <th style=" border: solid #eee thin;width: 130px;text-align: left;">备注</th>
-                                    <th style=" border: solid #eee thin;width: 88px;text-align: left;">操作</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <div class="table-body" style="">
-                            <table border="1" style=" border: solid #ffffff thin; width:1440px;height:42px;"
-                                cellspacing="0" class="tablebiankuan">
-                                <tr style="">
-                                    <td style="width: 47px;border:solid #eee thin;">1</td>
-                                    <td style="width: 340px;  border:solid #eee thin;">
-                                        <el-popover placement="bottom-start" trigger="click">
-                                            <supplierMaintenance ref="supplierMaintenance" @selected="selected02" />
-                                            <el-select slot="reference" v-model="form2.cbpc099" placeholder="" readonly
-                                                style=" width:100%;">
-                                            </el-select>
-                                        </el-popover>
-                                    </td>
-                                    <td style="width: 175px;border:solid #eee thin;">
-                                        <el-select v-model="form2.supplierId" placeholder="" style="">
-                                            <el-option v-for="item in ponpaixenghaomiaoshu" :key="item.brand"
-                                                :label="item.brand" :value="item.brand">
-                                            </el-option>
-                                        </el-select>
-                                    </td>
-                                    <td style="width: 177px;  border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 190px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 187px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 140px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa07" @blur="chen()" style="" />
-                                    </td>
-                                    <td style="width: 149px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa09" :disabled="true" style="" />
-                                    </td>
-                                    <td style="width: 120px;border:solid #eee thin;">
-                                        <!-- <el-input type="text" v-model="form2.supplierId" style="" /> -->
-                                        <el-input-number v-model="form2.cbsa10" :min="0" :controls="false"
-                                            :precision="2" style="width:81px;"></el-input-number>
-                                    </td>
-                                    <!-- <td style="width: 156px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 150px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td> -->
-                                    <td style="width: 151px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 88px;border:solid #eee thin;" v-bind="true">
-                                        <el-button size="mini" type="text"
-                                            style=" border: 0 !important;margin-left: 10px;" icon="el-icon-plus"
-                                            @click="addData">添加
-                                        </el-button>
-                                    </td>
-                                </tr>
-                                <tr v-for="(item, index) in tianjiahang" :key="index">
-                                    <td style="width: 50px;border:solid #eee thin;">{{ (index + 1) + 1 }}</td>
-                                    <td style="width: 340px;  border:solid #eee thin;">
-                                        <el-popover placement="bottom-start" trigger="click">
-                                            <supplierMaintenance ref="supplierMaintenance" @selected="selected02" />
-                                            <el-select slot="reference" v-model="form2.cbpc099" placeholder="" readonly
-                                                style=" width:100%;">
-                                            </el-select>
-                                        </el-popover>
-                                    </td>
-                                    <td style="width: 175px;border:solid #eee thin;">
-                                        <el-select v-model="form2.supplierId" placeholder="" style="">
-                                            <el-option v-for="item in ponpaixenghaomiaoshu" :key="item.brand"
-                                                :label="item.brand" :value="item.brand">
-                                            </el-option>
-                                        </el-select>
-                                    </td>
-                                    <td style="width: 177px;  border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 190px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 187px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 140px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa07" @blur="chen()" style="" />
-                                    </td>
-                                    <td style="width: 149px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.cbsa09" :disabled="true" style="" />
-                                    </td>
-                                    <td style="width: 120px;border:solid #eee thin;">
-                                        <!-- <el-input type="text" v-model="form2.supplierId" style="" /> -->
-                                        <el-input-number v-model="form2.cbsa10" :min="0" :controls="false"
-                                            :precision="2" style="width:81px;"></el-input-number>
-                                    </td>
-                                    <!-- <td style="width: 156px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 150px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td> -->
-                                    <td style="width: 151px;border:solid #eee thin;">
-                                        <el-input type="text" v-model="form2.supplierId" style="" />
-                                    </td>
-                                    <td style="width: 77px;border:solid #eee thin;">
-                                        <el-button size="mini" type="text"
-                                            style=" border: 0 !important;margin-left: 10px;" icon="el-icon-delete"
-                                            @click="deletData(index)">删除
-                                        </el-button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </el-form>
-            <div>
-                <el-button type="primary" class="buttonbaocuen buttonhandtuo" @click="handleAdd">保存</el-button>
-                <el-button @click="cancel9" style="margin-left:1%">取 消</el-button>
-            </div>
-        </el-dialog>
-
-
         <!--修改-->
         <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
@@ -843,6 +648,7 @@ export default {
         getList() {
             this.loading = true;
             SkuBarcodeLists(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {   
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -851,27 +657,42 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              } 
             }
             );
         },
         //供应商
         getList01() {
             SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+
+              if (response.code == "200") {  
                 this.postOptions = response.data.rows;
                 // console.log(response.data.rows,551100);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+            }
+   
             });
         },
         //库位
         getList02() {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            
+             if (response.code == "200") {   
                 this.KuWeiOptions = response.data.rows;
                 // console.log(response.data.rows,663322);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              } 
             });
         },
 
         //商品信息维护
         getList03() {
             GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
@@ -1029,12 +850,16 @@ export default {
             console.log(row.cbpc01, 8888);
 
             Purchaseinboundsho(row).then(response => {
+            
+             if (response.code == "200") {    
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '审批成功', type: 'success' });
-
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+               }  
             });
         },
         //盘点完成上面内容
@@ -1044,9 +869,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinBoundshf(item).then((res) => {
+                 if (res.code == "200") {  
                     console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("审批成功");
+                  }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                  }
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1057,11 +886,16 @@ export default {
             console.log(row.cbpc01, 8888);
 
             PurchaseinboundSht(row).then(response => {
+            
+             if (response.code == "200") {   
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '反审成功', type: 'success' });
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             }
 
             });
         },
@@ -1073,9 +907,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSht(item).then((res) => {
+                 if (res.code == "200") { 
                     console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("反审成功");
+                  }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                  }
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1089,11 +927,15 @@ export default {
             console.log(row.cbpc01, 8888);
 
             PurchaseinBoundshf(row).then(response => {
+              if (response.code == "200") {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '恭喜你，盘点完成', type: 'success' });
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
 
             });
          }).catch(() => { });
@@ -1107,9 +949,14 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinBoundshf(item).then((res) => {
+                 if (res.code == "200") {
                     console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("盘点完成");
+                  }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                  }
+
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1122,9 +969,13 @@ export default {
             console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记为"' + row.cbsh01 + '"的数据项？').then(() => {
                 PurchaseinboundShtt(row).then(response => {
+                  if (response.code == "200") { 
                     console.log(this.form.cbpc01, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
+                  }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
 
                 });
             }).catch(() => { });
@@ -1145,9 +996,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShtt(item).then((res) => {
+                 if (res.code == "200") {  
                     console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("取消成功");
+                 }else{
+                     this.$message({ message: res.msg, type: 'error' });
+                }
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -1184,11 +1039,16 @@ export default {
                     // this.manageMode = response.manageMode;
                     // this.ifEnabled = response.ifEnabled;
                     // this.sysUserId = response.sysUserId;
+                 if (response.code == "200") {  
                     console.log(this.form, 789)
                     // this.submitShangpin();
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
+                 }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                 }
+
 
                 });
 
@@ -1242,6 +1102,8 @@ export default {
             // this.$refs["form2"][0].validate((item) => {
             //     if (item) {
             PurchasereturnordersAdd(this.form2).then(response => {
+
+             if (response.code == "200") {    
                 console.log(response.posts, 12345678);
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
@@ -1250,7 +1112,9 @@ export default {
                 this.getList();
                 this.open2 = false;
                 this.reset01();
-
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             } 
                 // console.log(this.form2.ifEnabled, 123456);
             });
             //     } else {
@@ -1344,10 +1208,14 @@ export default {
             this.$modal.confirm('是否确认删除仓库为"' + this.idss + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchasereturnorderRemove(item).then((res) => {
+                     if (res.code == "200") { 
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                     }else{
+                        this.$message({ message: res.msg, type: 'error' });
+                     } 
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1376,9 +1244,13 @@ export default {
             this.$modal.confirm('是否确认删除用户编号为"' + row.cbpg01 + '"的数据项？').then(function () {
                 return PurchasereturnorderRemove(JSON.stringify(row));
             }).then((response) => {
+             if (response.code == "200") { 
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */
