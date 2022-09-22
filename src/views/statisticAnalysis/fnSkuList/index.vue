@@ -6,17 +6,17 @@
       <el-form :inline="true"   >
 
         <el-form-item label="仓库"   class="item-r" >
-          <el-select  v-model="queryParams.whId" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+          <el-select  v-model="queryParams.whIds" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="品牌" style="margin-left: 20px"  class="item-r" >
-          <el-select v-model="queryParams.brandId" multiple  filterable placeholder="请输入关键词" :loading="loading3">
+          <el-select v-model="queryParams.brandIds" multiple  filterable placeholder="请输入关键词" :loading="loading3">
             <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品" style="margin-left: 20px"  class="item-r" >
-          <el-select v-model="queryParams.goodsId" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+          <el-select v-model="queryParams.goodsIds" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
@@ -33,7 +33,8 @@
           <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
         <!--<el-table-column label="仓库" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />-->
         <el-table-column  label="供应商" align="center" prop="supplieName"  min-width="100px;"/>
         <el-table-column  label="品牌" align="center" prop="brand" min-width="180px;"/>
@@ -92,9 +93,9 @@ export default {
         pageNum: 1,
         pageSize: 10,
         // total: this.total,
-        brandId: "",
-        whId:"",
-        goodsId:"",
+        brandIds: [],
+        whIds:[],
+        goodsIds:[],
         startTime:"",
         endTime:"",
 
@@ -233,9 +234,9 @@ export default {
   methods: {
     /** 重置按钮操作 */
     resetQuery() {
-      this.queryParams.brandId = "";
-      this.queryParams.whId = "";
-      this.queryParams.goodsId = "";
+      this.queryParams.brandIds = [];
+      this.queryParams.whIds = [];
+      this.queryParams.goodsId = [];
       this.dateRange = [];
       this.queryParams.pageNum = 1;
       // this.resetForm("queryParams");

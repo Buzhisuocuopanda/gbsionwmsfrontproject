@@ -1252,7 +1252,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Warehousemanagement/Outofstockregistration", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/Outofstockregistration", query: {id: 1}})
       },
 
       //添加的取消按钮

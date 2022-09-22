@@ -137,3 +137,11 @@ export function totalOrderDetail(data) {
     params: data
   })
 }
+
+export function goodsShopList(data) {
+  return request({
+    url: '/sale/goodsShopList',
+    method: 'get',
+    params: data
+  })
+}

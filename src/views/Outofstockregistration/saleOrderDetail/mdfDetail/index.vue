@@ -350,8 +350,8 @@
                 </el-col>-->
 
         <el-col :span="8">
-          <el-form-item label="客户:" prop="customerId">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+          <el-form-item label="客户:" prop="customerName">
+            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in customeroptions"
                 :key="item.value"
@@ -365,8 +365,8 @@
 
         </el-col>
         <el-col :span="8">
-          <el-form-item label="销售人员:" prop="saleUserId">
-            <el-select v-loadmore="saleUserloadMore" v-model="formData.saleUserId" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+          <el-form-item label="销售人员:" prop="saleUser">
+            <el-select v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in saleUseroptions"
                 :key="item.value"
@@ -566,10 +566,10 @@
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsId" label="品牌" width="">
+          <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row)" v-loadmore="loadMore" v-model="scope.row.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
+                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -1507,7 +1507,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/Outofstockregistration", query: {id: 1}})
       },
 
       //添加的取消按钮

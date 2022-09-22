@@ -5,21 +5,21 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <el-select style="width: 300px" v-model="cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
+          <el-select style="width: 300px" @change="test" v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
             <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="品牌"   class="item-r" >
 
-          <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请选择" :loading="loading3">
+          <el-select v-model="queryParams.cala08"  style="width: 300px" clearable  filterable placeholder="请选择" :loading="loading3">
             <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
           </el-select>
           <!--<el-input v-model="queryParams.cala08" style="width: 300px" class="filter-item"  placeholder="请输入品牌" />-->
         </el-form-item>
         <!-- multiple-->
         <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+          <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
           </el-select>
 
@@ -28,11 +28,12 @@
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-<!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
+          <el-button type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
 
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column fixed label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
         <el-table-column fixed label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
         <el-table-column  label="品牌" align="center" prop="cala08" min-width="120px;"/>
@@ -92,7 +93,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         // total: this.total,
-        cbwa09: "",
+        cbwa09s: [],
         cala08: "",
         cbpb01: ""
       },
@@ -119,6 +120,9 @@ export default {
     this.getCalaList();
   },
   methods: {
+    test(){
+      console.log(this.cbwa09s);
+    },
     onSubmit() {},
     handleSelectionChange() {},
   /*  formatStateType(row) {
@@ -132,7 +136,7 @@ export default {
     },*/
     /** 重置按钮操作 */
     resetQuery() {
-      this.queryParams.cbwa09 = "";
+      this.queryParams.cbwa09s = "";
       this.queryParams.cala08 = "";
       this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;
@@ -144,6 +148,12 @@ export default {
       // var neirong = $('#miaoshu').val();
       this.queryParams.pageNum = 1;
       this.onSearch();
+    },
+    //导出
+    exprotData(){
+      this.download('/countQuery/InventorysummaryqueryExcelList', {
+        ...this.queryParams
+      }, `库存汇总查询_${new Date().getTime()}.xlsx`)
     },
     onSearch() {
       this.loading = true;
