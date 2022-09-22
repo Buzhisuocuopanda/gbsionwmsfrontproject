@@ -72,7 +72,7 @@ export function PurchaseinboundShss(data) {
   })
 }
 
-//采购入库取消完成
+//采购订单取消完成
 export function Purchaseinbounds(data) {
   return request({
     url: '/system/Purchaseordertable/SwJsPurchasereturnorderqxwc',

@@ -980,7 +980,7 @@ import salerman from "@/components/salerman";
                 })
                 this._ly_ok();
               }else{
-                 this.$message({ message: res.msg, type: 'error' });
+                 this.$message({ message: response.msg, type: 'error' });
               }
             });
           } else {
