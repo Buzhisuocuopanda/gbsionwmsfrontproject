@@ -33,7 +33,7 @@
       <el-table-column prop="cbba09" label="订单数量" sortable align="center"></el-table-column>
       <el-table-column prop="cbba11" label="已发货数量" sortable align="center"></el-table-column>
       <el-table-column prop="cbba13" label="已生产数量" sortable align="center"></el-table-column>
-      <el-table-column  prop="cbba14" label="缺货数量"  sortable align="center">
+      <!--<el-table-column  prop="cbba14" label="缺货数量"  sortable align="center">-->
         <!--<template slot-scope="scope">
           <div>{{scope.row.cbba09-scope.row.cbba13}}</div>
         </template>-->
