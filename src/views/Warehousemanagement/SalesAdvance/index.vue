@@ -918,16 +918,12 @@ export default {
             console.log(row.cbpc01,8888);
 
             PurchaseinboundSH(row).then(response => {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                if(response.code == 200){
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '审批成功', type: 'success' });
-                }else{
-                    this.$modal.msgError(response.msg)
-                }
-                
+            if (response.code == "200") {
+                this.getList();
+                this.$message({ message: response.msg, type: 'success' });
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             });
           }).catch(() => { });
         },
@@ -939,14 +935,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSH(item).then((res) => {
-                    console.log(res, 123)
-                    if(res.code == 200){
-                        this.getList();
-                        this.$modal.msgSuccess("审批成功");
-                    }else{
-                        this.$modal.msgError(res.msg)
-                    }
-                    
+                if (res.code == "200") {
+                    this.getList();
+                    this.$modal.msgSuccess(res.msg);
+                }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                }
+
                 }).catch((e) => {
                 })
             });
@@ -976,7 +971,7 @@ export default {
             userIds.forEach((item) => {
                 req.PurchaseinboundShs(item).then((res) => {
 
-                 if (res.code == "200") {   
+                 if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                   }else{
@@ -1016,7 +1011,7 @@ export default {
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
-                 if (res.code == "200") {  
+                 if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                  }else{
@@ -1053,7 +1048,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.Purchaseinbounds(item).then((res) => {
-  
+
                   if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
@@ -1071,7 +1066,7 @@ export default {
 
         /** 修改按钮操作 */
         handleUpdate() {
-           
+
                 let row = {}
                 row.orderNo = this.form.orderNo;
                 row.salerId = this.form.cbpc16;
@@ -1165,7 +1160,7 @@ export default {
             if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
 
-             if (response.code == "200") {    
+             if (response.code == "200") {
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 this.submitShangpin();
                 this.getList();
@@ -1225,7 +1220,9 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
-            const cbpc01 = row.id;
+            const cbpc01 = row.cbpc01;
+            console.log(row.cbpc01);
+
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-auth/role/" + cbpc01);
         },
@@ -1269,13 +1266,15 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
-                        if(res.code == 200){
-                            this.submitShangpin();
-                            this.getList();
-                            this.$modal.msgSuccess("删除成功");
-                        }else{
-                            this.$modal.msgError(res.msg)
-                        }
+
+                    if (res.code == "200") {
+                        // console.log(res, 123)
+                        this.submitShangpin();
+                        this.getList();
+                        this.$modal.msgSuccess("删除成功");
+                     }else{
+                        this.$message({ message: res.msg, type: 'error' });
+                     }
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1304,13 +1303,13 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
-                if(response.code == 200){
-                    this.submitShangpin();
-                    this.getList();
-                    this.$modal.msgSuccess("删除成功");
+             if (response.code == "200") {
+                this.submitShangpin();
+                this.getList();
+                this.$modal.msgSuccess("删除成功");
                 }else{
-                    this.$modal.msgError(response.msg)
-                }
+                this.$message({ message: response.msg, type: 'error' });
+               }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */
