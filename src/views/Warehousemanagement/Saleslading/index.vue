@@ -1020,21 +1020,18 @@ export default {
     },
 
     /** 销售提货单列表 */
- /** 查询用户列表 */
-        getList() {
-            this.loading = true;
-            Purchaseinbounddingdancx(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                this.userList = response.data.rows;
-                this.total = response.data.total;
-                // //供应商
-                // this.postOptions = response.data.content;
-                // console.log(this.userList, daterange3369);
-                console.log(response, 339688);
-                // this.deleteFlag = response.data.rows.deleteFlag;
-                this.loading = false;
-            }
-            );
-        },
+    getList() {
+      this.loading = true;
+      console.log(this.queryParams, this.dateRange,'ceshi')
+      Purchaseinbounddingdancx(
+        this.addDateRange(this.queryParams, this.dateRange)
+      ).then((response) => {
+        this.userList = response.data.rows;
+        this.total = response.data.total;
+        console.log(response, 339688);
+        this.loading = false;
+      });
+    },
 
     /** 销售订单列表 */
     getList09() {
@@ -1200,7 +1197,6 @@ export default {
     handleQuery() {
       // var neirong = $('#miaoshu').val();
       this.userList.sn = this.form.sn;
-
       this.getList();
       this.queryParams.pageNum = 1;
       this.queryParams.sn = "";

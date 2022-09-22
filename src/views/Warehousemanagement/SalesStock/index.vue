@@ -1101,70 +1101,78 @@ export default {
         //审批
         PurchaseinboundShenpi(row) {
             console.log(row.cbse01, 8888);
-
-            Purchaseinboundsho(row).then(response => {
+            this.$modal.confirm('是否确认审批编号为"' + row.cbse01 + '"的数据项？').then(function () {
+                return Purchaseinboundsho(row)
+            }).then(response => {
                 console.log(this.form.cbse01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '审批成功', type: 'success' });
-
-            });
+            }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbse01, 8888);
-
-            userIds.forEach((item) => {
-                req.Purchaseinboundsho(item).then((res) => {
-                    console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("审批成功");
-                }).catch((e) => {
-                    console.log(e, 456)
+            this.$modal.confirm('是否确认审批编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+                userIds.forEach((item) => {
+                    req.Purchaseinboundsho(item).then((res) => {
+                        console.log(res, 123)
+                        this.getList();
+                        this.$modal.msgSuccess("审批成功");
+                    }).catch((e) => {
+                        console.log(e, 456)
+                    })
                 })
-            })
+            }).catch(() => { });
+            
         },
         //反审
         PurchaseinboundFanShenpi(row) {
             console.log(row.cbse01, 8888);
-
-            PurchaseinboundSht(row).then(response => {
+            this.$modal.confirm('是否确认反审编号为"' + row.cbse01 + '"的数据项？').then(function () {
+                return PurchaseinboundSht(row)
+            }).then(response => {
                 console.log(this.form.cbse01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '反审成功', type: 'success' });
 
-            });
+            }).catch(() => { });
+            
         },
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbpc01, 8888);
-
-            userIds.forEach((item) => {
-                req.PurchaseinboundSht(item).then((res) => {
-                    console.log(res, 123)
-                    if(res.code == 200){
-                        this.getList();
-                        this.$modal.msgSuccess("反审成功");
-                    }else{
-                        this.$modal.msgError(res.msg)
-                    }
-                }).catch((e) => {
-                    console.log(e, 456)
+            this.$modal.confirm('是否确认反审编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+                userIds.forEach((item) => {
+                    req.PurchaseinboundSht(item).then((res) => {
+                        console.log(res, 123)
+                        if(res.code == 200){
+                            this.getList();
+                            this.$modal.msgSuccess("反审成功");
+                        }else{
+                            this.$modal.msgError(res.msg)
+                        }
+                    }).catch((e) => {
+                        console.log(e, 456)
+                    })
                 })
-            })
+            }).catch(() => { });
+            
         },
 
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
             console.log(row.cbse01, 8888);
-            PurchaseinBoundshf(row).then(response => {
+            this.$modal.confirm('是否确认标记"' + row.cbse01 + '"的数据项？').then(function () {
+                return PurchaseinBoundshf(row)
+            }).then(response => {
                 console.log(this.form.cbse01, 789)
                 // this.submitShangpin();
                 if(response.code == 200){
@@ -1174,27 +1182,30 @@ export default {
                 }else{
                     this.$modal.msgError(response.msg)
                 }
-            });
+            }).catch(() => { });
         },
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbse01, 8888);
-            userIds.forEach((item) => {
-                req.PurchaseinBoundshf(item).then((res) => {
-                    console.log(res, 123)
-                    if(res.code == 200){
-                        this.getList();
-                        this.$modal.msgSuccess("标记完成");
-                    }else{
-                        this.$modal.msgError(res.msg)
-                    }
-                    
-                }).catch((e) => {
-                    console.log(e, 456)
+            this.$modal.confirm('是否确认标记"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+                userIds.forEach((item) => {
+                    req.PurchaseinBoundshf(item).then((res) => {
+                        console.log(res, 123)
+                        if(res.code == 200){
+                            this.getList();
+                            this.$modal.msgSuccess("标记完成");
+                        }else{
+                            this.$modal.msgError(res.msg)
+                        }
+                        
+                    }).catch((e) => {
+                        console.log(e, 456)
+                    })
                 })
-            })
+            }).catch(() => { });
+            
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
@@ -1224,20 +1235,22 @@ export default {
         PurchaseinboundQuxiaoWangcheng01(row) {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             console.log(row.cbse01, 8888);
-
-            userIds.forEach((item) => {
-                req.PurchaseinboundShtt(item).then((res) => {
-                    console.log(res, 123)
-                    if(res.code == 200){
-                        this.getList();
-                        this.$modal.msgSuccess("取消标记成功");
-                    }else{
-                        this.$modal.msgError(res.msg)
-                    }
-                }).catch((e) => {
-                    console.log(e, 456)
+            this.$modal.confirm('是否取消标记"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+                userIds.forEach((item) => {
+                    req.PurchaseinboundShtt(item).then((res) => {
+                        console.log(res, 123)
+                        if(res.code == 200){
+                            this.getList();
+                            this.$modal.msgSuccess("取消标记成功");
+                        }else{
+                            this.$modal.msgError(res.msg)
+                        }
+                    }).catch((e) => {
+                        console.log(e, 456)
+                    })
                 })
-            })
+            }).catch(() => { });
+            
         },
         // 人工确认 完成更新库存
         PurchaseinboundRenGongqueren(row){

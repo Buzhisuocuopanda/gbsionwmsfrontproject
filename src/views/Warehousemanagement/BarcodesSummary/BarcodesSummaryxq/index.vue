@@ -110,7 +110,13 @@ export default {
         },
         //列表价格数值
         rounding(row, column) {
-            return parseFloat(row[column.property]).toFixed(2)
+            console.log(row,column,111,row[column.property])
+            if(!row[column.property]){
+                return ''
+            }else{
+                return parseFloat(row[column.property]).toFixed(2)
+            }
+            
         },
         // 多选框选中数据
         handleSelectionChange(selection) {

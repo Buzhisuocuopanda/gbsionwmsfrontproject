@@ -26,7 +26,13 @@ export function Purchaseinbounddingdancx(data) {
     data: data
   })
 }
-
+// 销售提货单详情查询
+export function Purchaseinbounddingdanxq(CBPC01) {
+  return request({
+    url: '/whmanagement/takeOrderDetail?id='+ CBPC01,
+    method: 'get',
+  })
+}
 // 销售订单查询
 export function Purchaseinbounddingdanxsdd(data) {
   return request({

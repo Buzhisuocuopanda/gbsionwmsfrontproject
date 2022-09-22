@@ -74,7 +74,7 @@ export function Purchaseinxiaoshoudingdan(CBPC01) {
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundedit',
+    url: '/system/Salesreturnorderss/Selloutofwarehousedeitone',
     method: 'post',
     data: data
   })

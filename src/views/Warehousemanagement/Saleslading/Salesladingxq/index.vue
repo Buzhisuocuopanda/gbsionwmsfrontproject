@@ -174,7 +174,7 @@
 
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { Purchaseinbounddingdanxq } from "@/api/Warehousemanagement/Saleslading";
 export default {
 
     data() {
@@ -229,7 +229,7 @@ export default {
             const userId = this.$route.params && this.$route.params.cbpc01;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                Purchaseinbounddingdanxq(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);
