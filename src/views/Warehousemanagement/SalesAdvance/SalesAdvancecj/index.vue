@@ -973,7 +973,8 @@ import salerman from "@/components/salerman";
 
         this.$refs["form2"].validate((item) => {
           if (item) {
-            this.form2.goods=this.tableData
+            this.form2.goodss=this.tableData;
+            this.form2.goods = this.tableData;
             PurchaseinboundAddydd(this.form2).then(response => {
               if (response.code == "200") {
                 this.$message({
@@ -993,6 +994,8 @@ import salerman from "@/components/salerman";
                   console.log(item.gsSalesOrders,8523697412);
                 })
                 this._ly_ok();
+              }else{
+                 this.$message({ message: response.msg, type: 'error' });
               }
             });
           } else {
