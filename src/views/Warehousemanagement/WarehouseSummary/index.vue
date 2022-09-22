@@ -1307,8 +1307,8 @@ export default {
         /** 详情操作 */
         handleAuthRole: function (row) {
             console.log(row)
-            return
-            const userId = row.cbpg01;
+            const userId = row.cbsh01;
+            console.log(userId)
             this.$router.push({
                 path:"/system/user-authhhhhhhhhh/role/"+userId,
             });

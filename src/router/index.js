@@ -161,6 +161,20 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/system/user-authhhhxg',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/:cbpc01(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/Saleslading/Saleskadingxg/index'),
+        meta: { title: '销售提货修改', activeMenu: '/Warehousemanagement/Saleslading' }
+      }
+    ]
+  },
+  {
     path: '/system/user-authhhhh',
     component: Layout,
     hidden: true,

@@ -23,7 +23,7 @@ export function PurchasereturnordersAdds(data) {
 // 详情
 export function PurchaseinboundList(CBPC01) {
   return request({
-    url: '/system/Salesreturnorderss/SwJsSkuBarcodelistss?cbse01='+ CBPC01,
+    url: '/system/Warehouseinventorysummary/SwJsStorelistsss?cbse01='+ CBPC01,
     method: 'get'
   })
 }
