@@ -1166,8 +1166,8 @@ export default {
         },
         /** 分配角色操作 */
         handleAuthRole: function (row) {
-            const userId = row.cbsh01;
-            this.$router.push("/system/user-authhhhhhhhh/role/" + userId);
+            const cbpg01 = row.cbsh01;
+            this.$router.push("/system/user-authhhhhhhhh/role/" + cbpg01);
         },
         /** 创建操作 */
         handlepdmxone: function (row) {

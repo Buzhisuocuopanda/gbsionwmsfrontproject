@@ -1442,10 +1442,12 @@ export default {
       this.open = true;
       // console.log(row, 7788521);
       this.form.id = row.id;
-      this.form.customerName = row.customerName;
-      this.form.contacts = row.contacts;
-      this.form.phone = row.phone;
-      this.form.orderNo = row.orderNo;
+      this.$router.push("/system/user-authhhhxg/role/" + this.form.id);
+      
+      // this.form.customerName = row.customerName;
+      // this.form.contacts = row.contacts;
+      // this.form.phone = row.phone;
+      // this.form.orderNo = row.orderNo;
     },
     /** 数形列表的商品分类按钮**/
     submitShangpin() {
