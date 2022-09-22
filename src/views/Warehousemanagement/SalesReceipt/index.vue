@@ -735,6 +735,7 @@ export default {
         getList() {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -743,6 +744,9 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             }
             );
         },
@@ -761,14 +765,23 @@ export default {
         //供应商
         getList01() {
             SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+
+             if (response.code == "200") {   
                 this.postOptions = response.data.rows;
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
                 // console.log(response.data.rows,551100);
             });
         },
         //库位
         getList02() {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") { 
                 this.KuWeiOptions = response.data.rows;
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             }
                 // console.log(response.data.rows,663322);
             });
         },
@@ -776,18 +789,27 @@ export default {
         //商品信息维护
         getList03() {
             GoodsList01(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            
+             if (response.code == "200") {   
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
                 // console.log(response.data.rows, 1655);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+            }   
             });
         },
         //仓库信息维护
         getList04() {
             StoreSkuList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {  
                 this.postCangKu = response.data.rows;
                 // this.XinghaoOptions = response.data.rows;
                 // console.log(response.data.rows, 1655);
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }   
             });
         },
 
@@ -1175,7 +1197,7 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
-
+              if (response.code == "200") { 
                 // console.log(response.posts, 12345678);
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
@@ -1184,11 +1206,14 @@ export default {
                 this.getList();
                 this.open2 = false;
                 this.reset01();
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }  
 
                 // console.log(this.form2.ifEnabled, 123456);
             });
                 } else {
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
 
@@ -1321,12 +1346,12 @@ export default {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
 
-            if (res.code == "200") {
+            if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
               }else{
-                this.$message({ message: res.msg, type: 'error' });
+                this.$message({ message: response.msg, type: 'error' });
                }
 
             }).catch(() => { });
