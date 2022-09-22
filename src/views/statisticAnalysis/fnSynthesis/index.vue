@@ -8,12 +8,12 @@
           <el-input v-model="queryParams.saleOrderNo" style="margin-left: 20px;width: 500px" class="filter-item"  placeholder="销售订单号" />
         </el-form-item>
         <el-form-item label="仓库"  style="margin-left: 100px"  class="item-r" >
-          <el-select style="width: 500px;margin-left: 20px" v-model="queryParams.whId" filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+          <el-select style="width: 500px;margin-left: 20px" v-model="queryParams.whId" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="客户" label-width="100px" style="margin-left: 10px;margin-top: -20px"  class="item-r" >
-          <el-select v-model="queryParams.customerName"  style="width: 500px;margin-left: 20px" filterable placeholder="请输入关键词" :loading="loading2">
+          <el-select v-model="queryParams.customerName"  style="width: 500px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca08" :label="item.cbca08" :value="item.cbca08"></el-option>
           </el-select>
         </el-form-item>
@@ -31,10 +31,11 @@
           <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
-        <el-table-column label="入库时间" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />
-        <el-table-column  label="出库时间" align="center" prop="outWhTimeMsg"  min-width="100px;"/>
-        <el-table-column  label="订单号" align="center" prop="orderNo" min-width="180px;"/>
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
+        <el-table-column fixed label="入库时间" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />
+        <el-table-column fixed label="出库时间" align="center" prop="outWhTimeMsg"  min-width="100px;"/>
+        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="center" prop="model" min-width="120px;"/>
         <el-table-column  label="描述" align="center" prop="description" min-width="290px;"/>
         <el-table-column  label="数量" align="center" prop="qty" min-width="60px;"/>

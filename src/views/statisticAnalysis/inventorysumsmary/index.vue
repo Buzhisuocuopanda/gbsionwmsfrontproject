@@ -5,18 +5,18 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
       <el-form-item label="商品分类"   class="item-r" >
-        <el-select v-model="queryParams.cbpa07"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading3">
+        <el-select v-model="queryParams.cbpa07"  style="width: 300px" clearable  filterable placeholder="请输入关键词" :loading="loading3">
           <el-option v-for="item in cbpaList" :key="item.cbpa07" :label="item.cbpa07+' ['+item.cbpa11+']'" :value="item.cbpa07"></el-option>
         </el-select>
       </el-form-item>
 
       <el-form-item label="品牌"   class="item-r" >
-        <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading2">
+        <el-select v-model="queryParams.cala08"  style="width: 300px" clearable  filterable placeholder="请输入关键词" :loading="loading2">
           <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="商品"   class="item-r" >
-        <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
           <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
         </el-select>
       </el-form-item>
@@ -28,7 +28,8 @@
                      style="margin-bottom:0;margin-left: 1em">导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column fixed align="center" label="序号" type="index" width="50"/>
         <el-table-column fixed label="销售订单号" align="center" prop="cboa07"  min-width="80px;"/>
         <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="200px;"/>
