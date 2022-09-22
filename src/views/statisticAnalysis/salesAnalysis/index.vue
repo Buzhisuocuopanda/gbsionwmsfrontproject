@@ -12,20 +12,20 @@
           <el-input v-model="supplierId" class="filter-item"  placeholder="供应商id" />
         </el-form-item>
         <el-form-item label="品牌"   class="item-r" >
-          <el-select v-model="queryParams.brand"  filterable placeholder="请输入关键词" :loading="loading3">
+          <el-select v-model="queryParams.brand" clearable filterable placeholder="请输入关键词" :loading="loading3">
             <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="型号"   class="item-r" >
+        <el-form-item label="型号" v-if="false"  class="item-r" >
           <el-input v-model="model" class="filter-item"  placeholder="型号" />
         </el-form-item>
-        <el-form-item label="销售人员"   class="item-r" >
-          <el-select v-model="queryParams.saleUserId"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading4">
+        <el-form-item label="销售人员" style="margin-left: 20px"  class="item-r" >
+          <el-select v-model="queryParams.saleUserId"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading4">
             <el-option v-for="item in cauaList" :key="item.caua17" :label="item.caua17" :value="item.caua17"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item  label="日期"  class="item-r">
+        <el-form-item  label="日期"  class="item-r" style="margin-left: 20px">
           <el-date-picker size="mini" v-model="dateRange"  type="daterange"
                           style="height: 35px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
@@ -37,12 +37,14 @@
 
 
 
-        <el-form-item style="margin: -5px -10px 1px 1px">
+        <el-form-item style="margin: -5px -10px 1px 20px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="客户名称" align="center" header-align="center" prop="customerName" min-width="160px;" />
         <el-table-column  label="下单时间" align="center" prop="createTime" :formatter="formatTime2" min-width="120px;"/>
         <el-table-column  label="供应商" align="center" prop="supplier" min-width="180px;"/>
@@ -225,6 +227,9 @@ export default {
     this.getCauaList();
   },
   methods: {
+    formatTime2(row){
+      return formatDate2(row.createTime);
+    },
     /** 重置按钮操作 */
     resetQuery() {
       this.queryParams.customerId = "";
@@ -243,9 +248,13 @@ export default {
       this.queryParams.pageNum = 1;
       this.onSearch();
     },
-    formatTime2(row){
-      return formatDate2(row.createTime);
+    //导出
+    exprotData(){
+      this.download('/query/salesAnalysisExcelList', {
+        ...this.queryParams
+      }, `销售分析数据_${new Date().getTime()}.xlsx`)
     },
+
     onSearch() {
       if(this.dateRange.length>=2){
         this.queryParams.startTime = this.dateRange[0];

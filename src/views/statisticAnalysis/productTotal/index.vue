@@ -8,12 +8,12 @@
         <el-input type="text" style="width: 300px" v-model="queryParams.cbba07"></el-input>
       </el-form-item>
       <el-form-item label="商品">
-        <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
           <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="queryParams.cbba12" filterable remote reserve-keyword placeholder="请选择" >
+        <el-select v-model="queryParams.cbba12" clearable filterable remote reserve-keyword placeholder="请选择" >
           <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </el-form-item>
@@ -24,7 +24,7 @@
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%" border :default-sort="{ prop: 'date', order: 'descending' }">
+    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }">
       <el-table-column prop="date" label="序号" type="index" sortable width="100" align="center"></el-table-column>
       <el-table-column prop="cbba07" label="订单号" sortable align="center" width="180"></el-table-column>
       <el-table-column prop="cala08" label="品牌" sortable align="center"></el-table-column>

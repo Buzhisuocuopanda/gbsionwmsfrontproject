@@ -5,17 +5,17 @@
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="商品分类">
-        <el-select v-model="queryParams.cbpa07"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading3">
+        <el-select v-model="queryParams.cbpa07"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading3">
           <el-option v-for="item in cbpaList" :key="item.cbpa07" :label="item.cbpa07+' ['+item.cbpa11+']'" :value="item.cbpa07"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="品牌">
-        <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading2">
+        <el-select v-model="queryParams.cala08"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
           <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="商品">
-        <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
           <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
         </el-select>
       </el-form-item>
@@ -26,12 +26,7 @@
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table
-      :data="tableData"
-      style="width: 100%"
-      border
-      :default-sort="{ prop: 'date', order: 'descending' }"
-    >
+    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }">
       <el-table-column prop="date" label="序号" type="index" sortable width="100" align="center"></el-table-column>
       <el-table-column prop="cbpa08" label="大类" align="center" sortable width="180"></el-table-column>
       <el-table-column prop="cbpa07" label="分类名称" align="center" sortable></el-table-column>
