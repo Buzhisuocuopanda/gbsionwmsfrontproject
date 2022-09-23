@@ -117,6 +117,8 @@
             /*     this.deviceList = []*/
             this.total = 0
           }
+        },error => {
+          this.loading = false;
         })
       },
       //导出
@@ -137,11 +139,13 @@
           } else {
             this.cbpaList = [];
           }
+        },error => {
+          this.loading3 = false;
         });
       },
       //下拉列表数据品牌
       getCalaList(){
-        let param={};
+        let param={cala10:"商品品牌"};
         this.loading2 = true;
         getswJsAllList(param).then(response => {
           this.loading2 = false;
@@ -150,6 +154,8 @@
           } else {
             this.calaList = [];
           }
+        },error => {
+          this.loading2 = false;
         });
       },
       //获取下拉列表数据商品
@@ -164,6 +170,8 @@
             } else {
               this.goodList = [];
             }
+          },error => {
+            this.loading1 = false;
           });
         } else {
           this.goodList = [];

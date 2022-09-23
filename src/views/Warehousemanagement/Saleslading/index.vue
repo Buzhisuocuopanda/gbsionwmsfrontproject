@@ -1438,9 +1438,8 @@ export default {
     },
     /** 修改详情按钮操作**/
     handlexiangqengSelect(row) {
-      console.log(row);
       this.open = true;
-      // console.log(row, 7788521);
+      console.log(row, 7788521);
       this.form.id = row.id;
       this.$router.push("/system/user-authhhhxg/role/" + this.form.id);
       

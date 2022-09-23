@@ -34,8 +34,8 @@
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column fixed label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
-        <el-table-column fixed label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
+        <el-table-column  label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
+        <el-table-column  label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
         <el-table-column  label="品牌" align="center" prop="cala08" min-width="120px;"/>
         <el-table-column  label="型号" align="center" prop="cbpb12" min-width="100px;"/>
         <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
@@ -44,7 +44,15 @@
         <el-table-column  label="可用库存数量" align="center" prop="lockQty" min-width="100px;"/>
         <el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
+        <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+          <template slot-scope="scope">
 
+            <el-button size="mini" type="text"  class="button-caozuoxougai"
+                       @click="addShopping(scope.row)" v-text="judge(scope.row)">
+            </el-button>
+            <!--v-hasPermi="['system:list:add']"-->
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         :background="true"
@@ -60,13 +68,18 @@
       <!--<pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                   :limit.sync="queryParams.pageSize" @pagination="onSearch" :page-sizes="[10, 20, 30]"
                 />-->
+      <el-badge :value="shoppingList.length" :hidden="shoppingList.length==0" style="margin-top: 50px;margin-left: 1500px;" class="item">
+        <el-button plain style="width: 130px;height: 50px" type="warning" icon="el-icon-shopping-cart-2">
+          购物车</el-button>
+      </el-badge>
+
     </div>
   </div>
 </template>
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList } from "@/api/statisticAnalysis/index";
+import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList,insertgoodsShop } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
   name: "inventorySummary",
@@ -88,6 +101,7 @@ export default {
       loading2:false,
       loading3:false,
 
+
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -98,6 +112,7 @@ export default {
         cbpb01: ""
       },
       inwuquList: [],
+      shoppingList: [],
       total:0,
       statusType: [
         {
@@ -134,6 +149,36 @@ export default {
         }
       }
     },*/
+    judge(row){
+      if(row.shopping == null||row.shopping == 0){
+        return "添加到购物车";
+      }else {
+        return "移除";
+      }
+    },
+    addShopping(row){
+      if(row.shopping == null||row.shopping == 0){
+        this.shoppingList.push(row);
+        row.shopping=1;
+        let param={goodsId:row.cbpb01};
+        insertgoodsShop(param).then(response => {
+
+          if (response.code == 200) {
+            console.log("添加成功")
+          } else {
+            console.log("添加失败1")
+          }
+
+        },error => {
+          console.log("添加失败2")
+        });
+      }else {
+        row.shopping=0;
+        this.shoppingList.splice(row,1);
+      }
+
+
+    },
     /** 重置按钮操作 */
     resetQuery() {
       this.queryParams.cbwa09s = "";
@@ -161,11 +206,21 @@ export default {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows
+          for(let i=0;i<this.inwuquList.length;i++){
+            for(let j=0;j<this.shoppingList.length;j++){
+              if(this.shoppingList[j].cbpb01==this.inwuquList[i].cbpb01){
+                this.inwuquList[i].shopping = 1;
+              }
+            }
+          }
+
           this.total = response.data.total
         } else {
           this.deviceList = []
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //获取下拉列表数据商品
@@ -180,6 +235,8 @@ export default {
           } else {
             this.goodList = [];
           }
+        },error => {
+          this.loading1 = false;
         });
       } else {
         this.goodList = [];
@@ -196,6 +253,8 @@ export default {
         } else {
           this.storeSkuList = [];
         }
+      },error => {
+        this.loading3 = false;
       });
       /*if (query !== '') {
 
@@ -205,7 +264,7 @@ export default {
     },
     //下拉列表数据品牌
     getCalaList(){
-      let param={};
+      let param={cala10:"商品品牌"};
       this.loading2 = true;
       getswJsAllList(param).then(response => {
         this.loading2 = false;
@@ -214,6 +273,8 @@ export default {
         } else {
           this.calaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
 
