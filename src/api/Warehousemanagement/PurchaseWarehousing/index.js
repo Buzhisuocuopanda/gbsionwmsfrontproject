@@ -44,7 +44,14 @@ export function PurchaseinboundEdit(data) {
     data: data
   })
 }
-
+// 采购入库单修改
+export function PurchaseinboundEditone(data) {
+  return request({
+    url: '/system/Purchaseinbound/SwJsPurchaseinboundeditone',
+    method: 'post',
+    data: data
+  })
+}
 // 删除
 export function PurchaseinboundRemove(data) {
   return request({

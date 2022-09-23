@@ -1141,24 +1141,13 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-            //  if (this.form.cbpc166 == 'CNY') {
-            //     this.form.cbpc16 = '6';
-            // }else if(this.form.cbpc166 == 'USD'){
-            //     this.form.cbpc16 = '5';
-            // }
-
-
-            // if(row.cbsa18=="1")
-            // {
-            //     this.form.cbsa18="增值税专用发票";
-            //     row.cbsa18="1";
-            // }
-            console.log(row,98999)
-            this.open = true;
-            // console.log(row, 7788521);
-            this.form = row;
-            this.form.cbpc16 = row.cala08;
-
+            // this.open = true;
+            // // console.log(row, 7788521);
+            // this.form = row;
+            // this.form.cbpc16 = row.cala08;
+            let id = row.cbpc01
+            console.log(row,id)
+            this.$router.push("/system/user-ckrkxg/role/" + id);
            
         },
         /** 数形列表的商品分类按钮**/
