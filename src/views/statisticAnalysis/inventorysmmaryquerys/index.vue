@@ -284,6 +284,8 @@ export default {
           this.deviceList = []
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
   },

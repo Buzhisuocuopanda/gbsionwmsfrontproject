@@ -269,6 +269,8 @@ export default {
      /*     this.deviceList = []*/
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //导出
@@ -290,6 +292,8 @@ export default {
           } else {
             this.goodList = [];
           }
+        },error => {
+          this.loading1 = false;
         });
       } else {
         this.goodList = [];
@@ -306,6 +310,8 @@ export default {
         } else {
           this.storeSkuList = [];
         }
+      },error => {
+        this.loading3 = false;
       });
     },
     //下拉列表数据品牌
@@ -319,6 +325,8 @@ export default {
         } else {
           this.calaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
   },

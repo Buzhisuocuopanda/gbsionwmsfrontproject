@@ -117,6 +117,8 @@
             /*     this.deviceList = []*/
             this.total = 0
           }
+        },error => {
+          this.loading = false;
         })
       },
       //导出
@@ -137,6 +139,8 @@
           } else {
             this.cbpaList = [];
           }
+        },error => {
+          this.loading3 = false;
         });
       },
       //下拉列表数据品牌
@@ -150,6 +154,8 @@
           } else {
             this.calaList = [];
           }
+        },error => {
+          this.loading2 = false;
         });
       },
       //获取下拉列表数据商品
@@ -164,6 +170,8 @@
             } else {
               this.goodList = [];
             }
+          },error => {
+            this.loading1 = false;
           });
         } else {
           this.goodList = [];

@@ -166,6 +166,8 @@ export default {
           this.deviceList = []
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //获取下拉列表数据商品
@@ -180,6 +182,8 @@ export default {
           } else {
             this.goodList = [];
           }
+        },error => {
+          this.loading1 = false;
         });
       } else {
         this.goodList = [];
@@ -196,6 +200,8 @@ export default {
         } else {
           this.storeSkuList = [];
         }
+      },error => {
+        this.loading3 = false;
       });
       /*if (query !== '') {
 
@@ -214,6 +220,8 @@ export default {
         } else {
           this.calaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
 
