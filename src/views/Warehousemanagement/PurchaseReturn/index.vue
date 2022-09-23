@@ -1095,13 +1095,16 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+            // console.log(row)
+            // this.open = true;
+            // console.log(row, 7788521);
+            // this.form.cbpg01 = row.cbpg01;
+            // this.form.cbpg07 = row.cbpg07;
+            // this.form.cbsa08 = row.cbsa08;
+            // this.form.cbwa09 = row.cbwa09;
             console.log(row)
-            this.open = true;
-            console.log(row, 7788521);
-            this.form.cbpg01 = row.cbpg01;
-            this.form.cbpg07 = row.cbpg07;
-            this.form.cbsa08 = row.cbsa08;
-            this.form.cbwa09 = row.cbwa09;
+            let id = row.cbpg01
+            this.$router.push("/system/user-cktkxg/role/" + id);
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

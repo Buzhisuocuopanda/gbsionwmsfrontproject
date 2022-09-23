@@ -140,7 +140,7 @@
 
 </template>
 <script>
-import { PurchaseinboundList } from "@/api/Warehousemanagement/SalesStock";
+import { SkuBarcodeListss } from "@/api/Warehousemanagement/WarehouseSummary";
 export default {
 
     data() {
@@ -196,7 +196,7 @@ export default {
             console.log(this.$route)
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                SkuBarcodeListss(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);

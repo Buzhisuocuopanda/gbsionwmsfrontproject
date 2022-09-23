@@ -496,7 +496,6 @@ export default {
     //  this.goodsId=this.orderList[0].goodsId;
      // console.log(this.goodsId,1111111)
       this.$router.push({path: "/Salesmanagement/salemdfOrderDetails", query: {goods: row}})
-
     },
     createForm(goodsId) {
       // this.showaddDialog = true

@@ -385,7 +385,7 @@
     </el-row>
 
     <!--订单创建-->
-    <!-- <el-dialog :visible.sync="open3">
+    <el-dialog :visible.sync="open3">
       <el-table
         border
         :header-cell-style="headClassssmtt"
@@ -465,7 +465,7 @@
           sortable
         />
       </el-table>
-    </el-dialog> -->
+    </el-dialog>
 
     <!-- 用户导入对话框 -->
     <el-dialog

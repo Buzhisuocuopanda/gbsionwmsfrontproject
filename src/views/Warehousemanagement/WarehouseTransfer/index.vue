@@ -917,14 +917,16 @@ export default {
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
             console.log(row.cbpc01, 8888);
-
             PurchaseinBoundshf(row).then(response => {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '恭喜你，标记完成', type: 'success' });
-
+                if(response.code == 200){
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '标记完成', type: 'success' });
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
             });
         },
 
@@ -937,7 +939,7 @@ export default {
                 req.PurchaseinBoundshf(item).then((res) => {
                     console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("恭喜你，标记完成");
+                    this.$modal.msgSuccess("标记完成");
                 }).catch((e) => {
                     console.log(e, 456)
                 })
@@ -950,8 +952,13 @@ export default {
             this.$modal.confirm('是否要取消标记为"' + row.cbaa01 + '"的数据项？').then(() => {
                 PurchaseinboundShtt(row).then(response => {
                     console.log(this.form.cbpc01, 789);
-                    this.getList();
-                    this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
+                    if(response.code == 200){
+                        this.getList();
+                        this.$message({ message: '取消标记成功', type: 'success' });
+                    }else{
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
+                    
 
                 });
             }).catch(() => { });

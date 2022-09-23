@@ -553,6 +553,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+  // 采购退库单修改
+  {
+    path: '/system/user-cktkxg',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseReturn/PurchaseReturnxg/index'),
+        meta: { title: '采购退库单修改', activeMenu: '/Warehousemanagement/PurchaseReturn' }
+      }
+    ]
+  },
   //销售出库单返回
    {
     path: '/system/user-xsckfh',
