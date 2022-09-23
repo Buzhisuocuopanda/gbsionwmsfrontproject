@@ -29,8 +29,11 @@
 
 
 
-
+         <el-form-item>
+              <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">加入</el-button>
+         </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
+            
 <!--          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>-->
 <!--
           <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
@@ -52,7 +55,8 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
+      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe  @selection-change="handleSelectionChangee">
+        <el-table-column type="selection" width="50" align="center" />
         <el-table-column fixed label="品牌" align="center" prop="brand" key="brand"  min-width="120px;"/>
         <el-table-column fixed label="型号" align="center" prop="model" min-width="120px;"/>
         <el-table-column  label="描述" align="center" prop="description" min-width="120px;" />
@@ -249,6 +253,7 @@ export default {
     return {
       title1: "",
       goodsId: "",
+      ids: [],
 
       form: {
         customerId: "",
@@ -463,6 +468,15 @@ export default {
     },
   methods: {
 
+     // 多选框选中数据
+        handleSelectionChangee(selection) {
+            this.ids = selection;
+            this.idss = selection.map(item => item.goodsId);
+            this.shenpiids = selection;
+            this.single = selection.length != 1;
+            this.multiple = !selection.length;
+        },
+
     delTotalOrder(row){
       this.$confirm('确认要删除'+row.orderNo+"售后单？", '确认操作', {
         type: 'warning',
@@ -495,7 +509,15 @@ export default {
       // this.showmdfDialog = true
     //  this.goodsId=this.orderList[0].goodsId;
      // console.log(this.goodsId,1111111)
-      this.$router.push({path: "/Salesmanagement/salemdfOrderDetails", query: {goods: row}})
+
+      
+       let userIds = this.ids.length > 0 ? this.ids : row
+            this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+                userIds.forEach((item) => {
+                 this.$router.push( {path: "/Salesmanagement/salemdfOrderDetails", query: { goods: JSON.stringify(this.idss) }})
+        })
+      })
+      console.log(this.ids,"123");
     },
     createForm(goodsId) {
       // this.showaddDialog = true
@@ -538,7 +560,7 @@ export default {
       goodsShopList(param).then(response => {
         if (response.data != null && response.data != null) {
           this.orderList = response.data;
-          console(response.data,8523)
+          // console(response.data,8523)
           this.totalItems = response.data.total;
         } else {
           this.deviceList = []
