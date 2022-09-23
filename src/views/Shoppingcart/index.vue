@@ -23,9 +23,9 @@
         </el-form>
 -->
 
-<!--        <el-form-item label="订单号"   class="item-r" >-->
-<!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
-<!--        </el-form-item>-->
+<!--        <el-form-item label="订单号"   class="item-r" >
+          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />
+        </el-form-item>-->
 
 
 
@@ -53,9 +53,9 @@
       <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
         <el-table-column fixed label="品牌" align="center" prop="brand" min-width="120px;"/>
         <el-table-column fixed label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column  label="描述" align="center" prop="description" min-width="120px;" :formatter="formatDate" />
-        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
-        <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />
+        <el-table-column  label="描述" align="center" prop="description" min-width="120px;"  />
+<!--        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
+        <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />-->
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
