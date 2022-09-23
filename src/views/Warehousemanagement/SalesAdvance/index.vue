@@ -16,8 +16,8 @@
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item prop="cbwa09" label="仓库">
-                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                    <el-form-item prop="caua17" label="销售人员" style="margin-left:1%;">
+                        <el-input v-model="queryParams.caua17" id="miaoshu" placeholder="请输入销售人员" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left:1%;">
@@ -32,7 +32,7 @@
                     <el-form-item>
                          <el-button class="biaoto-buttonchuangjian" size="mini" v-hasPermi="['system:saleChange:list']" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:50%;">
+                    <el-form-item style="margin-left:51%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -452,7 +452,8 @@ export default {
                 cbpc07:undefined,
                 cbsa08:undefined,
                 cbwa09:undefined,
-                dateRange:undefined
+                dateRange:undefined,
+                caua17: undefined
             },
             // 列信息
             //  columns: [
@@ -718,6 +719,8 @@ export default {
         getList() {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+
+             if (response.code == "200") {    
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -726,6 +729,10 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
+              }else{
+                 this.$message({ message: response.msg, type: 'error' });
+             }
+   
             }
             );
         },

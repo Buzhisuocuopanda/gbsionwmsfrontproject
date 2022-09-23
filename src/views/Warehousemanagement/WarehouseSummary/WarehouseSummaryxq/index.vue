@@ -192,7 +192,8 @@ export default {
         //详情列表
         getList() {
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbpg01;
+            const userId = this.$route.params && this.$route.params.userId;
+            console.log(this.$route)
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {

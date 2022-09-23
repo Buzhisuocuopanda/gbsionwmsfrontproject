@@ -12,12 +12,12 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
-                    <el-form-item prop="cbsa08" label="供应商">
-                        <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
+                    <el-form-item prop="cbpb08" label="商品描述">
+                        <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入商品描述" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item prop="cbwa09" label="仓库">
-                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                    <el-form-item prop="ponumber" label="PONumber" style="margin-left:1%;">
+                        <el-input v-model="queryParams.ponumber" id="miaoshu" placeholder="请输入PONumber" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left:1%;">
@@ -32,7 +32,7 @@
                     <el-form-item>
                          <el-button class="biaoto-buttonchuangjian" v-hasPermi="['system:salesReceipt:list']" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:50%;">
+                    <el-form-item style="margin-left:51%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -469,7 +469,9 @@ export default {
                 cbpc07:undefined,
                 cbsa08:undefined,
                 cbwa09:undefined,
-                dateRange:undefined
+                ponumber:undefined,
+                dateRange:undefined,
+                cbpb08:undefined
             },
             // 列信息
             //  columns: [
@@ -735,6 +737,7 @@ export default {
         getList() {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -743,6 +746,9 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             }
             );
         },
@@ -761,14 +767,23 @@ export default {
         //供应商
         getList01() {
             SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+
+             if (response.code == "200") {   
                 this.postOptions = response.data.rows;
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
                 // console.log(response.data.rows,551100);
             });
         },
         //库位
         getList02() {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") { 
                 this.KuWeiOptions = response.data.rows;
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             }
                 // console.log(response.data.rows,663322);
             });
         },
@@ -776,18 +791,27 @@ export default {
         //商品信息维护
         getList03() {
             GoodsList01(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            
+             if (response.code == "200") {   
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
                 // console.log(response.data.rows, 1655);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+            }   
             });
         },
         //仓库信息维护
         getList04() {
             StoreSkuList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {  
                 this.postCangKu = response.data.rows;
                 // this.XinghaoOptions = response.data.rows;
                 // console.log(response.data.rows, 1655);
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }   
             });
         },
 
@@ -1175,7 +1199,7 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
-
+              if (response.code == "200") { 
                 // console.log(response.posts, 12345678);
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
@@ -1184,11 +1208,14 @@ export default {
                 this.getList();
                 this.open2 = false;
                 this.reset01();
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }  
 
                 // console.log(this.form2.ifEnabled, 123456);
             });
                 } else {
-                    this.$message.error('请注意规范');
+                    // this.$message.error('请注意规范');
                 }
             })
 
@@ -1321,12 +1348,12 @@ export default {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
 
-            if (res.code == "200") {
+            if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
               }else{
-                this.$message({ message: res.msg, type: 'error' });
+                this.$message({ message: response.msg, type: 'error' });
                }
 
             }).catch(() => { });

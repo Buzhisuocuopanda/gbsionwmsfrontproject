@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="Purchase_caigou">销售退货单修改</div>
+    <div class="Purchase_caigou">销售提货单修改</div>
     <!-- <div class="Purchase_sum" v-for="(value, key) in userList" :key="key">
       <span class="Purchase_bianhao">编号：{{ value.cbpg07 || "" }}</span>
       <span class="Purchase_riqii"
@@ -299,6 +299,7 @@ import {
   Purchaseinxiaoshoudingdan,
   PurchaseinboundEdit,
 } from "@/api/Warehousemanagement/SalesStock";
+import { Purchaseinbounddingdanxq } from "@/api/Warehousemanagement/Saleslading";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -1040,22 +1041,24 @@ export default {
     //详情列表
     getList() {
       this.loading = true;
-      const userId = this.$route.params && this.$route.params.cbse01;
+      const userId = this.$route.params && this.$route.params.cbpc01;
+      console.log(userId,'nihao',this.$route)
       if (userId) {
         // 获取表详细信息
-        PurchaseinboundList(
+        Purchaseinbounddingdanxq(
           userId,
           this.addDateRange(this.queryParams, this.dateRange)
         ).then((res) => {
-          let response = res.data.rows[0];
+            console.log(res,11111111)
+          let response = res.data;
           //客户名称
-          this.form2.cbse099 = response.cbca08;
+          this.form2.cbse099 = response.customerName;
           // 明细表ID
           this.form2.cbsf01 = response.cbsf01;
           //仓库名称
-          this.form2.cbpc100 = response.cbwa09;
+          this.form2.cbpc100 = response.whName;
           //结算货币名称
-          this.form2.cbse166 = response.cala08;
+          this.form2.cbse166 = response.currencyMsg;
           // 日期
           this.form2.cbsc08 = response.cbse08;
           this.tableData = response.goods;
@@ -1163,4 +1166,4 @@ export default {
   },
 };
 </script>
-<style src="./SalesStockxgcss/index.css"></style>
+<style src="./Saleskadingxgcss/index.css"></style>

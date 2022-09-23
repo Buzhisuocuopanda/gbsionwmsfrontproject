@@ -982,10 +982,12 @@
                   console.log(item.cbie01,8523697412);
                 })
                 this._ly_ok()
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
               }
             });
           } else {
-            this.$message.error('请注意规范');
+           
           }
         })
         //    this._ly_ok();
