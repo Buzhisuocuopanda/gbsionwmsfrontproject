@@ -1104,11 +1104,17 @@ export default {
             this.$modal.confirm('是否确认审批编号为"' + row.cbse01 + '"的数据项？').then(function () {
                 return Purchaseinboundsho(row)
             }).then(response => {
+              
+             if (response.code == "200") {   
                 console.log(this.form.cbse01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '审批成功', type: 'success' });
+            }else{
+                 this.$message({ message: response.msg, type: 'error' });
+                }
+
             }).catch(() => { });
         },
         //审批上面内容
@@ -1118,9 +1124,13 @@ export default {
             this.$modal.confirm('是否确认审批编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.Purchaseinboundsho(item).then((res) => {
+                    if (res.code == "200") {  
                         console.log(res, 123)
                         this.getList();
                         this.$modal.msgSuccess("审批成功");
+                     }else{
+                        this.$message({ message: res.msg, type: 'error' });
+                     }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1134,12 +1144,15 @@ export default {
             this.$modal.confirm('是否确认反审编号为"' + row.cbse01 + '"的数据项？').then(function () {
                 return PurchaseinboundSht(row)
             }).then(response => {
+             if (response.code == "200") {  
                 console.log(this.form.cbse01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '反审成功', type: 'success' });
-
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             }  
             }).catch(() => { });
             
         },
@@ -1238,6 +1251,7 @@ export default {
             this.$modal.confirm('是否取消标记"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundShtt(item).then((res) => {
+                     if (res.code == "200") {
                         console.log(res, 123)
                         if(res.code == 200){
                             this.getList();
@@ -1245,6 +1259,10 @@ export default {
                         }else{
                             this.$modal.msgError(res.msg)
                         }
+                     }else{
+                            this.$message({ message: res.msg, type: 'error' });
+                      }
+
                     }).catch((e) => {
                         console.log(e, 456)
                     })

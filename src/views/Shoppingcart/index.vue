@@ -517,7 +517,7 @@ export default {
                  this.$router.push( {path: "/Salesmanagement/salemdfOrderDetails", query: { goods: JSON.stringify(this.idss) }})
         })
       })
-      console.log(this.ids,"123");
+      console.log(this.userIds,"123");
     },
     createForm(goodsId) {
       // this.showaddDialog = true

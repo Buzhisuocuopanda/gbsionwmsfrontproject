@@ -932,7 +932,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，盘点完成', type: 'success' });
+                this.$message({ message: '盘点完成', type: 'success' });
               }else{
                 this.$message({ message: response.msg, type: 'error' });
               }

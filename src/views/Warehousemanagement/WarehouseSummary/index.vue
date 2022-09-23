@@ -1030,12 +1030,15 @@ export default {
             console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否确定盘点完成为"' + row.cbpc01 + '"的数据项？').then(() => {
                 Purchaseinboundsho(row).then(response => {
+                if (response.code == "200") {    
                     console.log(this.form.cbpc01, 789)
                     // this.submitShangpin();
                     this.getList();
                     // this.open = false;
-                    this.$message({ message: '恭喜你，盘点成功', type: 'success' });
-
+                    this.$message({ message: '盘点成功', type: 'success' });
+                 }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                 } 
                 });
             }).catch(() => { });
             
