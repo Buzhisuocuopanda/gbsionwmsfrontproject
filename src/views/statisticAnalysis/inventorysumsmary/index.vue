@@ -189,7 +189,7 @@ export default {
     },
     //下拉列表数据品牌
     getCalaList(){
-      let param={};
+      let param={cala10:"商品品牌"};
       this.loading2 = true;
       getswJsAllList(param).then(response => {
         this.loading2 = false;
