@@ -11,12 +11,12 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
-                    <el-form-item prop="cbsa08" label="供应商">
-                        <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
+                    <el-form-item prop="supplier" label="供应商">
+                        <el-input v-model="queryParams.supplier" id="miaoshu" placeholder="请输入供应商" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item prop="cbwa09" label="仓库">
-                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                    <el-form-item prop="wh" label="仓库">
+                        <el-input v-model="queryParams.wh" id="miaoshu" placeholder="请输入仓库" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left:1%;">

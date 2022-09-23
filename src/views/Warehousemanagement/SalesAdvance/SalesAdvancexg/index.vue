@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">销售预订单入库单</div>
- <el-row :gutter="20" style="margin-top: 20px;">
+      <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="销售预订单编号:" prop="orderNo">
             <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
@@ -203,8 +203,8 @@
     //销售预订单
   import SalesBooking from "@/components/SalesBooking";
 
-//销售人员
-import salerman from "@/components/salerman";
+   //销售人员
+  import salerman from "@/components/salerman";
 
   export default {
     name: "store",
@@ -1038,5 +1038,5 @@ import salerman from "@/components/salerman";
     }
   };
 </script>
-<style src="./SalesReceiptcjcss/index.css">
+<style src="./SalesAdvancexgcss/index.css">
 </style>

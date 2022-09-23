@@ -1038,5 +1038,5 @@ import salerman from "@/components/salerman";
     }
   };
 </script>
-<style src="./SalesReceiptcjcss/index.css">
+<style src="./SalesReceiptxgcss/index.css">
 </style>

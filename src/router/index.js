@@ -483,6 +483,36 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //销售预订单变更单修改
+   {
+    path: '/system/user-SalesAdvancexiugai',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesAdvance/SalesAdvancexg/index'),
+        meta: { title: '销售预订单变更单修改', activeMenu: '/Warehousemanagement/SalesAdvance' }
+      }
+    ]
+  },
+
+  //销售预订单变更单详情
+   {
+    path: '/system/user-SalesAdvancexiangqong',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesAdvance/SalesAdvancexq/index'),
+        meta: { title: '销售预订单变更单详情', activeMenu: '/Warehousemanagement/SalesAdvance' }
+      }
+    ]
+  },
+
    //销售上架单添加
    {
     path: '/system/user-xssjdan',
@@ -678,7 +708,7 @@ export const dynamicRoutes = [
         path: 'role/',
          name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesReceipt/SalesReceiptcj/index'),
-        meta: { title: '销售退库创建', activeMenu: '/Warehousemanagement/SalesReceipt' }
+        meta: { title: '销售预订单入库单创建', activeMenu: '/Warehousemanagement/SalesReceipt' }
       }
     ]
   },

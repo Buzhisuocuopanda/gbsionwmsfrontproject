@@ -12,8 +12,8 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
-                    <el-form-item prop="cbpb08" label="商品描述">
-                        <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入商品描述" clearable
+                    <el-form-item prop="cbpb08" label="编号">
+                        <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="ponumber" label="PONumber" style="margin-left:1%;">
@@ -92,7 +92,7 @@
                     <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handleChuangJiangonexiugai(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:salesReceipt:edit']">
                                 修改
                             </el-button>
@@ -1273,6 +1273,15 @@ export default {
         handleChuangJiangone: function (row) {
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-xsyddrukudang/role/");
+        },
+
+         /** 修改操作 */
+        handleChuangJiangonexiugai: function (row) {
+
+             const cbpc01 = row.id;
+            console.log(row.cbpc01);
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-SalesAdvancexiugai/role/"+ cbpc01);
         },
 
         // /** 提交按钮 */
