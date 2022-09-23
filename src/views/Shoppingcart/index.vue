@@ -31,8 +31,10 @@
 
 
         <el-form-item style="margin: -5px -10px 1px 1px">
-<!--          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
-          <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>-->
+<!--          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>-->
+<!--
+          <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
+-->
 
             <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
 <!--          <el-upload-->
@@ -54,30 +56,28 @@
         <el-table-column fixed label="品牌" align="center" prop="brand" key="brand"  min-width="120px;"/>
         <el-table-column fixed label="型号" align="center" prop="model" min-width="120px;"/>
         <el-table-column  label="描述" align="center" prop="description" min-width="120px;" />
-        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
-        <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />
+<!--        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
+        <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />-->
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-<!--
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
                        type="text" @click="mdfDetail(scope.row)"
-            >修改</el-button>
+            >加入</el-button>
 
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>-->
+<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
                        type="text"
-                       @click="showDetail(scope.row)">详情</el-button>
+                       @click="showDetail(scope.row)">详情</el-button>-->
 
           </template>
 
         </el-table-column>
--->
       </el-table>
       <el-pagination
         :background="true"
@@ -248,6 +248,8 @@ export default {
   data() {
     return {
       title1: "",
+      goodsId: "",
+
       form: {
         customerId: "",
         saleOrderNo: "",
@@ -491,13 +493,14 @@ export default {
     mdfDetail(row) {
       // this.formData=row
       // this.showmdfDialog = true
-
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationmd", query: {id: row.id}})
+    //  this.goodsId=this.orderList[0].goodsId;
+     // console.log(this.goodsId,1111111)
+      this.$router.push({path: "/Salesmanagement/salemdfOrderDetails", query: {goods: row}})
 
     },
-    createForm() {
+    createForm(goodsId) {
       // this.showaddDialog = true
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationadd", query: {id: 1}})
+      this.$router.push({path: "/Salesmanagement/saleOrderDetail", query: {goodsId: goodsId}})
 
     },
     showDetail(row) {
@@ -538,12 +541,11 @@ export default {
           this.orderList = response.data;
           console(response.data,8523)
           this.totalItems = response.data.total;
-
         } else {
           this.deviceList = []
           this.totalItems = 0
         }
-        console.log(response.data);
+        console.log(this.orderList);
       }
 
 
