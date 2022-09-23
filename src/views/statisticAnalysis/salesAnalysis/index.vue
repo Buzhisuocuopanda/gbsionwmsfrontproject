@@ -273,6 +273,8 @@ export default {
      /*     this.deviceList = []*/
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //下拉列表数据品牌
@@ -286,6 +288,8 @@ export default {
         } else {
           this.calaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
     //下拉列表数据销售人员
@@ -299,6 +303,8 @@ export default {
         } else {
           this.cauaList = [];
         }
+      },error => {
+        this.loading4 = false;
       });
     },
 

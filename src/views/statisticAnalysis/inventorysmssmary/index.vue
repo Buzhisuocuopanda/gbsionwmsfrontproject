@@ -263,6 +263,8 @@ export default {
           this.deviceList = []
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //导出
@@ -283,6 +285,8 @@ export default {
           } else {
             this.goodList = [];
           }
+        },error => {
+          this.loading1 = false;
         });
       } else {
         this.goodList = [];
@@ -299,6 +303,8 @@ export default {
         } else {
           this.cbcaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
     //下拉列表数据销售人员
@@ -312,6 +318,8 @@ export default {
         } else {
           this.cauaList = [];
         }
+      },error => {
+        this.loading3 = false;
       });
     },
 
