@@ -292,9 +292,9 @@ export default {
   }
 
      /**  表头数量  */
- #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
+ /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
       
-  }
+  } */
 
   #printRecord .el-table__header-wrapper .el-table__header {
     width: 100% !important;

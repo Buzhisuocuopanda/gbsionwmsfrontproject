@@ -40,12 +40,20 @@
         <el-table-column  label="描述" align="center" prop="description" min-width="290px;"/>
         <el-table-column  label="数量" align="center" prop="qty" min-width="60px;"/>
         <el-table-column  label="序列号" align="center" prop="sn"  min-width="160px;"/>
-        <el-table-column  label="销售单价U" align="center" prop="uprice" min-width="100px;"/>
+        <el-table-column  label="销售单价U" align="center"  min-width="100px;">
+          <template slot-scope="scope">
+            <div >{{RToU(scope.row.rprice )}}</div>
+          </template>
+        </el-table-column>
         <el-table-column  label="销售单价R" align="center" prop="rprice" min-width="100px;"/>
         <el-table-column  label="经销商品名称" align="center" prop="suplierName" min-width="200px;"/>
         <el-table-column  label="品牌" align="center" prop="brand" min-width="100px;"/>
         <el-table-column  label="工厂" align="center" prop="gc" min-width="100px;"/>
-        <el-table-column  label="采购单价U" align="center" prop="cgUprice" min-width="60px;"/>
+        <el-table-column  label="采购单价U" align="center" min-width="60px;">
+          <template slot-scope="scope">
+            <div >{{RToU(scope.row.cgRprice )}}</div>
+          </template>
+        </el-table-column>
         <el-table-column  label="采购单价R" align="center" prop="cgRprice" min-width="60px;"/>
         <!--<el-table-column  label="生产总订单号" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
@@ -238,6 +246,14 @@ export default {
         }
       }
     },*/
+    RToU(num){
+      if(num!=null){
+        return num*141/1000;
+      }else {
+        return "";
+      }
+
+    },
     /** 重置按钮操作 */
     resetQuery() {
       this.queryParams.saleOrderNo = "";
@@ -278,6 +294,8 @@ export default {
      /*     this.deviceList = []*/
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //下拉列表数据仓库
@@ -291,6 +309,8 @@ export default {
         } else {
           this.storeSkuList = [];
         }
+      },error => {
+        this.loading3 = false;
       });
     },
     //下拉列表数据客户
@@ -304,6 +324,8 @@ export default {
         } else {
           this.cbcaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
 

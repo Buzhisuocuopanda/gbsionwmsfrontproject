@@ -27,13 +27,13 @@
 
                 <el-table-column prop="cbwa09" key="cbwa09" label="供应商">
                 </el-table-column>
-                <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="订单分类">
+                <el-table-column prop="cbab15" key="cbab15" label="订单分类">
                 </el-table-column>
-                <el-table-column prop="cbla09" key="cbla09" align="right" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" align="right" label="品牌">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="right" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" align="right" label="描述">
+                <el-table-column prop="cbpb08" key="cbpb08" align="right" label="描述">
                 </el-table-column>
                 <el-table-column prop="cbab09" key="cbab09" align="right" label="数量">
                 </el-table-column>

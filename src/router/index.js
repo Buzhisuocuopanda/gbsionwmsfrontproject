@@ -555,6 +555,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+  // 采购入库单修改
+  {
+    path: '/system/user-ckrkxg',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseWarehousing/PurchaseWarehousingxg/index'),
+        meta: { title: '采购入库单修改', activeMenu: '/Warehousemanagement/PurchaseWarehousing' }
+      }
+    ]
+  },
    //采购退库单返回
    {
     path: '/system/user-cktkfh',
@@ -566,6 +580,20 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseReturn/index'),
         meta: { title: '采购退库单', activeMenu: '/Warehousemanagement/PurchaseReturn' }
+      }
+    ]
+  },
+  // 采购退库单修改
+  {
+    path: '/system/user-cktkxg',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseReturn/PurchaseReturnxg/index'),
+        meta: { title: '采购退库单修改', activeMenu: '/Warehousemanagement/PurchaseReturn' }
       }
     ]
   },

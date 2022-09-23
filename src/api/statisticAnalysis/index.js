@@ -69,7 +69,14 @@ export function getsalermanAllList(query) {
   })
 }
 
-
+// 获取供应商信息下拉列表
+export function getSwJsSupplierlistAll(query) {
+  return request({
+    url: 'countQuery/SwJsSupplierlistAll',
+    method: 'get',
+    params: query
+  })
+}
 
 
 
@@ -79,6 +86,15 @@ export function getsalermanAllList(query) {
 export function getInventorySummaryList(query) {
   return request({
     url: '/countQuery/Inventorysummaryquery',
+    method: 'get',
+    params: query
+  })
+}
+
+// 添加购物车
+export function insertgoodsShop(query) {
+  return request({
+    url: '/sale/insertgoodsShop',
     method: 'get',
     params: query
   })

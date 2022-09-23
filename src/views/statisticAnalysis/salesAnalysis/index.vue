@@ -4,40 +4,44 @@
     <div class="filter-container">
       <el-form :inline="true"   >
 
-        <el-form-item label="经销商id" v-if="false"  class="item-r" >
-          <el-input v-model="customerId" class="filter-item"  placeholder="经销商id" />
-        </el-form-item>
-
-        <el-form-item label="供应商id" v-if="false"  class="item-r" >
-          <el-input v-model="supplierId" class="filter-item"  placeholder="供应商id" />
-        </el-form-item>
-        <el-form-item label="品牌"   class="item-r" >
-          <el-select v-model="queryParams.brand" clearable filterable placeholder="请输入关键词" :loading="loading3">
-            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
+        <el-form-item label="经销商"  class="item-r" label-width="80px">
+          <el-select v-model="queryParams.customerId"  style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+            <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="型号" v-if="false"  class="item-r" >
-          <el-input v-model="model" class="filter-item"  placeholder="型号" />
-        </el-form-item>
-        <el-form-item label="销售人员" style="margin-left: 20px"  class="item-r" >
-          <el-select v-model="queryParams.saleUserId"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading4">
-            <el-option v-for="item in cauaList" :key="item.caua17" :label="item.caua17" :value="item.caua17"></el-option>
+        <el-form-item label="供应商" style="margin-left: 50px" class="item-r" label-width="80px">
+          <el-select v-model="queryParams.supplierId"  style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading6">
+            <el-option v-for="item in cbsaList" :key="item.cbsa01" :label="item.cbsa08" :value="item.cbsa01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item  label="日期"  class="item-r" style="margin-left: 20px">
+        <el-form-item  label="日期"  class="item-r" style="margin-left: 50px" >
           <el-date-picker size="mini" v-model="dateRange"  type="daterange"
-                          style="height: 35px"
+                          style="height: 35px;width: 500px;margin-left: 20px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
 
+        <el-form-item label="品牌"   class="item-r" label-width="80px">
+          <el-select v-model="queryParams.brand" style="width: 300px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading3">
+            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="型号"  class="item-r" style="margin-left: 50px" label-width="80px">
+          <el-select v-model="queryParams.model" style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading5">
+            <el-option v-for="item in modelList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
+          </el-select>
+        </el-form-item>
+       <!-- <el-form-item label="销售人员" style="margin-left: 20px"  class="item-r" >
+          <el-select v-model="queryParams.saleUserId"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading4">
+            <el-option v-for="item in cauaList" :key="item.caua17" :label="item.caua17" :value="item.caua17"></el-option>
+          </el-select>
+        </el-form-item>-->
 
 
-
-
-        <el-form-item style="margin: -5px -10px 1px 20px">
+        <el-form-item style="margin: 1px -10px 1px 300px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
@@ -73,7 +77,7 @@
 </template>
 <script>
 
-import { getSalesAnalysisList,getswJsAllList,getsalermanAllList } from "@/api/statisticAnalysis/index";
+import { getSalesAnalysisList,getswJsAllList,getsalermanAllList,getSwJsCustomerAllList,getSwJsSupplierlistAll } from "@/api/statisticAnalysis/index";
 import {formatDate2} from "../../../utils";
 //
 // import { formatDate } from '../../../utils';
@@ -85,11 +89,20 @@ export default {
       calaList:[],
       //下拉列表数据销售人员
       cauaList:[],
+      //下拉列表数据客户
+      cbcaList:[],
+      //下拉列表数据供应商
+      cbsaList:[],
+      //下拉列表数据商品类型
+      modelList:[],
       dateRange:[],
 
       loading:false,
+      loading2:false,
       loading3:false,
       loading4:false,
+      loading5:false,
+      loading6:false,
 
       // 查询参数
       queryParams: {
@@ -224,7 +237,10 @@ export default {
   mounted() { // 自动触发写入的函数
     this.onSearch();
     this.getCalaList();
-    this.getCauaList();
+    // this.getCauaList();
+    this.getCbcaList();
+    this.getModelList();
+    this.getCbsaList();
   },
   methods: {
     formatTime2(row){
@@ -273,11 +289,13 @@ export default {
      /*     this.deviceList = []*/
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //下拉列表数据品牌
     getCalaList(){
-      let param={};
+      let param={cala10:"商品品牌"};
       this.loading2 = true;
       getswJsAllList(param).then(response => {
         this.loading2 = false;
@@ -286,6 +304,23 @@ export default {
         } else {
           this.calaList = [];
         }
+      },error => {
+        this.loading2 = false;
+      });
+    },
+    //下拉列表数据商品类型
+    getModelList(){
+      let param={cala10:"商品类型"};
+      this.loading5 = true;
+      getswJsAllList(param).then(response => {
+        this.loading5 = false;
+        if (response.data != null) {
+          this.modelList = response.data;
+        } else {
+          this.modelList = [];
+        }
+      },error => {
+        this.loading5 = false;
       });
     },
     //下拉列表数据销售人员
@@ -299,6 +334,38 @@ export default {
         } else {
           this.cauaList = [];
         }
+      },error => {
+        this.loading4 = false;
+      });
+    },
+    //下拉列表数据客户
+    getCbcaList(){
+      let param={};
+      this.loading2 = true;
+      getSwJsCustomerAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.cbcaList = response.data;
+        } else {
+          this.cbcaList = [];
+        }
+      },error => {
+        this.loading2 = false;
+      });
+    },
+    //下拉列表数据供应商
+    getCbsaList(){
+      let param={};
+      this.loading6 = true;
+      getSwJsSupplierlistAll(param).then(response => {
+        this.loading6 = false;
+        if (response.data != null) {
+          this.cbsaList = response.data;
+        } else {
+          this.cbsaList = [];
+        }
+      },error => {
+        this.loading6 = false;
       });
     },
 

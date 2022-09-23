@@ -36,8 +36,8 @@
       <!--<el-table-column  prop="cbba14" label="缺货数量"  sortable align="center">-->
         <!--<template slot-scope="scope">
           <div>{{scope.row.cbba09-scope.row.cbba13}}</div>
-        </template>-->
-      </el-table-column>
+        </template>
+      </el-table-column>-->
       <el-table-column prop="cbba12" label="状态" :formatter="formatStateType" sortable align="center"></el-table-column>
     </el-table>
     <el-pagination
@@ -127,6 +127,8 @@ export default {
           /*     this.deviceList = []*/
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //导出
@@ -148,6 +150,8 @@ export default {
           } else {
             this.goodList = [];
           }
+        },error => {
+          this.loading1 = false;
         });
       } else {
         this.goodList = [];

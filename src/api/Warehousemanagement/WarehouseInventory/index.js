@@ -18,7 +18,14 @@ export function SkuBarcodeLists(query) {
     params: query
   })
 }
-
+// 详情
+// /dev-api/stage-api/system/Warehouseinventoryschedule/SwJsStorelistdetail
+export function SkuBarcodeListss(CBPC01) {
+  return request({
+    url: '/system/Warehouseinventoryschedule/SwJsStorelistdetail?cbsh01='+ CBPC01,
+    method: 'get'
+  })
+}
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({

@@ -1124,8 +1124,8 @@ export default {
         // row.telPeople = this.form.isQualified;
         // console.log(this.form.id);
         console.log(row,'数据',this.form2,'列表',this.tableData)
-        // return
-        PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
+        
+        // PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
           // console.log(response,789)
           // this.form = response.data;
           // this.name = response.name;
@@ -1136,16 +1136,16 @@ export default {
           // this.manageMode = response.manageMode;
           // this.ifEnabled = response.ifEnabled;
           // this.sysUserId = response.sysUserId;
-          console.log(response, 789);
+          // console.log(response, 789);
           this.$message({ message: "修改成功", type: "success" });
-          this.$router.push("/Warehousemanagement/SalesStock/")
-        });
+          this.$router.push("/Warehousemanagement/Saleslading/")
+        // });
       } else {
         this.$message.error("错了哦，商品名称没有填呢");
       }
     },
     cancells(){
-      this.$router.push("/Warehousemanagement/SalesStock/")
+      this.$router.push("/Warehousemanagement/Saleslading/")
     }
   },
   computed: {},
