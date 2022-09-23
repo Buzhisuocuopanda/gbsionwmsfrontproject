@@ -1,7 +1,7 @@
 <template>
     <div>
        <section ref="print" class="recordImg" id="printRecord">
-        <div class="Purchase_caigou">采购入库单</div>
+        <div class="Purchase_caigou">销售预订单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
             <span class="Purchase_bianhao">编号：{{ value.orderNo }}</span>
             <span class="Purchase_riqi">日期：{{ value.orderDate.slice(0, 10) }}</span>
@@ -48,7 +48,7 @@
                     <el-descriptions-item :contentStyle="{'text-align': 'right'}"
                         :labelStyle="{ 'text-align': 'center'}">
                         <template :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                            slot="label">本页数量小记</template>{{totalCount}}
+                            slot="label">本页数量小记</template>{{ totalCount }}
                     </el-descriptions-item>
                     <el-descriptions-item :contentStyle="{'text-align': 'right'}"
                         :labelStyle="{ 'text-align': 'center'}">
@@ -193,14 +193,14 @@ export default {
         totalCount: function () {
             var totalCount = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalCount += this.userList[i].cbpd09;
+                totalCount += this.userList[i].qty;
             }
             return totalCount;
         },
         totalPrice: function () {
             var totalPrice = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalPrice += this.userList[i].cbpd09 * this.userList[i].cbpd11;
+                totalPrice += this.userList[i].qty * this.userList[i].price;
             }
             return totalPrice;
         }
