@@ -469,16 +469,25 @@
 
 
       exprotData() {
+        var startTime=null
+        var endTime=null
+        if(this.dateRange!=null && this.dateRange.length==2){
+          startTime=this.dateRange[0];
+          endTime=this.dateRange[1];
+        }
         const param = {
           orderNo: this.orderNo,
-          model: this.model,
-          status: this.status
+          customer: this.customer,
+          status: this.status,
+          startTime: startTime,
+          endTime: endTime,
+          type: 1
         }
         // this.loading=true;
 
-        this.download('/sale/totalOrderExcelList', {
+        this.download('/sale/saleOrderExcelList', {
           ...param
-        }, `生产订单数据_${new Date().getTime()}.xlsx`)
+        }, `国际销售订单数据_${new Date().getTime()}.xlsx`)
 
         // totalOrderExcelListtmp(param).then(response => {
         //   if (response.code === 200) {

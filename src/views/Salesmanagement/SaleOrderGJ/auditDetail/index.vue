@@ -229,7 +229,7 @@
           <el-table-column label="描述" width="" />
           <el-table-column prop="qty" label="数量" width="150"  :formatter="rounding">
             <template slot-scope="scope" >
-              <div style="text-align: right">
+              <div style="text-align: center">
 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
                 {{parseFloat(scope.row.qty).toFixed(2)}}
 

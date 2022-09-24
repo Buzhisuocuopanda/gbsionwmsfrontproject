@@ -68,7 +68,7 @@
         <el-table-column fixed="right" label="操作" min-width="250px;">
           <template slot-scope="scope">
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
             <el-button style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>
@@ -523,11 +523,11 @@
       },
       createForm() {
         // this.showaddDialog = true
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/add", query: {id: 1}})
 
       },
       showDetail(row) {
-        this.$router.push({path: "/Salesmanagement/saleshowOrderDetail", query: {id: row.id}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/detail", query: {id: row.id}})
 
       },
       closeDetail() {
@@ -548,11 +548,11 @@
         // this.formData=row
         // this.showmdfDialog = true
 
-        this.$router.push({path: "/Salesmanagement/salemdfOrderDetail", query: {id: row.id}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/mdf", query: {id: row.id}})
 
       },
       auditDetail(row,opeateType) {
-        this.$router.push({path: "/Salesmanagement/saleauditOrderDetail", query: {id: row.id,status:opeateType}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/audit", query: {id: row.id,status:opeateType}})
 
         // const param = {
         //   orderId: row.id,
@@ -595,16 +595,24 @@
 
 
       exprotData() {
+        var startTime=null
+        var endTime=null
+        if(this.dateRange!=null && this.dateRange.length==2){
+          startTime=this.dateRange[0];
+          endTime=this.dateRange[1];
+        }
         const param = {
           orderNo: this.orderNo,
-          model: this.model,
-          status: this.status
+          customer: this.customer,
+          status: this.status,
+          startTime: startTime,
+          endTime: endTime,
         }
         // this.loading=true;
 
-        this.download('/sale/totalOrderExcelList', {
+        this.download('/sale/exportSaleChangeList', {
           ...param
-        }, `生产订单数据_${new Date().getTime()}.xlsx`)
+        }, `销售变更订单数据_${new Date().getTime()}.xlsx`)
 
         // totalOrderExcelListtmp(param).then(response => {
         //   if (response.code === 200) {

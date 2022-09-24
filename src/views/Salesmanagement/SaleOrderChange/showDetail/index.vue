@@ -3,9 +3,10 @@
 
 
     <el-form ref="form2" :model="form2" label-width="230px" :rules="rules" style="" class="demo-ruleForm">
-      <div class="chuangjiancaigous">销售订单</div>
+      <div class="chuangjiancaigous">销售变更订单</div>
       <el-descriptions :column="3" border style="margin-top: 30px" :contentStyle="CS" :label-style="LS ">
-        <el-descriptions-item label="编号"  >{{this.formData.orderNo}}</el-descriptions-item>
+        <el-descriptions-item label="编号"  >{{this.formData.orderChangeNo}}</el-descriptions-item>
+        <el-descriptions-item label="销售订单编号"  >{{this.formData.orderNo}}</el-descriptions-item>
         <el-descriptions-item label="客户单号"  >{{this.formData.customerNo}}</el-descriptions-item>
         <el-descriptions-item label="日期"  >{{this.formData.orderDate}}</el-descriptions-item>
         <el-descriptions-item label="客户"  >{{this.formData.customerName}}</el-descriptions-item>
@@ -250,7 +251,7 @@
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsMsg" label="品牌" width="">
+          <el-table-column prop="goodsMsg" label="品牌" width="150">
             <template slot-scope="scope">
               <sapn>
 <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
@@ -267,9 +268,9 @@
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column label="型号" width="" />
-          <el-table-column label="描述" width="" />
-          <el-table-column prop="qty" label="数量" width="150" >
+          <el-table-column label="型号" width="150" />
+          <el-table-column label="描述" width="150" />
+          <el-table-column prop="qty" label="数量" width="120" >
             <template slot-scope="scope">
 <!--              <sapn>-->
 <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
@@ -283,7 +284,22 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="normalPrice" label="标准单价" width="150">
+
+          <el-table-column prop="qty" label="修改前数量" width="120" >
+            <template slot-scope="scope">
+              <!--              <sapn>-->
+              <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
+              <!--                <span>{{scope.row.qty}}</span>-->
+
+              <!--                &lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;-->
+              <!--              </sapn>-->
+              <div style="text-align: right">
+                {{parseFloat(scope.row.bfQty).toFixed(2)}}
+
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="normalPrice" label="标准单价" width="120">
             <template slot-scope="scope">
 <!--              <sapn>-->
 <!--&lt;!&ndash;                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>&ndash;&gt;-->
@@ -296,7 +312,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="currentPrice" label="本次单价" width="150">
+          <el-table-column prop="currentPrice" label="本次单价" width="120">
             <template slot-scope="scope">
 <!--              <sapn>-->
 <!--&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
@@ -309,8 +325,21 @@
               </div>
             </template>
           </el-table-column>
+          <el-table-column prop="currentPrice" label="修改前价格" width="120">
+            <template slot-scope="scope">
+              <!--              <sapn>-->
+              <!--&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
+              <!--                <span>{{scope.row.currentPrice}}</span>-->
 
-          <el-table-column prop="totalPrice" label="金额" width="150">
+              <!--              </sapn>-->
+              <div style="text-align: right">
+                {{parseFloat(scope.row.bfPrice).toFixed(2)}}
+
+              </div>
+            </template>
+          </el-table-column>
+
+          <el-table-column prop="totalPrice" label="金额" width="120">
             <template slot-scope="scope">
 <!--              <sapn>-->
 <!--&lt;!&ndash;                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>&ndash;&gt;-->
@@ -1281,7 +1310,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/saleOrderChange"})
       },
 
       //添加的取消按钮
