@@ -97,17 +97,6 @@
                         </el-input>
                   </el-popover>
             </template>
-            <!-- <el-col style="margin-left: 0%;" :span="7">
-              <el-form-item label="" prop="cbpc000">
-                  <el-popover placement="bottom-start" trigger="click">
-                       <Goodsone01 ref="Goodsone01" @selected="selected08"
-                          style="width:100% !important;" />
-                        <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                            style="width:100%;">
-                        </el-input>
-                  </el-popover>
-              </el-form-item>
-            </el-col> -->
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
@@ -683,9 +672,9 @@
                     cbpd12: ""
                   }
                 }
-                if (count-- === 1) {
-                  this._ly_save()
-                }
+                // if (count-- === 1) {
+                //   this._ly_save()
+                // }
                 this._ly_addFrom()
                 //    this.formArr.cbpg01="1234567";
                 //    this.form.cbpg01=this.formArr.cbpg01;

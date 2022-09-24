@@ -1,17 +1,17 @@
 <template>
     <div>
         <div class="Purchase_caigou">销售退货单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpg07 || '' }}</span>
+        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
+            <span class="Purchase_bianhao">编号：{{ value.cbse07 || '' }}</span>
             <span class="Purchase_riqii">日期：{{ value.cbse08.slice(0,10) }}</span>
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
             <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList"
+            <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList.slice(0, 1)"
                 :key="key">
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">客户</template>{{
-                    value.cbsa08
+                    value.cbca08
                     }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">

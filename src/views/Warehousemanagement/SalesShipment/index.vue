@@ -14,7 +14,7 @@
                         <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="请输入客户" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间" style="margin-left:2%;">
+                    <el-form-item label="日期" style="margin-left:2%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
@@ -998,12 +998,16 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
             PurchaseinboundShss(row).then(response => {
+             
+             if (response.code == "200") {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '标记完成', type: 'success' });
-
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              } 
             });
             }).catch(() => { });
         },
@@ -1016,9 +1020,14 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
+                 
+                if (res.code == "200") {
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("标记完成");
+                 }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                  }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1041,10 +1050,14 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
+                
+                 if (response.code == "200") {      
                     console.log(this.form.cbpc01, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
-
+                 }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                  }
                 });
             }).catch(() => { });
         },
@@ -1056,9 +1069,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.Purchaseinbounds(item).then((res) => {
+                 if (res.code == "200") { 
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("取消标记成功");
+                 }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                  }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1246,10 +1263,14 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
+                     if (res.code == "200") {
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                     }else{
+                        this.$message({ message: res.msg, type: 'error' });
+                      } 
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1278,9 +1299,13 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.cbsb07 + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
+             if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+               }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */

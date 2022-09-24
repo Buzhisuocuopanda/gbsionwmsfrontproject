@@ -78,7 +78,7 @@ export function PurchaseinboundRemove(id) {
 // 审核
 export function PurchaseinboundSH(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundsh',
+    url: '/whmanagement/auditTakeOrder',
     method: 'post',
     data: data
   })
@@ -87,7 +87,7 @@ export function PurchaseinboundSH(data) {
 //采购入库标记完成
 export function PurchaseinboundShss(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundshss',
+    url: '/whmanagement/auditTakeOrder',
     method: 'post',
     data: data
   })
@@ -96,7 +96,7 @@ export function PurchaseinboundShss(data) {
 //采购入库取消完成
 export function Purchaseinbounds(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinbounds',
+    url: '/whmanagement/auditTakeOrder',
     method: 'post',
     data: data
   })
@@ -105,7 +105,7 @@ export function Purchaseinbounds(data) {
 //采购入库单反审
 export function PurchaseinboundShs(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsPurchaseinboundshs',
+    url: '/whmanagement/auditTakeOrder ',
     method: 'post',
     data: data
   })
