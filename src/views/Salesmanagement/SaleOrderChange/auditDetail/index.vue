@@ -1,14 +1,19 @@
 <template>
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">销售订单</div>
+      <div class="chuangjiancaigous">销售变更订单</div>
 
       <!-- 编号:56221589223 -->
 
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
-          <el-form-item label="编号:" prop="orderNo">
-                        <el-input type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>
+          <el-form-item label="销售订单编号:" prop="orderNo">
+            <el-input type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="销售变更单编号:" prop="orderNo">
+                        <el-input type="text" v-model="formData.orderChangeNo" style="width: 70%;" readonly/>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -16,12 +21,7 @@
             <el-input type="text" v-model="formData.customerNo" style="width: 70%;" readonly />
           </el-form-item>
         </el-col>
-        <el-col :span="8">
-          <el-form-item label="日期:" prop="orderDate">
-            <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;" readonly>
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
+
       </el-row>
       <!--      <el-row :gutter="20">-->
       <!--        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
@@ -72,6 +72,12 @@
       <!--      </el-row>-->
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
+          <el-form-item label="日期:" prop="orderDate">
+            <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;" readonly>
+            </el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
           <el-form-item label="客户:" prop="customerName">
             <el-input type="text" v-model="formData.customerName" style="width: 70%;" readonly />
 
@@ -100,24 +106,26 @@
 <!--            </el-select>-->
           </el-form-item>
         </el-col>
+
+      </el-row>
+
+
+      <el-row :gutter="20">
+
         <el-col :span="8">
           <el-form-item label="结算货币:" prop="currency">
             <el-input type="text" v-model="formData.currencyMsg" style="width: 70%;" readonly />
 
             <!--            <el-select  v-model="formData.currency"  clearable  placeholder="请选择" style="width: 70%;">-->
-<!--              <el-option-->
-<!--                v-for="item in currencyoptions"-->
-<!--                :key="item.value"-->
-<!--                :label="item.label"-->
-<!--                :value="item.value">-->
-<!--              </el-option>-->
-<!--            </el-select>-->
+            <!--              <el-option-->
+            <!--                v-for="item in currencyoptions"-->
+            <!--                :key="item.value"-->
+            <!--                :label="item.label"-->
+            <!--                :value="item.value">-->
+            <!--              </el-option>-->
+            <!--            </el-select>-->
           </el-form-item>
         </el-col>
-      </el-row>
-
-
-      <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="收货人:" prop="receiveName">
             <el-input type="text" v-model="formData.receiveName" style="width: 70%;" readonly />
@@ -128,24 +136,24 @@
             <el-input type="text" v-model="formData.receivePhone" style="width: 70%;" readonly />
           </el-form-item>
         </el-col>
+
+      </el-row>
+
+      <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="发票类型:" prop="invoiceType">
             <el-input type="text" v-model="formData.invoiceType" style="width: 70%;" readonly />
 
-<!--            <el-select  v-model="formData.invoiceType"  clearable  placeholder="请选择" style="width: 70%;">-->
-<!--              <el-option-->
-<!--                v-for="item in invoiceoptions"-->
-<!--                :key="item.value"-->
-<!--                :label="item.label"-->
-<!--                :value="item.value">-->
-<!--              </el-option>-->
-<!--            </el-select>-->
+            <!--            <el-select  v-model="formData.invoiceType"  clearable  placeholder="请选择" style="width: 70%;">-->
+            <!--              <el-option-->
+            <!--                v-for="item in invoiceoptions"-->
+            <!--                :key="item.value"-->
+            <!--                :label="item.label"-->
+            <!--                :value="item.value">-->
+            <!--              </el-option>-->
+            <!--            </el-select>-->
           </el-form-item>
         </el-col>
-      </el-row>
-
-      <el-row :gutter="20">
-
         <el-col :span="8">
           <el-form-item label="订单类型:" prop="orderTypeMsg">
             <el-input type="text" v-model="formData.orderTypeMsg" style="width: 70%;" readonly/>
@@ -157,14 +165,15 @@
             <el-input type="text" v-model="formData.fcNumber" style="width: 70%;" readonly />
           </el-form-item>
         </el-col>
+
+      </el-row>
+      <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="订单分类:" prop="orderClassMsg">
             <el-input type="text" v-model="formData.orderClassMsg" style="width: 70%;"  readonly/>
           </el-form-item>
 
         </el-col>
-      </el-row>
-      <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="地址:" prop="address">
             <el-input type="text" v-model="formData.address" style="width: 120%;" readonly/>
@@ -229,7 +238,7 @@
           <el-table-column label="描述" width="" />
           <el-table-column prop="qty" label="数量" width="150"  :formatter="rounding">
             <template slot-scope="scope" >
-              <div style="text-align: center">
+              <div style="text-align: right">
 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
                 {{parseFloat(scope.row.qty).toFixed(2)}}
 
@@ -374,13 +383,13 @@
     </el-form>
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-      <el-button v-if="this.$route.query.status==2" type="primary" @click="auditSaleOrder">撤销</el-button>
-      <el-button v-if="this.$route.query.status==3" type="primary" @click="auditSaleOrder">审核</el-button>
+      <el-button v-if="this.$route.query.status==2" type="primary" @click="auditSaleChange">撤销</el-button>
+      <el-button v-if="this.$route.query.status==3" type="primary" @click="auditSaleChange">审核</el-button>
       <el-button v-if="this.$route.query.status==4" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
-      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>
+      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleChange">反审</el-button>
       <el-button v-if="this.$route.query.status==8" type="primary" @click="auditFinSaleOrder">已复核反审</el-button>
-      <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleOrder">标记完成</el-button>
-      <el-button v-if="this.$route.query.status==5" type="primary" @click="auditSaleOrder">指定结束</el-button>
+      <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleChange">标记完成</el-button>
+      <el-button v-if="this.$route.query.status==5" type="primary" @click="auditSaleChange">指定结束</el-button>
       <el-button  @click="cancel">取 消</el-button>
       <!-- </span> -->
     </div>
@@ -395,7 +404,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {auditFinSaleOrder,auditSaleOrder,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {auditSaleChange,orderChangeDetail,auditFinSaleOrder,auditSaleOrder,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1168,7 +1177,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/saleOrderChange", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1481,16 +1490,16 @@
       },
 
       /** 新增按钮操作 */
-      auditSaleOrder() {
+      auditSaleChange() {
         const param={
           orderId: this.formData.id,
           opeateType: this.$route.query.status
         }
-        auditSaleOrder(param).then(response => {
+        auditSaleChange(param).then(response => {
             if (response.code == "200") {
               this.$message.success("提交成功")
               this.$store.dispatch("tagsView/delView", this.$route)
-              this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+              this.$router.push({path: "/Salesmanagement/saleOrderChange", query: {id: 1}})
 
             }else {
 
@@ -1608,31 +1617,31 @@
       // 初始化表单数据，至少有一行表单数据
       this.formArr = []
       this._ly_addFrom()
-      this.initSelect()
-      this.initCustomerSelect()
-      this.initSaleUserSelect()
+      // this.initSelect()
+      // this.initCustomerSelect()
+      // this.initSaleUserSelect()
 
       const param={
         orderId: this.$route.query.id
       }
-      saleOderDetail(param).then(response => {
+      orderChangeDetail(param).then(response => {
           if (response.code == "200") {
-            // this.formData=response.data
-            this.formData.id =response.data.id
-            this.formData.orderNo =response.data.orderNo
-            this.formData.customerNo =response.data.customerNo
-            this.formData.customerId =response.data.customerId
-            this.formData.customerName =response.data.customerName
-            this.formData.orderDate =response.data.orderDate
-            this.formData.saleUserId =response.data.saleUserId
-            this.formData.saleUser =response.data.saleUser
-            this.formData.currency =response.data.currency
-            this.formData.receiveName =response.data.receiveName
-            this.formData.receivePhone =response.data.receivePhone
-            this.formData.invoiceType =response.data.invoiceType
-            this.formData.address =response.data.address
-            this.formData.fcNumber =response.data.fcNumber
-            this.formData.orderClassMsg =response.data.orderClassMsg
+            this.formData=response.data
+            // this.formData.id =response.data.id
+            // this.formData.orderNo =response.data.orderNo
+            // this.formData.customerNo =response.data.customerNo
+            // this.formData.customerId =response.data.customerId
+            // this.formData.customerName =response.data.customerName
+            // this.formData.orderDate =response.data.orderDate
+            // this.formData.saleUserId =response.data.saleUserId
+            // this.formData.saleUser =response.data.saleUser
+            // this.formData.currency =response.data.currency
+            // this.formData.receiveName =response.data.receiveName
+            // this.formData.receivePhone =response.data.receivePhone
+            // this.formData.invoiceType =response.data.invoiceType
+            // this.formData.address =response.data.address
+            // this.formData.fcNumber =response.data.fcNumber
+            // this.formData.orderClassMsg =response.data.orderClassMsg
             // this.tableData.push(...response.data.goods)
             this.tableData=response.data.goods
             console.log('tableData',this.tableData)

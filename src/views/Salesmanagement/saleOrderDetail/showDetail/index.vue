@@ -1671,9 +1671,9 @@
       // 初始化表单数据，至少有一行表单数据
       this.formArr = []
       this._ly_addFrom()
-      this.initSelect()
-      this.initCustomerSelect()
-      this.initSaleUserSelect()
+      // this.initSelect()
+      // this.initCustomerSelect()
+      // this.initSaleUserSelect()
 
       const param={
         orderId: this.$route.query.id

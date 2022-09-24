@@ -268,7 +268,7 @@
 </template>
 <script>
   // import x from ''
-  import { reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { saleChangeList,reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -523,11 +523,11 @@
       },
       createForm() {
         // this.showaddDialog = true
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/addSale", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/add", query: {id: 1}})
 
       },
       showDetail(row) {
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/showSale", query: {id: row.id}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/detail", query: {id: row.id}})
 
       },
       closeDetail() {
@@ -548,11 +548,11 @@
         // this.formData=row
         // this.showmdfDialog = true
 
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/mdfSale", query: {id: row.id}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/mdf", query: {id: row.id}})
 
       },
       auditDetail(row,opeateType) {
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/auditSale", query: {id: row.id,status:opeateType}})
+        this.$router.push({path: "/Salesmanagement/saleCgshowOrderDetail/audit", query: {id: row.id,status:opeateType}})
 
         // const param = {
         //   orderId: row.id,
@@ -607,13 +607,12 @@
           status: this.status,
           startTime: startTime,
           endTime: endTime,
-          type: 2
         }
         // this.loading=true;
 
-        this.download('/sale/saleOrderExcelList', {
+        this.download('/sale/exportSaleChangeList', {
           ...param
-        }, `国内销售订单数据_${new Date().getTime()}.xlsx`)
+        }, `销售变更订单数据_${new Date().getTime()}.xlsx`)
 
         // totalOrderExcelListtmp(param).then(response => {
         //   if (response.code === 200) {
@@ -811,7 +810,6 @@
         const param = {
           orderNo: this.orderNo,
           model: this.model,
-          type: 2,
           status: this.status,
           startTime:startTime,
           endTime:endTime,
@@ -819,7 +817,7 @@
           pageSize: this.listQuery.pageSize
         }
         // console.info(param)
-        saleOrderList(param).then(response => {
+        saleChangeList(param).then(response => {
           if (response.data != null && response.data.rows != null) {
             this.orderList = response.data.rows
             this.totalItems = response.data.total

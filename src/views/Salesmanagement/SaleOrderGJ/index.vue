@@ -45,6 +45,9 @@
           <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
                      style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
+          <el-button type="primary" v-on:click="skuDistribution()" :loading=loadingOut
+                     style="margin-bottom:0;margin-left: 1em">库存分配
+          </el-button>
 
 
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
@@ -52,34 +55,36 @@
       </el-form>
       <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
                 stripe style="margin-top:1em">
-        <el-table-column fixed label="编号" align="center" prop="orderNo" min-width="120px;"/>
+        <el-table-column fixed label="编号" align="center" prop="orderNo" min-width="150px;"/>
         <el-table-column  label="客户订单号" align="center" prop="customerNo" min-width="120px;"/>
         <el-table-column  label="日期" align="center" prop="orderDate" min-width="120px;"/>
         <el-table-column label="客户" align="center" prop="customerName" min-width="200px;"/>
         <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
         <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="150px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="300px;"/>
         <el-table-column label="电话" align="center" prop="phone" min-width="120px;"/>
         <el-table-column label="订单类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
         <el-table-column label="订单分类" align="center" prop="orderClassMsg" min-width="120px;"/>
         <el-table-column label="工厂账号" align="center" prop="fcNumber" min-width="120px;"/>
         <el-table-column label="其他" align="center" prop="other" min-width="120px;"/>
         <el-table-column label="制单时间" align="center" prop="createTime" min-width="120px;"/>
+        <el-table-column  fixed="right"  label="确认库存状态" align="center" prop="confirmSkuStatusMsg" min-width="120px;"/>
         <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button style="margin-left:8px; margin-top: 2px" size="mini" type="primary" @click="showDetail(scope.row)">详情</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click=" auditDetail(scope.row,2)">撤销</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click="auditDetail(scope.row,3)">审核</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==2" size="mini" type="primary" @click="auditDetail(scope.row,6)">反审</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" size="mini" icon="el-icon-share" type="text" @click="showDetail(scope.row)">详情</el-button>
+<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>-->
+<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
+            <el-button style="margin-top: 2px" v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,3)">审核</el-button>
+<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==2" size="mini" type="primary" @click="auditDetail(scope.row,6)">反审</el-button>-->
+<!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button style="margin-top: 2px" v-show="scope.row.status==6" size="mini" type="primary" @click="auditDetail(scope.row,5)">指定结束</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click=" reAddDetail(scope.row)">重新提交</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click="delSaleOrder(scope.row)">删除</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row)">确认库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" confirmSkuSaleOrder(scope.row,2)">取消库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)">删除</el-button>
           </template>
 
         </el-table-column>
@@ -124,7 +129,7 @@
 </template>
 <script>
   // import x from ''
-  import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { confirmSkuSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -464,16 +469,25 @@
 
 
       exprotData() {
+        var startTime=null
+        var endTime=null
+        if(this.dateRange!=null && this.dateRange.length==2){
+          startTime=this.dateRange[0];
+          endTime=this.dateRange[1];
+        }
         const param = {
           orderNo: this.orderNo,
-          model: this.model,
-          status: this.status
+          customer: this.customer,
+          status: this.status,
+          startTime: startTime,
+          endTime: endTime,
+          type: 1
         }
         // this.loading=true;
 
-        this.download('/sale/totalOrderExcelList', {
+        this.download('/sale/saleOrderExcelList', {
           ...param
-        }, `生产订单数据_${new Date().getTime()}.xlsx`)
+        }, `国际销售订单数据_${new Date().getTime()}.xlsx`)
 
         // totalOrderExcelListtmp(param).then(response => {
         //   if (response.code === 200) {
@@ -555,7 +569,7 @@
             if ( response.code === 200) {
               this.$notify.success("删除成功")
             } else {
-              this.$notify.error(response.data.msg)
+              this.$notify.error(response.msg)
             }
           })
         })
@@ -579,7 +593,7 @@
             this.formData={}
             this.onSearch();
           } else {
-            this.$notify.error(response.data.msg)
+            this.$notify.error(response.msg)
 
           }
         })
@@ -666,6 +680,33 @@
             return 'OK'
           }
         }
+      },
+      showConfirmDetail(row){
+        this.$router.push({path: "/Salesmanagement/gjAuditOrderDetail", query: {id: row.id,confirmStatus:2}})
+
+      },
+
+      skuDistribution(){
+        this.$router.push({path: "/Salesmanagement/saleGjDistribution"})
+
+      },
+      confirmSkuSaleOrder(row,operate){
+        const param = {
+          id: row.id,
+          opearte: operate
+        }
+
+        confirmSkuSaleOrder(param).then(response => {
+          if (response.code == 200) {
+            this.message.success("修改成功")
+
+            this.onSearch();
+          } else {
+            this.message.error(response.msg)
+
+          }
+        })
+
       },
       onSearch() {
         console.log('dateRange',this.dateRange)

@@ -9,12 +9,12 @@
         <el-form-item label="客户" class="item-r">
           <el-input v-model="customer" class="filter-item" placeholder="客户"/>
         </el-form-item>
-        <el-form-item  label="状态" class="item-r">
-          <el-select v-model="status" placeholder="状态" class="middle-input" style="width:120px">
-            <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item  label="状态" class="item-r">-->
+<!--          <el-select v-model="status" placeholder="状态" class="middle-input" style="width:120px">-->
+<!--            <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
         <el-form-item label="日期" style="margin-left:1%;">
           <el-date-picker  v-model="dateRange" type="daterange"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
@@ -68,15 +68,15 @@
         <el-table-column fixed="right" label="操作" min-width="250px;">
           <template slot-scope="scope">
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>-->
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
+            <el-button style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,4)">复审</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,8)">复核反审</el-button>
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete" plain size="mini"   type="text" @click="delSaleOrder(scope.row)">删除</el-button>
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>-->
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>-->
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete" plain size="mini"   type="text" @click="delSaleOrder(scope.row)">删除</el-button>-->
           </template>
 
         </el-table-column>
@@ -523,11 +523,11 @@
       },
       createForm() {
         // this.showaddDialog = true
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/addSale", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/saleOrderDetail", query: {id: 1}})
 
       },
       showDetail(row) {
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/showSale", query: {id: row.id}})
+        this.$router.push({path: "/Salesmanagement/saleshowOrderDetail", query: {id: row.id}})
 
       },
       closeDetail() {
@@ -548,11 +548,11 @@
         // this.formData=row
         // this.showmdfDialog = true
 
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/mdfSale", query: {id: row.id}})
+        this.$router.push({path: "/Salesmanagement/salemdfOrderDetail", query: {id: row.id}})
 
       },
       auditDetail(row,opeateType) {
-        this.$router.push({path: "/Salesmanagement/saleOrderDetail/auditSale", query: {id: row.id,status:opeateType}})
+        this.$router.push({path: "/Salesmanagement/saleauditOrderDetail", query: {id: row.id,status:opeateType}})
 
         // const param = {
         //   orderId: row.id,
@@ -607,13 +607,12 @@
           status: this.status,
           startTime: startTime,
           endTime: endTime,
-          type: 2
         }
         // this.loading=true;
 
-        this.download('/sale/saleOrderExcelList', {
+        this.download('/sale/exportfinsaleOrderList', {
           ...param
-        }, `国内销售订单数据_${new Date().getTime()}.xlsx`)
+        }, `财务复审数据_${new Date().getTime()}.xlsx`)
 
         // totalOrderExcelListtmp(param).then(response => {
         //   if (response.code === 200) {
@@ -812,7 +811,7 @@
           orderNo: this.orderNo,
           model: this.model,
           type: 2,
-          status: this.status,
+          status: -1,
           startTime:startTime,
           endTime:endTime,
           pageNum: this.listQuery.pageNum,

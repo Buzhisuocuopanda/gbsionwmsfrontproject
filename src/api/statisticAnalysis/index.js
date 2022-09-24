@@ -99,6 +99,14 @@ export function insertgoodsShop(query) {
     params: query
   })
 }
+// 获取购物车列表
+export function goodsShopList() {
+  return request({
+    url: '/sale/goodsShopList',
+    method: 'get',
+  })
+}
+
 
 // 获取库存台账列表
 export function getInventorysmmaryquerysList(query) {

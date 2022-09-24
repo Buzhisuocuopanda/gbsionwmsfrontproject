@@ -51,7 +51,11 @@
                  border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="客户名称" align="center" header-align="center" prop="customerName" min-width="160px;" />
         <el-table-column  label="下单时间" align="center" prop="createTime" :formatter="formatTime2" min-width="120px;"/>
-        <el-table-column  label="供应商" align="center" prop="supplier" min-width="180px;"/>
+        <el-table-column  label="供应商" align="center" prop="supplier" min-width="180px;">
+          <template slot-scope="scope">
+            <div>{{sliceString(scope.row)}}</div>
+          </template>
+        </el-table-column>
         <el-table-column  label="销售人员" align="center" prop="saleUser"  min-width="160px;"/>
         <el-table-column  label="销售订单号" align="center" prop="saleOrderNo" min-width="120px;"/>
         <el-table-column  label="型号" align="center" prop="model" min-width="160px;"/>
@@ -243,6 +247,16 @@ export default {
     this.getCbsaList();
   },
   methods: {
+    sliceString(row){
+      if(row.supplier!=null&&row.supplier.length>2){
+        return row.supplier.slice(0,row.supplier.length-1);
+      }else {
+        return "";
+      }
+
+
+    },
+
     formatTime2(row){
       return formatDate2(row.createTime);
     },

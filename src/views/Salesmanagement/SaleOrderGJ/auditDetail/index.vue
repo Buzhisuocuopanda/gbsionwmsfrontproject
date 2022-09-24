@@ -217,7 +217,7 @@
 <!--&lt;!&ndash;                  </el-option>&ndash;&gt;-->
 <!--&lt;!&ndash;                </el-select>&ndash;&gt;-->
 <!--              </sapn>-->
-              <div style="text-align: center">
+              <div style="text-align: right">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
                 {{scope.row.goodsMsg}}
 
@@ -234,6 +234,16 @@
                 {{parseFloat(scope.row.qty).toFixed(2)}}
 
 <!--                {{}}-->
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="qty" label="确认库存数量" width="150"  :formatter="rounding">
+            <template slot-scope="scope" >
+              <div style="text-align: right">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{parseFloat(scope.row.confirmQty).toFixed(2)}}
+
+                <!--                {{}}-->
               </div>
             </template>
           </el-table-column>
@@ -273,19 +283,19 @@
             </template>
           </el-table-column>
 
-<!--          <el-table-column prop="canUseSku" label="可用库存" width="150">-->
-<!--            <template slot-scope="scope">-->
-<!--&lt;!&ndash;              <sapn>&ndash;&gt;-->
-<!--&lt;!&ndash;                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>&ndash;&gt;-->
-<!--&lt;!&ndash;              </sapn>&ndash;&gt;-->
-<!--              <div style="text-align: right">-->
-<!--                &lt;!&ndash;                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
-<!--                {{parseFloat(scope.row.canUseSku).toFixed(2)}}-->
+          <el-table-column prop="canUseSku" label="可用库存" width="150">
+            <template slot-scope="scope">
+<!--              <sapn>-->
+<!--                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>-->
+<!--              </sapn>-->
+              <div style="text-align: right">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{parseFloat(scope.row.canUseSku).toFixed(2)}}
 
-<!--                &lt;!&ndash;                {{}}&ndash;&gt;-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
+                <!--                {{}}-->
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
 <!--              <sapn>-->
@@ -373,16 +383,14 @@
       </div>
     </el-form>
     <div class="tinajia_dingwei">
-      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-      <el-button v-if="this.$route.query.status==2" type="primary" @click="auditSaleOrder">撤销</el-button>
+       <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
       <el-button v-if="this.$route.query.status==3" type="primary" @click="auditSaleOrder">审核</el-button>
-      <el-button v-if="this.$route.query.status==4" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
-      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>
-      <el-button v-if="this.$route.query.status==8" type="primary" @click="auditFinSaleOrder">已复核反审</el-button>
-      <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleOrder">标记完成</el-button>
+<!--      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>-->
+<!--      <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleOrder">标记完成</el-button>-->
       <el-button v-if="this.$route.query.status==5" type="primary" @click="auditSaleOrder">指定结束</el-button>
+      <el-button v-if="this.$route.query.confirmStatus==2" type="primary" @click="confirmSkuSaleOrder">确认库存</el-button>
       <el-button  @click="cancel">取 消</el-button>
-      <!-- </span> -->
+       </span>
     </div>
   </div>
 </template>
@@ -395,7 +403,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {auditFinSaleOrder,auditSaleOrder,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {confirmSkuSaleOrder,auditFinSaleOrder,auditSaleOrder,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1168,7 +1176,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/saleOrderGJ", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1597,6 +1605,26 @@
         // this.$router.push("/system/user-auth/role/");
         this.$router.push("/system/user-cktkfh/role/");
       },
+      confirmSkuSaleOrder(){
+        const param = {
+          id: this.formData.id,
+          opearte: 1
+        }
+
+        confirmSkuSaleOrder(param).then(response => {
+          if (response.code == 200) {
+            this.$message.success("修改成功")
+            this.$store.dispatch("tagsView/delView", this.$route)
+            this.$router.push({path: "/Salesmanagement/saleOrderGJ", query: {id: 1}})
+            this.onSearch();
+          } else {
+            this.$message.error(response.msg)
+
+          }
+        })
+
+      },
+
       sum(row){
         if(row.qty!=null && row.currentPrice!=null){
           row.totalPrice=row.qty*row.currentPrice;
