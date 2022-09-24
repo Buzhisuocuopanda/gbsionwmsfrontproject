@@ -11,9 +11,10 @@
         <div style="width:97%; margin-left: 2%; margin-top: 1%;">
 
             <el-table border :header-cell-style="headClasspwbitd" v-loading="loading" :data="userList" 
+                 :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbsa08" key="cbsa08" width="70px;" label="供应商">
+                <el-table-column prop="cbsa08" key="cbsa08" width="110px;" label="供应商">
                 </el-table-column>
                 <!-- <el-table-column prop="cbla09" key="cbla09" width="150px;" label="库位">
                 </el-table-column> -->
@@ -110,7 +111,13 @@ export default {
         },
         //列表价格数值
         rounding(row, column) {
-            return parseFloat(row[column.property]).toFixed(2)
+            console.log(row,column,111,row[column.property])
+            if(!row[column.property]){
+                return ''
+            }else{
+                return parseFloat(row[column.property]).toFixed(2)
+            }
+            
         },
         // 多选框选中数据
         handleSelectionChange(selection) {

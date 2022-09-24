@@ -6,11 +6,22 @@
       <!-- 编号:56221589223 -->
 
       <el-row :gutter="20" style="margin-top: 20px;">
+
+
         <el-col :span="8">
-          <el-form-item label="编号:" prop="cbpc07">
-            <el-input type="text" v-model="form2.cbpc07" style="width: 60%;" />
+          <el-form-item label="客户:" prop="customerId">
+            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+              <el-option
+                v-for="item in customeroptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
         </el-col>
+
+
         <el-col :span="8">
           <el-form-item label="日期:">
             <el-date-picker type="date" placeholder="" v-model="form2.cbpc08" style="width: 60%;">
@@ -177,74 +188,6 @@
           </el-table-column>
           <!-- </el-form> -->
         </el-table>
-        <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-          <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-            <div class="box1">
-              <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
-                class="tablebiankuan table-heads" width="95%" height="20px">
-                <thead style="">
-                  <tr style="height:30px; ">
-                    <th style="width: 130px;height: 30px;">品牌</th>
-                    <th style="width: 130px;height: 30px;">型号</th>
-                    <th style="width: 130px;height: 30px;">描述</th>
-                    <th style="width: 140px;height: 30px;">数量</th>
-                    <th style="width: 140px;height: 30px;">单价</th>
-                    <th style="width: 140px;height: 30px;">金额</th>
-                    <th style="width: 350px;height: 30px;">备注</th>
-                    <th style="width: 50px;height: 30px;">操作</th>
-                  </tr>
-                </thead>
-              </table>
-              <div class="table-bodys">
-                <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                  cellspacing="0" class="tablebiankuan">
-                  <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
-                      :ref="form.formName" :inline="true">
-                      <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpc01" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-col style="margin-left: 0%;" :span="7">
-                        <el-form-item label="" prop="cbpc000">
-                          <el-popover placement="bottom-start" trigger="click">
-                            <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                              style="width:370px!important;" />
-                            <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                              style="width:205.6%;">
-                            </el-input>
-                          </el-popover>
-                        </el-form-item>
-                      </el-col>
-                      <el-form-item label="" size="small" prop="nickname" style="margin-left:5.1%;">
-                        <el-input type="text" v-model="form.cbpd09" @blur="chen(form)" style="width:73.2%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd11" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd11" @blur="chen(form)" :min="0" :controls="false"
-                          :precision="2" style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd12" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd12" :min="0" :controls="false" :precision="2"
-                          style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd13" style="margin-left:-5.2%;">
-                        <el-input v-model="form.cbpd13" style="width:184.1%;"></el-input>
-                      </el-form-item>
-
-                      <el-form-item v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
-                        <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" v-if="false" prop="name" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
-                      </el-form-item>
-                      <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;" size="small"
-                        icon="el-icon-delete" circle @click="_ly_delFrom(index)"></el-button>
-                    </el-form>
-                  </el-row>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </el-form>
     <div class="tinajia_dingwei">
@@ -264,6 +207,9 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
+
+ import { SwJsCustomerlistSelect } from '@/api/saleordermanage'
+
   import {
     getToken
   } from "@/utils/auth";
@@ -277,6 +223,31 @@
 
   //供应商
   import ListLists from "@/components/ListMaintenance";
+
+  Vue.directive('loadmore', {
+    bind(el, binding) {
+
+      // 获取element-ui定义好的scroll盒子
+      const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+      SELECTWRAP_DOM.addEventListener('scroll', function() {
+
+        /*
+        * scrollHeight 获取元素内容高度(只读)
+        * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+        * clientHeight 读取元素的可见高度(只读)
+        * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+        * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+        */
+        const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+        if(CONDITION) {
+          binding.value();
+        }
+      });
+    }
+  })
+
 
   export default {
     name: "store",
@@ -297,6 +268,21 @@
     },
     data() {
       return {
+        
+  customeroptions: [],
+
+      formData: {
+          orderType: 10,
+          orderTypeMsg: "销售订单",
+          orderClass: 2,
+          orderClassMsg: '国内订单',
+          receiveName:'',
+          receivePhone: '',
+          address: ''
+        },
+
+
+
         dialogVisible: this.visible,
         formArr: [], // 表单结构数组
         infoRules: { // 表单规则
@@ -684,6 +670,127 @@
 
     },
     methods: {
+
+     customerdataFilter(val){
+        this.customerListQuery.pageNum=1
+        this.customerId=val
+        const param={
+          selectMsg: this.customerId,
+          pageNum: this.customerListQuery.pageNum,
+          pageSize: this.customerListQuery.pageSize
+        }
+
+        SwJsCustomerlistSelect(param).then(response => {
+          if (response.code == "200") {
+            this.customerListQuery.pageNum=this.customerListQuery.pageNum+1
+            this.customeroptions=response.data.rows
+          }else {
+            this.$message.error(response.msg)
+          }
+        });
+
+      },
+
+
+
+        customerOnChange(val){
+        // console.log(this.formData.customer)
+        // console.log("val",val)
+        // console.log("val",row)
+        // row.qty=0.5
+        if(val=='' ){
+          return
+        }
+        const param={
+          cbca01: val,
+
+        }
+
+        //
+        customerDetail(param).then(response => {
+          if (response.code == "200") {
+            this.formData.receivePhone=response.data.cbca16
+            this.formData.receiveName=response.data.cbca14
+            this.formData.address=response.data.cbca15
+
+
+          }else {
+            this.formData.receivePhone=''
+            this.formData.receiveName=''
+            this.formData.address=''
+            this.$message.error(response.msg)
+
+          }
+        });
+
+      },
+
+
+         goodsOnChange(row){
+        // console.log(this.formData.customer)
+        // console.log("val",val)
+        console.log("val",row)
+        // row.qty=0.5
+
+        if(this.formData.customerId==null){
+            this.$message.error("请先选择客户")
+          return;
+          }
+
+        //检查goodsid是否存在
+        if(this.checkRepeat(this.tableData,row.goodsId)){
+          row.goodsId=null
+          row.normalPrice=0
+          row.canUseSku=0
+          this.$message.error("不能添加重复商品")
+
+          return
+        }
+        const param={
+          goodsId: row.goodsId,
+          customerId: this.formData.customerId,
+          orderClass: 2
+
+        }
+
+        //
+        goodsPriceAndSku(param).then(response => {
+          if (response.code == "200") {
+            row.normalPrice=response.data.normalPrice
+            row.canUseSku=response.data.canUseSku
+
+          }else {
+            row.normalPrice=0.0
+            row.canUseSku=0.0
+
+            this.$message.error(response.msg)
+
+          }
+        });
+
+      },
+
+
+    customerloadMore(){
+        const param={
+          selectMsg: this.customerId,
+          pageNum: this.customerListQuery.pageNum,
+          pageSize: this.customerListQuery.pageSize
+        }
+
+
+        SwJsCustomerlistSelect(param).then(response => {
+          if (response.code == "200") {
+            this.customerListQuery.pageNum=this.customerListQuery.pageNum+1
+            this.customeroptions.push.apply(this.customeroptions,response.data.rows)
+          }else {
+            this.$message.error(response.msg)
+          }
+        });
+      },
+
+      
+
 
 
        chen(item) {

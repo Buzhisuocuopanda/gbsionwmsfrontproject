@@ -5,22 +5,21 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <!--<el-input v-model="queryParams.cbwa09" class="filter-item"  placeholder="请输入仓库" />-->
-          <el-select style="width: 300px" v-model="cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
+          <el-select style="width: 300px" v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
             <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="品牌"   class="item-r" >
 
-          <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请选择" :loading="loading3">
+          <el-select v-model="queryParams.cala08"  style="width: 300px" clearable  filterable placeholder="请选择" :loading="loading3">
             <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
           </el-select>
           <!--<el-input v-model="queryParams.cala08" style="width: 300px" class="filter-item"  placeholder="请输入品牌" />-->
         </el-form-item>
         <!-- multiple-->
         <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+          <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
           </el-select>
 
@@ -29,13 +28,14 @@
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-<!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
+          <el-button type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
 
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
-        <el-table-column fixed label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
-        <el-table-column fixed label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
+        <el-table-column  label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
+        <el-table-column  label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
         <el-table-column  label="品牌" align="center" prop="cala08" min-width="120px;"/>
         <el-table-column  label="型号" align="center" prop="cbpb12" min-width="100px;"/>
         <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
@@ -44,7 +44,15 @@
         <el-table-column  label="可用库存数量" align="center" prop="lockQty" min-width="100px;"/>
         <el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
+        <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+          <template slot-scope="scope">
 
+            <el-button size="mini" type="text"  class="button-caozuoxougai"
+                       @click="addShopping(scope.row)" v-text="judge(scope.row)">
+            </el-button>
+            <!--v-hasPermi="['system:list:add']"-->
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         :background="true"
@@ -60,13 +68,42 @@
       <!--<pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                   :limit.sync="queryParams.pageSize" @pagination="onSearch" :page-sizes="[10, 20, 30]"
                 />-->
+      <!--<el-badge :value="shoppingList.length" :hidden="shoppingList.length==0" style="margin-top: 50px;margin-left: 1500px;" class="item">
+        <el-button plain style="width: 130px;height: 50px" type="warning" icon="el-icon-shopping-cart-2" @click="showShopping">
+          购物车</el-button>
+      </el-badge>-->
+
     </div>
+<!--购物车列表展示，暂时删除-->
+    <!--<el-dialog title="购物车" :visible.sync="dialogTableVisible"  :before-close="hideShopping" >
+      <el-table  :data="shoppingList"
+                 border fit highlight-current-row stripe height="600px" style="margin-top:1em;margin-bottom: 1em;">
+        <el-table-column  label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
+        <el-table-column  label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
+        <el-table-column  label="品牌" align="center" prop="cala08" min-width="120px;"/>
+        <el-table-column  label="型号" align="center" prop="cbpb12" min-width="100px;"/>
+        <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
+        <el-table-column  label="描述" align="center" prop="cbpb08"  min-width="240px;"/>
+        <el-table-column  label="数量" align="center" prop="cbif09" min-width="100px;"/>
+        <el-table-column  label="可用库存数量" align="center" prop="lockQty" min-width="100px;"/>
+        <el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />
+        &lt;!&ndash;<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>&ndash;&gt;
+        <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+          <template slot-scope="scope">
+            <el-button size="mini" type="text"  class="button-caozuoxougai"
+                       @click="removeShopping(scope.row)" >移除</el-button>
+            &lt;!&ndash;v-hasPermi="['system:list:add']"&ndash;&gt;
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>-->
+
   </div>
 </template>
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList } from "@/api/statisticAnalysis/index";
+import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList,insertgoodsShop,goodsShopList } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
   name: "inventorySummary",
@@ -87,17 +124,20 @@ export default {
       loading1:false,
       loading2:false,
       loading3:false,
+      dialogTableVisible: false,
+
 
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
         // total: this.total,
-        cbwa09: "",
+        cbwa09s: [],
         cala08: "",
         cbpb01: ""
       },
       inwuquList: [],
+      shoppingList: [],
       total:0,
       statusType: [
         {
@@ -115,9 +155,11 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
+    this.index==0;
     this.onSearch();
     this.getStoreSkuList();
     this.getCalaList();
+    this.getgoodsShopList();
   },
   methods: {
     onSubmit() {},
@@ -131,9 +173,64 @@ export default {
         }
       }
     },*/
+    //按钮显示文字
+    judge(row){
+      if(row.shopping == null||row.shopping == 0){
+        return "添加到购物车";
+      }else if(row.shopping == 1){
+        return "已添加";
+      }else if(row.shopping == 2){
+        return "添加中。。。";
+      }
+    },
+    //添加到购物车
+    addShopping(row){
+      if(row.shopping == null||row.shopping == 0){
+
+        let param={goodsId:row.cbpb01};
+        insertgoodsShop(param).then(response => {
+          row.shopping=2;
+          if (response.code == 200) {
+            this.$message('');
+            this.$message({
+              message: '添加成功', type: 'success'});
+            this.shoppingList.push(row);
+            row.shopping=1;
+          } else {
+            this.$message.error('添加失败1');
+            row.shopping=0;
+          }
+        },error => {
+          this.$message.error('添加失败2');
+          row.shopping=0;
+        });
+      }else {
+        //移除功能，暂时删除
+        /*row.shopping=0;
+        for(let i=0;i<this.shoppingList.length;i++){
+          if(this.shoppingList[i].cbpb01==row.cbpb01){
+            this.shoppingList.splice(i,1);
+          }
+        }*/
+      }
+    },
+    //从购物车中移除，暂时不用
+    removeShopping(row){
+      this.shoppingList.splice(row,1);
+    },
+    //显示弹窗，暂时不用
+    showShopping(){
+      this.dialogTableVisible =true;
+    },
+    //隐藏弹窗后调用，暂时不用
+    hideShopping(){
+      this.contrastShopping();
+      this.dialogTableVisible =false;
+    },
+
     /** 重置按钮操作 */
     resetQuery() {
-      this.queryParams.cbwa09 = "";
+      this.queryParams.cbwa09s = "";
       this.queryParams.cala08 = "";
       this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;
@@ -146,6 +243,12 @@ export default {
       this.queryParams.pageNum = 1;
       this.onSearch();
     },
+    //导出
+    exprotData(){
+      this.download('/countQuery/InventorysummaryqueryExcelList', {
+        ...this.queryParams
+      }, `库存汇总查询_${new Date().getTime()}.xlsx`)
+    },
     onSearch() {
       this.loading = true;
       getInventorySummaryList(this.queryParams).then(response => {
@@ -153,12 +256,47 @@ export default {
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows
           this.total = response.data.total
+          this.index++;
+          this.contrastShopping();
+
         } else {
           this.deviceList = []
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
+    //判断商品是否在购物车中
+    contrastShopping(){
+      for(let i=0;i<this.inwuquList.length;i++){
+        this.inwuquList[i].shopping = 0;
+        for(let j=0;j<this.shoppingList.length;j++){
+          if(this.shoppingList[j].cbpb01==this.inwuquList[i].cbpb01){
+            this.inwuquList[i].shopping = 1;
+          }
+          if(this.shoppingList[j].goodsId===this.inwuquList[i].cbpb01){
+            this.inwuquList[i].shopping = 1;
+          }
+        }
+      }
+    },
+    //获取购物车列表
+    getgoodsShopList(){
+      goodsShopList().then(response => {
+        if (response.data != null) {
+          this.shoppingList = response.data;
+          this.contrastShopping();
+
+        } else {
+          this.shoppingList = [];
+          this.$message.error('购物车数据获取失败');
+        }
+      },error => {
+        this.$message.error('购物车数据获取失败');
+      });
+    },
+
     //获取下拉列表数据商品
     getGoods(query){
       if (query !== '') {
@@ -171,6 +309,8 @@ export default {
           } else {
             this.goodList = [];
           }
+        },error => {
+          this.loading1 = false;
         });
       } else {
         this.goodList = [];
@@ -187,6 +327,8 @@ export default {
         } else {
           this.storeSkuList = [];
         }
+      },error => {
+        this.loading3 = false;
       });
       /*if (query !== '') {
 
@@ -196,7 +338,7 @@ export default {
     },
     //下拉列表数据品牌
     getCalaList(){
-      let param={};
+      let param={cala10:"商品品牌"};
       this.loading2 = true;
       getswJsAllList(param).then(response => {
         this.loading2 = false;
@@ -205,6 +347,8 @@ export default {
         } else {
           this.calaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
 

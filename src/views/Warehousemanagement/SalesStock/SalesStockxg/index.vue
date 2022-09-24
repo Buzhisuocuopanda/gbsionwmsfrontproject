@@ -48,7 +48,15 @@
         </el-descriptions-item>
         <el-descriptions-item label-class-name="my-labell01">
           <template slot="label">结算货币</template>
-          <el-input type="text" v-model="form2.cbse166" style="width: 100%" />
+          <!-- <el-input type="text" v-model="form2.cbse166" style="width: 100%" /> -->
+          <el-select  v-model="form2.cbse166"  clearable  placeholder="请选择" style="width: 70%;">
+              <el-option
+                v-for="item in jiageLeixeng"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
         </el-descriptions-item>
         <el-descriptions-item label-class-name="my-labell01">
           <template slot="label">关联订单</template>
@@ -571,11 +579,17 @@ export default {
         cbsb19: "",
         cbsb21: "",
         cbsb30: "",
+        cbse01:"",
         cbse09: "",
         cbse10: "",
+        cbse15: "",
         cbse16: "",
         cbse18: "",
         cbse099: "",
+        cbse166: "",
+        cbsf01:"",
+        cbsf08:"",
+        cbsf088:"",
       },
       defaultProps: {
         children: "children",
@@ -668,8 +682,9 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
-
       this.$set(row, "cbsf08", e.substring(e.indexOf(".") + 1));
+      this.form2.cbsf08 = e.substring(e.indexOf(".") + 1)
+      console.log(this.form2.cbsf08,e,'444',row)
     },
 
     selected088(name) {
@@ -677,6 +692,7 @@ export default {
       console.log(name.substring(name.indexOf("-") + 1), 963);
       this.form2.cbse099 = name.substring(0, name.indexOf("-"));
       this.form2.cbse09 = name.substring(name.indexOf("-") + 1);
+      console.log(this.form2.cbse09,this.form2.cbse099,'客户')
       // this.form2.icon = name;
     },
 
@@ -784,6 +800,7 @@ export default {
     },
     // 增加一行表单
     _ly_addFrom() {
+      const cbsf = this.form2.cbsf01;
       if (this.tableData.length >= 5) {
         this.$message.warning("最多只能添加5行");
         // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
@@ -791,13 +808,26 @@ export default {
       }
 
       this.tableData.push({
-        id: this.dataId,
-        date: "",
-        num: "",
-        address: "",
-        moner: "",
-        province: "",
-        cbpc000: "",
+        // id
+        cbsf01: cbsf,
+        // 商品ID
+        cbsf08:'',
+        // 数量
+        cbsf09:'',
+        // 单价
+        cbsf11:'',
+        // 金额
+        cbsf12:'',
+        // 备注
+        cbsf13:'',
+        // 销售退货单编号
+        cbse01:'',
+        // 供应商ID
+        cbsf15:'',
+        // 订单类型
+        cbsf16:'',
+        // user_id
+        user_id:'',
       });
       this.dataId++;
       console.log(this.tableData, 852369);
@@ -906,6 +936,8 @@ export default {
       console.log(row, 222);
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
       this.$set(row, "cbsf15", e.substring(e.indexOf("-") + 1), 8523642);
+      this.form2.cbse15 = row.cbsf15
+      console.log(this.form2.cbse15)
     },
 
     //添加行
@@ -1008,7 +1040,6 @@ export default {
     //详情列表
     getList() {
       this.loading = true;
-      console.log(this.$route);
       const userId = this.$route.params && this.$route.params.cbse01;
       if (userId) {
         // 获取表详细信息
@@ -1019,11 +1050,16 @@ export default {
           let response = res.data.rows[0];
           //客户名称
           this.form2.cbse099 = response.cbca08;
+          // 明细表ID
+          this.form2.cbsf01 = response.cbsf01;
           //仓库名称
           this.form2.cbpc100 = response.cbwa09;
           //结算货币名称
-          this.form2.cbse166 = response.currencyMsg;
-          console.log(this.form2.cbsb09, 85200000);
+          this.form2.cbse166 = response.cala08;
+          // 日期
+          this.form2.cbsc08 = response.cbse08;
+          this.tableData = response.goods;
+          console.log(this.form2,response, 85200000,'年后1');
           response.goods.forEach((item) => {
             item.cbsc177 = item.orderClass;
             item.cbsc15 = item.supplierId;
@@ -1055,11 +1091,25 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate() {
+      const userId = this.$route.params && this.$route.params.cbse01;
       if (this.form.name != undefined) {
         let row = {};
-        row.cbpc07 = this.form.cbpc07;
-        row.cbsa08 = this.form.cbsa08;
-        row.cbwa09 = this.form.cbwa09;
+        row.cbse01 = userId;
+        // 编号
+        row.cbpg07 = this.form.cbpc07;
+        // 客户id
+        row.cbse09 = this.form2.cbse09;
+        // 仓库
+        row.cbse10 = this.form2.cbse10;
+        // 日期
+        row.cbse08 = this.form2.cbsc08;
+        // 结算货币
+        row.cbse16 = this.form2.cbse166;
+        // 关联订单
+        row.cbse18 = this.form2.cbse18;
+        row.change_type = 1;
+        row.goods = this.tableData;
+        
         // row.invoiceBank = this.form.remark;
         // row.invoiceNumber = this.form.skuName;
         // row.invoicePhone = this.form.sn;
@@ -1069,8 +1119,9 @@ export default {
         // row.phone = this.form.scanStatus;
         // row.skuSort = this.form.orderType;
         // row.telPeople = this.form.isQualified;
-        row.cbpc01 = this.form.cbpc01;
         // console.log(this.form.id);
+        console.log(row,'数据',this.form2,'列表',this.tableData)
+        // return
         PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
           // console.log(response,789)
           // this.form = response.data;
@@ -1082,16 +1133,17 @@ export default {
           // this.manageMode = response.manageMode;
           // this.ifEnabled = response.ifEnabled;
           // this.sysUserId = response.sysUserId;
-          console.log(this.form, 789);
-          // this.submitShangpin();
-          this.getList();
-          this.open = false;
+          console.log(response, 789);
           this.$message({ message: "修改成功", type: "success" });
+          this.$router.push("/Warehousemanagement/SalesStock/")
         });
       } else {
         this.$message.error("错了哦，商品名称没有填呢");
       }
     },
+    cancells(){
+      this.$router.push("/Warehousemanagement/SalesStock/")
+    }
   },
   computed: {},
   mounted() {

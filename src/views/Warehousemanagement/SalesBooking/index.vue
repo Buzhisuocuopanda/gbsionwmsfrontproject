@@ -11,12 +11,12 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
-                    <el-form-item prop="cbsa08" label="供应商">
-                        <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
+                    <el-form-item prop="supplier" label="供应商">
+                        <el-input v-model="queryParams.supplier" id="miaoshu" placeholder="请输入供应商" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item prop="cbwa09" label="仓库">
-                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                    <el-form-item prop="wh" label="仓库">
+                        <el-input v-model="queryParams.wh" id="miaoshu" placeholder="请输入仓库" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left:1%;">
@@ -747,6 +747,8 @@ export default {
         getList() {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            
+             if (response.code == "200") { 
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -755,6 +757,9 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              } 
             }
             );
         },
@@ -773,33 +778,50 @@ export default {
         //供应商
         getList01() {
             SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {   
                 this.postOptions = response.data.rows;
                 // console.log(response.data.rows,551100);
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             });
         },
         //库位
         getList02() {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+             if (response.code == "200") {   
                 this.KuWeiOptions = response.data.rows;
                 // console.log(response.data.rows,663322);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }   
             });
         },
 
         //商品信息维护
         getList03() {
             GoodsList01(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+
+             if (response.code == "200") { 
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
                 // console.log(response.data.rows, 1655);
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+             } 
             });
         },
         //仓库信息维护
         getList04() {
             StoreSkuList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+              if (res.code == "200") {
                 this.postCangKu = response.data.rows;
                 // this.XinghaoOptions = response.data.rows;
                 // console.log(response.data.rows, 1655);
+              }else{
+               this.$message({ message: res.msg, type: 'error' });
+             }   
             });
         },
 
@@ -947,11 +969,15 @@ export default {
             console.log(row.cbpc01,8888);
 
             PurchaseinboundSH(row).then(response => {
+             if (response.code == "200") { 
                 // console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '审批成功', type: 'success' });
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             });
           }).catch(() => { });
         },
@@ -963,9 +989,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSH(item).then((res) => {
+                 if (res.code == "200") { 
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("审批成功");
+                 }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                 }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -977,11 +1007,16 @@ export default {
             this.$modal.confirm('是否要反审,编号为"' + row.orderNo + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShs(row).then(response => {
+             
+             if (response.code == "200") {
                 // console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '反审成功', type: 'success' });
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             });
           }).catch(() => { });
         },
@@ -994,9 +1029,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShs(item).then((res) => {
+                 if (res.code == "200") { 
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("反审成功");
+                  }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                 }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1010,11 +1049,15 @@ export default {
             this.$modal.confirm('是否要标记完成,编号为"' + row.orderNo + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShss(row).then(response => {
+              if (response.code == "200") { 
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '标记完成', type: 'success' });
+              }else{
+                this.$message({ message: response.msg, type: 'error' });
+              }
             });
           }).catch(() => { });
         },
@@ -1026,9 +1069,13 @@ export default {
             // console.log(row.cbpc01, 8888);
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
+                  if (res.code == "200") { 
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("标记完成");
+                  }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                  }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1051,10 +1098,14 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记,编号为"' + row.orderNo + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
+                  if (response.code == "200") {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
 
+                 }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                  } 
                 });
             }).catch(() => { });
         },
@@ -1066,9 +1117,13 @@ export default {
 
             userIds.forEach((item) => {
                 req.Purchaseinbounds(item).then((res) => {
+                 if (res.code == "200") {
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("取消标记成功");
+                   }else{
+                    this.$message({ message: res.msg, type: 'error' });
+                 }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1127,7 +1182,7 @@ export default {
         handleAdd() {
 
             this.$refs["form2"].validate((item) => {
-                if (item) {
+            if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
                 // console.log(response.posts, 12345678);
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
@@ -1141,7 +1196,7 @@ export default {
                 // console.log(this.form2.ifEnabled, 123456);
             });
                 } else {
-                    this.$message.error('请注意规范');
+                    
                 }
             })
 
@@ -1235,10 +1290,14 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
+                     if (res.code == "200") {  
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                      }else{
+                        this.$message({ message: res.msg, type: 'error' });
+                      }
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1267,9 +1326,13 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
+              if (response.code == "200") { 
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
+             }else{
+                this.$message({ message: response.msg, type: 'error' });
+                } 
             }).catch(() => { });
         },
         // /** 导出按钮操作 */

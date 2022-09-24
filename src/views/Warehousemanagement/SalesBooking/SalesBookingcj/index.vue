@@ -197,7 +197,7 @@
   import CustomerMainten from "@/components/CustomerMaintenance";
 
     //销售人员
-import salerman from "@/components/salerman";
+  import salerman from "@/components/salerman";
 
   export default {
     name: "store",
@@ -216,7 +216,8 @@ import salerman from "@/components/salerman";
       ListLists,
       Goodsone01,
       CustomerMainten,
-      salerman
+      salerman,
+      
     },
     data() {
       return {

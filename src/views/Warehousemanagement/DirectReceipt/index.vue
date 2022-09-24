@@ -1077,10 +1077,13 @@ export default {
             this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseInboundremove(JSON.stringify(item)).then((res) => {
-                        console.log(res, 123)
-                        this.submitShangpin();
-                        this.getList();
-                        this.$modal.msgSuccess("删除成功");
+                        if(res.code == 200){
+                            this.submitShangpin();
+                            this.getList();
+                            this.$modal.msgSuccess("删除成功");
+                        }else{
+                            this.$modal.msgError(res.msg)
+                        }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1109,9 +1112,13 @@ export default {
             this.$modal.confirm('是否确认删除类型为"' + row.cala08 + '"的数据项？').then(function () {
                 return PurchaseInboundremove(JSON.stringify(row));
             }).then((response) => {
-                this.submitShangpin();
-                this.getList();
-                this.$modal.msgSuccess("删除成功");
+                if(response.code == 200){
+                    this.submitShangpin();
+                    this.getList();
+                    this.$modal.msgSuccess("删除成功");
+                }else{
+                    this.$modal.msgError(response.msg)
+                }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */

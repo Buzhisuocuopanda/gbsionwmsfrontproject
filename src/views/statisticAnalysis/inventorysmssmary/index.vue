@@ -1,38 +1,40 @@
 <template>
+  <!--zgl-->
   <!--销售订单明细-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
         <el-form-item label="客户" style="margin-left: 10px"  class="item-r" >
-          <el-select v-model="queryParams.cbca08"  style="width: 300px"  filterable placeholder="请选择" :loading="loading2">
+          <el-select v-model="queryParams.cbca08" clearable   filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca08" :label="item.cbca08" :value="item.cbca08"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="销售人员" style="margin-left: 80px"   class="item-r" >
-          <el-select v-model="queryParams.caua17"  style="width: 300px"  filterable placeholder="请选择" :loading="loading3">
+        <el-form-item label="销售人员" style="margin-left: 20px"   class="item-r" >
+          <el-select v-model="queryParams.caua17"  clearable  filterable placeholder="请输入关键词" :loading="loading3">
             <el-option v-for="item in cauaList" :key="item.caua17" :label="item.caua17" :value="item.caua17"></el-option>
           </el-select>
 
         </el-form-item>
-        <el-form-item label="商品" style="margin-left: 80px"  class="item-r" >
-          <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+        <el-form-item label="商品" style="margin-left: 20px"  class="item-r" >
+          <el-select v-model="queryParams.cbpb01" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item  label="日期" style="margin-left: 10px">
-          <el-date-picker v-model="dateRange" type="daterange" style="width: 500px;height: 35px"
+        <el-form-item  label="日期" style="margin-left: 20px">
+          <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
 
-        <el-form-item style="margin: -5px -10px 1px 500px" >
+        <el-form-item style="margin: -5px -10px 1px 30px" >
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="单据编号" align="center" header-align="center" prop="cboa07" min-width="200px;" />
         <el-table-column  label="单据日期" align="center" prop="cboa08" :formatter="formatTime" min-width="120px;"/>
         <el-table-column  label="客户" align="center" prop="cbca08" min-width="240px;"/>
@@ -261,6 +263,8 @@ export default {
           this.deviceList = []
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
     //导出
@@ -281,6 +285,8 @@ export default {
           } else {
             this.goodList = [];
           }
+        },error => {
+          this.loading1 = false;
         });
       } else {
         this.goodList = [];
@@ -297,6 +303,8 @@ export default {
         } else {
           this.cbcaList = [];
         }
+      },error => {
+        this.loading2 = false;
       });
     },
     //下拉列表数据销售人员
@@ -310,6 +318,8 @@ export default {
         } else {
           this.cauaList = [];
         }
+      },error => {
+        this.loading3 = false;
       });
     },
 

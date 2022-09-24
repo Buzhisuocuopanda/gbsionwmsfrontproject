@@ -13,7 +13,7 @@ export function PurchaseinboundAdd(data) {
 // 销售预订单新增配置
 export function PurchaseinboundAddydd(data) {
   return request({
-    url: '/system/SalesScheduledOrders/addSalesScheduledOrdersChange',
+    url: '/system/SalesScheduledOrders/addSalesScheduledOrders',
     method: 'post',
     data: data
   })

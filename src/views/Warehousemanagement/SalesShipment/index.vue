@@ -918,9 +918,14 @@ export default {
             PurchaseinboundSH(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '审批成功', type: 'success' });
+                if(response.code == 200){
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '审批成功', type: 'success' });
+                }else{
+                    this.$modal.msgError(response.msg)
+                }
+                
             });
           }).catch(() => { });
         },
@@ -932,8 +937,14 @@ export default {
             userIds.forEach((item) => {
                 req.PurchaseinboundSH(item).then((res) => {
                     // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("审批成功");
+                    if(res.code == 200){
+                        this.getList();
+                        // this.open = false;
+                        this.$message({ message: '审批成功', type: 'success' });
+                    }else{
+                        this.$modal.msgError(res.msg)
+                    }
+                    
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -947,9 +958,13 @@ export default {
             PurchaseinboundShs(row).then(response => {
                 // console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '反审成功', type: 'success' });
+                if(response.code == 200){
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '反审成功', type: 'success' });
+                }else{
+                    this.$modal.msgError(response.msg)
+                }
             });
           }).catch(() => { });
         },
@@ -963,8 +978,13 @@ export default {
             userIds.forEach((item) => {
                 req.PurchaseinboundShs(item).then((res) => {
                     // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("反审成功");
+                    if(res.code ==200){
+                        this.getList();
+                        this.$modal.msgSuccess("反审成功");
+                    }else{
+                        this.$modal.msgError(res.msg)
+                    }
+                    
                 }).catch((e) => {
                     // console.log(e, 456)
                 })

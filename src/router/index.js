@@ -161,6 +161,20 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/system/user-authhhhxg',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/:cbpc01(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/Saleslading/Saleskadingxg/index'),
+        meta: { title: '销售提货修改', activeMenu: '/Warehousemanagement/Saleslading' }
+      }
+    ]
+  },
+  {
     path: '/system/user-authhhhh',
     component: Layout,
     hidden: true,
@@ -469,6 +483,36 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //销售预订单变更单修改
+   {
+    path: '/system/user-SalesAdvancexiugai',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesAdvance/SalesAdvancexg/index'),
+        meta: { title: '销售预订单变更单修改', activeMenu: '/Warehousemanagement/SalesAdvance' }
+      }
+    ]
+  },
+
+  //销售预订单变更单详情
+   {
+    path: '/system/user-SalesAdvancexiangqong',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesAdvance/SalesAdvancexq/index'),
+        meta: { title: '销售预订单变更单详情', activeMenu: '/Warehousemanagement/SalesAdvance' }
+      }
+    ]
+  },
+
    //销售上架单添加
    {
     path: '/system/user-xssjdan',
@@ -511,6 +555,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+  // 采购入库单修改
+  {
+    path: '/system/user-ckrkxg',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseWarehousing/PurchaseWarehousingxg/index'),
+        meta: { title: '采购入库单修改', activeMenu: '/Warehousemanagement/PurchaseWarehousing' }
+      }
+    ]
+  },
    //采购退库单返回
    {
     path: '/system/user-cktkfh',
@@ -522,6 +580,20 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseReturn/index'),
         meta: { title: '采购退库单', activeMenu: '/Warehousemanagement/PurchaseReturn' }
+      }
+    ]
+  },
+  // 采购退库单修改
+  {
+    path: '/system/user-cktkxg',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseReturn/PurchaseReturnxg/index'),
+        meta: { title: '采购退库单修改', activeMenu: '/Warehousemanagement/PurchaseReturn' }
       }
     ]
   },
@@ -664,7 +736,7 @@ export const dynamicRoutes = [
         path: 'role/',
          name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesReceipt/SalesReceiptcj/index'),
-        meta: { title: '销售退库创建', activeMenu: '/Warehousemanagement/SalesReceipt' }
+        meta: { title: '销售预订单入库单创建', activeMenu: '/Warehousemanagement/SalesReceipt' }
       }
     ]
   },

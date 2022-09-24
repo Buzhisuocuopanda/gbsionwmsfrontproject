@@ -1,64 +1,60 @@
 <template>
     <div>
         <div class="Purchase_caigou">销售提货单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
-            <span class="Purchase_bianhao" style="margin-left:15%;">客户订单号：{{ value.cbpc07 }}</span>
-            <span class="Purchase_riqii">日期：{{ value.cbpc08.slice(0, 10) }}</span>
+        <div class="Purchase_sum">
+            <span class="Purchase_bianhao">编号：{{ userList.orderNo || '' }}</span>
+            <span class="Purchase_bianhao" style="margin-left:15%;">客户订单号：{{ userList.customerNo || '' }}</span>
+            <span class="Purchase_riqii">日期：{{ userList.orderDate || '' }}</span>
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
             <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
+            <el-descriptions class="margin-top" title="" :column="3" border>
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">客户</template>{{
-                            value.cbsa08
+                            userList.customerName || ''
                     }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">仓库</template>{{ value.cbwa09 }}
+                    <template slot="label">仓库</template>{{ userList.whName || '' }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">销售人员</template>USD
+                    <template slot="label">销售人员</template>{{userList.userName || ''}}
                 </el-descriptions-item>
             </el-descriptions>
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
+            <el-descriptions class="margin-top" title="" :column="3" border>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">联系人</template>{{ value.cbsa08 }}
+                    <template slot="label">联系人</template>{{ userList.phone || '' }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">电话</template>{{ value.cbwa09 }}
+                    <template slot="label">电话</template>{{ userList.phone || '' }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">客户等级</template>USD
-                </el-descriptions-item>
-            </el-descriptions>
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">结算货币</template>{{ value.cbsa08 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">收货人</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">关联订单/提货单</template>USD
+                    <template slot="label">客户等级</template>{{userList.customerLevel || ''}}
                 </el-descriptions-item>
             </el-descriptions>
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
+            <el-descriptions class="margin-top" title="" :column="3" border>
+                <el-descriptions-item label-class-name="my-labell01">
+                    <template slot="label">结算货币</template>{{ userList.currencyMsg || '' }}
+                </el-descriptions-item>
+                <el-descriptions-item label-class-name="my-labell01">
+                    <template slot="label">收货人</template>{{ userList.receiver ||'' }}
+                </el-descriptions-item>
+                <el-descriptions-item label-class-name="my-labell01">
+                    <template slot="label">销售订单号</template>{{userList.saleOrderNo}}
+                </el-descriptions-item>
+            </el-descriptions>
+            <el-descriptions class="margin-top" title="" :column="3" border >
                 <el-descriptions-item content-class-name="my-content" label-class-name="my-labell02">
-                    <template slot="label">收货电话</template>{{ value.cbsa08 }}
+                    <template slot="label">收货电话</template>{{ userList.receivPhone ||'' }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell02">
-                    <template slot="label">收货地址</template>{{ value.cbwa09 }}
+                    <template slot="label">收货地址</template>{{ userList.receiveAdress || '' }}
                 </el-descriptions-item>
             </el-descriptions>
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table v-loading="loading" :data="userList" height="250"
+            <!-- <el-table v-loading="loading" :data="userList" height="250"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbpc07" key="cbpc07" label="供应商">
@@ -81,10 +77,12 @@
                 </el-table-column>
                 <el-table-column prop="cbpd11" key="cbpd11" label="备注">
                 </el-table-column>
-            </el-table>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+            </el-table> -->
+            <!-- 分页器 -->
+            <!-- <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
-                class="pagintotal" />
+                class="pagintotal" /> -->
+
             <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="品牌">
@@ -174,7 +172,7 @@
 
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { Purchaseinbounddingdanxq } from "@/api/Warehousemanagement/Saleslading";
 export default {
 
     data() {
@@ -184,7 +182,7 @@ export default {
             // 总条数
             total: 0,
             // 用户表格数据
-            userList: null,
+            userList: {},
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -220,7 +218,7 @@ export default {
         getParams() {
             let routerParams = this.$route.query;
             this.cbpc01 = routerParams.data;
-            console.log(this.cbpc01, 852369);
+            // console.log(this.cbpc01, 852369);
         },
 
         //详情列表
@@ -229,11 +227,13 @@ export default {
             const userId = this.$route.params && this.$route.params.cbpc01;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
-                    this.userList = res.data.rows;
-                    this.total = res.data.total;
+                Purchaseinbounddingdanxq(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                    
+                    this.userList = res.data;
+                    // this.total = res.data.total;
                     console.log(res, 888999);
                     this.loading = false;
+                    console.log(res.data,this.userList)
                 });
             }
         },

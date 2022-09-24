@@ -1,43 +1,59 @@
 <template>
+  <!--zgl-->
   <!--财务综合报表-->
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true"   >
-        <el-form-item label="销售订单号"   class="item-r" >
-          <el-input v-model="saleOrderNo" class="filter-item"  placeholder="销售订单号" />
+      <el-form :inline="true" >
+        <el-form-item label="销售订单号" label-width="100px" style="margin-left: 10px"  class="item-r" >
+          <el-input v-model="queryParams.saleOrderNo" style="margin-left: 20px;width: 500px" class="filter-item"  placeholder="销售订单号" />
         </el-form-item>
-        <el-form-item label="仓库"   class="item-r" >
-          <el-input v-model="whId" class="filter-item"  placeholder="仓库" />
-        </el-form-item><el-form-item label="客户"   class="item-r" >
-        <el-input v-model="customerName" class="filter-item"  placeholder="客户" />
-      </el-form-item>
+        <el-form-item label="仓库"  style="margin-left: 100px"  class="item-r" >
+          <el-select style="width: 500px;margin-left: 20px" v-model="queryParams.whId" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+            <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="客户" label-width="100px" style="margin-left: 10px;margin-top: -20px"  class="item-r" >
+          <el-select v-model="queryParams.customerName"  style="width: 500px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+            <el-option v-for="item in cbcaList" :key="item.cbca08" :label="item.cbca08" :value="item.cbca08"></el-option>
+          </el-select>
+        </el-form-item>
 
-        <el-form-item  label="日期">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange"
+        <el-form-item  label="日期" style="margin-left: 100px;margin-top: -20px">
+          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="margin-left: 20px;width: 500px;height: 35px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
 
-        <el-form-item style="margin: -5px -10px 1px 1px">
+        <el-form-item style="margin: -20px -10px 1px 1px;">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-         <!-- <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>-->
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"   border fit highlight-current-row stripe >
-        <el-table-column label="入库时间" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />
-        <el-table-column  label="出库时间" align="center" prop="outWhTimeMsg"  min-width="100px;"/>
-        <el-table-column  label="订单号" align="center" prop="orderNo" min-width="180px;"/>
+      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+                 border fit highlight-current-row stripe style="margin-top:1em">
+        <el-table-column fixed label="入库时间" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />
+        <el-table-column fixed label="出库时间" align="center" prop="outWhTimeMsg"  min-width="100px;"/>
+        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="center" prop="model" min-width="120px;"/>
         <el-table-column  label="描述" align="center" prop="description" min-width="290px;"/>
         <el-table-column  label="数量" align="center" prop="qty" min-width="60px;"/>
         <el-table-column  label="序列号" align="center" prop="sn"  min-width="160px;"/>
-        <el-table-column  label="销售单价U" align="center" prop="uPrice" min-width="100px;"/>
-        <el-table-column  label="销售单价R" align="center" prop="rPrice" min-width="100px;"/>
+        <el-table-column  label="销售单价U" align="center"  min-width="100px;">
+          <template slot-scope="scope">
+            <div >{{RToU(scope.row.rprice )}}</div>
+          </template>
+        </el-table-column>
+        <el-table-column  label="销售单价R" align="center" prop="rprice" min-width="100px;"/>
         <el-table-column  label="经销商品名称" align="center" prop="suplierName" min-width="200px;"/>
         <el-table-column  label="品牌" align="center" prop="brand" min-width="100px;"/>
         <el-table-column  label="工厂" align="center" prop="gc" min-width="100px;"/>
-        <el-table-column  label="采购单价U" align="center" prop="cgUprice" min-width="60px;"/>
+        <el-table-column  label="采购单价U" align="center" min-width="60px;">
+          <template slot-scope="scope">
+            <div >{{RToU(scope.row.cgRprice )}}</div>
+          </template>
+        </el-table-column>
         <el-table-column  label="采购单价R" align="center" prop="cgRprice" min-width="60px;"/>
         <!--<el-table-column  label="生产总订单号" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
@@ -58,29 +74,23 @@
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getfnSynthesisList } from "@/api/statisticAnalysis/index";
+import { getfnSynthesisList,getSwJsStoreSkuAllList,getSwJsCustomerAllList } from "@/api/statisticAnalysis/index";
 //
 // import { formatDate } from '../../../utils';
 export default {
   name: "fnSynthesis",
   data() {
     return {
-      saleOrderNo:"",
-      whId:"",
-      customerName:"",
-      /*formData: {
-        name: "",
-      },*/
+      //下拉列表数据仓库
+      storeSkuList:[],
+      //下拉列表数据客户
+      cbcaList:[],
       dateRange:[],
-     /* tableData: [],*/
-      /*loadingOut:false,*/
-  /*    loadingState:false,*/
+
       loading:false,
-      /*queryForm:{},*/
-      /*listQuery: {
-        pageNum: 1,
-        pageSize: 10
-      },*/
+      loading2:false,
+      loading3:false,
+
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -220,7 +230,9 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
-    this.onSearch()
+    this.onSearch();
+    this.getStoreSkuList();
+    this.getCbcaList();
   },
   methods: {
 /*    onSubmit() {},*/
@@ -234,14 +246,22 @@ export default {
         }
       }
     },*/
+    RToU(num){
+      if(num!=null){
+        return num*141/1000;
+      }else {
+        return "";
+      }
+
+    },
     /** 重置按钮操作 */
     resetQuery() {
-      this.saleOrderNo = "";
-      this.whId = "";
-      this.customerName = "";
+      this.queryParams.saleOrderNo = "";
+      this.queryParams.whId = "";
+      this.queryParams.customerName = "";
 
       this.queryParams.pageNum = 1;
-      this.resetForm("queryParams");
+      // this.resetForm("queryParams");
       this.onSearch();
     },
     /** 搜索按钮操作 */
@@ -250,16 +270,20 @@ export default {
       this.queryParams.pageNum = 1;
       this.onSearch();
     },
+    //导出
+    exprotData(){
+      this.download('/query/fnSynthesisExcelList', {
+        ...this.queryParams
+      }, `财务综合报表查询数据_${new Date().getTime()}.xlsx`)
+    },
     onSearch() {
-      this.queryParams.saleOrderNo = this.saleOrderNo;
-      this.queryParams.whId = this.whId;
       if(this.dateRange.length>=2){
         this.queryParams.startTime = this.dateRange[0];
         this.queryParams.endTime = this.dateRange[1];
+      }else {
+        this.queryParams.startTime = undefined;
+        this.queryParams.endTime = undefined;
       }
-
-
-      this.queryParams.customerName = this.customerName;
       this.loading = true;
       getfnSynthesisList(this.queryParams).then(response => {
         this.loading = false;
@@ -270,8 +294,41 @@ export default {
      /*     this.deviceList = []*/
           this.total = 0
         }
+      },error => {
+        this.loading = false;
       })
     },
+    //下拉列表数据仓库
+    getStoreSkuList(query){
+      let param={cbwa09:query};
+      this.loading3 = true;
+      getSwJsStoreSkuAllList(param).then(response => {
+        this.loading3 = false;
+        if (response.data != null) {
+          this.storeSkuList = response.data;
+        } else {
+          this.storeSkuList = [];
+        }
+      },error => {
+        this.loading3 = false;
+      });
+    },
+    //下拉列表数据客户
+    getCbcaList(){
+      let param={};
+      this.loading2 = true;
+      getSwJsCustomerAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.cbcaList = response.data;
+        } else {
+          this.cbcaList = [];
+        }
+      },error => {
+        this.loading2 = false;
+      });
+    },
+
   },
 };
 </script>

@@ -84,21 +84,21 @@
                 <span class="saomiaojluuuu">财务:</span>
             </div>
          <div class="saomiaojlu">扫描记录</div>
-             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userList"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userLists"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
-                <el-table-column prop="cala08" key="cala08" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpa07" key="cbpa07"  label="类型">
+                <el-table-column prop="lx" key="lx"  label="类型">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
                 <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="250">
                 </el-table-column>
-                <el-table-column prop="cbpe09" key="cbpe09" align="" label="SN">
+                <el-table-column prop="sn" key="sn" align="" label="SN">
                 </el-table-column>
-                <el-table-column prop="cbpe10" key="cbpe10" align="" label="库位">
+                <el-table-column prop="kwm" key="kwm" align="" label="库位">
                 </el-table-column>
-                <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="入库时间">
+                <el-table-column prop="cbpe03" key="cbpe03" :formatter="formatDate" label="入库时间">
                 </el-table-column>
             </el-table>
           </div>
@@ -122,6 +122,8 @@ export default {
             total: 0,
             // 用户表格数据
             userList: null,
+            // 扫描部分储存
+            userLists: null,
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -186,7 +188,17 @@ export default {
                 // 获取表详细信息
                 PurchaseinboundLists(userId, this.addDateRange(this.queryParams)).then(res => {
                     this.userList = res.data.rows;
+                    // this.userLists = res.data.rows;
                     this.total = res.data.total;
+                //     this.tableData.forEach((item) => {
+                //   item.cbpc01 = response.data.id;
+                //   console.log(item.cbpc01,8523697412);
+                // })
+                 let userlistss = res.data.rows.map(item=>{
+                    return item.goods;
+                 })
+                 this.userLists = userlistss[0];
+                 console.log(this.userLists,123456);
                     console.log(res, 888999);
                     this.loading = false;
                 });
@@ -280,9 +292,9 @@ export default {
   }
 
      /**  表头数量  */
- #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
+ /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
       
-  }
+  } */
 
   #printRecord .el-table__header-wrapper .el-table__header {
     width: 100% !important;

@@ -1,36 +1,32 @@
+<!-- zgl -->
 <!-- 缺货登记 -->
 <template>
   <div class="app-container">
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="商品分类">
-        <el-select v-model="queryParams.cbpa07"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading3">
+        <el-select v-model="queryParams.cbpa07"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading3">
           <el-option v-for="item in cbpaList" :key="item.cbpa07" :label="item.cbpa07+' ['+item.cbpa11+']'" :value="item.cbpa07"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="品牌">
-        <el-select v-model="queryParams.cala08"  style="width: 300px"  filterable placeholder="请输入关键词" :loading="loading2">
+        <el-select v-model="queryParams.cala08"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
           <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="商品">
-        <el-select v-model="queryParams.cbpb01" style="width: 300px" filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
+        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
           <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handleQuery">查询</el-button>
         <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-        <el-button type="primary" @click="onSubmit">导出</el-button>
+        <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table
-      :data="tableData"
-      style="width: 100%"
-      border
-      :default-sort="{ prop: 'date', order: 'descending' }"
-    >
+    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }">
       <el-table-column prop="date" label="序号" type="index" sortable width="100" align="center"></el-table-column>
       <el-table-column prop="cbpa08" label="大类" align="center" sortable width="180"></el-table-column>
       <el-table-column prop="cbpa07" label="分类名称" align="center" sortable></el-table-column>
@@ -121,7 +117,16 @@
             /*     this.deviceList = []*/
             this.total = 0
           }
+        },error => {
+          this.loading = false;
         })
+      },
+      //导出
+      exprotData(){
+        // this.loading=true;
+        this.download('/countQuery/InvsentorsysummaryqueryExcelList', {
+          ...this.queryParams
+        }, `缺货登记查询数据_${new Date().getTime()}.xlsx`)
       },
       //下拉列表数据商品分类
       getCbpaList(){
@@ -134,11 +139,13 @@
           } else {
             this.cbpaList = [];
           }
+        },error => {
+          this.loading3 = false;
         });
       },
       //下拉列表数据品牌
       getCalaList(){
-        let param={};
+        let param={cala10:"商品品牌"};
         this.loading2 = true;
         getswJsAllList(param).then(response => {
           this.loading2 = false;
@@ -147,6 +154,8 @@
           } else {
             this.calaList = [];
           }
+        },error => {
+          this.loading2 = false;
         });
       },
       //获取下拉列表数据商品
@@ -161,6 +170,8 @@
             } else {
               this.goodList = [];
             }
+          },error => {
+            this.loading1 = false;
           });
         } else {
           this.goodList = [];
