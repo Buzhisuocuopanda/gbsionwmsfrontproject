@@ -185,3 +185,49 @@ export function orderChangeDetail(data) {
     params: data
   })
 }
+export function orderlistSelect(data) {
+  return request({
+    url: '/sale/orderlistSelect',
+    method: 'get',
+    params: data
+  })
+}
+
+export function orderChangeGoodsSelect(data) {
+  return request({
+    url: '/sale/orderChangeGoodsSelect',
+    method: 'get',
+    params: data
+  })
+}
+
+export function goodsPriceAndSkuByOrderChange(data) {
+  return request({
+    url: '/sale/goodsPriceAndSkuByOrderChange',
+    method: 'post',
+    data: data
+  })
+}
+
+export function addSaleOrderChange(data) {
+  return request({
+    url: '/sale/addSaleOrderChange',
+    method: 'post',
+    data: data
+  })
+}
+
+export function mdfSaleOrderChange(data) {
+  return request({
+    url: '/sale/mdfSaleOrderChange',
+    method: 'post',
+    data: data
+  })
+}
+export function auditSaleChange(data) {
+  return request({
+    url: '/sale/auditSaleChange',
+    method: 'post',
+    data: data
+  })
+}
