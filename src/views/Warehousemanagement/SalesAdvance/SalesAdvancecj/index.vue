@@ -8,7 +8,7 @@
             <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
             <el-popover placement="bottom-start" trigger="click">
               <SalesBooking ref="SalesBooking" @selected="selected0222" style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly  style="width:110%;">
+              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly  style="width:68%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -120,7 +120,7 @@
         </el-row>
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="cbpc000" label="品牌" width="250">
+          <el-table-column prop="cbpc000" label="品牌" width="300">
             <template slot-scope="scope" style="width:200%;">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
@@ -131,14 +131,14 @@
                   </el-popover>
             </template>
           </el-table-column>
-           <el-table-column label="型号" width="250" />
-          <el-table-column label="描述" width="250" />
+           <el-table-column label="型号" width="300" />
+          <el-table-column label="描述" width="300" />
           <el-table-column label="数量" width="100" prop="qty">
             <template slot-scope="scope" style="width:200%;">
                   <el-input v-model="scope.row.qty"  placeholder="" @keyup="validateMealStandard($event)"  class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="orderDate" label="订单日期" width="220">
+          <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
                 <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;">
             </el-date-picker>             
@@ -162,6 +162,11 @@
           <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
             <template slot-scope="scope">
                 <el-input v-model="scope.row.goodsId" placeholder="" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="salerId" label="销售人员id" width="150">
+            <template slot-scope="scope">
+                <el-input v-model="scope.row.salerId" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
            <el-table-column v-if="false" prop="gsSalesOrders" label="销售预订单id" width="150">
@@ -690,6 +695,7 @@ import salerman from "@/components/salerman";
                 //  this.form2.goodsId = item.goodsId;
                 item.supplierId = this.form2.supplierId;
                 item.gsSalesOrders =this.form2.gsSalesOrders;
+                item.salerId = this.form2.salerId;
                  console.log(item,"1023");
                 })   
               PurchaseinboundAdd(JSON.stringify(this.tableData)).then(response => {
@@ -734,6 +740,8 @@ import salerman from "@/components/salerman";
                     orderNo:"",
                     GsSalesOrders:""
                   }
+                }else{
+                  this.$message({ message: response.msg, type: 'error' });
                 }
                 if (count-- === 1) {
                   this._ly_save()
@@ -751,7 +759,7 @@ import salerman from "@/components/salerman";
           // })
           console.log(this.tableData,"8520000");
         
-        console.log('_ly_ok:' + this.tableData)
+        console.log('_ly_ok:' + JSON.stringify(this.tableData))
       },
 
 
@@ -785,7 +793,6 @@ import salerman from "@/components/salerman";
         //   cbpd08: this.form2.cbpd08,
         // })
         this.tableData.push({
-          id: this.dataId,
           date: '',
           num: '',
           address: '',

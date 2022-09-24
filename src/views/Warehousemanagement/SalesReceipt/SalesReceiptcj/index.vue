@@ -4,7 +4,7 @@
       <div class="chuangjiancaigous">销售预订单入库单</div>
  <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
-          <el-form-item label="销售预订单编号:" prop="orderNo">
+          <el-form-item label="销售预订单编号:" prop="GsSalesOrders">
             <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
             <el-popover placement="bottom-start" trigger="click">
               <SalesBooking ref="SalesBooking" @selected="selected0222" style="width:210px!important; height:100px!important;" />
@@ -146,9 +146,9 @@
             </template>
           </el-table-column> -->
 
-          <el-table-column v-if="false" prop="purchaseOrderId" label="id" width="150">
+          <el-table-column v-if="false" prop="gsSalesOrders" label="销售预订单入库单id" width="150">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.purchaseOrderId" placeholder="id" style=""></el-input>
+                <el-input v-model="scope.row.gsSalesOrders" placeholder="id" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
@@ -668,18 +668,11 @@ import salerman from "@/components/salerman";
       },
       // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
       _ly_ok() {
-        // let count = this.tableData.length // 记录当前有多少个表单
-        // for (var index in this.tableData) {
-        //   var form = this.tableData[index]
-        //   console.log(form)
-        //   console.log(JSON.stringify(form))
-        //   }
-          // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-          // this.$refs[form.formName][0].validate((valid, obj) => {
-            // if (valid) {
-              // 如果检查通过，则对count减1。
-              // 当count为1时，表示是最后一个表单，则存储数据
               console.log(this.tableData,333)
+                 this.tableData.forEach((item) => {
+                    item.gsSalesOrders =this.form2.gsSalesOrders;
+                 console.log(item,"1023");
+                })  
               PurchaseinboundAdd(JSON.stringify(this.tableData)).then(response => {
                 if (response.code == "200") {
                   this.tableData = []
@@ -762,7 +755,6 @@ import salerman from "@/components/salerman";
         //   cbpd08: this.form2.cbpd08,
         // })
         this.tableData.push({
-          id: this.dataId,
           date: '',
           num: '',
           address: '',
@@ -971,43 +963,8 @@ import salerman from "@/components/salerman";
 
       /** 新增按钮操作 */
       handleAdd() {
-        this.$refs["form2"].validate((item) => {
-          if (item) {
-            PurchaseinboundAdd(this.form2).then(response => {
-              if (response.code == "200") {
-                this.$message({
-                  message: '添加成功',
-                  type: 'success',
-                  style: 'color:red;!important'
-                });
-                this.submitShangpin();
-                this.open2 = false;
-                this.reset01()
-                // console.log(this.form2.cbpg161,111);
-                // console.log(this.form.cbpg01,222);
-                console.log(response, 333);
-                
-                // this.tableData.forEach((item) => {
-                //   item.gsSalesOrders = response.data.id;
-                //   console.log(response.data.id,8523697412);
-                // })
+                                                          
                 this._ly_ok();
-              }else{
-                 this.$message({ message: response.msg, type: 'error' });
-              }
-            });
-
-
-          } else {
-            // this.$message.error('请注意规范');
-          }
-          
-          this.form2.ponumber = this.tableData[0].ponumber;
-          this.form2.inQty = this.tableData[0].inQty;
-          this.form2.goodsId = this.tableData[0].goodsId;
-        })
-        
-        //    this._ly_ok();
       },
 
       /** 返回操作 */
