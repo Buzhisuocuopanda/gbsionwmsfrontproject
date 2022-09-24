@@ -732,7 +732,6 @@
         //   cbpd08: this.form2.cbpd08,
         // })
         this.tableData.push({
-          id: this.dataId,
           date: '',
           num: '',
           address: '',

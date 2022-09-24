@@ -142,7 +142,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpa08" key="cbpa08"  label="类型">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号" width="180">
                 </el-table-column>
                 <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="390">
                 </el-table-column>

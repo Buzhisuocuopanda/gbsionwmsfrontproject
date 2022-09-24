@@ -4,9 +4,9 @@
         <div class="Purchase_caigou">库存初始化</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbie07 }}</span>
-            <span class="" style="margin-left:10%;">日期：{{ value.cbie02.slice(0, 10) }}</span>
-            <span class="" style="margin-left:10%;">仓库：{{ value.cbwa09 }}</span>
-            <span class="" style="margin-left:10%;">币种：{{ value.cala08 }}</span>
+            <span class="" style="margin-left:8%;">日期：{{ value.cbie02.slice(0, 10) }}</span>
+            <span class="" style="margin-left:8%;">仓库：{{ value.cbwa09 }}</span>
+            <span class="" style="margin-left:8%;">币种：{{ value.cala08 }}</span>
         </div>
         <div style="width:97%; margin-left: 2%; margin-top: 1%;">
 
@@ -14,7 +14,7 @@
                  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbsa08" key="cbsa08" width="110px;" label="供应商">
+                <el-table-column prop="cbsa08" key="cbsa08" width="100px;" label="供应商">
                 </el-table-column>
                 <!-- <el-table-column prop="cbla09" key="cbla09" width="150px;" label="库位">
                 </el-table-column> -->
@@ -26,7 +26,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpb15" key="cbpb15" width="120px;" label="UPC">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" width="490px;" label="描述">
+                <el-table-column prop="cbpb08" key="cbpb08" width="390px;" label="描述">
                 </el-table-column>
                 <el-table-column prop="cbif09" key="cbif09" align="right" width="50px;" label="数量">
                 </el-table-column>
@@ -95,6 +95,11 @@ export default {
 
     },
     methods: {
+
+          //打印
+        PrintRow(index, row){
+            this.$print(this.$refs.print) 
+        },
 
            //返回按钮
         handlefanhui: function (row) {
@@ -189,4 +194,38 @@ export default {
 };
 </script>
 <style src="./BarcodesSummaryxqcss/index.css">
+</style>
+<style>
+  
+@page {
+  size: auto;
+  margin: 3mm;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+  body {
+    border: solid 1px #ffffff;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+  #printRecord table {
+    table-layout: auto !important;
+  }
+
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printRecord #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+
+	
 </style>

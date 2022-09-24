@@ -57,8 +57,8 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbie07" width="180px;" prop="cbie07" sortable />
-                    <el-table-column label="日期" width="400px;" align="left" key="cbie02" prop="cbie02"
+                    <el-table-column label="编号" align="left" key="cbie07" width="400px;" prop="cbie07" sortable />
+                    <el-table-column label="日期"  align="left" key="cbie02" prop="cbie02"
                         :formatter="formatDate" sortable>
                     </el-table-column>
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
