@@ -12,19 +12,19 @@
           v-show="showSearch"
           label-width="68px"
         >
-          <el-form-item prop="cbsa08" label="客户订单号">
+          <el-form-item prop="cbsa08" label="编号">
             <el-input
-              v-model="queryParams.cbsa08"
+              v-model="queryParams.orderNo"
               id="miaoshu"
-              placeholder="请输入供应商"
+              placeholder="请输入编号"
               clearable
               style="width: 240px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
-          <el-form-item prop="cbwa09" label="仓库">
+          <el-form-item prop="whName" label="仓库">
             <el-input
-              v-model="queryParams.cbwa09"
+              v-model="queryParams.whName"
               id="miaoshu"
               placeholder="请输入仓库"
               clearable
@@ -788,8 +788,8 @@ export default {
         size: 15,
         total: this.total,
         totall: this.totall,
-        cbpc07: undefined,
-        cbsa08: undefined,
+        whName: undefined,
+        orderNo: undefined,
         cbwa09: undefined,
         dateRange: undefined,
       },

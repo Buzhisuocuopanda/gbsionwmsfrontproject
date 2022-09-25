@@ -1,10 +1,11 @@
 <template>
     <div>
+        <section ref="print" class="recordImg" id="printRecord">
         <div class="Purchase_caigou">仓库盘点表</div>
-        <!-- <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpg07 }}</span>
-            <span class="Purchase_riqii">日期：{{ value.cbpg08.slice(0, 10) }}</span>
-        </div> -->
+        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
+            <span class="Purchase_bianhao">编号：{{ value.cbsh07 }}</span>
+            <span class="Purchase_riqii">日期：{{ value.cbsi03.slice(0, 10) }}</span>
+        </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
             <!-- 横向 -->
             <!-- <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList.slice(0, 1)"
@@ -28,24 +29,25 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table v-loading="loading" :data="userList" height="500"
+            <el-table v-loading="loading" :data="userList"  :header-cell-style="headClass"
+            :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
+                <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbwa09" key="cbwa09" label="UPC">
+                <el-table-column prop="cbpb15" key="cbpb15" label="UPC" width="120">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="120">
                 </el-table-column>
                 <el-table-column prop="cbpb08" width="450" key="cbpb08" label="描述">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd12" label="商品SN">
+                <el-table-column prop="cbsi09" key="cbsi09" label="库存数量" width="80">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="库位">
+                <el-table-column prop="cbsi10" key="cbsi10" label="盘点数量" width="80">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="状态">
+                <el-table-column prop="cbwa09" key="cbwa09" label="仓库名称">
                 </el-table-column>
-                <el-table-column prop="cbph10" key="cbph10" label="备注">
+                <el-table-column prop="cbsi11" key="cbsi11" label="备注">
                 </el-table-column>
             </el-table>
             <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
@@ -135,9 +137,13 @@
                 </el-descriptions-item>
             </el-descriptions> -->
         </div>
-
+        </section>
+        <div style="width:50px;"></div>
+         <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+         <el-button style="margin-left:5%;" type="primary">返回</el-button>
+         <div style="width:50px;"></div>
     </div>
-
+    
 </template>
 <script>
 import { SkuBarcodeListss } from "@/api/Warehousemanagement/WarehouseSummary";
@@ -174,6 +180,18 @@ export default {
 
     },
     methods: {
+         //打印
+        PrintRow(index, row){
+            this.$print(this.$refs.print) 
+        },
+         //列表表头设置
+        headClass() {
+            return {
+                'text-align': 'center',
+                 height: '30px',
+                padding: '0'
+            }
+        },
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
@@ -245,4 +263,38 @@ export default {
 };
 </script>
 <style src="./WarehouseSummaryxqcss/index.css">
+</style>
+<style>
+  
+@page {
+  size: auto;
+  margin: 3mm;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+  body {
+    border: solid 1px #ffffff;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+  #printRecord table {
+    table-layout: auto !important;
+  }
+
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printRecord #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+
+	
 </style>

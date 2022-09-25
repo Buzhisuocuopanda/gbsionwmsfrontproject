@@ -11,14 +11,14 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
+                    <el-form-item prop="orderNo" label="编号">
+                        <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="" clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
-                    <el-form-item prop="cbca08" label="客户名称">
-                        <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
+                    </el-form-item>                   
                     <el-form-item label="日期" style="margin-left:1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
@@ -387,6 +387,7 @@ export default {
                 cbpc07:undefined,
                 cbsa08:undefined,
                 cbwa09:undefined,
+                orderNo:undefined,
                 dateRange:undefined
             },
             // 列信息

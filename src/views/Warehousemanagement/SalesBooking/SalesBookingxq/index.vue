@@ -35,6 +35,7 @@
                 <el-table-column prop="price" key="price" align="right" label="单价">
                 </el-table-column>
                 <el-table-column prop="cbpd12" key="cbpd12" align="right" label="金额">
+                   {{ parseFloat(totalPrice).toFixed(2) }}
                 </el-table-column>
                 <el-table-column prop="remark" key="remark" label="备注">
                 </el-table-column>
@@ -115,7 +116,7 @@ export default {
     },
     created() {
         this.getList();
-        
+        this.userList.cbpd12 =  this.userList.qty * this.userList.price;
     },
     methods: {
 

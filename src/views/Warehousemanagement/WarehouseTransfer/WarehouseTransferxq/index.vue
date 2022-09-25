@@ -1,5 +1,6 @@
 <template>
     <div>
+      <section ref="print" class="recordImg" id="printRecord">
         <div class="Purchase_caigou">调拨单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbaa07  }}</span>
@@ -22,26 +23,26 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="400"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" 
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbwa09" key="cbwa09" label="供应商">
                 </el-table-column>
                 <el-table-column prop="cbab15" key="cbab15" label="订单分类">
                 </el-table-column>
-                <el-table-column prop="pinpai" key="pinpai" align="right" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" align="left" label="品牌" width="50">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" align="right" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" align="left" label="型号" width="120">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" align="right" label="描述">
+                <el-table-column prop="cbpb08" key="cbpb08" align="right" label="描述" width="550">
                 </el-table-column>
-                <el-table-column prop="cbab09" key="cbab09" align="right" label="数量">
+                <el-table-column prop="cbab09" key="cbab09" align="right" label="数量" width="60">
                 </el-table-column>
-              <el-table-column prop="cbab15" key="cbab15" align="right" label="已扫数量">
+              <el-table-column prop="cbab15" key="cbab15" align="right" label="已扫数量" width="80">
               </el-table-column>
-              <el-table-column prop="cbpb10" key="cbpb10" align="right" label="单价">
+              <el-table-column prop="cbpb10" key="cbpb10" align="right" label="单价" width="60">
               </el-table-column>
-              <el-table-column prop="cbab11" key="cbab11" align="right" label="金额">
+              <el-table-column prop="cbab11" key="cbab11" align="right" label="金额" width="60">
               </el-table-column>
                 <el-table-column prop="cbpc17" key="cbpb08" label="备注">
                 </el-table-column>
@@ -131,7 +132,11 @@
                 </el-descriptions-item>
             </el-descriptions>
         </div>
-
+     </section>
+      <div style="height:50px;"></div>
+     <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+     <el-button style="margin-left:5%;" type="primary">返 回</el-button>
+     <div style="height:50px;"></div>
     </div>
 
 </template>
@@ -170,6 +175,12 @@ export default {
 
     },
     methods: {
+
+          //打印
+        PrintRow(index, row){
+            this.$print(this.$refs.print) 
+        },
+
         //列表表头设置
         headClass() {
             return {
@@ -248,4 +259,43 @@ export default {
 };
 </script>
 <style src="./WarehouseTransferxqcss/index.css">
+</style>
+<style>
+  
+@page {
+  size: auto;
+  margin: 3mm;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+  body {
+    border: solid 1px #ffffff;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+  #printRecord table {
+    table-layout: auto !important;
+  }
+
+     /**  表头数量  */
+ /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
+      
+  } */
+
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printRecord #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+
+	
 </style>

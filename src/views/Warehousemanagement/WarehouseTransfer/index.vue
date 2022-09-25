@@ -23,8 +23,8 @@
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" @click="handleckdbone">创建</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button>
-                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
-                            @click="handleDelete">删除</el-button>
+                        <!-- <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                            @click="handleDelete">删除</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
@@ -73,8 +73,8 @@
                     </el-table-column>
                     <el-table-column label="状态" align="left" key="cbaa11" prop="cbaa11" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbpc11 == 0 ? "未审核" : scope.row.cbpc11 == 1 ?
-                            "已审核" : scope.row.cbpc11 == 4 ? "已完成" : "未确定状态"
+                            <div>{{ scope.row.cbaa11 == 0 ? "未审核" : scope.row.cbaa11 == 1 ?
+                            "已审核" : scope.row.cbaa11 == 4 ? "已完成" : "未审核"
                             }}
                             </div>
                         </template>
@@ -86,10 +86,10 @@
                                 v-if="scope.row.cbaa11 == 1 | scope.row.cbaa11 == 2" v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button>
-                            <el-button size="mini" type="text" icon="el-icon-delete"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.cbaa11 == 0 | scope.row.cbaa11 == ' '"
-                                v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-hasPermi="['system:user:remove']">删除</el-button> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"

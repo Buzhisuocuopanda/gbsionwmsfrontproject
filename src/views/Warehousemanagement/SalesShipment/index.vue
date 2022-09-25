@@ -156,7 +156,7 @@
                     @selection-change="handleSelectionChange">
                     <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
                       <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
+                            <el-button  icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
                                 v-hasPermi="['system:user:edit']">
                             </el-button>
                        </template>
@@ -170,6 +170,9 @@
                      
             </el-table>
             <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
+            <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamss.pageNum"
+                    :limit.sync="queryParamss.pageSize" @pagination="userList01" :page-sizes="[2, 5, 10, 15, 20]"
+                    class="pagintotal" />
         </el-dialog>
         
         <!--修改-->
@@ -472,6 +475,18 @@ export default {
             },
             // 查询参数
             queryParams: {
+                pageNum: 1,
+                pageSize: 15,
+                page: 1,
+                size: 15,
+                total: this.total,
+                totall: this.totall,
+                cbsb07: undefined,
+                cbca08:undefined,
+                dateRange: undefined
+            },
+             // 查询参数
+            queryParamss: {
                 pageNum: 1,
                 pageSize: 15,
                 page: 1,
