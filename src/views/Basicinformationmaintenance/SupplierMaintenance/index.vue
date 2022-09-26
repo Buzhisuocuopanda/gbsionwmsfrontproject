@@ -10,12 +10,14 @@
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入公司名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                     <el-form-item prop="cbsa18" label="发票类型">
-                            <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
+                     <el-form-item prop="cbsa14" label="联系人">
+                            <!-- <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
                                     <el-option v-for="item in fapiaoleix" :key="item.label" :label="item.label"
                                         :value="item.value">
                                     </el-option>
-                                </el-select>
+                                </el-select> -->
+                                <el-input v-model="queryParams.cbsa14" id="miaoshu" placeholder="请输入联系人" clearable style="width: 240px;"
+                                    @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:supplier:list']" @click="handleQuery">查询</el-button>
@@ -604,6 +606,7 @@ export default {
                 size: 15,
                 total: this.total,
                 cbsa08: undefined,
+                cbsa14:undefined,
                 address: undefined
             },
             // 列信息
@@ -1097,10 +1100,14 @@ export default {
             this.$modal.confirm('是否确认删除供应商为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.SupplierRemove(JSON.stringify(item)).then((res) => {
+                     if (res.code == "200") {
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                     } else {
+                         this.$message({ message: res.msg, type: 'error' });
+                     }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1125,9 +1132,13 @@ export default {
         this.$modal.confirm('是否确认删除供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
           return SupplierRemove(JSON.stringify(row));
         }).then((response) => {
+            if (response.code == "200") {
           this.submitShangpin();
           this.getList();
           this.$modal.msgSuccess("删除成功");
+            } else {
+                this.$message({ message: response.msg, type: 'error' });
+            }
         }).catch(() => { });
       },
         /** 导出按钮操作 */

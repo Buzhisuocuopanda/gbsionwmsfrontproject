@@ -167,11 +167,11 @@
      <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left; margin-left: 1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left: 0.5%;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
            
           <el-table-column prop="cbpc000" label="品牌" width="200">
@@ -209,27 +209,27 @@
           </el-table-column>
           <el-table-column prop="cbpd09" label="数量" width="80">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbsc09" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.cbsc09" v-only-number="{max: 100, min: 0, precision:0.00}" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd11" label="单价"  width="80">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbsc11" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbsc11" v-only-number="{max: 100, min: 0, precision:0.00}" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd12" label="金额" width="80">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbsc12" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.cbsc12" v-only-number="{max: 100, min: 0, precision:0.00}" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbsc13" placeholder=""></el-input>
+                <el-input v-model="scope.row.cbsc13" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="订单占用量" width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbsc144" placeholder=""></el-input>
+                <el-input v-model="scope.row.cbsc144" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -270,7 +270,7 @@
       </div>
       </el-form>
       <div style="height:100px;"></div>
-      <div class="tinajia_dingwei">
+      <div class="tinajia_dingwei" style="margin-left:80%;">
          <el-button type="primary" @click="handleAdd">保 存</el-button>
          <el-button @click="_ly_cancelDialog">取 消</el-button>
     </div>

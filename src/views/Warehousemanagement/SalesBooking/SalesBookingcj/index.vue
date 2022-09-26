@@ -10,8 +10,8 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
-            </el-date-picker>
+            <!-- <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+            </el-date-picker> -->
           </el-form-item>
         </el-col>
       </el-row>
@@ -123,12 +123,12 @@
           <el-table-column label="描述" width="" />
           <el-table-column label="数量" width="100" >
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.qty"  placeholder="" class="shuzicaoyou" style=""></el-input>
+                  <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="100" >
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.price" placeholder="" class="shuzicaoyou" style=""></el-input>
+                  <el-input v-model="scope.row.price" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="remark" label="备注" width="">

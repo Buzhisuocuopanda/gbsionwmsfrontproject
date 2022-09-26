@@ -168,7 +168,6 @@
                 </div>
                <div>
             <div style="margin-left:3%; margin-top: 2%;">
-
             </div>
             <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
                 <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
@@ -178,7 +177,7 @@
                                 <tr style="height:30px; ">
                                     <th style="width: 60px;height: 30px;">客户等级</th>
                                     <th style="width: 70px;height: 30px;">结算类型</th>
-                                    <th style="width: 70px;height: 30px;">标准进价</th>
+                                    <th style="width: 70px;height: 30px;">标准进货价</th>
                                     <th style="width: 90px;height: 30px;">标准销货价</th>
                                     <th style="width: 80px;height: 30px;">生效日期</th>
                                     <th style="width: 50px;height: 30px;font-size:23px;">
@@ -213,10 +212,10 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item label=" " style="margin-left:-7%;" size="small" prop="cbpf04" >
-                            <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
+                            <el-input v-model="form5.cbpf04" style="width:74%;" v-only-number="{max: 100, min: 0, precision:0.00}"></el-input>
                         </el-form-item>
                         <el-form-item label=" " size="small" style="margin-left:-3%;" prop="cbpf05" >
-                            <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
+                            <el-input v-model="form5.cbpf05" style="width:74%;" v-only-number="{max: 100, min: 0, precision:0.00}"></el-input>
                         </el-form-item>
                         <el-form-item label=" " size="small" style="position: absolute;left: 85%;top:-15%;" prop="cbpf07">
                         <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
@@ -351,7 +350,7 @@
                                 <tr style="height:30px; ">
                                     <th style="width: 60px;height: 30px;">客户等级</th>
                                     <th style="width: 70px;height: 30px;">结算类型</th>
-                                    <th style="width: 70px;height: 30px;">标准进价</th>
+                                    <th style="width: 70px;height: 30px;">标准进货价</th>
                                     <th style="width: 90px;height: 30px;">标准销货价</th>
                                     <th style="width: 80px;height: 30px;">生效日期</th>
                                     <th style="width: 50px;height: 30px;font-size:23px;">
@@ -383,10 +382,10 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item label=" " style="margin-left:-8%;" size="small" prop="cbpf04" >
-                            <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
+                            <el-input v-model="form5.cbpf04" style="width:74%;" v-only-number="{max: 100, min: 0, precision:0.00}"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" style="margin-left:2%;" prop="cbpf05" >
-                            <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
+                            <el-input v-model="form5.cbpf05" style="width:74%;" v-only-number="{max: 100, min: 0, precision:0.00}"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" style="position: absolute;left: 85%;" prop="cbpf07">
                         <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
