@@ -69,8 +69,8 @@
                        type="text" @click="mdfDetail(scope.row)"
             >加入</el-button>
 
-<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>-->
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
 <!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
                        type="text"
                        @click="showDetail(scope.row)">详情</el-button>-->
@@ -240,7 +240,7 @@
 </template>
 
 <script>
-import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder, goodsShopList} from '@/api/saleordermanage'
+import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder, goodsShopList,delgoodsShop} from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -464,7 +464,7 @@ export default {
   methods: {
 
     delTotalOrder(row){
-      this.$confirm('确认要删除'+row.orderNo+"售后单？", '确认操作', {
+      this.$confirm('确认要删除'+row.orderNo+"购物车？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',
@@ -477,7 +477,7 @@ export default {
           delete: 1,
 
         }
-        delSales(param).then(response => {
+        delgoodsShop(param).then(response => {
           // console.log(response)
           if ( response.code === 200) {
             this.onSearch()
