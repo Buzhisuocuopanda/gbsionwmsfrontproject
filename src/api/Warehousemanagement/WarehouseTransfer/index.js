@@ -57,7 +57,7 @@ export function PurchasereturnorderRemove(data) {
 // 审核
 export function Purchaseinboundsho(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundsho',
+    url: '/system/WarehousetransferordersController/Selloutofwarehouseaddsh',
     method: 'post',
     data: data
   })
@@ -66,7 +66,7 @@ export function Purchaseinboundsho(data) {
 //采购入库标记完成
 export function PurchaseinBoundshf(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundshf',
+    url: '/system/WarehousetransferordersController/Selloutofwarehouseaddbjwc',
     method: 'post',
     data: data
   })
@@ -75,7 +75,7 @@ export function PurchaseinBoundshf(data) {
 //采购入库取消完成
 export function PurchaseinboundShtt(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundshtt',
+    url: '/system/WarehousetransferordersController/Selloutofwarehouseaddqxwc',
     method: 'post',
     data: data
   })
@@ -84,7 +84,7 @@ export function PurchaseinboundShtt(data) {
 //采购入库单反审
 export function PurchaseinboundSht(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundsht',
+    url: '/system/WarehousetransferordersController/Selloutofwarehouseaddfs',
     method: 'post',
     data: data
   })

@@ -468,7 +468,7 @@
             this.showDialog = true
             this.formData=response.data
           } else {
-            this.$message.error(response.data.msg)
+            this.$message.error(response.msg)
 
           }
         })
@@ -498,7 +498,7 @@
             this.showmdfDialog = true
             this.formData=response.data
           } else {
-            this.$message.error(response.data.msg)
+            this.$message.error(response.msg)
 
           }
         })
@@ -571,7 +571,7 @@
             this.formData={}
               this.onSearch();
           } else {
-            this.$message.error(response.data.msg)
+            this.$message.error(response.msg)
 
           }
         })
@@ -598,7 +598,7 @@
             if ( response.code === 200) {
               this.$message.success("删除成功")
             } else {
-              this.$message.error(response.data.msg)
+              this.$message.error(response.msg)
             }
           })
         })
@@ -622,7 +622,7 @@
             this.formData={}
             this.onSearch();
           } else {
-            this.$message.error(response.data.msg)
+            this.$message.error(response.msg)
 
           }
         })

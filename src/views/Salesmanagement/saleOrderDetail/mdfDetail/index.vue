@@ -1306,6 +1306,8 @@
       goodsQtyChange(row){
         if(row.qty>row.canUseSku){
           row.qty=0
+          row.totalPrice=0
+
           this.$message.error("数量不能超过可用库存数量")
         }
       },

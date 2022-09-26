@@ -93,17 +93,17 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
-                        <template slot-scope="scope" style="margin-left:-10%;">
+                    <!-- <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width"> -->
+                        <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
                                  v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button> -->
-                            <el-button size="mini" type="text" icon="el-icon-delete"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                
-                                v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-hasPermi="['system:user:remove']">删除</el-button> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
                             </el-button> -->
@@ -121,8 +121,8 @@
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']"
                                 v-if="scope.row.status == 1 | scope.row.status == 1">标记完成</el-button> -->
-                        </template>
-                    </el-table-column>
+                        <!-- </template> -->
+                    <!-- </el-table-column> -->
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
@@ -468,8 +468,7 @@ export default {
                 total: this.total,
                 cbpc07:undefined,
                 customerName:undefined,
-                whName:undefined,
-                dateRange:undefined
+                whName:undefined
             },
             // 列信息
             //  columns: [

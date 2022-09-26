@@ -145,15 +145,15 @@
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
-                <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="250">
+                <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="300">
                 </el-table-column>
                 <el-table-column prop="cbsd09" key="cbsd09" align="" label="SN">
                 </el-table-column>
                 <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
                 </el-table-column>
-                <el-table-column prop="cbsd11" key="cbsd11" label="扫描状态">
+                <el-table-column prop="saoma" key="saoma" label="扫描状态">
                      <template scope="scope">
-                            <div>{{ scope.row.cbsd11 == 1 ? "已扫描" : scope.row.cbsd11 == 0 ? "未扫描" : "状态不确定" }}
+                            <div>{{ scope.row.saoma == 1 ? "已扫描" : scope.row.saoma == 0 ? "未扫描" : "未扫描" }}
                             </div>
                         </template>
                 </el-table-column>
@@ -171,7 +171,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
-                <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="250">
+                <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="300">
                 </el-table-column>
                 <el-table-column prop="cbsd09" key="cbsd09" align="" label="SN">
                 </el-table-column>

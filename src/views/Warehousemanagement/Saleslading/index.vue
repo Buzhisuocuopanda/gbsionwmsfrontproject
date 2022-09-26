@@ -12,19 +12,19 @@
           v-show="showSearch"
           label-width="68px"
         >
-          <el-form-item prop="cbsa08" label="供应商">
+          <el-form-item prop="cbsa08" label="编号">
             <el-input
-              v-model="queryParams.cbsa08"
+              v-model="queryParams.orderNo"
               id="miaoshu"
-              placeholder="请输入供应商"
+              placeholder="请输入编号"
               clearable
               style="width: 240px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
-          <el-form-item prop="cbwa09" label="仓库">
+          <el-form-item prop="whName" label="仓库">
             <el-input
-              v-model="queryParams.cbwa09"
+              v-model="queryParams.whName"
               id="miaoshu"
               placeholder="请输入仓库"
               clearable
@@ -156,7 +156,7 @@
             align="left"
             key="orderNo"
             prop="orderNo"
-            width="150px;"
+            width="155px;"
             sortable
             fixed
           />
@@ -385,7 +385,7 @@
     </el-row>
 
     <!--订单创建-->
-    <!-- <el-dialog :visible.sync="open3">
+    <el-dialog :visible.sync="open3">
       <el-table
         border
         :header-cell-style="headClassssmtt"
@@ -465,7 +465,7 @@
           sortable
         />
       </el-table>
-    </el-dialog> -->
+    </el-dialog>
 
     <!-- 用户导入对话框 -->
     <el-dialog
@@ -788,8 +788,8 @@ export default {
         size: 15,
         total: this.total,
         totall: this.totall,
-        cbpc07: undefined,
-        cbsa08: undefined,
+        whName: undefined,
+        orderNo: undefined,
         cbwa09: undefined,
         dateRange: undefined,
       },
@@ -1282,11 +1282,16 @@ export default {
       // console.log(row.cbpc01, 8888);
 
       PurchaseinboundShs(row).then((response) => {
+       
+       if(response.code == 200){
         // console.log(this.form.cbpc01, 789)
         // this.submitShangpin();
         this.getList();
         // this.open = false;
         this.$message({ message: "反审成功", type: "success" });
+       }else{
+          this.$modal.msgError(response.msg)
+            }
       });
     },
 
@@ -1299,9 +1304,14 @@ export default {
         req
           .PurchaseinboundShs(item)
           .then((res) => {
+          if(res.code == 200){ 
             // console.log(res, 123)
             this.getList();
             this.$modal.msgSuccess("反审成功");
+           }else{
+            this.$modal.msgError(res.msg)
+          }
+
           })
           .catch((e) => {
             // console.log(e, 456)
@@ -1312,13 +1322,17 @@ export default {
     //标记完成
     PurchaseinboundBiaojiWancheng(row) {
       // console.log(row.cbpc01, 8888);
-
+       
       PurchaseinboundShss(row).then((response) => {
+       if(response.code == 200){
         console.log(this.form.id, 789);
         // this.submitShangpin();
         this.getList();
         // this.open = false;
         this.$message({ message: "标记完成", type: "success" });
+        }else{
+            this.$modal.msgError(response.msg)
+          }
       });
     },
 
@@ -1331,9 +1345,13 @@ export default {
         req
           .PurchaseinboundShss(item)
           .then((res) => {
+           if(res.code == 200){
             // console.log(res, 123)
             this.getList();
             this.$modal.msgSuccess("标记完成");
+          }else{
+            this.$modal.msgError(res.msg)
+            }
           })
           .catch((e) => {
             // console.log(e, 456)
@@ -1358,9 +1376,13 @@ export default {
         .confirm('是否要取消标记为ID"' + row.id + '"的数据项？')
         .then(() => {
           Purchaseinbounds(row).then((response) => {
+           if(response.code == 200){
             console.log(this.form.id, 789);
             this.getList();
             this.$message({ message: "取消标记成功", type: "success" });
+          }else{
+            this.$modal.msgError(response.msg)
+            }
           });
         })
         .catch(() => {});
@@ -1374,9 +1396,13 @@ export default {
         req
           .Purchaseinbounds(item)
           .then((res) => {
+           if(res.code == 200){
             // console.log(res, 123)
             this.getList();
             this.$modal.msgSuccess("取消标记成功");
+            }else{
+            this.$modal.msgError(res.msg)
+            }
           })
           .catch((e) => {
             // console.log(e, 456)

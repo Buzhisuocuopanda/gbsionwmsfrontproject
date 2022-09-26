@@ -13,17 +13,17 @@
                 v-loading="loading" :data="userList"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
+                <el-table-column prop="cbsa08" key="cbsa08" label="供应商" width="110">
                 </el-table-column>
                 <el-table-column prop="cbla09" key="cbla09" width="110px;" label="库位">
                 </el-table-column>
-                <el-table-column prop="cbpa07" key="cbpa07" label="商品分类" width="110px">
+                <el-table-column prop="cbpa07" key="cbpa07" label="商品分类" width="80px">
                 </el-table-column>
                 <el-table-column prop="cala08" key="cala08" label="品牌" width="55px;">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" width="118px;" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" width="156px;" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpb15" key="cbpb15" width="128px;" label="UPC">
+                <el-table-column prop="cbpb15" key="cbpb15" width="134px;" label="UPC">
                 </el-table-column>
                 <el-table-column prop="cbpb08" key="cbpb08" width="250px;" label="描述">
                 </el-table-column>

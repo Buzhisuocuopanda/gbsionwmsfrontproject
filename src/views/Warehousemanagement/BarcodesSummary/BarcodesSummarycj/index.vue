@@ -168,16 +168,12 @@
 
           <el-table-column v-if="false" prop="cbie01" label="主明细id" width="150">
             <template slot-scope="scope">
-              <sapn>
                 <el-input v-model="scope.row.cbie01" placeholder="id" style=""></el-input>
-              </sapn>
             </template>
           </el-table-column>
           <el-table-column v-if="false" prop="cbpc08" label="商品编号" width="150">
             <template slot-scope="scope">
-              <sapn>
                 <el-input v-model="scope.row.cbpc08" placeholder="商品编号" style=""></el-input>
-              </sapn>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -760,7 +756,6 @@
         //   cbpd08: this.form2.cbpd08,
         // })
         this.tableData.push({
-          id: this.dataId,
           date: '',
           num: '',
           address: '',

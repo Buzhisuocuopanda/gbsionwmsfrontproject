@@ -21,7 +21,7 @@
                       <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlepdmxone">创建</el-button>
+                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlepdmxone">创建</el-button> -->
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -932,7 +932,7 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
-                this.$message({ message: '恭喜你，盘点完成', type: 'success' });
+                this.$message({ message: '盘点完成', type: 'success' });
               }else{
                 this.$message({ message: response.msg, type: 'error' });
               }

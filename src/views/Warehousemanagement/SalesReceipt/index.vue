@@ -12,13 +12,13 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
-                    <el-form-item prop="cbpb08" label="商品描述">
-                        <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入商品描述" clearable
+                    <el-form-item prop="cbpb08" label="描述">
+                        <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入描述" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="ponumber" label="PONumber" style="margin-left:1%;">
                         <el-input v-model="queryParams.ponumber" id="miaoshu" placeholder="请输入PONumber" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                            style="width: 240px;margin-left: 7%;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left:1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
@@ -67,19 +67,14 @@
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <!-- <el-table-column label="编号" align="left" key="cbpc07" :show-overflow-tooltip="true" prop="cbpc07"
-                        sortable />
-                    <el-table-column label="日期" align="left" key="cbpc08" prop="cbpc08" :formatter="formatDate"
-                        sortable>
-                    </el-table-column> -->
-                    <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" sortable width="550" />
+                        sortable /> -->
+                   
+                    <el-table-column label="商品描述"  align="left" key="cbpb08" prop="cbpb08" sortable width="550" />
                     <el-table-column label="PONumber" align="left" key="ponumber" prop="ponumber" sortable />
-                    <el-table-column label="入库数量" align="left" key="inQty" prop="inQty" sortable>
-                        <!-- <template scope="scope">
-                            <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
-                            "CNY" : "未确定状态"
-                            }}
-                            </div>
-                        </template> -->
+                    <el-table-column label="入库数量"  align="left" key="inQty" prop="inQty" sortable>
+                    </el-table-column>
+                     <el-table-column label="日期" align="left" key="createTime" prop="createTime" :formatter="formatDate"
+                        sortable>
                     </el-table-column>
                     <el-table-column label="状态" align="left" key="status" prop="status" sortable>
                         <template scope="scope">
@@ -91,11 +86,11 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handleChuangJiangonexiugai(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:salesReceipt:edit']">
                                 修改
-                            </el-button>
+                            </el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.status == 0 | scope.row.status == ' '"
@@ -1273,6 +1268,15 @@ export default {
         handleChuangJiangone: function (row) {
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-xsyddrukudang/role/");
+        },
+
+         /** 修改操作 */
+        handleChuangJiangonexiugai: function (row) {
+
+             const cbpc01 = row.id;
+            console.log(row.cbpc01);
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-SalesAdvancexiugai/role/"+ cbpc01);
         },
 
         // /** 提交按钮 */

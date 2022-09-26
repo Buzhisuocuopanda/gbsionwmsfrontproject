@@ -5,7 +5,7 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <el-select style="width: 300px" @change="test" v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
+          <el-select style="width: 300px" v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
             <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
           </el-select>
         </el-form-item>
@@ -68,18 +68,42 @@
       <!--<pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                   :limit.sync="queryParams.pageSize" @pagination="onSearch" :page-sizes="[10, 20, 30]"
                 />-->
-      <el-badge :value="shoppingList.length" :hidden="shoppingList.length==0" style="margin-top: 50px;margin-left: 1500px;" class="item">
-        <el-button plain style="width: 130px;height: 50px" type="warning" icon="el-icon-shopping-cart-2">
+      <!--<el-badge :value="shoppingList.length" :hidden="shoppingList.length==0" style="margin-top: 50px;margin-left: 1500px;" class="item">
+        <el-button plain style="width: 130px;height: 50px" type="warning" icon="el-icon-shopping-cart-2" @click="showShopping">
           购物车</el-button>
-      </el-badge>
+      </el-badge>-->
 
     </div>
+<!--购物车列表展示，暂时删除-->
+    <!--<el-dialog title="购物车" :visible.sync="dialogTableVisible"  :before-close="hideShopping" >
+      <el-table  :data="shoppingList"
+                 border fit highlight-current-row stripe height="600px" style="margin-top:1em;margin-bottom: 1em;">
+        <el-table-column  label="大类" align="center" prop="totalclassify"  min-width="80px;"/>
+        <el-table-column  label="分类名称" align="center" prop="cbpa07" min-width="80px;"/>
+        <el-table-column  label="品牌" align="center" prop="cala08" min-width="120px;"/>
+        <el-table-column  label="型号" align="center" prop="cbpb12" min-width="100px;"/>
+        <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
+        <el-table-column  label="描述" align="center" prop="cbpb08"  min-width="240px;"/>
+        <el-table-column  label="数量" align="center" prop="cbif09" min-width="100px;"/>
+        <el-table-column  label="可用库存数量" align="center" prop="lockQty" min-width="100px;"/>
+        <el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />
+        &lt;!&ndash;<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>&ndash;&gt;
+        <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+          <template slot-scope="scope">
+            <el-button size="mini" type="text"  class="button-caozuoxougai"
+                       @click="removeShopping(scope.row)" >移除</el-button>
+            &lt;!&ndash;v-hasPermi="['system:list:add']"&ndash;&gt;
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>-->
+
   </div>
 </template>
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList,insertgoodsShop } from "@/api/statisticAnalysis/index";
+import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList,insertgoodsShop,goodsShopList } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
   name: "inventorySummary",
@@ -100,6 +124,7 @@ export default {
       loading1:false,
       loading2:false,
       loading3:false,
+      dialogTableVisible: false,
 
 
       // 查询参数
@@ -130,14 +155,13 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
+    this.index==0;
     this.onSearch();
     this.getStoreSkuList();
     this.getCalaList();
+    this.getgoodsShopList();
   },
   methods: {
-    test(){
-      console.log(this.cbwa09s);
-    },
     onSubmit() {},
     handleSelectionChange() {},
   /*  formatStateType(row) {
@@ -149,36 +173,61 @@ export default {
         }
       }
     },*/
+    //按钮显示文字
     judge(row){
       if(row.shopping == null||row.shopping == 0){
         return "添加到购物车";
-      }else {
-        return "移除";
+      }else if(row.shopping == 1){
+        return "已添加";
+      }else if(row.shopping == 2){
+        return "添加中。。。";
       }
     },
+    //添加到购物车
     addShopping(row){
       if(row.shopping == null||row.shopping == 0){
-        this.shoppingList.push(row);
-        row.shopping=1;
+
         let param={goodsId:row.cbpb01};
         insertgoodsShop(param).then(response => {
-
+          row.shopping=2;
           if (response.code == 200) {
-            console.log("添加成功")
+            this.$message('');
+            this.$message({
+              message: '添加成功', type: 'success'});
+            this.shoppingList.push(row);
+            row.shopping=1;
           } else {
-            console.log("添加失败1")
+            this.$message.error('添加失败1');
+            row.shopping=0;
           }
-
         },error => {
-          console.log("添加失败2")
+          this.$message.error('添加失败2');
+          row.shopping=0;
         });
       }else {
-        row.shopping=0;
-        this.shoppingList.splice(row,1);
+        //移除功能，暂时删除
+        /*row.shopping=0;
+        for(let i=0;i<this.shoppingList.length;i++){
+          if(this.shoppingList[i].cbpb01==row.cbpb01){
+            this.shoppingList.splice(i,1);
+          }
+        }*/
       }
-
-
     },
+    //从购物车中移除，暂时不用
+    removeShopping(row){
+      this.shoppingList.splice(row,1);
+    },
+    //显示弹窗，暂时不用
+    showShopping(){
+      this.dialogTableVisible =true;
+    },
+    //隐藏弹窗后调用，暂时不用
+    hideShopping(){
+      this.contrastShopping();
+      this.dialogTableVisible =false;
+    },
+
     /** 重置按钮操作 */
     resetQuery() {
       this.queryParams.cbwa09s = "";
@@ -206,15 +255,10 @@ export default {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows
-          for(let i=0;i<this.inwuquList.length;i++){
-            for(let j=0;j<this.shoppingList.length;j++){
-              if(this.shoppingList[j].cbpb01==this.inwuquList[i].cbpb01){
-                this.inwuquList[i].shopping = 1;
-              }
-            }
-          }
-
           this.total = response.data.total
+          this.index++;
+          this.contrastShopping();
+
         } else {
           this.deviceList = []
           this.total = 0
@@ -223,6 +267,36 @@ export default {
         this.loading = false;
       })
     },
+    //判断商品是否在购物车中
+    contrastShopping(){
+      for(let i=0;i<this.inwuquList.length;i++){
+        this.inwuquList[i].shopping = 0;
+        for(let j=0;j<this.shoppingList.length;j++){
+          if(this.shoppingList[j].cbpb01==this.inwuquList[i].cbpb01){
+            this.inwuquList[i].shopping = 1;
+          }
+          if(this.shoppingList[j].goodsId===this.inwuquList[i].cbpb01){
+            this.inwuquList[i].shopping = 1;
+          }
+        }
+      }
+    },
+    //获取购物车列表
+    getgoodsShopList(){
+      goodsShopList().then(response => {
+        if (response.data != null) {
+          this.shoppingList = response.data;
+          this.contrastShopping();
+
+        } else {
+          this.shoppingList = [];
+          this.$message.error('购物车数据获取失败');
+        }
+      },error => {
+        this.$message.error('购物车数据获取失败');
+      });
+    },
+
     //获取下拉列表数据商品
     getGoods(query){
       if (query !== '') {

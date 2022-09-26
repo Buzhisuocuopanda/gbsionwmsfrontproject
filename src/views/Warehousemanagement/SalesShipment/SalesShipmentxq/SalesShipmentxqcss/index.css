@@ -25,7 +25,7 @@
 }
 
 .my-labell01 {
-    width: 50px !important;
+    width: 55px !important;
     text-align: center!important;
     height: 20px !important;
 }
@@ -38,14 +38,14 @@
 }
 
 .my-labell02{
-    width: 146px !important;
+    width: 125px !important;
     text-align: center !important;
     height: 10px !important;
 }
 
 .my-content{
-    width: 357px !important;
-    height: 10px !important;
+    width: 270px !important;
+    height: 0px !important;
 }
 
 .saomiaojlu {

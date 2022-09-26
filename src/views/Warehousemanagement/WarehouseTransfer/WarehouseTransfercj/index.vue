@@ -700,7 +700,7 @@ export default {
             }
 
             this.tableData.push({
-                id: this.dataId,
+                // id: this.dataId,
                 date: '',
                 num: '',
                 address: '',

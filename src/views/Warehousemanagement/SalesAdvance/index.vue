@@ -12,14 +12,15 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
+                    <el-form-item prop="orderNo" label="编号" style="margin-left:1%;">
+                        <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入销售人员" clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item prop="caua17" label="销售人员" style="margin-left:1%;">
-                        <el-input v-model="queryParams.caua17" id="miaoshu" placeholder="请输入销售人员" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
+                    
                     <el-form-item label="日期" style="margin-left:1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
@@ -83,18 +84,18 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handleAuthRolexiugai(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:saleChange:edit']">
                                 修改
-                            </el-button>
+                            </el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:saleChange:remove']">删除</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
-                            </el-button>
+                            </el-button> -->
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:saleChange:sh']"
@@ -453,7 +454,8 @@ export default {
                 cbsa08:undefined,
                 cbwa09:undefined,
                 dateRange:undefined,
-                caua17: undefined
+                caua17: undefined,
+                orderNo:undefined
             },
             // 列信息
             //  columns: [
@@ -1227,16 +1229,25 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
-            const cbpc01 = row.cbpc01;
+            const cbpc01 = row.id;
             console.log(row.cbpc01);
-
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-auth/role/" + cbpc01);
+            this.$router.push("/system/user-SalesAdvancexiangqong/role/" + cbpc01);
         },
+
         /** 创建操作 */
         handleChuangJiangone: function (row) {
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-SalesAdvance/role/");
+        },
+
+          /** 修改操作 */
+        handleAuthRolexiugai: function (row) {
+            const cbpc01 = row.id;
+            console.log(row.cbpc01);
+
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-SalesAdvancexiugai/role/" + cbpc01);
         },
 
         // /** 提交按钮 */

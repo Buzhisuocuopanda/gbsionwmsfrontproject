@@ -217,7 +217,7 @@
 <!--&lt;!&ndash;                  </el-option>&ndash;&gt;-->
 <!--&lt;!&ndash;                </el-select>&ndash;&gt;-->
 <!--              </sapn>-->
-              <div style="text-align: right">
+              <div style="text-align: center">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
                 {{scope.row.goodsMsg}}
 
@@ -229,7 +229,7 @@
           <el-table-column label="描述" width="" />
           <el-table-column prop="qty" label="数量" width="150"  :formatter="rounding">
             <template slot-scope="scope" >
-              <div style="text-align: right">
+              <div style="text-align: center">
 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
                 {{parseFloat(scope.row.qty).toFixed(2)}}
 
@@ -273,19 +273,19 @@
             </template>
           </el-table-column>
 
-          <el-table-column prop="canUseSku" label="可用库存" width="150">
-            <template slot-scope="scope">
-<!--              <sapn>-->
-<!--                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>-->
-<!--              </sapn>-->
-              <div style="text-align: right">
-                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                {{parseFloat(scope.row.canUseSku).toFixed(2)}}
+<!--          <el-table-column prop="canUseSku" label="可用库存" width="150">-->
+<!--            <template slot-scope="scope">-->
+<!--&lt;!&ndash;              <sapn>&ndash;&gt;-->
+<!--&lt;!&ndash;                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>&ndash;&gt;-->
+<!--&lt;!&ndash;              </sapn>&ndash;&gt;-->
+<!--              <div style="text-align: right">-->
+<!--                &lt;!&ndash;                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
+<!--                {{parseFloat(scope.row.canUseSku).toFixed(2)}}-->
 
-                <!--                {{}}-->
-              </div>
-            </template>
-          </el-table-column>
+<!--                &lt;!&ndash;                {{}}&ndash;&gt;-->
+<!--              </div>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
 <!--              <sapn>-->
@@ -374,6 +374,7 @@
     </el-form>
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
+      <el-button v-if="this.$route.query.status==2" type="primary" @click="auditSaleOrder">撤销</el-button>
       <el-button v-if="this.$route.query.status==3" type="primary" @click="auditSaleOrder">审核</el-button>
       <el-button v-if="this.$route.query.status==4" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
       <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>

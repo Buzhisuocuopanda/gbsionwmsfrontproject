@@ -37,9 +37,9 @@ export function PurchaseinboundList(cbpg01) {
 }
 
 // 修改
-export function PurchaseinboundEdit(data) {
+export function PurchaseinboundEditone(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchaseinboundedit',
+    url: '/system/Purchasereturnorders/SwJsPurchasereturnorderseditone',
     method: 'post',
     data: data
   })

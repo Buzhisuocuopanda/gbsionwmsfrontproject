@@ -4,8 +4,13 @@
       <div class="chuangjiancaigous">销售预订单入库单</div>
  <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
-          <el-form-item label="编号:" prop="orderNo">
-            <el-input type="text" v-model="form2.orderNo" style="width: 60%;" />
+          <el-form-item label="销售预订单编号:" prop="GsSalesOrders">
+            <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
+            <el-popover placement="bottom-start" trigger="click">
+              <SalesBooking ref="SalesBooking" @selected="selected0222" style="width:210px!important; height:100px!important;" />
+              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly  style="width:68%;">
+              </el-input>
+            </el-popover>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -16,11 +21,6 @@
         </el-col>
       </el-row>
       <el-row :gutter="20">
-        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">
-          <el-form-item label="主副表id:" prop="cbpg161">
-            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />
-          </el-form-item>
-        </el-col>
         <el-col style="" :span="6">
           <el-form-item label="客户名称:" prop="cbpc0999">
             <el-popover placement="bottom-start" trigger="click">
@@ -60,18 +60,15 @@
                   </el-input>
                 </el-popover>
             </el-form-item>
-          <!-- <el-form-item label="结算货币:" prop="cbpc166">
-                  <el-popover placement="bottom-start" trigger="click">
-                      <ListLists ref="ListLists" @selected="selected004" />
-                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly
-                          style="border:solid #eee thin; width:77%;">
-                      </el-select>
-                  </el-popover>
-              </el-form-item> -->
         </el-col>
         <!--商品信息维护-->
       </el-row>
       <el-row v-if="false">
+         <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
+          <el-form-item label="销售预订单id:" prop="gsSalesOrders">
+            <el-input v-model="form2.gsSalesOrders" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
+          </el-form-item>
+        </el-col>
         <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">
           <el-form-item label="供应商id:" prop="supplierId">
             <el-input v-model="form2.supplierId" maxlength="30" style="width:80%;border:solid #eee thin" />
@@ -85,6 +82,21 @@
          <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
           <el-form-item label="客户id:" prop="customerId">
             <el-input v-model="form2.customerId" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
+          </el-form-item>
+        </el-col>
+         <el-col  style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+          <el-form-item label="PONumber:" prop="ponumber">
+            <el-input v-model="form2.ponumber" placeholder="" maxlength="30" style="width:80%;" />
+          </el-form-item>
+        </el-col>
+         <el-col  style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+          <el-form-item label="入库数量:" prop="inQty">
+            <el-input v-model="form2.inQty" placeholder="" maxlength="30" style="width:80%;" />
+          </el-form-item>
+        </el-col>
+        <el-col  style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+          <el-form-item label="货物id:" prop="goodsId">
+            <el-input v-model="form2.goodsId" placeholder="" maxlength="30" style="width:80%;" />
           </el-form-item>
         </el-col>
         <!-- 商品信息维护 -->
@@ -134,12 +146,7 @@
             </template>
           </el-table-column> -->
 
-          <el-table-column v-if="false" prop="purchaseOrderId" label="id" width="150">
-            <template slot-scope="scope">
-                <el-input v-model="scope.row.purchaseOrderId" placeholder="id" style=""></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column v-if="false" prop="gsSalesOrders" label="销售预订单id" width="150">
+          <el-table-column v-if="false" prop="gsSalesOrders" label="销售预订单入库单id" width="150">
             <template slot-scope="scope">
                 <el-input v-model="scope.row.gsSalesOrders" placeholder="id" style=""></el-input>
             </template>
@@ -174,9 +181,7 @@
 
 
   import {
-    PurchaseinboundAdd,
-    PurchaseinboundAdds,
-    PurchaseinboundAddydd
+    PurchaseinboundAdd
   } from "@/api/Warehousemanagement/SalesReceipt";
   import {
     getToken
@@ -194,6 +199,9 @@
 
     //客户
   import CustomerMainten from "@/components/CustomerMaintenance";
+
+    //销售预订单
+  import SalesBooking from "@/components/SalesBooking";
 
 //销售人员
 import salerman from "@/components/salerman";
@@ -215,7 +223,8 @@ import salerman from "@/components/salerman";
       ListLists,
       Goodsone01,
       CustomerMainten,
-      salerman
+      salerman,
+      SalesBooking
     },
     data() {
       return {
@@ -461,7 +470,8 @@ import salerman from "@/components/salerman";
           cbpc166: "",
           cbpc16: "",
           cbpc01: "",
-          cbpc000:""
+          cbpc000:"",
+          GsSalesOrders:""
         },
         form1: {
           // classifyId: "",
@@ -504,7 +514,12 @@ import salerman from "@/components/salerman";
           supplierId:"",
           whId:"",
           orderDate:"",
-          cbsb177:""
+          cbsb177:"",
+          GsSalesOrders:"",
+          goodsId:"",
+          inQty:"",
+          ponumber:""
+
         },
         defaultProps: {
           children: "children",
@@ -653,18 +668,11 @@ import salerman from "@/components/salerman";
       },
       // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
       _ly_ok() {
-        // let count = this.tableData.length // 记录当前有多少个表单
-        // for (var index in this.tableData) {
-        //   var form = this.tableData[index]
-        //   console.log(form)
-        //   console.log(JSON.stringify(form))
-        //   }
-          // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-          // this.$refs[form.formName][0].validate((valid, obj) => {
-            // if (valid) {
-              // 如果检查通过，则对count减1。
-              // 当count为1时，表示是最后一个表单，则存储数据
               console.log(this.tableData,333)
+                 this.tableData.forEach((item) => {
+                    item.gsSalesOrders =this.form2.gsSalesOrders;
+                 console.log(item,"1023");
+                })  
               PurchaseinboundAdd(JSON.stringify(this.tableData)).then(response => {
                 if (response.code == "200") {
                   this.tableData = []
@@ -747,7 +755,6 @@ import salerman from "@/components/salerman";
         //   cbpd08: this.form2.cbpd08,
         // })
         this.tableData.push({
-          id: this.dataId,
           date: '',
           num: '',
           address: '',
@@ -810,14 +817,14 @@ import salerman from "@/components/salerman";
         // this.form2.icon = name;
       },
 
-      // //添加模块-货币类型
-      // selected004(name) {
-      //   console.log(name, 123)
-      //   console.log(name.substring(name.indexOf("-") + 1), 963);
-      //   this.form2.cbpc166 = name.substring(0, name.indexOf("-"));
-      //   this.form2.cbpc16 = name.substring(name.indexOf("-") + 1)
-      //   // this.form2.icon = name;
-      // },
+     //添加销售预订单-预订单主键ID
+      selected0222(name) {
+        console.log(name, 123)
+        console.log(name.substring(name.indexOf("-") + 1), 963);
+        this.form2.GsSalesOrders = name.substring(0, name.indexOf("-"));
+        this.form2.gsSalesOrders = name.substring(name.indexOf("-") + 1);
+        // this.form2.icon = name;
+      },
 
       //添加模块-供应商
       selected02(name) {
@@ -956,38 +963,8 @@ import salerman from "@/components/salerman";
 
       /** 新增按钮操作 */
       handleAdd() {
-        this.$refs["form2"].validate((item) => {
-          if (item) {
-            this.form2.goods=this.tableData;
-            this.form2.goodss = this.tableData;
-            this.form2.goodsss = this.tableData;
-            PurchaseinboundAddydd(this.form2).then(response => {
-              if (response.code == "200") {
-                this.$message({
-                  message: '添加成功',
-                  type: 'success',
-                  style: 'color:red;!important'
-                });
-                this.submitShangpin();
-                this.open2 = false;
-                this.reset01()
-                // console.log(this.form2.cbpg161,111);
-                // console.log(this.form.cbpg01,222);
-                console.log(response, 333);
-                this.tableData.forEach((item) => {
-                  item.gsSalesOrders = response.data.id;
-                  console.log(response.data.id,8523697412);
-                })
+                                                          
                 this._ly_ok();
-              }else{
-                 this.$message({ message: response.msg, type: 'error' });
-              }
-            });
-          } else {
-            // this.$message.error('请注意规范');
-          }
-        })
-        //    this._ly_ok();
       },
 
       /** 返回操作 */
