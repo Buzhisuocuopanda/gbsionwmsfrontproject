@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
-            <div class="chuangjiancaigous">销售退库单</div>
+            <div class="chuangjiancaigous">仓库调拨单</div>
              <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:10%;">
@@ -111,7 +111,7 @@
        <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left;margin-left: 1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left:0.5%;">
@@ -214,7 +214,7 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei">
+    <div class="tinajia_dingwei" style="margin-left:80%;margin-top:3%;">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>

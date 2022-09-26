@@ -794,6 +794,7 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
+                        if (response.code == "200") {   
                         this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
@@ -801,7 +802,9 @@ export default {
                         this.getList();
                         this.open2 = false;
                         this.reset01();
-
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        } 
                         console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {

@@ -102,17 +102,17 @@
           <el-table-column label="描述" width="" />
           <el-table-column prop="cbpd09" label="数量" width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbpd09" v-only-number="{max: 100, min: 0,precision:0.00}"  @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.cbpd09" v-only-number="{max: 100000, min: 0,precision:0.0000}"  @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd11" label="单价"  width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbpd11" v-only-number="{max: 100, min: 0, precision:0.00}"   @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbpd11" v-only-number="{max: 100000, min: 0, precision:0.0000}"   @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="金额" width="100">
+          <el-table-column prop="cbpd12" label="金额" width="150">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbpd12" v-only-number="{max: 100, min: 0, precision:0.00}"  @blur="chen(scope.row)"  class="shuzicaoyou" placeholder="" style=""></el-input>
+                <el-input v-model="scope.row.cbpd12" v-only-number="{max: 100000, min: 0, precision:0.0000}" disabled  @blur="chen(scope.row)"  class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
