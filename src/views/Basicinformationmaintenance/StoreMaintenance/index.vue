@@ -580,7 +580,7 @@ export default {
         console.log(name, 123)
         console.log(name.substring(name.indexOf("-") + 1), 963);
         this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
-        this.form2.cbpc10 = name.substring(name.indexOf("-") + 1)
+        this.form2.cbla10 = name.substring(name.indexOf("-") + 1)
         // this.form2.icon = name;
       },
 

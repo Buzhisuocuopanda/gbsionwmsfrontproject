@@ -77,7 +77,7 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3" >
-           <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护</div>
+           <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护修改</div>
             <el-form ref="form" :model="form" :rules="rules3"  label-width="50%" class="chuangjianformcust">
                  <div>
                      <swiper-test style="margin-left:2%;">基本信息</swiper-test>
@@ -146,13 +146,6 @@
                     <el-col :span="11">
                         <el-form-item label="联系人2办公室电话:" prop="cbca20">
                             <el-input v-model="form.cbca20" placeholder="" style="width:100%;" maxlength="30" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                 <el-row>
-                    <el-col :span="11">
-                        <el-form-item label="联系人2:" prop="cbca21">
-                            <el-input v-model="form.cbca21" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -369,7 +362,7 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" class="abow_dialog3">
-            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护</div>
+            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护创建</div>
             <el-form ref="form2" :model="form2" label-width="50%" :rules="rules2" class="chuangjianformcust">
                  <div>
                      <span style="margin-left:2%;">基本信息</span>
@@ -1041,6 +1034,7 @@ export default {
                 row.cbca18 = this.form.cbca18;
                 row.cbca19 = this.form.cbca19;
                 row.cbca20 = this.form.cbca20;
+                row.cbca21 = this.form.cbca21;
                 row.cbca24 = this.form.cbca24;
                 row.cbca25 = this.form.cbca25;
                 row.cbca26 = this.form.cbca26;

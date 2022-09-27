@@ -453,6 +453,18 @@ export default {
     dicts: ['sys_normal_disable', 'sys_user_sex', 'sw_js_goods_if_enabled'],
     components: { Treeselect,ListMaintenance },
     data() {
+        const validateNumber = (rule, value, callback) => {
+            let numberReg = /^[1-9][0-9]{0,11}$/
+            if (value !== '') {
+                if (!numberReg.test(value)) {
+                    callback(new Error('UPC码不能超过12位'))
+                } else {
+                    callback()
+                }
+            } else {
+                callback(new Error('请输入值'))
+            }
+        }
         return {
             maxheight: window.innerHeight - 50,
             // 遮罩层
@@ -666,8 +678,9 @@ export default {
                 cbpb12: [
                     { required: true, message: '型号不能为空', trigger: 'blur' },
                 ],
-                upc: [
+                cbpb15: [
                     { required: true, message: 'upc不能为空', trigger: 'blur' },
+                    { validator: validateNumber, trigger: 'blur' }
                 ],
                 currency: [
                     { required: true, message: '结算货币不能为空', trigger: 'blur' },

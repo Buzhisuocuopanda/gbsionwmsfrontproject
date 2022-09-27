@@ -13,7 +13,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.cbpc08" style="width: 60%;">
+            <el-date-picker type="date" placeholder="" v-model="form2.cbpc08" style="width: 80%;">
             </el-date-picker>
           </el-form-item>
         </el-col>
