@@ -271,7 +271,7 @@ export default {
         this.queryParams.startTime = undefined;
         this.queryParams.endTime = undefined;
       }
-
+      this.queryParams.cbib17 = this.queryParams.cbwa09;
 
       // this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;

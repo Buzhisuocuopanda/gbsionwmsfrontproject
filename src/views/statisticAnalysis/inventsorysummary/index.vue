@@ -4,14 +4,14 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="商品分类"   class="item-r" >
-          <el-select v-model="queryParams.cbpa07"  style="width: 300px" clearable  filterable placeholder="请输入关键词" :loading="loading3">
-            <el-option v-for="item in cbpaList" :key="item.cbpa07" :label="item.cbpa07+' ['+item.cbpa11+']'" :value="item.cbpa07"></el-option>
+          <el-select v-model="queryParams.classId"  style="width: 300px" clearable  filterable placeholder="请输入关键词" :loading="loading3">
+            <el-option v-for="item in cbpaList" :key="item.cbpa01" :label="item.cbpa07+' ['+item.cbpa11+']'" :value="item.cbpa01"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="品牌"   class="item-r" >
-          <el-select v-model="queryParams.cala08"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
-            <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
+          <el-select v-model="queryParams.cbpb10"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品"   class="item-r" >
@@ -36,7 +36,7 @@
         <el-table-column  label="型号" align="center" prop="cbpb12" min-width="100px;"/>
         <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
         <el-table-column  label="描述" align="center" prop="cbpb08"  min-width="240px;"/>
-        <el-table-column  label="数量" align="center" prop="cbif09" min-width="100px;"/>
+        <el-table-column  label="数量" align="center" prop="cbib15" min-width="100px;"/>
         <el-table-column  label="可用库存数量" align="center" prop="lockQty" min-width="100px;"/>
         <!--<el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />-->
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
@@ -88,8 +88,8 @@ export default {
         pageNum: 1,
         pageSize: 10,
         total: this.total,
-        cbpa07: "",
-        cala08: "",
+        classId: "",
+        cbpb10: "",
         cbpb01: ""
       },
       inwuquList: [],
@@ -128,8 +128,8 @@ export default {
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.queryParams.cbpa07 = "";
-      this.queryParams.cala08 = "";
+      this.queryParams.classId = "";
+      this.queryParams.cbpb10 = "";
       this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;
       // this.resetForm("queryParams");
