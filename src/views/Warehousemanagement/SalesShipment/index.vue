@@ -1228,7 +1228,7 @@ export default {
             this.$router.push({
 
                 path: '/system/user-authhhchuanj/role/',
-                name: 'index',
+                // name: 'index',
                 query: {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
@@ -1242,7 +1242,7 @@ export default {
                         //  JSON.stringify(this.userList)
                 }
             })
-            location.reload();
+            // location.reload();
         },
         // /** 提交按钮 */
         // submitForm: function () {
