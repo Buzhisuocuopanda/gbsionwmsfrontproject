@@ -112,20 +112,7 @@
                             <el-form-item label="名称:" prop="cala08">
                                 <el-input v-model="form1.cala08" placeholder="" maxlength="30" style="width:70%;" />
                             </el-form-item>
-                        </el-col>
-                        <el-col>
-                            <el-form-item label="联系电话:" prop="cala11">
-                                <el-input v-model="form1.cala11" placeholder="" maxlength="30" style="width:70%;" />
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col>
-                            <el-form-item label="从事业务范围:" prop="cala12">
-                                <el-input v-model="form1.cala12" placeholder="" maxlength="30" style="width:70%;" />
-                            </el-form-item>
-                        </el-col>
-
+                        </el-col>                     
                     </el-row>
                 </div>
             </el-form>

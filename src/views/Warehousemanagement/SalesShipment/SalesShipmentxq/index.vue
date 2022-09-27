@@ -138,24 +138,24 @@
                     value.cbca08 }}
                 </el-descriptions-item>
              </el-descriptions>
-             <el-table  :header-cell-style="headClass" v-loading="loading" border :data="userList"  style="width: 90%;margin-left: 5%;"
+             <el-table  :header-cell-style="headClass" v-loading="loading" border :data="userLists"  style="width: 90%;margin-left: 5%;"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">  
                 <el-table-column type="index" :index="table_index" label="序号" width="50" align="center"></el-table-column>           
-                <el-table-column prop="cala08" key="cala08" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpa07" key="cbpa07"  label="类型">
+                <el-table-column prop="lx" key="lx"  label="类型">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
                 <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="300">
                 </el-table-column>
-                <el-table-column prop="cbsd09" key="cbsd09" align="" label="SN">
+                <el-table-column prop="sn" key="sn" align="" label="SN">
                 </el-table-column>
-                <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
+                <el-table-column prop="kwm" key="kwm" align="" label="库位">
                 </el-table-column>
                 <el-table-column prop="saoma" key="saoma" label="扫描状态">
                      <template scope="scope">
-                            <div>{{ scope.row.saoma == 1 ? "已扫描" : scope.row.saoma == 0 ? "未扫描" : "未扫描" }}
+                            <div>{{ scope.row.saoma == 1 ? "已扫描" : scope.row.saoma == 0 ? "已扫描" : "已扫描" }}
                             </div>
                         </template>
                 </el-table-column>
@@ -164,20 +164,20 @@
           
        
            <div class="saomiaojlub">扫描记录</div>
-             <el-table style="margin-top:1%; width: 90%;margin-left: 5%;"  :header-cell-style="headClass" v-loading="loading" border :data="userList" 
+             <el-table style="margin-top:1%; width: 90%;margin-left: 5%;"  :header-cell-style="headClass" v-loading="loading" border :data="userLists" 
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">     
                 <el-table-column type="index" :index="table_index" label="序号" width="50" align="center"></el-table-column>         
-                <el-table-column prop="cala08" key="cala08" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpa07" key="cbpa07"  label="类型">
+                <el-table-column prop="lx" key="lx"  label="类型">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                 </el-table-column>
                 <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="300">
                 </el-table-column>
-                <el-table-column prop="cbsd09" key="cbsd09" align="" label="SN">
+                <el-table-column prop="sn" key="sn" align="" label="SN">
                 </el-table-column>
-                <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
+                <el-table-column prop="kwm" key="kwm" align="" label="库位">
                 </el-table-column>
              </el-table>
           </div>
@@ -201,6 +201,7 @@ export default {
             total: 0,
             // 用户表格数据
             userList: null,
+            userLists:null,
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -272,6 +273,13 @@ export default {
                 PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
+                    console.log(res, 888999);
+
+                    let userlistss = res.data.rows.map(item => {
+                        return item.goods;
+                    })
+                    this.userLists = userlistss[0];
+                    console.log(this.userLists, 123456);
                     console.log(res, 888999);
                     this.loading = false;
                 });

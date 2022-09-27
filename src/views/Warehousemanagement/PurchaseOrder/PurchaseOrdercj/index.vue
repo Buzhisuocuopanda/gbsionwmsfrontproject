@@ -134,27 +134,23 @@
                   <el-input v-model="scope.row.price" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="inQty" label="入库数量" width="100">
+          <!-- <el-table-column prop="inQty" label="入库数量" width="100">
             <template slot-scope="scope">
-              <!-- <sapn> -->
                 <el-input v-model="scope.row.inQty" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input>
-              <!-- </sapn> -->
             </template>
-          </el-table-column>
-          <el-table-column prop="changeQty" label="变更数量"  width="100">
+          </el-table-column> -->
+          <!-- <el-table-column prop="changeQty" label="变更数量"  width="100">
             <template slot-scope="scope">
-              <!-- <sapn> -->
-                <el-input v-model="scope.row.changeQty" v-only-number="{max: 100, min: 0, precision:0.00}"  class="shuzicaoyou" placeholder="" style=""></el-input>
-              <!-- </sapn> -->
+                <el-input v-model="scope.row.changeQty" v-only-number="{max: 100, min: 0, precision:0.00}"  class="shuzicaoyou" placeholder="" style=""></el-input> 
             </template>
-          </el-table-column>
-          <el-table-column prop="surplusQty" label="剩余数量" width="100">
+          </el-table-column> -->
+          <!-- <el-table-column prop="surplusQty" label="剩余数量" width="100">
             <template slot-scope="scope">
               <sapn>
                 <el-input v-model="scope.row.surplusQty" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder="" class="shuzicaoyou" style=""></el-input>
               </sapn>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
               <sapn>

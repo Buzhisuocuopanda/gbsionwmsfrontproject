@@ -54,8 +54,6 @@
                     </el-table-column>
                     <el-table-column label="联系电话" align="left" key="cbca16" prop="cbca16" width="200" sortable />
                     <el-table-column label="状态" align="left" key="cbca07" prop="cbca07" width="180" sortable />
-
-
                     <el-table-column label="操作" align="center" fixed="right" width="160"
                         class-name="small-padding fixed-width">
                         <template slot-scope="scope">
@@ -148,6 +146,17 @@
                     <el-col :span="11">
                         <el-form-item label="联系人2办公室电话:" prop="cbca20">
                             <el-input v-model="form.cbca20" placeholder="" style="width:100%;" maxlength="30" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="状态:" prop="cbca07">
+                            <!-- <el-input v-model="form.cbca07" placeholder="" style="width:100%;" maxlength="30" /> -->
+                            <el-select v-model="form.cbca07" placeholder="" style="width:100%;">
+                                <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label" :value="item.label">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -436,6 +445,17 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="状态:" prop="cbca07">
+                            <!-- <el-input v-model="form.cbca07" placeholder="" style="width:100%;" maxlength="30" /> -->
+                            <el-select v-model="form2.cbca07" placeholder="" style="width:100%;">
+                                <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label" :value="item.label">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
                 <div style="height:60px;">
                      <span style="margin-left:2%;">发票信息</span>
                     <hr style="width:190%;"/>
@@ -643,7 +663,7 @@ export default {
             // 表单参数
             form: {
 
-
+                cbca07:"",
                 cbca08:"",
                 cbca10:"",
                 cbca14:"",
@@ -668,6 +688,7 @@ export default {
                 // ifEnabled: ""
             },
             form2: {
+                cbca07:"",
                 cbca08:"",
                 cbca10:"",
                 cbca14:"",

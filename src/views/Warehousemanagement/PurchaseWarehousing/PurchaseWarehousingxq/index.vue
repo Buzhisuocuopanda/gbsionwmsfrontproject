@@ -39,7 +39,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpd12" key="cbpd12" align="right" label="金额">
                 </el-table-column>
-                <el-table-column prop="cbpc17" key="cbpc17" label="备注">
+                <el-table-column prop="cbpd13" key="cbpd13" label="备注">
                 </el-table-column>
             </el-table>
         </el-form>

@@ -92,7 +92,7 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title1" :visible.sync="open"  class="abow_dialogy"  append-to-body>
-            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">仓库信息维护</div>
+            <div style="margin-top:0%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">仓库信息维护</div>
             <div style="margin-left:2%;margin-top: 0; font-size: 15px; color: black;"> 修改仓库信息</div>
             <hr style="margin-bottom:4%;"/>
             <!-- <div style="padding-top:-1%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
@@ -108,14 +108,14 @@
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:1%;">
+                        <el-col style="margin-top:0.3%;">
                             <el-form-item label="出库优先级:" prop="cbwa07">
                                 <el-input v-model="form.cbwa07"  maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:1%;">
+                        <el-col style="margin-top:0.3%;">
                             <el-form-item label="类型:" prop="cbwa11">
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa11" placeholder="" style="width:55%;">
@@ -125,7 +125,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:1%;">
+                        <el-col style="margin-top:0.3%;">
                             <el-form-item label="商品管理模式:" prop="cbwa12">
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa12" placeholder="" style="width:55%;">
@@ -136,7 +136,7 @@
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col style="margin-top:1%;">
+                        <el-col style="margin-top:0.3%;">
                             <el-form-item label="启用总订单:" prop="cbwa13">
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa13" placeholder="" style="width:55%;">
@@ -145,7 +145,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:1%;">
+                        <el-col style="margin-top:0.3%;">
                             <el-form-item label="启用提货单:" prop="cbwa14">
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
                                 <el-select v-model="form.cbwa14" placeholder="" style="width:55%;">
@@ -154,7 +154,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col style="margin-top:1%;">
+                        <el-col style="margin-top:0.3%;">
                             <el-form-item label="状态:" prop="cbwa08">
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa08" placeholder="" style="width:55%;">
@@ -163,8 +163,8 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                         <el-col style="margin-top:2%;">
-                            <div style="margin-left:75%;margin-top: 0%;">
+                         <el-col style="margin-top:3%;">
+                            <div style="margin-left:70%;margin-top: 0%;">
                                <el-button type="primary" @click="handleUpdate">确定</el-button>
                                <el-button @click="cancel">取 消</el-button>
                             </div>
@@ -260,7 +260,7 @@
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" class="chuangjianformWare">
                 <div style="margin-top:-3%;">
                 <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">创建仓库信息</div>
-                <hr style="margin-bottom:4%;width:100%;"/>
+                <hr style="margin-bottom:4%;width:110%;"/>
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
@@ -324,8 +324,8 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                         <el-col style="margin-top:4%;">
-                            <div style="margin-left:82%;margin-top: 0%;">
+                         <el-col style="margin-top:3%;">
+                            <div style="margin-left:70%;margin-top: 0%;">
                                <el-button type="primary" @click="handleAdd">确定</el-button>
                                <el-button @click="cancells">取 消</el-button>
                             </div>
