@@ -852,6 +852,7 @@ export default {
         cbca28: "",
         cbpc099: "",
       },
+      form3:'',
       defaultProps: {
         children: "children",
         label: "label",
@@ -950,6 +951,7 @@ export default {
     _ly_cancelDialog(done) {
       console.log("_ly_cancelDialog");
       this.$emit("on-close");
+      this.$router.push("/Warehousemanagement/Saleslading/");
     },
     // 关闭弹窗前，二次询问是否关闭
     _ly_beforeClose(done) {
@@ -1237,9 +1239,10 @@ export default {
 
     /** 新增按钮操作 */
     handleAdd() {
+        this.form2.goods = this.tableData
       this.$refs["form2"].validate((item) => {
         if (item) {
-          PurchaseinboundAdd(this.form2).then((response) => {
+          PurchaseinboundAdd(this.form3).then((response) => {
             // console.log(response.posts, 12345678);
             this.$message({
               message: "添加成功",
@@ -1249,9 +1252,10 @@ export default {
             // this.getTreeselect();
             // this.submitShangpin();
             this.submitShangpin();
-
             this.open2 = false;
             this.reset01();
+            this.$router.push("/Warehousemanagement/Saleslading/");
+            return
             this.tableData.forEach((item) => {
               item.cbsb01 = response.data.id;
             });
@@ -1278,6 +1282,7 @@ export default {
         whid,
         this.addDateRange(this.queryParams, this.dateRange)
       ).then((response) => {
+          this.form3 = response.data
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID

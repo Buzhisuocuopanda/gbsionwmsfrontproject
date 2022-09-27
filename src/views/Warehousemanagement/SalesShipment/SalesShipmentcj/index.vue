@@ -673,6 +673,7 @@ export default {
         _ly_cancelDialog(done) {
             console.log('_ly_cancelDialog')
             this.$emit('on-close')
+            this.$router.push("/system/user-xsckfh/role/");
         },
         // 关闭弹窗前，二次询问是否关闭
         _ly_beforeClose(done) {
@@ -696,7 +697,10 @@ export default {
                         // 当count为1时，表示是最后一个表单，则存储数据
                         PurchaseinboundAdds(JSON.stringify(this.tableData)).then(response => {
                              if(response.code=="200"){
+                                this.reset01();
+                                this.submitShangpin();
                                 this.tableData=[]
+                                this.$router.push("/system/user-xsckfh/role/");
                                 // this.form2= {
                                 //    cbpc07: "",
                                 //     cbpc08: "",
@@ -724,6 +728,8 @@ export default {
                                 //     cbsb21:"",
                                 //     cbsb30:""
                                 // }
+                            }else{
+                                this.$message({message:response.msg,type:'error'})
                             }
                         if (count-- === 1) {
                             this._ly_save()
@@ -983,20 +989,21 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     PurchaseinboundAdd(this.form2).then(response => {
-                        // console.log(response.posts, 12345678);
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
-                        this.submitShangpin();
-
-                        this.open2 = false;
-                        this.reset01();
-                        this.tableData.forEach((item)=>{
-                            item.cbsb01=response.data.id
-                        })
-                        console.log(response.data.id,123456);
-                        // console.log(this.item, 123456);
-                        this._ly_ok();
+                        if(response.code == 200){
+                            // console.log(response.posts, 12345678);
+                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                            // this.getTreeselect();
+                            // this.submitShangpin();
+                            this.open2 = false;
+                            this.tableData.forEach((item)=>{
+                                item.cbsb01=response.data.id
+                            })
+                            console.log(response.data.id,123456);
+                            // console.log(this.item, 123456);
+                            this._ly_ok();
+                        }else{
+                            this.$message({message:response.msg,type:'error'})
+                        }
                     });
                 } else {
                     // this.$message.error('请注意规范');

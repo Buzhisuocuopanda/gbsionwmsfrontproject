@@ -82,10 +82,11 @@ export function customerDetail(data) {
 }
 // /dev-api/stage-api/sale/goodsShopListcas
 export function customerDetaillists(data) {
+  console.log(data,typeof(data),'后台数据')
   return request({
     url: '/sale/goodsShopListcas',
     method: 'get',
-    params: data
+    params:data
   })
 }
 export function addSaleOrder(data) {
