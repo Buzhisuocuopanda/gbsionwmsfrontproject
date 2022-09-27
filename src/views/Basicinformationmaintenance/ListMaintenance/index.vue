@@ -58,7 +58,9 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title2" :visible.sync="open" append-to-body>
-            <el-form ref="form" :model="form" label-width="30%" :rules="rules22" style="margin-left:-15%;margin-top:3%;">
+            <div style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">列表管理修改
+            </div>
+            <el-form ref="form" :model="form" label-width="30%" :rules="rules22" style="margin-left:-15%;margin-top:3%;">           
                   <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;margin-left:5%;">
                         <el-form-item label="类别:" prop="cala10">
@@ -89,8 +91,8 @@
 
         <!-- 详情 -->
         <el-dialog :title="title" :visible.sync="open1">
-            <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
-            <!-- <hr /> -->
+            <div style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">列表管理详情
+            </div>
             <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%">
                 <div style="margin-top:3%;">
                     <el-row>
@@ -135,6 +137,8 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" append-to-body>
+            <div style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">列表管理创建
+            </div>
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;">
                 <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;">
@@ -310,8 +314,8 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
-                url: process.env.VUE_APP_BASE_API + "/system/classify/importSwJsGoodsClassify"
+                // 上传的地址/dev-api/stage-api/system/store/importSwJsStorelist
+                url: process.env.VUE_APP_BASE_API + "/system/store/importSwJsStorelist"
             },
             // 查询参数
             queryParams: {
@@ -727,9 +731,12 @@ export default {
             this.upload.title = "商品分类";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作
+         * 
+         * /dev-api/stage-api/system/store/importTemplate
+         */
         importTemplate() {
-            this.download('/system/classify/SwJsGoodsClassifyimportTemplate', {
+            this.download('/system/store/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理

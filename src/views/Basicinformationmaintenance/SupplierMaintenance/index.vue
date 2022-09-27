@@ -595,7 +595,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
+                // 上传的地址  /dev-api/stage-api/system/supplier/importSwJsSupplier
                 url: process.env.VUE_APP_BASE_API + "/system/supplier/importSwJsSupplier"
             },
             // 查询参数
@@ -888,13 +888,17 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        if (response.code == "200") {  
+                           this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
-                        this.submitShangpin();
-                        this.getList();
-                        this.open2 = false;
-                        this.reset01();
+                           this.submitShangpin();
+                           this.getList();
+                           this.open2 = false;
+                           this.reset01();
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
                     });
                 } else {
                     // alert("不可提交");
@@ -958,6 +962,7 @@ export default {
                  this.$refs["form"].validate((item) => {
                 if (item) {
                 SupplieRedit(JSON.stringify(row)).then(response => {
+                  if (response.code == "200") { 
                     // console.log(response,789)
                     // this.form = response.data;
                     // this.name = response.name;
@@ -973,7 +978,9 @@ export default {
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
-
+                 } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                 }
                 });
            } else {
                     // alert("不可提交");
@@ -1132,7 +1139,7 @@ export default {
         this.$modal.confirm('是否确认删除供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
           return SupplierRemove(JSON.stringify(row));
         }).then((response) => {
-            if (response.code == "200") {
+        if (response.code == "200") {
           this.submitShangpin();
           this.getList();
           this.$modal.msgSuccess("删除成功");
@@ -1141,7 +1148,10 @@ export default {
             }
         }).catch(() => { });
       },
-        /** 导出按钮操作 */
+        /** 导出按钮操作 
+         * 
+         * /dev-api/stage-api/system/supplier/SwJsSupplierexport
+        */
         handleExport() {
             this.download('/system/supplier/SwJsSupplierexport', {
                 ...this.queryParams
@@ -1166,7 +1176,10 @@ export default {
             this.upload.title = "供应商信息维护";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作 
+         * 
+         * /dev-api/stage-api/system/supplier/importTemplate
+        */
         importTemplate() {
             this.download('/system/supplier/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)

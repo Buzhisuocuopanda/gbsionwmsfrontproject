@@ -465,7 +465,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
+                // 上传的地址/dev-api/stage-api/system/Purchaseinbound/importSwJsGoods
                 url: process.env.VUE_APP_BASE_API + "/system/Purchaseinbound/importSwJsGoods"
             },
             // 查询参数
@@ -1263,7 +1263,10 @@ export default {
             }).catch(() => { });
         },
 
-        /** 导出按钮操作 */
+        /** 导出按钮操作 
+         * 
+         * /dev-api/stage-api/system/Purchaseinbound/SwJsGoodsexport
+        */
         handleExport() {
             this.download('/system/Purchaseinbound/SwJsGoodsexport', {
                 ...this.queryParams
@@ -1300,7 +1303,9 @@ export default {
             this.upload.title = "采购入库单";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作 
+         * /dev-api/stage-api/system/Purchaseinbound/importTemplate
+        */
         importTemplate() {
             this.download('/system/Purchaseinbound/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)

@@ -160,7 +160,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
+                // 上传的地址 
                 url: process.env.VUE_APP_BASE_API + "/system/classify/importSwJsGoodsClassify"
             },
             // 查询参数
@@ -332,6 +332,7 @@ export default {
             this.$refs["form"].validate((item) => {
                 if (item) {
                     ClassifyAdd(this.form).then(response => {
+                        if (response.code == "200") {   
                         // this.form.parent_id=this.form.id;
                         // console.log(this.from.parent_id,123456789);
                         this.title = "添加用户";
@@ -341,6 +342,9 @@ export default {
                         this.getList();
                         this.reset();
                         this.form.cbpa09 = "0";
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
 
                     });
                 } else {
@@ -371,7 +375,6 @@ export default {
         handleUpdate() {
             this.$refs["form"].validate((item) => {
                 if (item) {
-            if (this.form.cbpa07 != undefined) {
                 let row = Object.assign({}, this.form)
                 // console.log(row)
                 row.cbpa11 = this.form.cbpa11;
@@ -379,6 +382,7 @@ export default {
                 row.cbpa09 = this.form.cbpa09;
                 row.cbpa01 = this.form.cbpa01;
                 ClassifyEdit(JSON.stringify(row)).then(response => {
+                 if (response.code == "200") {
                     this.form = response.data;
                     this.cbpa07 = response.cbpa07;
                     this.cbpa11 = response.cbpa11;
@@ -387,12 +391,11 @@ export default {
                     this.getTreeselect();
                     this.submitShangpin();
                     this.$message({ message: '修改成功', type: 'success' });
-
+                 } else {
+                     this.$message({ message: response.msg, type: 'error' });
+                 }
                 });
 
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
        }
      })
         },
@@ -458,13 +461,17 @@ export default {
             // });
 
 
-            this.$modal.confirm('是否确认删除名称为"' + JSON.stringify(row.cbpa07) + '"的数据项？').then(function () {
+            this.$modal.confirm('是否确认删除,名称为"' + JSON.stringify(row.cbpa07) + '"的数据项？').then(function () {
                 return ClassifyRemove(JSON.stringify(row));
             }).then((response) => {
+                if (response.code == "200") {
                 this.getTreeselect();
                 this.submitShangpin();
                 this.$modal.msgSuccess("删除成功");
                 this.getList();
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }
             }).catch(() => { });
 
                 }
@@ -481,7 +488,10 @@ export default {
             this.upload.title = "商品分类";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作 
+         * 
+         * /dev-api/stage-api/system/classify/importTemplate
+        */
         importTemplate() {
             this.download('/system/classify/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)

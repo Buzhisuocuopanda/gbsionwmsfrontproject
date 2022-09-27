@@ -10,12 +10,14 @@
                         <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="请输入客户名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                     <el-form-item prop="cbca24" label="发票类型">
-                            <el-select v-model="queryParams.cbca24" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
+                     <el-form-item prop="cbca14" label="联系人">
+                            <!-- <el-select v-model="queryParams.cbca24" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
                                     <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
                                         :value="item.label">
                                     </el-option>
-                                </el-select>
+                            </el-select> -->
+                            <el-input v-model="queryParams.cbca14" id="miaoshu" placeholder="请输入联系人" clearable style="width: 240px;"
+                                @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:customer:list']" @click="handleQuery">查询</el-button>
@@ -710,6 +712,7 @@ export default {
                 locationNum: undefined,
                 cbca08: undefined,
                 cbca24: undefined,
+                cbca14:undefined,
                 sort: undefined
             },
             // 列信息
@@ -969,16 +972,19 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        console.log(this.form2, 997445);
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        if (response.code == "200") {     
+                            console.log(this.form2, 997445);
+                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
-                        this.submitShangpin();
-                        this.getList();
-                        this.open2 = false;
-                        this.reset01();
-
-                        console.log(this.form2.ifEnabled, 123456);
+                            this.submitShangpin();
+                            this.getList();
+                            this.open2 = false;
+                            this.reset01();
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        } 
+                            console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
                     // this.$message.error('请注意规范');
@@ -1057,12 +1063,15 @@ export default {
                     // this.manageMode = response.manageMode;
                     // this.ifEnabled = response.ifEnabled;
                     // this.sysUserId = response.sysUserId;
-                    console.log(this.form, 789)
+                    if (response.code == "200") {
+                        console.log(this.form, 789)
                     // this.submitShangpin();
-                    this.getList();
-                    this.open = false;
-                    this.$message({ message: '修改成功', type: 'success' });
-
+                        this.getList();
+                        this.open = false;
+                        this.$message({ message: '修改成功', type: 'success' });
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
 
                 } else {
@@ -1201,13 +1210,17 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             console.log(userIds, 123)
             console.log(typeof userIds)
-            this.$modal.confirm('是否删除客户为"' + JSON.stringify(this.idss) + '"？').then(() => {
+            this.$modal.confirm('是否删除客户为"' + JSON.stringify(this.idss) + '"?').then(() => {
                 userIds.forEach((item) => {
                     req.CustomeRemove(JSON.stringify(item)).then((res) => {
+                        if (res.code == "200") {
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1226,15 +1239,22 @@ export default {
         // row.ifEnabled = this.form.ifEnabled;
         // row.id=this.form.id;
         // console.log(row, 2222);
-        this.$modal.confirm('是否删除客户为"' + row.cbca08 + '"？').then(function () {
+        this.$modal.confirm('是否删除客户为"' + row.cbca08 + '"?').then(function () {
           return CustomeRemove(JSON.stringify(row));
         }).then((response) => {
-          this.submitShangpin();
-          this.getList();
-          this.$modal.msgSuccess("删除成功");
+            if (response.code == "200") { 
+                 this.submitShangpin();
+                 this.getList();
+                 this.$modal.msgSuccess("删除成功");
+            } else {
+                this.$message({ message: response.msg, type: 'error' });
+            }
         }).catch(() => { });
       },
-        /** 导出按钮操作 */
+        /** 导出按钮操作 
+         * 
+         * /dev-api/stage-api/system/customer/SwJsCustomerexport
+        */
         handleExport() {
             this.download('/system/customer/SwJsCustomerexport', {
                 ...this.queryParams
@@ -1259,7 +1279,10 @@ export default {
             this.upload.title = "客户信息维护";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作 
+         * 
+         * /dev-api/stage-api/system/customer/importTemplate
+        */
         importTemplate() {
             this.download('/system/customer/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)

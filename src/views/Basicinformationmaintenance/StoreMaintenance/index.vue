@@ -743,15 +743,17 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        if (response.code == "200") {
+                           this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
-                        this.submitShangpin();
-                        this.getList();
-                        this.open2 = false;
-                        this.reset01();
-
+                           this.submitShangpin();
+                           this.getList();
+                           this.open2 = false;
+                           this.reset01();
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        } 
                         // console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
@@ -811,12 +813,15 @@ export default {
                         // this.manageMode = response.manageMode;
                         // this.ifEnabled = response.ifEnabled;
                         // this.sysUserId = response.sysUserId;
-                        console.log(this.form, 789)
+                        if (response.code == "200") { 
+                            console.log(this.form, 789)
                         // this.submitShangpin();
-                        this.getList();
-                        this.open = false;
-                        this.$message({ message: '修改成功', type: 'success' });
-
+                            this.getList();
+                            this.open = false;
+                            this.$message({ message: '修改成功', type: 'success' });
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
                     });
                 } else {
                     // this.$message.error('库位码或库位顺序不能相同');
@@ -946,10 +951,14 @@ export default {
             this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.StoreRemove(JSON.stringify(item)).then((res) => {
+                        if (res.code == "200") { 
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                     } else {
+                        this.$message({ message: res.msg, type: 'error' });
+                     }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -981,9 +990,13 @@ export default {
         this.$modal.confirm('是否确认删除仓库为"' + row.cbwa09 + '"的数据项？').then(function () {
           return StoreRemove(JSON.stringify(row));
         }).then((response) => {
+         if (response.code == "200") {  
           this.submitShangpin();
           this.getList();
           this.$modal.msgSuccess("删除成功");
+            } else {
+                this.$message({ message: response.msg, type: 'error' });
+            } 
         }).catch(() => { });
       },
         /** 导出按钮操作 */
