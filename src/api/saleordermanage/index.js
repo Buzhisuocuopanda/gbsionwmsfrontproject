@@ -80,7 +80,14 @@ export function customerDetail(data) {
     params: data
   })
 }
-
+// /dev-api/stage-api/sale/goodsShopListcas
+export function customerDetaillists(data) {
+  return request({
+    url: '/sale/goodsShopListcas',
+    method: 'get',
+    params: data
+  })
+}
 export function addSaleOrder(data) {
   return request({
     url: '/sale/addSaleOrder',

@@ -35,17 +35,25 @@ export function Purchaseinbounddingdanxq(CBPC01) {
 }
 // 销售订单查询
 export function Purchaseinbounddingdanxsdd(data) {
+  console.log(data,'data')
   return request({
     url: '/sale/saleOrderList',
     method: 'get',
-    data: data
+    params: data
   })
+  
 }
 
 // 销售订单详情查询
-export function Purchaseinxiaoshoudingdan(CBPC01) {
+// export function Purchaseinxiaoshoudingdan(CBPC01) {
+//   return request({
+//     url: '/sale/saleOderDetail?orderId='+ CBPC01,
+//     method: 'get'
+//   })
+// }
+export function Purchaseinxiaoshoudingdan(CBPC01,whid) {
   return request({
-    url: '/sale/saleOderDetail?orderId='+ CBPC01,
+    url: '/whmanagement/takeOrderDetailBySaleId?saleOrderId='+CBPC01+'&whId=' + whid,
     method: 'get'
   })
 }

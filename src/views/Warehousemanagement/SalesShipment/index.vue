@@ -1013,16 +1013,17 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
             PurchaseinboundShss(row).then(response => {
-             
-             if (response.code == "200") {
-                console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '标记完成', type: 'success' });
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-              } 
+                if(response.code == 200){
+                    console.log(this.form.cbpc01, 789)
+                    // this.submitShangpin();
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '标记完成', type: 'success' });
+                }else{
+                    this.$message({ message:response.msg,type :'error'})
+                }
+                
+
             });
             }).catch(() => { });
         },
@@ -1035,14 +1036,14 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
-                 
-                if (res.code == "200") {
                     // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("标记完成");
-                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
-                  }
+                    if(res.code == 200){
+                        this.getList();
+                        this.$modal.msgSuccess("标记完成");
+                    }else{
+                        this.$message({ message:res.msg,type :'error'})
+                    }
+                    
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1065,14 +1066,13 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
-                
-                 if (response.code == "200") {      
                     console.log(this.form.cbpc01, 789);
-                    this.getList();
-                    this.$message({ message: '取消标记成功', type: 'success' });
-                 }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                  }
+                    if(response.code == 200){
+                        this.getList();
+                        this.$message({ message: '取消标记成功', type: 'success' });
+                    }else{
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
         },
@@ -1228,7 +1228,7 @@ export default {
             this.$router.push({
 
                 path: '/system/user-authhhchuanj/role/',
-                name: 'index',
+                // name: 'index',
                 query: {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
@@ -1242,7 +1242,7 @@ export default {
                         //  JSON.stringify(this.userList)
                 }
             })
-            location.reload();
+            // location.reload();
         },
         // /** 提交按钮 */
         // submitForm: function () {
