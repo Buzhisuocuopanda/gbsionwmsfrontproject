@@ -275,7 +275,7 @@ export default {
       }, `仓库台账_${new Date().getTime()}.xlsx`)
     },
     onSearch() {
-      if(this.dateRange.length>=2){
+      if(this.dateRange!=null&&this.dateRange.length>=2){
         this.queryParams.startTime = this.dateRange[0];
         this.queryParams.endTime = this.dateRange[1];
       }else {
