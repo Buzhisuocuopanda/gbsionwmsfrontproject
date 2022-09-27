@@ -79,6 +79,8 @@
                 </el-table-column>
                 <el-table-column prop="cbsc09" key="cbsc09" label="数量">
                 </el-table-column>
+                <el-table-column prop="cbsc09" key="cbsc09" label="良品数量">
+                </el-table-column>
                 <el-table-column prop="cbsc09" key="cbsc09" label="已扫数量">
                 </el-table-column>
                 <el-table-column prop="cbsc11" key="cbsc11" align="right" label="单价">

@@ -6,7 +6,7 @@
             <span class="Purchase_bianhao" style="margin-left:15%;">客户订单号：{{ userList.customerNo || '' }}</span>
             <span class="Purchase_riqii">日期：{{ userList.orderDate || '' }}</span>
         </div>
-        <div style="width:90%; margin-left: 5%; margin-top: 1%;">
+        <div style="width:90%; margin-left: 5%; margin-top: 1%;padding-bottom:5%;">
             <!-- 横向 -->
             <el-descriptions class="margin-top" title="" :column="3" border>
                 <el-descriptions-item label-class-name="my-labell01">
@@ -54,30 +54,35 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <!-- <el-table v-loading="loading" :data="userList" height="250"
+            <el-table v-loading="loading" :data="userLists" height="250"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
-
-                <el-table-column prop="cbpc07" key="cbpc07" label="供应商">
+                <el-table-column prop="supplierId" key="supplierId" label="供应商">
                 </el-table-column>
-                <el-table-column prop="cbwa09" key="cbwa09" label="订单分类">
+                <el-table-column prop="orderClass" key="orderClass" label="订单分类">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpc16" label="品牌">
+                <el-table-column prop="brand" key="brand" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" label="型号">
+                <el-table-column prop="model" key="model" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd12" label="描述">
+                <el-table-column prop="description" key="description" label="描述">
                 </el-table-column>
-                <el-table-column prop="cbpd12" key="cbpd11" label="数量">
+                <!-- goodsNum -->
+                <el-table-column label="良品数量">
+                    <template scope="scope">
+                        <el-input v-model="scope.row.qty"></el-input>
+                    </template>
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" label="已扫数量">
+                <el-table-column prop="qty" key="qty" label="数量">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" label="单价">
+                <el-table-column prop="scanQty" key="scanQty" label="已扫数量">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" label="金额">
+                <el-table-column prop="price" key="price" label="单价">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" label="备注">
+                <el-table-column prop="totalPrice" key="totalPrice" label="金额">
                 </el-table-column>
-            </el-table> -->
+                <el-table-column prop="remark" key="remark" label="备注">
+                </el-table-column>
+            </el-table>
             <!-- 分页器 -->
             <!-- <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
@@ -167,7 +172,10 @@
                 </el-descriptions-item>
             </el-descriptions>
         </div>
-
+        <div style="height:20px;"></div>
+            <el-button style="margin-left:5%;" type="primary" @click="PrintRow">质 检</el-button>
+            <el-button type="primary" @click="handlefanhui">返 回</el-button>
+        <div style="height:20px;"></div>
     </div>
 
 </template>
@@ -183,6 +191,7 @@ export default {
             total: 0,
             // 用户表格数据
             userList: {},
+            userLists:[],
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -206,6 +215,15 @@ export default {
 
     },
     methods: {
+        //返回按钮
+        handlefanhui: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/Warehousemanagement/Saleslading/");
+        },
+        // 质检
+        PrintRow(index, row){
+            console.log(11)
+        },
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
@@ -228,8 +246,8 @@ export default {
             if (userId) {
                 // 获取表详细信息
                 Purchaseinbounddingdanxq(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
-                    
                     this.userList = res.data;
+                    this.userLists = res.data.goods;
                     // this.total = res.data.total;
                     console.log(res, 888999);
                     this.loading = false;
