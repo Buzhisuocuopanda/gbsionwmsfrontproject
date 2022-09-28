@@ -137,13 +137,13 @@
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="发票地址:" prop="cbsa17">
-                                <el-input v-model="form.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
+                            <el-form-item label="发票地址:" prop="cbsa16">
+                                <el-input v-model="form.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
-                            <el-form-item label="发票电话:" prop="cbsa16">
-                                <el-input v-model="form.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
+                            <el-form-item label="发票电话:" prop="cbsa17">
+                                <el-input v-model="form.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -179,8 +179,6 @@
                     </el-row>
                 </div>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-            </div>
         </el-dialog>
 
         <!-- 详情 -->
@@ -224,6 +222,13 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
+                    <el-row style="margin-left:5%;margin-top:2%;">
+                        <el-col :span="11">
+                            <el-form-item label="编号:" prop="cbsa15">
+                                <el-input v-model="form1.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                     <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
                              发票信息
@@ -244,13 +249,13 @@
                     </el-row>
                     <el-row style="margin-left:5%;">
                         <el-col :span="11">
-                            <el-form-item label="发票地址:" prop="cbsa17">
-                                <el-input v-model="form1.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
+                            <el-form-item label="发票地址:" prop="cbsa16">
+                                <el-input v-model="form1.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
-                            <el-form-item label="发票电话:" prop="cbsa16">
-                                <el-input v-model="form1.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
+                            <el-form-item label="发票电话:" prop="cbsa17">
+                                <el-input v-model="form1.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -360,13 +365,13 @@
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="发票地址:" prop="cbsa17">
-                                <el-input v-model="form2.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
+                            <el-form-item label="发票地址:" prop="cbsa16">
+                                <el-input v-model="form2.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
-                            <el-form-item label="发票电话:" prop="cbsa16">
-                                <el-input v-model="form2.cbsa16" placeholder="" maxlength="30" style="width:100%;" />
+                            <el-form-item label="发票电话:" prop="cbsa17">
+                                <el-input v-model="form2.cbsa17" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -402,10 +407,6 @@
                     </el-row>
                 </div>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-
-                <!-- <el-button @click="cancel">取 消</el-button> -->
-            </div>
         </el-dialog>
 
         <!-- 用户导入对话框 -->
