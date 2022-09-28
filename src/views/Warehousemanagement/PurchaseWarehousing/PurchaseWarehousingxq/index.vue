@@ -33,7 +33,7 @@
                 </el-table-column>
                 <el-table-column prop="cbpd09" key="cbpd09" align="right" label="数量">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="已扫数量">
+                <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量">
                 </el-table-column>
                 <el-table-column prop="cbpd11" key="cbpd11" align="right" label="单价">
                 </el-table-column>

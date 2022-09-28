@@ -123,12 +123,7 @@
           </el-table-column>
           <el-table-column prop="cbsc09" key="cbsc09" label="数量">
           </el-table-column>
-          <el-table-column prop="cbsc09" key="cbsc09" label="良品数量">
-            <!-- <template scope="scope">
-                        <el-input v-model="scope.row.cbsc09"></el-input>
-                    </template> -->
-          </el-table-column>
-          <el-table-column prop="cbsc09" key="cbsc09" label="已扫数量">
+          <el-table-column prop="saoma" key="saoma" label="已扫数量">
           </el-table-column>
           <el-table-column
             prop="cbsc11"
