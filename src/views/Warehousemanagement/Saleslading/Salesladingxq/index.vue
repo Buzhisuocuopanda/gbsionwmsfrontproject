@@ -124,6 +124,7 @@
         style="width: 90%; margin-left: 5%"
         :default-sort="{ prop: 'name', order: 'descending' }"
         @selection-change="handleSelectionChange"
+        :span-method="arraySpanMethod"
       >
         <el-table-column
           type="index"
@@ -135,6 +136,22 @@
         <el-table-column prop="brand" key="brand" label="品牌">
         </el-table-column>
         <el-table-column prop="goodClass" key="goodClass" label="类型">
+          <template slot-scope="scope" style="width: 200%">
+                <el-input
+                  slot="reference"
+                  v-model="scope.row.goodClass"
+                  placeholder=""
+                  readonly
+                  style="width: 630px"
+                >
+                </el-input>
+            </template>
+        </el-table-column>
+        <el-table-column label="型号">
+        </el-table-column>
+        <el-table-column label="描述">
+        </el-table-column>
+        <!-- <el-table-column prop="goodClass" key="goodClass" label="类型">
         </el-table-column>
         <el-table-column prop="model" key="model" align="" label="型号">
         </el-table-column>
@@ -146,7 +163,7 @@
           label="描述"
           width="300"
         >
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
         <el-table-column prop="sku" key="sku" align="" label="库位">
@@ -164,6 +181,7 @@
         border
         :data="userList1"
         :default-sort="{ prop: 'name', order: 'descending' }"
+        :span-method="arraySpanMethod"
       >
         <el-table-column
           type="index"
@@ -370,6 +388,14 @@ export default {
     this.getList();
   },
   methods: {
+    // 合并单元格
+    arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 3) {
+          return [3, 5];
+        } else if (columnIndex === 1) {
+          return [0, 0];
+        }
+    },
     //列表表头设置
     headClass() {
       return {
@@ -472,8 +498,14 @@ export default {
         ).then((res) => {
           this.userList = res.data;
           this.userLists = res.data.goods;
-          this.userList1 = res.data.scans;
-          this.userListsss = res.data.sugests;
+          this.userList1 = res.data.scans.map(item=>{
+            item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
+            return item
+          });
+          this.userListsss = res.data.sugests.map(item=>{
+            item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
+            return item
+          });
           this.paramss.userId = res.data.userId;
           // this.total = res.data.total;
           console.log(res, 888999,this.userListss);
