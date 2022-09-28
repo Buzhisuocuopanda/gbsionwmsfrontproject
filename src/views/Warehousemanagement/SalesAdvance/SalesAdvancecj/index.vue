@@ -186,7 +186,7 @@
     </el-form>
     <div class="tinajia_dingwei">
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button @click="handlexiaoshouone">取 消</el-button>
     </div>
   </div>
 </template>
@@ -1018,10 +1018,10 @@ import salerman from "@/components/salerman";
         this.reset();
       },
 
-      /** 返回操作 */
-      handleChuangJiangone: function(row) {
+      /** 销售预订单变更单返回操作 */
+      handlexiaoshouone: function(row) {
         // this.$router.push("/system/user-auth/role/");
-        this.$router.push("/system/user-cktkfh/role/");
+        this.$router.push("/system/user-SalesAdvancefanhui/role/");
       },
 
        /** 新增按钮操作 */

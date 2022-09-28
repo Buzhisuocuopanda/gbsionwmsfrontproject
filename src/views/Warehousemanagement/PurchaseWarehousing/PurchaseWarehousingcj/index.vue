@@ -145,7 +145,7 @@
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button @click="handlecaigourukudanone">取 消</el-button>
       <!-- </span> -->
     </div>
   </div>
@@ -935,10 +935,10 @@
         //    this._ly_ok();
       },
 
-      /** 返回操作 */
-      handleChuangJiangone: function(row) {
+      /** 采购入库单返回操作 */
+      handlecaigourukudanone: function(row) {
         // this.$router.push("/system/user-auth/role/");
-        this.$router.push("/system/user-cktkfh/role/");
+        this.$router.push("/system/user-fanhui/role/");
       },
 
 
