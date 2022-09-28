@@ -163,6 +163,14 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                        <el-col>
+                            <el-form-item label="是否可用:" prop="cbwa15">
+                                <el-select v-model="form.cbwa15" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label" :value="dict.value">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
                          <el-col style="margin-top:3%;">
                             <div style="margin-left:70%;margin-top: 0%;">
                                <el-button type="primary" @click="handleUpdate">确定</el-button>
@@ -245,6 +253,14 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                        <el-col>
+                            <el-form-item label="是否可用:" prop="cbwa15">
+                                <el-select v-model="form1.cbwa15" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label" :value="dict.value">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
                     </el-row>
                 </div>
             </el-form>
@@ -322,6 +338,13 @@
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                         :value="dict.label" ></el-option>
                                 </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col>
+                            <el-form-item label="是否可用:" prop="cbwa15">
+                               <el-select v-model="form2.cbwa15" placeholder="" style="width:55%;">
+                                   <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                               </el-select>
                             </el-form-item>
                         </el-col>
                          <el-col style="margin-top:3%;">
@@ -487,6 +510,15 @@ export default {
             }, {
                 value: '2',
                 label: '禁用'
+            }],
+            value: '',
+
+            Zhuangshifuokeyu: [{
+                value: '1',
+                label: '是'
+            }, {
+                value: '0',
+                label: '否'
             }],
             value: '',
             // 角色选项
