@@ -119,3 +119,7 @@
     height: 360px;
     overflow: auto;
 }
+.el-select .el-input.is-disabled .el-input__inner{
+    background-color:#ffffff;
+    color: #606266;
+}
