@@ -35,7 +35,7 @@
                 </el-table-column>
                 <el-table-column prop="cbph09" key="cbph09" align="right"  label="数量">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" align="right" label="已扫数量">
+                <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量">
                 </el-table-column>
                 <el-table-column prop="cbph10" key="cbph10" align="right" label="单价">
                 </el-table-column>
@@ -136,21 +136,21 @@
                 <span class="saomiaojluuuu">财务:</span>
             </div>
              <div class="saomiaojlu">扫描记录</div>
-             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userList" 
+             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userLists" 
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
-                <el-table-column prop="cala08" key="cala08" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpa08" key="cbpa08"  label="类型">
+                <el-table-column prop="lx" key="lx"  label="类型">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号" width="180">
                 </el-table-column>
                 <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="390">
                 </el-table-column>
-                <el-table-column prop="cbpi09" key="cbpi09" align="" label="SN">
+                <el-table-column prop="sn" key="sn" align="" label="SN">
                 </el-table-column>
-                <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
+                <el-table-column prop="kwm" key="kwm" align="" label="库位">
                 </el-table-column>
-                <el-table-column prop="cbpg08" key="cbpg08" :formatter="formatDate" label="入库时间">
+                <el-table-column prop="cbpe03" key="cbpe03" :formatter="formatDate" label="入库时间">
                 </el-table-column>
             </el-table>
         </div>
@@ -174,6 +174,7 @@ export default {
             total: 0,
             // 用户表格数据
             userList: null,
+            userLists:null,
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -241,6 +242,13 @@ export default {
                 PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
+                    console.log(res, 888999);
+
+                    let userlistss = res.data.rows.map(item => {
+                        return item.goods;
+                    })
+                    this.userLists = userlistss[0];
+                    console.log(this.userLists, 123456);
                     console.log(res, 888999);
                     this.loading = false;
                 });

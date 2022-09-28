@@ -153,7 +153,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpc01(\\d+)',
+        path: 'role/:cbpc01(\\d+)+:status(\\d+)+:checkStatus(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/Saleslading/Salesladingxq/index'),
         meta: { title: '销售提货详情', activeMenu: '/Warehousemanagement/Saleslading' }

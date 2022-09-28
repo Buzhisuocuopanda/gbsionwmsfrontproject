@@ -10,12 +10,14 @@
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入公司名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                     <el-form-item prop="cbsa18" label="发票类型">
-                            <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
+                     <el-form-item prop="cbsa14" label="联系人">
+                            <!-- <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
                                     <el-option v-for="item in fapiaoleix" :key="item.label" :label="item.label"
                                         :value="item.value">
                                     </el-option>
-                                </el-select>
+                                </el-select> -->
+                                <el-input v-model="queryParams.cbsa14" id="miaoshu" placeholder="请输入联系人" clearable style="width: 240px;"
+                                    @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:supplier:list']" @click="handleQuery">查询</el-button>
@@ -593,7 +595,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
+                // 上传的地址  /dev-api/stage-api/system/supplier/importSwJsSupplier
                 url: process.env.VUE_APP_BASE_API + "/system/supplier/importSwJsSupplier"
             },
             // 查询参数
@@ -604,6 +606,7 @@ export default {
                 size: 15,
                 total: this.total,
                 cbsa08: undefined,
+                cbsa14:undefined,
                 address: undefined
             },
             // 列信息
@@ -885,13 +888,17 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        if (response.code == "200") {  
+                           this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
-                        this.submitShangpin();
-                        this.getList();
-                        this.open2 = false;
-                        this.reset01();
+                           this.submitShangpin();
+                           this.getList();
+                           this.open2 = false;
+                           this.reset01();
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
                     });
                 } else {
                     // alert("不可提交");
@@ -955,6 +962,7 @@ export default {
                  this.$refs["form"].validate((item) => {
                 if (item) {
                 SupplieRedit(JSON.stringify(row)).then(response => {
+                  if (response.code == "200") { 
                     // console.log(response,789)
                     // this.form = response.data;
                     // this.name = response.name;
@@ -970,7 +978,9 @@ export default {
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
-
+                 } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                 }
                 });
            } else {
                     // alert("不可提交");
@@ -1097,10 +1107,14 @@ export default {
             this.$modal.confirm('是否确认删除供应商为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.SupplierRemove(JSON.stringify(item)).then((res) => {
+                     if (res.code == "200") {
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                     } else {
+                         this.$message({ message: res.msg, type: 'error' });
+                     }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1125,12 +1139,19 @@ export default {
         this.$modal.confirm('是否确认删除供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
           return SupplierRemove(JSON.stringify(row));
         }).then((response) => {
+        if (response.code == "200") {
           this.submitShangpin();
           this.getList();
           this.$modal.msgSuccess("删除成功");
+            } else {
+                this.$message({ message: response.msg, type: 'error' });
+            }
         }).catch(() => { });
       },
-        /** 导出按钮操作 */
+        /** 导出按钮操作 
+         * 
+         * /dev-api/stage-api/system/supplier/SwJsSupplierexport
+        */
         handleExport() {
             this.download('/system/supplier/SwJsSupplierexport', {
                 ...this.queryParams
@@ -1155,7 +1176,10 @@ export default {
             this.upload.title = "供应商信息维护";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作 
+         * 
+         * /dev-api/stage-api/system/supplier/importTemplate
+        */
         importTemplate() {
             this.download('/system/supplier/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)

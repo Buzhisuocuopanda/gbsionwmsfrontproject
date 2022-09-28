@@ -48,7 +48,7 @@ export function PurchaseinboundEdit(data) {
 // 删除
 export function PurchasereturnorderRemove(data) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsPurchasereturnorderremove',
+    url: '/system/WarehousetransferordersController/Selloutofwarehousedel',
     method: 'post',
     data:data
   })

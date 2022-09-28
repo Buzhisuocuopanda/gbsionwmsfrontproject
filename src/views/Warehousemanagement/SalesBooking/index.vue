@@ -90,8 +90,9 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
+                            <!-- @click="handlexiangqengSelect(scope.row)" -->
                             <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                                class="button-caozuoxougai caozuoxiangqeng" 
                                 v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button>
