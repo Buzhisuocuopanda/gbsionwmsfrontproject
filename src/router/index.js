@@ -497,6 +497,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //采购订单返回
+   {
+    path: '/system/user-caigoudingdan',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseOrder/index'),
+        meta: { title: '采购订单', activeMenu: '/Warehousemanagement/PurchaseOrder' }
+      }
+    ]
+  },
    //销售预订单添加
    {
     path: '/system/user-cjxsydd',
