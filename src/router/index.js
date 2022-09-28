@@ -695,6 +695,21 @@ export const dynamicRoutes = [
       }
     ]
   },
+  // 销售提货单返回
+  {
+    path: '/Warehousemanagement/Saleslading',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: '',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/Saleslading/index'),
+        meta: { title: '销售提货单', activeMenu: '/Warehousemanagement/Saleslading' }
+      }
+    ]
+  },
+
   //根据提货单创建
   {
     path: '/system/user-authhhchuanj',

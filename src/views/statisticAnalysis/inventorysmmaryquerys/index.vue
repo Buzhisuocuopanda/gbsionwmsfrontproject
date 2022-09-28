@@ -14,6 +14,11 @@
           <el-input v-model="queryParams.cbwa09" class="filter-item" style="width: 300px" placeholder="单据类型/仓库" />
         </el-form-item>
 
+        <el-form-item label="商品"   class="item-r" >
+          <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading1">
+            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
+          </el-select>
+        </el-form-item>
         <!--<el-form-item label="品牌"   class="item-r" >
           <el-input v-model="cala08" class="filter-item"  placeholder="品牌" />
         </el-form-item>
@@ -66,7 +71,7 @@
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
 import { formatDate2 } from '../../../utils';
-import { getInventorysmmaryquerysList } from "@/api/statisticAnalysis/index";
+import { getInventorysmmaryquerysList,getSwJsGoodsAllList } from "@/api/statisticAnalysis/index";
 export default {
   components: {},
   name: "inventorysmmaryquerys",
@@ -76,11 +81,14 @@ export default {
       formData: {
         name: "",
       },
+      //下拉列表数据商品
+      goodList:[],
       dateRange:[],
       tableData: [],
       loadingOut:false,
       loadingState:false,
       loading:false,
+      loading1:false,
       queryForm:{},
       /*listQuery: {
         pageNum: 1,
@@ -93,6 +101,7 @@ export default {
         total: this.total,
         cbwa09: "",
         cbib17:"",
+        cbpb01:"",
         startTime:undefined,
         endTime:undefined,
         // cala08: "",
@@ -225,7 +234,8 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
-    this.onSearch()
+    this.onSearch();
+    this.getGoods();
   },
   methods: {
     onSubmit() {},
@@ -246,6 +256,7 @@ export default {
     resetQuery() {
       this.queryParams.cbib17 = "";
       this.queryParams.cbwa09 = "";
+      this.queryParams.cbpb01 ="";
       this.queryParams.pageNum = 1;
       this.dateRange = [];
       // this.resetForm("queryParams");
@@ -264,14 +275,14 @@ export default {
       }, `仓库台账_${new Date().getTime()}.xlsx`)
     },
     onSearch() {
-      if(this.dateRange.length>=2){
+      if(this.dateRange!=null&&this.dateRange.length>=2){
         this.queryParams.startTime = this.dateRange[0];
         this.queryParams.endTime = this.dateRange[1];
       }else {
         this.queryParams.startTime = undefined;
         this.queryParams.endTime = undefined;
       }
-
+      this.queryParams.cbib17 = this.queryParams.cbwa09;
 
       // this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;
@@ -288,6 +299,22 @@ export default {
         this.loading = false;
       })
     },
+    //获取下拉列表数据商品
+    getGoods(query){
+      let param={cbpb08:query, cbpb15:query, cbpb12:query,};
+      this.loading1 = true;
+      getSwJsGoodsAllList(param).then(response => {
+        this.loading1 = false;
+        if (response.data != null) {
+          this.goodList = response.data;
+        } else {
+          this.goodList = [];
+        }
+      },error => {
+        this.loading1 = false;
+      });
+    },
+
   },
 };
 </script>

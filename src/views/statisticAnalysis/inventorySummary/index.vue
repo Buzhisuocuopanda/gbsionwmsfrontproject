@@ -12,8 +12,8 @@
 
         <el-form-item label="品牌"   class="item-r" >
 
-          <el-select v-model="queryParams.cala08"  style="width: 300px" clearable  filterable placeholder="请选择" :loading="loading3">
-            <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
+          <el-select v-model="queryParams.cbpb10"  style="width: 300px" clearable  filterable placeholder="请选择" :loading="loading3">
+            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
           <!--<el-input v-model="queryParams.cala08" style="width: 300px" class="filter-item"  placeholder="请输入品牌" />-->
         </el-form-item>
@@ -40,7 +40,7 @@
         <el-table-column  label="型号" align="center" prop="cbpb12" min-width="100px;"/>
         <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
         <el-table-column  label="描述" align="center" prop="cbpb08"  min-width="240px;"/>
-        <el-table-column  label="数量" align="center" prop="cbif09" min-width="100px;"/>
+        <el-table-column  label="数量" align="center" prop="cbib15" min-width="100px;"/>
         <el-table-column  label="可用库存数量" align="center" prop="lockQty" min-width="100px;"/>
         <el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
@@ -133,7 +133,7 @@ export default {
         pageSize: 10,
         // total: this.total,
         cbwa09s: [],
-        cala08: "",
+        cbpb10: "",
         cbpb01: ""
       },
       inwuquList: [],
@@ -197,11 +197,11 @@ export default {
             this.shoppingList.push(row);
             row.shopping=1;
           } else {
-            this.$message.error('添加失败1');
+            this.$message.error('添加失败,'+response.msg);
             row.shopping=0;
           }
         },error => {
-          this.$message.error('添加失败2');
+          this.$message.error('添加失败2,'+response.msg);
           row.shopping=0;
         });
       }else {
@@ -231,7 +231,7 @@ export default {
     /** 重置按钮操作 */
     resetQuery() {
       this.queryParams.cbwa09s = "";
-      this.queryParams.cala08 = "";
+      this.queryParams.cbpb10 = "";
       this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;
       this.goodList = [];
@@ -256,7 +256,6 @@ export default {
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows
           this.total = response.data.total
-          this.index++;
           this.contrastShopping();
 
         } else {
@@ -271,13 +270,22 @@ export default {
     contrastShopping(){
       for(let i=0;i<this.inwuquList.length;i++){
         this.inwuquList[i].shopping = 0;
+        let indx =0;
         for(let j=0;j<this.shoppingList.length;j++){
-          if(this.shoppingList[j].cbpb01==this.inwuquList[i].cbpb01){
-            this.inwuquList[i].shopping = 1;
+          if(this.inwuquList[i].cbpb01!=null){
+            if(this.shoppingList[j].cbpb01==this.inwuquList[i].cbpb01){
+              this.inwuquList[i].shopping = 1;
+              indx =1;
+            }
+            if(this.shoppingList[j].goodsId===this.inwuquList[i].cbpb01){
+              this.inwuquList[i].shopping = 1;
+              indx =1;
+            }
           }
-          if(this.shoppingList[j].goodsId===this.inwuquList[i].cbpb01){
-            this.inwuquList[i].shopping = 1;
-          }
+
+        }
+        if(indx==0){
+          this.inwuquList[i].shopping = 0;
         }
       }
     },
