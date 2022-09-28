@@ -107,7 +107,7 @@
       <div class="saomiaojlu">出库建议表</div>
       <el-descriptions
         class="margin-top"
-        style="width: 90%; margin-left: 5%; margin-top: 1%"
+        style="width: 100%; margin-top: 1%"
         title=""
         :column="3"
         border
@@ -117,11 +117,10 @@
         </el-descriptions-item>
       </el-descriptions>
       <el-table
-        :header-cell-style="headClass"
         v-loading="loading"
         border
         :data="userListsss"
-        style="width: 90%; margin-left: 5%"
+        style="width: 100%;"
         :default-sort="{ prop: 'name', order: 'descending' }"
         @selection-change="handleSelectionChange"
         :span-method="arraySpanMethod"
@@ -136,13 +135,13 @@
         <el-table-column prop="brand" key="brand" label="品牌">
         </el-table-column>
         <el-table-column prop="goodClass" key="goodClass" label="类型">
-          <template slot-scope="scope" style="width: 200%">
+          <template slot-scope="scope" style="width: 630px">
                 <el-input
                   slot="reference"
                   v-model="scope.row.goodClass"
                   placeholder=""
                   readonly
-                  style="width: 630px"
+                  style="width: 100%"
                 >
                 </el-input>
             </template>
@@ -175,8 +174,7 @@
 
       <div class="saomiaojlu">扫描记录</div>
       <el-table
-        style="margin-top: 1%; width: 90%; margin-left: 5%"
-        :header-cell-style="headClass"
+        style="margin-top: 1%; width: 100%;"
         v-loading="loading"
         border
         :data="userList1"
@@ -390,19 +388,13 @@ export default {
   methods: {
     // 合并单元格
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (columnIndex === 3) {
-          return [3, 5];
-        } else if (columnIndex === 1) {
-          return [0, 0];
+        if (columnIndex === 2) {
+          return {rowspan: 1,colspan: 3 }
+        } else if (columnIndex > 2 && columnIndex<5) {
+          return {rowspan: 0,colspan: 0 }
+        } else if(columnIndex < 2){
+          return {rowspan: 1,colspan: 1 }
         }
-    },
-    //列表表头设置
-    headClass() {
-      return {
-        "text-align": "center",
-        height: "30px",
-        padding: "0",
-      };
     },
     //序号
     table_index(index) {
