@@ -120,9 +120,8 @@
 } */
 
 .tinajia_dingwei {
-    position: absolute;
-    top: 90%;
-    left: 80%;
+     
+    margin-top: 10%;
 }
 .shuzicaoyou {
     text-align: right;

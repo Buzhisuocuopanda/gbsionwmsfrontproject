@@ -52,9 +52,11 @@
             <el-button style="margin-left:3%;" type="primary" @click="PrintRow">打 印</el-button>
           </span>
           <span>
-            <el-button type="primary" style="margin-left:3%;"  @click="handlefanhui">返回</el-button>
+            <el-button  style="margin-left:3%;"  @click="handlefanhui">返回</el-button>
           </span>
+          
        </div>
+       <div style="height:50px;"></div>
     </div>
 
 </template>
