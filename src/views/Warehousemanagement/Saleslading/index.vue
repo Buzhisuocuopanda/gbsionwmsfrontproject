@@ -289,7 +289,16 @@
             width="120px;"
             prop="checkStatusMsg"
             sortable
-          />
+          >
+            <template slot-scope="scope">
+              <el-button size="mini"
+                type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"
+                @click="handlexiangqengSelects(scope.row)"
+                v-if="(scope.row.status == 2)"
+                v-hasPermi="['system:user:edit']"
+                >编辑</el-button>
+            </template>
+          </el-table-column>
           <el-table-column
             label="操作"
             align="center"
@@ -304,7 +313,7 @@
                 icon="el-icon-edit"
                 class="button-caozuoxougai caozuoxiangqeng"
                 @click="handlexiangqengSelect(scope.row)"
-                v-if="(scope.row.status != 1)"
+                v-if="(scope.row.status == 0)"
                 v-hasPermi="['system:user:edit']"
               >
                 修改
@@ -315,7 +324,7 @@
                 icon="el-icon-delete"
                 class="button-caozuoxougai caozuoxiangqeng"
                 @click="handleDelete01(scope.row)"
-                v-if="(scope.row.status != 1)"
+                v-if="(scope.row.status == 0)"
                 v-hasPermi="['system:user:remove']"
                 >删除</el-button
               >
@@ -335,7 +344,17 @@
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundShenpi(scope.row)"
                 v-hasPermi="['system:user:listselect']"
-                v-if="scope.row.status == 2"
+                v-if="scope.row.status == 1"
+                >撤销</el-button
+              >
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-s-order"
+                class="caozuoxiangqeng"
+                @click="PurchaseinboundShenpi(scope.row)"
+                v-hasPermi="['system:user:listselect']"
+                v-if="scope.row.status == 1"
                 >审核</el-button
               >
               <el-button
@@ -345,7 +364,7 @@
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundFanShenpi(scope.row)"
                 v-hasPermi="['system:user:listselect']"
-                v-if="scope.row.status == 3"
+                v-if="scope.row.status == 2"
                 >反审</el-button
               >
               <el-button
@@ -355,7 +374,7 @@
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
                 v-hasPermi="['system:user:listselect']"
-                v-if="scope.row.status == 4"
+                v-if="scope.row.status == 3"
                 >取消完成</el-button
               >
               <el-button
@@ -365,7 +384,7 @@
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                 v-hasPermi="['system:user:listselect']"
-                v-if="(scope.row.status == 3) | (scope.row.status == 1)"
+                v-if="(scope.row.status == 2) | (scope.row.status == 1)"
                 >标记完成</el-button
               >
             </template>
@@ -1283,8 +1302,13 @@ export default {
 
     //审批
     PurchaseinboundShenpi(row) {
-      console.log(row.id, 8888);
 
+      console.log(row.id, 8888);
+      let userId = row.id;
+      let status = row.status
+      let checkstatus = row.checkStatus
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      return
       PurchaseinboundSH(row).then((response) => {
         // console.log(this.form.cbpc01, 789)
         // this.submitShangpin();
@@ -1300,41 +1324,45 @@ export default {
     },
     //审批上面内容
     PurchaseinboundShenpi01(row) {
-      let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
-      console.log(userIds, 8888);
-
-      userIds.forEach((item) => {
-        req
-          .PurchaseinboundSH(item)
-          .then((res) => {
-            // console.log(res, 123)
-            if (res.code == 200) {
-              this.getList();
-              this.$modal.msgSuccess("审批成功");
-            } else {
-              this.$modal.msgError(res.msg);
-            }
-          })
-          .catch((e) => {
-            // console.log(e, 456)
-          });
-      });
+      
+      // let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
+      // console.log(userIds, 8888);
+      // userIds.forEach((item) => {
+      //   req
+      //     .PurchaseinboundSH(item)
+      //     .then((res) => {
+      //       // console.log(res, 123)
+      //       if (res.code == 200) {
+      //         this.getList();
+      //         this.$modal.msgSuccess("审批成功");
+      //       } else {
+      //         this.$modal.msgError(res.msg);
+      //       }
+      //     })
+      //     .catch((e) => {
+      //       // console.log(e, 456)
+      //     });
+      // });
     },
     //反审
     PurchaseinboundFanShenpi(row) {
       // console.log(row.cbpc01, 8888);
+      let userId = row.id;
+      let status = row.status
+      let checkstatus = row.checkStatus
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
 
-      PurchaseinboundShs(row).then((response) => {
-        if (response.code == 200) {
-          // console.log(this.form.cbpc01, 789)
-          // this.submitShangpin();
-          this.getList();
-          // this.open = false;
-          this.$message({ message: "反审成功", type: "success" });
-        } else {
-          this.$modal.msgError(response.msg);
-        }
-      });
+      // PurchaseinboundShs(row).then((response) => {
+      //   if (response.code == 200) {
+      //     // console.log(this.form.cbpc01, 789)
+      //     // this.submitShangpin();
+      //     this.getList();
+      //     // this.open = false;
+      //     this.$message({ message: "反审成功", type: "success" });
+      //   } else {
+      //     this.$modal.msgError(response.msg);
+      //   }
+      // });
     },
 
     //反审上面的
@@ -1515,6 +1543,14 @@ export default {
       // this.form.phone = row.phone;
       // this.form.orderNo = row.orderNo;
     },
+    /* 编辑按钮操作 */
+    handlexiangqengSelects(row) {
+      this.open = true;
+      console.log(row, 7788521);
+      const userId = row.id;
+      let status = row.status
+      this.$router.push("/system/user-authhhh/role/" + userId + status);
+    },
     /** 数形列表的商品分类按钮**/
     submitShangpin() {
       this.reset();
@@ -1594,7 +1630,9 @@ export default {
     /** 分配角色操作 */
     handleAuthRole: function (row) {
       const userId = row.id;
-      this.$router.push("/system/user-authhhh/role/" + userId);
+      let status = row.status
+      let checkstatus = row.checkStatus
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
     },
     /** 创建操作 */
     handletihuoone: function (row) {
