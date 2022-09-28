@@ -84,6 +84,8 @@
         </div>
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title1" :visible.sync="open" class="abow_dialog5">
+            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">商品信息维护修改
+            </div>
           <div>
                 <span style="font-size:15px;margin-left: 3%;">商品基础信息</span>
                 <hr />
@@ -166,73 +168,63 @@
                     <span style="font-size:15px;margin-left: 3%;">结算货币</span>
                     <hr />
                 </div>
-               <div>
-            <div style="margin-left:3%; margin-top: 2%;">
-
-            </div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-                <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-                    <div class="box1">
-                      <table  class="tablebiankuan table-heads" width="95%" height="20px">
-                            <thead style="">
-                                <tr style="height:30px; ">
-                                    <th style="width: 60px;height: 30px;">客户等级</th>
-                                    <th style="width: 70px;height: 30px;">结算类型</th>
-                                    <th style="width: 70px;height: 30px;">标准进价</th>
-                                    <th style="width: 90px;height: 30px;">标准销货价</th>
-                                    <th style="width: 80px;height: 30px;">生效日期</th>
-                                    <th style="width: 50px;height: 30px;font-size:23px;">
-                                      <!-- <el-button plain  type="primary" @click="_ly_addFrom">+</el-button> -->
-                                      <!-- <i class="el-icon-circle-plus-outline" @click="_ly_addFrom"></i> -->
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    <div class="table-bodyss" >
-                  <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                                cellspacing="0" class="tablebiankuan">
-                      <el-row >
-                     <el-form label-position="right" ref="form5" :rules="rules5" :model="form5" label-width="50px" style="margin-top:1%;"
-                        :inline="true">
-                        <!-- <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbpc01" style="width:50%;"></el-input>
-                        </el-form-item>                       -->
-                            <el-col style="margin-left: -2%;" :span="7">
-                                <el-form-item label=" " prop="cbpf02">
-                                      <el-select v-model="form5.cbpf02" placeholder="" style="width:70%;">
-                                         <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label"
-                                    :value="dict.value"></el-option>
-                            </el-select>
-                                </el-form-item>
-                         </el-col>
-                        <el-form-item  style="margin-left:-11%;"  label=" " size="small" prop="cbpf06" >
-                            <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
-                             <el-select v-model="form5.cbpf06" placeholder="" style="width:68%;">
-                                         <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
-                                    :value="dict.value"></el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label=" " style="margin-left:-7%;" size="small" prop="cbpf04" >
-                            <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
-                        </el-form-item>
-                        <el-form-item label=" " size="small" style="margin-left:-3%;" prop="cbpf05" >
-                            <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
-                        </el-form-item>
-                        <el-form-item label=" " size="small" style="position: absolute;left: 85%;top:-15%;" prop="cbpf07">
-                        <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
-                        </el-date-picker>
-                            <!-- <el-input v-model="form.cbpd13" style="width:55.1%;"></el-input> -->
-                        </el-form-item>
-                        <!-- <i class="el-icon-remove-outline" style="position: absolute; left: 98.7%;font-size:23px;"  @click="_ly_delFrom(index)"></i> -->
-
-                    </el-form>
+              <!-- 下边的  -->
+            <div>
+                <el-row>
+                    <el-col :span="24">
+                        <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
+                    </el-col>
                 </el-row>
-             </table>
-                       </div>
-                    </div>
-                 </div>
-             </div>
-          </div>
+            
+                <el-table :data="tableData" border  :row-style="{height: '10px'}"
+                    :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px; margin-left:0.5%;">
+                    <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
+                    <el-table-column prop="cbpf02" label="客户等级" width="251">
+                        <template slot-scope="scope">
+                            <!-- <el-input v-model="scope.row.cbpf02" placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf02" placeholder="" style="width:70%;">
+                                <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf06" label="结算类型" width="240">
+                        <template slot-scope="scope">
+                            <!-- <el-input v-model="scope.row.cbpf06"  placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf06" placeholder="" style="width:68%;">
+                                <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf04" label="标准进货价" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpf04"  class="shuzicaoyou" placeholder="" style=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf05" label="标准销货价" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpf05" class="shuzicaoyou" placeholder="" style=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf07" label="生效日期" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpf07" placeholder=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column v-if="false"  prop="cbpb01" label="商品信息维护id" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpb01" placeholder=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" align="center" width="80">
+                        <template slot-scope="scope">
+                            <span @click="_ly_delFrom(scope.row)">
+                                <i class="el-icon-delete" style="color: red;"></i>
+                            </span>
+                        </template>
+                    </el-table-column>
+                    <!-- </el-form> -->
+                </el-table>
+            </div>
             <div class="tinajia_dingweii">
                 <el-button type="primary" @click="handleUpdate">确 定</el-button>
                 <el-button @click="cancel">取 消</el-button>
@@ -255,6 +247,8 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" width="90%;" style="" append-to-body class="abow_dialog5">
+            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">商品信息维护创建
+            </div>
             <div>
                 <span style="font-size:15px;margin-left: 3%;">商品基础信息</span>
                 <hr />
@@ -335,74 +329,71 @@
                         </el-col>
                     </el-row>
                  </el-form>
-                  <div style="margin-top:7%;">
+                  <div style="margin-top:3%;">
                     <span style="font-size:15px;margin-left: 3%;">结算货币</span>
                     <hr />
                 </div>
-               <div>
-            <div style="margin-left:3%; margin-top: 2%;">
 
-            </div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-                <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-                    <div class="box1">
-                      <table  class="tablebiankuan table-heads"   width="95%" height="20px">
-                            <thead style="">
-                                <tr style="height:30px; ">
-                                    <th style="width: 60px;height: 30px;">客户等级</th>
-                                    <th style="width: 70px;height: 30px;">结算类型</th>
-                                    <th style="width: 70px;height: 30px;">标准进价</th>
-                                    <th style="width: 90px;height: 30px;">标准销货价</th>
-                                    <th style="width: 80px;height: 30px;">生效日期</th>
-                                    <th style="width: 50px;height: 30px;font-size:23px;">
-                                      <!-- <el-button plain  type="primary" @click="_ly_addFrom">+</el-button> -->
-                                      <!-- <i class="el-icon-circle-plus-outline" @click="_ly_addFrom"></i> -->
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    <div class="table-bodyss" >
-                     <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                                cellspacing="0" class="tablebiankuan">
-                      <el-row >
-                    <el-form label-position="right" ref="form5" :rules="rules5"  :model="form5" label-width="50px" style="margin-top:1%;"
-                        :inline="true">
-                            <el-col style="margin-left: -2%;" :span="7">
-                                <el-form-item label=" " prop="cbpf02">
-                                      <el-select v-model="form5.cbpf02" placeholder="" style="width:70%;">
-                                         <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label"
-                                    :value="dict.value"></el-option>
-                            </el-select>
-                                </el-form-item>
-                         </el-col>
-                        <el-form-item  style="margin-left:-10%;"  label=" " size="small" prop="cbpf06" >
-                            <!-- <el-input type="text" v-model="form.cbpd09"  style="width:70.2%;"></el-input> -->
-                             <el-select v-model="form5.cbpf06" placeholder="" style="width:68%;">
-                                         <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
-                                    :value="dict.value"></el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label=" " style="margin-left:-8%;" size="small" prop="cbpf04" >
-                            <el-input v-model="form5.cbpf04" style="width:74%;"></el-input>
-                        </el-form-item>
-                        <el-form-item label="" size="small" style="margin-left:2%;" prop="cbpf05" >
-                            <el-input v-model="form5.cbpf05" style="width:74%;"></el-input>
-                        </el-form-item>
-                        <el-form-item label="" size="small" style="position: absolute;left: 85%;" prop="cbpf07">
-                        <el-date-picker type="date" placeholder="" v-model="form.cbpf07" style="width: 100%;"> -->
-                        </el-date-picker>
-                            <!-- <el-input v-model="form.cbpd13" style="width:55.1%;"></el-input> -->
-                        </el-form-item>
-                        <!-- <i class="el-icon-remove-outline" style="position: absolute; left: 98.7%;font-size:23px;"  @click="_ly_delFrom(index)"></i> -->
-
-                    </el-form>
+            <!-- 下面的 -->
+               
+            <div>
+                <el-row>
+                    <el-col :span="24">
+                        <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom2">增行</el-button>
+                    </el-col>
                 </el-row>
-             </table>
-                       </div>
-                    </div>
-                 </div>
-             </div>
-          </div>
+            
+                <el-table :data="tableData2" border :row-style="{height: '10px'}" :cell-style="{padding: '5px'}"
+                    style="width: 99%;margin-top: 10px; margin-left:0.5%;">
+                    <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
+                    <el-table-column prop="cbpf02" label="客户等级" width="251">
+                        <template slot-scope="scope">
+                            <!-- <el-input v-model="scope.row.cbpf02" placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf02" placeholder="" style="width:100%;">
+                                <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf06" label="结算类型" width="240">
+                        <template slot-scope="scope">
+                            <!-- <el-input v-model="scope.row.cbpf06" placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf06" placeholder="" style="width:100%;">
+                                <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf04" label="标准进货价" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpf04" class="shuzicaoyou" placeholder="" style=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf05" label="标准销货价" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpf05" class="shuzicaoyou" placeholder="" style=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbpf07" label="生效日期" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpf07" placeholder=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column v-if="false"  prop="cbpb01" label="商品信息维护" width="240">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbpb01" placeholder=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" align="center" width="80">
+                        <template slot-scope="scope">
+                            <span @click="_ly_delFrom2(scope.row)">
+                                <i class="el-icon-delete" style="color: red;"></i>
+                            </span>
+                        </template>
+                    </el-table-column>
+                    <!-- </el-form> -->
+                </el-table>
+            </div>
+
+
          <div class="tinajia_dingweii">
             <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
                 <el-button type="primary" @click="handleAdd">保 存</el-button>
@@ -454,6 +445,18 @@ export default {
     dicts: ['sys_normal_disable', 'sys_user_sex', 'sw_js_goods_if_enabled'],
     components: { Treeselect,ListMaintenance },
     data() {
+        const validateNumber = (rule, value, callback) => {
+            let numberReg = /^[1-9][0-9]{0,11}$/
+            if (value !== '') {
+                if (!numberReg.test(value)) {
+                    callback(new Error('UPC码不能超过12位'))
+                } else {
+                    callback()
+                }
+            } else {
+                callback(new Error('请输入值'))
+            }
+        }
         return {
             maxheight: window.innerHeight - 50,
             // 遮罩层
@@ -462,6 +465,8 @@ export default {
             ids: [],
             idss: {},
             formArr:[],
+            tableData:[],
+            tableData2: [],
             // 非单个禁用
             single: true,
             // 非多个禁用
@@ -637,7 +642,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
+                // 上传的地址 
                 url: process.env.VUE_APP_BASE_API + "/system/goods/importSwJsGoods"
             },
             // 查询参数
@@ -667,8 +672,9 @@ export default {
                 cbpb12: [
                     { required: true, message: '型号不能为空', trigger: 'blur' },
                 ],
-                upc: [
+                cbpb15: [
                     { required: true, message: 'upc不能为空', trigger: 'blur' },
+                    { validator: validateNumber, trigger: 'blur' }
                 ],
                 currency: [
                     { required: true, message: '结算货币不能为空', trigger: 'blur' },
@@ -709,6 +715,12 @@ export default {
                  ],
                  cbpf04:[
                     { required: true, message: '标准进价不能为空', trigger: 'blur' },
+                 ],
+                cbpf07: [
+                    { required: true, message: '生效日期不能为空', trigger: 'blur' },
+                ],
+                cbpf05: [
+                    { required: true, message: '标准销货价不能为空', trigger: 'blur' },
                  ],
             }
         };
@@ -775,14 +787,28 @@ export default {
         },
 
 
-       // 点击右上角关闭弹窗
+        // 合并单元格
+        // arraySpanMethod({
+        //     row,
+        //     column,
+        //     rowIndex,
+        //     columnIndex
+        // }) {
+        //     if (columnIndex === 0) {
+        //         return [1, 3];
+        //     } else if (columnIndex < 3) {
+        //         return [0, 0];
+        //     }
+        // },
+        // 点击右上角关闭弹窗
         _ly_closeDialog(done) {
             console.log('_ly_closeDialog')
             this.$emit('on-close')
         },
         // 点击【取消】按钮关闭弹窗
         _ly_cancelDialog(done) {
-           this.open2=false;
+            console.log('_ly_cancelDialog')
+            this.$emit('on-close')
         },
         // 关闭弹窗前，二次询问是否关闭
         _ly_beforeClose(done) {
@@ -793,64 +819,67 @@ export default {
                 .catch(_ => { })
         },
         // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
-       _ly_ok() {
-            let count = this.formArr.length // 记录当前有多少个表单
-            for (var index in this.formArr) {
-                var form = this.formArr[index]
-                console.log(form)
-                // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-                this.$refs[form.formName][0].validate((valid, obj) => {
-                    if (valid) {
-                        // 如果检查通过，则对count减1。
-                        // 当count为1时，表示是最后一个表单，则存储数据
-                        GoodsAddss(JSON.stringify(this.formArr)).then(response => {
-                            if(response.code=="200"){
-                                // this.formArr=[]
-                                // this.form2={
-                                //     cbpc07: "",
-                                //     cbpc08: "",
-                                //     cbsa08: "",
-                                //     cbwa09: "",
-                                //     cala08: "",
-                                //     cbpc100: "",
-                                //     cbpc099: "",
-                                //     cbpc166: "",
-                                //     cbpc10: "",
-                                //     cbpc09: "",
-                                //     cbpd09: "",
-                                //     cbpd11: "",
-                                //     cbpd12: "",
-                                //     cbpc16: "",
-                                //     cbpc12: "",
-                                //     cbpc14: "",
-                                //     cbpd08: "",
-                                //     cbph09:"",
-                                //     cbph10: "",
-                                //     cbph11: "",
-                                //     cbpg161:"",
-                                //     cbpc01:"",
-                                //     cbpc000:"",
-                                //     cbpd09:"",
-                                //     cbpd11:"",
-                                //     cbpd12:""
-                                // }
-                            }
-                        if (count-- === 1) {
-                            this._ly_save()
-                        }
-                        this._ly_addFrom()
-                    //    this.formArr.cbpg01="1234567";
-                    //    this.form.cbpg01=this.formArr.cbpg01;
-                    //    console.log(this.form.cbpg01,85203);
-                    });
-
-                    } else {
-                        console.log(obj)
-                        return false
+        _ly_ok() {
+            // let count = this.tableData.length // 记录当前有多少个表单
+            // for (var index in this.tableData) {
+            //   var form = this.tableData[index]
+            //   console.log(form)
+            //   console.log(JSON.stringify(form))
+            //   }
+            // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
+            // this.$refs[form.formName][0].validate((valid, obj) => {
+            // if (valid) {
+            // 如果检查通过，则对count减1。
+            // 当count为1时，表示是最后一个表单，则存储数据
+            console.log(this.tableData, 333)
+            PurchaseinboundAdds(JSON.stringify(this.tableData)).then(response => {
+                if (response.code == "200") {
+                    this.tableData = []
+                    this.form2 = {
+                        cbpc07: "",
+                        cbpd08: "",
+                        cbsa08: "",
+                        cbwa09: "",
+                        cala08: "",
+                        cbpc100: "",
+                        cbpc099: "",
+                        cbpc166: "",
+                        cbpc10: "",
+                        cbpc09: "",
+                        cbpd09: "",
+                        cbpd11: "",
+                        cbpd12: "",
+                        cbpc16: "",
+                        cbpc12: "",
+                        cbpc14: "",
+                        cbpd08: "",
+                        cbph09: "",
+                        cbph10: "",
+                        cbph11: "",
+                        cbpg161: "",
+                        cbpc01: "",
+                        cbpc000: "",
+                        cbpd09: "",
+                        cbpd11: "",
+                        cbpd12: ""
                     }
-              })
-            }
-            console.log('_ly_ok:' + JSON.stringify(this.formArr))
+                }
+                // if (count-- === 1) {
+                //   this._ly_save()
+                // }
+                this._ly_addFrom()
+                //    this.formArr.cbpg01="1234567";
+                //    this.form.cbpg01=this.formArr.cbpg01;
+                //    console.log(this.form.cbpg01,85203);
+            });
+
+            //   } else {
+            //     console.log(obj)
+            //     return false
+            //   }
+            // })
+
+            console.log('_ly_ok:' + JSON.stringify(this.tableData))
         },
 
 
@@ -862,32 +891,80 @@ export default {
             this.$message.success('添加成功')
             // 将数据传递给父组件。
             // 如果要将数据存储到后台，可在此处自行实现
-            this.$emit('on-ok', this.formArr)
+            this.$emit('on-ok', this.tableData)
         },
         // 增加一行表单
         _ly_addFrom() {
-            if (this.formArr.length >= 10) {
-                this.$message.warning('最多只能添加10行')
-                this.reset01();
-                // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-                return
+            // if (this.formArr.length >= 10) {
+            //   this.$message.warning('最多只能添加10行')
+            //   this.reset01();
+            //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
+            //   return
 
-            }
+            // }
 
-            this.formArr.push({
-                formName: 'myform' + (new Date()).getTime(), // myform1648431132399
-                cbsc08: '',
-                cbsc09: '',
-                cbsc10: '',
-                branch: '',
-                cbpc01: this.form2.cbpg161,
-                cbpd08: this.form2.cbpd08,
+            // this.formArr.push({
+            //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
+            //   cbsc08: '',
+            //   cbsc09: '',
+            //   cbsc10: '',
+            //   branch: '',
+            //   cbpc01: this.form2.cbpg161,
+            //   cbpd08: this.form2.cbpd08,
+            // })
+            this.tableData.push({
+                date: '',
+                num: '',
+                address: '',
+                moner: '',
+                province: '',
+                cbpc000: ''
             })
+            this.dataId++
+            console.log(this.tableData, 852369);
+        },
+
+        // 增加一行表单
+        _ly_addFrom2() {
+            // if (this.formArr.length >= 10) {
+            //   this.$message.warning('最多只能添加10行')
+            //   this.reset01();
+            //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
+            //   return
+
+            // }
+
+            // this.formArr.push({
+            //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
+            //   cbsc08: '',
+            //   cbsc09: '',
+            //   cbsc10: '',
+            //   branch: '',
+            //   cbpc01: this.form2.cbpg161,
+            //   cbpd08: this.form2.cbpd08,
+            // })
+            this.tableData2.push({
+                date: '',
+                num: '',
+                address: '',
+                moner: '',
+                province: '',
+                cbpc000: ''
+            })
+            this.dataId++
+            console.log(this.tableData2, 852369);
         },
         // 删除一行表单
-        _ly_delFrom(index) {
-            console.log('index: ' + index)
-            this.formArr.splice(index, 1)
+        _ly_delFrom(row) {
+            // console.log('index: ' + index)
+            // this.formArr.splice(index, 1)
+            this.tableData.splice(this.tableData.indexOf(row), 1)
+        },
+        // 删除一行表单
+        _ly_delFrom2(row) {
+            // console.log('index: ' + index)
+            // this.formArr.splice(index, 1)
+            this.tableData2.splice(this.tableData2.indexOf(row), 1)
         },
         // 点击select的时候，缓存下行号
         // 如果一行有多个树状结构的select，可以通过缓存列号，区分是哪个select
@@ -907,12 +984,25 @@ export default {
             this.formArr[index].branch = data.label
 
             // 选择后收起下拉框
-            let formName = this.formArr[index].formName
+            let formName = this.tableData[index].formName
             this.$refs[formName + '_select'][0].blur() // myform1648431132399_select
         },
 
+        // 选择树状结构的某个节点时，回调到这个函数
+        _ly_chooseNode2(data) {
+            console.log('_ly_chooseNode:' + JSON.stringify(data))
+            let index = this.currentSelectIndex
+            if (index === -1) {
+                return
+            }
+            // 通过缓存的行号，找到对应的表单，并且将数据存储起来。
+            // 如果需要缓存更多的数据，可以在此处自行实现
+            this.formArr[index].branch = data.label
 
-
+            // 选择后收起下拉框
+            let formName = this.tableData2[index].formName
+            this.$refs[formName + '_select'][0].blur() // myform1648431132399_select
+        },
 
       //列表表头设置
       headClassGDC() {
@@ -1117,57 +1207,49 @@ export default {
                         this.getList();
                         this.reset01();
 
+                        console.log(response.data.id, 333);
+                        this.tableData2.forEach((item) => {
+                            item.cbpb01 = response.data.id;
+                            console.log(item.cbpb01, 8523697412);
+                        })
                         // this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
                     // this.$message.error('请注意规范');
                 }
+
             })
 
-            this.$refs["form5"].validate((item) => {
-                if (item) {
-                    GoodsAddss(this.form5).then(response => {
-                        // console.log(this.from.parent_id, 123456789);
-                        // this.classifyId = response.posts;
-                        // console.log(response.posts,123456);
-                        // this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
-                        this.getTreeselect();
-                        // this.submitShangpin();
-                        this.getList();
-                        this.reset01();
-                        // console.log(this.form2.ifEnabled, 123456);
-                    });
-                  } else {
-                    // this.$message.error('请注意规范');
+            GoodsAddss(JSON.stringify(this.tableData2)).then(response => {
+                if (response.code == "200") {
+                    this.tableData2 = []
+                    this.form2 = {
+                        cbpb07: "",
+                        cbpb08: "",
+                        cbpb09: "",
+                        cbpb10: "",
+                        cbpb11: "",
+                        cbpb12: "",
+                        cbpb13: "",
+                        cbpb14: "",
+                        cbpb15: "",
+                        cala08: "",
+                        cbpa07: "",
+                        cbpc099: ""
+                    }
                 }
-            })
+                this.getTreeselect();
+                // this.submitShangpin();
+                this.getList();
+                this.reset01();
+                // console.log(this.form2.ifEnabled, 123456);
+            });
+
+            console.log('_ly_ok:' + JSON.stringify(this.tableData2))
         },
 
-         /** 新增按钮操作 GoodsAddss */
-             handleAdds() {
-                this.$refs["form5"].validate((item) => {
-                if (item) {
-                    GoodsAddss(this.form5).then(response => {
-                        // console.log(this.from.parent_id, 123456789);
-                        // this.classifyId = response.posts;
-                        // console.log(response.posts,123456);
-                        // this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
-                        this.getTreeselect();
-                        // this.submitShangpin();
-                        this.getList();
-                        this.reset01();
-                        // console.log(this.form2.ifEnabled, 123456);
-                    });
-                  } else {
-                    // this.$message.error('请注意规范');
-                }
-            })
-        },
+        
 
         handlechuangjiang() {
             this.open2 = true;
@@ -1189,15 +1271,26 @@ export default {
                 row.cbpb07 = this.form.cbpb07;
                 row.cbpb10 = this.form.cbpb10;
                 console.log(this.form.cbpb01);
-          this.$refs["form5"].validate((item) => {
-            if (item) {
-                 GoodsAddss(this.form5).then(response => {
-                        // console.log(this.from.parent_id, 123456789);
-                        // this.classifyId = response.posts;
-                        // console.log(response.posts,123456);
-                        // this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
+            //   this.$refs["form5"].validate((item) => {
+            //     if (item) {
+                 GoodsAddss(JSON.stringify(this.tableData)).then(response => {
+                     if (response.code == "200") {
+                         this.tableData = []
+                         this.form2 = {
+                             cbpb07: "",
+                             cbpb08: "",
+                             cbpb09: "",
+                             cbpb10: "",
+                             cbpb11: "",
+                             cbpb12: "",
+                             cbpb13: "",
+                             cbpb14: "",
+                             cbpb15: "",
+                             cala08: "",
+                             cbpa07: "",
+                             cbpc099: ""
+                         }
+                     }
                         this.getTreeselect();
                         // this.submitShangpin();
                         this.getList();
@@ -1230,10 +1323,11 @@ export default {
                     // this.$message.error('请注意规范');
               }
            })
-        }else{
+           //     }else{
 
-        }
-    })
+           //     }
+           // })
+            console.log('_ly_ok:' + JSON.stringify(this.tableData))
 
         },
         /** 修改详情按钮操作**/
@@ -1378,7 +1472,10 @@ export default {
           this.$modal.msgSuccess("删除成功");
         }).catch(() => { });
       },
-        /** 导出按钮操作 */
+        /** 导出按钮操作 
+         * 
+         * /dev-api/stage-api/system/goods/SwJsGoodsexport
+        */
         handleExport() {
             this.download('/system/goods/SwJsGoodsexport', {
                 ...this.queryParams
@@ -1403,7 +1500,10 @@ export default {
             this.upload.title = "商品信息维护";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作 
+         * 
+         * /dev-api/stage-api/system/goods/importTemplate
+        */
         importTemplate() {
             this.download('/system/goods/importTemplate', {
             }, `user_${new Date().getTime()}.xlsx`)
@@ -1441,17 +1541,21 @@ export default {
     this.maxheight = window.innerHeight - 50
 },
     mounted() {
-         // 初始化表单数据，至少有一行表单数据
-        this.formArr = []
+        // 初始化表单数据，至少有一行表单数据
+        this.tableData = []
         this._ly_addFrom()
+        this.tableData2 = []
+        this._ly_addFrom2()
     },
     watch: {
         visible(newVal) {
             this.dialogVisible = newVal
             if (this.dialogVisible === false) {
                 // 重新打开弹窗时，初始化表单数据，至少有一行表单数据
-                this.formArr = []
+                this.tableData = []
                 this._ly_addFrom()
+                this.tableData2 = []
+                this._ly_addFrom2()
             }
         }
     }

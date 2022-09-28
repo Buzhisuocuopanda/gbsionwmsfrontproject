@@ -86,7 +86,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left; margin-left: 1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
@@ -119,21 +119,23 @@
           <el-table-column prop="cbph09" label="数量" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbph09" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
-              <!-- </sapn> -->
+                <el-input v-only-number="{max: 100, min: 0,precision:0}"  v-model="scope.row.cbph09" @blur="chen(scope.row)"  placeholder="" class="shuzicaoyou" style=""></el-input>
+                <!-- <input type="number"  v-enter-number placeholder="请输入金额" min="0" class="one" v-model="scope.row.cbph09"  @blur="isNull(scope.row.cbph09,1)" > -->
+
+                <!-- </sapn> -->
             </template>
           </el-table-column>
           <el-table-column prop="cbph10" label="单价"  width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbph10" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.cbph10" v-only-number="{max: 100, min: 0,precision:0}"  @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
           <el-table-column prop="cbph11" label="金额" width="100">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbph11" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.cbph11" v-only-number="{max: 100, min: 0,precision:0}"  placeholder="" @blur="chen(scope.row)" class="shuzicaoyou" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
