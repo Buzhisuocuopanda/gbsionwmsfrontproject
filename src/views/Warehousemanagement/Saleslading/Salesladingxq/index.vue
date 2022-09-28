@@ -2,10 +2,9 @@
   <div>
     <div class="Purchase_caigou">销售提货单</div>
     <div class="Purchase_sum">
+      <span class="Purchase_bianhao">销售订单号：{{ userList.saleOrderNo || "" }}</span>
       <span class="Purchase_bianhao">编号：{{ userList.orderNo || "" }}</span>
-      <span class="Purchase_bianhao" style="margin-left: 15%"
-        >客户订单号：{{ userList.customerNo || "" }}</span
-      >
+      <span class="Purchase_bianhao">客户订单号：{{ userList.customerNo || "" }}</span>
       <span class="Purchase_riqii">日期：{{ userList.orderDate || "" }}</span>
     </div>
     <div
@@ -45,18 +44,24 @@
         <el-descriptions-item label-class-name="my-labell01">
           <template slot="label">收货人</template>{{ userList.receiver || "" }}
         </el-descriptions-item>
-        <el-descriptions-item label-class-name="my-labell01">
-          <template slot="label">销售订单号</template>{{ userList.saleOrderNo }}
+        <el-descriptions-item
+          label-class-name="my-labell01"
+        >
+          <template slot="label">收货电话</template
+          >{{ userList.receivPhone || "" }}
         </el-descriptions-item>
+        <!-- <el-descriptions-item style="visibility: hidden;" label-class-name="my-labell01">
+          <template slot="label">销售订单号</template>{{ userList.saleOrderNo }}
+        </el-descriptions-item> -->
       </el-descriptions>
       <el-descriptions class="margin-top" title="" :column="3" border>
-        <el-descriptions-item
+        <!-- <el-descriptions-item
           content-class-name="my-content"
           label-class-name="my-labell02"
         >
           <template slot="label">收货电话</template
           >{{ userList.receivPhone || "" }}
-        </el-descriptions-item>
+        </el-descriptions-item> -->
         <el-descriptions-item label-class-name="my-labell02">
           <template slot="label">收货地址</template
           >{{ userList.receiveAdress || "" }}
@@ -69,6 +74,7 @@
         v-loading="loading"
         :data="userLists"
         height="250"
+        border
         :default-sort="{ prop: 'name', order: 'descending' }"
         @selection-change="handleSelectionChange"
       >
@@ -85,7 +91,7 @@
         <!-- goodsNum -->
         <el-table-column label="良品数量">
           <template scope="scope">
-            <el-input v-model="scope.row.qty" :disabled="status == 2?true:false"></el-input>
+            <el-input v-model="scope.row.qty" :readonly="status == 2 || status == 0?true:false"></el-input>
           </template>
         </el-table-column>
         <el-table-column prop="qty" key="qty" label="数量"> </el-table-column>
@@ -146,17 +152,7 @@
         <el-table-column prop="sku" key="sku" align="" label="库位">
         </el-table-column>
         <el-table-column prop="scanStatus" key="scanStatus" label="扫描状态">
-          <template scope="scope">
-            <div>
-              {{
-                scope.row.saoma == 1
-                  ? "已扫描"
-                  : scope.row.saoma == 0
-                  ? "未扫描"
-                  : "未扫描"
-              }}
-            </div>
-          </template>
+          
         </el-table-column>
       </el-table>
 
@@ -166,9 +162,8 @@
         :header-cell-style="headClass"
         v-loading="loading"
         border
-        :data="userlistss"
+        :data="userList1"
         :default-sort="{ prop: 'name', order: 'descending' }"
-        @selection-change="handleSelectionChange"
       >
         <el-table-column
           type="index"
@@ -322,7 +317,7 @@
       <el-button v-show="status == 2" type="primary" @click="PrintRowss"
         >反 审</el-button
       >
-      <el-button v-if="checkStatus != 1" type="primary" @click="PrintRow">质 检</el-button>
+      <!-- <el-button v-if="checkStatus == 1" type="primary" @click="PrintRow">质 检</el-button> -->
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
     <div style="height: 20px"></div>
@@ -344,7 +339,7 @@ export default {
       // 用户表格数据
       userList: {},
       userLists: [],
-      userListss: [],
+      userList1: [],
       userListsss:[],
       // 查询参数
       queryParams: {
@@ -375,6 +370,20 @@ export default {
     this.getList();
   },
   methods: {
+    //列表表头设置
+    headClass() {
+      return {
+        "text-align": "center",
+        height: "30px",
+        padding: "0",
+      };
+    },
+    //序号
+    table_index(index) {
+      return (
+        (this.queryParams.pageNum - 1) * this.queryParams.pageSize + index + 1
+      );
+    },
     //返回按钮
     handlefanhui: function (row) {
       // this.$router.push("/system/user-auth/role/");
@@ -463,11 +472,11 @@ export default {
         ).then((res) => {
           this.userList = res.data;
           this.userLists = res.data.goods;
-          this.userListss = res.data.scans;
+          this.userList1 = res.data.scans;
           this.userListsss = res.data.sugests;
           this.paramss.userId = res.data.userId;
           // this.total = res.data.total;
-          console.log(res, 888999);
+          console.log(res, 888999,this.userListss);
           this.loading = false;
           console.log(res.data, this.userList);
         });
