@@ -388,8 +388,8 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
-                url: process.env.VUE_APP_BASE_API + "/system/barcode/importSwJsSkuBarcode"
+                // 上传的地址/dev-api/stage-api/system/Warehousedetailsinitialize/importSwJsGoods
+                url: process.env.VUE_APP_BASE_API + "/system/Warehousedetailsinitialize/importSwJsGoods"
             },
             // 查询参数
             queryParams: {

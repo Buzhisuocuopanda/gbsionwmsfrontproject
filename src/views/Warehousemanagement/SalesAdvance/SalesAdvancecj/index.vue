@@ -115,7 +115,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
@@ -135,7 +135,7 @@
           <el-table-column label="描述" width="300" />
           <el-table-column label="数量" width="100" prop="qty">
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.qty"  placeholder="" @keyup="validateMealStandard($event)"  class="shuzicaoyou" style=""></el-input>
+                  <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" @keyup="validateMealStandard($event)"  class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="orderDate" label="订单日期" width="215">

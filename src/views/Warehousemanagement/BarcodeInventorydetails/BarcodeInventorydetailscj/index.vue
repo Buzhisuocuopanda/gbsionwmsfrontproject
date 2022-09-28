@@ -167,7 +167,7 @@
           </el-table-column>
           <el-table-column prop="cbpd11" label="价格"  width="100">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.cbig13" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.cbig13" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd12" label="入库时间" width="160">

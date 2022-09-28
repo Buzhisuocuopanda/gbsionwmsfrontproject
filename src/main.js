@@ -46,6 +46,12 @@ import dateMoment from '@/api/Warehousemanagement/PurchaseWarehousing/data.js'
 //打印组件
 import Print from '@/api/Warehousemanagement/PurchaseWarehousing/print.js'
 
+//数字
+import onlyNumber from '@/api/Warehousemanagement/PurchaseWarehousing/el-input'
+
+//数字保留两位小数
+import limitInput from '@/api/Warehousemanagement/PurchaseWarehousing/limitInput.js'
+
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
@@ -72,6 +78,10 @@ Vue.use(VueMeta)
 Vue.use(dateMoment)
 //打印组件
 Vue.use(Print)
+//数字转换
+Vue.use(onlyNumber)
+//数字保留两位小数
+Vue.use(limitInput)
 DictData.install()
 
 /**

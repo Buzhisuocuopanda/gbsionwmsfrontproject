@@ -1,9 +1,7 @@
 <template>
   <div class="app-container">
     <el-row :gutter="20" style="margin-left: -10%">
-      <!--用户数据-->
       <el-col :span="20" :xs="24" class="tooltup" style="width: 100%">
-        <!-- 表头内容  -->
         <el-form
           :model="queryParams"
           ref="queryForm"
@@ -64,8 +62,6 @@
             >
           </el-form-item>
           <el-form-item style="margin-left: 50%">
-            <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-            <!-- <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left:-2%;" @click="handletihuoone">创建</el-button> -->
             <el-button
               size="mini"
               class="biaoto-buttonchuangjian"
@@ -81,10 +77,6 @@
                   通过订单创建
                   <el-badge class="mark" />
                 </el-dropdown-item>
-                <!-- <el-dropdown-item class="clearfix">
-                              通过提货单创建
-                            <el-badge class="mark"/>
-                        </el-dropdown-item> -->
               </el-dropdown-menu>
             </el-dropdown>
           </el-form-item>
@@ -115,8 +107,6 @@
               v-hasPermi="['system:user:export']"
               >反审</el-button
             >
-            <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button> -->
             <el-button
               plain
               size="mini"
@@ -274,13 +264,6 @@
             prop="statusMsg"
             sortable
           >
-            <!-- <template scope="scope">
-                            <div>{{ scope.row.cbpc11 == 1 ? "审核" : scope.row.cbpc11 == 4 ?
-                                "已完成" : scope.row.cbpc11 == 2 ? "未审核" : scope.row.cbpc11 == 3 ?
-                                "已审核" : "未确定状态"
-                                }}
-                            </div>
-                        </template> -->
           </el-table-column>
           <el-table-column
             label="提货建议表"
@@ -379,7 +362,6 @@
           :limit.sync="queryParams.pageSize"
           @pagination="getList"
           :page-sizes="[2, 5, 10, 15, 20]"
-          class="pagintotal"
         />
       </el-col>
     </el-row>
@@ -423,7 +405,7 @@
         height="440"
         :default-sort="{ prop: 'name', order: 'descending' }"
         style="width: 100%; height: 8%; margin-left: -2%"
-        @selection-change="handleSelectionChange"
+        @selection-change="handleSelectionChangee"
       >
         <el-table-column
           label=""
@@ -557,8 +539,6 @@ import {
   PurchaseinboundLists,
   Purchaseinbounddingdanxsdd,
 } from "@/api/Warehousemanagement/Saleslading";
-
-import { PurchaseinboundList } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
 import * as req from "@/api/Warehousemanagement/Saleslading";
 import { getToken } from "@/utils/auth";
@@ -999,8 +979,8 @@ export default {
     //列表表头设置
     headClassssmtt() {
       return {
-        "text-align": "left",
-        height: "40px",
+        'text-align': 'left',
+        height: "30px",
         padding: "0",
       };
     },
@@ -1014,8 +994,8 @@ export default {
     //列表表头设置
     headClassSld() {
       return {
-        "text-align": "left",
-        height: "40px",
+        'text-align': 'left',
+        height: "30px",
         padding: "0",
       };
     },
@@ -1059,7 +1039,7 @@ export default {
       ).then((response) => {
         this.userList = response.data.rows;
         this.total = response.data.total;
-        console.log(response, 339688);
+        console.log(response.data.rows, 339688);
         this.loading = false;
       });
     },
@@ -1082,17 +1062,6 @@ export default {
       });
     },
 
-    /** 详情列表 */
-    // getList05() {
-    //     this.loading = true;
-    //     PurchaseinboundLists(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-    //         this.userList = response.data.rows;
-    //         this.total = response.data.total;
-    //         console.log(response, 3396888952);
-    //         this.loading = false;
-    //     }
-    //     );
-    // },
     //供应商
     getList01() {
       SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(
@@ -1134,61 +1103,6 @@ export default {
       );
     },
 
-    // /** 查询部门下拉树结构 */
-    // getTreeselect() {
-    //     treeselectt().then(response => {
-    //         response.data.forEach((res) => {
-    //             res.code = res.label ? res.label.substring(res.label.indexOf("-") + 1) : ""
-    //             res.label = res.label ? res.label.substring(0, res.label.indexOf("-")) : ""
-    //             if (res.children) {
-    //                 res.children.forEach((i) => {
-    //                     i.code = i.label ? i.label.substring(i.label.indexOf("-") + 1) : ""
-    //                     i.label = i.label ? i.label.substring(0, i.label.indexOf("-")) : ""
-    //                 })
-    //             }
-    //         })
-    //         this.deptOptions = response.data;
-    //         // this.deptOptions = response.data[0].label.substring(0, response.data[0].label.indexOf("-"));
-    //         // console.log(response.data[response.data.length].label.substring(0, response.data[response.data.length].label.indexOf("-")),123456789);
-    //         // console.log(response.data.label);
-    //         // console.log(JSON.stringify(Object.assign({}, response.data)));
-    //         // var j = JSON.stringify(Object.assign({}, response.data))
-    //         // for(var key in j)
-    //         // {
-    //         //   //  alert();
-    //         //   // console.log(key);
-    //         // }
-    //         // console.log(response);
-    //         // console.log(response.data);
-    //     });
-    // },
-    // 筛选节点
-    // filterNode(value, data) {
-    //
-    //   if (!value) return true;
-    //   alert("ddd");
-    //   return data.indexOf(value) !== -1;
-    // },
-    // 节点单击事件
-    // handleNodeClick(data) {
-    //     // console.log(data)
-    //     // this.queryParams.deptId = data.id;
-    //     // console.log(data.label,88888);
-    //     // const v1=data.label.substring(0, data.label.indexOf("-"));
-    //     this.form.classifyNum = "";
-    //     for (let i = 0; i < (data.code.split("-")).length - 1; i++) {
-    //         if (i != 0) {
-    //             this.form.classifyNum += ("-" + (data.code.split("-"))[i])
-    //         } else {
-    //             this.form.classifyNum += (data.code.split("-"))[i]
-    //         }
-    //     }
-    //     // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
-    //     this.form.classifyName = data.label
-    //     this.form.id = (data.code.split("-"))[data.code.split("-").length - 1]
-    //     // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
-    //     this.handleQuery();
-    // },
     // 取消按钮
     cancel() {
       this.open2 = false;
@@ -1257,6 +1171,14 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
+      this.ids = selection;
+      this.idss = selection.map((item) => item.id);
+      this.shenpiids = selection;
+      this.single = selection.length != 1;
+      this.multiple = !selection.length;
+    },
+    // 多选框选中数据
+    handleSelectionChangee(selection) {
       this.ids = selection;
       this.idss = selection.map((item) => item.id);
       this.shenpiids = selection;

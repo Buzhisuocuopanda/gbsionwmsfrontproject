@@ -105,7 +105,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left;margin-left: 1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
@@ -126,35 +126,31 @@
           <el-table-column label="描述" width="230" />
           <el-table-column label="数量" width="100" >
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.qty"  placeholder="" class="shuzicaoyou" style=""></el-input>
+                  <el-input v-model="scope.row.qty"  placeholder=""  v-only-number="{max: 100, min: 0, precision:0.00}"  class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="100" >
             <template slot-scope="scope" style="width:200%;">
-                  <el-input v-model="scope.row.price" placeholder="" class="shuzicaoyou" style=""></el-input>
+                  <el-input v-model="scope.row.price" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="inQty" label="入库数量" width="100">
+          <!-- <el-table-column prop="inQty" label="入库数量" width="100">
             <template slot-scope="scope">
-              <!-- <sapn> -->
-                <el-input v-model="scope.row.inQty"  placeholder="" class="shuzicaoyou" style=""></el-input>
-              <!-- </sapn> -->
+                <el-input v-model="scope.row.inQty" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
-          </el-table-column>
-          <el-table-column prop="changeQty" label="变更数量"  width="100">
+          </el-table-column> -->
+          <!-- <el-table-column prop="changeQty" label="变更数量"  width="100">
             <template slot-scope="scope">
-              <!-- <sapn> -->
-                <el-input v-model="scope.row.changeQty"  class="shuzicaoyou" placeholder="" style=""></el-input>
-              <!-- </sapn> -->
+                <el-input v-model="scope.row.changeQty" v-only-number="{max: 100, min: 0, precision:0.00}"  class="shuzicaoyou" placeholder="" style=""></el-input> 
             </template>
-          </el-table-column>
-          <el-table-column prop="surplusQty" label="剩余数量" width="100">
+          </el-table-column> -->
+          <!-- <el-table-column prop="surplusQty" label="剩余数量" width="100">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.surplusQty" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.surplusQty" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder="" class="shuzicaoyou" style=""></el-input>
               </sapn>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
               <sapn>
@@ -256,7 +252,7 @@
         </div> -->
       </div>
     </el-form>
-    <div class="tinajia_dingwei">
+    <div class="tinajia_dingwei" style="margin-left:80%; margin-top: 5%;" >
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>
