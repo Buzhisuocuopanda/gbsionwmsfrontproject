@@ -252,7 +252,7 @@
         </div> -->
       </div>
     </el-form>
-    <div class="tinajia_dingwei" style="margin-left:80%; margin-top: 5%;" >
+    <div class="tinajia_dingwei" style="margin-left:0%; margin-top: 5%;" >
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>

@@ -316,7 +316,7 @@
           <el-table-column prop="cbpd09" label="数量" width="80">
             <template slot-scope="scope">
               <el-input
-                v-model="scope.row.cbsc09"
+                v-model="scope.row.qty"
                 @blur="chen(scope.row)"
                 placeholder=""
                 class="shuzicaoyou"
@@ -338,7 +338,7 @@
           <el-table-column prop="cbpd12" label="金额" width="80">
             <template slot-scope="scope">
               <el-input
-                v-model="scope.row.cbsc12"
+                v-model="scope.row.price"
                 placeholder=""
                 class="shuzicaoyou"
                 style=""
@@ -347,12 +347,12 @@
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbsc13" placeholder=""></el-input>
+              <el-input v-model="scope.row.noSendQty" placeholder=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="订单占用量" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbsc144" placeholder=""></el-input>
+              <el-input v-model="scope.row.useQty" placeholder=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -1239,29 +1239,31 @@ export default {
 
     /** 新增按钮操作 */
     handleAdd() {
-        this.form2.goods = this.tableData
+      this.form2.goods = this.tableData
       this.$refs["form2"].validate((item) => {
         if (item) {
           PurchaseinboundAdd(this.form3).then((response) => {
             // console.log(response.posts, 12345678);
-            this.$message({
-              message: "添加成功",
-              type: "success",
-              style: "color:red;!important",
-            });
-            // this.getTreeselect();
-            // this.submitShangpin();
-            this.submitShangpin();
-            this.open2 = false;
-            this.reset01();
-            this.$router.push("/Warehousemanagement/Saleslading/");
-            return
-            this.tableData.forEach((item) => {
-              item.cbsb01 = response.data.id;
-            });
-            console.log(response.data.id, 123456);
-            // console.log(this.item, 123456);
-            this._ly_ok();
+            
+            if(response.code == 200){
+              this.$message({
+                message: "添加成功",
+                type: "success",
+                style: "color:red;!important",
+              });
+              this.submitShangpin();
+              this.open2 = false;
+              this.reset01();
+              this.$router.push("/Warehousemanagement/Saleslading/");
+            }else{
+              this.$message({message:response.msg,type:'error'})
+            }
+            // this.tableData.forEach((item) => {
+            //   item.cbsb01 = response.data.id;
+            // });
+            // console.log(response.data.id, 123456);
+            // // console.log(this.item, 123456);
+            // this._ly_ok();
           });
         } else {
           // this.$message.error('请注意规范');

@@ -181,12 +181,18 @@
                     <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
                     <el-table-column prop="cbpf02" label="客户等级" width="251">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf02" placeholder="" class="shuzicaoyou" style=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf02" placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf02" placeholder="" style="width:70%;">
+                                <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbpf06" label="结算类型" width="240">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf06"  placeholder="" class="shuzicaoyou" style=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf06"  placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf06" placeholder="" style="width:68%;">
+                                <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbpf04" label="标准进货价" width="240">
@@ -342,12 +348,18 @@
                     <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
                     <el-table-column prop="cbpf02" label="客户等级" width="251">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf02" placeholder="" class="shuzicaoyou" style=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf02" placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf02" placeholder="" style="width:100%;">
+                                <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbpf06" label="结算类型" width="240">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf06" placeholder="" class="shuzicaoyou" style=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf06" placeholder="" class="shuzicaoyou" style=""></el-input> -->
+                            <el-select v-model="scope.row.cbpf06" placeholder="" style="width:100%;">
+                                <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
+                            </el-select>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbpf04" label="标准进货价" width="240">

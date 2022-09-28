@@ -85,7 +85,7 @@
         <!-- goodsNum -->
         <el-table-column label="良品数量">
           <template scope="scope">
-            <el-input v-model="scope.row.qty"></el-input>
+            <el-input v-model="scope.row.qty" :disabled="status == 2?true:false"></el-input>
           </template>
         </el-table-column>
         <el-table-column prop="qty" key="qty" label="数量"> </el-table-column>
@@ -315,11 +315,16 @@
       </el-descriptions>
     </div>
     <div style="height: 20px"></div>
-    <el-button style="margin-left: 5%" type="primary" @click="PrintRows"
+    <div style="margin-left: 5%">
+      <el-button v-show="status == 1" type="primary" @click="PrintRows"
       >审 核</el-button
     >
-    <el-button type="primary" @click="PrintRow">质 检</el-button>
-    <el-button type="primary" @click="handlefanhui">返 回</el-button>
+      <el-button v-show="status == 2" type="primary" @click="PrintRowss"
+        >反 审</el-button
+      >
+      <el-button v-if="checkStatus != 1" type="primary" @click="PrintRow">质 检</el-button>
+      <el-button type="primary" @click="handlefanhui">返 回</el-button>
+    </div>
     <div style="height: 20px"></div>
   </div>
 </template>
@@ -354,10 +359,15 @@ export default {
       },
       CBPC01: "",
       paramss: {
+        goods:[],
         opType: "",
         takeOrderId: "",
         userId: "",
       },
+      // 订单状态
+      status:'',
+      // 质检状态
+      checkstatus:'',
     };
   },
   watch: {},
@@ -373,6 +383,7 @@ export default {
     // 审核
     PrintRows(row) {
       this.paramss.opType = 1;
+      this.changeMoreArrary()
       auditTakeOrder(this.paramss).then((res) => {
         if (res.code == 200) {
           this.$message({ message: "审批成功", type: "success" });
@@ -382,9 +393,23 @@ export default {
         }
       });
     },
+    // 反审
+    PrintRowss(row) {
+      this.paramss.opType = 3;
+      this.changeMoreArrary();
+      auditTakeOrder(this.paramss).then((res) => {
+        if (res.code == 200) {
+          this.$message({ message: "反审成功", type: "success" });
+          this.$router.push("/Warehousemanagement/Saleslading/");
+        } else {
+          this.$message({ message: res.msg, type: "error" });
+        }
+      });
+    },
     // 质检
     PrintRow(index, row) {
       this.paramss.opType = 6;
+      this.changeMoreArrary()
       auditTakeOrder(this.paramss).then((res) => {
         if (res.code == 200) {
           this.$message({ message: "质检完成成功", type: "success" });
@@ -393,6 +418,19 @@ export default {
           this.$message({ message: res.msg, type: "error" });
         }
       });
+    },
+    // 处理多条数据
+    changeMoreArrary(){
+      let obj = {
+        "goodQty": 0,
+        "plId": 0
+      }
+      this.paramss.goods = this.userLists.map(item =>{
+        obj.goodQty = item.qty;
+        obj.plId = item.cbplId;
+        return obj
+      })
+      console.log(this.paramss.goods,'4444')
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
@@ -413,7 +451,9 @@ export default {
     getList() {
       this.loading = true;
       const userId = this.$route.params && this.$route.params.cbpc01;
-      console.log(typeof userId);
+      this.status = this.$route.params && this.$route.params.status;
+      this.checkstatus = this.$route.params && this.$route.params.checkStatus;
+      console.log(this.$route.params,'路由');
       this.paramss.takeOrderId = Number(userId);
       if (userId) {
         // 获取表详细信息
