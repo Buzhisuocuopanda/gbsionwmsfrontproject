@@ -4,7 +4,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/system/Selloutofwarehouse/Selloutofwarehouseadd',
+    url: '/whmanagement/addTakeGoodsOrder',
     method: 'post',
     data: data
   })
@@ -170,5 +170,21 @@ export function StoreSkuList(query) {
     url: '/system/sku/SwJsStorelist',
     method: 'get',
     params: query
+  })
+}
+// 审核
+export function auditTakeOrder(data) {
+  return request({
+    url: '/whmanagement/auditTakeOrder',
+    method: 'post',
+    data: data
+  })
+}
+// 质检
+export function auditTakeOrders(data) {
+  return request({
+    url: '/whmanagement/auditTakeOrder',
+    method: 'post',
+    data: data
   })
 }

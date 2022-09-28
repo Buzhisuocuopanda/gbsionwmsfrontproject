@@ -287,7 +287,7 @@
                 icon="el-icon-edit"
                 class="button-caozuoxougai caozuoxiangqeng"
                 @click="handlexiangqengSelect(scope.row)"
-                v-if="(scope.row.status == 1) | (scope.row.status == 2)"
+                v-if="(scope.row.status != 1)"
                 v-hasPermi="['system:user:edit']"
               >
                 修改
@@ -298,7 +298,7 @@
                 icon="el-icon-delete"
                 class="button-caozuoxougai caozuoxiangqeng"
                 @click="handleDelete01(scope.row)"
-                v-if="(scope.row.status == 1) | (scope.row.status == 2)"
+                v-if="(scope.row.status != 1)"
                 v-hasPermi="['system:user:remove']"
                 >删除</el-button
               >
@@ -393,7 +393,7 @@
               placeholder="请输入销售订单编号"
               clearable
               style="width: 100%"
-              @change="handleQuery"
+              @change="handleQuerys(queryParams.orderNo)"
             />
         </el-col>
       </el-row>
@@ -1150,6 +1150,18 @@ export default {
       //  this.queryParams.pageNum = this.form.classifyName;
       console.log(this.queryParams);
       // this.getList();
+    },
+    handleQuerys(saleNo){
+      console.log(saleNo)
+      let obj = {
+        orderNo:saleNo,
+        type:''
+      }
+      Purchaseinbounddingdanxsdd(obj).then((res) =>{
+        if(res.code == 200){
+          this.userList01 = res.data.rows;
+        }
+      })
     },
     /** 重置按钮操作 */
     resetQuery() {
