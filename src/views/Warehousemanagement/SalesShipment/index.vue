@@ -66,7 +66,7 @@
                 </el-form>
 
                 <el-table border :header-cell-style="headClassssmt" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="440"
-                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:92.5%;height: 8%;margin-left: -2%;"
+                    :default-sort="{ prop: 'name', order: 'descending' }" style="width: 92.5%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="cbsb07" prop="cbsb07" sortable style="padding-top:60px !important;" width="160px;" fixed />
@@ -156,7 +156,7 @@
                     @selection-change="handleSelectionChange">
                     <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
                       <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button  icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
+                            <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
                                 v-hasPermi="['system:user:edit']">
                             </el-button>
                        </template>
@@ -1013,16 +1013,17 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
             PurchaseinboundShss(row).then(response => {
-             
-             if (response.code == "200") {
-                console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '标记完成', type: 'success' });
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-              } 
+                if(response.code == 200){
+                    console.log(this.form.cbpc01, 789)
+                    // this.submitShangpin();
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '标记完成', type: 'success' });
+                }else{
+                    this.$message({ message:response.msg,type :'error'})
+                }
+                
+
             });
             }).catch(() => { });
         },
@@ -1035,14 +1036,14 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
-                 
-                if (res.code == "200") {
                     // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("标记完成");
-                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
-                  }
+                    if(res.code == 200){
+                        this.getList();
+                        this.$modal.msgSuccess("标记完成");
+                    }else{
+                        this.$message({ message:res.msg,type :'error'})
+                    }
+                    
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1065,14 +1066,13 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
-                
-                 if (response.code == "200") {      
                     console.log(this.form.cbpc01, 789);
-                    this.getList();
-                    this.$message({ message: '取消标记成功', type: 'success' });
-                 }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                  }
+                    if(response.code == 200){
+                        this.getList();
+                        this.$message({ message: '取消标记成功', type: 'success' });
+                    }else{
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
         },
@@ -1228,7 +1228,7 @@ export default {
             this.$router.push({
 
                 path: '/system/user-authhhchuanj/role/',
-                name: 'index',
+                // name: 'index',
                 query: {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
@@ -1242,7 +1242,7 @@ export default {
                         //  JSON.stringify(this.userList)
                 }
             })
-            location.reload();
+            // location.reload();
         },
         // /** 提交按钮 */
         // submitForm: function () {

@@ -13,8 +13,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="客户" label-width="100px" style="margin-left: 10px;margin-top: -20px"  class="item-r" >
-          <el-select v-model="queryParams.customerName"  style="width: 500px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading2">
-            <el-option v-for="item in cbcaList" :key="item.cbca08" :label="item.cbca08" :value="item.cbca08"></el-option>
+          <el-select v-model="queryParams.customerId"  style="width: 500px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+            <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
           </el-select>
         </el-form-item>
 
@@ -33,7 +33,7 @@
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column fixed label="入库时间" align="center" header-align="center" prop="inWhTimeMsg" min-width="100px;" />
+        <el-table-column fixed label="入库时间" align="center" header-align="center" prop="inWhTime" min-width="100px;" />
         <el-table-column fixed label="出库时间" align="center" prop="outWhTimeMsg"  min-width="100px;"/>
         <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="center" prop="model" min-width="120px;"/>
@@ -98,7 +98,7 @@ export default {
         // total: this.total,
         saleOrderNo: "",
         whId:"",
-        customerName:"",
+        customerId:"",
         startTime:"",
         endTime:"",
 
@@ -258,8 +258,8 @@ export default {
     resetQuery() {
       this.queryParams.saleOrderNo = "";
       this.queryParams.whId = "";
-      this.queryParams.customerName = "";
-
+      this.queryParams.customerId = "";
+      this.queryParams.dateRange = [];
       this.queryParams.pageNum = 1;
       // this.resetForm("queryParams");
       this.onSearch();
@@ -277,12 +277,17 @@ export default {
       }, `财务综合报表查询数据_${new Date().getTime()}.xlsx`)
     },
     onSearch() {
-      if(this.dateRange.length>=2){
-        this.queryParams.startTime = this.dateRange[0];
-        this.queryParams.endTime = this.dateRange[1];
-      }else {
+      if(this.dateRange==null){
         this.queryParams.startTime = undefined;
         this.queryParams.endTime = undefined;
+      }else {
+        if(this.dateRange.length>=2){
+          this.queryParams.startTime = this.dateRange[0];
+          this.queryParams.endTime = this.dateRange[1];
+        }else {
+          this.queryParams.startTime = undefined;
+          this.queryParams.endTime = undefined;
+        }
       }
       this.loading = true;
       getfnSynthesisList(this.queryParams).then(response => {

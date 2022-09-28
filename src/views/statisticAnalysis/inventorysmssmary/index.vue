@@ -96,8 +96,8 @@ export default {
         pageNum: 1,
         pageSize: 10,
         cbpb01:"",
-        cbwa09: "",
         caua17:"",
+        cbca08:"",
         startTime:undefined,
         endTime:undefined,
 
@@ -246,7 +246,7 @@ export default {
       this.onSearch();
     },
     onSearch() {
-      if(this.dateRange.length>=2){
+      if(this.dateRange!=null&&this.dateRange.length>=2){
         this.queryParams.startTime = this.dateRange[0];
         this.queryParams.endTime = this.dateRange[1];
       }else {

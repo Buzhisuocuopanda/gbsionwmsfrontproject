@@ -456,7 +456,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址
+                // 上传的地址/dev-api/stage-api/system/Purchasereturnorders/importSwJsGoods
                 url: process.env.VUE_APP_BASE_API + "/system/Purchasereturnorders/importSwJsGoods"
             },
             // 查询参数
@@ -1303,7 +1303,9 @@ export default {
             this.upload.title = "采购退库单";
             this.upload.open = true;
         },
-        /** 下载模板操作 */
+        /** 下载模板操作 
+         * /dev-api/stage-api/system/Purchasereturnorders/importTemplate
+        */
         importTemplate() {
             this.download('/system/Purchasereturnorders/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)

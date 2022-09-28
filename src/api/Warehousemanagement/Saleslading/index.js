@@ -4,7 +4,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/system/Selloutofwarehouse/Selloutofwarehouseadd',
+    url: '/whmanagement/addTakeGoodsOrder',
     method: 'post',
     data: data
   })
@@ -35,17 +35,25 @@ export function Purchaseinbounddingdanxq(CBPC01) {
 }
 // 销售订单查询
 export function Purchaseinbounddingdanxsdd(data) {
+  console.log(data,'data')
   return request({
     url: '/sale/saleOrderList',
     method: 'get',
-    data: data
+    params: data
   })
+  
 }
 
 // 销售订单详情查询
-export function Purchaseinxiaoshoudingdan(CBPC01) {
+// export function Purchaseinxiaoshoudingdan(CBPC01) {
+//   return request({
+//     url: '/sale/saleOderDetail?orderId='+ CBPC01,
+//     method: 'get'
+//   })
+// }
+export function Purchaseinxiaoshoudingdan(CBPC01,whid) {
   return request({
-    url: '/sale/saleOderDetail?orderId='+ CBPC01,
+    url: '/whmanagement/takeOrderDetailBySaleId?saleOrderId='+CBPC01+'&whId=' + whid,
     method: 'get'
   })
 }
@@ -162,5 +170,21 @@ export function StoreSkuList(query) {
     url: '/system/sku/SwJsStorelist',
     method: 'get',
     params: query
+  })
+}
+// 审核
+export function auditTakeOrder(data) {
+  return request({
+    url: '/whmanagement/auditTakeOrder',
+    method: 'post',
+    data: data
+  })
+}
+// 质检
+export function auditTakeOrders(data) {
+  return request({
+    url: '/whmanagement/auditTakeOrder',
+    method: 'post',
+    data: data
   })
 }

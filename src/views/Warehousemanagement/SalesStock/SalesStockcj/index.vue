@@ -143,7 +143,7 @@
           <el-col :span="24">
             <el-button
               plain
-              style="float: left"
+              style="float: left;margin-left: 1%; " 
               type="primary"
               @click="_ly_addFrom"
               >增行</el-button
@@ -265,7 +265,7 @@
 
           <el-table-column prop="cbif09" label="数量" width="100">
             <template slot-scope="scope">
-              <el-input
+              <el-input v-only-number="{max: 100, min: 0, precision:0.00}"
                 v-model="scope.row.cbsf09"
                 @blur="chen(scope.row)"
                 :precision="2"
@@ -277,7 +277,7 @@
           </el-table-column>
           <el-table-column prop="cbif11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input
+              <el-input v-only-number="{max: 100, min: 0, precision:0.00}"
                 v-model="scope.row.cbsf11"
                 @blur="chen(scope.row)"
                 :precision="2"
@@ -289,7 +289,8 @@
           </el-table-column>
           <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input
+              <el-input v-only-number="{max: 100, min: 0, precision:0.00}"
+                @blur="chen(scope.row)"
                 v-model="scope.row.cbsf12"
                 placeholder=""
                 :precision="2"
@@ -347,7 +348,7 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei">
+    <div class="tinajia_dingwei" style="margin-left:80%; margin-top: 10%;">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>
