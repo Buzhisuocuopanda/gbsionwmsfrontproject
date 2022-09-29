@@ -61,7 +61,7 @@
               >重置</el-button
             >
           </el-form-item>
-          <el-form-item style="margin-left: 50%">
+          <el-form-item style="margin-left: 60%">
             <el-button
               size="mini"
               class="biaoto-buttonchuangjian"
@@ -89,7 +89,7 @@
               @click="handleDelete"
               >删除</el-button
             >
-            <el-button
+            <!-- <el-button
               plain
               size="mini"
               class="biaoto-buttondaochu"
@@ -106,7 +106,7 @@
               @click="PurchaseinboundFanShenpi01"
               v-hasPermi="['system:user:export']"
               >反审</el-button
-            >
+            > -->
             <el-button
               plain
               size="mini"
@@ -325,7 +325,7 @@
                 type="text"
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
-                @click="PurchaseinboundShenpi(scope.row)"
+                @click="PurchaseinboundShenpis(scope.row)"
                 v-hasPermi="['system:user:listselect']"
                 v-if="scope.row.status == 1"
                 >撤销</el-button
@@ -355,6 +355,16 @@
                 type="text"
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
+                @click="PrintRow(scope.row)"
+                v-hasPermi="['system:user:listselect']"
+                v-if="scope.row.checkStatus == 2"
+                >质检</el-button
+              >
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-s-order"
+                class="caozuoxiangqeng"
                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
                 v-hasPermi="['system:user:listselect']"
                 v-if="scope.row.status == 3"
@@ -367,7 +377,7 @@
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                 v-hasPermi="['system:user:listselect']"
-                v-if="(scope.row.status == 2) | (scope.row.status == 1)"
+                v-if="(scope.row.status == 2)"
                 >标记完成</el-button
               >
             </template>
@@ -495,6 +505,14 @@
           sortable
         />
       </el-table>
+      <pagination
+          v-show="total > 0"
+          :total="total"
+          :page.sync="queryParams.pageNum"
+          :limit.sync="queryParams.pageSize"
+          @pagination="getList09"
+          :page-sizes="[2, 5, 10, 15, 20]"
+        />
     </el-dialog>
 
     <!-- 用户导入对话框 -->
@@ -557,6 +575,7 @@ import {
   StoreSkuList,
   PurchaseinboundLists,
   Purchaseinbounddingdanxsdd,
+  auditTakeOrder,
 } from "@/api/Warehousemanagement/Saleslading";
 
 import * as req from "@/api/Warehousemanagement/Saleslading";
@@ -1049,7 +1068,7 @@ export default {
       this.tianjiahang.splice(index, 1);
     },
 
-    /** 销售提货单列表 */
+    /** 销售提货单列表 查询 */
     getList() {
       this.loading = true;
       console.log(this.queryParams, this.dateRange, "ceshi");
@@ -1066,10 +1085,8 @@ export default {
     /** 销售订单列表 */
     getList09() {
       this.loading = true;
-      let query = {
-        status:5
-      }
-      Purchaseinbounddingdanxsdd(query).then((response) => {
+      this.queryParams.status = 5
+      Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams, this.dateRange)).then((response) => {
         this.userList01 = response.data.rows;
         this.totall = response.data.total;
         // //供应商
@@ -1204,6 +1221,33 @@ export default {
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
+    // 处理多条数据
+    changeMoreArrary(row,type){
+      let paramss = {
+        goods:[],
+        opType: type,
+        takeOrderId: row.id,
+        userId: 1,
+      };
+      auditTakeOrder(paramss).then((res) => {
+        if (res.code == 200) {
+          this.$message({ message:res.msg, type: "success" });
+          this.getList()
+        } else {
+          this.$message({ message:res.msg, type: "error" });
+        }
+      });
+      // let obj = {
+      //   "goodQty": 0,
+      //   "plId": 0
+      // }
+      // paramss.goods = this.userLists.map(item =>{
+      //   obj.goodQty = item.qty;
+      //   obj.plId = item.cbplId;
+      //   return obj
+      // })
+      // console.log(this.paramss.goods,'4444')
+    },
     // 更多操作触发
     handleCommand(command, row) {
       switch (command) {
@@ -1230,19 +1274,18 @@ export default {
       let status = row.status
       let checkstatus = row.checkStatus
       this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
-      return
-      PurchaseinboundSH(row).then((response) => {
-        // console.log(this.form.cbpc01, 789)
-        // this.submitShangpin();
-        console.log(response);
-        if (response.code == 200) {
-          this.getList();
-          // this.open = false;
-          this.$message({ message: "审批成功", type: "success" });
-        } else {
-          this.$modal.msgError(response.msg);
-        }
-      });
+      // PurchaseinboundSH(row).then((response) => {
+      //   // console.log(this.form.cbpc01, 789)
+      //   // this.submitShangpin();
+      //   console.log(response);
+      //   if (response.code == 200) {
+      //     this.getList();
+      //     // this.open = false;
+      //     this.$message({ message: "审批成功", type: "success" });
+      //   } else {
+      //     this.$modal.msgError(response.msg);
+      //   }
+      // });
     },
     //审批上面内容
     PurchaseinboundShenpi01(row) {
@@ -1309,33 +1352,54 @@ export default {
           });
       });
     },
-
+    // 质检
+    PrintRow(row) {
+      this.changeMoreArrary(row,6)
+      // this.paramss.opType = 6;
+      // this.changeMoreArrary()
+      // auditTakeOrder(this.paramss).then((res) => {
+      //   if (res.code == 200) {
+      //     this.$message({ message: "质检完成成功", type: "success" });
+      //     this.$router.push("/Warehousemanagement/Saleslading/");
+      //   } else {
+      //     this.$message({ message: res.msg, type: "error" });
+      //   }
+      // });
+    },
     //标记完成
     PurchaseinboundBiaojiWancheng(row) {
-      // console.log(row.cbpc01, 8888);
-
-      PurchaseinboundShss(row).then((response) => {
-        if (response.code == 200) {
-          console.log(this.form.id, 789);
-          // this.submitShangpin();
-          this.getList();
-          // this.open = false;
-          this.$message({ message: "标记完成", type: "success" });
-        } else {
-          this.$modal.msgError(response.msg);
-        }
-      });
+      this.changeMoreArrary(row,4)
+      // PurchaseinboundShss(row).then((response) => {
+      //   if (response.code == 200) {
+      //     console.log(this.form.id, 789);
+      //     // this.submitShangpin();
+      //     this.getList();
+      //     // this.open = false;
+      //     this.$message({ message: "标记完成", type: "success" });
+      //   } else {
+      //     this.$modal.msgError(response.msg);
+      //   }
+      // });
     },
 
     //标记完成上面的按钮
     PurchaseinboundBiaojiWancheng01(row) {
       let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
       // console.log(row.cbpc01, 8888);
-
+      console.log(userIds)
+      let paramss = {
+        goods:[],
+        opType: '',
+        takeOrderId: '',
+        userId: 1,
+      };
       userIds.forEach((item) => {
-        req
-          .PurchaseinboundShss(item)
-          .then((res) => {
+        paramss ={
+          opType:4,
+          takeOrderId:item.id,
+          userId:1
+        }
+        req.auditTakeOrder(paramss).then((res) => {
             if (res.code == 200) {
               // console.log(res, 123)
               this.getList();
@@ -1345,9 +1409,25 @@ export default {
             }
           })
           .catch((e) => {
-            // console.log(e, 456)
+            console.log(e, 456)
           });
       });
+      // userIds.forEach((item) => {
+      //   req
+      //     .PurchaseinboundShss(item)
+      //     .then((res) => {
+      //       if (res.code == 200) {
+      //         // console.log(res, 123)
+      //         this.getList();
+      //         this.$modal.msgSuccess("标记完成");
+      //       } else {
+      //         this.$modal.msgError(res.msg);
+      //       }
+      //     })
+      //     .catch((e) => {
+      //       // console.log(e, 456)
+      //     });
+      // });
     },
     //取消标记
     PurchaseinboundQuxiaoWangcheng(row) {
@@ -1382,13 +1462,20 @@ export default {
     PurchaseinboundQuxiaoWangcheng01(row) {
       let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
       // console.log(row.cbpc01, 8888);
-
+      let paramss = {
+        goods:[],
+        opType: '',
+        takeOrderId: '',
+        userId: 1,
+      };
       userIds.forEach((item) => {
-        req
-          .Purchaseinbounds(item)
-          .then((res) => {
+        paramss ={
+          opType:5,
+          takeOrderId:item.id,
+          userId:1
+        }
+        req.auditTakeOrder(paramss).then((res) => {
             if (res.code == 200) {
-              // console.log(res, 123)
               this.getList();
               this.$modal.msgSuccess("取消标记成功");
             } else {
@@ -1396,11 +1483,31 @@ export default {
             }
           })
           .catch((e) => {
-            // console.log(e, 456)
+            console.log(e, 456)
           });
       });
+      // userIds.forEach((item) => {
+      //   req
+      //     .Purchaseinbounds(item)
+      //     .then((res) => {
+      //       if (res.code == 200) {
+      //         // console.log(res, 123)
+      //         this.getList();
+      //         this.$modal.msgSuccess("取消标记成功");
+      //       } else {
+      //         this.$modal.msgError(res.msg);
+      //       }
+      //     })
+      //     .catch((e) => {
+      //       // console.log(e, 456)
+      //     });
+      // });
     },
-
+    // 撤销
+    // auditTakeOrder,
+    PurchaseinboundShenpis(row){
+      this.changeMoreArrary(row,2)
+    },
     /** 修改按钮操作 */
     handleUpdate() {
       if (this.form.name != undefined) {
@@ -1469,9 +1576,10 @@ export default {
     handlexiangqengSelects(row) {
       this.open = true;
       console.log(row, 7788521);
-      const userId = row.id;
+      let userId = row.id;
       let status = row.status
-      this.$router.push("/system/user-authhhh/role/" + userId + status);
+      let checkstatus = row.checkStatus
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
     },
     /** 数形列表的商品分类按钮**/
     submitShangpin() {
@@ -1549,11 +1657,11 @@ export default {
         })
         .catch(() => {});
     },
-    /** 分配角色操作 */
+    /** 分配角色操作 详情跳转 */
     handleAuthRole: function (row) {
       const userId = row.id;
-      let status = row.status
-      let checkstatus = row.checkStatus
+      let status = 0
+      let checkstatus = 0
       this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
     },
     /** 创建操作 */

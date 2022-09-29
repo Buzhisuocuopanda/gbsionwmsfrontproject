@@ -79,7 +79,7 @@
         </section>
         <div style="height:20px;"></div>
             <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
-            <el-button type="primary" @click="handlefanhui">返回</el-button>
+            <el-button  @click="handlefanhui">返回</el-button>
         <div style="height:20px;"></div>
     </div>
 
@@ -120,7 +120,7 @@ export default {
     },
     methods: {
 
-         //返回按钮
+         //销售预订单返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-xiaosydd/role/");

@@ -12,7 +12,6 @@
     margin-left: 46%;
     font-weight: 900;
     font-size: 20px;
-    margin-bottom: 1%;
 }
 
 
@@ -114,18 +113,14 @@
     width: 80px !important;
 }
 
+
 .table-bodys {
     width: 1629px;
     height: 360px;
     overflow: auto;
 }
+
 .shuzicaoyou {
     text-align: right;
     direction: rtl;
 }
-
-/* .tinajia_dingwei {
-    position: absolute;
-    top: 50%;
-    left: 70%;
-} */

@@ -34,11 +34,11 @@
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="left" label="型号" width="120">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" align="right" label="描述" width="550">
+                <el-table-column prop="cbpb08" key="cbpb08" align="left" label="描述" width="550">
                 </el-table-column>
                 <el-table-column prop="cbab09" key="cbab09" align="right" label="数量" width="60">
                 </el-table-column>
-              <el-table-column prop="cbab15" key="cbab15" align="right" label="已扫数量" width="80">
+              <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量" width="80">
               </el-table-column>
               <el-table-column prop="cbpb10" key="cbpb10" align="right" label="单价" width="60">
               </el-table-column>
@@ -132,10 +132,33 @@
                 </el-descriptions-item>
             </el-descriptions>
         </div>
+        <div>
+            <span class="saomiaojluu">制单(wanghui):</span>
+            <span class="saomiaojluuu">审核:</span>
+            <span class="saomiaojluuuu">财务:</span>
+        </div>
+            <div class="saomiaojlu">扫描记录</div>
+            <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userLists"
+                :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" :default-sort="{ prop: 'name', order: 'descending' }">
+                <el-table-column prop="pinpai" key="pinpai" label="品牌">
+                </el-table-column>
+                <el-table-column prop="lx" key="lx" label="类型">
+                </el-table-column>
+                <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
+                </el-table-column>
+                <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="250">
+                </el-table-column>
+                <el-table-column prop="sn" key="sn" align="" label="SN">
+                </el-table-column>
+                <el-table-column prop="kwm" key="kwm" align="" label="库位">
+                </el-table-column>
+                <el-table-column prop="cbpe03" key="cbpe03" :formatter="formatDate" label="入库时间">
+                </el-table-column>
+            </el-table>
      </section>
       <div style="height:50px;"></div>
      <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
-     <el-button style="margin-left:5%;" type="primary">返 回</el-button>
+     <el-button style="margin-left:5%;" @click="handlexiaoshouone">返 回</el-button>
      <div style="height:50px;"></div>
     </div>
 
@@ -152,6 +175,8 @@ export default {
             total: 0,
             // 用户表格数据
             userList: null,
+            // 扫描部分储存
+            userLists: null,
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -175,6 +200,22 @@ export default {
 
     },
     methods: {
+
+        //列表表头设置
+        headClass() {
+            return {
+                'text-align': 'center',
+                height: '30px',
+                padding: '0'
+            }
+        },
+      //
+
+        /** 仓库调拨单返回操作 */
+        handlexiaoshouone: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/cangkudiaobudanfh/role/");
+        },
 
           //打印
         PrintRow(index, row){
@@ -214,6 +255,13 @@ export default {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);
+                  let userlistss = res.data.rows.map(item => {
+                      return item.goods;
+                  })
+                  this.userLists = userlistss[0];
+                  console.log(this.userLists, 123456);
+                  console.log(res, 888999);
+                  this.loading = false;
                     this.loading = false;
                 });
             }

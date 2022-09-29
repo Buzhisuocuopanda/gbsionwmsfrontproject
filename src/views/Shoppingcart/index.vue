@@ -511,8 +511,8 @@ export default {
      // console.log(this.goodsId,1111111)
 
       
-       let userIds = this.ids.length > 0 ? this.ids : row
-            this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+       let userIds = this.idss.length > 0 ? this.idss : row
+            this.$modal.confirm('编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                  this.$router.push( {path: "/Salesmanagement/salemdfOrderDetails", query: { goods: JSON.stringify(this.idss) }})
         })

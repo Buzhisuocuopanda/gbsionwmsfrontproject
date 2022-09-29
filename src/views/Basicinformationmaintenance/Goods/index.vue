@@ -207,7 +207,10 @@
                     </el-table-column>
                     <el-table-column prop="cbpf07" label="生效日期" width="240">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf07" placeholder=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf07" placeholder=""></el-input> -->
+
+                            <el-date-picker type="date" placeholder="" v-model="scope.row.cbpf07">
+                            </el-date-picker>
                         </template>
                     </el-table-column>
                     <el-table-column v-if="false"  prop="cbpb01" label="商品信息维护id" width="240">
@@ -374,7 +377,9 @@
                     </el-table-column>
                     <el-table-column prop="cbpf07" label="生效日期" width="240">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf07" placeholder=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf07" placeholder=""></el-input> -->
+                            <el-date-picker type="date" placeholder="" v-model="scope.row.cbpf07">
+                            </el-date-picker>
                         </template>
                     </el-table-column>
                     <el-table-column v-if="false"  prop="cbpb01" label="商品信息维护" width="240">
@@ -429,7 +434,7 @@
 <script>
 // import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus } from "@/api/system/user";
 // import { ClassifyAdd, ClassifyList, ClassifyEdit, ClassifyTreeselect, ClassifyRemove, ClassifyImport } from "@/api/Basicinformationmaintenance/Goods/index";
-import { GoodsAdd, GoodsList, GoodsEdit, ClassifyTreeselect, GoodsRemove,GoodsAddss } from "@/api/Basicinformationmaintenance/Goods/index";
+import { GoodsAdd, GoodsList, GoodsEdit, ClassifyTreeselect, GoodsRemove, GoodsAddss, GoodsListjiesuanhb } from "@/api/Basicinformationmaintenance/Goods/index";
 
 import * as req from "@/api/Basicinformationmaintenance/Goods/index";
 import { getToken } from "@/utils/auth";
@@ -475,8 +480,17 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+            total9916:0,
             // 用户表格数据
             userList: null,
+
+            userList01:null,
+            userList03:null,
+
+            //存储结算货币
+            userList9916:null,
+            //存储结算货币存储数据
+            userList0929:null,
             // 弹出层标题
             title: "",
             title1: "",
@@ -652,6 +666,7 @@ export default {
                 page: 1,
                 size: 15,
                 total: this.total,
+                total01 :this.total01,
                 brand: undefined,
                 cbpb12: undefined,
                 cbpa07: undefined,
@@ -735,7 +750,10 @@ export default {
        this.form.cbpb09 =  this.form.cbpb08;
 
         this.getList();
+        // this.getList01();
         this.getTreeselect();
+
+        this.getList029();
 
         // //输入框校验
         // this.modeltext();
@@ -1018,6 +1036,7 @@ export default {
             GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 console.log(response.rows, 123456);
                 this.userList = response.data.rows;
+                this.userList03 = response.data.rows;
                 this.total = response.data.total;
                 console.log(response, 3369);
                 console.log(response.data.content, 339688);
@@ -1025,6 +1044,37 @@ export default {
             }
             );
         },
+        /** 查询用户列表 */
+        getList029() {
+            this.loading = true;
+
+            GoodsListjiesuanhb(9844,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                // console.log(response.rows, 123456);
+                // this.userList = response.data.rows;
+                // this.userList03 = response.data.rows;
+                // this.total = response.data.total;
+                this.userList9916 = response.data.rows;
+                this.total9916 = response.data.total;
+                console.log(this.userList9916, 3369916);
+
+                this.userList9916.forEach((item) => {
+                    // item.cbpb01 = item;
+                    this.userList0929 = item;
+                    this.tableData[0].cbpf02 = item.cbpf02;
+                    this.tableData[0].cbpf04 = item.cbpf04;
+                    this.tableData[0].cbpf05 = item.cbpf05;
+                    this.tableData[0].cbpf06 = item.cbpf06;
+                    this.tableData[0].cbpf07 = item.cbpf07;
+                    console.log(item.cbpf02,20220929);
+                    // console.log(item.cbpb01, 8523697412);
+                })
+
+                // console.log(response.data.content, 339688);
+                // this.loading = false;
+            }
+            );
+        },
+       //GoodsListjiesuanhb
         /** 查询部门下拉树结构 */
         getTreeselect() {
             ClassifyTreeselect().then(response => {
@@ -1207,11 +1257,37 @@ export default {
                         this.getList();
                         this.reset01();
 
-                        console.log(response.data.id, 333);
+                        // console.log(response.data.id, 333);
+                        // console.log(this.tableData2,6666)
                         this.tableData2.forEach((item) => {
                             item.cbpb01 = response.data.id;
-                            console.log(item.cbpb01, 8523697412);
+                            // console.log(item.cbpb01, 8523697412);
                         })
+                        console.log(this.tableData2,555)
+                        GoodsAddss(JSON.stringify(this.tableData2)).then(response => {
+                            if (response.code == "200") {
+                                this.tableData2 = []
+                                this.form2 = {
+                                    cbpb07: "",
+                                    cbpb08: "",
+                                    cbpb09: "",
+                                    cbpb10: "",
+                                    cbpb11: "",
+                                    cbpb12: "",
+                                    cbpb13: "",
+                                    cbpb14: "",
+                                    cbpb15: "",
+                                    cala08: "",
+                                    cbpa07: "",
+                                    cbpc099: ""
+                                }
+                            }
+                            this.getTreeselect();
+                            // this.submitShangpin();
+                            this.getList();
+                            this.reset01();
+                            // console.log(this.form2.ifEnabled, 123456);
+                        });
                         // this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
@@ -1221,30 +1297,7 @@ export default {
 
             })
 
-            GoodsAddss(JSON.stringify(this.tableData2)).then(response => {
-                if (response.code == "200") {
-                    this.tableData2 = []
-                    this.form2 = {
-                        cbpb07: "",
-                        cbpb08: "",
-                        cbpb09: "",
-                        cbpb10: "",
-                        cbpb11: "",
-                        cbpb12: "",
-                        cbpb13: "",
-                        cbpb14: "",
-                        cbpb15: "",
-                        cala08: "",
-                        cbpa07: "",
-                        cbpc099: ""
-                    }
-                }
-                this.getTreeselect();
-                // this.submitShangpin();
-                this.getList();
-                this.reset01();
-                // console.log(this.form2.ifEnabled, 123456);
-            });
+           
 
             console.log('_ly_ok:' + JSON.stringify(this.tableData2))
         },
