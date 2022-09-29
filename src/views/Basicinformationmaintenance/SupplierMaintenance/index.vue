@@ -6,8 +6,8 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px" style="margin-left:2%;">
-                    <el-form-item prop="cbsa08" label="公司名称">
-                        <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入公司名称" clearable
+                    <el-form-item prop="cbsa08" label="客户名称">
+                        <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入客户名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                      <el-form-item prop="cbsa14" label="联系人">
@@ -37,8 +37,8 @@
                 <el-table :max-height="maxheight"  border :header-cell-style="headClassSPM" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="公司名称" align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="公司地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
+                    <el-table-column label="客户名称" align="left" key="cbsa08" prop="cbsa08" sortable />
+                    <el-table-column label="客户地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
                     <el-table-column label="联系人" align="left" key="cbsa14" prop="cbsa14" sortable />
                     <el-table-column label="联系电话" align="left" key="cbsa15" prop="cbsa15" sortable />
                     <!-- <el-table-column label="发票类型" align="left" key="cbsa18" prop="cbsa18" sortable>
