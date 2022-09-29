@@ -7,7 +7,7 @@
         </el-input>
      <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
         <div>
-            <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
+            <div style="width: 100%" v-for="(item, index) in iconList" :key="index"
                 @click="selectedIcon(item)">
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                 <!-- <span>{{ item }}</span> -->

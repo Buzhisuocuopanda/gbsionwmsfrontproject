@@ -51,7 +51,7 @@
                     <el-table-column label="型号" align="center" key="cbpb12" width="220px;" prop="cbpb12" sortable />
                     <el-table-column label="描述" align="center" key="cbpb08" prop="cbpb08" width="550px;" sortable />
                     <el-table-column label="SN" align="center" key="cbic10" prop="cbic10" width="130px;" sortable />
-                    <el-table-column label="库位" align="center" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="库位" align="center" key="cbla09" prop="cbla09" sortable />
                     <el-table-column label="入库日期" align="center" width="180px;" key="cbic02" prop="cbic02" :formatter="formatDate"
                         sortable>
                     </el-table-column>
@@ -63,7 +63,7 @@
                                     }}
                                 </div>
                             </template>
-                        </el-table-column> -->
+                    </el-table-column> -->
                     <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <!-- <el-button size="mini" type="text" icon="el-icon-edit"
