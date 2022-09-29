@@ -259,7 +259,7 @@ export default {
       this.queryParams.saleOrderNo = "";
       this.queryParams.whId = "";
       this.queryParams.customerId = "";
-      this.queryParams.dateRange = [];
+      this.dateRange = [];
       this.queryParams.pageNum = 1;
       // this.resetForm("queryParams");
       this.onSearch();
