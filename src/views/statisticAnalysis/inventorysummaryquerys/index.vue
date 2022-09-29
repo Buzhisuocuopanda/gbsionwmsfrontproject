@@ -18,7 +18,7 @@
           <el-select v-model="queryParams.cbpb01" clearable filterable remote reserve-keyword placeholder="请输入关键词"
             :remote-method="getGoods"
             :loading="loadingGood">
-            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+item.cbwa12+item.cbpb15" :value="item.cbpb01"></el-option>
+            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+' '+item.cbpb12+' '+item.cbpb15" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品SN"   class="item-r" >

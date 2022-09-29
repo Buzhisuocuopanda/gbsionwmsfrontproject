@@ -23,27 +23,28 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                          <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                          <el-button size="mini"  v-hasPermi="['system:warehouseInventoryrollup:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                          <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                          <el-button v-hasPermi="['system:warehouseInventoryrollup:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:60%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlekucunhuizongone">创建
+                        <el-button size="mini" v-hasPermi="['system:warehouseInventoryrollup:add']" class="biaoto-buttonchuangjian" @click="handlekucunhuizongone">创建
                         </el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                                   v-hasPermi="['system:warehouseInventoryrollup:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:warehouseInventoryrollup:sh']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:warehouseInventoryrollup:fs']">反审</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button>
+                            v-hasPermi="['system:warehouseInventoryrollup:import']">导入</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:user:export']">标记完成
@@ -84,16 +85,16 @@
                             </el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-if="scope.row.cbie10 == 0 | scope.row.cbie10 == ' '" v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-if="scope.row.cbie10 == 0 | scope.row.cbie10 == ' '" v-hasPermi="['system:warehouseInventoryrollup:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.cbie10 == 4 | scope.row.cbie10 == 1"
-                                v-hasPermi="['system:user:listselect']">详情
+                                v-hasPermi="['system:warehouseInventoryrollup:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:warehouseInventoryrollup:sh']"
                                 v-if="scope.row.cbie10 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:warehouseInventoryrollup:fs']"
                                 v-if="scope.row.cbie10 == 1">反审</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
@@ -681,7 +682,7 @@ export default {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
 
-            
+
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -690,7 +691,7 @@ export default {
                 console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
-                
+
             });
         },
 
@@ -877,7 +878,7 @@ export default {
         PurchaseinboundShenpi(row) {
             this.$modal.confirm('是否要审批,编号为"' + row.cbie07 + '"的数据项？').then(() => {
                 console.log(row.cbpc01, 8888);
-                
+
                 PurchaseinboundSH(row).then(response => {
                 if (response.code == "200") {
                     // console.log(this.form.cbpc01, 789)
@@ -900,7 +901,7 @@ export default {
 
                 userIds.forEach((item) => {
                     req.PurchaseinboundSH(item).then((res) => {
-                     if (res.code == "200") { 
+                     if (res.code == "200") {
                         // console.log(res, 123)
                         this.getList();
                         this.$modal.msgSuccess("审批成功");
@@ -961,7 +962,7 @@ export default {
             // console.log(row.cbpc01, 8888);
 
             PurchaseinboundShss(row).then(response => {
-             if (response.code == "200") { 
+             if (response.code == "200") {
                 console.log(this.form.cbie07, 789)
                 // this.submitShangpin();
                 this.getList();
@@ -1011,7 +1012,7 @@ export default {
             // console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记,编号为"' + row.cbie07 + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
-                 if (response.code == "200") {  
+                 if (response.code == "200") {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
@@ -1024,7 +1025,7 @@ export default {
         },
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
-        this.$modal.confirm('是否要取消标记,编号为"' + row.cbie07 + '"的数据项？').then(() => {    
+        this.$modal.confirm('是否要取消标记,编号为"' + row.cbie07 + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
 
@@ -1046,7 +1047,7 @@ export default {
 
         /** 修改按钮操作 */
         handleUpdate() {
-          
+
                 let row = {}
                 row.cbpc07 = this.form.cbpc07;
                 row.cbsa08 = this.form.cbsa08;
@@ -1130,7 +1131,7 @@ export default {
                 this.reset01();
              }else{
                 this.$message({ message: response.msg, type: 'error' });
-              } 
+              }
                 // console.log(this.form2.ifEnabled, 123456);
             });
             //     } else {
