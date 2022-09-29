@@ -4,8 +4,8 @@
             <div class="chuangjiancaigous">仓库调拨单</div>
              <el-row>
                 <el-col :span="7">
-                    <el-form-item label="编号:" prop="cbsb07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" />
+                    <el-form-item label="编号:" prop="cbsb07" style="margin-left:-5%;">
+                        <el-input type="text" v-model="form2.cbsb07" style="width: 67%;" />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
@@ -170,17 +170,17 @@
 
           <el-table-column prop="cbab09" label="数量" width="100">
             <template slot-scope="scope">
-                <el-input  v-model="scope.row.cbab09" @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input  v-model="scope.row.cbab09" v-only-number="{max: 100000, min: 0, precision:0.0000}"  @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbab11" label="单价"   width="100">
             <template slot-scope="scope">
-                <el-input  v-model="scope.row.cbab11" @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input  v-model="scope.row.cbab11" v-only-number="{max: 100000, min: 0, precision:0.0000}"  @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbab12" label="金额" width="100">
+          <el-table-column prop="cbab12" label="金额" width="150">
             <template slot-scope="scope">
-                <el-input  v-model="scope.row.cbab12" placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
+                <el-input  v-model="scope.row.cbab12" v-only-number="{max: 100000, min: 0, precision:0.0000}" disabled  placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbab13" label="备注" width="">
@@ -214,10 +214,10 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei" style="margin-left:80%;margin-top:3%;">
+    <div class="tinajia_dingwei" style="margin-left:2%;margin-top:3%;">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button @click="handlexiaoshouone">取 消</el-button>
       <!-- </span> -->
     </div>
   </div>
@@ -924,12 +924,11 @@ export default {
 
         },
 
-        /** 创建操作 */
-        handleChuangJiangone: function (row) {
+        /** 仓库调拨单返回操作 */
+        handlexiaoshouone: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-xsckfh/role/");
+            this.$router.push("/system/cangkudiaobudanfh/role/");
         },
-
 
 
 

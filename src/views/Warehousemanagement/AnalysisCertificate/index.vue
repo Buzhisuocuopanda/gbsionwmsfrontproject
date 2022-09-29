@@ -1019,7 +1019,6 @@ export default {
 
         /** 详情按钮操作 */
         handlexiangqeng() {
-            if (this.form.name != undefined) {
                 let row1 = {}
                 row.cbpc07 = this.form1.cbpc07;
                 row.cbsa08 = this.form1.cbsa08;
@@ -1035,11 +1034,6 @@ export default {
                     this.$message({ message: '修改成功', type: 'success' });
 
                 });
-
-            } else {
-                this.$message.error('错了哦，商品名称没有填呢');
-            }
-
         },
         /** 详情按钮操作**/
         handleSelect(row) {
@@ -1128,10 +1122,14 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.QualityinRemove(JSON.stringify(item)).then((res) => {
+                        if (res.code == "200") {  
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        } 
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1160,9 +1158,13 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.cbqa07 + '"的数据项？').then(function () {
                 return QualityinRemove(JSON.stringify(row));
             }).then((response) => {
+              if (response.code == "200") {  
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                } 
             }).catch(() => { });
         },
         // /** 导出按钮操作 */
@@ -1190,12 +1192,12 @@ export default {
             this.$router.push({
 
                 path: '/system/user-zhijiandan/role/',
-                name: 'index',
+                // name: 'index',
                 query: {                  
                     data: row.id,
                 }
             })
-            location.reload();
+            // location.reload();
         },
          
 
