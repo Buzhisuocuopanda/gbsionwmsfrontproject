@@ -207,11 +207,10 @@
         </el-table>
       </div>
     </el-form>
-    <div style="height:80px;"></div>
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button @click="handlefanhuione">取 消</el-button>
       <!-- </span> -->
     </div>
   </div>
@@ -1024,9 +1023,9 @@
     //   },
 
  /** 创建操作 */
-      handleChuangJiangone: function (row) {
+      handlefanhuione: function (row) {
         // this.$router.push("/system/user-auth/role/");
-        this.$router.push("/system/user-kcmxcshfh/role/");
+        this.$router.push("/system/user-kcmxfh/role/");
      },
 
 

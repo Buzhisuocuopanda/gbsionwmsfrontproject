@@ -108,7 +108,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
@@ -189,7 +189,7 @@
     </el-form>
     <div class="tinajia_dingwei">
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button @click="handlefanhui">取 消</el-button>
     </div>
   </div>
 </template>
@@ -994,11 +994,11 @@
     //     this.$router.push("/system/user-cktkfh/role/");
     //   },
 
- /** 创建操作 */
-      handleChuangJiangone: function (row) {
+      //库存汇总初始化返回按钮
+      handlefanhui: function (row) {
         // this.$router.push("/system/user-auth/role/");
-        this.$router.push("/system/user-kcmxcshfh/role/");
-     },
+        this.$router.push("/system/user-kchzcshfh/role/");
+      },
 
 
 

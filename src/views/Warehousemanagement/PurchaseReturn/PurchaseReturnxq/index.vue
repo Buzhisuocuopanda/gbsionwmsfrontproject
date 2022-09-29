@@ -157,7 +157,7 @@
        <div style="height:100px;"></div>
      </section>
        <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
-       <el-button type="primary" @click="handlefanhui">取消</el-button>
+       <el-button  @click="handlefanhui">取消</el-button>
        <div style="height:100px;"></div>
     </div>
 

@@ -11,7 +11,7 @@
       <el-row>
         <el-col :span="7">
           <el-form-item label="编号:" prop="cbsb07" style="margin-left: 10%">
-            <el-input type="text" v-model="form2.cbsb07" style="width: 50%" disabled/>
+            <el-input type="text" v-model="form2.cbsb07" style="width: 50%" readonly/>
           </el-form-item>
         </el-col>
         <el-col :span="7">
@@ -25,7 +25,7 @@
               placeholder=""
               v-model="form2.cbsb30"
               style="width: 100%"
-              disabled
+              readonly
             />
           </el-form-item>
         </el-col>
@@ -35,7 +35,7 @@
           <!-- <el-form-item label="客户:" prop="cbsb099"> -->
           <!-- <el-input type="text" v-model="form2.cbsb099" style="width:77%;" /> -->
           <el-form-item label="客户名称:" prop="cbpc0999">
-            <el-popover placement="bottom-start" trigger="click">
+            <el-popover placement="bottom-start" trigger="click" disabled>
               <CustomerMainten
                 ref="CustomerMainten"
                 @selected="selected022"
@@ -47,7 +47,6 @@
                 placeholder=""
                 readonly
                 style="width: 77%"
-                disabled
               >
               </el-input>
             </el-popover>
@@ -56,12 +55,12 @@
         </el-col>
         <el-col v-if="false" style="margin-left: 2%" :span="7">
           <el-form-item label="客户:" prop="cbsb09">
-            <el-input type="text" v-model="form2.cbsb09" style="width: 77%" disabled/>
+            <el-input type="text" v-model="form2.cbsb09" style="width: 77%" readonly/>
           </el-form-item>
         </el-col>
         <el-col style="" :span="7">
           <el-form-item label="仓库:" prop="cbpc100">
-            <el-popover placement="bottom-start" trigger="click" clearable>
+            <el-popover placement="bottom-start" trigger="click" clearable disabled>
               <kuweixxweihu
                 ref="kuweixxweihu"
                 @selected="selected01"
@@ -73,7 +72,6 @@
                 placeholder=""
                 readonly
                 style="width: 77%"
-                disabled
               >
               </el-input>
             </el-popover>
@@ -82,7 +80,7 @@
         <el-col style="" :span="7">
           <el-form-item label="销售人员:" prop="cbsb177">
             <!-- <el-input type="text" v-model="form2.cbsb177" style="width:77%;" /> -->
-            <el-popover placement="bottom-start" trigger="click" clearable>
+            <el-popover placement="bottom-start" trigger="click" clearable disabled>
               <salerman
                 ref="salerman"
                 @selected="selected011699"
@@ -94,7 +92,6 @@
                 placeholder=""
                 readonly
                 style="width: 77%"
-                disabled
               >
               </el-input>
             </el-popover>
@@ -109,12 +106,12 @@
       <el-row>
         <el-col style="margin-left: 2%; margin-top: -1%" :span="7">
           <el-form-item label="联系人:" prop="cbsb18">
-            <el-input type="text" v-model="form2.cbsb18" style="width: 77%" disabled/>
+            <el-input type="text" v-model="form2.cbsb18" style="width: 77%" readonly/>
           </el-form-item>
         </el-col>
         <el-col :span="7" style="margin-top: -1%">
           <el-form-item label="电话:" prop="cbsb19">
-            <el-input type="text" v-model="form2.cbsb19" style="width: 77%" disabled/>
+            <el-input type="text" v-model="form2.cbsb19" style="width: 77%" readonly/>
           </el-form-item>
         </el-col>
         <el-col style="margin-top: -1%" :span="7">
@@ -158,7 +155,7 @@
         </el-col>
         <el-col style="margin-top: -1%" :span="7">
           <el-form-item label="收货人:" prop="cbsb22">
-            <el-input type="text" v-model="form2.cbsb22" style="width: 77%" disabled/>
+            <el-input type="text" v-model="form2.cbsb22" style="width: 77%" readonly/>
           </el-form-item>
         </el-col>
         <!-- <el-col style="margin-top: -1%" :span="7">
@@ -183,12 +180,12 @@
       <el-row>
         <el-col style="margin-left: 2%; margin-top: -1%" :span="7">
           <el-form-item label="收货电话:" prop="cbsb29">
-            <el-input type="text" v-model="form2.cbsb29" style="width: 77%" disabled/>
+            <el-input type="text" v-model="form2.cbsb29" style="width: 77%" readonly/>
           </el-form-item>
         </el-col>
         <el-col style="margin-top: -1%" :span="7">
           <el-form-item label="收货地址:" prop="cbsb28">
-            <el-input type="text" v-model="form2.cbsb28" style="width: 240%" disabled/>
+            <el-input type="text" v-model="form2.cbsb28" style="width: 240%" readonly/>
           </el-form-item>
         </el-col>
         <el-col v-if="false" style="margin-top: -1%" :span="7">
