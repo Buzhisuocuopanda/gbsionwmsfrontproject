@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
 
-
-    <el-form ref="form2" :model="form2" label-width="230px" :rules="rules" style="" class="demo-ruleForm">
+    <section ref="print" class="recordImg" id="printRecord">
+      <el-form ref="form2" :model="form2" label-width="230px" :rules="rules" style="" class="demo-ruleForm">
       <div class="chuangjiancaigous">销售订单</div>
       <el-descriptions :column="3" border style="margin-top: 30px" :contentStyle="CS" :label-style="LS ">
         <el-descriptions-item label="编号"  >{{this.formData.orderNo}}</el-descriptions-item>
@@ -473,11 +473,21 @@
       </el-table>
 
     </div>
+    </section>
+    
     <div class="tinajia_dingwei">
-       <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
+       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
 <!--      <el-button type="primary" @click="handleAdd">保 存</el-button>-->
-      <el-button @click="cancel">取 消</el-button>
-       </span>
+      <el-button style="margin-left: 2%" type="primary" @click="handleExport">导出</el-button>
+      <el-button style="margin-left: 2%" type="primary" @click="handleExport1">导出1</el-button>
+      <el-button style="margin-left: 2%" type="primary" @click="xiaoschukudandayin">
+        打印
+      </el-button>
+      <el-button style="margin-left: 2%" type="primary" @click="xiaoschukujianyibiao">
+        打印1
+      </el-button>
+      <el-button type="primary" @click="cancel">取 消</el-button>
+       <!-- </span> -->
     </div>
   </div>
 </template>
@@ -1038,6 +1048,44 @@
 
     },
     methods: {
+      // 销售订单导出
+      handleExport() {
+        const userId = this.$route.query && this.$route.query.id;
+        console.log([userId,this.$route])
+        this.download(
+          "/sale/saleOrderdetailsexport1?orderId=" +
+            userId,
+          {},
+          `销售订单导出表— ${new Date().toLocaleDateString()}`
+        );
+      },
+      // 销售订单导出1
+      handleExport1() {
+        const userId = this.$route.query && this.$route.query.id;
+        console.log([userId,this.$route])
+        this.download(
+          "sale/saleOrderdetailsexport?orderId=" +
+            userId,
+          {},
+          `销售订单导出表1— ${new Date().toLocaleDateString()}.xls`
+        );
+      },
+      // 销售订单 打印
+      xiaoschukujianyibiao() {
+        const userId = this.$route.query && this.$route.query.id;
+        console.log([userId,this.$route])
+        this.download(
+          "/sale/printSaleOrder?orderId=" +
+            userId,
+          {},
+          `销售订单表— ${new Date().toLocaleDateString()}.pdf`
+        );
+      },
+      // 销售订单打印页面
+        xiaoschukudandayin(index, row){
+          // window.print()
+          this.$print(this.$refs.print)
+        },
       // 合并单元格
       arraySpanMethod({
         row,
