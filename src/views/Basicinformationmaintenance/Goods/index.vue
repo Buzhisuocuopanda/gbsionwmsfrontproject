@@ -1049,9 +1049,9 @@ export default {
         },
         /** 查询用户列表 */
         getList029(row) {
-           
-
-            GoodsListjiesuanhb(row.cbpb01,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            let id = row.cbpb01;
+            console.log(row,202209299999);
+            GoodsListjiesuanhb(id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 // console.log(response.rows, 123456);
                 // this.userList = response.data.rows;
                 // this.userList03 = response.data.rows;
@@ -1059,7 +1059,7 @@ export default {
                 this.userList9916 = response.data.rows;
                 this.total9916 = response.data.total;
                 console.log(this.userList9916, 3369916);
-
+                if (response.code == "200") { 
                 this.userList9916.forEach((item) => {
                     // item.cbpb01 = item;
                     this.userList0929 = item;
@@ -1071,6 +1071,10 @@ export default {
                     console.log(item.cbpf02,20220929);
                     // console.log(item.cbpb01, 8523697412);
                 })
+
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }    
 
                 // console.log(response.data.content, 339688);
                 // this.loading = false;
@@ -1392,7 +1396,7 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-           this.getList029(row);
+          
            if(row.cbpb10=="1")
             {
                 this.form.cbpb10="Epiphone";
@@ -1424,6 +1428,7 @@ export default {
             this.form = Object.assign({},row);
             this.form.cbpc099=this.form.cala08;
             this.form.cbpb01 = row.cbpb01;
+            this.getList029(row);
             // this.getList();
             
         },
