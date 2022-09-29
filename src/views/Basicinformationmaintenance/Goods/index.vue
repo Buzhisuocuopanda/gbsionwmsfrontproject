@@ -916,23 +916,6 @@ export default {
         },
         // 增加一行表单
         _ly_addFrom() {
-            // if (this.formArr.length >= 10) {
-            //   this.$message.warning('最多只能添加10行')
-            //   this.reset01();
-            //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-            //   return
-
-            // }
-
-            // this.formArr.push({
-            //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
-            //   cbsc08: '',
-            //   cbsc09: '',
-            //   cbsc10: '',
-            //   branch: '',
-            //   cbpc01: this.form2.cbpg161,
-            //   cbpd08: this.form2.cbpd08,
-            // })
             this.tableData.push({
                 date: '',
                 num: '',
@@ -941,29 +924,11 @@ export default {
                 province: '',
                 cbpc000: ''
             })
-            this.dataId++
             console.log(this.tableData, 852369);
         },
 
         // 增加一行表单
         _ly_addFrom2() {
-            // if (this.formArr.length >= 10) {
-            //   this.$message.warning('最多只能添加10行')
-            //   this.reset01();
-            //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-            //   return
-
-            // }
-
-            // this.formArr.push({
-            //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
-            //   cbsc08: '',
-            //   cbsc09: '',
-            //   cbsc10: '',
-            //   branch: '',
-            //   cbpc01: this.form2.cbpg161,
-            //   cbpd08: this.form2.cbpd08,
-            // })
             this.tableData2.push({
                 date: '',
                 num: '',
@@ -972,7 +937,6 @@ export default {
                 province: '',
                 cbpc000: ''
             })
-            this.dataId++
             console.log(this.tableData2, 852369);
         },
         // 删除一行表单
@@ -1068,7 +1032,26 @@ export default {
                     this.tableData[0].cbpf05 = item.cbpf05;
                     this.tableData[0].cbpf06 = item.cbpf06;
                     this.tableData[0].cbpf07 = item.cbpf07;
-                    console.log(item.cbpf02,20220929);
+                    if (this.tableData[0].cbpf02 == "1") {
+                        this.tableData[0].cbpf02 = "1";
+                        this.tableData[0].cbpf02 = "1";
+                    } else if (this.tableData[0].cbpf02 == "2") {
+                        this.tableData[0].cbpf02 = "2";
+                        this.tableData[0].cbpf02 = "2";
+                    } else if (this.tableData[0].cbpf02 == "3") {
+                        this.tableData[0].cbpf02 = "3";
+                        this.tableData[0].cbpf02 = "3";
+                    }
+
+
+                    if (this.tableData[0].cbpf06 == "1") {
+                        this.tableData[0].cbpf06 = "CNY";
+                        this.tableData[0].cbpf06 = "1";
+                    } else if (this.tableData[0].cbpf06 == "2") {
+                        this.tableData[0].cbpf06 = "USD"
+                        this.tableData[0].cbpf06 = "2";
+                    } 
+                    console.log(this.tableData,20220929);
                     // console.log(item.cbpb01, 8523697412);
                 })
 
@@ -1339,7 +1322,7 @@ export default {
                
                  GoodsAddss(JSON.stringify(this.tableData)).then(response => {
                      if (response.code == "200") {
-                         this.tableData = []
+                        //  this.tableData = []
                          this.form2 = {
                              cbpb07: "",
                              cbpb08: "",
