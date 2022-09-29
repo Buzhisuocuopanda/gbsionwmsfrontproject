@@ -36,8 +36,8 @@
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="仓库" align="center" header-align="center" prop="cbwa09" min-width="100px;" />
-        <el-table-column  label="供应商" align="center" prop="supplieName"  min-width="100px;"/>
-        <el-table-column  label="品牌" align="center" prop="brand" min-width="180px;"/>
+        <el-table-column  label="供应商" align="center" prop="supplieName"  min-width="180px;"/>
+        <el-table-column  label="品牌" align="center" prop="brand" min-width="100px;"/>
         <el-table-column  label="大类" align="center" prop="bclass" min-width="120px;"/>
         <el-table-column  label="小类" align="center" prop="sclass" min-width="80px;"/>
         <!--<el-table-column  label="SKU" align="center" prop="qty" min-width="60px;"/>-->
