@@ -1225,6 +1225,13 @@ export default {
             this.$router.push("/system/user-xsch/role/");
         },
 
+        /** 销售出库单修改操作 */
+        handlxiaoshochkudanone: function (row) {
+            const userId = row.cbsb01;
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-xiugaichukuxiugai/role/" + userId);
+        },
+
          //父子传值
         sendParams(row) {
             this.$router.push({
