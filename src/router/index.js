@@ -497,6 +497,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //采购订单返回
+   {
+    path: '/system/user-caigoudingdan',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseOrder/index'),
+        meta: { title: '采购订单', activeMenu: '/Warehousemanagement/PurchaseOrder' }
+      }
+    ]
+  },
    //销售预订单添加
    {
     path: '/system/user-cjxsydd',
@@ -597,6 +611,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //仓库调拨单返回
+   {
+    path: '/system/cangkudiaobudanfh',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/WarehouseTransfer/index'),
+        meta: { title: '仓库调拨单', activeMenu: '/Warehousemanagement/WarehouseTransfer' }
+      }
+    ]
+  },
   //采购入库单返回
    {
     path: '/system/user-ckrkfh',
@@ -667,6 +695,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //销售出库单修改
+   {
+    path: '/system/user-xiugaichukuxiugai',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentxg/index'),
+        meta: { title: '销售出库单修改', activeMenu: '/Warehousemanagement/SalesShipment' }
+      }
+    ]
+  },
    //质检单返回
    {
     path: '/system/user-zjdfh',
@@ -720,6 +762,36 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/WarehouseTransfer/index'),
         meta: { title: '仓库调拨单', activeMenu: '/Warehousemanagement/WarehouseTransfer' }
+      }
+    ]
+  },
+
+    //仓库调拨单修改
+   {
+    path: '/system/user-cangkudiaobodan',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/WarehouseTransfer/WarehouseTransferxg/index'),
+        meta: { title: '仓库调拨单修改', activeMenu: '/Warehousemanagement/WarehouseTransfer' }
+      }
+    ]
+  },
+
+     //销售预订单修改
+   {
+    path: '/system/user-cangkudiaobodang',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesBooking/SalesBookingxg/index'),
+        meta: { title: '销售预订单修改', activeMenu: '/Warehousemanagement/SalesBooking' }
       }
     ]
   },

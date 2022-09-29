@@ -28,6 +28,15 @@ export function GoodsList(query) {
   })
 }
 
+// 查询用户列表
+export function GoodsListjiesuanhb(CBPC01) {
+  return request({
+    url: '/system/goods/SwJsGoodscny?cbpb01='+ CBPC01,
+    method: 'get'
+  })
+}
+
+
 
 // 修改用户
 export function GoodsEdit(data) {

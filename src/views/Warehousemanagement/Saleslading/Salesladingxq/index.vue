@@ -116,6 +116,8 @@
           <template slot="label">客户</template>{{ userList.customerName }}
         </el-descriptions-item>
       </el-descriptions>
+
+      
       <el-table
         v-loading="loading"
         border

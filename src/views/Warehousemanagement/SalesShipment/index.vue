@@ -87,8 +87,8 @@
                     <el-table-column label="关联订单" align="left" key="cbsb31" prop="cbsb31" width="160px;" sortable>
                         <template scope="scope">
                              <div>{{ scope.row.cbsb31 == 1 ? "是" : scope.row.cbsb31 == 0 ?
-                            "否" : "未确定状态"
-                            }}
+                             "否" : "未确定状态"
+                             }}
                             </div>
                         </template>
                     </el-table-column>
@@ -96,16 +96,16 @@
                     <el-table-column label="关联提货单" align="left" key="cbsb32" prop="cbsb32" width="160px;" sortable>
                         <template scope="scope">
                              <div>{{ scope.row.cbsb31 == 0 ? "是" : scope.row.cbsb31 == 1 ?
-                            "否" : "未确定状态"
-                            }}
+                             "否" : "未确定状态"
+                             }}
                             </div>
                         </template>
                     </el-table-column>
                     <el-table-column label="状态" align="left" key="cbsb11" prop="cbsb11" width="170px;" sortable>
                         <template scope="scope">
                              <div>{{ scope.row.cbsb11 == 0 ? "未审核" : scope.row.cbsb11 == 1 ?
-                            "已审核" : scope.row.cbsb11 == 4 ? "已完成" : "未确定状态"
-                            }}
+                             "已审核" : scope.row.cbsb11 == 4 ? "已完成" : "未确定状态"
+                             }}
                             </div>
                         </template>
                     </el-table-column>
@@ -114,7 +114,7 @@
                         fixed="right">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handlxiaoshochkudanone(scope.row)"
                                 v-if="scope.row.cbsb11 == 0 | scope.row.cbsb11 == 2" v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button>
@@ -1221,6 +1221,13 @@ export default {
         handlexiaoshouone: function (row) {
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-xsch/role/");
+        },
+
+        /** 销售出库单修改操作 */
+        handlxiaoshochkudanone: function (row) {
+            const userId = row.cbsb01;
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-xiugaichukuxiugai/role/" + userId);
         },
 
          //父子传值

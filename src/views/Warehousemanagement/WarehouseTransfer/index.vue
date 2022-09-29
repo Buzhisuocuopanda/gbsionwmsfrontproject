@@ -58,16 +58,16 @@
                     <el-table-column label="关联订单" align="left" key="cbaa18" prop="cbaa18" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa18 == 0 ? "是" : scope.row.cbaa18 == 1 ?
-                                "否" : "未确定状态"
-                                }}
+                            "否" : "未确定状态"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
                     <el-table-column label="关联提货单" align="left" key="cbaa19" prop="cbaa19" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa19 == 0 ? "是" : scope.row.cbaa19 == 1 ?
-                                "否" : "未确定状态"
-                                }}
+                            "否" : "未确定状态"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
@@ -82,7 +82,7 @@
                     <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handlcangkudiaobuxiugaione(scope.row)"
                                 v-if="scope.row.cbaa11 == 1 | scope.row.cbaa11 == 2" v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button>
@@ -1164,6 +1164,16 @@ export default {
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-ckdb/role/");
         },
+
+
+
+        /** 仓库调拨单修改操作 */
+        handlcangkudiaobuxiugaione: function (row) {
+            const userId = row.cbaa01;
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-cangkudiaobodan/role/" + userId);
+        },
+
         // /** 提交按钮 */
         // submitForm: function () {
         //     this.$refs["form"].validate(valid => {
