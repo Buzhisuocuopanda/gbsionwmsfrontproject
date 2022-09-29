@@ -24,7 +24,7 @@
 // import icons from './requireIcons'
 // import { addUserSysStoreku, listUserStoreku, updateUserStoreku, removeSysStoreku } from "@/api/WareSys/Kuweixxweihu";
 // import { addUserSysStore, listUserStore, updateUserStore, removeSysStore } from "@/api/WareSys/Cangkuxxguanli";
-import {  StoreSkuList } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
+import { StoreSkuList01 } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 export default {
     name: 'kuweixxweihu',
     data() {
@@ -56,7 +56,7 @@ export default {
     methods: {
         filterIcons() {
             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            StoreSkuList(this.addDateRange(this.queryParams)).then(response => {
+            StoreSkuList01(this.addDateRange(this.queryParams)).then(response => {
                 // this.userList = response.data.rows;
                 //this.top = JSON.stringify(this.userList)
                 // console.log(response.data.rows, 3369);
@@ -68,7 +68,7 @@ export default {
                     this.iconList = []
                 } else {
                  
-                    response.data.forEach((item) => {
+                    response.data.row.forEach((item) => {
                         this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
                     })
                   
