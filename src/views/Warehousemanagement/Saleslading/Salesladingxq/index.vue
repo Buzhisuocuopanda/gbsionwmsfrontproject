@@ -136,8 +136,8 @@
         ></el-table-column>
         <el-table-column prop="brand" key="brand" label="品牌">
         </el-table-column>
-        <el-table-column prop="goodClass" key="goodClass" label="类型">
-          <template slot-scope="scope" style="width: 630px">
+        <el-table-column prop="goodClass" key="goodClass" label="类型" >
+          <!-- <template slot-scope="scope" style="width: 630px">
                 <el-input
                   slot="reference"
                   v-model="scope.row.goodClass"
@@ -146,7 +146,7 @@
                   style="width: 100%"
                 >
                 </el-input>
-            </template>
+            </template> -->
         </el-table-column>
         <el-table-column label="型号">
         </el-table-column>
