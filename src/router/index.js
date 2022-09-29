@@ -695,6 +695,20 @@ export const dynamicRoutes = [
       }
     ]
   },
+   //销售出库单修改
+   {
+    path: '/system/user-xiugaichukuxiugai',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentxg/index'),
+        meta: { title: '销售出库单修改', activeMenu: '/Warehousemanagement/SalesShipment' }
+      }
+    ]
+  },
    //质检单返回
    {
     path: '/system/user-zjdfh',
@@ -751,6 +765,22 @@ export const dynamicRoutes = [
       }
     ]
   },
+
+    //仓库调拨单修改
+   {
+    path: '/system/user-cangkudiaobodan',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/WarehouseTransfer/WarehouseTransferxg/index'),
+        meta: { title: '仓库调拨单修改', activeMenu: '/Warehousemanagement/WarehouseTransfer' }
+      }
+    ]
+  },
+
      //销售预订单修改
    {
     path: '/system/user-cangkudiaobodang',
