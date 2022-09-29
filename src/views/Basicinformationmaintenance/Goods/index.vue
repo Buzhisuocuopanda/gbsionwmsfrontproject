@@ -92,6 +92,11 @@
             </div>
             <el-form ref="form" :model="form" :rules="rules3"  style="margin-top:20px;" label-width="100px">
                    <el-row style="margin-left:5.2%;" :gutter="20"  class="el-row">
+                    <el-col :span="11" v-if="false">
+                        <el-form-item label="商品分类id:" prop="cbpb01">
+                            <el-input v-model="form.cbpb01" @focus="shuzhuangliebiao" placeholder="" maxlength="30" style="width:82%;" />
+                        </el-form-item>
+                    </el-col>
                         <el-col :span="11">
                             <el-form-item label="商品分类:" prop="cbpa07">
                                 <el-input v-model="form.cbpa07" @focus="shuzhuangliebiao" placeholder="" maxlength="30" style="width:82%;" />
@@ -402,7 +407,7 @@
          <div class="tinajia_dingweii">
             <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
                 <el-button type="primary" @click="handleAdd">保 存</el-button>
-                <el-button @click="_ly_cancelDialog">取 消</el-button>
+                <el-button @click="cancells">取 消</el-button>
             <!-- </span> -->
         </div>
     </el-dialog>
@@ -753,8 +758,6 @@ export default {
         // this.getList01();
         this.getTreeselect();
 
-        this.getList029();
-
         // //输入框校验
         // this.modeltext();
         // this.getConfigKey("sys.user.initPassword").then(response => {
@@ -1045,10 +1048,10 @@ export default {
             );
         },
         /** 查询用户列表 */
-        getList029() {
-            this.loading = true;
+        getList029(row) {
+           
 
-            GoodsListjiesuanhb(9844,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            GoodsListjiesuanhb(row.cbpb01,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 // console.log(response.rows, 123456);
                 // this.userList = response.data.rows;
                 // this.userList03 = response.data.rows;
@@ -1176,10 +1179,12 @@ export default {
             this.open = false;
             this.reset();
         },
+
         cancells(){
             this.open2=false;
             this.reset01();
         },
+        
         // 表单重置
         reset() {
             this.form = {
@@ -1309,9 +1314,10 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
-
+           
 
             this.open = true;
+           
                 let row = {}
                 row.cbpb01 = this.form.cbpb01;
                 row.cbpa07 = this.form.cbpa07;
@@ -1326,6 +1332,7 @@ export default {
                 console.log(this.form.cbpb01);
             //   this.$refs["form5"].validate((item) => {
             //     if (item) {
+               
                  GoodsAddss(JSON.stringify(this.tableData)).then(response => {
                      if (response.code == "200") {
                          this.tableData = []
@@ -1385,6 +1392,7 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+           this.getList029(row);
            if(row.cbpb10=="1")
             {
                 this.form.cbpb10="Epiphone";
@@ -1408,12 +1416,16 @@ export default {
                 this.form.cbpb10="Maestro"
                 row.cbpb10= "6";
             }
+            
             this.open = true;
+            
             console.log(row, 7788521);
             //  this.form= row;
             this.form = Object.assign({},row);
-            this.form.cbpc099=this.form.cala08
+            this.form.cbpc099=this.form.cala08;
+            this.form.cbpb01 = row.cbpb01;
             // this.getList();
+            
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
