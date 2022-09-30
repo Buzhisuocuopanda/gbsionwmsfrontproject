@@ -884,6 +884,8 @@ export default {
                         cbpd11: "",
                         cbpd12: ""
                     }
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
                 }
                 // if (count-- === 1) {
                 //   this._ly_save()
@@ -1273,6 +1275,8 @@ export default {
                                     cbpa07: "",
                                     cbpc099: ""
                                 }
+                            }else{
+                                this.$message({ message: response.msg, type: 'error' }); 
                             }
                             this.getTreeselect();
                             // this.submitShangpin();
@@ -1337,6 +1341,8 @@ export default {
                              cbpa07: "",
                              cbpc099: ""
                          }
+                     } else {
+                         this.$message({ message: response.msg, type: 'error' });
                      }
                         this.getTreeselect();
                         // this.submitShangpin();
@@ -1347,7 +1353,7 @@ export default {
               this.$refs["form"].validate((item) => {
                 if (item) {
                 GoodsEdit(JSON.stringify(row)).then(response => {
-
+                    if (response.code == "200") {
                     // this.form = response.data;
                     // this.classifyId = response.classify_id;
                     // this.brand = response.brand;
@@ -1363,7 +1369,9 @@ export default {
 
 
                     this.$message({ message: '修改成功', type: 'success' });
-
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
 
             } else {

@@ -65,7 +65,7 @@ export const constantRoutes = [
   },
     {
     path: '/chuanzhi',
-    component: () => import('@/components/salerman/index'),
+    component: () => import('@/components/WarehouseInfoSku/index'),
     hidden: true
   },
   {
@@ -153,7 +153,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpc01(\\d+)+:status(\\d+)+:checkStatus(\\d+)',
+        path: 'role/:cbpc01(\\d+)+:status(\\d+)+:checkStatus(\\d+)+:edit(\\d)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/Saleslading/Salesladingxq/index'),
         meta: { title: '销售提货详情', activeMenu: '/Warehousemanagement/Saleslading' }

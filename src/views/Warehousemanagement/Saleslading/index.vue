@@ -1275,7 +1275,8 @@ export default {
       let userId = row.id;
       let status = row.status
       let checkstatus = row.checkStatus
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
       // PurchaseinboundSH(row).then((response) => {
       //   // console.log(this.form.cbpc01, 789)
       //   // this.submitShangpin();
@@ -1317,7 +1318,8 @@ export default {
       let userId = row.id;
       let status = row.status
       let checkstatus = row.checkStatus
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
 
       // PurchaseinboundShs(row).then((response) => {
       //   if (response.code == 200) {
@@ -1581,7 +1583,8 @@ export default {
       let userId = row.id;
       let status = row.status
       let checkstatus = row.checkStatus
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 1
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
     },
     /** 数形列表的商品分类按钮**/
     submitShangpin() {
@@ -1664,7 +1667,8 @@ export default {
       const userId = row.id;
       let status = 0
       let checkstatus = 0
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
     },
     /** 创建操作 */
     handletihuoone: function (row) {

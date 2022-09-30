@@ -36,4 +36,3 @@ export function CustomeRemove(data) {
     data:data
   })
 }
-

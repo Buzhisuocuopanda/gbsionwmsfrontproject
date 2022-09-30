@@ -7,7 +7,7 @@
         </el-input>
       <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
           <div>
-            <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
+            <div  style="width: 100%" v-for="(item, index) in iconList" :key="index"
                 @click="selectedIcon(item)">
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                 <!-- <span>{{ item }}</span> -->
@@ -24,7 +24,7 @@
 // import icons from './requireIcons'
 // import { addUserSysStoreku, listUserStoreku, updateUserStoreku, removeSysStoreku } from "@/api/WareSys/Kuweixxweihu";
 // import { addUserSysStore, listUserStore, updateUserStore, removeSysStore } from "@/api/WareSys/Cangkuxxguanli";
-import {  StoreSkuList } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
+import { StoreSkuList01 } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 export default {
     name: 'kuweixxweihu',
     data() {
@@ -56,7 +56,7 @@ export default {
     methods: {
         filterIcons() {
             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            StoreSkuList(this.addDateRange(this.queryParams)).then(response => {
+            StoreSkuList01(this.addDateRange(this.queryParams)).then(response => {
                 // this.userList = response.data.rows;
                 //this.top = JSON.stringify(this.userList)
                 // console.log(response.data.rows, 3369);
@@ -67,10 +67,15 @@ export default {
                 if (response.data <= 0) {
                     this.iconList = []
                 } else {
-                 
-                    response.data.forEach((item) => {
+                    if (response.data.rows.length > 0) {
+                        response.data.rows.forEach((item) => {
                         this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
-                    })
+                    })         
+                 }
+                    // response.data.row.forEach((item) => {
+                    //     this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
+                    // })
+                    console.log(response.data,7758521);
                   
                 }
                 if (this.name) {
