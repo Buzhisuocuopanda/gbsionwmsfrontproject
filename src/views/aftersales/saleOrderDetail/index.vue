@@ -214,7 +214,7 @@
           <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row)" v-loadmore="loadMore" v-model="formData.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
+                <el-select @change="goodsOnChange()" v-loadmore="loadMore" v-model="formData.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -482,41 +482,7 @@
             }
           ]
         },
-        treeData: [{ // 树状数据
-          id: 1,
-          label: '一级 1',
-          children: [{
-            id: 4,
-            label: '二级 1-1',
-            children: [{
-              id: 9,
-              label: '三级 1-1-1'
-            }, {
-              id: 10,
-              label: '三级 1-1-2'
-            }]
-          }]
-        }, {
-          id: 2,
-          label: '一级 2',
-          children: [{
-            id: 5,
-            label: '二级 2-1'
-          }, {
-            id: 6,
-            label: '二级 2-2'
-          }]
-        }, {
-          id: 3,
-          label: '一级 3',
-          children: [{
-            id: 7,
-            label: '二级 3-1'
-          }, {
-            id: 8,
-            label: '二级 3-2'
-          }]
-        }],
+
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -1321,7 +1287,7 @@
           return
         }
         const param={
-          goodsId: row.goodsId,
+          goodsId: row.value,
           customerId: this.formData.customerId,
           orderClass: 2
 
@@ -1480,7 +1446,7 @@
       /** 新增按钮操作 */
       handleAdd() {
 
-        this.formData.goodsId=this.tableData.push(0)
+        // this.formData.goodsId=this.tableData.push(0)
         console.log(this.tableData);
         console.log(this.formData.goodsId);
         addSales(this.formData).then(response => {

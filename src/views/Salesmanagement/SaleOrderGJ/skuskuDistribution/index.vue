@@ -1,4 +1,5 @@
 <template>
+  <!--库存分配-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="120px">
