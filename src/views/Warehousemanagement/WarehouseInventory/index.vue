@@ -1,4 +1,5 @@
 <template>
+  <!--仓库盘点明细表-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -17,17 +18,18 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item >
-                      <el-button size="mini"  class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                      <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                      <el-button v-hasPermi="['system:warehouseinventoryschedule:list']" size="mini"  class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                      <el-button v-hasPermi="['system:warehouseinventoryschedule:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlepdmxone">创建</el-button> -->
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                                   v-hasPermi="['system:warehouseinventoryschedule:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">盘点完成</el-button>
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:warehouseinventoryschedule:pdwc']">盘点完成</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -38,7 +40,7 @@
                         </el-button> -->
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">取消完成
+                            v-hasPermi="['system:warehouseinventoryschedule:qxwc']">取消完成
                         </el-button>
                     </el-form-item>
                 </el-form>
@@ -75,7 +77,7 @@
                                 v-if="scope.row.cbpg11 == 1 | scope.row.cbpg11 == 2"
                                 v-hasPermi="['system:user:remove']">删除</el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:warehouseinventoryschedule:detail']">详情
                             </el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
@@ -648,7 +650,7 @@ export default {
         getList() {
             this.loading = true;
             SkuBarcodeLists(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-             if (response.code == "200") {   
+             if (response.code == "200") {
                 this.userList = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -659,7 +661,7 @@ export default {
                 this.loading = false;
              }else{
                 this.$message({ message: response.msg, type: 'error' });
-              } 
+              }
             }
             );
         },
@@ -667,32 +669,32 @@ export default {
         getList01() {
             SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
 
-              if (response.code == "200") {  
+              if (response.code == "200") {
                 this.postOptions = response.data.rows;
                 // console.log(response.data.rows,551100);
              }else{
                 this.$message({ message: response.msg, type: 'error' });
             }
-   
+
             });
         },
         //库位
         getList02() {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-            
-             if (response.code == "200") {   
+
+             if (response.code == "200") {
                 this.KuWeiOptions = response.data.rows;
                 // console.log(response.data.rows,663322);
              }else{
                 this.$message({ message: response.msg, type: 'error' });
-              } 
+              }
             });
         },
 
         //商品信息维护
         getList03() {
             GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-             
+
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
@@ -850,8 +852,8 @@ export default {
             console.log(row.cbpc01, 8888);
 
             Purchaseinboundsho(row).then(response => {
-            
-             if (response.code == "200") {    
+
+             if (response.code == "200") {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
@@ -859,7 +861,7 @@ export default {
                 this.$message({ message: '审批成功', type: 'success' });
               }else{
                 this.$message({ message: response.msg, type: 'error' });
-               }  
+               }
             });
         },
         //盘点完成上面内容
@@ -869,7 +871,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinBoundshf(item).then((res) => {
-                 if (res.code == "200") {  
+                 if (res.code == "200") {
                     console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("审批成功");
@@ -886,8 +888,8 @@ export default {
             console.log(row.cbpc01, 8888);
 
             PurchaseinboundSht(row).then(response => {
-            
-             if (response.code == "200") {   
+
+             if (response.code == "200") {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
@@ -907,7 +909,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSht(item).then((res) => {
-                 if (res.code == "200") { 
+                 if (res.code == "200") {
                     console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("反审成功");
@@ -969,7 +971,7 @@ export default {
             console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否要取消标记为"' + row.cbsh01 + '"的数据项？').then(() => {
                 PurchaseinboundShtt(row).then(response => {
-                  if (response.code == "200") { 
+                  if (response.code == "200") {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
@@ -996,7 +998,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShtt(item).then((res) => {
-                 if (res.code == "200") {  
+                 if (res.code == "200") {
                     console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("取消成功");
@@ -1039,7 +1041,7 @@ export default {
                     // this.manageMode = response.manageMode;
                     // this.ifEnabled = response.ifEnabled;
                     // this.sysUserId = response.sysUserId;
-                 if (response.code == "200") {  
+                 if (response.code == "200") {
                     console.log(this.form, 789)
                     // this.submitShangpin();
                     this.getList();
@@ -1103,7 +1105,7 @@ export default {
             //     if (item) {
             PurchasereturnordersAdd(this.form2).then(response => {
 
-             if (response.code == "200") {    
+             if (response.code == "200") {
                 console.log(response.posts, 12345678);
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
@@ -1114,7 +1116,7 @@ export default {
                 this.reset01();
              }else{
                 this.$message({ message: response.msg, type: 'error' });
-             } 
+             }
                 // console.log(this.form2.ifEnabled, 123456);
             });
             //     } else {
@@ -1209,14 +1211,14 @@ export default {
             this.$modal.confirm('是否确认删除仓库为"' + this.idss + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchasereturnorderRemove(item).then((res) => {
-                     if (res.code == "200") { 
+                     if (res.code == "200") {
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
                      }else{
                         this.$message({ message: res.msg, type: 'error' });
-                     } 
+                     }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1245,7 +1247,7 @@ export default {
             this.$modal.confirm('是否确认删除用户编号为"' + row.cbpg01 + '"的数据项？').then(function () {
                 return PurchasereturnorderRemove(JSON.stringify(row));
             }).then((response) => {
-             if (response.code == "200") { 
+             if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");

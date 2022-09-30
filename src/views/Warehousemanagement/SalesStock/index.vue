@@ -18,17 +18,17 @@
                     <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                                     :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                                     range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                    </el-date-picker>                    
+                    </el-date-picker>
                   </el-form-item>
                   <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" v-hasPermi="['system:salesreturnorderss:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                   </el-form-item>
                   <el-form-item>
-                        <el-button class="biaoto-buttonchuangjiannmnm" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button v-hasPermi="['system:salesreturnorderss:list']" class="biaoto-buttonchuangjiannmnm" size="mini" @click="resetQuery">重置</el-button>
                   </el-form-item>
-                    <el-form-item style="margin-left:38%;">                      
+                    <el-form-item style="margin-left:38%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjiannmnm" @click="handletuikuone">创建</el-button>
+                        <el-button size="mini" v-hasPermi="['system:salesreturnorderss:add']" class="biaoto-buttonchuangjiannmnm" @click="handletuikuone">创建</el-button>
                         <el-dropdown trigger="click">
                         <span class="el-dropdown-link xialaxuanxangjjj">
                              <i class="el-icon-caret-bottom el-icon--right "></i>
@@ -45,25 +45,26 @@
                         </el-dropdown-menu>
                        </el-dropdown>
                         <el-button size="mini" type="danger" style="margin-left:5px;" class="biaoto-buttonshanchu" :disabled="multiple"
+                                   v-hasPermi="['system:salesreturnorderss:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button>
+                            v-hasPermi="['system:salesreturnorderss:import']">导入</el-button>
                          <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">标记完成
+                            v-hasPermi="['system:salesreturnorderss:bjwc']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">取消完成
+                            v-hasPermi="['system:salesreturnorderss:qxwc']">取消完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="PurchaseinboundRenGongqueren"
-                            v-hasPermi="['system:user:import']">人工确认</el-button>
+                            v-hasPermi="['system:salesreturnorderss:labor']">人工确认</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -91,28 +92,28 @@
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbse11 == 0 | scope.row.cbse11 == 2" v-hasPermi="['system:user:edit']">
+                                v-if="scope.row.cbse11 == 0 | scope.row.cbse11 == 2" v-hasPermi="['system:salesreturnorderss:edit']">
                                 修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-if="scope.row.cbse11 == 0"
-                                v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-hasPermi="['system:salesreturnorderss:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)"  v-if="scope.row.cbse11 == 1 | scope.row.cbse11 == 4" v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)"  v-if="scope.row.cbse11 == 1 | scope.row.cbse11 == 4" v-hasPermi="['system:salesreturnorderss:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:salesreturnorderss:sh']"
                                 v-if="scope.row.cbse11 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:salesreturnorderss:fs']"
                                 v-if="scope.row.cbse11 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundQuxiaoWangcheng(scope.row)" v-hasPermi="['system:user:remove']"
+                                @click="PurchaseinboundQuxiaoWangcheng(scope.row)" v-hasPermi="['system:salesreturnorderss:qxwc']"
                                 v-if="scope.row.cbse11 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']"
+                                v-hasPermi="['system:salesreturnorderss:bjwc']"
                                 v-if="scope.row.cbse11 == 1 | scope.row.cbse11 == 1">标记完成</el-button>
                         </template>
                     </el-table-column>
@@ -143,10 +144,10 @@
                     <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
                     </el-table-column>
                     <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
-                     
+
             </el-table>
         </el-dialog>
-       
+
 
 
         <!--修改-->
@@ -716,7 +717,7 @@ export default {
             }
             );
         },
-        
+
         /** 查询用户列表 */
         // 查询提货订单列表
         getList09() {
@@ -906,22 +907,26 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            console.log(row.cbse01, 8888);
-            this.$modal.confirm('是否确认审批编号为"' + row.cbse01 + '"的数据项？').then(function () {
-                return Purchaseinboundsho(row)
-            }).then(response => {
-              
-             if (response.code == "200") {   
-                console.log(this.form.cbse01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '审批成功', type: 'success' });
-            }else{
-                 this.$message({ message: response.msg, type: 'error' });
-                }
+            let cbpg01 = row.cbse01
+            let status = row.cbse11
+            this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
 
-            }).catch(() => { });
+            // console.log(row.cbse01, 8888);
+            // this.$modal.confirm('是否确认审批编号为"' + row.cbse01 + '"的数据项？').then(function () {
+            //     return Purchaseinboundsho(row)
+            // }).then(response => {
+              
+            //  if (response.code == "200") {   
+            //     console.log(this.form.cbse01, 789)
+            //     // this.submitShangpin();
+            //     this.getList();
+            //     // this.open = false;
+            //     this.$message({ message: '审批成功', type: 'success' });
+            // }else{
+            //      this.$message({ message: response.msg, type: 'error' });
+            //     }
+
+            // }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -930,7 +935,7 @@ export default {
             this.$modal.confirm('是否确认审批编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.Purchaseinboundsho(item).then((res) => {
-                    if (res.code == "200") {  
+                    if (res.code == "200") {
                         console.log(res, 123)
                         this.getList();
                         this.$modal.msgSuccess("审批成功");
@@ -942,25 +947,27 @@ export default {
                     })
                 })
             }).catch(() => { });
-            
+
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            console.log(row.cbse01, 8888);
-            this.$modal.confirm('是否确认反审编号为"' + row.cbse01 + '"的数据项？').then(function () {
-                return PurchaseinboundSht(row)
-            }).then(response => {
-             if (response.code == "200") {  
-                console.log(this.form.cbse01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '反审成功', type: 'success' });
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-             }  
-            }).catch(() => { });
-            
+            let cbpg01 = row.cbse01
+            let status = row.cbse11
+            this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
+            // console.log(row.cbse01, 8888);
+            // this.$modal.confirm('是否确认反审编号为"' + row.cbse01 + '"的数据项？').then(function () {
+            //     return PurchaseinboundSht(row)
+            // }).then(response => {
+            //  if (response.code == "200") {  
+            //     console.log(this.form.cbse01, 789)
+            //     // this.submitShangpin();
+            //     this.getList();
+            //     // this.open = false;
+            //     this.$message({ message: '反审成功', type: 'success' });
+            //  }else{
+            //     this.$message({ message: response.msg, type: 'error' });
+            //  }  
+            // }).catch(() => { });
         },
 
         //反审上面的
@@ -982,7 +989,7 @@ export default {
                     })
                 })
             }).catch(() => { });
-            
+
         },
 
 
@@ -1018,13 +1025,13 @@ export default {
                         }else{
                             this.$modal.msgError(res.msg)
                         }
-                        
+
                     }).catch((e) => {
                         console.log(e, 456)
                     })
                 })
             }).catch(() => { });
-            
+
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
@@ -1038,7 +1045,7 @@ export default {
                     }else{
                         this.$modal.msgError(response.msg)
                     }
-                    
+
                 });
             }).catch(() => { });
 
@@ -1074,7 +1081,7 @@ export default {
                     })
                 })
             }).catch(() => { });
-            
+
         },
         // 人工确认 完成更新库存
         PurchaseinboundRenGongqueren(row){
@@ -1156,7 +1163,7 @@ export default {
             console.log(row,cbse01)
             this.$router.push("/system/user-authhhhhs/role/" + cbse01);
             this.getList();
-            
+
             // this.open = true;
             // console.log(row, 7788521);
             // this.form.cbpc01 = row.cbpc01;
@@ -1256,11 +1263,15 @@ export default {
 
          /** 详情操作 */
         handleAuthRole: function (row) {
-            const cbse01 = row.cbse01;
-            console.log(row.cbse01,885522);
+            // const cbse01 = row.cbse01;
+            // console.log(row.cbse01,885522);
 
-            // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-authhhhh/role/" + cbse01);
+            // // this.$router.push("/system/user-auth/role/");
+            // this.$router.push("/system/user-authhhhh/role/" + cbse01);
+            console.log(row,';;;;')
+            let cbpg01 = row.cbse01
+            let status = 8
+            this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
         
         },
         /** 创建操作 */
@@ -1280,7 +1291,7 @@ export default {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
                     // data: JSON.stringify(this.userList01),
-                    data:row.id,                
+                    data:row.id,
                         //  JSON.stringify(this.userList)
                 }
             })

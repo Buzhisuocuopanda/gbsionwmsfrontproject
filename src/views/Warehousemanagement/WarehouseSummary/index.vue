@@ -1,4 +1,5 @@
 <template>
+  <!--仓库盘点汇总表-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -17,17 +18,18 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item >
-                      <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                      <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                      <el-button size="mini" v-hasPermi="['system:warehouseinventorysummary:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                      <el-button v-hasPermi="['system:warehouseinventorysummary:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlepdhzone">创建</el-button> -->
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                                   v-hasPermi="['system:warehouseinventorysummary:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">盘点完成</el-button>
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:warehouseinventorysummary:pdwc']">盘点完成</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -38,7 +40,7 @@
                         </el-button> -->
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">取消完成
+                            v-hasPermi="['system:warehouseinventorysummary:qxwc']">取消完成
                         </el-button>
                     </el-form-item>
                 </el-form>
@@ -75,7 +77,7 @@
                                 v-if="scope.row.cbpg11 == 1 | scope.row.cbpg11 == 2"
                                 v-hasPermi="['system:user:remove']">删除</el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:warehouseinventorysummary:detail']">详情
                             </el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
@@ -1030,7 +1032,7 @@ export default {
             console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否确定盘点完成为"' + row.cbpc01 + '"的数据项？').then(() => {
                 Purchaseinboundsho(row).then(response => {
-                if (response.code == "200") {    
+                if (response.code == "200") {
                     console.log(this.form.cbpc01, 789)
                     // this.submitShangpin();
                     this.getList();
@@ -1038,10 +1040,10 @@ export default {
                     this.$message({ message: '盘点成功', type: 'success' });
                  }else{
                     this.$message({ message: response.msg, type: 'error' });
-                 } 
+                 }
                 });
             }).catch(() => { });
-            
+
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -1058,7 +1060,7 @@ export default {
                     })
                 })
             }).catch(() => { });
-            
+
         },
         //反审
         PurchaseinboundFanShenpi(row) {
@@ -1104,7 +1106,7 @@ export default {
 
                 });
             }).catch(() => { });
-            
+
         },
 
         //标记完成上面的按钮
@@ -1122,7 +1124,7 @@ export default {
                     })
                 })
             }).catch(() => { });
-            
+
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
@@ -1159,7 +1161,7 @@ export default {
                     })
                 })
             }).catch(() => { });
-            
+
         },
 
         /** 修改按钮操作 */

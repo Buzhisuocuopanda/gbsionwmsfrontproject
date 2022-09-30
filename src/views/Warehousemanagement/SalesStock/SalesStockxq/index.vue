@@ -139,12 +139,20 @@
                 </el-descriptions-item>
             </el-descriptions>
         </div>
-
+        <div v-if="status == 8" style="margin:10px 0;">
+            <!-- <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button> -->
+            <el-button style="margin-left:5%;" @click="handlefanhui">返 回</el-button>
+        </div>
+        <div v-else style="margin:10px 0;">
+            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
+            <el-button v-else style="margin-left:5%;" type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button  @click="handlefanhui">返回</el-button>
+        </div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundList } from "@/api/Warehousemanagement/SalesStock";
+import { PurchaseinboundList,Purchaseinboundsho,PurchaseinboundSht } from "@/api/Warehousemanagement/SalesStock";
 export default {
 
     data() {
@@ -166,8 +174,11 @@ export default {
                 address: undefined,
                 userId: undefined
             },
-            CBPC01: ""
-
+            CBPC01: "",
+            ids:{
+                id:''
+            },
+            status:'',
         };
     },
     watch: {
@@ -178,6 +189,40 @@ export default {
 
     },
     methods: {
+        //审批
+        PurchaseinboundShenpi() {
+            this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
+                Purchaseinboundsho({
+                    cbse01:this.ids.id
+                }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '审批成功', type: 'success' });
+                    this.$router.push("/Warehousemanagement/SalesStock");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+                });
+            }).catch(() => { });
+        },
+        //反审
+        PurchaseinboundFanShenpi() {
+            this.$modal.confirm('是否要反审,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
+                PurchaseinboundSht({
+                    cbse01:this.ids.id
+                }).then(response => {
+                    if (response.code == "200") {
+                        this.$message({ message: '反审成功', type: 'success' });
+                        this.$router.push("/Warehousemanagement/SalesStock");
+                    }else{
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
+                });
+            }).catch(() => { });
+        },
+        // 返回
+        handlefanhui(){
+            this.$router.push("/Warehousemanagement/SalesStock");
+        },
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
@@ -197,6 +242,9 @@ export default {
         getList() {
             this.loading = true;
             const userId = this.$route.params && this.$route.params.cbpg01;
+            this.ids.id = this.$route.params && this.$route.params.cbpg01;
+            this.status = this.$route.params && this.$route.params.status;
+            console.log(this.$route)
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {

@@ -1,4 +1,5 @@
 <template>
+  <!--库存分配-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="120px">
@@ -44,7 +45,7 @@
         <el-table-column fixed label="生产总订单号" align="center" prop="totalOrderNo" min-width="120px;"/>
         <el-table-column label="商品" align="center" prop="goodsMsg" min-width="400px;"/>
         <el-table-column label="优先级" align="center" prop="priority" min-width="120px;"/>
-        <el-table-column :formatter="rounding" label="确认使用库存数量" align="right" prop="confirmQty" min-width="100px;">
+        <el-table-column :formatter="rounding" label="确认库存数量" align="right" prop="confirmQty" min-width="120px;">
           <template slot-scope="scope">
 
           <span v-if="scope.row.id==editId">
@@ -54,6 +55,7 @@
           </template>
         </el-table-column>
         <el-table-column :formatter="rounding" label="商品库存数量" align="right" prop="goodsNum" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
         <el-table-column :formatter="rounding" label="可用库存" align="right" prop="canUseQty" min-width="100px;"/>
         <el-table-column :formatter="rounding" label="占用数量" align="right" prop="lockQty" min-width="100px;"/>
         <el-table-column :formatter="rounding" label="分配数量" align="right" prop="makeQty" min-width="100px;"/>
