@@ -24,6 +24,16 @@
         <el-form-item label="商品SN"   class="item-r" >
           <el-input v-model="queryParams.cbig10" class="filter-item"  placeholder="商品SN" />
         </el-form-item>
+        <el-form-item label="商品状态">
+          <el-select v-model="queryParams.status" clearable filterable remote reserve-keyword placeholder="请选择" >
+            <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="上架状态">
+          <el-select v-model="queryParams.groudStatus" clearable filterable remote reserve-keyword placeholder="请选择" >
+            <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
+        </el-form-item>
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
@@ -45,7 +55,8 @@
         <!--<el-table-column  label="描述" align="center" prop="lockQty" min-width="260px;"/>-->
         <el-table-column label="商品SN" align="center" prop="cbig10" min-width="80px;" />
         <el-table-column  label="入库日期" align="center" prop="cbig15" :formatter="formatTime2" min-width="80px;" />
-
+        <el-table-column prop="status" label="商品状态" :formatter="formatState" sortable align="center"></el-table-column>
+        <el-table-column prop="groudStatus" label="上架状态" :formatter="formatStateType" sortable align="center"></el-table-column>
 
       </el-table>
       <el-pagination
@@ -103,20 +114,35 @@ export default {
         cbla09s: "",
         cbpb01: "",
         cbig10:"",
+        groudStatus:undefined,
+        status:undefined,
       },
       inwuquList: [],
       total:0,
-      statusType: [
+      status: [
         {
-          value: 0,
-          label: 'NO',
+          value: 1,
+          label: '已入库',
         },
         {
-          value: 4,
-          label: 'OK',
+          value: 2,
+          label: '出库中',
+        },
+        {
+          value: 3,
+          label: '已出库',
         }
       ],
-
+      statusType: [
+        {
+          value: 1,
+          label: '上架',
+        },
+        {
+          value: 2,
+          label: '已下架',
+        }
+      ],
 
     };
   },
@@ -129,6 +155,26 @@ export default {
   methods: {
     formatTime2(row){
       return formatDate2(row.cbig15);
+    },
+    formatState(row) {
+      if (row != null) {
+        if (row.status == 1) {
+          return "已入库"
+        } else if (row.status == 2) {
+          return "出库中"
+        }else if (row.status == 3) {
+          return "已出库"
+        }
+      }
+    },
+    formatStateType(row) {
+      if (row != null) {
+        if (row.groudStatus == 1) {
+          return "上架"
+        } else if (row.groudStatus == 2) {
+          return "已下架"
+        }
+      }
     },
     onSubmit() {},
     handleSelectionChange() {},
