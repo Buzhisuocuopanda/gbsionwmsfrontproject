@@ -1,4 +1,5 @@
 <template>
+  <!--质检单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -18,22 +19,22 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                         <el-button size="mini" v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
+                         <el-button v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item>                      
+                    <el-form-item>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjianllnm">创建
+                        <el-button  size="mini" class="biaoto-buttonchuangjianllnm">创建
                         </el-button>
                         <el-dropdown trigger="click">
                           <span class="el-dropdown-link xialaxuanxangnnn">
                               <i class="el-icon-caret-bottom el-icon--right "></i>
                           </span>
                         <el-dropdown-menu slot="dropdown">
-                           <el-dropdown-item class="clearfix" @click.native="tong">
+                           <el-dropdown-item  class="clearfix" @click.native="tong">
                               通过提货单创建
                             <el-badge class="mark"/>
                            </el-dropdown-item>
@@ -42,6 +43,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" type="danger" style="margin-left:1%;"  class="biaoto-buttonshanchu" :disabled="multiple"
+                                   v-hasPermi="['system:qualityin:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
@@ -49,11 +51,11 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
-                    </el-form-item>                        
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:qualityin:sh']">审核</el-button>
+                    </el-form-item>
                     <el-form-item>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:qualityin:fs']">反审</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -96,23 +98,23 @@
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-if="scope.row.cbqa09 == 0 | scope.row.cbqa09 == ' '"
-                                v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-hasPermi="['system:qualityin:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                             v-if="scope.row.cbqa09 == 4 | scope.row.cbqa09 == 1"
-                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:qualityin:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:qualityin:sh']"
                                 v-if="scope.row.cbqa09 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:qualityin:fs']"
                                 v-if="scope.row.cbqa09 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbqa09 == 4">取消完成</el-button>
+                                v-hasPermi="['system:qualityin:qxwc']" v-if="scope.row.cbqa09 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']"
+                                v-hasPermi="['system:qualityin:bjwc']"
                                 v-if="scope.row.cbqa09 == 1 | scope.row.cbqa09 == 1">标记完成</el-button>
                         </template>
                     </el-table-column>
@@ -140,7 +142,7 @@
                     <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
                     </el-table-column>
                     <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
-                     
+
             </el-table>
             <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
         </el-dialog>
@@ -483,7 +485,7 @@ export default {
             // 用户导入参数
             upload: {
                 // 是否显示弹出层（用户导入）
-                
+
                 // 弹出层标题（用户导入）
                 title: "",
                 // 是否禁用上传
@@ -1122,14 +1124,14 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.QualityinRemove(JSON.stringify(item)).then((res) => {
-                        if (res.code == "200") {  
+                        if (res.code == "200") {
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
                         } else {
                             this.$message({ message: res.msg, type: 'error' });
-                        } 
+                        }
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1158,13 +1160,13 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.cbqa07 + '"的数据项？').then(function () {
                 return QualityinRemove(JSON.stringify(row));
             }).then((response) => {
-              if (response.code == "200") {  
+              if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
                 } else {
                     this.$message({ message: response.msg, type: 'error' });
-                } 
+                }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */
@@ -1193,13 +1195,13 @@ export default {
 
                 path: '/system/user-zhijiandan/role/',
                 // name: 'index',
-                query: {                  
+                query: {
                     data: row.id,
                 }
             })
             // location.reload();
         },
-         
+
 
         /** 导入按钮操作 */
         handleImport() {

@@ -1,4 +1,5 @@
 <template>
+  <!--销售出库单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -18,19 +19,19 @@
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                        </el-date-picker>    
+                        </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                         <el-button v-hasPermi="['system:selloutofwarehouse:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                         <el-button v-hasPermi="['system:selloutofwarehouse:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item  style="margin-left:51%;">                     
+                    <el-form-item  style="margin-left:51%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian">创建</el-button>
+                        <el-button size="mini" v-hasPermi="['system:selloutofwarehouse:add']" class="biaoto-buttonchuangjian">创建</el-button>
                         <el-dropdown trigger="click">
                         <span class="el-dropdown-link xialaxuanxang">
                              <i class="el-icon-caret-bottom el-icon--right "></i>
@@ -47,20 +48,21 @@
                         </el-dropdown-menu>
                        </el-dropdown>
                         <el-button size="mini" type="danger" style="margin-left:5px;" class="biaoto-buttonshanchu" :disabled="multiple"
+                                   v-hasPermi="['system:selloutofwarehouse:remove']"
                             @click="handleDelete">删除</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:selloutofwarehouse:sh']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:selloutofwarehouse:fs']">反审</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">标记完成
+                            v-hasPermi="['system:selloutofwarehouse:bjwc']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">取消完成
+                            v-hasPermi="['system:selloutofwarehouse:qxwc']">取消完成
                         </el-button>
                     </el-form-item>
                 </el-form>
@@ -87,8 +89,8 @@
                     <el-table-column label="关联订单" align="left" key="cbsb31" prop="cbsb31" width="160px;" sortable>
                         <template scope="scope">
                              <div>{{ scope.row.cbsb31 == 1 ? "是" : scope.row.cbsb31 == 0 ?
-                             "否" : "未确定状态"
-                             }}
+                            "否" : "未确定状态"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
@@ -96,16 +98,16 @@
                     <el-table-column label="关联提货单" align="left" key="cbsb32" prop="cbsb32" width="160px;" sortable>
                         <template scope="scope">
                              <div>{{ scope.row.cbsb31 == 0 ? "是" : scope.row.cbsb31 == 1 ?
-                             "否" : "未确定状态"
-                             }}
+                            "否" : "未确定状态"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
                     <el-table-column label="状态" align="left" key="cbsb11" prop="cbsb11" width="170px;" sortable>
                         <template scope="scope">
                              <div>{{ scope.row.cbsb11 == 0 ? "未审核" : scope.row.cbsb11 == 1 ?
-                             "已审核" : scope.row.cbsb11 == 4 ? "已完成" : "未确定状态"
-                             }}
+                            "已审核" : scope.row.cbsb11 == 4 ? "已完成" : "未确定状态"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
@@ -114,29 +116,29 @@
                         fixed="right">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlxiaoshochkudanone(scope.row)"
-                                v-if="scope.row.cbsb11 == 0 | scope.row.cbsb11 == 2" v-hasPermi="['system:user:edit']">
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                                v-if="scope.row.cbsb11 == 0 | scope.row.cbsb11 == 2" v-hasPermi="['system:selloutofwarehouse:edit']">
                                 修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-if="scope.row.cbsb11 == 0"
-                                v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-hasPermi="['system:selloutofwarehouse:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)"   v-if="scope.row.cbsb11 == 4 | scope.row.cbsb11 == 1"   v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)"   v-if="scope.row.cbsb11 == 4 | scope.row.cbsb11 == 1"   v-hasPermi="['system:selloutofwarehouse:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:selloutofwarehouse:sh']"
                                 v-if="scope.row.cbsb11 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:selloutofwarehouse:fs']"
                                 v-if="scope.row.cbsb11 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbsb11 == 4">取消完成</el-button>
+                                v-hasPermi="['system:selloutofwarehouse:qxwc']" v-if="scope.row.cbsb11 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']"
+                                v-hasPermi="['system:selloutofwarehouse:bjwc']"
                                 v-if="scope.row.cbsb11 == 1">标记完成</el-button>
                         </template>
                     </el-table-column>
@@ -167,14 +169,14 @@
                     <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
                     </el-table-column>
                     <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
-                     
+
             </el-table>
             <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
             <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamss.pageNum"
                     :limit.sync="queryParamss.pageSize" @pagination="userList01" :page-sizes="[2, 5, 10, 15, 20]"
                     class="pagintotal" />
         </el-dialog>
-        
+
         <!--修改-->
         <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
@@ -227,7 +229,7 @@
             </div>
         </el-dialog>
 
-    
+
         <!-- 用户导入对话框 -->
         <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
             <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
@@ -667,7 +669,7 @@ export default {
     },
     methods: {
 
-   
+
 
         tong(){
           this.open3 = true;
@@ -940,7 +942,7 @@ export default {
                 }else{
                     this.$modal.msgError(response.msg)
                 }
-                
+
             });
           }).catch(() => { });
         },
@@ -959,7 +961,7 @@ export default {
                     }else{
                         this.$modal.msgError(res.msg)
                     }
-                    
+
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -999,7 +1001,7 @@ export default {
                     }else{
                         this.$modal.msgError(res.msg)
                     }
-                    
+
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1022,7 +1024,7 @@ export default {
                 }else{
                     this.$message({ message:response.msg,type :'error'})
                 }
-                
+
 
             });
             }).catch(() => { });
@@ -1043,7 +1045,7 @@ export default {
                     }else{
                         this.$message({ message:res.msg,type :'error'})
                     }
-                    
+
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1084,7 +1086,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.Purchaseinbounds(item).then((res) => {
-                 if (res.code == "200") { 
+                 if (res.code == "200") {
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("取消标记成功");
@@ -1244,7 +1246,7 @@ export default {
                     //                       customerLevel:row.customerLevel,contacts:row.contacts,
                     //                     whName:row.whName,phone:row.phone,address:row.address,
                     //                     saleUser:row.saleUser,id:row.id}]),
-                      data: row.id,                    
+                      data: row.id,
                     // data01:JSON.stringify(row)
                         //  JSON.stringify(this.userList)
                 }
@@ -1292,7 +1294,7 @@ export default {
                         this.$modal.msgSuccess("删除成功");
                      }else{
                         this.$message({ message: res.msg, type: 'error' });
-                      } 
+                      }
                     }).catch((e) => {
                         // console.log(e, 456)
                     })

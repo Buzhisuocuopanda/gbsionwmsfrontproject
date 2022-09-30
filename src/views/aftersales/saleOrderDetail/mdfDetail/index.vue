@@ -1,4 +1,5 @@
 <template>
+  <!--修改-->
   <div class="app-container">
 <!--
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
@@ -345,13 +346,13 @@
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="销售订单号:" prop="orderNo">
-            <el-input type="text" v-model="formData.saleOrderNo" style="width: 60%;" />
+            <el-input type="text" v-model="formData.saleOrderNo" style="width: 70%;" />
           </el-form-item>
         </el-col>
 
         <el-col :span="8">
-          <el-form-item label="客户:" prop="customerId">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+          <el-form-item label="客户:" prop="customerId"><!--v-loadmore="customerloadMore"-->
+            <el-select @change="customerOnChange"  v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in customeroptions"
                 :key="item.value"
@@ -360,72 +361,61 @@
               </el-option>
             </el-select>
           </el-form-item>
-
         </el-col>
         <el-col :span="8">
-          <el-form-item label="问题原因:" prop="orderNo">
-            <el-input type="text" v-model="formData.question" style="width: 60%;" />
+          <el-form-item label="sn:" prop="receiveName">
+            <el-input type="text" v-model="formData.sn" style="width: 70%;" />
           </el-form-item>
         </el-col>
-        <!--        <el-col :span="8">
-                  <el-form-item label="客户单号:" prop="customerNo">
-                    <el-input type="text" v-model="formData.customerNo" style="width: 70%;" />
-                  </el-form-item>
-                </el-col>-->
-        <!--        <el-col :span="8">
-                  <el-form-item label="日期:" prop="orderDate">
-                    <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;">
-                    </el-date-picker>
-                  </el-form-item>
-                </el-col>-->
+
       </el-row>
-      <!--      <el-row :gutter="20">-->
-      <!--        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="主副表id:" prop="cbpg161">-->
-      <!--            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="供料单位:" prop="cbpc099">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="仓库:" prop="cbpc100">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="结算货币:" prop="cbpc16">-->
-      <!--            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">-->
-      <!--              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">-->
-      <!--              </el-option>-->
-      <!--            </el-select>-->
-      <!--          </el-form-item>-->
-      <!--          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">-->
-      <!--                  <el-popover placement="bottom-start" trigger="click">-->
-      <!--                      <ListLists ref="ListLists" @selected="selected004" />-->
-      <!--                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly-->
-      <!--                          style="border:solid #eee thin; width:77%;">-->
-      <!--                      </el-select>-->
-      <!--                  </el-popover>-->
-      <!--              </el-form-item> &ndash;&gt;-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash;商品信息维护&ndash;&gt;-->
-      <!--        <el-col v-if="false">-->
-      <!--          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
+      <!--      <el-row :gutter="20">
+              <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+                <el-form-item label="主副表id:" prop="cbpg161">
+                  <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />
+                </el-form-item>
+              </el-col>
+              <el-col style="" :span="8">
+                <el-form-item label="供料单位:" prop="cbpc099">
+                  <el-popover placement="bottom-start" trigger="click">
+                    <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />
+                    <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">
+                    </el-input>
+                  </el-popover>
+                </el-form-item>
+              </el-col>
+              <el-col style="" :span="8">
+                <el-form-item label="仓库:" prop="cbpc100">
+                  <el-popover placement="bottom-start" trigger="click">
+                    <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
+                    <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">
+                    </el-input>
+                  </el-popover>
+                </el-form-item>
+              </el-col>
+              <el-col style="" :span="8">
+                <el-form-item label="结算货币:" prop="cbpc16">
+                  <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">
+                    <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">
+                        <el-popover placement="bottom-start" trigger="click">
+                            <ListLists ref="ListLists" @selected="selected004" />
+                            <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly
+                                style="border:solid #eee thin; width:77%;">
+                            </el-select>
+                        </el-popover>
+                    </el-form-item> &ndash;&gt;
+              </el-col>
+              &lt;!&ndash;商品信息维护&ndash;&gt;
+              <el-col v-if="false">
+                <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">
+                  <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>-->
       <!--
             <el-row :gutter="20" style="margin-top: 1px;">
               <el-col :span="8">
@@ -470,11 +460,7 @@
 
 
       <el-row :gutter="20">
-        <el-col :span="8">
-          <el-form-item label="sn:" prop="receiveName">
-            <el-input type="text" v-model="formData.sn" style="width: 70%;" />
-          </el-form-item>
-        </el-col>
+
         <el-col :span="8">
           <el-form-item label="处理结果:" prop="receivePhone">
             <el-input type="text" v-model="formData.answerMsg" style="width: 70%;" />
@@ -483,6 +469,13 @@
         <el-col :span="8">
           <el-form-item label="进度:" prop="fcNumber">
             <el-input type="text" v-model="formData.process" style="width: 70%;" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="问题原因:" prop="orderNo">
+            <el-input type="textarea" v-model="formData.question" style="width: 92%;" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -509,9 +502,9 @@
               </el-col>
             </el-row>
       -->
-      <el-row :gutter="20">
+      <!--<el-row :gutter="20">
         <el-col :span="8">
-          <!--          <el-form-item label="客户:" prop="customerId">
+                    <el-form-item label="客户:" prop="customerId">
                       <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
                         <el-option
                           v-for="item in customeroptions"
@@ -520,34 +513,34 @@
                           :value="item.value">
                         </el-option>
                       </el-select>
-                    </el-form-item>-->
+                    </el-form-item>
         </el-col>
 
-        <!--        <el-col :span="8">-->
-        <!--          <el-form-item label="备注:" prop="remark">-->
-        <!--            <el-input type="text" v-model="formData.remark" style="width: 120%;" />-->
-        <!--          </el-form-item>-->
-        <!--        </el-col>-->
+                <el-col :span="8">
+                  <el-form-item label="备注:" prop="remark">
+                    <el-input type="text" v-model="formData.remark" style="width: 120%;" />
+                  </el-form-item>
+                </el-col>
       </el-row>
 
-      <!--      <el-row v-if="false">-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-      <!--        <el-col>-->
-      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
+            <el-row v-if="false">
+              <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">
+                <el-form-item label="供应商id:" prop="cbpc09">
+                  <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />
+                </el-form-item>
+              </el-col>
+              <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
+                <el-form-item label="仓库id:" prop="cbpc10">
+                  <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />
+                </el-form-item>
+              </el-col>
+              &lt;!&ndash; 商品信息维护 &ndash;&gt;
+              <el-col>
+                <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">
+                  <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>-->
       <div>
         <!--        <el-row>
                   <el-col :span="24">
@@ -555,10 +548,10 @@
                   </el-col>
                 </el-row>-->
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsMsg" label="品牌" width="">
+          <el-table-column prop="goodsMsg" label="品牌" width="200px">
             <template slot-scope="scope">
-              <sapn>
-                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+              <sapn><!--v-loadmore="loadMore"-->
+                <el-select @change="goodsOnChange(scope.row,$event)"  v-model="formData.goodsId" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -594,36 +587,37 @@
                       </template>
                     </el-table-column>
 
-                    <el-table-column prop="totalPrice" label="金额" width="150">
-                      <template slot-scope="scope">
-                        <sapn>
-                          <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>
-                        </sapn>
-                      </template>
-                    </el-table-column>
+                        <el-table-column prop="totalPrice" label="金额" width="150">
+                          <template slot-scope="scope">
+                            <sapn>
+                              <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>
+                            </sapn>
+                          </template>
+                        </el-table-column>
 
-                    <el-table-column prop="canUseSku" label="可用库存" width="150">
-                      <template slot-scope="scope">
-                        <sapn>
-                          <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>
-                        </sapn>
-                      </template>
-                    </el-table-column>
-                    <el-table-column prop="remark" label="备注" width="">
-                      <template slot-scope="scope">
-                        <sapn>
-                          <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
-                        </sapn>
-                      </template>
-                    </el-table-column>-->
-          <!--          <el-table-column label="操作" align="center" width="80">
-                      <template slot-scope="scope">
-                        <span @click="_ly_delFrom(scope.row)">
-                          <i class="el-icon-error" style="color: red;"></i>
-                        </span>
-                      </template>
-                    </el-table-column>-->
-        </el-table>
+                        <el-table-column prop="canUseSku" label="可用库存" width="150">
+                          <template slot-scope="scope">
+                            <sapn>
+                              <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>
+                            </sapn>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="remark" label="备注" width="">
+                          <template slot-scope="scope">
+                            <sapn>
+                              <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
+                            </sapn>
+                          </template>
+                        </el-table-column>-->
+              <!--          <el-table-column label="操作" align="center" width="80">
+                          <template slot-scope="scope">
+                            <span @click="_ly_delFrom(scope.row)">
+                              <i class="el-icon-error" style="color: red;"></i>
+                            </span>
+                          </template>
+                        </el-table-column>-->
+            </el-table>
+
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
             <div class="box1">
@@ -705,14 +699,12 @@
 </template>
 
 <script>
-  // import { PurchaseinboundAdds } from "@/api/Warehousemanagement/SalesShipment";
-
 
   import {
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,SwJsCustomerlistAll,swJsGoodslistBySelectAll } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -826,41 +818,7 @@
             }
           ]
         },
-        treeData: [{ // 树状数据
-          id: 1,
-          label: '一级 1',
-          children: [{
-            id: 4,
-            label: '二级 1-1',
-            children: [{
-              id: 9,
-              label: '三级 1-1-1'
-            }, {
-              id: 10,
-              label: '三级 1-1-2'
-            }]
-          }]
-        }, {
-          id: 2,
-          label: '一级 2',
-          children: [{
-            id: 5,
-            label: '二级 2-1'
-          }, {
-            id: 6,
-            label: '二级 2-2'
-          }]
-        }, {
-          id: 3,
-          label: '一级 3',
-          children: [{
-            id: 7,
-            label: '二级 3-1'
-          }, {
-            id: 8,
-            label: '二级 3-2'
-          }]
-        }],
+
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -1170,54 +1128,6 @@
           }
         ],
 
-        options3: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        },
-          {
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-        options2: [{
-          value: '选项1',
-          label: '黄金糕2'
-        }, {
-          value: '选项2',
-          label: '双皮奶2'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎2'
-        }, {
-          value: '选项4',
-          label: '龙须面2'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭2'
-        }],
       };
     },
     computed: {
@@ -1493,7 +1403,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Warehousemanagement/sales", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1663,7 +1573,7 @@
       initCustomerSelect(){
         const param={}
 
-        SwJsCustomerlistSelect(param).then(response => {
+        SwJsCustomerlistAll(param).then(response => {
           if (response.code == "200") {
             this.customeroptions=response.data.rows
           }else {
@@ -1679,8 +1589,7 @@
       },
 
       goodsOnChange(row,val){
-        // console.log(this.formData.customer)
-        // console.log("val",val)
+
         console.log("row",row)
         console.log("val",val)
         row.goodsId=val
@@ -1796,7 +1705,7 @@
       initSelect(){
         const param={}
 
-        swJsGoodslistBySelect(param).then(response => {
+        swJsGoodslistBySelectAll(param).then(response => {
           if (response.code == "200") {
             this.options=response.data.rows
           }else {

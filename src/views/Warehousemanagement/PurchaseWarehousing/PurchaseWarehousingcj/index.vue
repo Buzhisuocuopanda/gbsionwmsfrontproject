@@ -724,7 +724,6 @@
           province: '',
           cbpc000: ''
         })
-        this.dataId++
         console.log(this.tableData,852369);
       },
       // 删除一行表单

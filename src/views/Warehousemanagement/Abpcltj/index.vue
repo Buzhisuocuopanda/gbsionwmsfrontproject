@@ -53,7 +53,7 @@
             </template>
           </el-table-column>
         </el-table>
-        
+
         <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
           @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]" />
       </el-col>
@@ -130,7 +130,7 @@
     },
     data() {
       return {
-        
+
   customeroptions: [],
 
       formData: {
@@ -522,7 +522,7 @@
       this.getDicts("sw_js_store_type").then(response => {
         this.form.type = response.rows;
       });
-     
+
       this.form2.cbph10 = "20"
 
       console.log(this.form.cbpc16, 123456);
@@ -543,7 +543,7 @@
           this.loading = false;
         });
       },
-     
+
 
 
      customerdataFilter(val){
@@ -664,7 +664,7 @@
         });
       },
 
-      
+
 
 
 
