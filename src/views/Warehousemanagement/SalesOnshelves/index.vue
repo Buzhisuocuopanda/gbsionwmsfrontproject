@@ -1,4 +1,5 @@
 <template>
+  <!--销售上架单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -23,15 +24,15 @@
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                        </el-date-picker>                      
+                        </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                         <el-button v-hasPermi="['system:sellinglistings:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                         <el-button v-hasPermi="['system:sellinglistings:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:40%;"> 
+                    <el-form-item style="margin-left:40%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -77,7 +78,7 @@
                     </el-table-column>
                     <el-table-column label="联系电话" align="left" key="phone" prop="phone" sortable width="180px;">
                     </el-table-column>
-                    <el-table-column label="销售用户" align="left" key="saleUser" prop="saleUser" sortable width="180px;"> 
+                    <el-table-column label="销售用户" align="left" key="saleUser" prop="saleUser" sortable width="180px;">
                     </el-table-column>
                     <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="180px;">
                     </el-table-column>
@@ -102,12 +103,12 @@
                             </el-button> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                               
+
                                 v-hasPermi="['system:user:remove']">删除</el-button> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
                             </el-button> -->
-<!-- 
+<!--
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
                                 v-if="scope.row.status == 0">审核</el-button>
@@ -190,7 +191,7 @@
                         </el-col>
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
-                       
+
                         <el-col :span="12" class="GongyingShangjiaoyan">
                             <el-form-item>
                                 <el-button type="primary" @click="handleUpdate">确定</el-button>
@@ -641,7 +642,7 @@ export default {
     },
     methods: {
 
-       
+
          //列表表头设置
         headClasspw() {
             return {
@@ -1217,7 +1218,7 @@ export default {
         handleAuthRole: function (row) {
             const cbpc01 = row.cbpc01;
             console.log(row.cbpc01);
-            
+
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-auth/role/" + cbpc01);
         },

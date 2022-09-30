@@ -50,6 +50,15 @@ export function swJsGoodslistBySelect(data) {
     params: data
   })
 }
+
+export function swJsGoodslistBySelectAll(data) {
+  return request({
+    url: '/system/goods/swJsGoodslistBySelectAll',
+    method: 'get',
+    params: data
+  })
+}
+
 export function SwJsCustomerlistSelect(data) {
   return request({
     url: '/system/customer/SwJsCustomerlistSelect',
@@ -57,6 +66,15 @@ export function SwJsCustomerlistSelect(data) {
     params: data
   })
 }
+
+export function SwJsCustomerlistAll(data) {
+  return request({
+    url: '/system/customer/SwJsCustomerlistAll',
+    method: 'get',
+    params: data
+  })
+}
+
 
 export function systemUserSelect(data) {
   return request({

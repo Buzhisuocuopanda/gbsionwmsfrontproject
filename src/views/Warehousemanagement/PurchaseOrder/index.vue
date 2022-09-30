@@ -1,5 +1,5 @@
 <template>
-  <!--采购入库单-->
+  <!--采购订单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -27,37 +27,37 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button size="mini"  v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                         <el-button size="mini"  v-hasPermi="['system:purchaseordertable:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button  v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                         <el-button  v-hasPermi="['system:purchaseordertable:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:50%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
-                        <el-button size="mini"  v-hasPermi="['system:purchaseinbound:add']" class="biaoto-buttonchuangjian" @click="handleChuangJiangone">创建
+                        <el-button size="mini"  v-hasPermi="['system:purchaseordertable:add']" class="biaoto-buttonchuangjian" @click="handleChuangJiangone">创建
                         </el-button>
-                        <el-button type="mini"  v-hasPermi="['system:purchaseinbound:remove']" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
+                        <el-button type="mini"  v-hasPermi="['system:purchaseordertable:remove']" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
 
                             删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:purchaseinbound:sh']">审核</el-button>
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:purchaseordertable:sh']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:purchaseinbound:fs']">反审
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:purchaseordertable:fs']">反审
                         </el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
-                            v-hasPermi="['system:purchaseinbound:bjwc']">标记完成
+                            v-hasPermi="['system:purchaseordertable:bjwc']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:purchaseinbound:qxwc']">取消完成
+                            v-hasPermi="['system:purchaseordertable:qxwc']">取消完成
                         </el-button>
                     </el-form-item>
                 </el-form>
@@ -92,26 +92,26 @@
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == ' '"
-                                v-hasPermi="['system:purchaseinbound:remove']">删除</el-button>
+                                v-hasPermi="['system:purchaseordertable:remove']">删除</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)"  v-hasPermi="['system:user:listselect']">详情
                             </el-button> -->
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:purchaseinbound:sh']"
+                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:purchaseordertable:sh']"
                                 v-if="scope.row.status == 0"
                                >审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:purchaseinbound:fs']"
+                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:purchaseordertable:fs']"
                                 v-if="scope.row.status == 1"
                                 >反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
                                 v-if="scope.row.status == 4"
-                                v-hasPermi="['system:purchaseinbound:qxwc']">取消完成</el-button>
+                                v-hasPermi="['system:purchaseordertable:qxwc']">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                                       v-hasPermi="['system:purchaseinbound:bjwc']"
+                                       v-hasPermi="['system:purchaseordertable:bjwc']"
                                  v-if="scope.row.status == 1 | scope.row.status == 1"
                                 >标记完成</el-button>
                         </template>
