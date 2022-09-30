@@ -884,9 +884,9 @@ export default {
                         cbpd11: "",
                         cbpd12: ""
                     }
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
-                }
+                }else{
+                this.$message({ message: response.msg, type: 'error' });
+        }
                 // if (count-- === 1) {
                 //   this._ly_save()
                 // }

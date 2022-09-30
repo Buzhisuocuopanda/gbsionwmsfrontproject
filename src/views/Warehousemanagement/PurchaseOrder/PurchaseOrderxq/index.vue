@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="Purchase_caigou">仓库盘点表</div>
+        <div class="Purchase_caigou">采购订单表</div>
         <!-- <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbpg07 }}</span>
             <span class="Purchase_riqii">日期：{{ value.cbpg08.slice(0, 10) }}</span>
@@ -140,7 +140,7 @@
 
 </template>
 <script>
-import { PurchaseinboundList } from "@/api/Warehousemanagement/SalesStock";
+import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseOrder";
 export default {
 
     data() {
@@ -192,10 +192,10 @@ export default {
         //详情列表
         getList() {
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbpg01;
+            const userId = this.$route.params && this.$route.params.id;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinboundLists({cbsh01:userId},this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);

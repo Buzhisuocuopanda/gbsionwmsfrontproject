@@ -5,7 +5,7 @@
             @clear="filterIcons" @input.native="filterIcons">
             <i slot="suffix" class="el-icon-search el-input__icon" />
         </el-input>
-        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
+        <!-- <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
           <div>
             <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
                 @click="selectedIcon(item)">
@@ -14,7 +14,7 @@
                 </el-row>
             </div>
           </div>
-       </el-form>
+       </el-form> -->
     </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
             params: null,
             top: null,
             total:0,
-            iconList: [],
+            // iconList: [],
             // 查询参数
             queryParams: {
                 pageNum: 1,

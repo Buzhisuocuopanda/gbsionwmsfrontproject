@@ -20,10 +20,11 @@ export function SkuBarcodeLists(query) {
 }
 // 详情
 // /dev-api/stage-api/system/Warehouseinventoryschedule/SwJsStorelistdetail
-export function SkuBarcodeListss(CBPC01) {
+export function SkuBarcodeListss(data) {
   return request({
-    url: '/system/Warehouseinventoryschedule/SwJsStorelistdetail?cbsh01='+ CBPC01,
-    method: 'get'
+    url: '/system/Warehouseinventoryschedule/SwJsStorelistdetail',
+    method: 'get',
+    params:data
   })
 }
 // 修改

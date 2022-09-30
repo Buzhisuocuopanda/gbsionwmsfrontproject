@@ -224,7 +224,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbie01(\\d+)',
+        path: 'role/:cbie01(\\d+):+status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/BarcodeInventorydetails/BarcodeInventorydetailsxq/index'),
         meta: { title: '库存初始化详情', activeMenu: '/Warehousemanagement/BarcodeInventorydetails' }
@@ -256,6 +256,21 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/WarehouseInventory/WarehouseInventoryxq/index'),
         meta: { title: '仓库盘点详情', activeMenu: '/Warehousemanagement/WarehouseInventory' }
+      }
+    ]
+  },
+  //仓库盘点明细返回
+   {
+    path: '/system/user-cangkupandian',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/WarehouseInventory/index'),
+        meta: { title: '仓库盘点明细表', activeMenu: '/Warehousemanagement/WarehouseInventory' }
       }
     ]
   },
@@ -494,6 +509,20 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrdercj/index'),
         meta: { title: '采购订单创建', activeMenu: '/Warehousemanagement/PurchaseOrder' }
+      }
+    ]
+  },
+  //采购订单详情
+  {
+    path: '/system/user-cgddxq',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrderxq/index'),
+        meta: { title: '采购订单', activeMenu: '/Warehousemanagement/PurchaseOrder' }
       }
     ]
   },

@@ -92,9 +92,9 @@
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:purchaseordertable:remove']">删除</el-button>
-                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)"  v-hasPermi="['system:user:listselect']">详情
-                            </el-button> -->
+                            </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:purchaseordertable:sh']"
@@ -1162,11 +1162,9 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
-            const cbpc01 = row.cbpc01;
-            console.log(row.cbpc01);
-
+            const id = row.id;
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-auth/role/" + cbpc01);
+            this.$router.push("/system/user-cgddxq/role/" + id);
         },
         /** 创建操作 */
         handleChuangJiangone: function (row) {
