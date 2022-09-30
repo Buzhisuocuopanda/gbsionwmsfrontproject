@@ -29,10 +29,10 @@
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:warehousetransferordersController:sh']">审核</el-button>
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:warehousetransferordersController:fs']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -853,20 +853,24 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否确认审核,编号为"' + row.cbaa07 + '"的数据项？').then(function () {
-                return Purchaseinboundsho(row);
-            }).then(response => {
-             if (response.code == "200") {
-                console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '审批成功', type: 'success' });
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-              }
-            }).catch(() => { });
+            // cbaa11
+            let cbpc01 = row.cbaa01
+            let status = row.cbaa11
+            this.$router.push("/system/user-authhhhhhhhhhh/role/" + cbpc01 + status);
+            // console.log(row.cbpc01, 8888);
+            // this.$modal.confirm('是否确认审核,编号为"' + row.cbaa07 + '"的数据项？').then(function () {
+            //     return Purchaseinboundsho(row);
+            // }).then(response => {
+            //  if (response.code == "200") { 
+            //     console.log(this.form.cbpc01, 789)
+            //     // this.submitShangpin();
+            //     this.getList();
+            //     // this.open = false;
+            //     this.$message({ message: '审批成功', type: 'success' });
+            //  }else{
+            //     this.$message({ message: response.msg, type: 'error' });
+            //   } 
+            // }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -890,21 +894,25 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否确认反审,编号为"' + row.cbaa07 + '"的数据项？').then(function () {
-                return PurchaseinboundSht(row);
-            }).then(response => {
+            let cbpc01 = row.cbaa01
+            let status = row.cbaa11
+            this.$router.push("/system/user-authhhhhhhhhhh/role/" + cbpc01 + status);
 
-             if (response.code == "200") {
-                console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '反审成功', type: 'success' });
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-             }
-            }).catch(() => { });
+            // console.log(row.cbpc01, 8888);
+            // this.$modal.confirm('是否确认反审,编号为"' + row.cbaa07 + '"的数据项？').then(function () {
+            //     return PurchaseinboundSht(row);
+            // }).then(response => {
+            
+            //  if (response.code == "200") {  
+            //     console.log(this.form.cbpc01, 789)
+            //     // this.submitShangpin();
+            //     this.getList();
+            //     // this.open = false;
+            //     this.$message({ message: '反审成功', type: 'success' });
+            //  }else{
+            //     this.$message({ message: response.msg, type: 'error' });
+            //  }
+            // }).catch(() => { });
         },
 
         //反审上面的
@@ -1158,8 +1166,9 @@ export default {
         },
         /** 分配角色操作 */
         handleAuthRole: function (row) {
-            const userId = row.cbaa01;
-            this.$router.push("/system/user-authhhhhhhhhhh/role/" + userId);
+            let cbpc01 = row.cbaa01
+            let status = 8
+            this.$router.push("/system/user-authhhhhhhhhhh/role/" + cbpc01 + status);
         },
         /** 创建操作 */
         handleckdbone: function (row) {

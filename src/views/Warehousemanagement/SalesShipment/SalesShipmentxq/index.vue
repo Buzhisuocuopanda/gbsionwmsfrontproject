@@ -313,7 +313,8 @@
       </el-table>
     </div>
     <div style="height: 50px"></div>
-    <el-button style="margin-left: 5%" type="primary" @click="handleExport"
+    <div v-if="status == 8">
+        <el-button style="margin-left: 5%" type="primary" @click="handleExport"
       >导出</el-button
     >
     <el-button
@@ -334,11 +335,18 @@
       @click="xiaoschukusaomiaojlubiao"
       >扫描记录表打印</el-button
     >
+    <el-button  @click="handlefanhui">返回</el-button>
+    </div>
+    <div v-else>
+        <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
+        <el-button v-else type="primary" style="margin-left:5%;"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+        <el-button  @click="handlefanhui">返回</el-button>
+    </div>
     <div style="height: 50px"></div>
   </div>
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists,PurchaseinboundSH,PurchaseinboundShs } from "@/api/Warehousemanagement/SalesShipment";
 export default {
   data() {
     return {
@@ -360,6 +368,10 @@ export default {
         userId: undefined,
       },
       CBPC01: "",
+      ids:{
+          id:''
+      },
+      status:'',
     };
   },
   watch: {},
@@ -367,6 +379,39 @@ export default {
     this.getList();
   },
   methods: {
+    //审批
+    PurchaseinboundShenpi() {
+        this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbsb07 + '"的数据项？').then(() => {
+            PurchaseinboundSH({
+              cbsb01:this.ids.id
+            }).then(response => {
+            if (response.code == "200") {
+                this.$message({ message: '审批成功', type: 'success' });
+                this.$router.push("/system/user-xsckfh/role/");
+            }else{
+                this.$message({ message: response.msg, type: 'error' });
+            }
+            });
+        }).catch(() => { });
+    },
+    //反审
+    PurchaseinboundFanShenpi() {
+        this.$modal.confirm('是否要反审,编号为"' + this.userList[0].cbsb07 + '"的数据项？').then(() => {
+            PurchaseinboundShs({
+              cbsb01:this.ids.id
+            }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '反审成功', type: 'success' });
+                    this.$router.push("/system/user-xsckfh/role/");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+            });
+        }).catch(() => { });
+    },
+    handlefanhui(){
+      this.$router.push("/system/user-xsckfh/role/");
+    },
     //写在methods里面的方法 ---出库建议表
     PrintRow(index, row) {
       this.$print(this.$refs.print);
@@ -412,6 +457,8 @@ export default {
     getList() {
       this.loading = true;
       const userId = this.$route.params && this.$route.params.cbsb01;
+      this.ids.id = this.$route.params && this.$route.params.cbsb01;
+      this.status = this.$route.params && this.$route.params.status;
       if (userId) {
         // 获取表详细信息
         PurchaseinboundLists(

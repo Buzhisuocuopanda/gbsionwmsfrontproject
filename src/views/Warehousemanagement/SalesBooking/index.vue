@@ -43,11 +43,11 @@
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:saleOrder:sh']">审核</el-button>
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:saleOrder:fs']">反审
-                        </el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审
+                        </el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -967,21 +967,25 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批,编号为"' + row.orderNo + '"的数据项？').then(() => {
-            console.log(row.cbpc01,8888);
+            let cbpc01 = row.id
+            let status = row.status
+            this.$router.push("/system/user-authxiaoshouyudingdang/role/" + cbpc01 + status);
 
-            PurchaseinboundSH(row).then(response => {
-             if (response.code == "200") {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '审批成功', type: 'success' });
-              }else{
-                this.$message({ message: response.msg, type: 'error' });
-              }
-            });
-          }).catch(() => { });
+        //     this.$modal.confirm('是否要审批,编号为"' + row.orderNo + '"的数据项？').then(() => {
+        //     console.log(row.cbpc01,8888);
+
+        //     PurchaseinboundSH(row).then(response => {
+        //      if (response.code == "200") { 
+        //         // console.log(this.form.cbpc01, 789)
+        //         // this.submitShangpin();
+        //         this.getList();
+        //         // this.open = false;
+        //         this.$message({ message: '审批成功', type: 'success' });
+        //       }else{
+        //         this.$message({ message: response.msg, type: 'error' });
+        //       }
+        //     });
+        //   }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -1006,21 +1010,24 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审,编号为"' + row.orderNo + '"的数据项？').then(() => {
-            // console.log(row.cbpc01, 8888);
-            PurchaseinboundShs(row).then(response => {
-
-             if (response.code == "200") {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '反审成功', type: 'success' });
-              }else{
-                this.$message({ message: response.msg, type: 'error' });
-              }
-            });
-          }).catch(() => { });
+            let cbpc01 = row.id
+            let status = row.status
+            this.$router.push("/system/user-authxiaoshouyudingdang/role/" + cbpc01 + status);
+        //     this.$modal.confirm('是否要反审,编号为"' + row.orderNo + '"的数据项？').then(() => {
+        //     // console.log(row.cbpc01, 8888);
+        //     PurchaseinboundShs(row).then(response => {
+             
+        //      if (response.code == "200") {
+        //         // console.log(this.form.cbpc01, 789)
+        //         // this.submitShangpin();
+        //         this.getList();
+        //         // this.open = false;
+        //         this.$message({ message: '反审成功', type: 'success' });
+        //       }else{
+        //         this.$message({ message: response.msg, type: 'error' });
+        //       }
+        //     });
+        //   }).catch(() => { });
         },
 
         //反审上面的
@@ -1248,9 +1255,8 @@ export default {
         handleAuthRole: function (row) {
             const cbpc01 = row.id;
             console.log(row.id);
-
-            // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-authxiaoshouyudingdang/role/" + cbpc01);
+            let status = 8
+            this.$router.push("/system/user-authxiaoshouyudingdang/role/" + cbpc01 + status);
         },
         /** 创建操作 */
         handleChuangJiangone: function (row) {

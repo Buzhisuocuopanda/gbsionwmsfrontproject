@@ -1,0 +1,41 @@
+.Purchase_caigou {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: 1%;
+}
+
+.Purchase_sum {
+    margin-top: 1%;
+    margin-left: 20%;
+    font-weight: 200;
+}
+
+.Purchase_riqii {
+    margin-left: 20%;
+}
+
+.el-descriptions-row th {
+    width: 120px;
+}
+
+.el-descriptions-row td {
+    width: 120px;
+}
+
+.my-labell01 {
+    width: 50px !important;
+    text-align: center !important;
+    height: 20px !important;
+}
+
+.my-labell02 {
+    width: 146px !important;
+    text-align: center !important;
+    height: 10px !important;
+}
+
+.my-content {
+    width: 357px !important;
+    height: 10px !important;
+}
