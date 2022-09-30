@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
 
-
-    <el-form ref="form2" :model="form2" label-width="230px" :rules="rules" style="" class="demo-ruleForm">
+    <section ref="print" class="recordImg" id="printRecord">
+      <el-form ref="form2" :model="form2" label-width="230px" :rules="rules" style="" class="demo-ruleForm">
       <div class="chuangjiancaigous">销售变更订单</div>
       <el-descriptions :column="3" border style="margin-top: 30px" :contentStyle="CS" :label-style="LS ">
         <el-descriptions-item label="编号"  >{{this.formData.orderChangeNo}}</el-descriptions-item>
@@ -28,455 +28,96 @@
         <el-descriptions-item label="发票邮寄地址"  >{{this.formData.fpReceiveAddress}}</el-descriptions-item>
         <el-descriptions-item label="其他"  >{{this.formData.other}}</el-descriptions-item>
       </el-descriptions>
-      <!-- 编号:56221589223 -->
-
-<!--      <el-row :gutter="20" style="margin-top: 20px;">-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="编号:" prop="orderNo" class="inputDeep">-->
-<!--&lt;!&ndash;                        <el-input class="inputDeep" type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.orderNo}}</span>-->
-<!--          </el-form-item>-->
-
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="客户单号:" prop="customerNo">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.customerNo" style="width: 70%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.customerNo}}</span>-->
-
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="日期:" prop="orderDate">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.orderDate" style="width: 70%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.customerNo}}</span>-->
-
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
-<!--      &lt;!&ndash;      <el-row :gutter="20">&ndash;&gt;-->
-<!--      &lt;!&ndash;        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">&ndash;&gt;-->
-<!--      &lt;!&ndash;          <el-form-item label="主副表id:" prop="cbpg161">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />&ndash;&gt;-->
-<!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-<!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-<!--      &lt;!&ndash;        <el-col style="" :span="8">&ndash;&gt;-->
-<!--      &lt;!&ndash;          <el-form-item label="供料单位:" prop="cbpc099">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <el-popover placement="bottom-start" trigger="click">&ndash;&gt;-->
-<!--      &lt;!&ndash;              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />&ndash;&gt;-->
-<!--      &lt;!&ndash;              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">&ndash;&gt;-->
-<!--      &lt;!&ndash;              </el-input>&ndash;&gt;-->
-<!--      &lt;!&ndash;            </el-popover>&ndash;&gt;-->
-<!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-<!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-<!--      &lt;!&ndash;        <el-col style="" :span="8">&ndash;&gt;-->
-<!--      &lt;!&ndash;          <el-form-item label="仓库:" prop="cbpc100">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <el-popover placement="bottom-start" trigger="click">&ndash;&gt;-->
-<!--      &lt;!&ndash;              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />&ndash;&gt;-->
-<!--      &lt;!&ndash;              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">&ndash;&gt;-->
-<!--      &lt;!&ndash;              </el-input>&ndash;&gt;-->
-<!--      &lt;!&ndash;            </el-popover>&ndash;&gt;-->
-<!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-<!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-<!--      &lt;!&ndash;        <el-col style="" :span="8">&ndash;&gt;-->
-<!--      &lt;!&ndash;          <el-form-item label="结算货币:" prop="cbpc16">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">&ndash;&gt;-->
-<!--      &lt;!&ndash;              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">&ndash;&gt;-->
-<!--      &lt;!&ndash;              </el-option>&ndash;&gt;-->
-<!--      &lt;!&ndash;            </el-select>&ndash;&gt;-->
-<!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-<!--      &lt;!&ndash;          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">&ndash;&gt;-->
-<!--      &lt;!&ndash;                  <el-popover placement="bottom-start" trigger="click">&ndash;&gt;-->
-<!--      &lt;!&ndash;                      <ListLists ref="ListLists" @selected="selected004" />&ndash;&gt;-->
-<!--      &lt;!&ndash;                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly&ndash;&gt;-->
-<!--      &lt;!&ndash;                          style="border:solid #eee thin; width:77%;">&ndash;&gt;-->
-<!--      &lt;!&ndash;                      </el-select>&ndash;&gt;-->
-<!--      &lt;!&ndash;                  </el-popover>&ndash;&gt;-->
-<!--      &lt;!&ndash;              </el-form-item> &ndash;&gt;&ndash;&gt;-->
-<!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-<!--      &lt;!&ndash;        &lt;!&ndash;商品信息维护&ndash;&gt;&ndash;&gt;-->
-<!--      &lt;!&ndash;        <el-col v-if="false">&ndash;&gt;-->
-<!--      &lt;!&ndash;          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">&ndash;&gt;-->
-<!--      &lt;!&ndash;            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>&ndash;&gt;-->
-<!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-<!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-<!--      &lt;!&ndash;      </el-row>&ndash;&gt;-->
-<!--      <el-row :gutter="20" style="margin-top: 1px;">-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="客户:" prop="customerName">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.customerName" style="width: 70%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.customerName}}</span>-->
-
-<!--            &lt;!&ndash;            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable   clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-<!--&lt;!&ndash;                v-for="item in customeroptions"&ndash;&gt;-->
-<!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-<!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-<!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-<!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-<!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-<!--          </el-form-item>-->
-
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="销售人员:" prop="saleUser">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.saleUser" style="width: 70%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.saleUser}}</span>-->
-
-<!--            &lt;!&ndash;            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-<!--&lt;!&ndash;                v-for="item in saleUseroptions"&ndash;&gt;-->
-<!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-<!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-<!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-<!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-<!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="结算货币:" prop="currency">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.currency" style="width: 70%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.currency}}</span>-->
-
-<!--            &lt;!&ndash;            <el-select  v-model="formData.currency"  clearable  placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-<!--&lt;!&ndash;                v-for="item in currencyoptions"&ndash;&gt;-->
-<!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-<!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-<!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-<!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-<!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
-
-
-<!--      <el-row :gutter="20">-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="收货人:" prop="receiveName">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.receiveName" style="width: 70%;" readonly />&ndash;&gt;-->
-<!--            <span>{{this.formData.receiveName}}</span>-->
-
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="电话:" prop="receivePhone">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.receivePhone" style="width: 70%;" readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.receivePhone}}</span>-->
-
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="发票类型:" prop="invoiceType">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.invoiceType" style="width: 70%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.invoiceType}}</span>-->
-
-<!--            &lt;!&ndash;            <el-select  v-model="formData.invoiceType"  clearable  placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-<!--&lt;!&ndash;                v-for="item in invoiceoptions"&ndash;&gt;-->
-<!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-<!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-<!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-<!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-<!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
-
-<!--      <el-row :gutter="20">-->
-
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="订单类型:" prop="orderTypeMsg">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.orderTypeMsg" style="width: 70%;" readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.orderTypeMsg}}</span>-->
-
-<!--          </el-form-item>-->
-
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="工厂账号:" prop="fcNumber">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.fcNumber" style="width: 70%;" readonly />&ndash;&gt;-->
-<!--            <span>{{this.formData.fcNumber}}</span>-->
-
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="订单分类:" prop="orderClassMsg">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.orderClassMsg" style="width: 70%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.orderClassMsg}}</span>-->
-
-<!--          </el-form-item>-->
-
-<!--        </el-col>-->
-<!--      </el-row>-->
-<!--      <el-row :gutter="20">-->
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="地址:" prop="address">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.address" style="width: 120%;"  readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.address}}</span>-->
-
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-
-<!--        <el-col :span="8">-->
-<!--          <el-form-item label="备注:" prop="remark">-->
-<!--&lt;!&ndash;            <el-input type="text" v-model="formData.remark" style="width: 120%;" readonly/>&ndash;&gt;-->
-<!--            <span>{{this.formData.remark}}</span>-->
-
-<!--          </el-form-item>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
-
-      <!--      <el-row v-if="false">-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-      <!--        <el-col>-->
-      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
-      <div>
-        <el-row>
-          <el-col :span="24">
-<!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
-          </el-col>
-        </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsMsg" label="品牌" width="150">
-            <template slot-scope="scope">
-              <sapn>
-<!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
-                <span>{{scope.row.goodsMsg}}</span>
-
-                <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
-<!--                  <el-option-->
-<!--                    v-for="item in options"-->
-<!--                    :key="item.value"-->
-<!--                    :label="item.label"-->
-<!--                    :value="item.value">-->
-<!--                  </el-option>-->
-<!--                </el-select>-->
-              </sapn>
+      <div style="width: 100%;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" style="margin-top: 10px;">
+          <el-table-column prop="goodsMsg" label="品牌">
+            <template slot-scope="scope" style="width:500px">
+              <div style="width:100%">
+                <div>{{scope.row.goodsMsg}}</div>
+              </div>
             </template>
           </el-table-column>
-          <el-table-column label="型号" width="150" />
-          <el-table-column label="描述" width="150" />
-          <el-table-column prop="qty" label="数量" width="120" >
+          <el-table-column label="型号"  />
+          <el-table-column label="描述" />
+          <el-table-column prop="qty" label="数量">
             <template slot-scope="scope">
-<!--              <sapn>-->
-<!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
-<!--                <span>{{scope.row.qty}}</span>-->
-
-<!--                &lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;-->
-<!--              </sapn>-->
               <div style="text-align: right">
                 {{parseFloat(scope.row.qty).toFixed(2)}}
-
               </div>
             </template>
           </el-table-column>
-
-          <el-table-column prop="qty" label="修改前数量" width="120" >
+          <el-table-column prop="qty" label="修改前数量">
             <template slot-scope="scope">
-              <!--              <sapn>-->
-              <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
-              <!--                <span>{{scope.row.qty}}</span>-->
-
-              <!--                &lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;-->
-              <!--              </sapn>-->
               <div style="text-align: right">
                 {{parseFloat(scope.row.bfQty).toFixed(2)}}
-
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="normalPrice" label="标准单价" width="120">
+          <el-table-column prop="normalPrice" label="标准单价">
             <template slot-scope="scope">
-<!--              <sapn>-->
-<!--&lt;!&ndash;                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>&ndash;&gt;-->
-<!--                <span>{{scope.row.normalPrice}}</span>-->
-
-<!--              </sapn>-->
               <div style="text-align: right">
-                <!--                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>-->
                 {{parseFloat(scope.row.normalPrice==null?0:scope.row.normalPrice).toFixed(2)}}
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="currentPrice" label="本次单价" width="120">
+          <el-table-column prop="currentPrice" label="本次单价">
             <template slot-scope="scope">
-<!--              <sapn>-->
-<!--&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
-<!--                <span>{{scope.row.currentPrice}}</span>-->
-
-<!--              </sapn>-->
               <div style="text-align: right">
                 {{parseFloat(scope.row.currentPrice).toFixed(2)}}
-
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="currentPrice" label="修改前价格" width="120">
+          <el-table-column prop="currentPrice" label="修改前价格">
             <template slot-scope="scope">
-              <!--              <sapn>-->
-              <!--&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
-              <!--                <span>{{scope.row.currentPrice}}</span>-->
-
-              <!--              </sapn>-->
               <div style="text-align: right">
                 {{parseFloat(scope.row.bfPrice).toFixed(2)}}
-
               </div>
             </template>
           </el-table-column>
 
-          <el-table-column prop="totalPrice" label="金额" width="120">
+          <el-table-column prop="totalPrice" label="金额">
             <template slot-scope="scope">
-<!--              <sapn>-->
-<!--&lt;!&ndash;                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>&ndash;&gt;-->
-<!--                <span>{{scope.row.totalPrice}}</span>-->
-
-<!--              </sapn>-->
               <div style="text-align: right">
                 {{parseFloat(scope.row.totalPrice).toFixed(2)}}
-
               </div>
             </template>
           </el-table-column>
-
-
-          <el-table-column prop="remark" label="备注" width="">
+          <el-table-column prop="remark" label="备注">
             <template slot-scope="scope">
               <sapn>
-<!--                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注" readonly></el-input>-->
                 <span>{{scope.row.remark}}</span>
-
               </sapn>
             </template>
           </el-table-column>
-<!--          <el-table-column label="操作" align="center" width="80">-->
-<!--            <template slot-scope="scope">-->
-<!--              <span @click="_ly_delFrom(scope.row)">-->
-<!--                <i class="el-icon-error" style="color: red;"></i>-->
-<!--              </span>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
         </el-table>
-        <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-          <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-            <div class="box1">
-              <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
-                class="tablebiankuan table-heads" width="95%" height="20px">
-                <thead style="">
-                  <tr style="height:30px; ">
-                    <th style="width: 130px;height: 30px;">品牌</th>
-                    <th style="width: 130px;height: 30px;">型号</th>
-                    <th style="width: 130px;height: 30px;">描述</th>
-                    <th style="width: 140px;height: 30px;">数量</th>
-                    <th style="width: 140px;height: 30px;">单价</th>
-                    <th style="width: 140px;height: 30px;">金额</th>
-                    <th style="width: 350px;height: 30px;">备注</th>
-                    <th style="width: 50px;height: 30px;">操作</th>
-                  </tr>
-                </thead>
-              </table>
-              <div class="table-bodys">
-                <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                  cellspacing="0" class="tablebiankuan">
-                  <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
-                      :ref="form.formName" :inline="true">
-                      <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpc01" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-col style="margin-left: 0%;" :span="7">
-                        <el-form-item label="" prop="cbpc000">
-                          <el-popover placement="bottom-start" trigger="click">
-                            <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                              style="width:370px!important;" />
-                            <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                              style="width:205.6%;">
-                            </el-input>
-                          </el-popover>
-                        </el-form-item>
-                      </el-col>
-                      <el-form-item label="" size="small" prop="nickname" style="margin-left:5.1%;">
-                        <el-input type="text" v-model="form.cbpd09" @blur="chen(form)" style="width:73.2%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd11" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd11" @blur="chen(form)" :min="0" :controls="false"
-                          :precision="2" style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd12" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd12" :min="0" :controls="false" :precision="2"
-                          style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd13" style="margin-left:-5.2%;">
-                        <el-input v-model="form.cbpd13" style="width:184.1%;"></el-input>
-                      </el-form-item>
-
-                      <el-form-item v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
-                        <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" v-if="false" prop="name" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
-                      </el-form-item>
-                      <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;" size="small"
-                        icon="el-icon-delete" circle @click="_ly_delFrom(index)"></el-button>
-                    </el-form>
-                  </el-row>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </el-form>
 
-    <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS " >
+    <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS " style="margin-top:10px">
       <el-descriptions-item  :contentStyle="{ 'text-align': 'right' }" label="本页数量小计"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="合计数量"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"  label="合计金额"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>
     </el-descriptions>
-    <el-descriptions :column="3" border :contentStyle="CS" :label-style="LS ">
+    <el-descriptions :column="3" border :contentStyle="CS" :label-style="LS " style="margin-top:10px">
       <el-descriptions-item label="制单"  labelStyle	="width: 20%;text-align:center">{{this.formData.makeUser}}</el-descriptions-item>
       <el-descriptions-item label="审核"  labelStyle	="width: 20%;text-align:center">{{this.formData.auditUser}}</el-descriptions-item>
       <el-descriptions-item label="仓库"  labelStyle	="width: 20%;text-align:center">{{this.formData.ck}}</el-descriptions-item>
     </el-descriptions>
     <div style="margin-top: 30px">
-      <el-row>
-<!--        <el-col :span="24">-->
-<!--          &lt;!&ndash;            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>&ndash;&gt;-->
-<!--        </el-col>-->
-      </el-row>
       <el-table :data="auditData" border  style="width: 100%;margin-top: 10px; "  >
-
         <el-table-column prop="auditUser" label=审批人 width="300%" style="text-align:center">
           <template slot-scope="scope">
             <sapn>
-<!--              <el-input v-model="scope.row.auditUser" placeholder="审批人" style="" readonly></el-input>-->
               <span>{{scope.row.auditUser}}</span>
-
             </sapn>
           </template>
         </el-table-column>
         <el-table-column prop="description" label="审批详情" width="900%">
           <template slot-scope="scope">
             <sapn>
-<!--              <el-input v-model="scope.row.description" placeholder="审批详情" style=" "></el-input>-->
               <span>{{scope.row.description}}</span>
-
             </sapn>
           </template>
         </el-table-column>
@@ -484,29 +125,21 @@
         <el-table-column prop="auditResult" label="审批结果" width="300%" >
           <template slot-scope="scope">
             <div>
-<!--              <el-input  class="inputDeep" v-model="scope.row.auditResult" placeholder="审批结果" style="" readonly></el-input>-->
               <span>{{scope.row.auditResult}}</span>
-
             </div>
           </template>
         </el-table-column>
-
-
-        <!--          <el-table-column label="操作" align="center" width="80">-->
-        <!--            <template slot-scope="scope">-->
-        <!--              <span @click="_ly_delFrom(scope.row)">-->
-        <!--                <i class="el-icon-error" style="color: red;"></i>-->
-        <!--              </span>-->
-        <!--            </template>-->
-        <!--          </el-table-column>-->
       </el-table>
-
     </div>
+    </section>
+    
     <div class="tinajia_dingwei">
-       <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
 <!--      <el-button type="primary" @click="handleAdd">保 存</el-button>-->
+      <el-button style="margin-left: 2%" type="primary" @click="handleExport">导出</el-button>
+      <el-button style="margin-left: 2%" type="primary" @click="xiaoschukudandayin">
+        打印
+      </el-button>
       <el-button @click="cancel">取 消</el-button>
-       </span>
     </div>
   </div>
 </template>
@@ -1067,6 +700,53 @@
 
     },
     methods: {
+      // 销售变更单导出
+      handleExport() {
+        const userId = this.$route.query && this.$route.query.id;
+        console.log([userId,this.$route])
+        this.download(
+          "/sale/saleOrderchangedetailsexport1?orderId=" +
+            userId,
+          {},
+          `销售变更单导出表${new Date().toLocaleDateString()}.pdf`
+        );
+      },
+      // 销售订单打印页面
+      xiaoschukudandayin(index, row){
+        // window.print()
+        this.$print(this.$refs.print)
+        // 判断iframe是否存在，不存在则创建iframe
+        // var iframe=document.getElementById("print-iframe");
+        // if(!iframe){  
+        //   var el = document.getElementById("printRecord");
+        //   iframe = document.createElement('IFRAME');
+        //   var doc = null;
+        //   iframe.setAttribute("id", "print-iframe");
+        //   iframe.setAttribute('style', 'position:absolute;width:0px;height:0px;left:-500px;top:-500px;');
+        //   document.body.appendChild(iframe);
+        //   doc = iframe.contentWindow.document;
+        //   //这里可以自定义样式
+        //   doc.write('<style media="print">@page {size: auto;margin: 0mm;}</style>'); //解决出现页眉页脚和路径的问题
+        //   doc.write('<div>' + el.innerHTML + '</div>');
+        //   doc.close();
+        //   iframe.contentWindow.focus();
+        // }
+        // setTimeout(function(){ iframe.contentWindow.print();},50)  //解决第一次样式不生效的问题
+        // if (navigator.userAgent.indexOf("MSIE") > 0){
+        //   document.body.removeChild(iframe);
+        // }
+        
+        // let newstr = this.$refs.print.innerHTML  // 获取需要打印的内容
+        //   let oldstr = document.body.innerHTML  // 获取别打印页面的内容
+        //   document.body.innerHTML = newstr  
+        //   // // 获取表格表头，表格内容改变打印内容字体的颜色
+        //   // document.getElementsByTagName('thead')[0].style.color = '#000'
+        //   // document.getElementsByTagName('tbody')[0].style.color = '#000'
+        //   window.print()
+        //   document.body.innerHTML = oldstr
+        //   window.location.reload()  // 退出刷新页面
+        //   return false
+      },
       // 合并单元格
       arraySpanMethod({
         row,
@@ -1778,4 +1458,54 @@
   /*  border: 0px;*/
   /*width: 100%;*/
   /*}*/
+</style>
+<style>
+  
+@page {
+  size: auto;
+  /* margin: 3mm; */
+  overflow: hidden;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+  body {
+    border: solid 1px #ffffff;
+    padding: 2px;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+  #printRecord table {
+    table-layout: auto !important;
+  }
+  #printRecord .el-table{
+    width: 100%;
+  }
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+  }
+  #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printRecord .el-table__header{
+    width: 100% !important;
+  }
+  #printRecord .el-table--enable-row-transition .el-table__body td.el-table__cell{
+    border-bottom: 1px solid #3075b3;
+  }
+  #printRecord .el-table--enable-row-transition .el-table__body td:first-child .el-table__cell{
+    width:30%;
+  }
+   .el-table--border .el-table__cell:first-child .cell span{
+    display: block;
+    width: 100%;
+  }
+  #printRecord #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+
+  
 </style>

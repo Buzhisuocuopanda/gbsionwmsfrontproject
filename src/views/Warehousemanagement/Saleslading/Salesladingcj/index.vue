@@ -229,7 +229,7 @@
       </el-row>
 
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button
               plain
@@ -239,7 +239,7 @@
               >增行</el-button
             >
           </el-col>
-        </el-row>
+        </el-row> -->
 
         <el-table
           :data="tableData"
@@ -409,13 +409,13 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" width="80">
+          <!-- <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.row)">
                 <i class="el-icon-delete" style="color: red"></i>
               </span>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <!-- </el-form> -->
         </el-table>
       </div>
@@ -848,6 +848,7 @@ export default {
         cbsb28: "",
         cbca28: "",
         cbpc099: "",
+        saleOrderNo:"",
       },
       form3:'',
       defaultProps: {
@@ -1239,9 +1240,7 @@ export default {
       this.form2.goods = this.tableData
       this.$refs["form2"].validate((item) => {
         if (item) {
-          PurchaseinboundAdd(this.form3).then((response) => {
-            // console.log(response.posts, 12345678);
-            
+          PurchaseinboundAdd(this.form2).then((response) => {
             if(response.code == 200){
               this.$message({
                 message: "添加成功",
@@ -1272,6 +1271,7 @@ export default {
     getList() {
       let routerParams = this.$route.query;
       this.formArr = routerParams.data;
+      let saleorder = this.$route.query.data
       let whid = this.$route.query.whNameid
       console.log(this.$route)
       //    let zhuangh = JSON.parse(this.formArr);
@@ -1282,6 +1282,7 @@ export default {
         this.addDateRange(this.queryParams, this.dateRange)
       ).then((response) => {
           this.form3 = response.data
+          this.form2 = response.data
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID
@@ -1314,6 +1315,8 @@ export default {
         this.form2.cbsb21 = response.data.receiveAdress;
         //客户订单
         this.form2.cbsb30 = response.data.customerNo;
+        // 销售订单号
+        this.form2.saleOrderNo = response.data.saleOrderNo;
         console.log(this.form2.cbsb09, 85200000);
         response.data.goods.forEach((item) => {
           item.cbsc177 = item.orderClass;

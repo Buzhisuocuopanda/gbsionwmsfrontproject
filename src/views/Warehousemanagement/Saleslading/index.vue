@@ -507,6 +507,14 @@
           sortable
         />
       </el-table>
+      <pagination
+          v-show="total > 0"
+          :total="total"
+          :page.sync="queryParams.pageNum"
+          :limit.sync="queryParams.pageSize"
+          @pagination="getList09"
+          :page-sizes="[2, 5, 10, 15, 20]"
+        />
     </el-dialog>
 
     <!-- 用户导入对话框 -->
@@ -1079,10 +1087,8 @@ export default {
     /** 销售订单列表 */
     getList09() {
       this.loading = true;
-      let query = {
-        status:5
-      }
-      Purchaseinbounddingdanxsdd(query).then((response) => {
+      this.queryParams.status = 5
+      Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams, this.dateRange)).then((response) => {
         this.userList01 = response.data.rows;
         this.totall = response.data.total;
         // //供应商
