@@ -7,7 +7,7 @@
         </el-input>
       <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
           <div>
-            <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
+            <div  style="width: 100%" v-for="(item, index) in iconList" :key="index"
                 @click="selectedIcon(item)">
                 <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                 <!-- <span>{{ item }}</span> -->
@@ -67,10 +67,15 @@ export default {
                 if (response.data <= 0) {
                     this.iconList = []
                 } else {
-                 
-                    response.data.row.forEach((item) => {
+                    if (response.data.rows.length > 0) {
+                        response.data.rows.forEach((item) => {
                         this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
-                    })
+                    })         
+                 }
+                    // response.data.row.forEach((item) => {
+                    //     this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
+                    // })
+                    console.log(response.data,7758521);
                   
                 }
                 if (this.name) {
