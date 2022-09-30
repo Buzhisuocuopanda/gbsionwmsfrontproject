@@ -785,9 +785,7 @@
 
         }).then(() => {
           const param = {
-            id: row.id,
-            delete: 1,
-
+            orderId: row.id
           }
           reAddSaleOrder(param).then(response => {
             // console.log(response)

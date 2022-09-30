@@ -111,7 +111,7 @@ export function reAddSaleOrder(data) {
 
 export function mdfSaleOrder(data) {
   return request({
-    url: '/sale/addSaleOrder',
+    url: '/sale/mdfSaleOrder',
     method: 'post',
     data: data
   })

@@ -75,7 +75,7 @@
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>
+<!--            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>-->
             <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete" plain size="mini"   type="text" @click="delSaleOrder(scope.row)">删除</el-button>
           </template>
 

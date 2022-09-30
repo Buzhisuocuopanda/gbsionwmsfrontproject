@@ -1023,7 +1023,15 @@ export const dynamicRoutes = [
         name: 'showSaleOrder',
         component: () => import('@/views/Salesmanagement/saleOrderDetail/showDetail/index'),
 
-        meta: { title: '销售订单审核详情',  activeMenu:'/Salesmanagement/saleOrderDetail/show' }
+        meta: { title: '国内销售订单详情',  activeMenu:'/Salesmanagement/saleOrderDetail/show' }
+      },      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'showGjSale',
+
+        name: 'showGjSale',
+        component: () => import('@/views/Salesmanagement/SaleOrderGJ/showDetail/index'),
+
+        meta: { title: '国际销售订单详情',  activeMenu:'/Salesmanagement/saleOrderDetailGj/show' }
       }
     ]
   },
