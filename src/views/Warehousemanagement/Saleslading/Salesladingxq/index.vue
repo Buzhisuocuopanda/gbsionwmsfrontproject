@@ -55,20 +55,14 @@
         </el-descriptions-item> -->
       </el-descriptions>
       <el-descriptions class="margin-top" title="" :column="3" border>
-        <!-- <el-descriptions-item
-          content-class-name="my-content"
-          label-class-name="my-labell02"
-        >
-          <template slot="label">收货电话</template
-          >{{ userList.receivPhone || "" }}
-        </el-descriptions-item> -->
         <el-descriptions-item label-class-name="my-labell02">
           <template slot="label">收货地址</template
           >{{ userList.receiveAdress || "" }}
         </el-descriptions-item>
       </el-descriptions>
-
-      <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
+      <!-- 出库建议编辑隐藏 -->
+      <div v-if="edit == 0">
+        <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
       <el-table
         v-loading="loading"
@@ -137,39 +131,16 @@
         <el-table-column prop="brand" key="brand" label="品牌">
         </el-table-column>
         <el-table-column prop="goodClass" key="goodClass" label="类型" >
-          <!-- <template slot-scope="scope" style="width: 630px">
-                <el-input
-                  slot="reference"
-                  v-model="scope.row.goodClass"
-                  placeholder=""
-                  readonly
-                  style="width: 100%"
-                >
-                </el-input>
-            </template> -->
         </el-table-column>
         <el-table-column label="型号">
         </el-table-column>
         <el-table-column label="描述">
         </el-table-column>
-        <!-- <el-table-column prop="goodClass" key="goodClass" label="类型">
-        </el-table-column>
-        <el-table-column prop="model" key="model" align="" label="型号">
-        </el-table-column>
-        <el-table-column
-          id="miaos"
-          prop="description"
-          key="description"
-          align=""
-          label="描述"
-          width="300"
-        >
-        </el-table-column> -->
         <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
         <el-table-column prop="sku" key="sku" align="" label="库位">
         </el-table-column>
-        <el-table-column prop="scanStatus" key="scanStatus" label="扫描状态">
+        <el-table-column prop="scanStatus" key="scanStatuss" label="扫描状态">
           
         </el-table-column>
       </el-table>
@@ -210,59 +181,6 @@
         <el-table-column prop="sku" key="sku" align="" label="库位">
         </el-table-column>
       </el-table>
-      <!-- 分页器 -->
-      <!-- <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
-                class="pagintotal" /> -->
-
-      <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="品牌">
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="型号">
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" label-class-name="my-label"
-                    :contentStyle="{ 'text-align': 'center'}" label="描述">
-
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="数量"></el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="已扫数量">
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="单价"></el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="金额"></el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="备注"></el-descriptions-item>
-            </el-descriptions> -->
-      <!--100 -->
-      <!-- <el-descriptions title="" direction="vertical" :column="8.5" border v-for="(value, key) in userList"
-                :key="key">
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">{{ value.cbpc07 }}
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">EA22VSNH3
-                </el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" label-class-name="my-label"
-                    :contentStyle="{ 'text-align': 'center'}" label="">
-                    J-45 Student J-45 Student J-45 Student
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">6</el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">18100000000
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">91.00</el-descriptions-item>
-                <el-descriptions-item :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                    label="">546.00</el-descriptions-item>
-                <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
-                    label="">苏州市</el-descriptions-item>
-            </el-descriptions> -->
 
       <!-- 横向 -->
       <div style="margin-top: 3%">
@@ -326,16 +244,64 @@
           }}
         </el-descriptions-item>
       </el-descriptions>
+      </div>
+      <div v-else style="margin-top:1%">
+        <el-table
+        v-loading="loading"
+        border
+        :data="userListsss"
+        style="width: 100%;"
+        :default-sort="{ prop: 'name', order: 'descending' }"
+        @selection-change="handleSelectionChange"
+        :span-method="arraySpanMethods">
+        <el-table-column prop="sn" key="sn" align="" label="SN">
+          <template slot-scope="scope" style="width: 200%">
+              <el-popover placement="bottom-start" trigger="click">
+                <TakeSuggests
+                  ref="TakeSuggests"
+                  @selected="selected08($event, scope.row)"
+                  style="width: 630px !important"
+                  :iconList = iconList
+                  @show="filterIcons"
+                  :check = checks
+                />
+                <el-input
+                  slot="reference"
+                  v-model="scope.row.sn"
+                  placeholder=""
+                  style="width: 100%"
+                >
+                </el-input>
+              </el-popover>
+            </template>
+        </el-table-column>
+        <el-table-column label="库位">
+        </el-table-column>
+        <el-table-column label="品牌">
+        </el-table-column>
+        <el-table-column label="型号">
+        </el-table-column>
+        <el-table-column label="描述">
+        </el-table-column>
+        <el-table-column prop="scanStatus" key="scanStatus1" label="扫描状态">
+        </el-table-column>
+        <el-table-column prop="scanStatus" key="scanStatus2" label="备注">
+        </el-table-column>
+      </el-table>
+      </div>
     </div>
     <div style="height: 20px"></div>
-    <div style="margin-left: 5%">
-      <el-button v-show="status == 1" type="primary" @click="PrintRows"
-      >审 核</el-button
-    >
-      <el-button v-show="status == 2" type="primary" @click="PrintRowss"
-        >反 审</el-button
-      >
-      <!-- <el-button v-if="checkStatus == 1" type="primary" @click="PrintRow">质 检</el-button> -->
+    <div style="margin-left: 5%" v-if="edit == 0">
+      <el-button v-show="status == 1" type="primary" @click="PrintRows">审 核</el-button>
+      <el-button v-show="status == 2" type="primary" @click="PrintRowss">反 审</el-button>
+      <el-button type="primary" @click="exportDetail">导出</el-button>
+      <el-button type="primary" @click="printTakeOrderOrder">销售订单打印</el-button>
+      <el-button type="primary" @click="printTakeOrderScanLog">扫码记录打印</el-button>
+      <el-button type="primary" @click="printTakeOrderSuggest">出库建议打印</el-button>
+      <el-button type="primary" @click="handlefanhui">返 回</el-button>
+    </div>
+    <div v-else style="margin-left: 5%">
+      <el-button type="primary" @click="mdfTakeSuggest">保 存</el-button>
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
     <div style="height: 20px"></div>
@@ -346,8 +312,13 @@ import {
   Purchaseinbounddingdanxq,
   auditTakeOrder,
   auditTakeOrders,
+  CustomerLists,
 } from "@/api/Warehousemanagement/Saleslading";
+import TakeSuggests from "@/components/TakeSuggests"
 export default {
+  components: {
+    TakeSuggests,
+  },
   data() {
     return {
       // 遮罩层
@@ -381,6 +352,12 @@ export default {
       status:'',
       // 质检状态
       checkstatus:'',
+      // 是否是编辑过来的
+      edit:1,
+      whid:'',
+      goodsId:'',
+      iconList:'',
+      checks:false,
     };
   },
   watch: {},
@@ -388,6 +365,71 @@ export default {
     this.getList();
   },
   methods: {
+    filterIcons(){
+      this.checks = true
+      console.log(112121)
+      CustomerLists(this.whid,this.goodsId).then(response => {
+        this.iconList = []
+        if (response.data <= 0) {
+            this.iconList = []
+        } else {
+          if(response.data.length > 0){
+            response.data.forEach((item) => {
+                this.iconList.push(item.sn + "-" + item.cbla09+ "-" + item.cbpb10+ "-" + item.cbpb12+ "-" + item.cbpb08)
+            })
+            }
+        }
+        console.log(response.data, 339688);
+      })
+    },
+    //查询商品信息维护
+    selected08(e, row) {
+      // row.cbpc000=e
+      console.log([e,row],'ceshihhh')
+      row.sn = e
+      // this.$set(row, "cbsc08", e.substring(e.indexOf(".") + 1), 8523642);
+    },
+    // 导出
+    exportDetail() {
+      const userId = this.$route.params && this.$route.params.cbpc01;
+      this.download(
+        "/whmanagement/exportDetail?id=" +
+          userId,
+        {},
+        `销售提货表—_${new Date().toLocaleDateString()}.xls`
+      );
+    },
+    // 销售订单打印
+    printTakeOrderOrder() {
+      const userId = this.$route.params && this.$route.params.cbpc01;
+      this.download(
+        "/whmanagement/printTakeOrderOrder?id=" +
+          userId,
+        {},
+        `销售提货订单表—_${new Date().toLocaleDateString()}.xls`
+      );
+    },
+    // 出库建议表
+    printTakeOrderSuggest() {
+      const userId = this.$route.params && this.$route.params.cbpc01;
+      this.download(
+        "/whmanagement/printTakeOrderSuggest?id=" +
+          userId,
+        {},
+        `出库建议表—_${new Date().toLocaleDateString()}.pdf`
+      );
+    },
+    // 扫描记录表
+    printTakeOrderScanLog() {
+      const userId = this.$route.params && this.$route.params.cbpc01;
+      this.download(
+        "/whmanagement/printTakeOrderScanLog?id=" +
+          userId,
+        {},
+        `扫描记录表—_${new Date().toLocaleDateString()}.pdf`
+      );
+    },
+
     // 合并单元格
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
         if (columnIndex === 2) {
@@ -395,6 +437,16 @@ export default {
         } else if (columnIndex > 2 && columnIndex<5) {
           return {rowspan: 0,colspan: 0 }
         } else if(columnIndex < 2){
+          return {rowspan: 1,colspan: 1 }
+        }
+    },
+    // 合并单元格 出库建议表
+    arraySpanMethods({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 0) {
+          return {rowspan: 1,colspan: 5 }
+        } else if (columnIndex <5) {
+          return {rowspan: 0,colspan: 0 }
+        } else if(columnIndex > 6){
           return {rowspan: 1,colspan: 1 }
         }
     },
@@ -482,6 +534,7 @@ export default {
       const userId = this.$route.params && this.$route.params.cbpc01;
       this.status = this.$route.params && this.$route.params.status;
       this.checkstatus = this.$route.params && this.$route.params.checkStatus;
+      this.edit = this.$route.params && this.$route.params.edit;
       console.log(this.$route.params,'路由');
       this.paramss.takeOrderId = Number(userId);
       if (userId) {
@@ -492,12 +545,19 @@ export default {
         ).then((res) => {
           this.userList = res.data;
           this.userLists = res.data.goods;
+          this.whid = res.data.whId
+          this.goodsId = res.data.goods[0].goodsId
+          console.log([this.whid,this.goodsId],'传值')
           this.userList1 = res.data.scans.map(item=>{
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
           });
           this.userListsss = res.data.sugests.map(item=>{
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
+            return item
+          });
+          this.userList2 = res.data.sugests.map(item=>{
+            item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
             return item
           });
           this.paramss.userId = res.data.userId;
