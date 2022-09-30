@@ -224,7 +224,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbie01(\\d+)',
+        path: 'role/:cbie01(\\d+):+status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/BarcodeInventorydetails/BarcodeInventorydetailsxq/index'),
         meta: { title: '库存初始化详情', activeMenu: '/Warehousemanagement/BarcodeInventorydetails' }
@@ -509,6 +509,20 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrdercj/index'),
         meta: { title: '采购订单创建', activeMenu: '/Warehousemanagement/PurchaseOrder' }
+      }
+    ]
+  },
+  //采购订单详情
+  {
+    path: '/system/user-cgddxq',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrderxq/index'),
+        meta: { title: '采购订单', activeMenu: '/Warehousemanagement/PurchaseOrder' }
       }
     ]
   },

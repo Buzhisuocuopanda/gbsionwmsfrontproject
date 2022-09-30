@@ -140,7 +140,7 @@
 
 </template>
 <script>
-import { PurchaseinboundList } from "@/api/Warehousemanagement/SalesStock";
+import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseOrder";
 export default {
 
     data() {
@@ -192,10 +192,10 @@ export default {
         //详情列表
         getList() {
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbpg01;
+            const userId = this.$route.params && this.$route.params.id;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinboundLists({cbsh01:userId},this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);
