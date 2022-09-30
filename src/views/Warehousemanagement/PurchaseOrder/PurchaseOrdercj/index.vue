@@ -8,7 +8,7 @@
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="编号:" prop="cbpc07">
-            <el-input type="text" v-model="form2.cbpc07" style="width: 60%;" />
+            <el-input type="text" v-model="form2.cbpc07" style="width: 74%;" />
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -255,7 +255,7 @@
     <div class="tinajia_dingwei" style="margin-left:0%; margin-top: 5%;" >
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <el-button @click="handlecaigoudingdanfanhuione">取 消</el-button>
       <!-- </span> -->
     </div>
   </div>
@@ -1076,10 +1076,10 @@ import salerman from "@/components/salerman";
         //    this._ly_ok();
       },
 
-      /** 返回操作 */
-      handleChuangJiangone: function(row) {
+      /** 采购订单返回操作 */
+      handlecaigoudingdanfanhuione: function(row) {
         // this.$router.push("/system/user-auth/role/");
-        this.$router.push("/system/user-cktkfh/role/");
+        this.$router.push("/system/user-caigoudingdan/role/");
       },
 
 

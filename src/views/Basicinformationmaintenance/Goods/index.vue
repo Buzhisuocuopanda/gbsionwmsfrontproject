@@ -92,6 +92,11 @@
             </div>
             <el-form ref="form" :model="form" :rules="rules3"  style="margin-top:20px;" label-width="100px">
                    <el-row style="margin-left:5.2%;" :gutter="20"  class="el-row">
+                    <el-col :span="11" v-if="false">
+                        <el-form-item label="商品分类id:" prop="cbpb01">
+                            <el-input v-model="form.cbpb01" @focus="shuzhuangliebiao" placeholder="" maxlength="30" style="width:82%;" />
+                        </el-form-item>
+                    </el-col>
                         <el-col :span="11">
                             <el-form-item label="商品分类:" prop="cbpa07">
                                 <el-input v-model="form.cbpa07" @focus="shuzhuangliebiao" placeholder="" maxlength="30" style="width:82%;" />
@@ -207,7 +212,10 @@
                     </el-table-column>
                     <el-table-column prop="cbpf07" label="生效日期" width="240">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf07" placeholder=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf07" placeholder=""></el-input> -->
+
+                            <el-date-picker type="date" placeholder="" v-model="scope.row.cbpf07">
+                            </el-date-picker>
                         </template>
                     </el-table-column>
                     <el-table-column v-if="false"  prop="cbpb01" label="商品信息维护id" width="240">
@@ -374,7 +382,9 @@
                     </el-table-column>
                     <el-table-column prop="cbpf07" label="生效日期" width="240">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbpf07" placeholder=""></el-input>
+                            <!-- <el-input v-model="scope.row.cbpf07" placeholder=""></el-input> -->
+                            <el-date-picker type="date" placeholder="" v-model="scope.row.cbpf07">
+                            </el-date-picker>
                         </template>
                     </el-table-column>
                     <el-table-column v-if="false"  prop="cbpb01" label="商品信息维护" width="240">
@@ -397,7 +407,7 @@
          <div class="tinajia_dingweii">
             <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
                 <el-button type="primary" @click="handleAdd">保 存</el-button>
-                <el-button @click="_ly_cancelDialog">取 消</el-button>
+                <el-button @click="cancells">取 消</el-button>
             <!-- </span> -->
         </div>
     </el-dialog>
@@ -429,7 +439,7 @@
 <script>
 // import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus } from "@/api/system/user";
 // import { ClassifyAdd, ClassifyList, ClassifyEdit, ClassifyTreeselect, ClassifyRemove, ClassifyImport } from "@/api/Basicinformationmaintenance/Goods/index";
-import { GoodsAdd, GoodsList, GoodsEdit, ClassifyTreeselect, GoodsRemove,GoodsAddss } from "@/api/Basicinformationmaintenance/Goods/index";
+import { GoodsAdd, GoodsList, GoodsEdit, ClassifyTreeselect, GoodsRemove, GoodsAddss, GoodsListjiesuanhb } from "@/api/Basicinformationmaintenance/Goods/index";
 
 import * as req from "@/api/Basicinformationmaintenance/Goods/index";
 import { getToken } from "@/utils/auth";
@@ -475,8 +485,17 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+            total9916:0,
             // 用户表格数据
             userList: null,
+
+            userList01:null,
+            userList03:null,
+
+            //存储结算货币
+            userList9916:null,
+            //存储结算货币存储数据
+            userList0929:null,
             // 弹出层标题
             title: "",
             title1: "",
@@ -652,6 +671,7 @@ export default {
                 page: 1,
                 size: 15,
                 total: this.total,
+                total01 :this.total01,
                 brand: undefined,
                 cbpb12: undefined,
                 cbpa07: undefined,
@@ -735,6 +755,7 @@ export default {
        this.form.cbpb09 =  this.form.cbpb08;
 
         this.getList();
+        // this.getList01();
         this.getTreeselect();
 
         // //输入框校验
@@ -895,23 +916,6 @@ export default {
         },
         // 增加一行表单
         _ly_addFrom() {
-            // if (this.formArr.length >= 10) {
-            //   this.$message.warning('最多只能添加10行')
-            //   this.reset01();
-            //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-            //   return
-
-            // }
-
-            // this.formArr.push({
-            //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
-            //   cbsc08: '',
-            //   cbsc09: '',
-            //   cbsc10: '',
-            //   branch: '',
-            //   cbpc01: this.form2.cbpg161,
-            //   cbpd08: this.form2.cbpd08,
-            // })
             this.tableData.push({
                 date: '',
                 num: '',
@@ -920,29 +924,11 @@ export default {
                 province: '',
                 cbpc000: ''
             })
-            this.dataId++
             console.log(this.tableData, 852369);
         },
 
         // 增加一行表单
         _ly_addFrom2() {
-            // if (this.formArr.length >= 10) {
-            //   this.$message.warning('最多只能添加10行')
-            //   this.reset01();
-            //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-            //   return
-
-            // }
-
-            // this.formArr.push({
-            //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
-            //   cbsc08: '',
-            //   cbsc09: '',
-            //   cbsc10: '',
-            //   branch: '',
-            //   cbpc01: this.form2.cbpg161,
-            //   cbpd08: this.form2.cbpd08,
-            // })
             this.tableData2.push({
                 date: '',
                 num: '',
@@ -951,7 +937,6 @@ export default {
                 province: '',
                 cbpc000: ''
             })
-            this.dataId++
             console.log(this.tableData2, 852369);
         },
         // 删除一行表单
@@ -1018,6 +1003,7 @@ export default {
             GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 console.log(response.rows, 123456);
                 this.userList = response.data.rows;
+                this.userList03 = response.data.rows;
                 this.total = response.data.total;
                 console.log(response, 3369);
                 console.log(response.data.content, 339688);
@@ -1025,6 +1011,60 @@ export default {
             }
             );
         },
+        /** 查询用户列表 */
+        getList029(row) {
+            let id = row.cbpb01;
+            console.log(row,202209299999);
+            GoodsListjiesuanhb(id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                // console.log(response.rows, 123456);
+                // this.userList = response.data.rows;
+                // this.userList03 = response.data.rows;
+                // this.total = response.data.total;
+                this.userList9916 = response.data.rows;
+                this.total9916 = response.data.total;
+                console.log(this.userList9916, 3369916);
+                if (response.code == "200") { 
+                this.userList9916.forEach((item) => {
+                    // item.cbpb01 = item;
+                    this.userList0929 = item;
+                    this.tableData[0].cbpf02 = item.cbpf02;
+                    this.tableData[0].cbpf04 = item.cbpf04;
+                    this.tableData[0].cbpf05 = item.cbpf05;
+                    this.tableData[0].cbpf06 = item.cbpf06;
+                    this.tableData[0].cbpf07 = item.cbpf07;
+                    if (this.tableData[0].cbpf02 == "1") {
+                        this.tableData[0].cbpf02 = "1";
+                        this.tableData[0].cbpf02 = "1";
+                    } else if (this.tableData[0].cbpf02 == "2") {
+                        this.tableData[0].cbpf02 = "2";
+                        this.tableData[0].cbpf02 = "2";
+                    } else if (this.tableData[0].cbpf02 == "3") {
+                        this.tableData[0].cbpf02 = "3";
+                        this.tableData[0].cbpf02 = "3";
+                    }
+
+
+                    if (this.tableData[0].cbpf06 == "1") {
+                        this.tableData[0].cbpf06 = "CNY";
+                        this.tableData[0].cbpf06 = "1";
+                    } else if (this.tableData[0].cbpf06 == "2") {
+                        this.tableData[0].cbpf06 = "USD"
+                        this.tableData[0].cbpf06 = "2";
+                    } 
+                    console.log(this.tableData,20220929);
+                    // console.log(item.cbpb01, 8523697412);
+                })
+
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }    
+
+                // console.log(response.data.content, 339688);
+                // this.loading = false;
+            }
+            );
+        },
+       //GoodsListjiesuanhb
         /** 查询部门下拉树结构 */
         getTreeselect() {
             ClassifyTreeselect().then(response => {
@@ -1126,10 +1166,12 @@ export default {
             this.open = false;
             this.reset();
         },
+
         cancells(){
             this.open2=false;
             this.reset01();
         },
+        
         // 表单重置
         reset() {
             this.form = {
@@ -1207,11 +1249,37 @@ export default {
                         this.getList();
                         this.reset01();
 
-                        console.log(response.data.id, 333);
+                        // console.log(response.data.id, 333);
+                        // console.log(this.tableData2,6666)
                         this.tableData2.forEach((item) => {
                             item.cbpb01 = response.data.id;
-                            console.log(item.cbpb01, 8523697412);
+                            // console.log(item.cbpb01, 8523697412);
                         })
+                        console.log(this.tableData2,555)
+                        GoodsAddss(JSON.stringify(this.tableData2)).then(response => {
+                            if (response.code == "200") {
+                                this.tableData2 = []
+                                this.form2 = {
+                                    cbpb07: "",
+                                    cbpb08: "",
+                                    cbpb09: "",
+                                    cbpb10: "",
+                                    cbpb11: "",
+                                    cbpb12: "",
+                                    cbpb13: "",
+                                    cbpb14: "",
+                                    cbpb15: "",
+                                    cala08: "",
+                                    cbpa07: "",
+                                    cbpc099: ""
+                                }
+                            }
+                            this.getTreeselect();
+                            // this.submitShangpin();
+                            this.getList();
+                            this.reset01();
+                            // console.log(this.form2.ifEnabled, 123456);
+                        });
                         // this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
@@ -1221,30 +1289,7 @@ export default {
 
             })
 
-            GoodsAddss(JSON.stringify(this.tableData2)).then(response => {
-                if (response.code == "200") {
-                    this.tableData2 = []
-                    this.form2 = {
-                        cbpb07: "",
-                        cbpb08: "",
-                        cbpb09: "",
-                        cbpb10: "",
-                        cbpb11: "",
-                        cbpb12: "",
-                        cbpb13: "",
-                        cbpb14: "",
-                        cbpb15: "",
-                        cala08: "",
-                        cbpa07: "",
-                        cbpc099: ""
-                    }
-                }
-                this.getTreeselect();
-                // this.submitShangpin();
-                this.getList();
-                this.reset01();
-                // console.log(this.form2.ifEnabled, 123456);
-            });
+           
 
             console.log('_ly_ok:' + JSON.stringify(this.tableData2))
         },
@@ -1256,9 +1301,10 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
-
+           
 
             this.open = true;
+           
                 let row = {}
                 row.cbpb01 = this.form.cbpb01;
                 row.cbpa07 = this.form.cbpa07;
@@ -1273,9 +1319,10 @@ export default {
                 console.log(this.form.cbpb01);
             //   this.$refs["form5"].validate((item) => {
             //     if (item) {
+               
                  GoodsAddss(JSON.stringify(this.tableData)).then(response => {
                      if (response.code == "200") {
-                         this.tableData = []
+                        //  this.tableData = []
                          this.form2 = {
                              cbpb07: "",
                              cbpb08: "",
@@ -1332,6 +1379,7 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
+          
            if(row.cbpb10=="1")
             {
                 this.form.cbpb10="Epiphone";
@@ -1355,12 +1403,17 @@ export default {
                 this.form.cbpb10="Maestro"
                 row.cbpb10= "6";
             }
+            
             this.open = true;
+            
             console.log(row, 7788521);
             //  this.form= row;
             this.form = Object.assign({},row);
-            this.form.cbpc099=this.form.cala08
+            this.form.cbpc099=this.form.cala08;
+            this.form.cbpb01 = row.cbpb01;
+            this.getList029(row);
             // this.getList();
+            
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

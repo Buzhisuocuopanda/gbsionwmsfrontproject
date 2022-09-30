@@ -61,9 +61,9 @@
                 </el-form>
 
 
-                <el-table border  :header-cell-style="headClasspw"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="460"
+                <el-table border  :header-cell-style="headClasspw"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="500"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%; margin-top: -2%;" @selection-change="handleSelectionChange">
+                    style="width:92.5%;height: 8%;margin-left: -2%; margin-top: -3%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
                         sortable  width="180px;"/>

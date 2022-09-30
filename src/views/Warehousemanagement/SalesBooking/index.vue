@@ -92,7 +92,7 @@
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <!-- @click="handlexiangqengSelect(scope.row)" -->
                             <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" 
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handxiougaiRole(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button>
@@ -1255,6 +1255,15 @@ export default {
         handleChuangJiangone: function (row) {
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-cjxsydd/role/");
+        },
+
+        //修改 /system/user-cangkudiaobodang
+        handxiougaiRole: function (row) {
+            const cbpc01 = row.id;
+            console.log(row.id);
+
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-cangkudiaobodang/role/" + cbpc01);
         },
 
         // /** 提交按钮 */
