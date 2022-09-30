@@ -8,8 +8,8 @@
         <el-input type="text" style="width: 300px" v-model="queryParams.cbba07"></el-input>
       </el-form-item>
       <el-form-item label="商品">
-        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
-          <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+' '+item.cbpb12+' '+item.cbpb15" :value="item.cbpb01"></el-option>
+        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :loading="loading1">
+          <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="状态">
@@ -87,7 +87,8 @@ export default {
   },
   computed: {},
   mounted() { // 自动触发写入的函数
-    this.onSearch()
+    this.onSearch();
+    this.getGoods();
   },
   methods: {
     onSubmit() {},

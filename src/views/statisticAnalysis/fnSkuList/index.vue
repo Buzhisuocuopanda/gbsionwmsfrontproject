@@ -16,8 +16,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="商品" style="margin-left: 20px"  class="item-r" >
-          <el-select v-model="queryParams.goodsIds" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getGoods" :loading="loading1">
-            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cbpb08+' '+item.cbpb12+' '+item.cbpb15" :value="item.cbpb01"></el-option>
+          <el-select v-model="queryParams.goodsIds" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading1">
+            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item  label="日期" style="margin-left: 20px">
@@ -230,6 +230,7 @@ export default {
     this.onSearch();
     this.getStoreSkuList();
     this.getCalaList();
+    this.getGoods();
   },
   methods: {
     /** 重置按钮操作 */
