@@ -27,7 +27,7 @@
                     <el-form-item>
                          <el-button v-hasPermi="['system:selloutofwarehouse:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item  style="margin-left:51%;">
+                    <el-form-item  style="margin-left:61%;">                     
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button> -->
@@ -50,10 +50,10 @@
                         <el-button size="mini" type="danger" style="margin-left:5px;" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:selloutofwarehouse:remove']"
                             @click="handleDelete">删除</el-button>
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:selloutofwarehouse:sh']">审核</el-button>
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:selloutofwarehouse:fs']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -927,24 +927,28 @@ export default {
             this.form2.swJsStoreId01 = row.name;
         },
 
-        //审批
+        //审批 审核
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
-            console.log(row.cbpc01, 8888);
+            let cbpc01 = row.cbsb01
+            let status = row.cbsb11
+            this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
 
-            PurchaseinboundSH(row).then(response => {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                if(response.code == 200){
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '审批成功', type: 'success' });
-                }else{
-                    this.$modal.msgError(response.msg)
-                }
+        //     this.$modal.confirm('是否要审批,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
+        //     console.log(row.cbpc01, 8888);
 
-            });
-          }).catch(() => { });
+        //     PurchaseinboundSH(row).then(response => {
+        //         // console.log(this.form.cbpc01, 789)
+        //         // this.submitShangpin();
+        //         if(response.code == 200){
+        //             this.getList();
+        //             // this.open = false;
+        //             this.$message({ message: '审批成功', type: 'success' });
+        //         }else{
+        //             this.$modal.msgError(response.msg)
+        //         }
+                
+        //     });
+        //   }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -970,20 +974,23 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要反审,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
-            PurchaseinboundShs(row).then(response => {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                if(response.code == 200){
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '反审成功', type: 'success' });
-                }else{
-                    this.$modal.msgError(response.msg)
-                }
-            });
-          }).catch(() => { });
+            let cbpc01 = row.cbsb01
+            let status = row.cbsb11
+            this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
+        //     // console.log(row.cbpc01, 8888);
+        //     this.$modal.confirm('是否要反审,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
+        //     PurchaseinboundShs(row).then(response => {
+        //         // console.log(this.form.cbpc01, 789)
+        //         // this.submitShangpin();
+        //         if(response.code == 200){
+        //             this.getList();
+        //             // this.open = false;
+        //             this.$message({ message: '反审成功', type: 'success' });
+        //         }else{
+        //             this.$modal.msgError(response.msg)
+        //         }
+        //     });
+        //   }).catch(() => { });
         },
 
         //反审上面的
@@ -1213,10 +1220,14 @@ export default {
                 });
             }).catch(() => { });
         },
-        /** 分配角色操作 */
+        /** 分配角色操作 详情 */
         handleAuthRole: function (row) {
-            const userId = row.cbsb01;
-            this.$router.push("/system/user-authhh/role/" + userId);
+            // const userId = row.cbsb01;
+            // this.$router.push("/system/user-authhh/role/" + userId);
+
+            let cbpc01 = row.cbsb01
+            let status = 8
+            this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
         },
 
         /** 创建操作 */

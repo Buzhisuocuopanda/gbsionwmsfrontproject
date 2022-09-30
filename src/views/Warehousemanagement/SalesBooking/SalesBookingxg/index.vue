@@ -617,10 +617,6 @@ export default {
         this.getDicts("sw_js_store_type").then(response => {
             this.form.type = response.rows;
         });
-        // this.form.type = this.dict[0].label;
-        // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
-        // console.log(this.userList,123456789);
-        // this.chen();
         this.form2.cbph10 = "20"
 
         console.log(this.form.cbpc16, 123456);
@@ -630,7 +626,10 @@ export default {
     },
     methods: {
 
+        // 查询详情数据
+        getlist(){
 
+        },
         //添加模块-销售人员
         selected011699(name) {
             console.log(name, 123)

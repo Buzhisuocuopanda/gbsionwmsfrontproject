@@ -111,7 +111,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpc01(\\d+)',
+        path: 'role/:cbpc01(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseWarehousing/PurchaseWarehousingxq/index'),
         meta: { title: '采购入库详情', activeMenu: '/Warehousemanagement/PurchaseWarehousing' }
@@ -125,7 +125,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpg01(\\d+)',
+        path: 'role/:cbpg01(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseReturn/PurchaseReturnxq/index'),
         meta: { title: '采购退货详情', activeMenu: '/Warehousemanagement/PurchaseReturn' }
@@ -139,7 +139,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbsb01(\\d+)',
+        path: 'role/:cbsb01(\\d+)+:status(\\d+)',
          name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentxq/index'),
         meta: { title: '销售出库详情', activeMenu: '/Warehousemanagement/SalesShipment' }
@@ -181,10 +181,10 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpg01(\\d+)',
+        path: 'role/:cbpg01(\\d+):status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesStock/SalesStockxq/index'),
-        meta: { title: '销售退货详情', activeMenu: '/Warehousemanagement/SalesStock' }
+        meta: { title: '销售退库单详情', activeMenu: '/Warehousemanagement/SalesStock' }
       }
     ]
   },
@@ -238,7 +238,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbie01(\\d+)',
+        path: 'role/:cbie01(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/BarcodesSummary/BarcodesSummaryxq/index'),
         meta: { title: '库存初始化详情', activeMenu: '/Warehousemanagement/BarcodesSummary' }
@@ -279,7 +279,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbaa01(\\d+)',
+        path: 'role/:cbaa01(\\d+):status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/WarehouseTransfer/WarehouseTransferxq/index'),
         meta: { title: '仓库调拨单详情', activeMenu: '/Warehousemanagement/WarehouseTransfer' }
@@ -294,7 +294,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:id(\\d+)',
+        path: 'role/:id(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesBooking/SalesBookingxq/index'),
         meta: { title: '销售预订单详情', activeMenu: '/Warehousemanagement/SalesBooking' }
@@ -765,7 +765,20 @@ export const dynamicRoutes = [
       }
     ]
   },
-
+  //销售退库单返回
+  {
+    path: '/Warehousemanagement/SalesStock',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: '',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesStock/index'),
+        meta: { title: '销售退库单', activeMenu: '/Warehousemanagement/SalesStock' }
+      }
+    ]
+  },
     //仓库调拨单修改
    {
     path: '/system/user-cangkudiaobodan',

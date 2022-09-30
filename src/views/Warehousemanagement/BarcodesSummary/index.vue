@@ -39,10 +39,10 @@
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:warehouseInventoryrollup:sh']">审核</el-button>
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:warehouseInventoryrollup:fs']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:warehouseInventoryrollup:import']">导入</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -876,21 +876,26 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批,编号为"' + row.cbie07 + '"的数据项？').then(() => {
-                console.log(row.cbpc01, 8888);
+            let cbpc01 = row.cbie01
+            let status = row.cbie10
+            // let status = 8
+            this.$router.push("/system/user-authhhhhhhh/role/" + cbpc01 + status);
 
-                PurchaseinboundSH(row).then(response => {
-                if (response.code == "200") {
-                    // console.log(this.form.cbpc01, 789)
-                    // this.submitShangpin();
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '审批成功', type: 'success' });
-                 }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                 }
-                });
-            }).catch(() => { });
+            // this.$modal.confirm('是否要审批,编号为"' + row.cbie07 + '"的数据项？').then(() => {
+            //     console.log(row.cbpc01, 8888);
+                
+            //     PurchaseinboundSH(row).then(response => {
+            //     if (response.code == "200") {
+            //         // console.log(this.form.cbpc01, 789)
+            //         // this.submitShangpin();
+            //         this.getList();
+            //         // this.open = false;
+            //         this.$message({ message: '审批成功', type: 'success' });
+            //      }else{
+            //         this.$message({ message: response.msg, type: 'error' });
+            //      }
+            //     });
+            // }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -916,21 +921,26 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审,编号为"' + row.cbie07 + '"的数据项？').then(() => {
-                // console.log(row.cbpc01, 8888);
+            let cbpc01 = row.cbie01
+            let status = row.cbie10
+            // let status = 8
+            this.$router.push("/system/user-authhhhhhhh/role/" + cbpc01 + status);
 
-                PurchaseinboundShs(row).then(response => {
-                  if (response.code == "200") {
-                    // console.log(this.form.cbpc01, 789)
-                    // this.submitShangpin();
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '反审成功', type: 'success' });
-                  }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                  }
-                });
-            }).catch(() => { });
+            // this.$modal.confirm('是否要反审,编号为"' + row.cbie07 + '"的数据项？').then(() => {
+            //     // console.log(row.cbpc01, 8888);
+
+            //     PurchaseinboundShs(row).then(response => {
+            //       if (response.code == "200") {
+            //         // console.log(this.form.cbpc01, 789)
+            //         // this.submitShangpin();
+            //         this.getList();
+            //         // this.open = false;
+            //         this.$message({ message: '反审成功', type: 'success' });
+            //       }else{
+            //         this.$message({ message: response.msg, type: 'error' });
+            //       }
+            //     });
+            // }).catch(() => { });
         },
 
         //反审上面的
@@ -1183,8 +1193,13 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
-            const userId = row.cbie01;
-            this.$router.push("/system/user-authhhhhhhh/role/" + userId);
+            // const userId = row.cbie01;
+            // this.$router.push("/system/user-authhhhhhhh/role/" + userId);
+
+            let cbpc01 = row.cbie01
+            // let status = row.cbie10
+            let status = 8
+            this.$router.push("/system/user-authhhhhhhh/role/" + cbpc01 + status);
         },
         /** 创建操作 */
         handlekucunhuizongone: function (row) {
