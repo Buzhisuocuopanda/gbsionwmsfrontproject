@@ -188,3 +188,14 @@ export function auditTakeOrders(data) {
     data: data
   })
 }
+// 查询列表2
+export function CustomerLists(whid,goodsid) {
+  return request({
+    url: '/whmanagement/selectGoodsSnByWhIdAndGoodsId',
+    method: 'get',
+    params: {
+      whId:whid,
+      goodsId:goodsid
+    }
+  })
+}
