@@ -1164,9 +1164,10 @@ export default {
                 });
             }).catch(() => { });
         },
-        /** 分配角色操作 */
+        /** 仓库盘点详情 */
         handleAuthRole: function (row) {
-            const cbpg01 = row.cbsh01;
+            let cbpg01 = row.cbsh01;
+            console.log(cbsh09,'状态');
             this.$router.push("/system/user-authhhhhhhhh/role/" + cbpg01);
         },
         /** 创建操作 */

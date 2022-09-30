@@ -259,6 +259,21 @@ export const dynamicRoutes = [
       }
     ]
   },
+  //仓库盘点明细返回
+   {
+    path: '/system/user-cangkupandian',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/WarehouseInventory/index'),
+        meta: { title: '仓库盘点明细表', activeMenu: '/Warehousemanagement/WarehouseInventory' }
+      }
+    ]
+  },
   {
     path: '/system/user-authhhhhhhhhh',
     component: Layout,
