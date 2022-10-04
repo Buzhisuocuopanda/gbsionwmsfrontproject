@@ -297,7 +297,7 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="仓库账号" class="item-r">
+            <el-form-item label="仓库账号" >
               <el-select v-model="form.isWarehouse" placeholder="请选择" >
                 <el-option v-for="item in isWarehouses" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -306,9 +306,9 @@
           </el-col>
 
           <el-col :span="12">
-            <el-form-item v-show="form.isWarehouse==0" label="管理仓库" class="item-r">
-              <el-select v-model="form.warehousePerm" multiple  placeholder="请选择"  >
-                <el-option v-for="item in warehouses" :key="item.cbwa09" :label="item.cbwa09" :value="item.cbwa09"></el-option>
+            <el-form-item v-show="form.isWarehouse==0" label="管理仓库">
+              <el-select v-model="form.warehousePerms" multiple  placeholder="请选择"  >
+                <el-option v-for="item in warehouses" :key="item.cbwa01" :label="item.cbwa09" :value="item.cbwa01"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -316,8 +316,8 @@
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="审核权限" class="item-r">
-              <el-select v-model="form.auditPerm" multiple placeholder="请选择" >
+            <el-form-item label="审核权限">
+              <el-select v-model="form.auditPerms" multiple placeholder="请选择" >
                 <el-option v-for="item in audits" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -457,11 +457,11 @@ export default {
       ],
       isWarehouses: [
         {
-          value: 0,
+          value: "0",
           label: '是',
         },
         {
-          value: 1,
+          value: "1",
           label: '否',
         }
       ],
@@ -565,6 +565,7 @@ export default {
       this.loading = true;
       listUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.userList = response.rows;
+          console.log(this.userList);
           this.total = response.total;
           this.loading = false;
         }
@@ -631,7 +632,11 @@ export default {
         status: "0",
         remark: undefined,
         postIds: [],
-        roleIds: []
+        roleIds: [],
+        isWarehouse:undefined,
+        warehousePerms:[],
+        auditPerms:[]
+
       };
       this.resetForm("form");
     },
@@ -688,6 +693,9 @@ export default {
         this.roleOptions = response.roles;
         this.form.postIds = response.postIds;
         this.form.roleIds = response.roleIds;
+        this.form.auditPerms = response.data.auditPerms;
+        this.form.isWarehouse = response.data.isWarehouse;
+        this.form.warehousePerms = response.data.warehousePerms;
         this.open = true;
         this.title = "修改用户";
         this.form.password = "";
