@@ -1,4 +1,5 @@
 <template>
+  <!--销售订单变更单-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px">
@@ -22,12 +23,12 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
+          <el-button v-hasPermi="['system:saleChange:list']"  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
                      @click="onSearch">搜索
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
+          <el-button v-hasPermi="['system:saleChange:list']"  class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
+          <el-button v-hasPermi="['system:saleChange:add']"  class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
             创建
           </el-button>
 <!--          <el-upload-->
@@ -40,7 +41,7 @@
 <!--            style="display: inline">-->
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
-          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
+          <el-button v-hasPermi="['system:saleChange:export']"  type="primary" v-on:click="exprotData()" :loading=loadingOut
                      style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
 

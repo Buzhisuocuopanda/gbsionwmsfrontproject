@@ -59,11 +59,20 @@
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
-            <el-button size="small" type="primary"  @click="mdfDetail(scope.row)"
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-edit"
+              @click="mdfDetail(scope.row)"
+              v-hasPermi="['system:store:edit']"
             >修改</el-button>
-
-            <el-button size="small" type="primary"
-                       @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-delete"
+              @click="delTotalOrder(scope.row)"
+              v-hasPermi="['system:store:remove']"
+            >删除</el-button>
           </template>
 
         </el-table-column>

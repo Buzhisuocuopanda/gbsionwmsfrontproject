@@ -18,12 +18,12 @@
         </el-form-item>
 
         <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
+          <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
                      @click="onSearch">搜索
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
+          <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
+          <el-button v-hasPermi="['system:totalOrder:add']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
             创建
           </el-button>
 <!--          <el-upload-->
@@ -36,9 +36,9 @@
 <!--            style="display: inline">-->
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
-          <el-button type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
+          <el-button v-hasPermi="['system:totalOrder:import']" type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
 
-          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
+          <el-button v-hasPermi="['system:totalOrder:export']" type="primary" v-on:click="exprotData()" :loading=loadingOut
                      style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
@@ -58,9 +58,9 @@
         <el-table-column label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
+            <el-button v-hasPermi="['system:totalOrder:detail']" icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button v-hasPermi="['system:totalOrder:edit']" icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button v-hasPermi="['system:totalOrder:remove']" icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
           </template>
 
         </el-table-column>
