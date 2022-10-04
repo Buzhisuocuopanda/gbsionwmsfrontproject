@@ -15,22 +15,22 @@
           </el-select>
         </el-form-item>
         <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" clearable filterable remote reserve-keyword placeholder="请输入关键词"
+          <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词"
             :remote-method="getGoods"
             :loading="loadingGood">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品SN"   class="item-r" >
-          <el-input v-model="queryParams.cbig10" class="filter-item"  placeholder="商品SN" />
+          <el-input v-model="queryParams.cbig10" style="width: 300px" class="filter-item"  placeholder="商品SN" />
         </el-form-item>
         <el-form-item label="商品状态">
-          <el-select v-model="queryParams.status" clearable filterable remote reserve-keyword placeholder="请选择" >
+          <el-select v-model="queryParams.status" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请选择" >
             <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="上架状态">
-          <el-select v-model="queryParams.groudStatus" clearable filterable remote reserve-keyword placeholder="请选择" >
+          <el-select v-model="queryParams.groudStatus" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请选择" >
             <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
@@ -53,8 +53,8 @@
         <el-table-column  label="型号" align="center" prop="cbpb12"  min-width="240px;"/>
         <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
         <!--<el-table-column  label="描述" align="center" prop="lockQty" min-width="260px;"/>-->
-        <el-table-column label="商品SN" align="center" prop="cbig10" min-width="80px;" />
-        <el-table-column  label="入库日期" align="center" prop="cbig15" :formatter="formatTime2" min-width="80px;" />
+        <el-table-column label="商品SN" align="center" prop="sn" min-width="80px;" />
+        <el-table-column  label="入库日期" align="center" prop="inTime" :formatter="formatTime2" min-width="80px;" />
         <el-table-column prop="status" label="商品状态" :formatter="formatState" sortable align="center"></el-table-column>
         <el-table-column prop="groudStatus" label="上架状态" :formatter="formatStateType" sortable align="center"></el-table-column>
 
@@ -154,7 +154,7 @@ export default {
   },
   methods: {
     formatTime2(row){
-      return formatDate2(row.cbig15);
+      return formatDate2(row.inTime);
     },
     formatState(row) {
       if (row != null) {
@@ -185,6 +185,8 @@ export default {
       this.queryParams.cbla09s = [];
       this.queryParams.cbpb01 = "";
       this.queryParams.cbig10 = "";
+      this.queryParams.groudStatus="";
+        this.queryParams.status="";
       this.queryParams.pageNum = 1;
       this.onSearch();
     },

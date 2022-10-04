@@ -296,6 +296,35 @@
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="12">
+            <el-form-item label="仓库账号" class="item-r">
+              <el-select v-model="form.isWarehouse" placeholder="请选择" >
+                <el-option v-for="item in isWarehouses" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="12">
+            <el-form-item v-show="form.isWarehouse==0" label="管理仓库" class="item-r">
+              <el-select v-model="form.warehousePerm" multiple  placeholder="请选择"  >
+                <el-option v-for="item in warehouses" :key="item.cbwa09" :label="item.cbwa09" :value="item.cbwa09"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="审核权限" class="item-r">
+              <el-select v-model="form.auditPerm" multiple placeholder="请选择" >
+                <el-option v-for="item in audits" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="24">
             <el-form-item label="备注">
               <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
@@ -347,7 +376,7 @@ import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-
+import {getSwJsStoreSkuAllList} from "@/api/statisticAnalysis/index";
 export default {
   name: "User",
   dicts: ['sys_normal_disable', 'sys_user_sex'],
@@ -368,6 +397,8 @@ export default {
       total: 0,
       // 用户表格数据
       userList: null,
+      //下拉列表仓库数据
+      warehouses:null,
       // 弹出层标题
       title: "",
       // 部门树选项
@@ -424,6 +455,66 @@ export default {
         { key: 5, label: `状态`, visible: true },
         { key: 6, label: `创建时间`, visible: true }
       ],
+      isWarehouses: [
+        {
+          value: 0,
+          label: '是',
+        },
+        {
+          value: 1,
+          label: '否',
+        }
+      ],
+      audits:[
+        {
+          value: 1,
+          label: '国内销售订单审核',
+        },
+        {
+          value: 2,
+          label: '国际销售订单审核',
+        },
+        {
+          value: 3,
+          label: '采购入库单审核',
+        },
+        {
+          value: 4,
+          label: '采购退库单审核',
+        },
+        {
+          value: 5,
+          label: '销售出库单审核',
+        },
+        {
+          value: 6,
+          label: '销售退库单审核',
+        },
+        {
+          value: 7,
+          label: '销售提货单审核',
+        },
+        {
+          value: 8,
+          label: '质检单审核',
+        },
+        {
+          value: 9,
+          label: '仓库明细初始化审核',
+        },
+        {
+          value: 10,
+          label: '库存汇总初始化审核',
+        },
+        {
+          value: 11,
+          label: '销售财务复审审核',
+        },
+        {
+          value: 12,
+          label: '销售变更单审核',
+        }
+      ],
       // 表单校验
       rules: {
         userName: [
@@ -463,6 +554,7 @@ export default {
   created() {
     this.getList();
     this.getTreeselect();
+    this.getStoreSkuList();
     this.getConfigKey("sys.user.initPassword").then(response => {
       this.initPassword = response.msg;
     });
@@ -477,6 +569,21 @@ export default {
           this.loading = false;
         }
       );
+    },
+    //下拉列表数据仓库
+    getStoreSkuList(){
+      let param={};
+      this.loading2 = true;
+      getSwJsStoreSkuAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.warehouses = response.data;
+        } else {
+          this.warehouses = [];
+        }
+      },error => {
+        this.loading2 = false;
+      });
     },
     /** 查询部门下拉树结构 */
     getTreeselect() {
