@@ -1,4 +1,5 @@
 <template>
+  <!--销售退库单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -915,8 +916,8 @@ export default {
             // this.$modal.confirm('是否确认审批编号为"' + row.cbse01 + '"的数据项？').then(function () {
             //     return Purchaseinboundsho(row)
             // }).then(response => {
-              
-            //  if (response.code == "200") {   
+
+            //  if (response.code == "200") {
             //     console.log(this.form.cbse01, 789)
             //     // this.submitShangpin();
             //     this.getList();
@@ -958,7 +959,7 @@ export default {
             // this.$modal.confirm('是否确认反审编号为"' + row.cbse01 + '"的数据项？').then(function () {
             //     return PurchaseinboundSht(row)
             // }).then(response => {
-            //  if (response.code == "200") {  
+            //  if (response.code == "200") {
             //     console.log(this.form.cbse01, 789)
             //     // this.submitShangpin();
             //     this.getList();
@@ -966,7 +967,7 @@ export default {
             //     this.$message({ message: '反审成功', type: 'success' });
             //  }else{
             //     this.$message({ message: response.msg, type: 'error' });
-            //  }  
+            //  }
             // }).catch(() => { });
         },
 
@@ -1272,7 +1273,7 @@ export default {
             let cbpg01 = row.cbse01
             let status = 8
             this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
-        
+
         },
         /** 创建操作 */
         handletuikuone: function (row) {

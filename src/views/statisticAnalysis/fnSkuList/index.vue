@@ -28,9 +28,9 @@
         </el-form-item>
 
         <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['query:fnSkuList:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
+          <el-button v-hasPermi="['query:fnSkuList:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button v-hasPermi="['query:fnSkuList:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
@@ -237,7 +237,7 @@ export default {
     resetQuery() {
       this.queryParams.brandIds = [];
       this.queryParams.whIds = [];
-      this.queryParams.goodsId = [];
+      this.queryParams.goodsIds = [];
       this.dateRange = [];
       this.queryParams.pageNum = 1;
       // this.resetForm("queryParams");

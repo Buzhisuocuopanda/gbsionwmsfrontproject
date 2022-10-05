@@ -29,7 +29,7 @@
 
 
         <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
+          <el-button v-hasPermi="['approval:unfinisheddocuments:list']"  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
 <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
 <!--          <el-upload-->
 <!--          <el-table-->

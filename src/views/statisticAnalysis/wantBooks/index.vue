@@ -1,5 +1,5 @@
 <!-- zgl -->
-<!-- 缺货登记 -->
+<!-- 缺货登记查询 -->
 <template>
   <div class="app-container">
     <!-- 搜索 -->
@@ -20,9 +20,9 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="handleQuery">查询</el-button>
-        <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-        <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+        <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:list']" type="primary" @click="handleQuery">查询</el-button>
+        <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+        <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
       </el-form-item>
     </el-form>
     <!-- 表格 -->

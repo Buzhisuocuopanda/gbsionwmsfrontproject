@@ -13,10 +13,10 @@
 
 
         <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
+          <el-button v-hasPermi="['system:saleOrderSku:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
                      @click="onSearch">搜索
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
+          <el-button v-hasPermi="['system:saleOrderSku:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
 <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">-->
 <!--            创建-->
@@ -62,7 +62,7 @@
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
 <!--            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>-->
-            <el-button v-if="scope.row.id==editId" icon="el-icon-edit" plain size="mini"   type="text" @click="updateDetail(scope.row)">保存</el-button>
+            <el-button v-hasPermi="['system:updateGjQty:save']"  v-if="scope.row.id==editId" icon="el-icon-edit" plain size="mini"   type="text" @click="updateDetail(scope.row)">保存</el-button>
             <el-button v-else icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">库存分配</el-button>
 
             <!--            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>-->

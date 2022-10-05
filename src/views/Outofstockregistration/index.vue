@@ -1,4 +1,5 @@
 <template>
+  <!--缺货登记-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
@@ -29,8 +30,8 @@
 
 
         <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
-          <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
+          <el-button v-hasPermi="['system:outofstockregistrationform:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
+          <el-button v-hasPermi="['system:outofstockregistrationform:add']" class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
             <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
 <!--          <el-upload-->
@@ -63,12 +64,14 @@
           <template slot-scope="scope" >
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
                        type="text" @click="mdfDetail(scope.row)"
+                       v-hasPermi="['system:outofstockregistrationform:edit']"
             >修改</el-button>
 
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
+                       v-hasPermi="['system:outofstockregistrationform:remove']"
+                       type="text"  @click="delTotalOrder(scope.row)" >删除</el-button>
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"
+                       type="text" v-hasPermi="['system:outofstockregistrationform:detail']"
                        @click="showDetail(scope.row)">详情</el-button>
 
           </template>

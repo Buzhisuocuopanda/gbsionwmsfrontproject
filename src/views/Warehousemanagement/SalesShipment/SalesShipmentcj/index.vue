@@ -172,7 +172,7 @@
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left: 0.5%;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-           
+
           <el-table-column prop="cbpc000" label="品牌" width="200">
             <template slot-scope="scope" style="width:200%;">
                 <el-popover placement="bottom-start" trigger="click">
@@ -314,7 +314,7 @@ export default {
         }
         return {
             // 表单结构数组
-            formArr: [], 
+            formArr: [],
             tableData:[],
             // 遮罩层
             loading: true,
@@ -375,14 +375,14 @@ export default {
             }],
             value: '',
             //订单类型
-            jiageLeixengong:[{                
+            jiageLeixengong:[{
                 value:'1',
-                label:"国际订单"                
+                label:"国际订单"
             },{
                 value:'2',
-                label:"国内订单" 
+                label:"国内订单"
             }],
-            
+
             //货币类型
             jiageLeixeng: [{
                 value: '1',
@@ -407,7 +407,7 @@ export default {
                 label: '7'
             }],
             value: '',
-     
+
             //关联订单/关联提货单
             jiageLeixengton: [{
                 value: '1',
@@ -613,7 +613,7 @@ export default {
                 ],
                 cbpc0990: [
                     { required: true, message: "收货电话不能为空!", trigger: "blur" }
-                ], 
+                ],
                 cbsb19: [
                     { required: true, message: "电话不能为空!", trigger: "blur" },
                     { validator: phoneValidator11, trigger: 'blur' }
@@ -641,11 +641,14 @@ export default {
     created() {
 
         this.form.cbsc17=this.form.brand;
-        //销售提货单详情
+      let routerParams = this.$route.query;
+      this.form2.cbsb20 = routerParams.data.id;
+      //销售提货单详情
          this.getList();
+
         this.form2.cbca08=this.ListUser.customerName;
         //父子页面传值
-         
+
         // this.getParams();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
@@ -734,7 +737,7 @@ export default {
                         if (count-- === 1) {
                             this._ly_save()
                         }
-                        
+
                         //  this.reset03();
                     //    this.formArr.cbpg01="1234567";
                     //    this.form.cbpg01=this.formArr.cbpg01;
@@ -750,7 +753,7 @@ export default {
             console.log('_ly_ok:' + JSON.stringify(this.tableData))
         },
 
-   
+
 
        // 合并单元格
       arraySpanMethod({
@@ -826,8 +829,8 @@ export default {
 
         // getParams() {
         //      let routerParams = this.$route.query;
-        //        this.ListUser = routerParams.data; 
-        //        let zhuangh = JSON.parse(this.ListUser); 
+        //        this.ListUser = routerParams.data;
+        //        let zhuangh = JSON.parse(this.ListUser);
         //        //客户
         //        this.form2.cbsb09=zhuangh[0].customerName;
         //        //仓库
@@ -851,8 +854,8 @@ export default {
         //       console.log(JSON.parse(routerParams.data01),55555);
 
         //    },
-        
- 
+
+
 
         show() {
             this.showSearch = !this.showSearch;
@@ -901,7 +904,7 @@ export default {
 
         //添加模块-供应商
         selected02(e,row) {
-            
+
             // console.log(name.substring(name.indexOf("-") + 1), 963);
             // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
             // this.form2.cbsc15 = name.substring(name.indexOf("-") + 1);
@@ -985,8 +988,10 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
-
-            this.$refs["form2"].validate((item) => {
+          let routerParams = this.$route.query;
+          this.formArr = routerParams.data;
+          this.form2.cbsb20 = routerParams.data.id;
+          this.$refs["form2"].validate((item) => {
                 if (item) {
                     PurchaseinboundAdd(this.form2).then(response => {
                         if(response.code == 200){
@@ -1015,11 +1020,11 @@ export default {
          /** 销售提货单 */
         getList() {
             let routerParams = this.$route.query;
-               this.formArr = routerParams.data; 
-            //    let zhuangh = JSON.parse(this.formArr);  
-                // console.log(zhuangh[0].id,889999);          
+               this.formArr = routerParams.data;
+            //    let zhuangh = JSON.parse(this.formArr);
+                // console.log(zhuangh[0].id,889999);
                PurchaseinListxiangq(this.formArr,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                
+
                 //客户名称
                 this.form2.cbpc0999 = response.data.customerName;
                 //客户名称ID
@@ -1040,7 +1045,7 @@ export default {
                 this.form2.cbca28  = response.data.customerLevel;
                 //结算货币名称
                 this.form2.cbsb166 = response.data.currencyMsg;
-                //结算货币名称id 
+                //结算货币名称id
                 this.form2.cbsb16 = response.data.currency;
                 //收货人
                 this.form2.cbsb22 = response.data.receiver;
@@ -1066,7 +1071,9 @@ export default {
                     item.cbsc13 = item.scanQty;
                     item.cbsc144 = item.noSendQty;
                     item.cbsc15 = item.remark;
-                    item.cbsc14 = item.saleOrderId;
+                    // item.cbsc14 = item.saleOrderId;
+                  item.cbsc14 = item.cbob01;
+
                     item.cbpc000 =item.brand + "~" + item.model + "~" + item.description;
                     if(item.cbsc177=="国内订单"){
                           item.cbsc17="1";
@@ -1080,10 +1087,10 @@ export default {
                 this.tableData = response.data.goods;
                 this.total = response.data.total;
                 console.log(response.data.goods, 339688);
-              
+
                 console.log(response.data,1709916);
 
- 
+
             }
             );
         },
