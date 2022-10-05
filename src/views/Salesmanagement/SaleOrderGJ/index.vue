@@ -82,8 +82,8 @@
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <el-button style="margin-top: 2px" v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row)">确认库存</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" confirmSkuSaleOrder(scope.row,2)">取消库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,2)">确认库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,1)">取消库存</el-button>
             <el-button style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)">删除</el-button>
           </template>
 
@@ -401,7 +401,7 @@
 
       },
       showDetail(row) {
-        this.$router.push({path: "/Salesmanagement/saleshowOrderDetail", query: {id: row.id}})
+        this.$router.push({path: "/Salesmanagement/saleOrderDetail/showGjSale", query: {id: row.id}})
 
       },
       closeDetail() {
@@ -426,7 +426,7 @@
 
       },
       auditDetail(row,opeateType) {
-        this.$router.push({path: "/Salesmanagement/saleauditOrderDetail", query: {id: row.id,status:opeateType}})
+        this.$router.push({path: "/Salesmanagement/gjAuditOrderDetail", query: {id: row.id,status:opeateType}})
 
         // const param = {
         //   orderId: row.id,
@@ -461,7 +461,8 @@
             if ( response.code === 200) {
               this.$message.success("删除成功")
             } else {
-              this.$message.error(response.data.msg)
+
+              this.$message.error(response.msg)
             }
           })
         })
@@ -681,8 +682,8 @@
           }
         }
       },
-      showConfirmDetail(row){
-        this.$router.push({path: "/Salesmanagement/gjAuditOrderDetail", query: {id: row.id,confirmStatus:2}})
+      showConfirmDetail(row,status){
+        this.$router.push({path: "/Salesmanagement/gjAuditOrderDetail", query: {id: row.id,confirmStatus:status}})
 
       },
 

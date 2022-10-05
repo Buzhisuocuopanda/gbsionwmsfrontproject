@@ -217,7 +217,7 @@
 <!--&lt;!&ndash;                  </el-option>&ndash;&gt;-->
 <!--&lt;!&ndash;                </el-select>&ndash;&gt;-->
 <!--              </sapn>-->
-              <div style="text-align: right">
+              <div style="text-align: center">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
                 {{scope.row.goodsMsg}}
 
@@ -237,7 +237,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="qty" label="确认库存数量" width="150"  :formatter="rounding">
+          <el-table-column prop="confirmQty" label="确认库存数量" width="150"  :formatter="rounding">
             <template slot-scope="scope" >
               <div style="text-align: right">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
@@ -388,7 +388,8 @@
 <!--      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>-->
 <!--      <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleOrder">标记完成</el-button>-->
       <el-button v-if="this.$route.query.status==5" type="primary" @click="auditSaleOrder">指定结束</el-button>
-      <el-button v-if="this.$route.query.confirmStatus==2" type="primary" @click="confirmSkuSaleOrder">确认库存</el-button>
+      <el-button v-if="this.$route.query.confirmStatus==2" type="primary" @click="confirmSkuSaleOrder(1)">确认库存</el-button>
+      <el-button v-if="this.$route.query.confirmStatus==1" type="primary" @click="confirmSkuSaleOrder(2)">取消库存</el-button>
       <el-button  @click="cancel">取 消</el-button>
        </span>
     </div>
@@ -1168,11 +1169,6 @@
         this.tianjiahang.splice(index, 1);
       },
 
-
-
-
-
-
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
@@ -1498,7 +1494,7 @@
             if (response.code == "200") {
               this.$message.success("提交成功")
               this.$store.dispatch("tagsView/delView", this.$route)
-              this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+              this.$router.push({path: "/Salesmanagement/SaleOrderGj", query: {id: 1}})
 
             }else {
 
@@ -1605,10 +1601,10 @@
         // this.$router.push("/system/user-auth/role/");
         this.$router.push("/system/user-cktkfh/role/");
       },
-      confirmSkuSaleOrder(){
+      confirmSkuSaleOrder(opt){
         const param = {
           id: this.formData.id,
-          opearte: 1
+          opearte: opt
         }
 
         confirmSkuSaleOrder(param).then(response => {

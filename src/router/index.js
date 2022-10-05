@@ -65,7 +65,7 @@ export const constantRoutes = [
   },
     {
     path: '/chuanzhi',
-    component: () => import('@/components/salerman/index'),
+    component: () => import('@/components/WarehouseInfoSku/index'),
     hidden: true
   },
   {
@@ -111,7 +111,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpc01(\\d+)',
+        path: 'role/:cbpc01(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseWarehousing/PurchaseWarehousingxq/index'),
         meta: { title: '采购入库详情', activeMenu: '/Warehousemanagement/PurchaseWarehousing' }
@@ -125,7 +125,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpg01(\\d+)',
+        path: 'role/:cbpg01(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseReturn/PurchaseReturnxq/index'),
         meta: { title: '采购退货详情', activeMenu: '/Warehousemanagement/PurchaseReturn' }
@@ -139,7 +139,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbsb01(\\d+)',
+        path: 'role/:cbsb01(\\d+)+:status(\\d+)',
          name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesShipment/SalesShipmentxq/index'),
         meta: { title: '销售出库详情', activeMenu: '/Warehousemanagement/SalesShipment' }
@@ -153,7 +153,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpc01(\\d+)+:status(\\d+)+:checkStatus(\\d+)',
+        path: 'role/:cbpc01(\\d+)+:status(\\d+)+:checkStatus(\\d+)+:edit(\\d)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/Saleslading/Salesladingxq/index'),
         meta: { title: '销售提货详情', activeMenu: '/Warehousemanagement/Saleslading' }
@@ -181,10 +181,10 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbpg01(\\d+)',
+        path: 'role/:cbpg01(\\d+):status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesStock/SalesStockxq/index'),
-        meta: { title: '销售退货详情', activeMenu: '/Warehousemanagement/SalesStock' }
+        meta: { title: '销售退库单详情', activeMenu: '/Warehousemanagement/SalesStock' }
       }
     ]
   },
@@ -224,7 +224,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbie01(\\d+)',
+        path: 'role/:cbie01(\\d+):+status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/BarcodeInventorydetails/BarcodeInventorydetailsxq/index'),
         meta: { title: '库存初始化详情', activeMenu: '/Warehousemanagement/BarcodeInventorydetails' }
@@ -238,7 +238,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbie01(\\d+)',
+        path: 'role/:cbie01(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/BarcodesSummary/BarcodesSummaryxq/index'),
         meta: { title: '库存初始化详情', activeMenu: '/Warehousemanagement/BarcodesSummary' }
@@ -256,6 +256,21 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/WarehouseInventory/WarehouseInventoryxq/index'),
         meta: { title: '仓库盘点详情', activeMenu: '/Warehousemanagement/WarehouseInventory' }
+      }
+    ]
+  },
+  //仓库盘点明细返回
+   {
+    path: '/system/user-cangkupandian',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/WarehouseInventory/index'),
+        meta: { title: '仓库盘点明细表', activeMenu: '/Warehousemanagement/WarehouseInventory' }
       }
     ]
   },
@@ -279,7 +294,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbaa01(\\d+)',
+        path: 'role/:cbaa01(\\d+):status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/WarehouseTransfer/WarehouseTransferxq/index'),
         meta: { title: '仓库调拨单详情', activeMenu: '/Warehousemanagement/WarehouseTransfer' }
@@ -294,7 +309,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:id(\\d+)',
+        path: 'role/:id(\\d+)+:status(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/SalesBooking/SalesBookingxq/index'),
         meta: { title: '销售预订单详情', activeMenu: '/Warehousemanagement/SalesBooking' }
@@ -494,6 +509,20 @@ export const dynamicRoutes = [
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrdercj/index'),
         meta: { title: '采购订单创建', activeMenu: '/Warehousemanagement/PurchaseOrder' }
+      }
+    ]
+  },
+  //采购订单详情
+  {
+    path: '/system/user-cgddxq',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrderxq/index'),
+        meta: { title: '采购订单', activeMenu: '/Warehousemanagement/PurchaseOrder' }
       }
     ]
   },
@@ -765,7 +794,20 @@ export const dynamicRoutes = [
       }
     ]
   },
-
+  //销售退库单返回
+  {
+    path: '/Warehousemanagement/SalesStock',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: '',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesStock/index'),
+        meta: { title: '销售退库单', activeMenu: '/Warehousemanagement/SalesStock' }
+      }
+    ]
+  },
     //仓库调拨单修改
    {
     path: '/system/user-cangkudiaobodan',
@@ -1023,7 +1065,15 @@ export const dynamicRoutes = [
         name: 'showSaleOrder',
         component: () => import('@/views/Salesmanagement/saleOrderDetail/showDetail/index'),
 
-        meta: { title: '销售订单审核详情',  activeMenu:'/Salesmanagement/saleOrderDetail/show' }
+        meta: { title: '国内销售订单详情',  activeMenu:'/Salesmanagement/saleOrderDetail/show' }
+      },      {
+        // path: 'role/:cbpc01(\\d+)',
+        path: 'showGjSale',
+
+        name: 'showGjSale',
+        component: () => import('@/views/Salesmanagement/SaleOrderGJ/showDetail/index'),
+
+        meta: { title: '国际销售订单详情',  activeMenu:'/Salesmanagement/saleOrderDetailGj/show' }
       }
     ]
   },

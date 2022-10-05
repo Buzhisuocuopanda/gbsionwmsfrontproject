@@ -31,7 +31,7 @@ export function PurchaseinboundList(query) {
 // 详情
 export function PurchaseinboundLists(CBPC01) {
   return request({
-    url: '/system/Purchaseordertable/SwJsSkuBarcodelistss?cbpc01='+ CBPC01,
+    url: '/system/Purchaseordertable/SwJsSkuBarcodelists?id='+ CBPC01,
     method: 'get'
   })
 }

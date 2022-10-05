@@ -30,9 +30,8 @@
         </el-form-item>
 
         <el-form-item label="型号"  class="item-r" style="margin-left: 50px" label-width="80px">
-          <el-select v-model="queryParams.model" style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading5">
-            <el-option v-for="item in modelList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
-          </el-select>
+          <el-input v-model="queryParams.model" style="margin-left: 20px;width: 300px" class="filter-item"  placeholder="型号" />
+
         </el-form-item>
        <!-- <el-form-item label="销售人员" style="margin-left: 20px"  class="item-r" >
           <el-select v-model="queryParams.saleUserId"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading4">

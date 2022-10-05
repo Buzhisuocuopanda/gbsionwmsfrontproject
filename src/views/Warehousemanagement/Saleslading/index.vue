@@ -1,4 +1,5 @@
 <template>
+  <!--销售提货单-->
   <div class="app-container">
     <el-row :gutter="20" style="margin-left: -10%">
       <el-col :span="20" :xs="24" class="tooltup" style="width: 100%">
@@ -87,6 +88,7 @@
               class="biaoto-buttonshanchu"
               :disabled="multiple"
               @click="handleDelete"
+              v-hasPermi="['system:whmanagement:remove']"
               >删除</el-button
             >
             <!-- <el-button
@@ -113,7 +115,7 @@
               class="biaoto-buttondaochu"
               @click="PurchaseinboundBiaojiWancheng01"
               :disabled="multiple"
-              v-hasPermi="['system:user:export']"
+              v-hasPermi="['system:whmanagement:auditTakeOrder']"
               >标记完成
             </el-button>
             <el-button
@@ -122,7 +124,7 @@
               class="biaoto-buttonfanshen"
               @click="PurchaseinboundQuxiaoWangcheng01"
               :disabled="multiple"
-              v-hasPermi="['system:user:export']"
+              v-hasPermi="['system:whmanagement:auditTakeOrder']"
               >取消完成
             </el-button>
           </el-form-item>
@@ -297,7 +299,7 @@
                 class="button-caozuoxougai caozuoxiangqeng"
                 @click="handlexiangqengSelect(scope.row)"
                 v-if="(scope.row.status == 0)"
-                v-hasPermi="['system:user:edit']"
+                v-hasPermi="['system:whmanagement:edit']"
               >
                 修改
               </el-button>
@@ -308,7 +310,7 @@
                 class="button-caozuoxougai caozuoxiangqeng"
                 @click="handleDelete01(scope.row)"
                 v-if="(scope.row.status == 0)"
-                v-hasPermi="['system:user:remove']"
+                v-hasPermi="['system:whmanagement:remove']"
                 >删除</el-button
               >
               <el-button
@@ -317,7 +319,7 @@
                 icon="el-icon-share"
                 class="caozuoxiangqeng"
                 @click="handleAuthRole(scope.row)"
-                v-hasPermi="['system:user:listselect']"
+                v-hasPermi="['system:whmanagement:detail']"
                 >详情
               </el-button>
               <el-button
@@ -326,7 +328,7 @@
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundShenpis(scope.row)"
-                v-hasPermi="['system:user:listselect']"
+                v-hasPermi="['system:whmanagement:auditTakeOrder']"
                 v-if="scope.row.status == 1"
                 >撤销</el-button
               >
@@ -336,7 +338,7 @@
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundShenpi(scope.row)"
-                v-hasPermi="['system:user:listselect']"
+                v-hasPermi="['system:whmanagement:sh']"
                 v-if="scope.row.status == 1"
                 >审核</el-button
               >
@@ -346,7 +348,7 @@
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundFanShenpi(scope.row)"
-                v-hasPermi="['system:user:listselect']"
+                v-hasPermi="['system:whmanagement:fs']"
                 v-if="scope.row.status == 2"
                 >反审</el-button
               >
@@ -356,7 +358,7 @@
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
                 @click="PrintRow(scope.row)"
-                v-hasPermi="['system:user:listselect']"
+                v-hasPermi="['system:whmanagement:auditTakeOrder']"
                 v-if="scope.row.checkStatus == 2"
                 >质检</el-button
               >
@@ -366,7 +368,7 @@
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                v-hasPermi="['system:user:listselect']"
+                v-hasPermi="['system:whmanagement:auditTakeOrder']"
                 v-if="scope.row.status == 3"
                 >取消完成</el-button
               >
@@ -376,7 +378,7 @@
                 icon="el-icon-s-order"
                 class="caozuoxiangqeng"
                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                v-hasPermi="['system:user:listselect']"
+                v-hasPermi="['system:whmanagement:auditTakeOrder']"
                 v-if="(scope.row.status == 2)"
                 >标记完成</el-button
               >
@@ -842,7 +844,7 @@ export default {
         cbwa09: undefined,
         dateRange: undefined,
       },
-      
+
       // 列信息
       //  columns: [
       //   {
@@ -1273,7 +1275,8 @@ export default {
       let userId = row.id;
       let status = row.status
       let checkstatus = row.checkStatus
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
       // PurchaseinboundSH(row).then((response) => {
       //   // console.log(this.form.cbpc01, 789)
       //   // this.submitShangpin();
@@ -1289,7 +1292,7 @@ export default {
     },
     //审批上面内容
     PurchaseinboundShenpi01(row) {
-      
+
       // let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
       // console.log(userIds, 8888);
       // userIds.forEach((item) => {
@@ -1315,7 +1318,8 @@ export default {
       let userId = row.id;
       let status = row.status
       let checkstatus = row.checkStatus
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
 
       // PurchaseinboundShs(row).then((response) => {
       //   if (response.code == 200) {
@@ -1579,7 +1583,8 @@ export default {
       let userId = row.id;
       let status = row.status
       let checkstatus = row.checkStatus
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 1
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
     },
     /** 数形列表的商品分类按钮**/
     submitShangpin() {
@@ -1662,7 +1667,8 @@ export default {
       const userId = row.id;
       let status = 0
       let checkstatus = 0
-      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus);
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
     },
     /** 创建操作 */
     handletihuoone: function (row) {
@@ -1827,7 +1833,7 @@ export default {
         });
         // location.reload();
       }
-      
+
     },
 
     //测试树状菜单

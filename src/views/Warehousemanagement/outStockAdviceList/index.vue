@@ -13,8 +13,8 @@
         <el-input type="text" style="width: 300px;margin-left: 20px" v-model="queryParams.orderNo"></el-input>
       </el-form-item>
       <el-form-item style="margin-left: 100px">
-        <el-button type="primary" @click="handleQuery">查询</el-button>
-        <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+        <el-button v-hasPermi="['system:outStockAdviceList:list']" type="primary" @click="handleQuery">查询</el-button>
+        <el-button v-hasPermi="['system:outStockAdviceList:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
         <!--<el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
       </el-form-item>
     </el-form>
@@ -39,7 +39,7 @@
         <template slot-scope="scope">
 
           <el-button v-show="scope.row.status ==2" type="primary"  class="button-caozuoxougai"
-                     @click="stockEnd(scope.row)" >调拨
+                     v-hasPermi="['system:outStockAdviceList:end']" @click="stockEnd(scope.row)" >调拨
           </el-button>
           <!--v-hasPermi="['system:list:add']"-->
         </template>

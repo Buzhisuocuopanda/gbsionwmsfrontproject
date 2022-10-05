@@ -42,26 +42,29 @@
                 class="pagintotal" />
         </div>
        <div style="margin-top:5%;">
-          <span class="saomiaojluu">制单(wanghui):</span>
+          <span class="saomiaojluu">制单:</span>
           <span class="saomiaojluuu">审核:</span>
           <span class="saomiaojluuuu">财务:</span>
        </div>
      </section>
        <div style="height:50px;"></div>
        <div style="margin-top:5%;">
-          <span>
-            <el-button style="margin-left:3%;" type="primary" @click="PrintRow">打 印</el-button>
-          </span>
-          <span>
-            <el-button  style="margin-left:3%;"  @click="handlefanhui">返回</el-button>
-          </span>
+            <div v-if="status == 8">
+                <el-button style="margin-left:3%;" type="primary" @click="PrintRow">打 印</el-button>
+                <el-button  style="margin-left:3%;"  @click="handlefanhui">返回</el-button>
+            </div>
+            <div v-else>
+                <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
+                <el-button v-else style="margin-left:5%;" type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+                <el-button  @click="handlefanhui">返回</el-button>
+            </div>
        </div>
       <div style="height:50px;"></div>
     </div>
 </template>
 <script>
 // import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/BarcodesSummary";
+import { PurchaseinboundLists,PurchaseinboundSH,PurchaseinboundShs } from "@/api/Warehousemanagement/BarcodesSummary";
 export default {
 
     data() {
@@ -83,8 +86,11 @@ export default {
                 address: undefined,
                 userId: undefined
             },
-            CBPC01: ""
-
+            CBPC01: "",
+            ids:{
+                id:''
+            },
+            status:'',
         };
     },
     watch: {
@@ -95,7 +101,32 @@ export default {
 
     },
     methods: {
-
+        //审批
+        PurchaseinboundShenpi() {
+            this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbie07 + '"的数据项？').then(() => {
+                PurchaseinboundSH({cbie01:this.ids.id}).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '审批成功', type: 'success' });
+                    this.$router.push("/system/user-kchzcshfh/role/");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+                });
+            }).catch(() => { });
+        },
+        //反审
+        PurchaseinboundFanShenpi() {
+            this.$modal.confirm('是否要反审,编号为"' + this.userList[0].cbie07 + '"的数据项？').then(() => {
+                PurchaseinboundShs({cbie01:this.ids.id}).then(response => {
+                    if (response.code == "200") {
+                        this.$message({ message: '反审成功', type: 'success' });
+                        this.$router.push("/system/user-kchzcshfh/role/");
+                    }else{
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
+                });
+            }).catch(() => { });
+        },
           //打印
         PrintRow(index, row){
             this.$print(this.$refs.print) 
@@ -143,6 +174,8 @@ export default {
         getList() {
             this.loading = true;
             const userId = this.$route.params && this.$route.params.cbie01;
+            this.ids.id = this.$route.params && this.$route.params.cbie01;
+            this.status = this.$route.params && this.$route.params.status;
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {

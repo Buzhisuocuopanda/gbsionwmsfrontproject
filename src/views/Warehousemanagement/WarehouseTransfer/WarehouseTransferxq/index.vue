@@ -157,14 +157,21 @@
             </el-table>
      </section>
       <div style="height:50px;"></div>
-     <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
-     <el-button style="margin-left:5%;" @click="handlexiaoshouone">返 回</el-button>
+        <div v-if="status == 8">
+            <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+            <el-button style="margin-left:5%;" @click="handlexiaoshouone">返 回</el-button>
+        </div>
+        <div v-else>
+            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
+            <el-button v-else type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button  @click="handlexiaoshouone">返回</el-button>
+        </div>
      <div style="height:50px;"></div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/WarehouseTransfer";
+import { PurchaseinboundLists,Purchaseinboundsho,PurchaseinboundSht } from "@/api/Warehousemanagement/WarehouseTransfer";
 export default {
 
     data() {
@@ -188,8 +195,11 @@ export default {
                 address: undefined,
                 userId: undefined
             },
-            CBPC01: ""
-
+            CBPC01: "",
+            ids:{
+                id:''
+            },
+            status:'',
         };
     },
     watch: {
@@ -210,6 +220,36 @@ export default {
             }
         },
       //
+        //审批
+        PurchaseinboundShenpi() {
+            this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
+                Purchaseinboundsho({
+                    cbaa01:this.ids.id
+                }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '审批成功', type: 'success' });
+                    this.$router.push("/system/cangkudiaobudanfh/role/");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+                });
+            }).catch(() => { });
+        },
+        //反审
+        PurchaseinboundFanShenpi() {
+            this.$modal.confirm('是否要反审,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
+                PurchaseinboundSht({
+                    cbaa01:this.ids.id
+                }).then(response => {
+                    if (response.code == "200") {
+                        this.$message({ message: '反审成功', type: 'success' });
+                        this.$router.push("/system/cangkudiaobudanfh/role/");
+                    }else{
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
+                });
+            }).catch(() => { });
+        },
 
         /** 仓库调拨单返回操作 */
         handlexiaoshouone: function (row) {
@@ -249,6 +289,8 @@ export default {
         getList() {
             this.loading = true;
             const userId = this.$route.params && this.$route.params.cbaa01;
+            this.ids.id = this.$route.params && this.$route.params.cbaa01;
+            this.status = this.$route.params && this.$route.params.status;
             if (userId) {
                 // 获取表详细信息
               PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {

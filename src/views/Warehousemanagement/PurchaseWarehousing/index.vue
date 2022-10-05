@@ -1,4 +1,5 @@
 <template>
+  <!--采购入库-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -28,36 +29,36 @@
                     </el-form-item>
 
                     <el-form-item>
-                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                         <el-button v-hasPermi="['system:purchaseinbound:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                         <el-button v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:39.5%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handleChuangJiangone">创建
+                        <el-button size="mini" v-hasPermi="['system:purchaseinbound:add']" class="biaoto-buttonchuangjian" @click="handleChuangJiangone">创建
                         </el-button>
-                        <el-button type="mini" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
+                        <el-button type="mini" v-hasPermi="['system:purchaseinbound:remove']" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
                             删除</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button>
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审
-                        </el-button>
+                        </el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">标记完成
+                            v-hasPermi="['system:purchaseinbound:bjwc']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:user:export']">取消完成
+                            v-hasPermi="['system:purchaseinbound:qxwc']">取消完成
                         </el-button>
                     </el-form-item>
                 </el-form>
@@ -94,30 +95,30 @@
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbpc11 == 0 | scope.row.cbpc11 == 2" v-hasPermi="['system:user:edit']">
+                                v-if="scope.row.cbpc11 == 0 | scope.row.cbpc11 == 2" v-hasPermi="['system:purchaseinbound:edit']">
                                 修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.cbpc11 == 0 | scope.row.cbpc11 == ' '"
-                                v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-hasPermi="['system:purchaseinbound:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbpc11 == 4 | scope.row.cbpc11 == 1"  
-                                v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbpc11 == 4 | scope.row.cbpc11 == 1"
+                                v-hasPermi="['system:purchaseinbound:detail']">详情
                             </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:purchaseinbound:sh']"
                                 v-if="scope.row.cbpc11 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
+                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:purchaseinbound:fs']"
                                 v-if="scope.row.cbpc11 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']" v-if="scope.row.cbpc11 == 4">取消完成</el-button>
+                                v-hasPermi="['system:purchaseinbound:qxwc']" v-if="scope.row.cbpc11 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                                v-hasPermi="['system:user:listselect']"
+                                v-hasPermi="['system:purchaseinbound:bjwc']"
                                 v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 1">标记完成</el-button>
                         </template>
                     </el-table-column>
@@ -172,9 +173,9 @@
                                 </el-option>
                             </el-select>
                         </el-form-item> -->
-                       
+
                     </el-col>
-                   
+
                     <el-col style="margin-top:1%;">
                         <el-form-item label="仓库:" prop="cbwa09">
                             <el-popover placement="bottom-start" trigger="click">
@@ -932,20 +933,24 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批,编号为"' + row.cbpc07 + '"的数据项？').then(() => {
-            console.log(row.cbpc01,8888);
+            let cbpc01 = row.cbpc01
+            let status = row.cbpc11
+            this.$router.push("/system/user-auth/role/" + cbpc01 + status);
 
-            PurchaseinboundSH(row).then(response => {
-             if (response.code == "200") {  
-                this.getList();
-                // this.open = false;
-                this.$message({ message: response.msg, type: 'success' });
-            }else{
-                        this.$message({ message: response.msg, type: 'error' });
-                  }
+        //     this.$modal.confirm('是否要审批,编号为"' + row.cbpc07 + '"的数据项？').then(() => {
+        //     console.log(row.cbpc01,8888);
 
-            });
-          }).catch(() => { });
+        //     PurchaseinboundSH(row).then(response => {
+        //      if (response.code == "200") {  
+        //         this.getList();
+        //         // this.open = false;
+        //         this.$message({ message: response.msg, type: 'success' });
+        //     }else{
+        //                 this.$message({ message: response.msg, type: 'error' });
+        //           }
+
+        //     });
+        //   }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -955,7 +960,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSH(item).then((res) => {
-               if (res.code == "200") { 
+               if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                  }else{
@@ -970,19 +975,23 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审,编号为"' + row.cbpc07 + '"的数据项？').then(() => {
-            // console.log(row.cbpc01, 8888);
-            PurchaseinboundShs(row).then(response => {
-              if (response.code == "200") {  
-                this.getList();
-                // this.open = false;
-                this.$message({ message: response.msg, type: 'success' });
-            }else{
-                        this.$message({ message: response.msg, type: 'error' });
-                  }
+            let cbpc01 = row.cbpc01
+            let status = row.cbpc11
+            this.$router.push("/system/user-auth/role/" + cbpc01 + status);
 
-            });
-          }).catch(() => { });
+        //     this.$modal.confirm('是否要反审,编号为"' + row.cbpc07 + '"的数据项？').then(() => {
+        //     // console.log(row.cbpc01, 8888);
+        //     PurchaseinboundShs(row).then(response => {
+        //       if (response.code == "200") {  
+        //         this.getList();
+        //         // this.open = false;
+        //         this.$message({ message: response.msg, type: 'success' });
+        //     }else{
+        //                 this.$message({ message: response.msg, type: 'error' });
+        //           }
+
+        //     });
+        //   }).catch(() => { });
         },
 
         //反审上面的
@@ -993,8 +1002,8 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundShs(item).then((res) => {
-                
-                if (res.code == "200") {   
+
+                if (res.code == "200") {
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
@@ -1016,7 +1025,7 @@ export default {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShss(row).then(response => {
 
-             if (response.code == "200") {       
+             if (response.code == "200") {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
@@ -1038,7 +1047,7 @@ export default {
             userIds.forEach((item) => {
                 req.PurchaseinboundShss(item).then((res) => {
 
-               if (res.code == "200") {   
+               if (res.code == "200") {
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
@@ -1086,14 +1095,14 @@ export default {
                    }
 
                 }).catch((e) => { })
-                
+
             });
             }).catch(() => { });
         },
 
         /** 修改按钮操作 */
         handleUpdate() {
-           
+
                 let row = {}
                 row.cbpc07 = this.form.cbpc07;
                 row.cbpc09 = this.form.cbsa01;
@@ -1103,7 +1112,7 @@ export default {
                 // row.cbpc16 = this.form.cala08;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-                 if (response.code == "200") {  
+                 if (response.code == "200") {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
@@ -1111,14 +1120,14 @@ export default {
                  }else{
                     this.$message({ message: response.msg, type: 'error' });
                  }
-                     
+
                 });
 
         },
 
         /** 详情按钮操作 */
         handlexiangqeng() {
-            
+
                 let row1 = {}
                 row.cbpc07 = this.form1.cbpc07;
                 row.cbsa08 = this.form1.cbsa08;
@@ -1127,7 +1136,7 @@ export default {
                 row.cbpc01 = this.form1.cbpc01;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-                  if (response.code == "200") {  
+                  if (response.code == "200") {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
@@ -1148,7 +1157,7 @@ export default {
             let id = row.cbpc01
             console.log(row,id)
             this.$router.push("/system/user-ckrkxg/role/" + id);
-           
+
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -1165,7 +1174,7 @@ export default {
                 if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
 
-               if (response.code == "200") {  
+               if (response.code == "200") {
                 // console.log(response.posts, 12345678);
                 this.$message({ message: "添加成功", type: 'success', style: 'color:red;!important' });
                 this.submitShangpin();
@@ -1200,11 +1209,15 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
-            const cbpc01 = row.cbpc01;
-            console.log(row.cbpc01);
+            // const cbpc01 = row.cbpc01;
+            // console.log(row.cbpc01);
 
-            // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-auth/role/" + cbpc01);
+            // // this.$router.push("/system/user-auth/role/");
+            // this.$router.push("/system/user-auth/role/" + cbpc01);
+
+            let cbpc01 = row.cbpc01
+            let status = 8
+            this.$router.push("/system/user-auth/role/" + cbpc01 + status);
         },
         /** 创建操作 */
         handleChuangJiangone: function (row) {
@@ -1246,7 +1259,7 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
-                     if (res.code == "200") { 
+                     if (res.code == "200") {
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
@@ -1263,8 +1276,8 @@ export default {
             }).catch(() => { });
         },
 
-        /** 导出按钮操作 
-         * 
+        /** 导出按钮操作
+         *
          * /dev-api/stage-api/system/Purchaseinbound/SwJsGoodsexport
         */
         handleExport() {
@@ -1287,7 +1300,7 @@ export default {
             this.$modal.confirm('是否确认删除用户,编号为"' + row.cbpc07 + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
-              if (response.code == "200") {  
+              if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
@@ -1303,7 +1316,7 @@ export default {
             this.upload.title = "采购入库单";
             this.upload.open = true;
         },
-        /** 下载模板操作 
+        /** 下载模板操作
          * /dev-api/stage-api/system/Purchaseinbound/importTemplate
         */
         importTemplate() {

@@ -1,4 +1,5 @@
 <template>
+  <!--直接入库单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -18,9 +19,10 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" v-hasPermi="['system:directly:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                                   v-hasPermi="['system:directly:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
@@ -75,7 +77,7 @@
                                 </el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-hasPermi="['system:user:remove']">删除</el-button>
+                                v-hasPermi="['system:directly:remove']">删除</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                     @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情
                                 </el-button>

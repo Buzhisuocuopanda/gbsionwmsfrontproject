@@ -1,25 +1,23 @@
 <template>
+  <!--售后-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
-
-        <el-form :inline="true">
-          <el-form-item>
-            <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期" value-format="yyyy-MM-dd HH:mm:ss"
-                            :default-time="'00:00:00'">
-            </el-date-picker>
-            ~
-            <el-date-picker v-model="dateRange.endTime" type="datetime" placeholder="选择结束日期" value-format="yyyy-MM-dd HH:mm:ss"
-                            :default-time="'23:59:59'">
-            </el-date-picker>
-          </el-form-item>
-<!--          <el-form-item>-->
-<!--            <el-button type="primary" @click="onSearch()">查询</el-button>-->
-<!--          </el-form-item>-->
-          <el-form-item label="订单号"   class="item-r" >
-            <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />
-          </el-form-item>
-        </el-form>
+        <el-form-item style="margin-left: 10px">
+          <el-date-picker  v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期" value-format="yyyy-MM-dd HH:mm:ss"
+                          :default-time="'00:00:00'">
+          </el-date-picker>
+          ~
+          <el-date-picker v-model="dateRange.endTime" type="datetime" placeholder="选择结束日期" value-format="yyyy-MM-dd HH:mm:ss"
+                          :default-time="'23:59:59'">
+          </el-date-picker>
+        </el-form-item>
+        <!--          <el-form-item>-->
+        <!--            <el-button type="primary" @click="onSearch()">查询</el-button>-->
+        <!--          </el-form-item>-->
+        <el-form-item label="订单号"   class="item-r" >
+          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />
+        </el-form-item>
 
 <!--        <el-form-item label="订单号"   class="item-r" >-->
 <!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
@@ -28,7 +26,7 @@
 
 
 
-        <el-form-item style="margin: -50px -10px 1px 1px">
+        <el-form-item  style="margin: -5px -10px 1px 100px">
           <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
           <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
@@ -61,11 +59,20 @@
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
-            <el-button size="small" type="primary"  @click="mdfDetail(scope.row)"
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-edit"
+              @click="mdfDetail(scope.row)"
+              v-hasPermi="['system:store:edit']"
             >修改</el-button>
-
-            <el-button size="small" type="primary"
-                       @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
+            <el-button
+              size="mini"
+              type="text"
+              icon="el-icon-delete"
+              @click="delTotalOrder(scope.row)"
+              v-hasPermi="['system:store:remove']"
+            >删除</el-button>
           </template>
 
         </el-table-column>
@@ -510,7 +517,7 @@ export default {
     },
     onSearch() {
       const param = {
-        cabraa14: this.orderNo,
+        saleOrderNo: this.orderNo,
         startTime: this.dateRange.startTime,
         endTime: this.dateRange.endTime,
         pageNum: this.listQuery.pageNum,

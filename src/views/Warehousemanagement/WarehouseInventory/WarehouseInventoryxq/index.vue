@@ -143,7 +143,7 @@
       </section>
 
       <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
-      <el-button style="margin-left:5%;" type="primary">返 回</el-button>
+      <el-button style="margin-left:5%;" type="primary" @click="cangkupandian" >返 回</el-button>
     </div>
 
 </template>
@@ -168,7 +168,7 @@ export default {
                 total: this.total,
                 name: undefined,
                 address: undefined,
-                userId: undefined
+                cbsh01: undefined
             },
             CBPC01: ""
 
@@ -182,6 +182,12 @@ export default {
 
     },
     methods: {
+
+        //仓库盘点明细返回按钮
+        cangkupandian: function (row) {
+            // this.$router.push("/system/user-auth/role/");
+            this.$router.push("/system/user-cangkupandian/role/");
+        },
 
          //打印
         PrintRow(index, row){
@@ -213,10 +219,12 @@ export default {
         //详情列表
         getList() {
             this.loading = true;
-            const userId = this.$route.params && this.$route.params.cbpg01;
-            if (userId) {
+            const cbsh01 = this.$route.params && this.$route.params.cbpg01;
+            this.queryParams.cbsh01 =this.$route.params && this.$route.params.cbpg01;
+            console.log(45648789)
+            if (cbsh01) {
                 // 获取表详细信息
-                SkuBarcodeListss(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                SkuBarcodeListss(this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);

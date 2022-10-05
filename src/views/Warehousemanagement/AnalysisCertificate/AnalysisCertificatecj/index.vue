@@ -116,10 +116,10 @@
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
            <el-table-column label="SN" width="" />
-          <el-table-column v-if="false" prop="cbpd09" label="SN" width="100">
+          <el-table-column v-if="false" prop="cbqd09" label="SN" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbpd09"  placeholder="" class="shuzicaoyou" style=""></el-input>
+                <el-input v-model="scope.row.cbqd09"  placeholder="" class="shuzicaoyou" style=""></el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
@@ -620,6 +620,8 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     QualityinAdd(this.form2).then(response => {
+                    
+                        if (response.code == "200") {    
                         // console.log(response.posts, 12345678);
                         this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         this.submitShangpin();
@@ -632,6 +634,9 @@ export default {
                         console.log(item.cbqa01,896523);
 
                         this._ly_ok();
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        } 
                     });
                 } else {
                     // this.$message.error('请注意规范');
@@ -708,6 +713,8 @@ export default {
                                     cbpd11:"",
                                     cbpd12:""
                                 }
+                            } else {
+                                this.$message({ message: response.msg, type: 'error' });
                             }
                         if (count-- === 1) {
                             this._ly_save()
