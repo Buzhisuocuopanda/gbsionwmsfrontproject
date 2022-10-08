@@ -164,6 +164,8 @@
         <div v-else>
             <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
             <el-button v-else type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button type="primary" @click="PurchaseinboundQuxiaoWangcheng">调入标记完成</el-button>
+            <el-button type="primary" @click="PurchaseinboundBiaojiWancheng">调出标记完成</el-button>
             <el-button  @click="handlexiaoshouone">返回</el-button>
         </div>
      <div style="height:50px;"></div>
@@ -171,7 +173,7 @@
 
 </template>
 <script>
-import { PurchaseinboundLists,Purchaseinboundsho,PurchaseinboundSht } from "@/api/Warehousemanagement/WarehouseTransfer";
+import { PurchaseinboundLists,Purchaseinboundsho,PurchaseinboundSht,PurchaseinboundShtt,PurchaseinBoundshf } from "@/api/Warehousemanagement/WarehouseTransfer";
 export default {
 
     data() {
@@ -219,7 +221,38 @@ export default {
                 padding: '0'
             }
         },
-      //
+        // 
+        // 入
+        PurchaseinboundQuxiaoWangcheng() {
+            this.$modal.confirm('是否要调入标记,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
+                PurchaseinboundShtt({
+                    cbaa01:this.ids.id
+                }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '成功', type: 'success' });
+                    this.$router.push("/system/cangkudiaobudanfh/role/");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+                });
+            }).catch(() => { });
+        },
+        // 出
+        PurchaseinboundBiaojiWancheng() {
+            this.$modal.confirm('是否要调出标记,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
+                PurchaseinBoundshf({
+                    cbaa01:this.ids.id
+                }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '成功', type: 'success' });
+                    this.$router.push("/system/cangkudiaobudanfh/role/");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+                });
+            }).catch(() => { });
+        },
+
         //审批
         PurchaseinboundShenpi() {
             this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
