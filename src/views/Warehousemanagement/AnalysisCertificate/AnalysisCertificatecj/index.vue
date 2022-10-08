@@ -25,17 +25,17 @@
             <div style="margin-left:3%; margin-top: 2%;">
                <el-button plain  type="primary" @click="_ly_addFrom">新增一行</el-button>
             </div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">                   
+            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
                 <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
                     <div class="box1">
                       <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
                             class="tablebiankuan table-heads" width="95%" height="20px">
                             <thead style="">
                                 <tr style="height:30px; ">
-                                    <th style="width: 130px;height: 30px;">品牌</th>  
-                                    <th style="width: 130px;height: 30px;">型号</th> 
-                                    <th style="width: 130px;height: 30px;">描述</th> 
-                                    <th style="width: 140px;height: 30px;">SN</th>                   
+                                    <th style="width: 130px;height: 30px;">品牌</th>
+                                    <th style="width: 130px;height: 30px;">型号</th>
+                                    <th style="width: 130px;height: 30px;">描述</th>
+                                    <th style="width: 140px;height: 30px;">SN</th>
                                     <th style="width: 140px;height: 30px;">替换商品SN</th>
                                     <th style="width: 50px;height: 30px;">操作</th>
                                 </tr>
@@ -46,10 +46,10 @@
                                 cellspacing="0" class="tablebiankuan">
                       <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
                           <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
-                        :inline="true">                        
+                        :inline="true">
                         <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
                             <el-input v-model="form.cbpc01" style="width:70%;"></el-input>
-                        </el-form-item>                      
+                        </el-form-item>
                             <el-col style="margin-left: 0%;" :span="7">
                                 <el-form-item label="" prop="cbpc000">
                                    <el-popover placement="bottom-start" trigger="click">
@@ -86,7 +86,7 @@
           </div> -->
               <div>
         <el-row>
-          <el-col :span="24">
+          <el-col v-if="false" :span="24">
             <el-button plain style="float:left; margin-left:5%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
@@ -95,7 +95,17 @@
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
-                <el-popover placement="bottom-start" trigger="click">
+              <!--<sapn>
+                <el-select @change="goodsOnChange()"  v-model="scope.row.cbpc000" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </sapn>-->
+                <el-popover placement="bottom-start" trigger="clic k">
                         <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
@@ -160,7 +170,7 @@
                 <el-input v-model="scope.row.cbqa01" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" width="80">
+          <el-table-column v-if="false" label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.row)">
                 <i class="el-icon-delete" style="color: red;"></i>
@@ -363,23 +373,11 @@ export default {
                 // ifEnabled: ""
             },
             form2: {
-                cbpc07: "",
-                cbpc08: "",
-                cbsa08: "",
-                cbwa09: "",
-                cala08: "",
-                cbpc100: "",
-                cbpc099: "",
-                cbpc166: "",
-                cbpc10: "",
-                cbpc09: "",
-                cbpd09: "",
-                cbpd11: "",
-                cbpd12: "",
-                cbpc16: "",
-                cbpc12: "",
-                cbpc14: "",
-                cbpd08: ""
+                cbqa01: "",
+                cbqa07: "",
+                cbqa11: "",
+                cbqa06: "",
+
             },
             defaultProps: {
                 children: "children",
@@ -400,7 +398,7 @@ export default {
                 // 上传的地址
                 url: process.env.VUE_APP_BASE_API + "/system/barcode/importSwJsSkuBarcode"
             },
-            // 查询参数
+            /*// 查询参数
             queryParams: {
                 pageNum: 1,
                 pageSize: 10,
@@ -411,7 +409,7 @@ export default {
                 cbsa08: undefined,
                 cbwa09: undefined,
                 dateRange: undefined
-            },
+            },*/
 
             rules: {
                 cbpc099: [
@@ -438,7 +436,7 @@ export default {
         },
     },
     created() {
-      
+
         this.form2.cbqa06 ="0";
 
         this.getList();
@@ -481,8 +479,8 @@ export default {
              /** 销售提货单 */
         getList() {
             let routerParams = this.$route.query;
-               this.formArr = routerParams.data; 
-                // console.log(zhuangh[0].id,889999);          
+               this.formArr = routerParams.data;
+                // console.log(zhuangh[0].id,889999);
                PurchaseinboundSellout(this.formArr,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 response.data.scans.forEach((item)=>{
                     // item.cbsc177=item.orderClass;
@@ -497,7 +495,7 @@ export default {
                     console.log(item.cbpd09,19991119);
 
                 })
-                
+
                 this.tableData = response.data.scans;
                 this.total = response.data.total;
                 console.log(response.data.scans, 339688);
@@ -505,7 +503,7 @@ export default {
                 // response.data.goods.forEach((e)=>{
                 //   this.form.cbsc17=e.orderClass;
                 // })
-                // let 
+                // let
                 console.log( this.formArr,99916);
                 // console.log(this.userList01.orderClass,852147777);
                 // this.deleteFlag = response.data.rows.deleteFlag;   this.form.cbsc17
@@ -521,7 +519,7 @@ export default {
             this.form2.cbpd11 = "20"
             this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
         },
-        //添加模块-仓库
+       /* //添加模块-仓库
         selected01(name) {
             console.log(name, 123)
             console.log(name.substring(name.indexOf("-") + 1), 963);
@@ -560,11 +558,7 @@ export default {
         deletData(index) {
             this.tianjiahang.splice(index, 1);
         },
-
-
-
-
-
+*/
 
         // 取消按钮
         cancel() {
@@ -620,8 +614,8 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     QualityinAdd(this.form2).then(response => {
-                    
-                        if (response.code == "200") {    
+
+                        if (response.code == "200") {
                         // console.log(response.posts, 12345678);
                         this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         this.submitShangpin();
@@ -636,7 +630,7 @@ export default {
                         this._ly_ok();
                         } else {
                             this.$message({ message: response.msg, type: 'error' });
-                        } 
+                        }
                     });
                 } else {
                     // this.$message.error('请注意规范');
@@ -645,14 +639,7 @@ export default {
 
         },
 
-        /** 创建操作 */
-        handleChuangJiangone: function (row) {
-            // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-zjdfh/role/");
-        },
-
-
-     // 点击右上角关闭弹窗
+     /*// 点击右上角关闭弹窗
         _ly_closeDialog(done) {
             console.log('_ly_closeDialog')
             this.$emit('on-close')
@@ -669,7 +656,7 @@ export default {
                     done()
                 })
                 .catch(_ => { })
-        },
+        },*/
         // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
         _ly_ok() {
             let count = this.tableData.length // 记录当前有多少个表单
@@ -685,7 +672,7 @@ export default {
                         QualityinAdds(JSON.stringify(this.tableData)).then(response => {
                             if(response.code=="200"){
                                 this.tableData=[]
-                                this.form2={
+                            /*    this.form2={
                                     cbpc07: "",
                                     cbpc08: "",
                                     cbsa08: "",
@@ -712,7 +699,7 @@ export default {
                                     cbpd09:"",
                                     cbpd11:"",
                                     cbpd12:""
-                                }
+                                }*/
                             } else {
                                 this.$message({ message: response.msg, type: 'error' });
                             }
@@ -734,7 +721,7 @@ export default {
             console.log('_ly_ok:' + JSON.stringify(this.tableData))
         },
 
-   
+
 
 
 
@@ -752,7 +739,7 @@ export default {
                 this.reset01();
                 // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
                 return
-                
+
             }
 
             this.tableData.push({

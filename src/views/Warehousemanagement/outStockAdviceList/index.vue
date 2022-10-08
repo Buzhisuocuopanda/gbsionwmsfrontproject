@@ -139,14 +139,6 @@
           this.loading = false;
         })
       },
-      //导出
-      exprotData(){
-        // this.loading=true;
-        this.download('/countQuery/InvsentorsysummaryqueryExcelList', {
-          ...this.queryParams
-        }, `缺货登记查询数据_${new Date().getTime()}.xlsx`)
-      },
-
       stockEnd(row){
         if(this.index == 0){
           this.index =1;

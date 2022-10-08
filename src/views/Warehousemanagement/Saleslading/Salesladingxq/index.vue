@@ -50,9 +50,6 @@
           <template slot="label">收货电话</template
           >{{ userList.receivPhone || "" }}
         </el-descriptions-item>
-        <!-- <el-descriptions-item style="visibility: hidden;" label-class-name="my-labell01">
-          <template slot="label">销售订单号</template>{{ userList.saleOrderNo }}
-        </el-descriptions-item> -->
       </el-descriptions>
       <el-descriptions class="margin-top" title="" :column="3" border>
         <el-descriptions-item label-class-name="my-labell02">
@@ -60,9 +57,7 @@
           >{{ userList.receiveAdress || "" }}
         </el-descriptions-item>
       </el-descriptions>
-      <!-- 出库建议编辑隐藏 -->
       <div v-if="edit == 0">
-        <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
       <el-table
         v-loading="loading"
@@ -256,13 +251,12 @@
         :span-method="arraySpanMethods">
         <el-table-column prop="sn" key="sn" align="" label="SN">
           <template slot-scope="scope" style="width: 200%">
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" @show="filterIcons">
                 <TakeSuggests
                   ref="TakeSuggests"
                   @selected="selected08($event, scope.row)"
                   style="width: 630px !important"
                   :iconList = iconList
-                  @show="filterIcons"
                   :check = checks
                 />
                 <el-input
@@ -356,7 +350,10 @@ export default {
       edit:1,
       whid:'',
       goodsId:'',
-      iconList:'',
+      iconList:{
+        whid : '',
+        goodsId : '',
+      },
       checks:false,
     };
   },
@@ -365,9 +362,15 @@ export default {
     this.getList();
   },
   methods: {
+    mdfTakeSuggest(){
+
+    },
     filterIcons(){
       this.checks = true
+      this.iconList.whid = this.whid
+      this.iconList.goodsId = this.goodsId
       console.log(112121)
+      return
       CustomerLists(this.whid,this.goodsId).then(response => {
         this.iconList = []
         if (response.data <= 0) {
@@ -556,10 +559,13 @@ export default {
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
           });
-          this.userList2 = res.data.sugests.map(item=>{
-            item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
-            return item
-          });
+          if(this.edit != 0){
+            this.userList2 = res.data.sugests.map(item=>{
+              item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
+              return item
+            });
+          }
+          
           this.paramss.userId = res.data.userId;
           // this.total = res.data.total;
           console.log(res, 888999,this.userListss);
