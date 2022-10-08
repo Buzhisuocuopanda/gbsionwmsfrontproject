@@ -1358,7 +1358,13 @@ export default {
     },
     // 质检
     PrintRow(row) {
-      this.changeMoreArrary(row,6)
+      let userId = row.id;
+      let status = 3;
+      let checkstatus = row.checkStatus
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
+      // this.changeMoreArrary(row,6)
+
       // this.paramss.opType = 6;
       // this.changeMoreArrary()
       // auditTakeOrder(this.paramss).then((res) => {

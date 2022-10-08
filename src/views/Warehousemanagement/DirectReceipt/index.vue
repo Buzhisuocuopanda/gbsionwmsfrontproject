@@ -21,9 +21,9 @@
                     <el-form-item>
                         <el-button size="mini" v-hasPermi="['system:directly:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                        <!-- <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:directly:remove']"
-                            @click="handleDelete">删除</el-button>
+                            @click="handleDelete">删除</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
