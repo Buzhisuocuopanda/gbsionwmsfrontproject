@@ -231,8 +231,6 @@ export default {
                 if (response.code == "200") {
                     this.$message({ message: '成功', type: 'success' });
                     this.$router.push("/system/cangkudiaobudanfh/role/");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
                 }
                 });
             }).catch(() => { });
@@ -246,8 +244,6 @@ export default {
                 if (response.code == "200") {
                     this.$message({ message: '成功', type: 'success' });
                     this.$router.push("/system/cangkudiaobudanfh/role/");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
                 }
                 });
             }).catch(() => { });
