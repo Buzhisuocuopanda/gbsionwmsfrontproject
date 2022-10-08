@@ -57,7 +57,7 @@
           >{{ userList.receiveAdress || "" }}
         </el-descriptions-item>
       </el-descriptions>
-      <div v-if="edit == 0">
+      <div v-if="edit == 0 || edit == 3">
 
       <el-table
         v-loading="loading"
@@ -195,7 +195,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页数量小记</template
-            >{{ totalCount }}
+            >{{ totalnumber }}
           </el-descriptions-item>
           <el-descriptions-item
             :contentStyle="{ 'text-align': 'right' }"
@@ -206,7 +206,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页金额小记</template
-            >{{ parseFloat(totalPrice).toFixed(2) }}
+            >{{ totalnumber }}
           </el-descriptions-item>
         </el-descriptions>
       </div>
@@ -216,14 +216,14 @@
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
-          <template slot="label">合计数量</template>{{ totalCount }}
+          <template slot="label">合计数量</template>{{ totalnumber}}
         </el-descriptions-item>
         <el-descriptions-item
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
           <template slot="label">合计金额</template
-          >{{ parseFloat(totalPrice).toFixed(2) }}
+          >{{ totalPrice }}
         </el-descriptions-item>
       </el-descriptions>
 
@@ -286,16 +286,20 @@
     </div>
     <div style="height: 20px"></div>
     <div style="margin-left: 5%" v-if="edit == 0">
-      <el-button v-show="status == 1" type="primary" @click="PrintRows">审 核</el-button>
-      <el-button v-show="status == 2" type="primary" @click="PrintRowss">反 审</el-button>
+      <el-button v-if="status == 1" type="primary" @click="PrintRows">审 核</el-button>
+      <el-button v-else-if="status == 2" type="primary" @click="PrintRowss">反 审</el-button>
+      <el-button v-else type="primary" @click="PrintRow">质 检</el-button>
       <el-button type="primary" @click="exportDetail">导出</el-button>
       <el-button type="primary" @click="printTakeOrderOrder">销售订单打印</el-button>
       <el-button type="primary" @click="printTakeOrderScanLog">扫码记录打印</el-button>
       <el-button type="primary" @click="printTakeOrderSuggest">出库建议打印</el-button>
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
-    <div v-else style="margin-left: 5%">
+    <div v-else-if="edit == 1" style="margin-left: 5%">
       <el-button type="primary" @click="mdfTakeSuggest">保 存</el-button>
+      <el-button type="primary" @click="handlefanhui">返 回</el-button>
+    </div>
+    <div v-else style="margin-left: 5%">
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
     <div style="height: 20px"></div>
@@ -510,7 +514,7 @@ export default {
         "plId": 0
       }
       this.paramss.goods = this.userLists.map(item =>{
-        obj.goodQty = item.qty;
+        obj.goodQty = Number(item.qty);
         obj.plId = item.cbplId;
         return obj
       })
@@ -606,6 +610,14 @@ export default {
     this.getParams();
   },
   computed: {
+    totalnumber:function(){
+      var totalnumber = 0
+      for (let i = 0; i < this.userLists.length; i++) {
+        totalnumber += this.userLists[i].qty;
+      }
+      console.log(totalnumber,777777)
+      return totalnumber
+    },
     totalCount: function () {
       var totalCount = 0;
       for (let i = 0; i < this.userList.length; i++) {
@@ -615,10 +627,11 @@ export default {
     },
     totalPrice: function () {
       var totalPrice = 0;
-      for (let i = 0; i < this.userList.length; i++) {
-        totalPrice += this.userList[i].cbpd09 * this.userList[i].cbpd11;
+      for (let i = 0; i < this.userLists.length; i++) {
+        totalPrice += this.userLists[i].totalPrice;
       }
       return totalPrice;
+      
     },
   },
 };
