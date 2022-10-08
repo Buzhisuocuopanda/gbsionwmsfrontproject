@@ -1056,7 +1056,7 @@
           "/sale/saleOrderdetailsexport1?orderId=" +
             userId,
           {},
-          `销售订单导出表— ${new Date().toLocaleDateString()}`
+          `销售订单导出表— ${new Date().toLocaleDateString()}.xls`
         );
       },
       // 销售订单导出1
@@ -1787,7 +1787,12 @@
   .demo-ruleForm >>>.el-input__inner{
     border: 0;
   }
-
+.tinajia_dingwei{
+    position: relative;
+    margin-top: 15px;
+    top:90%;
+    left:0;
+}
 
 
   /*.inputDeep >>> .el-input__inner {*/
