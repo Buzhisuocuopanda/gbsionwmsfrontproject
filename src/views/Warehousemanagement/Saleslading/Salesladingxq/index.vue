@@ -50,9 +50,6 @@
           <template slot="label">收货电话</template
           >{{ userList.receivPhone || "" }}
         </el-descriptions-item>
-        <!-- <el-descriptions-item style="visibility: hidden;" label-class-name="my-labell01">
-          <template slot="label">销售订单号</template>{{ userList.saleOrderNo }}
-        </el-descriptions-item> -->
       </el-descriptions>
       <el-descriptions class="margin-top" title="" :column="3" border>
         <el-descriptions-item label-class-name="my-labell02">
@@ -60,9 +57,7 @@
           >{{ userList.receiveAdress || "" }}
         </el-descriptions-item>
       </el-descriptions>
-      <!-- 出库建议编辑隐藏 -->
-      <div v-if="edit == 0">
-        <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
+      <div v-if="edit == 0 || edit == 3">
 
       <el-table
         v-loading="loading"
@@ -200,7 +195,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页数量小记</template
-            >{{ totalCount }}
+            >{{ totalnumber }}
           </el-descriptions-item>
           <el-descriptions-item
             :contentStyle="{ 'text-align': 'right' }"
@@ -211,7 +206,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页金额小记</template
-            >{{ parseFloat(totalPrice).toFixed(2) }}
+            >{{ totalnumber }}
           </el-descriptions-item>
         </el-descriptions>
       </div>
@@ -221,14 +216,14 @@
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
-          <template slot="label">合计数量</template>{{ totalCount }}
+          <template slot="label">合计数量</template>{{ totalnumber}}
         </el-descriptions-item>
         <el-descriptions-item
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
           <template slot="label">合计金额</template
-          >{{ parseFloat(totalPrice).toFixed(2) }}
+          >{{ totalPrice }}
         </el-descriptions-item>
       </el-descriptions>
 
@@ -256,13 +251,12 @@
         :span-method="arraySpanMethods">
         <el-table-column prop="sn" key="sn" align="" label="SN">
           <template slot-scope="scope" style="width: 200%">
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" @show="filterIcons">
                 <TakeSuggests
                   ref="TakeSuggests"
                   @selected="selected08($event, scope.row)"
                   style="width: 630px !important"
                   :iconList = iconList
-                  @show="filterIcons"
                   :check = checks
                 />
                 <el-input
@@ -292,16 +286,20 @@
     </div>
     <div style="height: 20px"></div>
     <div style="margin-left: 5%" v-if="edit == 0">
-      <el-button v-show="status == 1" type="primary" @click="PrintRows">审 核</el-button>
-      <el-button v-show="status == 2" type="primary" @click="PrintRowss">反 审</el-button>
+      <el-button v-if="status == 1" type="primary" @click="PrintRows">审 核</el-button>
+      <el-button v-else-if="status == 2" type="primary" @click="PrintRowss">反 审</el-button>
+      <el-button v-else type="primary" @click="PrintRow">质 检</el-button>
       <el-button type="primary" @click="exportDetail">导出</el-button>
       <el-button type="primary" @click="printTakeOrderOrder">销售订单打印</el-button>
       <el-button type="primary" @click="printTakeOrderScanLog">扫码记录打印</el-button>
       <el-button type="primary" @click="printTakeOrderSuggest">出库建议打印</el-button>
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
-    <div v-else style="margin-left: 5%">
+    <div v-else-if="edit == 1" style="margin-left: 5%">
       <el-button type="primary" @click="mdfTakeSuggest">保 存</el-button>
+      <el-button type="primary" @click="handlefanhui">返 回</el-button>
+    </div>
+    <div v-else style="margin-left: 5%">
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
     <div style="height: 20px"></div>
@@ -356,7 +354,10 @@ export default {
       edit:1,
       whid:'',
       goodsId:'',
-      iconList:'',
+      iconList:{
+        whid : '',
+        goodsId : '',
+      },
       checks:false,
     };
   },
@@ -365,9 +366,15 @@ export default {
     this.getList();
   },
   methods: {
+    mdfTakeSuggest(){
+
+    },
     filterIcons(){
       this.checks = true
+      this.iconList.whid = this.whid
+      this.iconList.goodsId = this.goodsId
       console.log(112121)
+      return
       CustomerLists(this.whid,this.goodsId).then(response => {
         this.iconList = []
         if (response.data <= 0) {
@@ -507,7 +514,7 @@ export default {
         "plId": 0
       }
       this.paramss.goods = this.userLists.map(item =>{
-        obj.goodQty = item.qty;
+        obj.goodQty = Number(item.qty);
         obj.plId = item.cbplId;
         return obj
       })
@@ -556,10 +563,13 @@ export default {
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
           });
-          this.userList2 = res.data.sugests.map(item=>{
-            item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
-            return item
-          });
+          if(this.edit != 0){
+            this.userList2 = res.data.sugests.map(item=>{
+              item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
+              return item
+            });
+          }
+          
           this.paramss.userId = res.data.userId;
           // this.total = res.data.total;
           console.log(res, 888999,this.userListss);
@@ -600,6 +610,14 @@ export default {
     this.getParams();
   },
   computed: {
+    totalnumber:function(){
+      var totalnumber = 0
+      for (let i = 0; i < this.userLists.length; i++) {
+        totalnumber += this.userLists[i].qty;
+      }
+      console.log(totalnumber,777777)
+      return totalnumber
+    },
     totalCount: function () {
       var totalCount = 0;
       for (let i = 0; i < this.userList.length; i++) {
@@ -609,10 +627,11 @@ export default {
     },
     totalPrice: function () {
       var totalPrice = 0;
-      for (let i = 0; i < this.userList.length; i++) {
-        totalPrice += this.userList[i].cbpd09 * this.userList[i].cbpd11;
+      for (let i = 0; i < this.userLists.length; i++) {
+        totalPrice += this.userLists[i].totalPrice;
       }
       return totalPrice;
+      
     },
   },
 };

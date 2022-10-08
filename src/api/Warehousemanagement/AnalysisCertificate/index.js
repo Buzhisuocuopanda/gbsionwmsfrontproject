@@ -45,6 +45,17 @@ export function QualityinEdit(data) {
   })
 }
 
+// 质检单修改1
+export function QualityinEditOne(data) {
+  return request({
+    url: '/system/Qualityin/SwJsPurchaseinboundeditone',
+    method: 'post',
+    data: data
+  })
+}
+
+
+
 // 质检单删除
 export function QualityinRemove(data) {
   return request({

@@ -41,7 +41,7 @@
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
                 class="pagintotal" />
             <div style="margin-top:2%;">
-                <span class="saomiaojluu">制单(wanghui):</span>
+                <span class="saomiaojluu">制单:</span>
                 <span class="saomiaojluuu">审核:</span>
                 <span class="saomiaojluuuu">财务:</span>
             </div>

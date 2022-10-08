@@ -18,9 +18,9 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" style="margin-left: 200px" @click="handleQuery">查询</el-button>
-        <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-        <el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" type="primary" style="margin-left: 200px" @click="handleQuery">查询</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
       </el-form-item>
     </el-form>
     <!-- 表格 -->
@@ -104,7 +104,7 @@ export default {
 
     /** 重置按钮操作 */
     resetQuery() {
-      this.queryParams.cbpa07 = "";
+      this.queryParams.cbba07 = "";
       this.queryParams.cbba12 = "";
       this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;

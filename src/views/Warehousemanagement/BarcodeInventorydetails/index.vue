@@ -1077,8 +1077,12 @@ export default {
         },
         /** 分配角色操作 */
         handleAuthRole: function (row) {
-            const userId = row.cbie01;
-            this.$router.push("/system/user-authhhhhhh/role/" + userId);
+            // const userId = row.cbie01;
+            // this.$router.push("/system/user-authhhhhhh/role/" + userId);
+
+            let cbie01 = row.cbie01
+            let status = row.cbie10
+            this.$router.push("/system/user-authhhhhhh/role/");
         },
 
         /** 创建操作 */

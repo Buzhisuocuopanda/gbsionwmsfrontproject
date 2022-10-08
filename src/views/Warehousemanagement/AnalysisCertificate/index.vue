@@ -90,11 +90,11 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbpc11 == 1 | scope.row.cbpc11 == 2" v-hasPermi="['system:user:edit']">
+                                 v-hasPermi="['system:qualityin:edit']">
                                 修改
-                            </el-button> -->
+                            </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-if="scope.row.cbqa09 == 0 | scope.row.cbqa09 == ' '"
@@ -148,7 +148,7 @@
         </el-dialog>
 
         <!--修改-->
-        <el-dialog :visible.sync="open">
+<!--        <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
                 <span style="font-size:20px;">质检单</span>
                 <hr />
@@ -160,30 +160,30 @@
                             <el-input v-model="form.cbpc07" maxlength="30" style="width:50%" />
                         </el-form-item>
                     </el-col>
-                    <!-- <el-col style="margin-top:1%;">
+                    &lt;!&ndash; <el-col style="margin-top:1%;">
                         <el-form-item label="日期:" prop="cbpc08">
                             <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
                                 style="width:50%" />
                         </el-form-item>
-                    </el-col> -->
+                    </el-col> &ndash;&gt;
                 </el-row>
                 <el-row>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="供应商:" prop="cbsa08">
                             <el-input v-model="form.cbsa08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
+                            &lt;!&ndash; <el-select v-model="form.cala10" placeholder="" style="width:50%">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
-                            </el-select> -->
+                            </el-select> &ndash;&gt;
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="结算货币:" prop="cala08">
                             <el-input v-model="form.cala08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
+                            &lt;!&ndash; <el-select v-model="form.cala10" placeholder="" style="width:50%">
                                 <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
-                            </el-select> -->
+                            </el-select> &ndash;&gt;
                         </el-form-item>
                     </el-col>
                     <el-col style="margin-top:1%;">
@@ -197,7 +197,7 @@
                 <el-button type="primary" @click="handleUpdate">确 定</el-button>
                 <el-button @click="cancells">取 消</el-button>
             </div>
-        </el-dialog>
+        </el-dialog>-->
 
         <el-dialog :visible.sync="open1" append-to-body>
             <div style="margin-top:-30px;">
@@ -277,7 +277,7 @@
 <script>
 // import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
 // import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { QualityinAdd, QualityinList, QualityinEdit, QualityinRemove, QualityinSH, QualityinfShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists,Purchaseintihuadang } from "@/api/Warehousemanagement/AnalysisCertificate";
+import { QualityinAdd, QualityinList, QualityinEdit, QualityinRemove, QualityinSH, QualityinfShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList, PurchaseinboundLists,Purchaseintihuadang,QualityinEditOne } from "@/api/Warehousemanagement/AnalysisCertificate";
 import * as req from "@/api/Warehousemanagement/AnalysisCertificate";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -1004,7 +1004,7 @@ export default {
                 row.cala08 = this.form.cala08;
                 row.cbpc01 = this.form.cbpc01;
                 // console.log(this.form.id);
-                QualityinEdit(JSON.stringify(row)).then(response => {
+              QualityinEditOne(JSON.stringify(row)).then(response => {
 
                     // console.log(this.form, 789)
                     this.getList();
@@ -1047,17 +1047,26 @@ export default {
             this.form1.cbsa08 = row.cbsa08;
             this.form1.cbwa09 = row.cbwa09;
             this.form1.cala08 = row.cala08;
+
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
             console.log(row)
-            this.open = true;
+            // this.open = true;
             // console.log(row, 7788521);
             this.form.cbpc01 = row.cbpc01;
             this.form.cbpc07 = row.cbpc07;
             this.form.cbsa08 = row.cbsa08;
             this.form.cbwa09 = row.cbwa09;
             this.form.cala08 = row.cala08;
+          this.$router.push({
+
+            path: '/system/user-zhijiandan/role/',
+            // name: 'index',
+            query: {
+              data: row.id,
+            }
+          })
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {

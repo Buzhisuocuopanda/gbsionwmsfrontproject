@@ -30,9 +30,8 @@
         </el-form-item>
 
         <el-form-item label="型号"  class="item-r" style="margin-left: 50px" label-width="80px">
-          <el-select v-model="queryParams.model" style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading5">
-            <el-option v-for="item in modelList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
-          </el-select>
+          <el-input v-model="queryParams.model" style="margin-left: 20px;width: 300px" class="filter-item"  placeholder="型号" />
+
         </el-form-item>
        <!-- <el-form-item label="销售人员" style="margin-left: 20px"  class="item-r" >
           <el-select v-model="queryParams.saleUserId"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading4">
@@ -42,9 +41,9 @@
 
 
         <el-form-item style="margin: 1px -10px 1px 300px">
-          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['query:salesAnalysis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
+          <el-button v-hasPermi="['query:salesAnalysis:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button v-hasPermi="['query:salesAnalysis:export']" type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"

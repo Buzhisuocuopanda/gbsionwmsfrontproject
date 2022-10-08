@@ -100,6 +100,12 @@ service.interceptors.response.use(res => {
       })
       return Promise.reject(new Error(msg))
     }  else {
+      if(code != 200){
+        Message({
+          message: msg,
+          type: 'error'
+        })
+      }
       return res.data
     }
   },
