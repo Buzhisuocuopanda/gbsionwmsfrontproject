@@ -27,8 +27,8 @@
 
 
         <el-form-item  style="margin: -5px -10px 1px 100px">
-          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
-          <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
+          <el-button  v-hasPermi="['system:aftersales:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
+          <el-button  class="filter-item" type="primary" v-hasPermi="['system:aftersales:add']"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
             <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
 <!--          <el-upload-->
@@ -64,14 +64,14 @@
               type="text"
               icon="el-icon-edit"
               @click="mdfDetail(scope.row)"
-              v-hasPermi="['system:store:edit']"
+              v-hasPermi="['system:aftersales:list']"
             >修改</el-button>
             <el-button
               size="mini"
               type="text"
               icon="el-icon-delete"
               @click="delTotalOrder(scope.row)"
-              v-hasPermi="['system:store:remove']"
+              v-hasPermi="['system:aftersales:remove']"
             >删除</el-button>
           </template>
 
