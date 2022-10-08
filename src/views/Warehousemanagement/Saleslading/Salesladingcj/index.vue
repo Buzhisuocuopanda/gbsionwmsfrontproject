@@ -284,7 +284,7 @@
                 />
                 <el-input
                   slot="reference"
-                  v-model="scope.row.cbpc099"
+                  v-model="scope.row.cbpc09"
                   placeholder=""
                   readonly
                   style="width: 80%"
@@ -830,7 +830,6 @@ export default {
         cbpc12: "",
         cbpc14: "",
         cbpd08: "",
-
         cbsb07: "",
         cbsb09: "",
         cbpc0999: "",
@@ -847,8 +846,9 @@ export default {
         cbsb29: "",
         cbsb28: "",
         cbca28: "",
-        cbpc099: "",
+        cbpc09: "",
         saleOrderNo:"",
+        supplierId:'',
       },
       form3:'',
       defaultProps: {
@@ -1164,8 +1164,9 @@ export default {
       // console.log(name.substring(name.indexOf("-") + 1), 963);
       // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
       // this.form2.cbsc15 = name.substring(name.indexOf("-") + 1);
-      this.$set(row, "cbpc099", e.substring(0, e.indexOf("-")));
-      this.$set(row, "cbsc15", e.substring(e.indexOf("-") + 1), 8523642);
+      this.$set(row, "cbpc09", e.substring(0, e.indexOf("-")));
+      // cbpc099  cbsc15
+      this.$set(row, "supplierId", e.substring(e.indexOf("-") + 1), 8523642);
       // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
       // this.form2.icon = name;
     },
