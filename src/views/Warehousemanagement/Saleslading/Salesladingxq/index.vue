@@ -563,7 +563,7 @@ export default {
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
           });
-          if(this.edit != 0){
+          if(this.edit == 1){
             this.userList2 = res.data.sugests.map(item=>{
               item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
               return item
