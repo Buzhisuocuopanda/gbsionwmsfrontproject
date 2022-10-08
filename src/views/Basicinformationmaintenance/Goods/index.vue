@@ -1029,11 +1029,13 @@ export default {
                 this.userList9916.forEach((item) => {
                     // item.cbpb01 = item;
                     this.userList0929 = item;
+                    // this.$set(row, "cbpc000");
                     this.tableData[0].cbpf02 = item.cbpf02;
                     this.tableData[0].cbpf04 = item.cbpf04;
                     this.tableData[0].cbpf05 = item.cbpf05;
                     this.tableData[0].cbpf06 = item.cbpf06;
                     this.tableData[0].cbpf07 = item.cbpf07;
+
                     if (this.tableData[0].cbpf02 == "1") {
                         this.tableData[0].cbpf02 = "1";
                         this.tableData[0].cbpf02 = "1";
@@ -1044,8 +1046,6 @@ export default {
                         this.tableData[0].cbpf02 = "3";
                         this.tableData[0].cbpf02 = "3";
                     }
-
-
                     if (this.tableData[0].cbpf06 == "1") {
                         this.tableData[0].cbpf06 = "CNY";
                         this.tableData[0].cbpf06 = "1";
