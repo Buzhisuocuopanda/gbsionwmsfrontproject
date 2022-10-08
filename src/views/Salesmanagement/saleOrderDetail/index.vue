@@ -1441,7 +1441,7 @@
       /** 新增按钮操作 */
       handleAdd() {
 
-          this.formData.goods=this.tableData
+        this.formData.goods=this.tableData
         addSaleOrder(this.formData).then(response => {
           if (response.code == "200") {
             this.$message.success("添加成功")

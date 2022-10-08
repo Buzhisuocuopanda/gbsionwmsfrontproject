@@ -5,7 +5,7 @@
             <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:-5%;">
-                        <el-input type="text" v-model="form2.cbsb07" style="width: 67%;" />
+                        <el-input type="text" v-model="form2.cbsb07" style="width: 67%;" readonly=""/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
@@ -27,7 +27,7 @@
                     <el-form-item label="调出仓库:" prop="cbse099">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected011" style="width:160px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc1000" placeholder="" readonly
+                            <el-input slot="reference" v-model="form2.cbpc1000" placeholder=""
                                 style="width:100%;">
                             </el-input>
                         </el-popover>
@@ -37,7 +37,7 @@
                     <el-form-item label="调入仓库:" prop="cbpc100">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:160px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
+                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" 
                                 style="width:100%;">
                             </el-input>
                         </el-popover>
@@ -235,7 +235,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchasereturnordersAdds, PurchasereturnordersAdd } from "@/api/Warehousemanagement/WarehouseTransfer";
+import { PurchasereturnordersAdds, PurchasereturnordersAdd,PurchaseinboundLists } from "@/api/Warehousemanagement/WarehouseTransfer";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -411,6 +411,7 @@ export default {
                 cbaa09: "",
                 cbaa10: "",
                 cbaa16: "",
+                cbaa166:"",
                 cbaa18: "",
                 cbab08: "",
                 cbab14: "",
@@ -549,7 +550,7 @@ export default {
 
         //父子页面传值
         this.xiugaijszhi();
-
+        this.getList()
 
 
         this.form2.cbca08 = this.ListUser.customerName;
@@ -906,7 +907,6 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
-
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     PurchasereturnordersAdd(this.form2).then(response => {
@@ -945,7 +945,64 @@ export default {
             this.$router.push("/system/cangkudiaobudanfh/role/");
         },
 
+        /** 仓库调拨单 */
+        getList() {
+            let id = this.$route.params.id
+            PurchaseinboundLists(id, this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                let res = response.data.rows[0]
+                // 日期
+                this.form2.cbaa08 = res.cbaa08;
+                // 编号
+                this.form2.cbsb07 = res.cbaa07;
+                // 调入仓库名称
+                this.form2.cbpc100 = res.cbwa09;
+                // 调入仓库名称ID
+                this.form2.cbsb10 = res.whId;
+                // 调出仓库名称
+                this.form2.cbpc1000 = res.cbwa10;
+                // 调出仓库名称ID
+                this.form2.cbaa09 = res.whId;
+                //结算货币名称
+                this.form2.cbsb16 = res.cala08;
+                //结算货币名称id 
+                this.form2.cbsb166 = res.cala08=='CNY'?5:6;
+                //客户订单
+                this.form2.cbsb30 = res.cbsb30;
+                console.log(this.form2.cbsb09, 85200000);
+                res.goods.forEach((item) => {
+                    item.cbsc177 = item.orderClass;
+                    item.cbsc15 = item.supplierId;
+                    item.cbsd133 = item.brand;
+                    item.cbsd134 = item.model;
+                    item.cbsd135 = item.description;
+                    item.cbsc08 = item.goodsId;
+                    item.cbsc09 = item.qty;
+                    item.cbsc11 = item.price;
+                    item.cbsc12 = item.totalPrice;
+                    item.cbsc13 = item.scanQty;
+                    item.cbsc144 = item.noSendQty;
+                    item.cbsc15 = item.remark;
+                    item.cbsc14 = item.saleOrderId;
+                    item.cbpc000 = item.brand + "~" + item.model + "~" + item.description;
+                    if (item.cbsc177 == "国内订单") {
+                        item.cbsc17 = "1";
+                    } else {
+                        item.cbsc17 = "2";
+                    }
 
+                })
+                //------------
+                this.formArr = rres;
+                this.tableData = res.goods;
+                this.total = res.total;
+                console.log(res.goods, 33968855555);
+
+                console.log(res, 170991611111111111);
+
+
+            }
+            );
+        },
 
 
     },
