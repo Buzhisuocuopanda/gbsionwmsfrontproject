@@ -57,7 +57,7 @@
           >{{ userList.receiveAdress || "" }}
         </el-descriptions-item>
       </el-descriptions>
-      <div v-if="edit == 0">
+      <div v-if="edit == 0 || edit == 3">
 
       <el-table
         v-loading="loading"
@@ -195,7 +195,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页数量小记</template
-            >{{ totalnumber || '' }}
+            >{{ totalnumber }}
           </el-descriptions-item>
           <el-descriptions-item
             :contentStyle="{ 'text-align': 'right' }"
@@ -206,7 +206,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页金额小记</template
-            >{{ totalnumber || '' }}
+            >{{ totalnumber }}
           </el-descriptions-item>
         </el-descriptions>
       </div>
@@ -216,14 +216,14 @@
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
-          <template slot="label">合计数量</template>{{ totalnumber || '' }}
+          <template slot="label">合计数量</template>{{ totalnumber}}
         </el-descriptions-item>
         <el-descriptions-item
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
           <template slot="label">合计金额</template
-          >{{ totalPrice || '' }}
+          >{{ totalPrice }}
         </el-descriptions-item>
       </el-descriptions>
 
@@ -295,8 +295,11 @@
       <el-button type="primary" @click="printTakeOrderSuggest">出库建议打印</el-button>
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
-    <div v-else style="margin-left: 5%">
+    <div v-else-if="edit == 1" style="margin-left: 5%">
       <el-button type="primary" @click="mdfTakeSuggest">保 存</el-button>
+      <el-button type="primary" @click="handlefanhui">返 回</el-button>
+    </div>
+    <div v-else style="margin-left: 5%">
       <el-button type="primary" @click="handlefanhui">返 回</el-button>
     </div>
     <div style="height: 20px"></div>
@@ -612,6 +615,7 @@ export default {
       for (let i = 0; i < this.userLists.length; i++) {
         totalnumber += this.userLists[i].qty;
       }
+      console.log(totalnumber,777777)
       return totalnumber
     },
     totalCount: function () {

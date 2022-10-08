@@ -212,8 +212,8 @@
           <el-table-column
             label="仓库"
             align="left"
-            key="cala08"
-            prop="cala08"
+            key="cbwa09"
+            prop="cbwa09"
             width="160px;"
             sortable
           />
@@ -236,8 +236,8 @@
           <el-table-column
             label="收货人"
             align="left"
-            key="cala08"
-            prop="cala08"
+            key="cbsb22"
+            prop="cbsb22"
             width="160px;"
             sortable
           />
@@ -264,7 +264,7 @@
                     ? "是"
                     : scope.row.cbsb31 == 0
                     ? "否"
-                    : "未确定状态"
+                    : ""
                 }}
               </div>
             </template>
@@ -285,7 +285,7 @@
                     ? "是"
                     : scope.row.cbsb31 == 1
                     ? "否"
-                    : "未确定状态"
+                    : ""
                 }}
               </div>
             </template>
@@ -312,14 +312,14 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column
+          <!-- <el-table-column
             label="出库建议表"
             align="left"
             key="cala08"
             prop="cala08"
             width="160px;"
             sortable
-          />
+          /> -->
           <el-table-column
             label="操作"
             align="center"

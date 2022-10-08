@@ -217,7 +217,7 @@
         title=""
         :column="3"
         border
-        v-for="(value, key) in userList.slice(0, 1)"
+        v-for="(value, key) in userList.outsuggestion"
         :key="key"
       >
         <el-descriptions-item label-class-name="my-labell012">

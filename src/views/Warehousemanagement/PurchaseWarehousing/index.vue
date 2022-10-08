@@ -7,18 +7,17 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-
-                    <!--<el-form-item prop="cbpc07" label="编号">-->
-                        <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
-                            <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
-                    <!--</el-form-item>-->
+                    <el-form-item prop="cbpc07" label="编号">
+                        <el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable
+                            style="width: 180px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                            style="width: 150px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbwa09" label="仓库">
                         <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                            style="width: 130px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
 
                     <el-form-item label="日期" style="margin-left:1%;">
@@ -27,7 +26,6 @@
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
                         </el-date-picker>
                     </el-form-item>
-
                     <el-form-item>
                          <el-button v-hasPermi="['system:purchaseinbound:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>

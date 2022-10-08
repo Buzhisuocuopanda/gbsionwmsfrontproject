@@ -6,19 +6,18 @@
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
-
-                    <!--<el-form-item prop="cbpg07" label="编号">-->
-                        <!--<el-input v-model="queryParams.cbpg07" id="miaoshu" placeholder="请输入编号" clearable-->
-                            <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
-                    <!--</el-form-item>-->
+                    label-width="68px" style="margin-left:-10px;">
+                    <el-form-item prop="cbpg07" label="编号">
+                        <el-input v-model="queryParams.cbpg07" id="miaoshu" placeholder="请输入编号" clearable
+                            style="width: 180px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                            style="width: 150px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbwa09" label="仓库">
                         <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                            style="width: 130px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="日期" style="margin-left: 1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
@@ -73,7 +72,7 @@
                     <el-table-column label="状态" align="left" key="cbpg11" prop="cbpg11" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbpg11 == 0 ? "未审核" : scope.row.cbpg11 == 1 ?
-                            "已审核" : scope.row.cbpg11 == 4 ? "已完成" : "未确定状态"
+                            "已审核" : scope.row.cbpg11 == 4 ? "已完成" : ""
                             }}
                             </div>
                         </template>
