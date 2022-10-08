@@ -210,3 +210,23 @@ export function CustomerLists(whid,goodsid) {
     }
   })
 }
+// 销售退库详情
+// /dev-api/stage-api/system/Selloutofwarehouse/SwJsSkuBarcodelistss
+export function SwJsSkuBarcodelistss(id) {
+  return request({
+    url: '/system/Selloutofwarehouse/SwJsSkuBarcodelistss',
+    method: 'get',
+    params: {
+      cbsb01:id
+    }
+  })
+}
+// 销售修改
+// /dev-api/stage-api/system/Selloutofwarehouse/Selloutofwarehouseeditone
+export function Selloutofwarehouseeditone(data) {
+  return request({
+    url: '/system/Selloutofwarehouse/Selloutofwarehouseeditone',
+    method: 'post',
+    data: data
+  })
+}

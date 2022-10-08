@@ -333,7 +333,7 @@
                 type="text"
                 icon="el-icon-edit"
                 class="button-caozuoxougai caozuoxiangqeng"
-                @click="handlexiangqengSelect(scope.row)"
+                @click="handlxiaoshochkudanone(scope.row)"
                 v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"
                 v-hasPermi="['system:selloutofwarehouse:edit']"
               >
@@ -1726,6 +1726,7 @@ export default {
 
     /** 销售出库单修改操作 */
     handlxiaoshochkudanone: function (row) {
+        console.log(row,888888)
       const userId = row.cbsb01;
       // this.$router.push("/system/user-auth/role/");
       this.$router.push("/system/user-xiugaichukuxiugai/role/" + userId);
