@@ -119,8 +119,9 @@ export function PurchaseinboundSH(data) {
   })
 }
 
-//采购入库标记完成
+// 入库标记完成
 export function PurchaseinboundShss(data) {
+  // /dev-api/stage-api/system/Selloutofwarehouse/Selloutofwarehouseaddshwc
   return request({
     url: '/system/Selloutofwarehouse/Selloutofwarehouseaddshwc',
     method: 'post',
@@ -128,8 +129,9 @@ export function PurchaseinboundShss(data) {
   })
 }
 
-//采购入库取消完成
+// 入库取消完成
 export function Purchaseinbounds(data) {
+  // /dev-api/stage-api/system/Selloutofwarehouse/Selloutofwarehouseaddqxwc
   return request({
     url: '/system/Selloutofwarehouse/Selloutofwarehouseaddqxwc',
     method: 'post',
