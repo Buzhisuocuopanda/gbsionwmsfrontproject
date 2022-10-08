@@ -422,7 +422,7 @@
 
       <!-- <div> -->
       <!-- <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog"> -->
-      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">             
+      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
                 <el-button type="primary" @click="handleAdd">保 存</el-button>
               </span> -->
       <!-- <table style="margin-top:2%;">
@@ -443,47 +443,47 @@
                </table> -->
       <!-- <el-row v-for="(form, index) in formArrr" style="width:110%;margin-bottom: -2%;" :key="index">
                     <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
-                        :inline="true"> 
-                        
+                        :inline="true">
+
                         <el-form-item label="" size="small" prop="cbsc15" style="margin-left:0.8%;">
-                            <el-input  v-model="form.cbsc15" style="width:40%;"></el-input>                           
+                            <el-input  v-model="form.cbsc15" style="width:40%;"></el-input>
                         </el-form-item>
                         <el-form-item label="" size="small" prop="cbsc177" style="margin-left:-7%; ">
                             <el-input  v-model="form.cbsc177" style="width:50%;"></el-input>
                         </el-form-item>
-                        
+
                         <el-form-item label="" size="small" prop="cbsd133" style="margin-left:-7%;">
                             <el-input v-model="form.cbsd133" style="width:55%;"></el-input>
                         </el-form-item>
-                       
+
                         <el-form-item label="" size="small" prop="cbsd134" style="margin-left:-6%;">
                             <el-input v-model="form.cbsd134" style="width:55%;"></el-input>
                         </el-form-item>
-                       
+
                         <el-form-item label="" size="small" prop="cbsd135" style="margin-left:-6%;">
                             <el-input v-model="form.cbsd135" style="width:55%;"></el-input>
                         </el-form-item>
-                       
+
                         <el-form-item label="" size="small" prop="cbsc09" style="margin-left:-6%;">
                             <el-input v-model="form.cbsc09" style=" width:50%;"></el-input>
                         </el-form-item>
-                       
+
                         <el-form-item label="" size="small" prop="cbsc11" style="margin-left:-6%;">
                             <el-input v-model="form.cbsc11" style="width:55%;"></el-input>
                         </el-form-item>
-                        
+
                         <el-form-item label="" size="small" prop="cbsc12" style="margin-left:-6%;">
                             <el-input v-model="form.cbsc12" style="width:55%;"></el-input>
                         </el-form-item>
-                       
+
                         <el-form-item label="" size="small" prop="cbsc13" style="margin-left:-6%;">
                             <el-input v-model="form.cbsc13" style="width:55%;"></el-input>
                         </el-form-item>
-                        
+
                         <el-form-item label="" size="small" prop="cbsc14" style="margin-left:-6%;">
                             <el-input v-model="form.cbsc14" style="width:66%;"></el-input>
                         </el-form-item>
-                       
+
                         <el-form-item label="" size="small" prop="cbsc15" style="margin-left:-4%;">
                             <el-input v-model="form.cbsc15" style="width:60%;"></el-input>
                         </el-form-item>
@@ -1308,7 +1308,7 @@ export default {
         //收货人
         this.form2.cbsb22 = response.data.receiver;
         //收货电话
-        this.form2.cbsb29 = response.data.receivePhone;
+        this.form2.cbsb29 = response.data.receivPhone;
         //收货地址
         this.form2.cbsb28 = response.data.receiveAdress;
         //收货地址

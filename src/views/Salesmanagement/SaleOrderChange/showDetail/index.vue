@@ -98,7 +98,7 @@
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="合计数量"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"  label="合计金额"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}</el-descriptions-item>
-      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>
+      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.capPrice}}</el-descriptions-item>
     </el-descriptions>
     <el-descriptions :column="3" border :contentStyle="CS" :label-style="LS " style="margin-top:10px">
       <el-descriptions-item label="制单"  labelStyle	="width: 20%;text-align:center">{{this.formData.makeUser}}</el-descriptions-item>
@@ -132,7 +132,7 @@
       </el-table>
     </div>
     </section>
-    
+
     <div class="tinajia_dingwei">
 <!--      <el-button type="primary" @click="handleAdd">保 存</el-button>-->
       <el-button style="margin-left: 2%" type="primary" @click="handleExport">导出</el-button>
@@ -717,7 +717,7 @@
         this.$print(this.$refs.print)
         // 判断iframe是否存在，不存在则创建iframe
         // var iframe=document.getElementById("print-iframe");
-        // if(!iframe){  
+        // if(!iframe){
         //   var el = document.getElementById("printRecord");
         //   iframe = document.createElement('IFRAME');
         //   var doc = null;
@@ -735,10 +735,10 @@
         // if (navigator.userAgent.indexOf("MSIE") > 0){
         //   document.body.removeChild(iframe);
         // }
-        
+
         // let newstr = this.$refs.print.innerHTML  // 获取需要打印的内容
         //   let oldstr = document.body.innerHTML  // 获取别打印页面的内容
-        //   document.body.innerHTML = newstr  
+        //   document.body.innerHTML = newstr
         //   // // 获取表格表头，表格内容改变打印内容字体的颜色
         //   // document.getElementsByTagName('thead')[0].style.color = '#000'
         //   // document.getElementsByTagName('tbody')[0].style.color = '#000'
@@ -1460,7 +1460,7 @@
   /*}*/
 </style>
 <style>
-  
+
 @page {
   size: auto;
   /* margin: 3mm; */
@@ -1507,5 +1507,5 @@
   }
 }
 
-  
+
 </style>
