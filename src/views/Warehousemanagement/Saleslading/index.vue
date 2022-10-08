@@ -835,7 +835,7 @@ export default {
         pageSize: 15,
         page: 1,
         size: 15,
-        status:'',
+        // status:'',
         total: this.total,
         totall: this.totall,
         saleOrderNo:undefined,
@@ -1184,10 +1184,7 @@ export default {
       this.getList();
       this.queryParams.pageNum = 1;
       this.queryParams.sn = "";
-      // this.getList();
-      //  this.queryParams.pageNum = this.form.classifyName;
       console.log(this.queryParams);
-      // this.getList();
     },
     handleQuerys(saleNo){
       console.log(saleNo)
@@ -1358,7 +1355,13 @@ export default {
     },
     // 质检
     PrintRow(row) {
-      this.changeMoreArrary(row,6)
+      let userId = row.id;
+      let status = 3;
+      let checkstatus = row.checkStatus
+      let edit = 0
+      this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
+      // this.changeMoreArrary(row,6)
+
       // this.paramss.opType = 6;
       // this.changeMoreArrary()
       // auditTakeOrder(this.paramss).then((res) => {
@@ -1667,7 +1670,7 @@ export default {
       const userId = row.id;
       let status = 0
       let checkstatus = 0
-      let edit = 0
+      let edit = 3
       this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
     },
     /** 创建操作 */
