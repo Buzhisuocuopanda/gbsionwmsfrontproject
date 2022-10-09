@@ -253,7 +253,7 @@
 
           <el-table-column prop="cbpc000" label="品牌" width="200">
             <template slot-scope="scope" style="width: 200%">
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" disabled>
                 <Goodsone01
                   ref="Goodsone01"
                   @selected="selected08($event, scope.row)"
@@ -276,7 +276,7 @@
           <el-table-column prop="province" label="供应商" width="150">
             <template slot-scope="scope">
               <!-- <el-input v-model="scope.row.cbsc15" placeholder=""></el-input> -->
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" disabled>
                 <supplierMaintenance
                   ref="supplierMaintenance"
                   @selected="selected02($event, scope.row)"
@@ -313,11 +313,12 @@
           <el-table-column prop="cbpd09" label="数量" width="80">
             <template slot-scope="scope">
               <el-input
-                v-model="scope.row.qty"
+                v-model="scope.row.cbsc09"
                 @blur="chen(scope.row)"
                 placeholder=""
                 class="shuzicaoyou"
                 style=""
+                readonly
               ></el-input>
             </template>
           </el-table-column>
@@ -329,27 +330,29 @@
                 class="shuzicaoyou"
                 placeholder=""
                 style=""
+                readonly
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="金额" width="80">
+          <el-table-column prop="cbpd12" label="金额" width="90">
             <template slot-scope="scope">
               <el-input
-                v-model="scope.row.price"
+                v-model="scope.row.cbsc12"
                 placeholder=""
                 class="shuzicaoyou"
                 style=""
+                readonly
               ></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.noSendQty" placeholder=""></el-input>
+              <el-input v-model="scope.row.noSendQty" placeholder="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="订单占用量" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.useQty" placeholder=""></el-input>
+              <el-input v-model="scope.row.useQty" placeholder="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -1328,7 +1331,7 @@ export default {
           item.cbsc08 = item.goodsId;
           item.cbsc09 = item.qty;
           item.cbsc11 = item.price;
-          item.cbsc12 = item.totalPrice;
+          item.cbsc12 = item.cbsc09 * item.cbsc11;
           item.cbsc13 = item.scanQty;
           item.cbsc144 = item.noSendQty;
           item.cbsc15 = item.remark;
