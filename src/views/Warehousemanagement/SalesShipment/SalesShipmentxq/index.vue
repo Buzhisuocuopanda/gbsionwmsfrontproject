@@ -228,7 +228,7 @@
         :header-cell-style="headClass"
         v-loading="loading"
         border
-        :data="userList"
+        :data="userList[0].outsuggestion"
         style="width: 90%; margin-left: 5%"
         :default-sort="{ prop: 'name', order: 'descending' }"
         @selection-change="handleSelectionChange"
@@ -240,27 +240,27 @@
           width="50"
           align="center"
         ></el-table-column>
-        <el-table-column prop="cala08" key="cala08" label="品牌">
+        <el-table-column prop="brand" key="brand" label="品牌">
         </el-table-column>
-        <el-table-column prop="cbpa07" key="cbpa07" label="类型">
+        <el-table-column prop="goodClass" key="goodClass" label="类型">
         </el-table-column>
-        <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
+        <el-table-column prop="model" key="model" align="" label="型号">
         </el-table-column>
         <el-table-column
           id="miaos"
-          prop="cbpb08"
-          key="cbpb08"
+          prop="description"
+          key="description"
           align=""
           label="描述"
           width="300"
         >
         </el-table-column>
-        <el-table-column prop="cbsd09" key="cbsd09" align="" label="SN">
+        <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
-        <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
+        <el-table-column prop="sku" key="sku" align="" label="库位">
         </el-table-column>
-        <el-table-column prop="saoma" key="saoma" label="扫描状态">
-          <template scope="scope">
+        <el-table-column prop="scanStatus" key="scanStatus" label="扫描状态">
+          <!-- <template scope="scope">
             <div>
               {{
                 scope.row.saoma == 1
@@ -270,7 +270,7 @@
                   : "未扫描"
               }}
             </div>
-          </template>
+          </template> -->
         </el-table-column>
       </el-table>
 
@@ -340,13 +340,15 @@
     <div v-else>
         <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
         <el-button v-else type="primary" style="margin-left:5%;"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+        <el-button v-show="status != 4 && status !=0" type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成</el-button>
+        <el-button v-show="status == 4" type="primary" @click="PurchaseinboundBiaojiWancheng">取消完成</el-button>
         <el-button  @click="handlefanhui">返回</el-button>
     </div>
     <div style="height: 50px"></div>
   </div>
 </template>
 <script>
-import { PurchaseinboundLists,PurchaseinboundSH,PurchaseinboundShs } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists,PurchaseinboundSH,PurchaseinboundShs,PurchaseinboundShss,Purchaseinbounds } from "@/api/Warehousemanagement/SalesShipment";
 export default {
   data() {
     return {
@@ -379,6 +381,32 @@ export default {
     this.getList();
   },
   methods: {
+    // 标记完成
+    PurchaseinboundQuxiaoWangcheng() {
+        this.$modal.confirm('是否要标记,编号为"' + this.userList[0].cbsb07 + '"的数据项？').then(() => {
+            PurchaseinboundShss({
+              cbsb01:this.ids.id
+            }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '标记成功', type: 'success' });
+                    this.$router.push("/system/user-xsckfh/role/");
+                }
+            });
+        }).catch(() => { });
+    },
+    // 取消标记
+    PurchaseinboundBiaojiWancheng() {
+        this.$modal.confirm('是否要取消标记,编号为"' + this.userList[0].cbsb07 + '"的数据项？').then(() => {
+            Purchaseinbounds({
+              cbsb01:this.ids.id
+            }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '取消标记成功', type: 'success' });
+                    this.$router.push("/system/user-xsckfh/role/");
+                }
+            });
+        }).catch(() => { });
+    },
     //审批
     PurchaseinboundShenpi() {
         this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbsb07 + '"的数据项？').then(() => {
@@ -388,8 +416,6 @@ export default {
             if (response.code == "200") {
                 this.$message({ message: '审批成功', type: 'success' });
                 this.$router.push("/system/user-xsckfh/role/");
-            }else{
-                this.$message({ message: response.msg, type: 'error' });
             }
             });
         }).catch(() => { });
@@ -403,8 +429,6 @@ export default {
                 if (response.code == "200") {
                     this.$message({ message: '反审成功', type: 'success' });
                     this.$router.push("/system/user-xsckfh/role/");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             });
         }).catch(() => { });
