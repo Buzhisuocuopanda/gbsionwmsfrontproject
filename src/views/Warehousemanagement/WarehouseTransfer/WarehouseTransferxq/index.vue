@@ -225,7 +225,8 @@ export default {
         // 入
         PurchaseinboundQuxiaoWangcheng() {
             this.$modal.confirm('是否要调入标记,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
-                PurchaseinboundShtt({
+                // PurchaseinBoundshf
+                PurchaseinBoundshf({
                     cbaa01:this.ids.id
                 }).then(response => {
                 if (response.code == "200") {
@@ -238,7 +239,7 @@ export default {
         // 出
         PurchaseinboundBiaojiWancheng() {
             this.$modal.confirm('是否要调出标记,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
-                PurchaseinBoundshf({
+                PurchaseinboundShtt({
                     cbaa01:this.ids.id
                 }).then(response => {
                 if (response.code == "200") {
