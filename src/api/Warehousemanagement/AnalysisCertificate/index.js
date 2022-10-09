@@ -172,3 +172,13 @@ export function StoreSkuList(query) {
     params: query
   })
 }
+
+// 创建质检单详情
+export function SwJsSkuBarcodeselectss(data) {
+  return request({
+    // /dev-api/stage-api/system/Qualityin/SwJsSkuBarcodeselectss
+    url: 'system/Qualityin/SwJsSkuBarcodeselectss',
+    method: 'get',
+    params:data
+  })
+}
