@@ -5,12 +5,12 @@
             <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" />
+                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" disabled />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="客户订单:" style="margin-left:11.2%;" prop="cbsb30">
-                        <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 85%;" />
+                        <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 85%;" disabled />
                     </el-form-item>
 
                 </el-col>
@@ -23,8 +23,8 @@
                         <el-popover placement="bottom-start" trigger="click" disabled>
                             <CustomerMainten ref="CustomerMainten" @selected="selected022"
                                 style="width:210px!important; height:100px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc0999" placeholder=""
-                                style="width:85%;">
+                            <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly
+                                style="width:85%;" disabled>
                             </el-input>
                         </el-popover>
                     </el-form-item>
@@ -32,14 +32,14 @@
                 </el-col>
                 <el-col v-if="false" style="margin-left: 2%;" :span="7">
                     <el-form-item label="客户:" prop="cbsb09">
-                        <el-input type="text" v-model="form2.cbsb09" style="width:85%;" />
+                        <el-input type="text" v-model="form2.cbsb09" style="width:85%;" disabled />
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="7">
                     <el-form-item label="仓库:" prop="cbpc100">
-                        <el-popover placement="bottom-start" trigger="click" clearable >
+                        <el-popover placement="bottom-start" trigger="click" clearable disabled>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" 
+                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" disabled
                                 style="width:85%;">
                             </el-input>
                         </el-popover>
@@ -49,7 +49,7 @@
                     <el-form-item label="销售人员:" prop="cbsb177">
                         <el-popover placement="bottom-start" trigger="click" clearable disabled>
                             <salerman ref="salerman" @selected="selected011699" style="width:260px!important;" />
-                            <el-input slot="reference" v-model="form2.cbsb177" placeholder=""  
+                            <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly disabled
                                 style="width:85%;">
                             </el-input>
                         </el-popover>
@@ -62,19 +62,19 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col style="margin-left: 2%;margin-top: -1%;" :span="7" >
+                <el-col style="margin-left: 2%;margin-top: -1%;" :span="7" disabled>
                     <el-form-item label="联系人:" prop="cbsb18">
-                        <el-input type="text" v-model="form2.cbsb18" style="width:85%;"  />
+                        <el-input type="text" v-model="form2.cbsb18" style="width:85%;" disabled />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7" style="margin-top: -1%;">
                     <el-form-item label="电话:" prop="cbsb19">
-                        <el-input type="text" v-model="form2.cbsb19" style="width:85%;"  />
+                        <el-input type="text" v-model="form2.cbsb19" style="width:85%;" disabled />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="客户等级:" prop="cbca28">
-                        <el-select v-model="form2.cbca28" placeholder="" style="width:85%;" >
+                        <el-select v-model="form2.cbca28" placeholder="" style="width:85%;" disabled>
                             <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -86,7 +86,7 @@
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="结算货币:" prop="cbsb166">
                         <!-- <el-input type="text" v-model="form2.cbsb166" style="width:77%;" /> -->
-                        <el-select v-model="form2.cbsb166" placeholder="" style="width:85%;" >
+                        <el-select v-model="form2.cbsb166" placeholder="" style="width:85%;" disabled>
                             <el-option v-for="item in jiageLeixenghuobi" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -100,7 +100,7 @@
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="收货人:" prop="cbsb22">
-                        <el-input type="text" v-model="form2.cbsb22" style="width:85%;"  />
+                        <el-input type="text" v-model="form2.cbsb22" style="width:85%;" disabled />
                     </el-form-item>
                 </el-col>
                 <!-- <el-col style="margin-top: -1%;" :span="7">
@@ -121,17 +121,17 @@
             <el-row>
                 <el-col style="margin-left: 2%;margin-top: -1%;" :span="7">
                     <el-form-item label="收货电话:" prop="cbsb29">
-                        <el-input type="text" v-model="form2.cbsb29" style="width:85%;"  />
+                        <el-input type="text" v-model="form2.cbsb29" style="width:85%;" disabled />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7">
                     <el-form-item label="收货地址:" prop="cbsb28">
-                        <el-input type="text" v-model="form2.cbsb28" style="width:240%;"  />
+                        <el-input type="text" v-model="form2.cbsb28" style="width:240%;" disabled />
                     </el-form-item>
                 </el-col>
                 <el-col v-if="false" style="margin-top: -1%;" :span="7">
                     <el-form-item label="收货地址:" prop="cbsb21">
-                        <el-input type="text" v-model="form2.cbsb21" style="width:77%;"  />
+                        <el-input type="text" v-model="form2.cbsb21" style="width:77%;" disabled />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top: -1%;" :span="7" v-if="false">
@@ -291,7 +291,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchaseinboundAdds, Selloutofwarehouseeditone, SwJsSkuBarcodelistss } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundAdds, PurchaseinboundAdd, PurchaseinListxiangq } from "@/api/Warehousemanagement/SalesShipment";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -999,9 +999,10 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
+
             this.$refs["form2"].validate((item) => {
                 if (item) {
-                    Selloutofwarehouseeditone(this.form2).then(response => {
+                    PurchaseinboundAdd(this.form2).then(response => {
                         if (response.code == 200) {
                             // console.log(response.posts, 12345678);
                             this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
@@ -1027,42 +1028,46 @@ export default {
 
         /** 销售提货单 */
         getList() {
-            let id = this.$route.params.id
-            SwJsSkuBarcodelistss(id, this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                let res = response.data.rows[0]
+            let routerParams = this.$route.query;
+            this.formArr = routerParams.data;
+            //    let zhuangh = JSON.parse(this.formArr);  
+            // console.log(zhuangh[0].id,889999);          
+            PurchaseinListxiangq(this.formArr, this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+
                 //客户名称
-                this.form2.cbpc0999 = res.cbca08;
+                this.form2.cbpc0999 = response.data.customerName;
                 //客户名称ID
-                this.form2.cbsb09 = 8;
+                this.form2.cbsb09 = response.data.customerId;
                 //仓库名称
-                this.form2.cbpc100 = res.cbwa09;
+                this.form2.cbpc100 = response.data.whName;
                 //仓库名称ID
-                this.form2.cbsb10 = res.whId;
+                this.form2.cbsb10 = response.data.whId;
                 //销售人员名称
-                this.form2.cbsb177 = res.caua15;
+                this.form2.cbsb177 = response.data.saleUserName;
                 //销售人员ID
-                this.form2.cbsb17 = 8;
+                this.form2.cbsb17 = response.data.saleUserId;
                 //联系人
-                this.form2.cbsb18 = res.cbsb18;
+                this.form2.cbsb18 = response.data.contacts;
                 //电话
-                this.form2.cbsb19 = res.cbsb19;
+                this.form2.cbsb19 = response.data.phone;
                 //客户等级
-                this.form2.cbca28 = res.cbca28;
+                this.form2.cbca28 = response.data.customerLevel;
                 //结算货币名称
-                this.form2.cbsb166 = res.cny;
+                this.form2.cbsb166 = response.data.currencyMsg;
                 //结算货币名称id 
-                this.form2.cbsb16 = res.currency;
+                this.form2.cbsb16 = response.data.currency;
                 //收货人
-                this.form2.cbsb22 = res.cbsb18;
+                this.form2.cbsb22 = response.data.receiver;
                 //收货电话
-                this.form2.cbsb29 = res.cbsb29;
+                this.form2.cbsb29 = response.data.receivPhone;
                 //收货地址
-                this.form2.cbsb28 = res.cbsb21;
-                this.form2.cbsb21 = res.cbsb21;
+                this.form2.cbsb28 = response.data.receiveAdress;
+                //收货地址
+                this.form2.cbsb21 = response.data.receiveAdress;
                 //客户订单
-                this.form2.cbsb30 = res.cbsb30;
+                this.form2.cbsb30 = response.data.customerNo;
                 console.log(this.form2.cbsb09, 85200000);
-                res.goods.forEach((item) => {
+                response.data.goods.forEach((item) => {
                     item.cbsc177 = item.orderClass;
                     item.cbsc15 = item.supplierId;
                     item.cbsd133 = item.brand;
@@ -1085,12 +1090,12 @@ export default {
 
                 })
                 //------------
-                this.formArr = rres;
-                this.tableData = res.goods;
-                this.total = res.total;
-                console.log(res.goods, 33968855555);
+                this.formArr = response.data;
+                this.tableData = response.data.goods;
+                this.total = response.data.total;
+                console.log(response.data.goods, 339688);
 
-                console.log(res, 170991611111111111);
+                console.log(response.data, 1709916);
 
 
             }
