@@ -280,7 +280,7 @@
         :header-cell-style="headClass"
         v-loading="loading"
         border
-        :data="userList"
+        :data="userListed"
         :default-sort="{ prop: 'name', order: 'descending' }"
         @selection-change="handleSelectionChange"
       >
@@ -291,9 +291,9 @@
           width="50"
           align="center"
         ></el-table-column>
-        <el-table-column prop="cala08" key="cala08" label="品牌">
+        <el-table-column prop="pinpai" key="pinpai" label="品牌">
         </el-table-column>
-        <el-table-column prop="cbpa07" key="cbpa07" label="类型">
+        <el-table-column prop="lx" key="lx" label="类型">
         </el-table-column>
         <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
         </el-table-column>
@@ -306,9 +306,9 @@
           width="300"
         >
         </el-table-column>
-        <el-table-column prop="cbsd09" key="cbsd09" align="" label="SN">
+        <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
-        <el-table-column prop="cbla09" key="cbla09" align="" label="库位">
+        <el-table-column prop="kwm" key="kwm" align="" label="库位">
         </el-table-column>
       </el-table>
     </div>
@@ -358,6 +358,7 @@ export default {
       total: 0,
       // 用户表格数据
       userList: null,
+      userListed:"",
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -490,6 +491,7 @@ export default {
           this.addDateRange(this.queryParams, this.dateRange)
         ).then((res) => {
           this.userList = res.data.rows;
+          this.userListed = res.data.rows[0].goods;
           this.total = res.data.total;
           console.log(res, 888999);
           this.loading = false;

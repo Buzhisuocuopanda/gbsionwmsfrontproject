@@ -74,7 +74,7 @@
 <!--            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>-->
             <el-button v-hasPermi="['system:updateGjQty:save']"  v-if="scope.row.id==editId" icon="el-icon-edit" plain size="mini"   type="text" @click="updateDetail(scope.row)">保存</el-button>
             <el-button v-else icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">库存分配</el-button>
-            <el-button  icon="el-icon-s-order" plain size="mini"   type="text">取消</el-button>
+            <el-button  icon="el-icon-s-order" plain size="mini" @click="mdfDetailQx(scope.row)"  type="text">取消</el-button>
 
             <!--            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>-->
           </template>
@@ -537,6 +537,11 @@
 
 
       },
+
+      mdfDetailQx(row){
+        this.editId="";
+      },
+
 
       exprotData() {
         const param = {

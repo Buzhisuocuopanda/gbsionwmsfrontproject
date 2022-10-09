@@ -561,7 +561,7 @@
       <!--      </el-row>-->
       <div>
         <el-row>
-          <el-col :span="24">
+          <el-col v-if="false" :span="24">
             <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
         </el-row>

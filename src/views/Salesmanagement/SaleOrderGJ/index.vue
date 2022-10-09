@@ -1,4 +1,5 @@
 <template>
+  <!--国际销售订单-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px">
@@ -40,12 +41,12 @@
 <!--            style="display: inline">-->
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
-          <el-button type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
+          <el-button v-hasPermi="['sale:saleOrder:import']" type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
 
-          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
+          <el-button v-hasPermi="['sale:saleOrderGj:export']" type="primary" v-on:click="exprotData()" :loading=loadingOut
                      style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
-          <el-button type="primary" v-on:click="skuDistribution()" :loading=loadingOut
+          <el-button  type="primary" v-on:click="skuDistribution()" :loading=loadingOut
                      style="margin-bottom:0;margin-left: 1em">库存分配
           </el-button>
 
@@ -74,17 +75,17 @@
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button style="margin-left:8px; margin-top: 2px" size="mini" icon="el-icon-share" type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" size="mini" icon="el-icon-share" type="text" @click="showDetail(scope.row)" v-hasPermi="['sale:saleOrderGj:detail']">详情</el-button>
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>-->
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
-            <el-button style="margin-top: 2px" v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,3)">审核</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,3)" v-hasPermi="['sale:saleOrderGj:audit']">审核</el-button>
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==2" size="mini" type="primary" @click="auditDetail(scope.row,6)">反审</el-button>-->
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button style="margin-top: 2px" v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,2)">确认库存</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,1)">取消库存</el-button>
-            <el-button style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)">删除</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)" v-hasPermi="['sale:saleOrderGj:audit']">指定结束</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,2)" v-hasPermi="['sale:saleOrder:confirm']">确认库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,1)" v-hasPermi="['sale:saleOrder:confirm']">取消库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)" v-hasPermi="['sale:saleOrderGj:remove']">删除</el-button>
           </template>
 
         </el-table-column>
@@ -129,7 +130,7 @@
 </template>
 <script>
   // import x from ''
-  import { confirmSkuSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { confirmSkuSaleOrder,delSaleOrderGj,saleOrderListGj, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -442,7 +443,7 @@
         //   }
         // })
       },
-      delSaleOrder(row){
+      delSaleOrderGj(row){
         this.$confirm('确认要删除'+row.orderNo+"销售订单吗？", '确认操作', {
           type: 'warning',
           distinguishCancelAndClose: true,
@@ -486,7 +487,7 @@
         }
         // this.loading=true;
 
-        this.download('/sale/saleOrderExcelList', {
+        this.download('/sale/saleOrderExcelListGj', {
           ...param
         }, `国际销售订单数据_${new Date().getTime()}.xlsx`)
 
@@ -729,7 +730,7 @@
           pageSize: this.listQuery.pageSize
         }
         // console.info(param)
-        saleOrderList(param).then(response => {
+        saleOrderListGj(param).then(response => {
           if (response.data != null && response.data.rows != null) {
             this.orderList = response.data.rows
             this.totalItems = response.data.total

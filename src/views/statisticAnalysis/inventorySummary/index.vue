@@ -235,7 +235,6 @@ export default {
       this.queryParams.cbpb10 = "";
       this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;
-      this.goodList = [];
       this.onSearch();
     },
     /** 搜索按钮操作 */
