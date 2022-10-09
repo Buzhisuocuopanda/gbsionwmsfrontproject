@@ -1111,6 +1111,19 @@ export default {
     this.form2.cbsa09 = "20";
   },
   methods: {
+    handleQuerys(saleNo){
+      console.log(saleNo)
+      let obj = {
+        orderNo:saleNo,
+        type:''
+      }
+      Purchaseinbounddingdancx(obj).then((res) =>{
+        if(res.code == 200){
+          this.userList01 = res.data.rows;
+        }
+        console.log(res,4444444)
+      })
+    },
     tong() {
       this.open3 = true;
     },
@@ -1454,6 +1467,7 @@ export default {
         .then(() => {
           let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
           // console.log(row.cbpc01, 8888);
+
           userIds.forEach((item) => {
             req
               .PurchaseinboundShs(item)
@@ -1480,22 +1494,22 @@ export default {
       let cbpc01 = row.cbsb01;
       let status = row.cbsb11;
       this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
-      //   this.$modal
-      //     .confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？')
-      //     .then(() => {
-      //       PurchaseinboundShss(row).then((response) => {
-      //         if (response.code == 200) {
-      //           console.log(this.form.cbpc01, 789);
-      //           // this.submitShangpin();
-      //           this.getList();
-      //           // this.open = false;
-      //           this.$message({ message: "标记完成", type: "success" });
-      //         } else {
-      //           this.$message({ message: response.msg, type: "error" });
-      //         }
-      //       });
-      //     })
-      //     .catch(() => {});
+    //   this.$modal
+    //     .confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？')
+    //     .then(() => {
+    //       PurchaseinboundShss(row).then((response) => {
+    //         if (response.code == 200) {
+    //           console.log(this.form.cbpc01, 789);
+    //           // this.submitShangpin();
+    //           this.getList();
+    //           // this.open = false;
+    //           this.$message({ message: "标记完成", type: "success" });
+    //         } else {
+    //           this.$message({ message: response.msg, type: "error" });
+    //         }
+    //       });
+    //     })
+    //     .catch(() => {});
     },
 
     //标记完成上面的按钮
@@ -1543,20 +1557,20 @@ export default {
       // });
 
       // console.log(row.cbpc01, 8888);
-      //   this.$modal
-      //     .confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？')
-      //     .then(() => {
-      //       Purchaseinbounds(row).then((response) => {
-      //         console.log(this.form.cbpc01, 789);
-      //         if (response.code == 200) {
-      //           this.getList();
-      //           this.$message({ message: "取消标记成功", type: "success" });
-      //         } else {
-      //           this.$message({ message: response.msg, type: "error" });
-      //         }
-      //       });
-      //     })
-      //     .catch(() => {});
+    //   this.$modal
+    //     .confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？')
+    //     .then(() => {
+    //       Purchaseinbounds(row).then((response) => {
+    //         console.log(this.form.cbpc01, 789);
+    //         if (response.code == 200) {
+    //           this.getList();
+    //           this.$message({ message: "取消标记成功", type: "success" });
+    //         } else {
+    //           this.$message({ message: response.msg, type: "error" });
+    //         }
+    //       });
+    //     })
+    //     .catch(() => {});
     },
     //取消标记上面的
     PurchaseinboundQuxiaoWangcheng01(row) {
@@ -1565,15 +1579,17 @@ export default {
         .then(() => {
           let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
           // console.log(row.cbpc01, 8888);
+
           userIds.forEach((item) => {
             req
               .Purchaseinbounds(item)
               .then((res) => {
-                // console.log(res, 123)
-                if (res.code == 200) {
+                if (res.code == "200") {
                   // console.log(res, 123)
                   this.getList();
                   this.$modal.msgSuccess("取消标记成功");
+                } else {
+                  this.$message({ message: res.msg, type: "error" });
                 }
               })
               .catch((e) => {
@@ -1717,6 +1733,7 @@ export default {
 
     /** 销售出库单修改操作 */
     handlxiaoshochkudanone: function (row) {
+        console.log(row,888888)
       const userId = row.cbsb01;
       // this.$router.push("/system/user-auth/role/");
       this.$router.push("/system/user-xiugaichukuxiugai/role/" + userId);
@@ -1724,22 +1741,37 @@ export default {
 
     //父子传值
     sendParams(row) {
-      this.$router.push({
-        path: "/system/user-authhhchuanj/role/",
-        // name: 'index',
-        query: {
-          // name: '页面1',
-          // data: this.form2.cbpc01,
-          // data: JSON.stringify(this.userList01),
-          // data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
-          //                       customerLevel:row.customerLevel,contacts:row.contacts,
-          //                     whName:row.whName,phone:row.phone,address:row.address,
-          //                     saleUser:row.saleUser,id:row.id}]),
-          data: row.id,
-          // data01:JSON.stringify(row)
-          //  JSON.stringify(this.userList)
-        },
-      });
+        if(!this.form2.cbpc10){
+        this.$message({
+          message: '请选择仓库',
+          type: 'warning'
+        });
+      }else{
+        this.$router.push({
+          path: "/system/user-authhhchuanj/role/",
+          // name: "AuthUser",
+          query: {
+            data: row.id,
+            whNameid:this.form2.cbpc10
+          },
+        });
+      }
+    //   this.$router.push({
+    //     path: "/system/user-authhhchuanj/role/",
+    //     // name: 'index',
+    //     query: {
+    //       // name: '页面1',
+    //       // data: this.form2.cbpc01,
+    //       // data: JSON.stringify(this.userList01),
+    //       // data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
+    //       //                       customerLevel:row.customerLevel,contacts:row.contacts,
+    //       //                     whName:row.whName,phone:row.phone,address:row.address,
+    //       //                     saleUser:row.saleUser,id:row.id}]),
+    //       data: row.id,
+    //       // data01:JSON.stringify(row)
+    //       //  JSON.stringify(this.userList)
+    //     },
+    //   });
       // location.reload();
     },
     // /** 提交按钮 */
