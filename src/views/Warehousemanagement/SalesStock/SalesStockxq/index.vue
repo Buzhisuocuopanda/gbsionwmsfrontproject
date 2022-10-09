@@ -146,13 +146,15 @@
         <div v-else style="margin:10px 0;">
             <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
             <el-button v-else style="margin-left:5%;" type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button type="primary" @click="PurchaseinboundQuxiaoWangcheng" v-if="status == 4">取消完成</el-button>
+            <el-button type="primary" @click="PurchaseinboundBiaojiWancheng" v-if="status == 1">标记完成</el-button>
             <el-button  @click="handlefanhui">返回</el-button>
         </div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundList,Purchaseinboundsho,PurchaseinboundSht } from "@/api/Warehousemanagement/SalesStock";
+import { PurchaseinboundList,Purchaseinboundsho,PurchaseinboundSht,PurchaseinboundShtt,PurchaseinBoundshf } from "@/api/Warehousemanagement/SalesStock";
 export default {
 
     data() {
@@ -189,6 +191,36 @@ export default {
 
     },
     methods: {
+        // 标记完成
+        PurchaseinboundBiaojiWancheng() {
+            this.$modal.confirm('是否要标记完成,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
+                PurchaseinBoundshf({
+                    cbse01:this.ids.id
+                }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '标记成功', type: 'success' });
+                    this.$router.push("/Warehousemanagement/SalesStock");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+                });
+            }).catch(() => { });
+        },
+        // 取消标记完成
+        PurchaseinboundQuxiaoWangcheng() {
+            this.$modal.confirm('是否要取消标记,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
+                PurchaseinboundShtt({
+                    cbse01:this.ids.id
+                }).then(response => {
+                if (response.code == "200") {
+                    this.$message({ message: '取消成功', type: 'success' });
+                    this.$router.push("/Warehousemanagement/SalesStock");
+                }else{
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+                });
+            }).catch(() => { });
+        },
         //审批
         PurchaseinboundShenpi() {
             this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
