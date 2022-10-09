@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
+    <div><!--:rules="rules" -->
+        <el-form ref="form2" :model="form2" label-width="35%" style="">
             <div class="chuangjiancaigous">销售出货单</div>
              <el-row>
                 <el-col :span="7">
@@ -990,7 +990,7 @@ export default {
         handleAdd() {
           let routerParams = this.$route.query;
           this.formArr = routerParams.data;
-          this.form2.cbsb20 = routerParams.data.id;
+          this.form2.takeId = routerParams.data;
           this.$refs["form2"].validate((item) => {
                 if (item) {
                     PurchaseinboundAdd(this.form2).then(response => {

@@ -1,9 +1,9 @@
 <template>
+  <!--审批记录-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
 
-        <el-form :inline="true">
           <el-form-item>
             <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期" value-format="yyyy-MM-dd HH:mm:ss"
                             :default-time="'00:00:00'">
@@ -19,7 +19,6 @@
           <el-form-item label="订单号"   class="item-r" >
             <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />
           </el-form-item>
-        </el-form>
 
 <!--        <el-form-item label="订单号"   class="item-r" >-->
 <!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
