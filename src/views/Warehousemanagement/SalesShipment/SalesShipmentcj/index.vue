@@ -280,7 +280,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchaseinboundAdds,PurchaseinboundAdd,PurchaseinListxiangq,CustomerLists } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundAdds,PurchaseinboundAdd,PurchaseinListxiangq } from "@/api/Warehousemanagement/SalesShipment";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -1021,10 +1021,9 @@ export default {
         getList() {
             let routerParams = this.$route.query;
                this.formArr = routerParams.data;
-               let whid = this.$route.query.whNameid
             //    let zhuangh = JSON.parse(this.formArr);
                 // console.log(zhuangh[0].id,889999);
-               CustomerLists(this.formArr,whid,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+               PurchaseinListxiangq(this.formArr,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
 
                 //客户名称
                 this.form2.cbpc0999 = response.data.customerName;

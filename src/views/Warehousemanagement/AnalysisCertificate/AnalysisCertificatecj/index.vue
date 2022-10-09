@@ -422,7 +422,7 @@ export default {
                     { type: 'date', required: true, message: '日期不能为空!', trigger: 'change' }
                 ],
                 cbqa07: [
-                    { required: true, message: "编号不能为空!", trigger: "blur" }
+                    { required: false, message: "编号不能为空!", trigger: "blur" }
                 ]
             },
 
