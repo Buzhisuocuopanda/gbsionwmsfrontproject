@@ -458,7 +458,10 @@ export default {
          //返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-zjdfh/role/");
+            // this.$router.push("/system/user-zjdfh/role/");
+
+            this.$store.dispatch("tagsView/delView", this.$route)
+            this.$router.push("/system/user-zjdfh/role/")
         },
 
         //单元格合并
