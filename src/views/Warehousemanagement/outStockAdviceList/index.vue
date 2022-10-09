@@ -12,6 +12,11 @@
       <el-form-item label="订单号" style="margin-left: 20px">
         <el-input type="text" style="width: 300px;margin-left: 20px" v-model="queryParams.orderNo"></el-input>
       </el-form-item>
+      <el-form-item label="状态">
+        <el-select v-model="queryParams.status" clearable filterable remote reserve-keyword placeholder="请选择" >
+          <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item style="margin-left: 100px">
         <el-button v-hasPermi="['system:outStockAdviceList:list']" type="primary" @click="handleQuery">查询</el-button>
         <el-button v-hasPermi="['system:outStockAdviceList:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
@@ -19,7 +24,7 @@
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }">
+    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
       <el-table-column prop="date" label="序号" type="index" sortable width="100" align="center"></el-table-column>
       <el-table-column prop="saleOrderNo" label="商品订单" align="center" sortable></el-table-column>
       <el-table-column prop="description" label="商品描述" align="center" sortable width="300"></el-table-column>
@@ -78,6 +83,7 @@
           pageNum: 1,
           pageSize: 10,
           whId:"",
+          status:"",
           orderNo:"",
         },
         tableData: [], // 表格数据
@@ -87,6 +93,20 @@
         loading3:false,
         total:0,
         index:0,
+        statusType: [
+          {
+            value: 1,
+            label: '待审核',
+          },
+          {
+            value: 2,
+            label: '待调拨',
+          },
+          {
+            value: 3,
+            label: '已完成',
+          }
+        ],
       };
     },
     computed: {},
@@ -114,6 +134,7 @@
       resetQuery() {
         this.queryParams.whId = "";
         this.queryParams.orderNo="";
+        this.queryParams.status = "";
         this.queryParams.pageNum = 1;
         // this.resetForm("queryParams");
         this.onSearch();
