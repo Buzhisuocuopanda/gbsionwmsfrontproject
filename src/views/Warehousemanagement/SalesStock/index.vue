@@ -996,20 +996,24 @@ export default {
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
-            console.log(row.cbse01, 8888);
-            this.$modal.confirm('是否确认标记"' + row.cbse01 + '"的数据项？').then(function () {
-                return PurchaseinBoundshf(row)
-            }).then(response => {
-                console.log(this.form.cbse01, 789)
-                // this.submitShangpin();
-                if(response.code == 200){
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '标记完成', type: 'success' });
-                }else{
-                    this.$modal.msgError(response.msg)
-                }
-            }).catch(() => { });
+            let cbpg01 = row.cbse01
+            let status = row.cbse11
+            this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
+
+            // console.log(row.cbse01, 8888);
+            // this.$modal.confirm('是否确认标记"' + row.cbse01 + '"的数据项？').then(function () {
+            //     return PurchaseinBoundshf(row)
+            // }).then(response => {
+            //     console.log(this.form.cbse01, 789)
+            //     // this.submitShangpin();
+            //     if(response.code == 200){
+            //         this.getList();
+            //         // this.open = false;
+            //         this.$message({ message: '标记完成', type: 'success' });
+            //     }else{
+            //         this.$modal.msgError(response.msg)
+            //     }
+            // }).catch(() => { });
         },
 
         //标记完成上面的按钮
@@ -1036,19 +1040,23 @@ export default {
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
-            console.log(row.cbse01, 8888);
-            this.$modal.confirm('是否要取消标记为"' + row.cbse01 + '"的数据项？').then(() => {
-                PurchaseinboundShtt(row).then(response => {
-                    console.log(this.form.cbse01, 789);
-                    if(response.code == 200){
-                        this.getList();
-                        this.$message({ message: '取消标记成功', type: 'success' });
-                    }else{
-                        this.$modal.msgError(response.msg)
-                    }
+            let cbpg01 = row.cbse01
+            let status = row.cbse11
+            this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
 
-                });
-            }).catch(() => { });
+            // console.log(row.cbse01, 8888);
+            // this.$modal.confirm('是否要取消标记为"' + row.cbse01 + '"的数据项？').then(() => {
+            //     PurchaseinboundShtt(row).then(response => {
+            //         console.log(this.form.cbse01, 789);
+            //         if(response.code == 200){
+            //             this.getList();
+            //             this.$message({ message: '取消标记成功', type: 'success' });
+            //         }else{
+            //             this.$modal.msgError(response.msg)
+            //         }
+
+            //     });
+            // }).catch(() => { });
 
             // this.$modal.confirm('是否取消标记,ID号为"' + JSON.stringify(row.cbpc01) + '"的数据项？').then(function () {
             //     // return PurchaseinboundShtt(row);
