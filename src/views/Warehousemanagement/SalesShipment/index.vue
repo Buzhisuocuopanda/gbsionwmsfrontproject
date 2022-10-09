@@ -1,43 +1,87 @@
 <template>
   <!--销售出库单-->
-    <div class="app-container">
-        <el-row :gutter="20" style="margin-left:-10%;">
-            <!--用户数据-->
-            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
-                <!-- 表头内容  -->
-                <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
-                    <el-form-item prop="cbsb07" label="编号">
-                        <el-input v-model="queryParams.cbsb07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
-                    <el-form-item prop="cbca08" label="客户">
-                        <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="请输入客户" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
-                    <el-form-item label="日期" style="margin-left:2%;">
-                        <el-date-picker :size="mini" v-model="dateRange" type="daterange"
-                            :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                            range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                        </el-date-picker>
-                    </el-form-item>
-                    <el-form-item>
-                         <el-button v-hasPermi="['system:selloutofwarehouse:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                    </el-form-item>
-                    <el-form-item>
-                         <el-button v-hasPermi="['system:selloutofwarehouse:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
-                    </el-form-item>
-                    <el-form-item  style="margin-left:61%;">                     
-                        <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
-                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button> -->
-                        <el-button size="mini" v-hasPermi="['system:selloutofwarehouse:add']" class="biaoto-buttonchuangjian">创建</el-button>
-                        <el-dropdown trigger="click">
-                        <span class="el-dropdown-link xialaxuanxang">
-                             <i class="el-icon-caret-bottom el-icon--right "></i>
-                        </span>
-                        <el-dropdown-menu slot="dropdown">
-                           <!-- <el-dropdown-item class="clearfix" >
+  <div class="app-container">
+    <el-row :gutter="20" style="margin-left: -10%">
+      <!--用户数据-->
+      <el-col :span="20" :xs="24" class="tooltup" style="width: 100%">
+        <!-- 表头内容  -->
+        <el-form
+          :model="queryParams"
+          ref="queryForm"
+          size="small"
+          :inline="true"
+          v-show="showSearch"
+          label-width="68px"
+        >
+          <el-form-item prop="cbsb07" label="编号">
+            <el-input
+              v-model="queryParams.cbsb07"
+              id="miaoshu"
+              placeholder="请输入编号"
+              clearable
+              style="width: 240px"
+              @keyup.enter.native="handleQuery"
+            />
+          </el-form-item>
+          <el-form-item prop="cbca08" label="客户">
+            <el-input
+              v-model="queryParams.cbca08"
+              id="miaoshu"
+              placeholder="请输入客户"
+              clearable
+              style="width: 240px"
+              @keyup.enter.native="handleQuery"
+            />
+          </el-form-item>
+          <el-form-item label="日期" style="margin-left: 2%">
+            <el-date-picker
+              :size="mini"
+              v-model="dateRange"
+              type="daterange"
+              :picker-options="pickerOptions"
+              popper-class="elDatePicker"
+              value-format="yyyy-MM-dd"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              align="right"
+            >
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button
+              v-hasPermi="['system:selloutofwarehouse:list']"
+              size="mini"
+              class="biaoto-buttonchaxuen"
+              @click="handleQuery"
+              >查询</el-button
+            >
+          </el-form-item>
+          <el-form-item>
+            <el-button
+              v-hasPermi="['system:selloutofwarehouse:list']"
+              class="biaoto-buttonchuangjian"
+              size="mini"
+              @click="resetQuery"
+              >重置</el-button
+            >
+          </el-form-item>
+          <el-form-item style="margin-left: 78%">
+            <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
+            <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
+            <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button> -->
+            <el-button
+              size="mini"
+              v-hasPermi="['system:selloutofwarehouse:add']"
+              class="biaoto-buttonchuangjian"
+              >创建</el-button
+            >
+            <el-dropdown trigger="click">
+              <span class="el-dropdown-link xialaxuanxang">
+                <i class="el-icon-caret-bottom el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <!-- <el-dropdown-item class="clearfix" >
                               通过订单创建
                              <el-badge class="mark"/>
                            </el-dropdown-item> -->
@@ -56,141 +100,452 @@
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu"
-                            @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
-                            v-hasPermi="['system:selloutofwarehouse:bjwc']">标记完成
-                        </el-button>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen"
-                            @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
-                            v-hasPermi="['system:selloutofwarehouse:qxwc']">取消完成
-                        </el-button>
-                    </el-form-item>
-                </el-form>
+            <!-- <el-button
+              plain
+              size="mini"
+              class="biaoto-buttondaochu"
+              @click="PurchaseinboundBiaojiWancheng01"
+              :disabled="multiple"
+              v-hasPermi="['system:selloutofwarehouse:bjwc']"
+              >标记完成
+            </el-button>
+            <el-button
+              plain
+              size="mini"
+              class="biaoto-buttonfanshen"
+              @click="PurchaseinboundQuxiaoWangcheng01"
+              :disabled="multiple"
+              v-hasPermi="['system:selloutofwarehouse:qxwc']"
+              >取消完成
+            </el-button> -->
+          </el-form-item>
+        </el-form>
 
-                <el-table border :header-cell-style="headClassssmt" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="440"
-                    :default-sort="{ prop: 'name', order: 'descending' }" style="width: 92.5%;height: 8%;margin-left: -2%;"
-                    @selection-change="handleSelectionChange">
-                    <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbsb07" prop="cbsb07" sortable style="padding-top:60px !important;" width="160px;" fixed />
-                    <el-table-column label="客户订单号" align="left" key="cbsb30" prop="cbsb30" width="180px;" sortable />
-                    <el-table-column label="日期" align="left" key="cbsb08" prop="cbsb08" :formatter="formatDate"
-                        width="160px;" sortable>
-                    </el-table-column>
-                    <el-table-column label="客户" align="left" key="cbca08" prop="cbca08" width="280px;" sortable />
-                    <el-table-column label="客户等级" align="left" key="cbca28" prop="cbca28" width="160px;" sortable />
-                    <el-table-column label="联系人" align="left" key="cbsb18" prop="cbsb18" width="160px;" sortable />
-                    <el-table-column label="电话" align="left" key="cbsb19" prop="cbsb19" width="160px;" sortable />
-                    <el-table-column label="销售人员" align="left" key="caua15" prop="caua15" width="160px;" sortable />
-                    <el-table-column label="仓库" align="left" key="cala08" prop="cala08" width="160px;" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="160px;" sortable />
-                    <el-table-column label="收货地址" align="left" key="cbsb21" prop="cbsb21" width="490px;" sortable />
-                    <el-table-column label="收货人" align="left" key="cala08" prop="cala08" width="160px;" sortable />
-                    <el-table-column label="收货电话" align="left" key="cbsb19" prop="cbsb19" width="160px;" sortable />
-                    <el-table-column label="关联订单" align="left" key="cbsb31" prop="cbsb31" width="160px;" sortable>
-                        <template scope="scope">
-                             <div>{{ scope.row.cbsb31 == 1 ? "是" : scope.row.cbsb31 == 0 ?
-                            "否" : "未确定状态"
-                            }}
-                            </div>
-                        </template>
-                    </el-table-column>
+        <el-table
+          border
+          :header-cell-style="headClassssmt"
+          :row-style="{ height: '3px' }"
+          :cell-style="{ padding: '2px' }"
+          v-loading="loading"
+          :data="userList"
+          height="440"
+          :default-sort="{ prop: 'name', order: 'descending' }"
+          style="width: 92.5%; height: 8%; margin-left: -2%"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column type="selection" width="50" align="center" />
+          <el-table-column
+            label="编号"
+            align="left"
+            key="cbsb07"
+            prop="cbsb07"
+            sortable
+            style="padding-top: 60px !important"
+            width="160px;"
+            fixed
+          />
+          <el-table-column
+            label="客户订单号"
+            align="left"
+            key="cbsb30"
+            prop="cbsb30"
+            width="180px;"
+            sortable
+          />
+          <el-table-column
+            label="日期"
+            align="left"
+            key="cbsb08"
+            prop="cbsb08"
+            :formatter="formatDate"
+            width="160px;"
+            sortable
+          >
+          </el-table-column>
+          <el-table-column
+            label="客户"
+            align="left"
+            key="cbca08"
+            prop="cbca08"
+            width="280px;"
+            sortable
+          />
+          <el-table-column
+            label="客户等级"
+            align="left"
+            key="cbca28"
+            prop="cbca28"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="联系人"
+            align="left"
+            key="cbsb18"
+            prop="cbsb18"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="电话"
+            align="left"
+            key="cbsb19"
+            prop="cbsb19"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="销售人员"
+            align="left"
+            key="caua15"
+            prop="caua15"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="仓库"
+            align="left"
+            key="cbwa09"
+            prop="cbwa09"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="结算货币"
+            align="left"
+            key="cala08"
+            prop="cala08"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="收货地址"
+            align="left"
+            key="cbsb21"
+            prop="cbsb21"
+            width="490px;"
+            sortable
+          />
+          <el-table-column
+            label="收货人"
+            align="left"
+            key="cbsb22"
+            prop="cbsb22"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="收货电话"
+            align="left"
+            key="cbsb19"
+            prop="cbsb19"
+            width="160px;"
+            sortable
+          />
+          <el-table-column
+            label="关联订单"
+            align="left"
+            key="cbsb31"
+            prop="cbsb31"
+            width="160px;"
+            sortable
+          >
+            <template scope="scope">
+              <div>
+                {{
+                  scope.row.cbsb31 == 1
+                    ? "是"
+                    : scope.row.cbsb31 == 0
+                    ? "否"
+                    : ""
+                }}
+              </div>
+            </template>
+          </el-table-column>
 
-                    <el-table-column label="关联提货单" align="left" key="cbsb32" prop="cbsb32" width="160px;" sortable>
-                        <template scope="scope">
-                             <div>{{ scope.row.cbsb31 == 0 ? "是" : scope.row.cbsb31 == 1 ?
-                            "否" : "未确定状态"
-                            }}
-                            </div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="状态" align="left" key="cbsb11" prop="cbsb11" width="170px;" sortable>
-                        <template scope="scope">
-                             <div>{{ scope.row.cbsb11 == 0 ? "未审核" : scope.row.cbsb11 == 1 ?
-                            "已审核" : scope.row.cbsb11 == 4 ? "已完成" : "未确定状态"
-                            }}
-                            </div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="出库建议表" align="left" key="cala08" prop="cala08" width="160px;" sortable />
-                    <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width"
-                        fixed="right">
-                        <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" type="text" icon="el-icon-edit"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbsb11 == 0 | scope.row.cbsb11 == 2" v-hasPermi="['system:selloutofwarehouse:edit']">
-                                修改
-                            </el-button>
-                            <el-button size="mini" type="text" icon="el-icon-delete"
-                                class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-if="scope.row.cbsb11 == 0"
-                                v-hasPermi="['system:selloutofwarehouse:remove']">删除</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)"   v-if="scope.row.cbsb11 == 4 | scope.row.cbsb11 == 1"   v-hasPermi="['system:selloutofwarehouse:detail']">详情
-                            </el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:selloutofwarehouse:sh']"
-                                v-if="scope.row.cbsb11 == 0">审核</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:selloutofwarehouse:fs']"
-                                v-if="scope.row.cbsb11 == 1">反审</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:selloutofwarehouse:qxwc']" v-if="scope.row.cbsb11 == 4">取消完成</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                                v-hasPermi="['system:selloutofwarehouse:bjwc']"
-                                v-if="scope.row.cbsb11 == 1">标记完成</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
+          <el-table-column
+            label="关联提货单"
+            align="left"
+            key="cbsb32"
+            prop="cbsb32"
+            width="160px;"
+            sortable
+          >
+            <template scope="scope">
+              <div>
+                {{
+                  scope.row.cbsb31 == 0
+                    ? "是"
+                    : scope.row.cbsb31 == 1
+                    ? "否"
+                    : ""
+                }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="状态"
+            align="left"
+            key="cbsb11"
+            prop="cbsb11"
+            width="170px;"
+            sortable
+          >
+            <template scope="scope">
+              <div>
+                {{
+                  scope.row.cbsb11 == 0
+                    ? "未审核"
+                    : scope.row.cbsb11 == 1
+                    ? "已审核"
+                    : scope.row.cbsb11 == 4
+                    ? "已完成"
+                    : "未确定状态"
+                }}
+              </div>
+            </template>
+          </el-table-column>
+          <!-- <el-table-column
+            label="出库建议表"
+            align="left"
+            key="cala08"
+            prop="cala08"
+            width="160px;"
+            sortable
+          /> -->
+          <el-table-column
+            label="操作"
+            align="center"
+            width="250"
+            class-name="small-padding fixed-width"
+            fixed="right"
+          >
+            <template slot-scope="scope" style="margin-left: -10%">
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
+                class="button-caozuoxougai caozuoxiangqeng"
+                @click="handlxiaoshochkudanone(scope.row)"
+                v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"
+                v-hasPermi="['system:selloutofwarehouse:edit']"
+              >
+                修改
+              </el-button>
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-delete"
+                class="button-caozuoxougai caozuoxiangqeng"
+                @click="handleDelete01(scope.row)"
+                v-if="scope.row.cbsb11 == 0"
+                v-hasPermi="['system:selloutofwarehouse:remove']"
+                >删除</el-button
+              >
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-share"
+                class="caozuoxiangqeng"
+                @click="handleAuthRole(scope.row)"
+                v-if="(scope.row.cbsb11 == 4) | (scope.row.cbsb11 == 1)"
+                v-hasPermi="['system:selloutofwarehouse:detail']"
+                >详情
+              </el-button>
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-s-order"
+                class="caozuoxiangqeng"
+                @click="PurchaseinboundShenpi(scope.row)"
+                v-hasPermi="['system:selloutofwarehouse:sh']"
+                v-if="scope.row.cbsb11 == 0"
+                >审核</el-button
+              >
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-s-order"
+                class="caozuoxiangqeng"
+                @click="PurchaseinboundFanShenpi(scope.row)"
+                v-hasPermi="['system:selloutofwarehouse:fs']"
+                v-if="scope.row.cbsb11 == 1"
+                >反审</el-button
+              >
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-s-order"
+                class="caozuoxiangqeng"
+                @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
+                v-hasPermi="['system:selloutofwarehouse:qxwc']"
+                v-if="scope.row.cbsb11 == 4"
+                >取消完成</el-button
+              >
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-s-order"
+                class="caozuoxiangqeng"
+                @click="PurchaseinboundBiaojiWancheng(scope.row)"
+                v-hasPermi="['system:selloutofwarehouse:bjwc']"
+                v-if="scope.row.cbsb11 == 1"
+                >标记完成</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
 
-                <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
-                    class="pagintotal" />
-            </el-col>
-        </el-row>
+        <pagination
+          v-show="total > 0"
+          :total="total"
+          :page.sync="queryParams.pageNum"
+          :limit.sync="queryParams.pageSize"
+          @pagination="getList"
+          :page-sizes="[2, 5, 10, 15, 20]"
+          class="pagintotal"
+        />
+      </el-col>
+    </el-row>
 
+    <!--提货单创建-->
+    <el-dialog :visible.sync="open3">
+      <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
+        <el-col :span="12">
+          <el-popover placement="bottom-start" trigger="click" clearable>
+            <kuweixxweihu
+              ref="kuweixxweihu"
+              @selected="selected01"
+              style="width: 260px !important"
+            />
+            <el-input
+              slot="reference"
+              v-model="form2.cbpc100"
+              placeholder="请选择仓库"
+              readonly
+              style="width: 96%"
+            >
+            </el-input>
+          </el-popover>
+        </el-col>
+        <el-col :span="12">
+          <el-input
+            v-model="queryParams.orderNo"
+            id="miaoshu"
+            placeholder="请输入销售订单编号"
+            clearable
+            style="width: 100%"
+            @change="handleQuerys(queryParams.orderNo)"
+          />
+        </el-col>
+      </el-row>
+      <el-table
+        border
+        :header-cell-style="headClassssmt"
+        v-loading="loading"
+        :data="userList01"
+        height="440"
+        :default-sort="{ prop: 'name', order: 'descending' }"
+        style="width: 100%; height: 8%; margin-left: -2%"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column
+          label=""
+          align="center"
+          width="50"
+          class-name="small-padding fixed-width"
+        >
+          <template slot-scope="scope" style="margin-left: -10%">
+            <el-button
+              size="mini"
+              icon="el-icon-share"
+              class="button-caozuoxougai caozuoxiangqeng"
+              type="primary"
+              @click="sendParams(scope.row)"
+              v-hasPermi="['system:user:edit']"
+            >
+            </el-button>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="编号"
+          align="left"
+          key="orderNo"
+          prop="orderNo"
+          sortable
+          style="padding-top: 60px !important"
+          width="260px;"
+        />
+        <el-table-column
+          label="单据日期"
+          align="left"
+          key="orderDate"
+          prop="orderDate"
+          width="180px;"
+          sortable
+        />
+        <el-table-column
+          label="客户"
+          align="left"
+          key="customerName"
+          prop="customerName"
+          width="220px;"
+          sortable
+        />
+        <el-table-column
+          label="销售人员"
+          align="left"
+          key="saleUser"
+          prop="saleUser"
+          width="160px;"
+          sortable
+        >
+        </el-table-column>
+        <el-table-column
+          label="制单日期"
+          align="left"
+          key="orderDate"
+          prop="orderDate"
+          width="280px;"
+          sortable
+        />
+      </el-table>
+      <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
+      <pagination
+        v-show="totall > 0"
+        :total="totall"
+        :page.sync="queryParamss.pageNum"
+        :limit.sync="queryParamss.pageSize"
+        @pagination="userList01"
+        :page-sizes="[2, 5, 10, 15, 20]"
+        class="pagintotal"
+      />
+    </el-dialog>
 
-        <!--提货单创建-->
-        <el-dialog :visible.sync="open3">
-            <el-table border :header-cell-style="headClassssmt" v-loading="loading" :data="userList01" height="440"
-                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
-                    @selection-change="handleSelectionChange">
-                    <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
-                      <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
-                                v-hasPermi="['system:user:edit']">
-                            </el-button>
-                       </template>
-                       </el-table-column>
-                    <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable style="padding-top:60px !important;" width="260px;" />
-                     <el-table-column label="单据日期" align="left" key="orderDate" prop="orderDate" width="180px;" sortable />
-                    <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
-                    <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
-                    </el-table-column>
-                    <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
-
-            </el-table>
-            <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
-            <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamss.pageNum"
-                    :limit.sync="queryParamss.pageSize" @pagination="userList01" :page-sizes="[2, 5, 10, 15, 20]"
-                    class="pagintotal" />
-        </el-dialog>
-
-        <!--修改-->
-        <el-dialog :visible.sync="open">
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">销售出库单</span>
-                <hr />
-            </div>
-            <el-form ref="form" :model="form" label-width="30%" style="margin-left:-15%;margin-top:3%;">
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbsb07" >
-                            <el-input v-model="form.cbsb07" maxlength="30" disabled style="width:50%;" />
-                        </el-form-item>
-                    </el-col>
-                    <!-- <el-col style="margin-top:1%;">
+    <!--修改-->
+    <el-dialog :visible.sync="open">
+      <div style="margin-top: -30px">
+        <span style="font-size: 20px">销售出库单</span>
+        <hr />
+      </div>
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="30%"
+        style="margin-left: -15%; margin-top: 3%"
+      >
+        <el-row>
+          <el-col style="margin-top: 1%">
+            <el-form-item label="编号:" prop="cbsb07">
+              <el-input
+                v-model="form.cbsb07"
+                maxlength="30"
+                disabled
+                style="width: 50%"
+              />
+            </el-form-item>
+          </el-col>
+          <!-- <el-col style="margin-top:1%;">
                         <el-form-item label="日期:" prop="cbpc08">
                             <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
                                 style="width:50%" />
@@ -998,7 +1353,6 @@ export default {
             this.$modal.confirm('是否要反审,编号为"' + this.idss + '"的数据项？').then(() => {
             let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
             // console.log(row.cbpc01, 8888);
-
             userIds.forEach((item) => {
                 req.PurchaseinboundShs(item).then((res) => {
                     // console.log(res, 123)
@@ -1016,97 +1370,116 @@ export default {
           }).catch(() => { });
         },
 
+    //标记完成
+    PurchaseinboundBiaojiWancheng(row) {
+      // console.log(row.cbpc01, 8888);
+      let cbpc01 = row.cbsb01;
+      let status = row.cbsb11;
+      this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
+    //   this.$modal
+    //     .confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？')
+    //     .then(() => {
+    //       PurchaseinboundShss(row).then((response) => {
+    //         if (response.code == 200) {
+    //           console.log(this.form.cbpc01, 789);
+    //           // this.submitShangpin();
+    //           this.getList();
+    //           // this.open = false;
+    //           this.$message({ message: "标记完成", type: "success" });
+    //         } else {
+    //           this.$message({ message: response.msg, type: "error" });
+    //         }
+    //       });
+    //     })
+    //     .catch(() => {});
+    },
 
-        //标记完成
-        PurchaseinboundBiaojiWancheng(row) {
-            // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
-            PurchaseinboundShss(row).then(response => {
-                if(response.code == 200){
-                    console.log(this.form.cbpc01, 789)
-                    // this.submitShangpin();
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '标记完成', type: 'success' });
-                }else{
-                    this.$message({ message:response.msg,type :'error'})
+    //标记完成上面的按钮
+    PurchaseinboundBiaojiWancheng01(row) {
+      this.$modal
+        .confirm('是否要标记完成,编号为"' + this.idss + '"的数据项？')
+        .then(() => {
+          let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
+          // console.log(row.cbpc01, 8888);
+
+          userIds.forEach((item) => {
+            req
+              .PurchaseinboundShss(item)
+              .then((res) => {
+                // console.log(res, 123)
+                if (res.code == 200) {
+                  this.getList();
+                  this.$modal.msgSuccess("标记完成");
+                } else {
+                  this.$message({ message: res.msg, type: "error" });
                 }
+              })
+              .catch((e) => {
+                // console.log(e, 456)
+              });
+          });
+        })
+        .catch(() => {});
+    },
+    //取消标记
+    PurchaseinboundQuxiaoWangcheng(row) {
+      // console.log(row.cbpc01, 8888);
 
+      let cbpc01 = row.cbsb01;
+      let status = row.cbsb11;
+      this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
 
-            });
-            }).catch(() => { });
-        },
+      // Purchaseinbounds(row).then(response => {
+      //     console.log(this.form.cbpc01, 789)
+      //     // this.submitShangpin();
+      //     this.getList();
+      //     // this.open = false;
+      //     this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
 
-        //标记完成上面的按钮
-        PurchaseinboundBiaojiWancheng01(row) {
-            this.$modal.confirm('是否要标记完成,编号为"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
+      // });
 
-            userIds.forEach((item) => {
-                req.PurchaseinboundShss(item).then((res) => {
-                    // console.log(res, 123)
-                    if(res.code == 200){
-                        this.getList();
-                        this.$modal.msgSuccess("标记完成");
-                    }else{
-                        this.$message({ message:res.msg,type :'error'})
-                    }
-
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
-          }).catch(() => { });
-        },
-        //取消标记
-        PurchaseinboundQuxiaoWangcheng(row) {
-            // console.log(row.cbpc01, 8888);
-
-            // Purchaseinbounds(row).then(response => {
-            //     console.log(this.form.cbpc01, 789)
-            //     // this.submitShangpin();
-            //     this.getList();
-            //     // this.open = false;
-            //     this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
-
-            // });
-
-            // console.log(row.cbpc01, 8888);
-            this.$modal.confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
-                Purchaseinbounds(row).then(response => {
-                    console.log(this.form.cbpc01, 789);
-                    if(response.code == 200){
-                        this.getList();
-                        this.$message({ message: '取消标记成功', type: 'success' });
-                    }else{
-                        this.$message({ message: response.msg, type: 'error' });
-                    }
-                });
-            }).catch(() => { });
-        },
-        //取消标记上面的
-        PurchaseinboundQuxiaoWangcheng01(row) {
-            this.$modal.confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
-
-            userIds.forEach((item) => {
-                req.Purchaseinbounds(item).then((res) => {
-                 if (res.code == "200") {
-                    // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("取消标记成功");
-                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
-                  }
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
-          }).catch(() => { });
-        },
-
+      // console.log(row.cbpc01, 8888);
+    //   this.$modal
+    //     .confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？')
+    //     .then(() => {
+    //       Purchaseinbounds(row).then((response) => {
+    //         console.log(this.form.cbpc01, 789);
+    //         if (response.code == 200) {
+    //           this.getList();
+    //           this.$message({ message: "取消标记成功", type: "success" });
+    //         } else {
+    //           this.$message({ message: response.msg, type: "error" });
+    //         }
+    //       });
+    //     })
+    //     .catch(() => {});
+    },
+    //取消标记上面的
+    PurchaseinboundQuxiaoWangcheng01(row) {
+      this.$modal
+        .confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？')
+        .then(() => {
+          let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
+          // console.log(row.cbpc01, 8888);
+          userIds.forEach((item) => {
+            req
+              .Purchaseinbounds(item)
+              .then((res) => {
+                // console.log(res, 123)
+                if (res.code == 200) {
+                  // console.log(res, 123)
+                  this.getList();
+                  this.$modal.msgSuccess("取消标记成功");
+                } 
+              })
+              .catch((e) => {
+                // console.log(e, 456)
+              });
+          });
+        })
+        .catch(() => {});
+    },
+    
         /** 修改按钮操作 */
         handleUpdate() {
                 let row = {}
@@ -1117,7 +1490,6 @@ export default {
                 row.cbsb30 = this.form.cbsb30;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
