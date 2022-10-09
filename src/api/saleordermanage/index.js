@@ -42,6 +42,14 @@ export function saleOrderList(data) {
     params: data
   })
 }
+//国际销售订单
+export function saleOrderListGj(data) {
+  return request({
+    url: '/sale/saleOrderListGj',
+    method: 'get',
+    params: data
+  })
+}
 
 export function swJsGoodslistBySelect(data) {
   return request({
@@ -142,6 +150,14 @@ export function auditSaleOrder(data) {
     data: data
   })
 }
+//国际销售订单
+export function auditSaleOrderGj(data) {
+  return request({
+    url: '/sale/auditSaleOrderGj',
+    method: 'post',
+    data: data
+  })
+}
 
 export function auditFinSaleOrder(data) {
   return request({
@@ -158,11 +174,26 @@ export function delSaleOrder(data) {
     data: data
   })
 }
-
+//国际销售订单
+export function delSaleOrderGj(data) {
+  return request({
+    url: '/sale/delSaleOrderGj',
+    method: 'post',
+    data: data
+  })
+}
 
 export function saleOderDetail(data) {
   return request({
     url: '/sale/saleOderDetail',
+    method: 'get',
+    params: data
+  })
+}
+//国际销售订单
+export function saleOderDetailGj(data) {
+  return request({
+    url: '/sale/saleOderDetailGj',
     method: 'get',
     params: data
   })

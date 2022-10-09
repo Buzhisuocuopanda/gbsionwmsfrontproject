@@ -454,7 +454,83 @@ export default {
 
     },
     methods: {
+      /** 销售提货单 */
+      getList() {
+        let routerParams = this.$route.query;
+        this.formArr = routerParams.data;
+        //    let zhuangh = JSON.parse(this.formArr);
+        // console.log(zhuangh[0].id,889999);
+      /*  PurchaseinListxiangq(this.formArr,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
 
+           /!* //客户名称
+            this.form2.cbpc0999 = response.data.customerName;
+            //客户名称ID
+            this.form2.cbsb09 = response.data.customerId;
+            //仓库名称
+            this.form2.cbpc100 = response.data.whName;
+            //仓库名称ID
+            this.form2.cbsb10  = response.data.whId;
+            //销售人员名称
+            this.form2.cbsb177 = response.data.saleUserName;
+            //销售人员ID
+            this.form2.cbsb17  = response.data.saleUserId;
+            //联系人
+            this.form2.cbsb18  = response.data.contacts;
+            //电话
+            this.form2.cbsb19  = response.data.phone;
+            //客户等级
+            this.form2.cbca28  = response.data.customerLevel;
+            //结算货币名称
+            this.form2.cbsb166 = response.data.currencyMsg;
+            //结算货币名称id
+            this.form2.cbsb16 = response.data.currency;
+            //收货人
+            this.form2.cbsb22 = response.data.receiver;
+            //收货电话
+            this.form2.cbsb29 = response.data.receivPhone;
+            //收货地址
+            this.form2.cbsb28 = response.data.receiveAdress;
+            //收货地址
+            this.form2.cbsb21 = response.data.receiveAdress;
+            //客户订单
+            this.form2.cbsb30 = response.data.customerNo;
+            console.log(this.form2.cbsb09,85200000);
+            response.data.goods.forEach((item)=>{
+              item.cbsc177=item.orderClass;
+              item.cbsc15 = item.supplierId;
+              item.cbsd133 = item.brand;
+              item.cbsd134 = item.model;
+              item.cbsd135 = item.description;
+              item.cbsc08 = item.goodsId;
+              item.cbsc09 = item.qty;
+              item.cbsc11 = item.price;
+              item.cbsc12 = item.totalPrice;
+              item.cbsc13 = item.scanQty;
+              item.cbsc144 = item.noSendQty;
+              item.cbsc15 = item.remark;
+              // item.cbsc14 = item.saleOrderId;
+              item.cbsc14 = item.cbob01;
+
+              item.cbpc000 =item.brand + "~" + item.model + "~" + item.description;
+              if(item.cbsc177=="国内订单"){
+                item.cbsc17="1";
+              }else{
+                item.cbsc17 = "2";
+              }
+
+            })
+            //------------
+            this.formArr = response.data;
+            this.tableData = response.data.goods;
+            this.total = response.data.total;*!/
+            console.log(response.data.goods, 339688);
+
+            console.log(response.data,1709916);
+
+
+          }
+        );*/
+      },
          //返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
