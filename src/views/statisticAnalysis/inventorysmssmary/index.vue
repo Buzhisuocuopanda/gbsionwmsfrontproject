@@ -10,8 +10,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="销售人员" style="margin-left: 20px"   class="item-r" >
-          <el-select v-model="queryParams.caua17"  clearable  filterable placeholder="请输入关键词" :loading="loading3">
-            <el-option v-for="item in cauaList" :key="item.caua17" :label="item.caua17" :value="item.caua17"></el-option>
+          <el-select v-model="queryParams.caua17" v-loadmore="getCauaList"  clearable  filterable placeholder="请输入关键词">
+            <el-option v-for="item in cauaList" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
 
         </el-form-item>
@@ -73,6 +73,32 @@
 // import { totalOrderList } from "@/api/saleordermanage";
 import {formatDate2} from '../../../utils';
 import { getInventorysmssmaryquerysList,getSwJsGoodsAllList,getSwJsCustomerAllList,getsalermanAllList } from "@/api/statisticAnalysis/index";
+import {systemUserSelect } from '@/api/saleordermanage'
+import Vue from "vue";
+
+Vue.directive('loadmore', {
+  bind(el, binding) {
+
+    // 获取element-ui定义好的scroll盒子
+    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+    SELECTWRAP_DOM.addEventListener('scroll', function() {
+
+      /*
+      * scrollHeight 获取元素内容高度(只读)
+      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+      * clientHeight 读取元素的可见高度(只读)
+      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+      */
+      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+      if(CONDITION) {
+        binding.value();
+      }
+    });
+  }
+})
 export default {
   components: {},
   name: "inventorysmssmary",
@@ -101,6 +127,11 @@ export default {
         startTime:undefined,
         endTime:undefined,
 
+      },
+
+      userParams: {
+        pageNum: 1,
+        pageSize: 10,
       },
       inwuquList: [],
       total:0,
@@ -310,14 +341,12 @@ export default {
     },
     //下拉列表数据销售人员
     getCauaList(){
-      let param={};
       this.loading3 = true;
-      getsalermanAllList(param).then(response => {
+      systemUserSelect(this.userParams).then(response => {
         this.loading3 = false;
-        if (response.data != null) {
-          this.cauaList = response.data;
-        } else {
-          this.cauaList = [];
+        if (response.code == 200) {
+          this.userParams.pageNum=this.userParams.pageNum+1;
+          this.cauaList.push(...response.data.rows)
         }
       },error => {
         this.loading3 = false;
