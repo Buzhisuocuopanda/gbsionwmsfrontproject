@@ -1273,7 +1273,7 @@ export default {
                                     cbpc099: ""
                                 }
                             }else{
-                                this.$message({ message: response.msg, type: 'error' }); 
+                                // this.$message({ message: response.msg, type: 'error' }); 
                             }
                             this.getTreeselect();
                             // this.submitShangpin();
