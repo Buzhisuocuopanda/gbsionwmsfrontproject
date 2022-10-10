@@ -110,6 +110,7 @@
     <pagination
       v-show="total>0"
       :total="total"
+      :page-sizes="[10, 15, 20, 50, 500]"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
@@ -144,7 +145,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 15,
         ipaddr: undefined,
         userName: undefined,
         status: undefined

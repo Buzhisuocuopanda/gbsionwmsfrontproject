@@ -77,7 +77,7 @@
                         </el-table-column>
                     </el-table>
                     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                        :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20,3000]"
+                        :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                         class="pagintotal" />
                 </el-col>
             </el-row>
@@ -113,7 +113,7 @@
 
                         <el-form-item label="商品品牌:" prop="cbpc099">
                             <el-popover placement="bottom-start" trigger="click">
-                                <ListMaintenancePp ref="ListMaintenancePp" @selected="selected02" style="width:350px !important;" />
+                                <ListMaintenance ref="ListMaintenance" @selected="selected02" style="width:350px !important;" />
                                 <el-input slot="reference" v-model="form.cbpc099" placeholder="" readonly
                                     style="width:82%;">
                                 </el-input>
@@ -278,7 +278,7 @@
                             </el-form-item> -->
                         <el-form-item label="商品品牌:" prop="cbpc099">
                             <el-popover placement="bottom-start" trigger="click">
-                                <ListMaintenancePp ref="ListMaintenancePp" @selected="selected01"  style="width:350px !important" />
+                                <ListMaintenance ref="ListMaintenance" @selected="selected01"  style="width:350px !important" />
                                 <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly
                                     style="width:80%;">
                                 </el-input>
@@ -450,13 +450,10 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
  //列表
 import ListMaintenance from "@/components/ListMaintenance";
 
-//商品品牌列表
-import ListMaintenancePp from "@/components/ListMaintenancePp";
-
 export default {
     name: "User",
     dicts: ['sys_normal_disable', 'sys_user_sex', 'sw_js_goods_if_enabled'],
-    components: { Treeselect,ListMaintenance,ListMaintenancePp },
+    components: { Treeselect,ListMaintenance },
     data() {
         const validateNumber = (rule, value, callback) => {
             let numberReg = /^[1-9][0-9]{0,11}$/

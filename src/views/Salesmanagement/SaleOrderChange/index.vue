@@ -84,7 +84,7 @@
       </el-table>
       <el-pagination
         :background="true"
-        :page-sizes="[10, 20, 30, 40]"
+        :page-sizes="[10, 15, 20, 50, 500]"
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
@@ -269,7 +269,7 @@
 </template>
 <script>
   // import x from ''
-  import { saleChangeList,reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { delSaleChange,saleChangeList,reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -413,7 +413,7 @@
         },
         listQuery: {
           pageNum: 1,
-          pageSize: 10
+          pageSize: 15
         },
         totalItems: 0,
         // ExcelUploadUrl: process.env.VUE_APP_BASE_API+"/sale/importTotalOrder",
@@ -583,7 +583,7 @@
             delete: 1,
 
           }
-          delSaleOrder(param).then(response => {
+          delSaleChange(param).then(response => {
             // console.log(response)
             if ( response.code === 200) {
               this.$message.success("删除成功")

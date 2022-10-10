@@ -154,7 +154,7 @@
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
-      @pagination="getList"
+      @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
     />
 
     <!-- 添加或修改参数配置对话框 -->
@@ -218,7 +218,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 15,
         dictName: undefined,
         dictType: undefined,
         status: undefined

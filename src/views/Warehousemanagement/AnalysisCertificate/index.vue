@@ -92,41 +92,60 @@
                         <template slot-scope="scope" style="margin-left:-10%;">
                              <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
+                                v-if="scope.row.cbqa09 == 0"
                                  v-hasPermi="['system:qualityin:edit']">
                                 修改
                             </el-button>
-                            <el-button size="mini" type="text" icon="el-icon-delete"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-if="scope.row.cbqa09 == 0 | scope.row.cbqa09 == ' '"
-                                v-hasPermi="['system:qualityin:remove']">删除</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                                v-hasPermi="['system:qualityin:remove']">删除</el-button> -->
+                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                             v-if="scope.row.cbqa09 == 4 | scope.row.cbqa09 == 1"
                                 @click="handleAuthRole(scope.row)" v-hasPermi="['system:qualityin:detail']">详情
+                            </el-button> -->
+                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:qualityin:detail']">详情
                             </el-button>
+                            <el-button size="mini" type="text" icon="el-icon-delete"
+                                class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
+                                v-hasPermi="['system:qualityin:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:qualityin:sh']"
                                 v-if="scope.row.cbqa09 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:qualityin:fs']"
                                 v-if="scope.row.cbqa09 == 1">反审</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
                                 v-hasPermi="['system:qualityin:qxwc']" v-if="scope.row.cbqa09 == 4">取消完成</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:qualityin:bjwc']"
-                                v-if="scope.row.cbqa09 == 1 | scope.row.cbqa09 == 1">标记完成</el-button>
+                                v-if="scope.row.cbqa09 == 1 | scope.row.cbqa09 == 1">标记完成</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
             </el-col>
         </el-row>
         <!--提货单创建-->
         <el-dialog :visible.sync="open3">
+            <el-row tyle="margin-left:-14px;margin-bottom:10px">
+                <el-col :span="12">
+                    <el-input
+                        v-model="queryParams.orderNo"
+                        id="miaoshu"
+                        placeholder="请输入销售订单编号,sn码"
+                        clearable
+                        style="width: 100%"
+                        @change="handleQuerys(queryParams.orderNo)"
+                        />
+                </el-col>
+            </el-row>
             <el-table  v-loading="loading" :data="userList099" height="440" @selection-change="handleSelectionChange"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;">
                     <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
@@ -675,6 +694,18 @@ export default {
         this.chen();
     },
     methods: {
+        handleQuerys(saleNo){
+            console.log(saleNo)
+            let obj = {
+                orderNo:saleNo,
+            }
+            Purchaseintihuadang(obj).then((res) =>{
+                if(res.code == 200){
+                    this.userList099 = response.data.rows;
+                    this.total = response.data.total;
+                }
+            })
+        },
         tong(){
           this.open3 = true;
         },
@@ -736,7 +767,10 @@ export default {
         /** 查询用户列表 */
         getList099() {
             this.loading = true;
-            Purchaseintihuadang(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            let obj = {
+                status : 2
+            };
+            Purchaseintihuadang(obj,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList099 = response.data.rows;
                 this.total = response.data.total;
                 // //供应商

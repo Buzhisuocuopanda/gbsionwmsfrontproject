@@ -37,11 +37,30 @@ export function PurchaseinboundList(query) {
   })
 }
 
-// 详情
-export function PurchaseinboundLists(CBPC01) {
+//详情
+export function PurchaseinboundLists(data) {
   return request({
-    url: '/system/Purchaseinbound/SwJsSkuBarcodelistss?cbpc01='+ CBPC01,
-    method: 'get'
+    url: '/system/SalesScheduledOrders/saleOrderAdvance?id='+ data,
+    method: 'post',
+    data:data
+  })
+}
+
+//销售预订单变更单详情
+export function PurchaseinSalesAdvance(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/saleOrderAdvance?id='+ data,
+    method: 'post',
+    data: data
+  })
+}
+  
+//销售预订单变更单修改 
+export function PurchaseinboundEditSalesAdvance(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/editGsSalesOrdersChange',
+    method: 'post',
+    data: data
   })
 }
 
@@ -53,6 +72,7 @@ export function PurchaseinboundEdit(data) {
     data: data
   })
 }
+
 
 // 删除
 export function PurchaseinboundRemove(data) {

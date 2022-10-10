@@ -360,7 +360,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrderChange,orderChangeDetail,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {orderChangeGoodsSelect,mdfSaleOrderChange,orderChangeDetail,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -751,20 +751,20 @@
           url: process.env.VUE_APP_BASE_API + "/system/barcode/importSwJsSkuBarcode"
         },
         listQuery: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10
         },
         customerListQuery: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10
         },
         saleUserListQuery: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10
         },
         // 查询参数
         queryParams: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10,
 
           total: this.total,
@@ -1218,13 +1218,14 @@
 // // 这里可以做你想做的任何事 到底执行
 //        this.options=this.options2
         const param={
-          goodsMsg: this.goodsMsg,
+          selectMsg: this.goodsMsg,
+          orderId:this.formData.orderId,
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
 
 
-        swJsGoodslistBySelect(param).then(response => {
+        orderChangeGoodsSelect(param).then(response => {
           if (response.code == "200") {
             this.listQuery.pageNum=this.listQuery.pageNum+1
             // this.options.push.apply(this.options,response.data.rows)
@@ -1238,12 +1239,14 @@
         this.listQuery.pageNum=1
         this.goodsMsg=val
         const param={
-          goodsMsg: this.goodsMsg,
+          selectMsg: this.goodsMsg,
+          orderId:this.formData.orderId,
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
 
-        swJsGoodslistBySelect(param).then(response => {
+
+        orderChangeGoodsSelect(param).then(response => {
           if (response.code == "200") {
 
             this.listQuery.pageNum=this.listQuery.pageNum+1
@@ -1435,9 +1438,11 @@
         });
       },
       initSelect(){
-        const param={}
+        const param={
+          orderId:this.formData.orderId
+        }
 
-        swJsGoodslistBySelect(param).then(response => {
+        orderChangeGoodsSelect(param).then(response => {
           if (response.code == "200") {
             this.options=response.data.rows
           }else {

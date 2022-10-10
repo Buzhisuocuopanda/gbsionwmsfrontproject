@@ -378,7 +378,7 @@
           :page.sync="queryParams.pageNum"
           :limit.sync="queryParams.pageSize"
           @pagination="getList"
-          :page-sizes="[2, 5, 10, 15, 20]"
+          :page-sizes="[10, 15, 20, 50, 500]"
           class="pagintotal"
         />
       </el-col>

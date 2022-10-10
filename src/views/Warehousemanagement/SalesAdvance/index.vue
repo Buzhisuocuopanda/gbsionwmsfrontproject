@@ -84,18 +84,18 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                            <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleAuthRolexiugai(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:saleChange:edit']">
                                 修改
-                            </el-button> -->
+                            </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:saleChange:remove']">删除</el-button>
-                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                            <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
-                            </el-button> -->
+                            </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:saleChange:sh']"
@@ -115,7 +115,7 @@
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
             </el-col>
         </el-row>
@@ -728,7 +728,7 @@ export default {
                 // //供应商
                 // this.postOptions = response.data.content;
                 // console.log(this.userList, daterange3369);
-                console.log(response, 339688);
+                // console.log(response, 339688);
                 // this.deleteFlag = response.data.rows.deleteFlag;
                 this.loading = false;
               }else{
@@ -1321,13 +1321,13 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
-             if (response.code == "200") {
+            if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
                 }else{
                 this.$message({ message: response.msg, type: 'error' });
-               }
+            }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */

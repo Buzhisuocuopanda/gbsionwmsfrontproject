@@ -86,11 +86,11 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                            <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleChuangJiangonexiugai(scope.row)"
                                 v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:salesReceipt:edit']">
                                 修改
-                            </el-button> -->
+                            </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                v-if="scope.row.status == 0 | scope.row.status == ' '"
@@ -117,7 +117,7 @@
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
             </el-col>
         </el-row>
@@ -1276,7 +1276,7 @@ export default {
              const cbpc01 = row.id;
             console.log(row.cbpc01);
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-SalesAdvancexiugai/role/"+ cbpc01);
+            this.$router.push("/system/user-SalesReceiptxiugai/role/"+ cbpc01);
         },
 
         // /** 提交按钮 */

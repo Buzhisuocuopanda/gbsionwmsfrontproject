@@ -289,7 +289,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchaseinboundAdds, PurchaseinboundAdd, PurchaseinListxiangq } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundAdds, PurchaseinboundAdd, PurchaseinListxiangq,SwJsSkuBarcodelistss  } from "@/api/Warehousemanagement/SalesShipment";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";

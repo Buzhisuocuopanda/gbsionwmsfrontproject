@@ -332,5 +332,5 @@ export default {
     }
 };
 </script>
-<style src="./SalesStockxqcss/index.css">
+<style src="./SalesStockxqcss/index.css" scoped>
 </style>

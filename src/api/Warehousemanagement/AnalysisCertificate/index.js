@@ -182,3 +182,12 @@ export function SwJsSkuBarcodeselectss(data) {
     params:data
   })
 }
+// 创建质检单  替换sn查询
+export function SwJsSkuBarcodeselectsss(data) {
+  return request({
+    // http://127.0.0.1:8080/system/Qualityin/SwJsSkuBarcodeselectsss
+    url: 'system/Qualityin/SwJsSkuBarcodeselectsss',
+    method: 'get',
+    params:data
+  })
+}

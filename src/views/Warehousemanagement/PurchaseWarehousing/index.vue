@@ -27,10 +27,10 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:purchaseinbound:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button v-hasPermi="['system:purchaseinbound:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:39.5%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
@@ -123,7 +123,7 @@
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-          :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+          :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
             </el-col>
         </el-row>

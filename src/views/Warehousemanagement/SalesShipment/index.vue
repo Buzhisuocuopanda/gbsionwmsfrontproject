@@ -379,7 +379,7 @@
                 v-if="scope.row.cbsb11 == 1"
                 >反审</el-button
               >
-              <el-button
+              <!-- <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-s-order"
@@ -388,7 +388,7 @@
                 v-hasPermi="['system:selloutofwarehouse:qxwc']"
                 v-if="scope.row.cbsb11 == 4"
                 >取消完成</el-button
-              >
+              > -->
               <el-button
                 size="mini"
                 type="text"
@@ -409,7 +409,7 @@
           :page.sync="queryParams.pageNum"
           :limit.sync="queryParams.pageSize"
           @pagination="getList"
-          :page-sizes="[2, 5, 10, 15, 20]"
+          :page-sizes="[10, 15, 20, 50, 500]"
           class="pagintotal"
         />
       </el-col>
@@ -524,7 +524,7 @@
         :page.sync="queryParamss.pageNum"
         :limit.sync="queryParamss.pageSize"
         @pagination="userList01"
-        :page-sizes="[2, 5, 10, 15, 20]"
+      :page-sizes="[10, 15, 20, 50, 500]"
         class="pagintotal"
       />
     </el-dialog>

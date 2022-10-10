@@ -174,16 +174,14 @@
           </el-table-column>
           <el-table-column label="替换商品SN" width="200">
             <template slot-scope="scope">
-              <!-- <sapn> -->
-                <el-select v-model="scope.row.cbqb09" placeholder="请选择">
-                    <el-option
-                    v-for="(item,index) in tableData"
-                    :key="index"
-                    :label="item.cbpm09"
-                    :value="item.cbpm09">
-                    </el-option>
+              <el-select filterable remote v-model="scope.row.cbqb09" placeholder="请选择" :filter-method="getLists">
+                  <el-option
+                  v-for="(item,index) in tableDatas"
+                  :key="index"
+                  :label="item.cbpm09"
+                  :value="item.cbpm09">
+                  </el-option>
                 </el-select>
-              <!-- </sapn> -->
             </template>
           </el-table-column>
           <el-table-column v-if="false" prop="cbpd13" label="id" width="150">
@@ -289,6 +287,7 @@ import {
   QualityinAdd,
   QualityinAdds,
   SwJsSkuBarcodeselectss,
+  SwJsSkuBarcodeselectsss,
 } from "@/api/Warehousemanagement/AnalysisCertificate";
 import { getToken } from "@/utils/auth";
 //仓库
@@ -318,6 +317,7 @@ export default {
       shenpiids: [],
       formArr: [],
       tableData: [],
+      tableDatas: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -326,6 +326,7 @@ export default {
       showSearch: false,
       // 总条数
       total: 0,
+      totals: 0,
       // 用户表格数据
       userList: null,
       // 弹出层标题
@@ -603,7 +604,7 @@ export default {
       }
     },
 
-    /** 销售提货单 */
+    /** 质检详情查询 */
     getList() {
       let id = this.$route.query.data
       // console.log(zhuangh[0].id,889999);
@@ -642,7 +643,22 @@ export default {
         // let
       });
     },
-
+    // 替换sn查询
+    getLists(query){
+      let id = this.$route.query.data
+      let cbpm08 = this.tableData[0].cbpm08
+      SwJsSkuBarcodeselectss(
+        {
+          // cbpk01:id,
+         cbpm08:cbpm08,
+         cbpm09:query}
+      ).then((response) => {
+        console.log(response,'年后11')
+        this.tableDatas = response.data.rows;
+        this.totals = response.data.total;
+        console.log(response.data.scans, 789789);
+      });
+    },
     show() {
       this.showSearch = !this.showSearch;
     },
