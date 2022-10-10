@@ -60,7 +60,7 @@
           <template slot-scope="scope" >
 <!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">修改</el-button>-->
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"
+                       type="text" v-hasPermi="['approval:unfinisheddocuments:detail']"
                        @click="showDetail(scope.row)">详情</el-button>
           </template>
 
