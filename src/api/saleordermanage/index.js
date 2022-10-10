@@ -91,6 +91,16 @@ export function systemUserSelect(data) {
     params: data
   })
 }
+//获取用户列表（不分页）
+export function systemUserSelectAll(data) {
+  return request({
+    url: '/system/customer/systemUserSelectAll',
+    method: 'get',
+    params: data
+  })
+}
+
+
 
 export function goodsPriceAndSku(data) {
   return request({
@@ -106,22 +116,20 @@ export function customerDetail(data) {
     params: data
   })
 }
+export function customerDetailShop(data) {
+  return request({
+    url: '/system/customer/customerDetailShop',
+    method: 'get',
+    params: data
+  })
+}
 // /dev-api/stage-api/sale/goodsShopListcas
 export function customerDetaillists(data) {
   console.log(data,typeof(data),'后台数据')
-  let datas = JSON.parse(data)
-  console.log(datas,'datas')
   return request({
     url: '/sale/goodsShopListcas',
     method: 'post',
     data:data,
-  })
-}
-export function addSaleOrder(data) {
-  return request({
-    url: '/sale/addSaleOrder',
-    method: 'post',
-    data: data
   })
 }
 
@@ -138,6 +146,14 @@ export function reAddSaleOrder(data) {
 export function mdfSaleOrder(data) {
   return request({
     url: '/sale/mdfSaleOrder',
+    method: 'post',
+    data: data,
+  })
+}
+export function addSaleOrder(data) {
+  return request({
+    // /dev-api/stage-api/sale/addSaleOrder
+    url: '/sale/addSaleOrder',
     method: 'post',
     data: data
   })

@@ -11,7 +11,7 @@
           v-show="showSearch"
           label-width="68px"
         >
-          <el-form-item prop="cbsa08" label="编号">
+          <el-form-item prop="orderNo" label="编号">
             <el-input
               v-model="queryParams.orderNo"
               id="miaoshu"
@@ -62,7 +62,7 @@
               >重置</el-button
             >
           </el-form-item>
-          <el-form-item style="margin-left: 60%">
+          <el-form-item style="margin-left: 76%">
             <el-button
               size="mini"
               class="biaoto-buttonchuangjian"
@@ -109,7 +109,7 @@
               v-hasPermi="['system:user:export']"
               >反审</el-button
             > -->
-            <el-button
+            <!-- <el-button
               plain
               size="mini"
               class="biaoto-buttondaochu"
@@ -126,7 +126,7 @@
               :disabled="multiple"
               v-hasPermi="['system:whmanagement:auditTakeOrder']"
               >取消完成
-            </el-button>
+            </el-button> -->
           </el-form-item>
         </el-form>
 

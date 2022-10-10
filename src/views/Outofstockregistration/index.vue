@@ -489,16 +489,16 @@ export default {
       // this.formData=row
       // this.showmdfDialog = true
 
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationmd", query: {id: row.id}})
+      this.$router.push({path: "/Outofstockregistrationmd/Outofstockregistrationmd", query: {id: row.id}})
 
     },
     createForm() {
       // this.showaddDialog = true
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationadd", query: {id: 1}})
+      this.$router.push({path: "/Outofstockregistrationadd/Outofstockregistrationadd", query: {id: 1}})
 
     },
     showDetail(row) {
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationdetail", query: {id: row.id}})
+      this.$router.push({path: "/Outofstockregistrationmd/Outofstockregistrationdetail", query: {id: row.id}})
 
     },
     cancel() {

@@ -44,10 +44,10 @@
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
+      <el-table :data="orderList" :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="480" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
                 stripe>
         <el-table-column fixed label="优先级" align="center" prop="priority" min-width="120px;"/>
-        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="120px;"/>
+        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="140px;"/>
         <el-table-column label="型号" align="center" prop="model" min-width="120px;"/>
         <el-table-column label="描述" align="center" prop="description" min-width="400px;"/>
         <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
@@ -405,6 +405,17 @@
       this.initSelect()
     },
     methods: {
+
+      //列表表头设置
+      headClasspw() {
+        return {
+          'text-align': 'left',
+          height: '30px',
+          padding: '0'
+        }
+      },
+
+
       onSubmit() {
       },
       handleSelectionChange() {

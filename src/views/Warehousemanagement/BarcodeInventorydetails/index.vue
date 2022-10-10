@@ -27,7 +27,7 @@
                     <el-form-item>
                             <el-button class="biaoto-buttonchuangjian" v-hasPermi="['system:swJsStorea:list']" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:55%;">
+                    <el-form-item style="margin-left:66%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:swJsStorea:add']" @click="handlekucunone">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
@@ -36,10 +36,10 @@
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:swJsStorea:sh']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:swJsStorea:fs']">反审</el-button>
+                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:swJsStorea:fs']">反审</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:swJsStorea:import']">导入</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -861,7 +861,7 @@ export default {
                 // console.log(row.cbpc01, 8888);
 
                 PurchaseinboundShs(row).then(response => {
-                 if (response.code == "200") {  
+                if (response.code == "200") {  
                     this.getList();
                     // this.open = false;
                     this.$message({ message: response.msg, type: 'success' });
@@ -1079,10 +1079,12 @@ export default {
         handleAuthRole: function (row) {
             // const userId = row.cbie01;
             // this.$router.push("/system/user-authhhhhhh/role/" + userId);
-
-            let cbie01 = row.cbie01
-            let status = row.cbie10
-            this.$router.push("/system/user-authhhhhhh/role/");
+            
+            let cbie01 = row.cbie01;
+            console.log(cbie01, 1234);
+            // let status = row.cbie10;
+            // consoel.log(row,2222);
+            this.$router.push("/system/user-authhhhhhh/role/" + cbie01);
         },
 
         /** 创建操作 */
@@ -1199,7 +1201,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/barcode/importSwJsSkuBarcodeimportTemplate', {
+            this.download('/system/Warehousedetailsinitialize/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理

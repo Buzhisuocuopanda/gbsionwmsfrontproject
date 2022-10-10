@@ -48,15 +48,12 @@
       </el-form>
       <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
         <el-table-column fixed label="销售订单号" align="center" prop="saleOrderNo" min-width="120px;"/>
+        <el-table-column fixed label="销售人员" align="center" prop="aslerName" min-width="120px;"/>
         <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="120px;"/>
         <el-table-column  label="问题原因" align="center" prop="question" min-width="120px;" />
         <el-table-column  label="sn" align="center" prop="sn" min-width="200px;" />
-        <el-table-column  label="处理结果" align="left" prop="answerMsg" min-width="100px;"/>
-<!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
-<!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
-<!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
-<!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
-<!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
+        <el-table-column  label="处理结果" align="left" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
+        <el-table-column  label="反馈时间" align="center" prop="inTime" :formatter="formatTime2" min-width="80px;" />
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
             <el-button
@@ -240,6 +237,7 @@
 <script>
 import { listSales, getSales, delSales, addSales, updateSales } from "@/api/system/sales";
 import { getToken } from '@/utils/auth'
+import {formatDate2} from "../../utils";
 
 export default {
   components: {},
@@ -302,6 +300,15 @@ export default {
         size: 15,
         total: this.total,
         saleOrderNo: null,
+      },
+      formatStateType(row) {
+        if (row != null) {
+          if (row.answerMsg == 1) {
+            return "未解决"
+          } else if (row.answerMsg == 2) {
+            return "已解决"
+          }
+        }
       },
       // 表单参数
       // 表单校验
@@ -456,7 +463,9 @@ export default {
     // this.getList();
     },
   methods: {
-
+    formatTime2(row){
+      return formatDate2(row.inTime);
+    },
     delTotalOrder(row){
       this.$confirm('确认要删除'+row.saleOrderNo+"售后单？", '确认操作', {
         type: 'warning',
@@ -488,12 +497,12 @@ export default {
       // this.formData=row
       // this.showmdfDialog = true
 
-      this.$router.push({path: "/Warehousemanagement/salemdfOrderDetail", query: {id: row.id}})
+      this.$router.push({path: "/aftersalesDetails/aftermdsalesDetails", query: {id: row.id}})
 
     },
     createForm() {
       // this.showaddDialog = true
-      this.$router.push({path: "/Warehousemanagement/aftersalesDetails", query: {id: 1}})
+      this.$router.push({path: "/aftersalesDetails/aftersalesDetails", query: {id: 1}})
 
     },
     cancel() {
