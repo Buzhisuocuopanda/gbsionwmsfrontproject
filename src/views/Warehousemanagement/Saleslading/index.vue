@@ -392,7 +392,7 @@
           :page.sync="queryParams.pageNum"
           :limit.sync="queryParams.pageSize"
           @pagination="getList"
-          :page-sizes="[2, 5, 10, 15, 20]"
+          :page-sizes="[10, 15, 20, 50, 500]"
         />
       </el-col>
     </el-row>
@@ -513,7 +513,7 @@
           :page.sync="queryParams.pageNum"
           :limit.sync="queryParams.pageSize"
           @pagination="getList09"
-          :page-sizes="[2, 5, 10, 15, 20]"
+          :page-sizes="[10, 15, 20, 50, 500]"
         />
     </el-dialog>
 

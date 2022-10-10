@@ -92,7 +92,7 @@
       </el-table>
       <el-pagination
         :background="true"
-        :page-sizes="[10, 20, 30, 40]"
+        :page-sizes="[10, 15, 20, 50, 500]"
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
@@ -287,7 +287,7 @@
         },
         listQuery: {
           pageNum: 1,
-          pageSize: 10
+          pageSize: 15
         },
         totalItems: 0,
         // ExcelUploadUrl: process.env.VUE_APP_BASE_API+"/sale/importTotalOrder",

@@ -54,7 +54,7 @@
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
             </el-col>
         </el-row>
@@ -68,16 +68,16 @@
 
                 <el-row style="margin-top:3%;">
 
-                   <el-col style="margin-left:7%;">
-                       <el-form-item label="仓库:" prop="cbpc100">
-                           <el-popover placement="bottom-start" trigger="click">
-                               <kuweixxweihu ref="kuweixxweihu" @selected="selected02" />
-                              <el-input slot="reference" v-model="form.cbpc100" readonly  placeholder=""
+                <el-col style="margin-left:7%;">
+                    <el-form-item label="仓库:" prop="cbpc100">
+                        <el-popover placement="bottom-start" trigger="click">
+                            <kuweixxweihu ref="kuweixxweihu" @selected="selected02" />
+                            <el-input slot="reference" v-model="form.cbpc100" readonly  placeholder=""
                                 style="width:77%;">
-                              </el-input>
-                           </el-popover>
-                        </el-form-item>
-                  </el-col>
+                            </el-input>
+                        </el-popover>
+                    </el-form-item>
+                </el-col>
                     <el-col style="margin-left:7%;">
                         <el-form-item label="库位码:" prop="cbla09">
                             <el-input v-model="form.cbla09" placeholder="" style="width:77%;"
@@ -143,7 +143,7 @@
         <el-dialog :title="title2" :visible.sync="open1" append-to-body>
             <el-form ref="form1" :model="form1" label-width="30%">
                 <el-row style="margin-top:3%;">
-                     <el-col>
+                    <el-col>
                         <el-form-item label="仓库:" prop="cbla09">
                             <el-input v-model="form1.cbla09" placeholder="" readonly style="width:77%;"
                                 maxlength="30" />

@@ -44,7 +44,7 @@
       </el-table>
       <el-pagination
         :background="true"
-        :page-sizes="[10, 20, 30, 40]"
+        :page-sizes="[10, 15, 20, 50, 500]"
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
@@ -86,7 +86,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 15,
         total: this.total,
         classId: "",
         cbpb10: "",

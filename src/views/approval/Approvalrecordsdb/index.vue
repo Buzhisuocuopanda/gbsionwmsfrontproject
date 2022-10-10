@@ -69,7 +69,7 @@
       </el-table>
       <el-pagination
         :background="true"
-        :page-sizes="[10, 20, 30, 40]"
+        :page-sizes="[10, 15, 20, 50, 500]"
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
@@ -105,7 +105,7 @@ export default {
       loadingState:false,
       listQuery: {
         pageNum: 1,
-        pageSize: 10
+        pageSize: 15
       },
       orderList: [],
       // 日期范围
