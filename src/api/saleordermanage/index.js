@@ -106,6 +106,13 @@ export function customerDetail(data) {
     params: data
   })
 }
+export function customerDetailShop(data) {
+  return request({
+    url: '/system/customer/customerDetailShop',
+    method: 'get',
+    params: data
+  })
+}
 // /dev-api/stage-api/sale/goodsShopListcas
 export function customerDetaillists(data) {
   console.log(data,typeof(data),'后台数据')

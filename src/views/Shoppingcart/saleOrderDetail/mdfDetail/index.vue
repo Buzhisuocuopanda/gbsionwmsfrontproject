@@ -330,7 +330,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,customerDetaillists } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,customerDetaillists,customerDetailShop } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1327,7 +1327,8 @@
             row.qty = response.data.qty
             row.price = response.data.price
             row.currentPrice = response.data.ckSku
-            row.totalPrice = 
+            row.totalPrice = response.data.qty * response.data.price
+            this.$set(row,'totalPrice',response.data.qty * response.data.price)
             console.log(row,'请求成功返回')
           }else {
             row.normalPrice=0.0
@@ -1370,13 +1371,14 @@
         if(val=='' ){
           return
         }
+        let arr1 = JSON.parse(this.$route.query.goods)
         const param={
           cbca01: val,
-
+          goodsId:this.$route.query.goods,
         }
 
         //
-        customerDetail(param).then(response => {
+        customerDetailShop(param).then(response => {
           if (response.code == "200") {
             this.formData.receivePhone=response.data.cbca16
             this.formData.receiveName=response.data.cbca14
@@ -1389,7 +1391,7 @@
             this.$message.error(response.msg)
           }
         });
-        this.getshoplist(param)
+        // this.getshoplist(param)
       },
       // 获取购物车信息
       getshoplist(customerId){
