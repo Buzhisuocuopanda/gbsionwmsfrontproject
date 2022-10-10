@@ -1157,4 +1157,4 @@ export default {
   },
 };
 </script>
-<style src="./SalesStockcjcss/index.css"></style>
+<style src="./SalesStockcjcss/index.css" scoped></style>

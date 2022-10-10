@@ -8,7 +8,7 @@
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="编号:" prop="orderNo">
-                        <el-input type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>
+            <el-input type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -352,7 +352,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,customerDetaillists } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1384,10 +1384,6 @@
         this.formData.saleUserId=val
       },
       customerOnChange(val){
-        // console.log(this.formData.customer)
-        // console.log("val",val)
-        // console.log("val",row)
-        // row.qty=0.5
         if(val=='' ){
           return
         }
@@ -1403,19 +1399,30 @@
             this.formData.receiveName=response.data.cbca14
             this.formData.address=response.data.cbca15
             this.formData.customerId=response.data.cbca01
-
-
           }else {
             this.formData.receivePhone=''
             this.formData.receiveName=''
             this.formData.address=''
             this.$message.error(response.msg)
-
           }
         });
-
+        // customerDetaillists
+        this.getshoplist(param)
       },
+      // 获取信息
+      getshoplist(customerId){
+        let arr1 = JSON.parse(this.$route.query.goods)
+        let obj = {
+          "customerId": customerId.cbca01,
+          "goodsId": 0,
+          "orderClass": 1
+        }
+        let arr2 = []
+        // for(var i = 0;i<arr1.length;i++){[
 
+        // ]}
+        console.log(this.$route,'路由',typeof(arr1),arr1,arr2)
+      },
       initSaleUserSelect(){
         const param={}
 
@@ -1443,7 +1450,6 @@
 
       /** 新增按钮操作 */
       handleAdd() {
-
         this.formData.goods=this.tableData
         mdfSaleOrder(this.formData).then(response => {
             if (response.code == "200") {
@@ -1564,7 +1570,7 @@
     }
   };
 </script>
-<style src=".././PurchaseWarehousingcjcss/index.css">
+<style src=".././PurchaseWarehousingcjcss/index.css" scoped>
   .normQtyclass {
     background-color: #00afff;
   }

@@ -1528,7 +1528,7 @@
     }
   };
 </script>
-<style src="./PurchaseWarehousingcjcss/index.css">
+<style src="./PurchaseWarehousingcjcss/index.css" scoped>
   .normQtyclass {
     background-color: #00afff;
   }
