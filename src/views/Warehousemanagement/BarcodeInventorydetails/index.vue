@@ -861,7 +861,7 @@ export default {
                 // console.log(row.cbpc01, 8888);
 
                 PurchaseinboundShs(row).then(response => {
-                 if (response.code == "200") {  
+                if (response.code == "200") {  
                     this.getList();
                     // this.open = false;
                     this.$message({ message: response.msg, type: 'success' });
@@ -1199,7 +1199,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/barcode/importSwJsSkuBarcodeimportTemplate', {
+            this.download('/system/Warehousedetailsinitialize/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
