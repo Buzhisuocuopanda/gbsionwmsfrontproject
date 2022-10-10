@@ -269,7 +269,7 @@
 </template>
 <script>
   // import x from ''
-  import { saleChangeList,reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
+  import { delSaleChange,saleChangeList,reAddSaleOrder,delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder } from '@/api/saleordermanage'
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
@@ -583,7 +583,7 @@
             delete: 1,
 
           }
-          delSaleOrder(param).then(response => {
+          delSaleChange(param).then(response => {
             // console.log(response)
             if ( response.code === 200) {
               this.$message.success("删除成功")
