@@ -295,7 +295,7 @@ export default {
       loadingState:false,
       listQuery: {
         pageNum: 1,
-        pageSize: 10
+        pageSize: 15
       },
       open2: false,
       open: false,
