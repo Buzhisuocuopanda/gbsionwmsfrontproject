@@ -27,10 +27,10 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:purchaseinbound:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button v-hasPermi="['system:purchaseinbound:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:39.5%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
