@@ -176,8 +176,11 @@
             <template slot-scope="scope">
               <!-- <sapn> -->
                 <el-select v-model="scope.row.cbqb09" placeholder="请选择">
+                  <!-- <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+                      <el-button slot="append" icon="el-icon-search"></el-button>
+                    </el-input> -->
                     <el-option
-                    v-for="(item,index) in tableData"
+                    v-for="(item,index) in tableDatas"
                     :key="index"
                     :label="item.cbpm09"
                     :value="item.cbpm09">
@@ -289,6 +292,7 @@ import {
   QualityinAdd,
   QualityinAdds,
   SwJsSkuBarcodeselectss,
+  SwJsSkuBarcodeselectsss,
 } from "@/api/Warehousemanagement/AnalysisCertificate";
 import { getToken } from "@/utils/auth";
 //仓库
@@ -318,6 +322,7 @@ export default {
       shenpiids: [],
       formArr: [],
       tableData: [],
+      tableDatas: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -326,6 +331,7 @@ export default {
       showSearch: false,
       // 总条数
       total: 0,
+      totals: 0,
       // 用户表格数据
       userList: null,
       // 弹出层标题
@@ -567,6 +573,7 @@ export default {
     this.form2.cbqa06 = "0";
 
     this.getList();
+    this.getLists();
     this.getConfigKey("sys.user.initPassword").then((response) => {
       // this.initPassword = response.msg;
     });
@@ -603,7 +610,7 @@ export default {
       }
     },
 
-    /** 销售提货单 */
+    /** 质检详情查询 */
     getList() {
       let id = this.$route.query.data
       // console.log(zhuangh[0].id,889999);
@@ -642,7 +649,18 @@ export default {
         // let
       });
     },
-
+    // 替换sn查询
+    getLists(){
+      let id = this.$route.query.data
+      SwJsSkuBarcodeselectsss(
+        {cbpk01:id}
+      ).then((response) => {
+        console.log(response,'年后11')
+        this.tableDatas = response.data.rows;
+        this.totals = response.data.total;
+        console.log(response.data.scans, 789789);
+      });
+    },
     show() {
       this.showSearch = !this.showSearch;
     },
