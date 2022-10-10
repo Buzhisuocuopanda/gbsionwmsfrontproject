@@ -418,7 +418,7 @@
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="合计数量"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}</el-descriptions-item>
       <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"  label="合计金额"  labelStyle	="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}</el-descriptions-item>
-      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>
+      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.capPrice}}</el-descriptions-item>
     </el-descriptions>
     <el-descriptions :column="3" border :contentStyle="CS" :label-style="LS ">
       <el-descriptions-item label="制单"  labelStyle	="width: 20%;text-align:center">{{this.formData.makeUser}}</el-descriptions-item>
@@ -474,7 +474,7 @@
 
     </div>
     </section>
-    
+
     <div class="tinajia_dingwei">
        <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
 <!--      <el-button type="primary" @click="handleAdd">保 存</el-button>-->

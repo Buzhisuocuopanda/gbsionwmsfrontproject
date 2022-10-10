@@ -1641,22 +1641,22 @@
       }
       saleOderDetail(param).then(response => {
           if (response.code == "200") {
-            // this.formData=response.data
-            this.formData.id =response.data.id
-            this.formData.orderNo =response.data.orderNo
-            this.formData.customerNo =response.data.customerNo
-            this.formData.customerId =response.data.customerId
-            this.formData.customerName =response.data.customerName
-            this.formData.orderDate =response.data.orderDate
-            this.formData.saleUserId =response.data.saleUserId
-            this.formData.saleUser =response.data.saleUser
-            this.formData.currency =response.data.currency
-            this.formData.receiveName =response.data.receiveName
-            this.formData.receivePhone =response.data.receivePhone
-            this.formData.invoiceType =response.data.invoiceType
-            this.formData.address =response.data.address
-            this.formData.fcNumber =response.data.fcNumber
-            this.formData.orderClassMsg =response.data.orderClassMsg
+            this.formData=response.data
+            // this.formData.id =response.data.id
+            // this.formData.orderNo =response.data.orderNo
+            // this.formData.customerNo =response.data.customerNo
+            // this.formData.customerId =response.data.customerId
+            // this.formData.customerName =response.data.customerName
+            // this.formData.orderDate =response.data.orderDate
+            // this.formData.saleUserId =response.data.saleUserId
+            // this.formData.saleUser =response.data.saleUser
+            // this.formData.currency =response.data.currency
+            // this.formData.receiveName =response.data.receiveName
+            // this.formData.receivePhone =response.data.receivePhone
+            // this.formData.invoiceType =response.data.invoiceType
+            // this.formData.address =response.data.address
+            // this.formData.fcNumber =response.data.fcNumber
+            // this.formData.orderClassMsg =response.data.orderClassMsg
             // this.tableData.push(...response.data.goods)
             this.tableData=response.data.goods
             console.log('tableData',this.tableData)
