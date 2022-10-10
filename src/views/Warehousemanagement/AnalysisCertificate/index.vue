@@ -736,7 +736,10 @@ export default {
         /** 查询用户列表 */
         getList099() {
             this.loading = true;
-            Purchaseintihuadang(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            let obj = {
+                cbpk11 : 2
+            };
+            Purchaseintihuadang(obj,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList099 = response.data.rows;
                 this.total = response.data.total;
                 // //供应商

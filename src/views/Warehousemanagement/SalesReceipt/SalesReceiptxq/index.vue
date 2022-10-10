@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="Purchase_caigou">采购入库单</div>
+        <div class="Purchase_caigou">销售预订单入库单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
             <span class="Purchase_riqi">日期：{{ value.cbpc08.slice(0, 10) }}</span>

@@ -379,7 +379,7 @@
                 v-if="scope.row.cbsb11 == 1"
                 >反审</el-button
               >
-              <el-button
+              <!-- <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-s-order"
@@ -388,7 +388,7 @@
                 v-hasPermi="['system:selloutofwarehouse:qxwc']"
                 v-if="scope.row.cbsb11 == 4"
                 >取消完成</el-button
-              >
+              > -->
               <el-button
                 size="mini"
                 type="text"

@@ -341,7 +341,7 @@
         <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
         <el-button v-else type="primary" style="margin-left:5%;"  @click="PurchaseinboundFanShenpi">反 审</el-button>
         <el-button v-show="status != 4 && status !=0" type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成</el-button>
-        <el-button v-show="status == 4" type="primary" @click="PurchaseinboundBiaojiWancheng">取消完成</el-button>
+        <!-- <el-button v-show="status == 4" type="primary" @click="PurchaseinboundBiaojiWancheng">取消完成</el-button> -->
         <el-button  @click="handlefanhui">返回</el-button>
     </div>
     <div style="height: 50px"></div>
