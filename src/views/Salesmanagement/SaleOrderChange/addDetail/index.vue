@@ -758,19 +758,19 @@
           url: process.env.VUE_APP_BASE_API + "/system/barcode/importSwJsSkuBarcode"
         },
         listQuery: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10
         },
         customerListQuery: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10
         },
         saleUserListQuery: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10
         },
         orderListQuery: {
-          pageNum: 1,
+          pageNum: 2,
           pageSize: 10
         },
         // 查询参数
@@ -1253,7 +1253,8 @@
 // // 这里可以做你想做的任何事 到底执行
 //        this.options=this.options2
         const param={
-          goodsMsg: this.goodsMsg,
+          selectMsg: this.goodsMsg,
+          orderId:this.formData.orderId,
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
@@ -1273,7 +1274,8 @@
         this.listQuery.pageNum=1
         this.goodsMsg=val
         const param={
-          goodsMsg: this.goodsMsg,
+          selectMsg: this.goodsMsg,
+          orderId:this.formData.orderId,
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
@@ -1554,7 +1556,7 @@
 
         }
 
-        swJsGoodslistBySelect(param).then(response => {
+        orderChangeGoodsSelect(param).then(response => {
           if (response.code == "200") {
                 this.options=response.data.rows
           }else {
