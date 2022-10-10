@@ -724,6 +724,8 @@ export const dynamicRoutes = [
       }
     ]
   },
+
+
    //销售出库单修改
    {
     path: '/system/user-xiugaichukuxiugai',
@@ -1428,10 +1430,28 @@ export const dynamicRoutes = [
         name: 'Outofstockregistrationadd',
         component: () => import('@/views/Outofstockregistration/saleOrderDetail/index'),
 
-        meta: { title: '售后单创建', icon: 'component', noCache: true, affix: true }
+        meta: { title: '缺货登记创建', icon: 'component', noCache: true, affix: true }
       }
     ]
   },
+
+  //缺货登记返回
+  {
+    path: '/Outofstockregistrationfh',
+    component: Layout,
+    name: 'Outofstockregistrationfh',
+    permissions: ['system:user:edit'],
+    children: [
+      {
+        path: 'role/',
+        name:'OutofstockregistrationRole',
+        component: (resolve) => require(['@/views/Outofstockregistration/index'], resolve),
+        meta: { title: '缺货登记'}
+      }
+    ]
+  },
+
+
   //修改缺货等级
   {
     path: '/Outofstockregistrationmd',

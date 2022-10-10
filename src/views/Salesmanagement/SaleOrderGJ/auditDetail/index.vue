@@ -404,7 +404,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {confirmSkuSaleOrder,auditFinSaleOrder,auditSaleOrder,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {confirmSkuSaleOrder,auditFinSaleOrder,auditSaleOrderGj,mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1490,7 +1490,7 @@
           orderId: this.formData.id,
           opeateType: this.$route.query.status
         }
-        auditSaleOrder(param).then(response => {
+        auditSaleOrderGj(param).then(response => {
             if (response.code == "200") {
               this.$message.success("提交成功")
               this.$store.dispatch("tagsView/delView", this.$route)

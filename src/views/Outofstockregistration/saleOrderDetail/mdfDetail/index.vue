@@ -351,7 +351,7 @@
 
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerName">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="customerOnChange" v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in customeroptions"
                 :key="item.value"
@@ -561,7 +561,7 @@
       <!--      </el-row>-->
       <div>
         <el-row>
-          <el-col :span="24">
+          <el-col v-if="false" :span="24">
             <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
         </el-row>
@@ -724,7 +724,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,SwJsCustomerlistAll } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1183,55 +1183,6 @@
             label: 'USD'
           }
         ],
-
-        options3: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        },
-          {
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-        options2: [{
-          value: '选项1',
-          label: '黄金糕2'
-        }, {
-          value: '选项2',
-          label: '双皮奶2'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎2'
-        }, {
-          value: '选项4',
-          label: '龙须面2'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭2'
-        }],
       };
     },
     computed: {
@@ -1582,6 +1533,7 @@
           if (response.code == "200") {
             this.customerListQuery.pageNum=this.customerListQuery.pageNum+1
             this.customeroptions.push.apply(this.customeroptions,response.data.rows)
+
           }else {
             this.$message.error(response.msg)
           }
@@ -1677,7 +1629,7 @@
       initCustomerSelect(){
         const param={}
 
-        SwJsCustomerlistSelect(param).then(response => {
+        SwJsCustomerlistAll(param).then(response => {
           if (response.code == "200") {
             this.customeroptions=response.data.rows
           }else {
@@ -1721,7 +1673,7 @@
         }
 
         //
-        goodsPriceAndSku(param).then(response => {
+        /*goodsPriceAndSku(param).then(response => {
           if (response.code == "200") {
             row.normalPrice=response.data.normalPrice
             row.canUseSku=response.data.canUseSku
@@ -1733,7 +1685,7 @@
             this.$message.error(response.msg)
 
           }
-        });
+        });*/
 
       },
       getQtyStyle(row){
@@ -1823,13 +1775,15 @@
 
       /** 新增按钮操作 */
       handleAdd() {
-
+        for(let i=0;i<this.tableData.length;i++){
+          this.tableData[i].cbof01=this.tableData[i].id;
+        }
         this.formData.goods=this.tableData
         updateSales(this.formData).then(response => {
             if (response.code == "200") {
               this.$message.success("修改成功")
               this.$store.dispatch("tagsView/delView", this.$route)
-             this.$router.push({path: "/Warehousemanagement/Outofstockregistration", query: {id: 1}})
+              this.$router.push({path:"/Outofstockregistrationfh/role"})
 
             }else {
 
@@ -1884,7 +1838,7 @@
       /** 返回操作 */
       handleChuangJiangone: function(row) {
         // this.$router.push("/system/user-auth/role/");
-        this.$router.push("/system/user-cktkfh/role/");
+        this.$router.push({path:"/Outofstockregistrationfh/role"})
       },
       sum(row){
         if(row.qty!=null && row.currentPrice!=null){
@@ -1907,6 +1861,7 @@
       console.log(param.id)
       saleOderDetailss(param).then(response => {
           if (response.code == "200") {
+            console.log(response.data,11111);
             this.formData.cboe01 =response.data.cboe01
             this.formData.customerId =response.data.customerId
             this.formData.saleOrderNo =response.data.saleOrderNo
@@ -1932,12 +1887,12 @@
             this.formData.address =response.data.address
             this.formData.fcNumber =response.data.fcNumber
             this.formData.orderClassMsg =response.data.orderClassMsg
-             this.tableData.push(...response.data.goods)
+             // this.tableData.push(...response.data.goods)
             this.tableData=response.data.goods
-            console.log(5555)
-            console.log(this.formData)
 
-            console.log('tableData',this.tableData)
+            console.log(response.data,22222);
+
+            console.log(this.tableData,123456);
 
           }else {
             this.$message.error(response.msg)

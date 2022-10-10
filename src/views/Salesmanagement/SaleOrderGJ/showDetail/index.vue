@@ -511,7 +511,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetailGj, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1737,7 +1737,7 @@
       const param={
         orderId: this.$route.query.id
       }
-      saleOderDetail(param).then(response => {
+      saleOderDetailGj(param).then(response => {
           if (response.code == "200") {
             // this.formData=response.data
             // this.formData.id =response.data.id

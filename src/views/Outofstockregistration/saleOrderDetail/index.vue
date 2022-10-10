@@ -855,55 +855,6 @@
             label: 'USD'
           }
         ],
-
-        options3: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        },
-          {
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-        options2: [{
-          value: '选项1',
-          label: '黄金糕2'
-        }, {
-          value: '选项2',
-          label: '双皮奶2'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎2'
-        }, {
-          value: '选项4',
-          label: '龙须面2'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭2'
-        }],
       };
     },
     computed: {
@@ -955,9 +906,9 @@
         this.$emit('on-close')
       },
       // 点击【取消】按钮关闭弹窗
-      _ly_cancelDialog(done) {
-        console.log('_ly_cancelDialog')
-        this.$emit('on-close')
+      _ly_cancelDialog() {
+        this.$store.dispatch("tagsView/delView", this.$route)
+        this.$router.push({path:"/Outofstockregistrationfh/role"})
       },
       // 关闭弹窗前，二次询问是否关闭
       _ly_beforeClose(done) {
@@ -1391,7 +1342,7 @@
         }
 
         //
-        goodsPriceAndSku(param).then(response => {
+       /* goodsPriceAndSku(param).then(response => {
           if (response.code == "200") {
             row.normalPrice=response.data.normalPrice
             row.canUseSku=response.data.canUseSku
@@ -1403,7 +1354,7 @@
             this.$message.error(response.msg)
 
           }
-        });
+        });*/
 
       },
       getQtyStyle(row){
@@ -1551,7 +1502,7 @@
           if (response.code == "200") {
             this.$message.success("添加成功")
             this.$store.dispatch("tagsView/delView", this.$route)
-            this.$router.push({path: "/Warehousemanagement/Outofstockregistration", query: {id: 1}})
+            this.$router.push({path:"/Outofstockregistrationfh/role"})
 
           }else {
 
