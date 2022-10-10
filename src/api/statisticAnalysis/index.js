@@ -91,6 +91,16 @@ export function getInventorySummaryList(query) {
   })
 }
 
+// 获取销售预订单汇总
+export function saleOrderListCountquery(query) {
+  return request({
+    url: '/countQuery/saleOrderListCountquery',
+    method: 'get',
+    params: query
+  })
+}
+
+
 // 添加购物车
 export function insertgoodsShop(query) {
   return request({
