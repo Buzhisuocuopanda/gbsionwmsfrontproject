@@ -59,7 +59,7 @@
         <el-table-column label="操作"  min-width="60px;">
           <template slot-scope="scope" >
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"   @click="showDetail(scope.row)">详情</el-button>
+                       type="text"  v-hasPermi="['approval:approvalrecords:detail']" @click="showDetail(scope.row)">详情</el-button>
 <!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">删除</el-button>-->
           </template>
 
