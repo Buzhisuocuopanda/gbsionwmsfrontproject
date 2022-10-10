@@ -22,12 +22,12 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
+          <el-button v-hasPermi="['sale:saleOrder:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
                      @click="onSearch">搜索
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
+          <el-button v-hasPermi="['sale:saleOrder:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
+          <el-button v-hasPermi="['sale:saleOrder:add']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
             创建
           </el-button>
 <!--          <el-upload-->
@@ -41,6 +41,7 @@
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
           <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut
+                     v-hasPermi="['sale:saleOrder:export']"
                      style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
 
@@ -67,16 +68,16 @@
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="250px;">
           <template slot-scope="scope">
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"  type="text" @click="showDetail(scope.row)" v-hasPermi="['sale:saleOrder:detail']">详情</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)" v-hasPermi="['sale:saleOrder:edit']">修改</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)" v-hasPermi="['sale:saleOrder:audit']">撤销</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,3)" v-hasPermi="['sale:saleOrder:audit']">审核</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,6)" v-hasPermi="['sale:saleOrder:audit']">反审</el-button>
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete" plain size="mini"   type="text" @click="delSaleOrder(scope.row)">删除</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)" v-hasPermi="['sale:saleOrder:audit']">指定结束</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit" plain size="mini"   type="text" @click=" reAddDetail(scope.row)" v-hasPermi="['sale:saleOrder:submit']">重新提交</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete" plain size="mini"   type="text" @click="delSaleOrder(scope.row)" v-hasPermi="['sale:saleOrder:remove']">删除</el-button>
           </template>
 
         </el-table-column>

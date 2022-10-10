@@ -66,7 +66,7 @@
               >重置</el-button
             >
           </el-form-item>
-          <el-form-item style="margin-left: 61%">
+          <el-form-item style="margin-left: 78%">
             <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
             <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
             <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button> -->
@@ -107,7 +107,7 @@
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
             <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-            <el-button
+            <!-- <el-button
               plain
               size="mini"
               class="biaoto-buttondaochu"
@@ -124,7 +124,7 @@
               :disabled="multiple"
               v-hasPermi="['system:selloutofwarehouse:qxwc']"
               >取消完成
-            </el-button>
+            </el-button> -->
           </el-form-item>
         </el-form>
 
@@ -333,7 +333,7 @@
                 type="text"
                 icon="el-icon-edit"
                 class="button-caozuoxougai caozuoxiangqeng"
-                @click="handlexiangqengSelect(scope.row)"
+                @click="handlxiaoshochkudanone(scope.row)"
                 v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"
                 v-hasPermi="['system:selloutofwarehouse:edit']"
               >
@@ -379,7 +379,7 @@
                 v-if="scope.row.cbsb11 == 1"
                 >反审</el-button
               >
-              <el-button
+              <!-- <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-s-order"
@@ -388,7 +388,7 @@
                 v-hasPermi="['system:selloutofwarehouse:qxwc']"
                 v-if="scope.row.cbsb11 == 4"
                 >取消完成</el-button
-              >
+              > -->
               <el-button
                 size="mini"
                 type="text"
@@ -1491,22 +1491,25 @@ export default {
     //标记完成
     PurchaseinboundBiaojiWancheng(row) {
       // console.log(row.cbpc01, 8888);
-      this.$modal
-        .confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？')
-        .then(() => {
-          PurchaseinboundShss(row).then((response) => {
-            if (response.code == 200) {
-              console.log(this.form.cbpc01, 789);
-              // this.submitShangpin();
-              this.getList();
-              // this.open = false;
-              this.$message({ message: "标记完成", type: "success" });
-            } else {
-              this.$message({ message: response.msg, type: "error" });
-            }
-          });
-        })
-        .catch(() => {});
+      let cbpc01 = row.cbsb01;
+      let status = row.cbsb11;
+      this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
+    //   this.$modal
+    //     .confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？')
+    //     .then(() => {
+    //       PurchaseinboundShss(row).then((response) => {
+    //         if (response.code == 200) {
+    //           console.log(this.form.cbpc01, 789);
+    //           // this.submitShangpin();
+    //           this.getList();
+    //           // this.open = false;
+    //           this.$message({ message: "标记完成", type: "success" });
+    //         } else {
+    //           this.$message({ message: response.msg, type: "error" });
+    //         }
+    //       });
+    //     })
+    //     .catch(() => {});
     },
 
     //标记完成上面的按钮
@@ -1540,6 +1543,10 @@ export default {
     PurchaseinboundQuxiaoWangcheng(row) {
       // console.log(row.cbpc01, 8888);
 
+      let cbpc01 = row.cbsb01;
+      let status = row.cbsb11;
+      this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
+
       // Purchaseinbounds(row).then(response => {
       //     console.log(this.form.cbpc01, 789)
       //     // this.submitShangpin();
@@ -1550,20 +1557,20 @@ export default {
       // });
 
       // console.log(row.cbpc01, 8888);
-      this.$modal
-        .confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？')
-        .then(() => {
-          Purchaseinbounds(row).then((response) => {
-            console.log(this.form.cbpc01, 789);
-            if (response.code == 200) {
-              this.getList();
-              this.$message({ message: "取消标记成功", type: "success" });
-            } else {
-              this.$message({ message: response.msg, type: "error" });
-            }
-          });
-        })
-        .catch(() => {});
+    //   this.$modal
+    //     .confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？')
+    //     .then(() => {
+    //       Purchaseinbounds(row).then((response) => {
+    //         console.log(this.form.cbpc01, 789);
+    //         if (response.code == 200) {
+    //           this.getList();
+    //           this.$message({ message: "取消标记成功", type: "success" });
+    //         } else {
+    //           this.$message({ message: response.msg, type: "error" });
+    //         }
+    //       });
+    //     })
+    //     .catch(() => {});
     },
     //取消标记上面的
     PurchaseinboundQuxiaoWangcheng01(row) {
@@ -1726,6 +1733,7 @@ export default {
 
     /** 销售出库单修改操作 */
     handlxiaoshochkudanone: function (row) {
+        console.log(row,888888)
       const userId = row.cbsb01;
       // this.$router.push("/system/user-auth/role/");
       this.$router.push("/system/user-xiugaichukuxiugai/role/" + userId);

@@ -736,7 +736,10 @@ export default {
         /** 查询用户列表 */
         getList099() {
             this.loading = true;
-            Purchaseintihuadang(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            let obj = {
+                cbpk11 : 2
+            };
+            Purchaseintihuadang(obj,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList099 = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -1054,17 +1057,19 @@ export default {
             console.log(row)
             // this.open = true;
             // console.log(row, 7788521);
-            this.form.cbpc01 = row.cbpc01;
-            this.form.cbpc07 = row.cbpc07;
-            this.form.cbsa08 = row.cbsa08;
-            this.form.cbwa09 = row.cbwa09;
-            this.form.cala08 = row.cala08;
+            // this.form.cbpc01 = row.cbpc01;
+            // this.form.cbpc07 = row.cbpc07;
+            // this.form.cbsa08 = row.cbsa08;
+            // this.form.cbwa09 = row.cbwa09;
+            // this.form.cala08 = row.cala08;
           this.$router.push({
 
-            path: '/system/user-zhijiandan/role/',
+            path: '/system/user-zhijiandan/roleXg/',
             // name: 'index',
             query: {
-              data: row.id,
+              data: row.cbqa01,
+              cbqa07:row.cbqa07,
+              cbqa11:row.cbqa11
             }
           })
         },

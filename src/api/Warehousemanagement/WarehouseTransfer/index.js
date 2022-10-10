@@ -63,24 +63,38 @@ export function Purchaseinboundsho(data) {
   })
 }
 
+// //采购入库标记完成
+// export function PurchaseinBoundshf(data) {
+//   return request({
+//     url: '/system/WarehousetransferordersController/Selloutofwarehouseaddbjwc',
+//     method: 'post',
+//     data: data
+//   })
+// }
 //采购入库标记完成
 export function PurchaseinBoundshf(data) {
   return request({
-    url: '/system/WarehousetransferordersController/Selloutofwarehouseaddbjwc',
+    url: '/system/WarehousetransferordersController/transferordersinbjwc',
     method: 'post',
     data: data
   })
 }
-
+// //采购入库取消完成
+// export function PurchaseinboundShtt(data) {
+//   return request({
+//     url: '/system/WarehousetransferordersController/Selloutofwarehouseaddqxwc',
+//     method: 'post',
+//     data: data
+//   })
+// }
 //采购入库取消完成
 export function PurchaseinboundShtt(data) {
   return request({
-    url: '/system/WarehousetransferordersController/Selloutofwarehouseaddqxwc',
+    url: '/system/WarehousetransferordersController/transferordersoutsbjwc',
     method: 'post',
     data: data
   })
 }
-
 //采购入库单反审
 export function PurchaseinboundSht(data) {
   return request({

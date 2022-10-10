@@ -10,7 +10,16 @@
         <el-form-item label="生产总订单号" class="item-r">
           <el-input v-model="totalOrderNo" class="filter-item" placeholder="生产总订单号"/>
         </el-form-item>
-
+        <el-form-item label="商品" class="item-r"><!--:filter-method="saleUserdataFilter"-->
+          <el-select v-loadmore="loadMore" v-model="goodsId" filterable clearable  placeholder="请选择" >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['system:saleOrderSku:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
@@ -39,31 +48,33 @@
           <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="skuList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
+      <el-table :data="skuList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row v-loading="loading"
                 stripe>
         <el-table-column fixed label="销售订单号" align="center" prop="orderNo" min-width="150px;"/>
         <el-table-column fixed label="生产总订单号" align="center" prop="totalOrderNo" min-width="120px;"/>
         <el-table-column label="商品" align="center" prop="goodsMsg" min-width="400px;"/>
         <el-table-column label="优先级" align="center" prop="priority" min-width="120px;"/>
-        <el-table-column :formatter="rounding" label="确认库存数量" align="right" prop="confirmQty" min-width="120px;">
-          <template slot-scope="scope">
 
+        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="商品库存数量" align="right" prop="goodsNum" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="占用数量" align="right" prop="lockQty" min-width="100px;"/>
+       <!-- <el-table-column :formatter="rounding" label="分配数量" align="right" prop="makeQty" min-width="100px;"/>-->
+        <el-table-column :formatter="rounding" label="可用库存" align="right" prop="canUseQty" min-width="100px;"/>
+        <el-table-column :formatter="rounding" label="本次分配数量" align="right" prop="confirmQty" min-width="120px;">
+          <template slot-scope="scope">
           <span v-if="scope.row.id==editId">
             <el-input  v-model="scope.row.confirmQty" style="width:50%"   oninput="value=value.replace(/[^\d]/g,'')"/>
           </span>
             <span v-else>{{scope.row.confirmQty}}</span>
           </template>
         </el-table-column>
-        <el-table-column :formatter="rounding" label="商品库存数量" align="right" prop="goodsNum" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="可用库存" align="right" prop="canUseQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="占用数量" align="right" prop="lockQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="分配数量" align="right" prop="makeQty" min-width="100px;"/>
+
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
 <!--            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>-->
             <el-button v-hasPermi="['system:updateGjQty:save']"  v-if="scope.row.id==editId" icon="el-icon-edit" plain size="mini"   type="text" @click="updateDetail(scope.row)">保存</el-button>
             <el-button v-else icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">库存分配</el-button>
+            <el-button  icon="el-icon-s-order" plain size="mini" @click="mdfDetailQx(scope.row)"  type="text">取消</el-button>
 
             <!--            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>-->
           </template>
@@ -302,6 +313,7 @@
   import { getToken } from '@/utils/auth'
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
+  import {swJsGoodslistBySelectAll  } from '@/api/saleordermanage'
   import Vue from 'vue'
   Vue.directive('loadmore', {
     bind(el, binding) {
@@ -349,6 +361,7 @@
             // { type: 'number', message: '数量必须为数字'}
           ],
         },
+        //下拉列表数据商品
         options:[],
         listQuerySelect: {
           pageNum: 1,
@@ -359,6 +372,7 @@
           pageNum: 1,
           pageSize: 10
         },
+
         totalItems: 0,
         // ExcelUploadUrl: process.env.VUE_APP_BASE_API+"/sale/importTotalOrder",
         // 设置上传的请求头部
@@ -367,6 +381,7 @@
         ExcelUploadUrl: process.env.VUE_APP_BASE_API + '/sale/importTotalOrder',
         orderNo: '',
         totalOrderNo:'',
+        goodsId:'',
         model: '',
         status: '',
         single: true,
@@ -378,7 +393,7 @@
         tableData: [],
         loadingOut: false,
         loadingState: false,
-
+        loading:false,
         orderList: [],
         skuList: [],
         upload: {
@@ -412,7 +427,7 @@
     computed: {},
     mounted() { // 自动触发写入的函数
       this.onSearch()
-      // this.initSelect()
+      this.loadMore()
     },
     methods: {
       onSubmit() {
@@ -464,7 +479,10 @@
       reset() {
         this.model = ''
         this.orderNo = ''
+        this.goodsId = ''
         this.status = ''
+        this.listQuery.pageNum = 1;
+        this.onSearch()
       },
       createForm() {
         this.showaddDialog = true
@@ -519,6 +537,11 @@
 
 
       },
+
+      mdfDetailQx(row){
+        this.editId="";
+      },
+
 
       exprotData() {
         const param = {
@@ -792,7 +815,7 @@
         });
 
       },
-
+      //下拉列表数据商品
       loadMore() {
 //         console.log("滚动到底部了")
 // // 这里可以做你想做的任何事 到底执行
@@ -856,18 +879,24 @@
         const param = {
           orderNo: this.orderNo,
           totalOrderNo: this.totalOrderNo,
+          goodsId:this.goodsId,
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
         // console.info(param)
+        this.loading = true;
         saleOrderSkuList(param).then(response => {
           if (response.data != null && response.data.rows != null) {
             this.skuList = response.data.rows
             this.totalItems = response.data.total
+            this.loading = false;
           } else {
             this.skuList = []
             this.totalItems = 0
+            this.loading = false;
           }
+        },error => {
+          this.loading = false;
         })
       }
     }

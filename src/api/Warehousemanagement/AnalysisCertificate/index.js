@@ -172,3 +172,22 @@ export function StoreSkuList(query) {
     params: query
   })
 }
+
+// 创建质检单详情
+export function SwJsSkuBarcodeselectss(data) {
+  return request({
+    // /dev-api/stage-api/system/Qualityin/SwJsSkuBarcodeselectss
+    url: 'system/Qualityin/SwJsSkuBarcodeselectss',
+    method: 'get',
+    params:data
+  })
+}
+// 创建质检单  替换sn查询
+export function SwJsSkuBarcodeselectsss(data) {
+  return request({
+    // http://127.0.0.1:8080/system/Qualityin/SwJsSkuBarcodeselectsss
+    url: 'system/Qualityin/SwJsSkuBarcodeselectsss',
+    method: 'get',
+    params:data
+  })
+}

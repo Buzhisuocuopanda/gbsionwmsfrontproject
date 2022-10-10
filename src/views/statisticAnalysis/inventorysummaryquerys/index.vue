@@ -5,32 +5,32 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="仓库"   class="item-r" >
-          <el-select style="width: 300px" v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
+          <el-select  v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
             <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="库位"   class="item-r" >
-          <el-select style="width: 300px" v-model="queryParams.cbla09s" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+          <el-select  v-model="queryParams.cbla09s" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in cblaList" :key="item.cbla09" :label="item.cbla09" :value="item.cbla09"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词"
+          <el-select v-model="queryParams.cbpb01"  clearable filterable remote reserve-keyword placeholder="请输入关键词"
             :remote-method="getGoods"
             :loading="loadingGood">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品SN"   class="item-r" >
-          <el-input v-model="queryParams.cbig10" style="width: 300px" class="filter-item"  placeholder="商品SN" />
+          <el-input v-model="queryParams.cbig10"  class="filter-item"  placeholder="商品SN" />
         </el-form-item>
         <el-form-item label="商品状态">
-          <el-select v-model="queryParams.status" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请选择" >
+          <el-select v-model="queryParams.status" clearable filterable remote reserve-keyword placeholder="请选择" >
             <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="上架状态">
-          <el-select v-model="queryParams.groudStatus" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请选择" >
+          <el-select v-model="queryParams.groudStatus"  clearable filterable remote reserve-keyword placeholder="请选择" >
             <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
@@ -49,7 +49,7 @@
         <el-table-column fixed label="库位" align="center" prop="cbla09" min-width="80px;"/>
         <!--<el-table-column  label="大类" align="center" prop="cala08" min-width="120px;"/>-->
         <el-table-column  label="商品分类" align="center" prop="cbpa07" min-width="100px;"/>
-        <el-table-column  label="品牌" align="center" prop="cbpb15" min-width="100px;"/>
+        <el-table-column  label="品牌" align="center" prop="cala08" min-width="100px;"/>
         <el-table-column  label="型号" align="center" prop="cbpb12"  min-width="240px;"/>
         <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
         <!--<el-table-column  label="描述" align="center" prop="lockQty" min-width="260px;"/>-->

@@ -5,22 +5,20 @@
             <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" disabled />
+                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" readonly/>
                     </el-form-item>
+                    
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="客户订单:" style="margin-left:11.2%;" prop="cbsb30">
                         <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 85%;" disabled />
                     </el-form-item>
-
                 </el-col>
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;" :span="7">
-                    <!-- <el-form-item label="客户:" prop="cbsb099"> -->
-                    <!-- <el-input type="text" v-model="form2.cbsb099" style="width:77%;" /> -->
                     <el-form-item label="客户名称:" prop="cbpc0999">
-                        <el-popover placement="bottom-start" trigger="click" disabled>
+                        <el-popover placement="bottom-start" trigger="click">
                             <CustomerMainten ref="CustomerMainten" @selected="selected022"
                                 style="width:210px!important; height:100px!important;" />
                             <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly
@@ -47,7 +45,7 @@
                 </el-col>
                 <el-col style="" :span="7">
                     <el-form-item label="销售人员:" prop="cbsb177">
-                        <el-popover placement="bottom-start" trigger="click" clearable disabled>
+                        <el-popover placement="bottom-start" trigger="click" clearable>
                             <salerman ref="salerman" @selected="selected011699" style="width:260px!important;" />
                             <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly disabled
                                 style="width:85%;">
@@ -1028,24 +1026,23 @@ export default {
 
         /** 销售提货单 */
         getList() {
-            let routerParams = this.$route.query;
-            this.formArr = routerParams.data;
-            //    let zhuangh = JSON.parse(this.formArr);  
-            // console.log(zhuangh[0].id,889999);          
-            PurchaseinListxiangq(this.formArr, this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-
+            let id = this.$route.params.id
+            SwJsSkuBarcodelistss(id, this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+                let res = response.data.rows[0]
+                // 编号
+                this.form2.cbsb07 = res.cbsb07;
                 //客户名称
                 this.form2.cbpc0999 = response.data.customerName;
                 //客户名称ID
-                this.form2.cbsb09 = response.data.customerId;
+                this.form2.cbsb09 = res.cbsb09;
                 //仓库名称
                 this.form2.cbpc100 = response.data.whName;
                 //仓库名称ID
-                this.form2.cbsb10 = response.data.whId;
+                this.form2.cbsb10 = res.cbsb10;
                 //销售人员名称
                 this.form2.cbsb177 = response.data.saleUserName;
                 //销售人员ID
-                this.form2.cbsb17 = response.data.saleUserId;
+                this.form2.cbsb17 = res.cbsb17;
                 //联系人
                 this.form2.cbsb18 = response.data.contacts;
                 //电话
@@ -1055,7 +1052,9 @@ export default {
                 //结算货币名称
                 this.form2.cbsb166 = response.data.currencyMsg;
                 //结算货币名称id 
-                this.form2.cbsb16 = response.data.currency;
+                this.form2.cbsb16 = res.currency;
+                // 订单类型
+                this.form2.cbsc17 = res.cbsc17;
                 //收货人
                 this.form2.cbsb22 = response.data.receiver;
                 //收货电话

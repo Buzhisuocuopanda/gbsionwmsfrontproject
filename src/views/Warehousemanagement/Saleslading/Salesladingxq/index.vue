@@ -80,7 +80,7 @@
         <!-- goodsNum -->
         <el-table-column label="良品数量">
           <template scope="scope">
-            <el-input v-model="scope.row.qty" :readonly="status == 2 || status == 0?true:false"></el-input>
+            <el-input v-model="scope.row.goodsNum" :readonly="status == 2 || status == 0?true:false"></el-input>
           </template>
         </el-table-column>
         <el-table-column prop="qty" key="qty" label="数量"> </el-table-column>
@@ -563,7 +563,7 @@ export default {
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
           });
-          if(this.edit != 0){
+          if(this.edit == 1){
             this.userList2 = res.data.sugests.map(item=>{
               item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
               return item
