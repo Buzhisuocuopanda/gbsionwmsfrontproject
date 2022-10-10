@@ -45,6 +45,8 @@ export function PurchaseinboundLists(CBPC01) {
   })
 }
 
+
+
 // 修改
 export function PurchaseinboundEdit(data) {
   return request({
@@ -54,10 +56,30 @@ export function PurchaseinboundEdit(data) {
   })
 }
 
+// 销售预订单入库单修改
+export function PurchaseinboundxiaoshouEdit(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/editSubscribetotheinventoryslip',
+    method: 'post',
+    data: data
+  })
+}
+
+// /system/SalesScheduledOrders/editSubscribetotheinventoryslip
+
 // 删除
 export function PurchaseinboundRemove(data) {
   return request({
     url: '/system/SalesScheduledOrders/deleteSubscribetotheinventoryslip',
+    method: 'post',
+    data:data
+  })
+}
+
+//销售预订单入库单详情
+export function PurchaseinboundSalesReceipt(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/selectSalesReceiptList?id='+ data,
     method: 'post',
     data:data
   })

@@ -26,3 +26,76 @@
 .my-label {
     width: 250px !important;
 }
+
+/* 销售预订单主表 */
+.el-col .GsSalesOrders .el-form-item__content .el-input .el-input__inner{
+    background-color: #ffff;
+    color: black;
+}
+
+/* 时间 */
+.el-col .datepicker .el-form-item__content 
+.el-date-editor .el-input__inner{
+    background-color: #ffff;
+    color: black;
+}
+
+/*  客户名称  */
+.el-row .el-col .CustomerMainten .el-form-item__content 
+.el-input .el-input__inner{
+    background-color: #ffff;
+    color: black;
+}
+
+/*  供应商  */
+.el-row .el-col .supplierMaintenance .el-form-item__content 
+.el-input .el-input__inner{
+    background-color: #ffff;
+    color: black;
+}
+
+/*  仓库  */
+.el-row .el-col .kuweixxweihu .el-form-item__content 
+.el-input .el-input__inner {
+    background-color: #ffff;
+    color: black;
+}
+
+/*  销售人员  */
+.el-row .el-col .salerman .el-form-item__content 
+.el-input .el-input__inner {
+    background-color: #ffff;
+    color: black;
+}
+
+/* 商品id */
+.el-table__body-wrapper .el-table__row .cell 
+.Goodsone01 .el-input__inner{
+    background-color: #ffff;
+    color: black;
+}
+
+/* 数量 */
+.el-table__body-wrapper .el-table__row .cell 
+.shuzicaoyou .el-input__inner {
+    background-color: #ffff;
+    color: black;
+}
+
+/* 订单日期 */
+.el-table__body-wrapper .el-table__row .cell 
+.orderDatescope .el-input__inner {
+    background-color: #ffff;
+    color: black;
+}
+
+.chuangjiancaigous {
+    margin-top: 1%;
+    margin-left: 46%;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.tinajia_dingwei {
+    margin-top: 10%;
+}
