@@ -58,7 +58,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="pageNum" :limit.sync="pageSize" />
+    <pagination v-show="total>0" :total="total" :page.sync="pageNum" :limit.sync="pageSize" :page-sizes="[10, 15, 20, 50, 500]"  />
   </div>
 </template>
 
@@ -76,7 +76,7 @@ export default {
       // 表格数据
       list: [],
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 15,
       // 查询参数
       queryParams: {
         ipaddr: undefined,

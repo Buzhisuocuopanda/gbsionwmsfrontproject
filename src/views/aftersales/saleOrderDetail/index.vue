@@ -124,16 +124,27 @@
 
 
       <el-row :gutter="20">
-
         <el-col :span="8">
-          <el-form-item label="处理结果:" prop="receivePhone">
-            <el-input type="text" v-model="formData.answerMsg" style="width: 70%;" />
+          <el-form-item label="销售人员">
+            <el-select v-model="formData.aslerId" clearable filterable remote reserve-keyword placeholder="请选择" style="width: 70%;" >
+              <el-option v-for="item in cauaList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="进度:" prop="fcNumber">
-            <el-input type="text" v-model="formData.process" style="width: 70%;" />
+          <el-form-item label="处理结果">
+            <el-select v-model="formData.answerMsg" clearable filterable remote reserve-keyword placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
           </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="进度">
+            <el-select v-model="formData.process" clearable filterable remote reserve-keyword placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in processs" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
+          </el-form-item>
+
         </el-col>
       </el-row>
     <el-row>
@@ -383,6 +394,8 @@
 
   //供应商
   import ListLists from "@/components/ListMaintenance";
+  //用户信息
+  import {systemUserSelectAll } from '@/api/saleordermanage'
 
   // //客户
   // import CustomerMainten from "@/components/CustomerMaintenance";
@@ -526,6 +539,8 @@
         KuWeiOptions: [],
         //商品信息维护品牌
         shangponOptions: [],
+        //下拉列表数据用户
+        cauaList:[],
         //商品信息维护的型号
         XinghaoOptions: [],
         //仓库信息维护
@@ -668,6 +683,7 @@
           suplierId: "",
           answerMsg: "",
           process: "",
+          aslerId:"",
 
           orderType: 10,
           orderTypeMsg: "销售订单",
@@ -726,6 +742,26 @@
           children: "children",
           label: "label"
         },
+        status: [
+          {
+            value: 1,
+            label: '未解决',
+          },
+          {
+            value: 2,
+            label: '已解决',
+          }
+        ],
+        processs: [
+          {
+            value: 1,
+            label: '未完成',
+          },
+          {
+            value: 2,
+            label: '已完成',
+          }
+        ],
         // 用户导入参数
         upload: {
           // 是否显示弹出层（用户导入）
@@ -860,7 +896,7 @@
         // console.log('_ly_cancelDialog')
         // this.$emit('on-close');
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Warehousemanagement/sales", query: {id: 1}})
+        this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
       },
       // 关闭弹窗前，二次询问是否关闭
       _ly_beforeClose(done) {
@@ -1259,6 +1295,17 @@
           }
         });
       },
+      //下拉列表数据销售人员
+      getCauaList(){
+        this.loading3 = true;
+        systemUserSelectAll({}).then(response => {
+          if (response.code == 200) {
+            this.cauaList = response.data.rows;
+          }
+        },error => {
+
+        });
+      },
       goodsQtyChange(row){
         if(row.qty>row.canUseSku){
           row.qty=0
@@ -1453,7 +1500,7 @@
           if (response.code == "200") {
             this.$message.success("添加成功")
             this.$store.dispatch("tagsView/delView", this.$route)
-            this.$router.push({path: "/Warehousemanagement/sales", query: {id: 1}})
+            this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
             // this.$store.dispatch("tagsView/delView", this.$route)
             // this.$router.push({path: "/aftersales", query: {id: 1}})
 
@@ -1526,6 +1573,7 @@
       this.initSelect()
       this.initCustomerSelect()
       this.initSaleUserSelect()
+      this.getCauaList()
     },
     watch: {
       visible(newVal) {

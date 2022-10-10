@@ -861,7 +861,7 @@ export default {
                 // console.log(row.cbpc01, 8888);
 
                 PurchaseinboundShs(row).then(response => {
-                 if (response.code == "200") {  
+                if (response.code == "200") {  
                     this.getList();
                     // this.open = false;
                     this.$message({ message: response.msg, type: 'success' });
@@ -1079,10 +1079,12 @@ export default {
         handleAuthRole: function (row) {
             // const userId = row.cbie01;
             // this.$router.push("/system/user-authhhhhhh/role/" + userId);
-
-            let cbie01 = row.cbie01
-            let status = row.cbie10
-            this.$router.push("/system/user-authhhhhhh/role/");
+            
+            let cbie01 = row.cbie01;
+            console.log(cbie01, 1234);
+            // let status = row.cbie10;
+            // consoel.log(row,2222);
+            this.$router.push("/system/user-authhhhhhh/role/" + cbie01);
         },
 
         /** 创建操作 */
@@ -1199,7 +1201,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/barcode/importSwJsSkuBarcodeimportTemplate', {
+            this.download('/system/Warehousedetailsinitialize/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
