@@ -224,7 +224,7 @@ export const dynamicRoutes = [
     permissions: ['system:user:edit'],
     children: [
       {
-        path: 'role/:cbie01(\\d+):+status(\\d+)',
+        path: 'role/:cbie01(\\d+)',
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/BarcodeInventorydetails/BarcodeInventorydetailsxq/index'),
         meta: { title: '库存初始化详情', activeMenu: '/Warehousemanagement/BarcodeInventorydetails' }
