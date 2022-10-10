@@ -1699,7 +1699,7 @@
     }
   };
 </script>
-<style src=".././PurchaseWarehousingcjcss/index.css">
+<style src=".././PurchaseWarehousingcjcss/index.css" scope>
   .normQtyclass {
     background-color: #00afff;
   }

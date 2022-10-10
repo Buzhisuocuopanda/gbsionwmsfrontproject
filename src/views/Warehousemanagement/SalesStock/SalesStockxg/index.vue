@@ -1163,4 +1163,4 @@ export default {
   },
 };
 </script>
-<style src="./SalesStockxgcss/index.css"></style>
+<style src="./SalesStockxgcss/index.css" scoped></style>

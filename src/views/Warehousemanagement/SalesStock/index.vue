@@ -1439,5 +1439,5 @@ export default {
     }
 };
 </script>
-<style src="./SalesStockcss/index.css">
+<style src="./SalesStockcss/index.css" scoped>
 </style>
