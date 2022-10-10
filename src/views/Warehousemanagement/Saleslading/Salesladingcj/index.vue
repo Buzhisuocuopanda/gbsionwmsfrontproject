@@ -310,23 +310,21 @@
               </el-select>
             </template>
           </el-table-column> -->
-          <el-table-column prop="cbpd09" label="数量" width="80">
+          <el-table-column prop="cbsc09" label="数量" width="80">
             <template slot-scope="scope">
               <el-input
                 v-model="scope.row.cbsc09"
-                @blur="chen(scope.row)"
+                @input="chen(scope.row,$event)"
                 placeholder=""
                 class="shuzicaoyou"
                 style=""
-                readonly
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="单价" width="80">
+          <el-table-column prop="cbpd11" label="单价" >
             <template slot-scope="scope">
               <el-input
                 v-model="scope.row.cbsc11"
-                @blur="chen(scope.row)"
                 class="shuzicaoyou"
                 placeholder=""
                 style=""
@@ -334,7 +332,7 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="金额" width="90">
+          <el-table-column prop="cbpd12" label="金额" >
             <template slot-scope="scope">
               <el-input
                 v-model="scope.row.cbsc12"
@@ -345,12 +343,12 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="剩余未发量" width="100">
+          <el-table-column prop="province" label="剩余未发量" >
             <template slot-scope="scope">
               <el-input v-model="scope.row.noSendQty" placeholder="" readonly></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="订单占用量" width="100">
+          <el-table-column prop="province" label="订单占用量" >
             <template slot-scope="scope">
               <el-input v-model="scope.row.useQty" placeholder="" readonly></el-input>
             </template>
@@ -1255,8 +1253,6 @@ export default {
               this.open2 = false;
               this.reset01();
               this.$router.push("/Warehousemanagement/Saleslading/");
-            }else{
-              this.$message({message:response.msg,type:'error'})
             }
             // this.tableData.forEach((item) => {
             //   item.cbsb01 = response.data.id;
@@ -1347,7 +1343,7 @@ export default {
         this.formArr = response.data;
         this.tableData = response.data.goods;
         this.total = response.data.total;
-        console.log(response.data.goods, 339688);
+        console.log(response.data.goods,this.tableData, 339688000);
 
         console.log(response, 1709916);
       });

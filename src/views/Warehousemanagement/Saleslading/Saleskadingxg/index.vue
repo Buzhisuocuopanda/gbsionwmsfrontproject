@@ -96,7 +96,7 @@
         >
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope">
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" disabled>
                 <Goodsone01
                   ref="Goodsone01"
                   @selected="selected08($event, scope.row)"
@@ -131,7 +131,7 @@
           <el-table-column label="描述" width="" />
           <el-table-column prop="cbpc099" label="供应商" width="180">
             <template slot-scope="scope">
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" disabled>
                 <supplierMaintenance
                   ref="supplierMaintenance"
                   @selected="selected02($event, scope.row)"
@@ -173,6 +173,7 @@
                 v-model="scope.row.cbsf16"
                 placeholder=""
                 style="width: 100%"
+                disabled
               >
                 <el-option
                   v-for="item in dingdanfelei"
@@ -198,32 +199,21 @@
               ></el-input>
             </template>
           </el-table-column>
-
-          <el-table-column prop="cbif09" label="数量" width="100">
-            <template slot-scope="scope">
+          <el-table-column prop="cbsf09" label="数量" width="100">
+            <template slot-scope="scopes">
               <el-input
-                v-model="scope.row.cbsf09"
-                @blur="chen(scope.row)"
-                :precision="2"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
+                v-model="scopes.row.cbsf09"
+                @input="chen(scopes.row)"
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbif11" label="单价" width="100">
+           <el-table-column prop="cbsf11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsf11"
-                @blur="chen(scope.row)"
-                :precision="2"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsf11"
+                readonly @blur="chen(scope.row)"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbif12" label="金额" width="100">
+          <el-table-column prop="cbsf12" label="金额" width="100">
             <template slot-scope="scope">
               <el-input
                 v-model="scope.row.cbsf12"
@@ -231,10 +221,11 @@
                 :precision="2"
                 class="shuzicaoyou"
                 style=""
+                readonly
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="cbsf13" label="备注" width="">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsf13" placeholder=""></el-input>
             </template>
@@ -1064,15 +1055,15 @@ export default {
           this.tableData = response.goods;
           console.log(this.form2,response, 85200000,'年后1');
           response.goods.forEach((item) => {
-            item.cbsc177 = item.orderClass;
+            item.cbsf16 = item.orderClass;
             item.cbsc15 = item.supplierId;
             item.cbsd133 = item.brand;
             item.cbsd134 = item.model;
             item.cbsd135 = item.description;
             item.cbsc08 = item.goodsId;
-            item.cbsc09 = item.qty;
-            item.cbsc11 = item.price;
-            item.cbsc12 = item.totalPrice;
+            item.cbsf09 = item.qty;
+            item.cbsf11 = item.price;
+            item.cbsf12 = item.qty * item.price;
             item.cbsc13 = item.scanQty;
             item.cbsc144 = item.noSendQty;
             item.cbsc15 = item.remark;
@@ -1085,9 +1076,8 @@ export default {
               item.cbsc17 = "2";
             }
           });
-          this.userList = response.data.rows;
-          this.total = response.data.total;
-          console.log(response, 888999);
+          this.userList = response.data;
+          console.log(response, 88899977777777,this.tableData);
           this.loading = false;
         });
       }

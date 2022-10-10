@@ -109,19 +109,10 @@ export function customerDetail(data) {
 // /dev-api/stage-api/sale/goodsShopListcas
 export function customerDetaillists(data) {
   console.log(data,typeof(data),'后台数据')
-  let datas = JSON.parse(data)
-  console.log(datas,'datas')
   return request({
     url: '/sale/goodsShopListcas',
     method: 'post',
     data:data,
-  })
-}
-export function addSaleOrder(data) {
-  return request({
-    url: '/sale/addSaleOrder',
-    method: 'post',
-    data: data
   })
 }
 
@@ -139,10 +130,17 @@ export function mdfSaleOrder(data) {
   return request({
     url: '/sale/mdfSaleOrder',
     method: 'post',
+    data: data,
+  })
+}
+export function addSaleOrder(data) {
+  return request({
+    // /dev-api/stage-api/sale/addSaleOrder
+    url: '/sale/addSaleOrder',
+    method: 'post',
     data: data
   })
 }
-
 export function auditSaleOrder(data) {
   return request({
     url: '/sale/auditSaleOrder',

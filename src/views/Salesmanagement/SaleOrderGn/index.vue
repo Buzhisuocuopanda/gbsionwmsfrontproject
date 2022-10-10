@@ -812,6 +812,7 @@
         const param = {
           orderNo: this.orderNo,
           model: this.model,
+          customer: this.customer,
           type: 2,
           status: this.status,
           startTime:startTime,

@@ -174,19 +174,14 @@
           </el-table-column>
           <el-table-column label="替换商品SN" width="200">
             <template slot-scope="scope">
-              <!-- <sapn> -->
-                <el-select v-model="scope.row.cbqb09" placeholder="请选择">
-                  <!-- <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-                      <el-button slot="append" icon="el-icon-search"></el-button>
-                    </el-input> -->
-                    <el-option
-                    v-for="(item,index) in tableDatas"
-                    :key="index"
-                    :label="item.cbpm09"
-                    :value="item.cbpm09">
-                    </el-option>
+              <el-select filterable remote v-model="scope.row.cbqb09" placeholder="请选择" :filter-method="getLists">
+                  <el-option
+                  v-for="(item,index) in tableDatas"
+                  :key="index"
+                  :label="item.cbpm09"
+                  :value="item.cbpm09">
+                  </el-option>
                 </el-select>
-              <!-- </sapn> -->
             </template>
           </el-table-column>
           <el-table-column v-if="false" prop="cbpd13" label="id" width="150">
@@ -573,7 +568,6 @@ export default {
     this.form2.cbqa06 = "0";
 
     this.getList();
-    this.getLists();
     this.getConfigKey("sys.user.initPassword").then((response) => {
       // this.initPassword = response.msg;
     });
@@ -650,10 +644,14 @@ export default {
       });
     },
     // 替换sn查询
-    getLists(){
+    getLists(query){
       let id = this.$route.query.data
-      SwJsSkuBarcodeselectsss(
-        {cbpk01:id}
+      let cbpm08 = this.tableData[0].cbpm08
+      SwJsSkuBarcodeselectss(
+        {
+          // cbpk01:id,
+         cbpm08:cbpm08,
+         cbpm09:query}
       ).then((response) => {
         console.log(response,'年后11')
         this.tableDatas = response.data.rows;

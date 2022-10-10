@@ -721,6 +721,7 @@
 
         const param = {
           orderNo: this.orderNo,
+          customer: this.customer,
           model: this.model,
           type: 1,
           status: this.status,
