@@ -109,7 +109,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
@@ -146,9 +146,9 @@
             </template>
           </el-table-column> -->
 
-          <el-table-column v-if="false" prop="purchaseOrderId" label="id" width="150">
+          <el-table-column v-if="false" prop="gsSalesOrders" label="id" width="150">
             <template slot-scope="scope">
-                <el-input v-model="scope.row.purchaseOrderId" placeholder="id" style=""></el-input>
+                <el-input v-model="scope.row.gsSalesOrders" placeholder="id" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
@@ -169,7 +169,7 @@
     </el-form>
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-      <el-button type="primary" @click="handleAdd">保 存</el-button>
+      <el-button type="primary" @click="handleUpdate">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>
       <!-- </span> -->
     </div>
@@ -181,7 +181,7 @@
 
 
   import {
-    PurchaseinboundAdd
+  PurchaseinboundAdd, PurchaseinboundSalesReceipt, PurchaseinboundxiaoshouEdit
   } from "@/api/Warehousemanagement/SalesReceipt";
   import {
     getToken
@@ -611,6 +611,8 @@ import salerman from "@/components/salerman";
     },
     created() {
 
+      //销售预订单入库单
+      this.getList();
 
       this.getConfigKey("sys.user.initPassword").then(response => {
         // this.initPassword = response.msg;
@@ -629,8 +631,103 @@ import salerman from "@/components/salerman";
     },
     methods: {
 
+      /** 修改按钮操作 */
+      handleUpdate() {
 
-       chen(item) {
+        let row = {}
+        //客户id
+        row.customer = this.form2.customerId;
+        //供应商id
+        row.supplierId = this.form2.supplierId;
+        //仓库id 
+        row.whId = this.form2.whId;
+        //销售人员id
+        row.salerId = this.form2.salerId;
+        //订单日期
+        row.orderDate = this.form2.orderDate;
+        //商品id
+        this.tableData.forEach((item) => {
+          row.goodsId = item.goodsId;
+          //商品型号
+          row.goodsclassify = item.goodsclassify;
+          //销售预订单入库单
+          row.gsSalesOrders = item.gsSalesOrders;
+        })
+        row.id = this.form2.id;
+        // row.cbpc16 = this.form.cbpc16;
+        // console.log(this.form.id);
+        PurchaseinboundxiaoshouEdit(JSON.stringify(row)).then(response => {
+          if (response.code == "200") {
+            // console.log(this.form, 789)
+            this.getList();
+            this.$message({ message: '修改成功', type: 'success' });
+
+          } else {
+            this.$message({ message: response.msg, type: 'error' });
+          }
+
+        });
+
+      },
+
+
+      //详情列表
+      getList() {
+        const userId = this.$route.params && this.$route.params.id;
+        // console.log(userId,"20221009");
+        if (userId) {
+          // 获取表详细信息
+          PurchaseinboundSalesReceipt(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+            if (res.code == "200") {
+              this.userList = res.data.rows;
+              this.total = res.data.total;
+              console.log(res, "20221009");
+              //销售预订单主表名称
+              this.form2.GsSalesOrders = this.userList[0].orderNo;
+              //销售预订单主表名称id
+              this.form2.gsSalesOrders = this.userList[0].gsSalesOrders;
+              //日期
+              this.form2.orderDate = this.userList[0].orderDate;
+              //客户名称
+              this.form2.cbpc0999 = this.userList[0].cbca08;
+              //客户名称id
+              this.form2.customerId = this.userList[0].cbca01;
+              //供应商名称
+              this.form2.cbpc099 = this.userList[0].cbsa08;
+              //供应商id
+              this.form2.supplierId = this.userList[0].cbsa01;
+              //仓库名称
+              this.form2.cbpc100 = this.userList[0].cbwa09;
+              //仓库名称ID
+              this.form2.whId = this.userList[0].cbwa01;
+              //销售人员名称
+              this.form2.cbsb177 = this.userList[0].caua09;
+              //销售人员ID
+              this.form2.salerId = this.userList[0].caua01;
+
+              //品牌、型号、描述
+              // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
+              this.tableData.forEach((item) => {
+                //  this.form2.goodsId = item.goodsId;
+                item.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
+                //入库数量
+                item.inQty = this.userList[0].inQty;
+                //ponumber
+                item.ponumber = this.userList[0].ponumber;
+                //商品id
+                item.goodsId = this.userList[0].goodsId;
+                //销售预订单入库单
+                item.gsSalesOrders = this.userList[0].gsSalesOrders;
+              })
+
+            } else {
+              this.$message({ message: res.msg, type: 'error' });
+            }
+          });
+        }
+      },
+
+      chen(item) {
             if(item.cbpd09>0&&item.cbpd11>0){
                 this.$set(item,'cbpd12',(parseFloat(item.cbpd09)*parseFloat(item.cbpd11)))
             }
@@ -768,7 +865,9 @@ import salerman from "@/components/salerman";
           address: '',
           moner: '',
           province: '',
-          cbpc000: ''
+          cbpc000: '',
+          inQty:'',
+          ponumber:''
         })
         this.dataId++
         console.log(this.tableData,852369);

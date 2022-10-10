@@ -1276,7 +1276,7 @@ export default {
              const cbpc01 = row.id;
             console.log(row.cbpc01);
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-SalesAdvancexiugai/role/"+ cbpc01);
+            this.$router.push("/system/user-SalesReceiptxiugai/role/"+ cbpc01);
         },
 
         // /** 提交按钮 */

@@ -21,7 +21,7 @@
                             <el-input v-model="queryParams.cbpa07" id="miaoshu" placeholder="请输入商品分类" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
-                         <el-form-item prop="cbpb12" label="型号">
+                        <el-form-item prop="cbpb12" label="型号">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
                             <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
@@ -262,7 +262,7 @@
                 <hr />
             </div>
             <el-form ref="form2" :model="form2" :rules="rules2" style="margin-top:20px;" label-width="100px">
-                   <el-row style="margin-left:6%;">
+                <el-row style="margin-left:6%;">
                         <el-col :span="11">
                             <el-form-item label="商品分类:" prop="cbpa07">
                                 <el-input v-model="form2.cbpa07" @focus="shuzhuangliebiaocj" placeholder="" maxlength="30" style="width:80%;" />
@@ -315,7 +315,7 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                     <el-row v-if="false">
+                    <el-row v-if="false">
                         <el-col :span="11">
                             <el-form-item label="商品分类id" prop="cbpb14">
                                 <el-input v-model="form2.cbpb14" placeholder="" maxlength="30" style="width:78%;" />
@@ -336,14 +336,13 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                 </el-form>
-                  <div style="margin-top:3%;">
+                </el-form>
+                <div style="margin-top:3%;">
                     <span style="font-size:15px;margin-left: 3%;">结算货币</span>
                     <hr />
                 </div>
 
-            <!-- 下面的 -->
-               
+            <!-- 下面的 -->               
             <div>
                 <el-row>
                     <el-col :span="24">
@@ -404,7 +403,7 @@
             </div>
 
 
-         <div class="tinajia_dingweii">
+        <div class="tinajia_dingweii">
             <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
                 <el-button type="primary" @click="handleAdd">保 存</el-button>
                 <el-button @click="cancells">取 消</el-button>
@@ -632,18 +631,18 @@ export default {
                 // ifEnabled: ""
             },
             form2: {
-                 cbpb07: "",
-                 cbpb08: "",
-                 cbpb09: "",
-                 cbpb10: "",
-                 cbpb11: "",
-                 cbpb12: "",
-                 cbpb13: "",
-                 cbpb14: "",
-                 cbpb15: "",
-                 cala08: "",
-                 cbpa07:"",
-                 cbpc099:""
+                cbpb07: "",
+                cbpb08: "",
+                cbpb09: "",
+                cbpb10: "",
+                cbpb11: "",
+                cbpb12: "",
+                cbpb13: "",
+                cbpb14: "",
+                cbpb15: "",
+                cala08: "",
+                cbpa07:"",
+                cbpc099:""
             },
             defaultProps: {
                 children: "children",
@@ -706,7 +705,7 @@ export default {
                     { required: true, message: '价格不能为空', trigger: 'blur' },
                 ]
             },
-          rules3: {
+            rules3: {
                 cbpb08: [
                     { required: true, message: '商品名称不能为空', trigger: 'blur' },
                 ],
@@ -727,21 +726,21 @@ export default {
                 ]
             },
             rules5: {
-                  cbpf02:[
+                cbpf02:[
                     { required: true, message: '客户等级不能为空', trigger: 'change' },
-                 ],
-                 cbpf06:[
+                ],
+                cbpf06:[
                     { required: true, message: '结算类型不能为空', trigger: 'change' },
-                 ],
-                 cbpf04:[
+                ],
+                cbpf04:[
                     { required: true, message: '标准进价不能为空', trigger: 'blur' },
-                 ],
+                ],
                 cbpf07: [
                     { required: true, message: '生效日期不能为空', trigger: 'blur' },
                 ],
                 cbpf05: [
                     { required: true, message: '标准销货价不能为空', trigger: 'blur' },
-                 ],
+                ],
             }
         };
     },
@@ -752,7 +751,7 @@ export default {
         }
     },
     created() {
-       this.form.cbpb09 =  this.form.cbpb08;
+        this.form.cbpb09 =  this.form.cbpb08;
 
         this.getList();
         // this.getList01();
@@ -778,7 +777,7 @@ export default {
             // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
             // this.form2.icon = name;
 
-             this.$set(this.form,"cbpc099",name.substring(0, name.indexOf("-")))
+            this.$set(this.form,"cbpc099",name.substring(0, name.indexOf("-")))
             this.form.cbpb10  = name.substring(name.indexOf("-") + 1)
             this.$forceUpdate()
         },
@@ -911,7 +910,7 @@ export default {
 
         // 存储表单数据
         _ly_save() {
-            this.$message.success('添加成功')
+            // this.$message.success('添加成功')
             // 将数据传递给父组件。
             // 如果要将数据存储到后台，可在此处自行实现
             this.$emit('on-ok', this.tableData)
@@ -992,13 +991,13 @@ export default {
         },
 
       //列表表头设置
-      headClassGDC() {
+    headClassGDC() {
         return {
-          'text-align': 'left',
-          height: '40px',
-          padding: '0'
+        'text-align': 'left',
+        height: '40px',
+        padding: '0'
         }
-      },
+    },
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -1018,10 +1017,6 @@ export default {
             let id = row.cbpb01;
             console.log(row,202209299999);
             GoodsListjiesuanhb(id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                // console.log(response.rows, 123456);
-                // this.userList = response.data.rows;
-                // this.userList03 = response.data.rows;
-                // this.total = response.data.total;
                 this.userList9916 = response.data.rows;
                 this.total9916 = response.data.total;
                 console.log(this.userList9916, 3369916);
@@ -1081,7 +1076,7 @@ export default {
                             console.log(i.children,666)
                             if(i.children){
                                 i.children.forEach((it)=>{
-                                     console.log(it)
+                                    console.log(it)
                                     it.code = it.label ? it.label.substring(it.label.indexOf("~") + 1) : ""
                                     it.label = it.label ? it.label.substring(0, it.label.indexOf("~")) : ""
                                 })
@@ -1106,7 +1101,7 @@ export default {
         //   alert("ddd");
         //   return data.indexOf(value) !== -1;
         // },
-         handleNodeClickll(data) {
+        handleNodeClickll(data) {
             this.form.cbpa11 = "";
             for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
                 if (i != 0) {
@@ -1117,7 +1112,7 @@ export default {
             }
             // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
             this.form.cbpa07 = data.label;
-             this.queryParams.cbpa07 = data.label;
+            this.queryParams.cbpa07 = data.label;
             this.form.cbpb14 = (this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1]
             console.log((this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1],19991119);
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
@@ -1127,7 +1122,7 @@ export default {
         },
 
             // 节点单击事件
-     handleNodeClick(data) {
+    handleNodeClick(data) {
             this.form.cbpa11 = "";
             for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
                 if (i != 0) {
@@ -1147,7 +1142,7 @@ export default {
         },
 
         // 节点单击事件
-     handleNodeClickcj(data) {
+    handleNodeClickcj(data) {
             this.form.cbpa11 = "";
             for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
                 if (i != 0) {
@@ -1160,7 +1155,7 @@ export default {
             this.form2.cbpa07 = data.label
             this.form2.cbpb14 = (this.form.cbpa11.split("~"))[this.form.cbpa11.split("~").length - 1]
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
-             this.open4 = false;
+            this.open4 = false;
             this.handleQuery();
         },
         // 取消按钮
@@ -1206,7 +1201,7 @@ export default {
 
 
             this.queryParams.pageNum = 1;
-             this.getList();
+            this.getList();
         },
         /** 重置按钮操作 */
         resetQuery() {
@@ -1239,6 +1234,8 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     GoodsAdd(this.form2).then(response => {
+
+                        if (response.code == "200") {    
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
@@ -1286,14 +1283,16 @@ export default {
                         });
                         // this.handleAdds();
                         // console.log(this.form2.ifEnabled, 123456);
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+
                     });
                 } else {
                     // this.$message.error('请注意规范');
                 }
 
-            })
-
-           
+            })           
 
             console.log('_ly_ok:' + JSON.stringify(this.tableData2))
         },
@@ -1304,11 +1303,9 @@ export default {
             this.open2 = true;
         },
         /** 修改按钮操作 */
-        handleUpdate() {
-           
+        handleUpdate() {           
 
-            this.open = true;
-           
+            this.open = true;           
                 let row = {}
                 row.cbpb01 = this.form.cbpb01;
                 row.cbpa07 = this.form.cbpa07;
@@ -1322,35 +1319,34 @@ export default {
                 row.cbpb10 = this.form.cbpb10;
                 console.log(this.form.cbpb01);
             //   this.$refs["form5"].validate((item) => {
-            //     if (item) {
-               
-                 GoodsAddss(JSON.stringify(this.tableData)).then(response => {
-                     if (response.code == "200") {
+            //     if (item) {               
+                GoodsAddss(JSON.stringify(this.tableData)).then(response => {
+                    if (response.code == "200") {
                         //  this.tableData = []
-                         this.form2 = {
-                             cbpb07: "",
-                             cbpb08: "",
-                             cbpb09: "",
-                             cbpb10: "",
-                             cbpb11: "",
-                             cbpb12: "",
-                             cbpb13: "",
-                             cbpb14: "",
-                             cbpb15: "",
-                             cala08: "",
-                             cbpa07: "",
-                             cbpc099: ""
-                         }
-                     } else {
-                         this.$message({ message: response.msg, type: 'error' });
-                     }
+                        this.form2 = {
+                            cbpb07: "",
+                            cbpb08: "",
+                            cbpb09: "",
+                            cbpb10: "",
+                            cbpb11: "",
+                            cbpb12: "",
+                            cbpb13: "",
+                            cbpb14: "",
+                            cbpb15: "",
+                            cala08: "",
+                            cbpa07: "",
+                            cbpc099: ""
+                        }
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                         this.getTreeselect();
                         // this.submitShangpin();
                         this.getList();
                         this.reset01();
                         // console.log(this.form2.ifEnabled, 123456);
                     });
-              this.$refs["form"].validate((item) => {
+            this.$refs["form"].validate((item) => {
                 if (item) {
                 GoodsEdit(JSON.stringify(row)).then(response => {
                     if (response.code == "200") {
@@ -1376,8 +1372,8 @@ export default {
 
             } else {
                     // this.$message.error('请注意规范');
-              }
-           })
+            }
+        })
            //     }else{
 
            //     }
@@ -1387,8 +1383,8 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-          
-           if(row.cbpb10=="1")
+        
+        if(row.cbpb10=="1")
             {
                 this.form.cbpb10="Epiphone";
                 row.cbpb10= "1";
@@ -1515,7 +1511,7 @@ export default {
         },
 
       /** 普通删除按钮操作 */
-      handleDelete01(row) {
+    handleDelete01(row) {
 
         // row.classifyId = this.form.classifyId;
         // row.brand = this.form.brand;
@@ -1526,13 +1522,13 @@ export default {
         // row.id=this.form.id;
         // console.log(row, 2222);
         this.$modal.confirm('是否确认删除商品分类为"' + row.cbpa07 + '"的数据项？').then(function () {
-          return GoodsRemove(JSON.stringify(row));
+        return GoodsRemove(JSON.stringify(row));
         }).then((response) => {
-          this.submitShangpin();
-          this.getList();
-          this.$modal.msgSuccess("删除成功");
+        this.submitShangpin();
+        this.getList();
+        this.$modal.msgSuccess("删除成功");
         }).catch(() => { });
-      },
+    },
         /** 导出按钮操作 
          * 
          * /dev-api/stage-api/system/goods/SwJsGoodsexport
@@ -1593,12 +1589,12 @@ export default {
 
     },mounted () {
     window.onresize = () => {
-      return (() => {
-          this.maxheight = window.innerHeight - 50
-      })()
+    return (() => {
+        this.maxheight = window.innerHeight - 50
+    })()
     }
-  },
-  activated () {
+},
+activated () {
     this.maxheight = window.innerHeight - 50
 },
     mounted() {

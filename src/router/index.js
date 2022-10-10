@@ -597,6 +597,21 @@ export const dynamicRoutes = [
     ]
   },
 
+    //销售预订单入库单修改
+   {
+    path: '/system/user-SalesReceiptxiugai',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [
+      {
+        path: 'role/:id(\\d+)',
+        name: 'AuthUser',
+        component: () => import('@/views/Warehousemanagement/SalesReceipt/SalesReceiptxg/index'),
+        meta: { title: '销售预订单入库单修改', activeMenu: '/Warehousemanagement/SalesReceipt' }
+      }
+    ]
+  },
+
   //销售预订单变更单详情
    {
     path: '/system/user-SalesAdvancexiangqong',
