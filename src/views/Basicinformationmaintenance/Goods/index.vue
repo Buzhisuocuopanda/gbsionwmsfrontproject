@@ -113,7 +113,7 @@
 
                         <el-form-item label="商品品牌:" prop="cbpc099">
                             <el-popover placement="bottom-start" trigger="click">
-                                <ListMaintenance ref="ListMaintenance" @selected="selected02" style="width:350px !important;" />
+                                <ListMaintenancePp ref="ListMaintenancePp" @selected="selected02" style="width:350px !important;" />
                                 <el-input slot="reference" v-model="form.cbpc099" placeholder="" readonly
                                     style="width:82%;">
                                 </el-input>
@@ -180,7 +180,7 @@
                         <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
                     </el-col>
                 </el-row>
-            
+
                 <el-table :data="tableData" border  :row-style="{height: '10px'}"
                     :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px; margin-left:0.5%;">
                     <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
@@ -278,7 +278,7 @@
                             </el-form-item> -->
                         <el-form-item label="商品品牌:" prop="cbpc099">
                             <el-popover placement="bottom-start" trigger="click">
-                                <ListMaintenance ref="ListMaintenance" @selected="selected01"  style="width:350px !important" />
+                                <ListMaintenancePp ref="ListMaintenancePp" @selected="selected01"  style="width:350px !important" />
                                 <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly
                                     style="width:80%;">
                                 </el-input>
@@ -343,14 +343,14 @@
                 </div>
 
             <!-- 下面的 -->
-               
+
             <div>
                 <el-row>
                     <el-col :span="24">
                         <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom2">增行</el-button>
                     </el-col>
                 </el-row>
-            
+
                 <el-table :data="tableData2" border :row-style="{height: '10px'}" :cell-style="{padding: '5px'}"
                     style="width: 99%;margin-top: 10px; margin-left:0.5%;">
                     <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
@@ -450,10 +450,13 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
  //列表
 import ListMaintenance from "@/components/ListMaintenance";
 
+//商品品牌列表
+import ListMaintenancePp from "@/components/ListMaintenancePp";
+
 export default {
     name: "User",
     dicts: ['sys_normal_disable', 'sys_user_sex', 'sw_js_goods_if_enabled'],
-    components: { Treeselect,ListMaintenance },
+    components: { Treeselect,ListMaintenance,ListMaintenancePp },
     data() {
         const validateNumber = (rule, value, callback) => {
             let numberReg = /^[1-9][0-9]{0,11}$/
@@ -661,7 +664,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址 
+                // 上传的地址
                 url: process.env.VUE_APP_BASE_API + "/system/goods/importSwJsGoods"
             },
             // 查询参数
@@ -1025,7 +1028,7 @@ export default {
                 this.userList9916 = response.data.rows;
                 this.total9916 = response.data.total;
                 console.log(this.userList9916, 3369916);
-                if (response.code == "200") { 
+                if (response.code == "200") {
                 this.userList9916.forEach((item) => {
                     // item.cbpb01 = item;
                     this.userList0929 = item;
@@ -1052,14 +1055,14 @@ export default {
                     } else if (this.tableData[0].cbpf06 == "2") {
                         this.tableData[0].cbpf06 = "USD"
                         this.tableData[0].cbpf06 = "2";
-                    } 
+                    }
                     console.log(this.tableData,20220929);
                     // console.log(item.cbpb01, 8523697412);
                 })
 
                 } else {
                     this.$message({ message: response.msg, type: 'error' });
-                }    
+                }
 
                 // console.log(response.data.content, 339688);
                 // this.loading = false;
@@ -1173,7 +1176,7 @@ export default {
             this.open2=false;
             this.reset01();
         },
-        
+
         // 表单重置
         reset() {
             this.form = {
@@ -1276,7 +1279,7 @@ export default {
                                     cbpc099: ""
                                 }
                             }else{
-                                this.$message({ message: response.msg, type: 'error' }); 
+                                this.$message({ message: response.msg, type: 'error' });
                             }
                             this.getTreeselect();
                             // this.submitShangpin();
@@ -1293,22 +1296,22 @@ export default {
 
             })
 
-           
+
 
             console.log('_ly_ok:' + JSON.stringify(this.tableData2))
         },
 
-        
+
 
         handlechuangjiang() {
             this.open2 = true;
         },
         /** 修改按钮操作 */
         handleUpdate() {
-           
+
 
             this.open = true;
-           
+
                 let row = {}
                 row.cbpb01 = this.form.cbpb01;
                 row.cbpa07 = this.form.cbpa07;
@@ -1323,7 +1326,7 @@ export default {
                 console.log(this.form.cbpb01);
             //   this.$refs["form5"].validate((item) => {
             //     if (item) {
-               
+
                  GoodsAddss(JSON.stringify(this.tableData)).then(response => {
                      if (response.code == "200") {
                         //  this.tableData = []
@@ -1387,7 +1390,7 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-          
+
            if(row.cbpb10=="1")
             {
                 this.form.cbpb10="Epiphone";
@@ -1411,9 +1414,9 @@ export default {
                 this.form.cbpb10="Maestro"
                 row.cbpb10= "6";
             }
-            
+
             this.open = true;
-            
+
             console.log(row, 7788521);
             //  this.form= row;
             this.form = Object.assign({},row);
@@ -1421,7 +1424,7 @@ export default {
             this.form.cbpb01 = row.cbpb01;
             this.getList029(row);
             // this.getList();
-            
+
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -1533,8 +1536,8 @@ export default {
           this.$modal.msgSuccess("删除成功");
         }).catch(() => { });
       },
-        /** 导出按钮操作 
-         * 
+        /** 导出按钮操作
+         *
          * /dev-api/stage-api/system/goods/SwJsGoodsexport
         */
         handleExport() {
@@ -1561,8 +1564,8 @@ export default {
             this.upload.title = "商品信息维护";
             this.upload.open = true;
         },
-        /** 下载模板操作 
-         * 
+        /** 下载模板操作
+         *
          * /dev-api/stage-api/system/goods/importTemplate
         */
         importTemplate() {

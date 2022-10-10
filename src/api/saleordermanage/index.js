@@ -91,6 +91,16 @@ export function systemUserSelect(data) {
     params: data
   })
 }
+//获取用户列表（不分页）
+export function systemUserSelectAll(data) {
+  return request({
+    url: '/system/customer/systemUserSelectAll',
+    method: 'get',
+    params: data
+  })
+}
+
+
 
 export function goodsPriceAndSku(data) {
   return request({
