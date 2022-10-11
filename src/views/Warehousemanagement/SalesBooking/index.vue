@@ -32,7 +32,7 @@
                     <el-form-item>
                          <el-button v-hasPermi="['system:saleOrder:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:50%;">
+                    <el-form-item style="margin-left:61%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -81,7 +81,7 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="状态" align="left" key="status" prop="status" sortable>
+                    <el-table-column label="状态" align="center" key="status" prop="status" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
                             "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"

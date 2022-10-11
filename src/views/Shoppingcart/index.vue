@@ -55,11 +55,11 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe  @selection-change="handleSelectionChangee">
+      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe  @selection-change="handleSelectionChangee">
         <el-table-column type="selection" width="50" align="center" />
-        <el-table-column fixed label="品牌" align="center" prop="brand" key="brand"  min-width="120px;"/>
-        <el-table-column fixed label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column  label="描述" align="center" prop="description" min-width="120px;" />
+        <el-table-column fixed label="品牌" align="left" prop="brand" key="brand"  min-width="30px;"/>
+        <el-table-column fixed label="型号" align="left" prop="model" min-width="50px;"/>
+        <el-table-column  label="描述" align="left" prop="description" min-width="120px;" />
 <!--        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
         <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />-->
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
@@ -67,17 +67,17 @@
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作"  min-width="120px;">
+        <el-table-column label="操作"  min-width="50px;">
           <template slot-scope="scope" >
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text" @click="mdfDetail(scope.row)"
+            <el-button class="caozuoxiangqeng" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini"
+                      type="text" @click="mdfDetail(scope.row)"
             >加入</el-button>
 
 <!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>-->
+                      type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>-->
 <!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"
-                       @click="showDetail(scope.row)">详情</el-button>-->
+                      type="text"
+                      @click="showDetail(scope.row)">详情</el-button>-->
 
           </template>
 
@@ -89,7 +89,7 @@
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:30px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -729,5 +729,7 @@ export default {
 </script>
 
 <style scoped>
-
+.caozuoxiangqeng {
+  border: 0 !important;
+}
 </style>

@@ -47,14 +47,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="类型" align="center" key="cbpa07" prop="cbpa07" sortable />
-                    <el-table-column label="品牌" align="center" key="cala08" prop="cala08" sortable>
+                    <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable  width="100px;"/>
+                    <el-table-column label="品牌" align="left" key="cala08" prop="cala08" sortable>
                     </el-table-column>
-                    <el-table-column label="型号" align="center" key="cbpb12" width="220px;" prop="cbpb12" sortable />
-                    <el-table-column label="描述" align="center" key="cbpb08" prop="cbpb08" width="550px;" sortable />
-                    <el-table-column label="SN" align="center" key="cbic10" prop="cbic10" width="130px;" sortable />
-                    <el-table-column label="库位" align="center" key="cbla09" prop="cbla09" sortable />
-                    <el-table-column label="入库日期" align="center" width="180px;" key="cbic02" prop="cbic02" :formatter="formatDate"
+                    <el-table-column label="型号" align="left" key="cbpb12" width="220px;" prop="cbpb12" sortable />
+                    <el-table-column label="描述" align="left" key="cbpb08" prop="cbpb08" width="550px;" sortable />
+                    <el-table-column label="SN" align="left" key="cbic10" prop="cbic10" width="130px;" sortable />
+                    <el-table-column label="库位" align="left" key="cbla09" prop="cbla09" sortable />
+                    <el-table-column label="入库日期" align="left" width="180px;" key="cbic02" prop="cbic02" :formatter="formatDate"
                         sortable>
                     </el-table-column>
                     <!-- <el-table-column label="状态" align="center" key="cbpg11" prop="cbpg11" sortable>

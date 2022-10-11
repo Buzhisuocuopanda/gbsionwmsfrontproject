@@ -70,13 +70,13 @@
                         sortable /> -->
                    
                     <el-table-column label="商品描述"  align="left" key="cbpb08" prop="cbpb08" sortable width="550" />
-                    <el-table-column label="PONumber" align="left" key="ponumber" prop="ponumber" sortable />
-                    <el-table-column label="入库数量"  align="left" key="inQty" prop="inQty" sortable>
+                    <el-table-column label="PONumber" :formatter="rounding" align="right" key="ponumber" prop="ponumber" sortable />
+                    <el-table-column label="入库数量" :formatter="rounding" align="right" key="inQty" prop="inQty" sortable>
                     </el-table-column>
-                     <el-table-column label="日期" align="left" key="createTime" prop="createTime" :formatter="formatDate"
+                    <el-table-column label="日期" align="left" key="createTime" prop="createTime" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="状态" align="left" key="status" prop="status" sortable>
+                    <el-table-column label="状态" align="center" key="status" prop="status" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
                             "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
@@ -639,6 +639,9 @@ export default {
     },
     methods: {
 
+        rounding(row, column) {
+            return parseFloat(row[column.property]).toFixed(2)
+        },
 
         //列表表头设置
         headClasspw() {

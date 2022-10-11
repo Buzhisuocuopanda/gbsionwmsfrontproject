@@ -48,12 +48,12 @@
           <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="skuList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row v-loading="loading"
+      <el-table :data="skuList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row v-loading="loading"
                 stripe>
-        <el-table-column fixed label="销售订单号" align="center" prop="orderNo" min-width="150px;"/>
-        <el-table-column fixed label="生产总订单号" align="center" prop="totalOrderNo" min-width="120px;"/>
-        <el-table-column label="商品" align="center" prop="goodsMsg" min-width="400px;"/>
-        <el-table-column label="优先级" align="center" prop="priority" min-width="120px;"/>
+        <el-table-column fixed label="销售订单号" align="left" prop="orderNo" min-width="150px;"/>
+        <el-table-column fixed label="生产总订单号" align="left" prop="totalOrderNo" min-width="120px;"/>
+        <el-table-column label="商品" align="left" prop="goodsMsg" min-width="400px;"/>
+        <el-table-column label="优先级" align="right" prop="priority" min-width="120px;"/>
 
         <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
         <el-table-column :formatter="rounding" label="商品库存数量" align="right" prop="goodsNum" min-width="100px;"/>
@@ -72,9 +72,9 @@
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
 <!--            <el-button  icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>-->
-            <el-button v-hasPermi="['system:updateGjQty:save']"  v-if="scope.row.id==editId" icon="el-icon-edit" plain size="mini"   type="text" @click="updateDetail(scope.row)">保存</el-button>
-            <el-button v-else icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">库存分配</el-button>
-            <el-button  icon="el-icon-s-order" plain size="mini" @click="mdfDetailQx(scope.row)"  type="text">取消</el-button>
+            <el-button class="caozuoxiangqeng" v-hasPermi="['system:updateGjQty:save']"  v-if="scope.row.id==editId" icon="el-icon-edit" plain size="mini"   type="text" @click="updateDetail(scope.row)">保存</el-button>
+            <el-button class="caozuoxiangqeng" v-else icon="el-icon-edit"  size="mini"   type="text" @click="mdfDetail(scope.row)">库存分配</el-button>
+            <el-button class="caozuoxiangqeng"  icon="el-icon-s-order"  size="mini" @click="mdfDetailQx(scope.row)"  type="text">取消</el-button>
 
             <!--            <el-button  icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>-->
           </template>
@@ -904,8 +904,8 @@
 </script>
 
 
-<style lang="scss">
-  .caozuoxiangqeng {
+<style lang="scss" scoped>
+.caozuoxiangqeng {
     border: 0 !important;
   }
   /*.el-dialog__footer {*/
@@ -915,5 +915,7 @@
   /*  -webkit-box-sizing: border-box;*/
   /*  box-sizing: border-box*/
   /*}*/
-
+.caozuoxiangqeng {
+  border: 0 !important;
+}
 </style>

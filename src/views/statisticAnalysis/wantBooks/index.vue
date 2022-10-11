@@ -20,23 +20,23 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:list']" type="primary" @click="handleQuery">查询</el-button>
+        <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:list']" class="filter-item" type="primary" @click="handleQuery">查询</el-button>
         <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-        <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+        <el-button v-hasPermi="['countQuery:invsentorsysummaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }">
-      <el-table-column prop="date" label="序号" type="index" sortable width="100" align="center"></el-table-column>
-      <el-table-column prop="cbpa08" label="大类" align="center" sortable width="180"></el-table-column>
-      <el-table-column prop="cbpa07" label="分类名称" align="center" sortable></el-table-column>
-      <el-table-column prop="cala08" label="品牌" align="center" sortable></el-table-column>
-      <el-table-column prop="cbpb12" label="型号" align="center" sortable></el-table-column>
-      <el-table-column prop="cbpb15" label="UPC" align="center" sortable></el-table-column>
-      <el-table-column prop="cbpb08" label="描述" align="center" width="240px" sortable></el-table-column>
-      <el-table-column prop="cbof09" label="数量" align="center" sortable></el-table-column>
-      <el-table-column prop="cbca08" label="客户" align="center" sortable></el-table-column>
-      <el-table-column prop="cboe08" :formatter="formatTime" label="日期" align="center" sortable></el-table-column>
+    <el-table :data="tableData" :header-cell-style="headClasspw"  style="width: 100%;margin-top:0.1em" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="460" border :default-sort="{ prop: 'date', order: 'descending' }">
+      <el-table-column prop="date" label="序号" type="index" sortable width="50" align="left"></el-table-column>
+      <el-table-column prop="cbpa08" label="大类" align="left" sortable width="110"></el-table-column>
+      <el-table-column prop="cbpa07" label="分类名称" align="left" width="100" sortable></el-table-column>
+      <el-table-column prop="cala08" label="品牌" align="left" sortable></el-table-column>
+      <el-table-column prop="cbpb12" label="型号" align="left" width="110" sortable></el-table-column>
+      <el-table-column prop="cbpb15" label="UPC" align="left" width="118" sortable></el-table-column>
+      <el-table-column prop="cbpb08" label="描述" align="left" width="280px" sortable></el-table-column>
+      <el-table-column prop="cbof09" label="数量" align="right" :formatter="rounding" sortable></el-table-column>
+      <el-table-column prop="cbca08" label="客户" align="left" width="220px;" sortable></el-table-column>
+      <el-table-column prop="cboe08" :formatter="formatTime" label="日期" align="left" sortable></el-table-column>
     </el-table>
     <el-pagination
       :background="true"
@@ -44,7 +44,7 @@
       :total="total"
       :current-page.sync="queryParams.pageNum"
       :page-size.sync="queryParams.pageSize"
-      style="padding-top:40px; padding-left: 20px;float: right"
+      style="padding-top:20px; padding-left: 20px;float: right"
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="onSearch"
       @current-change="onSearch"/>
@@ -88,6 +88,20 @@
       this.getGoods();
     },
     methods: {
+
+      rounding(row, column) {
+        return parseFloat(row[column.property]).toFixed(2)
+      },
+
+      //列表表头设置
+      headClasspw() {
+        return {
+          'text-align': 'left',
+          height: '30px',
+          padding: '0'
+        }
+      },
+
       onSubmit() {},
       formatTime(row){
         return formatDate2(row.cboe08);

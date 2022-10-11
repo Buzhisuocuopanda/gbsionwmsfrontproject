@@ -47,11 +47,11 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
-        <el-table-column fixed label="编号" align="center" prop="cboe07" min-width="120px;"/>
-        <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="120px;"/>
-        <el-table-column  label="日期" align="center" prop="cboe08" min-width="120px;" :formatter="formatDate" />
-        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
+      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" :data="orderList" element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row stripe >
+        <el-table-column fixed label="编号" align="left" prop="cboe07" min-width="120px;"/>
+        <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="120px;"/>
+        <el-table-column  label="日期" align="left" prop="cboe08" min-width="120px;" :formatter="formatDate" />
+        <el-table-column  label="销售人员" align="left" prop="caua15" min-width="200px;" />
         <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
@@ -60,17 +60,17 @@
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text" @click="mdfDetail(scope.row)"
-                       v-hasPermi="['system:outofstockregistrationform:edit']"
+            <el-button class="caozuoxiangqeng" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini"
+                      type="text" @click="mdfDetail(scope.row)"
+                      v-hasPermi="['system:outofstockregistrationform:edit']"
             >修改</el-button>
 
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       v-hasPermi="['system:outofstockregistrationform:remove']"
-                       type="text"  @click="delTotalOrder(scope.row)" >删除</el-button>
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text" v-hasPermi="['system:outofstockregistrationform:detail']"
-                       @click="showDetail(scope.row)">详情</el-button>
+            <el-button class="caozuoxiangqeng" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini"
+                      v-hasPermi="['system:outofstockregistrationform:remove']"
+                      type="text"  @click="delTotalOrder(scope.row)" >删除</el-button>
+            <el-button class="caozuoxiangqeng" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini"
+                      type="text" v-hasPermi="['system:outofstockregistrationform:detail']"
+                      @click="showDetail(scope.row)">详情</el-button>
 
           </template>
 
@@ -272,7 +272,7 @@ export default {
       userList: null,
       total: 0,
 
-       totalItems: 0,
+      totalItems: 0,
       cboe07: "",
 
       orderNo: "",
@@ -699,5 +699,7 @@ export default {
 </script>
 
 <style scoped>
-
+.caozuoxiangqeng {
+      border: 0 !important;
+    }
 </style>
