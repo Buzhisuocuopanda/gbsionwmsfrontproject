@@ -26,9 +26,9 @@
             <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
+                <el-table-column prop="cala08" key="cbpc07" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12"  label="型号">
                 </el-table-column>
                 <el-table-column prop="qty" key="qty" align="right" label="数量">
                 </el-table-column>
