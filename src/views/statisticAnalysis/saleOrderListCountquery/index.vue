@@ -1,62 +1,69 @@
 <template>
   <!--zgl-->
-  <!--库存情况报表-->
+  <!--销售预订单汇总-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
+        <el-form-item label="客户" style="margin-left: 10px"  class="item-r" >
+          <el-select v-model="queryParams.customerId" clearable   filterable placeholder="请输入关键词" :loading="loading2">
+            <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="销售人员" style="margin-left: 20px"   class="item-r" >
+          <el-select v-model="queryParams.salerId" v-loadmore="getCauaList"  clearable  filterable placeholder="请输入关键词">
+            <el-option v-for="item in cauaList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
 
-        <el-form-item label="仓库"   class="item-r" >
-          <el-select  v-model="queryParams.whIds" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
-            <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
-          </el-select>
         </el-form-item>
-        <el-form-item label="品牌" style="margin-left: 20px"  class="item-r" >
-          <el-select v-model="queryParams.brandIds" multiple  filterable placeholder="请输入关键词" :loading="loading3">
-            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="商品" style="margin-left: 20px"  class="item-r" >
-          <el-select v-model="queryParams.goodsIds" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading1">
+        <el-form-item label="商品" v-if="false" style="margin-left: 20px"  class="item-r" >
+          <el-select v-model="queryParams.cbpb01" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading1">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="供应商" style="margin-left: 20px" class="item-r" >
+          <el-select v-model="queryParams.supplierId"   clearable filterable placeholder="请输入关键词" :loading="loading6">
+            <el-option v-for="item in cbsaList" :key="item.cbsa01" :label="item.cbsa08" :value="item.cbsa01"></el-option>
+          </el-select>
+        </el-form-item>
+
         <el-form-item  label="日期" style="margin-left: 20px">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="height: 32px"
+          <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
 
-        <el-form-item style="margin: -5px -10px 1px 1px">
-          <el-button v-hasPermi="['query:fnSkuList:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-          <el-button v-hasPermi="['query:fnSkuList:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['query:fnSkuList:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+        <el-form-item style="margin: -5px -10px 1px 30px" >
+          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
+          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column label="仓库" align="center" header-align="center" prop="cbwa09" min-width="100px;" />
-        <el-table-column  label="供应商" align="center" prop="supplieName"  min-width="180px;"/>
-        <el-table-column  label="品牌" align="center" prop="brand" min-width="100px;"/>
-        <el-table-column  label="大类" align="center" prop="bclass" min-width="120px;"/>
-        <el-table-column  label="小类" align="center" prop="sclass" min-width="80px;"/>
-        <!--<el-table-column  label="SKU" align="center" prop="qty" min-width="60px;"/>-->
-        <el-table-column  label="型号" align="center" prop="model"  min-width="160px;"/>
-        <el-table-column  label="期初库存" align="center" prop="firstQty" min-width="100px;"/>
-        <el-table-column  label="生产入库" align="center" prop="makeQty" min-width="100px;"/>
-       <!-- <el-table-column  label="改型号" align="center" prop="suplierName" min-width="200px;"/>-->
-        <el-table-column  label="不良返工" align="center" prop="badQty" min-width="100px;"/>
-        <el-table-column  label="累计" align="center" prop="totalQty" min-width="100px;"/>
-        <el-table-column  label="销售出库" align="center" prop="outSaleQty" min-width="60px;"/>
-        <el-table-column  label="库存" align="center" prop="skuQty" min-width="160px;"/>
-        <!--<el-table-column  label="现有订单" align="center" prop="cgRprice" min-width="60px;"/>
-        <el-table-column  label="订单分配" align="center" prop="cgRprice" min-width="60px;"/>
-        <el-table-column  label="订单缺货" align="center" prop="cbib16" min-width="100px;"/>
-        <el-table-column  label="无订单" align="center" prop="cbib16" min-width="100px;"/>-->
+        <el-table-column label="供料单位" align="center" header-align="center" prop="supplier" min-width="200px;" />
+
+        <el-table-column  label="客户名称" align="center" prop="customer" min-width="240px;"/>
+        <el-table-column  label="编号" align="center" prop="orderNo" min-width="240px;"/>
+        <el-table-column  label="品牌" align="center" prop="cbpb10" min-width="130px;"/>
+        <el-table-column  label="商品" align="center" prop="cbpb08" min-width="130px;"/>
+        <el-table-column  label="数量" align="center" prop="qty" min-width="100px;"/>
+       <!-- <el-table-column  label="入库数量" align="center" prop="cbob10" min-width="100px;"/>
+        <el-table-column  label="变更数量" align="center" min-width="100px;"/>
+        <el-table-column  label="剩余数量" align="center" min-width="100px;"/>
+        <el-table-column  label="是否完成" align="center" min-width="100px;">
+          <template slot-scope="scope">
+            <div>{{scope.row.num!=null? scope.row.num-scope.row.cbob10:''}}</div>
+          </template>
+        </el-table-column>-->
+        <el-table-column  label="销售人员" align="center" prop="saler" min-width="120px;"/>
+        <el-table-column  label="创建时间" align="center" prop="createTime" :formatter="formatTime" min-width="120px;"/>
+        <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
+
       </el-table>
       <el-pagination
         :background="true"
-        :page-sizes="[10, 15, 20, 50, 500]"
+        :page-sizes="[10, 20, 30, 40]"
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
@@ -69,49 +76,75 @@
   </div>
 </template>
 <script>
+// import x from ''
+// import { totalOrderList } from "@/api/saleordermanage";
+import {formatDate2} from '../../../utils';
+import { saleOrderListCountquery,getSwJsGoodsAllList,getSwJsCustomerAllList,getsalermanAllList,getSwJsSupplierlistAll } from "@/api/statisticAnalysis/index";
+import {systemUserSelect } from '@/api/saleordermanage'
+import Vue from "vue";
 
-import { getfnSkuList,getSwJsStoreSkuAllList,getswJsAllList,getSwJsGoodsAllList } from "@/api/statisticAnalysis/index";
-//
-// import { formatDate } from '../../../utils';
+Vue.directive('loadmore', {
+  bind(el, binding) {
+
+    // 获取element-ui定义好的scroll盒子
+    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+    SELECTWRAP_DOM.addEventListener('scroll', function() {
+
+      /*
+      * scrollHeight 获取元素内容高度(只读)
+      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+      * clientHeight 读取元素的可见高度(只读)
+      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+      */
+      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+      if(CONDITION) {
+        binding.value();
+      }
+    });
+  }
+})
 export default {
-  name: "fnSkuList",
+  components: {},
+  name: "inventorysmssmary",
   data() {
     return {
+
+      dateRange:[],
+      tableData: [],
       //下拉列表数据商品
       goodList:[],
-      //下拉列表数据仓库
-      storeSkuList:[],
-      //下拉列表数据品牌
-      calaList:[],
-      dateRange:[],
+      //下拉列表数据客户
+      cbcaList:[],
+      //下拉列表数据销售人员
+      cauaList:[],
+      //下拉列表数据供应商
+      cbsaList:[],
       loading:false,
       loading1:false,
       loading2:false,
       loading3:false,
+      loading6:false,
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 15,
-        // total: this.total,
-        brandIds: [],
-        whIds:[],
-        goodsIds:[],
-        startTime:"",
-        endTime:"",
+        pageSize: 10,
+        customerId:"",
+        supplierId:"",
+        salerId:"",
+        startTime:undefined,
+        endTime:undefined,
 
+      },
+
+      userParams: {
+        pageNum: 1,
+        pageSize: 10,
       },
       inwuquList: [],
       total:0,
-      statusType: [
-        {
-          value: 0,
-          label: 'NO',
-        },
-        {
-          value: 4,
-          label: 'OK',
-        }
-      ],
       pickerOptions: {
         shortcuts: [{
           text: '今日',
@@ -228,26 +261,31 @@ export default {
   computed: {},
   mounted() { // 自动触发写入的函数
     this.onSearch();
-    this.getStoreSkuList();
-    this.getCalaList();
-    this.getGoods();
+    this.getCbcaList();
+    this.getCauaList();
+    // this.getGoods();
+    this.getCbsaList();
   },
   methods: {
+    onSubmit() {},
+    handleSelectionChange() {},
+    formatTime(row){
+      return formatDate2(row.createTime);
+    },
     /** 重置按钮操作 */
     resetQuery() {
-      this.queryParams.brandIds = [];
-      this.queryParams.whIds = [];
-      this.queryParams.goodsIds = [];
-      this.dateRange = [];
+      this.queryParams.customerId = "";
+      this.queryParams.supplierId = "";
+      this.queryParams.salerId = "";
+      this.dateRange=[];
       this.queryParams.pageNum = 1;
       // this.resetForm("queryParams");
       this.onSearch();
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      // var neirong = $('#miaoshu').val();
-      this.queryParams.pageNum = 1;
 
+      this.queryParams.pageNum = 1;
       this.onSearch();
     },
     onSearch() {
@@ -258,15 +296,14 @@ export default {
         this.queryParams.startTime = undefined;
         this.queryParams.endTime = undefined;
       }
-
       this.loading = true;
-      getfnSkuList(this.queryParams).then(response => {
+      saleOrderListCountquery(this.queryParams).then(response => {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows
           this.total = response.data.total
         } else {
-     /*     this.deviceList = []*/
+          this.deviceList = []
           this.total = 0
         }
       },error => {
@@ -275,11 +312,10 @@ export default {
     },
     //导出
     exprotData(){
-      this.download('/query/fnSkuListExcelList', {
+      this.download('/countQuery/saleOrderListCountqueryExcel', {
         ...this.queryParams
-      }, `库存情况报表查询数据_${new Date().getTime()}.xlsx`)
+      }, `销售预订单汇总数据_${new Date().getTime()}.xlsx`)
     },
-
     //获取下拉列表数据商品
     getGoods(query){
       if (query !== '') {
@@ -299,34 +335,47 @@ export default {
         this.goodList = [];
       }
     },
-    //下拉列表数据仓库
-    getStoreSkuList(query){
-      let param={cbwa09:query};
-      this.loading3 = true;
-      getSwJsStoreSkuAllList(param).then(response => {
-        this.loading3 = false;
+    //下拉列表数据客户
+    getCbcaList(){
+      let param={};
+      this.loading2 = true;
+      getSwJsCustomerAllList(param).then(response => {
+        this.loading2 = false;
         if (response.data != null) {
-          this.storeSkuList = response.data;
+          this.cbcaList = response.data;
         } else {
-          this.storeSkuList = [];
+          this.cbcaList = [];
+        }
+      },error => {
+        this.loading2 = false;
+      });
+    },
+    //下拉列表数据销售人员
+    getCauaList(){
+      this.loading3 = true;
+      systemUserSelect(this.userParams).then(response => {
+        this.loading3 = false;
+        if (response.code == 200) {
+          this.userParams.pageNum=this.userParams.pageNum+1;
+          this.cauaList.push(...response.data.rows)
         }
       },error => {
         this.loading3 = false;
       });
     },
-    //下拉列表数据品牌
-    getCalaList(){
-      let param={cala10:"商品品牌"};
-      this.loading2 = true;
-      getswJsAllList(param).then(response => {
-        this.loading2 = false;
+    //下拉列表数据供应商
+    getCbsaList(){
+      let param={};
+      this.loading6 = true;
+      getSwJsSupplierlistAll(param).then(response => {
+        this.loading6 = false;
         if (response.data != null) {
-          this.calaList = response.data;
+          this.cbsaList = response.data;
         } else {
-          this.calaList = [];
+          this.cbsaList = [];
         }
       },error => {
-        this.loading2 = false;
+        this.loading6 = false;
       });
     },
   },

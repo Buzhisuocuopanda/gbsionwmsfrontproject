@@ -154,7 +154,7 @@
       :total="total"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
-      @pagination="getList"
+      @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
     />
 
     <!-- 添加或修改角色配置对话框 -->
@@ -319,7 +319,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 15,
         roleName: undefined,
         roleKey: undefined,
         status: undefined

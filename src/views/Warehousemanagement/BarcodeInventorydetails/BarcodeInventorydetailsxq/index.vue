@@ -10,7 +10,7 @@
         </div>
         <div style="width:97%; margin-left: 2%; margin-top: 1%;">
             <el-table border :header-cell-style="headClasspwbitd" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
-                v-loading="loading" :data="userList"
+                 :data="userList"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbsa08" key="cbsa08" label="供应商" width="110">
@@ -38,7 +38,7 @@
             </el-table>
 
             <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
+                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10,15,20,50,500]"
                 class="pagintotal" />
             <div style="margin-top:2%;">
                 <span class="saomiaojluu">制单:</span>
@@ -137,15 +137,15 @@ export default {
 
         //详情列表
         getList() {
-            this.loading = true;
             const userId = this.$route.params && this.$route.params.cbie01;
+            console.log(userId,88888);
+            // this.status = this.$route.params && this.$route.params.status;
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
                     this.total = res.data.total;
                     console.log(res, 888999);
-                    this.loading = false;
                 });
             }
         },

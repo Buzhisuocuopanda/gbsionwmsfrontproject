@@ -338,14 +338,14 @@
       </div>
     </el-form>
 -->
-    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
+    <el-form ref="formData" :model="formData" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">售后单</div>
 
       <!-- 编号:56221589223 -->
 
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
-          <el-form-item label="销售订单号:" prop="orderNo">
+          <el-form-item label="销售订单号:" prop="saleOrderNo">
             <el-input type="text" v-model="formData.saleOrderNo" style="width: 70%;" />
           </el-form-item>
         </el-col>
@@ -363,7 +363,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="sn:" prop="receiveName">
+          <el-form-item label="sn:" prop="sn">
             <el-input type="text" v-model="formData.sn" style="width: 70%;" />
           </el-form-item>
         </el-col>
@@ -460,15 +460,26 @@
 
 
       <el-row :gutter="20">
+        <el-col :span="8">
+          <el-form-item label="销售人员">
+            <el-select v-model="formData.salerId" clearable filterable   placeholder="请选择" style="width: 70%;" >
+              <el-option v-for="item in cauaList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
 
         <el-col :span="8">
-          <el-form-item label="处理结果:" prop="receivePhone">
-            <el-input type="text" v-model="formData.answerMsg" style="width: 70%;" />
+          <el-form-item  prop="answerMsg" label="处理结果">
+            <el-select v-model="formData.answerMsg" clearable filterable  placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="进度:" prop="fcNumber">
-            <el-input type="text" v-model="formData.process" style="width: 70%;" />
+          <el-form-item prop="process" label="进度">
+            <el-select v-model="formData.process" clearable filterable  placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in processs" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
       </el-row>
@@ -716,7 +727,8 @@
 
   //商品信息维护
   import Goodsone01 from "@/components/Goodsone";
-
+  //用户信息
+  import {systemUserSelectAll } from '@/api/saleordermanage'
   //供应商
   import ListLists from "@/components/ListMaintenance";
   import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss } from "@/api/system/sales";
@@ -867,6 +879,9 @@
         //仓库信息维护
         //商品的品牌型号描述
         ponpaixenghaomiaoshu: [],
+        //下拉列表数据用户
+        cauaList:[],
+
         // 日期范围
         dateRange: [],
         postCangKu: [],
@@ -1002,8 +1017,9 @@
           question: "",
           sn: "",
           suplierId: "",
-          answerMsg: "",
-          process: "",
+          answerMsg: undefined,
+          process: undefined,
+          salerId:"",
 
           orderType: 10,
           orderTypeMsg: "销售订单",
@@ -1113,6 +1129,26 @@
         tableData: [],
         dataId: 0,
         options: [],
+        status: [
+          {
+            value: 1,
+            label: '未解决',
+          },
+          {
+            value: 2,
+            label: '已解决',
+          }
+        ],
+        processs: [
+          {
+            value: 1,
+            label: '未完成',
+          },
+          {
+            value: 2,
+            label: '已完成',
+          }
+        ],
         saleUseroptions: [],
         customeroptions: [],
         saleUseroptions: [],
@@ -1403,7 +1439,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Warehousemanagement/sales", query: {id: 1}})
+        this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1581,6 +1617,18 @@
           }
         });
       },
+      //下拉列表数据销售人员
+      getCauaList(){
+        this.loading3 = true;
+        systemUserSelectAll({}).then(response => {
+          if (response.code == 200) {
+            this.cauaList = response.data.rows;
+          }
+        },error => {
+
+        });
+      },
+
       goodsQtyChange(row){
         if(row.qty>row.canUseSku){
           row.qty=0
@@ -1718,13 +1766,13 @@
 
       /** 新增按钮操作 */
       handleAdd() {
-
-        this.formData.goods=this.tableData
+        console.log(this.formData,1111);
+        // this.formData.goods=this.tableData
         updateSales(this.formData).then(response => {
             if (response.code == "200") {
               this.$message.success("修改成功")
               this.$store.dispatch("tagsView/delView", this.$route)
-             this.$router.push({path: "/Warehousemanagement/sales", query: {id: 1}})
+              this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
 
             }else {
 
@@ -1795,14 +1843,14 @@
       this.initSelect()
       this.initCustomerSelect()
       this.initSaleUserSelect()
-
+      this.getCauaList()
       const param={
         orderId: this.$route.query.id
       }
       console.log(param.id)
       saleOderDetailss(param).then(response => {
           if (response.code == "200") {
-            this.formData.customerId =response.data.customerId
+           /* this.formData.customerId =response.data.customerId
             this.formData.saleOrderNo =response.data.saleOrderNo
             this.formData.goodsId =response.data.goodsId
             this.formData.question =response.data.question
@@ -1825,13 +1873,17 @@
             this.formData.invoiceType =response.data.invoiceType
             this.formData.address =response.data.address
             this.formData.fcNumber =response.data.fcNumber
-            this.formData.orderClassMsg =response.data.orderClassMsg
+            this.formData.orderClassMsg =response.data.orderClassMsg*/
             // this.tableData.push(...response.data.goods)
-            this.tableData=response.data.goodsId
+            // this.tableData=response.data.goodsId
+
+            this.formData =response.data
+            this.formData.answerMsg = parseInt(this.formData.answerMsg);
+            this.formData.process = parseInt(this.formData.process);
+              console.log(response.data)
             console.log(5555)
             console.log(this.formData)
 
-            console.log('tableData',this.tableData)
 
           }else {
             this.$message.error(response.msg)
@@ -1851,7 +1903,7 @@
     }
   };
 </script>
-<style src=".././PurchaseWarehousingcjcss/index.css">
+<style src=".././PurchaseWarehousingcjcss/index.css" scoped>
   .normQtyclass {
     background-color: #00afff;
   }

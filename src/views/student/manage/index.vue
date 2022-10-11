@@ -133,9 +133,10 @@
     <pagination
       v-show="total>0"
       :total="total"
+      :page-sizes="[10, 15, 20, 50, 500]"
       :page.sync="queryParams.pageNum"
       :limit.sync="queryParams.pageSize"
-      @pagination="getList"
+      @pagination="getList"  
     />
 
     <!-- 添加或修改学生信息对话框 -->
@@ -219,7 +220,7 @@
         // 查询参数
         queryParams: {
           pageNum: 1,
-          pageSize: 10,
+          pageSize: 15,
           studentName: null,
           studentAge: null,
           studentHobby: null,

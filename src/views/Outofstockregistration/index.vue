@@ -78,7 +78,7 @@
       </el-table>
       <el-pagination
         :background="true"
-        :page-sizes="[10, 20, 30, 40]"
+        :page-sizes="[10, 15, 20, 50, 500]"
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
@@ -285,7 +285,7 @@ export default {
       loadingState:false,
       listQuery: {
         pageNum: 1,
-        pageSize: 10
+        pageSize: 15
       },
       open2: false,
       open: false,
@@ -489,16 +489,16 @@ export default {
       // this.formData=row
       // this.showmdfDialog = true
 
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationmd", query: {id: row.id}})
+      this.$router.push({path: "/Outofstockregistrationmd/Outofstockregistrationmd", query: {id: row.id}})
 
     },
     createForm() {
       // this.showaddDialog = true
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationadd", query: {id: 1}})
+      this.$router.push({path: "/Outofstockregistrationadd/Outofstockregistrationadd", query: {id: 1}})
 
     },
     showDetail(row) {
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationdetail", query: {id: row.id}})
+      this.$router.push({path: "/Outofstockregistrationmd/Outofstockregistrationdetail", query: {id: row.id}})
 
     },
     cancel() {

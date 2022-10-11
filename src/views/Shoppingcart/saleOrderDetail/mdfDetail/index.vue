@@ -170,25 +170,6 @@
           </el-form-item>
         </el-col>
       </el-row>
-
-      <!--      <el-row v-if="false">-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-      <!--        <el-col>-->
-      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
       <div>
         <el-row>
           <el-col :span="24">
@@ -214,23 +195,22 @@
           <el-table-column label="描述" width="" />
           <el-table-column prop="qty" label="数量" width="150" >
             <template slot-scope="scope">
-              <sapn>
                 <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
                 <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
+              
+            </template>
+          </el-table-column>
+          <el-table-column prop="currentPrice" label="标准单价" width="150">
+            <template slot-scope="scope">
+              <sapn>
+                <el-input v-model="scope.row.currentPrice" placeholder="标准单价" style="" readonly></el-input>
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column prop="normalPrice" label="标准单价" width="150">
+          <el-table-column prop="normalPrice" label="本次单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
-          <el-table-column prop="currentPrice" label="本次单价" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+                <el-input v-model="scope.row.normalPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -336,10 +316,8 @@
       </div>
     </el-form>
     <div class="tinajia_dingwei">
-      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="cancel">取 消</el-button>
-      <!-- </span> -->
     </div>
   </div>
 </template>
@@ -352,7 +330,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,customerDetaillists } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,customerDetaillists,customerDetailShop } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -684,7 +662,8 @@
           orderClassMsg: '国内订单',
           receiveName:'',
           receivePhone: '',
-          address: ''
+          address: '',
+          shoppongIds:[],
         },
         form1: {
           // classifyId: "",
@@ -1316,7 +1295,7 @@
         // console.log("val",val)
         console.log("row",row)
         console.log("val",val)
-       row.goodsId=val
+        row.goodsId=val
       //  row.goodsId=  this.$route.query.id
         // row.qty=0.5
 
@@ -1335,7 +1314,7 @@
           return
         }
         const param={
-       goodsId: row.goodsId,
+          goodsId: row.goodsId,
           customerId: this.formData.customerId,
           orderClass: 2
         }
@@ -1345,12 +1324,17 @@
           if (response.code == "200") {
             row.normalPrice=response.data.normalPrice
             row.canUseSku=response.data.canUseSku
-
+            row.qty = response.data.qty
+            row.price = response.data.price
+            row.currentPrice = response.data.ckSku
+            row.totalPrice = response.data.qty * response.data.price
+            this.$set(row,'totalPrice',response.data.qty * response.data.price)
+            console.log(row,'请求成功返回')
           }else {
             row.normalPrice=0.0
             row.canUseSku=0.0
 
-            this.$message.error(response.msg)
+            // this.$message.error(response.msg)
 
           }
         });
@@ -1387,13 +1371,14 @@
         if(val=='' ){
           return
         }
+        let arr1 = JSON.parse(this.$route.query.goods)
         const param={
           cbca01: val,
-
+          goodsId:this.$route.query.goods,
         }
 
         //
-        customerDetail(param).then(response => {
+        customerDetailShop(param).then(response => {
           if (response.code == "200") {
             this.formData.receivePhone=response.data.cbca16
             this.formData.receiveName=response.data.cbca14
@@ -1406,22 +1391,30 @@
             this.$message.error(response.msg)
           }
         });
-        // customerDetaillists
-        this.getshoplist(param)
+        // this.getshoplist(param)
       },
-      // 获取信息
+      // 获取购物车信息
       getshoplist(customerId){
         let arr1 = JSON.parse(this.$route.query.goods)
-        let obj = {
-          "customerId": customerId.cbca01,
-          "goodsId": 0,
-          "orderClass": 1
-        }
+        this.tableData.shoppongIds = arr1
         let arr2 = []
-        // for(var i = 0;i<arr1.length;i++){[
-
-        // ]}
+        for(let i = 0;i<arr1.length;i++){[
+            arr2.splice(i,0,{
+              "customerId": customerId.cbca01,
+              "goodsId": arr1[i],
+              "orderClass": 1
+            }),
+        ]}
         console.log(this.$route,'路由',typeof(arr1),arr1,arr2)
+        customerDetaillists(arr2).then(res =>{
+          if(res.code == 200){
+            this.tableData = res.data
+            this.tableData.map((item)=>{
+              item.goodsMsg = item.goodsBrand + item.goodsModel + item.goodsdatail
+              this.goodsOnChange(item,item.goodsId)
+            })
+          }
+        })
       },
       initSaleUserSelect(){
         const param={}
@@ -1451,9 +1444,9 @@
       /** 新增按钮操作 */
       handleAdd() {
         this.formData.goods=this.tableData
-        mdfSaleOrder(this.formData).then(response => {
+        addSaleOrder(this.formData).then(response => {
             if (response.code == "200") {
-              this.$message.success("修改成功")
+              this.$message.success("成功")
               this.$store.dispatch("tagsView/delView", this.$route)
               this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
 
@@ -1514,7 +1507,7 @@
       },
       sum(row){
         if(row.qty!=null && row.currentPrice!=null){
-          row.totalPrice=row.qty*row.currentPrice;
+          row.totalPrice= row.qty * row.currentPrice;
         }
       },
 

@@ -40,6 +40,7 @@ export default {
                 pageNum: 1,
                 pageSize: 999999,
                 page: 1,
+                cala10:"商品品牌",
                 size: 999999,
                 total: this.total,
                 dateRange:undefined
