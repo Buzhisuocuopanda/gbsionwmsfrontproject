@@ -210,7 +210,7 @@
           <el-table-column prop="normalPrice" label="本次单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.normalPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+                <el-input readonly v-model="scope.row.normalPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -1372,9 +1372,14 @@
           return
         }
         let arr1 = JSON.parse(this.$route.query.goods)
+        let arr2 = []
+        for(let i = 0;i<arr1.length;i++){[
+          arr2[i] = arr1[i]
+        ]}
+        console.log()
         const param={
           cbca01: val,
-          goodsId:this.$route.query.goods,
+          goodsIds:arr2,
         }
 
         //
@@ -1384,11 +1389,12 @@
             this.formData.receiveName=response.data.cbca14
             this.formData.address=response.data.cbca15
             this.formData.customerId=response.data.cbca01
+            this.tableData = response.data.goodsres
           }else {
             this.formData.receivePhone=''
             this.formData.receiveName=''
             this.formData.address=''
-            this.$message.error(response.msg)
+            // this.$message.error(response.msg)
           }
         });
         // this.getshoplist(param)
