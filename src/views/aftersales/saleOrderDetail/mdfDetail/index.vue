@@ -363,7 +363,11 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="sn:" prop="sn">
+          <el-form-item label="反馈时间:" prop="feedbackTime">
+            <el-date-picker type="date" placeholder="" v-model="formData.feedbackTime" style="width: 70%;">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="sn:" v-if="false" prop="sn">
             <el-input type="text" v-model="formData.sn" style="width: 70%;" />
           </el-form-item>
         </el-col>
@@ -458,6 +462,32 @@
             </el-row>
       -->
 
+      <el-row :gutter="20" >
+        <el-col :span="8" >
+          <el-form-item label="SN" prop="sn">
+            <el-select :remote-method="selectSn" v-loadmore="getSn" @clear="clearSn" v-model="formData.sn" filterable clearable remote
+                       reserve-keyword placeholder="请选择" style="width: 70%;">
+              <el-option
+                v-for="item in snList"
+                :key="item.sn"
+                @click.native="goodsOnChange(item)"
+                :label="item.sn"
+                :value="item.sn">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="品牌:" prop="cbpb10">
+            <el-input type="text" disabled v-model="formData.cbpb10" style="width: 70%;" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="商品:" prop="cbpb08">
+            <el-input type="text" disabled v-model="formData.cbpb08" style="width: 70%;" />
+          </el-form-item>
+        </el-col>
+      </el-row>
 
       <el-row :gutter="20">
         <el-col :span="8">
@@ -487,6 +517,14 @@
         <el-col :span="24">
           <el-form-item label="问题原因:" prop="orderNo">
             <el-input type="textarea" v-model="formData.question" style="width: 92%;" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="解决方案:" prop="solution">
+            <el-input type="textarea" v-model="formData.solution" style="width: 92%;" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -558,16 +596,16 @@
                     <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
                   </el-col>
                 </el-row>-->
-        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsMsg" label="品牌" width="200px">
-            <template slot-scope="scope">
-              <sapn><!--v-loadmore="loadMore"-->
-                <el-select @change="goodsOnChange(scope.row,$event)"  v-model="formData.goodsId" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+       <!-- <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px">
+          <el-table-column prop="goodsMsg" label="品牌" width="">
+            <template slot-scope="scope" style="overflow-y:hidden">
+              <sapn  >&lt;!&ndash;v-loadmore="loadMore"&ndash;&gt;
+                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="getSn" v-model="formData.goodsMsg" filterable clearable  placeholder="请选择" style="width: 100%">
                   <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
+                    v-for="item in snList"
+                    :key="item.sn"
+                    :label="item.goodsMsg"
+                    :value="item.sn">
                   </el-option>
                 </el-select>
               </sapn>
@@ -575,7 +613,8 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <!--          <el-table-column prop="qty" label="数量" width="150" >
+          <el-table-column label="SN" width="" />
+          &lt;!&ndash;          <el-table-column prop="qty" label="数量" width="150" >
                       <template slot-scope="scope">
                         <sapn>
                           <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
@@ -619,15 +658,15 @@
                               <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
                             </sapn>
                           </template>
-                        </el-table-column>-->
-              <!--          <el-table-column label="操作" align="center" width="80">
+                        </el-table-column>&ndash;&gt;
+              &lt;!&ndash;          <el-table-column label="操作" align="center" width="80">
                           <template slot-scope="scope">
                             <span @click="_ly_delFrom(scope.row)">
                               <i class="el-icon-error" style="color: red;"></i>
                             </span>
                           </template>
-                        </el-table-column>-->
-            </el-table>
+                        </el-table-column>&ndash;&gt;
+            </el-table>-->
 
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
@@ -731,7 +770,7 @@
   import {systemUserSelectAll } from '@/api/saleordermanage'
   //供应商
   import ListLists from "@/components/ListMaintenance";
-  import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss } from "@/api/system/sales";
+  import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss,selectGoodsSnSelect } from "@/api/system/sales";
 
   // //客户
   // import CustomerMainten from "@/components/CustomerMaintenance";
@@ -752,8 +791,8 @@
         * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
         * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
         */
-        const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
 
+        const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
         if(CONDITION) {
           binding.value();
         }
@@ -881,7 +920,12 @@
         ponpaixenghaomiaoshu: [],
         //下拉列表数据用户
         cauaList:[],
-
+        //下拉列表数据sn商品
+        snList:[],
+        snListQuery: {
+          pageNum: 1,
+          pageSize: 10
+        },
         // 日期范围
         dateRange: [],
         postCangKu: [],
@@ -1020,6 +1064,9 @@
           answerMsg: undefined,
           process: undefined,
           salerId:"",
+          goodsMsg:"",
+          feedbackTime:undefined,
+          solution:"",
 
           orderType: 10,
           orderTypeMsg: "销售订单",
@@ -1110,16 +1157,12 @@
 
 
         rules: {
-          orderDate: [
-            { required: true, message: '请输入日期', trigger: 'blur' },
-            // { type: 'number', message: '优先级必须为数字'}
-          ],
-          saleUserId: [
+          salerId: [
             { required: true, message: '请输入销售人员', trigger: 'blur' },
           ],
-          // goods: [
-          //   { required: true, message: '请选择商品', trigger: 'blur' },
-          // ],
+          sn: [
+            { required: true, message: '请选择SN号', trigger: 'blur' },
+          ],
           customerId: [
             { required: true, message: '请输入客户', trigger: 'blur' },
             // { type: 'number', message: '数量必须为数字'}
@@ -1204,8 +1247,8 @@
         columnIndex
       }) {
         if (columnIndex === 0) {
-          return [1, 3];
-        } else if (columnIndex < 3) {
+          return [1, 4];
+        } else if (columnIndex < 4) {
           return [0, 0];
         }
       },
@@ -1635,10 +1678,35 @@
           this.$message.error("数量不能超过可用库存数量")
         }
       },
+      clearSn(){
+        this.formData.goodsId =undefined;
+        this.formData.cbpb08 = "";
+        this.formData.cbpb10 = "";
+      },
+      selectSn(query){
+        this.snListQuery.pageNum=1;
+        this.snListQuery.sn = query;
+        selectGoodsSnSelect(this.snListQuery).then(response => {
+          console.log(response.data)
+          if (response.code == "200") {
+            this.snListQuery.pageNum=this.snListQuery.pageNum+1
+            // this.options.push.apply(this.options,response.data.rows)
+            this.snList = response.data;
+          }else {
+            this.$message.error(response.msg)
+          }
+        },error => {
 
-      goodsOnChange(row,val){
+        });
 
-        console.log("row",row)
+      },
+
+      goodsOnChange(item){
+        this.formData.goodsId =item.goodsId;
+        this.formData.cbpb08 = item.cbpb08;
+        this.formData.cbpb10 = item.cbpb10;
+        // this.formData.sn = val;
+        /*console.log("row",row)
         console.log("val",val)
         row.goodsId=val
         // row.qty=0.5
@@ -1676,9 +1744,25 @@
             this.$message.error(response.msg)
 
           }
-        });
+        });*/
 
       },
+
+      getSn(){
+        selectGoodsSnSelect(this.snListQuery).then(response => {
+
+          if (response.code == "200") {
+            this.snListQuery.pageNum=this.snListQuery.pageNum+1
+            // this.options.push.apply(this.options,response.data.rows)
+            this.snList.push(...response.data)
+          }else {
+            this.$message.error(response.msg)
+          }
+        },error => {
+
+        });
+      },
+
       getQtyStyle(row){
         return "color: red"
 
@@ -1766,23 +1850,29 @@
 
       /** 新增按钮操作 */
       handleAdd() {
-        console.log(this.formData,1111);
-        // this.formData.goods=this.tableData
-        updateSales(this.formData).then(response => {
-            if (response.code == "200") {
-              this.$message.success("修改成功")
-              this.$store.dispatch("tagsView/delView", this.$route)
-              this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
+        this.$refs['formData'].validate((valid) => {
+          if (valid) {
+            updateSales(this.formData).then(response => {
+              if (response.code == "200") {
+                this.$message.success("修改成功")
+                this.$store.dispatch("tagsView/delView", this.$route)
+                this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
 
-            }else {
+              }else {
 
-              this.$message.error(response.msg)
+                this.$message.error(response.msg)
 
-              // this.$router.go(-1)
+                // this.$router.go(-1)
 
-            }
+              }
+            });
+          } else {
+            console.log('error submit!!');
+            return false;
           }
-        )
+        });
+
+
 
 
 
@@ -1837,13 +1927,7 @@
 
     },
     mounted() {
-      // 初始化表单数据，至少有一行表单数据
-      this.formArr = []
-      this._ly_addFrom()
-      this.initSelect()
-      this.initCustomerSelect()
-      this.initSaleUserSelect()
-      this.getCauaList()
+
       const param={
         orderId: this.$route.query.id
       }
@@ -1890,6 +1974,14 @@
           }
         }
       )
+      // 初始化表单数据，至少有一行表单数据
+      this.formArr = []
+      this._ly_addFrom()
+      this.initSelect()
+      this.initCustomerSelect()
+      this.initSaleUserSelect()
+      this.getCauaList()
+      this.getSn()
     },
     watch: {
       visible(newVal) {

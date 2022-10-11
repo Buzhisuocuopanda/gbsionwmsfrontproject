@@ -151,8 +151,8 @@ export function StoreList(query) {
 export function Purchaseintihuadang(data) {
   return request({
     url: '/whmanagement/takeOrderList',
-    method: 'post',
-    data: data
+    method: 'get',
+    params: data
   })
 }
 

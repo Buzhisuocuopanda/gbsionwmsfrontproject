@@ -1,7 +1,7 @@
 <template>
   <!--新增-->
   <div class="app-container">
-    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
+    <el-form ref="formData" :model="formData" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">售后单</div>
 
       <!-- 编号:56221589223 -->
@@ -14,7 +14,7 @@
         </el-col>
 
         <el-col :span="8">
-          <el-form-item label="客户:" prop="customerId">
+          <el-form-item label="客户:" prop="customerId"  >
             <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in customeroptions"
@@ -27,7 +27,11 @@
 
         </el-col>
         <el-col :span="8">
-          <el-form-item label="sn:" prop="receiveName">
+          <el-form-item label="反馈时间:" prop="feedbackTime">
+            <el-date-picker type="date"  placeholder="" v-model="formData.feedbackTime" style="width: 70%;">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="sn:" v-if="false" prop="receiveName">
             <el-input type="text" v-model="formData.sn" style="width: 70%;" />
           </el-form-item>
         </el-col>
@@ -122,11 +126,36 @@
       </el-row>
 -->
 
-
+    <el-row :gutter="20" >
+      <el-col :span="8" >
+        <el-form-item label="SN" prop="sn">
+          <el-select  :remote-method="selectSn" v-loadmore="getSn" @clear="clearSn" v-model="formData.sn" filterable clearable  remote
+                      reserve-keyword placeholder="请选择" style="width: 70%;">
+            <el-option
+              v-for="item in snList"
+              :key="item.sn"
+              @click.native="goodsOnChange(item)"
+              :label="item.sn"
+              :value="item.sn">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-col>
+      <el-col :span="8">
+        <el-form-item label="品牌:" prop="cbpb10">
+          <el-input type="text" disabled v-model="formData.cbpb10" style="width: 70%;" />
+        </el-form-item>
+      </el-col>
+      <el-col :span="8">
+        <el-form-item label="商品:" prop="cbpb08">
+          <el-input type="text" disabled v-model="formData.cbpb08" style="width: 70%;" />
+        </el-form-item>
+      </el-col>
+    </el-row>
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-form-item label="销售人员">
-            <el-select v-model="formData.aslerId" clearable filterable remote reserve-keyword placeholder="请选择" style="width: 70%;" >
+          <el-form-item label="销售人员" prop="salerId">
+            <el-select v-model="formData.salerId" clearable filterable remote reserve-keyword placeholder="请选择" style="width: 70%;" >
               <el-option v-for="item in cauaList" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-form-item>
@@ -149,11 +178,18 @@
       </el-row>
     <el-row>
       <el-col :span="24">
-        <el-form-item label="问题原因:" prop="orderNo">
+        <el-form-item label="问题原因:" prop="question">
           <el-input type="textarea" v-model="formData.question" style="width: 92%;" />
         </el-form-item>
       </el-col>
     </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="解决方案:" prop="solution">
+            <el-input type="textarea" v-model="formData.solution" style="width: 92%;" />
+          </el-form-item>
+        </el-col>
+      </el-row>
 <!--
       <el-row :gutter="20">
 
@@ -215,83 +251,77 @@
           </el-form-item>
         </el-col>
       </el-row>-->
-      <div>
-<!--        <el-row>
+     <!-- <div>
+&lt;!&ndash;        <el-row>
           <el-col :span="24">
             <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
-        </el-row>-->
+        </el-row>&ndash;&gt;
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange()" v-loadmore="loadMore" v-model="formData.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
+
               </sapn>
             </template>
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-<!--          <el-table-column prop="qty" label="数量" width="150" >
-            <template slot-scope="scope">
-              <sapn>
-                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
-&lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;
-              </sapn>
-            </template>
-          </el-table-column>
-          <el-table-column prop="normalPrice" label="标准单价" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
-          <el-table-column prop="currentPrice" label="本次单价" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
+          <el-table-column label="SN" width="" />
+          &lt;!&ndash;          <el-table-column prop="qty" label="数量" width="150" >
+                      <template slot-scope="scope">
+                        <sapn>
+                          <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+          &lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;
+                        </sapn>
+                      </template>
+                    </el-table-column>
+                    <el-table-column prop="normalPrice" label="标准单价" width="150">
+                      <template slot-scope="scope">
+                        <sapn>
+                          <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
+                        </sapn>
+                      </template>
+                    </el-table-column>
+                    <el-table-column prop="currentPrice" label="本次单价" width="150">
+                      <template slot-scope="scope">
+                        <sapn>
+                          <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+                        </sapn>
+                      </template>
+                    </el-table-column>
 
-          <el-table-column prop="totalPrice" label="金额" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
+                    <el-table-column prop="totalPrice" label="金额" width="150">
+                      <template slot-scope="scope">
+                        <sapn>
+                          <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>
+                        </sapn>
+                      </template>
+                    </el-table-column>
 
-          <el-table-column prop="canUseSku" label="可用库存" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
-          <el-table-column prop="remark" label="备注" width="">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
-              </sapn>
-            </template>
-          </el-table-column>-->
-<!--          <el-table-column label="操作" align="center" width="80">
-            <template slot-scope="scope">
-              <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-error" style="color: red;"></i>
-              </span>
-            </template>
-          </el-table-column>-->
+                    <el-table-column prop="canUseSku" label="可用库存" width="150">
+                      <template slot-scope="scope">
+                        <sapn>
+                          <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>
+                        </sapn>
+                      </template>
+                    </el-table-column>
+                    <el-table-column prop="remark" label="备注" width="">
+                      <template slot-scope="scope">
+                        <sapn>
+                          <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
+                        </sapn>
+                      </template>
+                    </el-table-column>&ndash;&gt;
+          &lt;!&ndash;          <el-table-column label="操作" align="center" width="80">
+                      <template slot-scope="scope">
+                        <span @click="_ly_delFrom(scope.row)">
+                          <i class="el-icon-error" style="color: red;"></i>
+                        </span>
+                      </template>
+                    </el-table-column>&ndash;&gt;
         </el-table>
-        <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
+        &lt;!&ndash; <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
             <div class="box1">
               <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
@@ -358,8 +388,8 @@
               </div>
             </div>
           </div>
-        </div> -->
-      </div>
+        </div> &ndash;&gt;
+      </div>-->
     </el-form>
 
     <div class="tinajia_dingwei">
@@ -399,7 +429,7 @@
 
   // //客户
   // import CustomerMainten from "@/components/CustomerMaintenance";
-  import { listSales, getSales, delSales, addSales, updateSales } from "@/api/system/sales";
+  import { listSales, getSales, delSales, addSales, updateSales,selectGoodsSnSelect } from "@/api/system/sales";
 
   import Vue from 'vue';
   Vue.directive('loadmore', {
@@ -541,6 +571,8 @@
         shangponOptions: [],
         //下拉列表数据用户
         cauaList:[],
+        //下拉列表数据sn商品
+        snList:[],
         //商品信息维护的型号
         XinghaoOptions: [],
         //仓库信息维护
@@ -678,12 +710,16 @@
           customerId: "",
           saleOrderNo: "",
           goodsId: "",
+          cbpb08:"",
           question: "",
           sn: "",
           suplierId: "",
           answerMsg: "",
           process: "",
-          aslerId:"",
+          salerId:"",
+          feedbackTime:undefined,
+          cbpb10:"",
+          solution:"",
 
           orderType: 10,
           orderTypeMsg: "销售订单",
@@ -783,6 +819,11 @@
           pageNum: 1,
           pageSize: 10
         },
+        snListQuery: {
+          sn:"",
+          pageNum: 1,
+          pageSize: 10
+        },
         customerListQuery: {
           pageNum: 1,
           pageSize: 10
@@ -805,16 +846,16 @@
 
 
         rules: {
-          orderDate: [
+         /* orderDate: [
             { required: true, message: '请输入日期', trigger: 'blur' },
             // { type: 'number', message: '优先级必须为数字'}
-          ],
-          saleUserId: [
+          ],*/
+          salerId: [
             { required: true, message: '请输入销售人员', trigger: 'blur' },
           ],
-          // goods: [
-          //   { required: true, message: '请选择商品', trigger: 'blur' },
-          // ],
+          sn: [
+            { required: true, message: '请选择SN号', trigger: 'blur' },
+          ],
           customerId: [
             { required: true, message: '请输入客户', trigger: 'blur' },
             // { type: 'number', message: '数量必须为数字'}
@@ -878,8 +919,8 @@
         columnIndex
       }) {
         if (columnIndex === 0) {
-          return [1, 3];
-        } else if (columnIndex < 3) {
+          return [1, 4];
+        } else if (columnIndex < 4) {
           return [0, 0];
         }
       },
@@ -1306,55 +1347,54 @@
 
         });
       },
+
+      getSn(){
+        selectGoodsSnSelect(this.snListQuery).then(response => {
+          console.log(response.data)
+          if (response.code == "200") {
+            this.snListQuery.pageNum=this.snListQuery.pageNum+1
+            // this.options.push.apply(this.options,response.data.rows)
+            this.snList.push(...response.data)
+          }else {
+            this.$message.error(response.msg)
+          }
+        },error => {
+
+        });
+      },
+      selectSn(query){
+        this.snListQuery.pageNum=1;
+        this.snListQuery.sn = query;
+        selectGoodsSnSelect(this.snListQuery).then(response => {
+          console.log(response.data)
+          if (response.code == "200") {
+            this.snListQuery.pageNum=this.snListQuery.pageNum+1
+            // this.options.push.apply(this.options,response.data.rows)
+            this.snList = response.data;
+          }else {
+            this.$message.error(response.msg)
+          }
+        },error => {
+
+        });
+
+      },
       goodsQtyChange(row){
         if(row.qty>row.canUseSku){
           row.qty=0
           this.$message.error("数量不能超过可用库存数量")
         }
       },
+      clearSn(){
+        this.formData.goodsId =undefined;
+        this.formData.cbpb08 = "";
+        this.formData.cbpb10 = "";
+      },
+      goodsOnChange(item){
 
-      goodsOnChange(row){
-        // console.log(this.formData.customer)
-        // console.log("val",val)
-        console.log("val",row)
-        // row.qty=0.5
-
-        if(this.formData.customerId==null){
-            this.$message.error("请先选择客户")
-          return;
-          }
-
-        //检查goodsid是否存在
-        if(this.checkRepeat(this.tableData,row.goodsId)){
-          row.goodsId=null
-          row.normalPrice=0
-          row.canUseSku=0
-          this.$message.error("不能添加重复商品")
-
-          return
-        }
-        const param={
-          goodsId: row.value,
-          customerId: this.formData.customerId,
-          orderClass: 2
-
-        }
-
-        //
-        goodsPriceAndSku(param).then(response => {
-          if (response.code == "200") {
-            row.normalPrice=response.data.normalPrice
-            row.canUseSku=response.data.canUseSku
-
-          }else {
-            row.normalPrice=0.0
-            row.canUseSku=0.0
-
-            this.$message.error(response.msg)
-
-          }
-        });
-
+        this.formData.goodsId =item.goodsId;
+        this.formData.cbpb08 = item.cbpb08;
+        this.formData.cbpb10 = item.cbpb10;
       },
       getQtyStyle(row){
         return "color: red"
@@ -1382,10 +1422,7 @@
   },
 
       customerOnChange(val){
-        // console.log(this.formData.customer)
-        // console.log("val",val)
-        // console.log("val",row)
-        // row.qty=0.5
+
         if(val=='' ){
           return
         }
@@ -1437,82 +1474,31 @@
         });
       },
 
-   /*    /!** 新增按钮操作 *!/
-      handleAdd() {
-
-        this.$refs["form2"].validate((item) => {
-          if (item) {
-            addSales(this.form2).then(response => {
-              // console.log(this.from.parent_id, 123456789);
-              // this.classifyId = response.posts;
-              // console.log(response.posts,123456);
-
-              this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-              // this.getTreeselect();
-              // this.submitShangpin();
-              //this.submitShangpin();
-              this.onSearch();
-              this.open2 = false;
-              this.reset01();
-
-              // console.log(this.form2.ifEnabled, 123456);
-            });
-          } else {
-            // this.$message.error('请注意规范');
-          }
-        })
-        // if (this.form2.swJsStoreId != undefined || this.form2.locationNum != undefined || this.form2.sort != undefined) {
-        //     // console.log(this.form.id, 123456);
-
-        //     addUserSysStoreku(this.form2).then(response => {
-        //         // console.log(this.from.parent_id, 123456789);
-        //         // this.classifyId = response.posts;
-        //         // console.log(response.posts,123456);
-        //         this.title = "添加用户";
-        //         this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
-        //         // this.getTreeselect();
-        //         // this.submitShangpin();
-        //         this.submitShangpin();
-        //         this.getList();
-        //         this.open2 = false;
-        //         this.reset01();
-
-        //         console.log(this.form2.ifEnabled, 123456);
-        //     });
-        // } else {
-        //     this.$message.error('输入的内容不能为空呀');
-        // }
-
-        // this.reset();
-        // } else {
-        //   this.$message.error('错了哦，商品名称没有填呢');
-        // }
-
-      }, */
-
       /** 新增按钮操作 */
       handleAdd() {
+        this.$refs['formData'].validate((valid) => {
+          if (valid) {
+            addSales(this.formData).then(response => {
+              if (response.code == "200") {
+                this.$message.success("添加成功")
+                this.$store.dispatch("tagsView/delView", this.$route)
+                this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
 
-        // this.formData.goodsId=this.tableData.push(0)
-        console.log(this.tableData);
-        console.log(this.formData.goodsId);
-        addSales(this.formData).then(response => {
-          if (response.code == "200") {
-            this.$message.success("添加成功")
-            this.$store.dispatch("tagsView/delView", this.$route)
-            this.$router.push({path: "/aftersalesDetails/aftermdsales", query: {id: 1}})
-            // this.$store.dispatch("tagsView/delView", this.$route)
-            // this.$router.push({path: "/aftersales", query: {id: 1}})
+              }else {
 
-          }else {
+                this.$message.error(response.msg)
 
-            this.$message.error(response.msg)
+                // this.$router.go(-1)
 
-            // this.$router.go(-1)
-
+              }
+            });
+          } else {
+            console.log('error submit!!');
+            return false;
           }
-        }
-        )
+        });
+
+
 
 
 
@@ -1574,6 +1560,9 @@
       this.initCustomerSelect()
       this.initSaleUserSelect()
       this.getCauaList()
+      this.formData.answerMsg = 1;
+      this.formData.feedbackTime = new Date();
+      this.getSn()
     },
     watch: {
       visible(newVal) {

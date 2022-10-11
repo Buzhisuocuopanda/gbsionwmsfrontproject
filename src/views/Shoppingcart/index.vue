@@ -33,7 +33,7 @@
               <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">加入</el-button>
          </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
-            
+
 <!--          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>-->
 <!--
           <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
@@ -510,7 +510,7 @@ export default {
     //  this.goodsId=this.orderList[0].goodsId;
      // console.log(this.goodsId,1111111)
 
-      
+
        let userIds = this.idss.length > 0 ? this.idss : row
             this.$modal.confirm('编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
@@ -559,7 +559,7 @@ export default {
       // console.info(param)
       goodsShopList(param).then(response => {
         if (response.data != null && response.data != null) {
-          this.orderList = response.data;
+          this.orderList = response.data.rows;
           // console(response.data,8523)
           this.totalItems = response.data.total;
         } else {

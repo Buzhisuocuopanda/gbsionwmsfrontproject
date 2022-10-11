@@ -1306,14 +1306,12 @@ export default {
             let userIds = this.ids.length > 0 ? this.ids : row
             this.$modal.confirm('是否确认删除,编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
-                    req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
+                    req.PurchaseinboundRemove({orderId:item.id}).then((res) => {
                      if (res.code == "200") {
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
-                      }else{
-                        this.$message({ message: res.msg, type: 'error' });
                       }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1331,25 +1329,17 @@ export default {
 
         /** 普通删除按钮操作 */
         handleDelete01(row) {
-
-            // row.classifyId = this.form.classifyId;
-            // row.brand = this.form.brand;
-            // row.model = this.form.model;
-            // row.upc = this.form.upc;
-            // row.description = this.form.description;
-            // row.ifEnabled = this.form.ifEnabled;
-            // row.id=this.form.id;
-            // console.log(row, 2222);
+            let obj = {
+                orderId : row.id
+            }
             this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
-                return PurchaseinboundRemove(JSON.stringify(row));
+                return PurchaseinboundRemove(obj);
             }).then((response) => {
               if (response.code == "200") {
                 this.submitShangpin();
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-                }
+             }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */

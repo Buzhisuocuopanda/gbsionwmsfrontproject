@@ -22,8 +22,8 @@ export function PurchasereturnordersAdds(data) {
 export function Purchaseinbounddingdancx(data) {
   return request({
     url: '/whmanagement/takeOrderList',
-    method: 'post',
-    data: data
+    method: 'get',
+    params: data
   })
 }
 // 销售提货单详情查询

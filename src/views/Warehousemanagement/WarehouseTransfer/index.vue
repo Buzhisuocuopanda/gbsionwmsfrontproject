@@ -106,11 +106,11 @@
                                v-if="scope.row.cbaa11 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)" v-hasPermi="['system:warehousetransferordersController:qxwc']"
-                                v-if="scope.row.cbaa11 == 1">调入标记完成</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                                v-if="scope.row.cbaa11 == 1">标记完成</el-button>
+                            <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:warehousetransferordersController:bjwc']"
-                                v-if="scope.row.cbaa11 == 1 | scope.row.cbaa11 == 1">调出标记完成</el-button>
+                                v-if="scope.row.cbaa11 == 1 | scope.row.cbaa11 == 1">调出标记完成</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>

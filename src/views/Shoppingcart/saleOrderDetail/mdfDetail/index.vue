@@ -197,20 +197,20 @@
             <template slot-scope="scope">
                 <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
                 <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
-              
+
             </template>
           </el-table-column>
-          <el-table-column prop="currentPrice" label="标准单价" width="150">
+          <el-table-column prop="normalPrice" label="标准单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.currentPrice" placeholder="标准单价" style="" readonly></el-input>
+                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column prop="normalPrice" label="本次单价" width="150">
+          <el-table-column prop="currentPrice" label="本次单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.normalPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+                <el-input  v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -330,7 +330,7 @@
     PurchaseinboundAdd,
     PurchaseinboundAdds,GoodsList01
   } from "@/api/Warehousemanagement/PurchaseWarehousing";
-  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,customerDetaillists } from '@/api/saleordermanage'
+  import {mdfSaleOrder,saleOderDetail, swJsGoodslistBySelect ,SwJsCustomerlistSelect,systemUserSelect,goodsPriceAndSku,customerDetail,addSaleOrder,customerDetaillists,customerDetailShop } from '@/api/saleordermanage'
 
   import {
     getToken
@@ -1105,7 +1105,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/Shoppingcart", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1327,7 +1327,8 @@
             row.qty = response.data.qty
             row.price = response.data.price
             row.currentPrice = response.data.ckSku
-            row.totalPrice = 
+            row.totalPrice = response.data.qty * response.data.price
+            this.$set(row,'totalPrice',response.data.qty * response.data.price)
             console.log(row,'请求成功返回')
           }else {
             row.normalPrice=0.0
@@ -1370,31 +1371,38 @@
         if(val=='' ){
           return
         }
+        let arr1 = JSON.parse(this.$route.query.goods)
+        let arr2 = []
+        for(let i = 0;i<arr1.length;i++){[
+          arr2[i] = arr1[i]
+        ]}
+        console.log()
         const param={
           cbca01: val,
-
+          goodsIds:arr2,
         }
 
         //
-        customerDetail(param).then(response => {
+        customerDetailShop(param).then(response => {
           if (response.code == "200") {
             this.formData.receivePhone=response.data.cbca16
             this.formData.receiveName=response.data.cbca14
             this.formData.address=response.data.cbca15
             this.formData.customerId=response.data.cbca01
+            this.tableData = response.data.goodsres
           }else {
             this.formData.receivePhone=''
             this.formData.receiveName=''
             this.formData.address=''
-            this.$message.error(response.msg)
+            // this.$message.error(response.msg)
           }
         });
-        this.getshoplist(param)
+        // this.getshoplist(param)
       },
       // 获取购物车信息
       getshoplist(customerId){
         let arr1 = JSON.parse(this.$route.query.goods)
-        this.tableData.shoppongIds = arr1
+        this.formData.shoppongIds = arr1
         let arr2 = []
         for(let i = 0;i<arr1.length;i++){[
             arr2.splice(i,0,{

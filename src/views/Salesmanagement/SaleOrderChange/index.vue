@@ -579,7 +579,7 @@
 
         }).then(() => {
           const param = {
-            orderId: row.id,
+            id: row.id,
             delete: 1,
 
           }
@@ -587,6 +587,7 @@
             // console.log(response)
             if ( response.code === 200) {
               this.$message.success("删除成功")
+              this.onSearch()
             } else {
               this.$message.error(response.data.msg)
             }

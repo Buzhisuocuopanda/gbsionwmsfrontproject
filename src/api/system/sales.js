@@ -51,3 +51,13 @@ export function saleOderDetailss(data) {
     params: data
   })
 }
+
+
+//查询下拉列表sn
+export function selectGoodsSnSelect(data) {
+  return request({
+    url: '/system/Aftersales/selectGoodsSnSelect',
+    method: 'get',
+    params: data
+  })
+}

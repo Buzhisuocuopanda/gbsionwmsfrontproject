@@ -1199,21 +1199,21 @@ export const dynamicRoutes = [
         name: 'aftersalesDetails',
         component: () => import('@/views/aftersales/saleOrderDetail/index'),
 
-        meta: { title: '售后单创建', icon: 'component', noCache: true }
+        meta: { title: '售后服务单创建', icon: 'component', noCache: true }
       },{
         // path: 'role/:cbpc01(\\d+)',
         path: 'aftermdsalesDetails',
         name: 'aftermdsalesDetails',
         component: () => import('@/views/aftersales/saleOrderDetail/mdfDetail/index'),
 
-        meta: { title: '售后单修改', icon: 'component', noCache: true }
+        meta: { title: '售后服务单修改', icon: 'component', noCache: true }
       },{
         // path: 'role/:cbpc01(\\d+)',
         path: 'aftermdsales',
         name: 'aftermdsales',
         component: () => import('@/views/aftersales/index'),
 
-        meta: { title: '售后', icon: 'component' }
+        meta: { title: '售后服务单', icon: 'component' }
       }
     ]
   },
@@ -1680,3 +1680,5 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
+
+

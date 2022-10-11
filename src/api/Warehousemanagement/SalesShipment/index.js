@@ -41,8 +41,8 @@ export function PurchaseinxiaosoList(query) {
 export function Purchaseinbounddingdancx(data) {
   return request({
     url: '/whmanagement/takeOrderList',
-    method: 'post',
-    data: data
+    method: 'get',
+    params: data
   })
 }
 
