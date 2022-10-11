@@ -10,8 +10,8 @@
                 </el-col>
                 <el-col :span="8">
                     <el-form-item label="日期:">
-                        <!-- <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
-            </el-date-picker> -->
+                        <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+                        </el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -22,65 +22,52 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="6">
-                    <el-form-item label="客户名称:" prop="cbpc0999">
+                    <el-form-item label="客户名称:" prop="customer">
                         <el-popover placement="bottom-start" trigger="click">
                             <CustomerMainten ref="CustomerMainten" @selected="selected022"
                                 style="width:210px!important; height:100px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly
+                            <el-input slot="reference" v-model="form2.customer" placeholder="" readonly
                                 style="width:110%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-2%;" :span="6">
-                    <el-form-item label="供料单位:" prop="cbpc099">
+                    <el-form-item label="供料单位:" prop="supplier">
                         <el-popover placement="bottom-start" trigger="click">
                             <supplierMaintenance ref="supplierMaintenance" @selected="selected02"
                                 style="width:210px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly
+                            <el-input slot="reference" v-model="form2.supplier" placeholder="" readonly
                                 style="width:100%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-4%;" :span="6">
-                    <el-form-item label="仓库:" prop="cbpc100">
+                    <el-form-item label="仓库:" prop="cbwa09">
                         <el-popover placement="bottom-start" trigger="click">
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
+                            <el-input slot="reference" v-model="form2.cbwa09" placeholder="" readonly
                                 style="width:100%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-2%;" :span="6">
-                    <!-- <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
-              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select> -->
-                    <el-form-item label="销售人员:" prop="salerId">
+                    <el-form-item label="销售人员:" prop="saler">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <salerman ref="salerman" @selected="selected011699" style="width:220px!important;" />
-                            <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly
+                            <el-input slot="reference" v-model="form2.saler" placeholder="" readonly
                                 style="width:85%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
-                    <!-- <el-form-item label="结算货币:" prop="cbpc166">
-                  <el-popover placement="bottom-start" trigger="click">
-                      <ListLists ref="ListLists" @selected="selected004" />
-                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly
-                          style="border:solid #eee thin; width:77%;">
-                      </el-select>
-                  </el-popover>
-              </el-form-item> -->
                 </el-col>
-                <!--商品信息维护-->
             </el-row>
             <el-row v-if="false">
                 <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">
-                    <el-form-item label="供应商id:" prop="supplierId">
-                        <el-input v-model="form2.supplierId" maxlength="30" style="width:80%;border:solid #eee thin" />
+                    <el-form-item label="供应商id:" prop="goodsId">
+                        <el-input v-model="form2.goodsId" maxlength="30" style="width:80%;border:solid #eee thin" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
@@ -118,12 +105,12 @@
                 <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
                     :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
                     <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-                    <el-table-column prop="cbpc000" label="品牌" width="">
+                    <el-table-column prop="cala08" label="品牌" width="">
                         <template slot-scope="scope" style="width:200%;">
                             <el-popover placement="bottom-start" trigger="click">
                                 <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
                                     style="width:780px!important;" />
-                                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
+                                <el-input slot="reference" v-model="scope.row.cala08" placeholder="" readonly
                                     style="width:100%;">
                                 </el-input>
                             </el-popover>
@@ -189,7 +176,9 @@
 
 import {
     PurchaseinboundAdd,
-    PurchaseinboundAdds
+    PurchaseinboundAdds,
+    PurchaseinboundLists,
+    PurchaseinboundEdit
 } from "@/api/Warehousemanagement/SalesBooking";
 import {
     getToken
@@ -518,7 +507,7 @@ export default {
                 supplierId: "",
                 whId: "",
                 orderDate: "",
-                cbsb177: ""
+                cbsb177: "",
             },
             defaultProps: {
                 children: "children",
@@ -556,12 +545,12 @@ export default {
 
 
             rules: {
-                cbpc0999: [{
+                customer: [{
                     required: true,
                     message: "供料单位不能为空!",
                     trigger: 'change'
                 }],
-                cbpc100: [{
+                cbwa09: [{
                     required: true,
                     message: "仓库不能为空!",
                     trigger: 'change'
@@ -610,7 +599,7 @@ export default {
     },
     created() {
 
-
+        this.getList()
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -625,10 +614,39 @@ export default {
 
     },
     methods: {
-
-        // 查询详情数据
-        getlist(){
-
+        //详情列表
+        getList(){
+            this.loading = true;
+            const userId = this.$route.params &&  this.$route.params.id;
+            // this.orderid.id = this.$route.params &&  this.$route.params.id;
+            // this.status = this.$route.params && this.$route.params.status;
+            if (userId) {
+                // 获取表详细信息
+                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                    this.form2 = res.data.rows[0];
+                    this.form2.whId = this.form2.cbwa01;
+                    this.form2.orderDate = this.form2.orderDate.slice(0,10) + ' ' + this.form2.orderDate.slice(11,19)
+                    console.log(this.form2.orderDate,'日期')
+                    let obj = res.data.rows[0]
+                    let arr1 = res.data.rows
+                    this.tableData[0].cala08 = obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08;
+                    let arr2 = []
+                    for(let i = 0;i<arr1.length;i++){[
+                        arr2.splice(i,0,{
+                            "cala08":obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08,
+                            "goodsId": arr1[i].goodsId,
+                            "gsSalesOrders":arr1[i].gsSalesOrders,
+                            "id": 0,
+                            "price": arr1[i].price,
+                            "qty": arr1[i].qty,
+                            "remark": arr1[i].remark,
+                        }),
+                    ]}
+                    this.tableData = arr2;
+                    console.log(arr2, 8889990000);
+                    this.loading = false;
+                });
+            }
         },
         //添加模块-销售人员
         selected011699(name) {
@@ -721,7 +739,7 @@ export default {
                         cbpd12: "",
                         orderDate: "",
                         cbpc0999: "",
-                        cbsb177: ""
+                        cbsb177: "",
                     }
                 }
                 if (count-- === 1) {
@@ -773,13 +791,13 @@ export default {
             //   cbpd08: this.form2.cbpd08,
             // })
             this.tableData.push({
-                // id: this.dataId,
-                date: '',
-                num: '',
-                address: '',
-                moner: '',
-                province: '',
-                cbpc000: ''
+                "cala08":'',
+                "goodsId": '',
+                "gsSalesOrders":'',
+                "id": 0,
+                "price": '',
+                "qty": '',
+                "remark": '',
             })
             this.dataId++
             console.log(this.tableData, 852369);
@@ -811,12 +829,6 @@ export default {
             let formName = this.tableData[index].formName
             this.$refs[formName + '_select'][0].blur() // myform1648431132399_select
         },
-
-
-
-
-
-
         show() {
             this.showSearch = !this.showSearch;
         },
@@ -830,9 +842,9 @@ export default {
         selected01(name) {
             console.log(name, 123)
             // console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
+            this.form2.wh = name.substring(0, name.indexOf("-"))
             this.form2.whId = name.substring(name.indexOf("-") + 1)
-            console.log(this.form2.cbpc10, 8888888);
+            console.log(this.form2.wh, 8888888);
             // this.form2.icon = name;
         },
 
@@ -868,10 +880,7 @@ export default {
         //查询商品信息维护
         selected08(e, row) {
             // row.cbpc000=e
-            this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
-            console.log(e, 111)
-            console.log(row, 222)
-            // row.cbpc08 = e.substring(e.indexOf(".") + 1)
+            this.$set(row, "cala08", e.substring(0, e.indexOf(".")))
             this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
             console.log(row, 555)
         },
@@ -887,12 +896,6 @@ export default {
         deletData(index) {
             this.tianjiahang.splice(index, 1);
         },
-
-
-
-
-
-
         // 取消按钮
         cancel() {
             this.open2 = false;
@@ -946,14 +949,13 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
-
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     this.form2.goods = this.tableData
-                    PurchaseinboundAdd(this.form2).then(response => {
+                    PurchaseinboundEdit(this.form2).then(response => {
                         if (response.code == "200") {
                             this.$message({
-                                message: '添加成功',
+                                message: '修改成功',
                                 type: 'success',
                                 style: 'color:red;!important'
                             });
@@ -967,7 +969,6 @@ export default {
                                 item.purchaseOrderId = response.data.id;
                                 console.log(item.purchaseOrderId, 8523697412);
                             })
-                            this._ly_ok();
                         }
                     });
                 } else {
