@@ -363,7 +363,11 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="sn:" prop="sn">
+          <el-form-item label="反馈时间:" prop="feedbackTime">
+            <el-date-picker type="date" placeholder="" v-model="formData.feedbackTime" style="width: 70%;">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="sn:" v-if="false" prop="sn">
             <el-input type="text" v-model="formData.sn" style="width: 70%;" />
           </el-form-item>
         </el-col>
@@ -558,16 +562,16 @@
                     <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
                   </el-col>
                 </el-row>-->
-        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="goodsMsg" label="品牌" width="200px">
-            <template slot-scope="scope">
-              <sapn><!--v-loadmore="loadMore"-->
-                <el-select @change="goodsOnChange(scope.row,$event)"  v-model="formData.goodsId" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px">
+          <el-table-column prop="goodsMsg" label="品牌" width="">
+            <template slot-scope="scope" style="overflow-y:hidden">
+              <sapn  ><!--v-loadmore="loadMore"-->
+                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="getSn" v-model="formData.goodsMsg" filterable clearable  placeholder="请选择" style="width: 100%">
                   <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
+                    v-for="item in snList"
+                    :key="item.sn"
+                    :label="item.goodsMsg"
+                    :value="item.sn">
                   </el-option>
                 </el-select>
               </sapn>
@@ -575,6 +579,7 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
+          <el-table-column label="SN" width="" />
           <!--          <el-table-column prop="qty" label="数量" width="150" >
                       <template slot-scope="scope">
                         <sapn>
@@ -731,7 +736,7 @@
   import {systemUserSelectAll } from '@/api/saleordermanage'
   //供应商
   import ListLists from "@/components/ListMaintenance";
-  import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss } from "@/api/system/sales";
+  import { listSales, getSales, delSales, addSales, updateSales,saleOderDetailss,selectGoodsSnSelect } from "@/api/system/sales";
 
   // //客户
   // import CustomerMainten from "@/components/CustomerMaintenance";
@@ -752,8 +757,8 @@
         * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
         * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
         */
-        const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
 
+        const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
         if(CONDITION) {
           binding.value();
         }
@@ -881,7 +886,12 @@
         ponpaixenghaomiaoshu: [],
         //下拉列表数据用户
         cauaList:[],
-
+        //下拉列表数据sn商品
+        snList:[],
+        snListQuery: {
+          pageNum: 1,
+          pageSize: 10
+        },
         // 日期范围
         dateRange: [],
         postCangKu: [],
@@ -1020,6 +1030,8 @@
           answerMsg: undefined,
           process: undefined,
           salerId:"",
+          goodsMsg:"",
+          feedbackTime:undefined,
 
           orderType: 10,
           orderTypeMsg: "销售订单",
@@ -1204,8 +1216,8 @@
         columnIndex
       }) {
         if (columnIndex === 0) {
-          return [1, 3];
-        } else if (columnIndex < 3) {
+          return [1, 4];
+        } else if (columnIndex < 4) {
           return [0, 0];
         }
       },
@@ -1638,7 +1650,8 @@
 
       goodsOnChange(row,val){
 
-        console.log("row",row)
+        this.formData.sn = val;
+        /*console.log("row",row)
         console.log("val",val)
         row.goodsId=val
         // row.qty=0.5
@@ -1676,9 +1689,25 @@
             this.$message.error(response.msg)
 
           }
-        });
+        });*/
 
       },
+
+      getSn(){
+        selectGoodsSnSelect(this.snListQuery).then(response => {
+
+          if (response.code == "200") {
+            this.snListQuery.pageNum=this.snListQuery.pageNum+1
+            // this.options.push.apply(this.options,response.data.rows)
+            this.snList.push(...response.data)
+          }else {
+            this.$message.error(response.msg)
+          }
+        },error => {
+
+        });
+      },
+
       getQtyStyle(row){
         return "color: red"
 
@@ -1837,13 +1866,7 @@
 
     },
     mounted() {
-      // 初始化表单数据，至少有一行表单数据
-      this.formArr = []
-      this._ly_addFrom()
-      this.initSelect()
-      this.initCustomerSelect()
-      this.initSaleUserSelect()
-      this.getCauaList()
+
       const param={
         orderId: this.$route.query.id
       }
@@ -1890,6 +1913,14 @@
           }
         }
       )
+      // 初始化表单数据，至少有一行表单数据
+      this.formArr = []
+      this._ly_addFrom()
+      this.initSelect()
+      this.initCustomerSelect()
+      this.initSaleUserSelect()
+      this.getCauaList()
+      this.getSn()
     },
     watch: {
       visible(newVal) {

@@ -197,20 +197,20 @@
             <template slot-scope="scope">
                 <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
                 <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
-              
+
             </template>
           </el-table-column>
-          <el-table-column prop="currentPrice" label="标准单价" width="150">
+          <el-table-column prop="normalPrice" label="标准单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.currentPrice" placeholder="标准单价" style="" readonly></el-input>
+                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column prop="normalPrice" label="本次单价" width="150">
+          <el-table-column prop="currentPrice" label="本次单价" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input readonly v-model="scope.row.normalPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
+                <el-input  v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -1105,7 +1105,7 @@
       // 取消按钮
       cancel() {
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        this.$router.push({path: "/Salesmanagement/Shoppingcart", query: {id: 1}})
       },
 
       //添加的取消按钮
@@ -1402,7 +1402,7 @@
       // 获取购物车信息
       getshoplist(customerId){
         let arr1 = JSON.parse(this.$route.query.goods)
-        this.tableData.shoppongIds = arr1
+        this.formData.shoppongIds = arr1
         let arr2 = []
         for(let i = 0;i<arr1.length;i++){[
             arr2.splice(i,0,{
