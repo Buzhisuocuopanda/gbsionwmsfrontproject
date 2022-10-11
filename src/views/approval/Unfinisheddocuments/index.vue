@@ -45,10 +45,10 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
-        <el-table-column fixed label="单据类型" align="center" prop="cabraa07" min-width="120px;"/>
-        <el-table-column fixed label="单据编号" align="center" prop="cabraa14" min-width="120px;"/>
-        <el-table-column  label="单据日期" align="center" prop="cabraa15" min-width="120px;"  :formatter="formatDate"/>
+      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe >
+        <el-table-column fixed label="单据类型" align="left" prop="cabraa07" min-width="120px;"/>
+        <el-table-column fixed label="单据编号" align="left" prop="cabraa14" min-width="120px;"/>
+        <el-table-column  label="单据日期" align="left" prop="cabraa15" min-width="120px;"  :formatter="formatDate"/>
 <!--        <el-table-column  label="审核日期" align="center" prop="cabraa02" min-width="200px;" :formatter="formatDate"/>-->
         <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="100px;"/>
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
@@ -59,9 +59,9 @@
         <el-table-column label="操作"  min-width="60px;">
           <template slot-scope="scope" >
 <!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">修改</el-button>-->
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text" v-hasPermi="['approval:unfinisheddocuments:detail']"
-                       @click="showDetail(scope.row)">详情</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" class="caozuoxiangqeng"  size="mini"
+                      type="text" v-hasPermi="['approval:unfinisheddocuments:detail']"
+                      @click="showDetail(scope.row)">详情</el-button>
           </template>
 
         </el-table-column>
@@ -72,7 +72,7 @@
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -306,5 +306,7 @@ export default {
 </script>
 
 <style scoped>
-
+.caozuoxiangqeng {
+  border: 0 !important;
+}
 </style>

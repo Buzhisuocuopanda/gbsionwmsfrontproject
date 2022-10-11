@@ -30,27 +30,27 @@
         <el-form-item style="margin: -5px -10px 1px 30px" >
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column label="单据编号" align="center" header-align="center" prop="cboa07" min-width="200px;" />
-        <el-table-column  label="单据日期" align="center" prop="cboa08" :formatter="formatTime" min-width="120px;"/>
-        <el-table-column  label="客户" align="center" prop="cbca08" min-width="240px;"/>
-        <el-table-column  label="销售人员" align="center" prop="caua17" min-width="120px;"/>
-        <el-table-column  label="品牌" align="center" prop="cala08" min-width="130px;"/>
-        <el-table-column  label="类型" align="center" prop="cbpa08" min-width="100px;"/>
-        <el-table-column  label="型号" align="center" prop="cbpb12"  min-width="160px;"/>
-        <el-table-column  label="数量" align="center" prop="num" min-width="100px;"/>
-        <el-table-column  label="已发货数量" align="center" prop="cbob10" min-width="100px;"/>
-        <el-table-column  label="未发货数量" align="center" min-width="100px;">
+      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  height="460"  :data="inwuquList" element-loading-text="Loading。。。"  width="100%;"  v-loading="loading"
+                border fit highlight-current-row stripe style="margin-top:1em">
+        <el-table-column label="单据编号" align="left" header-align="center" prop="cboa07" min-width="200px;" />
+        <el-table-column  label="单据日期" align="left" prop="cboa08" :formatter="formatTime" min-width="120px;"/>
+        <el-table-column  label="客户" align="left" prop="cbca08" min-width="240px;"/>
+        <el-table-column  label="销售人员" align="left" prop="caua17" min-width="120px;"/>
+        <el-table-column  label="品牌" align="left" prop="cala08" min-width="130px;"/>
+        <el-table-column  label="类型" align="left" prop="cbpa08" min-width="100px;"/>
+        <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="160px;"/>
+        <el-table-column  label="数量" align="right" :formatter="rounding" prop="num" min-width="100px;"/>
+        <el-table-column  label="已发货数量" align="right" :formatter="rounding" prop="cbob10" min-width="100px;"/>
+        <el-table-column  label="未发货数量" align="right" :formatter="rounding" min-width="100px;">
           <template slot-scope="scope">
             <div>{{scope.row.num!=null? scope.row.num-scope.row.cbob10:''}}</div>
           </template>
         </el-table-column>
-        <el-table-column  label="单价" align="center" prop="cbob11" min-width="100px;"/>
-        <el-table-column  label="金额" align="center" prop="cbob12" min-width="100px;"/>
+        <el-table-column  label="单价" align="right" :formatter="rounding" prop="cbob11" min-width="100px;"/>
+        <el-table-column  label="金额" align="right" :formatter="rounding" prop="cbob12" min-width="100px;"/>
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
@@ -60,7 +60,7 @@
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -256,6 +256,11 @@ export default {
     this.getGoods();
   },
   methods: {
+
+    rounding(row, column) {
+      return parseFloat(row[column.property]).toFixed(2)
+    },
+
     onSubmit() {},
     handleSelectionChange() {},
     formatTime(row){

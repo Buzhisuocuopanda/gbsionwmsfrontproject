@@ -30,26 +30,26 @@
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['countQuery:inventorysmmaryquerys:list']"   class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventorysmmaryquerys:list']"  class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['countQuery:inventorysmmaryquerys:export']" type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['countQuery:inventorysmmaryquerys:export']" class="filter-item" type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+      <el-table :row-style="{height: '3px'}" :header-cell-style="headClasspw" :cell-style="{padding: '2px'}" height="460" :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column label="仓库" align="center" header-align="center" prop="cbwa09" min-width="80px;" />
-        <el-table-column  label="单据日期" align="center"  prop="cbib04" :formatter="formatTime2"  min-width="100px;"/>
-        <el-table-column  label="单据类型" align="center" prop="cbib17" min-width="90px;"/>
-        <el-table-column  label="单据编号" align="center" prop="cbib03" min-width="130px;"/>
-        <el-table-column  label="摘要" align="center" prop="cbib17" min-width="130px;"/>
-        <el-table-column  label="往来单位" align="center" prop="cbib06" min-width="100px;"/>
-        <el-table-column  label="商品" align="center" prop="cbpb08"  min-width="270px;"/>
-        <el-table-column  label="上次结存数量" align="center" prop="cbib09" min-width="60px;"/>
-        <el-table-column  label="上次结存成本金额" align="center" prop="cbib10" min-width="100px;"/>
-        <el-table-column  label="本次入库数量" align="center" prop="cbib11" min-width="60px;"/>
-        <el-table-column  label="本次入库金额" align="center" prop="cbib12" min-width="80px;"/>
-        <el-table-column  label="本次出库数量" align="center" prop="cbib13" min-width="60px;"/>
-        <el-table-column  label="本次出库金额" align="center" prop="cbib14" min-width="80px;"/>
-        <el-table-column  label="本次结存数量" align="center" prop="cbib15" min-width="60px;"/>
-        <el-table-column  label="本次结存金额" align="center" prop="cbib16" min-width="80px;"/>
+        <el-table-column label="仓库" align="left" header-align="center" prop="cbwa09" min-width="80px;" />
+        <el-table-column  label="单据日期" align="left"  prop="cbib04" :formatter="formatTime2"  min-width="100px;"/>
+        <el-table-column  label="单据类型" align="left" prop="cbib17" min-width="90px;"/>
+        <el-table-column  label="单据编号" align="left" prop="cbib03" min-width="130px;"/>
+        <el-table-column  label="摘要" align="left" prop="cbib17" min-width="130px;"/>
+        <el-table-column  label="往来单位" align="left" prop="cbib06" min-width="100px;"/>
+        <el-table-column  label="商品" align="left" prop="cbpb08"  min-width="270px;"/>
+        <el-table-column  label="上次结存数量" align="right" :formatter="rounding" prop="cbib09" min-width="60px;"/>
+        <el-table-column  label="上次结存成本金额" align="right" :formatter="rounding" prop="cbib10" min-width="100px;"/>
+        <el-table-column  label="本次入库数量" align="right" :formatter="rounding" prop="cbib11" min-width="60px;"/>
+        <el-table-column  label="本次入库金额" align="right" :formatter="rounding" prop="cbib12" min-width="80px;"/>
+        <el-table-column  label="本次出库数量" align="right" :formatter="rounding" prop="cbib13" min-width="60px;"/>
+        <el-table-column  label="本次出库金额" align="right" :formatter="rounding" prop="cbib14" min-width="80px;"/>
+        <el-table-column  label="本次结存数量" align="right" :formatter="rounding" prop="cbib15" min-width="60px;"/>
+        <el-table-column  label="本次结存金额" align="right" :formatter="rounding" prop="cbib16" min-width="80px;"/>
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
@@ -59,7 +59,7 @@
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -238,6 +238,20 @@ export default {
     this.getGoods();
   },
   methods: {
+
+    rounding(row, column) {
+      return parseFloat(row[column.property]).toFixed(2)
+    },
+
+    //列表表头设置
+    headClasspw() {
+      return {
+        'text-align': 'left',
+        height: '30px',
+        padding: '0'
+      }
+    },
+
     onSubmit() {},
     handleSelectionChange() {},
     formatStateType(row) {

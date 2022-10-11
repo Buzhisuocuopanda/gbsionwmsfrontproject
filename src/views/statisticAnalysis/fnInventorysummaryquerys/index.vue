@@ -27,23 +27,23 @@
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['query:fnInventorysummaryquery:list']"  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['query:fnInventorysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['query:fnInventorysummaryquery:list']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['query:fnInventorysummaryquery:list']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
 
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" height="460" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column  v-if="false" align="center" prop="cbig01"  min-width="80px;"/>
-        <el-table-column fixed label="仓库" align="center" prop="cbwa09"  min-width="80px;"/>
-        <el-table-column fixed label="库位" align="center" prop="cbla09" min-width="80px;"/>
+        <el-table-column fixed label="仓库" align="left" prop="cbwa09"  min-width="80px;"/>
+        <el-table-column fixed label="库位" align="left" prop="cbla09" min-width="80px;"/>
         <!--<el-table-column  label="大类" align="center" prop="cala08" min-width="120px;"/>-->
-        <el-table-column  label="商品分类" align="center" prop="cbpa07" min-width="100px;"/>
-        <el-table-column  label="品牌" align="center" prop="cbpb15" min-width="100px;"/>
-        <el-table-column  label="型号" align="center" prop="cbpb12"  min-width="240px;"/>
-        <el-table-column  label="UPC" align="center" prop="cbpb15" min-width="100px;"/>
+        <el-table-column  label="商品分类" align="left" prop="cbpa07" min-width="100px;"/>
+        <el-table-column  label="品牌" align="left" prop="cbpb15" min-width="100px;"/>
+        <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="240px;"/>
+        <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="100px;"/>
         <!--<el-table-column  label="描述" align="center" prop="lockQty" min-width="260px;"/>-->
-        <el-table-column label="商品SN" align="center" prop="cbig10" min-width="80px;" />
-        <el-table-column  label="入库日期" align="center" prop="cbig15" :formatter="formatTime2" min-width="80px;" />
+        <el-table-column label="商品SN" align="left" prop="cbig10" min-width="80px;" />
+        <el-table-column  label="入库日期" align="left" prop="cbig15" :formatter="formatTime2" min-width="80px;" />
 
 
       </el-table>
@@ -53,7 +53,7 @@
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>

@@ -57,7 +57,7 @@
                     <!-- <el-table-column label="仓库" align="center" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable />
                     <el-table-column label="关联订单" align="center" key="cala08" prop="cala08" sortable /> -->
-                    <el-table-column label="状态" align="left" key="cbsh09" prop="cbsh09" sortable>
+                    <el-table-column label="状态" align="center" key="cbsh09" prop="cbsh09" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbsh09 == 3 ? "盘点中" : scope.row.cbsh09 == 4 ?
                                 "盘点完" : "未确定状态"

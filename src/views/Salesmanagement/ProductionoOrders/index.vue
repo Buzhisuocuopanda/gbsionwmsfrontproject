@@ -19,7 +19,7 @@
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
-                     @click="onSearch">搜索
+                    @click="onSearch">搜索
           </el-button>
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
@@ -36,31 +36,31 @@
 <!--            style="display: inline">-->
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
-          <el-button v-hasPermi="['system:totalOrder:import']" type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
+          <el-button v-hasPermi="['system:totalOrder:import']" class="filter-item"  type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
 
-          <el-button v-hasPermi="['system:totalOrder:export']" type="primary" v-on:click="exprotData()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">导出
+          <el-button v-hasPermi="['system:totalOrder:export']" class="filter-item" type="primary" v-on:click="exprotData()" :loading=loadingOut
+                    style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="480" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
+      <el-table :data="orderList"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="480" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
                 stripe>
-        <el-table-column fixed label="优先级" align="center" prop="priority" min-width="120px;"/>
-        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="140px;"/>
-        <el-table-column label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column label="描述" align="center" prop="description" min-width="400px;"/>
+        <el-table-column fixed label="优先级" align="right" prop="priority" min-width="120px;"/>
+        <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="140px;"/>
+        <el-table-column label="型号" align="left" prop="model" min-width="120px;"/>
+        <el-table-column label="描述" align="left" prop="description" min-width="400px;"/>
         <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
         <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="100px;"/>
         <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="100px;"/>
         <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;"/>
-        <el-table-column label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
+        <el-table-column label="类型" align="left" prop="orderTypeMsg" min-width="120px;"/>
         <el-table-column label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button v-hasPermi="['system:totalOrder:detail']" icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button v-hasPermi="['system:totalOrder:edit']" icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button v-hasPermi="['system:totalOrder:remove']" icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
+            <el-button v-hasPermi="['system:totalOrder:detail']" icon="el-icon-share"  size="mini" class="caozuoxiangqeng"  type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button v-hasPermi="['system:totalOrder:edit']" icon="el-icon-edit"  size="mini" class="caozuoxiangqeng"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button v-hasPermi="['system:totalOrder:remove']" icon="el-icon-delete"  size="mini" class="caozuoxiangqeng"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
           </template>
 
         </el-table-column>
@@ -71,7 +71,7 @@
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:40px; padding-left: 10px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -609,6 +609,7 @@
             // console.log(response)
             if ( response.code === 200) {
               this.$message.success("删除成功")
+              this.onSearch()
             } else {
               this.$message.error(response.msg)
             }
@@ -848,8 +849,8 @@
 </script>
 
 
-<style lang="scss">
-  .caozuoxiangqeng {
+<style lang="scss" scoped>
+.caozuoxiangqeng {
     border: 0 !important;
   }
   /*.el-dialog__footer {*/
@@ -859,5 +860,7 @@
   /*  -webkit-box-sizing: border-box;*/
   /*  box-sizing: border-box*/
   /*}*/
-
+.caozuoxiangqeng {
+  border: 0 !important;
+}
 </style>

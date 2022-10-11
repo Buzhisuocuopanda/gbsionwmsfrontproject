@@ -31,7 +31,7 @@
                     <el-form-item>
                         <el-button v-hasPermi="['system:purchasereturnorders:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:45%;">
+                    <el-form-item style="margin-left:59%;">
 
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
@@ -69,7 +69,7 @@
                     <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="状态" align="left" key="cbpg11" prop="cbpg11" sortable>
+                    <el-table-column label="状态" align="center" key="cbpg11" prop="cbpg11" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbpg11 == 0 ? "未审核" : scope.row.cbpg11 == 1 ?
                             "已审核" : scope.row.cbpg11 == 4 ? "已完成" : ""

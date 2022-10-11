@@ -24,18 +24,18 @@
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
-      <el-table-column prop="date" label="序号" type="index" sortable width="100" align="center"></el-table-column>
-      <el-table-column prop="saleOrderNo" label="商品订单" align="center" sortable></el-table-column>
-      <el-table-column prop="description" label="商品描述" align="center" sortable width="300"></el-table-column>
-      <el-table-column prop="brand" label="品牌" align="center" sortable></el-table-column>
-      <el-table-column prop="whName" label="仓库" align="center" sortable></el-table-column>
-      <el-table-column prop="model" label="型号" align="center" sortable></el-table-column>
+    <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="430" :header-cell-style="headClasspw" :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
+      <el-table-column prop="date" label="序号" type="index" sortable width="100" align="left"></el-table-column>
+      <el-table-column prop="saleOrderNo" label="商品订单" align="left" sortable></el-table-column>
+      <el-table-column prop="description" label="商品描述" align="left" sortable width="300"></el-table-column>
+      <el-table-column prop="brand" label="品牌" align="left" sortable></el-table-column>
+      <el-table-column prop="whName" label="仓库" align="left" sortable></el-table-column>
+      <el-table-column prop="model" label="型号" align="left" sortable></el-table-column>
 
      <!-- <el-table-column prop="description" label="描述" align="center" width="240px" sortable></el-table-column>-->
 
 
-      <el-table-column prop="qty" label="数量" align="center" sortable></el-table-column>
+      <el-table-column prop="qty" label="数量" :formatter="rounding" align="right" sortable></el-table-column>
 
    <!--   <el-table-column prop="cbca08" label="客户" align="center" sortable></el-table-column>
       <el-table-column prop="cboe08" :formatter="formatTime" label="日期" align="center" sortable></el-table-column>-->
@@ -43,7 +43,7 @@
       <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
         <template slot-scope="scope">
 
-          <el-button v-show="scope.row.status ==2" type="primary"  class="button-caozuoxougai"
+          <el-button v-show="scope.row.status ==2"  size="mini" type="text" class="button-caozuoxougai"
                      v-hasPermi="['system:outStockAdviceList:end']" @click="stockEnd(scope.row)" >调拨
           </el-button>
           <!--v-hasPermi="['system:list:add']"-->
@@ -56,7 +56,7 @@
       :total="total"
       :current-page.sync="queryParams.pageNum"
       :page-size.sync="queryParams.pageSize"
-      style="padding-top:40px; padding-left: 20px;float: right"
+      style="padding-top:30px; padding-left: 20px;float: right"
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="onSearch"
       @current-change="onSearch"/>
@@ -115,6 +115,20 @@
       this.getStoreSkuList();
     },
     methods: {
+    
+      rounding(row, column) {
+        return parseFloat(row[column.property]).toFixed(2)
+      },
+
+      //列表表头设置
+      headClasspw() {
+        return {
+          'text-align': 'left',
+          height: '30px',
+          padding: '0'
+        }
+      },
+
       onSubmit() {},
       formatTime(row){
         return formatDate2(row.cboe08);

@@ -74,7 +74,7 @@
                     </el-table-column>
                     <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="销售人员" align="left" key="caua17" prop="caua17" sortable />
-                    <el-table-column label="状态" align="left" key="status" prop="status" sortable>
+                    <el-table-column label="状态" align="center" key="status" prop="status" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
                             "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"

@@ -24,23 +24,23 @@
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" type="primary" v-on:click="exprotData()"
+          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"
                      style="margin-bottom:0;margin-left: 1em">导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" height="460" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column fixed align="center" label="序号" type="index" width="50"/>
-        <el-table-column fixed label="销售订单号" align="center" prop="cboa07"  min-width="80px;"/>
-        <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="200px;"/>
-        <el-table-column  label="客户订单号" align="center" prop="cboa25" min-width="200px;"/>
-        <el-table-column  label="分类" align="center" prop="cbpa07" min-width="100px;"/>
-        <el-table-column  label="品牌" align="center" prop="cala08" min-width="60px;"/>
-        <el-table-column  label="型号" align="center" prop="cbpb12"  min-width="100px;"/>
-        <el-table-column  label="占用数量" align="center" prop="lockQty" min-width="60px;"/>
-        <el-table-column  label="订单数量" align="center" prop="cbob09" min-width="60px;"/>
-        <el-table-column label="已发数量" align="center" prop="cbob10" min-width="60px;" />
-        <el-table-column label="取消数量" align="center" prop="cbob15" min-width="60px;" />
+        <el-table-column  align="center" label="序号" type="index" width="50"/>
+        <el-table-column  label="销售订单号" align="left" prop="cboa07"  min-width="110px;"/>
+        <el-table-column  label="客户" align="left" prop="cbca08" min-width="180px;"/>
+        <el-table-column  label="客户订单号" align="left" prop="cboa25" min-width="150px;"/>
+        <el-table-column  label="分类" align="left" prop="cbpa07" min-width="90px;"/>
+        <el-table-column  label="品牌" align="left" prop="cala08" min-width="60px;"/>
+        <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="90px;"/>
+        <el-table-column  label="占用数量" align="right" :formatter="rounding"  prop="lockQty" min-width="60px;"/>
+        <el-table-column  label="订单数量" align="right" :formatter="rounding"  prop="cbob09" min-width="60px;"/>
+        <el-table-column label="已发数量" align="right" :formatter="rounding"  prop="cbob10" min-width="60px;" />
+        <el-table-column label="取消数量" align="right" :formatter="rounding" prop="cbob15" min-width="60px;" />
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
@@ -50,7 +50,7 @@
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -119,6 +119,10 @@ export default {
     this.getGoods();
   },
   methods: {
+
+    rounding(row, column) {
+      return parseFloat(row[column.property]).toFixed(2)
+    },
     onSubmit() {},
     handleSelectionChange() {},
     formatStateType(row) {

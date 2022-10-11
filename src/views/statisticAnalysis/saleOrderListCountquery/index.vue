@@ -39,15 +39,15 @@
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+      <el-table :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" height="460" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column label="供料单位" align="center" header-align="center" prop="supplier" min-width="200px;" />
+        <el-table-column label="供料单位" align="left" header-align="center" prop="supplier" min-width="200px;" />
 
-        <el-table-column  label="客户名称" align="center" prop="customer" min-width="240px;"/>
-        <el-table-column  label="编号" align="center" prop="orderNo" min-width="240px;"/>
-        <el-table-column  label="品牌" align="center" prop="cbpb10" min-width="130px;"/>
-        <el-table-column  label="商品" align="center" prop="cbpb08" min-width="130px;"/>
-        <el-table-column  label="数量" align="center" prop="qty" min-width="100px;"/>
+        <el-table-column  label="客户名称" align="left" prop="customer" min-width="240px;"/>
+        <el-table-column  label="编号" align="left" prop="orderNo" min-width="210px;"/>
+        <el-table-column  label="品牌" align="left" prop="cbpb10" min-width="130px;"/>
+        <el-table-column  label="商品" align="left" prop="cbpb08" min-width="130px;"/>
+        <el-table-column  label="数量" align="right" :formatter="rounding" prop="qty" min-width="100px;"/>
        <!-- <el-table-column  label="入库数量" align="center" prop="cbob10" min-width="100px;"/>
         <el-table-column  label="变更数量" align="center" min-width="100px;"/>
         <el-table-column  label="剩余数量" align="center" min-width="100px;"/>
@@ -56,18 +56,18 @@
             <div>{{scope.row.num!=null? scope.row.num-scope.row.cbob10:''}}</div>
           </template>
         </el-table-column>-->
-        <el-table-column  label="销售人员" align="center" prop="saler" min-width="120px;"/>
-        <el-table-column  label="创建时间" align="center" prop="createTime" :formatter="formatTime" min-width="120px;"/>
+        <el-table-column  label="销售人员" align="left" prop="saler" min-width="120px;"/>
+        <el-table-column  label="创建时间" align="left" prop="createTime" :formatter="formatTime" min-width="120px;"/>
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
       <el-pagination
         :background="true"
-        :page-sizes="[10, 20, 30, 40]"
+        :page-sizes="[10, 15, 20, 50, 500]"
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -130,7 +130,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 15,
         customerId:"",
         supplierId:"",
         salerId:"",
@@ -141,7 +141,7 @@ export default {
 
       userParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 15,
       },
       inwuquList: [],
       total:0,
@@ -267,6 +267,19 @@ export default {
     this.getCbsaList();
   },
   methods: {
+
+    //列表表头设置
+    headClasspw() {
+      return {
+        'text-align': 'left',
+        height: '30px',
+        padding: '0'
+      }
+    },
+
+    rounding(row, column) {
+      return parseFloat(row[column.property]).toFixed(2)
+    },
     onSubmit() {},
     handleSelectionChange() {},
     formatTime(row){

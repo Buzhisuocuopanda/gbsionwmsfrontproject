@@ -24,7 +24,7 @@
         </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
-                     @click="onSearch">搜索
+                    @click="onSearch">搜索
           </el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
@@ -44,33 +44,33 @@
           <el-button v-hasPermi="['sale:saleOrder:import']" type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
 
           <el-button v-hasPermi="['sale:saleOrderGj:export']" type="primary" v-on:click="exprotData()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">导出
+                    style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
           <el-button  type="primary" v-on:click="skuDistribution()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">库存分配
+                    style="margin-bottom:0;margin-left: 1em">库存分配
           </el-button>
 
 
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
+      <el-table :data="orderList"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row
                 stripe style="margin-top:1em">
-        <el-table-column fixed label="编号" align="center" prop="orderNo" min-width="150px;"/>
-        <el-table-column  label="客户订单号" align="center" prop="customerNo" min-width="120px;"/>
-        <el-table-column  label="日期" align="center" prop="orderDate" min-width="120px;"/>
-        <el-table-column label="客户" align="center" prop="customerName" min-width="200px;"/>
+        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="150px;"/>
+        <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="120px;"/>
+        <el-table-column  label="日期" align="left" prop="orderDate" min-width="120px;"/>
+        <el-table-column label="客户" align="left" prop="customerName" min-width="200px;"/>
         <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
         <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="300px;"/>
-        <el-table-column label="电话" align="center" prop="phone" min-width="120px;"/>
-        <el-table-column label="订单类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
-        <el-table-column label="订单分类" align="center" prop="orderClassMsg" min-width="120px;"/>
-        <el-table-column label="工厂账号" align="center" prop="fcNumber" min-width="120px;"/>
-        <el-table-column label="其他" align="center" prop="other" min-width="120px;"/>
-        <el-table-column label="制单时间" align="center" prop="createTime" min-width="120px;"/>
-        <el-table-column  fixed="right"  label="确认库存状态" align="center" prop="confirmSkuStatusMsg" min-width="120px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="380px;"/>
+        <el-table-column label="电话" align="left" prop="phone" min-width="120px;"/>
+        <el-table-column label="订单类型" align="left" prop="orderTypeMsg" min-width="120px;"/>
+        <el-table-column label="订单分类" align="left" prop="orderClassMsg" min-width="120px;"/>
+        <el-table-column label="工厂账号" align="left" prop="fcNumber" min-width="120px;"/>
+        <el-table-column label="其他" align="left" prop="other" min-width="120px;"/>
+        <el-table-column label="制单时间" align="left" prop="createTime" min-width="180px;"/>
+        <el-table-column  fixed="right"  label="确认库存状态" align="left" prop="confirmSkuStatusMsg" min-width="120px;"/>
         <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="220px;">
@@ -96,7 +96,7 @@
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:25px; padding-left: 10px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -342,6 +342,10 @@
       this.onSearch()
     },
     methods: {
+
+    
+
+
       onSubmit() {
       },
       handleSelectionChange() {
