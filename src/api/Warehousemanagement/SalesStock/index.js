@@ -51,8 +51,8 @@ export function SkuBarcodeListsxs(data) {
 export function Purchaseinbounddingdancx(data) {
   return request({
     url: '/whmanagement/takeOrderList',
-    method: 'post',
-    data: data
+    method: 'get',
+    params: data
   })
 }
 // 提货订单详情查询

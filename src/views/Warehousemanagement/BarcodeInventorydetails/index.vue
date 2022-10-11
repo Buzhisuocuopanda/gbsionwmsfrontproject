@@ -1079,10 +1079,12 @@ export default {
         handleAuthRole: function (row) {
             // const userId = row.cbie01;
             // this.$router.push("/system/user-authhhhhhh/role/" + userId);
-
-            let cbie01 = row.cbie01
-            let status = row.cbie10
-            this.$router.push("/system/user-authhhhhhh/role/");
+            
+            let cbie01 = row.cbie01;
+            console.log(cbie01, 1234);
+            // let status = row.cbie10;
+            // consoel.log(row,2222);
+            this.$router.push("/system/user-authhhhhhh/role/" + cbie01);
         },
 
         /** 创建操作 */

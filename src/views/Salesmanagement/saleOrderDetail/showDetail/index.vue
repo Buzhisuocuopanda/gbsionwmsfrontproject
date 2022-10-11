@@ -3,7 +3,7 @@
 
     <section ref="print" class="recordImg" id="printRecord">
       <el-form ref="form2" :model="form2" label-width="230px" :rules="rules" style="" class="demo-ruleForm">
-      <div class="chuangjiancaigous">销售订单</div>
+      <div class="chuangjiancaigous">国内销售订单</div>
       <el-descriptions :column="3" border style="margin-top: 30px" :contentStyle="CS" :label-style="LS ">
         <el-descriptions-item label="编号"  >{{this.formData.orderNo}}</el-descriptions-item>
         <el-descriptions-item label="客户单号"  >{{this.formData.customerNo}}</el-descriptions-item>
@@ -1539,7 +1539,8 @@
         const param={
           goodsId: row.goodsId,
           customerId: this.formData.customerId,
-          orderClass: 2
+          orderClass: 2,
+          currency: this.formData.currency
         }
 
         //
