@@ -158,6 +158,16 @@ export function addSaleOrder(data) {
     data: data
   })
 }
+
+export function delSaleChange(data) {
+  return request({
+    url: '/sale/delSaleChange',
+    method: 'post',
+    data: data
+  })
+}
+
+
 export function auditSaleOrder(data) {
   return request({
     url: '/sale/auditSaleOrder',
