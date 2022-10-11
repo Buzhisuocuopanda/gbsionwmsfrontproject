@@ -1316,7 +1316,8 @@
         const param={
           goodsId: row.goodsId,
           customerId: this.formData.customerId,
-          orderClass: 2
+          orderClass: 2,
+          currency: this.formData.currency
         }
 
         //

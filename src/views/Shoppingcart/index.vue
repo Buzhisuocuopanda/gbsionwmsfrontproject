@@ -30,7 +30,7 @@
 
 
          <el-form-item>
-              <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">加入</el-button>
+              <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">生成国内销售订单</el-button>
          </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
 
@@ -67,21 +67,21 @@
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作"  min-width="120px;">
-          <template slot-scope="scope" >
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text" @click="mdfDetail(scope.row)"
-            >加入</el-button>
+<!--        <el-table-column label="操作"  min-width="120px;">-->
+<!--          <template slot-scope="scope" >-->
+<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
+<!--                       type="text" @click="mdfDetail(scope.row)"-->
+<!--            >生成国内销售订单</el-button>-->
 
-<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>-->
-<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"
-                       @click="showDetail(scope.row)">详情</el-button>-->
+<!--&lt;!&ndash;            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
+<!--                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>&ndash;&gt;-->
+<!--&lt;!&ndash;            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
+<!--                       type="text"-->
+<!--                       @click="showDetail(scope.row)">详情</el-button>&ndash;&gt;-->
 
-          </template>
+<!--          </template>-->
 
-        </el-table-column>
+<!--        </el-table-column>-->
       </el-table>
       <el-pagination
         :background="true"
