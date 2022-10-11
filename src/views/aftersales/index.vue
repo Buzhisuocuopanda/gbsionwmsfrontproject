@@ -46,14 +46,14 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
-        <el-table-column fixed label="销售订单号" align="center" prop="saleOrderNo" min-width="120px;"/>
-        <el-table-column fixed label="销售人员" align="center" prop="aslerName" min-width="120px;"/>
-        <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="120px;"/>
-        <el-table-column  label="问题原因" align="center" prop="question" min-width="120px;" />
-        <el-table-column  label="sn" align="center" prop="sn" min-width="200px;" />
-        <el-table-column  label="处理结果" align="left" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
-        <el-table-column  label="反馈时间" align="center" prop="inTime" :formatter="formatTime2" min-width="80px;" />
+      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="470" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
+        <el-table-column fixed label="销售订单号" align="left" prop="saleOrderNo" min-width="120px;"/>
+        <el-table-column fixed label="销售人员" align="left" prop="aslerName" min-width="120px;"/>
+        <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="130px;"/>
+        <el-table-column  label="问题原因" align="left" prop="question" min-width="120px;" />
+        <el-table-column  label="sn" align="left" prop="sn" min-width="200px;" />
+        <el-table-column  label="处理结果" align="center" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
+        <el-table-column  label="反馈时间" align="left" prop="inTime" :formatter="formatTime2" min-width="80px;" />
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
             <el-button
