@@ -609,6 +609,7 @@
             // console.log(response)
             if ( response.code === 200) {
               this.$message.success("删除成功")
+              this.onSearch()
             } else {
               this.$message.error(response.msg)
             }
