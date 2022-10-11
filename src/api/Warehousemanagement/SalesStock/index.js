@@ -51,7 +51,7 @@ export function SkuBarcodeListsxs(data) {
 export function Purchaseinbounddingdancx(data) {
   return request({
     url: '/whmanagement/takeOrderList',
-    method: 'post',
+    method: 'get',
     data: data
   })
 }
