@@ -1,22 +1,22 @@
 <!-- @author zhengjie -->
 <template>
     <div class="icon-body" style="width:190px;">
-        <el-input v-model="name" style="position: relative;" clearable placeholder=""
-            @clear="filterIcons" @input.native="filterIcons">
+        <el-input v-model="name" style="position: relative;" clearable placeholder="" @clear="filterIcons"
+            @input.native="filterIcons">
             <i slot="suffix" class="el-icon-search el-input__icon" />
         </el-input>
-       <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
-        <div>
-            <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
-                @click="selectedIcon(item)">
-                <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
-                <!-- <span>{{ item }}</span> -->
-                <el-row style="margin-top: 0%;">
-                    <el-col :span="24"> <span>{{ item.substring(0,item.lastIndexOf(".")) }}</span></el-col>
-                </el-row>
+        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
+            <div>
+                <div height="20" style="width: 100%" v-for="(item, index) in iconList" :key="index"
+                    @click="selectedIcon(item)">
+                    <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
+                    <!-- <span>{{ item }}</span> -->
+                    <el-row style="margin-top: 0%;">
+                        <el-col :span="24"> <span>{{ item.substring(0,item.lastIndexOf(".")) }}</span></el-col>
+                    </el-row>
+                </div>
             </div>
-        </div>
-      </el-form>
+        </el-form>
     </div>
 </template>
 
@@ -32,17 +32,17 @@ export default {
             userList: null,
             params: null,
             top: null,
-            total:0,
+            total: 0,
             // iconList: ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
             iconList: [],
-             // 查询参数
+            // 查询参数
             queryParams: {
                 pageNum: 1,
                 pageSize: 999999,
                 page: 1,
                 size: 999999,
                 total: this.total,
-                dateRange:undefined
+                dateRange: undefined
             },
         }
     },
@@ -61,21 +61,22 @@ export default {
                 // console.log(response.data.rows, 3369);
                 // console.log(this.top,888888);
                 // this.icons =[]
-                this.total =  response.data.total;
+                this.total = response.data.total;
                 this.iconList = []
                 if (response.data.rows <= 0) {
                     this.iconList = []
                 } else {
-                  if(response.data.rows.length > 0){
-                    response.data.rows.forEach((item) => {
-                        this.iconList.push(item.cbpb10+ "~" + item.cbpb12+ "~" +  item.cbpb08 + "." + item.cbpb01)
-                    })
-                  }
+                    if (response.data.rows.length > 0) {
+                        response.data.rows.forEach((item) => {
+                            this.iconList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+                            // console.log(item)
+                        })
+                    }
                 }
                 if (this.name) {
                     this.iconList = this.iconList.filter(item => item.includes(this.name))
                 }
-                console.log(response.data.rows, 339688);
+                // console.log(response.data.rows, 339688);
             }
             );
 

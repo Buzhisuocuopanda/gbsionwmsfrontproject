@@ -1,7 +1,7 @@
 <template>
   <!--缺货登记-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container outofstock">
       <el-form :inline="true" label-width="70px"  >
 
           <el-form-item>
@@ -699,6 +699,9 @@ export default {
 </script>
 
 <style scoped>
+.outofstock  .el-form--inline {
+    height: 50px !important;
+  }
 .caozuoxiangqengOut {
       border: 0 !important;
       padding:0 !important;
