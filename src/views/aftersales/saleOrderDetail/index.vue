@@ -2,7 +2,7 @@
   <!--新增-->
   <div class="app-container">
     <el-form ref="formData" :model="formData" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">售后单</div>
+      <div class="chuangjiancaigous">售后服务单</div>
 
       <!-- 编号:56221589223 -->
 

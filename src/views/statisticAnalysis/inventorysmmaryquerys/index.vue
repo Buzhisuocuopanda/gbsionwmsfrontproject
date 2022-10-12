@@ -42,14 +42,14 @@
         <el-table-column  label="摘要" align="left" prop="cbib17" min-width="130px;"/>
         <el-table-column  label="往来单位" align="left" prop="cbib06" min-width="100px;"/>
         <el-table-column  label="商品" align="left" prop="cbpb08"  min-width="270px;"/>
-        <el-table-column  label="上次结存数量" align="right" :formatter="rounding" prop="cbib09" min-width="60px;"/>
-        <el-table-column  label="上次结存成本金额" align="right" :formatter="rounding" prop="cbib10" min-width="100px;"/>
-        <el-table-column  label="本次入库数量" align="right" :formatter="rounding" prop="cbib11" min-width="60px;"/>
-        <el-table-column  label="本次入库金额" align="right" :formatter="rounding" prop="cbib12" min-width="80px;"/>
-        <el-table-column  label="本次出库数量" align="right" :formatter="rounding" prop="cbib13" min-width="60px;"/>
-        <el-table-column  label="本次出库金额" align="right" :formatter="rounding" prop="cbib14" min-width="80px;"/>
-        <el-table-column  label="本次结存数量" align="right" :formatter="rounding" prop="cbib15" min-width="60px;"/>
-        <el-table-column  label="本次结存金额" align="right" :formatter="rounding" prop="cbib16" min-width="80px;"/>
+        <el-table-column  label="上次结存数量" align="right" :formatter="rounding" prop="cbib09" min-width="100px;"/>
+        <el-table-column  label="上次结存成本金额" align="right" :formatter="rounding" prop="cbib10" min-width="130px;"/>
+        <el-table-column  label="本次入库数量" align="right" :formatter="rounding" prop="cbib11" min-width="100px;"/>
+        <el-table-column  label="本次入库金额" align="right" :formatter="rounding" prop="cbib12" min-width="100px;"/>
+        <el-table-column  label="本次出库数量" align="right" :formatter="rounding" prop="cbib13" min-width="100px;"/>
+        <el-table-column  label="本次出库金额" align="right" :formatter="rounding" prop="cbib14" min-width="100px;"/>
+        <el-table-column  label="本次结存数量" align="right" :formatter="rounding" prop="cbib15" min-width="100px;"/>
+        <el-table-column  label="本次结存金额" align="right" :formatter="rounding" prop="cbib16" min-width="100px;"/>
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
@@ -240,6 +240,9 @@ export default {
   methods: {
 
     rounding(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return '0.00';
+      }
       return parseFloat(row[column.property]).toFixed(2)
     },
 
