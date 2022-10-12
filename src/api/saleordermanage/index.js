@@ -203,7 +203,7 @@ export function delSaleOrder(data) {
 export function delSaleOrderGj(data) {
   return request({
     url: '/sale/delSaleOrderGj',
-    method: 'get',
+    method: 'post',
     data: data
   })
 }
@@ -258,7 +258,7 @@ export function saleChangeList(data) {
   return request({
     url: '/sale/saleChangeList',
     method: 'get',
-    data: data
+    params: data
   })
 }
 

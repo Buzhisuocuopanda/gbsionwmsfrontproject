@@ -818,7 +818,7 @@
           pageNum: this.listQuery.pageNum,
           pageSize: this.listQuery.pageSize
         }
-        // console.info(param)
+        console.info(param)
         saleChangeList(param).then(response => {
           if (response.data != null && response.data.rows != null) {
             this.orderList = response.data.rows
