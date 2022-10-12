@@ -1103,6 +1103,8 @@ export default {
             // name: 'index',
             query: {
               data: row.cbqa01,
+              cbqa07: row.cbqa07,
+              cbqa11: row.cbqa11,
             }
           })
         },
