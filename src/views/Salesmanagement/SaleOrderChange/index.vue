@@ -72,7 +72,7 @@
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit"  size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit"  size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
-            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>
+<!--            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>-->
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
