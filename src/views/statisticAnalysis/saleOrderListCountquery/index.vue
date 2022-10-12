@@ -40,14 +40,20 @@
         </el-form-item>
       </el-form>
       <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
+                 border fit highlight-current-row stripe style="margin-top:1em"  :span-method="objectSpanMethod">
         <el-table-column label="供料单位" align="center" header-align="center" prop="supplier" min-width="200px;" />
 
         <el-table-column  label="客户名称" align="center" prop="customer" min-width="240px;"/>
-        <el-table-column  label="编号" align="center" prop="orderNo" min-width="240px;"/>
-        <el-table-column  label="品牌" align="center" prop="cbpb10" min-width="130px;"/>
-        <el-table-column  label="商品" align="center" prop="cbpb08" min-width="130px;"/>
-        <el-table-column  label="数量" align="center" prop="qty" min-width="100px;"/>
+        <el-table-column  label="编号" align="center" prop="orderNo" min-width="200px;"/>
+        <el-table-column  label="销售人员" align="center" prop="saler" min-width="120px;"/>
+        <el-table-column  label="数量" align="center" prop="num" min-width="60px;"/>
+        <el-table-column  label="入库数量" align="center" prop="enterNum" min-width="60px;"/>
+        <el-table-column  label="变更数量" align="center" prop="changeNum" min-width="60px;"/>
+        <el-table-column  label="剩余数量" align="center" prop="remainNum" min-width="60px;"/>
+        <el-table-column  label="品牌" align="center" prop="cbpb10" min-width="100px;"/>
+        <el-table-column  label="型号" align="center" prop="cbpb12" min-width="130px;"/>
+        <el-table-column  label="商品" align="center" prop="cbpb08" min-width="200px;"/>
+
        <!-- <el-table-column  label="入库数量" align="center" prop="cbob10" min-width="100px;"/>
         <el-table-column  label="变更数量" align="center" min-width="100px;"/>
         <el-table-column  label="剩余数量" align="center" min-width="100px;"/>
@@ -56,7 +62,7 @@
             <div>{{scope.row.num!=null? scope.row.num-scope.row.cbob10:''}}</div>
           </template>
         </el-table-column>-->
-        <el-table-column  label="销售人员" align="center" prop="saler" min-width="120px;"/>
+
         <el-table-column  label="创建时间" align="center" prop="createTime" :formatter="formatTime" min-width="120px;"/>
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
@@ -127,6 +133,7 @@ export default {
       loading2:false,
       loading3:false,
       loading6:false,
+      address: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -282,6 +289,181 @@ export default {
       // this.resetForm("queryParams");
       this.onSearch();
     },
+
+    // 时间转换 和合并单元格
+    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+      // this.address = JSON.parse(this.form.supplierShengshiqu)
+     /* if (this.crud.data != null) {
+        this.crud.data.forEach(item => {
+          if (item.startTime != null) {
+            item.startTime = formatDate(item.startTime, 'yyyy-MM-dd hh:mm')
+          }
+          if (item.endTime != null) {
+            item.endTime = formatDate(item.endTime, 'yyyy-MM-dd hh:mm')
+          }
+        })
+      }*/
+      if (columnIndex === 0) {
+        const _row = (this.flitterData(this.inwuquList).one)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 1) {
+        const _row = (this.flitterData(this.inwuquList).two)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 2) {
+        const _row = (this.flitterData(this.inwuquList).three)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 3) {
+        const _row = (this.flitterData(this.inwuquList).four)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 4) {
+        const _row = (this.flitterData(this.inwuquList).four)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 5) {
+        const _row = (this.flitterData(this.inwuquList).six)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 6) {
+        const _row = (this.flitterData(this.inwuquList).four)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 7) {
+        const _row = (this.flitterData(this.inwuquList).three)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+      if (columnIndex === 11) {
+        const _row = (this.flitterData(this.inwuquList).three)[rowIndex]
+        const _col = _row > 0 ? 1 : 0
+        return {
+          rowspan: _row,
+          colspan: _col
+        }
+      }
+    },
+
+    flitterData(arr) {
+      const spanOneArr = []
+      const spanTwoArr = []
+      const spanThreeArr = []
+      const spanEightArr = []
+      const spanFourArr = []
+      const spanFiveArr = []
+      const spanSixArr =[]
+      let concatOne = 0
+      let concatTwo = 0
+      let concatThree = 0
+      let concatFour = 0
+      let concatFive = 0
+      let concatSix = 0
+
+      let concatEight = 0
+      arr.forEach((item, index) => {
+        if (index === 0) {
+          spanOneArr.push(1)
+          spanTwoArr.push(1)
+          spanThreeArr.push(1)
+          spanFourArr.push(1)
+          spanFiveArr.push(1)
+          spanSixArr.push(1)
+          spanEightArr.push(1)
+        } else {
+
+
+          if (item.id === arr[index - 1].id &&item.supplier === arr[index - 1].supplier) { // 第一列需合并相同内容的判断条件
+            spanOneArr[concatOne] += 1
+            spanOneArr.push(0)
+            spanEightArr[concatEight] += 1
+            spanEightArr.push(0)
+          } else {
+            spanOneArr.push(1)
+            concatOne = index
+            spanEightArr.push(1)
+            concatEight = index
+          }
+
+          if (item.id === arr[index - 1].id && item.customer === arr[index - 1].customer) { // 第二列需合并相同内容的判断条件
+            spanTwoArr[concatTwo] += 1
+            spanTwoArr.push(0)
+          } else {
+            spanTwoArr.push(1)
+            concatTwo = index
+          }
+
+          if (item.id === arr[index - 1].id && item.onderNo === arr[index - 1].onderNo) { // 第三列需合并相同内容的判断条件
+            spanThreeArr[concatThree] += 1
+            spanThreeArr.push(0)
+          } else {
+            spanThreeArr.push(1)
+            concatThree = index
+          }
+          if (item.id === arr[index - 1].id ) { // 第三列需合并相同内容的判断条件
+            spanFourArr[concatFour] += 1
+            spanFourArr.push(0)
+
+            spanFiveArr[concatFive] += 1
+            spanFiveArr.push(0)
+
+            spanSixArr[concatSix] += 1
+            spanSixArr.push(0)
+          } else {
+            spanFourArr.push(1)
+            concatFour = index
+
+            spanFiveArr.push(1)
+            concatFive = index
+
+            spanSixArr.push(1)
+            concatSix = index
+          }
+
+        }
+      })
+      return {
+        one: spanOneArr,
+        two: spanTwoArr,
+        three: spanThreeArr,
+        four: spanFourArr,
+        five: spanFiveArr,
+        six: spanSixArr
+      }
+    },
+
     /** 搜索按钮操作 */
     handleQuery() {
 
