@@ -17,9 +17,9 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item style="margin: -5px -10px 1px 1px">
+        <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
-                     @click="onSearch">搜索
+                    @click="onSearch">搜索
           </el-button>
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
@@ -36,31 +36,31 @@
 <!--            style="display: inline">-->
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
-          <el-button v-hasPermi="['system:totalOrder:import']" type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
+          <el-button v-hasPermi="['system:totalOrder:import']" class="filter-item"  type="primary" v-on:click="handleImport()" style="margin-bottom:0;margin-left: 1em">导入</el-button>
 
-          <el-button v-hasPermi="['system:totalOrder:export']" type="primary" v-on:click="exprotData()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">导出
+          <el-button v-hasPermi="['system:totalOrder:export']" class="filter-item" type="primary" v-on:click="exprotData()" :loading=loadingOut
+                    style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="480" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
+      <el-table :data="orderList"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="480" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row
                 stripe>
-        <el-table-column fixed label="优先级" align="center" prop="priority" min-width="120px;"/>
-        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="140px;"/>
-        <el-table-column label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column label="描述" align="center" prop="description" min-width="400px;"/>
-        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="100px;"/>
-        <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="100px;"/>
+        <el-table-column fixed label="优先级" align="left" prop="priority" min-width="70px;"/>
+        <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="140px;"/>
+        <el-table-column label="型号" align="left" prop="model" min-width="140px;"/>
+        <el-table-column label="描述" align="left" prop="description" min-width="400px;"/>
+        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="76px;"/>
+        <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="76px;"/>
+        <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="89px;"/>
         <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;"/>
-        <el-table-column label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>
-        <el-table-column label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>
+        <el-table-column label="类型" align="left" prop="orderTypeMsg" min-width="80px;"/>
+        <el-table-column label="状态" align="center" prop="status" min-width="80px;" :formatter="formatStateType"/>
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button v-hasPermi="['system:totalOrder:detail']" icon="el-icon-share" plain size="mini"   type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button v-hasPermi="['system:totalOrder:edit']" icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button v-hasPermi="['system:totalOrder:remove']" icon="el-icon-delete" plain size="mini"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
+            <el-button v-hasPermi="['system:totalOrder:detail']" icon="el-icon-share"  size="mini" class="caozuoxiangqengOrder"  type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button v-hasPermi="['system:totalOrder:edit']" icon="el-icon-edit"  size="mini" class="caozuoxiangqengOrder"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button v-hasPermi="['system:totalOrder:remove']" icon="el-icon-delete"  size="mini" class="caozuoxiangqengOrder"   type="text" @click="delTotalOrder(scope.row)">删除</el-button>
           </template>
 
         </el-table-column>
@@ -71,7 +71,7 @@
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 10px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -116,7 +116,7 @@
 <!--              </el-popover>-->
 <!--            </template>-->
           </el-form-item>
-          <el-form-item label="数量" prop="qty">
+          <el-form-item label="订单数量" prop="qty">
             <el-input  v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
             ></el-input>
           </el-form-item>
@@ -151,7 +151,7 @@
             <!--                        style="width:205.6%;">-->
             <!--              </el-input>-->
             <!--            </el-popover>-->
-            <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+            <el-select readonly @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -169,7 +169,7 @@
 <!--              </el-popover>-->
 <!--            </template>-->
           </el-form-item>
-          <el-form-item label="数量" prop="qty">
+          <el-form-item label="订单数量" prop="qty">
             <el-input  v-model="formData.qty" style="width:50%;text-align: right"     oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"
             ></el-input>
           </el-form-item>
@@ -222,10 +222,12 @@
 
               <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
                 <el-form-item label="优先级" >
-                  <el-input v-model="formData.priority" style="width:50%" readonly></el-input>
+<!--                  <el-input v-model="formData.priority" style="width:50%" readonly></el-input>-->
+                  <span>{{formData.priority}}</span>
                 </el-form-item>
                 <el-form-item label="订单号" >
-                  <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>
+<!--                  <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>-->
+                  <span>{{formData.orderNo}}</span>
                 </el-form-item>
                 <el-form-item label="商品" >
                   <!--            <el-popover placement="bottom-start" trigger="click">-->
@@ -236,10 +238,12 @@
                   <!--              </el-input>-->
                   <!--            </el-popover>-->
 
-                  <el-input  v-model="formData.goods" placeholder=""
-                            style="width:70%;" readonly>
-                  </el-input>
-<!--                  <template  style="width:200%;">-->
+<!--                  <el-input  v-model="formData.goods" placeholder=""-->
+<!--                            style="width:70%;" readonly>-->
+<!--                  </el-input>-->
+                  <span>{{formData.goods}}</span>
+
+                  <!--                  <template  style="width:200%;">-->
 
 <!--                    <el-popover placement="bottom-start" trigger="click">-->
 <!--                      <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
@@ -248,7 +252,7 @@
 <!--                    </el-popover>-->
 <!--                  </template>-->
                 </el-form-item>
-                <el-form-item label="数量" >
+                <el-form-item label="订单数量" >
 <!--                  <el-input : v-model="formData.qty" style="width:50%;text-align: right" readonly></el-input>-->
                   <span>
                     {{parseFloat(formData.qty).toFixed(2)}}
@@ -849,16 +853,16 @@
 </script>
 
 
-<style lang="scss">
-  .caozuoxiangqeng {
-    border: 0 !important;
-  }
-  /*.el-dialog__footer {*/
+<style lang="scss" scoped>
+/*.el-dialog__footer {*/
   /*  padding: 15px;*/
   /*  padding-top: 10px;*/
   /*  text-align: right;*/
   /*  -webkit-box-sizing: border-box;*/
   /*  box-sizing: border-box*/
   /*}*/
-
+.caozuoxiangqengOrder {
+  border: 0 !important;
+  padding: 0 !important;
+}
 </style>

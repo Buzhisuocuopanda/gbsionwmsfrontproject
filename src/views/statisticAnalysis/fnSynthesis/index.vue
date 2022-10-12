@@ -28,33 +28,33 @@
         <el-form-item style="margin: -20px -10px 1px 1px;">
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['query:fnSynthesis:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['query:fnSynthesis:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
+      <el-table  :header-cell-style="headClasspw" :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="430" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column fixed label="入库时间" align="center" header-align="center" prop="inWhTime" min-width="100px;" />
-        <el-table-column fixed label="出库时间" align="center" prop="outWhTimeMsg"  min-width="100px;"/>
-        <el-table-column fixed label="订单号" align="center" prop="orderNo" min-width="180px;"/>
-        <el-table-column  label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column  label="描述" align="center" prop="description" min-width="290px;"/>
-        <el-table-column  label="数量" align="center" prop="qty" min-width="60px;"/>
-        <el-table-column  label="序列号" align="center" prop="sn"  min-width="160px;"/>
-        <el-table-column  label="销售单价U" align="center"  min-width="100px;">
+        <el-table-column fixed label="入库时间" align="left" :formatter="formatDate" header-align="center" prop="inWhTime" min-width="100px;" />
+        <el-table-column fixed label="出库时间" align="left" prop="outWhTimeMsg"  min-width="100px;"/>
+        <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="180px;"/>
+        <el-table-column  label="型号" align="left" prop="model" min-width="120px;"/>
+        <el-table-column  label="描述" align="left" prop="description" min-width="290px;"/>
+        <el-table-column  label="数量" :formatter="rounding" align="right" prop="qty" min-width="60px;"/>
+        <el-table-column  label="序列号" align="left" prop="sn"  min-width="160px;"/>
+        <el-table-column  label="销售单价U" :formatter="rounding" align="right"  min-width="100px;">
           <template slot-scope="scope">
             <div >{{RToU(scope.row.rprice )}}</div>
           </template>
         </el-table-column>
-        <el-table-column  label="销售单价R" align="center" prop="rprice" min-width="100px;"/>
-        <el-table-column  label="经销商品名称" align="center" prop="suplierName" min-width="200px;"/>
-        <el-table-column  label="品牌" align="center" prop="brand" min-width="100px;"/>
-        <el-table-column  label="工厂" align="center" prop="gc" min-width="100px;"/>
-        <el-table-column  label="采购单价U" align="center" min-width="60px;">
+        <el-table-column  label="销售单价R" :formatter="rounding" align="right" prop="rprice" min-width="100px;"/>
+        <el-table-column  label="经销商品名称" align="left" prop="suplierName" min-width="200px;"/>
+        <el-table-column  label="品牌" align="left" prop="brand" min-width="100px;"/>
+        <el-table-column  label="工厂" align="left" prop="gc" min-width="100px;"/>
+        <el-table-column  label="采购单价U" :formatter="rounding" align="right" min-width="60px;">
           <template slot-scope="scope">
             <div >{{RToU(scope.row.cgRprice )}}</div>
           </template>
         </el-table-column>
-        <el-table-column  label="采购单价R" align="center" prop="cgRprice" min-width="60px;"/>
+        <el-table-column  label="采购单价R" align="right" :formatter="rounding" prop="cgRprice" min-width="80px;"/>
         <!--<el-table-column  label="生产总订单号" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
       <el-pagination
@@ -229,12 +229,27 @@ export default {
     };
   },
   computed: {},
-  mounted() { // 自动触发写入的函数
+  mounted() { 
+    
+    // 自动触发写入的函数
     this.onSearch();
     this.getStoreSkuList();
     this.getCbcaList();
   },
   methods: {
+
+    rounding(row, column) {
+      return parseFloat(row[column.property]).toFixed(2)
+    },
+    //列表表头设置
+    headClasspw() {
+      return {
+        'text-align': 'left',
+        height: '30px',
+        padding: '0'
+      }
+    },
+
 /*    onSubmit() {},*/
     /*handleSelectionChange() {},*/
    /* formatStateType(row) {

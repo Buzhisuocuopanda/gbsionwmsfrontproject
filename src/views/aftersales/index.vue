@@ -12,16 +12,6 @@
                           :default-time="'23:59:59'">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="销售人员" style="margin-left: 20px"   class="item-r" >
-          <el-select v-model="salerId" @change="userChange" v-loadmore="getCauaList"  clearable  filterable placeholder="请输入关键词">
-            <el-option v-for="item in cauaList" :key="item.value" :label="item.label" :value="item.value"></el-option>
-          </el-select>
-          <el-form-item label="处理结果"  style="margin-left: 20px">
-            <el-select v-model="answerMsg"  clearable filterable remote reserve-keyword placeholder="请选择" >
-              <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-form-item>
         <!--          <el-form-item>-->
         <!--            <el-button type="primary" @click="onSearch()">查询</el-button>-->
         <!--          </el-form-item>-->
@@ -36,7 +26,7 @@
 
 
 
-        <el-form-item  style="margin: -5px -10px 1px 50px">
+        <el-form-item  style="margin: -5px -10px 1px 100px">
           <el-button  v-hasPermi="['system:aftersales:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
           <el-button  class="filter-item" type="primary" v-hasPermi="['system:aftersales:add']"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
@@ -56,14 +46,14 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
-        <el-table-column fixed label="销售订单号" align="center" prop="saleOrderNo" min-width="120px;"/>
-        <el-table-column fixed label="销售人员" align="center" prop="salerName" min-width="120px;"/>
-        <el-table-column fixed label="客户" align="center" prop="cbca08" min-width="120px;"/>
-        <el-table-column  label="问题原因" align="center" prop="question" min-width="120px;" />
-        <el-table-column  label="sn" align="center" prop="sn" min-width="200px;" />
-        <el-table-column  label="处理结果" align="left" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
-        <el-table-column  label="反馈时间" align="center" prop="feedbackTime" :formatter="formatTime2" min-width="80px;" />
+      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="470" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
+        <el-table-column fixed label="销售订单号" align="left" prop="saleOrderNo" min-width="120px;"/>
+        <el-table-column fixed label="销售人员" align="left" prop="aslerName" min-width="120px;"/>
+        <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="130px;"/>
+        <el-table-column  label="问题原因" align="left" prop="question" min-width="120px;" />
+        <el-table-column  label="sn" align="left" prop="sn" min-width="200px;" />
+        <el-table-column  label="处理结果" align="center" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
+        <el-table-column  label="反馈时间" align="left" prop="inTime" :formatter="formatTime2" min-width="80px;" />
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
             <el-button
@@ -248,32 +238,7 @@
 import { listSales, getSales, delSales, addSales, updateSales } from "@/api/system/sales";
 import { getToken } from '@/utils/auth'
 import {formatDate2} from "../../utils";
-import {systemUserSelect } from '@/api/saleordermanage'
-import Vue from "vue";
 
-Vue.directive('loadmore', {
-  bind(el, binding) {
-
-    // 获取element-ui定义好的scroll盒子
-    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
-
-    SELECTWRAP_DOM.addEventListener('scroll', function() {
-
-      /*
-      * scrollHeight 获取元素内容高度(只读)
-      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
-      * clientHeight 读取元素的可见高度(只读)
-      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
-      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
-      */
-      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
-
-      if(CONDITION) {
-        binding.value();
-      }
-    });
-  }
-})
 export default {
   components: {},
   data() {
@@ -309,8 +274,6 @@ export default {
        totalItems: 0,
       orderNo: "",
       model: "",
-      salerId:undefined,
-      answerMsg:undefined,
       formData: {
         name: "",
       },
@@ -323,28 +286,13 @@ export default {
       },
       open2: false,
       open: false,
-//下拉列表数据销售人员
-      cauaList:[],
-      userParams: {
-        pageNum: 1,
-        pageSize: 10,
-      },
+
       orderList: [],
       // 日期范围
       dateRange: {
         startTime: '',
         endTime: ''
       },
-      statusType: [
-        {
-          value: 1,
-          label: '未解决',
-        },
-        {
-          value: 2,
-          label: '已解决',
-        }
-      ],
       queryParams: {
         pageNum: 1,
         pageSize: 15,
@@ -509,20 +457,14 @@ export default {
   computed: {},
   mounted() { // 自动触发写入的函数
     this.onSearch()
-    this.getCauaList()
   },
   created() {
     //仓库明细初始化
     // this.getList();
     },
   methods: {
-    userChange(val){
-      this.saleId = val;
-      console.log(this.saleId)
-    },
-
     formatTime2(row){
-      return formatDate2(row.feedbackTime);
+      return formatDate2(row.inTime);
     },
     delTotalOrder(row){
       this.$confirm('确认要删除'+row.saleOrderNo+"售后单？", '确认操作', {
@@ -585,8 +527,6 @@ export default {
     onSearch() {
       const param = {
         saleOrderNo: this.orderNo,
-        salerId:this.salerId,
-        answerMsg:this.answerMsg,
         startTime: this.dateRange.startTime,
         endTime: this.dateRange.endTime,
         pageNum: this.listQuery.pageNum,
@@ -689,20 +629,6 @@ export default {
       //   this.$message.error('错了哦，商品名称没有填呢');
       // }
 
-    },
-
-    //下拉列表数据销售人员
-    getCauaList(){
-      this.loading3 = true;
-      systemUserSelect(this.userParams).then(response => {
-        this.loading3 = false;
-        if (response.code == 200) {
-          this.userParams.pageNum=this.userParams.pageNum+1;
-          this.cauaList.push(...response.data.rows)
-        }
-      },error => {
-        this.loading3 = false;
-      });
     },
     /** 修改按钮操作 */
     handleUpdate() {

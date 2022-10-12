@@ -60,7 +60,7 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbie07" prop="cbie07" width="280px;" sortable />
+                    <el-table-column label="编号" align="left" key="cbie07" prop="cbie07" width="380px;" sortable />
                     <el-table-column label="日期" width="200px;" align="left" key="cbie02" prop="cbie02"
                         :formatter="formatDate" sortable>
                     </el-table-column>
@@ -68,7 +68,7 @@
                     <!-- <el-table-column label="供应商" align="center" key="cbsa08" prop="cbsa08" sortable />
 
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
-                    <el-table-column label="状态" width="350px;" align="left" key="cbie10" prop="cbie10" sortable>
+                    <el-table-column label="状态" width="150px;" align="center" key="cbie10" prop="cbie10" sortable>
                        <template scope="scope">
                             <div>{{ scope.row.cbie10 == 0 ? "未审核" : scope.row.cbie10 == 1 ?
                             "已审核" : scope.row.cbie10 == 4 ? "已完成" : "未确定状态"

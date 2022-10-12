@@ -19,10 +19,10 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button size="mini" v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
@@ -30,9 +30,9 @@
                         <el-button  size="mini" class="biaoto-buttonchuangjianllnm">创建
                         </el-button>
                         <el-dropdown trigger="click">
-                          <span class="el-dropdown-link xialaxuanxangnnn">
-                              <i class="el-icon-caret-bottom el-icon--right "></i>
-                          </span>
+                        <span class="el-dropdown-link xialaxuanxangnnn">
+                            <i class="el-icon-caret-bottom el-icon--right "></i>
+                        </span>
                         <el-dropdown-menu slot="dropdown">
                            <el-dropdown-item  class="clearfix" @click.native="tong">
                               通过提货单创建
@@ -73,14 +73,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" width="" align="left" key="cbqa07" prop="cbqa07" sortable />
-                    <el-table-column label="日期" width="400px;" align="left" key="cbqa08" prop="cbqa08"
+                    <el-table-column label="编号" width="" align="left" key="cbqa07" prop="cbqa07" sortable  />
+                    <el-table-column label="日期" width="300px;" align="left" key="cbqa08" prop="cbqa08"
                         :formatter="formatDate" sortable>
                     </el-table-column>
                     <!-- <el-table-column label="供应商" align="center" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="仓库" align="center" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
-                    <el-table-column label="状态" width="350px;" align="left" key="cbqa09" prop="cbqa09" sortable>
+                    <el-table-column label="状态" width="150px;" align="center" key="cbqa09" prop="cbqa09" sortable>
                         <template scope="scope">
                            <div>{{ scope.row.cbqa09 == 0 ? "未审核" : scope.row.cbqa09 == 1 ?
                             "已审核" : scope.row.cbqa09 == 4 ? "已完成" : "未审核"

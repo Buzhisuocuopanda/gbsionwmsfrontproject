@@ -9,7 +9,7 @@
                     label-width="68px">
                     <el-form-item prop="cbpc07" label="编号">
                         <el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable
-                            style="width: 180px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
+                            style="width: 180px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbsa08" label="供应商">
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
@@ -32,7 +32,7 @@
                     <el-form-item>
                         <el-button v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:39.5%;">
+                    <el-form-item style="margin-left:54.5%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -81,7 +81,7 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="状态" align="left" key="cbpc11" prop="cbpc11" sortable>
+                    <el-table-column label="状态" align="center" key="cbpc11" prop="cbpc11" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbpc11 == 0 ? "未审核" : scope.row.cbpc11 == 1 ?
                             "已审核" : scope.row.cbpc11 == 4 ? "已完成" : "未确定状态"
@@ -1351,5 +1351,5 @@ export default {
     }
 };
 </script>
-<style src="./PurchaseWarehousingcss/index.css">
+<style src="./PurchaseWarehousingcss/index.css" scoped>
 </style>

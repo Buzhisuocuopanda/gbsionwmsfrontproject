@@ -114,7 +114,7 @@
               <!--<i class="el-icon-s-promotion"></i> 官网：<el-link-->
                 <!--href="http://www.ruoyi.vip"-->
                 <!--target="_blank"-->
-                <!--&gt;http://www.ruoyi.vip</el-link-->
+                <!--&gt;</el-link-->
               <!--&gt;-->
             <!--</p>-->
             <!--<p>-->

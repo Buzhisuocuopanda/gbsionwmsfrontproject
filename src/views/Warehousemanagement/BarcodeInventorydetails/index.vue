@@ -65,7 +65,7 @@
                     <!-- <el-table-column label="供应商" align="center" key="cbsa08" prop="cbsa08" sortable />
 
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
-                    <el-table-column label="状态" width="350px;" align="left" key="cbie10" prop="cbie10" sortable>
+                    <el-table-column label="状态" width="150px;" align="center" key="cbie10" prop="cbie10" sortable>
                          <template scope="scope">
                             <div>{{ scope.row.cbie10 == 0 ? "未审核" : scope.row.cbie10 == 1 ?
                             "已审核" : scope.row.cbie10 == 4 ? "已完成" : "未确定状态"
