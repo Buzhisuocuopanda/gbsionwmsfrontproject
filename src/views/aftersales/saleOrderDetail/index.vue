@@ -178,7 +178,7 @@
       </el-row>
     <el-row>
       <el-col :span="24">
-        <el-form-item label="问题原因:" prop="question">
+        <el-form-item label="问题描述:" prop="question">
           <el-input type="textarea" v-model="formData.question" style="width: 92%;" />
         </el-form-item>
       </el-col>
