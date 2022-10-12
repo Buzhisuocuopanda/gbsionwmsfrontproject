@@ -37,7 +37,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-      
+
       <div>
         <el-row>
           <el-col :span="24">
@@ -552,6 +552,7 @@ export default {
     // console.log(this.userList,123456789);
 
     console.log(this.form.cbpc16, 123456);
+    this.getLists();
   },
   methods: {
     //返回按钮
@@ -716,11 +717,11 @@ export default {
           QualityinAdd(this.form2).then((response) => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
-              this.$message({
-                message: "添加成功",
-                type: "success",
-                style: "color:red;!important",
-              });
+              // this.$message({
+              //   message: "添加成功",
+              //   type: "success",
+              //   style: "color:red;!important",
+              // });
               this.tableData.forEach((item) => {
                 item.cbqa01 = response.data.id;
                 item.cbqb10 = this.ysn;
@@ -776,6 +777,11 @@ export default {
     //   }
       QualityinAdds(JSON.stringify(this.tableData)).then((response) => {
           if (response.code == "200") {
+            this.$message({
+              message: "添加成功",
+              type: "success",
+              style: "color:red;!important",
+            });
             this.submitShangpin();
             this.reset01();
             this.tableData = [];
