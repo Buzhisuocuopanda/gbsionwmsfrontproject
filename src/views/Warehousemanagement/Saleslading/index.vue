@@ -157,7 +157,7 @@
             align="left"
             key="orderDate"
             prop="orderDate"
-            width="120px;"
+            width="110px;"
             :formatter="formatDate"
             sortable
           >
@@ -182,7 +182,7 @@
             label="客户等级"
             align="left"
             key="customerLevel"
-            width="120px;"
+            width="110px;"
             prop="customerLevel"
             sortable
           />
@@ -190,7 +190,7 @@
             label="联系人"
             align="left"
             key="contacts"
-            width="120px;"
+            width="90px;"
             prop="contacts"
             sortable
           />
@@ -206,7 +206,7 @@
             label="销售人员"
             align="left"
             key="saleUser"
-            width="120px;"
+            width="100px;"
             prop="saleUser"
             sortable
           />
@@ -214,7 +214,7 @@
             label="仓库"
             align="left"
             key="whName"
-            width="120px;"
+            width="80px;"
             prop="whName"
             sortable
           />

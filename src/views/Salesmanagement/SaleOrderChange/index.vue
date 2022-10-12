@@ -50,20 +50,20 @@
       </el-form>
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row
                 stripe style="margin-top:1em">
-        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="128px;"/>
+        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="136px;"/>
         <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="130px;"/>
-        <el-table-column  label="日期" align="left" prop="orderDate" min-width="90px;"/>
+        <el-table-column  label="日期" align="left" prop="orderDate" min-width="100px;"/>
         <el-table-column label="客户" align="left" prop="customerName" min-width="260px;"/>
         <el-table-column label="销售人员" align="left" prop="saleUser" min-width="75px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="75px;"/>
         <el-table-column label="收货人" align="left" prop="receiver" min-width="75px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="450px;"/>
-        <el-table-column label="电话" align="left" prop="phone" min-width="100px;"/>
-        <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="75px;"/>
-        <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="75px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="490px;"/>
+        <el-table-column label="电话" align="left" prop="phone" min-width="120px;"/>
+        <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="95px;"/>
+        <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="95px;"/>
         <el-table-column label="工厂账号" align="left" prop="fcNumber" min-width="120px;"/>
         <el-table-column label="其他" align="left" prop="other" min-width="120px;"/>
-        <el-table-column label="制单时间" align="left" prop="createTime" min-width="140px;"/>
+        <el-table-column label="制单时间" align="left" prop="createTime" min-width="160px;"/>
         <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="70px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="250px;">

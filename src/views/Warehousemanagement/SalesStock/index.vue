@@ -73,16 +73,16 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbse07" prop="cbse07" width="180px;" sortable />
+                    <el-table-column label="编号" align="left" key="cbse07" prop="cbse07" width="160px;" sortable />
                     <el-table-column label="日期" align="left" key="cbse08" prop="cbse08" :formatter="formatDate"
                         sortable>
                     </el-table-column>
                     <el-table-column label="客户" align="left" key="cbca08" prop="cbca08" width="280px;" sortable />
-                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="90" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="80" sortable />
+                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="100" sortable />
                     <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" sortable />
                     <el-table-column label="状态" align="center" key="cbse11" prop="cbse11" width="80" sortable>
-                       <template scope="scope">
+                        <template scope="scope">
                             <div>{{ scope.row.cbse11 == 0 ? "未审核" : scope.row.cbse11 == 1 ?
                             "已审核" : scope.row.cbse11 == 4 ? "已完成" : "未确定状态"
                             }}
