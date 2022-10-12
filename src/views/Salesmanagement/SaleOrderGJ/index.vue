@@ -88,6 +88,7 @@
             <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)" v-hasPermi="['sale:saleOrderGj:remove']">删除</el-button>
           </template>
 
+          
         </el-table-column>
       </el-table>
       <el-pagination

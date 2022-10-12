@@ -81,7 +81,7 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="状态" align="center" key="cbpc11" prop="cbpc11" width="100" sortable>
+                    <el-table-column label="状态" align="center" key="cbpc11" prop="cbpc11" width="80" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbpc11 == 0 ? "未审核" : scope.row.cbpc11 == 1 ?
                             "已审核" : scope.row.cbpc11 == 4 ? "已完成" : "未确定状态"

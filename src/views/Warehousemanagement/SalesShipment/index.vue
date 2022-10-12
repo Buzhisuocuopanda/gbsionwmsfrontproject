@@ -165,7 +165,7 @@
             key="cbsb08"
             prop="cbsb08"
             :formatter="formatDate"
-            width="130px;"
+            width="100px;"
             sortable
           >
           </el-table-column>
@@ -198,7 +198,7 @@
             align="left"
             key="cbsb19"
             prop="cbsb19"
-            width="140px;"
+            width="130px;"
             sortable
           />
           <el-table-column
