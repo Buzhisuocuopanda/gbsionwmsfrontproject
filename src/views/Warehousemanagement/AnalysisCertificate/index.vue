@@ -27,19 +27,19 @@
                     <el-form-item>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button> -->
-                        <el-button  size="mini" class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
+                        <el-button  size="mini" class="biaoto-buttonchuangjianllnm">创建
                         </el-button>
-                        <!-- <el-dropdown trigger="click">
-                          <span class="el-dropdown-link xialaxuanxangnnn">
-                              <i class="el-icon-caret-bottom el-icon--right "></i>
-                          </span>
+                        <el-dropdown trigger="click">
+                        <span class="el-dropdown-link xialaxuanxangnnn">
+                            <i class="el-icon-caret-bottom el-icon--right "></i>
+                        </span>
                         <el-dropdown-menu slot="dropdown">
                            <el-dropdown-item  class="clearfix" @click.native="tong">
                               通过提货单创建
                             <el-badge class="mark"/>
                            </el-dropdown-item>
-                        </el-dropdown-menu> -->
-                       <!-- </el-dropdown> -->
+                        </el-dropdown-menu>
+                       </el-dropdown>
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" type="danger" style="margin-left:1%;"  class="biaoto-buttonshanchu" :disabled="multiple"
@@ -126,7 +126,6 @@
                         </template>
                     </el-table-column>
                 </el-table>
-
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
@@ -134,7 +133,7 @@
         </el-row>
         <!--提货单创建-->
         <el-dialog :visible.sync="open3">
-            <el-row tyle="margin-left:-14px;margin-bottom:1%">
+            <el-row tyle="margin-left:-14px;margin-bottom:10px">
                 <el-col :span="12">
                     <el-input
                         v-model="queryParams.orderNo"
@@ -147,7 +146,7 @@
                 </el-col>
             </el-row>
             <el-table  v-loading="loading" :data="userList099" height="440" @selection-change="handleSelectionChange"
-                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;margin-top:2%">
+                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;">
                     <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
                       <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
@@ -160,12 +159,10 @@
                     <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
                     <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
                     </el-table-column>
-                    <el-table-column label="制单日期" align="left" key="orderDates" prop="orderDate" width="280px;" sortable />
+                    <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
 
             </el-table>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                    :limit.sync="queryParams.pageSize" @pagination="getList099" :page-sizes="[10, 15, 20, 50, 500]"
-                    class="pagintotal" />
+            <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
         </el-dialog>
 
         <!--修改-->
@@ -330,6 +327,7 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+            total01:0,
             // 用户表格数据
             userList: null,
             userList099:null,
@@ -682,7 +680,7 @@ export default {
         //仓库
         this.getList04();
         //提货单
-        this.getList099();
+        // this.getList099();
 
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
@@ -701,18 +699,10 @@ export default {
             let obj = {
                 orderNo:saleNo,
             }
-            let queryParams= {
-                pageNum: 1,
-                pageSize: 15,
-                page: 1,
-                size: 15,
-                total: this.total,
-                orderNo:saleNo
-            }
-            Purchaseintihuadang(this.addDateRange(queryParams, this.dateRange)).then((res) =>{
+            Purchaseintihuadang(obj).then((res) =>{
                 if(res.code == 200){
-                    this.userList099 = res.data.rows;
-                    this.total = res.data.total;
+                    this.userList099 = response.data.rows;
+                    this.total01 = response.data.total;
                 }
             })
         },
@@ -780,10 +770,9 @@ export default {
             let obj = {
                 status : 2
             };
-            this.queryParams.status = 2
-            Purchaseintihuadang(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            Purchaseintihuadang(obj,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList099 = response.data.rows;
-                this.total = response.data.total;
+                this.total01 = response.data.total;
                 // //供应商
                 // this.postOptions = response.data.content;
                 // console.log(this.userList, 3369);
@@ -1097,12 +1086,21 @@ export default {
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
             console.log(row)
+            // this.open = true;
+            // console.log(row, 7788521);
+            // this.form.cbpc01 = row.cbpc01;
+            // this.form.cbpc07 = row.cbpc07;
+            // this.form.cbsa08 = row.cbsa08;
+            // this.form.cbwa09 = row.cbwa09;
+            // this.form.cala08 = row.cala08;
           this.$router.push({
 
             path: '/system/user-zhijiandan/roleXg/',
             // name: 'index',
             query: {
               data: row.cbqa01,
+              cbqa07:row.cbqa07,
+              cbqa11:row.cbqa11
             }
           })
         },
@@ -1242,9 +1240,9 @@ export default {
 
                 path: '/system/user-zhijiandan/role/',
                 // name: 'index',
-                // query: {
-                //     data: row.id,
-                // }
+                query: {
+                    data: row.id,
+                }
             })
             // location.reload();
         },

@@ -54,7 +54,7 @@
                     <el-table-column label="描述" align="left" key="cbpb08" prop="cbpb08" width="550px;" sortable />
                     <el-table-column label="SN" align="left" key="cbic10" prop="cbic10" width="130px;" sortable />
                     <el-table-column label="库位" align="left" key="cbla09" prop="cbla09" sortable />
-                    <el-table-column label="入库日期" align="left" width="180px;" key="cbic02" prop="cbic02" :formatter="formatDate"
+                    <el-table-column label="入库日期" align="left" width="100px;" key="cbic02" prop="cbic02" :formatter="formatDate"
                         sortable>
                     </el-table-column>
                     <!-- <el-table-column label="状态" align="center" key="cbpg11" prop="cbpg11" sortable>

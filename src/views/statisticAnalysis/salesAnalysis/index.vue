@@ -248,6 +248,9 @@ export default {
   methods: {
 
     rounding(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return '0.00';
+      }
       return parseFloat(row[column.property]).toFixed(2)
     },
     sliceString(row){

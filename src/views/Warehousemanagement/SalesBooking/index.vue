@@ -66,14 +66,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
+                    <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
                         sortable />
-                    <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
+                    <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable  width="200"/>
-                    <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable />
-                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="200;" sortable>
+                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable  width="170"/>
+                    <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable width="120" />
+                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="280" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
                             "CNY" : "未确定状态"
@@ -81,7 +81,7 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="状态" align="center" key="status" prop="status" sortable>
+                    <el-table-column label="状态" align="center" key="status" width="120" prop="status" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
                             "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
@@ -89,7 +89,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
+                    <el-table-column label="操作" align="center" width="260" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <!-- @click="handlexiangqengSelect(scope.row)" -->
                             <el-button size="mini" type="text" icon="el-icon-edit"
