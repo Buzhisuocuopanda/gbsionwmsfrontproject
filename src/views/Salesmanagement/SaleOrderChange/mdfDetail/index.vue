@@ -92,7 +92,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUser">
-            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="saleUserOnChange($event)"  v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option
                 v-for="item in saleUseroptions"
                 :key="item.value"
