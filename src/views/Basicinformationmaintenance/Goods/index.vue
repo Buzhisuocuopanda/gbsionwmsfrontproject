@@ -1301,6 +1301,8 @@ export default {
 
 
         handlechuangjiang() {
+          this.tableData2 = [];
+          this._ly_addFrom2();
             this.open2 = true;
         },
         /** 修改按钮操作 */

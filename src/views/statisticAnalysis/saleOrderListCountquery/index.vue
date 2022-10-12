@@ -46,10 +46,10 @@
         <el-table-column  label="客户名称" align="center" prop="customer" min-width="240px;"/>
         <el-table-column  label="编号" align="center" prop="orderNo" min-width="200px;"/>
         <el-table-column  label="销售人员" align="center" prop="saler" min-width="120px;"/>
-        <el-table-column  label="数量" align="center" prop="num" min-width="60px;"/>
-        <el-table-column  label="入库数量" align="center" prop="enterNum" min-width="60px;"/>
-        <el-table-column  label="变更数量" align="center" prop="changeNum" min-width="60px;"/>
-        <el-table-column  label="剩余数量" align="center" prop="remainNum" min-width="60px;"/>
+        <el-table-column  label="数量" align="center" :formatter="rounding" prop="num" min-width="60px;"/>
+        <el-table-column  label="入库数量" align="center" :formatter="rounding" prop="enterNum" min-width="60px;"/>
+        <el-table-column  label="变更数量" align="center" :formatter="rounding" prop="changeNum" min-width="60px;"/>
+        <el-table-column  label="剩余数量" align="center" :formatter="rounding" prop="remainNum" min-width="60px;"/>
         <el-table-column  label="品牌" align="center" prop="cbpb10" min-width="100px;"/>
         <el-table-column  label="型号" align="center" prop="cbpb12" min-width="130px;"/>
         <el-table-column  label="商品" align="center" prop="cbpb08" min-width="200px;"/>
@@ -278,6 +278,12 @@ export default {
     handleSelectionChange() {},
     formatTime(row){
       return formatDate2(row.createTime);
+    },
+    rounding(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return '0.00';
+      }
+      return parseFloat(row[column.property]).toFixed(2)
     },
     /** 重置按钮操作 */
     resetQuery() {
