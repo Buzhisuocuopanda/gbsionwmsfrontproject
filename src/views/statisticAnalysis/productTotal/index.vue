@@ -18,21 +18,21 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" type="primary" style="margin-left: 200px" @click="handleQuery">查询</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" class="filter-item" type="primary" style="margin-left: 0px" @click="handleQuery">查询</el-button>
         <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }">
-      <el-table-column prop="date" label="序号" type="index" sortable width="100" align="center"></el-table-column>
-      <el-table-column prop="cbba07" label="订单号" sortable align="center" width="180"></el-table-column>
-      <el-table-column prop="cala08" label="品牌" sortable align="center"></el-table-column>
-      <el-table-column prop="cbpb12" label="型号" sortable align="center"></el-table-column>
-      <el-table-column prop="cbpb08" label="描述" sortable width="260px" align="center"></el-table-column>
-      <el-table-column prop="cbba09" label="订单数量" sortable align="center"></el-table-column>
-      <el-table-column prop="cbba11" label="已发货数量" sortable align="center"></el-table-column>
-      <el-table-column prop="cbba13" label="已生产数量" sortable align="center"></el-table-column>
+    <el-table :data="tableData" :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="490" style="width: 100%;  margin-top:0.1em" border :default-sort="{ prop: 'date', order: 'descending' }">
+      <el-table-column prop="date" label="序号" type="index" sortable width="100" align="left"></el-table-column>
+      <el-table-column prop="cbba07" label="订单号" sortable align="left" width="180"></el-table-column>
+      <el-table-column prop="cala08" label="品牌" sortable align="left"></el-table-column>
+      <el-table-column prop="cbpb12" label="型号" sortable align="left"></el-table-column>
+      <el-table-column prop="cbpb08" label="描述" sortable width="260px" align="left"></el-table-column>
+      <el-table-column prop="cbba09" label="订单数量" :formatter="rounding" sortable align="right"></el-table-column>
+      <el-table-column prop="cbba11" label="已发货数量" :formatter="rounding" sortable align="right"></el-table-column>
+      <el-table-column prop="cbba13" label="已生产数量" :formatter="rounding" sortable align="right"></el-table-column>
       <!--<el-table-column  prop="cbba14" label="缺货数量"  sortable align="center">-->
         <!--<template slot-scope="scope">
           <div>{{scope.row.cbba09-scope.row.cbba13}}</div>
@@ -46,7 +46,7 @@
       :total="total"
       :current-page.sync="queryParams.pageNum"
       :page-size.sync="queryParams.pageSize"
-      style="padding-top:40px; padding-left: 20px;float: right"
+      style="padding-top:20px; padding-left: 20px;float: right"
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="onSearch"
       @current-change="onSearch"/>
@@ -91,6 +91,20 @@ export default {
     this.getGoods();
   },
   methods: {
+
+    rounding(row, column) {
+      return parseFloat(row[column.property]).toFixed(2)
+    },
+
+    //列表表头设置
+    headClasspw() {
+      return {
+        'text-align': 'left',
+        height: '30px',
+        padding: '0'
+      }
+    },
+
     onSubmit() {},
     formatStateType(row) {
           if (row != null) {

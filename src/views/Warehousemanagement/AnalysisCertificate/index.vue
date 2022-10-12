@@ -19,17 +19,17 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button size="mini" v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button> -->
-                        <el-button  size="mini" class="biaoto-buttonchuangjianllnm">创建
+                        <el-button  size="mini" class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
                         </el-button>
-                        <el-dropdown trigger="click">
+                        <!-- <el-dropdown trigger="click">
                           <span class="el-dropdown-link xialaxuanxangnnn">
                               <i class="el-icon-caret-bottom el-icon--right "></i>
                           </span>
@@ -38,8 +38,8 @@
                               通过提货单创建
                             <el-badge class="mark"/>
                            </el-dropdown-item>
-                        </el-dropdown-menu>
-                       </el-dropdown>
+                        </el-dropdown-menu> -->
+                       <!-- </el-dropdown> -->
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" type="danger" style="margin-left:1%;"  class="biaoto-buttonshanchu" :disabled="multiple"
@@ -73,14 +73,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" width="" align="left" key="cbqa07" prop="cbqa07" sortable />
-                    <el-table-column label="日期" width="400px;" align="left" key="cbqa08" prop="cbqa08"
+                    <el-table-column label="编号" width="" align="left" key="cbqa07" prop="cbqa07" sortable  />
+                    <el-table-column label="日期" width="300px;" align="left" key="cbqa08" prop="cbqa08"
                         :formatter="formatDate" sortable>
                     </el-table-column>
                     <!-- <el-table-column label="供应商" align="center" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="仓库" align="center" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
-                    <el-table-column label="状态" width="350px;" align="left" key="cbqa09" prop="cbqa09" sortable>
+                    <el-table-column label="状态" width="150px;" align="center" key="cbqa09" prop="cbqa09" sortable>
                         <template scope="scope">
                            <div>{{ scope.row.cbqa09 == 0 ? "未审核" : scope.row.cbqa09 == 1 ?
                             "已审核" : scope.row.cbqa09 == 4 ? "已完成" : "未审核"
@@ -134,7 +134,7 @@
         </el-row>
         <!--提货单创建-->
         <el-dialog :visible.sync="open3">
-            <el-row tyle="margin-left:-14px;margin-bottom:10px">
+            <el-row tyle="margin-left:-14px;margin-bottom:1%">
                 <el-col :span="12">
                     <el-input
                         v-model="queryParams.orderNo"
@@ -147,7 +147,7 @@
                 </el-col>
             </el-row>
             <el-table  v-loading="loading" :data="userList099" height="440" @selection-change="handleSelectionChange"
-                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;">
+                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;margin-top:2%">
                     <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
                       <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
@@ -160,10 +160,12 @@
                     <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
                     <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
                     </el-table-column>
-                    <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
+                    <el-table-column label="制单日期" align="left" key="orderDates" prop="orderDate" width="280px;" sortable />
 
             </el-table>
-            <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="sendParams">确定</el-button> -->
+            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                    :limit.sync="queryParams.pageSize" @pagination="getList099" :page-sizes="[10, 15, 20, 50, 500]"
+                    class="pagintotal" />
         </el-dialog>
 
         <!--修改-->
@@ -699,10 +701,18 @@ export default {
             let obj = {
                 orderNo:saleNo,
             }
-            Purchaseintihuadang(obj).then((res) =>{
+            let queryParams= {
+                pageNum: 1,
+                pageSize: 15,
+                page: 1,
+                size: 15,
+                total: this.total,
+                orderNo:saleNo
+            }
+            Purchaseintihuadang(this.addDateRange(queryParams, this.dateRange)).then((res) =>{
                 if(res.code == 200){
-                    this.userList099 = response.data.rows;
-                    this.total = response.data.total;
+                    this.userList099 = res.data.rows;
+                    this.total = res.data.total;
                 }
             })
         },
@@ -770,7 +780,8 @@ export default {
             let obj = {
                 status : 2
             };
-            Purchaseintihuadang(obj,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            this.queryParams.status = 2
+            Purchaseintihuadang(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList099 = response.data.rows;
                 this.total = response.data.total;
                 // //供应商
@@ -1086,21 +1097,12 @@ export default {
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
             console.log(row)
-            // this.open = true;
-            // console.log(row, 7788521);
-            // this.form.cbpc01 = row.cbpc01;
-            // this.form.cbpc07 = row.cbpc07;
-            // this.form.cbsa08 = row.cbsa08;
-            // this.form.cbwa09 = row.cbwa09;
-            // this.form.cala08 = row.cala08;
           this.$router.push({
 
             path: '/system/user-zhijiandan/roleXg/',
             // name: 'index',
             query: {
               data: row.cbqa01,
-              cbqa07:row.cbqa07,
-              cbqa11:row.cbqa11
             }
           })
         },
@@ -1240,9 +1242,9 @@ export default {
 
                 path: '/system/user-zhijiandan/role/',
                 // name: 'index',
-                query: {
-                    data: row.id,
-                }
+                // query: {
+                //     data: row.id,
+                // }
             })
             // location.reload();
         },

@@ -57,7 +57,7 @@
                     <el-table-column label="调出仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="调入仓库" align="left" key="cbwa10" prop="cbwa10" sortable />
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="关联订单" align="left" key="cbaa18" prop="cbaa18" sortable>
+                    <el-table-column label="关联订单" align="center" key="cbaa18" prop="cbaa18" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa18 == 0 ? "是" : scope.row.cbaa18 == 1 ?
                             "否" : "未确定状态"
@@ -65,7 +65,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="关联提货单" align="left" key="cbaa19" prop="cbaa19" sortable>
+                    <el-table-column label="关联提货单" align="center" key="cbaa19" prop="cbaa19" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa19 == 0 ? "是" : scope.row.cbaa19 == 1 ?
                             "否" : "未确定状态"
@@ -73,7 +73,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="状态" align="left" key="cbaa11" prop="cbaa11" sortable>
+                    <el-table-column label="状态" align="center" key="cbaa11" prop="cbaa11" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa11 == 0 ? "未审核" : scope.row.cbaa11 == 1 ?
                             "已审核" : scope.row.cbaa11 == 4 ? "已完成" : "未审核"
@@ -106,11 +106,11 @@
                                v-if="scope.row.cbaa11 == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)" v-hasPermi="['system:warehousetransferordersController:qxwc']"
-                                v-if="scope.row.cbaa11 == 1">调入标记完成</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                                v-if="scope.row.cbaa11 == 1">标记完成</el-button>
+                            <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:warehousetransferordersController:bjwc']"
-                                v-if="scope.row.cbaa11 == 1 | scope.row.cbaa11 == 1">调出标记完成</el-button>
+                                v-if="scope.row.cbaa11 == 1 | scope.row.cbaa11 == 1">调出标记完成</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>

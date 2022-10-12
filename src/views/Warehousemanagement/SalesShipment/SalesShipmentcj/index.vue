@@ -5,7 +5,7 @@
              <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" disabled/>
+                        <el-input type="text" v-model="form2.cbsb07" style="width: 70%;" disabled/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
@@ -1188,7 +1188,7 @@ export default {
         // 提货单id
         this.form2.takeId = id;
         // 编号
-        this.form2.cbsb07 = response.data.saleOrderNo;
+        this.form2.cbsb07 = response.data.orderNo;
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID
@@ -1220,7 +1220,7 @@ export default {
         //收货地址
         this.form2.cbsb21 = response.data.receiveAdress;
         //客户订单
-        this.form2.cbsb30 = response.data.saleOrderNo;
+        this.form2.cbsb30 = response.data.customerNo;
         console.log(this.form2.cbsb09, 85200000);
         response.data.goods.forEach((item) => {
           item.cbsc177 = item.orderClass;

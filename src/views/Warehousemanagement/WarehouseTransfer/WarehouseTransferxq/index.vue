@@ -164,8 +164,8 @@
         <div v-else>
             <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
             <el-button v-else type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
-            <el-button type="primary" @click="PurchaseinboundQuxiaoWangcheng">调入标记完成</el-button>
-            <el-button type="primary" @click="PurchaseinboundBiaojiWancheng">调出标记完成</el-button>
+            <el-button type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成</el-button>
+            <!-- <el-button type="primary" @click="PurchaseinboundBiaojiWancheng">调出标记完成</el-button> -->
             <el-button  @click="handlexiaoshouone">返回</el-button>
         </div>
      <div style="height:50px;"></div>
@@ -224,7 +224,7 @@ export default {
         // 
         // 入
         PurchaseinboundQuxiaoWangcheng() {
-            this.$modal.confirm('是否要调入标记,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
+            this.$modal.confirm('是否要标记完成,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
                 // PurchaseinBoundshf
                 PurchaseinBoundshf({
                     cbaa01:this.ids.id

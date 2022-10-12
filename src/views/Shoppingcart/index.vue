@@ -30,10 +30,10 @@
 
 
          <el-form-item>
-              <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">加入</el-button>
+              <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">生成国内销售订单</el-button>
          </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
-            
+
 <!--          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>-->
 <!--
           <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
@@ -55,11 +55,11 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe  @selection-change="handleSelectionChangee">
+      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe  @selection-change="handleSelectionChangee">
         <el-table-column type="selection" width="50" align="center" />
-        <el-table-column fixed label="品牌" align="center" prop="brand" key="brand"  min-width="120px;"/>
-        <el-table-column fixed label="型号" align="center" prop="model" min-width="120px;"/>
-        <el-table-column  label="描述" align="center" prop="description" min-width="120px;" />
+        <el-table-column fixed label="品牌" align="left" prop="brand" key="brand"  min-width="30px;"/>
+        <el-table-column fixed label="型号" align="left" prop="model" min-width="50px;"/>
+        <el-table-column  label="描述" align="left" prop="description" min-width="120px;" />
 <!--        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
         <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />-->
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
@@ -67,21 +67,21 @@
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作"  min-width="120px;">
-          <template slot-scope="scope" >
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text" @click="mdfDetail(scope.row)"
-            >加入</el-button>
+<!--        <el-table-column label="操作"  min-width="120px;">-->
+<!--          <template slot-scope="scope" >-->
+<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
+<!--                       type="text" @click="mdfDetail(scope.row)"-->
+<!--            >生成国内销售订单</el-button>-->
 
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
-<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
-                       type="text"
-                       @click="showDetail(scope.row)">详情</el-button>-->
+<!--&lt;!&ndash;            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
+<!--                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>&ndash;&gt;-->
+<!--&lt;!&ndash;            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
+<!--                       type="text"-->
+<!--                       @click="showDetail(scope.row)">详情</el-button>&ndash;&gt;-->
 
-          </template>
+<!--          </template>-->
 
-        </el-table-column>
+<!--        </el-table-column>-->
       </el-table>
       <el-pagination
         :background="true"
@@ -89,7 +89,7 @@
         :total="totalItems"
         :current-page.sync="listQuery.pageNum"
         :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:30px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -244,7 +244,7 @@
 </template>
 
 <script>
-import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder, goodsShopList,delgoodsShop} from '@/api/saleordermanage'
+import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder, goodsShopList} from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -478,7 +478,7 @@ export default {
         },
 
     delTotalOrder(row){
-      this.$confirm('确认要删除'+row.orderNo+"购物车？", '确认操作', {
+      this.$confirm('确认要删除'+row.orderNo+"售后单？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',
@@ -491,7 +491,7 @@ export default {
           delete: 1,
 
         }
-        delgoodsShop(param).then(response => {
+        delSales(param).then(response => {
           // console.log(response)
           if ( response.code === 200) {
             this.onSearch()
@@ -510,7 +510,7 @@ export default {
     //  this.goodsId=this.orderList[0].goodsId;
      // console.log(this.goodsId,1111111)
 
-      
+
        let userIds = this.idss.length > 0 ? this.idss : row
             this.$modal.confirm('编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
@@ -559,7 +559,7 @@ export default {
       // console.info(param)
       goodsShopList(param).then(response => {
         if (response.data != null && response.data != null) {
-          this.orderList = response.data;
+          this.orderList = response.data.rows;
           // console(response.data,8523)
           this.totalItems = response.data.total;
         } else {
@@ -729,5 +729,7 @@ export default {
 </script>
 
 <style scoped>
-
+.caozuoxiangqeng {
+  border: 0 !important;
+}
 </style>

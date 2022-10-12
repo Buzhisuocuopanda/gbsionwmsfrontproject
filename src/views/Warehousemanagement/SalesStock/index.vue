@@ -7,40 +7,40 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                  <el-form-item prop="cbse07" label="编号">
+                <el-form-item prop="cbse07" label="编号">
                     <el-input v-model="queryParams.cbse07" id="miaoshu" placeholder="请输入编号" clearable
-                              style="width: 240px;" @keyup.enter.native="handleQuery" />
-                  </el-form-item>
-                  <el-form-item prop="cbwa09" label="仓库">
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                </el-form-item>
+                <el-form-item prop="cbwa09" label="仓库">
                     <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
-                              style="width: 240px;" @keyup.enter.native="handleQuery" />
-                  </el-form-item>
-                  <el-form-item label="日期" style="margin-left:1%;">
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                </el-form-item>
+                <el-form-item label="日期" style="margin-left:1%;">
                     <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                                     :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                                     range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
                     </el-date-picker>
-                  </el-form-item>
-                  <el-form-item>
+                </el-form-item>
+                <el-form-item>
                         <el-button size="mini" v-hasPermi="['system:salesreturnorderss:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                  </el-form-item>
-                  <el-form-item>
+                </el-form-item>
+                <el-form-item>
                         <el-button v-hasPermi="['system:salesreturnorderss:list']" class="biaoto-buttonchuangjiannmnm" size="mini" @click="resetQuery">重置</el-button>
-                  </el-form-item>
-                    <el-form-item style="margin-left:38%;">
+                </el-form-item>
+                    <el-form-item style="margin-left:47.5%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" v-hasPermi="['system:salesreturnorderss:add']" class="biaoto-buttonchuangjiannmnm" @click="handletuikuone">创建</el-button>
                         <el-dropdown trigger="click">
                         <span class="el-dropdown-link xialaxuanxangjjj">
-                             <i class="el-icon-caret-bottom el-icon--right "></i>
+                            <i class="el-icon-caret-bottom el-icon--right "></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                           <el-dropdown-item class="clearfix" >
-                              通过订单创建
-                             <el-badge class="mark"/>
-                           </el-dropdown-item>
+                        <el-dropdown-item class="clearfix" >
+                            通过订单创建
+                                <el-badge class="mark"/>
+                        </el-dropdown-item>
                         <el-dropdown-item class="clearfix" @click.native="tong">
-                              通过提货单创建
+                            通过提货单创建
                             <el-badge class="mark"/>
                         </el-dropdown-item>
                         </el-dropdown-menu>
@@ -81,7 +81,7 @@
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" sortable />
-                    <el-table-column label="状态" align="left" key="cbse11" prop="cbse11" sortable>
+                    <el-table-column label="状态" align="center" key="cbse11" prop="cbse11" sortable>
                        <template scope="scope">
                             <div>{{ scope.row.cbse11 == 0 ? "未审核" : scope.row.cbse11 == 1 ?
                             "已审核" : scope.row.cbse11 == 4 ? "已完成" : "未确定状态"

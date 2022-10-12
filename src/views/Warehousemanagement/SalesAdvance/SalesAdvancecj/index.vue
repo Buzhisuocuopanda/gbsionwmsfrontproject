@@ -23,28 +23,28 @@
       <el-row :gutter="20">
         
         <el-col style="" :span="6">
-          <el-form-item label="客户名称:" prop="cbpc0999">
+          <el-form-item label="客户名称:" prop="customer">
             <el-popover placement="bottom-start" trigger="click">
               <CustomerMainten ref="CustomerMainten" @selected="selected022" style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly  style="width:110%;">
+              <el-input slot="reference" v-model="form2.customer" placeholder="" readonly  style="width:110%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-2%;" :span="6">
-          <el-form-item label="供料单位:" prop="cbpc099">
+          <el-form-item label="供料单位:" prop="supplier">
             <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:210px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:100%;">
+              <el-input slot="reference" v-model="form2.supplier" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-4%;" :span="6">
-          <el-form-item label="仓库:" prop="cbpc100">
+          <el-form-item label="仓库:" prop="wh">
             <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:100%;">
+              <el-input slot="reference" v-model="form2.wh" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -54,10 +54,10 @@
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select> -->
-             <el-form-item label="销售人员:" prop="salerId">
+             <el-form-item label="销售人员:" prop="saler">
             <el-popover placement="bottom-start" trigger="click" clearable>
                 <salerman ref="salerman" @selected="selected011699" style="width:220px!important;" />
-                  <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly style="width:85%;">
+                  <el-input slot="reference" v-model="form2.saler" placeholder="" readonly style="width:85%;">
                   </el-input>
                 </el-popover>
             </el-form-item>
@@ -113,19 +113,19 @@
         </el-col>
       </el-row>
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
-        </el-row>
+        </el-row> -->
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="cbpc000" label="品牌" width="300">
+          <el-table-column prop="goodsclassify" label="品牌" width="300">
             <template slot-scope="scope" style="width:200%;">
                 <el-popover placement="bottom-start" trigger="click">
                        <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
                           style="width:600px!important;" />
-                        <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
+                        <el-input slot="reference" v-model="scope.row.goodsclassify" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
                   </el-popover>
@@ -196,7 +196,8 @@
 
 
   import {
-    PurchaseinboundAdd
+    PurchaseinboundAdd,
+    saleOrderAdvance
   } from "@/api/Warehousemanagement/SalesAdvance";
 
   import {
@@ -740,8 +741,8 @@ import salerman from "@/components/salerman";
                     orderNo:"",
                     GsSalesOrders:""
                   }
-                }else{
-                  this.$message({ message: response.msg, type: 'error' });
+                  this.$message({message:res.msg,type:'success'})
+                  this.handlexiaoshouone()
                 }
                 if (count-- === 1) {
                   this._ly_save()
@@ -899,8 +900,24 @@ import salerman from "@/components/salerman";
         this.form2.GsSalesOrders = name.substring(0, name.indexOf("-"));
         this.form2.gsSalesOrders = name.substring(name.indexOf("-") + 1);
         // this.form2.icon = name;
+        this.getchange(this.form2.gsSalesOrders,this.form2.GsSalesOrders)
       },
-
+      getchange(id,orderno) {
+        let obj = {
+          ids:id
+        }
+        saleOrderAdvance(id).then((res) =>{
+          if(res.code == 200){
+            console.log(res.data)
+            this.form2 = res.data.rows[0]
+            this.tableData = res.data.rows
+            this.tableData.map((item)=>{
+              item.goodsclassify = item.cala08 + ' ~ ' + item.cbpb12 + ' ~ ' + item.cbpb08
+            })
+            this.form2.GsSalesOrders = orderno
+          }
+        })
+      },
          //添加模块-供应商
       selected02(name) {
        console.log(name, 123)
@@ -911,43 +928,16 @@ import salerman from "@/components/salerman";
 
 
       //查询商品信息维护
-      selected08(e,row) {
+      selected08(name,row) {
         // row.cbpc000=e
-        this.$set(row,"cbpc000",e.substring(0,e.indexOf(".")))
-        console.log(e,111)
+        // this.$set(row,"cbpc000",e.substring(0,e.indexOf(".")))
+        console.log(name,111)
         console.log(row,222)
         // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-        this.$set(row,"goodsId",e.substring(e.indexOf(".") +1),8523642)
-        this.$set(row,"goodsclassifyy",e.substring(e.indexOf("~")+1),8523642)
-        this.$set(row,"goodsclassify",row.goodsclassifyy.substring(0,row.goodsclassifyy.indexOf("~")),555)
-        // console.log(row.cbpc08,96325412);
-        // console.log(name, 111)
-        // console.log(index, 222)
-        // this.$set(this.tableData, "cbpc000", e)
-
-        // this.formArr[index].cbpc000=''
-        // this.formArr[index].cbpc000=e
-        // console.log(this.formArr)
-        // console.log(name.substring(name.indexOf("-") + 1), 963);
-        // this.form.cbpc000 = name.substring(0, name.indexOf("-"));
-        // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
-        // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-        // this.form.cbpc000 = name;
-        // this.form.cbpd08  =  name.substring(name.indexOf(".") +1);
-        // console.log(this.form2.cbpd08,852369421);
-
-          // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
-        //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
-          // this.form.cbpc000 = name;
-          // this.$set(this.tableData,"cbpc000",name);
-          // this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1));
-          // this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
-          // this.$forceUpdate()
-          // console.log(this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
-          // this.tableData.cbpc000 = "123";
-          // this.tableData.num = "23344";
-          // console.log(name,556623);
-          // console.log(this.tableData.cbpc000,20220905);
+        this.$set(row,"goodsId",name.substring(name.indexOf(".") +1),8523642)
+        // this.$set(row,"goodsclassifyy",e.substring(e.indexOf("~")+1),8523642)
+        this.$set(row,"goodsclassify",name.substring(0,name.indexOf(".")),555)
+        console.log(row,96325412);
       },
 
 
@@ -1021,7 +1011,9 @@ import salerman from "@/components/salerman";
       /** 销售预订单变更单返回操作 */
       handlexiaoshouone: function(row) {
         // this.$router.push("/system/user-auth/role/");
-        this.$router.push("/system/user-SalesAdvancefanhui/role/");
+        // this.$router.push("/system/user-SalesAdvancefanhui/role/");
+        this.$store.dispatch("tagsView/delView", this.$route)
+        this.$router.push({path: "/system/user-SalesAdvancefanhui/role/", query: {id: 1}})
       },
 
        /** 新增按钮操作 */
@@ -1055,5 +1047,5 @@ import salerman from "@/components/salerman";
     }
   };
 </script>
-<style src="./SalesAdvancecjcss/index.css">
+<style src="./SalesAdvancecjcss/index.css" scoped>
 </style>

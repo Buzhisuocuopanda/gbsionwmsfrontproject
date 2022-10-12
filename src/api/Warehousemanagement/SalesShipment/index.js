@@ -42,7 +42,7 @@ export function Purchaseinbounddingdancx(data) {
   return request({
     url: '/whmanagement/takeOrderList',
     method: 'get',
-    data: data
+    params: data
   })
 }
 
