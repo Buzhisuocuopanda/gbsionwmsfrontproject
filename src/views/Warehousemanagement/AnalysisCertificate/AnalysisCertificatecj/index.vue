@@ -854,4 +854,4 @@ export default {
   },
 };
 </script>
-<style src="./AnalysisCertificatecjcss/index.css"></style>
+<style src="./AnalysisCertificatecjcss/index.css" scoped></style>
