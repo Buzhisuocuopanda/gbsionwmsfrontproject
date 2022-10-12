@@ -56,36 +56,36 @@
       </el-form>
       <el-table :data="orderList"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row
                 stripe style="margin-top:1em">
-        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="130px;"/>
+        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="150px;"/>
         <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="120px;"/>
-        <el-table-column  label="日期" align="left" prop="orderDate" min-width="90px;"/>
+        <el-table-column  label="日期" align="left" prop="orderDate" min-width="120px;"/>
         <el-table-column label="客户" align="left" prop="customerName" min-width="200px;"/>
-        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="75px;"/>
-        <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="75px;"/>
-        <el-table-column label="收货人" align="left" prop="receiver" min-width="75px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="450px;"/>
-        <el-table-column label="电话" align="left" prop="phone" min-width="100px;"/>
-        <el-table-column label="订单类型" align="left" prop="orderTypeMsg" min-width="80px;"/>
-        <el-table-column label="订单分类" align="left" prop="orderClassMsg" min-width="80px;"/>
+        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
+        <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
+        <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="380px;"/>
+        <el-table-column label="电话" align="left" prop="phone" min-width="120px;"/>
+        <el-table-column label="订单类型" align="left" prop="orderTypeMsg" min-width="120px;"/>
+        <el-table-column label="订单分类" align="left" prop="orderClassMsg" min-width="120px;"/>
         <el-table-column label="工厂账号" align="left" prop="fcNumber" min-width="120px;"/>
         <el-table-column label="其他" align="left" prop="other" min-width="120px;"/>
-        <el-table-column label="制单时间" align="left" prop="createTime" min-width="140px;"/>
-        <el-table-column  fixed="right"  label="确认库存状态" align="left" prop="confirmSkuStatusMsg" min-width="100px;"/>
-        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="70px;"/>
+        <el-table-column label="制单时间" align="left" prop="createTime" min-width="180px;"/>
+        <el-table-column  fixed="right"  label="确认库存状态" align="left" prop="confirmSkuStatusMsg" min-width="120px;"/>
+        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="220px;">
           <template slot-scope="scope">
-            <el-button class="caozuoxiangqengOrderGJ" style="margin-left:8px; margin-top: 2px" size="mini" icon="el-icon-share" type="text" @click="showDetail(scope.row)" v-hasPermi="['sale:saleOrderGj:detail']">详情</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" size="mini" icon="el-icon-share" type="text" @click="showDetail(scope.row)" v-hasPermi="['sale:saleOrderGj:detail']">详情</el-button>
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>-->
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
-            <el-button class="caozuoxiangqengOrderGJ" style="margin-top: 2px" v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,3)" v-hasPermi="['sale:saleOrderGj:audit']">审核</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,3)" v-hasPermi="['sale:saleOrderGj:audit']">审核</el-button>
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==2" size="mini" type="primary" @click="auditDetail(scope.row,6)">反审</el-button>-->
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button class="caozuoxiangqengOrderGJ" style="margin-top: 2px" v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)" v-hasPermi="['sale:saleOrderGj:audit']">指定结束</el-button>
-            <el-button class="caozuoxiangqengOrderGJ" style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,2)" v-hasPermi="['sale:saleOrder:confirm']">确认库存</el-button>
-            <el-button class="caozuoxiangqengOrderGJ" style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,1)" v-hasPermi="['sale:saleOrder:confirm']">取消库存</el-button>
-            <el-button class="caozuoxiangqengOrderGJ" style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)" v-hasPermi="['sale:saleOrderGj:remove']">删除</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)" v-hasPermi="['sale:saleOrderGj:audit']">指定结束</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,2)" v-hasPermi="['sale:saleOrder:confirm']">确认库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,1)" v-hasPermi="['sale:saleOrder:confirm']">取消库存</el-button>
+            <el-button style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)" v-hasPermi="['sale:saleOrderGj:remove']">删除</el-button>
           </template>
 
         </el-table-column>
@@ -106,8 +106,8 @@
       <!-- 用户导入对话框 -->
       <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
         <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
-                  :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
-                  :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
+                   :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
+                   :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           <div class="el-upload__tip text-center" slot="tip">
@@ -343,7 +343,7 @@
     },
     methods: {
 
-    
+
 
 
       onSubmit() {
@@ -749,16 +749,13 @@
   }
 </script>
 
-<style lang="scss" scoped>
-/*.el-dialog__footer {*/
+<style lang="scss">
+  /*.el-dialog__footer {*/
   /*  padding: 15px;*/
   /*  padding-top: 10px;*/
   /*  text-align: right;*/
   /*  -webkit-box-sizing: border-box;*/
   /*  box-sizing: border-box*/
   /*}*/
-  .caozuoxiangqengOrderGJ{
-    padding:0 !important;
-    border: 0 !important;
-  }
+
 </style>
