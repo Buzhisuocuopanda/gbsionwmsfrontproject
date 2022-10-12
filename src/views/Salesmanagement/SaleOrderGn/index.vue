@@ -521,6 +521,9 @@
         this.model = ''
         this.orderNo = ''
         this.status = ''
+        this.customer=''
+        this.dateRange=''
+
       },
       createForm() {
         // this.showaddDialog = true

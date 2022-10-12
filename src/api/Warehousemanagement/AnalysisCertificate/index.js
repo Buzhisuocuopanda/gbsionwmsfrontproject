@@ -177,7 +177,7 @@ export function StoreSkuList(query) {
 export function SwJsSkuBarcodeselectss(data) {
   return request({
     // /dev-api/stage-api/system/Qualityin/SwJsSkuBarcodeselectss
-    url: 'system/Qualityin/SwJsSkuBarcodeselectss',
+    url: '/system/Qualityin/SwJsSkuBarcodeselectss',
     method: 'get',
     params:data
   })
@@ -186,7 +186,7 @@ export function SwJsSkuBarcodeselectss(data) {
 export function SwJsSkuBarcodeselectsss(data) {
   return request({
     // http://127.0.0.1:8080/system/Qualityin/SwJsSkuBarcodeselectsss
-    url: 'system/Qualityin/SwJsSkuBarcodeselectsss',
+    url: '/system/Qualityin/SwJsSkuBarcodeselectsss',
     method: 'get',
     params:data
   })
