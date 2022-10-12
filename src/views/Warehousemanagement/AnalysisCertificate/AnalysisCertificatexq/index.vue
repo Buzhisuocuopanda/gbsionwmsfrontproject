@@ -148,5 +148,5 @@ export default {
     }
 };
 </script>
-<style src="./AnalysisCertificatexqcss/index.css">
+<style src="./AnalysisCertificatexqcss/index.css" scoped>
 </style>
