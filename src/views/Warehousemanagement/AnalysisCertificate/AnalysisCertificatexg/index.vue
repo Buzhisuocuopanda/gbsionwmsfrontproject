@@ -607,5 +607,5 @@ export default {
     }
 };
 </script>
-<style src="./AnalysisCertificatecjcss/index.css">
+<style src="./AnalysisCertificatecjcss/index.css" scoped>
 </style>
