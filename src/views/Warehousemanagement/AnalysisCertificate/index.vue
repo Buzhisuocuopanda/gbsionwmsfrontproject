@@ -126,7 +126,6 @@
                         </template>
                     </el-table-column>
                 </el-table>
-
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
@@ -681,7 +680,7 @@ export default {
         //仓库
         this.getList04();
         //提货单
-        this.getList099();
+        // this.getList099();
 
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
