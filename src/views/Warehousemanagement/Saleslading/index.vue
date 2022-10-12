@@ -230,7 +230,7 @@
             label="收货地址"
             align="left"
             key="address"
-            width="120px;"
+            width="520px;"
             prop="address"
             sortable
           />
@@ -260,9 +260,9 @@
           />
           <el-table-column
             label="状态"
-            align="left"
+            align="center"
             key="statusMsg"
-            width="120px;"
+            width="100px;"
             prop="statusMsg"
             sortable
           >
@@ -1035,7 +1035,7 @@ export default {
     headClassSld() {
       return {
         'text-align': 'left',
-        height: "30px",
+        height: "40px",
         padding: "0",
       };
     },
@@ -1846,4 +1846,4 @@ export default {
   },
 };
 </script>
-<style src="./Salesladingcss/index.css"></style>
+<style src="./Salesladingcss/index.css" scoped ></style>
