@@ -116,7 +116,7 @@
 <!--              </el-popover>-->
 <!--            </template>-->
           </el-form-item>
-          <el-form-item label="数量" prop="qty">
+          <el-form-item label="订单数量" prop="qty">
             <el-input  v-model="formData.qty" style="width:50%"     oninput="value=value.replace(/[^\d]/g,'')"
             ></el-input>
           </el-form-item>
@@ -151,7 +151,7 @@
             <!--                        style="width:205.6%;">-->
             <!--              </el-input>-->
             <!--            </el-popover>-->
-            <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+            <el-select readonly @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -169,7 +169,7 @@
 <!--              </el-popover>-->
 <!--            </template>-->
           </el-form-item>
-          <el-form-item label="数量" prop="qty">
+          <el-form-item label="订单数量" prop="qty">
             <el-input  v-model="formData.qty" style="width:50%;text-align: right"     oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"
             ></el-input>
           </el-form-item>
@@ -222,10 +222,12 @@
 
               <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
                 <el-form-item label="优先级" >
-                  <el-input v-model="formData.priority" style="width:50%" readonly></el-input>
+<!--                  <el-input v-model="formData.priority" style="width:50%" readonly></el-input>-->
+                  <span>{{formData.priority}}</span>
                 </el-form-item>
                 <el-form-item label="订单号" >
-                  <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>
+<!--                  <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>-->
+                  <span>{{formData.orderNo}}</span>
                 </el-form-item>
                 <el-form-item label="商品" >
                   <!--            <el-popover placement="bottom-start" trigger="click">-->
@@ -236,10 +238,12 @@
                   <!--              </el-input>-->
                   <!--            </el-popover>-->
 
-                  <el-input  v-model="formData.goods" placeholder=""
-                            style="width:70%;" readonly>
-                  </el-input>
-<!--                  <template  style="width:200%;">-->
+<!--                  <el-input  v-model="formData.goods" placeholder=""-->
+<!--                            style="width:70%;" readonly>-->
+<!--                  </el-input>-->
+                  <span>{{formData.goods}}</span>
+
+                  <!--                  <template  style="width:200%;">-->
 
 <!--                    <el-popover placement="bottom-start" trigger="click">-->
 <!--                      <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)"-->
@@ -248,7 +252,7 @@
 <!--                    </el-popover>-->
 <!--                  </template>-->
                 </el-form-item>
-                <el-form-item label="数量" >
+                <el-form-item label="订单数量" >
 <!--                  <el-input : v-model="formData.qty" style="width:50%;text-align: right" readonly></el-input>-->
                   <span>
                     {{parseFloat(formData.qty).toFixed(2)}}
