@@ -83,7 +83,7 @@
             </el-row>
         </div>
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog5">
+        <el-dialog :title="title1" :visible.sync="open"  class="abow_dialog5">
             <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">商品信息维护修改
             </div>
           <div>
@@ -448,7 +448,7 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
  //列表
-import ListMaintenance from "@/components/ListMaintenance";
+import ListMaintenance from "@/components/ListMaintenancePp";
 
 export default {
     name: "User",
