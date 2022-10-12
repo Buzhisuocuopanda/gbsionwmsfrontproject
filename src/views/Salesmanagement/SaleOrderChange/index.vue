@@ -24,7 +24,7 @@
         </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['system:saleChange:list']"  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
-                     @click="onSearch">搜索
+                    @click="onSearch">搜索
           </el-button>
           <el-button v-hasPermi="['system:saleChange:list']"  class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
@@ -42,7 +42,7 @@
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
           <el-button v-hasPermi="['system:saleChange:export']" class="filter-item"  type="primary" v-on:click="exprotData()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">导出
+                    style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
 
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
@@ -50,34 +50,34 @@
       </el-form>
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row
                 stripe style="margin-top:1em">
-        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="150px;"/>
-        <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="150px;"/>
-        <el-table-column  label="日期" align="left" prop="orderDate" min-width="120px;"/>
-        <el-table-column label="客户" align="left" prop="customerName" min-width="200px;"/>
-        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
-        <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
-        <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="400px;"/>
-        <el-table-column label="电话" align="left" prop="phone" min-width="120px;"/>
-        <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="120px;"/>
-        <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="120px;"/>
+        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="128px;"/>
+        <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="130px;"/>
+        <el-table-column  label="日期" align="left" prop="orderDate" min-width="90px;"/>
+        <el-table-column label="客户" align="left" prop="customerName" min-width="260px;"/>
+        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="75px;"/>
+        <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="75px;"/>
+        <el-table-column label="收货人" align="left" prop="receiver" min-width="75px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="450px;"/>
+        <el-table-column label="电话" align="left" prop="phone" min-width="100px;"/>
+        <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="75px;"/>
+        <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="75px;"/>
         <el-table-column label="工厂账号" align="left" prop="fcNumber" min-width="120px;"/>
         <el-table-column label="其他" align="left" prop="other" min-width="120px;"/>
-        <el-table-column label="制单时间" align="left" prop="createTime" min-width="180px;"/>
-        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
+        <el-table-column label="制单时间" align="left" prop="createTime" min-width="140px;"/>
+        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="70px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="250px;">
           <template slot-scope="scope">
-            <el-button v-hasPermi="['system:saleChange:detail']" class="caozuoxiangqeng" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
-            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit"  size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
-            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit"  size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
-            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
-<!--            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>-->
+            <el-button v-hasPermi="['system:saleChange:detail']" class="caozuoxiangqengChange" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit"  size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit"  size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
+            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,3)">审核</el-button>
+<!--            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>-->
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
+            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit"  size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>-->
-            <el-button v-hasPermi="['system:saleChange:remove']" class="caozuoxiangqeng" style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete"  size="mini"   type="text" @click="delSaleOrder(scope.row)">删除</el-button>
+            <el-button v-hasPermi="['system:saleChange:remove']" class="caozuoxiangqengChange" style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-delete"  size="mini"   type="text" @click="delSaleOrder(scope.row)">删除</el-button>
           </template>
 
         </el-table-column>
@@ -842,7 +842,8 @@
   /*  box-sizing: border-box*/
   /*}*/
 
-.caozuoxiangqeng {
+.caozuoxiangqengChange {
   border: 0 !important;
+  padding:0 !important;
 }
 </style>
