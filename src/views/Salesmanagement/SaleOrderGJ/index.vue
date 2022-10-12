@@ -63,7 +63,7 @@
         <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
         <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="380px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="500px;"/>
         <el-table-column label="电话" align="left" prop="phone" min-width="120px;"/>
         <el-table-column label="订单类型" align="left" prop="orderTypeMsg" min-width="120px;"/>
         <el-table-column label="订单分类" align="left" prop="orderClassMsg" min-width="120px;"/>
@@ -757,7 +757,7 @@
   /*  -webkit-box-sizing: border-box;*/
   /*  box-sizing: border-box*/
   /*}*/
-.caozuoxiangqeng {
+.caozuoxiangqengGJ {
   border: 0 !important;
   padding:0 !important;
 }

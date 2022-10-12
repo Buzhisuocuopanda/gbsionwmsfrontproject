@@ -292,10 +292,10 @@
           </el-table-column>
           <el-table-column
             label="状态"
-            align="left"
+            align="center"
             key="cbsb11"
             prop="cbsb11"
-            width="90px;"
+            width="100px;"
             sortable
           >
             <template scope="scope">
