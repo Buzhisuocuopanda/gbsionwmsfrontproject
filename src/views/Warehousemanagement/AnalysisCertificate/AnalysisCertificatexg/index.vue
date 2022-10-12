@@ -4,8 +4,8 @@
             <div class="chuangjiancaigous">质检单</div>
             <el-row>
                 <el-col :span="7">
-                    <el-form-item label="编号:" prop="cbqa07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbqa07" style="width: 50%;" />
+                    <el-form-item label="编号:" prop="cbpk07" style="margin-left:10%;">
+                        <el-input type="text" v-model="form2.cbpk07" style="width: 50%;" />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
@@ -30,7 +30,7 @@
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 95%;  margin-left: 3%; margin-top: 10px;">
          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="cbpc000" label="品牌" width="">
+          <el-table-column prop="f" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
               <!--<sapn>
                 <el-select @change="goodsOnChange()"  v-model="scope.row.cbpc000" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
@@ -42,8 +42,8 @@
                   </el-option>
                 </el-select>
               </sapn>-->
-                <el-popover placement="bottom-start" trigger="clic k">
-                        <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
+                <el-popover placement="bottom-start" trigger="click" disabled>
+                        <el-input slot="reference" v-model="scope.row.f" placeholder="" readonly
                             style="width:100%;">
                         </el-input>
                   </el-popover>
@@ -320,6 +320,17 @@ export default {
                 children: "children",
                 label: "label"
             },
+            // 查询参数
+            queryParams: {
+                pageNum: 1,
+                pageSize: 999999,
+                page: 1,
+                size: 999999,
+                total: this.total,
+                name: undefined,
+                address: undefined,
+                userId: undefined
+            },
             // 用户导入参数
             upload: {
                 // 是否显示弹出层（用户导入）
@@ -361,8 +372,8 @@ export default {
         },
     },
     created() {
-
-      this.getDetail();
+        this.getList()
+    //   this.getDetail();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -381,6 +392,7 @@ export default {
          //返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
+            this.$store.dispatch("tagsView/delView", this.$route)
             this.$router.push("/system/user-zjdfh/role/");
         },
 
@@ -428,39 +440,23 @@ export default {
           });
 
       },
-             /** 销售提货单 */
+        //详情列表
         getList() {
-            let routerParams = this.$route.query;
-               this.formArr = routerParams.data;
-                // console.log(zhuangh[0].id,889999);
-               PurchaseinboundSellout(this.formArr,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                response.data.scans.forEach((item)=>{
-                    // item.cbsc177=item.orderClass;
-                    item.cbpb09 = item.sku;
-                    // if(item.cbsc177=="国内订单"){
-                    //       item.cbsc17="1";
-                    // }
-                    item.cbpc000 = item.brand +"-"+item.model+"-"+item.description+"-"+item.sn;
-                    item.cbqb09 = item.sku;
-                    item.cbqb10 = item.sn;
-                    item.cbqb08 = '695414';
-                    console.log(item.cbpd09,19991119);
-
-                })
-
-                this.tableData = response.data.scans;
-                this.total = response.data.total;
-                console.log(response.data.scans, 339688);
-                // this.userList01 = JSON.stringify(this.userList);
-                // response.data.goods.forEach((e)=>{
-                //   this.form.cbsc17=e.orderClass;
-                // })
-                // let
-                console.log( this.formArr,99916);
-                // console.log(this.userList01.orderClass,852147777);
-                // this.deleteFlag = response.data.rows.deleteFlag;   this.form.cbsc17
+            this.loading = true;
+            const userId = this.$route.query && this.$route.query.data;
+            if (userId) {
+                // 获取表详细信息
+                QualityinLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                    this.userList = res.data.rows[0];
+                    this.tableData = res.data.rows;
+                    this.tableData.map((item) =>{
+                        item.f = item.cala08 + ' ~ ' + item.cbpb08 + ' ~ ' + item.cbpb12 + ' ~ ' + item.cbqb10
+                    })
+                    this.total = res.data.total;
+                    console.log(res, 888999);
+                    this.loading = false;
+                });
             }
-            );
         },
         // 表单重置
         reset() {
@@ -482,14 +478,15 @@ export default {
 
         /** 修改按钮操作 */
         handleEdit() {
+          const userId = this.$route.query && this.$route.query.data;
           this.form2.goods = this.tableData;
+          this.form2.cbqa01 = userId
           QualityinEditOne(this.form2).then(response => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
               this.$message({ message: '修改成功', type: 'success', style: 'color:red;!important' });
-              this._ly_ok();
-            } else {
-              this.$message({ message: response.msg, type: 'error' });
+              this.handlefanhui()
+            //   this._ly_ok();
             }
           });
 
@@ -519,8 +516,6 @@ export default {
                                   goods:[]
                               }
 
-                            } else {
-                                this.$message({ message: response.msg, type: 'error' });
                             }
                         if (count-- === 1) {
                             this._ly_save()
