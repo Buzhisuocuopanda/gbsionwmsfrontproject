@@ -11,7 +11,7 @@
       <el-row>
         <el-col :span="7">
           <el-form-item label="编号:" prop="cbqa07" style="margin-left: 10%">
-            <el-input type="text" v-model="form2.cbqa07" style="width: 50%" />
+            <el-input type="text" v-model="form2.cbqa07" style="width: 50%" readonly/>
           </el-form-item>
         </el-col>
         <el-col :span="7">
