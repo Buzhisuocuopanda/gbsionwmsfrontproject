@@ -21,7 +21,7 @@
             <!--用户数据-->
             <el-col :span="18">
                 <el-form ref="form" :model="form" :rules="rules" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
+                    label-width="90px">
                     <div class="shangponfenlei-lase">
                         <div class="shangponfenlei">
                             商品分类信息
@@ -29,7 +29,11 @@
                         <hr />
                         <div class="shangponfenlei-middle">
                             <el-row>
-
+                              <el-col style="margin-left: 120px;">
+                                <el-form-item label="父字节编号"  prop="cbpa09" >
+                                  <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
+                                </el-form-item>
+                              </el-col>
                                 <el-col style="margin-left: 120px;">
                                     <el-form-item label="名称" prop="cbpa07" >
                                         <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;" />
@@ -41,11 +45,7 @@
                                              />
                                     </el-form-item>
                                 </el-col>
-                                <el-col v-if="false">
-                                    <el-form-item label="父字节编号" prop="cbpa09" >
-                                        <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
-                                    </el-form-item>
-                                </el-col>
+
                                 <el-col v-if="false">
                                     <el-form-item label="id" prop="cbpa01" >
                                         <el-input v-model="form.cbpa01" maxlength="30" style="width: 400px;" />
@@ -160,7 +160,7 @@ export default {
                 updateSupport: 0,
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
-                // 上传的地址 
+                // 上传的地址
                 url: process.env.VUE_APP_BASE_API + "/system/classify/importSwJsGoodsClassify"
             },
             // 查询参数
@@ -332,7 +332,7 @@ export default {
             this.$refs["form"].validate((item) => {
                 if (item) {
                     ClassifyAdd(this.form).then(response => {
-                        if (response.code == "200") {   
+                        if (response.code == "200") {
                         // this.form.parent_id=this.form.id;
                         // console.log(this.from.parent_id,123456789);
                         this.title = "添加用户";
@@ -488,8 +488,8 @@ export default {
             this.upload.title = "商品分类";
             this.upload.open = true;
         },
-        /** 下载模板操作 
-         * 
+        /** 下载模板操作
+         *
          * /dev-api/stage-api/system/classify/importTemplate
         */
         importTemplate() {

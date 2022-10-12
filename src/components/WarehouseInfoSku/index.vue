@@ -41,6 +41,7 @@ export default {
                 pageNum: 1,
                 pageSize: 999999,
                 page: 1,
+                cbwa08:'启用',
                 size: 999999,
                 total: this.total,
                 dateRange:undefined
@@ -70,13 +71,13 @@ export default {
                     if (response.data.rows.length > 0) {
                         response.data.rows.forEach((item) => {
                         this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
-                    })         
+                    })
                  }
                     // response.data.row.forEach((item) => {
                     //     this.iconList.push(item.cbwa09 +"-"+item.cbwa01);
                     // })
                     console.log(response.data,7758521);
-                  
+
                 }
                 if (this.name) {
                     this.iconList = this.iconList.filter(item => item.includes(this.name))
