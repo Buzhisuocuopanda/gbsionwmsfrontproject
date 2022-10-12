@@ -10,7 +10,7 @@
         </div>
         <div style="width:97%; margin-left: 2%; margin-top: 1%;">
 
-            <el-table border :header-cell-style="headClasspwbitd" v-loading="loading" :data="userList" 
+            <el-table border :header-cell-style="headClasspwbitd" v-loading="loading" :data="userList"
                  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
@@ -129,7 +129,7 @@ export default {
         },
           //打印
         PrintRow(index, row){
-            this.$print(this.$refs.print) 
+            this.$print(this.$refs.print)
         },
 
            //返回按钮
@@ -146,15 +146,12 @@ export default {
             }
         },
         //列表价格数值
-        rounding(row, column) {
-            console.log(row,column,111,row[column.property])
-            if(!row[column.property]){
-                return ''
-            }else{
-                return parseFloat(row[column.property]).toFixed(2)
-            }
-            
-        },
+      rounding(row, column) {
+        if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+          return '0.00';
+        }
+        return parseFloat(row[column.property]).toFixed(2)
+      },
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
@@ -229,7 +226,7 @@ export default {
 <style src="./BarcodesSummaryxqcss/index.css">
 </style>
 <style>
-  
+
 @page {
   size: auto;
   margin: 3mm;
@@ -260,5 +257,5 @@ export default {
   }
 }
 
-	
+
 </style>
