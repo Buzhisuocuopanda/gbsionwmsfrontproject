@@ -197,7 +197,7 @@
 
   import {
     PurchaseinboundAdd,
-    saleOrderAdvance
+    saleOrderListdetail
   } from "@/api/Warehousemanagement/SalesAdvance";
 
   import {
@@ -741,7 +741,7 @@ import salerman from "@/components/salerman";
                     orderNo:"",
                     GsSalesOrders:""
                   }
-                  this.$message({message:res.msg,type:'success'})
+                  this.$message({message:'创建成功',type:'success'})
                   this.handlexiaoshouone()
                 }
                 if (count-- === 1) {
@@ -904,9 +904,9 @@ import salerman from "@/components/salerman";
       },
       getchange(id,orderno) {
         let obj = {
-          ids:id
+          id:id
         }
-        saleOrderAdvance(id).then((res) =>{
+        saleOrderListdetail(id).then((res) =>{
           if(res.code == 200){
             console.log(res.data)
             this.form2 = res.data.rows[0]
