@@ -925,8 +925,10 @@
       },
       // 点击【取消】按钮关闭弹窗
       _ly_cancelDialog(done) {
-        console.log('_ly_cancelDialog')
-        this.$emit('on-close')
+        // console.log('_ly_cancelDialog')
+        // this.$emit('on-close')
+        this.$store.dispatch("tagsView/delView", this.$route)
+        this.$router.push({path: "/Salesmanagement/saleOrderChange", query: {id: 1}})
       },
       // 关闭弹窗前，二次询问是否关闭
       _ly_beforeClose(done) {
