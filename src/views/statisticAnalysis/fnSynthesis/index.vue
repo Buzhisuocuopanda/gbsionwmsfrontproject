@@ -49,12 +49,12 @@
         <el-table-column  label="经销商品名称" align="left" prop="suplierName" min-width="200px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="100px;"/>
         <el-table-column  label="工厂" align="left" prop="gc" min-width="100px;"/>
-        <el-table-column  label="采购单价U" :formatter="rounding" align="right" min-width="60px;">
+        <el-table-column  label="采购单价U" :formatter="rounding" align="right" min-width="110px;">
           <template slot-scope="scope">
             <div >{{RToU(scope.row.cgRprice )}}</div>
           </template>
         </el-table-column>
-        <el-table-column  label="采购单价R" align="right" :formatter="rounding" prop="cgRprice" min-width="80px;"/>
+        <el-table-column  label="采购单价R" align="right" :formatter="rounding" prop="cgRprice" min-width="110px;"/>
         <!--<el-table-column  label="生产总订单号" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
       <el-pagination

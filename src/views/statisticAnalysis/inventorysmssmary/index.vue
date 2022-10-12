@@ -27,14 +27,14 @@
           </el-date-picker>
         </el-form-item>
 
-        <el-form-item style="margin: -5px -10px 1px 30px" >
+        <el-form-item style="margin: -10px -10px 1px 30px" >
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  height="460"  :data="inwuquList" element-loading-text="Loading。。。"  width="100%;"  v-loading="loading"
-                border fit highlight-current-row stripe style="margin-top:1em">
+                border fit highlight-current-row stripe style="margin-top:0.2em">
         <el-table-column label="单据编号" align="left" header-align="center" prop="cboa07" min-width="200px;" />
         <el-table-column  label="单据日期" align="left" prop="cboa08" :formatter="formatTime" min-width="120px;"/>
         <el-table-column  label="客户" align="left" prop="cbca08" min-width="240px;"/>

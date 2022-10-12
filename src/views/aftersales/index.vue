@@ -1,7 +1,7 @@
 <template>
   <!--售后-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container saorderdet">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item style="margin-left: 10px">
           <el-date-picker  v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期" value-format="yyyy-MM-dd HH:mm:ss"
@@ -49,7 +49,7 @@
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="470" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
         <el-table-column fixed label="销售订单号" align="left" prop="saleOrderNo" min-width="120px;"/>
         <el-table-column fixed label="销售人员" align="left" prop="aslerName" min-width="120px;"/>
-        <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="130px;"/>
+        <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="160px;"/>
         <el-table-column  label="问题描述" align="left" prop="question" min-width="120px;" />
         <el-table-column  label="sn" align="left" prop="sn" min-width="200px;" />
         <el-table-column  label="处理结果" align="center" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
@@ -58,6 +58,7 @@
           <template slot-scope="scope" >
             <el-button
               size="mini"
+              class="caozuoxiangqorderdet"
               type="text"
               icon="el-icon-edit"
               @click="mdfDetail(scope.row)"
@@ -66,6 +67,7 @@
             <el-button
               size="mini"
               type="text"
+              class="caozuoxiangqorderdet"
               icon="el-icon-delete"
               @click="delTotalOrder(scope.row)"
               v-hasPermi="['system:aftersales:remove']"
@@ -703,5 +705,15 @@ export default {
 </script>
 
 <style scoped>
+.saorderdet .el-form--inline {
+  height: 60px !important;
+}
 
+  .saorderdet .el-button{
+  border:0px !important;
+  padding:0px !important;
+  }
+  .caozuoxiangqorderdet{
+  border: 0px !important;
+  }
 </style>
