@@ -67,24 +67,24 @@
                     style="width:92.5%;height: 8%;margin-left: -2%; margin-top: -3%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
-                        sortable  width="180px;"/>
+                        sortable  width="160px;"/>
                     <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
-                        sortable width="180px;">
+                        sortable width="90px;">
                     </el-table-column>
-                    <el-table-column label="客户编号" align="left" key="customerNo" prop="customerNo" sortable width="180px;" />
-                    <el-table-column label="客户名称" align="left" key="customerName" prop="customerName" sortable width="180px;" />
-                    <el-table-column label="客户等级" align="right" key="customerLevel" prop="customerLevel" sortable width="180px;" />
-                    <el-table-column label="联系人" align="left" key="contacts" prop="contacts" sortable width="180px;">
+                    <el-table-column label="客户编号" align="left" key="customerNo" prop="customerNo" sortable width="200px;" />
+                    <el-table-column label="客户名称" align="left" key="customerName" prop="customerName" sortable width="200px;" />
+                    <el-table-column label="客户等级" align="right" key="customerLevel" prop="customerLevel" sortable width="100px;" />
+                    <el-table-column label="联系人" align="left" key="contacts" prop="contacts" sortable width="90px;">
                     </el-table-column>
-                    <el-table-column label="联系电话" align="left" key="phone" prop="phone" sortable width="180px;">
+                    <el-table-column label="联系电话" align="left" key="phone" prop="phone" sortable width="110px;">
                     </el-table-column>
-                    <el-table-column label="销售用户" align="left" key="saleUser" prop="saleUser" sortable width="180px;">
+                    <el-table-column label="销售用户" align="left" key="saleUser" prop="saleUser" sortable width="150px;">
                     </el-table-column>
-                    <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="180px;">
+                    <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="110px;">
                     </el-table-column>
                     <el-table-column label="地址" align="left" key="address" prop="address" sortable width="500px;">
                     </el-table-column>
-                    <el-table-column label="检测状态" align="center" key="checkStatusMsg" prop="checkStatusMsg" sortable width="180px;">
+                    <el-table-column label="检测状态" align="center" key="checkStatusMsg" prop="checkStatusMsg" sortable width="120px;">
                     </el-table-column>
                     <el-table-column label="商品状态" align="center" key="statusMsg" prop="statusMsg" sortable width="120px;">
                         <!-- <template scope="scope">
@@ -98,7 +98,7 @@
                         <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                 v-hasPermi="['system:user:edit']">
+                                v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-delete"

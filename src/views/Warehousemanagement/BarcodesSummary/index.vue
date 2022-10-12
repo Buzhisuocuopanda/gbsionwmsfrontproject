@@ -23,12 +23,12 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                          <el-button size="mini"  v-hasPermi="['system:warehouseInventoryrollup:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button size="mini"  v-hasPermi="['system:warehouseInventoryrollup:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                          <el-button v-hasPermi="['system:warehouseInventoryrollup:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button v-hasPermi="['system:warehouseInventoryrollup:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:60%;">
+                    <el-form-item style="margin-left:71%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" v-hasPermi="['system:warehouseInventoryrollup:add']" class="biaoto-buttonchuangjian" @click="handlekucunhuizongone">创建
@@ -69,7 +69,7 @@
 
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
                     <el-table-column label="状态" width="150px;" align="center" key="cbie10" prop="cbie10" sortable>
-                       <template scope="scope">
+                        <template scope="scope">
                             <div>{{ scope.row.cbie10 == 0 ? "未审核" : scope.row.cbie10 == 1 ?
                             "已审核" : scope.row.cbie10 == 4 ? "已完成" : "未确定状态"
                             }}

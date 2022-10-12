@@ -21,7 +21,7 @@
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
-        <el-form-item style="margin: -11px -10px 1px 1px;margin-left: 65%;">
+        <el-form-item style="margin: -11px -10px 1px 1px;">
           <el-button v-hasPermi="['sale:saleOrder:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
                     @click="onSearch">搜索
           </el-button>

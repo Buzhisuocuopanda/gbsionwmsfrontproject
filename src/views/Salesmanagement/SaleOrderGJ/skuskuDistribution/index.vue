@@ -1,7 +1,7 @@
 <template>
   <!--库存分配-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container skuDisbut">
       <el-form :inline="true" label-width="120px">
         <el-form-item label="销售订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="销售订单号"/>
@@ -915,6 +915,9 @@
   /*  -webkit-box-sizing: border-box;*/
   /*  box-sizing: border-box*/
   /*}*/
+  .skuDisbut .el-form--inline {
+    height: 70px !important;
+  }
 .caozuoxiangqengsku {
   border: 0 !important;
   padding:0 !important;
