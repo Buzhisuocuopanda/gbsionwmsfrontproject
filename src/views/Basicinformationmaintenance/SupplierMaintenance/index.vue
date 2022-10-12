@@ -222,13 +222,13 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:5%;margin-top:2%;">
+                    <!--<el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
                             <el-form-item label="编号:" prop="cbsa15">
                                 <el-input v-model="form1.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
-                    </el-row>
+                    </el-row>-->
                     <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
                              发票信息
@@ -338,13 +338,13 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row style="margin-left:5%;margin-top:2%;">
+                    <!--<el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
                             <el-form-item label="编号:" prop="cbsa15">
                                 <el-input v-model="form2.cbsa15" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
-                    </el-row>
+                    </el-row>-->
                     <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
                              发票信息
@@ -889,7 +889,7 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        if (response.code == "200") {  
+                        if (response.code == "200") {
                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
@@ -963,7 +963,7 @@ export default {
                  this.$refs["form"].validate((item) => {
                 if (item) {
                 SupplieRedit(JSON.stringify(row)).then(response => {
-                  if (response.code == "200") { 
+                  if (response.code == "200") {
                     // console.log(response,789)
                     // this.form = response.data;
                     // this.name = response.name;
@@ -1149,8 +1149,8 @@ export default {
             }
         }).catch(() => { });
       },
-        /** 导出按钮操作 
-         * 
+        /** 导出按钮操作
+         *
          * /dev-api/stage-api/system/supplier/SwJsSupplierexport
         */
         handleExport() {
@@ -1177,8 +1177,8 @@ export default {
             this.upload.title = "供应商信息维护";
             this.upload.open = true;
         },
-        /** 下载模板操作 
-         * 
+        /** 下载模板操作
+         *
          * /dev-api/stage-api/system/supplier/importTemplate
         */
         importTemplate() {

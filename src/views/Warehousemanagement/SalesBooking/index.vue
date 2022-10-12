@@ -71,9 +71,9 @@
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
                         sortable>
                     </el-table-column>
-                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable  width="170"/>
+                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable  width="140"/>
                     <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable width="120" />
-                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="280" sortable>
+                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="310" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
                             "CNY" : "未确定状态"

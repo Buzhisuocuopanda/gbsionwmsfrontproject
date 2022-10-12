@@ -11,7 +11,7 @@
       <el-row>
         <el-col :span="7">
           <el-form-item label="编号:" prop="cbqa07" style="margin-left: 10%">
-            <el-input type="text" v-model="form2.cbqa07" style="width: 50%" />
+            <el-input type="text" v-model="form2.cbqa07" style="width: 50%" readonly/>
           </el-form-item>
         </el-col>
         <el-col :span="7">
@@ -71,7 +71,7 @@
                   </el-option>
                 </el-select>
               </sapn>-->
-              <el-select filterable @visible-change="hiddens" remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%">
+              <el-select filterable @change="slected" @visible-change="hiddens" remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%">
                   <el-input v-model="queryParams.orderNo"
                         placeholder="请输入销售订单编号,sn码"
                         clearable
@@ -449,6 +449,8 @@ export default {
       value: "",
       // 角色选项
       roleOptions: [],
+      // 原sn
+      ysn:'',
       // 表单参数
       form: {
         cbpc07: "",
@@ -573,8 +575,6 @@ export default {
 
     /** 质检详情查询 */
     getList(data) {
-      // let id = this.$route.query.data
-      // console.log(zhuangh[0].id,889999);
       SwJsSkuBarcodeselectss(
         {cbpk07:data,
           cbpm09:data,
@@ -586,6 +586,12 @@ export default {
           this.total = response.data.total;
         }
       });
+    },
+    slected(name){
+      let sn = name.substring(0, name.indexOf("-"));
+      let ysn = name.split("-");
+      let a = ysn.length
+      this.ysn = ysn[a-1]
     },
     hiddens(){
       this.queryParams.orderNo = ''
@@ -710,15 +716,14 @@ export default {
           QualityinAdd(this.form2).then((response) => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
-              this.$message({
-                message: "添加成功",
-                type: "success",
-                style: "color:red;!important",
-              });
+              // this.$message({
+              //   message: "添加成功",
+              //   type: "success",
+              //   style: "color:red;!important",
+              // });
               this.tableData.forEach((item) => {
                 item.cbqa01 = response.data.id;
-                item.cbqb10 = item.cbpm09;
-                item.cbqb10 = item.f.slice(23,);
+                item.cbqb10 = this.ysn;
               });
               this._ly_ok();
             }
@@ -771,6 +776,11 @@ export default {
     //   }
       QualityinAdds(JSON.stringify(this.tableData)).then((response) => {
           if (response.code == "200") {
+            this.$message({
+              message: "添加成功",
+              type: "success",
+              style: "color:red;!important",
+            });
             this.submitShangpin();
             this.reset01();
             this.tableData = [];

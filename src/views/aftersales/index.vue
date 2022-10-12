@@ -48,12 +48,12 @@
       </el-form>
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="470" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
         <el-table-column fixed label="销售订单号" align="left" prop="saleOrderNo" min-width="120px;"/>
-        <el-table-column fixed label="销售人员" align="left" prop="aslerName" min-width="120px;"/>
+        <el-table-column fixed label="销售人员" align="left" prop="salerName" min-width="120px;"/>
         <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="130px;"/>
-        <el-table-column  label="问题原因" align="left" prop="question" min-width="120px;" />
+        <el-table-column  label="问题描述" align="left" prop="question" min-width="120px;" />
         <el-table-column  label="sn" align="left" prop="sn" min-width="200px;" />
         <el-table-column  label="处理结果" align="center" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
-        <el-table-column  label="反馈时间" align="left" prop="inTime" :formatter="formatTime2" min-width="80px;" />
+        <el-table-column  label="反馈时间" align="left" prop="feedbackTime" :formatter="formatTime2" min-width="80px;" />
         <el-table-column label="操作"  min-width="120px;">
           <template slot-scope="scope" >
             <el-button
@@ -464,10 +464,10 @@ export default {
     },
   methods: {
     formatTime2(row){
-      return formatDate2(row.inTime);
+      return formatDate2(row.feedbackTime);
     },
     delTotalOrder(row){
-      this.$confirm('确认要删除'+row.saleOrderNo+"售后单？", '确认操作', {
+      this.$confirm('确认要删除'+row.saleOrderNo+"售后服务单？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',

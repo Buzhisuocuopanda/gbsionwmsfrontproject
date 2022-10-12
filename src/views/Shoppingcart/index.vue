@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container shopping">
       <el-form :inline="true" label-width="70px"  >
 
 <!--
@@ -732,4 +732,8 @@ export default {
 .caozuoxiangqeng {
   border: 0 !important;
 }
+
+.shopping .el-form--inline {
+    height: 50px !important;
+  }
 </style>
