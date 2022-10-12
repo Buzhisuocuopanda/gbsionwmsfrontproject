@@ -45,7 +45,14 @@ export function PurchaseinboundLists(data) {
     data:data
   })
 }
-
+// 销售预订单详情
+export function saleOrderListdetail(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/saleOrderListdetail?id='+data,
+    method: 'post',
+    // data:data
+  })
+}
 //销售预订单变更单详情
 export function PurchaseinSalesAdvance(data) {
   return request({
@@ -190,3 +197,14 @@ export function StoreSkuList(query) {
 //     data:data
 //   })
 // }
+
+//详情
+export function saleOrderAdvance(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/saleOrderAdvance',
+    method: 'post',
+    params:{
+      ids:data
+    }
+  })
+}

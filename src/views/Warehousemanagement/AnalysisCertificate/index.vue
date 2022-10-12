@@ -126,7 +126,6 @@
                         </template>
                     </el-table-column>
                 </el-table>
-
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
                     class="pagintotal" />
@@ -328,6 +327,7 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+            total01:0,
             // 用户表格数据
             userList: null,
             userList099:null,
@@ -680,7 +680,7 @@ export default {
         //仓库
         this.getList04();
         //提货单
-        this.getList099();
+        // this.getList099();
 
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
@@ -702,7 +702,7 @@ export default {
             Purchaseintihuadang(obj).then((res) =>{
                 if(res.code == 200){
                     this.userList099 = response.data.rows;
-                    this.total = response.data.total;
+                    this.total01 = response.data.total;
                 }
             })
         },
@@ -772,7 +772,7 @@ export default {
             };
             Purchaseintihuadang(obj,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.userList099 = response.data.rows;
-                this.total = response.data.total;
+                this.total01 = response.data.total;
                 // //供应商
                 // this.postOptions = response.data.content;
                 // console.log(this.userList, 3369);

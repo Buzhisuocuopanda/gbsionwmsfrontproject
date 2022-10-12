@@ -62,14 +62,14 @@
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:92.5%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="cbpg07" prop="cbpg07" sortable />
-                    <el-table-column label="日期" align="left" key="cbpg08" prop="cbpg08" :formatter="formatDate"
+                    <el-table-column label="编号" width="160" align="left" key="cbpg07" prop="cbpg07" sortable />
+                    <el-table-column label="日期" width="120" align="left" key="cbpg08" prop="cbpg08" :formatter="formatDate"
                         sortable>
                     </el-table-column>
                     <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="状态" align="center" key="cbpg11" prop="cbpg11" sortable>
+                    <el-table-column label="仓库" width="90" align="left" key="cbwa09" prop="cbwa09" sortable />
+                    <el-table-column label="结算货币" width="100" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="状态" width="90" align="center" key="cbpg11" prop="cbpg11" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbpg11 == 0 ? "未审核" : scope.row.cbpg11 == 1 ?
                             "已审核" : scope.row.cbpg11 == 4 ? "已完成" : ""

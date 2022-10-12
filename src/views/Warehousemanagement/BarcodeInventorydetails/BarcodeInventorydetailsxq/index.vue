@@ -54,7 +54,7 @@
           <span>
             <el-button  style="margin-left:3%;"  @click="handlefanhui">返回</el-button>
           </span>
-          
+
        </div>
        <div style="height:50px;"></div>
     </div>
@@ -105,7 +105,7 @@ export default {
 
         //打印
         PrintRow(index, row){
-            this.$print(this.$refs.print) 
+            this.$print(this.$refs.print)
         },
 
         //列表表头设置
@@ -117,9 +117,12 @@ export default {
             }
         },
         //列表价格数值
-        rounding(row, column) {
-            return parseFloat(row[column.property]).toFixed(2)
-        },
+      rounding(row, column) {
+        if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+          return '0.00';
+        }
+        return parseFloat(row[column.property]).toFixed(2)
+      },
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
@@ -193,7 +196,7 @@ export default {
 <style src="./BarcodeInventorydetailsxqcss/index.css">
 </style>
 <style>
-  
+
 @page {
   size: auto;
   margin: 3mm;
@@ -222,5 +225,5 @@ export default {
   #printRecord #pagetable table {
     table-layout: fixed !important;
   }
-}	
+}
 </style>

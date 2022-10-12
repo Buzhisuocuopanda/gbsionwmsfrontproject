@@ -68,7 +68,7 @@
                     <el-table-column type="selection" width="50" align="center" />
                     <!-- <el-table-column label="编号" align="left" key="cbpc07" :show-overflow-tooltip="true" prop="cbpc07"
                         sortable /> -->
-                   
+
                     <el-table-column label="商品描述"  align="left" key="cbpb08" prop="cbpb08" sortable width="550" />
                     <el-table-column label="PONumber" :formatter="rounding" align="right" key="ponumber" prop="ponumber" sortable />
                     <el-table-column label="入库数量" :formatter="rounding" align="right" key="inQty" prop="inQty" sortable>
@@ -639,9 +639,12 @@ export default {
     },
     methods: {
 
-        rounding(row, column) {
-            return parseFloat(row[column.property]).toFixed(2)
-        },
+      rounding(row, column) {
+        if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+          return '0.00';
+        }
+        return parseFloat(row[column.property]).toFixed(2)
+      },
 
         //列表表头设置
         headClasspw() {
@@ -766,7 +769,7 @@ export default {
         getList01() {
             SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
 
-             if (response.code == "200") {   
+             if (response.code == "200") {
                 this.postOptions = response.data.rows;
               }else{
                 this.$message({ message: response.msg, type: 'error' });
@@ -777,7 +780,7 @@ export default {
         //库位
         getList02() {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-             if (response.code == "200") { 
+             if (response.code == "200") {
                 this.KuWeiOptions = response.data.rows;
              }else{
                 this.$message({ message: response.msg, type: 'error' });
@@ -789,27 +792,27 @@ export default {
         //商品信息维护
         getList03() {
             GoodsList01(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-            
-             if (response.code == "200") {   
+
+             if (response.code == "200") {
                 this.shangponOptions = response.data.rows;
                 this.XinghaoOptions = response.data.rows;
                 this.ponpaixenghaomiaoshu = response.data.rows;
                 // console.log(response.data.rows, 1655);
              }else{
                 this.$message({ message: response.msg, type: 'error' });
-            }   
+            }
             });
         },
         //仓库信息维护
         getList04() {
             StoreSkuList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-             if (response.code == "200") {  
+             if (response.code == "200") {
                 this.postCangKu = response.data.rows;
                 // this.XinghaoOptions = response.data.rows;
                 // console.log(response.data.rows, 1655);
               }else{
                 this.$message({ message: response.msg, type: 'error' });
-              }   
+              }
             });
         },
 
@@ -957,7 +960,7 @@ export default {
             console.log(row.cbpc01,8888);
 
             PurchaseinboundSH(row).then(response => {
-             if (response.code == "200") {  
+             if (response.code == "200") {
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '审批成功', type: 'success' });
@@ -976,7 +979,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.PurchaseinboundSH(item).then((res) => {
-                   if (res.code == "200") { 
+                   if (res.code == "200") {
                     this.getList();
                     this.$modal.msgSuccess("审批成功");
 
@@ -994,7 +997,7 @@ export default {
             this.$modal.confirm('是否要反审,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShs(row).then(response => {
-             if (response.code == "200") { 
+             if (response.code == "200") {
                 this.getList();
                 // this.open = false;
                 this.$message({ message: '反审成功', type: 'success' });
@@ -1018,7 +1021,7 @@ export default {
                     this.$modal.msgSuccess("反审成功");
                     }else{
                    this.$message({ message: res.msg, type: 'error' });
-                  } 
+                  }
                 }).catch((e) => {
                     // console.log(e, 456)
                 })
@@ -1032,7 +1035,7 @@ export default {
             this.$modal.confirm('是否要标记完成,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
             // console.log(row.cbpc01, 8888);
             PurchaseinboundShss(row).then(response => {
-              if (response.code == "200") {   
+              if (response.code == "200") {
                 console.log(this.form.cbpc01, 789)
                 // this.submitShangpin();
                 this.getList();
@@ -1070,13 +1073,13 @@ export default {
             this.$modal.confirm('是否要取消标记,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
 
-                   if (response.code == "200") { 
+                   if (response.code == "200") {
                     console.log(this.form.cbpc01, 789);
                     this.getList();
                     this.$message({ message: '取消标记成功', type: 'success' });
                    }else{
                     this.$message({ message: response.msg, type: 'error' });
-                   } 
+                   }
 
                 });
             }).catch(() => { });
@@ -1089,7 +1092,7 @@ export default {
 
             userIds.forEach((item) => {
                 req.Purchaseinbounds(item).then((res) => {
-                  if (res.code == "200") {  
+                  if (res.code == "200") {
                     // console.log(res, 123)
                     this.getList();
                     this.$modal.msgSuccess("取消标记成功");
@@ -1105,7 +1108,7 @@ export default {
 
         /** 修改按钮操作 */
         handleUpdate() {
-           
+
                 let row = {}
                 row.cbpc07 = this.form.cbpc07;
                 row.cbpc09 = this.form.cbsa01;
@@ -1130,7 +1133,7 @@ export default {
 
         /** 详情按钮操作 */
         handlexiangqeng() {
-          
+
                 let row1 = {}
                 row.cbpc07 = this.form1.cbpc07;
                 row.cbsa08 = this.form1.cbsa08;
@@ -1139,7 +1142,7 @@ export default {
                 row.cbpc01 = this.form1.cbpc01;
                 // console.log(this.form.id);
                 PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-                if (response.code == "200") { 
+                if (response.code == "200") {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
@@ -1149,7 +1152,7 @@ export default {
                 }
                 });
 
-           
+
         },
         /** 详情按钮操作**/
         handleSelect(row) {
@@ -1197,7 +1200,7 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
             PurchaseinboundAdd(this.form2).then(response => {
-              if (response.code == "200") { 
+              if (response.code == "200") {
                 // console.log(response.posts, 12345678);
                 this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                 // this.getTreeselect();
@@ -1208,7 +1211,7 @@ export default {
                 this.reset01();
               }else{
                 this.$message({ message: response.msg, type: 'error' });
-              }  
+              }
 
                 // console.log(this.form2.ifEnabled, 123456);
             });
@@ -1317,7 +1320,7 @@ export default {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
 
-                     if (res.code == "200") {    
+                     if (res.code == "200") {
                         // console.log(res, 123)
                         this.submitShangpin();
                         this.getList();

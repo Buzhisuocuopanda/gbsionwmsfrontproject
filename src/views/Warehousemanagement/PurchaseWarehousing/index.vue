@@ -72,8 +72,8 @@
                         sortable>
                     </el-table-column>
                     <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable>
+                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" sortable width="80" />
+                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="100" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?
                             "CNY" : "未确定状态"
@@ -81,7 +81,7 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="状态" align="center" key="cbpc11" prop="cbpc11" sortable>
+                    <el-table-column label="状态" align="center" key="cbpc11" prop="cbpc11" width="100" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbpc11 == 0 ? "未审核" : scope.row.cbpc11 == 1 ?
                             "已审核" : scope.row.cbpc11 == 4 ? "已完成" : "未确定状态"

@@ -83,8 +83,8 @@
               <el-dropdown-menu slot="dropdown">
                 <!-- <el-dropdown-item class="clearfix" >
                               通过订单创建
-                             <el-badge class="mark"/>
-                           </el-dropdown-item> -->
+                            <el-badge class="mark"/>
+                          </el-dropdown-item> -->
                 <el-dropdown-item class="clearfix" @click.native="tong">
                   通过提货单创建
                   <el-badge class="mark" />
@@ -165,7 +165,7 @@
             key="cbsb08"
             prop="cbsb08"
             :formatter="formatDate"
-            width="160px;"
+            width="130px;"
             sortable
           >
           </el-table-column>
@@ -182,7 +182,7 @@
             align="left"
             key="cbca28"
             prop="cbca28"
-            width="160px;"
+            width="100px;"
             sortable
           />
           <el-table-column
@@ -190,7 +190,7 @@
             align="left"
             key="cbsb18"
             prop="cbsb18"
-            width="160px;"
+            width="100px;"
             sortable
           />
           <el-table-column
@@ -198,7 +198,7 @@
             align="left"
             key="cbsb19"
             prop="cbsb19"
-            width="160px;"
+            width="140px;"
             sortable
           />
           <el-table-column
@@ -206,7 +206,7 @@
             align="left"
             key="caua15"
             prop="caua15"
-            width="160px;"
+            width="120px;"
             sortable
           />
           <el-table-column
@@ -214,7 +214,7 @@
             align="left"
             key="cbwa09"
             prop="cbwa09"
-            width="160px;"
+            width="80px;"
             sortable
           />
           <el-table-column
@@ -222,7 +222,7 @@
             align="left"
             key="cala08"
             prop="cala08"
-            width="160px;"
+            width="110px;"
             sortable
           />
           <el-table-column
@@ -238,7 +238,7 @@
             align="left"
             key="cbsb22"
             prop="cbsb22"
-            width="160px;"
+            width="110px;"
             sortable
           />
           <el-table-column
@@ -246,7 +246,7 @@
             align="left"
             key="cbsb19"
             prop="cbsb19"
-            width="160px;"
+            width="130px;"
             sortable
           />
           <el-table-column
@@ -295,7 +295,7 @@
             align="left"
             key="cbsb11"
             prop="cbsb11"
-            width="170px;"
+            width="90px;"
             sortable
           >
             <template scope="scope">

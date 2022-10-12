@@ -229,8 +229,8 @@ export default {
     };
   },
   computed: {},
-  mounted() { 
-    
+  mounted() {
+
     // 自动触发写入的函数
     this.onSearch();
     this.getStoreSkuList();
@@ -239,6 +239,9 @@ export default {
   methods: {
 
     rounding(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return '0.00';
+      }
       return parseFloat(row[column.property]).toFixed(2)
     },
     //列表表头设置
