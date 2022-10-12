@@ -190,3 +190,14 @@ export function StoreSkuList(query) {
 //     data:data
 //   })
 // }
+
+//详情
+export function saleOrderAdvance(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/saleOrderAdvance',
+    method: 'post',
+    params:{
+      ids:data
+    }
+  })
+}

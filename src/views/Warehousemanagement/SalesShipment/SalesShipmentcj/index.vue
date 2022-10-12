@@ -1205,6 +1205,8 @@ export default {
         this.form2.cbsb18 = response.data.receiver;
         //电话
         this.form2.cbsb19 = response.data.phone;
+        // id
+        this.form2.cbsb20 = id;
         //客户等级
         this.form2.cbca28 = response.data.customerLevel;
         //结算货币名称

@@ -37,72 +37,10 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <!-- <div>
-            <div style="margin-left:3%; margin-top: 2%;">
-               <el-button plain  type="primary" @click="_ly_addFrom">新增一行</el-button>
-            </div>
-            <div  width="1050px" center  :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-                <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-                    <div class="box1">
-                      <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
-                            class="tablebiankuan table-heads" width="95%" height="20px">
-                            <thead style="">
-                                <tr style="height:30px; ">
-                                    <th style="width: 130px;height: 30px;">品牌</th>
-                                    <th style="width: 130px;height: 30px;">型号</th>
-                                    <th style="width: 130px;height: 30px;">描述</th>
-                                    <th style="width: 140px;height: 30px;">SN</th>
-                                    <th style="width: 140px;height: 30px;">替换商品SN</th>
-                                    <th style="width: 50px;height: 30px;">操作</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    <div class="table-bodys" >
-                     <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                                cellspacing="0" class="tablebiankuan">
-                      <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                          <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form" :ref="form.formName"
-                        :inline="true">
-                        <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbpc01" style="width:70%;"></el-input>
-                        </el-form-item>
-                            <el-col style="margin-left: 0%;" :span="7">
-                                <el-form-item label="" prop="cbpc000">
-                                   <el-popover placement="bottom-start" trigger="click">
-                                      <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                                          style="width:469%">
-                                      </el-input>
-                                    </el-popover>
-                                </el-form-item>
-                            </el-col>
-                        <el-form-item label="" size="small" prop="cbpd09" class="tihuanshangp" style="margin-left:60%;">
-                            <el-input type="text" v-model="form.cbpb09"  style="width:125%;"></el-input>
-                        </el-form-item>
-                        <el-form-item  v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
-                            <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
-                        </el-form-item>
-                        <el-form-item label="" v-if="false"  prop="name" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
-                        </el-form-item>
-                         <el-form-item label="质检单主表id" v-if="false"  prop="cbqa01" style="margin-left:0.8%;">
-                            <el-input v-model="form.cbqa01" style="border:solid #eee thin;width:70%;"></el-input>
-                        </el-form-item>
-                        <el-form-item v-if="false" label="" size="small" prop="cbqb10" class="tihuanshangp" style="margin-left:60%;">
-                            <el-input type="text" v-model="form.cbqb10"  style="width:125%;"></el-input>
-                        </el-form-item>
-                        <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;"  size="small" icon="el-icon-delete"  circle
-                            @click="_ly_delFrom(index)"></el-button>
-                    </el-form>
-                </el-row>
-             </table>
-                       </div>
-                    </div>
-                 </div>
-             </div>
-          </div> -->
+      
       <div>
         <el-row>
-          <el-col v-if="false" :span="24">
+          <el-col :span="24">
             <el-button
               plain
               style="float: left; margin-left: 5%"
@@ -121,8 +59,7 @@
           :cell-style="{ padding: '5px' }"
           style="width: 95%; margin-left: 3%; margin-top: 10px"
         >
-          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="f" label="品牌" width="">
+          <el-table-column label="品牌" width="">
             <template slot-scope="scope" style="width: 200%">
               <!--<sapn>
                 <el-select @change="goodsOnChange()"  v-model="scope.row.cbpc000" filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
@@ -134,7 +71,22 @@
                   </el-option>
                 </el-select>
               </sapn>-->
-              <el-popover placement="bottom-start" trigger="click" disabled>
+              <el-select filterable @visible-change="hiddens" remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%">
+                  <el-input v-model="queryParams.orderNo"
+                        placeholder="请输入销售订单编号,sn码"
+                        clearable
+                        style="width: 100%"
+                        @change="getList(queryParams.orderNo)">
+                    <i slot="suffix" class="el-icon-search el-input__icon" />
+                  </el-input>
+                  <el-option
+                  v-for="(item,index) in tableDataed"
+                  :key="index"
+                  :label="item.f"
+                  :value="item.f">
+                  </el-option>
+                </el-select>
+              <!-- <el-popover placement="bottom-start" trigger="click" disabled>
                 <el-input
                   slot="reference"
                   v-model="scope.row.f"
@@ -143,7 +95,7 @@
                   style="width: 100%"
                 >
                 </el-input>
-              </el-popover>
+              </el-popover> -->
             </template>
             <!-- <el-col style="margin-left: 0%;" :span="7">
               <el-form-item label="" prop="cbpc000">
@@ -160,15 +112,23 @@
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
           <el-table-column label="SN" width="" />
-          <el-table-column v-if="false" prop="cbqd09" label="SN" width="100">
+          <el-table-column v-if="false" label="SN" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input
-                v-model="scope.row.cbqd09"
+              <!-- <el-input
+                v-model="scope.row.cbqd10"
                 placeholder=""
                 class="shuzicaoyou"
                 style=""
-              ></el-input>
+              ></el-input> -->
+              <el-select filterable remote v-model="scope.row.cbqd10" style="widith:100%">
+                  <el-option
+                  v-for="(item,index) in tableDataed"
+                  :key="index"
+                  :label="item.cbpm09"
+                  :value="item.cbpm09">
+                  </el-option>
+                </el-select>
               <!-- </sapn> -->
             </template>
           </el-table-column>
@@ -223,11 +183,14 @@
             width="150"
           >
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbqb10"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-select filterable remote v-model="scope.row.cbqb09" style="widith:100%">
+                  <el-option
+                  v-for="(item,index) in tableDataed"
+                  :key="index"
+                  :label="item.cbpm09"
+                  :value="item.cbpm09">
+                  </el-option>
+                </el-select>
             </template>
           </el-table-column>
           <el-table-column
@@ -288,6 +251,7 @@ import {
   QualityinAdds,
   SwJsSkuBarcodeselectss,
   SwJsSkuBarcodeselectsss,
+  Purchaseintihuadang,
 } from "@/api/Warehousemanagement/AnalysisCertificate";
 import { getToken } from "@/utils/auth";
 //仓库
@@ -316,8 +280,24 @@ export default {
       ids: [],
       shenpiids: [],
       formArr: [],
-      tableData: [],
+      tableData: [
+        {
+          cbpc000: "",
+          cbsc08: "",
+          cbsc09: "",
+          cbsc10: "",
+          branch: "",
+          cbqb09:'',
+          cbqb10:'',
+        }
+      ],
       tableDatas: [],
+      tableDataed:[
+        {
+          cbpm09:'',
+          f:'',
+        }
+      ],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -524,18 +504,11 @@ export default {
         url:
           process.env.VUE_APP_BASE_API + "/system/barcode/importSwJsSkuBarcode",
       },
-      /*// 查询参数
-            queryParams: {
-                pageNum: 1,
-                pageSize: 10,
-                page: 1,
-                size: 10,
-                total: this.total,
-                cbpc07: undefined,
-                cbsa08: undefined,
-                cbwa09: undefined,
-                dateRange: undefined
-            },*/
+      // 查询参数
+      queryParams: {
+          total: this.total,
+          orderNo:'',
+      },
 
       rules: {
         cbpc099: [
@@ -566,8 +539,6 @@ export default {
   },
   created() {
     this.form2.cbqa06 = "0";
-
-    this.getList();
     this.getConfigKey("sys.user.initPassword").then((response) => {
       // this.initPassword = response.msg;
     });
@@ -581,10 +552,6 @@ export default {
     console.log(this.form.cbpc16, 123456);
   },
   methods: {
-    //   搜索sn
-    seach(){
-
-    },
     //返回按钮
     handlefanhui: function (row) {
       // this.$router.push("/system/user-auth/role/");
@@ -605,43 +572,26 @@ export default {
     },
 
     /** 质检详情查询 */
-    getList() {
-      let id = this.$route.query.data
+    getList(data) {
+      // let id = this.$route.query.data
       // console.log(zhuangh[0].id,889999);
       SwJsSkuBarcodeselectss(
-        {cbpk01:id}
+        {cbpk07:data,
+          cbpm09:data,
+          }
       ).then((response) => {
-          console.log(response,'年后')
-        // response.data.scans.forEach((item) => {
-        //   // item.cbsc177=item.orderClass;
-        //   item.cbpb09 = item.sku;
-        //   // if(item.cbsc177=="国内订单"){
-        //   //       item.cbsc17="1";
-        //   // }
-        //   item.cbpc000 =
-        //     item.brand +
-        //     "-" +
-        //     item.model +
-        //     "-" +
-        //     item.description +
-        //     "-" +
-        //     item.sn;
-        //   item.cbqb09 = item.sku;
-        //   item.cbqb10 = item.sn;
-        //   item.cbqb08 = "695414";
-        //   console.log(item.cbpd09, 19991119);
-        // });
-
-        this.tableData = response.data.rows;
-
-        this.total = response.data.total;
-        console.log(response.data.scans, 339688);
-        // this.userList01 = JSON.stringify(this.userList);
-        // response.data.goods.forEach((e)=>{
-        //   this.form.cbsc17=e.orderClass;
-        // })
-        // let
+        console.log(response,'年后')
+        if(response.code == 200){
+          this.tableDataed = response.data.rows;
+          this.total = response.data.total;
+        }
       });
+    },
+    hiddens(){
+      this.queryParams.orderNo = ''
+      this.tableDataed.map((item) =>{
+        item.f = ''
+      })
     },
     // 替换sn查询
     getLists(query){
@@ -653,10 +603,8 @@ export default {
          cbpm08:cbpm08,
          cbpm09:query}
       ).then((response) => {
-        console.log(response,'年后11')
         this.tableDatas = response.data.rows;
         this.totals = response.data.total;
-        console.log(response.data.scans, 789789);
       });
     },
     show() {
@@ -767,15 +715,11 @@ export default {
                 type: "success",
                 style: "color:red;!important",
               });
-              this.submitShangpin();
-              this.open2 = false;
-              this.reset01();
               this.tableData.forEach((item) => {
                 item.cbqa01 = response.data.id;
                 item.cbqb10 = item.cbpm09;
+                item.cbqb10 = item.f.slice(23,);
               });
-              console.log(item.cbqa01, 896523);
-
               this._ly_ok();
             }
           });
@@ -827,6 +771,8 @@ export default {
     //   }
       QualityinAdds(JSON.stringify(this.tableData)).then((response) => {
           if (response.code == "200") {
+            this.submitShangpin();
+            this.reset01();
             this.tableData = [];
             this.handlefanhui()
           }
@@ -835,7 +781,6 @@ export default {
         //   }
         //   this._ly_addFrom();
         });
-      console.log("_ly_ok:" + JSON.stringify(this.tableData));
     },
 
     // 存储表单数据
@@ -860,6 +805,8 @@ export default {
         cbsc09: "",
         cbsc10: "",
         branch: "",
+        cbqb09:'',
+        cbqb10:'',
       });
     },
     // 删除一行表单
@@ -907,4 +854,4 @@ export default {
   },
 };
 </script>
-<style src="./AnalysisCertificatecjcss/index.css"></style>
+<style src="./AnalysisCertificatecjcss/index.css" scoped></style>

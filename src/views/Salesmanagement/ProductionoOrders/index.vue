@@ -1,7 +1,7 @@
 <template>
   <!--生产总订单-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container shengchuang">
       <el-form :inline="true" label-width="70px">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号"/>
@@ -54,7 +54,7 @@
         <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="76px;"/>
         <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="89px;"/>
         <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;"/>
-        <el-table-column label="类型" align="left" prop="orderTypeMsg" min-width="80px;"/>
+        <el-table-column label="类型" align="left" prop="orderTypeMsg" min-width="95px;"/>
         <el-table-column label="状态" align="center" prop="status" min-width="80px;" :formatter="formatStateType"/>
         <el-table-column label="操作" min-width="220px;">
           <template slot-scope="scope">
@@ -864,6 +864,9 @@
   /*  -webkit-box-sizing: border-box;*/
   /*  box-sizing: border-box*/
   /*}*/
+  .shengchuang .el-form--inline{
+    height:70px !important;
+  }
 .caozuoxiangqengOrder {
   border: 0 !important;
   padding: 0 !important;
