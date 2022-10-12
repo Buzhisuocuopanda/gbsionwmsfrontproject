@@ -21,15 +21,15 @@
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
-        <el-form-item style="margin: -5px -10px 1px 1px">
+        <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
                     @click="onSearch">搜索
           </el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">
-            创建
-          </el-button>
+<!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="createForm">-->
+<!--            创建-->
+<!--          </el-button>-->
 <!--          <el-upload-->
 <!--            ref="uploadExcel"-->
 <!--            :action="ExcelUploadUrl"-->
@@ -48,30 +48,30 @@
         </el-form-item>
       </el-form>
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="470" border fit highlight-current-row
-                stripe style="margin-top:1em">
-        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="150px;"/>
-        <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="120px;"/>
-        <el-table-column  label="日期" align="left" prop="orderDate" min-width="120px;"/>
-        <el-table-column label="客户" align="left" prop="customerName" min-width="200px;"/>
-        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="100px;"/>
-        <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="100px;"/>
-        <el-table-column label="收货人" align="left" prop="receiver" min-width="100px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="380px;"/>
-        <el-table-column label="电话" align="left" prop="phone" min-width="120px;"/>
-        <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="120px;"/>
-        <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="120px;"/>
+                stripe style="margin-top:0.1em">
+        <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="130px;"/>
+        <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="200px;"/>
+        <el-table-column  label="日期" align="left" prop="orderDate" min-width="90px;"/>
+        <el-table-column label="客户" align="left" prop="customerName" min-width="240px;"/>
+        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="78px;"/>
+        <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="75px;"/>
+        <el-table-column label="收货人" align="left" prop="receiver" min-width="70px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="450px;"/>
+        <el-table-column label="电话" align="left" prop="phone" min-width="110px;"/>
+        <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="75px;"/>
+        <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="75px;"/>
         <el-table-column label="工厂账号" align="left" prop="fcNumber" min-width="120px;"/>
         <el-table-column label="其他" align="left" prop="other" min-width="120px;"/>
-        <el-table-column label="制单时间" align="left" prop="createTime" min-width="150px;"/>
-        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
+        <el-table-column label="制单时间" align="left" prop="createTime" min-width="140px;"/>
+        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="75px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column fixed="right" label="操作" min-width="250px;">
+        <el-table-column fixed="right" label="操作" min-width="230px;">
           <template slot-scope="scope">
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" class="caozuoxiangqeng"  size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" class="caozuoxiangqengFN"  size="mini"  type="text" @click="showDetail(scope.row)">详情</el-button>
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>-->
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
-            <el-button style="margin-top: 1px" v-show="scope.row.status==2" class="caozuoxiangqeng"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,4)">复审</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==5" class="caozuoxiangqeng"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,8)">复核反审</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==2" class="caozuoxiangqengFN"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,4)">复审</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status==5" class="caozuoxiangqengFN"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,8)">复核反审</el-button>
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
 <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
 <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>-->
@@ -841,7 +841,8 @@
   /*  box-sizing: border-box*/
   /*}*/
   
-.caozuoxiangqeng {
+.caozuoxiangqengFN {
   border: 0 !important;
+  padding: 0 !important;
 }
 </style>

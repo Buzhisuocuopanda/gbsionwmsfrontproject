@@ -257,8 +257,8 @@ export function confirmSkuSaleOrder(data) {
 export function saleChangeList(data) {
   return request({
     url: '/sale/saleChangeList',
-    method: 'post',
-    data: data
+    method: 'get',
+    params: data
   })
 }
 
