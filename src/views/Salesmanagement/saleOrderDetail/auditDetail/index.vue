@@ -1167,8 +1167,15 @@
 
       // 取消按钮
       cancel() {
+
         this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+        if(this.$route.query.status==4 || this.$route.query.status==8) {
+          this.$router.push({path: "/Salesmanagement/SaleOrderFn", query: {id: 1}})
+
+        }else {
+          this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+
+        }
       },
 
       //添加的取消按钮

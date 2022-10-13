@@ -77,7 +77,7 @@
                     </el-form-item>
                 </el-col> -->
             </el-row>
-            
+
             <el-row>
                   <el-col style="margin-top: -1%;" :span="7" v-if="false">
                     <el-form-item label="主明细键:" prop="cbsb21">
@@ -115,7 +115,7 @@
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left:0.5%;">
-        
+
          <el-table-column prop="cbpc000" label="品牌" width="250">
            <template slot-scope="scope">
                 <el-popover placement="bottom-start" trigger="click">
@@ -248,7 +248,7 @@ export default {
     data() {
         return {
             // 表单结构数组
-            formArr: [], 
+            formArr: [],
             tableData:[],
             // 遮罩层
             loading: true,
@@ -411,7 +411,7 @@ export default {
                   cbab13: "",
                   cbaa01: "",
 
-                        
+
                   cbpd08: "",
                   cbsb07:"",
                   cbsb09:"",
@@ -452,7 +452,7 @@ export default {
                   cbab13: "",
                   cbaa01: "",
 
-                        
+
                   cbpd08: "",
                   cbsb07:"",
                   cbsb09:"",
@@ -499,9 +499,9 @@ export default {
                 dateRange: undefined
             },
             rules: {
-                cbpc100: [
-                    { required: true, message: "仓库不能为空!", trigger: 'change' }
-                ],
+                // cbpc100: [
+                //     { required: true, message: "仓库不能为空!", trigger: 'change' }
+                // ],
                 cbpg16: [
                     { required: true, message: "结算货币不能为空!", trigger: 'change' }
                 ],
@@ -513,7 +513,7 @@ export default {
                 ],
                 cbpc0990: [
                     { required: true, message: "收货电话不能为空!", trigger: "blur" }
-                ], 
+                ],
                 cbpc10000: [
                     { required: true, message: "电话不能为空!", trigger: "blur" }
                 ],
@@ -537,14 +537,14 @@ export default {
         },
     },
     created() {
-        
-       
+
+
 
 
 
         this.form2.cbca08=this.ListUser.customerName;
         //父子页面传值
-         
+
         this.getParams();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
@@ -566,7 +566,7 @@ export default {
          //查询商品信息维护
       selected08(e,row) {
         this.$set(row,"cbpc000",e.substring(0,e.indexOf(".")))
-    
+
         this.$set(row,"cbab08",e.substring(e.indexOf(".") +1))
       },
 
@@ -664,7 +664,7 @@ export default {
                         if (count-- === 1) {
                             this._ly_save()
                         }
-                        
+
                         //  this.reset03();
                     //    this.formArr.cbpg01="1234567";
                     //    this.form.cbpg01=this.formArr.cbpg01;
@@ -680,7 +680,7 @@ export default {
             console.log('_ly_ok:' + JSON.stringify(this.tableData))
         },
 
-   
+
 
 
 
@@ -743,10 +743,10 @@ export default {
 
 
         getParams() {
-              
+
             //  let routerParams = this.$route.query;
-            //    this.ListUser = routerParams.data; 
-            //    let zhuangh = JSON.parse(this.ListUser); 
+            //    this.ListUser = routerParams.data;
+            //    let zhuangh = JSON.parse(this.ListUser);
             //    //客户
             //    this.form2.cbse09=zhuangh[0].customerName;
             //    //仓库
@@ -756,7 +756,7 @@ export default {
             //    //结算货币id
             //    this.form2.cbse16 = zhuangh[0].settleCurrent;
             //    //审核时间
-            //    this.form2.cbse13 = zhuangh[0].createTime;    
+            //    this.form2.cbse13 = zhuangh[0].createTime;
             //    //订单分类展示
             //    this.form.cbsf166 = zhuangh[0].orderClassMsg;
             //     //订单分类id
@@ -767,17 +767,17 @@ export default {
             //    this.form2.cbca28 =zhuangh[0].customerLevel;
             //    //客户订单
             //    this.form2.cbsb30 = zhuangh[0].customerNo;
-            //    //关联订单展示  
+            //    //关联订单展示
             //    this.form2.cbse188  = zhuangh[0].orderTypeMsg;
-            //    //关联订单id  
+            //    //关联订单id
             //    this.form2.cbse18  = zhuangh[0].orderType;
             // //    this.form2.cbpc16 =zhuangh[0].customerNo;
             //   console.log(JSON.parse(this.ListUser),852369);
             // //   console.log(JSON.parse(routerParams.data01),55555);
-               
+
            },
-        
- 
+
+
 
         show() {
             this.showSearch = !this.showSearch;
