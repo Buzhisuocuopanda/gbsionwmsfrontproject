@@ -51,9 +51,9 @@
         <el-table-column  label="商品分类" align="left" prop="cbpa07" min-width="100px;"/>
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="100px;"/>
         <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="240px;"/>
-        <el-table-column  label="UPC" align="right" prop="cbpb15" min-width="100px;"/>
+        <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="100px;"/>
         <!--<el-table-column  label="描述" align="center" prop="lockQty" min-width="260px;"/>-->
-        <el-table-column label="商品SN" align="right" prop="sn" min-width="90px;" />
+        <el-table-column label="商品SN" align="left" prop="sn" min-width="90px;" />
         <el-table-column  label="入库日期" align="left" prop="inTime" :formatter="formatTime2" min-width="80px;" />
         <el-table-column prop="status" label="商品状态" :formatter="formatState" sortable align="center"></el-table-column>
         <el-table-column prop="groudStatus" label="上架状态" :formatter="formatStateType" sortable align="center"></el-table-column>
