@@ -416,7 +416,16 @@ export default {
       });
     },
     updsteSn(row,value){
+      for(let i=0;i<this.userListsss.length;i++){
+        if(this.userListsss[i].sn2 == value){
+          this.$message.warning("您已选择该sn号，请勿重复选择")
+          row.sn ="";
+          row.goodsMsg = "";
+          return
+        }
+      }
       row.sn2 = value;
+
       console.log(value,1111);
     },
     getSnList(){
