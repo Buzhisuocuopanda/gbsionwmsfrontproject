@@ -1081,7 +1081,9 @@ export default {
     /** 采购订单返回操作 */
     handlecaigoudingdanfanhuione: function (row) {
       // this.$router.push("/system/user-auth/role/");
-      this.$router.push("/system/user-caigoudingdan/role/");
+      // this.$router.push("/system/user-caigoudingdan/role/");
+      this.$tab.closePage();
+      this.$router.go(-1);
     },
 
 

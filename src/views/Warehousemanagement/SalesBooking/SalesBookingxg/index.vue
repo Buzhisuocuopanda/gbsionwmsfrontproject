@@ -57,8 +57,7 @@
                     <el-form-item label="销售人员:" prop="saler">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <salerman ref="salerman" @selected="selected011699" style="width:220px!important;" />
-                            <el-input slot="reference" v-model="form2.saler" placeholder="" readonly
-                                style="width:85%;">
+                            <el-input slot="reference" v-model="form2.saler" placeholder="" readonly style="width:85%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
@@ -615,9 +614,9 @@ export default {
     },
     methods: {
         //详情列表
-        getList(){
+        getList() {
             this.loading = true;
-            const userId = this.$route.params &&  this.$route.params.id;
+            const userId = this.$route.params && this.$route.params.id;
             // this.orderid.id = this.$route.params &&  this.$route.params.id;
             // this.status = this.$route.params && this.$route.params.status;
             if (userId) {
@@ -625,23 +624,25 @@ export default {
                 PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.form2 = res.data.rows[0];
                     this.form2.whId = this.form2.cbwa01;
-                    this.form2.orderDate = this.form2.orderDate.slice(0,10) + ' ' + this.form2.orderDate.slice(11,19)
-                    console.log(this.form2.orderDate,'日期')
+                    this.form2.orderDate = this.form2.orderDate.slice(0, 10) + ' ' + this.form2.orderDate.slice(11, 19)
+                    console.log(this.form2.orderDate, '日期')
                     let obj = res.data.rows[0]
                     let arr1 = res.data.rows
                     this.tableData[0].cala08 = obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08;
                     let arr2 = []
-                    for(let i = 0;i<arr1.length;i++){[
-                        arr2.splice(i,0,{
-                            "cala08":obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08,
-                            "goodsId": arr1[i].goodsId,
-                            "gsSalesOrders":arr1[i].gsSalesOrders,
-                            "id": arr1[i].id,
-                            "price": arr1[i].price,
-                            "qty": arr1[i].qty,
-                            "remark": arr1[i].remark,
-                        }),
-                    ]}
+                    for (let i = 0; i < arr1.length; i++) {
+                        [
+                            arr2.splice(i, 0, {
+                                "cala08": obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08,
+                                "goodsId": arr1[i].goodsId,
+                                "gsSalesOrders": arr1[i].gsSalesOrders,
+                                "id": arr1[i].id,
+                                "price": arr1[i].price,
+                                "qty": arr1[i].qty,
+                                "remark": arr1[i].remark,
+                            }),
+                        ]
+                    }
                     this.tableData = arr2;
                     console.log(arr2, 8889990000);
                     this.loading = false;
@@ -791,9 +792,9 @@ export default {
             //   cbpd08: this.form2.cbpd08,
             // })
             this.tableData.push({
-                "cala08":'',
+                "cala08": '',
                 "goodsId": '',
-                "gsSalesOrders":'',
+                "gsSalesOrders": '',
                 "id": 0,
                 "price": '',
                 "qty": '',
@@ -937,8 +938,8 @@ export default {
             this.resetForm("queryForm");
             this.handleQuery();
         },
-      
-        gort(){
+
+        gort() {
             const userId = this.$route.params && this.$route.params.id;
         },
 
@@ -960,7 +961,7 @@ export default {
                 "supplierId": this.form2.supplierId,
                 "userId": this.form2.userId,
                 "whId": this.form2.whId,
-                }
+            }
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     // this.form2.goods = this.tableData
@@ -988,7 +989,9 @@ export default {
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
             this.$store.dispatch("tagsView/delView", this.$route)
-            this.$router.push("/system/user-xiaosydd/role/");
+            // this.$router.push("/system/user-xiaosydd/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
 
 
