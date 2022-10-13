@@ -5,32 +5,32 @@
       <el-form :inline="true"   >
 
         <el-form-item label="经销商"  class="item-r" label-width="80px">
-          <el-select v-model="queryParams.customerId"  style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+          <el-select v-model="queryParams.customerId"  style="margin-left: 10px;width: 240px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="供应商" style="margin-left: 50px" class="item-r" label-width="80px">
-          <el-select v-model="queryParams.supplierId"  style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading6">
+        <el-form-item label="供应商" style="margin-left: 10px" class="item-r" label-width="80px">
+          <el-select v-model="queryParams.supplierId"  style="margin-left: 10px;width: 200px" clearable filterable placeholder="请输入关键词" :loading="loading6">
             <el-option v-for="item in cbsaList" :key="item.cbsa01" :label="item.cbsa08" :value="item.cbsa01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item  label="日期"  class="item-r" style="margin-left: 50px" >
+        <el-form-item  label="日期"  class="item-r" style="margin-left: 10px" >
           <el-date-picker size="mini" v-model="dateRange"  type="daterange"
-                          style="height: 35px;width: 500px;margin-left: 20px"
+                          style="height: 35px;width: 250px;margin-left: 20px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
 
-        <el-form-item label="品牌"   class="item-r" label-width="80px">
-          <el-select v-model="queryParams.brand" style="width: 300px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading3">
+        <el-form-item label="品牌"   class="item-r" label-width="50px">
+          <el-select v-model="queryParams.brand" style="width: 200px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading3">
             <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="型号"  class="item-r" style="margin-left: 50px" label-width="80px">
-          <el-input v-model="queryParams.model" style="margin-left: 20px;width: 300px" class="filter-item"  placeholder="型号" />
+        <el-form-item label="型号"  class="item-r" style="margin-left: 0px" label-width="80px">
+          <el-input v-model="queryParams.model" style="margin-left: 10px;width: 240px" class="filter-item"  placeholder="型号" />
 
         </el-form-item>
        <!-- <el-form-item label="销售人员" style="margin-left: 20px"  class="item-r" >
@@ -46,19 +46,19 @@
           <el-button v-hasPermi="['query:salesAnalysis:export']" class="filter-item" type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" height="460" width="100%;" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column label="客户名称" align="left" header-align="center" prop="customerName" min-width="200px;" />
+      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" height="430" width="100%;" v-loading="loading"
+                border fit highlight-current-row stripe style="margin-top:1em">
+        <el-table-column label="客户名称" align="left" header-align="center" prop="customerName" min-width="270px;" />
         <el-table-column  label="下单时间" align="left" prop="createTime" :formatter="formatTime2" min-width="120px;"/>
         <el-table-column  label="供应商" align="left" prop="supplier" min-width="140px;">
           <template slot-scope="scope">
             <div>{{sliceString(scope.row)}}</div>
           </template>
         </el-table-column>
-        <el-table-column  label="销售人员" align="left" prop="saleUser"  min-width="160px;"/>
-        <el-table-column  label="销售订单号" align="left" prop="saleOrderNo" min-width="139px;"/>
+        <el-table-column  label="销售人员" align="left" prop="saleUser"  min-width="110px;"/>
+        <el-table-column  label="销售订单号" align="left" prop="saleOrderNo" min-width="155px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="160px;"/>
-        <el-table-column  label="品牌" align="left" prop="brandName" min-width="100px;"/>
+        <el-table-column  label="品牌" align="left" prop="brandName" min-width="120px;"/>
         <el-table-column  label="数量" align="right" :formatter="rounding" prop="qty" min-width="80px;"/>
         <el-table-column  label="金额" align="right" :formatter="rounding" prop="price" min-width="100px;"/>
         <el-table-column  label="成本" align="right" :formatter="rounding" prop="cost" min-width="100px;"/>

@@ -29,7 +29,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <!-- <el-col :span="8">
           <el-form-item label="日期:">
             <el-date-picker
               type="date"
@@ -39,7 +39,7 @@
             >
             </el-date-picker>
           </el-form-item>
-        </el-col>
+        </el-col> -->
       </el-row>
       <el-row :gutter="20">
         <el-col style="" :span="6">
@@ -220,11 +220,11 @@
         </el-col>
       </el-row>
       <div>
-        <!-- <el-row>
+        <el-row>
           <el-col :span="24">
             <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
-        </el-row> -->
+        </el-row>
 
         <el-table
           :data="tableData"
@@ -267,12 +267,24 @@
               ></el-input>
             </template>
           </el-table-column>
+          <el-table-column label="价格" width="100" prop="price">
+            <template slot-scope="scope" style="width: 200%">
+              <el-input
+                v-model="scope.row.price"
+                v-only-number="{ max: 100, min: 0, precision: 0.0 }"
+                class="shuzicaoyou"
+                style=""
+              ></el-input>
+            </template>
+          </el-table-column>
           <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
               <el-date-picker
                 type="date"
                 placeholder=""
                 v-model="scope.row.orderDate"
+                @change="dateFormat"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 style="width: 100%"
               >
               </el-date-picker>
@@ -892,22 +904,24 @@ export default {
     console.log(this.form.cbpc16, 123456);
   },
   methods: {
-    validateMealStandard(e) {
-      let mealStandard = e.target.value
-        .replace(/[^\d.]/g, "")
-        .replace(/\.{2,}/g, ".")
-        .replace(".", "$#$")
-        .replace(/\./g, "")
-        .replace("$#$", ".")
-        .replace(/^(\-)*(\d+)\.(\d\d).*$/, "$1$2.$3")
-        .replace(/^\./g, "");
-      if (mealStandard >= 999999999.99) {
-        this.tableData.qty = 999999999.99;
-      } else {
-        this.tableData.qty = mealStandard;
-      }
+    // validateMealStandard(e) {
+    //   let mealStandard = e.target.value
+    //     .replace(/[^\d.]/g, "")
+    //     .replace(/\.{2,}/g, ".")
+    //     .replace(".", "$#$")
+    //     .replace(/\./g, "")
+    //     .replace("$#$", ".")
+    //     .replace(/^(\-)*(\d+)\.(\d\d).*$/, "$1$2.$3")
+    //     .replace(/^\./g, "");
+    //   if (mealStandard >= 999999999.99) {
+    //     this.tableData.qty = 999999999.99;
+    //   } else {
+    //     this.tableData.qty = mealStandard;
+    //   }
+    // },
+    dateFormat(row){
+      console.log(row)
     },
-
     //添加模块-销售人员
     selected011699(name) {
       console.log(name, 123);
@@ -946,85 +960,74 @@ export default {
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
-      console.log(this.tableData, 333);
-      let arr = []
-      let arr1 = this.tableData
-      // this.tableData.forEach((item) => {
-      //   //  this.form2.goodsId = item.goodsId;
-      //   item.supplierId = this.form2.supplierId;
-      //   item.gsSalesOrders = this.form2.gsSalesOrders;
-      //   item.salerId = this.form2.salerId;
-      //   console.log(item, "1023");
-      // });
-      for(let i = 0;i<arr1.length;i++){
+      let arr = [];
+      let arr1 = this.tableData;
+      for (let i = 0; i < arr1.length; i++) {
         arr.push({
-          "goodsId": arr1[i].goodsId,
-          "goodsclassify": arr1[i].cbpb12,
-          "gsSalesOrders": arr1[i].id,
-          "orderDate": arr1[i].orderDate ,
-          "qty": arr1[i].qty,
-          "salerId": arr1[i].salerId,
-          "supplierId": arr1[i].supplierId,
-        })
+          goodsId: arr1[i].goodsId,
+          // goodsclassify: arr1[i].cbpb12,
+          goodsclassify: arr1[i].goodsclassify,
+          gsSalesOrders: arr1[0].id,
+          // .000+08:00
+          orderDate: arr1[i].orderDate.slice(0,10) + 'T' + arr1[i].orderDate.slice(11,19) + '.000+08:00',
+          qty: arr1[i].qty,
+          price:arr1[i].price,
+          salerId: arr1[0].salerId,
+          supplierId: arr1[0].supplierId,
+        });
       }
-      PurchaseinboundAdd(JSON.stringify(arr)).then((response) => {
-        if (response.code == "200") {
-          this.tableData = [];
-          this.form2 = {
-            cbpc07: "",
-            cbpd08: "",
-            cbsa08: "",
-            cbwa09: "",
-            cala08: "",
-            cbpc100: "",
-            cbpc099: "",
-            cbpc166: "",
-            cbpc10: "",
-            cbpc09: "",
-            cbpd09: "",
-            cbpd11: "",
-            cbpd12: "",
-            cbpc16: "",
-            cbpc12: "",
-            cbpc14: "",
-            cbpd08: "",
-            cbph09: "",
-            cbph10: "",
-            cbph11: "",
-            cbpg161: "",
-            cbpc01: "",
-            cbpc000: "",
-            cbpd09: "",
-            cbpd11: "",
-            cbpd12: "",
-            cbpc0999: "",
-            customerId: "",
-            salerId: "",
-            supplierId: "",
-            whId: "",
-            orderDate: "",
-            cbpc099: "",
-            cbsb177: "",
-            orderNo: "",
-            GsSalesOrders: "",
-          };
-          this.$message({ message: "创建成功", type: "success" });
-          this.handlexiaoshouone();
-        }
-        if (count-- === 1) {
-          this._ly_save();
-        }
-        this._ly_addFrom();
-        //    this.formArr.cbpg01="1234567";
-        //    this.form.cbpg01=this.formArr.cbpg01;
-        //    console.log(this.form.cbpg01,85203);
-      });
-
-      //   } else {
-      //     console.log(obj)
-      //     return false
-      //   }
-      // })
+      if (!arr[0].gsSalesOrders) {
+        return;
+      } else {
+        PurchaseinboundAdd(JSON.stringify(arr)).then((response) => {
+          if (response.code == "200") {
+            this.tableData = [];
+            this.form2 = {
+              cbpc07: "",
+              cbpd08: "",
+              cbsa08: "",
+              cbwa09: "",
+              cala08: "",
+              cbpc100: "",
+              cbpc099: "",
+              cbpc166: "",
+              cbpc10: "",
+              cbpc09: "",
+              cbpd09: "",
+              cbpd11: "",
+              cbpd12: "",
+              cbpc16: "",
+              cbpc12: "",
+              cbpc14: "",
+              cbpd08: "",
+              cbph09: "",
+              cbph10: "",
+              cbph11: "",
+              cbpg161: "",
+              cbpc01: "",
+              cbpc000: "",
+              cbpd09: "",
+              cbpd11: "",
+              cbpd12: "",
+              cbpc0999: "",
+              customerId: "",
+              salerId: "",
+              supplierId: "",
+              whId: "",
+              orderDate: "",
+              cbpc099: "",
+              cbsb177: "",
+              orderNo: "",
+              GsSalesOrders: "",
+            };
+            this.$message({ message: "创建成功", type: "success" });
+            this.handlexiaoshouone();
+          }
+          if (count-- === 1) {
+            this._ly_save();
+          }
+        });
+      }
       console.log(this.tableData, "8520000");
 
       console.log("_ly_ok:" + JSON.stringify(this.tableData));
@@ -1039,32 +1042,19 @@ export default {
     },
     // 增加一行表单
     _ly_addFrom() {
-      // if (this.formArr.length >= 10) {
-      //   this.$message.warning('最多只能添加10行')
-      //   this.reset01();
-      //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-      //   return
-
-      // }
-
-      // this.formArr.push({
-      //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
-      //   cbsc08: '',
-      //   cbsc09: '',
-      //   cbsc10: '',
-      //   branch: '',
-      //   cbpc01: this.form2.cbpg161,
-      //   cbpd08: this.form2.cbpd08,
-      // })
       this.tableData.push({
-        date: "",
-        num: "",
-        address: "",
-        moner: "",
-        province: "",
-        cbpc000: "",
-        cbpc099: "",
-      });
+        goodsId: '',
+        goodsclassify: '',
+        gsSalesOrders: '',
+        orderDate: '',
+        qty: '',
+        price:'',
+        salerId: '',
+        supplierId: '',
+      })
+      // for(let i = 1;i<this.tableData.length;i++){
+      //   this.tableData[i] = obj
+      // }
       this.dataId++;
       console.log(this.tableData, 852369);
     },
@@ -1164,8 +1154,10 @@ export default {
           this.tableData.map((item) => {
             item.goodsclassify =
               item.cala08 + " ~ " + item.cbpb12 + " ~ " + item.cbpb08;
+              // item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
           });
           this.form2.GsSalesOrders = orderno;
+          console.log(this.tableData)
         }
       });
     },
@@ -1179,20 +1171,16 @@ export default {
 
     //查询商品信息维护
     selected08(name, row) {
-      // row.cbpc000=e
-      // this.$set(row,"cbpc000",e.substring(0,e.indexOf(".")))
       console.log(name, 111);
       console.log(row, 222);
-      // row.cbpc08 = e.substring(e.indexOf(".") + 1)
       this.$set(row, "goodsId", name.substring(name.indexOf(".") + 1), 8523642);
-      // this.$set(row,"goodsclassifyy",e.substring(e.indexOf("~")+1),8523642)
       this.$set(
         row,
         "goodsclassify",
         name.substring(0, name.indexOf(".")),
         555
       );
-      console.log(row, 96325412);
+      console.log(row, 96325412,strarr);
     },
 
     //添加行

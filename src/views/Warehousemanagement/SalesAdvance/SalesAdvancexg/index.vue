@@ -4,12 +4,11 @@
       <div class="chuangjiancaigous">销售预订变更单</div>
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
-          <el-form-item label="销售预订单:" prop="GsSalesOrders">
-            <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
-            <el-popover placement="bottom-start" trigger="click">
+          <el-form-item label="销售预订单:" prop="orderNo">
+            <el-popover placement="bottom-start" trigger="click" disabled>
               <SalesBooking ref="SalesBooking" @selected="selected0222"
                 style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width:68%;">
+              <el-input slot="reference" v-model="form2.orderNo" placeholder="" readonly style="width:68%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -24,29 +23,29 @@
       <el-row :gutter="20">
 
         <el-col style="" :span="6">
-          <el-form-item label="客户名称:" prop="cbpc0999">
-            <el-popover placement="bottom-start" trigger="click">
+          <el-form-item label="客户名称:" prop="customer">
+            <el-popover placement="bottom-start" trigger="click" disabled>
               <CustomerMainten ref="CustomerMainten" @selected="selected022"
                 style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly style="width:110%;">
+              <el-input slot="reference" v-model="form2.customer" placeholder="" readonly style="width:110%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-2%;" :span="6">
-          <el-form-item label="供料单位:" prop="cbpc099">
-            <el-popover placement="bottom-start" trigger="click">
+          <el-form-item label="供料单位:" prop="supplier">
+            <el-popover placement="bottom-start" trigger="click" disabled>
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:210px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:100%;">
+              <el-input slot="reference" v-model="form2.supplier" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-4%;" :span="6">
-          <el-form-item label="仓库:" prop="cbpc100">
-            <el-popover placement="bottom-start" trigger="click">
+          <el-form-item label="仓库:" prop="wh">
+            <el-popover placement="bottom-start" trigger="click" disabled>
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:100%;">
+              <el-input slot="reference" v-model="form2.wh" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -56,10 +55,10 @@
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select> -->
-          <el-form-item label="销售人员:" prop="salerId">
-            <el-popover placement="bottom-start" trigger="click" clearable>
+          <el-form-item label="销售人员:" prop="saler">
+            <el-popover placement="bottom-start" trigger="click" clearable disabled>
               <salerman ref="salerman" @selected="selected011699" style="width:220px!important;" />
-              <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly style="width:85%;">
+              <el-input slot="reference" v-model="form2.saler" placeholder="" readonly style="width:85%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -67,21 +66,21 @@
         <!--商品信息维护-->
       </el-row>
       <el-row v-if="false">
-        <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
+        <!-- <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
           <el-form-item label="商品id:" prop="goodsId">
             <el-input v-model="form2.goodsId" placeholder="" maxlength="30" style="width:80%;" />
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
           <el-form-item label="id:" prop="id">
             <el-input v-model="form2.id" placeholder="" maxlength="30" style="width:80%;" />
           </el-form-item>
         </el-col>
-        <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
+        <!-- <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
           <el-form-item label="数量id:" prop="qty">
             <el-input v-model="form2.qty" placeholder="" maxlength="30" style="width:80%;" />
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
           <el-form-item label="商品型号:" prop="goodsclassify">
             <el-input v-model="form2.goodsclassify" placeholder="" maxlength="30" style="width:80%;" />
@@ -122,25 +121,35 @@
         </el-col>
       </el-row>
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
-        </el-row>
+        </el-row> -->
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
           :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
-          <el-table-column prop="cbpc000" label="品牌" width="300">
+          <el-table-column prop="cala08" label="品牌" width="300">
             <template slot-scope="scope" style="width:200%;">
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" disabled>
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:600px!important;" />
-                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
+                <el-input slot="reference" v-model="scope.row.cala08" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
             </template>
           </el-table-column>
           <el-table-column label="型号" width="300" />
           <el-table-column label="描述" width="300" />
+          <!-- <el-table-column label="销售预订单" prop="orderNo" width="200px">
+            <template slot-scope="scope" style="width:200%;">
+              <el-popover placement="bottom-start" trigger="click" disabled>
+              <SalesBooking ref="SalesBooking" @selected="selected0222"
+                style="width:210px!important; height:100px!important;" />
+              <el-input slot="reference" v-model="scope.row.orderNo" placeholder="" readonly style="width:100%;">
+              </el-input>
+            </el-popover>
+            </template>
+          </el-table-column> -->
           <el-table-column label="数量" width="100" prop="qty">
             <template slot-scope="scope" style="width:200%;">
               <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""
@@ -149,7 +158,7 @@
           </el-table-column>
           <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
-              <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;">
+              <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;" disabled>
               </el-date-picker>
             </template>
           </el-table-column>
@@ -662,20 +671,20 @@ export default {
   },
   methods: {
 
-    validateMealStandard(e) {
-      let mealStandard = e.target.value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3').replace(/^\./g, '');
-      if (mealStandard >= 999999999.99) {
-        this.tableData.qty = 999999999.99;
-      } else {
-        this.tableData.qty = mealStandard;
-      }
-    },
+    // validateMealStandard(e) {
+    //   let mealStandard = e.target.value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3').replace(/^\./g, '');
+    //   if (mealStandard >= 999999999.99) {
+    //     this.tableData.qty = 999999999.99;
+    //   } else {
+    //     this.tableData.qty = mealStandard;
+    //   }
+    // },
 
     //添加模块-销售人员
     selected011699(name) {
       console.log(name, 123)
       console.log(name.substring(name.indexOf("~") + 1), 963);
-      this.form2.cbsb177 = name.substring(0, name.indexOf("~"))
+      this.form2.saler = name.substring(0, name.indexOf("~"))
       this.form2.salerId = name.substring(name.indexOf("~") + 1)
       // this.form2.icon = name;
     },
@@ -856,56 +865,49 @@ export default {
        console.log(userId,"20221009");
       if (userId) {
         // 获取表详细信息
-        PurchaseinSalesAdvance(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+        PurchaseinSalesAdvance({id:userId}, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
           if (res.code == "200") {
             this.userList = res.data.rows;
             this.total = res.data.total;
             console.log(res, "20221009");
-            //主键id
-            this.form2.id = this.userList[0].id;
-            //销售预订单主表名称
-            this.form2.GsSalesOrders = this.userList[0].orderNo;
-            //销售预订单主表名称id
-            this.form2.gsSalesOrders = this.userList[0].gsSalesOrders;
-            //日期
-            this.form2.orderDate = this.userList[0].orderDate;
-            //客户名称
-            this.form2.cbpc0999 = this.userList[0].customerMag;
-            //客户名称id
-            this.form2.customerId = this.userList[0].customer;
-            //供应商名称
-            this.form2.cbpc099 = this.userList[0].supplierMge;
-            //供应商id
-            this.form2.supplierId = this.userList[0].supplier;
-            //仓库名称
-            this.form2.cbpc100 = this.userList[0].wh;
-            //仓库名称ID
-            this.form2.whId = this.userList[0].whId;
-            //销售人员名称
-            this.form2.cbsb177 = this.userList[0].salerMag;
-            //销售人员ID
-            this.form2.salerId = this.userList[0].saler;
-            //商品id
-            this.form2.goodsId = this.userList[0].goodsId;
+            this.form2 = res.data.rows[0]
+            this.tableData = res.data.rows
+            // //主键id
+            // this.form2.id = this.userList[0].id;
+            // //销售预订单主表名称
+            // this.form2.GsSalesOrders = this.userList[0].orderNo;
+            // //销售预订单主表名称id
+            // this.form2.gsSalesOrders = this.userList[0].gsSalesOrders;
+            // //日期
+            // this.form2.orderDate = this.userList[0].orderDate;
+            // //客户名称
+            // this.form2.cbpc0999 = this.userList[0].customerMag;
+            // //客户名称id
+            // this.form2.customerId = this.userList[0].customer;
+            // //供应商名称
+            // this.form2.cbpc099 = this.userList[0].supplierMge;
+            // //供应商id
+            // this.form2.supplierId = this.userList[0].supplier;
+            // //仓库名称
+            // this.form2.cbpc100 = this.userList[0].wh;
+            // //仓库名称ID
+            // this.form2.whId = this.userList[0].whId;
+            // //销售人员名称
+            // this.form2.cbsb177 = this.userList[0].salerMag;
+            // //销售人员ID
+            // this.form2.salerId = this.userList[0].saler;
+            // //商品id
+            // this.form2.goodsId = this.userList[0].goodsId;
             //品牌、型号、描述
             // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
             this.tableData.forEach((item) => {
               //  this.form2.goodsId = item.goodsId;
               //品牌、型号、描述
-              item.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
+              item.cala08 = item.cala08 + "~" + item.cbpb12 + "~" + item.cbpb08;
               //商品id
-              item.goodsId = this.userList[0].goodsId;
-              
-              this.form2.goodsId = item.goodsId;
-              //数量
-              item.qty = this.userList[0].qty;
-              this.form2.qty = item.qty;
-              //销售预订单主表id
-              item.gsSalesOrders = this.userList[0].gsSalesOrders;
-              //订单日期
-              item.orderDate = this.userList[0].orderDate;
-              //型号
-              item.goodsclassify = this.userList[0].cbpb12; 
+              item.goodsId = item.goodsId;
+              // 
+              item.orderNo = item.orderNo
             })
 
           } else {
@@ -947,7 +949,7 @@ export default {
     selected01(name) {
       console.log(name, 123)
       // console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
+      this.form2.wh = name.substring(0, name.indexOf("-"))
       this.form2.whId = name.substring(name.indexOf("-") + 1)
       console.log(this.form2.cbpc10, 8888888);
       // this.form2.icon = name;
@@ -968,18 +970,20 @@ export default {
     selected022(name) {
       console.log(name, 123)
       console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc0999 = name.substring(0, name.indexOf("-"));
+      this.form2.customer = name.substring(0, name.indexOf("-"));
       this.form2.customerId = name.substring(name.indexOf("-") + 1);
       this.form.cbsa08 = name.substring(0, name.indexOf("-"));
       // this.form2.icon = name;
     },
 
     //添加销售预订单-预订单主键ID
-    selected0222(name) {
-      console.log(name, 123)
+    selected0222(name,row) {
+      console.log(name, row)
       console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.GsSalesOrders = name.substring(0, name.indexOf("-"));
-      this.form2.gsSalesOrders = name.substring(name.indexOf("-") + 1);
+      this.$set(row, "orderNo", name.substring(0, name.indexOf("-")));
+      this.$set(row, "gsSalesOrders", name.substring(name.indexOf("-") + 1));
+      // this.form2.orderNo = name.substring(0, name.indexOf("-"));
+      // this.form2.gsSalesOrders = name.substring(name.indexOf("-") + 1);
       // this.form2.icon = name;
     },
 
@@ -987,7 +991,7 @@ export default {
     selected02(name) {
       console.log(name, 123)
       console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+      this.form2.supplier = name.substring(0, name.indexOf("-"));
       this.form2.supplierId = name.substring(name.indexOf("-") + 1);
     },
 
@@ -995,10 +999,9 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cala08", e.substring(0, e.indexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
-      // row.cbpc08 = e.substring(e.indexOf(".") + 1)
       this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
       this.$set(row, "goodsclassifyy", e.substring(e.indexOf("~") + 1), 8523642)
       this.$set(row, "goodsclassify", row.goodsclassifyy.substring(0, row.goodsclassifyy.indexOf("~")), 555)
@@ -1103,6 +1106,7 @@ export default {
     /** 销售预订单变更单返回操作 */
     handlexiaoshouone: function (row) {
       // this.$router.push("/system/user-auth/role/");
+      this.$store.dispatch("tagsView/delView", this.$route)
       this.$router.push("/system/user-SalesAdvancefanhui/role/");
     },
 
@@ -1110,33 +1114,45 @@ export default {
     handleUpdate() {
 
       let row = {}
-      //客户id
-      row.customer = this.form2.customerId;
-      //供应商id
-      row.supplierId = this.form2.supplierId;
-      //仓库id 
-      row.whId = this.form2.whId;
-      //销售人员id
-      row.salerId = this.form2.salerId;
-      //订单日期
-      row.orderDate = this.form2.orderDate;
+      
       //商品id
       this.tableData.forEach((item) => {
         row.goodsId = item.goodsId;
         //商品型号
         row.goodsclassify = item.goodsclassify;
+        row.qty = item.qty
       })
-      row.id = this.form2.id;
+      
+      let arr1 = []
+      for(let i = 0;i<this.tableData.length;i++){
+        arr1.push({
+          //客户id
+          // customer : this.tableData[i].customerId,
+          //供应商id
+          // supplierId : this.tableData[i].supplierId,
+          //仓库id 
+          // whId : this.tableData[i].whId,
+          //销售人员id
+          // salerId : this.tableData[i].salerId,
+          //订单日期
+          // orderDate : this.tableData[i].orderDate,
+          id : this.tableData[i].id,
+          goodsId : this.tableData[i].goodsId,
+          //商品型号
+          // goodsclassify : this.tableData[i].goodsclassify,
+          qty : this.tableData[i].qty,
+          // 主表id
+          gsSalesOrders : this.tableData[i].gsSalesOrders,
+        })
+      }
       // row.cbpc16 = this.form.cbpc16;
       // console.log(this.form.id);
-      PurchaseinboundEditSalesAdvance(JSON.stringify(row)).then(response => {
+      PurchaseinboundEditSalesAdvance(JSON.stringify(arr1)).then(response => {
         if (response.code == "200") {
           // console.log(this.form, 789)
-          this.getList();
+          
           this.$message({ message: '修改成功', type: 'success' });
-
-        } else {
-          this.$message({ message: response.msg, type: 'error' });
+          this.handlexiaoshouone();
         }
 
       });

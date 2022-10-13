@@ -1060,7 +1060,7 @@ export const dynamicRoutes = [{
         name: 'AuthUser',
         component: () => import('@/views/Warehousemanagement/AnalysisCertificate/AnalysisCertificatecj/index'),
         meta: {
-          title: '质检单',
+          title: '质检单创建',
           activeMenu: '/Warehousemanagement/AnalysisCertificate'
         }
       },
@@ -1069,7 +1069,7 @@ export const dynamicRoutes = [{
         name: 'zhijiandanXg',
         component: () => import('@/views/Warehousemanagement/AnalysisCertificate/AnalysisCertificatexg/index'),
         meta: {
-          title: '质检单',
+          title: '质检单修改',
           activeMenu: '/Warehousemanagement/AnalysisCertificate'
         }
       }

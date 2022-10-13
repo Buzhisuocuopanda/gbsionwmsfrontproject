@@ -56,9 +56,9 @@ export function saleOrderListdetail(data) {
 //销售预订单变更单详情
 export function PurchaseinSalesAdvance(data) {
   return request({
-    url: '/system/SalesScheduledOrders/saleOrderAdvance?id='+ data,
+    url: '/system/SalesScheduledOrders/saleOrderAdvance',
     method: 'post',
-    data: data
+    params: data
   })
 }
   
@@ -203,8 +203,6 @@ export function saleOrderAdvance(data) {
   return request({
     url: '/system/SalesScheduledOrders/saleOrderAdvance',
     method: 'post',
-    params:{
-      ids:data
-    }
+    params:data
   })
 }

@@ -1,7 +1,7 @@
 <!-- zgl -->
 <!-- 缺货登记查询 -->
 <template>
-  <div class="app-container">
+  <div class="app-container wantbooks">
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="商品分类">
@@ -30,13 +30,13 @@
       <el-table-column prop="date" label="序号" type="index" sortable width="50" align="left"></el-table-column>
       <el-table-column prop="cbpa08" label="大类" align="left" sortable width="110"></el-table-column>
       <el-table-column prop="cbpa07" label="分类名称" align="left" width="100" sortable></el-table-column>
-      <el-table-column prop="cala08" label="品牌" align="left" sortable></el-table-column>
-      <el-table-column prop="cbpb12" label="型号" align="left" width="110" sortable></el-table-column>
-      <el-table-column prop="cbpb15" label="UPC" align="left" width="118" sortable></el-table-column>
+      <el-table-column prop="cala08" label="品牌" width="80" align="left" sortable></el-table-column>
+      <el-table-column prop="cbpb12" label="型号" align="left" width="140" sortable></el-table-column>
+      <el-table-column prop="cbpb15" label="UPC" align="left" width="145" sortable></el-table-column>
       <el-table-column prop="cbpb08" label="描述" align="left" width="280px" sortable></el-table-column>
       <el-table-column prop="cbof09" label="数量" align="right" :formatter="rounding" sortable></el-table-column>
-      <el-table-column prop="cbca08" label="客户" align="left" width="220px;" sortable></el-table-column>
-      <el-table-column prop="cboe08" :formatter="formatTime" label="日期" align="left" sortable></el-table-column>
+      <el-table-column prop="cbca08" label="客户" align="left" width="240px;" sortable></el-table-column>
+      <el-table-column prop="cboe08" width="110" :formatter="formatTime" label="日期" align="left" sortable></el-table-column>
     </el-table>
     <el-pagination
       :background="true"
@@ -201,4 +201,8 @@
   };
 </script>
 
-<style lang="less" scoped></style>
+<style  scoped>
+.wantbooks .el-form--inline {
+  height: 60px !important;
+}
+</style>

@@ -36,19 +36,19 @@
       <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" :header-cell-style="headClasspw"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading" height="460"
                  border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="仓库" align="left" header-align="center" prop="cbwa09" min-width="70px;" />
-        <el-table-column  label="供应商" align="left" prop="supplieName"  min-width="140px;"/>
-        <el-table-column  label="品牌" align="left" prop="brand" min-width="90px;"/>
+        <el-table-column  label="供应商" align="left" prop="supplieName"  min-width="660px;"/>
+        <el-table-column  label="品牌" align="left" prop="brand" min-width="110px;"/>
         <el-table-column  label="大类" align="left" prop="bclass" min-width="80px;"/>
         <el-table-column  label="小类" align="left" prop="sclass" min-width="110px;"/>
         <!--<el-table-column  label="SKU" align="center" prop="qty" min-width="60px;"/>-->
-        <el-table-column  label="型号" align="left" prop="model"  min-width="160px;"/>
+        <el-table-column  label="型号" align="left" prop="model"  min-width="180px;"/>
         <el-table-column  label="期初库存" align="right" :formatter="rounding" prop="firstQty" min-width="100px;"/>
         <el-table-column  label="生产入库" align="right" :formatter="rounding" prop="makeQty" min-width="100px;"/>
        <!-- <el-table-column  label="改型号" align="center" prop="suplierName" min-width="200px;"/>-->
         <el-table-column  label="不良返工" align="right" :formatter="rounding" prop="badQty" min-width="100px;"/>
         <el-table-column  label="累计" align="right" :formatter="rounding" prop="totalQty" min-width="100px;"/>
         <el-table-column  label="销售出库" :formatter="rounding" align="right" prop="outSaleQty" min-width="80px;"/>
-        <el-table-column  label="库存" :formatter="rounding" align="right" prop="skuQty" min-width="140px;"/>
+        <el-table-column  label="库存" :formatter="rounding" align="right" prop="skuQty" min-width="80px;"/>
         <!--<el-table-column  label="现有订单" align="center" prop="cgRprice" min-width="60px;"/>
         <el-table-column  label="订单分配" align="center" prop="cgRprice" min-width="60px;"/>
         <el-table-column  label="订单缺货" align="center" prop="cbib16" min-width="100px;"/>
