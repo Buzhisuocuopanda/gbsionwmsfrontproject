@@ -11,10 +11,10 @@
             <el-descriptions class="margin-top" title="" :column="3" border
                 v-for="(value, key) in userList.slice(0, 1)" :key="key">
                 <el-descriptions-item>
-                    <template slot="label">调出仓库</template>{{ value.cbsa08 }}
+                    <template slot="label">调出仓库</template>{{ value.cbwa09 }}
                 </el-descriptions-item>
                 <el-descriptions-item>
-                    <template slot="label">调入仓库</template>{{ value.cbwa09 }}
+                    <template slot="label">调入仓库</template>{{ value.cbwa10 }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                     <template slot="label">结算货币</template>{{ value.cala08 }}
@@ -23,18 +23,18 @@
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" 
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbwa09" key="cbwa09" label="供应商">
+                <el-table-column prop="cbwa09" key="cbsa01" label="供应商">
                 </el-table-column>
                 <el-table-column prop="cbab15" key="cbab15" label="订单分类">
                 </el-table-column>
-                <el-table-column prop="pinpai" key="pinpai" align="left" label="品牌" width="50">
+                <el-table-column prop="pinpai" key="pinpai" align="left" label="品牌" width="120">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" align="left" label="型号" width="120">
                 </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" align="left" label="描述" width="550">
+                <el-table-column prop="cbpb08" key="cbpb08" align="left" label="描述" width="300">
                 </el-table-column>
                 <el-table-column prop="cbab09" key="cbab09" align="right" label="数量" width="60">
                 </el-table-column>
@@ -133,7 +133,7 @@
             </el-descriptions>
         </div>
         <div>
-            <span class="saomiaojluu">制单(wanghui):</span>
+            <span class="saomiaojluu">制单:</span>
             <span class="saomiaojluuu">审核:</span>
             <span class="saomiaojluuuu">财务:</span>
         </div>
@@ -221,7 +221,7 @@ export default {
                 padding: '0'
             }
         },
-        // 
+        //
         // 入
         PurchaseinboundQuxiaoWangcheng() {
             this.$modal.confirm('是否要标记完成,编号为"' + this.userList[0].cbaa07 + '"的数据项？').then(() => {
@@ -289,7 +289,7 @@ export default {
 
           //打印
         PrintRow(index, row){
-            this.$print(this.$refs.print) 
+            this.$print(this.$refs.print)
         },
 
         //列表表头设置
@@ -381,7 +381,7 @@ export default {
 <style src="./WarehouseTransferxqcss/index.css">
 </style>
 <style>
-  
+
 @page {
   size: auto;
   margin: 3mm;
@@ -402,7 +402,7 @@ export default {
 
      /**  表头数量  */
  /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
-      
+
   } */
 
   #printRecord .el-table__header-wrapper .el-table__header {
@@ -417,5 +417,5 @@ export default {
   }
 }
 
-	
+
 </style>
