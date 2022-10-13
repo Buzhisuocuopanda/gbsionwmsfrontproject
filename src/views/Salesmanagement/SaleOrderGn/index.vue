@@ -48,7 +48,7 @@
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row
+      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row
                 stripe style="margin-top:0.5em">
         <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="140px;"/>
         <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="120px;"/>

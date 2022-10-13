@@ -1,7 +1,7 @@
 <template>
   <!--审批记录-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container approcorde">
       <el-form :inline="true" label-width="70px"  >
 
           <el-form-item>
@@ -46,9 +46,9 @@
         </el-form-item>
       </el-form>
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="490"  border fit highlight-current-row stripe >
-        <el-table-column fixed label="单据类型" align="left" prop="cabraa07" min-width="120px;"/>
+        <el-table-column fixed label="单据类型" align="left" prop="cabraa07" min-width="90px;"/>
         <el-table-column fixed label="单据编号" align="left" prop="cabraa14" min-width="120px;"/>
-        <el-table-column  label="单据日期" align="left" prop="cabraa15" min-width="120px;"  :formatter="formatDate"/>
+        <el-table-column  label="单据日期" align="left" prop="cabraa15" min-width="100px;"  :formatter="formatDate"/>
         <el-table-column  label="审核日期" align="left" prop="cabraa02" min-width="200px;" :formatter="formatDate"/>
         <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="100px;"/>
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
@@ -308,5 +308,9 @@ export default {
 <style scoped>
 .caozuoxiangqeng {
       border: 0 !important;
-    }   
+      padding: 0 !important;
+    }  
+.approcorde .el-form--inline {
+  height: 60px !important;
+}
 </style>

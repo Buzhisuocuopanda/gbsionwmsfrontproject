@@ -5,15 +5,15 @@
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="订单号">
-        <el-input type="text" style="width: 300px" v-model="queryParams.cbba07"></el-input>
+        <el-input type="text" style="width: 200px;" v-model="queryParams.cbba07"></el-input>
       </el-form-item>
       <el-form-item label="商品">
-        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :loading="loading1">
+        <el-select v-model="queryParams.cbpb01" style="width: 200px;" clearable filterable remote reserve-keyword placeholder="请输入关键词" :loading="loading1">
           <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="queryParams.cbba12" clearable filterable remote reserve-keyword placeholder="请选择" >
+        <el-select style="width:200px;" v-model="queryParams.cbba12" clearable filterable remote reserve-keyword placeholder="请选择" >
           <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </el-form-item>

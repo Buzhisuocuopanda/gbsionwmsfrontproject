@@ -1,6 +1,6 @@
 <template>
   <!--直接入库单-->
-    <div class="app-container">
+    <div class="app-container directre">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
@@ -1177,5 +1177,6 @@ export default {
     }
 };
 </script>
-<style src="./DirectReceiptcss/index.css">
+<style src="./DirectReceiptcss/index.css" scoped>
 </style>
+

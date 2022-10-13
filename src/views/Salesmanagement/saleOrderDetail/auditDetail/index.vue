@@ -1514,7 +1514,7 @@
             if (response.code == "200") {
               this.$message.success("提交成功")
               this.$store.dispatch("tagsView/delView", this.$route)
-              this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
+              this.$router.push({path: "/Salesmanagement/saleOrderFn", query: {id: 1}})
 
             }else {
 

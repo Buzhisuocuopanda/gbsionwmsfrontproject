@@ -1,6 +1,6 @@
 <template>
   <!--质检单-->
-    <div class="app-container">
+    <div class="app-container ancerficate">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
@@ -1103,6 +1103,8 @@ export default {
             // name: 'index',
             query: {
               data: row.cbqa01,
+              cbqa07: row.cbqa07,
+              cbqa11: row.cbqa11,
             }
           })
         },

@@ -457,3 +457,7 @@
     font-weight: 900;
     font-size: 20px;
 }
+
+.Waretransf .el-form--inline {
+    height: 70px !important;
+}

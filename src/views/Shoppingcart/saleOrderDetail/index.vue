@@ -768,10 +768,10 @@
 
 
         rules: {
-          orderDate: [
-            { required: true, message: '请输入日期', trigger: 'blur' },
-            // { type: 'number', message: '优先级必须为数字'}
-          ],
+          // orderDate: [
+          //   { required: true, message: '请输入日期', trigger: 'blur' },
+          //   // { type: 'number', message: '优先级必须为数字'}
+          // ],
           saleUserId: [
             { required: true, message: '请输入销售人员', trigger: 'blur' },
           ],
