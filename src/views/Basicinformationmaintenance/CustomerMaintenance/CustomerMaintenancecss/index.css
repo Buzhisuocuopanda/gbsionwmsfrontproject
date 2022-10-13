@@ -309,3 +309,7 @@
     
     
 }
+
+.custmantencs .el-form--inline {
+    height: 60px !important;
+}

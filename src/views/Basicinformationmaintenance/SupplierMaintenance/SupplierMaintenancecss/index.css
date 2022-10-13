@@ -288,3 +288,7 @@
     overflow-y: auto;
 
 }
+
+.suppmaintence .el-form--inline {
+    height: 60px !important;
+}
