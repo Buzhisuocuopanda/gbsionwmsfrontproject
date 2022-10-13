@@ -29,7 +29,7 @@
                         <hr />
                         <div class="shangponfenlei-middle">
                             <el-row>
-                              <el-col style="margin-left: 120px;">
+                              <el-col v-if="false" style="margin-left: 120px;">
                                 <el-form-item label="父字节编号"  prop="cbpa09" >
                                   <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
                                 </el-form-item>
