@@ -636,7 +636,7 @@ export default {
                             "cala08":obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08,
                             "goodsId": arr1[i].goodsId,
                             "gsSalesOrders":arr1[i].gsSalesOrders,
-                            "id": 0,
+                            "id": arr1[i].id,
                             "price": arr1[i].price,
                             "qty": arr1[i].qty,
                             "remark": arr1[i].remark,
@@ -652,7 +652,7 @@ export default {
         selected011699(name) {
             console.log(name, 123)
             console.log(name.substring(name.indexOf("~") + 1), 963);
-            this.form2.cbsb177 = name.substring(0, name.indexOf("~"))
+            this.form2.saler = name.substring(0, name.indexOf("~"))
             this.form2.salerId = name.substring(name.indexOf("~") + 1)
             // this.form2.icon = name;
         },
@@ -842,7 +842,7 @@ export default {
         selected01(name) {
             console.log(name, 123)
             // console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form2.wh = name.substring(0, name.indexOf("-"))
+            this.form2.cbwa09 = name.substring(0, name.indexOf("-"))
             this.form2.whId = name.substring(name.indexOf("-") + 1)
             console.log(this.form2.wh, 8888888);
             // this.form2.icon = name;
@@ -861,7 +861,7 @@ export default {
         selected02(name) {
             console.log(name, 123)
             console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+            this.form2.supplier = name.substring(0, name.indexOf("-"));
             this.form2.supplierId = name.substring(name.indexOf("-") + 1);
             // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
             // this.form2.icon = name;
@@ -871,7 +871,7 @@ export default {
         selected022(name) {
             console.log(name, 123)
             console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form2.cbpc0999 = name.substring(0, name.indexOf("-"));
+            this.form2.customer = name.substring(0, name.indexOf("-"));
             this.form2.customerId = name.substring(name.indexOf("-") + 1);
             this.form.cbsa08 = name.substring(0, name.indexOf("-"));
             // this.form2.icon = name;
@@ -949,26 +949,32 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
+            let form1 = {
+                "customerId": this.form2.customerId,
+                "goods": this.tableData,
+                "id": this.form2.id,
+                "orderDate": this.form2.orderDate,
+                "orderNo": this.form2.orderNo,
+                "salerId": this.form2.salerId,
+                "status": this.form2.status,
+                "supplierId": this.form2.supplierId,
+                "userId": this.form2.userId,
+                "whId": this.form2.whId,
+                }
             this.$refs["form2"].validate((item) => {
                 if (item) {
-                    this.form2.goods = this.tableData
-                    PurchaseinboundEdit(this.form2).then(response => {
+                    // this.form2.goods = this.tableData
+                    PurchaseinboundEdit(form1).then(response => {
                         if (response.code == "200") {
                             this.$message({
                                 message: '修改成功',
                                 type: 'success',
                                 style: 'color:red;!important'
                             });
+                            this.handlefanhui()
                             this.submitShangpin();
                             this.open2 = false;
                             this.reset01()
-                            // console.log(this.form2.cbpg161,111);
-                            // console.log(this.form.cbpg01,222);
-                            console.log(response.data.id, 333);
-                            this.tableData.forEach((item) => {
-                                item.purchaseOrderId = response.data.id;
-                                console.log(item.purchaseOrderId, 8523697412);
-                            })
                         }
                     });
                 } else {
@@ -981,6 +987,7 @@ export default {
         //销售预订单返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
+            this.$store.dispatch("tagsView/delView", this.$route)
             this.$router.push("/system/user-xiaosydd/role/");
         },
 
