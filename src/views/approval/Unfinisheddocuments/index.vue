@@ -46,11 +46,11 @@
         </el-form-item>
       </el-form>
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe >
-        <el-table-column fixed label="单据类型" align="left" prop="cabraa07" min-width="120px;"/>
-        <el-table-column fixed label="单据编号" align="left" prop="cabraa14" min-width="120px;"/>
-        <el-table-column  label="单据日期" align="left" prop="cabraa15" min-width="120px;"  :formatter="formatDate"/>
+        <el-table-column fixed label="单据类型" align="left" prop="cabraa07" min-width="60px;"/>
+        <el-table-column fixed label="单据编号" align="left" prop="cabraa14" min-width="70px;"/>
+        <el-table-column  label="单据日期" align="left" prop="cabraa15" min-width="60px;"  :formatter="formatDate"/>
 <!--        <el-table-column  label="审核日期" align="center" prop="cabraa02" min-width="200px;" :formatter="formatDate"/>-->
-        <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="100px;"/>
+        <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="200px;"/>
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->

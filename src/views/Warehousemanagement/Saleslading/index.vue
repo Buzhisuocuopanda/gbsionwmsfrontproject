@@ -166,7 +166,7 @@
             label="客户订单号"
             align="left"
             key="customerNo"
-            width="120px;"
+            width="180px;"
             prop="customerNo"
             sortable
           />

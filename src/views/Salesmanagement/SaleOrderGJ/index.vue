@@ -73,7 +73,7 @@
 <!--        <el-table-column  fixed="right"  label="确认库存状态" align="left" prop="confirmSkuStatusMsg" min-width="120px;"/>-->
         <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="120px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column fixed="right" label="操作" min-width="220px;">
+        <el-table-column fixed="right" label="操作" min-width="180px;">
           <template slot-scope="scope">
             <el-button class="caozuoxiangqengGJ" style="margin-left:8px; margin-top: 2px" size="mini" icon="el-icon-share" type="text" @click="showDetail(scope.row)" v-hasPermi="['sale:saleOrderGj:detail']">详情</el-button>
 <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==0" size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>-->

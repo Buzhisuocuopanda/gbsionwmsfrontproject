@@ -1,30 +1,15 @@
 <template>
   <div class="app-container">
-    <el-form
-      ref="form2"
-      :model="form2"
-      label-width="130px"
-      :rules="rules"
-      style=""
-    >
+    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">销售预订变更单</div>
       <el-row :gutter="20" style="margin-top: 20px">
         <el-col :span="8">
           <el-form-item label="销售预订单:" prop="GsSalesOrders">
             <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
             <el-popover placement="bottom-start" trigger="click">
-              <SalesBooking
-                ref="SalesBooking"
-                @selected="selected0222"
-                style="width: 210px !important; height: 100px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.GsSalesOrders"
-                placeholder=""
-                readonly
-                style="width: 68%"
-              >
+              <SalesBooking ref="SalesBooking" @selected="selected0222"
+                style="width: 210px !important; height: 100px !important" />
+              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width: 68%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -45,18 +30,9 @@
         <el-col style="" :span="6">
           <el-form-item label="客户名称:" prop="customer">
             <el-popover placement="bottom-start" trigger="click">
-              <CustomerMainten
-                ref="CustomerMainten"
-                @selected="selected022"
-                style="width: 210px !important; height: 100px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.customer"
-                placeholder=""
-                readonly
-                style="width: 110%"
-              >
+              <CustomerMainten ref="CustomerMainten" @selected="selected022"
+                style="width: 210px !important; height: 100px !important" />
+              <el-input slot="reference" v-model="form2.customer" placeholder="" readonly style="width: 110%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -64,18 +40,8 @@
         <el-col style="margin-left: -2%" :span="6">
           <el-form-item label="供料单位:" prop="supplier">
             <el-popover placement="bottom-start" trigger="click">
-              <supplierMaintenance
-                ref="supplierMaintenance"
-                @selected="selected02"
-                style="width: 210px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.supplier"
-                placeholder=""
-                readonly
-                style="width: 100%"
-              >
+              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width: 210px !important" />
+              <el-input slot="reference" v-model="form2.supplier" placeholder="" readonly style="width: 100%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -83,18 +49,8 @@
         <el-col style="margin-left: -4%" :span="6">
           <el-form-item label="仓库:" prop="wh">
             <el-popover placement="bottom-start" trigger="click">
-              <kuweixxweihu
-                ref="kuweixxweihu"
-                @selected="selected01"
-                style="width: 210px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.wh"
-                placeholder=""
-                readonly
-                style="width: 100%"
-              >
+              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 210px !important" />
+              <el-input slot="reference" v-model="form2.wh" placeholder="" readonly style="width: 100%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -106,18 +62,8 @@
             </el-select> -->
           <el-form-item label="销售人员:" prop="saler">
             <el-popover placement="bottom-start" trigger="click" clearable>
-              <salerman
-                ref="salerman"
-                @selected="selected011699"
-                style="width: 220px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.saler"
-                placeholder=""
-                readonly
-                style="width: 85%"
-              >
+              <salerman ref="salerman" @selected="selected011699" style="width: 220px !important" />
+              <el-input slot="reference" v-model="form2.saler" placeholder="" readonly style="width: 85%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -127,95 +73,51 @@
       <el-row v-if="false">
         <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="商品id:" prop="goodsId">
-            <el-input
-              v-model="form2.goodsId"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%"
-            />
+            <el-input v-model="form2.goodsId" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="数量id:" prop="qty">
-            <el-input
-              v-model="form2.qty"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%"
-            />
+            <el-input v-model="form2.qty" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="商品型号:" prop="goodsclassify">
-            <el-input
-              v-model="form2.goodsclassify"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%"
-            />
+            <el-input v-model="form2.goodsclassify" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: 0%; margin-left: 2%" :span="7">
           <el-form-item label="供应商id:" prop="supplierId">
-            <el-input
-              v-model="form2.supplierId"
-              maxlength="30"
-              style="width: 80%; border: solid #eee thin"
-            />
+            <el-input v-model="form2.supplierId" maxlength="30" style="width: 80%; border: solid #eee thin" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="仓库id:" prop="whId">
-            <el-input
-              v-model="form2.whId"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%; border: solid #eee thin"
-            />
+            <el-input v-model="form2.whId" placeholder="" maxlength="30" style="width: 80%; border: solid #eee thin" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="客户id:" prop="customerId">
-            <el-input
-              v-model="form2.customerId"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%; border: solid #eee thin"
-            />
+            <el-input v-model="form2.customerId" placeholder="" maxlength="30"
+              style="width: 80%; border: solid #eee thin" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="销售人员id:" prop="salerId">
-            <el-input
-              v-model="form2.salerId"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%; border: solid #eee thin"
-            />
+            <el-input v-model="form2.salerId" placeholder="" maxlength="30"
+              style="width: 80%; border: solid #eee thin" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="销售预订单id:" prop="gsSalesOrders">
-            <el-input
-              v-model="form2.gsSalesOrders"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%; border: solid #eee thin"
-            />
+            <el-input v-model="form2.gsSalesOrders" placeholder="" maxlength="30"
+              style="width: 80%; border: solid #eee thin" />
           </el-form-item>
         </el-col>
         <!-- 商品信息维护 -->
         <el-col>
-          <el-form-item
-            label=""
-            v-if="false"
-            prop="cbpd08"
-            style="margin-left: 0.8%"
-          >
-            <el-input
-              v-model="form2.cbpd08"
-              style="border: solid #eee thin; width: 70%"
-            ></el-input>
+          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left: 0.8%">
+            <el-input v-model="form2.cbpd08" style="border: solid #eee thin; width: 70%"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -226,29 +128,15 @@
           </el-col>
         </el-row>
 
-        <el-table
-          :data="tableData"
-          border
-          :span-method="arraySpanMethod"
-          :row-style="{ height: '10px' }"
-          :cell-style="{ padding: '5px' }"
-          style="width: 100%; margin-top: 10px"
-        >
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">
           <el-table-column prop="goodsclassify" label="品牌" width="300">
             <template slot-scope="scope" style="width: 200%">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01
-                  ref="Goodsone01"
-                  @selected="selected08($event, scope.row)"
-                  style="width: 600px !important"
-                />
-                <el-input
-                  slot="reference"
-                  v-model="scope.row.goodsclassify"
-                  placeholder=""
-                  readonly
-                  style="width: 100%"
-                >
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  style="width: 600px !important" />
+                <el-input slot="reference" v-model="scope.row.goodsclassify" placeholder="" readonly
+                  style="width: 100%">
                 </el-input>
               </el-popover>
             </template>
@@ -257,121 +145,51 @@
           <el-table-column label="描述" width="300" />
           <el-table-column label="数量" width="100" prop="qty">
             <template slot-scope="scope" style="width: 200%">
-              <el-input
-                v-model="scope.row.qty"
-                v-only-number="{ max: 100, min: 0, precision: 0.0 }"
-                placeholder=""
-                @keyup="validateMealStandard($event)"
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.qty" v-only-number="{ max: 100, min: 0, precision: 0.0 }" placeholder=""
+                @keyup="validateMealStandard($event)" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="100" prop="price">
             <template slot-scope="scope" style="width: 200%">
-              <el-input
-                v-model="scope.row.price"
-                v-only-number="{ max: 100, min: 0, precision: 0.0 }"
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.price" v-only-number="{ max: 100, min: 0, precision: 0.0 }"
+                class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
-              <el-date-picker
-                type="date"
-                placeholder=""
-                v-model="scope.row.orderDate"
-                @change="dateFormat"
-                value-format="yyyy-MM-dd HH:mm:ss"
-                style="width: 100%"
-              >
+              <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" @change="dateFormat"
+                value-format="yyyy-MM-dd HH:mm:ss" style="width: 100%">
               </el-date-picker>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="supplierId"
-            label="供应商id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="supplierId" label="供应商id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.supplierId"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.supplierId" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="goodsclassify"
-            label="型号"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="goodsclassify" label="型号" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.goodsclassify"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.goodsclassify" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="goodsclassifyy"
-            label="型号"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="goodsclassifyy" label="型号" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.goodsclassifyy"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.goodsclassifyy" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="goodsId"
-            label="商品编号id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.goodsId"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.goodsId" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="salerId"
-            label="销售人员id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="salerId" label="销售人员id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.salerId"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.salerId" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="gsSalesOrders"
-            label="销售预订单id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="gsSalesOrders" label="销售预订单id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.gsSalesOrders"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.gsSalesOrders" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -919,7 +737,7 @@ export default {
     //     this.tableData.qty = mealStandard;
     //   }
     // },
-    dateFormat(row){
+    dateFormat(row) {
       console.log(row)
     },
     //添加模块-销售人员
@@ -956,7 +774,7 @@ export default {
         .then((_) => {
           done();
         })
-        .catch((_) => {});
+        .catch((_) => { });
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
@@ -969,9 +787,9 @@ export default {
           goodsclassify: arr1[i].goodsclassify,
           gsSalesOrders: arr1[0].id,
           // .000+08:00
-          orderDate: arr1[i].orderDate.slice(0,10) + 'T' + arr1[i].orderDate.slice(11,19) + '.000+08:00',
+          orderDate: arr1[i].orderDate.slice(0, 10) + 'T' + arr1[i].orderDate.slice(11, 19) + '.000+08:00',
           qty: arr1[i].qty,
-          price:arr1[i].price,
+          price: arr1[i].price,
           salerId: arr1[0].salerId,
           supplierId: arr1[0].supplierId,
         });
@@ -1048,7 +866,7 @@ export default {
         gsSalesOrders: '',
         orderDate: '',
         qty: '',
-        price:'',
+        price: '',
         salerId: '',
         supplierId: '',
       })
@@ -1154,7 +972,7 @@ export default {
           this.tableData.map((item) => {
             item.goodsclassify =
               item.cala08 + " ~ " + item.cbpb12 + " ~ " + item.cbpb08;
-              // item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
+            // item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
           });
           this.form2.GsSalesOrders = orderno;
           console.log(this.tableData)
@@ -1180,7 +998,7 @@ export default {
         name.substring(0, name.indexOf(".")),
         555
       );
-      console.log(row, 96325412,strarr);
+      console.log(row, 96325412, strarr);
     },
 
     //添加行
@@ -1247,10 +1065,12 @@ export default {
       // this.$router.push("/system/user-auth/role/");
       // this.$router.push("/system/user-SalesAdvancefanhui/role/");
       this.$store.dispatch("tagsView/delView", this.$route);
-      this.$router.push({
-        path: "/system/user-SalesAdvancefanhui/role/",
-        query: { id: 1 },
-      });
+      // this.$router.push({
+      //   path: "/system/user-SalesAdvancefanhui/role/",
+      //   query: { id: 1 },
+      // });
+      this.$tab.closePage();
+      this.$router.go(-1);
     },
 
     /** 新增按钮操作 */
@@ -1277,4 +1097,6 @@ export default {
   },
 };
 </script>
-<style src="./SalesAdvancecjcss/index.css" scoped></style>
+<style src="./SalesAdvancecjcss/index.css" scoped>
+
+</style>
