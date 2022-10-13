@@ -31,22 +31,22 @@
           <el-button v-hasPermi="['query:fnSynthesis:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table  :header-cell-style="headClasspw" :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="430" v-loading="loading"
+      <el-table  :header-cell-style="headClasspwfnsyns" :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="430" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column fixed label="入库时间" align="left" :formatter="formatDate" header-align="center" prop="inWhTime" min-width="100px;" />
         <el-table-column fixed label="出库时间" align="left" prop="outWhTimeMsg"  min-width="100px;"/>
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="180px;"/>
-        <el-table-column  label="型号" align="left" prop="model" min-width="120px;"/>
-        <el-table-column  label="描述" align="left" prop="description" min-width="290px;"/>
+        <el-table-column  label="型号" align="left" prop="model" min-width="150px;"/>
+        <el-table-column  label="描述" align="left" prop="description" min-width="520px;"/>
         <el-table-column  label="数量" :formatter="rounding" align="right" prop="qty" min-width="60px;"/>
-        <el-table-column  label="序列号" align="left" prop="sn"  min-width="160px;"/>
+        <el-table-column  label="序列号" align="left" prop="sn"  min-width="120px;"/>
         <el-table-column  label="销售单价U" :formatter="rounding" align="right"  min-width="100px;">
           <template slot-scope="scope">
             <div >{{RToU(scope.row.rprice )}}</div>
           </template>
         </el-table-column>
         <el-table-column  label="销售单价R" :formatter="rounding" align="right" prop="rprice" min-width="100px;"/>
-        <el-table-column  label="经销商品名称" align="left" prop="suplierName" min-width="200px;"/>
+        <el-table-column  label="经销商品名称" align="left" prop="suplierName" min-width="220px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="100px;"/>
         <el-table-column  label="工厂" align="left" prop="gc" min-width="100px;"/>
         <el-table-column  label="采购单价U" :formatter="rounding" align="right" min-width="110px;">
@@ -63,7 +63,7 @@
         :total="total"
         :current-page.sync="queryParams.pageNum"
         :page-size.sync="queryParams.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
+        style="padding-top:20px; padding-left: 20px;float: right"
         layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch"
         @current-change="onSearch"/>
@@ -245,10 +245,10 @@ export default {
       return parseFloat(row[column.property]).toFixed(2)
     },
     //列表表头设置
-    headClasspw() {
+    headClasspwfnsyns() {
       return {
         'text-align': 'left',
-        height: '30px',
+        height: '40px',
         padding: '0'
       }
     },

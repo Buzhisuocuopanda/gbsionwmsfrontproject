@@ -1,7 +1,7 @@
 <!-- zgl -->
 <!-- 生产总订单查询 -->
 <template>
-  <div class="app-container">
+  <div class="app-container prodtotal">
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="订单号">
@@ -25,11 +25,11 @@
     </el-form>
     <!-- 表格 -->
     <el-table :data="tableData" :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="490" style="width: 100%;  margin-top:0.1em" border :default-sort="{ prop: 'date', order: 'descending' }">
-      <el-table-column prop="date" label="序号" type="index" sortable width="100" align="left"></el-table-column>
-      <el-table-column prop="cbba07" label="订单号" sortable align="left" width="180"></el-table-column>
-      <el-table-column prop="cala08" label="品牌" sortable align="left"></el-table-column>
-      <el-table-column prop="cbpb12" label="型号" sortable align="left"></el-table-column>
-      <el-table-column prop="cbpb08" label="描述" sortable width="260px" align="left"></el-table-column>
+      <el-table-column prop="date" label="序号" type="index" sortable width="60" align="left"></el-table-column>
+      <el-table-column prop="cbba07" label="订单号" sortable align="left" width="150"></el-table-column>
+      <el-table-column prop="cala08" label="品牌" width="110" sortable align="left"></el-table-column>
+      <el-table-column prop="cbpb12" width="150" label="型号" sortable align="left"></el-table-column>
+      <el-table-column prop="cbpb08" label="描述" sortable width="360px" align="left"></el-table-column>
       <el-table-column prop="cbba09" label="订单数量" :formatter="rounding" sortable align="right"></el-table-column>
       <el-table-column prop="cbba11" label="已发货数量" :formatter="rounding" sortable align="right"></el-table-column>
       <el-table-column prop="cbba13" label="已生产数量" :formatter="rounding" sortable align="right"></el-table-column>
@@ -38,7 +38,7 @@
           <div>{{scope.row.cbba09-scope.row.cbba13}}</div>
         </template>
       </el-table-column>-->
-      <el-table-column prop="cbba12" label="状态" :formatter="formatStateType" sortable align="center"></el-table-column>
+      <el-table-column prop="cbba12" label="状态" width="80" :formatter="formatStateType" sortable align="center"></el-table-column>
     </el-table>
     <el-pagination
       :background="true"
@@ -180,4 +180,8 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style  scoped>
+.prodtotal .el-form--inline {
+  height: 60px !important;
+}
+</style>

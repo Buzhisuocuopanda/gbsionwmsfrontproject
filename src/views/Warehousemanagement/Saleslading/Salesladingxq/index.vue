@@ -106,7 +106,7 @@
         </el-descriptions-item>
       </el-descriptions>
 
-      
+
       <el-table
         v-loading="loading"
         border
@@ -136,7 +136,7 @@
         <el-table-column prop="sku" key="sku" align="" label="库位">
         </el-table-column>
         <el-table-column prop="scanStatus" key="scanStatuss" label="扫描状态">
-          
+
         </el-table-column>
       </el-table>
 
@@ -251,7 +251,10 @@
         :span-method="arraySpanMethods">
         <el-table-column prop="sn" key="sn" align="" label="SN">
           <template slot-scope="scope" style="width: 200%">
-              <el-popover placement="bottom-start" trigger="click" @show="filterIcons">
+              <el-select v-model="scope.row.sn" style="width: 100%">
+                <el-option v-for="item in snList" :key="item.sn" :label="item.sn" :value="item.sn"></el-option>
+              </el-select>
+              <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
                 <TakeSuggests
                   ref="TakeSuggests"
                   @selected="selected08($event, scope.row)"
@@ -266,7 +269,7 @@
                   style="width: 100%"
                 >
                 </el-input>
-              </el-popover>
+              </el-popover>-->
             </template>
         </el-table-column>
         <el-table-column label="库位">
@@ -311,6 +314,7 @@ import {
   auditTakeOrder,
   auditTakeOrders,
   CustomerLists,
+  selectGoodsSnByWhIdAndGoodsId,
 } from "@/api/Warehousemanagement/Saleslading";
 import TakeSuggests from "@/components/TakeSuggests"
 export default {
@@ -328,6 +332,8 @@ export default {
       userLists: [],
       userList1: [],
       userListsss:[],
+      //下拉列表sn数据
+      snList:[],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -363,12 +369,26 @@ export default {
   },
   watch: {},
   created() {
+    console.log(111,"zgl")
     this.getList();
   },
   methods: {
     mdfTakeSuggest(){
 
     },
+    getSnList(){
+      let param={whid:query, cbpb15:query, cbpb12:query,};
+      selectGoodsSnByWhIdAndGoodsId(param).then(response => {
+        if (response.data != null) {
+          this.snList = response.data;
+        } else {
+          // this.snList = [];
+        }
+      },error => {
+      });
+    },
+
+
     filterIcons(){
       this.checks = true
       this.iconList.whid = this.whid
@@ -532,7 +552,7 @@ export default {
     getParams() {
       let routerParams = this.$route.query;
       this.cbpc01 = routerParams.data;
-      // console.log(this.cbpc01, 852369);
+      console.log(routerParams.data,1013);
     },
 
     //详情列表
@@ -559,9 +579,9 @@ export default {
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
           });
-          this.userList = res.data.goods.map(item =>{
+          /*this.userLists = res.data.goods.map(item =>{
             item.goodsNum = item.qty
-          })
+          })*/
           this.userListsss = res.data.sugests.map(item=>{
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
@@ -572,7 +592,7 @@ export default {
               return item
             });
           }
-          
+
           this.paramss.userId = res.data.userId;
           // this.total = res.data.total;
           console.log(res, 888999,this.userListss);
@@ -610,6 +630,7 @@ export default {
     },
   },
   mounted() {
+    console.log(111,"zgl")
     this.getParams();
   },
   computed: {
@@ -634,7 +655,7 @@ export default {
         totalPrice += this.userLists[i].totalPrice;
       }
       return totalPrice;
-      
+
     },
   },
 };

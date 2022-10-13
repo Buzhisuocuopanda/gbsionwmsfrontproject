@@ -1,6 +1,6 @@
 <template>
   <!--销售库存查询-->
-  <div class="app-container">
+  <div class="app-container insorymay">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="商品分类"   class="item-r" >
@@ -27,15 +27,15 @@
 
         </el-form-item>
       </el-form>
-      <el-table  :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="460" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
+      <el-table  :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="465" v-loading="loading"
+                border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column fixed align="left" label="序号" type="index" width="50"></el-table-column>
-        <el-table-column fixed label="大类" align="left" prop="totalclassify"  min-width="80px;"/>
+        <el-table-column fixed label="大类" align="left" prop="totalclassify"  min-width="60px;"/>
         <el-table-column fixed label="分类名称" align="left" prop="cbpa07" min-width="80px;"/>
-        <el-table-column  label="品牌" align="left" prop="cala08" min-width="120px;"/>
-        <el-table-column  label="型号" align="left" prop="cbpb12" min-width="100px;"/>
-        <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="100px;"/>
-        <el-table-column  label="描述" align="left" prop="cbpb08"  min-width="240px;"/>
+        <el-table-column  label="品牌" align="left" prop="cala08" min-width="80px;"/>
+        <el-table-column  label="型号" align="left" prop="cbpb12" min-width="110px;"/>
+        <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="110px;"/>
+        <el-table-column  label="描述" align="left" prop="cbpb08"  min-width="280px;"/>
         <el-table-column  label="数量" align="right" prop="cbib15" :formatter="rounding" min-width="100px;"/>
         <el-table-column  label="可用库存数量" align="right" prop="lockQty" :formatter="rounding" min-width="100px;"/>
         <!--<el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />-->
@@ -226,6 +226,8 @@ export default {
 };
 </script>
 
-<style lang="" scoped>
-
+<style  scoped>
+  .insorymay .el-form--inline{
+    height:60px !important;
+  }
 </style>
