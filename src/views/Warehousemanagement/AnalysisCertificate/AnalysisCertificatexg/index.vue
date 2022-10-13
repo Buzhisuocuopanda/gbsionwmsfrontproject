@@ -507,9 +507,11 @@ export default {
 
         /** 修改按钮操作 */
         handleEdit() {
+
           const userId = this.$route.query && this.$route.query.data;
           this.form2.goods = this.tableData;
           this.form2.cbqa01 = userId
+          console.log(this.form2,1013)
           QualityinEditOne(this.form2).then(response => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
