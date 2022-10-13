@@ -46,7 +46,7 @@
                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column  v-if="false" align="center" prop="cbig01"  min-width="80px;"/>
         <el-table-column  label="仓库" align="left" prop="cbwa09"  min-width="80px;"/>
-        <el-table-column  label="库位" align="left" prop="cbla09" min-width="80px;"/>
+        <el-table-column  label="库位" align="left" prop="cbla09" min-width="110px;"/>
         <!--<el-table-column  label="大类" align="center" prop="cala08" min-width="120px;"/>-->
         <el-table-column  label="商品分类" align="left" prop="cbpa07" min-width="100px;"/>
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="100px;"/>

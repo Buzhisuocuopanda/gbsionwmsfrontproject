@@ -73,8 +73,8 @@
           <el-table-column prop="cbqb09" label="替换商品SN"  width="200">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-select v-model="scope.row.cbqb09"   filterable placeholder="请输入关键词" :loading="loading3">
-                <el-option v-for="item in snList" :key="item.cbpm09" :label="item.cbpm09" :value="item.cbpm09"></el-option>
+              <el-select v-model="scope.row.cbqb09" :remote-method="getLists"  reserve-keyword remote filterable placeholder="请输入关键词" :loading="loading3">
+                <el-option v-for="item in snList"  :key="item.cbpm09" :label="item.cbpm09" :value="item.cbpm09"></el-option>
               </el-select>
                <!-- <el-input v-model="scope.row.cbqb09" class="shuzicaoyou" placeholder="" style=""></el-input>-->
               <!-- </sapn> -->
@@ -134,7 +134,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 //下拉列表替换sn
-import { PurchaseinboundSellout,QualityinAdd,QualityinAdds,QualityinLists,QualityinEditOne,SwJsSkuBarcodeselectss } from "@/api/Warehousemanagement/AnalysisCertificate";
+import { PurchaseinboundSellout,QualityinAdd,QualityinAdds,QualityinLists,QualityinEditOne,SwJsSkuBarcodeselectsss } from "@/api/Warehousemanagement/AnalysisCertificate";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -404,17 +404,18 @@ export default {
     },
     methods: {
       // 替换sn查询
-      getLists(){
+      getLists(query){
         let id = this.$route.query.data
         this.loading3 = true;
-        SwJsSkuBarcodeselectss({
+        SwJsSkuBarcodeselectsss({
             // cbpk01:id,
-            // cbpm09:query
+            cbpm09:query
           }).then((response) => {
           this.loading3 = false;
           this.snList = response.data.rows;
           // this.snList = response.data.total;
         },error => {
+          this.snList=[];
           this.loading3 = false;
         });
       },

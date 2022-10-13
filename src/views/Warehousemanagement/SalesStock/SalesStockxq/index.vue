@@ -144,17 +144,18 @@
             <el-button style="margin-left:5%;" @click="handlefanhui">返 回</el-button>
         </div>
         <div v-else style="margin:10px 0;">
-            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
-            <el-button v-else style="margin-left:5%;" type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
+            </el-button>
+            <el-button v-else style="margin-left:5%;" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
             <el-button type="primary" @click="PurchaseinboundQuxiaoWangcheng" v-if="status == 4">取消完成</el-button>
             <el-button type="primary" @click="PurchaseinboundBiaojiWancheng" v-if="status == 1">标记完成</el-button>
-            <el-button  @click="handlefanhui">返回</el-button>
+            <el-button @click="handlefanhui">返回</el-button>
         </div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundList,Purchaseinboundsho,PurchaseinboundSht,PurchaseinboundShtt,PurchaseinBoundshf } from "@/api/Warehousemanagement/SalesStock";
+import { PurchaseinboundList, Purchaseinboundsho, PurchaseinboundSht, PurchaseinboundShtt, PurchaseinBoundshf } from "@/api/Warehousemanagement/SalesStock";
 export default {
 
     data() {
@@ -177,10 +178,10 @@ export default {
                 userId: undefined
             },
             CBPC01: "",
-            ids:{
-                id:''
+            ids: {
+                id: ''
             },
-            status:'',
+            status: '',
         };
     },
     watch: {
@@ -195,14 +196,14 @@ export default {
         PurchaseinboundBiaojiWancheng() {
             this.$modal.confirm('是否要标记完成,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
                 PurchaseinBoundshf({
-                    cbse01:this.ids.id
+                    cbse01: this.ids.id
                 }).then(response => {
-                if (response.code == "200") {
-                    this.$message({ message: '标记成功', type: 'success' });
-                    this.$router.push("/Warehousemanagement/SalesStock");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                }
+                    if (response.code == "200") {
+                        this.$message({ message: '标记成功', type: 'success' });
+                        this.$router.push("/Warehousemanagement/SalesStock");
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
         },
@@ -210,14 +211,14 @@ export default {
         PurchaseinboundQuxiaoWangcheng() {
             this.$modal.confirm('是否要取消标记,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
                 PurchaseinboundShtt({
-                    cbse01:this.ids.id
+                    cbse01: this.ids.id
                 }).then(response => {
-                if (response.code == "200") {
-                    this.$message({ message: '取消成功', type: 'success' });
-                    this.$router.push("/Warehousemanagement/SalesStock");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                }
+                    if (response.code == "200") {
+                        this.$message({ message: '取消成功', type: 'success' });
+                        this.$router.push("/Warehousemanagement/SalesStock");
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
         },
@@ -225,14 +226,14 @@ export default {
         PurchaseinboundShenpi() {
             this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
                 Purchaseinboundsho({
-                    cbse01:this.ids.id
+                    cbse01: this.ids.id
                 }).then(response => {
-                if (response.code == "200") {
-                    this.$message({ message: '审批成功', type: 'success' });
-                    this.$router.push("/Warehousemanagement/SalesStock");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                }
+                    if (response.code == "200") {
+                        this.$message({ message: '审批成功', type: 'success' });
+                        this.$router.push("/Warehousemanagement/SalesStock");
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
         },
@@ -240,20 +241,22 @@ export default {
         PurchaseinboundFanShenpi() {
             this.$modal.confirm('是否要反审,编号为"' + this.userList[0].cbse07 + '"的数据项？').then(() => {
                 PurchaseinboundSht({
-                    cbse01:this.ids.id
+                    cbse01: this.ids.id
                 }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: '反审成功', type: 'success' });
                         this.$router.push("/Warehousemanagement/SalesStock");
-                    }else{
+                    } else {
                         this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
         },
         // 返回
-        handlefanhui(){
-            this.$router.push("/Warehousemanagement/SalesStock");
+        handlefanhui() {
+            // this.$router.push("/Warehousemanagement/SalesStock");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
         // 多选框选中数据
         handleSelectionChange(selection) {
@@ -322,15 +325,16 @@ export default {
             for (let i = 0; i < this.userList.length; i++) {
                 totalPrice += this.userList[i].cbph09 * this.userList[i].cbph10;
             }
-            if(totalPrice){
+            if (totalPrice) {
                 return totalPrice
-            }else{
+            } else {
                 totalPrice = ''
             }
-            
+
         }
     }
 };
 </script>
 <style src="./SalesStockxqcss/index.css" scoped>
+
 </style>

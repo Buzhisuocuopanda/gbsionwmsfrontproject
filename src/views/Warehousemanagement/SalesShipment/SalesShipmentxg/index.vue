@@ -5,9 +5,9 @@
             <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" readonly/>
+                        <el-input type="text" v-model="form2.cbsb07" style="width: 50%;" readonly />
                     </el-form-item>
-                    
+
                 </el-col>
                 <el-col :span="7">
                     <el-form-item label="客户订单:" style="margin-left:11.2%;" prop="cbsb30">
@@ -289,7 +289,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchaseinboundAdds, PurchaseinboundAdd, PurchaseinListxiangq,SwJsSkuBarcodelistss  } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundAdds, PurchaseinboundAdd, PurchaseinListxiangq, SwJsSkuBarcodelistss } from "@/api/Warehousemanagement/SalesShipment";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -685,7 +685,9 @@ export default {
         _ly_cancelDialog(done) {
             console.log('_ly_cancelDialog')
             this.$emit('on-close')
-            this.$router.push("/system/user-xsckfh/role/");
+            // this.$router.push("/system/user-xsckfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
         // 关闭弹窗前，二次询问是否关闭
         _ly_beforeClose(done) {
