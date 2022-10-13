@@ -265,3 +265,7 @@
     height: 40px;
 
 }
+
+.listmaince .el-form--inline {
+    height: 60px !important;
+}

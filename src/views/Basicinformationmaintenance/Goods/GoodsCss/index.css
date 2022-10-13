@@ -345,3 +345,6 @@ color: white !important;
     position: absolute;
     left:70%;
 }
+.goodsnance .el-form--inline {
+    height: 60px !important;
+}

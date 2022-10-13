@@ -211,3 +211,13 @@ export function selectGoodsSnByWhIdAndGoodsId(whid,goodsid) {
     }
   })
 }
+
+
+// 更改出货建议
+export function mdfTakeSuggest(data) {
+  return request({
+    url: '/whmanagement/mdfTakeSuggest',
+    method: 'post',
+    data: data
+  })
+}
