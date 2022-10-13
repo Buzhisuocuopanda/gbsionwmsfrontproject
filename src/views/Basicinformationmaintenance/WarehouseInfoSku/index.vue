@@ -37,19 +37,19 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="出库优先级" align="left" key="cbwa07" prop="cbwa07" sortable>
+                    <el-table-column label="出库优先级" width="130px;" align="right" key="cbwa07" prop="cbwa07" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa07 <= 1 ? "优先出库" : "正常出库" }} </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="管理模式" align="left" key="cbwa12" prop="cbwa12" sortable>
+                    <el-table-column label="管理模式" width="120px;" align="left" key="cbwa12" prop="cbwa12" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa12 == 1 ? "条码管理" : scope.row.cbwa12 == 2 ? "数量管理" : "管理方式未知"
                             }}
                             </div>
                         </template> -->
                     </el-table-column>
-                    <el-table-column label="启用总订单" align="left" key="cbwa13" prop="cbwa13" sortable>
+                    <el-table-column label="启用总订单" width="120px;" align="left" key="cbwa13" prop="cbwa13" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa13 == 0 ? "是" : scope.row.cbwa13 == 1 ?
                             "否" : "状态不确定"
@@ -57,7 +57,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="启用提货单" align="left" key="cbwa14" prop="cbwa14" sortable>
+                    <el-table-column label="启用提货单" width="120px;" align="left" key="cbwa14" prop="cbwa14" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa14 == 0 ? "是" : scope.row.cbwa14 == 1 ? "否" :
                             "状态不确定"
@@ -65,7 +65,7 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="状态" align="left" key="cbwa08" prop="cbwa08" sortable>
+                    <el-table-column label="状态" width="110px;" align="center" key="cbwa08" prop="cbwa08" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cbwa15 == -1 ? "启用" : scope.row.cbwa15 == 1 ? "禁用" : "状态不确定" }}
                             </div>

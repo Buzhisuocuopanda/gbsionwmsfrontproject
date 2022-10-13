@@ -1,5 +1,5 @@
 <template>
-    <div class="app-container">
+    <div class="app-container suppmaintence">
         <el-row :gutter="20">
             <!--用户数据-->
             <el-col :span="20" :xs="24" style="width:100%;">
@@ -37,10 +37,10 @@
                 <el-table :max-height="maxheight"  border :header-cell-style="headClassSPM" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="客户名称" align="left" key="cbsa08" prop="cbsa08" sortable />
+                    <el-table-column label="客户名称"  align="left" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="客户地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
-                    <el-table-column label="联系人" align="left" key="cbsa14" prop="cbsa14" sortable />
-                    <el-table-column label="联系电话" align="left" key="cbsa15" prop="cbsa15" sortable />
+                    <el-table-column label="联系人" width="130px;" align="left" key="cbsa14" prop="cbsa14" sortable />
+                    <el-table-column label="联系电话" width="150px;" align="left" key="cbsa15" prop="cbsa15" sortable />
                     <!-- <el-table-column label="发票类型" align="left" key="cbsa18" prop="cbsa18" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbsa18 == 1 ? "增值税专用发票" : scope.row.cbsa18 == 2 ?
@@ -50,7 +50,7 @@
                             </div>
                         </template>
                     </el-table-column> -->
-                    <el-table-column label="状态" align="left" key="cbsa07" prop="cbsa07" sortable>
+                    <el-table-column label="状态" width="100px;" align="center" key="cbsa07" prop="cbsa07" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.ifEnabled == -1 ? "启用" : scope.row.ifEnabled == 1 ? "禁用" : "状态不确定" }}
                             </div>
@@ -1222,5 +1222,5 @@ export default {
 },
 };
 </script>
-<style src="./SupplierMaintenancecss/index.css">
+<style src="./SupplierMaintenancecss/index.css" scoped>
 </style>
