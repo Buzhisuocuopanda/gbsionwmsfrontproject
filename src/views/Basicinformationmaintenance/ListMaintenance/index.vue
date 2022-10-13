@@ -1,5 +1,5 @@
 <template>
-    <div class="app-container">
+    <div class="app-container listmaince">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
             <el-col class="tooltup" style="width:92%;">
@@ -750,5 +750,5 @@ export default {
     }
 };
 </script>
-<style src="./ListMaintenanceCss/index.css">
+<style src="./ListMaintenanceCss/index.css" scoped>
 </style>

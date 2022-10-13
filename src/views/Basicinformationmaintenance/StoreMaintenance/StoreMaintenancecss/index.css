@@ -272,3 +272,7 @@ color: white !important;
     height: 40px;
 
 }
+
+.storemaince .el-form--inline {
+    height: 60px !important;
+}
