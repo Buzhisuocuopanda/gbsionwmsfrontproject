@@ -5,13 +5,13 @@
       <el-form :inline="true"   >
 
         <el-form-item label="经销商"  class="item-r" label-width="80px">
-          <el-select v-model="queryParams.customerId"  style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+          <el-select v-model="queryParams.customerId"  style="margin-left: 20px;width: 200px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="供应商" style="margin-left: 50px" class="item-r" label-width="80px">
-          <el-select v-model="queryParams.supplierId"  style="margin-left: 20px;width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading6">
+          <el-select v-model="queryParams.supplierId"  style="margin-left: 20px;width: 200px" clearable filterable placeholder="请输入关键词" :loading="loading6">
             <el-option v-for="item in cbsaList" :key="item.cbsa01" :label="item.cbsa08" :value="item.cbsa01"></el-option>
           </el-select>
         </el-form-item>
@@ -46,9 +46,9 @@
           <el-button v-hasPermi="['query:salesAnalysis:export']" class="filter-item" type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
-      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" height="460" width="100%;" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column label="客户名称" align="left" header-align="center" prop="customerName" min-width="200px;" />
+      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" height="430" width="100%;" v-loading="loading"
+                border fit highlight-current-row stripe style="margin-top:1em">
+        <el-table-column label="客户名称" align="left" header-align="center" prop="customerName" min-width="270px;" />
         <el-table-column  label="下单时间" align="left" prop="createTime" :formatter="formatTime2" min-width="120px;"/>
         <el-table-column  label="供应商" align="left" prop="supplier" min-width="140px;">
           <template slot-scope="scope">
@@ -56,9 +56,9 @@
           </template>
         </el-table-column>
         <el-table-column  label="销售人员" align="left" prop="saleUser"  min-width="160px;"/>
-        <el-table-column  label="销售订单号" align="left" prop="saleOrderNo" min-width="139px;"/>
+        <el-table-column  label="销售订单号" align="left" prop="saleOrderNo" min-width="145px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="160px;"/>
-        <el-table-column  label="品牌" align="left" prop="brandName" min-width="100px;"/>
+        <el-table-column  label="品牌" align="left" prop="brandName" min-width="120px;"/>
         <el-table-column  label="数量" align="right" :formatter="rounding" prop="qty" min-width="80px;"/>
         <el-table-column  label="金额" align="right" :formatter="rounding" prop="price" min-width="100px;"/>
         <el-table-column  label="成本" align="right" :formatter="rounding" prop="cost" min-width="100px;"/>

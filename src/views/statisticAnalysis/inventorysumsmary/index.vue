@@ -1,7 +1,7 @@
 <template>
 <!--zgl-->
   <!--商品占用查询-->
-  <div class="app-container">
+  <div class="app-container inventsumarys">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
       <el-form-item label="商品分类"   class="item-r" >
@@ -25,11 +25,11 @@
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"
-                     style="margin-bottom:0;margin-left: 1em">导出</el-button>
+                    style="margin-bottom:0;margin-left: 1em">导出</el-button>
         </el-form-item>
       </el-form>
       <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" height="460" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
+                border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column  align="center" label="序号" type="index" width="50"/>
         <el-table-column  label="销售订单号" align="left" prop="cboa07"  min-width="110px;"/>
         <el-table-column  label="客户" align="left" prop="cbca08" min-width="180px;"/>

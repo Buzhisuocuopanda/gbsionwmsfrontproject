@@ -3,16 +3,16 @@
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">销售预订变更单</div>
       <el-row :gutter="20" style="margin-top: 20px;">
-        <!-- <el-col :span="8">
-          <el-form-item label="销售预订单:" prop="GsSalesOrders">
-            <el-popover placement="bottom-start" trigger="click">
+        <el-col :span="8">
+          <el-form-item label="销售预订单:" prop="orderNo">
+            <el-popover placement="bottom-start" trigger="click" disabled>
               <SalesBooking ref="SalesBooking" @selected="selected0222"
                 style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width:68%;">
+              <el-input slot="reference" v-model="form2.orderNo" placeholder="" readonly style="width:68%;">
               </el-input>
             </el-popover>
           </el-form-item>
-        </el-col> -->
+        </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
             <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
@@ -121,11 +121,11 @@
         </el-col>
       </el-row>
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
-        </el-row>
+        </el-row> -->
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
           :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
@@ -140,7 +140,7 @@
           </el-table-column>
           <el-table-column label="型号" width="300" />
           <el-table-column label="描述" width="300" />
-          <el-table-column label="销售预订单" prop="orderNo" width="200px">
+          <!-- <el-table-column label="销售预订单" prop="orderNo" width="200px">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click" disabled>
               <SalesBooking ref="SalesBooking" @selected="selected0222"
@@ -149,7 +149,7 @@
               </el-input>
             </el-popover>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column label="数量" width="100" prop="qty">
             <template slot-scope="scope" style="width:200%;">
               <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""
@@ -1106,6 +1106,7 @@ export default {
     /** 销售预订单变更单返回操作 */
     handlexiaoshouone: function (row) {
       // this.$router.push("/system/user-auth/role/");
+      this.$store.dispatch("tagsView/delView", this.$route)
       this.$router.push("/system/user-SalesAdvancefanhui/role/");
     },
 
@@ -1149,9 +1150,9 @@ export default {
       PurchaseinboundEditSalesAdvance(JSON.stringify(arr1)).then(response => {
         if (response.code == "200") {
           // console.log(this.form, 789)
-          this.getList();
+          
           this.$message({ message: '修改成功', type: 'success' });
-
+          this.handlexiaoshouone();
         }
 
       });
