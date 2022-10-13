@@ -1,7 +1,7 @@
 <!-- zgl -->
 <!-- 调拨建议 -->
 <template>
-  <div class="app-container">
+  <div class="app-container outAdvicelist">
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="仓库"  style="margin-left: 10px"  class="item-r" >
@@ -28,16 +28,16 @@
       <el-table-column prop="date" label="序号" type="index" sortable width="80" align="left"></el-table-column>
       <el-table-column prop="saleOrderNo" label="商品订单" align="left" sortable></el-table-column>
       <el-table-column prop="description" label="商品描述" align="left" sortable width="300"></el-table-column>
-      <el-table-column prop="brand" width="110px;" label="品牌" align="left" sortable></el-table-column>
+      <el-table-column prop="brand" width="130px;" label="品牌" align="left" sortable></el-table-column>
       <el-table-column prop="whName" width="80px;" label="仓库" align="left" sortable></el-table-column>
       <el-table-column prop="model" label="型号" align="left" sortable></el-table-column>
 
-     <!-- <el-table-column prop="description" label="描述" align="center" width="240px" sortable></el-table-column>-->
+      <!-- <el-table-column prop="description" label="描述" align="center" width="240px" sortable></el-table-column>-->
 
 
       <el-table-column prop="qty" width="80px;" label="数量" :formatter="rounding" align="right" sortable></el-table-column>
 
-   <!--   <el-table-column prop="cbca08" label="客户" align="center" sortable></el-table-column>
+      <!--   <el-table-column prop="cbca08" label="客户" align="center" sortable></el-table-column>
       <el-table-column prop="cboe08" :formatter="formatTime" label="日期" align="center" sortable></el-table-column>-->
       <el-table-column prop="status" width="100px;" label="状态" :formatter="formatStateType" sortable align="center"></el-table-column>
       <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
@@ -218,4 +218,8 @@
   };
 </script>
 
-<style lang="less" scoped></style>
+<style scoped>
+.outAdvicelist .el-form--inline {
+  height: 60px !important;
+}
+</style>

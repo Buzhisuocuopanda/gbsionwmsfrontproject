@@ -37,8 +37,8 @@
                 <el-table :max-height="maxheight"  border :header-cell-style="headClassSPM" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="客户名称"  align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="客户地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
+                    <el-table-column label="客户名称" width="200"  align="left" key="cbsa08" prop="cbsa08" sortable />
+                    <el-table-column label="客户地址"  align="left" key="cbsa13" prop="cbsa13" locationNum />
                     <el-table-column label="联系人" width="130px;" align="left" key="cbsa14" prop="cbsa14" sortable />
                     <el-table-column label="联系电话" width="150px;" align="left" key="cbsa15" prop="cbsa15" sortable />
                     <!-- <el-table-column label="发票类型" align="left" key="cbsa18" prop="cbsa18" sortable>

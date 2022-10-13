@@ -1,6 +1,6 @@
 <template>
   <!--售后-->
-  <div class="app-container">
+  <div class="app-container saorderdet">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item style="margin-left: 10px">

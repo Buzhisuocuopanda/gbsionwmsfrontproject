@@ -1,5 +1,5 @@
 <template>
-    <div class="app-container">
+    <div class="app-container goodsnance">
         <div style="width:102.5%;">
             <el-row :gutter="20">
                 <!--部门数据-->
@@ -1600,5 +1600,5 @@ export default {
     }
 };
 </script>
-<style src="./GoodsCss/index.css">
+<style src="./GoodsCss/index.css" scoped>
 </style>
