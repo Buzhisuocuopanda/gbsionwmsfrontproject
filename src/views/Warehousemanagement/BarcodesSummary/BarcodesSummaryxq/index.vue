@@ -1,70 +1,74 @@
 <template>
     <div>
-      <section ref="print" class="recordImg" id="printRecord">
-        <div class="Purchase_caigou">库存初始化</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbie07 }}</span>
-            <span class="" style="margin-left:8%;">日期：{{ value.cbie02.slice(0, 10) }}</span>
-            <span class="" style="margin-left:8%;">仓库：{{ value.cbwa09 }}</span>
-            <span class="" style="margin-left:8%;">币种：{{ value.cala08 }}</span>
-        </div>
-        <div style="width:97%; margin-left: 2%; margin-top: 1%;">
+        <section ref="print" class="recordImg" id="printRecord">
+            <div class="Purchase_caigou">库存初始化</div>
+            <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
+                <span class="Purchase_bianhao">编号：{{ value.cbie07 }}</span>
+                <span class="" style="margin-left:8%;">日期：{{ value.cbie02.slice(0, 10) }}</span>
+                <span class="" style="margin-left:8%;">仓库：{{ value.cbwa09 }}</span>
+                <span class="" style="margin-left:8%;">币种：{{ value.cala08 }}</span>
+            </div>
+            <div style="width:97%; margin-left: 2%; margin-top: 1%;">
 
-            <el-table border :header-cell-style="headClasspwbitd" v-loading="loading" :data="userList"
-                 :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
-                :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                <el-table border :header-cell-style="headClasspwbitd" v-loading="loading" :data="userList"
+                    :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbsa08" key="cbsa08" width="100px;" label="供应商">
-                </el-table-column>
-                <!-- <el-table-column prop="cbla09" key="cbla09" width="150px;" label="库位">
+                    <el-table-column prop="cbsa08" key="cbsa08" width="100px;" label="供应商">
+                    </el-table-column>
+                    <!-- <el-table-column prop="cbla09" key="cbla09" width="150px;" label="库位">
                 </el-table-column> -->
-                <el-table-column prop="cbpa07" key="cbpa07" width="110px;" label="商品分类">
-                </el-table-column>
-                <el-table-column prop="cala08" key="cala08" width="60px;" label="品牌">
-                </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" width="140px;" label="型号">
-                </el-table-column>
-                <el-table-column prop="cbpb15" key="cbpb15" width="120px;" label="UPC">
-                </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" width="390px;" label="描述">
-                </el-table-column>
-                <el-table-column prop="cbif09" key="cbif09" align="right" width="50px;" label="数量">
-                </el-table-column>
-                <el-table-column prop="cbif11" key="cbif11" :formatter="rounding" align="right" width="90" label=" 价格">
-                </el-table-column>
-                <el-table-column prop="cbif12"  width="100px;" key="cbif12" :formatter="rounding"  align="right"  label="金额">
-                </el-table-column>
-                <el-table-column prop="cbif13" key="cbif13" label="备注">
-                </el-table-column>
-            </el-table>
-            <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
-                class="pagintotal" />
-        </div>
-       <div style="margin-top:5%;">
-          <span class="saomiaojluu">制单:</span>
-          <span class="saomiaojluuu">审核:</span>
-          <span class="saomiaojluuuu">财务:</span>
-       </div>
-     </section>
-       <div style="height:50px;"></div>
-       <div style="margin-top:5%;">
+                    <el-table-column prop="cbpa07" key="cbpa07" width="110px;" label="商品分类">
+                    </el-table-column>
+                    <el-table-column prop="cala08" key="cala08" width="60px;" label="品牌">
+                    </el-table-column>
+                    <el-table-column prop="cbpb12" key="cbpb12" width="140px;" label="型号">
+                    </el-table-column>
+                    <el-table-column prop="cbpb15" key="cbpb15" width="120px;" label="UPC">
+                    </el-table-column>
+                    <el-table-column prop="cbpb08" key="cbpb08" width="390px;" label="描述">
+                    </el-table-column>
+                    <el-table-column prop="cbif09" key="cbif09" align="right" width="50px;" label="数量">
+                    </el-table-column>
+                    <el-table-column prop="cbif11" key="cbif11" :formatter="rounding" align="right" width="90"
+                        label=" 价格">
+                    </el-table-column>
+                    <el-table-column prop="cbif12" width="100px;" key="cbif12" :formatter="rounding" align="right"
+                        label="金额">
+                    </el-table-column>
+                    <el-table-column prop="cbif13" key="cbif13" label="备注">
+                    </el-table-column>
+                </el-table>
+                <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
+                    class="pagintotal" />
+            </div>
+            <div style="margin-top:5%;">
+                <span class="saomiaojluu">制单:</span>
+                <span class="saomiaojluuu">审核:</span>
+                <span class="saomiaojluuuu">财务:</span>
+            </div>
+        </section>
+        <div style="height:50px;"></div>
+        <div style="margin-top:5%;">
             <div v-if="status == 8">
                 <el-button style="margin-left:3%;" type="primary" @click="PrintRow">打 印</el-button>
-                <el-button  style="margin-left:3%;"  @click="handlefanhui">返回</el-button>
+                <el-button style="margin-left:3%;" @click="handlefanhui">返回</el-button>
             </div>
             <div v-else>
-                <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
-                <el-button v-else style="margin-left:5%;" type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
-                <el-button  @click="handlefanhui">返回</el-button>
+                <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
+                </el-button>
+                <el-button v-else style="margin-left:5%;" type="primary" @click="PurchaseinboundFanShenpi">反 审
+                </el-button>
+                <el-button @click="handlefanhui">返回</el-button>
             </div>
-       </div>
-      <div style="height:50px;"></div>
+        </div>
+        <div style="height:50px;"></div>
     </div>
 </template>
 <script>
 // import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { PurchaseinboundLists,PurchaseinboundSH,PurchaseinboundShs } from "@/api/Warehousemanagement/BarcodesSummary";
+import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs } from "@/api/Warehousemanagement/BarcodesSummary";
 export default {
 
     data() {
@@ -87,10 +91,10 @@ export default {
                 userId: undefined
             },
             CBPC01: "",
-            ids:{
-                id:''
+            ids: {
+                id: ''
             },
-            status:'',
+            status: '',
         };
     },
     watch: {
@@ -104,38 +108,44 @@ export default {
         //审批
         PurchaseinboundShenpi() {
             this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbie07 + '"的数据项？').then(() => {
-                PurchaseinboundSH({cbie01:this.ids.id}).then(response => {
-                if (response.code == "200") {
-                    this.$message({ message: '审批成功', type: 'success' });
-                    this.$router.push("/system/user-kchzcshfh/role/");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                }
+                PurchaseinboundSH({ cbie01: this.ids.id }).then(response => {
+                    if (response.code == "200") {
+                        this.$message({ message: '审批成功', type: 'success' });
+                        // this.$router.push("/system/user-kchzcshfh/role/");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
         },
         //反审
         PurchaseinboundFanShenpi() {
             this.$modal.confirm('是否要反审,编号为"' + this.userList[0].cbie07 + '"的数据项？').then(() => {
-                PurchaseinboundShs({cbie01:this.ids.id}).then(response => {
+                PurchaseinboundShs({ cbie01: this.ids.id }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: '反审成功', type: 'success' });
-                        this.$router.push("/system/user-kchzcshfh/role/");
-                    }else{
+                        // this.$router.push("/system/user-kchzcshfh/role/");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
+                    } else {
                         this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
         },
-          //打印
-        PrintRow(index, row){
+        //打印
+        PrintRow(index, row) {
             this.$print(this.$refs.print)
         },
 
-           //返回按钮
+        //返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-kchzcshfh/role/");
+            // this.$router.push("/system/user-kchzcshfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
         //列表表头设置
         headClasspwbitd() {
@@ -146,12 +156,12 @@ export default {
             }
         },
         //列表价格数值
-      rounding(row, column) {
-        if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
-          return '0.00';
-        }
-        return parseFloat(row[column.property]).toFixed(2)
-      },
+        rounding(row, column) {
+            if (parseFloat(row[column.property]).toFixed(2) == null || isNaN(parseFloat(row[column.property]).toFixed(2))) {
+                return '0.00';
+            }
+            return parseFloat(row[column.property]).toFixed(2)
+        },
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection;
@@ -224,38 +234,41 @@ export default {
 };
 </script>
 <style src="./BarcodesSummaryxqcss/index.css">
+
 </style>
 <style>
-
 @page {
-  size: auto;
-  margin: 3mm;
+    size: auto;
+    margin: 3mm;
 }
+
 @media print {
-  html {
-    background-color: #ffffff;
-    height: auto;
-    margin: 0px;
-  }
-  body {
-    border: solid 1px #ffffff;
-    /* margin: 10mm 15mm 10mm 15mm; */
-  }
-  #printRecord table {
-    table-layout: auto !important;
-  }
+    html {
+        background-color: #ffffff;
+        height: auto;
+        margin: 0px;
+    }
 
-  #printRecord .el-table__header-wrapper .el-table__header {
-    width: 100% !important;
-    border: solid 1px #f2f2f2;
-  }
-  #printRecord .el-table__body-wrapper .el-table__body {
-    width: 100% !important;
-  }
-  #printRecord #pagetable table {
-    table-layout: fixed !important;
-  }
+    body {
+        border: solid 1px #ffffff;
+        /* margin: 10mm 15mm 10mm 15mm; */
+    }
+
+    #printRecord table {
+        table-layout: auto !important;
+    }
+
+    #printRecord .el-table__header-wrapper .el-table__header {
+        width: 100% !important;
+        border: solid 1px #f2f2f2;
+    }
+
+    #printRecord .el-table__body-wrapper .el-table__body {
+        width: 100% !important;
+    }
+
+    #printRecord #pagetable table {
+        table-layout: fixed !important;
+    }
 }
-
-
 </style>
