@@ -457,3 +457,7 @@ color: white !important;
     font-weight: 900;
     font-size: 20px;
 }
+
+.waresummer .el-form--inline {
+    height: 60px !important;
+}

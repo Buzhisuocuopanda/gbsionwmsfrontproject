@@ -1,7 +1,7 @@
 <template>
   <!--国际销售订单-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container saleorderGj">
       <el-form :inline="true" label-width="70px">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号"/>
@@ -761,5 +761,9 @@
 .caozuoxiangqengGJ {
   border: 0 !important;
   padding:0 !important;
+}
+
+.saleorderGj .el-button{
+  border: 0px !important;
 }
 </style>

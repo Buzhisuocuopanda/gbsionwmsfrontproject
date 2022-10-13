@@ -4,8 +4,8 @@
             <div class="chuangjiancaigous">质检单</div>
             <el-row>
                 <el-col :span="7">
-                    <el-form-item label="编号:" prop="cbpk07" style="margin-left:10%;">
-                        <el-input type="text" v-model="form2.cbpk07" style="width: 50%;" readonly/>
+                    <el-form-item label="编号:" prop="cbqa07" style="margin-left:10%;">
+                        <el-input type="text" v-model="form2.cbqa07" style="width: 50%;" readonly/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
@@ -73,7 +73,10 @@
           <el-table-column prop="cbqb09" label="替换商品SN"  width="200">
             <template slot-scope="scope">
               <!-- <sapn> -->
-                <el-input v-model="scope.row.cbqb09" class="shuzicaoyou" placeholder="" style=""></el-input>
+              <el-select v-model="scope.row.cbqb09"   filterable placeholder="请输入关键词" :loading="loading3">
+                <el-option v-for="item in snList" :key="item.cbpm09" :label="item.cbpm09" :value="item.cbpm09"></el-option>
+              </el-select>
+               <!-- <el-input v-model="scope.row.cbqb09" class="shuzicaoyou" placeholder="" style=""></el-input>-->
               <!-- </sapn> -->
             </template>
           </el-table-column>
@@ -130,8 +133,8 @@
 
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
-
-import { PurchaseinboundSellout,QualityinAdd,QualityinAdds,QualityinLists,QualityinEditOne } from "@/api/Warehousemanagement/AnalysisCertificate";
+//下拉列表替换sn
+import { PurchaseinboundSellout,QualityinAdd,QualityinAdds,QualityinLists,QualityinEditOne,SwJsSkuBarcodeselectss } from "@/api/Warehousemanagement/AnalysisCertificate";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -141,6 +144,8 @@ import supplierMaintenance from "@/components/SupplierMaintenance";
 //供应商
 import ListLists from "@/components/ListMaintenance";
 
+
+
 export default {
     name: "store",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
@@ -149,6 +154,7 @@ export default {
         return {
             // 遮罩层
             loading: true,
+          loading3: true,
             tianjiahang: [],
             // 选中数组
             ids: [],
@@ -331,6 +337,8 @@ export default {
                 address: undefined,
                 userId: undefined
             },
+          //下拉列表替换商品sn
+          snList:[],
             // 用户导入参数
             upload: {
                 // 是否显示弹出层（用户导入）
@@ -372,8 +380,15 @@ export default {
         },
     },
     created() {
+      let routerParams = this.$route.query;
+      // this.formArr = {cbqa01:routerParams.data};
+      this.formArr = routerParams.data;
+      this.form2.cbqa01 = routerParams.data;
+      this.form2.cbqa07 = routerParams.cbqa07;
+      this.form2.cbqa11 = routerParams.cbqa11;
         this.getList()
-    //   this.getDetail();
+      this.getLists()
+      // this.getDetail();
         this.getConfigKey("sys.user.initPassword").then(response => {
             // this.initPassword = response.msg;
         });
@@ -388,7 +403,21 @@ export default {
 
     },
     methods: {
-
+      // 替换sn查询
+      getLists(){
+        let id = this.$route.query.data
+        this.loading3 = true;
+        SwJsSkuBarcodeselectss({
+            // cbpk01:id,
+            // cbpm09:query
+          }).then((response) => {
+          this.loading3 = false;
+          this.snList = response.data.rows;
+          // this.snList = response.data.total;
+        },error => {
+          this.loading3 = false;
+        });
+      },
          //返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");

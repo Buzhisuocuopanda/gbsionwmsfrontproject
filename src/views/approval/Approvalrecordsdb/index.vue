@@ -1,7 +1,7 @@
 <template>
   <!--待办事宜-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container approlrdsdb">
       <el-form :inline="true" label-width="70px"  >
 
           <el-form-item>
@@ -312,5 +312,10 @@ export default {
 <style scoped>
 .caozuoxiangqeng {
   border: 0 !important;
+  padding:0 !important;
+}
+
+.approlrdsdb .el-form--inline {
+  height: 60px !important;
 }
 </style>

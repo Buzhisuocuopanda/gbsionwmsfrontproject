@@ -69,7 +69,7 @@
                     <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
                         sortable  width="160px;"/>
                     <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
-                        sortable width="90px;">
+                        sortable width="110px;">
                     </el-table-column>
                     <el-table-column label="客户编号" align="left" key="customerNo" prop="customerNo" sortable width="200px;" />
                     <el-table-column label="客户名称" align="left" key="customerName" prop="customerName" sortable width="200px;" />

@@ -39,7 +39,7 @@
         <el-table-column  label="供应商" align="left" prop="supplieName"  min-width="140px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="90px;"/>
         <el-table-column  label="大类" align="left" prop="bclass" min-width="80px;"/>
-        <el-table-column  label="小类" align="left" prop="sclass" min-width="90px;"/>
+        <el-table-column  label="小类" align="left" prop="sclass" min-width="110px;"/>
         <!--<el-table-column  label="SKU" align="center" prop="qty" min-width="60px;"/>-->
         <el-table-column  label="型号" align="left" prop="model"  min-width="160px;"/>
         <el-table-column  label="期初库存" align="right" :formatter="rounding" prop="firstQty" min-width="100px;"/>
@@ -48,7 +48,7 @@
         <el-table-column  label="不良返工" align="right" :formatter="rounding" prop="badQty" min-width="100px;"/>
         <el-table-column  label="累计" align="right" :formatter="rounding" prop="totalQty" min-width="100px;"/>
         <el-table-column  label="销售出库" :formatter="rounding" align="right" prop="outSaleQty" min-width="80px;"/>
-        <el-table-column  label="库存" :formatter="rounding" align="right" prop="skuQty" min-width="160px;"/>
+        <el-table-column  label="库存" :formatter="rounding" align="right" prop="skuQty" min-width="140px;"/>
         <!--<el-table-column  label="现有订单" align="center" prop="cgRprice" min-width="60px;"/>
         <el-table-column  label="订单分配" align="center" prop="cgRprice" min-width="60px;"/>
         <el-table-column  label="订单缺货" align="center" prop="cbib16" min-width="100px;"/>

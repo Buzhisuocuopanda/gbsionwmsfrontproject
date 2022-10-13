@@ -1,7 +1,7 @@
 <template>
   <!--未完单据-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container unfinddcumts">
       <el-form :inline="true" label-width="70px"  >
 
           <el-form-item>
@@ -308,5 +308,9 @@ export default {
 <style scoped>
 .caozuoxiangqeng {
   border: 0 !important;
+}
+
+.unfinddcumts .el-form--inline {
+  height: 60px !important;
 }
 </style>

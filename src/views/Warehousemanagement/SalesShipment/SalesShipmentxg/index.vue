@@ -1024,7 +1024,7 @@ export default {
 
         },
 
-        /** 销售提货单 */
+        /** 销售出库单 */
         getList() {
             let id = this.$route.params.id
             SwJsSkuBarcodelistss(id, this.addDateRange(this.queryParams, this.dateRange)).then(response => {

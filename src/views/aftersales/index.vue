@@ -58,6 +58,7 @@
           <template slot-scope="scope" >
             <el-button
               size="mini"
+              class="caozuoxiangqorderdet"
               type="text"
               icon="el-icon-edit"
               @click="mdfDetail(scope.row)"
@@ -66,6 +67,7 @@
             <el-button
               size="mini"
               type="text"
+              class="caozuoxiangqorderdet"
               icon="el-icon-delete"
               @click="delTotalOrder(scope.row)"
               v-hasPermi="['system:aftersales:remove']"
@@ -703,5 +705,15 @@ export default {
 </script>
 
 <style scoped>
+.saorderdet .el-form--inline {
+  height: 60px !important;
+}
 
+  .saorderdet .el-button{
+  border:0px !important;
+  padding:0px !important;
+  }
+  .caozuoxiangqorderdet{
+  border: 0px !important;
+  }
 </style>

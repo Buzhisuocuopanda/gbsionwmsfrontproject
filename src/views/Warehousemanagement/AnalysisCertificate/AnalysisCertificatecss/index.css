@@ -474,3 +474,6 @@
     background-image: linear-gradient(#469ab9, #005ab3);
 }
 
+.ancerficate .el-form--inline {
+    height: 60px !important;
+}
