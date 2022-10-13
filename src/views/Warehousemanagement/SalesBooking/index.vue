@@ -50,14 +50,15 @@
                         </el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu"
+                        <!-- 取消该标记该功能 10.13 -->
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:saleOrder:bjwc']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
                             v-hasPermi="['system:saleOrder:qxwc']">取消完成
-                        </el-button>
+                        </el-button> -->
                     </el-form-item>
                 </el-form>
 
