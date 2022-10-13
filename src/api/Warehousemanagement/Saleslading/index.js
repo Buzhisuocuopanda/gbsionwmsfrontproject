@@ -41,7 +41,7 @@ export function Purchaseinbounddingdanxsdd(data) {
     method: 'get',
     params: data
   })
-  
+
 }
 
 // 销售订单详情查询
@@ -190,6 +190,18 @@ export function auditTakeOrders(data) {
 }
 // 查询列表2
 export function CustomerLists(whid,goodsid) {
+  return request({
+    url: '/whmanagement/selectGoodsSnByWhIdAndGoodsId',
+    method: 'get',
+    params: {
+      whId:whid,
+      goodsId:goodsid
+    }
+  })
+}
+
+// 查询列表2
+export function selectGoodsSnByWhIdAndGoodsId(whid,goodsid) {
   return request({
     url: '/whmanagement/selectGoodsSnByWhIdAndGoodsId',
     method: 'get',
