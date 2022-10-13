@@ -1,41 +1,41 @@
 <template>
     <div>
         <div class="Purchase_caigou">销售预订单入库单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpc07 }}</span>
-            <span class="Purchase_riqi">日期：{{ value.cbpc08.slice(0, 10) }}</span>
+        <div class="Purchase_sum" v-for="(value, key) in userList" :key="key">
+            <span class="Purchase_bianhao">编号：{{ value.orderNo }}</span>
+            <span class="Purchase_riqi">日期：{{ value.orderDate }}</span>
         </div>
         <div style="width:98%; margin-left: 1%; margin-top: 1%;">
             <!-- 横向 -->
             <el-descriptions class="margin-top" title="" :column="3" border
-                v-for="(value, key) in userList.slice(0, 1)" :key="key">
+                v-for="(value, key) in userList" :key="key">
                 <el-descriptions-item>
                     <template slot="label">供料单位</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
                 </el-descriptions-item>
-                <el-descriptions-item>
+                <!-- <el-descriptions-item>
                     <template slot="label">结算货币</template>USD
-                </el-descriptions-item>
+                </el-descriptions-item> -->
             </el-descriptions>
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList" height="280"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="tabData" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="品牌">
+                <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpc08" key="cbpc08" :formatter="formatDate" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="数量">
+                <el-table-column prop="inQty" key="inQty" align="right" label="数量">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" align="right" label="已扫数量">
+                <!-- <el-table-column prop="cbpd09" key="cbpd09" align="right" label="已扫数量">
+                </el-table-column> -->
+                <el-table-column prop="price" key="price" align="right" label="单价">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd11" align="right" label="单价">
-                </el-table-column>
-                <el-table-column prop="cbpd12" key="cbpd12" align="right" label="金额">
+                <el-table-column prop="totalPrice" key="totalPrice" align="right" label="金额">
                 </el-table-column>
                 <el-table-column prop="cbpc17" key="cbpc17" label="备注">
                 </el-table-column>
@@ -125,12 +125,14 @@
                 </el-descriptions-item>
             </el-descriptions>
         </div>
-
+        <div class="tinajia_dingwei" style="margin:5% 0 1% 3%;left:0;">
+            <el-button @click="_ly_cancelDialog">取 消</el-button>
+        </div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundLists } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { PurchaseinboundSalesReceipt } from "@/api/Warehousemanagement/SalesReceipt";
 export default {
     
     data() {
@@ -140,7 +142,8 @@ export default {
             // 总条数
             total: 0,
             // 用户表格数据
-            userList: null,
+            userList: [{}],
+            tabData:[],
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -164,6 +167,13 @@ export default {
         
     },
     methods: {
+        // 点击【取消】按钮关闭弹窗
+      _ly_cancelDialog(done) {
+        console.log('_ly_cancelDialog')
+        this.$emit('on-close')
+        this.$store.dispatch("tagsView/delView", this.$route)
+        this.$router.push("/system/user-xiaoshouyddfanhui/role/");
+      },
         //列表表头设置
         headClass() {
             return {
@@ -190,13 +200,18 @@ export default {
         //详情列表
         getList(){
             this.loading = true;
-            const userId = this.$route.params &&  this.$route.params.cbpc01;
+            const userId = this.$route.query &&  this.$route.query.id;
             if (userId) {
                 // 获取表详细信息
-                PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
-                    this.userList = res.data.rows;
+                PurchaseinboundSalesReceipt(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                    this.userList[0] = res.data.rows[0];
+                    this.userList[0].orderDate = this.userList[0].orderDate.slice(0,10)
+                    this.tabData = res.data.rows;
+                    this.tabData.map((item) =>{
+                        item.totalPrice = item.inQty * item.price
+                    })
                     this.total = res.data.total;
-                    console.log(res, 888999);
+                    console.log(res, 888999,this.userList);
                     this.loading = false;
                 });
             }
@@ -226,15 +241,15 @@ export default {
     computed: {
         totalCount: function () {
             var totalCount = 0;
-            for (let i = 0; i < this.userList.length; i++) {
-                totalCount += this.userList[i].cbpd09;
+            for (let i = 0; i < this.tabData.length; i++) {
+                totalCount += this.tabData[i].inQty;
             }
             return totalCount;
         },
         totalPrice: function () {
             var totalPrice = 0;
-            for (let i = 0; i < this.userList.length; i++) {
-                totalPrice += this.userList[i].cbpd09 * this.userList[i].cbpd11;
+            for (let i = 0; i < this.tabData.length; i++) {
+                totalPrice += this.tabData[i].inQty * this.tabData[i].price;
             }
             return totalPrice;
         }

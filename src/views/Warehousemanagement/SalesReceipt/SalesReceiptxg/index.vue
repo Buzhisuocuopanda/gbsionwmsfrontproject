@@ -635,16 +635,16 @@ import salerman from "@/components/salerman";
       handleUpdate() {
 
         let row = {}
-        //客户id
-        row.customer = this.form2.customerId;
-        //供应商id
-        row.supplierId = this.form2.supplierId;
-        //仓库id 
-        row.whId = this.form2.whId;
-        //销售人员id
-        row.salerId = this.form2.salerId;
-        //订单日期
-        row.orderDate = this.form2.orderDate;
+        // //客户id
+        // row.customer = this.form2.customerId;
+        // //供应商id
+        // row.supplierId = this.form2.supplierId;
+        // //仓库id 
+        // row.whId = this.form2.whId;
+        // //销售人员id
+        // row.salerId = this.form2.salerId;
+        // //订单日期
+        // row.orderDate = this.form2.orderDate;
         //商品id
         this.tableData.forEach((item) => {
           row.goodsId = item.goodsId;
@@ -652,18 +652,19 @@ import salerman from "@/components/salerman";
           row.goodsclassify = item.goodsclassify;
           //销售预订单入库单
           row.gsSalesOrders = item.gsSalesOrders;
+          // id
+          row.id = item.id;
+          // 入库数量
+          row.inQty = item.inQty
+          // pomber
+          row.ponumber = item.ponumber
+
         })
-        row.id = this.form2.id;
-        // row.cbpc16 = this.form.cbpc16;
-        // console.log(this.form.id);
         PurchaseinboundxiaoshouEdit(JSON.stringify(row)).then(response => {
           if (response.code == "200") {
             // console.log(this.form, 789)
-            this.getList();
+            this._ly_cancelDialog();
             this.$message({ message: '修改成功', type: 'success' });
-
-          } else {
-            this.$message({ message: response.msg, type: 'error' });
           }
 
         });
@@ -718,6 +719,7 @@ import salerman from "@/components/salerman";
                 item.goodsId = this.userList[0].goodsId;
                 //销售预订单入库单
                 item.gsSalesOrders = this.userList[0].gsSalesOrders;
+                item.id = this.userList[0].id;
               })
 
             } else {
@@ -754,6 +756,8 @@ import salerman from "@/components/salerman";
       _ly_cancelDialog(done) {
         console.log('_ly_cancelDialog')
         this.$emit('on-close')
+        this.$store.dispatch("tagsView/delView", this.$route)
+        this.$router.push("/system/user-xiaoshouyddfanhui/role/");
       },
       // 关闭弹窗前，二次询问是否关闭
       _ly_beforeClose(done) {
