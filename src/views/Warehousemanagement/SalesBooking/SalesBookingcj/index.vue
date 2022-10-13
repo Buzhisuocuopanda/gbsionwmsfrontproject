@@ -10,8 +10,8 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <!-- <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
-            </el-date-picker> -->
+            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+            </el-date-picker>
           </el-form-item>
         </el-col>
       </el-row>
@@ -711,6 +711,7 @@
                     cbpc0999:"",
                     cbsb177:""
                   }
+                  this.handlefanhui()
                 }
                 if (count-- === 1) {
                   this._ly_save()
@@ -936,6 +937,9 @@
         this.$refs["form2"].validate((item) => {
           if (item) {
             this.form2.goods=this.tableData
+            this.form2.orderDate = this.form2.orderDate.slice(0,10) + '  ' + this.form2.orderDate.slice(10,-1)
+            console.log(this.form2.orderDate)
+            return
             PurchaseinboundAdd(this.form2).then(response => {
               if (response.code == "200") {
                 this.$message({
