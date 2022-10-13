@@ -233,9 +233,9 @@
                     <!-- </el-form> -->
                 </el-table>
             </div>
-            <div class="tinajia_dingweii">
-                <el-button type="primary" @click="handleUpdate">确 定</el-button>
-                <el-button @click="cancel">取 消</el-button>
+            <div style="text-align: center;margin-top: 30px">
+                <el-button type="primary" @click="handleUpdate" >确 定</el-button>
+                <el-button @click="cancel" style="margin-left: 100px">取 消</el-button>
             </div>
         </el-dialog>
 
@@ -404,10 +404,10 @@
             </div>
 
 
-         <div class="tinajia_dingweii">
+         <div style="text-align: center;margin-top: 30px">
             <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
                 <el-button type="primary" @click="handleAdd">保 存</el-button>
-                <el-button @click="cancells">取 消</el-button>
+                <el-button @click="cancells" style="margin-left: 100px">取 消</el-button>
             <!-- </span> -->
         </div>
     </el-dialog>
@@ -1016,7 +1016,6 @@ export default {
         /** 查询用户列表 */
         getList029(row) {
             let id = row.cbpb01;
-            console.log(row,202209299999);
             GoodsListjiesuanhb(id,this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 // console.log(response.rows, 123456);
                 // this.userList = response.data.rows;
@@ -1024,35 +1023,36 @@ export default {
                 // this.total = response.data.total;
                 this.userList9916 = response.data.rows;
                 this.total9916 = response.data.total;
-                console.log(this.userList9916, 3369916);
+                this.tableData = [];
                 if (response.code == "200") {
                 this.userList9916.forEach((item) => {
                     // item.cbpb01 = item;
+                  let tableDataItem = {
+
+                  };
                     this.userList0929 = item;
-                    this.tableData[0].cbpf02 = item.cbpf02;
-                    this.tableData[0].cbpf04 = item.cbpf04;
-                    this.tableData[0].cbpf05 = item.cbpf05;
-                    this.tableData[0].cbpf06 = item.cbpf06;
-                    this.tableData[0].cbpf07 = item.cbpf07;
-                    if (this.tableData[0].cbpf02 == "1") {
-                        this.tableData[0].cbpf02 = "1";
-                        this.tableData[0].cbpf02 = "1";
-                    } else if (this.tableData[0].cbpf02 == "2") {
-                        this.tableData[0].cbpf02 = "2";
-                        this.tableData[0].cbpf02 = "2";
-                    } else if (this.tableData[0].cbpf02 == "3") {
-                        this.tableData[0].cbpf02 = "3";
-                        this.tableData[0].cbpf02 = "3";
+                  // tableDataItem.cbpf01 = item.cbpf01;
+                  tableDataItem.cbpf02 = item.cbpf02;
+                  tableDataItem.cbpf04 = item.cbpf04;
+                  tableDataItem.cbpf05 = item.cbpf05;
+                  tableDataItem.cbpf06 = item.cbpf06;
+                  tableDataItem.cbpf07 = item.cbpf07;
+                    if (tableDataItem.cbpf02 == "1") {
+                      tableDataItem.cbpf02 = "1";
+                    } else if (tableDataItem.cbpf02 == "2") {
+                      tableDataItem.cbpf02 = "2";
+                    } else if (tableDataItem.cbpf02 == "3") {
+                      tableDataItem.cbpf02 = "3";
                     }
 
 
-                    if (this.tableData[0].cbpf06 == "1") {
-                        this.tableData[0].cbpf06 = "CNY";
-                        this.tableData[0].cbpf06 = "1";
-                    } else if (this.tableData[0].cbpf06 == "2") {
-                        this.tableData[0].cbpf06 = "USD"
-                        this.tableData[0].cbpf06 = "2";
+                    if (tableDataItem.cbpf06 == "1") {
+                      tableDataItem.cbpf06 = "1";
+
+                    } else if (tableDataItem.cbpf06 == "2") {
+                      tableDataItem.cbpf06 = "2"
                     }
+                  this.tableData.push(tableDataItem)
                     console.log(this.tableData,20220929);
                     // console.log(item.cbpb01, 8523697412);
                 })
@@ -1307,10 +1307,6 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
-
-
-            this.open = true;
-
                 let row = {}
                 row.cbpb01 = this.form.cbpb01;
                 row.cbpa07 = this.form.cbpa07;
@@ -1325,51 +1321,31 @@ export default {
                 console.log(this.form.cbpb01);
             //   this.$refs["form5"].validate((item) => {
             //     if (item) {
+                for(let i = 0;i<this.tableData.length;i++){
+                  this.tableData[i].cbpb01 =this.form.cbpb01;
 
-                 GoodsAddss(JSON.stringify(this.tableData)).then(response => {
+                }
+                row.goods = this.tableData;
+                // console.log(this.tableData,123456)
+               /*  GoodsAddss(JSON.stringify(this.tableData)).then(response => {
                      if (response.code == "200") {
-                        //  this.tableData = []
-                         this.form2 = {
-                             cbpb07: "",
-                             cbpb08: "",
-                             cbpb09: "",
-                             cbpb10: "",
-                             cbpb11: "",
-                             cbpb12: "",
-                             cbpb13: "",
-                             cbpb14: "",
-                             cbpb15: "",
-                             cala08: "",
-                             cbpa07: "",
-                             cbpc099: ""
-                         }
+                         this.tableData = []
+
                      } else {
                          this.$message({ message: response.msg, type: 'error' });
                      }
                         this.getTreeselect();
-                        // this.submitShangpin();
                         this.getList();
-                        this.reset01();
-                        // console.log(this.form2.ifEnabled, 123456);
-                    });
+                    });*/
               this.$refs["form"].validate((item) => {
                 if (item) {
                 GoodsEdit(JSON.stringify(row)).then(response => {
                     if (response.code == "200") {
-                    // this.form = response.data;
-                    // this.classifyId = response.classify_id;
-                    // this.brand = response.brand;
-                    // this.model = response.model;
-                    // this.upc = response.upc;
-                    // this.description = response.description;
-                    // this.if_enabled = response.if_enabled;
                     this.getTreeselect();
                     this.open = false;
-                    // this.submitShangpin();
+                      this.tableData = []
                     this.getList();
-                    // this.handleAdds();
-
-
+                      this.reset01();
                     this.$message({ message: '修改成功', type: 'success' });
                     } else {
                         this.$message({ message: response.msg, type: 'error' });

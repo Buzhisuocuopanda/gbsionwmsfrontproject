@@ -27,7 +27,7 @@
 
         </el-form-item>-->
 
-        <el-form-item style="margin: -5px -10px 1px 1px">
+        <el-form-item style="margin: -13px -10px 1px 1px">
           <el-button v-hasPermi="['countQuery:inventorysmmaryquerys:list']"   class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventorysmmaryquerys:list']"  class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['countQuery:inventorysmmaryquerys:export']" class="filter-item" type="primary" v-on:click="exprotData()"   style="margin-bottom:0;margin-left: 1em" >导出</el-button>
@@ -37,8 +37,8 @@
                  border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="仓库" align="left" header-align="center" prop="cbwa09" min-width="80px;" />
         <el-table-column  label="单据日期" align="left"  prop="cbib04" :formatter="formatTime2"  min-width="100px;"/>
-        <el-table-column  label="单据类型" align="left" prop="cbib17" min-width="90px;"/>
-        <el-table-column  label="单据编号" align="left" prop="cbib03" min-width="130px;"/>
+        <el-table-column  label="单据类型" align="left" prop="cbib17" min-width="110px;"/>
+        <el-table-column  label="单据编号" align="left" prop="cbib03" min-width="150px;"/>
         <el-table-column  label="摘要" align="left" prop="cbib17" min-width="130px;"/>
         <el-table-column  label="往来单位" align="left" prop="cbib06" min-width="100px;"/>
         <el-table-column  label="商品" align="left" prop="cbpb08"  min-width="270px;"/>

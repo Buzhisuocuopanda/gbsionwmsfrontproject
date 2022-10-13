@@ -1,6 +1,6 @@
 <template>
   <!--仓库调拨单-->
-    <div class="app-container">
+    <div class="app-container Waretransf">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">

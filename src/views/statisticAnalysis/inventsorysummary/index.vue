@@ -4,23 +4,23 @@
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item label="商品分类"   class="item-r" >
-          <el-select v-model="queryParams.classId"  style="width: 300px" clearable  filterable placeholder="请输入关键词" :loading="loading3">
+          <el-select v-model="queryParams.classId"  style="width: 200px" clearable  filterable placeholder="请输入关键词" :loading="loading3">
             <el-option v-for="item in cbpaList" :key="item.cbpa01" :label="item.cbpa07+' ['+item.cbpa11+']'" :value="item.cbpa01"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="品牌"   class="item-r" >
-          <el-select v-model="queryParams.cbpb10"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+          <el-select v-model="queryParams.cbpb10"  style="width: 200px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :loading="loading1">
+          <el-select v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :loading="loading1">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item style="margin: -5px -10px 1px 1px">
+        <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['countQuery:inventsorysummaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>

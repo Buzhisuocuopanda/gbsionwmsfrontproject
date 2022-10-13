@@ -5,19 +5,19 @@
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="仓库"  style="margin-left: 10px"  class="item-r" >
-        <el-select style="width: 300px;margin-left: 20px" v-model="queryParams.whId" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+        <el-select style="width: 200px;margin-left: 20px" v-model="queryParams.whId" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
           <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="订单号" style="margin-left: 20px">
-        <el-input type="text" style="width: 300px;margin-left: 20px" v-model="queryParams.orderNo"></el-input>
+        <el-input type="text" style="width: 200px;margin-left: 20px" v-model="queryParams.orderNo"></el-input>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="queryParams.status" clearable filterable remote reserve-keyword placeholder="请选择" >
+        <el-select style="width:150px;" v-model="queryParams.status" clearable filterable remote reserve-keyword placeholder="请选择" >
           <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item style="margin-left: 100px">
+      <el-form-item style="margin-left: 80px">
         <el-button v-hasPermi="['system:outStockAdviceList:list']" type="primary" @click="handleQuery">查询</el-button>
         <el-button v-hasPermi="['system:outStockAdviceList:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
         <!--<el-button type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
@@ -28,7 +28,7 @@
       <el-table-column prop="date" label="序号" type="index" sortable width="80" align="left"></el-table-column>
       <el-table-column prop="saleOrderNo" label="商品订单" align="left" sortable></el-table-column>
       <el-table-column prop="description" label="商品描述" align="left" sortable width="300"></el-table-column>
-      <el-table-column prop="brand" width="80px;" label="品牌" align="left" sortable></el-table-column>
+      <el-table-column prop="brand" width="110px;" label="品牌" align="left" sortable></el-table-column>
       <el-table-column prop="whName" width="80px;" label="仓库" align="left" sortable></el-table-column>
       <el-table-column prop="model" label="型号" align="left" sortable></el-table-column>
 

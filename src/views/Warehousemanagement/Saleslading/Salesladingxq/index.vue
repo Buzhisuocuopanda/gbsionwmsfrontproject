@@ -554,11 +554,14 @@ export default {
           this.userLists = res.data.goods;
           this.whid = res.data.whId
           this.goodsId = res.data.goods[0].goodsId
-          console.log([this.whid,this.goodsId],'传值')
+          console.log([this.whid,this.goodsId,this.userLists],'传值')
           this.userList1 = res.data.scans.map(item=>{
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
           });
+          this.userList = res.data.goods.map(item =>{
+            item.goodsNum = item.qty
+          })
           this.userListsss = res.data.sugests.map(item=>{
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item

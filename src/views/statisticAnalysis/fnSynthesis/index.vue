@@ -4,28 +4,28 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" >
-        <el-form-item label="销售订单号" label-width="100px" style="margin-left: 10px"  class="item-r" >
-          <el-input v-model="queryParams.saleOrderNo" style="margin-left: 20px;width: 500px" class="filter-item"  placeholder="销售订单号" />
+        <el-form-item label="销售订单号"  style="margin-left: 10px"  class="item-r" >
+          <el-input v-model="queryParams.saleOrderNo" style="margin-left: 10px;" class="filter-item"  placeholder="销售订单号" />
         </el-form-item>
-        <el-form-item label="仓库"  style="margin-left: 100px"  class="item-r" >
-          <el-select style="width: 500px;margin-left: 20px" v-model="queryParams.whId" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+        <el-form-item label="仓库"  style="margin-left: 20px"  class="item-r" >
+          <el-select style="margin-left: 10px" v-model="queryParams.whId" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="客户" label-width="100px" style="margin-left: 10px;margin-top: -20px"  class="item-r" >
-          <el-select v-model="queryParams.customerId"  style="width: 500px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+        <el-form-item label="客户" style="margin-left: 20px;"  class="item-r" >
+          <el-select v-model="queryParams.customerId"  style="margin-left: 10px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item  label="日期" style="margin-left: 100px;margin-top: -20px">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="margin-left: 20px;width: 500px;height: 35px"
+        <el-form-item  label="日期" style="margin-left: 20px;">
+          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="margin-left: 10px;height: 35px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
 
-        <el-form-item style="margin: -20px -10px 1px 1px;">
+        <el-form-item style="margin: 0px -10px 1px 1px;">
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['query:fnSynthesis:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
@@ -49,12 +49,12 @@
         <el-table-column  label="经销商品名称" align="left" prop="suplierName" min-width="200px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="100px;"/>
         <el-table-column  label="工厂" align="left" prop="gc" min-width="100px;"/>
-        <el-table-column  label="采购单价U" :formatter="rounding" align="right" min-width="60px;">
+        <el-table-column  label="采购单价U" :formatter="rounding" align="right" min-width="110px;">
           <template slot-scope="scope">
             <div >{{RToU(scope.row.cgRprice )}}</div>
           </template>
         </el-table-column>
-        <el-table-column  label="采购单价R" align="right" :formatter="rounding" prop="cgRprice" min-width="80px;"/>
+        <el-table-column  label="采购单价R" align="right" :formatter="rounding" prop="cgRprice" min-width="110px;"/>
         <!--<el-table-column  label="生产总订单号" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
       <el-pagination

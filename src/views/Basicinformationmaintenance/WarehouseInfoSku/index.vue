@@ -1,5 +1,5 @@
 <template>
-    <div class="app-container">
+    <div class="app-container waresku">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
             <el-col class="tooltup" style="width:100%;">
@@ -1138,5 +1138,5 @@ export default {
     }
 };
 </script>
-<style src="./WarehouseInfoSkucss/index.css">
+<style src="./WarehouseInfoSkucss/index.css" scoped>
 </style>

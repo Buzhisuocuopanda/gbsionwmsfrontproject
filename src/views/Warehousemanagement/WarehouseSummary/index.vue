@@ -1,6 +1,6 @@
 <template>
   <!--仓库盘点汇总表-->
-    <div class="app-container">
+    <div class="app-container waresummer">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">

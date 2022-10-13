@@ -700,7 +700,7 @@ export default {
 
 <style scoped>
 .outofstock  .el-form--inline {
-    height: 50px !important;
+    height: 65px !important;
   }
 .caozuoxiangqengOut {
       border: 0 !important;

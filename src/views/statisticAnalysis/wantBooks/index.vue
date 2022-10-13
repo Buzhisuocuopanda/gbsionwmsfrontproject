@@ -5,17 +5,17 @@
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="商品分类">
-        <el-select v-model="queryParams.cbpa07"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading3">
+        <el-select v-model="queryParams.cbpa07"  style="width: 200px" clearable filterable placeholder="请输入关键词" :loading="loading3">
           <el-option v-for="item in cbpaList" :key="item.cbpa07" :label="item.cbpa07+' ['+item.cbpa11+']'" :value="item.cbpa07"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="品牌">
-        <el-select v-model="queryParams.cala08"  style="width: 300px" clearable filterable placeholder="请输入关键词" :loading="loading2">
+        <el-select v-model="queryParams.cala08"  style="width: 200px" clearable filterable placeholder="请输入关键词" :loading="loading2">
           <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="商品">
-        <el-select v-model="queryParams.cbpb01" style="width: 300px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :loading="loading1">
+        <el-select v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote reserve-keyword placeholder="请输入关键词" :loading="loading1">
           <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
         </el-select>
       </el-form-item>

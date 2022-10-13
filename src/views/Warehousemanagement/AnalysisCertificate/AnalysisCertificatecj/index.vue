@@ -37,7 +37,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-      
+
       <div>
         <el-row>
           <el-col :span="24">
@@ -552,6 +552,7 @@ export default {
     // console.log(this.userList,123456789);
 
     console.log(this.form.cbpc16, 123456);
+    this.getLists();
   },
   methods: {
     //返回按钮

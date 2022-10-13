@@ -1,7 +1,7 @@
 <template>
   <!--国际销售订单-->
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container saleorderGj">
       <el-form :inline="true" label-width="70px">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号"/>
@@ -88,7 +88,7 @@
             <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)" v-hasPermi="['sale:saleOrderGj:remove']">删除</el-button>
           </template>
 
-          
+
         </el-table-column>
       </el-table>
       <el-pagination
@@ -761,5 +761,9 @@
 .caozuoxiangqengGJ {
   border: 0 !important;
   padding:0 !important;
+}
+
+.saleorderGj .el-button{
+  border: 0px !important;
 }
 </style>
