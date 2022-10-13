@@ -310,11 +310,11 @@
               </el-select>
             </template>
           </el-table-column> -->
-          <el-table-column prop="cbsc09" label="数量" width="80">
+          <el-table-column prop="qty" label="数量" width="80">
             <template slot-scope="scope">
               <el-input
-                v-model="scope.row.cbsc09"
-                @input="chen(scope.row,$event)"
+                v-model="scope.row.qty"
+                @input="chen(scope.row)"
                 placeholder=""
                 class="shuzicaoyou"
                 style=""
@@ -332,7 +332,7 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="金额" >
+          <el-table-column prop="cbsc12" label="金额" >
             <template slot-scope="scope">
               <el-input
                 v-model="scope.row.cbsc12"
@@ -343,19 +343,19 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="剩余未发量" >
+          <el-table-column prop="noSendQty" label="剩余未发量" >
             <template slot-scope="scope">
               <el-input v-model="scope.row.noSendQty" placeholder="" readonly></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="订单占用量" >
+          <el-table-column prop="useQty" label="订单占用量" >
             <template slot-scope="scope">
               <el-input v-model="scope.row.useQty" placeholder="" readonly></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd13" placeholder=""></el-input>
+              <el-input v-model="scope.row.remark" placeholder=""></el-input>
             </template>
           </el-table-column>
 
@@ -935,7 +935,7 @@ export default {
     // this.form.type = this.dict[0].label;
     // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
     // console.log(this.userList,123456789);
-    this.chen();
+    this.chen(row);
     this.form2.cbpd11 = "20";
 
     console.log(this.form.cbpc16, 123456);
@@ -1119,9 +1119,11 @@ export default {
       this.showSearch = !this.showSearch;
     },
 
-    chen() {
-      this.form2.cbpd11 = "20";
-      this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
+    chen(row) {
+      // this.form2.cbpd11 = "20";
+      // this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
+      this.$set(row,"cbsc12",row.cbsc11 * row.qty)
+      console.log([row,row.cbsc11,row.qty])
     },
     //添加模块-仓库
     selected01(name) {
