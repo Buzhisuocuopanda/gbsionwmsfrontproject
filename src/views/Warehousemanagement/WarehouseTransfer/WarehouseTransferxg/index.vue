@@ -5,7 +5,7 @@
             <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:-5%;">
-                        <el-input type="text" v-model="form2.cbsb07" style="width: 67%;" readonly=""/>
+                        <el-input type="text" v-model="form2.cbsb07" style="width: 67%;" readonly="" />
                     </el-form-item>
                 </el-col>
                 <el-col :span="7">
@@ -27,8 +27,7 @@
                     <el-form-item label="调出仓库:" prop="cbse099">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected011" style="width:160px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc1000" placeholder=""
-                                style="width:100%;">
+                            <el-input slot="reference" v-model="form2.cbpc1000" placeholder="" style="width:100%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
@@ -37,8 +36,7 @@
                     <el-form-item label="调入仓库:" prop="cbpc100">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:160px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" 
-                                style="width:100%;">
+                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" style="width:100%;">
                             </el-input>
                         </el-popover>
                     </el-form-item>
@@ -235,7 +233,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchasereturnordersAdds, PurchasereturnordersAdd,PurchaseinboundLists } from "@/api/Warehousemanagement/WarehouseTransfer";
+import { PurchasereturnordersAdds, PurchasereturnordersAdd, PurchaseinboundLists } from "@/api/Warehousemanagement/WarehouseTransfer";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -411,7 +409,7 @@ export default {
                 cbaa09: "",
                 cbaa10: "",
                 cbaa16: "",
-                cbaa166:"",
+                cbaa166: "",
                 cbaa18: "",
                 cbab08: "",
                 cbab14: "",
@@ -925,6 +923,8 @@ export default {
                             console.log(response.data.id, 123456);
                             // console.log(this.item, 123456);
                             this._ly_ok();
+                            this.$tab.closePage();
+                            this.$router.go(-1);
                         }
                     });
                 } else {
@@ -935,14 +935,16 @@ export default {
         },
 
         //修改接收值
-        xiugaijszhi(){
+        xiugaijszhi() {
             const userId = this.$route.params && this.$route.params.cbaa01;
         },
 
         /** 仓库调拨单返回操作 */
         handlexiaoshouone: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/cangkudiaobudanfh/role/");
+            // this.$router.push("/system/cangkudiaobudanfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
 
         /** 仓库调拨单 */
@@ -965,7 +967,7 @@ export default {
                 //结算货币名称
                 this.form2.cbsb16 = res.cala08;
                 //结算货币名称id 
-                this.form2.cbsb166 = res.cala08=='CNY'?5:6;
+                this.form2.cbsb166 = res.cala08 == 'CNY' ? 5 : 6;
                 //客户订单
                 this.form2.cbsb30 = res.cbsb30;
                 console.log(this.form2.cbsb09, 85200000);
