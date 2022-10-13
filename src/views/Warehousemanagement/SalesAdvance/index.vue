@@ -33,7 +33,7 @@
                     <el-form-item>
                          <el-button class="biaoto-buttonchuangjian" size="mini" v-hasPermi="['system:saleChange:list']" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:51%;">
+                    <el-form-item style="margin-left:70%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -46,19 +46,19 @@
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:saleChange:sh']">审核</el-button>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
+                        <!-- <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:saleChange:fs']">反审
-                        </el-button>
+                        </el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:saleChange:bjwc']">标记完成
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
                             v-hasPermi="['system:saleChange:qxwc']">取消完成
-                        </el-button>
+                        </el-button> -->
                     </el-form-item>
                 </el-form>
 
@@ -100,7 +100,7 @@
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:saleChange:sh']"
                                 v-if="scope.row.status == 0">审核</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:saleChange:fs']"
                                 v-if="scope.row.status == 1">反审</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
@@ -109,7 +109,7 @@
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:saleChange:qxwc']"
-                                v-if="scope.row.status == 1 | scope.row.status == 1">标记完成</el-button>
+                                v-if="scope.row.status == 1 | scope.row.status == 1">标记完成</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>
