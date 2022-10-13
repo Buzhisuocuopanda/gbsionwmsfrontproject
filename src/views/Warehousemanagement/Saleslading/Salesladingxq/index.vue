@@ -538,6 +538,7 @@ export default {
     handlefanhui: function (row) {
       // this.$router.push("/system/user-auth/role/");
       this.$store.dispatch("tagsView/delView", this.$route)
+      this.$tab.closePage();
       this.$router.go(-1)
       // this.$router.push("/Warehousemanagement/Saleslading/");
     },
@@ -548,7 +549,9 @@ export default {
       auditTakeOrder(this.paramss).then((res) => {
         if (res.code == 200) {
           this.$message({ message: "审批成功", type: "success" });
-          this.$router.push("/Warehousemanagement/Saleslading/");
+          // this.$router.push("/Warehousemanagement/Saleslading/");
+          this.$tab.closePage();
+          this.$router.go(-1);
         } else {
           this.$message({ message: res.msg, type: "error" });
         }
@@ -561,7 +564,9 @@ export default {
       auditTakeOrder(this.paramss).then((res) => {
         if (res.code == 200) {
           this.$message({ message: "反审成功", type: "success" });
-          this.$router.push("/Warehousemanagement/Saleslading/");
+          // this.$router.push("/Warehousemanagement/Saleslading/");
+          this.$tab.closePage();
+          this.$router.go(-1);
         } else {
           this.$message({ message: res.msg, type: "error" });
         }
@@ -574,7 +579,9 @@ export default {
       auditTakeOrder(this.paramss).then((res) => {
         if (res.code == 200) {
           this.$message({ message: "质检完成成功", type: "success" });
-          this.$router.push("/Warehousemanagement/Saleslading/");
+          // this.$router.push("/Warehousemanagement/Saleslading/");
+          this.$tab.closePage();
+          this.$router.go(-1);
         } else {
           this.$message({ message: res.msg, type: "error" });
         }

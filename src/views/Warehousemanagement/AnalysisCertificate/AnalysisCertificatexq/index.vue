@@ -7,7 +7,7 @@
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
 
-            <el-table border :header-cell-style="headClassACC" v-loading="loading" :data="userList" 
+            <el-table border :header-cell-style="headClassACC" v-loading="loading" :data="userList"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cala08" key="cala08" label="品牌">
@@ -22,10 +22,9 @@
                 </el-table-column>
             </el-table>
             <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]"
-                class="pagintotal" />
+                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]" class="pagintotal" />
         </div>
-        
+
         <el-button type="primary" style="margin-left:10%;margin-top:4%;" @click="handlefanhui">返回</el-button>
     </div>
 
@@ -66,10 +65,12 @@ export default {
     },
     methods: {
 
-         //返回按钮
+        //返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-zjdfh/role/");
+            // this.$router.push("/system/user-zjdfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
         //列表表头设置
         headClassACC() {
@@ -149,4 +150,5 @@ export default {
 };
 </script>
 <style src="./AnalysisCertificatexqcss/index.css" scoped>
+
 </style>

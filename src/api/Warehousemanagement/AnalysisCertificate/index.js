@@ -14,7 +14,7 @@ export function QualityinAdd(data) {
 // 质检单新增
 export function QualityinAdds(data) {
   return request({
-    url: '/system/Qualityin//SwJsPurchaseinboundadds',
+    url: '/system/Qualityin/SwJsPurchaseinboundadds',
     method: 'post',
     data: data
   })

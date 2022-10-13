@@ -62,7 +62,7 @@
               </el-input>
             </el-popover>
           </el-form-item>
-        </el-col>       
+        </el-col>
         <!--商品信息维护-->
       </el-row>
       <el-row v-if="false">
@@ -177,7 +177,7 @@
               <el-input v-model="scope.row.goodsclassifyy" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column v-if="false"  prop="goodsId" label="商品编号id" width="150">
+          <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
             <template slot-scope="scope">
               <el-input v-model="scope.row.goodsId" placeholder="" style=""></el-input>
             </template>
@@ -510,7 +510,7 @@ export default {
         supplierId: "",
         qty: "",
         goodsId: "",
-        orderDate:""
+        orderDate: ""
       },
       form1: {
         // classifyId: "",
@@ -544,7 +544,7 @@ export default {
         cbpg161: "",
         cbpc01: "",
         cbpc000: "",
-        qty:"",
+        qty: "",
         cbpd09: "",
         cbpd11: "",
         cbpd12: "",
@@ -558,9 +558,9 @@ export default {
         cbsb177: "",
         orderNo: "",
         GsSalesOrders: "",
-        id:"",
-        goodsId:"",
-        orderDate:""
+        id: "",
+        goodsId: "",
+        orderDate: ""
       },
       defaultProps: {
         children: "children",
@@ -750,7 +750,7 @@ export default {
             cbpg161: "",
             cbpc01: "",
             cbpc000: "",
-            qty:"",
+            qty: "",
             cbpd09: "",
             cbpd11: "",
             cbpd12: "",
@@ -824,7 +824,7 @@ export default {
         moner: '',
         province: '',
         cbpc000: '',
-        qty:"",
+        qty: "",
         cbpc099: '',
         orderDate: ''
       })
@@ -862,10 +862,10 @@ export default {
     //详情列表
     getList() {
       const userId = this.$route.params && this.$route.params.id;
-       console.log(userId,"20221009");
+      console.log(userId, "20221009");
       if (userId) {
         // 获取表详细信息
-        PurchaseinSalesAdvance({id:userId}, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+        PurchaseinSalesAdvance({ id: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
           if (res.code == "200") {
             this.userList = res.data.rows;
             this.total = res.data.total;
@@ -977,7 +977,7 @@ export default {
     },
 
     //添加销售预订单-预订单主键ID
-    selected0222(name,row) {
+    selected0222(name, row) {
       console.log(name, row)
       console.log(name.substring(name.indexOf("-") + 1), 963);
       this.$set(row, "orderNo", name.substring(0, name.indexOf("-")));
@@ -1107,14 +1107,16 @@ export default {
     handlexiaoshouone: function (row) {
       // this.$router.push("/system/user-auth/role/");
       this.$store.dispatch("tagsView/delView", this.$route)
-      this.$router.push("/system/user-SalesAdvancefanhui/role/");
+      // this.$router.push("/system/user-SalesAdvancefanhui/role/");
+      this.$tab.closePage();
+      this.$router.go(-1);
     },
 
     /** 修改按钮操作 */
     handleUpdate() {
 
       let row = {}
-      
+
       //商品id
       this.tableData.forEach((item) => {
         row.goodsId = item.goodsId;
@@ -1122,9 +1124,9 @@ export default {
         row.goodsclassify = item.goodsclassify;
         row.qty = item.qty
       })
-      
+
       let arr1 = []
-      for(let i = 0;i<this.tableData.length;i++){
+      for (let i = 0; i < this.tableData.length; i++) {
         arr1.push({
           //客户id
           // customer : this.tableData[i].customerId,
@@ -1136,13 +1138,13 @@ export default {
           // salerId : this.tableData[i].salerId,
           //订单日期
           // orderDate : this.tableData[i].orderDate,
-          id : this.tableData[i].id,
-          goodsId : this.tableData[i].goodsId,
+          id: this.tableData[i].id,
+          goodsId: this.tableData[i].goodsId,
           //商品型号
           // goodsclassify : this.tableData[i].goodsclassify,
-          qty : this.tableData[i].qty,
+          qty: this.tableData[i].qty,
           // 主表id
-          gsSalesOrders : this.tableData[i].gsSalesOrders,
+          gsSalesOrders: this.tableData[i].gsSalesOrders,
         })
       }
       // row.cbpc16 = this.form.cbpc16;
@@ -1150,7 +1152,7 @@ export default {
       PurchaseinboundEditSalesAdvance(JSON.stringify(arr1)).then(response => {
         if (response.code == "200") {
           // console.log(this.form, 789)
-          
+
           this.$message({ message: '修改成功', type: 'success' });
           this.handlexiaoshouone();
         }
@@ -1178,4 +1180,5 @@ export default {
 };
 </script>
 <style src="./SalesAdvancexgcss/index.css">
+
 </style>
