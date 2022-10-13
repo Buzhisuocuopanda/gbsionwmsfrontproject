@@ -54,7 +54,7 @@
                             </el-input>
                         </el-popover> -->
 
-                        <el-input type="text" :disabled="true" v-model="form2.cbpc099" style="width: 100%;" />
+                        <el-input type="text" :disabled="true" v-model="form2.cbpc100" style="width: 100%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-2%;" :span="6">
@@ -873,7 +873,7 @@ export default {
             console.log(userId, "20221009");
             if (userId) {
                 // 获取表详细信息
-                PurchaseinSalesAdvance(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinSalesAdvance({id:userId}, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     if (res.code == "200") {
                         this.userList = res.data.rows;
                         this.total = res.data.total;
@@ -887,21 +887,21 @@ export default {
                         //日期
                         this.form2.orderDate = this.userList[0].orderDate;
                         //客户名称
-                        this.form2.cbpc0999 = this.userList[0].customerMag;
+                        this.form2.cbpc0999 = this.userList[0].customer;
                         //客户名称id
-                        this.form2.customerId = this.userList[0].customer;
+                        this.form2.customerId = this.userList[0].customerId;
                         //供应商名称
-                        this.form2.cbpc099 = this.userList[0].supplierMge;
+                        this.form2.cbpc099 = this.userList[0].supplier;
                         //供应商id
-                        this.form2.supplierId = this.userList[0].supplier;
+                        this.form2.supplierId = this.userList[0].supplierId;
                         //仓库名称
                         this.form2.cbpc100 = this.userList[0].wh;
                         //仓库名称ID
                         this.form2.whId = this.userList[0].whId;
                         //销售人员名称
-                        this.form2.cbsb177 = this.userList[0].salerMag;
+                        this.form2.cbsb177 = this.userList[0].saler;
                         //销售人员ID
-                        this.form2.salerId = this.userList[0].saler;
+                        this.form2.salerId = this.userList[0].salerId;
                         //商品id
                         this.form2.goodsId = this.userList[0].goodsId;
                         //品牌、型号、描述
