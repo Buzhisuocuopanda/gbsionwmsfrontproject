@@ -41,7 +41,7 @@
 <!--            <el-button type="primary" :loading=loadingOut style="margin-bottom:0;margin-left: 1em">Excel导入</el-button>-->
 <!--          </el-upload>-->
           <el-button class="filter-item" type="primary" v-on:click="exprotData()" :loading=loadingOut
-                     style="margin-bottom:0;margin-left: 1em">导出
+                    style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
 
 <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
@@ -53,7 +53,7 @@
         <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="200px;"/>
         <el-table-column  label="日期" align="left" prop="orderDate" min-width="108px;"/>
         <el-table-column label="客户" align="left" prop="customerName" min-width="240px;"/>
-        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="78px;"/>
+        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="90px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="75px;"/>
         <el-table-column label="收货人" align="left" prop="receiver" min-width="70px;"/>
         <el-table-column label="地址" align="left" prop="address" min-width="450px;"/>
