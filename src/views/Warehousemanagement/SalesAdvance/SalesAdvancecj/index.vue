@@ -946,9 +946,8 @@ export default {
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
-      console.log(this.tableData, 333);
-      let arr = []
-      let arr1 = this.tableData
+      let arr = [];
+      let arr1 = this.tableData;
       // this.tableData.forEach((item) => {
       //   //  this.form2.goodsId = item.goodsId;
       //   item.supplierId = this.form2.supplierId;
@@ -956,75 +955,69 @@ export default {
       //   item.salerId = this.form2.salerId;
       //   console.log(item, "1023");
       // });
-      for(let i = 0;i<arr1.length;i++){
+      for (let i = 0; i < arr1.length; i++) {
         arr.push({
-          "goodsId": arr1[i].goodsId,
-          "goodsclassify": arr1[i].cbpb12,
-          "gsSalesOrders": arr1[i].id,
-          "orderDate": arr1[i].orderDate ,
-          "qty": arr1[i].qty,
-          "salerId": arr1[i].salerId,
-          "supplierId": arr1[i].supplierId,
-        })
+          goodsId: arr1[i].goodsId,
+          goodsclassify: arr1[i].cbpb12,
+          gsSalesOrders: arr1[i].id,
+          orderDate: arr1[i].orderDate,
+          qty: arr1[i].qty,
+          salerId: arr1[i].salerId,
+          supplierId: arr1[i].supplierId,
+        });
       }
-      PurchaseinboundAdd(JSON.stringify(arr)).then((response) => {
-        if (response.code == "200") {
-          this.tableData = [];
-          this.form2 = {
-            cbpc07: "",
-            cbpd08: "",
-            cbsa08: "",
-            cbwa09: "",
-            cala08: "",
-            cbpc100: "",
-            cbpc099: "",
-            cbpc166: "",
-            cbpc10: "",
-            cbpc09: "",
-            cbpd09: "",
-            cbpd11: "",
-            cbpd12: "",
-            cbpc16: "",
-            cbpc12: "",
-            cbpc14: "",
-            cbpd08: "",
-            cbph09: "",
-            cbph10: "",
-            cbph11: "",
-            cbpg161: "",
-            cbpc01: "",
-            cbpc000: "",
-            cbpd09: "",
-            cbpd11: "",
-            cbpd12: "",
-            cbpc0999: "",
-            customerId: "",
-            salerId: "",
-            supplierId: "",
-            whId: "",
-            orderDate: "",
-            cbpc099: "",
-            cbsb177: "",
-            orderNo: "",
-            GsSalesOrders: "",
-          };
-          this.$message({ message: "创建成功", type: "success" });
-          this.handlexiaoshouone();
-        }
-        if (count-- === 1) {
-          this._ly_save();
-        }
-        this._ly_addFrom();
-        //    this.formArr.cbpg01="1234567";
-        //    this.form.cbpg01=this.formArr.cbpg01;
-        //    console.log(this.form.cbpg01,85203);
-      });
-
-      //   } else {
-      //     console.log(obj)
-      //     return false
-      //   }
-      // })
+      if (!arr[0].gsSalesOrders) {
+        return;
+      } else {
+        PurchaseinboundAdd(JSON.stringify(arr)).then((response) => {
+          if (response.code == "200") {
+            this.tableData = [];
+            this.form2 = {
+              cbpc07: "",
+              cbpd08: "",
+              cbsa08: "",
+              cbwa09: "",
+              cala08: "",
+              cbpc100: "",
+              cbpc099: "",
+              cbpc166: "",
+              cbpc10: "",
+              cbpc09: "",
+              cbpd09: "",
+              cbpd11: "",
+              cbpd12: "",
+              cbpc16: "",
+              cbpc12: "",
+              cbpc14: "",
+              cbpd08: "",
+              cbph09: "",
+              cbph10: "",
+              cbph11: "",
+              cbpg161: "",
+              cbpc01: "",
+              cbpc000: "",
+              cbpd09: "",
+              cbpd11: "",
+              cbpd12: "",
+              cbpc0999: "",
+              customerId: "",
+              salerId: "",
+              supplierId: "",
+              whId: "",
+              orderDate: "",
+              cbpc099: "",
+              cbsb177: "",
+              orderNo: "",
+              GsSalesOrders: "",
+            };
+            this.$message({ message: "创建成功", type: "success" });
+            this.handlexiaoshouone();
+          }
+          if (count-- === 1) {
+            this._ly_save();
+          }
+        });
+      }
       console.log(this.tableData, "8520000");
 
       console.log("_ly_ok:" + JSON.stringify(this.tableData));
