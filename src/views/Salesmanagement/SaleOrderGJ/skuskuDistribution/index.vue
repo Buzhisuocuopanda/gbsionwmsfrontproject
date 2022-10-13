@@ -52,7 +52,7 @@
                 stripe>
         <el-table-column fixed label="销售订单号" align="left" prop="orderNo" min-width="140px;"/>
         <el-table-column fixed label="生产总订单号" align="left" prop="totalOrderNo" min-width="120px;"/>
-        <el-table-column label="商品" align="left" prop="goodsMsg" min-width="400px;"/>
+        <el-table-column label="商品" align="left" prop="goodsMsg" min-width="570px;"/>
         <el-table-column label="优先级" align="right" prop="priority" min-width="70px;"/>
 
         <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="78px;"/>
