@@ -70,15 +70,17 @@
                     :value="item.value">
                   </el-option>
                 </el-select>
-              </sapn>-->
-              <el-select filterable @change="slected" @visible-change="hiddens" remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%">
-                  <el-input v-model="queryParams.orderNo"
+              </sapn>--><!--@visible-change="hiddens"-->
+              <el-select @change="slected" filterable :filter-method="getChangeList" v-loadmore="getList" filterable  remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%" >
+                 <!-- <el-input v-model="queryParams.orderNo"
                         placeholder="请输入销售订单编号,sn码"
                         clearable
+                            @change="getList(queryParams.orderNo)"
                         style="width: 100%"
-                        @change="getList(queryParams.orderNo)">
+                       >
+                    &lt;!&ndash; @change="getList(queryParams.orderNo)"&ndash;&gt;
                     <i slot="suffix" class="el-icon-search el-input__icon" />
-                  </el-input>
+                  </el-input>-->
                   <el-option
                   v-for="(item,index) in tableDataed"
                   :key="index"
@@ -133,8 +135,8 @@
             </template>
           </el-table-column>
           <el-table-column label="替换商品SN" width="200">
-            <template slot-scope="scope">
-              <el-select filterable remote v-model="scope.row.cbqb09" placeholder="请选择" :filter-method="getLists">
+            <template slot-scope="scope"><!--:filter-method="getLists"-->
+              <el-select filterable remote v-model="scope.row.cbqb09" placeholder="请选择" :loading="loading3">
                   <el-option
                   v-for="(item,index) in tableDatas"
                   :key="index"
@@ -261,7 +263,30 @@ import supplierMaintenance from "@/components/SupplierMaintenance";
 
 //供应商
 import ListLists from "@/components/ListMaintenance";
+import Vue from 'vue';
+Vue.directive('loadmore', {
+  bind(el, binding) {
 
+    // 获取element-ui定义好的scroll盒子
+    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+    SELECTWRAP_DOM.addEventListener('scroll', function() {
+
+      /*
+      * scrollHeight 获取元素内容高度(只读)
+      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+      * clientHeight 读取元素的可见高度(只读)
+      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+      */
+      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+      if(CONDITION) {
+        binding.value();
+      }
+    });
+  }
+})
 export default {
   name: "store",
   dicts: [
@@ -275,6 +300,8 @@ export default {
     return {
       // 遮罩层
       loading: true,
+      loading3: false,
+      loading4:false,
       tianjiahang: [],
       // 选中数组
       ids: [],
@@ -292,12 +319,7 @@ export default {
         }
       ],
       tableDatas: [],
-      tableDataed:[
-        {
-          cbpm09:'',
-          f:'',
-        }
-      ],
+      tableDataed:[],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -511,7 +533,11 @@ export default {
           total: this.total,
           orderNo:'',
       },
-
+      listQuery: {
+        pageNum: 1,
+        pageSize: 10,
+        cbpm09:''
+      },
       rules: {
         cbpc099: [
           { required: true, message: "供料单位不能为空!", trigger: "blur" },
@@ -541,6 +567,8 @@ export default {
   },
   created() {
     this.form2.cbqa06 = "0";
+    this.getLists();
+    this.getList();
     this.getConfigKey("sys.user.initPassword").then((response) => {
       // this.initPassword = response.msg;
     });
@@ -552,7 +580,7 @@ export default {
     // console.log(this.userList,123456789);
 
     console.log(this.form.cbpc16, 123456);
-    this.getLists();
+
   },
   methods: {
     //返回按钮
@@ -576,16 +604,30 @@ export default {
 
     /** 质检详情查询 */
     getList(data) {
-      SwJsSkuBarcodeselectss(
-        {cbpk07:data,
-          cbpm09:data,
-          }
-      ).then((response) => {
-        console.log(response,'年后')
+
+      SwJsSkuBarcodeselectss(this.listQuery).then((response) => {
         if(response.code == 200){
-          this.tableDataed = response.data.rows;
+          this.listQuery.pageNum+=1;
+          this.tableDataed.push(... response.data.rows);
+
           this.total = response.data.total;
         }
+      },error => {
+        this.loading4 = false;
+      });
+    },
+    /** 质检详情查询 */
+    getChangeList(data) {
+      this.listQuery.cbpm09 = data
+      this.listQuery.pageNum = 1;
+      SwJsSkuBarcodeselectss(this.listQuery).then((response) => {
+        if(response.code == 200){
+          this.listQuery.pageNum+=1;
+          this.tableDataed =response.data.rows;
+          this.total = response.data.total;
+        }
+      },error => {
+        this.loading4 = false;
       });
     },
     slected(name){
@@ -604,14 +646,18 @@ export default {
     getLists(query){
       let id = this.$route.query.data
       let cbpm08 = this.tableData[0].cbpm08
-      SwJsSkuBarcodeselectss(
-        {
+      this.loading3 = true;
+      console.log(cbpm08+'zgl',111);
+      SwJsSkuBarcodeselectsss({
           // cbpk01:id,
-         cbpm08:cbpm08,
-         cbpm09:query}
-      ).then((response) => {
+         // cbpm08:cbpm08,
+         cbpm09:query
+      }).then((response) => {
+        this.loading3 = false;
         this.tableDatas = response.data.rows;
         this.totals = response.data.total;
+      },error => {
+        this.loading3 = false;
       });
     },
     show() {
@@ -711,6 +757,8 @@ export default {
 
     /** 新增按钮操作 */
     handleAdd() {
+
+
       this.form2.cbqa06 = "0";
       this.$refs["form2"].validate((item) => {
         if (item) {
