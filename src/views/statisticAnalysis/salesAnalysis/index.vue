@@ -48,7 +48,7 @@
       </el-form>
       <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  :data="inwuquList" element-loading-text="Loading。。。" height="460" width="100%;" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em">
-        <el-table-column label="客户名称" align="left" header-align="center" prop="customerName" min-width="170px;" />
+        <el-table-column label="客户名称" align="left" header-align="center" prop="customerName" min-width="200px;" />
         <el-table-column  label="下单时间" align="left" prop="createTime" :formatter="formatTime2" min-width="120px;"/>
         <el-table-column  label="供应商" align="left" prop="supplier" min-width="140px;">
           <template slot-scope="scope">
@@ -56,7 +56,7 @@
           </template>
         </el-table-column>
         <el-table-column  label="销售人员" align="left" prop="saleUser"  min-width="160px;"/>
-        <el-table-column  label="销售订单号" align="left" prop="saleOrderNo" min-width="129px;"/>
+        <el-table-column  label="销售订单号" align="left" prop="saleOrderNo" min-width="139px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="160px;"/>
         <el-table-column  label="品牌" align="left" prop="brandName" min-width="100px;"/>
         <el-table-column  label="数量" align="right" :formatter="rounding" prop="qty" min-width="80px;"/>

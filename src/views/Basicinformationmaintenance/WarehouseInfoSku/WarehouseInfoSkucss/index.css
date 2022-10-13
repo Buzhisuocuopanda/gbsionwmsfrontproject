@@ -298,3 +298,7 @@ color: white !important;
 /* .el-input .el-input__inner {
     border: 1px solid white !important;
 } */
+
+.waresku .el-form--inline {
+    height: 60px !important;
+    }
