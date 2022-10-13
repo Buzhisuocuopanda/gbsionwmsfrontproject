@@ -80,15 +80,16 @@
         <!-- goodsNum -->
         <el-table-column label="良品数量">
           <template scope="scope">
-            <el-input v-model="scope.row.goodsNum" :readonly="status == 2 || status == 0?true:false"></el-input>
+            <el-input v-model="scope.row.goodsNum" v-if="status == 2 || status == 0?false:true" :readonly="status == 2 || status == 0?true:false"></el-input>
+            <div v-text="rounding2(scope.row.goodsNum)"  v-if="status == 2 || status == 0?true:false"></div>
           </template>
         </el-table-column>
-        <el-table-column prop="qty" key="qty" label="数量"> </el-table-column>
-        <el-table-column prop="scanQty" key="scanQty" label="已扫数量">
+        <el-table-column prop="qty" key="qty" label="数量" :formatter="rounding"> </el-table-column>
+        <el-table-column prop="scanQty" key="scanQty" :formatter="rounding" label="已扫数量">
         </el-table-column>
-        <el-table-column prop="price" key="price" label="单价">
+        <el-table-column prop="price" key="price" :formatter="rounding" label="单价">
         </el-table-column>
-        <el-table-column prop="totalPrice" key="totalPrice" label="金额">
+        <el-table-column prop="totalPrice" key="totalPrice" :formatter="rounding" label="金额">
         </el-table-column>
         <el-table-column prop="remark" key="remark" label="备注">
         </el-table-column>
@@ -195,7 +196,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页数量小记</template
-            >{{ totalnumber }}
+            >{{ isNaN(parseFloat(totalnumber).toFixed(2))?'0.00':parseFloat(totalnumber).toFixed(2) }}
           </el-descriptions-item>
           <el-descriptions-item
             :contentStyle="{ 'text-align': 'right' }"
@@ -206,7 +207,7 @@
               :labelStyle="{ 'text-align': 'center' }"
               slot="label"
               >本页金额小记</template
-            >{{ totalnumber }}
+            >{{ isNaN(parseFloat(totalnumber).toFixed(2))?'0.00':parseFloat(totalnumber).toFixed(2) }}
           </el-descriptions-item>
         </el-descriptions>
       </div>
@@ -216,14 +217,14 @@
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
-          <template slot="label">合计数量</template>{{ totalnumber}}
+          <template slot="label">合计数量</template>{{isNaN(parseFloat(totalnumber).toFixed(2))?'0.00':parseFloat(totalnumber).toFixed(2) }}
         </el-descriptions-item>
         <el-descriptions-item
           :contentStyle="{ 'text-align': 'right' }"
           :labelStyle="{ 'text-align': 'center' }"
         >
           <template slot="label">合计金额</template
-          >{{ totalPrice }}
+          >{{ isNaN(parseFloat(totalPrice).toFixed(2))?'0.00':parseFloat(totalPrice).toFixed(2) }}
         </el-descriptions-item>
       </el-descriptions>
 
@@ -251,8 +252,9 @@
         :span-method="arraySpanMethods">
         <el-table-column prop="sn" key="sn" align="" label="SN">
           <template slot-scope="scope" style="width: 200%">
-              <el-select v-model="scope.row.sn" style="width: 100%">
-                <el-option v-for="item in snList" :key="item.sn" :label="item.sn" :value="item.sn"></el-option>
+            <!--@change="updsteSn(scope.row,value)"-->
+              <el-select @change="updsteSn(scope.row,$event)" :disabled="scope.row.scanStatus=='已扫码'" v-model="scope.row.sn" style="width: 100%">
+                <el-option v-for="item in snList" :key="item.sn" :label="item.goodsMsg" :value="item.sn"></el-option>
               </el-select>
               <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
                 <TakeSuggests
@@ -314,6 +316,7 @@ import {
   auditTakeOrder,
   auditTakeOrders,
   CustomerLists,
+  mdfTakeSuggest,
   selectGoodsSnByWhIdAndGoodsId,
 } from "@/api/Warehousemanagement/Saleslading";
 import TakeSuggests from "@/components/TakeSuggests"
@@ -332,6 +335,7 @@ export default {
       userLists: [],
       userList1: [],
       userListsss:[],
+      userId:undefined,
       //下拉列表sn数据
       snList:[],
       // 查询参数
@@ -371,14 +375,52 @@ export default {
   created() {
     console.log(111,"zgl")
     this.getList();
+
   },
   methods: {
+    //列表价格数值
+    rounding(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return '0.00';
+      }
+      return parseFloat(row[column.property]).toFixed(2)
+    },
+    rounding2(value) {
+      if(value==null||isNaN(parseFloat(value).toFixed(2))){
+        return '0.00';
+      }
+      return parseFloat(value).toFixed(2)
+    },
     mdfTakeSuggest(){
+      for(let i=0;i<this.userListsss.length;i++){
+        this.userListsss[i].cbpm09 = this.userListsss[i].sn2;
+        this.userListsss[i].cbpm08 = this.userListsss[i].goodsId;
+      }
 
+      let dtat = {
+        userId:this.userId,
+        list:this.userListsss
+      }
+      mdfTakeSuggest(dtat).then(response => {
+        if (response.code == 200) {
+          this.$store.dispatch("tagsView/delView", this.$route)
+          this.$router.go(-1)
+          // this.$router.push("/Warehousemanagement/Saleslading/");
+          this.$message.success("修改成功")
+        } else {
+          // this.snList = [];
+          this.$message.error(response.message)
+        }
+      },error => {
+        this.$message.error("修改失败")
+      });
+    },
+    updsteSn(row,value){
+      row.sn2 = value;
+      console.log(value,1111);
     },
     getSnList(){
-      let param={whid:query, cbpb15:query, cbpb12:query,};
-      selectGoodsSnByWhIdAndGoodsId(param).then(response => {
+      selectGoodsSnByWhIdAndGoodsId(this.whid,this.goodsId).then(response => {
         if (response.data != null) {
           this.snList = response.data;
         } else {
@@ -486,7 +528,9 @@ export default {
     //返回按钮
     handlefanhui: function (row) {
       // this.$router.push("/system/user-auth/role/");
-      this.$router.push("/Warehousemanagement/Saleslading/");
+      this.$store.dispatch("tagsView/delView", this.$route)
+      this.$router.go(-1)
+      // this.$router.push("/Warehousemanagement/Saleslading/");
     },
     // 审核
     PrintRows(row) {
@@ -559,6 +603,7 @@ export default {
     getList() {
       this.loading = true;
       const userId = this.$route.params && this.$route.params.cbpc01;
+      this.userId = userId;
       this.status = this.$route.params && this.$route.params.status;
       this.checkstatus = this.$route.params && this.$route.params.checkStatus;
       this.edit = this.$route.params && this.$route.params.edit;
@@ -574,7 +619,7 @@ export default {
           this.userLists = res.data.goods;
           this.whid = res.data.whId
           this.goodsId = res.data.goods[0].goodsId
-          console.log([this.whid,this.goodsId,this.userLists],'传值')
+          this.getSnList();
           this.userList1 = res.data.scans.map(item=>{
             item.goodClass = item.goodClass + '-' + item.model  + '-' + item.description
             return item
@@ -588,6 +633,7 @@ export default {
           });
           if(this.edit == 1){
             this.userList2 = res.data.sugests.map(item=>{
+              item.sn2 = item.sn
               item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
               return item
             });
