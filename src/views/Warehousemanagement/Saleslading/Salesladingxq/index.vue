@@ -633,6 +633,7 @@ export default {
         ).then((res) => {
           this.userList = res.data;
           this.userLists = res.data.goods;
+          console.log(this.userLists,'zgl1')
           this.whid = res.data.whId
           this.goodsId = res.data.goods[0].goodsId
           this.getSnList();
