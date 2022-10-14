@@ -31,11 +31,11 @@
                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column fixed align="left" label="序号" type="index" width="50"></el-table-column>
         <el-table-column fixed label="大类" align="left" prop="totalclassify"  min-width="60px;"/>
-        <el-table-column fixed label="分类名称" align="left" prop="cbpa07" min-width="80px;"/>
+        <el-table-column fixed label="分类名称" align="left" prop="cbpa07" min-width="100px;"/>
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="80px;"/>
-        <el-table-column  label="型号" align="left" prop="cbpb12" min-width="110px;"/>
+        <el-table-column  label="型号" align="left" prop="cbpb12" min-width="130px;"/>
         <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="110px;"/>
-        <el-table-column  label="描述" align="left" prop="cbpb08"  min-width="280px;"/>
+        <el-table-column  label="描述" align="left" prop="cbpb08"  min-width="600px;"/>
         <el-table-column  label="数量" align="right" prop="cbib15" :formatter="rounding" min-width="100px;"/>
         <el-table-column  label="可用库存数量" align="right" prop="lockQty" :formatter="rounding" min-width="100px;"/>
         <!--<el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />-->

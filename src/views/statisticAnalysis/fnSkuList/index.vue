@@ -39,7 +39,7 @@
         <el-table-column  label="供应商" align="left" prop="supplieName"  min-width="660px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="110px;"/>
         <el-table-column  label="大类" align="left" prop="bclass" min-width="80px;"/>
-        <el-table-column  label="小类" align="left" prop="sclass" min-width="110px;"/>
+        <el-table-column  label="小类" align="left" prop="sclass" min-width="140px;"/>
         <!--<el-table-column  label="SKU" align="center" prop="qty" min-width="60px;"/>-->
         <el-table-column  label="型号" align="left" prop="model"  min-width="180px;"/>
         <el-table-column  label="期初库存" align="right" :formatter="rounding" prop="firstQty" min-width="100px;"/>
