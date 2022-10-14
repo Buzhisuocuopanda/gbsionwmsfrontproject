@@ -253,8 +253,8 @@
         <el-table-column prop="sn" key="sn" align="" label="SN">
           <template slot-scope="scope" style="width: 200%">
             <!--@change="updsteSn(scope.row,value)"-->
-              <el-select @change="updsteSn(scope.row,$event)" :disabled="scope.row.scanStatus=='已扫码'" v-model="scope.row.sn" style="width: 100%">
-                <el-option v-for="item in snList" :key="item.sn" :label="item.goodsMsg" :value="item.sn"></el-option>
+              <el-select :disabled="scope.row.scanStatus=='已扫码'" v-model="scope.row.sn" style="width: 100%">
+                <el-option @click.native="updsteSn(scope.row,item)" v-for="item in snList" :key="item.sn" :label="item.goodsMsg" :value="item.sn"></el-option>
               </el-select>
               <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
                 <TakeSuggests
@@ -392,9 +392,11 @@ export default {
       return parseFloat(value).toFixed(2)
     },
     mdfTakeSuggest(){
+      console.log(this.userListsss,1014);
       for(let i=0;i<this.userListsss.length;i++){
         this.userListsss[i].cbpm09 = this.userListsss[i].sn2;
         this.userListsss[i].cbpm08 = this.userListsss[i].goodsId;
+        this.userListsss[i].cbpk01 = this.userId;
       }
 
       let dtat = {
@@ -415,18 +417,18 @@ export default {
         this.$message.error("修改失败")
       });
     },
-    updsteSn(row,value){
+    updsteSn(row,item){
       for(let i=0;i<this.userListsss.length;i++){
-        if(this.userListsss[i].sn2 == value){
+        if(this.userListsss[i].sn2 == item.sn){
           this.$message.warning("您已选择该sn号，请勿重复选择")
           row.sn ="";
           row.goodsMsg = "";
           return
         }
       }
-      row.sn2 = value;
-
-      console.log(value,1111);
+      row.sn2 = item.sn;
+      row.goodsId = item.goodsId;
+      console.log(row.goodsId,10142);
     },
     getSnList(){
       selectGoodsSnByWhIdAndGoodsId(this.whid,this.goodsId).then(response => {
@@ -651,7 +653,8 @@ export default {
           if(this.edit == 1){
             this.userList2 = res.data.sugests.map(item=>{
               item.sn2 = item.sn
-              item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass + ' - ' + item.model  + ' - ' + item.description
+              /*+ ' - ' + item.model  + ' - ' + item.description*/
+              item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass
               return item
             });
           }
