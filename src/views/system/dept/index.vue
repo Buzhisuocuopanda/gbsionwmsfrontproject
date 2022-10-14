@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container containdept">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="部门名称" prop="deptName">
         <el-input
@@ -20,8 +20,8 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button  type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button  icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -50,6 +50,8 @@
 
     <el-table
       v-if="refreshTable"
+      :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+      height="410"
       v-loading="loading"
       :data="deptList"
       row-key="deptId"
@@ -73,6 +75,7 @@
           <el-button
             size="mini"
             type="text"
+            class="caozuoxiangqengdept"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['system:dept:edit']"
@@ -80,6 +83,7 @@
           <el-button
             size="mini"
             type="text"
+            class="caozuoxiangqengdept"
             icon="el-icon-plus"
             @click="handleAdd(scope.row)"
             v-hasPermi="['system:dept:add']"
@@ -88,6 +92,7 @@
             v-if="scope.row.parentId != 0"
             size="mini"
             type="text"
+            class="caozuoxiangqengdept"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['system:dept:remove']"
@@ -334,3 +339,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqengdept{
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.containdept .el-form--inline {
+  height: 60px !important;
+}
+</style>
