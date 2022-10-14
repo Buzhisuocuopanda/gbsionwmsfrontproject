@@ -18,8 +18,8 @@
           <!--<el-input v-model="queryParams.cala08" style="width: 300px" class="filter-item"  placeholder="请输入品牌" />-->
         </el-form-item>
         <!-- multiple-->
-        <el-form-item label="商品"   class="item-r" >
-          <el-select v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading1">
+        <el-form-item label="商品"   class="item-r" ><!--:loading="loading1"-->
+          <el-select @change="getGoods" :remote-method="getGoods" v-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
 
@@ -104,6 +104,31 @@
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
 import { getSwJsStoreSkuAllList,getSwJsGoodsAllList,getInventorySummaryList,getswJsAllList,insertgoodsShop,goodsShopList } from "@/api/statisticAnalysis/index";
+
+import Vue from 'vue';
+Vue.directive('loadmore', {
+  bind(el, binding) {
+
+    // 获取element-ui定义好的scroll盒子
+    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+    SELECTWRAP_DOM.addEventListener('scroll', function () {
+
+      /*
+      * scrollHeight 获取元素内容高度(只读)
+      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+      * clientHeight 读取元素的可见高度(只读)
+      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+      */
+      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+      if (CONDITION) {
+        binding.value();
+      }
+    });
+  }
+})
 export default {
   components: {},
   name: "inventorySummary",
@@ -136,6 +161,15 @@ export default {
         cbpb10: "",
         cbpb01: ""
       },
+      // 商品查询参数
+      goodsQueryParams:{
+        pageNum: 1,
+        pageSize: 10,
+        cbpb08:"",
+        cbpb15:"",
+        cbpb12:""
+      },
+
       inwuquList: [],
       shoppingList: [],
       total:0,
@@ -160,7 +194,7 @@ export default {
     this.getStoreSkuList();
     this.getCalaList();
     this.getgoodsShopList();
-    this.getGoods();
+    this.getGoods(undefined);
   },
   methods: {
 
@@ -244,6 +278,7 @@ export default {
       this.queryParams.cbpb10 = "";
       this.queryParams.cbpb01 = "";
       this.queryParams.pageNum = 1;
+      this.getGoods();
       this.onSearch();
     },
     /** 搜索按钮操作 */
@@ -315,23 +350,43 @@ export default {
     },
 
     //获取下拉列表数据商品
-    getGoods(query){
-      if (query !== '') {
-        let param={cbpb08:query, cbpb15:query, cbpb12:query,};
-        this.loading1 = true;
-        getSwJsGoodsAllList(param).then(response => {
-          this.loading1 = false;
-          if (response.data != null) {
-            this.goodList = response.data;
-          } else {
-            this.goodList = [];
-          }
-        },error => {
-          this.loading1 = false;
-        });
-      } else {
-        this.goodList = [];
-      }
+    getGoods(val){
+      this.goodsQueryParams.cbpb08 = val;
+      this.goodsQueryParams.cbpb15 = val;
+      this.goodsQueryParams.cbpb12 = val;
+      this.goodsQueryParams.pageNum = 1;
+      // this.loading1 = true;
+      getSwJsGoodsAllList(this.goodsQueryParams).then(response => {
+        // this.loading1 = false;
+        if (response.data != null) {
+          this.goodsQueryParams.pageNum += 1;
+          this.goodList = response.data;
+        } else {
+          this.goodList = [];
+        }
+      },error => {
+        // this.loading1 = false;
+      });
+    },
+
+    //获取下拉列表数据商品
+    getGoodsloadmore(){
+      // this.goodsQueryParams.cbpb08 = query;
+      // this.goodsQueryParams.cbpb15 = query;
+      // this.goodsQueryParams.cbpb12 = query;
+      // this.goodsQueryParams.pageNum = 1;
+      // this.loading1 = true;
+      getSwJsGoodsAllList(this.goodsQueryParams).then(response => {
+        // this.loading1 = false;
+        if (response.data != null) {
+          this.goodsQueryParams.pageNum += 1;
+          this.goodList.push(...response.data);
+        } else {
+          // this.goodList = [];
+        }
+      },error => {
+        // this.loading1 = false;
+      });
     },
     //下拉列表数据仓库
     getStoreSkuList(query){
