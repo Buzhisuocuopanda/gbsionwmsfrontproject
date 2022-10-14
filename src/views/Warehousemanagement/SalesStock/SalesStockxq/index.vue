@@ -18,17 +18,24 @@
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">结算货币</template>USD
+                    <template slot="label">结算货币</template>{{ value.cala08 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">关联订单</template>USD
+                    <template slot="label">关联订单</template>
+                        {{
+                            value.cbse18 == 0
+                            ? "是"
+                            : value.cbse18 == 1
+                            ? "否"
+                            : ""
+                        }}
                 </el-descriptions-item>
             </el-descriptions>
 
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table v-loading="loading" :data="userList" height="250"
+            <el-table v-loading="loading" :data="userList" height="auto"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                 <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
