@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
-            <div class="chuangjiancaigous">销售出货单</div>
+            <div class="chuangjiancaigous">销售出库单</div>
             <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:10%;">
