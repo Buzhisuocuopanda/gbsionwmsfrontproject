@@ -55,7 +55,7 @@
                     &lt;!&ndash; @change="getList(queryParams.orderNo)"&ndash;&gt;
                     <i slot="suffix" class="el-icon-search el-input__icon" />
                   </el-input>-->
-                <el-option v-for="(item,index) in tableDataed" :key="index" :label="item.f" :value="item.f">
+                <el-option @click.native="refreshTables(scope.row,item)" v-for="(item,index) in tableDataed" :key="index" :label="item.f" :value="item.f">
                 </el-option>
               </el-select>
               <!-- <el-popover placement="bottom-start" trigger="click" disabled>
@@ -104,7 +104,7 @@
             <template slot-scope="scope">
               <!--:filter-method="getLists"-->
               <el-select filterable remote v-model="scope.row.cbqb09" placeholder="请选择" :loading="loading3">
-                <el-option v-for="(item,index) in tableDatas" :key="index" :label="item.cbpm09" :value="item.cbpm09">
+                <el-option v-for="(item,index) in scope.row.tableDatas" :key="index" :label="item.cbpm09" :value="item.cbpm09">
                 </el-option>
               </el-select>
             </template>
@@ -510,6 +510,21 @@ export default {
 
   },
   methods: {
+    refreshTables(row,item){
+      let id = this.$route.query.data
+      // let cbpm08 = this.tableData[0].cbpm08
+      SwJsSkuBarcodeselectsss({
+        // cbpk01:id,
+        goodsId:item.goodsId,
+        // cbpm09: query
+      }).then((response) => {
+        this.loading3 = false;
+        this.tableDatas = response.data.rows;
+        this.totals = response.data.total;
+      }, error => {
+        this.loading3 = false;
+      });
+    },
     //返回按钮
     handlefanhui: function (row) {
       // this.$router.push("/system/user-auth/role/");
@@ -579,8 +594,8 @@ export default {
       console.log(cbpm08 + 'zgl', 111);
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
-        // cbpm08:cbpm08,
-        cbpm09: query
+        cbpm08:cbpm08,
+        // cbpm09: query
       }).then((response) => {
         this.loading3 = false;
         this.tableDatas = response.data.rows;
@@ -797,6 +812,7 @@ export default {
         branch: "",
         cbqb09: '',
         cbqb10: '',
+        tableDatas:this.tableDatas
       });
     },
     // 删除一行表单

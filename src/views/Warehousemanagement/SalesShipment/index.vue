@@ -1115,7 +1115,7 @@ export default {
       console.log(saleNo)
       let obj = {
         orderNo:saleNo,
-        type:''
+        checkStatus:1
       }
       Purchaseinbounddingdancx(obj).then((res) =>{
         if(res.code == 200){
