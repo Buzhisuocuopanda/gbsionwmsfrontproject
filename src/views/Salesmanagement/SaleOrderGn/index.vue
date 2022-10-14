@@ -57,14 +57,14 @@
         <el-table-column label="销售人员" align="left" prop="saleUser" min-width="95px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="75px;"/>
         <el-table-column label="收货人" align="left" prop="receiver" max-width="150px;" min-width="100px;"/>
-        <el-table-column label="地址" align="left" prop="address" max-width="600px;"  min-width="440px;"/>
-        <el-table-column label="电话" align="left" prop="phone" min-width="110px;"/>
+        <el-table-column label="地址" align="left" prop="address" max-width="600px;"  min-width="500px;"/>
+        <el-table-column label="电话" align="left" prop="phone" min-width="120px;"/>
         <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="86px;"/>
         <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="86px;"/>
         <el-table-column label="工厂账号" align="left" prop="fcNumber" min-width="120px;"/>
         <el-table-column label="其他" align="left" prop="other" min-width="120px;"/>
-        <el-table-column label="制单时间" align="left" prop="createTime" min-width="158px;"/>
-        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="80px;"/>
+        <el-table-column label="制单时间" align="left" prop="createTime" min-width="160px;"/>
+        <el-table-column  fixed="right"  label="状态" align="center" prop="statusMsg" min-width="100px;"/>
 <!--        <el-table-column label="其他" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
         <el-table-column fixed="right" label="操作" min-width="270px;">
           <template slot-scope="scope">

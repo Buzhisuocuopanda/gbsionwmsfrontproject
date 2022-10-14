@@ -156,7 +156,7 @@
             align="left"
             key="cbsb30"
             prop="cbsb30"
-            width="180px;"
+            width="260px;"
             sortable
           />
           <el-table-column
@@ -230,7 +230,7 @@
             align="left"
             key="cbsb21"
             prop="cbsb21"
-            width="490px;"
+            width="530px;"
             sortable
           />
           <el-table-column
