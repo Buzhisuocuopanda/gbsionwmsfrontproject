@@ -51,8 +51,8 @@
         <el-table-column  label="变更数量" align="right" :formatter="rounding" prop="changeNum" min-width="80px;"/>
         <el-table-column  label="剩余数量" align="right" :formatter="rounding" prop="remainNum" min-width="80px;"/>
         <el-table-column  label="品牌" align="left" prop="cbpb10" min-width="100px;"/>
-        <el-table-column  label="型号" align="left" prop="cbpb12" min-width="130px;"/>
-        <el-table-column  label="商品" align="left" prop="cbpb08" min-width="200px;"/>
+        <el-table-column  label="型号" align="left" prop="cbpb12" min-width="160px;"/>
+        <el-table-column  label="商品" align="left" prop="cbpb08" min-width="490px;"/>
 
        <!-- <el-table-column  label="入库数量" align="center" prop="cbob10" min-width="100px;"/>
         <el-table-column  label="变更数量" align="center" min-width="100px;"/>

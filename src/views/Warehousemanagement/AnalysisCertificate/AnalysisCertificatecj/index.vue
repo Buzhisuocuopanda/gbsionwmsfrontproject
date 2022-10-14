@@ -109,6 +109,14 @@
               </el-select>
             </template>
           </el-table-column>
+          <el-table-column label="操作" align="center" width="80">
+            <template slot-scope="scope">
+              <span @click="_ly_delFrom(scope.$index)">
+                <i class="el-icon-delete" style="color: red;"></i>
+              </span>
+            </template>
+          </el-table-column>
+
           <el-table-column v-if="false" prop="cbpd13" label="id" width="150">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbpd13" placeholder="id" style=""></el-input>

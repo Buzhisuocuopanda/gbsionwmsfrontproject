@@ -42,12 +42,12 @@
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="130px;"/>
         <el-table-column  label="类型" align="left" prop="cbpa08" min-width="100px;"/>
         <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="160px;"/>
-        <el-table-column  label="数量" align="right" :formatter="rounding" prop="num" min-width="100px;"/>
+        <el-table-column  label="数量" align="right" :formatter="rounding" prop="cbob09" min-width="100px;"/>
         <el-table-column  label="已发货数量" align="right" :formatter="rounding" prop="cbob10" min-width="100px;"/>
-        <el-table-column  label="未发货数量" align="right" :formatter="rounding" min-width="100px;">
-          <template slot-scope="scope">
+        <el-table-column  label="未发货数量" align="right" :formatter="rounding" prop="num" min-width="100px;">
+         <!-- <template slot-scope="scope">
             <div>{{scope.row.num!=null? scope.row.num-scope.row.cbob10:''}}</div>
-          </template>
+          </template>-->
         </el-table-column>
         <el-table-column  label="单价" align="right" :formatter="rounding" prop="cbob11" min-width="100px;"/>
         <el-table-column  label="金额" align="right" :formatter="rounding" prop="cbob12" min-width="100px;"/>

@@ -52,11 +52,11 @@
         <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="140px;"/>
         <el-table-column  label="客户订单号" align="left" prop="customerNo" min-width="200px;"/>
         <el-table-column  label="日期" align="left" prop="orderDate" min-width="108px;"/>
-        <el-table-column label="客户" align="left" prop="customerName" min-width="240px;"/>
-        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="90px;"/>
+        <el-table-column label="客户" align="left" prop="customerName" min-width="280px;"/>
+        <el-table-column label="销售人员" align="left" prop="saleUser" min-width="110px;"/>
         <el-table-column label="结算货币" align="left" prop="settleCurrentMsg" min-width="75px;"/>
-        <el-table-column label="收货人" align="left" prop="receiver" min-width="70px;"/>
-        <el-table-column label="地址" align="left" prop="address" min-width="450px;"/>
+        <el-table-column label="收货人" align="left" prop="receiver" min-width="90px;"/>
+        <el-table-column label="地址" align="left" prop="address" min-width="550px;"/>
         <el-table-column label="电话" align="left" prop="phone" min-width="110px;"/>
         <el-table-column label="订单类型" align="left" prop="orderClassMsg" min-width="95px;"/>
         <el-table-column label="订单分类" align="left" prop="orderTypeMsg" min-width="95px;"/>

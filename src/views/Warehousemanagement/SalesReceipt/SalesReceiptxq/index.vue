@@ -7,8 +7,7 @@
         </div>
         <div style="width:98%; margin-left: 1%; margin-top: 1%;">
             <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" :column="3" border
-                v-for="(value, key) in userList" :key="key">
+            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList" :key="key">
                 <el-descriptions-item>
                     <template slot="label">供料单位</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
@@ -134,7 +133,7 @@
 <script>
 import { PurchaseinboundSalesReceipt } from "@/api/Warehousemanagement/SalesReceipt";
 export default {
-    
+
     data() {
         return {
             // 遮罩层
@@ -143,7 +142,7 @@ export default {
             total: 0,
             // 用户表格数据
             userList: [{}],
-            tabData:[],
+            tabData: [],
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -153,32 +152,34 @@ export default {
                 total: this.total,
                 name: undefined,
                 address: undefined,
-                userId:undefined
+                userId: undefined
             },
-            CBPC01:""
+            CBPC01: ""
 
         };
     },
     watch: {
-       
+
     },
     created() {
         this.getList();
-        
+
     },
     methods: {
         // 点击【取消】按钮关闭弹窗
-      _ly_cancelDialog(done) {
-        console.log('_ly_cancelDialog')
-        this.$emit('on-close')
-        this.$store.dispatch("tagsView/delView", this.$route)
-        this.$router.push("/system/user-xiaoshouyddfanhui/role/");
-      },
+        _ly_cancelDialog(done) {
+            console.log('_ly_cancelDialog')
+            this.$emit('on-close')
+            this.$store.dispatch("tagsView/delView", this.$route)
+            // this.$router.push("/system/user-xiaoshouyddfanhui/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
+        },
         //列表表头设置
         headClass() {
             return {
                 'text-align': 'center',
-                 height: '30px',
+                height: '30px',
                 padding: '0'
             }
         },
@@ -193,30 +194,30 @@ export default {
         //父子页面传值
         getParams() {
             let routerParams = this.$route.query;
-            this.cbpc01 = routerParams.data;            
-            console.log(this.cbpc01,852369);
+            this.cbpc01 = routerParams.data;
+            console.log(this.cbpc01, 852369);
         },
 
         //详情列表
-        getList(){
+        getList() {
             this.loading = true;
-            const userId = this.$route.query &&  this.$route.query.id;
+            const userId = this.$route.query && this.$route.query.id;
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundSalesReceipt(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList[0] = res.data.rows[0];
-                    this.userList[0].orderDate = this.userList[0].orderDate.slice(0,10)
+                    this.userList[0].orderDate = this.userList[0].orderDate.slice(0, 10)
                     this.tabData = res.data.rows;
-                    this.tabData.map((item) =>{
+                    this.tabData.map((item) => {
                         item.totalPrice = item.inQty * item.price
                     })
                     this.total = res.data.total;
-                    console.log(res, 888999,this.userList);
+                    console.log(res, 888999, this.userList);
                     this.loading = false;
                 });
             }
         },
-        
+
         //时间的转换
         smallToBig(money) {
             var cnMoney = "零元整";
@@ -256,4 +257,6 @@ export default {
     }
 };
 </script>
-<style src="./SalesReceiptxqcss/index.css"></style>
+<style src="./SalesReceiptxqcss/index.css">
+
+</style>

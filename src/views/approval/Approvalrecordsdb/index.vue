@@ -50,7 +50,7 @@
         <el-table-column fixed label="单据编号" align="left" prop="cabraa14" min-width="80px;"/>
         <el-table-column  label="单据日期" align="left" prop="cabraa15" min-width="80px;"  :formatter="formatDate"/>
         <el-table-column  label="审核日期" align="left" prop="cabraa02" min-width="80px;" :formatter="formatDate"/>
-        <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="280px;"/>
+        <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="330px;"/>
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->

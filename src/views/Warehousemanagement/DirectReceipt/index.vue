@@ -47,8 +47,8 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable  width="100px;"/>
-                    <el-table-column label="品牌" align="left" key="cala08" prop="cala08" sortable>
+                    <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable  width="120px;"/>
+                    <el-table-column label="品牌" width="90" align="left" key="cala08" prop="cala08" sortable>
                     </el-table-column>
                     <el-table-column label="型号" align="left" key="cbpb12" width="220px;" prop="cbpb12" sortable />
                     <el-table-column label="描述" align="left" key="cbpb08" prop="cbpb08" width="550px;" sortable />

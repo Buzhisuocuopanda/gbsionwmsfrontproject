@@ -72,7 +72,7 @@
                         sortable width="110px;">
                     </el-table-column>
                     <el-table-column label="客户编号" align="left" key="customerNo" prop="customerNo" sortable width="200px;" />
-                    <el-table-column label="客户名称" align="left" key="customerName" prop="customerName" sortable width="200px;" />
+                    <el-table-column label="客户名称" align="left" key="customerName" prop="customerName" sortable width="240px;" />
                     <el-table-column label="客户等级" align="right" key="customerLevel" prop="customerLevel" sortable width="100px;" />
                     <el-table-column label="联系人" align="left" key="contacts" prop="contacts" sortable width="90px;">
                     </el-table-column>
@@ -82,7 +82,7 @@
                     </el-table-column>
                     <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="110px;">
                     </el-table-column>
-                    <el-table-column label="地址" align="left" key="address" prop="address" sortable width="500px;">
+                    <el-table-column label="地址" align="left" key="address" prop="address" sortable width="520px;">
                     </el-table-column>
                     <el-table-column label="检测状态" align="center" key="checkStatusMsg" prop="checkStatusMsg" sortable width="120px;">
                     </el-table-column>
