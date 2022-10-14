@@ -41,7 +41,7 @@
         <el-table-column  label="单据编号" align="left" prop="cbib03" min-width="150px;"/>
         <el-table-column  label="摘要" align="left" prop="cbib17" min-width="130px;"/>
         <el-table-column  label="往来单位" align="left" prop="cbib06" min-width="100px;"/>
-        <el-table-column  label="商品" align="left" prop="cbpb08"  min-width="270px;"/>
+        <el-table-column  label="商品" align="left" prop="cbpb08"  min-width="600px;"/>
         <el-table-column  label="上次结存数量" align="right" :formatter="rounding" prop="cbib09" min-width="100px;"/>
         <el-table-column  label="上次结存成本金额" align="right" :formatter="rounding" prop="cbib10" min-width="130px;"/>
         <el-table-column  label="本次入库数量" align="right" :formatter="rounding" prop="cbib11" min-width="100px;"/>

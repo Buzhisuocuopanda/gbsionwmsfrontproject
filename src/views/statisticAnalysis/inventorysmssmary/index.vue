@@ -37,10 +37,10 @@
                 border fit highlight-current-row stripe style="margin-top:0.2em">
         <el-table-column label="单据编号" align="left" header-align="center" prop="cboa07" min-width="200px;" />
         <el-table-column  label="单据日期" align="left" prop="cboa08" :formatter="formatTime" min-width="120px;"/>
-        <el-table-column  label="客户" align="left" prop="cbca08" min-width="240px;"/>
+        <el-table-column  label="客户" align="left" prop="cbca08" min-width="280px;"/>
         <el-table-column  label="销售人员" align="left" prop="caua17" min-width="120px;"/>
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="130px;"/>
-        <el-table-column  label="类型" align="left" prop="cbpa08" min-width="100px;"/>
+        <el-table-column  label="类型" align="left" prop="cbpa08" min-width="140px;"/>
         <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="160px;"/>
         <el-table-column  label="数量" align="right" :formatter="rounding" prop="cbob09" min-width="100px;"/>
         <el-table-column  label="已发货数量" align="right" :formatter="rounding" prop="cbob10" min-width="100px;"/>

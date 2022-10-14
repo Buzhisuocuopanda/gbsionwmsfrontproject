@@ -78,7 +78,7 @@
         <el-table-column prop="description" key="description" label="描述">
         </el-table-column>
         <!-- goodsNum -->
-        <el-table-column label="良品数量">
+        <el-table-column prop="goodsNum" label="良品数量" v-if="edit == 1 || edit == 0">
           <template scope="scope">
             <el-input v-model="scope.row.goodsNum" v-if="status == 2 || status == 0?false:true" :readonly="status == 2 || status == 0?true:false"></el-input>
             <div v-text="rounding2(scope.row.goodsNum)"  v-if="status == 2 || status == 0?true:false"></div>
