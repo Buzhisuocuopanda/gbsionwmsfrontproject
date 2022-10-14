@@ -1,18 +1,19 @@
 <template>
     <div class="app-container">
-        <el-form ref="form2" :model="form2" label-width="130px"  style="">
+        <el-form ref="form2" :model="form2" label-width="130px" style="">
             <div class="chuangjiancaigous">销售预订变更单</div>
             <el-row :gutter="20" style="margin-top: 20px;">
                 <el-col :span="8">
                     <el-form-item label="销售预订单:" prop="GsSalesOrders" class="GsSalesOrders">
-                        <el-input type="text" :disabled="true" v-model="form2.GsSalesOrders" style="width: 60%;" />                      
-                            <!-- <el-input :disabled="true"  slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly
+                        <el-input type="text" :disabled="true" v-model="form2.GsSalesOrders" style="width: 60%;" />
+                        <!-- <el-input :disabled="true"  slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly
                                 style="width:68%;background-color: #ffffff;"/> -->
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
                     <el-form-item label="日期:" class="datepicker">
-                        <el-date-picker :disabled="true" type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+                        <el-date-picker :disabled="true" type="date" placeholder="" v-model="form2.orderDate"
+                            style="width: 60%;">
                         </el-date-picker>
                     </el-form-item>
                 </el-col>
@@ -70,7 +71,7 @@
                             </el-input>
                         </el-popover> -->
 
-                    <el-input type="text" :disabled="true" v-model="form2.cbsb177" style="width: 100%;" />
+                        <el-input type="text" :disabled="true" v-model="form2.cbsb177" style="width: 100%;" />
                     </el-form-item>
                 </el-col>
                 <!--商品信息维护-->
@@ -78,27 +79,32 @@
             <el-row v-if="false">
                 <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
                     <el-form-item label="商品id:" prop="goodsId">
-                        <el-input :disabled="true" v-model="form2.goodsId" placeholder="" maxlength="30" style="width:80%;" />
+                        <el-input :disabled="true" v-model="form2.goodsId" placeholder="" maxlength="30"
+                            style="width:80%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
                     <el-form-item label="id:" prop="id">
-                        <el-input :disabled="true" v-model="form2.id" placeholder="" maxlength="30" style="width:80%;" />
+                        <el-input :disabled="true" v-model="form2.id" placeholder="" maxlength="30"
+                            style="width:80%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
                     <el-form-item label="数量id:" prop="qty">
-                        <el-input :disabled="true" v-model="form2.qty" placeholder="" maxlength="30" style="width:80%;" />
+                        <el-input :disabled="true" v-model="form2.qty" placeholder="" maxlength="30"
+                            style="width:80%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
                     <el-form-item label="商品型号:" prop="goodsclassify">
-                        <el-input :disabled="true" v-model="form2.goodsclassify" placeholder="" maxlength="30" style="width:80%;" />
+                        <el-input :disabled="true" v-model="form2.goodsclassify" placeholder="" maxlength="30"
+                            style="width:80%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:0%;margin-left: 2%;" :span="7">
                     <el-form-item label="供应商id:" prop="supplierId">
-                        <el-input :disabled="true" v-model="form2.supplierId" maxlength="30" style="width:80%;border:solid #eee thin" />
+                        <el-input :disabled="true" v-model="form2.supplierId" maxlength="30"
+                            style="width:80%;border:solid #eee thin" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-top:0%;margin-left: -3%;" :span="7">
@@ -128,7 +134,8 @@
                 <!-- 商品信息维护 -->
                 <el-col>
                     <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">
-                        <el-input :disabled="true" v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
+                        <el-input :disabled="true" v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;">
+                        </el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -143,7 +150,7 @@
                 <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
                     :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
                     <el-table-column prop="cbpc000" label="品牌" width="300">
-                        <template slot-scope="scope" style="width:200%;" >
+                        <template slot-scope="scope" style="width:200%;">
                             <!-- <el-popover placement="bottom-start" trigger="click">
                                 <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
                                     style="width:600px!important;" />
@@ -151,15 +158,17 @@
                                     style="width:100%;">
                                 </el-input>
                             </el-popover> -->
-                            <el-input :disabled="true"  v-model="scope.row.cbpc000" class="Goodsone01" style="width:100%;"/>
+                            <el-input :disabled="true" v-model="scope.row.cbpc000" class="Goodsone01"
+                                style="width:100%;" />
                         </template>
                     </el-table-column>
                     <el-table-column label="型号" width="300" />
                     <el-table-column label="描述" width="300" />
                     <el-table-column label="数量" width="100" prop="qty">
                         <template slot-scope="scope" style="width:200%;">
-                            <el-input :disabled="true" v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}"
-                                placeholder="" @keyup="validateMealStandard($event)" class="shuzicaoyou" style="">
+                            <el-input :disabled="true" v-model="scope.row.qty"
+                                v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""
+                                @keyup="validateMealStandard($event)" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
@@ -172,17 +181,20 @@
                     </el-table-column>
                     <el-table-column v-if="false" prop="supplierId" label="供应商id" width="150">
                         <template slot-scope="scope">
-                            <el-input :disabled="true" v-model="scope.row.supplierId" placeholder="" style=""></el-input>
+                            <el-input :disabled="true" v-model="scope.row.supplierId" placeholder="" style="">
+                            </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column v-if="false" prop="goodsclassify" label="型号" width="150">
                         <template slot-scope="scope">
-                            <el-input :disabled="true" v-model="scope.row.goodsclassify" placeholder="" style=""></el-input>
+                            <el-input :disabled="true" v-model="scope.row.goodsclassify" placeholder="" style="">
+                            </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column v-if="false" prop="goodsclassifyy" label="型号" width="150">
                         <template slot-scope="scope">
-                            <el-input :disabled="true" v-model="scope.row.goodsclassifyy" placeholder="" style=""></el-input>
+                            <el-input :disabled="true" v-model="scope.row.goodsclassifyy" placeholder="" style="">
+                            </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
@@ -197,7 +209,8 @@
                     </el-table-column>
                     <el-table-column v-if="false" prop="gsSalesOrders" label="销售预订单id" width="150">
                         <template slot-scope="scope">
-                            <el-input :disabled="true" v-model="scope.row.gsSalesOrders" placeholder="" style=""></el-input>
+                            <el-input :disabled="true" v-model="scope.row.gsSalesOrders" placeholder="" style="">
+                            </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="80">
@@ -873,7 +886,7 @@ export default {
             console.log(userId, "20221009");
             if (userId) {
                 // 获取表详细信息
-                PurchaseinSalesAdvance({id:userId}, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinSalesAdvance({ id: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     if (res.code == "200") {
                         this.userList = res.data.rows;
                         this.total = res.data.total;
@@ -1120,7 +1133,9 @@ export default {
         /** 销售预订单变更单返回操作 */
         handlexiaoshouone: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-SalesAdvancefanhui/role/");
+            // this.$router.push("/system/user-SalesAdvancefanhui/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
 
         /** 修改按钮操作 */
@@ -1178,4 +1193,6 @@ export default {
     }
 };
 </script>
-<style src="./SalesAdvancecss/index.css"></style>
+<style src="./SalesAdvancecss/index.css">
+
+</style>
