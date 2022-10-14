@@ -101,7 +101,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table ref="tables" v-loading="loading" :data="list" @selection-change="handleSelectionChange" :default-sort="defaultSort" @sort-change="handleSortChange">
+    <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" border height="400" :header-cell-style="headClasspwoperlog" ref="tables" v-loading="loading" :data="list" @selection-change="handleSelectionChange" :default-sort="defaultSort" @sort-change="handleSortChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="日志编号" align="center" prop="operId" />
       <el-table-column label="系统模块" align="center" prop="title" />
@@ -130,6 +130,7 @@
             size="mini"
             type="text"
             icon="el-icon-view"
+            class="caozuoxiangqengoperlog"
             @click="handleView(scope.row,scope.index)"
             v-hasPermi="['monitor:operlog:query']"
           >详细</el-button>
@@ -233,6 +234,16 @@ export default {
     this.getList();
   },
   methods: {
+
+    //列表表头设置
+    headClasspwoperlog() {
+      return {
+        'text-align': 'left',
+        height: '30px',
+        padding: '0'
+      }
+    },
+
     /** 查询登录日志 */
     getList() {
       this.loading = true;
@@ -303,4 +314,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqengoperlog{
+  border: 0 !important;
+}
+
+</style>
 

@@ -102,7 +102,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
+    <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" border height="400" v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="参数主键" align="center" prop="configId" />
       <el-table-column label="参数名称" align="center" prop="configName" :show-overflow-tooltip="true" />
@@ -124,6 +124,7 @@
           <el-button
             size="mini"
             type="text"
+            class="caozuoxiangqengconfig"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['system:config:edit']"
@@ -131,6 +132,7 @@
           <el-button
             size="mini"
             type="text"
+            class="caozuoxiangqengconfig"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['system:config:remove']"
@@ -342,3 +344,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqengconfig{
+  border: 0 !important;
+}
+</style>

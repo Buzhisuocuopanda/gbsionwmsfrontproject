@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container containpost">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="岗位编码" prop="postCode">
         <el-input
@@ -28,8 +28,8 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button class="caozuoxiangqengpost" type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button class="caozuoxiangqengpost" icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -39,6 +39,7 @@
           type="primary"
           plain
           icon="el-icon-plus"
+          class="caozuoxiangqengpost"
           size="mini"
           @click="handleAdd"
           v-hasPermi="['system:post:add']"
@@ -49,6 +50,7 @@
           type="success"
           plain
           icon="el-icon-edit"
+          class="caozuoxiangqengpost"
           size="mini"
           :disabled="single"
           @click="handleUpdate"
@@ -60,6 +62,7 @@
           type="danger"
           plain
           icon="el-icon-delete"
+          class="caozuoxiangqengpost"
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
@@ -71,6 +74,7 @@
           type="warning"
           plain
           icon="el-icon-download"
+          class="caozuoxiangqengpost"
           size="mini"
           @click="handleExport"
           v-hasPermi="['system:post:export']"
@@ -79,7 +83,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="postList" @selection-change="handleSelectionChange">
+    <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="410" :data="postList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="岗位编号" align="center" prop="postId" />
       <el-table-column label="岗位编码" align="center" prop="postCode" />
@@ -101,6 +105,7 @@
             size="mini"
             type="text"
             icon="el-icon-edit"
+            class="caozuoxiangqengpost"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['system:post:edit']"
           >修改</el-button>
@@ -108,6 +113,7 @@
             size="mini"
             type="text"
             icon="el-icon-delete"
+            class="caozuoxiangqengpost"
             @click="handleDelete(scope.row)"
             v-hasPermi="['system:post:remove']"
           >删除</el-button>
@@ -307,3 +313,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqengpost{
+    border:0 !important;
+    padding: 0 !important;
+}
+
+.containpost  .el-form--inline {
+    height: 60px !important;
+  }
+</style>
