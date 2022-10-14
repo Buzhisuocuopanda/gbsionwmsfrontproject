@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container caidanmeun">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="菜单名称" prop="menuName">
         <el-input
@@ -20,8 +20,8 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button  type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button  icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -50,6 +50,9 @@
 
     <el-table
       v-if="refreshTable"
+      :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+      height="430"
+      border
       v-loading="loading"
       :data="menuList"
       row-key="menuId"
@@ -78,6 +81,7 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button 
+            class="caozuoxiangqengmenu"
             size="mini"
             type="text"
             icon="el-icon-edit"
@@ -86,6 +90,7 @@
           >修改</el-button>
           <el-button
             size="mini"
+            class="caozuoxiangqengmenu"
             type="text"
             icon="el-icon-plus"
             @click="handleAdd(scope.row)"
@@ -93,6 +98,7 @@
           >新增</el-button>
           <el-button
             size="mini"
+            class="caozuoxiangqengmenu"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
@@ -451,3 +457,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqengmenu{
+  border:0 !important;
+  padding: 0 !important;
+}
+
+.caidanmeun .el-form--inline {
+  height: 60px !important;
+}
+</style>
+

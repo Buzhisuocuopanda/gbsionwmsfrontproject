@@ -1169,6 +1169,16 @@ export const dynamicRoutes = [{
         }
       },
       {
+        path: 'mdfGjSale',
+        name: 'mdfGjSaleOrder',
+        component: () => import('@/views/Salesmanagement/SaleOrderGJ/mdfDetail/index'),
+
+        meta: {
+          title: '销售国际订单修改详情',
+          activeMenu: '/Salesmanagement/SaleOrderGJ/mdf'
+        }
+      },
+      {
         // path: 'role/:cbpc01(\\d+)',
         path: 'addSale',
 
@@ -1540,7 +1550,7 @@ export const dynamicRoutes = [{
   //     }
   //   ]
   // },
-  // 销售修改订单详情
+  // 销售订单修改
   {
     path: '/salemdfOrderDetail',
     component: Layout,
