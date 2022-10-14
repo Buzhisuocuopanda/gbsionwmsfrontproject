@@ -44,7 +44,7 @@
                 </el-select>
               </sapn>-->
               <!--@visible-change="hiddens"-->
-              <el-select @change="slected" filterable :filter-method="getChangeList" v-loadmore="getList" filterable
+              <el-select @change="slected" filterable :filter-method="getChangeList" v-loadmore="getList"
                 remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%">
                 <!-- <el-input v-model="queryParams.orderNo"
                         placeholder="请输入销售订单编号,sn码"
@@ -109,6 +109,14 @@
               </el-select>
             </template>
           </el-table-column>
+          <el-table-column label="操作" align="center" width="80">
+            <template slot-scope="scope">
+              <span @click="_ly_delFrom(scope.$index)">
+                <i class="el-icon-delete" style="color: red;"></i>
+              </span>
+            </template>
+          </el-table-column>
+
           <el-table-column v-if="false" prop="cbpd13" label="id" width="150">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbpd13" placeholder="id" style=""></el-input>

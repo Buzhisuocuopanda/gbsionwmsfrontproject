@@ -151,6 +151,7 @@ export default {
     this.onSearch()
     this.getStoreSkuList();
     this.getCblaList();
+    this.getGoods();
   },
   methods: {
 

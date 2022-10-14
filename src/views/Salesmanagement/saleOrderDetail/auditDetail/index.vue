@@ -378,7 +378,7 @@
       <el-button v-if="this.$route.query.status==2" type="primary" @click="auditSaleOrder">撤销</el-button>
       <el-button v-if="this.$route.query.status==3" type="primary" @click="auditSaleOrder">审核</el-button>
       <el-button v-if="this.$route.query.status==4" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
-      <!--      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>-->
+      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>
       <el-button v-if="this.$route.query.status==8" type="primary" @click="auditFinSaleOrder">已复核反审</el-button>
       <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleOrder">标记完成</el-button>
       <el-button v-if="this.$route.query.status==5" type="primary" @click="auditSaleOrder">指定结束</el-button>
