@@ -1264,11 +1264,9 @@ export default {
         },
         /** 详情操作 */
         handleAuthRole: function (row) {
-            const cbpc01 = row.cbpc01;
-            console.log(row.cbpc01);
-
+            let cbpc01 = row.id;
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-auth/role/" + cbpc01);
+            this.$router.push({path: "/Warehousemanagement/SalesReceipt/detail/",query: {id: cbpc01}})
         },
         /** 创建操作 */
         handleChuangJiangone: function (row) {
@@ -1278,9 +1276,7 @@ export default {
 
          /** 修改操作 */
         handleChuangJiangonexiugai: function (row) {
-
              const cbpc01 = row.id;
-            console.log(row.cbpc01);
             // this.$router.push("/system/user-auth/role/");
             this.$router.push("/system/user-SalesReceiptxiugai/role/"+ cbpc01);
         },

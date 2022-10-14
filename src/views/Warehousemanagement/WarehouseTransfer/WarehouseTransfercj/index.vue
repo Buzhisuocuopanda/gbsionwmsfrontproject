@@ -2,7 +2,7 @@
     <div>
         <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
             <div class="chuangjiancaigous">仓库调拨单</div>
-             <el-row>
+            <el-row>
                 <el-col :span="7">
                     <el-form-item label="编号:" prop="cbsb07" style="margin-left:-5%;">
                         <el-input type="text" v-model="form2.cbsb07" style="width: 67%;" />
@@ -50,24 +50,25 @@
                     </el-form-item>
                 </el-col> -->
                 <!--结算货币展示  jiageLeixeng-->
-                <el-col  style="margin-left: 2%;" :span="5">
+                <el-col style="margin-left: 2%;" :span="5">
                     <el-form-item label="结算货币:" prop="cbaa16">
                         <!-- <el-input type="text" v-model="form2.cbaa16" style="width:100%;" /> -->
-                      <el-select v-model="form2.cbaa16" placeholder="" style="width:100%;">
-                         <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
-                         </el-option>
-                      </el-select>
+                        <el-select v-model="form2.cbaa16" placeholder="" style="width:100%;">
+                            <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
                 <!--订单类型展示-->
-                 <el-col  style="margin-left: 2%;" :span="5">
+                <el-col style="margin-left: 2%;" :span="5">
                     <el-form-item label="关联订单:" prop="cbaa18">
                         <!-- <el-input type="text" v-model="form2.cbse18" style="width:100%;" /> -->
-                         <el-select v-model="form2.cbaa18" placeholder="" style="width:77%;">
-                                <el-option v-for="item in guanliandindan" :key="item.value" :label="item.label"
-                                    :value="item.value">
-                                </el-option>
-                            </el-select>
+                        <el-select v-model="form2.cbaa18" placeholder="" style="width:77%;">
+                            <el-option v-for="item in guanliandindan" :key="item.value" :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
                 <!--订单类型id-->
@@ -79,17 +80,17 @@
             </el-row>
 
             <el-row>
-                  <el-col style="margin-top: -1%;" :span="7" v-if="false">
+                <el-col style="margin-top: -1%;" :span="7" v-if="false">
                     <el-form-item label="主明细键:" prop="cbsb21">
                         <el-input type="text" v-model="form2.cbsb211" style="width:77%;" />
                     </el-form-item>
                 </el-col>
-                  <el-col style="margin-top: -1%;" :span="7" v-if="false">
+                <el-col style="margin-top: -1%;" :span="7" v-if="false">
                     <el-form-item label="审核时间:" prop="cbse13">
                         <el-input type="text" v-model="form2.cbse13" style="width:77%;" />
                     </el-form-item>
                 </el-col>
-                 <el-col style="margin-top: -1%;" :span="7" v-if="false">
+                <el-col style="margin-top: -1%;" :span="7" v-if="false">
                     <el-form-item label="完成时间:" prop="cbse15">
                         <el-input type="text" v-model="form2.cbse15" style="width:77%;" />
                     </el-form-item>
@@ -103,158 +104,166 @@
             <el-row v-if="false">
                 <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
                     <el-form-item label="调入仓库id:" prop="cbaa10">
-                        <el-input v-model="form2.cbaa10" placeholder="" maxlength="30"
-                            style="width:80%;" />
+                        <el-input v-model="form2.cbaa10" placeholder="" maxlength="30" style="width:80%;" />
                     </el-form-item>
                 </el-col>
             </el-row>
-       <div>
-        <el-row>
-          <el-col :span="24">
-            <el-button plain style="float: left;margin-left: 1%;" type="primary" @click="_ly_addFrom">增行</el-button>
-          </el-col>
-        </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}" :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left:0.5%;">
+            <div>
+                <el-row>
+                    <el-col :span="24">
+                        <el-button plain style="float: left;margin-left: 1%;" type="primary" @click="_ly_addFrom">增行
+                        </el-button>
+                    </el-col>
+                </el-row>
+                <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
+                    :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left:0.5%;">
 
-         <el-table-column prop="cbpc000" label="品牌" width="250">
-           <template slot-scope="scope">
-                <el-popover placement="bottom-start" trigger="click">
-                       <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
-                          style="width:670px!important;" />
-                          <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
-                            style="width:100%;">
-                        </el-input>
-                  </el-popover>
-            </template>
-          </el-table-column>
-           <el-table-column v-if="false" prop="cbab08" label="商品id" width="150">
-            <template slot-scope="scope">
-                <el-input v-model="scope.row.cbab08" placeholder="商品id" style=""></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column label="型号" width="250" />
-          <el-table-column label="描述" width="250" />
-           <el-table-column prop="cbpc099" label="供应商"  width="180">
-            <template slot-scope="scope">
-            <el-popover placement="bottom-start" trigger="click">
-              <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)" style="width:600!important;" />
-              <el-input slot="reference" v-model="scope.row.cbpc099" placeholder="" readonly style="width:100%;">
-              </el-input>
-            </el-popover>
-            </template>
-          </el-table-column>
-            <el-table-column v-if="false" prop="cbab14" label="供应商id" width="150">
-            <template slot-scope="scope">
-                <el-input v-model="scope.row.cbab14" placeholder="供应商id" style=""></el-input>
-            </template>
-          </el-table-column>
-           <el-table-column prop="cbab15" label="订单分类"  width="150">
-            <template slot-scope="scope">
-            <!-- <el-popover placement="bottom-start" trigger="click">
+                    <el-table-column prop="cbpc000" label="品牌" width="250">
+                        <template slot-scope="scope">
+                            <el-popover placement="bottom-start" trigger="click">
+                                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
+                                    style="width:670px!important;" />
+                                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
+                                    style="width:100%;">
+                                </el-input>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+                    <el-table-column v-if="false" prop="cbab08" label="商品id" width="150">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbab08" placeholder="商品id" style=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="型号" width="250" />
+                    <el-table-column label="描述" width="250" />
+                    <el-table-column prop="cbpc099" label="供应商" width="180">
+                        <template slot-scope="scope">
+                            <el-popover placement="bottom-start" trigger="click">
+                                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)"
+                                    style="width:600!important;" />
+                                <el-input slot="reference" v-model="scope.row.cbpc099" placeholder="" readonly
+                                    style="width:100%;">
+                                </el-input>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+                    <el-table-column v-if="false" prop="cbab14" label="供应商id" width="150">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbab14" placeholder="供应商id" style=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbab15" label="订单分类" width="150">
+                        <template slot-scope="scope">
+                            <!-- <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)" style="width:120px!important;" />
               <el-input slot="reference" v-model="scope.row.cbpc0990" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover> -->
-                <el-select v-model="scope.row.cbab15" placeholder="" style="width:100%;">
-                    <el-option v-for="item in dingdanfelei" :key="item.label" :label="item.label"
-                        :value="item.value">
-                    </el-option>
-                </el-select>
-            </template>
-          </el-table-column>
-            <el-table-column v-if="false" prop="cbsf16" label="订单分类id" width="150">
-            <template slot-scope="scope">
-                <el-input v-model="scope.row.cbsf16" placeholder="订单分类id" style=""></el-input>
-            </template>
-          </el-table-column>
+                            <el-select v-model="scope.row.cbab15" placeholder="" style="width:100%;">
+                                <el-option v-for="item in dingdanfelei" :key="item.label" :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </template>
+                    </el-table-column>
+                    <el-table-column v-if="false" prop="cbsf16" label="订单分类id" width="150">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbsf16" placeholder="订单分类id" style=""></el-input>
+                        </template>
+                    </el-table-column>
 
-          <el-table-column prop="cbab09" label="数量" width="100">
-            <template slot-scope="scope">
-                <el-input  v-model="scope.row.cbab09" v-only-number="{max: 100000, min: 0, precision:0.0000}"  @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column prop="cbab11" label="单价"   width="100">
-            <template slot-scope="scope">
-                <el-input  v-model="scope.row.cbab11" v-only-number="{max: 100000, min: 0, precision:0.0000}"  @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column prop="cbab12" label="金额" width="150">
-            <template slot-scope="scope">
-                <el-input  v-model="scope.row.cbab12" v-only-number="{max: 100000, min: 0, precision:0.0000}" disabled  placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column prop="cbab13" label="备注" width="">
-            <template slot-scope="scope">
-                <el-input v-model="scope.row.cbab13"  placeholder=""></el-input>
-            </template>
-          </el-table-column>
+                    <el-table-column prop="cbab09" label="数量" width="100">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbab09" v-only-number="{max: 100000, min: 0, precision:0.0000}"
+                                @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            </el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbab11" label="单价" width="100">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbab11" v-only-number="{max: 100000, min: 0, precision:0.0000}"
+                                @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            </el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbab12" label="金额" width="150">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbab12" v-only-number="{max: 100000, min: 0, precision:0.0000}"
+                                disabled placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbab13" label="备注" width="">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.cbab13" placeholder=""></el-input>
+                        </template>
+                    </el-table-column>
 
-          <el-table-column v-if="false" prop="cbaa01" label="主明细id" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.cbaa01" placeholder="id" style=""></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
-          <el-table-column v-if="false" prop="cbpc08" label="商品编号" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.cbpc08" placeholder="商品编号" style=""></el-input>
-              </sapn>
-            </template>
-          </el-table-column>
-          <el-table-column label="操作" align="center" width="80">
-            <template slot-scope="scope">
-              <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-delete" style="color: red;"></i>
-              </span>
-            </template>
-          </el-table-column>
-          <!-- </el-form> -->
-        </el-table>
-      </div>
-    </el-form>
-    <div class="tinajia_dingwei" style="margin-left:2%;margin-top:3%;">
-      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-      <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="handlexiaoshouone">取 消</el-button>
-      <!-- </span> -->
+                    <el-table-column v-if="false" prop="cbaa01" label="主明细id" width="150">
+                        <template slot-scope="scope">
+                            <sapn>
+                                <el-input v-model="scope.row.cbaa01" placeholder="id" style=""></el-input>
+                            </sapn>
+                        </template>
+                    </el-table-column>
+                    <el-table-column v-if="false" prop="cbpc08" label="商品编号" width="150">
+                        <template slot-scope="scope">
+                            <sapn>
+                                <el-input v-model="scope.row.cbpc08" placeholder="商品编号" style=""></el-input>
+                            </sapn>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" align="center" width="80">
+                        <template slot-scope="scope">
+                            <span @click="_ly_delFrom(scope.row)">
+                                <i class="el-icon-delete" style="color: red;"></i>
+                            </span>
+                        </template>
+                    </el-table-column>
+                    <!-- </el-form> -->
+                </el-table>
+            </div>
+        </el-form>
+        <div class="tinajia_dingwei" style="margin-left:2%;margin-top:3%;">
+            <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
+            <el-button type="primary" @click="handleAdd">保 存</el-button>
+            <el-button @click="handlexiaoshouone">取 消</el-button>
+            <!-- </span> -->
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchasereturnordersAdds,PurchasereturnordersAdd } from "@/api/Warehousemanagement/WarehouseTransfer";
+import { PurchasereturnordersAdds, PurchasereturnordersAdd } from "@/api/Warehousemanagement/WarehouseTransfer";
 import { getToken } from "@/utils/auth";
-  //仓库
+//仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
-  //供应商
+//供应商
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
-  //供应商
+//供应商
 import ListLists from "@/components/ListMaintenance";
-  //商品信息维护
+//商品信息维护
 import Goodsone01 from "@/components/Goodsone";
 
-  //客户信息维护
+//客户信息维护
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
 export default {
     name: "store",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
-    components: { kuweixxweihu, supplierMaintenance, ListLists,Goodsone01,CustomerMaintenance },
+    components: { kuweixxweihu, supplierMaintenance, ListLists, Goodsone01, CustomerMaintenance },
     data() {
         return {
             // 表单结构数组
             formArr: [],
-            tableData:[],
+            tableData: [],
             // 遮罩层
             loading: true,
             tianjiahang: [],
-            ListUser:[],
-            zhuangh:[],
+            ListUser: [],
+            zhuangh: [],
             // 选中数组
             ids: [],
             shenpiids: [],
@@ -381,7 +390,7 @@ export default {
             }],
             value: '',
 
-             //关联订单状态
+            //关联订单状态
             guanliandindan: [{
                 value: '1',
                 label: '是'
@@ -394,37 +403,37 @@ export default {
             roleOptions: [],
             // 表单参数
             form: {
-                  cbpc1000: "",
-                  cbpc100: "",
-                  cbpc099: "",
-                  cbpc000: "",
-                  cbab15: "",
-                  cbaa09: "",
-                  cbaa10: "",
-                  cbaa16: "",
-                  cbaa18: "",
-                  cbab08: "",
-                  cbab14: "",
-                  cbab09: "",
-                  cbab11: "",
-                  cbab12: "",
-                  cbab13: "",
-                  cbaa01: "",
+                cbpc1000: "",
+                cbpc100: "",
+                cbpc099: "",
+                cbpc000: "",
+                cbab15: "",
+                cbaa09: "",
+                cbaa10: "",
+                cbaa16: "",
+                cbaa18: "",
+                cbab08: "",
+                cbab14: "",
+                cbab09: "",
+                cbab11: "",
+                cbab12: "",
+                cbab13: "",
+                cbaa01: "",
 
 
-                  cbpd08: "",
-                  cbsb07:"",
-                  cbsb09:"",
-                  cbsb10:"",
-                  cbsb17:"",
-                  cbsb18:"",
-                  cbsb19:"",
-                  cbsb21:"",
-                  cbsb30:"",
-                  cbse09:"",
-                  cbse10:"",
-                  cbse16:"",
-                  cbse18:""
+                cbpd08: "",
+                cbsb07: "",
+                cbsb09: "",
+                cbsb10: "",
+                cbsb17: "",
+                cbsb18: "",
+                cbsb19: "",
+                cbsb21: "",
+                cbsb30: "",
+                cbse09: "",
+                cbse10: "",
+                cbse16: "",
+                cbse18: ""
             },
             form1: {
                 // classifyId: "",
@@ -435,37 +444,37 @@ export default {
                 // ifEnabled: ""
             },
             form2: {
-                  cbpc1000: "",
-                  cbpc100: "",
-                  cbpc099: "",
-                  cbpc000: "",
-                  cbab15: "",
-                  cbaa09: "",
-                  cbaa10: "",
-                  cbaa16: "",
-                  cbaa18: "",
-                  cbab08: "",
-                  cbab14: "",
-                  cbab09: "",
-                  cbab11: "",
-                  cbab12: "",
-                  cbab13: "",
-                  cbaa01: "",
+                cbpc1000: "",
+                cbpc100: "",
+                cbpc099: "",
+                cbpc000: "",
+                cbab15: "",
+                cbaa09: "",
+                cbaa10: "",
+                cbaa16: "",
+                cbaa18: "",
+                cbab08: "",
+                cbab14: "",
+                cbab09: "",
+                cbab11: "",
+                cbab12: "",
+                cbab13: "",
+                cbaa01: "",
 
 
-                  cbpd08: "",
-                  cbsb07:"",
-                  cbsb09:"",
-                  cbsb10:"",
-                  cbsb17:"",
-                  cbsb18:"",
-                  cbsb19:"",
-                  cbsb21:"",
-                  cbsb30:"",
-                  cbse09:"",
-                  cbse10:"",
-                  cbse16:"",
-                  cbse18:""
+                cbpd08: "",
+                cbsb07: "",
+                cbsb09: "",
+                cbsb10: "",
+                cbsb17: "",
+                cbsb18: "",
+                cbsb19: "",
+                cbsb21: "",
+                cbsb30: "",
+                cbse09: "",
+                cbse10: "",
+                cbse16: "",
+                cbse18: ""
             },
             defaultProps: {
                 children: "children",
@@ -542,7 +551,7 @@ export default {
 
 
 
-        this.form2.cbca08=this.ListUser.customerName;
+        this.form2.cbca08 = this.ListUser.customerName;
         //父子页面传值
 
         this.getParams();
@@ -563,37 +572,37 @@ export default {
     },
     methods: {
 
-         //查询商品信息维护
-      selected08(e,row) {
-        this.$set(row,"cbpc000",e.substring(0,e.indexOf(".")))
+        //查询商品信息维护
+        selected08(e, row) {
+            this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
 
-        this.$set(row,"cbab08",e.substring(e.indexOf(".") +1))
-      },
+            this.$set(row, "cbab08", e.substring(e.indexOf(".") + 1))
+        },
 
-     selected088(name) {
-        console.log(name, 123)
-        console.log(name.substring(name.indexOf("-") + 1), 963);
-        this.form2.cbse099 = name.substring(0, name.indexOf("-"))
-        this.form2.cbse09 = name.substring(name.indexOf("-") + 1)
-        // this.form2.icon = name;
-      },
+        selected088(name) {
+            console.log(name, 123)
+            console.log(name.substring(name.indexOf("-") + 1), 963);
+            this.form2.cbse099 = name.substring(0, name.indexOf("-"))
+            this.form2.cbse09 = name.substring(name.indexOf("-") + 1)
+            // this.form2.icon = name;
+        },
 
 
         // 合并单元格
-      arraySpanMethod({
-        row,
-        column,
-        rowIndex,
-        columnIndex
-      }) {
-        if (columnIndex === 0) {
-          return [1, 3];
-        } else if (columnIndex < 3) {
-          return [0, 0];
-        }
-      },
+        arraySpanMethod({
+            row,
+            column,
+            rowIndex,
+            columnIndex
+        }) {
+            if (columnIndex === 0) {
+                return [1, 3];
+            } else if (columnIndex < 3) {
+                return [0, 0];
+            }
+        },
 
-         // 点击右上角关闭弹窗
+        // 点击右上角关闭弹窗
         _ly_closeDialog(done) {
             console.log('_ly_closeDialog')
             this.$emit('on-close')
@@ -621,61 +630,61 @@ export default {
                 // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
                 // this.$refs[form.formName][0].validate((valid, obj) => {
                 //     if (valid) {
-                        // 如果检查通过，则对count减1。
-                        // 当count为1时，表示是最后一个表单，则存储数据
+                // 如果检查通过，则对count减1。
+                // 当count为1时，表示是最后一个表单，则存储数据
                 PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(response => {
 
-                if (response.code == "200") {
-                  this.tableData = []
-                  this.form2 = {
-                        cbpc1000: "",
-                        cbpc100: "",
-                        cbpc099: "",
-                        cbpc000: "",
-                        cbab15: "",
-                        cbaa09: "",
-                        cbaa10: "",
-                        cbaa16: "",
-                        cbaa18: "",
-                        cbab08: "",
-                        cbab14: "",
-                        cbab09: "",
-                        cbab11: "",
-                        cbab12: "",
-                        cbab13: "",
-                        cbaa01: "",
+                    if (response.code == "200") {
+                        this.tableData = []
+                        this.form2 = {
+                            cbpc1000: "",
+                            cbpc100: "",
+                            cbpc099: "",
+                            cbpc000: "",
+                            cbab15: "",
+                            cbaa09: "",
+                            cbaa10: "",
+                            cbaa16: "",
+                            cbaa18: "",
+                            cbab08: "",
+                            cbab14: "",
+                            cbab09: "",
+                            cbab11: "",
+                            cbab12: "",
+                            cbab13: "",
+                            cbaa01: "",
 
 
-                        cbpd08: "",
-                        cbsb07:"",
-                        cbsb09:"",
-                        cbsb10:"",
-                        cbsb17:"",
-                        cbsb18:"",
-                        cbsb19:"",
-                        cbsb21:"",
-                        cbsb30:"",
-                        cbse09:"",
-                        cbse10:"",
-                        cbse16:"",
-                        cbse18:""
-                  }
-                }
-                        if (count-- === 1) {
-                            this._ly_save()
+                            cbpd08: "",
+                            cbsb07: "",
+                            cbsb09: "",
+                            cbsb10: "",
+                            cbsb17: "",
+                            cbsb18: "",
+                            cbsb19: "",
+                            cbsb21: "",
+                            cbsb30: "",
+                            cbse09: "",
+                            cbse10: "",
+                            cbse16: "",
+                            cbse18: ""
                         }
+                    }
+                    if (count-- === 1) {
+                        this._ly_save()
+                    }
 
-                        //  this.reset03();
+                    //  this.reset03();
                     //    this.formArr.cbpg01="1234567";
                     //    this.form.cbpg01=this.formArr.cbpg01;
                     //    console.log(this.form.cbpg01,85203);
-                    });
+                });
 
-            //         } else {
-            //             console.log(obj)
-            //             return false
-            //         }
-            //   })
+                //         } else {
+                //             console.log(obj)
+                //             return false
+                //         }
+                //   })
             }
             console.log('_ly_ok:' + JSON.stringify(this.tableData))
         },
@@ -707,10 +716,10 @@ export default {
                 moner: '',
                 province: '',
                 cbpc000: ''
-                })
-                this.dataId++
-                console.log(this.tableData,852369);
-      },
+            })
+            this.dataId++
+            console.log(this.tableData, 852369);
+        },
         // 删除一行表单
         _ly_delFrom(index) {
             console.log('index: ' + index)
@@ -775,7 +784,7 @@ export default {
             //   console.log(JSON.parse(this.ListUser),852369);
             // //   console.log(JSON.parse(routerParams.data01),55555);
 
-           },
+        },
 
 
 
@@ -784,10 +793,10 @@ export default {
         },
 
         chen(item) {
-            if(item.cbab09>0&&item.cbab11>0){
-                this.$set(item,'cbab12',(parseFloat(item.cbab09)*parseFloat(item.cbab11)))
+            if (item.cbab09 > 0 && item.cbab11 > 0) {
+                this.$set(item, 'cbab12', (parseFloat(item.cbab09) * parseFloat(item.cbab11)))
             }
-          },
+        },
         //添加模块-调入仓库
         selected01(name) {
             console.log(name, 123)
@@ -796,7 +805,7 @@ export default {
             this.form2.cbaa10 = name.substring(name.indexOf("-") + 1)
             // this.form2.icon = name;
         },
-         //添加模块-调出仓库
+        //添加模块-调出仓库
         selected011(name) {
             console.log(name, 123)
             console.log(name.substring(name.indexOf("-") + 1), 963);
@@ -815,19 +824,19 @@ export default {
         },
 
         //添加模块-供应商
-      selected02(e,row) {
-        // console.log(name, 123)
-        // console.log(name.substring(name.indexOf("-") + 1), 963);
-        // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
-        // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
-        // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-        // this.form2.icon = name;
-         this.$set(row,"cbpc099",e.substring(0,e.indexOf("-")))
-        console.log(e,111)
-        console.log(row,222)
-        // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-        this.$set(row,"cbab14",e.substring(e.indexOf("-") +1),8523642)
-      },
+        selected02(e, row) {
+            // console.log(name, 123)
+            // console.log(name.substring(name.indexOf("-") + 1), 963);
+            // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+            // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
+            // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+            // this.form2.icon = name;
+            this.$set(row, "cbpc099", e.substring(0, e.indexOf("-")))
+            console.log(e, 111)
+            console.log(row, 222)
+            // row.cbpc08 = e.substring(e.indexOf(".") + 1)
+            this.$set(row, "cbab14", e.substring(e.indexOf("-") + 1), 8523642)
+        },
 
         //添加行
         addData() {
@@ -900,21 +909,23 @@ export default {
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     PurchasereturnordersAdd(this.form2).then(response => {
-                         if (response.code == "200") {
-                        // console.log(response.posts, 12345678);
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
-                        this.submitShangpin();
+                        if (response.code == "200") {
+                            // console.log(response.posts, 12345678);
+                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                            // this.getTreeselect();
+                            // this.submitShangpin();
+                            this.submitShangpin();
 
-                        this.open2 = false;
-                        this.reset01();
-                        this.tableData.forEach((item)=>{
-                            item.cbaa01=response.data.id;
-                        })
-                        console.log(response.data.id,123456);
-                        // console.log(this.item, 123456);
-                        this._ly_ok();
+                            this.open2 = false;
+                            this.reset01();
+                            this.tableData.forEach((item) => {
+                                item.cbaa01 = response.data.id;
+                            })
+                            console.log(response.data.id, 123456);
+                            // console.log(this.item, 123456);
+                            this._ly_ok();
+                            this.$tab.closePage();
+                            this.$router.go(-1);
                         }
                     });
                 } else {
@@ -927,7 +938,9 @@ export default {
         /** 仓库调拨单返回操作 */
         handlexiaoshouone: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/cangkudiaobudanfh/role/");
+            // this.$router.push("/system/cangkudiaobudanfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
 
 
@@ -938,7 +951,7 @@ export default {
 
     },
     mounted() {
-       // 初始化表单数据，至少有一行表单数据
+        // 初始化表单数据，至少有一行表单数据
         this.tableData = []
         this._ly_addFrom()
     },
@@ -955,4 +968,5 @@ export default {
 };
 </script>
 <style src="./WarehouseTransfercjcss/index.css">
+
 </style>

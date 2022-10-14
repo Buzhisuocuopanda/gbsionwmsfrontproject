@@ -1,53 +1,53 @@
 <template v-if="userList.length=1">
     <div>
-       <section ref="print" class="recordImg" id="printRecord">
-        <div class="Purchase_caigou">采购退货单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbpg07 }}</span>
-            <span class="Purchase_riqi">日期：{{ value.cbpg08.slice(0, 10) }}</span>
-        </div>
-        <div style="width:98%; margin-left: 1%;margin-top: 1%;">
-            <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
-                :key="key">
-                <el-descriptions-item>
-                    <template slot="label">供料单位</template>{{ value.cbsa08 }}
-                </el-descriptions-item>
-                <el-descriptions-item>
-                    <template slot="label">仓库</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
-                <el-descriptions-item>
-                    <template slot="label">结算货币</template>{{ value.cala08 }}
-                </el-descriptions-item>
-            </el-descriptions>
+        <section ref="print" class="recordImg" id="printRecord">
+            <div class="Purchase_caigou">采购退货单</div>
+            <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
+                <span class="Purchase_bianhao">编号：{{ value.cbpg07 }}</span>
+                <span class="Purchase_riqi">日期：{{ value.cbpg08.slice(0, 10) }}</span>
+            </div>
+            <div style="width:98%; margin-left: 1%;margin-top: 1%;">
+                <!-- 横向 -->
+                <el-descriptions class="margin-top" title="" :column="3" border
+                    v-for="(value, key) in userList.slice(0, 1)" :key="key">
+                    <el-descriptions-item>
+                        <template slot="label">供料单位</template>{{ value.cbsa08 }}
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">仓库</template>{{ value.cbwa09 }}
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">结算货币</template>{{ value.cala08 }}
+                    </el-descriptions-item>
+                </el-descriptions>
 
-            <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
+                <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table border v-loading="loading" :data="userList"  :header-cell-style="headClassprxq"
-                :cell-style="{ padding:'5px 0' }" :row-style="{ height:'10px' }"
-            :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                <el-table border v-loading="loading" :data="userList" :header-cell-style="headClassprxq"
+                    :cell-style="{ padding:'5px 0' }" :row-style="{ height:'10px' }"
+                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cala08" key="cala08" label="品牌">
-                </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="200px;">
-                </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" label="描述" width="450px;">
-                </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" align="right"  label="数量">
-                </el-table-column>
-                <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量">
-                </el-table-column>
-                <el-table-column prop="cbph10" key="cbph10" align="right" label="单价">
-                </el-table-column>
-                <el-table-column prop="cbph11" key="cbph11" align="right" label="金额">
-                </el-table-column>
-                <el-table-column prop="cbph13" key="cbph13" label="备注">
-                </el-table-column>
-            </el-table>
-            <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[9999999]"
-                class="pagintotal" />
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
+                    <el-table-column prop="cala08" key="cala08" label="品牌">
+                    </el-table-column>
+                    <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="200px;">
+                    </el-table-column>
+                    <el-table-column prop="cbpb08" key="cbpb08" label="描述" width="450px;">
+                    </el-table-column>
+                    <el-table-column prop="cbph09" key="cbph09" align="right" label="数量">
+                    </el-table-column>
+                    <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量">
+                    </el-table-column>
+                    <el-table-column prop="cbph10" key="cbph10" align="right" label="单价">
+                    </el-table-column>
+                    <el-table-column prop="cbph11" key="cbph11" align="right" label="金额">
+                    </el-table-column>
+                    <el-table-column prop="cbph13" key="cbph13" label="备注">
+                    </el-table-column>
+                </el-table>
+                <pagination v-if="false" v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[9999999]"
+                    class="pagintotal" />
+                <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="品牌">
                 </el-descriptions-item>
@@ -70,8 +70,8 @@
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="备注"></el-descriptions-item>
             </el-descriptions> -->
-            <!--100 -->
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border v-for="(value, key) in userList"
+                <!--100 -->
+                <!-- <el-descriptions title="" direction="vertical" :column="8.5" border v-for="(value, key) in userList"
                 :key="key">
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="">{{ value.cbpc01 }}
@@ -96,81 +96,83 @@
                     label="">苏州市</el-descriptions-item>
             </el-descriptions> -->
 
-            <!-- 横向 -->
-            <div style="margin-top:3%;">
-                <el-descriptions class="margin-top" title="" :column="2" border style="margin-top:3%;">
+                <!-- 横向 -->
+                <div style="margin-top:3%;">
+                    <el-descriptions class="margin-top" title="" :column="2" border style="margin-top:3%;">
+                        <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
+                            :labelStyle="{ 'text-align': 'center' }">
+                            <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
+                                slot="label">本页数量小记</template>{{ totalCount }}
+                        </el-descriptions-item>
+                        <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
+                            :labelStyle="{ 'text-align': 'center' }">
+                            <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
+                                slot="label">本页金额小记</template>{{ parseFloat(totalPrice).toFixed(2) }}
+                        </el-descriptions-item>
+                    </el-descriptions>
+                </div>
+                <!-- 横向 -->
+                <el-descriptions class="margin-top" title="" :column="2" border>
                     <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                         :labelStyle="{ 'text-align': 'center' }">
-                        <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
-                            slot="label">本页数量小记</template>{{ totalCount }}
+                        <template slot="label">合计数量</template>{{ totalCount }}
                     </el-descriptions-item>
                     <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                         :labelStyle="{ 'text-align': 'center' }">
-                        <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
-                            slot="label">本页金额小记</template>{{ parseFloat(totalPrice).toFixed(2) }}
+                        <template slot="label">合计金额</template>{{ parseFloat(totalPrice).toFixed(2) }}
                     </el-descriptions-item>
                 </el-descriptions>
-            </div>
-            <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" :column="2" border>
-                <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                    :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">合计数量</template>{{ totalCount }}
-                </el-descriptions-item>
-                <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
-                    :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">合计金额</template>{{ parseFloat(totalPrice).toFixed(2) }}
-                </el-descriptions-item>
-            </el-descriptions>
 
-            <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" border>
-                <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
-                    :labelStyle="{ 'text-align': 'center' }">
-                    <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
-                </el-descriptions-item>
-            </el-descriptions>
-             <div >
-                <span class="saomiaojluu">制单(wanghui):</span>
-                <span class="saomiaojluuu">审核:</span>
-                <span class="saomiaojluuuu">财务:</span>
+                <!-- 横向 -->
+                <el-descriptions class="margin-top" title="" border>
+                    <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
+                        :labelStyle="{ 'text-align': 'center' }">
+                        <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
+                    </el-descriptions-item>
+                </el-descriptions>
+                <div>
+                    <span class="saomiaojluu">制单(wanghui):</span>
+                    <span class="saomiaojluuu">审核:</span>
+                    <span class="saomiaojluuuu">财务:</span>
+                </div>
+                <div class="saomiaojlu">扫描记录</div>
+                <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border
+                    :data="userLists" :default-sort="{ prop: 'name', order: 'descending' }"
+                    @selection-change="handleSelectionChange">
+                    <el-table-column prop="pinpai" key="pinpai" label="品牌">
+                    </el-table-column>
+                    <el-table-column prop="lx" key="lx" label="类型">
+                    </el-table-column>
+                    <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号" width="180">
+                    </el-table-column>
+                    <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="390">
+                    </el-table-column>
+                    <el-table-column prop="sn" key="sn" align="" label="SN">
+                    </el-table-column>
+                    <el-table-column prop="kwm" key="kwm" align="" label="库位">
+                    </el-table-column>
+                    <el-table-column prop="cbpe03" key="cbpe03" :formatter="formatDate" label="入库时间">
+                    </el-table-column>
+                </el-table>
             </div>
-             <div class="saomiaojlu">扫描记录</div>
-             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userLists" 
-                :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">                
-                <el-table-column prop="pinpai" key="pinpai" label="品牌">
-                </el-table-column>
-                <el-table-column prop="lx" key="lx"  label="类型">
-                </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号" width="180">
-                </el-table-column>
-                <el-table-column prop="cbpb08" key="cbpb08" align="" label="描述" width="390">
-                </el-table-column>
-                <el-table-column prop="sn" key="sn" align="" label="SN">
-                </el-table-column>
-                <el-table-column prop="kwm" key="kwm" align="" label="库位">
-                </el-table-column>
-                <el-table-column prop="cbpe03" key="cbpe03" :formatter="formatDate" label="入库时间">
-                </el-table-column>
-            </el-table>
-        </div>
-       <div style="height:100px;"></div>
-     </section>
-       <div v-if="status == 8">
+            <div style="height:100px;"></div>
+        </section>
+        <div v-if="status == 8">
             <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
-            <el-button  @click="handlefanhui">返回</el-button>
+            <el-button @click="handlefanhui">返回</el-button>
         </div>
         <div v-else>
-            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
-            <el-button v-else style="margin-left:5%;" type="primary"  @click="PurchaseinboundFanShenpi">反 审</el-button>
-            <el-button  @click="handlefanhui">返回</el-button>
+            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
+            </el-button>
+            <el-button v-else style="margin-left:5%;" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button @click="handlefanhui">返回</el-button>
         </div>
-       <div style="height:100px;"></div>
+        <div style="height:100px;"></div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundList,Purchaseinboundsho,PurchaseinboundSht } from "@/api/Warehousemanagement/PurchaseReturn";
+import { PurchaseinboundList, Purchaseinboundsho, PurchaseinboundSht } from "@/api/Warehousemanagement/PurchaseReturn";
 export default {
 
     data() {
@@ -181,7 +183,7 @@ export default {
             total: 0,
             // 用户表格数据
             userList: null,
-            userLists:null,
+            userLists: null,
             // 查询参数
             queryParams: {
                 pageNum: 1,
@@ -194,11 +196,11 @@ export default {
                 userId: undefined
             },
             CBPC01: "",
-            cbpg01:"",
-            ids:{
-                id:''
+            cbpg01: "",
+            ids: {
+                id: ''
             },
-            status:'',
+            status: '',
         };
     },
     watch: {
@@ -212,38 +214,44 @@ export default {
         //审核
         PurchaseinboundShenpi() {
             this.$modal.confirm('是否要审批,编号为"' + this.userList[0].cbpg07 + '"的数据项？').then(() => {
-            Purchaseinboundsho({cbpg01:this.ids.id}).then(response => {
-                if (response.code == "200") {
-                    this.$message({ message: '审批成功', type: 'success' });
-                    this.$router.push("/system/user-cktkfh/role/");
-                }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                }
+                Purchaseinboundsho({ cbpg01: this.ids.id }).then(response => {
+                    if (response.code == "200") {
+                        this.$message({ message: '审批成功', type: 'success' });
+                        // this.$router.push("/system/user-cktkfh/role/");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
         },
         //反审
         PurchaseinboundFanShenpi() {
             this.$modal.confirm('是否要反审,编号为"' + this.userList[0].cbpg07 + '"的数据项？').then(() => {
-                PurchaseinboundSht({cbpg01:this.ids.id}).then(response => {
+                PurchaseinboundSht({ cbpg01: this.ids.id }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: '反审成功', type: 'success' });
-                        this.$router.push("/system/user-cktkfh/role/");
-                    }else{
+                        // this.$router.push("/system/user-cktkfh/role/");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
+                    } else {
                         this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
         },
-         //返回按钮
+        //返回按钮
         handlefanhui: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-cktkfh/role/");
+            // this.$router.push("/system/user-cktkfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
         },
 
         //写在methods里面的方法
-       PrintRow(index, row){
-            this.$print(this.$refs.print) 
+        PrintRow(index, row) {
+            this.$print(this.$refs.print)
         },
         //列表表头设置
         headClassprxq() {
@@ -332,30 +340,35 @@ export default {
 };
 </script>
 <style src="./PurchaseReturnxqcss/index.css">
+
 </style>
 <style>
 @page {
-   size: auto;
-   margin: 3mm;
+    size: auto;
+    margin: 3mm;
 }
+
 @media print {
-   html {
-     background-color: #ffffff;
-     height: auto;
-     margin: 0px;
- }
-  body {
-   border: solid 1px #ffffff;
-   /* margin: 10mm 15mm 10mm 15mm; */
-  }
-   #printRecord table {
-    table-layout: auto !important;
- }
-   /**  内容描述 */
+    html {
+        background-color: #ffffff;
+        height: auto;
+        margin: 0px;
+    }
+
+    body {
+        border: solid 1px #ffffff;
+        /* margin: 10mm 15mm 10mm 15mm; */
+    }
+
+    #printRecord table {
+        table-layout: auto !important;
+    }
+
+    /**  内容描述 */
     /* #printRecord .el-table__body .el-table__row .el-table_1_column_3 .cell{
       width: 280 !important;
    } */
-/**  表头描述  */
+    /**  表头描述  */
     /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_3 .cell{
       width: 280 !important;
     } */
@@ -366,36 +379,38 @@ export default {
 
 
     /** 表头型号 */
-   /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell{
+    /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell{
      width: 200 !important;
     } */
 
 
-   /** 表头品牌 */
-  /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell{
+    /** 表头品牌 */
+    /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell{
          width: 60 !important;
    } */
     /** 品牌内容 */
-   /* #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell{
+    /* #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell{
        width: 60 !important;
    } */
 
 
-     /** 表头数量 */
+    /** 表头数量 */
     /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
  
    } */
 
 
-   #printRecord .el-table__header-wrapper .el-table__header {
-       width: 100% !important;
-       border: solid 1px #f2f2f2;
-   }
-   #printRecord .el-table__body-wrapper .el-table__body {
-    width: 100% !important;
-   }
-  #printRecord #pagetable table {
-     table-layout: fixed !important;
- }
-} 
+    #printRecord .el-table__header-wrapper .el-table__header {
+        width: 100% !important;
+        border: solid 1px #f2f2f2;
+    }
+
+    #printRecord .el-table__body-wrapper .el-table__body {
+        width: 100% !important;
+    }
+
+    #printRecord #pagetable table {
+        table-layout: fixed !important;
+    }
+}
 </style>

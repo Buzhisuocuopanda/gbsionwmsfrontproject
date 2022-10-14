@@ -649,7 +649,21 @@ export const dynamicRoutes = [{
       }
     }]
   },
-
+  //销售预订单入库单详情
+  {
+    path: '/Warehousemanagement/SalesReceipt',
+    component: Layout,
+    permissions: ['system:user:add'],
+    children: [{
+      path: 'detail',
+      name: 'detail',
+      component: () => import('@/views/Warehousemanagement/SalesReceipt/SalesReceiptxq/index'),
+      meta: {
+        title: '销售预订单入库单详情',
+        activeMenu: '/Warehousemanagement/SalesReceipt'
+      }
+    }]
+  },
   //销售预订单变更单详情
   {
     path: '/system/user-SalesAdvancexiangqong',
