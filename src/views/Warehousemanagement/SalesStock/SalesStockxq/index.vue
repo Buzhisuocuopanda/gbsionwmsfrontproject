@@ -337,14 +337,14 @@ export default {
         totalCount: function () {
             var totalCount = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalCount += this.userList[i].cbph09;
+                totalCount += this.userList[i].nums;
             }
             return totalCount;
         },
         totalPrice: function () {
             var totalPrice = 0;
             for (let i = 0; i < this.userList.length; i++) {
-                totalPrice += this.userList[i].cbph09 * this.userList[i].cbph10;
+                totalPrice += this.userList[i].cbsf09 * this.userList[i].cbsf11;
             }
             if (totalPrice) {
                 return totalPrice

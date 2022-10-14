@@ -18,7 +18,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:" prop="orderDate">
-            <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;">
+            <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;" @click="getdate()">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -683,7 +683,9 @@
           orderClassMsg: '国内订单',
           receiveName:'',
           receivePhone: '',
-          address: ''
+          address: '',
+          orderDate:'',
+          currency:'',
         },
         form1: {
           // classifyId: "",
@@ -850,6 +852,7 @@
           value: '选项5',
           label: '北京烤鸭2'
         }],
+        dateValue:'',
       };
     },
     computed: {
@@ -865,7 +868,7 @@
     },
     created() {
 
-
+      this.getDate()
       this.getConfigKey("sys.user.initPassword").then(response => {
         // this.initPassword = response.msg;
       });
@@ -879,9 +882,15 @@
       this.form2.cbph10 = "20"
 
       console.log(this.form.cbpc16, 123456);
-
+      
     },
     methods: {
+      // 
+      getDate(){
+        this.formData.orderDate = new Date()
+        this.formData.currency = 'CNY'
+        console.log(this.formData.orderDate,111)
+      },
       // 合并单元格
       arraySpanMethod({
         row,
@@ -1444,6 +1453,7 @@
       handleAdd() {
 
         this.formData.goods=this.tableData
+        this.formData.currency = this.formData.currency == 'CNY'?6:5
         addSaleOrder(this.formData).then(response => {
           if (response.code == "200") {
             this.$message.success("添加成功")

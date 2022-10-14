@@ -129,6 +129,18 @@
 
        <!--订单创建-->
         <el-dialog :visible.sync="open3">
+            <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
+                <el-col :span="12">
+                    <el-input
+                        v-model="queryParams.orderNo"
+                        id="miaoshu"
+                        placeholder="请输入销售订单编号"
+                        clearable
+                        style="width: 100%"
+                        @change="handleQuerys(queryParams.orderNo)"
+                    />
+                </el-col>
+            </el-row>
             <el-table border  v-loading="loading" :data="userList01" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
@@ -147,6 +159,9 @@
                     <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
 
             </el-table>
+            <pagination v-show="total > 0" :total="totall" :page.sync="queryParamss.pageNum"
+                :limit.sync="queryParamss.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]"
+                class="pagintotal" />
         </el-dialog>
 
 
@@ -491,6 +506,18 @@ export default {
                 cbwa09: undefined,
                 cbse07: undefined
             },
+            // 查询参数
+            queryParamss: {
+                pageNum: 1,
+                pageSize: 15,
+                page: 1,
+                size: 15,
+                total: this.total,
+                totall: this.totall,
+                cbsb07: undefined,
+                cbca08: undefined,
+                dateRange: undefined,
+            },
             // 列信息
             //  columns: [
             //   {
@@ -657,6 +684,20 @@ export default {
         this.chen();
     },
     methods: {
+        handleQuerys(saleNo){
+            console.log(saleNo)
+            let obj = {
+                orderNo:saleNo,
+                checkStatus:1
+            }
+            Purchaseinbounddingdancx(obj).then((res) =>{
+                if(res.code == 200){
+                    this.userList01 = res.data.rows;
+                    this.totall = res.data.total
+                }
+                console.log(res,4444444)
+            })
+        },
           //销售订单添加
         tong(){
           this.open3 = true;
@@ -723,7 +764,7 @@ export default {
         // 查询提货订单列表
         getList09() {
             this.loading = true;
-            Purchaseinbounddingdancx(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            Purchaseinbounddingdancx(this.addDateRange(this.queryParamss, this.dateRange)).then(response => {
                 this.userList01 = response.data.rows;
                 this.totall = response.data.total;
                 // //供应商
