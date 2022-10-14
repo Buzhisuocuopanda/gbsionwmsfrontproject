@@ -397,7 +397,9 @@ export default {
         this.userListsss[i].cbpm09 = this.userListsss[i].sn2;
         this.userListsss[i].cbpm08 = this.userListsss[i].goodsId;
         this.userListsss[i].cbpk01 = this.userId;
+        this.userListsss[i].cbpm10 = this.userListsss[i].locationId;
       }
+
 
       let dtat = {
         userId:this.userId,
@@ -428,6 +430,7 @@ export default {
       }
       row.sn2 = item.sn;
       row.goodsId = item.goodsId;
+      row.locationId = item.locationId;
       console.log(row.goodsId,10142);
     },
     getSnList(){
@@ -653,8 +656,8 @@ export default {
           if(this.edit == 1){
             this.userList2 = res.data.sugests.map(item=>{
               item.sn2 = item.sn
-              /*+ ' - ' + item.model  + ' - ' + item.description*/
-              item.sn = item.sn + ' - ' + item.sku  + ' - ' + item.goodClass
+              /*+ ' - ' + item.goodClass+ ' - '*/
+              item.sn = item.sn + ' - ' + item.cbla09 + ' - ' + item.brand + ' - ' + item.model  + ' - ' + item.description
               return item
             });
           }
