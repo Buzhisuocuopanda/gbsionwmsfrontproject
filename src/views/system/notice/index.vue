@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container containnotice">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="公告标题" prop="noticeTitle">
         <el-input
@@ -69,7 +69,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="noticeList" @selection-change="handleSelectionChange">
+    <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" border height="400" v-loading="loading" :data="noticeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="序号" align="center" prop="noticeId" width="100" />
       <el-table-column
@@ -100,6 +100,7 @@
             size="mini"
             type="text"
             icon="el-icon-edit"
+            class="caozuoxiangqengnotice"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['system:notice:edit']"
           >修改</el-button>
@@ -107,6 +108,7 @@
             size="mini"
             type="text"
             icon="el-icon-delete"
+            class="caozuoxiangqengnotice"
             @click="handleDelete(scope.row)"
             v-hasPermi="['system:notice:remove']"
           >删除</el-button>
@@ -310,3 +312,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqengnotice {
+    border: 0 !important;
+}
+
+.containnotice .el-form--inline {
+  height: 60px !important;
+}
+</style>

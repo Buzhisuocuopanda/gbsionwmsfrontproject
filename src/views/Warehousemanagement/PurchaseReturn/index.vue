@@ -929,7 +929,7 @@ export default {
         PurchaseinboundFanShenpi(row) {
             let cbpc01 = row.cbpg01
             // let status = row.cbpg11
-            let status = 8
+            let status = row.cbpg11
             this.$router.push("/system/user-authh/role/" + cbpc01 + status);
         //   this.$modal.confirm('是否要反审,编号为"' + row.cbpg07 + '"的数据项？').then(() => {
         //     console.log(row.cbpg01, 8888);

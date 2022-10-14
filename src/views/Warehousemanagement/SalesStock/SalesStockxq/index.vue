@@ -18,38 +18,56 @@
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">结算货币</template>USD
+                    <template slot="label">结算货币</template>{{ value.cala08 }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
-                    <template slot="label">关联订单</template>USD
+                    <template slot="label">关联订单</template>
+                        {{
+                            value.cbse18 == 0
+                            ? "是"
+                            : value.cbse18 == 1
+                            ? "否"
+                            : ""
+                        }}
                 </el-descriptions-item>
             </el-descriptions>
 
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table v-loading="loading" :data="userList" height="250"
+            <el-table v-loading="loading" :data="userList" height="auto"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cbpc07" key="cbpc07" label="供应商">
+                <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
                 </el-table-column>
-                <el-table-column prop="cbwa09" key="cbwa09" label="订单分类">
+                <el-table-column prop="cbsf16" key="cbsf16" label="订单分类">
+                    <template scope="scope">
+                        <div>
+                            {{
+                            scope.row.cbsf16 == 1
+                            ? "国际订单"
+                            : scope.row.cbsf16 == 2
+                            ? "国内订单"
+                            : "状态不确定"
+                            }}
+                        </div>
+                    </template>
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpc16" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpd09" key="cbpd09" label="型号">
+                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
                 </el-table-column>
-                <el-table-column prop="cbpd11" key="cbpd12" label="描述">
+                <el-table-column prop="cbpb08" key="cbpb08" label="描述">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="数量">
+                <el-table-column prop="cbsf09" key="cbsf09" label="数量">
                 </el-table-column>
-                <el-table-column prop="cbph09" key="cbph09" label="已扫数量">
+                <el-table-column prop="saoma" key="saoma" label="已扫数量">
                 </el-table-column>
-                <el-table-column prop="cbph10" key="cbph10" label="单价">
+                <el-table-column prop="cbsf11" key="cbsf11" label="单价">
                 </el-table-column>
-                <el-table-column prop="cbph11" key="cbph11" label="金额">
+                <el-table-column prop="cbsf12" key="cbsf12" label="金额">
                 </el-table-column>
-                <el-table-column prop="cbph13" key="cbph13" label="备注">
+                <el-table-column prop="cbsf13" key="cbsf13" label="备注">
                 </el-table-column>
             </el-table>
             <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
@@ -284,6 +302,9 @@ export default {
                 // 获取表详细信息
                 PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
+                    this.userList.map((item) =>{
+
+                    })
                     this.total = res.data.total;
                     console.log(res, 888999);
                     this.loading = false;

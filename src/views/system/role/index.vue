@@ -46,8 +46,8 @@
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button  type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button  icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -97,7 +97,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
+    <el-table border v-loading="loading" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="400"  :data="roleList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="角色编号" prop="roleId" width="120" />
       <el-table-column label="角色名称" prop="roleName" :show-overflow-tooltip="true" width="150" />
@@ -124,6 +124,7 @@
             size="mini"
             type="text"
             icon="el-icon-edit"
+            class="caozuoxiangqengrole"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['system:role:edit']"
           >修改</el-button>
@@ -131,6 +132,7 @@
             size="mini"
             type="text"
             icon="el-icon-delete"
+            class="caozuoxiangqengrole"
             @click="handleDelete(scope.row)"
             v-hasPermi="['system:role:remove']"
           >删除</el-button>
@@ -612,3 +614,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqengrole{
+
+  border: 0 !important;
+}
+</style>

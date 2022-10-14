@@ -74,8 +74,8 @@
             ></el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button  type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+            <el-button  icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -135,7 +135,7 @@
           <right-toolbar :showSearch.sync="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
         </el-row>
 
-        <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
+        <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" border height="410" v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column label="用户编号" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
           <el-table-column label="用户名称" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
@@ -166,6 +166,7 @@
             <template slot-scope="scope" v-if="scope.row.userId !== 1">
               <el-button
                 size="mini"
+                class="caozuoxiangqenguser"
                 type="text"
                 icon="el-icon-edit"
                 @click="handleUpdate(scope.row)"
@@ -173,6 +174,7 @@
               >修改</el-button>
               <el-button
                 size="mini"
+                class="caozuoxiangqenguser"
                 type="text"
                 icon="el-icon-delete"
                 @click="handleDelete(scope.row)"
@@ -787,3 +789,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.caozuoxiangqenguser{
+    border: 0 !important;
+}
+</style>

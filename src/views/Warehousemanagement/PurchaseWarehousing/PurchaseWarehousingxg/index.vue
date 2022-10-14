@@ -803,7 +803,8 @@ export default {
     //   console.log("_ly_cancelDialog");
     //   this.$emit("on-close");
         this.reset01()
-        this.$router.push("/system/user-cktkfh/role/");
+         this.$tab.closePage();
+      this.$router.go(-1);
     },
     // 关闭弹窗前，二次询问是否关闭
     _ly_beforeClose(done) {
@@ -1066,7 +1067,11 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-            this.form2.cbpc16 = this.form2.cala08s
+            if(this.form2.cala08s == 'CNY'){
+              this.form2.cbpc16 = 6
+            }else{
+              this.form2.cbpc16 = 5
+            }
             this.tableData[0] = {
                 "cbpd01": this.form2.cbpd01,
                 "cbpc01": this.form2.cbpc01,
@@ -1091,7 +1096,8 @@ export default {
               // console.log(this.form2.cbpg161,111);
               // console.log(this.form.cbpg01,222);
             //   console.log(response.data.id, 333);
-              this.$router.push("/system/user-cktkfh/role/");
+              this.$tab.closePage();
+              this.$router.go(-1);
             //   this.tableData.forEach((item) => {
             //     item.cbpc01 = response.data.id;
             //     console.log(item.cbpc01, 8523697412);
@@ -1125,6 +1131,10 @@ export default {
             });
             this.userLists = userlistss[0];
             this.form2 = res.data.rows[0];
+            this.tableData = res.data.rows;
+            this.tableData.map((item) =>{
+              item.cbpc000 = item.cala08 + ' ~ ' + item.cbpa07 + ' ~ ' + item.cbpb08
+            })
             console.log(this.userLists, 123456);
             console.log(res, 888999);
             this.loading = false;

@@ -16,9 +16,12 @@
 
         </el-form-item>
         <el-form-item label="商品" style="margin-left: 20px"  class="item-r" >
-          <el-select v-model="queryParams.cbpb01" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading1">
+          <el-select @change="getGoods" :remote-method="getGoods" v-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
+         <!-- <el-select v-model="queryParams.cbpb01" clearable filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading1">
+            <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
+          </el-select>-->
         </el-form-item>
         <el-form-item  label="日期" style="margin-left: 20px">
           <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
@@ -128,7 +131,14 @@ export default {
         endTime:undefined,
 
       },
-
+      // 商品查询参数
+      goodsQueryParams:{
+        pageNum: 1,
+        pageSize: 10,
+        cbpb08:"",
+        cbpb15:"",
+        cbpb12:""
+      },
       userParams: {
         pageNum: 1,
         pageSize: 15,
@@ -276,6 +286,7 @@ export default {
       this.queryParams.cbpb01 = "";
       this.dateRange=[];
       this.queryParams.pageNum = 1;
+      this.getGoods();
       // this.resetForm("queryParams");
       this.onSearch();
     },
@@ -314,23 +325,42 @@ export default {
       }, `销售订单明细查询数据_${new Date().getTime()}.xlsx`)
     },
     //获取下拉列表数据商品
-    getGoods(query){
-      if (query !== '') {
-        let param={cbpb08:query, cbpb15:query, cbpb12:query,};
-        this.loading1 = true;
-        getSwJsGoodsAllList(param).then(response => {
-          this.loading1 = false;
-          if (response.data != null) {
-            this.goodList = response.data;
-          } else {
-            this.goodList = [];
-          }
-        },error => {
-          this.loading1 = false;
-        });
-      } else {
-        this.goodList = [];
-      }
+    getGoods(val){
+      this.goodsQueryParams.cbpb08 = val;
+      this.goodsQueryParams.cbpb15 = val;
+      this.goodsQueryParams.cbpb12 = val;
+      this.goodsQueryParams.pageNum = 1;
+      // this.loading1 = true;
+      getSwJsGoodsAllList(this.goodsQueryParams).then(response => {
+        // this.loading1 = false;
+        if (response.data != null) {
+          this.goodsQueryParams.pageNum += 1;
+          this.goodList = response.data;
+        } else {
+          this.goodList = [];
+        }
+      },error => {
+        // this.loading1 = false;
+      });
+    },
+    //获取下拉列表数据商品
+    getGoodsloadmore(){
+      // this.goodsQueryParams.cbpb08 = query;
+      // this.goodsQueryParams.cbpb15 = query;
+      // this.goodsQueryParams.cbpb12 = query;
+      // this.goodsQueryParams.pageNum = 1;
+      // this.loading1 = true;
+      getSwJsGoodsAllList(this.goodsQueryParams).then(response => {
+        // this.loading1 = false;
+        if (response.data != null) {
+          this.goodsQueryParams.pageNum += 1;
+          this.goodList.push(...response.data);
+        } else {
+          // this.goodList = [];
+        }
+      },error => {
+        // this.loading1 = false;
+      });
     },
     //下拉列表数据客户
     getCbcaList(){

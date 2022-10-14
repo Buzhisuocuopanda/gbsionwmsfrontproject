@@ -755,6 +755,8 @@ export default {
     _ly_cancelDialog(done) {
       console.log("_ly_cancelDialog");
       this.$emit("on-close");
+      this.$tab.closePage();
+      this.$router.go(-1);
     },
     // 关闭弹窗前，二次询问是否关闭
     _ly_beforeClose(done) {
@@ -779,6 +781,13 @@ export default {
         PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(
           (response) => {
             if (response.code == "200") {
+              this.$message({
+                message: "添加成功",
+                type: "success",
+                style: "color:red;!important",
+              });
+              this.$tab.closePage();
+              this.$router.go(-1);
               this.tableData = [];
               this.form2 = {
                 cbpc07: "",
@@ -1031,11 +1040,7 @@ export default {
           PurchasereturnordersAdd(this.form2).then((response) => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
-              this.$message({
-                message: "添加成功",
-                type: "success",
-                style: "color:red;!important",
-              });
+              
               // this.getTreeselect();
               // this.submitShangpin();
               this.submitShangpin();
