@@ -81,10 +81,17 @@ export function PurchaseinboundSalesReceipt(data) {
   return request({
     url: '/system/SalesScheduledOrders/selectSalesReceiptList?id='+ data,
     method: 'post',
-    data:data
+    // data:data
   })
 }
-
+// 销售预订单详情
+export function saleOrderListdetail(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/saleOrderListdetail?id='+data,
+    method: 'post',
+    // data:data
+  })
+}
 // 审核
 export function PurchaseinboundSH(data) {
   return request({

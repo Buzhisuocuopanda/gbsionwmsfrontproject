@@ -44,7 +44,7 @@
                 </el-select>
               </sapn>-->
               <!--@visible-change="hiddens"-->
-              <el-select @change="slected" filterable :filter-method="getChangeList" v-loadmore="getList" filterable
+              <el-select @change="slected" filterable :filter-method="getChangeList" v-loadmore="getList"
                 remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%">
                 <!-- <el-input v-model="queryParams.orderNo"
                         placeholder="请输入销售订单编号,sn码"
