@@ -292,7 +292,7 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" style="margin-left: -10%">
-              <el-button
+              <!-- <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-edit"
@@ -302,7 +302,7 @@
                 v-hasPermi="['system:whmanagement:edit']"
               >
                 修改
-              </el-button>
+              </el-button> -->
               <el-button
                 size="mini"
                 type="text"
