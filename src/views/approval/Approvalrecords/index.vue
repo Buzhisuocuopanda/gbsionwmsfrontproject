@@ -240,7 +240,7 @@ export default {
   },
   created() {
     //仓库明细初始化
-    this.getList();
+    // this.getList();
     },
   methods: {
     showDetail(row) {
@@ -276,10 +276,7 @@ export default {
           this.deviceList = []
           this.totalItems = 0
         }
-      }
-
-
-      )
+      })
 
 
 
@@ -309,7 +306,7 @@ export default {
 .caozuoxiangqeng {
       border: 0 !important;
       padding: 0 !important;
-    }  
+    }
 .approcorde .el-form--inline {
   height: 60px !important;
 }

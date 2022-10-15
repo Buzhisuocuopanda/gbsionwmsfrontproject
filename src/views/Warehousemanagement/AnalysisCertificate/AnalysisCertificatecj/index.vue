@@ -112,7 +112,7 @@
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.$index)">
-                <i class="el-icon-delete" style="color: red;"></i>
+                <i class="el-icon-delete" style="color: #ff0000;"></i>
               </span>
             </template>
           </el-table-column>
