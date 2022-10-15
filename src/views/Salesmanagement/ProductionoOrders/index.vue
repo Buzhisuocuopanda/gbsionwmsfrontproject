@@ -99,9 +99,9 @@
             <!--              </el-input>-->
             <!--            </el-popover>-->
 
-            <el-select @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods" filterable
-              clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-select @change="goodsOnChange($event)" v-el-select-loadmore="loadMore" v-model="formData.goods"
+              filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+              <el-option v-for="item,i in options" :key="i" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
 
@@ -291,34 +291,34 @@
 </template>
 <script>
 // import x from ''
-import { totalOrderDetail, swJsGoodslistBySelect, totalOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
+import { totalOrderDetail, swJsGoodslistBySelect, swJsGoodslistBySelectAll, totalOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
-import Vue from 'vue'
-Vue.directive('loadmore', {
-  bind(el, binding) {
+// import Vue from 'vue'
+// Vue.directive('loadmore', {
+//   bind(el, binding) {
 
-    // 获取element-ui定义好的scroll盒子
-    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+//     // 获取element-ui定义好的scroll盒子
+//     const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
 
-    SELECTWRAP_DOM.addEventListener('scroll', function () {
+//     SELECTWRAP_DOM.addEventListener('scroll', function () {
 
-      /*
-      * scrollHeight 获取元素内容高度(只读)
-      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
-      * clientHeight 读取元素的可见高度(只读)
-      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
-      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
-      */
-      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+//       /*
+//       * scrollHeight 获取元素内容高度(只读)
+//       * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+//       * clientHeight 读取元素的可见高度(只读)
+//       * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+//       * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+//       */
+//       const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
 
-      if (CONDITION) {
-        binding.value();
-      }
-    });
-  }
-})
+//       if (CONDITION) {
+//         binding.value();
+//       }
+//     });
+//   }
+// })
 export default {
   components: {
     Goodsone01
@@ -342,7 +342,9 @@ export default {
           // { type: 'number', message: '数量必须为数字'}
         ],
       },
+      optionsAll: null,
       options: [],
+      currrent: 0,
       listQuerySelect: {
         pageNum: 1,
         pageSize: 15
@@ -403,6 +405,21 @@ export default {
   mounted() { // 自动触发写入的函数
     this.onSearch()
     this.initSelect()
+
+    const param = {
+      goodsMsg: this.formData.goods,
+      pageNum: this.listQuerySelect.pageNum,
+      pageSize: this.listQuerySelect.pageSize
+    }
+    swJsGoodslistBySelectAll(param).then(res => {
+      if (res.code == "200") {
+        this.optionsAll = res.data.rows
+        this.options = this.optionsAll.slice(0, 50)
+        this.current = 50
+      } else {
+        this.$message.error(res.msg)
+      }
+    })
   },
   methods: {
 
@@ -767,25 +784,31 @@ export default {
 
     },
     loadMore() {
+      let arr = this.optionsAll.slice(this.current, this.current + 50)
+      for (let i = 0; i < arr.length; i++) {
+        this.options.push(arr[i])
+      }
+      this.curremt += 50
+
       //         console.log("滚动到底部了")
       // // 这里可以做你想做的任何事 到底执行
       //        this.options=this.options2
-      const param = {
-        goodsMsg: this.formData.goods,
-        pageNum: this.listQuerySelect.pageNum,
-        pageSize: this.listQuerySelect.pageSize
-      }
+      // const param = {
+      //   goodsMsg: this.formData.goods,
+      //   pageNum: this.listQuerySelect.pageNum,
+      //   pageSize: this.listQuerySelect.pageSize
+      // }
 
 
-      swJsGoodslistBySelect(param).then(response => {
-        if (response.code == "200") {
-          this.listQuerySelect.pageNum = this.listQuerySelect.pageNum + 1
-          // this.options.push.apply(this.options,response.data.rows)
-          this.options.push(...response.data.rows)
-        } else {
-          this.$message.error(response.msg)
-        }
-      });
+      // swJsGoodslistBySelect(param).then(response => {
+      //   if (response.code == "200") {
+      //     this.listQuerySelect.pageNum = this.listQuerySelect.pageNum + 1
+      //     // this.options.push.apply(this.options,response.data.rows)
+      //     this.options.push(...response.data.rows)
+      //   } else {
+      //     this.$message.error(response.msg)
+      //   }
+      // });
     },
     handleImport() {
       this.upload.title = "生产总订单";
