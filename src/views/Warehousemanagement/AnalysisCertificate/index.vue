@@ -27,7 +27,7 @@
                     <el-form-item>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button> -->
-                        <el-button  size="mini" class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
+                        <el-button  size="mini"  v-show="false" class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
                         </el-button>
                         <!-- <el-dropdown trigger="click">
                           <span class="el-dropdown-link xialaxuanxangnnn">
@@ -90,7 +90,7 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                             <el-button size="mini" type="text" icon="el-icon-edit"
+                             <el-button size="mini" v-show="false" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
                                 v-if="scope.row.cbqa09 == 0"
                                  v-hasPermi="['system:qualityin:edit']">
@@ -107,7 +107,7 @@
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-hasPermi="['system:qualityin:detail']">详情
                             </el-button>
-                            <el-button size="mini" type="text" icon="el-icon-delete"
+                            <el-button size="mini" v-show="false" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-hasPermi="['system:qualityin:remove']">删除</el-button>
                             <el-button v-show="false" size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
