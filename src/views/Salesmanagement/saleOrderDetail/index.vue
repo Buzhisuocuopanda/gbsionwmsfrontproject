@@ -554,10 +554,10 @@ export default {
 
       //货币类型
       jiageLeixeng: [{
-        value: '6',
+        value: 6,
         label: 'CNY'
       }, {
-        value: '5',
+        value: 5,
         label: 'USD'
       }],
       //发票类型
@@ -783,10 +783,10 @@ export default {
       //选择集合
       currencyoptions: [
         {
-          value: '6',
+          value: 6,
           label: 'CNY'
         }, {
-          value: '7',
+          value: 7,
           label: 'USD'
         }
       ],
@@ -1327,11 +1327,12 @@ export default {
 
         return
       }
+
       const param = {
         goodsId: row.goodsId,
         customerId: this.formData.customerId,
         orderClass: 2,
-        currency: this.formData.currency
+        currency: this.formData.currency == 'CNY' ? 6 : 5
 
 
       }
