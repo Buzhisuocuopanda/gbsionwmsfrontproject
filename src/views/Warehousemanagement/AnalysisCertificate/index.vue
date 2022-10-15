@@ -50,11 +50,11 @@
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                     </el-form-item>
                     <el-form-item>
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:qualityin:sh']">审核</el-button>
+                        <el-button plain size="mini" v-show="false" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01"  v-hasPermi="['system:qualityin:sh']">审核</el-button>
                     </el-form-item>
                     <el-form-item>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
+                        <el-button plain size="mini" v-show="false" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:qualityin:fs']">反审</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
@@ -110,10 +110,10 @@
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-hasPermi="['system:qualityin:remove']">删除</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <el-button v-show="false" size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:qualityin:sh']"
                                 v-if="scope.row.cbqa09 == 0">审核</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <el-button v-show="false" size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:qualityin:fs']"
                                 v-if="scope.row.cbqa09 == 1">反审</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
