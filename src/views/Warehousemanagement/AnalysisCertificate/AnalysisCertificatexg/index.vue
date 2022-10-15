@@ -72,8 +72,8 @@
           </el-table-column>
           <el-table-column prop="cbqb09" label="替换商品SN" width="200">
             <template slot-scope="scope">
-              <!-- <sapn> -->
-              <el-select v-model="scope.row.cbqb09" :remote-method="getLists" reserve-keyword remote filterable
+              <!-- <sapn> --><!--:remote-method="getLists" reserve-keyword -->
+              <el-select v-model="scope.row.cbqb09"   filterable remote
                 placeholder="请输入关键词" :loading="loading3">
                 <el-option v-for="item in scope.row.snList" :key="item.cbpm09" :label="item.cbpm09" :value="item.cbpm09">
                 </el-option>
@@ -388,6 +388,7 @@ export default {
     this.form2.cbqa01 = routerParams.data;
     this.form2.cbqa07 = routerParams.cbqa07;
     this.form2.cbqa11 = routerParams.cbqa11;
+    // this.getLists2();
     this.getList()
     // this.getLists()
     // this.getDetail();
@@ -406,19 +407,37 @@ export default {
   },
   methods: {
     // 替换sn查询
-    getLists(query,item) {
+    getLists(item) {
       // let id = this.$route.query.data
       // this.loading3 = true;
+
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
-        cbpm08: query
+        cbpm08: item.cbpm08
       }).then((response) => {
         // this.loading3 = false;
         item.snList = response.data.rows;
-        // this.snList = response.data.total;
+        console.log(item.snList,10152);
       }, error => {
-        item.snList = [];
+        // item.snList = [];
         // this.loading3 = false;
+      });
+    },
+
+    // 替换sn查询
+    getLists2() {
+      // let id = this.$route.query.data
+      // this.loading3 = true;
+
+      SwJsSkuBarcodeselectsss({
+        // cbpk01:id,
+        cbpm08: undefined
+      }).then((response) => {
+        // this.loading3 = false;
+        this.snList = response.data.rows;
+
+      }, error => {
+        // this.snList = [];
       });
     },
     //返回按钮
@@ -484,11 +503,15 @@ export default {
           this.userList = res.data.rows[0];
           this.tableData = res.data.rows;
           this.tableData.map((item) => {
-            this.getLists(item.cbpm08,item);
+            // item.snList =this.snList;
+            this.getLists(item);
+            item.snList =this.snList;
             item.f = item.cala08 + ' ~ ' + item.cbpb08 + ' ~ ' + item.cbpb12 + ' ~ ' + item.cbqb10
+            console.log(item);
           })
+
           this.total = res.data.total;
-          console.log(res, 888999);
+          console.log(this.tableData, 101514);
           this.loading = false;
         });
       }

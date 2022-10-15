@@ -890,7 +890,7 @@ export default {
   },
   created() {
 
-
+    console.log("-----------sdasdasd-----------")
     this.getConfigKey("sys.user.initPassword").then(response => {
       // this.initPassword = response.msg;
     });
@@ -1214,9 +1214,10 @@ export default {
         if (response.code == "200") {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
           this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       });
     },
     customerloadMore() {
@@ -1231,9 +1232,10 @@ export default {
         if (response.code == "200") {
           this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
           this.customeroptions.push.apply(this.customeroptions, response.data.rows)
-        } else {
-          this.$message.error(response.msg)
         }
+        //  else {
+        //   this.$message.error(response.msg)
+        // }
       });
     },
     loadMore() {
@@ -1252,9 +1254,10 @@ export default {
           this.listQuery.pageNum = this.listQuery.pageNum + 1
           // this.options.push.apply(this.options,response.data.rows)
           this.options.push(...response.data.rows)
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       });
     },
     dataFilter(val) {
@@ -1271,9 +1274,10 @@ export default {
 
           this.listQuery.pageNum = this.listQuery.pageNum + 1
           this.options = response.data.rows
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       });
 
     },
@@ -1290,9 +1294,10 @@ export default {
         if (response.code == "200") {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
           this.saleUseroptions = response.data.rows
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       });
 
     },
@@ -1309,9 +1314,10 @@ export default {
         if (response.code == "200") {
           this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
           this.customeroptions = response.data.rows
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       });
 
     },
@@ -1329,9 +1335,10 @@ export default {
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
           this.customeroptions = response.data.rows
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       });
     },
     //下拉列表数据销售人员
@@ -1353,9 +1360,10 @@ export default {
           this.snListQuery.pageNum = this.snListQuery.pageNum + 1
           // this.options.push.apply(this.options,response.data.rows)
           this.snList.push(...response.data)
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       }, error => {
 
       });
@@ -1369,9 +1377,10 @@ export default {
           this.snListQuery.pageNum = this.snListQuery.pageNum + 1
           // this.options.push.apply(this.options,response.data.rows)
           this.snList = response.data;
-        } else {
-          this.$message.error(response.msg)
         }
+        // else {
+        //   this.$message.error(response.msg)
+        // }
       }, error => {
 
       });
@@ -1441,7 +1450,7 @@ export default {
           this.formData.receivePhone = ''
           this.formData.receiveName = ''
           this.formData.address = ''
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
         }
       });
@@ -1454,8 +1463,9 @@ export default {
       systemUserSelect(param).then(response => {
         if (response.code == "200") {
           this.saleUseroptions = response.data.rows
-        } else {
-          this.$message.error(response.msg)
+        }
+        else {
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1467,7 +1477,7 @@ export default {
         if (response.code == "200") {
           this.options = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1485,7 +1495,7 @@ export default {
               this.$router.go(-1);
             } else {
 
-              this.$message.error(response.msg)
+              // this.$message.error(response.msg)
 
               // this.$router.go(-1)
 

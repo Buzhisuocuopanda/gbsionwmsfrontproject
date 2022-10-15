@@ -1,5 +1,5 @@
 <template>
-  <!--销售预订单变更单-->
+    <!--销售预订单变更单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -9,8 +9,8 @@
                     label-width="68px">
 
                     <!--<el-form-item prop="cbpc07" label="编号">-->
-                        <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
-                            <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
+                    <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
+                    <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
                     <el-form-item prop="orderNo" label="编号" style="margin-left:1%;">
                         <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入销售人员" clearable
@@ -20,7 +20,7 @@
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入供应商" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    
+
                     <el-form-item label="日期" style="margin-left:1%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
@@ -28,18 +28,22 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:saleChange:list']" @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:saleChange:list']"
+                            @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button class="biaoto-buttonchuangjian" size="mini" v-hasPermi="['system:saleChange:list']" @click="resetQuery">重置</el-button>
+                        <el-button class="biaoto-buttonchuangjian" size="mini" v-hasPermi="['system:saleChange:list']"
+                            @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:70%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:saleChange:add']" @click="handleChuangJiangone">创建
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:saleChange:add']"
+                            @click="handleChuangJiangone">创建
                         </el-button>
-                        <el-button type="mini" class="biaoto-buttonshanchu" v-hasPermi="['system:saleChange:remove']" :disabled="multiple" @click="handleDelete">
+                        <el-button type="mini" class="biaoto-buttonshanchu" v-hasPermi="['system:saleChange:remove']"
+                            :disabled="multiple" @click="handleDelete">
                             删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
@@ -63,14 +67,15 @@
                 </el-form>
 
 
-                <el-table border :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"  v-loading="loading" :data="userList" height="430"
+                <el-table border :header-cell-style="headClasspw" :row-style="{height: '3px'}"
+                    :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="430"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" width="130px;" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
-                        sortable />
-                    <el-table-column label="日期" width="100" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
-                        sortable>
+                    <el-table-column label="编号" width="130px;" align="left" key="orderNo" :show-overflow-tooltip="true"
+                        prop="orderNo" sortable />
+                    <el-table-column label="日期" width="100" align="left" key="orderDate" prop="orderDate"
+                        :formatter="formatDate" sortable>
                     </el-table-column>
                     <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="销售人员" align="left" key="caua17" prop="caua17" sortable />
@@ -86,15 +91,17 @@
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleAuthRolexiugai(scope.row)"
-                                v-if="scope.row.status == 0 | scope.row.status == 2" v-hasPermi="['system:saleChange:edit']">
+                                v-if="scope.row.status == 0 | scope.row.status == 2"
+                                v-hasPermi="['system:saleChange:edit']">
                                 修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                               v-if="scope.row.status == 0 | scope.row.status == ' '"
+                                v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:saleChange:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"
+                                v-hasPermi="['system:user:listselect']">详情
                             </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
@@ -148,8 +155,7 @@
                     </el-col>
                     <el-col style="margin-top:1%;">
                         <el-form-item label="销售人员:" prop="cbpc16">
-                            <el-select v-model="form.cbpc16" placeholder=""
-                                style="width: 50%; ">
+                            <el-select v-model="form.cbpc16" placeholder="" style="width: 50%; ">
                                 <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label"
                                     :value="item.value">
                                 </el-option>
@@ -239,7 +245,7 @@ export default {
             tianjiahang: [],
             // 选中数组
             ids: [],
-            shenpiids:[],
+            shenpiids: [],
             // 非单个禁用
             single: true,
             // 非多个禁用
@@ -381,7 +387,7 @@ export default {
                 cbpc08: "",
                 cbsa08: "",
                 cbwa09: "",
-                cala08:"",
+                cala08: "",
                 invoiceNumber: "",
                 invoicePhone: "",
                 invoiceTaxpayerNumber: "",
@@ -393,8 +399,8 @@ export default {
                 cbpd09: "",
                 cbpd11: "",
                 cbpd12: "",
-                cbpc166:"",
-                cbpc16:""
+                cbpc166: "",
+                cbpc16: ""
 
             },
             form1: {
@@ -410,19 +416,19 @@ export default {
                 cbpc08: "",
                 cbsa08: "",
                 cbwa09: "",
-                cala08:"",
-                cbpc100:"",
-                cbpc099:"",
-                cbpc166:"",
+                cala08: "",
+                cbpc100: "",
+                cbpc099: "",
+                cbpc166: "",
                 cbpc10: "",
                 cbpc09: "",
-                cbpd09:"",
-                cbpd11:"",
-                cbpd12:"",
-                cbpc16:"",
-                cbpc12:"",
-                cbpc14:"",
-                cbpd08:""
+                cbpd09: "",
+                cbpd11: "",
+                cbpd12: "",
+                cbpc16: "",
+                cbpc12: "",
+                cbpc14: "",
+                cbpd08: ""
             },
             defaultProps: {
                 children: "children",
@@ -450,12 +456,12 @@ export default {
                 page: 1,
                 size: 15,
                 total: this.total,
-                cbpc07:undefined,
-                cbsa08:undefined,
-                cbwa09:undefined,
-                dateRange:undefined,
+                cbpc07: undefined,
+                cbsa08: undefined,
+                cbwa09: undefined,
+                dateRange: undefined,
                 caua17: undefined,
-                orderNo:undefined
+                orderNo: undefined
             },
             // 列信息
             //  columns: [
@@ -621,9 +627,9 @@ export default {
         // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
         // console.log(this.userList,123456789);
         this.chen();
-        this.form2.cbpd11 ="20"
+        this.form2.cbpd11 = "20"
 
-        console.log(this.form.cbpc16,123456);
+        console.log(this.form.cbpc16, 123456);
 
     },
     methods: {
@@ -651,8 +657,7 @@ export default {
                 }
             })
         },
-        chen()
-        {
+        chen() {
             this.form2.cbpd11 = "20"
             this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
         },
@@ -722,19 +727,19 @@ export default {
             this.loading = true;
             PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
 
-             if (response.code == "200") {    
-                this.userList = response.data.rows;
-                this.total = response.data.total;
-                // //供应商
-                // this.postOptions = response.data.content;
-                // console.log(this.userList, daterange3369);
-                // console.log(response, 339688);
-                // this.deleteFlag = response.data.rows.deleteFlag;
-                this.loading = false;
-              }else{
-                 this.$message({ message: response.msg, type: 'error' });
-             }
-   
+                if (response.code == "200") {
+                    this.userList = response.data.rows;
+                    this.total = response.data.total;
+                    // //供应商
+                    // this.postOptions = response.data.content;
+                    // console.log(this.userList, daterange3369);
+                    // console.log(response, 339688);
+                    // this.deleteFlag = response.data.rows.deleteFlag;
+                    this.loading = false;
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+
             }
             );
         },
@@ -843,7 +848,7 @@ export default {
             this.open2 = false;
         },
         //修改的取消按钮
-        cancells(){
+        cancells() {
             this.open = false;
         },
         //添加的取消按钮
@@ -924,113 +929,113 @@ export default {
         //审批
         PurchaseinboundShenpi(row) {
             this.$modal.confirm('是否要审批,编号为"' + row.orderNo + '"的数据项？').then(() => {
-            console.log(row.cbpc01,8888);
+                console.log(row.cbpc01, 8888);
 
-            PurchaseinboundSH(row).then(response => {
-            if (response.code == "200") {
-                this.getList();
-                this.$message({ message: response.msg, type: 'success' });
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-              }
-            });
-          }).catch(() => { });
+                PurchaseinboundSH(row).then(response => {
+                    if (response.code == "200") {
+                        this.getList();
+                        // this.$message({ message: response.msg, type: 'success' });
+                    } else {
+                        // this.$message({ message: response.msg, type: 'error' });
+                    }
+                });
+            }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
             this.$modal.confirm('是否要审批,编号为"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
 
-            userIds.forEach((item) => {
-                req.PurchaseinboundSH(item).then((res) => {
-                if (res.code == "200") {
-                    this.getList();
-                    this.$modal.msgSuccess(res.msg);
-                }else{
-                    this.$message({ message: res.msg, type: 'error' });
-                }
+                userIds.forEach((item) => {
+                    req.PurchaseinboundSH(item).then((res) => {
+                        if (res.code == "200") {
+                            this.getList();
+                            this.$modal.msgSuccess(res.msg);
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
 
-                }).catch((e) => {
-                })
-            });
-          }).catch(() => { });
+                    }).catch((e) => {
+                    })
+                });
+            }).catch(() => { });
         },
         //反审
         PurchaseinboundFanShenpi(row) {
             this.$modal.confirm('是否要反审,编号为"' + row.orderNo + '"的数据项？').then(() => {
-            // console.log(row.cbpc01, 8888);
-            PurchaseinboundShs(row).then(response => {
-            if (response.code == "200") {
-                this.getList();
-                this.$message({ message: response.msg, type: 'success' });
-              }else{
-                this.$message({ message: response.msg, type: 'error' });
-              }
-            });
-          }).catch(() => { });
+                // console.log(row.cbpc01, 8888);
+                PurchaseinboundShs(row).then(response => {
+                    if (response.code == "200") {
+                        this.getList();
+                        this.$message({ message: response.msg, type: 'success' });
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
+                });
+            }).catch(() => { });
         },
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
             this.$modal.confirm('是否要反审,编号为"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
 
-            userIds.forEach((item) => {
-                req.PurchaseinboundShs(item).then((res) => {
+                userIds.forEach((item) => {
+                    req.PurchaseinboundShs(item).then((res) => {
 
-                 if (res.code == "200") {
-                    this.getList();
-                    this.$modal.msgSuccess(res.msg);
-                  }else{
-                    this.$message({ message: res.msg, type: 'error' });
-                  }
+                        if (res.code == "200") {
+                            this.getList();
+                            this.$modal.msgSuccess(res.msg);
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
 
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
-          }).catch(() => { });
+                    }).catch((e) => {
+                        // console.log(e, 456)
+                    })
+                });
+            }).catch(() => { });
         },
 
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
             this.$modal.confirm('是否要标记完成,编号为"' + row.orderNo + '"的数据项？').then(() => {
-            // console.log(row.cbpc01, 8888);
-            PurchaseinboundShss(row).then(response => {
+                // console.log(row.cbpc01, 8888);
+                PurchaseinboundShss(row).then(response => {
 
-             if (response.code == "200") {
-                console.log(this.form.cbpc01, 789)
-                this.getList();
-                // this.open = false;
-                this.$message({ message: response.msg, type: 'success' });
-             }else{
-                this.$message({ message: response.msg, type: 'error' });
-             }
-            });
-          }).catch(() => { });
+                    if (response.code == "200") {
+                        console.log(this.form.cbpc01, 789)
+                        this.getList();
+                        // this.open = false;
+                        this.$message({ message: response.msg, type: 'success' });
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
+                });
+            }).catch(() => { });
         },
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
             this.$modal.confirm('是否要标记完成,编号为"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
-            userIds.forEach((item) => {
-                req.PurchaseinboundShss(item).then((res) => {
-                 if (res.code == "200") {
-                    this.getList();
-                    this.$modal.msgSuccess(res.msg);
-                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
-                }
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
+                userIds.forEach((item) => {
+                    req.PurchaseinboundShss(item).then((res) => {
+                        if (res.code == "200") {
+                            this.getList();
+                            this.$modal.msgSuccess(res.msg);
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
 
-                  }).catch((e) => {
-                })
-            });
-          }).catch(() => { });
+                    }).catch((e) => {
+                    })
+                });
+            }).catch(() => { });
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
@@ -1038,13 +1043,13 @@ export default {
             this.$modal.confirm('是否要取消标记,编号为"' + row.orderNo + '"的数据项？').then(() => {
                 Purchaseinbounds(row).then(response => {
 
-                if (response.code == "200") {
-                    console.log(this.form.cbpc01, 789);
-                    this.getList();
-                    this.$message({ message: response.msg, type: 'success' });
-                 }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                   }
+                    if (response.code == "200") {
+                        console.log(this.form.cbpc01, 789);
+                        this.getList();
+                        this.$message({ message: response.msg, type: 'success' });
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
 
                 });
             }).catch(() => { });
@@ -1052,49 +1057,49 @@ export default {
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
             this.$modal.confirm('是否要取消标记,编号为"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
 
-            userIds.forEach((item) => {
-                req.Purchaseinbounds(item).then((res) => {
+                userIds.forEach((item) => {
+                    req.Purchaseinbounds(item).then((res) => {
 
-                  if (res.code == "200") {
-                    this.getList();
-                    this.$modal.msgSuccess(res.msg);
-                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
-                 }
+                        if (res.code == "200") {
+                            this.getList();
+                            this.$modal.msgSuccess(res.msg);
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
 
 
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
+                    }).catch((e) => {
+                        // console.log(e, 456)
+                    })
+                });
             }).catch(() => { });
         },
 
         /** 修改按钮操作 */
         handleUpdate() {
 
-                let row = {}
-                row.orderNo = this.form.orderNo;
-                row.salerId = this.form.cbpc16;
-                row.supplierId = this.form.supplierId;
-                row.id = this.form.id;
-                // row.cbpc16 = this.form.cbpc16;
-                // console.log(this.form.id);
-                PurchaseinboundEdit(JSON.stringify(row)).then(response => {
-                  if (response.code == "200") {
+            let row = {}
+            row.orderNo = this.form.orderNo;
+            row.salerId = this.form.cbpc16;
+            row.supplierId = this.form.supplierId;
+            row.id = this.form.id;
+            // row.cbpc16 = this.form.cbpc16;
+            // console.log(this.form.id);
+            PurchaseinboundEdit(JSON.stringify(row)).then(response => {
+                if (response.code == "200") {
                     // console.log(this.form, 789)
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
 
-                  }else{
+                } else {
                     this.$message({ message: response.msg, type: 'error' });
-                 }
+                }
 
-                });
+            });
 
         },
 
@@ -1135,12 +1140,12 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-            console.log(row,98999)
+            console.log(row, 98999)
             this.open = true;
             // console.log(row, 7788521);
             this.form.orderNo = row.orderNo;
             this.form.cbpc16 = row.caua17;
-            this.form.cbsa08  = row.cbsa08 ;
+            this.form.cbsa08 = row.cbsa08;
             this.form.goodsclassify = row.goodsclassify;
             this.form.id = row.id;
             // this.form.cbsa01 = row.cbsa01;
@@ -1166,20 +1171,20 @@ export default {
         handleAdd() {
 
             this.$refs["form2"].validate((item) => {
-            if (item) {
-            PurchaseinboundAdd(this.form2).then(response => {
+                if (item) {
+                    PurchaseinboundAdd(this.form2).then(response => {
 
-             if (response.code == "200") {
-                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                this.submitShangpin();
-                this.getList();
-                this.open2 = false;
-                this.reset01();
-               }else{
-                this.$message({ message: response.msg, type: 'error' });
-               }
-                // console.log(this.form2.ifEnabled, 123456);
-            });
+                        if (response.code == "200") {
+                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                            this.submitShangpin();
+                            this.getList();
+                            this.open2 = false;
+                            this.reset01();
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
+                        // console.log(this.form2.ifEnabled, 123456);
+                    });
                 } else {
                     // this.$message.error('请注意规范');
                 }
@@ -1241,7 +1246,7 @@ export default {
             this.$router.push("/system/user-SalesAdvance/role/");
         },
 
-          /** 修改操作 */
+        /** 修改操作 */
         handleAuthRolexiugai: function (row) {
             const cbpc01 = row.id;
             console.log(row.cbpc01);
@@ -1285,14 +1290,14 @@ export default {
                 userIds.forEach((item) => {
                     req.PurchaseinboundRemove(JSON.stringify(item)).then((res) => {
 
-                    if (res.code == "200") {
-                        // console.log(res, 123)
-                        this.submitShangpin();
-                        this.getList();
-                        this.$modal.msgSuccess("删除成功");
-                     }else{
-                        this.$message({ message: res.msg, type: 'error' });
-                     }
+                        if (res.code == "200") {
+                            // console.log(res, 123)
+                            this.submitShangpin();
+                            this.getList();
+                            this.$modal.msgSuccess("删除成功");
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
                     }).catch((e) => {
                         // console.log(e, 456)
                     })
@@ -1321,13 +1326,13 @@ export default {
             this.$modal.confirm('是否确认删除,编号为"' + row.orderNo + '"的数据项？').then(function () {
                 return PurchaseinboundRemove(JSON.stringify(row));
             }).then((response) => {
-            if (response.code == "200") {
-                this.submitShangpin();
-                this.getList();
-                this.$modal.msgSuccess("删除成功");
-                }else{
-                this.$message({ message: response.msg, type: 'error' });
-            }
+                if (response.code == "200") {
+                    this.submitShangpin();
+                    this.getList();
+                    this.$modal.msgSuccess("删除成功");
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }
             }).catch(() => { });
         },
         // /** 导出按钮操作 */
@@ -1385,10 +1390,11 @@ export default {
     computed: {
 
     },
-    mounted () {
+    mounted() {
 
     }
 };
 </script>
 <style src="./SalesAdvancecss/index.css">
+
 </style>

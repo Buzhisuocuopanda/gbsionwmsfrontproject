@@ -10,7 +10,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="库位"   class="item-r" >
-          <el-select  v-model="queryParams.cbla09s" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+          <el-select  v-model="queryParams.cbla09s" :remote-method="getCblaList" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in cblaList" :key="item.cbla09" :label="item.cbla09" :value="item.cbla09"></el-option>
           </el-select>
         </el-form-item>

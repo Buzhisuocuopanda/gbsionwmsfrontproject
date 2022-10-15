@@ -24,10 +24,10 @@
                     <el-form-item>
                         <el-button v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item>
+                    <el-form-item >
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button> -->
-                        <el-button  size="mini" class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
+                        <el-button  size="mini"   class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
                         </el-button>
                         <!-- <el-dropdown trigger="click">
                           <span class="el-dropdown-link xialaxuanxangnnn">
@@ -42,7 +42,7 @@
                        <!-- </el-dropdown> -->
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" type="danger" style="margin-left:1%;"  class="biaoto-buttonshanchu" :disabled="multiple"
+                        <el-button size="mini" type="danger" style="margin-left:1%;" v-show="false" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:qualityin:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -50,11 +50,11 @@
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                     </el-form-item>
                     <el-form-item>
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:qualityin:sh']">审核</el-button>
+                        <el-button plain size="mini" v-show="false" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01"  v-hasPermi="['system:qualityin:sh']">审核</el-button>
                     </el-form-item>
                     <el-form-item>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
+                        <el-button plain size="mini" v-show="false" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:qualityin:fs']">反审</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
@@ -80,7 +80,7 @@
                     <!-- <el-table-column label="供应商" align="center" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="仓库" align="center" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
-                    <el-table-column label="状态" width="150px;" align="center" key="cbqa09" prop="cbqa09" sortable>
+                    <el-table-column label="状态" v-if="false" width="150px;" align="center" key="cbqa09" prop="cbqa09" sortable>
                         <template scope="scope">
                            <div>{{ scope.row.cbqa09 == 0 ? "未审核" : scope.row.cbqa09 == 1 ?
                             "已审核" : scope.row.cbqa09 == 4 ? "已完成" : "未审核"
@@ -90,7 +90,7 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
-                             <el-button size="mini" type="text" icon="el-icon-edit"
+                             <el-button size="mini" v-show="false" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
                                 v-if="scope.row.cbqa09 == 0"
                                  v-hasPermi="['system:qualityin:edit']">
@@ -107,13 +107,13 @@
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-hasPermi="['system:qualityin:detail']">详情
                             </el-button>
-                            <el-button size="mini" type="text" icon="el-icon-delete"
+                            <el-button size="mini" v-show="false" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-hasPermi="['system:qualityin:remove']">删除</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <el-button v-show="false" size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:qualityin:sh']"
                                 v-if="scope.row.cbqa09 == 0">审核</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <el-button v-show="false" size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:qualityin:fs']"
                                 v-if="scope.row.cbqa09 == 1">反审</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"

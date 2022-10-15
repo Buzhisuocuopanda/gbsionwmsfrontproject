@@ -112,7 +112,7 @@
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.$index)">
-                <i class="el-icon-delete" style="color: red;"></i>
+                <i class="el-icon-delete" style="color: #ff0000;"></i>
               </span>
             </template>
           </el-table-column>
@@ -725,6 +725,8 @@ export default {
               this._ly_ok();
               // this.$tab.closePage();
               // this.$router.go(-1);
+            }else {
+              this.$message.error(response.message);
             }
           });
         } else {
@@ -784,6 +786,8 @@ export default {
           this.reset01();
           this.tableData = [];
           this.handlefanhui()
+        }else {
+          this.$message.error(response.message());
         }
         //   if (count-- === 1) {
         //     this._ly_save();
