@@ -725,6 +725,8 @@ export default {
               this._ly_ok();
               // this.$tab.closePage();
               // this.$router.go(-1);
+            }else {
+              this.$message.error(response.message);
             }
           });
         } else {
@@ -784,6 +786,8 @@ export default {
           this.reset01();
           this.tableData = [];
           this.handlefanhui()
+        }else {
+          this.$message.error(response.message());
         }
         //   if (count-- === 1) {
         //     this._ly_save();

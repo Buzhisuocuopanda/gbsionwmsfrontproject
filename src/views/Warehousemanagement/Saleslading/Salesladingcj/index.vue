@@ -867,6 +867,8 @@ export default {
               //     cbsb21:"",
               //     cbsb30:""
               // }
+            }else {
+              this.$message.error(response.message);
             }
             if (count-- === 1) {
               this._ly_save();
@@ -1119,15 +1121,15 @@ export default {
               this.open2 = false;
               this.reset01();
               // this.$router.push("/Warehousemanagement/Saleslading/");
-              this.$tab.closePage();
-              this.$router.go(-1);
+              // this.$tab.closePage();
+              // this.$router.go(-1);
             }
             // this.tableData.forEach((item) => {
             //   item.cbsb01 = response.data.id;
             // });
             // console.log(response.data.id, 123456);
             // // console.log(this.item, 123456);
-            // this._ly_ok();
+            this._ly_ok();
           });
         } else {
           // this.$message.error('请注意规范');

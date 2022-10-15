@@ -72,8 +72,8 @@
           </el-table-column>
           <el-table-column prop="cbqb09" label="替换商品SN" width="200">
             <template slot-scope="scope">
-              <!-- <sapn> -->
-              <el-select v-model="scope.row.cbqb09" :remote-method="getLists" reserve-keyword remote filterable
+              <!-- <sapn> --><!--:remote-method="getLists"-->
+              <el-select v-model="scope.row.cbqb09"  reserve-keyword remote filterable
                 placeholder="请输入关键词" :loading="loading3">
                 <el-option v-for="item in scope.row.snList" :key="item.cbpm09" :label="item.cbpm09" :value="item.cbpm09">
                 </el-option>
@@ -409,12 +409,14 @@ export default {
     getLists(query,item) {
       // let id = this.$route.query.data
       // this.loading3 = true;
+
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
         cbpm08: query
       }).then((response) => {
         // this.loading3 = false;
         item.snList = response.data.rows;
+        console.log(response.data,10152);
         // this.snList = response.data.total;
       }, error => {
         item.snList = [];
