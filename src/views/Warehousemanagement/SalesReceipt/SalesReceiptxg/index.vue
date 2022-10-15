@@ -614,7 +614,7 @@ export default {
   },
   created() {
 
-    //销售预订单入库单
+    //
     this.getList();
 
     this.getConfigKey("sys.user.initPassword").then(response => {
