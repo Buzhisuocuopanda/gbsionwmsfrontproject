@@ -44,7 +44,7 @@
         <el-table-column  label="可用库存数量" align="right" :formatter="rounding" prop="lockQty" min-width="100px;"/>
         <el-table-column label="仓库" align="left" prop="cbwa09" min-width="80px;" />
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+        <el-table-column label="操作" v-if="false" align="center" width="160" class-name="small-padding fixed-width">
           <template slot-scope="scope">
 
             <el-button size="mini" type="text"  class="button-caozuoxougai"
@@ -238,8 +238,9 @@ export default {
             this.$message('');
             this.$message({
               message: '添加成功', type: 'success'});
-            this.shoppingList.push(row);
             row.shopping=1;
+            this.shoppingList.push(row);
+
           } else {
             this.$message.error('添加失败,'+response.msg);
             row.shopping=0;
