@@ -11,7 +11,7 @@
       <el-row>
         <el-col :span="7">
           <el-form-item label="编号:" prop="cbsb07" style="margin-left: 10%">
-            <el-input type="text" v-model="form2.cbsb07" style="width: 50%" />
+            <el-input type="text" disabled v-model="form2.cbsb07" style="width: 50%" />
           </el-form-item>
         </el-col>
         <el-col :span="7">
@@ -143,7 +143,7 @@
           <el-col :span="24">
             <el-button
               plain
-              style="float: left;margin-left: 1%; " 
+              style="float: left;margin-left: 1%; "
               type="primary"
               @click="_ly_addFrom"
               >增行</el-button
@@ -1040,7 +1040,7 @@ export default {
           PurchasereturnordersAdd(this.form2).then((response) => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
-              
+
               // this.getTreeselect();
               // this.submitShangpin();
               this.submitShangpin();
