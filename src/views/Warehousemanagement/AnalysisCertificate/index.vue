@@ -80,7 +80,7 @@
                     <!-- <el-table-column label="供应商" align="center" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="仓库" align="center" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="结算货币" align="center" key="cala08" prop="cala08" sortable /> -->
-                    <el-table-column label="状态" width="150px;" align="center" key="cbqa09" prop="cbqa09" sortable>
+                    <el-table-column label="状态" v-if="false" width="150px;" align="center" key="cbqa09" prop="cbqa09" sortable>
                         <template scope="scope">
                            <div>{{ scope.row.cbqa09 == 0 ? "未审核" : scope.row.cbqa09 == 1 ?
                             "已审核" : scope.row.cbqa09 == 4 ? "已完成" : "未审核"
