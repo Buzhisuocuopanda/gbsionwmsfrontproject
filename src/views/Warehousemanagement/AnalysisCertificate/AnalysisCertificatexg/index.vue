@@ -75,7 +75,7 @@
               <!-- <sapn> -->
               <el-select v-model="scope.row.cbqb09" :remote-method="getLists" reserve-keyword remote filterable
                 placeholder="请输入关键词" :loading="loading3">
-                <el-option v-for="item in snList" :key="item.cbpm09" :label="item.cbpm09" :value="item.cbpm09">
+                <el-option v-for="item in scope.row.snList" :key="item.cbpm09" :label="item.cbpm09" :value="item.cbpm09">
                 </el-option>
               </el-select>
               <!-- <el-input v-model="scope.row.cbqb09" class="shuzicaoyou" placeholder="" style=""></el-input>-->
@@ -156,7 +156,7 @@ export default {
     return {
       // 遮罩层
       loading: true,
-      loading3: true,
+      loading3: false,
       tianjiahang: [],
       // 选中数组
       ids: [],
@@ -389,7 +389,7 @@ export default {
     this.form2.cbqa07 = routerParams.cbqa07;
     this.form2.cbqa11 = routerParams.cbqa11;
     this.getList()
-    this.getLists()
+    // this.getLists()
     // this.getDetail();
     this.getConfigKey("sys.user.initPassword").then(response => {
       // this.initPassword = response.msg;
@@ -406,19 +406,19 @@ export default {
   },
   methods: {
     // 替换sn查询
-    getLists(query) {
-      let id = this.$route.query.data
-      this.loading3 = true;
+    getLists(query,item) {
+      // let id = this.$route.query.data
+      // this.loading3 = true;
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
-        cbpm09: query
+        cbpm08: query
       }).then((response) => {
-        this.loading3 = false;
-        this.snList = response.data.rows;
+        // this.loading3 = false;
+        item.snList = response.data.rows;
         // this.snList = response.data.total;
       }, error => {
-        this.snList = [];
-        this.loading3 = false;
+        item.snList = [];
+        // this.loading3 = false;
       });
     },
     //返回按钮
@@ -484,6 +484,7 @@ export default {
           this.userList = res.data.rows[0];
           this.tableData = res.data.rows;
           this.tableData.map((item) => {
+            this.getLists(item.cbpm08,item);
             item.f = item.cala08 + ' ~ ' + item.cbpb08 + ' ~ ' + item.cbpb12 + ' ~ ' + item.cbqb10
           })
           this.total = res.data.total;
