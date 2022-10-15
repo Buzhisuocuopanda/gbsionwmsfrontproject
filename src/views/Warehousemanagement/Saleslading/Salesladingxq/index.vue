@@ -121,6 +121,8 @@
           </el-table-column>
           <el-table-column prop="sn" key="sn" align="" label="SN">
           </el-table-column>
+          <el-table-column prop="bfSn" key="sn" align="" label="替换前SN">
+          </el-table-column>
           <el-table-column prop="sku" key="sku" align="" label="库位">
           </el-table-column>
         </el-table>
