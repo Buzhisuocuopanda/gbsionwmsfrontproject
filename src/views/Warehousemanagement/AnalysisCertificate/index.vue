@@ -24,10 +24,10 @@
                     <el-form-item>
                         <el-button v-hasPermi="['system:qualityin:list']" class="biaoto-buttonchuangjianllnm" size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item>
+                    <el-form-item >
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button> -->
-                        <el-button  size="mini"  v-show="false" class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
+                        <el-button  size="mini"   class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
                         </el-button>
                         <!-- <el-dropdown trigger="click">
                           <span class="el-dropdown-link xialaxuanxangnnn">
@@ -42,7 +42,7 @@
                        <!-- </el-dropdown> -->
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" type="danger" style="margin-left:1%;"  class="biaoto-buttonshanchu" :disabled="multiple"
+                        <el-button size="mini" type="danger" style="margin-left:1%;" v-show="false" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:qualityin:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
