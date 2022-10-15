@@ -497,7 +497,7 @@ export default {
           this.showDialog = true
           this.formData = response.data
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
         }
       })
@@ -527,7 +527,7 @@ export default {
           this.showmdfDialog = true
           this.formData = response.data
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
         }
       })
@@ -600,7 +600,7 @@ export default {
           this.formData = {}
           this.onSearch();
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
         }
       })
@@ -628,7 +628,7 @@ export default {
             this.$message.success("删除成功")
             this.onSearch()
           } else {
-            this.$message.error(response.msg)
+            // this.$message.error(response.msg)
           }
         })
       })
@@ -652,7 +652,7 @@ export default {
           this.formData = {}
           this.onSearch();
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
         }
       })
@@ -758,7 +758,7 @@ export default {
         if (response.code == "200") {
           this.options = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -778,7 +778,7 @@ export default {
           this.listQuerySelect.pageNum = this.listQuerySelect.pageNum + 1
           this.options = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
 
