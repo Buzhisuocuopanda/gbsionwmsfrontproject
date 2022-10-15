@@ -579,6 +579,10 @@ export default {
     },
     // 质检
     PrintRow(index, row) {
+   /*   if(row.goodsNum!=null&&row.goodsNum>row.qty){
+        this.$message({ message: "良品数量不能大于总数量", type: "error" });
+        return
+      }*/
       this.paramss.opType = 6;
       this.changeMoreArrary()
       auditTakeOrder(this.paramss).then((res) => {
