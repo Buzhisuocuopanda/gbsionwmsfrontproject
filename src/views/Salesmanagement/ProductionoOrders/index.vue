@@ -47,7 +47,8 @@
           <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="480"
+      <!-- style="height:calc(100% - 10)" -->
+      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
         element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe>
         <el-table-column fixed label="优先级" align="left" prop="priority" min-width="70px;" />
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="140px;" />

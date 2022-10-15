@@ -137,7 +137,7 @@
             <template slot-scope="scope">
               <sapn>
                 <el-input v-model="scope.row.cbph11" v-only-number="{max: 100, min: 0,precision:0}" placeholder=""
-                  @blur="chen(scope.row)" class="shuzicaoyou" style=""></el-input>
+                  @blur="chen(scope.row)" class="shuzicaoyou" style="" readonly></el-input>
               </sapn>
             </template>
           </el-table-column>

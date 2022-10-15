@@ -82,7 +82,7 @@
                     </el-descriptions-item>
                 </el-descriptions>
                 <div>
-                    <span class="saomiaojluu">制单(wanghui):</span>
+                    <span class="saomiaojluu">制单:</span>
                     <span class="saomiaojluuu">审核:</span>
                     <span class="saomiaojluuuu">财务:</span>
                 </div>

@@ -45,7 +45,7 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSm" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="470"
+                <el-table border :header-cell-style="headClassWSm" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList"  max-height="470" min-height="470"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:92.5%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />

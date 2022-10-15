@@ -133,7 +133,7 @@
               <el-input v-model="scope.row.cbph11" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="cbph13" label="备注" width="">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbph13" placeholder=""></el-input>
             </template>
@@ -689,7 +689,9 @@ export default {
       //   console.log("_ly_cancelDialog");
       //   this.$emit("on-close");
       this.reset01()
-      this.$router.push("/system/user-cktkfh/role/");
+      // this.$router.push("/system/user-cktkfh/role/");
+       this.$tab.closePage();
+      this.$router.go(-1);
     },
     // 关闭弹窗前，二次询问是否关闭
     _ly_beforeClose(done) {
@@ -975,14 +977,9 @@ export default {
               this.submitShangpin();
               // this.open2 = false;
               this.reset01();
-              // console.log(this.form2.cbpg161,111);
-              // console.log(this.form.cbpg01,222);
-              //   console.log(response.data.id, 333);
-              this.$router.push("/system/user-cktkfh/role/");
-              //   this.tableData.forEach((item) => {
-              //     item.cbpc01 = response.data.id;
-              //     console.log(item.cbpc01, 8523697412);
-              //   });
+              // this.$router.push("/system/user-cktkfh/role/");
+               this.$tab.closePage();
+                this.$router.go(-1);
             }
           });
         } else {
@@ -1012,6 +1009,10 @@ export default {
             });
             this.userLists = userlistss[0];
             this.form2 = res.data.rows[0];
+            this.tableData = res.data.rows;
+            this.tableData.map((item) =>{
+              item.cbpc000 = item.pinpai + ' - ' + item.cbpb12 + ' - ' + item.cbpb08
+            })
             console.log(this.userLists, 123456);
             console.log(res, 888999);
             this.loading = false;

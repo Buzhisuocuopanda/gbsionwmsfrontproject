@@ -1,32 +1,16 @@
 <template>
   <div>
-    <el-form
-      ref="form2"
-      :model="form2"
-      :rules="rules"
-      label-width="35%"
-      style=""
-    >
+    <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
       <div class="chuangjiancaigous">销售提货单</div>
       <el-row>
         <el-col :span="7">
           <el-form-item label="编号:" prop="cbsb07" style="margin-left: 10%">
-            <el-input type="text" v-model="form2.cbsb07" style="width: 50%" readonly/>
+            <el-input type="text" v-model="form2.cbsb07" style="width: 50%" readonly />
           </el-form-item>
         </el-col>
         <el-col :span="7">
-          <el-form-item
-            label="客户订单:"
-            style="margin-left: 11.2%"
-            prop="cbsb30"
-          >
-            <el-input
-              type="text"
-              placeholder=""
-              v-model="form2.cbsb30"
-              style="width: 100%"
-              readonly
-            />
+          <el-form-item label="客户订单:" style="margin-left: 11.2%" prop="cbsb30">
+            <el-input type="text" placeholder="" v-model="form2.cbsb30" style="width: 100%" readonly />
           </el-form-item>
         </el-col>
       </el-row>
@@ -36,18 +20,9 @@
           <!-- <el-input type="text" v-model="form2.cbsb099" style="width:77%;" /> -->
           <el-form-item label="客户名称:" prop="cbpc0999">
             <el-popover placement="bottom-start" trigger="click" disabled>
-              <CustomerMainten
-                ref="CustomerMainten"
-                @selected="selected022"
-                style="width: 210px !important; height: 100px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.cbpc0999"
-                placeholder=""
-                readonly
-                style="width: 77%"
-              >
+              <CustomerMainten ref="CustomerMainten" @selected="selected022"
+                style="width: 210px !important; height: 100px !important" />
+              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly style="width: 77%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -55,24 +30,14 @@
         </el-col>
         <el-col v-if="false" style="margin-left: 2%" :span="7">
           <el-form-item label="客户:" prop="cbsb09">
-            <el-input type="text" v-model="form2.cbsb09" style="width: 77%" readonly/>
+            <el-input type="text" v-model="form2.cbsb09" style="width: 77%" readonly />
           </el-form-item>
         </el-col>
         <el-col style="" :span="7">
           <el-form-item label="仓库:" prop="cbpc100">
             <el-popover placement="bottom-start" trigger="click" clearable disabled>
-              <kuweixxweihu
-                ref="kuweixxweihu"
-                @selected="selected01"
-                style="width: 260px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.cbpc100"
-                placeholder=""
-                readonly
-                style="width: 77%"
-              >
+              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 260px !important" />
+              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width: 77%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -81,18 +46,8 @@
           <el-form-item label="销售人员:" prop="cbsb177">
             <!-- <el-input type="text" v-model="form2.cbsb177" style="width:77%;" /> -->
             <el-popover placement="bottom-start" trigger="click" clearable disabled>
-              <salerman
-                ref="salerman"
-                @selected="selected011699"
-                style="width: 260px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.cbsb177"
-                placeholder=""
-                readonly
-                style="width: 77%"
-              >
+              <salerman ref="salerman" @selected="selected011699" style="width: 260px !important" />
+              <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly style="width: 77%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -106,23 +61,18 @@
       <el-row>
         <el-col style="margin-left: 2%; margin-top: -1%" :span="7">
           <el-form-item label="联系人:" prop="cbsb18">
-            <el-input type="text" v-model="form2.cbsb18" style="width: 77%" readonly/>
+            <el-input type="text" v-model="form2.cbsb18" style="width: 77%" readonly />
           </el-form-item>
         </el-col>
         <el-col :span="7" style="margin-top: -1%">
           <el-form-item label="电话:" prop="cbsb19">
-            <el-input type="text" v-model="form2.cbsb19" style="width: 77%" readonly/>
+            <el-input type="text" v-model="form2.cbsb19" style="width: 77%" readonly />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: -1%" :span="7">
           <el-form-item label="客户等级:" prop="cbca28">
             <el-select v-model="form2.cbca28" placeholder="" style="width: 80%" disabled>
-              <el-option
-                v-for="item in jiageLeixeng"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -132,18 +82,8 @@
         <el-col style="margin-left: 2%; margin-top: -1%" :span="7">
           <el-form-item label="结算货币:" prop="cbsb166">
             <!-- <el-input type="text" v-model="form2.cbsb166" style="width:77%;" /> -->
-            <el-select
-              v-model="form2.cbsb166"
-              placeholder=""
-              style="width: 77%"
-              disabled
-            >
-              <el-option
-                v-for="item in jiageLeixenghuobi"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+            <el-select v-model="form2.cbsb166" placeholder="" style="width: 77%" disabled>
+              <el-option v-for="item in jiageLeixenghuobi" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -155,7 +95,7 @@
         </el-col>
         <el-col style="margin-top: -1%" :span="7">
           <el-form-item label="收货人:" prop="cbsb22">
-            <el-input type="text" v-model="form2.cbsb22" style="width: 77%" readonly/>
+            <el-input type="text" v-model="form2.cbsb22" style="width: 77%" readonly />
           </el-form-item>
         </el-col>
         <!-- <el-col style="margin-top: -1%" :span="7">
@@ -180,12 +120,12 @@
       <el-row>
         <el-col style="margin-left: 2%; margin-top: -1%" :span="7">
           <el-form-item label="收货电话:" prop="cbsb29">
-            <el-input type="text" v-model="form2.cbsb29" style="width: 77%" readonly/>
+            <el-input type="text" v-model="form2.cbsb29" style="width: 77%" readonly />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: -1%" :span="7">
           <el-form-item label="收货地址:" prop="cbsb28">
-            <el-input type="text" v-model="form2.cbsb28" style="width: 240%" readonly/>
+            <el-input type="text" v-model="form2.cbsb28" style="width: 240%" readonly />
           </el-form-item>
         </el-col>
         <el-col v-if="false" style="margin-top: -1%" :span="7">
@@ -212,12 +152,7 @@
                 </el-col> -->
         <el-col style="margin-top: -0.4%; margin-left: -3%" :span="7">
           <el-form-item label="仓库id:" prop="cbsb10">
-            <el-input
-              v-model="form2.cbsb10"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%"
-            />
+            <el-input v-model="form2.cbsb10" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
         </el-col>
         <!-- <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">
@@ -241,31 +176,16 @@
           </el-col>
         </el-row> -->
 
-        <el-table
-          :data="tableData"
-          border
-          :span-method="arraySpanMethod"
-          :row-style="{ height: '10px' }"
-          :cell-style="{ padding: '5px' }"
-          style="width: 100%; margin-top: 10px"
-        >
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
 
           <el-table-column prop="cbpc000" label="品牌" width="200">
             <template slot-scope="scope" style="width: 200%">
               <el-popover placement="bottom-start" trigger="click" disabled>
-                <Goodsone01
-                  ref="Goodsone01"
-                  @selected="selected08($event, scope.row)"
-                  style="width: 630px !important"
-                />
-                <el-input
-                  slot="reference"
-                  v-model="scope.row.cbpc000"
-                  placeholder=""
-                  readonly
-                  style="width: 100%"
-                >
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  style="width: 630px !important" />
+                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
             </template>
@@ -277,18 +197,9 @@
             <template slot-scope="scope">
               <!-- <el-input v-model="scope.row.cbsc15" placeholder=""></el-input> -->
               <el-popover placement="bottom-start" trigger="click" disabled>
-                <supplierMaintenance
-                  ref="supplierMaintenance"
-                  @selected="selected02($event, scope.row)"
-                  style="width: 210px !important"
-                />
-                <el-input
-                  slot="reference"
-                  v-model="scope.row.cbpc09"
-                  placeholder=""
-                  readonly
-                  style="width: 80%"
-                >
+                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event, scope.row)"
+                  style="width: 210px !important" />
+                <el-input slot="reference" v-model="scope.row.cbpc09" placeholder="" readonly style="width: 80%">
                 </el-input>
               </el-popover>
             </template>
@@ -312,43 +223,26 @@
           </el-table-column> -->
           <el-table-column prop="qty" label="数量" width="80">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.qty"
-                @input="chen(scope.row)"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.qty" @input="chen(scope.row)" placeholder="" class="shuzicaoyou" style="">
+              </el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="单价" >
+          <el-table-column prop="cbpd11" label="单价">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsc11"
-                class="shuzicaoyou"
-                placeholder=""
-                style=""
-                readonly
-              ></el-input>
+              <el-input v-model="scope.row.cbsc11" class="shuzicaoyou" placeholder="" style="" readonly></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbsc12" label="金额" >
+          <el-table-column prop="cbsc12" label="金额">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsc12"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
-                readonly
-              ></el-input>
+              <el-input v-model="scope.row.cbsc12" placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="noSendQty" label="剩余未发量" >
+          <el-table-column prop="noSendQty" label="剩余未发量">
             <template slot-scope="scope">
               <el-input v-model="scope.row.noSendQty" placeholder="" readonly></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="useQty" label="订单占用量" >
+          <el-table-column prop="useQty" label="订单占用量">
             <template slot-scope="scope">
               <el-input v-model="scope.row.useQty" placeholder="" readonly></el-input>
             </template>
@@ -361,53 +255,22 @@
 
           <el-table-column v-if="false" prop="cbsb01" label="id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsb01"
-                placeholder="id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsb01" placeholder="id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbsc08"
-            label="商品id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbsc08" label="商品id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsc08"
-                placeholder="商品id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsc08" placeholder="商品id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbsc15"
-            label="供应商id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbsc15" label="供应商id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsc15"
-                placeholder="供应商id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsc15" placeholder="供应商id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbsc14"
-            label="销售订单id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbsc14" label="销售订单id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsc14"
-                placeholder="销售订单id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsc14" placeholder="销售订单id" style=""></el-input>
             </template>
           </el-table-column>
           <!-- <el-table-column label="操作" align="center" width="80">
@@ -848,10 +711,10 @@ export default {
         cbsb28: "",
         cbca28: "",
         cbpc09: "",
-        saleOrderNo:"",
-        supplierId:'',
+        saleOrderNo: "",
+        supplierId: '',
       },
-      form3:'',
+      form3: '',
       defaultProps: {
         children: "children",
         label: "label",
@@ -919,6 +782,7 @@ export default {
     },
   },
   created() {
+    console.log('----------------5464--------------------')
     this.form.cbsc17 = this.form.brand;
     //销售提货单详情
     this.getList();
@@ -958,7 +822,7 @@ export default {
         .then((_) => {
           done();
         })
-        .catch((_) => {});
+        .catch((_) => { });
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
@@ -1122,8 +986,8 @@ export default {
     chen(row) {
       // this.form2.cbpd11 = "20";
       // this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
-      this.$set(row,"cbsc12",row.cbsc11 * row.qty)
-      console.log([row,row.cbsc11,row.qty])
+      this.$set(row, "cbsc12", row.cbsc11 * row.qty)
+      console.log([row, row.cbsc11, row.qty])
     },
     //添加模块-仓库
     selected01(name) {
@@ -1245,7 +1109,7 @@ export default {
       this.$refs["form2"].validate((item) => {
         if (item) {
           PurchaseinboundAdd(this.form2).then((response) => {
-            if(response.code == 200){
+            if (response.code == 200) {
               this.$message({
                 message: "添加成功",
                 type: "success",
@@ -1254,7 +1118,9 @@ export default {
               this.submitShangpin();
               this.open2 = false;
               this.reset01();
-              this.$router.push("/Warehousemanagement/Saleslading/");
+              // this.$router.push("/Warehousemanagement/Saleslading/");
+              this.$tab.closePage();
+              this.$router.go(-1);
             }
             // this.tableData.forEach((item) => {
             //   item.cbsb01 = response.data.id;
@@ -1283,8 +1149,8 @@ export default {
         whid,
         this.addDateRange(this.queryParams, this.dateRange)
       ).then((response) => {
-          this.form3 = response.data
-          this.form2 = response.data
+        this.form3 = response.data
+        this.form2 = response.data
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID
@@ -1345,7 +1211,7 @@ export default {
         this.formArr = response.data;
         this.tableData = response.data.goods;
         this.total = response.data.total;
-        console.log(response.data.goods,this.tableData, 339688000);
+        console.log(response.data.goods, this.tableData, 339688000);
 
         console.log(response, 1709916);
       });
@@ -1375,4 +1241,6 @@ export default {
   },
 };
 </script>
-<style src="./Salesladingcjcss/index.css"></style>
+<style src="./Salesladingcjcss/index.css">
+
+</style>

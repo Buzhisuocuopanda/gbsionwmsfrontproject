@@ -10,7 +10,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;"  value-format="yyyy-MM-dd HH:mm:ss" @change="orderdate">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -617,7 +617,9 @@ export default {
 
   },
   methods: {
-
+    orderdate(date){
+      console.log(date)
+    },
 
     //添加模块-销售人员
     selected011699(name) {
@@ -938,9 +940,8 @@ export default {
       this.$refs["form2"].validate((item) => {
         if (item) {
           this.form2.goods = this.tableData
-          this.form2.orderDate = this.form2.orderDate.slice(0, 10) + '  ' + this.form2.orderDate.slice(10, -1)
           console.log(this.form2.orderDate)
-          return
+          // this.form2.orderDate = this.form2.orderDate.slice(0, 10) + '  ' + this.form2.orderDate.slice(10, -1)
           PurchaseinboundAdd(this.form2).then(response => {
             if (response.code == "200") {
               this.$message({
@@ -953,12 +954,12 @@ export default {
               this.reset01()
               // console.log(this.form2.cbpg161,111);
               // console.log(this.form.cbpg01,222);
-              console.log(response.data.id, 333);
-              this.tableData.forEach((item) => {
-                item.purchaseOrderId = response.data.id;
-                console.log(item.purchaseOrderId, 8523697412);
-              })
-              this._ly_ok();
+              // console.log(response.data.id, 333);
+              // this.tableData.forEach((item) => {
+              //   item.purchaseOrderId = response.data.id;
+              //   console.log(item.purchaseOrderId, 8523697412);
+              // })
+              // this._ly_ok();
               this.$tab.closePage();
               this.$router.go(-1);
             }
