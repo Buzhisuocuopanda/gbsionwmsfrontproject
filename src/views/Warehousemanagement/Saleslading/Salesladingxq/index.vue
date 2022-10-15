@@ -100,6 +100,8 @@
           </el-table-column>
           <el-table-column prop="sn" key="sn" align="" label="SN">
           </el-table-column>
+          <el-table-column prop="bfSn" key="sn" align="" label="替换前SN">
+          </el-table-column>
           <el-table-column prop="sku" key="sku" align="" label="库位">
           </el-table-column>
           <el-table-column prop="scanStatus" key="scanStatuss" label="扫描状态">
@@ -120,8 +122,6 @@
           <el-table-column id="miaos" prop="description" key="description" align="" label="描述" width="300">
           </el-table-column>
           <el-table-column prop="sn" key="sn" align="" label="SN">
-          </el-table-column>
-          <el-table-column prop="bfSn" key="sn" align="" label="替换前SN">
           </el-table-column>
           <el-table-column prop="sku" key="sku" align="" label="库位">
           </el-table-column>

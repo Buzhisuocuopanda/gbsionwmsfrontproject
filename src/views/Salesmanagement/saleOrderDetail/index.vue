@@ -554,10 +554,10 @@ export default {
 
       //货币类型
       jiageLeixeng: [{
-        value: '6',
+        value: 6,
         label: 'CNY'
       }, {
-        value: '5',
+        value: 5,
         label: 'USD'
       }],
       //发票类型
@@ -783,10 +783,10 @@ export default {
       //选择集合
       currencyoptions: [
         {
-          value: '6',
+          value: 6,
           label: 'CNY'
         }, {
-          value: '7',
+          value: 7,
           label: 'USD'
         }
       ],
@@ -1179,7 +1179,7 @@ export default {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
           this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1196,7 +1196,7 @@ export default {
           this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
           this.customeroptions.push.apply(this.customeroptions, response.data.rows)
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1217,7 +1217,7 @@ export default {
           // this.options.push.apply(this.options,response.data.rows)
           this.options.push(...response.data.rows)
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1236,7 +1236,7 @@ export default {
           this.listQuery.pageNum = this.listQuery.pageNum + 1
           this.options = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
 
@@ -1255,7 +1255,7 @@ export default {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
           this.saleUseroptions = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
 
@@ -1274,7 +1274,7 @@ export default {
           this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
           this.customeroptions = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
 
@@ -1294,7 +1294,7 @@ export default {
         if (response.code == "200") {
           this.customeroptions = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1327,11 +1327,12 @@ export default {
 
         return
       }
+
       const param = {
         goodsId: row.goodsId,
         customerId: this.formData.customerId,
         orderClass: 2,
-        currency: this.formData.currency
+        currency: this.formData.currency == 'CNY' ? 6 : 5
 
 
       }
@@ -1346,7 +1347,7 @@ export default {
           row.normalPrice = 0.0
           row.canUseSku = 0.0
 
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
         }
       });
@@ -1402,7 +1403,7 @@ export default {
           this.formData.receivePhone = ''
           this.formData.receiveName = ''
           this.formData.address = ''
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
         }
       });
@@ -1416,7 +1417,7 @@ export default {
         if (response.code == "200") {
           this.saleUseroptions = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1429,7 +1430,7 @@ export default {
         if (response.code == "200") {
           this.options = response.data.rows
         } else {
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
         }
       });
     },
@@ -1450,7 +1451,7 @@ export default {
 
         } else {
 
-          this.$message.error(response.msg)
+          // this.$message.error(response.msg)
 
           // this.$router.go(-1)
 

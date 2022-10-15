@@ -1,12 +1,6 @@
 <template>
   <div>
-    <el-form
-      ref="form2"
-      :model="form2"
-      :rules="rules"
-      label-width="35%"
-      style=""
-    >
+    <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
       <div class="chuangjiancaigous">销售退库单</div>
       <el-row>
         <el-col :span="7">
@@ -16,12 +10,7 @@
         </el-col>
         <el-col :span="7">
           <el-form-item label="日期:" style="margin-left: 20%" prop="cbsb30">
-            <el-input
-              type="text"
-              placeholder=""
-              v-model="form2.cbse08"
-              style="width: 60%"
-            />
+            <el-input type="text" placeholder="" v-model="form2.cbse08" style="width: 60%" />
           </el-form-item>
         </el-col>
         <el-col :span="7" v-if="false">
@@ -34,18 +23,8 @@
         <el-col style="margin-left: 2%" :span="5">
           <el-form-item label="客户:" prop="cbse099">
             <el-popover placement="bottom-start" trigger="click">
-              <CustomerMaintenance
-                ref="CustomerMaintenance"
-                @selected="selected088"
-                style="width:400px; !important;"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.cbse099"
-                placeholder=""
-                readonly
-                style="width: 120%"
-              >
+              <CustomerMaintenance ref="CustomerMaintenance" @selected="selected088" style="width:400px; !important;" />
+              <el-input slot="reference" v-model="form2.cbse099" placeholder="" readonly style="width: 120%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -53,18 +32,8 @@
         <el-col style="" :span="5">
           <el-form-item label="仓库:" prop="cbpc100">
             <el-popover placement="bottom-start" trigger="click" clearable>
-              <kuweixxweihu
-                ref="kuweixxweihu"
-                @selected="selected01"
-                style="width: 160px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.cbpc100"
-                placeholder=""
-                readonly
-                style="width: 100%"
-              >
+              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 160px !important" />
+              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width: 100%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -86,12 +55,7 @@
           <el-form-item label="关联订单:" prop="cbse18">
             <!-- <el-input type="text" v-model="form2.cbse18" style="width:100%;" /> -->
             <el-select v-model="form2.cbse18" placeholder="" style="width: 77%">
-              <el-option
-                v-for="item in guanliandindan"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+              <el-option v-for="item in guanliandindan" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -129,66 +93,31 @@
       <el-row v-if="false">
         <el-col style="margin-top: -0.4%; margin-left: -3%" :span="7">
           <el-form-item label="仓库id:" prop="cbsb10">
-            <el-input
-              v-model="form2.cbse10"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%"
-            />
+            <el-input v-model="form2.cbse10" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
         </el-col>
       </el-row>
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button
-              plain
-              style="float: left;margin-left: 1%; "
-              type="primary"
-              @click="_ly_addFrom"
-              >增行</el-button
-            >
+            <el-button plain style="float: left;margin-left: 1%; " type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
-        <el-table
-          :data="tableData"
-          border
-          :span-method="arraySpanMethod"
-          :row-style="{ height: '10px' }"
-          :cell-style="{ padding: '5px' }"
-          style="width: 99%; margin-top: 10px; margin-left: 0.5%"
-        >
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 99%; margin-top: 10px; margin-left: 0.5%">
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01
-                  ref="Goodsone01"
-                  @selected="selected08($event, scope.row)"
-                  style="width:400px; !important;"
-                />
-                <el-input
-                  slot="reference"
-                  v-model="scope.row.cbpc000"
-                  placeholder=""
-                  readonly
-                  style="width: 100%"
-                >
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  style="width:400px; !important;" />
+                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbsf08"
-            label="商品id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbsf08" label="商品id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsf08"
-                placeholder="商品id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsf08" placeholder="商品id" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="型号" width="" />
@@ -196,34 +125,16 @@
           <el-table-column prop="cbpc099" label="供应商" width="180">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <supplierMaintenance
-                  ref="supplierMaintenance"
-                  @selected="selected02($event, scope.row)"
-                  style="width: 130px !important"
-                />
-                <el-input
-                  slot="reference"
-                  v-model="scope.row.cbpc099"
-                  placeholder=""
-                  readonly
-                  style="width: 100%"
-                >
+                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event, scope.row)"
+                  style="width: 130px !important" />
+                <el-input slot="reference" v-model="scope.row.cbpc099" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbsf15"
-            label="供应商id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbsf15" label="供应商id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsf15"
-                placeholder="供应商id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsf15" placeholder="供应商id" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpc0990" label="订单分类" width="150">
@@ -233,70 +144,34 @@
               <el-input slot="reference" v-model="scope.row.cbpc0990" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover> -->
-              <el-select
-                v-model="scope.row.cbsf16"
-                placeholder=""
-                style="width: 100%"
-              >
-                <el-option
-                  v-for="item in dingdanfelei"
-                  :key="item.label"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="scope.row.cbsf16" placeholder="" style="width: 100%">
+                <el-option v-for="item in dingdanfelei" :key="item.label" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbsf16"
-            label="订单分类id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbsf16" label="订单分类id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbsf16"
-                placeholder="订单分类id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbsf16" placeholder="订单分类id" style=""></el-input>
             </template>
           </el-table-column>
 
           <el-table-column prop="cbif09" label="数量" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{max: 100, min: 0, precision:0.00}"
-                v-model="scope.row.cbsf09"
-                @blur="chen(scope.row)"
-                :precision="2"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-only-number="{ min: 0, precision:0.00}" v-model="scope.row.cbsf09" @blur="chen(scope.row)"
+                :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbif11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{max: 100, min: 0, precision:0.00}"
-                v-model="scope.row.cbsf11"
-                @blur="chen(scope.row)"
-                :precision="2"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-only-number="{ min: 0, precision:0.00}" v-model="scope.row.cbsf11" @blur="chen(scope.row)"
+                :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{max: 100, min: 0, precision:0.00}"
-                @blur="chen(scope.row)"
-                v-model="scope.row.cbsf12"
-                placeholder=""
-                :precision="2"
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-only-number="{ min: 0, precision:0.00}" @blur="chen(scope.row)" v-model="scope.row.cbsf12"
+                placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -305,35 +180,17 @@
             </template>
           </el-table-column>
 
-          <el-table-column
-            v-if="false"
-            prop="cbse01"
-            label="主明细id"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbse01" label="主明细id" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input
-                  v-model="scope.row.cbse01"
-                  placeholder="id"
-                  style=""
-                ></el-input>
+                <el-input v-model="scope.row.cbse01" placeholder="id" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbpc08"
-            label="商品编号"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbpc08" label="商品编号" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input
-                  v-model="scope.row.cbpc08"
-                  placeholder="商品编号"
-                  style=""
-                ></el-input>
+                <el-input v-model="scope.row.cbpc08" placeholder="商品编号" style=""></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -764,7 +621,7 @@ export default {
         .then((_) => {
           done();
         })
-        .catch((_) => {});
+        .catch((_) => { });
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
@@ -1036,7 +893,7 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-            this.form2.goods = this.tableData
+          this.form2.goods = this.tableData
           PurchasereturnordersAdd(this.form2).then((response) => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
@@ -1162,4 +1019,6 @@ export default {
   },
 };
 </script>
-<style src="./SalesStockcjcss/index.css" scoped></style>
+<style src="./SalesStockcjcss/index.css" scoped>
+
+</style>
