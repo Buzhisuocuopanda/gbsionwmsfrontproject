@@ -512,17 +512,20 @@ export default {
   methods: {
     refreshTables(row,item){
       let id = this.$route.query.data
+      row.cbqb09 = undefined;
       // let cbpm08 = this.tableData[0].cbpm08
+      // this.loading3 = true;
+      // console.log(cbpm08 + 'zgl', 111);
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
-        goodsId:item.goodsId,
+        cbpm08:item.cbpm08,
         // cbpm09: query
       }).then((response) => {
-        this.loading3 = false;
-        this.tableDatas = response.data.rows;
-        this.totals = response.data.total;
+        // this.loading3 = false;
+        row.tableDatas = response.data.rows;
+        // this.totals = response.data.total;
       }, error => {
-        this.loading3 = false;
+        // this.loading3 = false;
       });
     },
     //返回按钮
@@ -589,19 +592,20 @@ export default {
     // 替换sn查询
     getLists(query) {
       let id = this.$route.query.data
-      let cbpm08 = this.tableData[0].cbpm08
-      this.loading3 = true;
-      console.log(cbpm08 + 'zgl', 111);
+      // let cbpm08 = this.tableData[0].cbpm08
+      // this.loading3 = true;
+      // console.log(cbpm08 + 'zgl', 111);
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
-        cbpm08:cbpm08,
+        cbpm08:query,
         // cbpm09: query
       }).then((response) => {
-        this.loading3 = false;
+        // this.loading3 = false;
         this.tableDatas = response.data.rows;
         this.totals = response.data.total;
+        this._ly_addFrom();
       }, error => {
-        this.loading3 = false;
+        // this.loading3 = false;
       });
     },
     show() {
@@ -719,8 +723,8 @@ export default {
                 item.cbqb10 = this.ysn;
               });
               this._ly_ok();
-              this.$tab.closePage();
-              this.$router.go(-1);
+              // this.$tab.closePage();
+              // this.$router.go(-1);
             }
           });
         } else {
@@ -846,7 +850,7 @@ export default {
   mounted() {
     // 初始化表单数据，至少有一行表单数据
     this.tableData = [];
-    this._ly_addFrom();
+    // this._ly_addFrom();
   },
   watch: {
     visible(newVal) {
