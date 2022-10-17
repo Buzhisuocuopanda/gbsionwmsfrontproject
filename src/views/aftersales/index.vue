@@ -55,7 +55,10 @@
         <el-table-column  label="处理结果" align="center" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
         <el-table-column  label="反馈时间" align="left" prop="feedbackTime" :formatter="formatTime2" min-width="80px;" />
         <el-table-column label="操作"  min-width="120px;">
-          <template slot-scope="scope" >
+          <template slot-scope="scope" ><!--style="margin-left:8px; margin-top: 2px"-->
+            <el-button class="caozuoxiangqengOut"  icon="el-icon-share"  size="mini"
+                       type="text" v-hasPermi="['system:aftersales:detail']"
+                       @click="showDetail(scope.row)">详情</el-button>
             <el-button
               size="mini"
               class="caozuoxiangqorderdet"
@@ -501,6 +504,9 @@ export default {
 
       this.$router.push({path: "/aftersalesDetails/aftermdsalesDetails", query: {id: row.id}})
 
+    },
+    showDetail(row){
+      this.$router.push({path: "/aftersalesDetails/aftermdsalesDetailsShow", query: {id: row.id}})
     },
     createForm() {
       // this.showaddDialog = true

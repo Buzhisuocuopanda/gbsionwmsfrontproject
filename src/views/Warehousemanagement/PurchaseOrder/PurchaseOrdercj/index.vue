@@ -1,14 +1,14 @@
 <template>
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">采购订单</div>
+      <div class="chuangjiancaigous">配件入库</div>
 
       <!-- 编号:56221589223 -->
 
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="编号:" prop="cbpc07">
-            <el-input type="text" v-model="form2.cbpc07" style="width: 74%;" />
+            <el-input type="text" v-model="form2.cbpc07" style="width: 74%;" :disabled="true" />
           </el-form-item>
         </el-col>
         <el-col :span="8">

@@ -242,7 +242,7 @@ export default {
             this.shoppingList.push(row);
 
           } else {
-            this.$message.error('添加失败,'+response.msg);
+            // this.$message.error('添加失败,'+response.msg);
             row.shopping=0;
           }
         },error => {

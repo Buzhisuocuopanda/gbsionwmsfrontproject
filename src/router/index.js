@@ -1341,6 +1341,17 @@ export const dynamicRoutes = [{
         icon: 'component',
         noCache: true
       }
+    },{
+      // path: 'role/:cbpc01(\\d+)',
+      path: 'aftermdsalesDetailsShow',
+      name: 'aftermdsalesDetailsShow',
+      component: () => import('@/views/aftersales/saleOrderDetail/mdfDetailShow/index'),
+
+      meta: {
+        title: '售后服务单详情',
+        icon: 'component',
+        noCache: true
+      }
     }, {
       // path: 'role/:cbpc01(\\d+)',
       path: 'aftermdsales',

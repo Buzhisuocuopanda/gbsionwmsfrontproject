@@ -1429,7 +1429,7 @@ export default {
                   // this.open = false;
                   this.$message({ message: "审批成功", type: "success" });
                 } else {
-                  this.$modal.msgError(res.msg);
+                  // this.$modal.msgError(res.msg);
                 }
               })
               .catch((e) => {
@@ -1477,7 +1477,7 @@ export default {
                   this.getList();
                   this.$modal.msgSuccess("反审成功");
                 } else {
-                  this.$modal.msgError(res.msg);
+                  // this.$modal.msgError(res.msg);
                 }
               })
               .catch((e) => {
@@ -1529,7 +1529,7 @@ export default {
                   this.getList();
                   this.$modal.msgSuccess("标记完成");
                 } else {
-                  this.$message({ message: res.msg, type: "error" });
+                  // this.$message({ message: res.msg, type: "error" });
                 }
               })
               .catch((e) => {

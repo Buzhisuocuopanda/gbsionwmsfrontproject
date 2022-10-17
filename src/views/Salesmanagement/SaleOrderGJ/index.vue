@@ -554,7 +554,7 @@ export default {
           this.formData = {}
           this.onSearch();
         } else {
-          this.$notify.error(response.data.msg)
+          // this.$notify.error(response.data.msg)
 
         }
       })
@@ -605,7 +605,7 @@ export default {
           this.formData = {}
           this.onSearch();
         } else {
-          this.$notify.error(response.msg)
+          // this.$notify.error(response.msg)
 
         }
       })
@@ -669,7 +669,7 @@ export default {
       if (response.code == 200) {
         this.$message.success('上传成功')
       } else {
-        this.$message.error(response.msg);
+        // this.$message.error(response.msg);
 
 
       }
@@ -714,7 +714,7 @@ export default {
 
           this.onSearch();
         } else {
-          this.message.error(response.msg)
+          // this.message.error(response.msg)
 
         }
       })

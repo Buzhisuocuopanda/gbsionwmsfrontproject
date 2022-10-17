@@ -1250,7 +1250,7 @@ export default {
             // this.open = false;
             this.$message({ message: "审批成功", type: "success" });
         }else{
-            this.$modal.msgError(response.msg)
+            // this.$modal.msgError(response.msg)
         }
         
       });
@@ -1269,7 +1269,7 @@ export default {
                 this.getList();
                 this.$modal.msgSuccess("审批成功");
             }else{
-                this.$modal.msgError(res.msg)
+                // this.$modal.msgError(res.msg)
             }
           })
           .catch((e) => {
@@ -1290,8 +1290,8 @@ export default {
         // this.open = false;
         this.$message({ message: "反审成功", type: "success" });
        }else{
-          this.$modal.msgError(response.msg)
-            }
+          // this.$modal.msgError(response.msg)
+          }
       });
     },
 
@@ -1309,7 +1309,7 @@ export default {
             this.getList();
             this.$modal.msgSuccess("反审成功");
            }else{
-            this.$modal.msgError(res.msg)
+            // this.$modal.msgError(res.msg)
           }
 
           })
@@ -1331,7 +1331,7 @@ export default {
         // this.open = false;
         this.$message({ message: "标记完成", type: "success" });
         }else{
-            this.$modal.msgError(response.msg)
+            // this.$modal.msgError(response.msg)
           }
       });
     },
@@ -1350,7 +1350,7 @@ export default {
             this.getList();
             this.$modal.msgSuccess("标记完成");
           }else{
-            this.$modal.msgError(res.msg)
+            // this.$modal.msgError(res.msg)
             }
           })
           .catch((e) => {
@@ -1381,7 +1381,7 @@ export default {
             this.getList();
             this.$message({ message: "取消标记成功", type: "success" });
           }else{
-            this.$modal.msgError(response.msg)
+            // this.$modal.msgError(response.msg)
             }
           });
         })
@@ -1401,7 +1401,7 @@ export default {
             this.getList();
             this.$modal.msgSuccess("取消标记成功");
             }else{
-            this.$modal.msgError(res.msg)
+            // this.$modal.msgError(res.msg)
             }
           })
           .catch((e) => {
@@ -1599,7 +1599,7 @@ export default {
                   this.getList();
                   this.$modal.msgSuccess("删除成功");
                 } else {
-                  this.$modal.msgError(res.msg);
+                  // this.$modal.msgError(res.msg);
                 }
               })
               .catch((e) => {
@@ -1642,7 +1642,7 @@ export default {
             this.getList();
             this.$modal.msgSuccess("删除成功");
           }else{
-              this.$modal.msgError(response.msg)
+              // this.$modal.msgError(response.msg)
           }
         })
         .catch(() => {});
