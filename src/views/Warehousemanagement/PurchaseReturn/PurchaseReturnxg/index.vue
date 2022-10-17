@@ -130,7 +130,7 @@
           </el-table-column>
           <el-table-column prop="cbpd12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbph11" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbph11" placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbph13" label="备注" width="">
