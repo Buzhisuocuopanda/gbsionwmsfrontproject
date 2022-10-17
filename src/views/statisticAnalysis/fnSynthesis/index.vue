@@ -39,23 +39,23 @@
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="150px;"/>
         <el-table-column  label="描述" align="left" prop="description" min-width="300px;"/>
-        <el-table-column  label="数量" :formatter="rounding" align="right" prop="qty" min-width="60px;"/>
+        <el-table-column  label="数量" :formatter="rounding2" align="right" prop="qty" min-width="60px;"/>
         <el-table-column  label="序列号" align="left" prop="sn"  min-width="120px;"/>
-        <el-table-column  label="销售单价U" :formatter="rounding" align="right"  min-width="100px;">
-          <template slot-scope="scope">
+        <el-table-column  label="销售单价U" :formatter="rounding3" align="right" prop="uprice" min-width="100px;">
+          <!--<template slot-scope="scope">
             <div >{{RToU(scope.row.rprice )}}</div>
-          </template>
+          </template>-->
         </el-table-column>
-        <el-table-column  label="销售单价R" :formatter="rounding" align="right" prop="rprice" min-width="100px;"/>
+        <el-table-column  label="销售单价R" :formatter="rounding3" align="right" prop="rprice" min-width="100px;"/>
         <el-table-column  label="经销商品名称" align="left" prop="suplierName" min-width="220px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="100px;"/>
         <el-table-column  label="工厂" align="left" prop="gc" min-width="100px;"/>
-        <el-table-column  label="采购单价U" :formatter="rounding" align="right" min-width="110px;">
-          <template slot-scope="scope">
+        <el-table-column  label="采购单价U" :formatter="rounding3" align="right" prop="cgUprice" min-width="110px;">
+          <!--<template slot-scope="scope">
             <div >{{RToU(scope.row.cgRprice )}}</div>
-          </template>
+          </template>-->
         </el-table-column>
-        <el-table-column  label="采购单价R" align="right" :formatter="rounding" prop="cgRprice" min-width="110px;"/>
+        <el-table-column  label="采购单价R" align="right" :formatter="rounding3" prop="cgRprice" min-width="110px;"/>
         <!--<el-table-column  label="生产总订单号" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
       <el-pagination
@@ -242,6 +242,16 @@ export default {
     rounding(row, column) {
       if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
         return '0.00';
+      }
+      return parseFloat(row[column.property]).toFixed(2)
+    },
+    rounding2() {
+
+      return parseFloat("1").toFixed(2)
+    },
+    rounding3(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return "";
       }
       return parseFloat(row[column.property]).toFixed(2)
     },

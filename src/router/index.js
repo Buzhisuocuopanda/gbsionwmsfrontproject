@@ -1672,7 +1672,7 @@ export const dynamicRoutes = [{
       component: () => import('@/views/Outofstockregistration/saleOrderDetail/mdfDetail/index'),
 
       meta: {
-        title: '修改缺货等级',
+        title: '修改缺货登记',
         icon: 'component',
         noCache: true
       }
@@ -1684,7 +1684,7 @@ export const dynamicRoutes = [{
       component: () => import('@/views/Outofstockregistration/saleOrderDetail/showDetail/index'),
 
       meta: {
-        title: '修改缺货等级',
+        title: '缺货登记详情',
         icon: 'component',
         noCache: true
       }
