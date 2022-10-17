@@ -75,9 +75,9 @@
                                     v-hasPermi="['system:user:edit']">
                                     修改
                                 </el-button> -->
-                            <el-button size="mini" type="text" icon="el-icon-delete"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-hasPermi="['system:directly:remove']">删除</el-button>
+                                v-hasPermi="['system:directly:remove']">删除</el-button> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                     @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情
                                 </el-button>
