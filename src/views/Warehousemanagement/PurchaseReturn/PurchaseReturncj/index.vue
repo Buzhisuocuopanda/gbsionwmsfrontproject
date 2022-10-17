@@ -25,7 +25,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
-          <el-form-item label="供料单位:" prop="cbpc099">
+          <el-form-item label="供料单位:">
             <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />
               <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">
@@ -43,7 +43,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
-          <el-form-item label="结算货币:" prop="cbpg16">
+          <el-form-item label="结算货币:">
             <el-select v-model="form2.cbpg16" placeholder="" style="width:80%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
