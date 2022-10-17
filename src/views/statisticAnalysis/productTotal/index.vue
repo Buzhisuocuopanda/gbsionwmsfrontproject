@@ -5,7 +5,7 @@
     <!-- 搜索 -->
     <el-form ref="form" :model="queryParams" label-width="80px" inline>
       <el-form-item label="订单号">
-        <el-input type="text" style="width: 200px;" v-model="queryParams.cbba07"></el-input>
+        <el-input type="text" style="width: 200px;" v-model="queryParams.cbba07"  placeholder="请输入订单号" ></el-input>
       </el-form-item>
       <el-form-item label="商品">
         <el-select @change="getGoods" :remote-method="getGoods" v-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
