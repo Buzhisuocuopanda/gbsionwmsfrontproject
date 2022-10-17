@@ -333,7 +333,7 @@ export default {
           this.$message.success("修改成功")
         } else {
           // this.snList = [];
-          this.$message.error(response.message)
+          // this.$message.error(response.message)
         }
       }, error => {
         this.$message.error("修改失败")
@@ -478,7 +478,7 @@ export default {
           this.$tab.closePage();
           this.$router.go(-1);
         } else {
-          this.$message({ message: res.msg, type: "error" });
+          // this.$message({ message: res.msg, type: "error" });
         }
       });
     },
@@ -493,7 +493,7 @@ export default {
           this.$tab.closePage();
           this.$router.go(-1);
         } else {
-          this.$message({ message: res.msg, type: "error" });
+          // this.$message({ message: res.msg, type: "error" });
         }
       });
     },
@@ -512,7 +512,7 @@ export default {
           this.$tab.closePage();
           this.$router.go(-1);
         } else {
-          this.$message({ message: res.msg, type: "error" });
+          // this.$message({ message: res.msg, type: "error" });
         }
       });
     },

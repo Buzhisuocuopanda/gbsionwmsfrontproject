@@ -188,7 +188,7 @@
               row.status = 3;
             } else {
               this.index =1;
-              this.$message.error('调拨失败');
+              // this.$message.error('调拨失败');
             }
           },error => {
             this.index =1;
