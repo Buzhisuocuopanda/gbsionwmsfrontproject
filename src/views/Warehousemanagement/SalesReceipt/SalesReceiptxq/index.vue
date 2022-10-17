@@ -1,4 +1,5 @@
 <template>
+    <!--  销售预订单入库单审核  -->
     <div>
         <div class="Purchase_caigou">销售预订单入库单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList" :key="key">
@@ -125,13 +126,16 @@
             </el-descriptions>
         </div>
         <div class="tinajia_dingwei" style="margin:5% 0 1% 3%;left:0;">
+
+            <el-button @click="_ly_shenhe" type="primary" v-if="state == 0">审 核</el-button>
             <el-button @click="_ly_cancelDialog">取 消</el-button>
         </div>
     </div>
 
 </template>
 <script>
-import { PurchaseinboundSalesReceipt } from "@/api/Warehousemanagement/SalesReceipt";
+
+import { PurchaseinboundSalesReceipt, PurchaseinboundSH } from "@/api/Warehousemanagement/SalesReceipt";
 export default {
 
     data() {
@@ -154,7 +158,8 @@ export default {
                 address: undefined,
                 userId: undefined
             },
-            CBPC01: ""
+            CBPC01: "",
+            state: null
 
         };
     },
@@ -163,9 +168,30 @@ export default {
     },
     created() {
         this.getList();
-
+        console.log("---------------")
     },
     methods: {
+        _ly_shenhe() {
+            console.log("点击审核按钮")
+
+            this.$modal.confirm('是否要审批,ponumber为"' + this.userList[0].orderNo + '"的数据项？').then(() => {
+                console.log("进入审批流程")
+                // console.log(row.cbpc01, 8888);
+                // console.log(row)
+                console.log(this.tabData)
+                PurchaseinboundSH({ id: this.userList[0].id }).then(response => {
+                    if (response.code == "200") {
+                        // this.getList();
+                        // this.open = false;
+                        this.$message({ message: '审批成功', type: 'success' });
+                        this.$tab.closePage();
+                        this.$router.go(-1);
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
+                });
+            }).catch(() => { });
+        },
         // 点击【取消】按钮关闭弹窗
         _ly_cancelDialog(done) {
             console.log('_ly_cancelDialog')
@@ -202,6 +228,8 @@ export default {
         getList() {
             this.loading = true;
             const userId = this.$route.query && this.$route.query.id;
+            this.state = this.$route.query.state
+            console.log(this.state)
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundSalesReceipt(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
