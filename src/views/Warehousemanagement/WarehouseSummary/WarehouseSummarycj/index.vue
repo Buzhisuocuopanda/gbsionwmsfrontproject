@@ -100,7 +100,7 @@
                                 <th style=" border: solid #eee thin;width:120px;text-align: left;">描述</th>
                                 <th style=" border: solid #eee thin;width:128px;text-align: left;">库存数量</th>
                                 <th style=" border: solid #eee thin;width:110px;text-align: left;">盘点数量</th>
-                               
+
                                 <th style=" border: solid #eee thin;width: 130px;text-align: left;">备注</th>
                                 <!-- <th style=" border: solid #eee thin;width: 64px;text-align: left;">操作</th> -->
                             </tr>
@@ -156,8 +156,7 @@
                                     <el-input type="text" v-model="form2.cbpd11" id="input3" style="" />
                                 </td>
                                 <td style="width: 124px;border:solid #eee thin;">
-                                    <el-input v-model="form2.cbpd12" 
-                                        style="width:81px;"></el-input>
+                                    <el-input v-model="form2.cbpd12" style="width:81px;"></el-input>
                                 </td>
 
                                 <td style="width: 146px;border:solid #eee thin;">
@@ -446,7 +445,7 @@ export default {
         // this.form.type = this.dict[0].label;
         // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
         // console.log(this.userList,123456789);
-       
+
 
         console.log(this.form.cbpc16, 123456);
 
@@ -581,7 +580,9 @@ export default {
         /** 创建操作 */
         handleChuangJiangone: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-ckpdhzfh/role/");
+            // this.$router.push("/system/user-ckpdhzfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1)
         },
 
 
@@ -598,4 +599,5 @@ export default {
 };
 </script>
 <style src="./WarehouseSummarycjcss/index.css">
+
 </style>
