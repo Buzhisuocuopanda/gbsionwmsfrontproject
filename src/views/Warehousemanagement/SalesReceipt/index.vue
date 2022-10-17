@@ -54,10 +54,10 @@
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:salesReceipt:bjwc']">标记完成
                         </el-button>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen"
+                        <!-- <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
                             v-hasPermi="['system:salesReceipt:qxwc']">取消完成
-                        </el-button>
+                        </el-button> -->
                     </el-form-item>
                 </el-form>
 
@@ -105,9 +105,9 @@
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:salesReceipt:fs']"
                                 v-if="scope.row.status == 1">反审</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                                v-hasPermi="['system:salesReceipt:qxwc']" v-if="scope.row.status == 4">取消完成</el-button>
+                                v-hasPermi="['system:salesReceipt:qxwc']" v-if="scope.row.status == 4">取消完成</el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:salesReceipt:bjwc']"
