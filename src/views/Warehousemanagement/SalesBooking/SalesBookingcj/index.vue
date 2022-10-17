@@ -10,7 +10,8 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;"  value-format="yyyy-MM-dd HH:mm:ss" @change="orderdate">
+            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;"
+              value-format="yyyy-MM-dd HH:mm:ss" @change="orderdate">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -202,7 +203,7 @@ import CustomerMainten from "@/components/CustomerMaintenance";
 import salerman from "@/components/salerman";
 
 export default {
-  name: "store",
+  name: "AuthUser",
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
   props: {
     visible: {
@@ -617,7 +618,7 @@ export default {
 
   },
   methods: {
-    orderdate(date){
+    orderdate(date) {
       console.log(date)
     },
 

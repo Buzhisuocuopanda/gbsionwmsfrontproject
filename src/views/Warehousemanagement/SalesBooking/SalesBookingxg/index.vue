@@ -200,7 +200,7 @@ import CustomerMainten from "@/components/CustomerMaintenance";
 import salerman from "@/components/salerman";
 
 export default {
-    name: "store",
+    name: "AuthUser",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     props: {
         visible: {

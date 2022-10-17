@@ -320,6 +320,7 @@ import Goodsone01 from "@/components/Goodsone";
 //   }
 // })
 export default {
+  name: 'ProductionoOrders',
   components: {
     Goodsone01
 
