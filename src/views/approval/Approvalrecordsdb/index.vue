@@ -242,7 +242,7 @@ export default {
   },
   created() {
     //仓库明细初始化
-    this.getList();
+    // this.getList();
     },
   methods: {
     showDetail(row) {

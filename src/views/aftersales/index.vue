@@ -51,10 +51,10 @@
         <el-table-column fixed label="销售人员" align="left" prop="salerName" min-width="120px;"/>
         <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="130px;"/>
         <el-table-column  label="问题描述" align="left" prop="question" min-width="120px;" />
-        <el-table-column  label="sn" align="left" prop="sn" min-width="200px;" />
+        <el-table-column  label="sn" align="left" prop="sn" min-width="140px;" />
         <el-table-column  label="处理结果" align="center" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
-        <el-table-column  label="反馈时间" align="left" prop="feedbackTime" :formatter="formatTime2" min-width="80px;" />
-        <el-table-column label="操作"  min-width="120px;">
+        <el-table-column  label="反馈时间" align="left" prop="feedbackTime" :formatter="formatTime2" min-width="100px;" />
+        <el-table-column label="操作"  min-width="180px;">
           <template slot-scope="scope" ><!--style="margin-left:8px; margin-top: 2px"-->
             <el-button class="caozuoxiangqengOut"  icon="el-icon-share"  size="mini"
                        type="text" v-hasPermi="['system:aftersales:detail']"

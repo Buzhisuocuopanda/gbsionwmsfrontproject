@@ -4,7 +4,12 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
-
+        <el-form-item  label="日期" style="margin-left: 20px">
+          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="height: 32px"
+                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+          </el-date-picker>
+        </el-form-item>
         <el-form-item label="仓库"   class="item-r" >
           <el-select  v-model="queryParams.whIds" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
@@ -23,12 +28,7 @@
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>-->
         </el-form-item>
-        <el-form-item  label="日期" style="margin-left: 20px">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="height: 32px"
-                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-          </el-date-picker>
-        </el-form-item>
+
 
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['query:fnSkuList:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
@@ -39,7 +39,7 @@
       <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" :header-cell-style="headClasspw"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading" height="460"
                  border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="仓库" align="left" header-align="center" prop="cbwa09" min-width="70px;" />
-        <el-table-column  label="供应商" align="left" prop="supplieName"  min-width="660px;"/>
+        <el-table-column v-if="false" label="供应商" align="left" prop="supplieName"  min-width="300px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="110px;"/>
         <el-table-column  label="大类" align="left" prop="bclass" min-width="80px;"/>
         <el-table-column  label="小类" align="left" prop="sclass" min-width="140px;"/>

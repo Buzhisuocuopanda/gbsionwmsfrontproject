@@ -39,7 +39,7 @@
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="120px;"/>
         <el-table-column  label="型号" align="left" prop="cbpb12" min-width="150px;"/>
         <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="150px;"/>
-        <el-table-column  label="描述" align="left" prop="cbpb08"  min-width="570px;"/>
+        <el-table-column  label="描述" align="left" prop="cbpb08"  min-width="300px;"/>
         <el-table-column  label="数量" align="right" prop="cbib15" :formatter="rounding" min-width="100px;"/>
         <el-table-column  label="可用库存数量" align="right" :formatter="rounding" prop="lockQty" min-width="100px;"/>
         <el-table-column label="仓库" align="left" prop="cbwa09" min-width="80px;" />

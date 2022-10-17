@@ -4,6 +4,13 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" >
+        <el-form-item  label="日期" style="margin-left: 20px;">
+          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="margin-left: 10px;height: 35px"
+                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+          </el-date-picker>
+        </el-form-item>
+
         <el-form-item label="销售订单号"  style="margin-left: 10px"  class="item-r" >
           <el-input v-model="queryParams.saleOrderNo" style="margin-left: 10px;" class="filter-item"  placeholder="销售订单号" />
         </el-form-item>
@@ -18,12 +25,6 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item  label="日期" style="margin-left: 20px;">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="margin-left: 10px;height: 35px"
-                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-          </el-date-picker>
-        </el-form-item>
 
         <el-form-item style="margin: 0px -10px 1px 1px;">
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
@@ -37,7 +38,7 @@
         <el-table-column fixed label="出库时间" align="left" prop="outWhTimeMsg"  min-width="100px;"/>
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="150px;"/>
-        <el-table-column  label="描述" align="left" prop="description" min-width="520px;"/>
+        <el-table-column  label="描述" align="left" prop="description" min-width="300px;"/>
         <el-table-column  label="数量" :formatter="rounding" align="right" prop="qty" min-width="60px;"/>
         <el-table-column  label="序列号" align="left" prop="sn"  min-width="120px;"/>
         <el-table-column  label="销售单价U" :formatter="rounding" align="right"  min-width="100px;">
