@@ -416,7 +416,7 @@
     </el-row>
 
     <!--提货单创建-->
-    <el-dialog :visible.sync="open3">
+    <el-dialog :visible.sync="open3" @close="close">
       <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
         <el-col :span="12">
           <el-popover placement="bottom-start" trigger="click" clearable>
@@ -679,7 +679,7 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
 export default {
-  name: "store",
+  name: "SalesShipment",
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -1111,6 +1111,12 @@ export default {
     this.form2.cbsa09 = "20";
   },
   methods: {
+    // 弹框关闭
+    close(){
+      this.form2.cbpc100 = ''
+      console.log(1111111111)
+    },
+    // 
     handleQuerys(saleNo){
       console.log(saleNo)
       let obj = {
@@ -1755,6 +1761,8 @@ export default {
             whNameid:this.form2.cbpc10
           },
         });
+        this.open3 = false
+        this.close()
       }
     //   this.$router.push({
     //     path: "/system/user-authhhchuanj/role/",

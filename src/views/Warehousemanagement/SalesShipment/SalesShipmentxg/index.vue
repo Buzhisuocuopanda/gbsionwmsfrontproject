@@ -179,7 +179,7 @@
                             <el-popover placement="bottom-start" trigger="click">
                                 <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
                                     style="width:630px!important;" />
-                                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
+                                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder=""
                                     style="width:100%;">
                                 </el-input>
                             </el-popover>
@@ -187,14 +187,13 @@
                     </el-table-column>
                     <el-table-column label="型号" width="200" />
                     <el-table-column label="描述" width="200" />
-
-                    <el-table-column prop="province" label="供应商" width="150">
+                    <el-table-column label="供应商" width="150">
                         <template slot-scope="scope">
                             <!-- <el-input v-model="scope.row.cbsc15" placeholder=""></el-input> -->
                             <el-popover placement="bottom-start" trigger="click">
                                 <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)"
                                     style="width:210px!important;" />
-                                <el-input slot="reference" v-model="scope.row.cbsa08" placeholder="" readonly
+                                <el-input slot="reference" v-model="scope.row.cbpc099" placeholder=""
                                     style="width:100%;">
                                 </el-input>
                             </el-popover>
@@ -308,7 +307,7 @@ import Goodsone01 from "@/components/Goodsone";
 import salerman from "@/components/salerman";
 
 export default {
-    name: "store",
+    name: "AuthUser",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { kuweixxweihu, supplierMaintenance, ListLists, CustomerMainten, Goodsone01, salerman },
     data() {
@@ -924,6 +923,7 @@ export default {
             this.$set(row, "cbsc15", e.substring(e.indexOf("-") + 1), 8523642)
             // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
             // this.form2.icon = name;
+            console.log(e,row)
         },
 
         //查询商品信息维护
@@ -1037,6 +1037,8 @@ export default {
                 this.form2.cbsb07 = res.cbsb07;
                 //客户名称
                 this.form2.cbpc0999 = res.cbca08;
+                // 供应商
+                this.form2.cbpc099 = res.cbsa08;
                 //客户名称ID
                 this.form2.cbsb09 = res.cbsb09;
                 //仓库名称
@@ -1071,7 +1073,7 @@ export default {
                 this.form2.cbsb30 = res.cbsb30;
                 // id
                 this.form2.cbsb01 = res.cbsc01
-                console.log(this.form2.cbsb09, 85200000);
+                console.log(this.form2, 85200000);
                 response.data.rows.map((item)=>{
                     this.tableData.push({
                         "cbsb01": item.cbsb01,
@@ -1086,6 +1088,7 @@ export default {
                         "cbsa08":item.cbsa08,
                         "cbsc17": item.cbsc17 == 1?'国际订单':'国内订单',
                         "cbpc000":item.cala08 + "~" + item.cbpa07 + "~" + item.cbpb08,
+                        "cbpc099":item.cbsa08,
                     })
                 })
                 // this.tableData.forEach((item) => {
