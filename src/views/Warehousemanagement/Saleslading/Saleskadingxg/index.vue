@@ -12,7 +12,7 @@
       <el-descriptions class="margin-top" title="" :column="4" border>
         <el-descriptions-item label-class-name="my-labell01">
           <template slot="label">客户</template>
-          <el-popover placement="bottom-start" trigger="click">
+          <el-popover placement="bottom-start" trigger="click" disabled>
             <CustomerMaintenance ref="CustomerMaintenance" @selected="selected088" style="width:300px; !important;" />
             <el-input slot="reference" v-model="form2.cbse099" placeholder="" readonly style="width: 100%">
             </el-input>
@@ -20,7 +20,7 @@
         </el-descriptions-item>
         <el-descriptions-item label-class-name="my-labell01">
           <template slot="label">仓库</template>
-          <el-popover placement="bottom-start" trigger="click" clearable>
+          <el-popover placement="bottom-start" trigger="click" clearable disabled>
             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 100% !important" />
             <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width: 100%">
             </el-input>

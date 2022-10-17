@@ -1024,7 +1024,7 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("反审成功");
                         }else{
-                            this.$modal.msgError(res.msg)
+                            // this.$modal.msgError(res.msg)
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1069,7 +1069,7 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("标记完成");
                         }else{
-                            this.$modal.msgError(res.msg)
+                            // this.$modal.msgError(res.msg)
                         }
 
                     }).catch((e) => {
@@ -1120,7 +1120,7 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("取消标记成功");
                         }else{
-                            this.$modal.msgError(res.msg)
+                            // this.$modal.msgError(res.msg)
                         }
                      }else{
                             this.$message({ message: res.msg, type: 'error' });
@@ -1188,7 +1188,7 @@ export default {
                         this.getList();
                         this.$message({ message: '修改成功', type: 'success' });
                     }else{
-                        this.$modal.msgError(response.msg)
+                        // this.$modal.msgError(response.msg)
                     }
                     this.open = false;
                 });
@@ -1385,7 +1385,7 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
                         }else{
-                            this.$modal.msgError(res.msg);
+                            // this.$modal.msgError(res.msg);
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1420,7 +1420,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
                 }else{
-                    this.$modal.msgError(res.msg)
+                    // this.$modal.msgError(res.msg)
                 }
             }).catch(() => { });
         },

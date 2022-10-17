@@ -1084,7 +1084,7 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
                         }else{
-                            this.$modal.msgError(res.msg)
+                            // this.$modal.msgError(res.msg)
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1119,7 +1119,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
                 }else{
-                    this.$modal.msgError(response.msg)
+                    // this.$modal.msgError(response.msg)
                 }
             }).catch(() => { });
         },

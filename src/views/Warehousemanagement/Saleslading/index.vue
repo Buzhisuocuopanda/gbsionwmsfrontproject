@@ -1233,7 +1233,7 @@ export default {
           this.$message({ message:res.msg, type: "success" });
           this.getList()
         } else {
-          this.$message({ message:res.msg, type: "error" });
+          // this.$message({ message:res.msg, type: "error" });
         }
       });
       // let obj = {
@@ -1283,7 +1283,7 @@ export default {
       //     // this.open = false;
       //     this.$message({ message: "审批成功", type: "success" });
       //   } else {
-      //     this.$modal.msgError(response.msg);
+      //    // this.$modal.msgError(response.msg);
       //   }
       // });
     },
@@ -1301,7 +1301,7 @@ export default {
       //         this.getList();
       //         this.$modal.msgSuccess("审批成功");
       //       } else {
-      //         this.$modal.msgError(res.msg);
+      //        // this.$modal.msgError(res.msg);
       //       }
       //     })
       //     .catch((e) => {
