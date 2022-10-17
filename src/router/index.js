@@ -538,7 +538,7 @@ export const dynamicRoutes = [{
       name: 'AuthUser',
       component: () => import('@/views/Warehousemanagement/PurchaseOrder/PurchaseOrdercj/index'),
       meta: {
-        title: '采购订单创建',
+        title: '配件入库创建',
         activeMenu: '/Warehousemanagement/PurchaseOrder'
       }
     }]

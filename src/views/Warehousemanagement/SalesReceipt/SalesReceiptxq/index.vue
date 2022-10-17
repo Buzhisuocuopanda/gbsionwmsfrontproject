@@ -137,7 +137,7 @@
 
 import { PurchaseinboundSalesReceipt, PurchaseinboundSH } from "@/api/Warehousemanagement/SalesReceipt";
 export default {
-
+    name: "AuthUser",
     data() {
         return {
             // 遮罩层

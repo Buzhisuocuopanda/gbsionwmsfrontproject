@@ -1,5 +1,5 @@
 <template>
-  <!--仓库盘点汇总表-->
+    <!--仓库盘点汇总表-->
     <div class="app-container waresummer">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -17,19 +17,22 @@
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
                         </el-date-picker>
                     </el-form-item>
-                    <el-form-item >
-                      <el-button size="mini" v-hasPermi="['system:warehouseinventorysummary:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                      <el-button v-hasPermi="['system:warehouseinventorysummary:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                    <el-form-item>
+                        <el-button size="mini" v-hasPermi="['system:warehouseinventorysummary:list']"
+                            class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button v-hasPermi="['system:warehouseinventorysummary:list']"
+                            class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlepdhzone">创建</el-button> -->
+                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlepdhzone">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
-                                   v-hasPermi="['system:warehouseinventorysummary:remove']"
-                            @click="handleDelete">删除</el-button>
+                            v-hasPermi="['system:warehouseinventorysummary:remove']" @click="handleDelete">删除
+                        </el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:warehouseinventorysummary:pdwc']">盘点完成</el-button>
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:warehouseinventorysummary:pdwc']">盘点完成
+                        </el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -45,9 +48,10 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSm" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList"  max-height="470" min-height="470"
-                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:92.5%;height: 8%;margin-left: -2%;"
-                    @selection-change="handleSelectionChange">
+                <el-table border :header-cell-style="headClassWSm" :row-style="{height: '3px'}"
+                    :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" max-height="470"
+                    min-height="470" :default-sort="{ prop: 'name', order: 'descending' }"
+                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="cbsh07" prop="cbsh07" sortable />
                     <el-table-column label="日期" align="left" key="cbsh08" prop="cbsh08" :formatter="formatDate"
@@ -60,8 +64,8 @@
                     <el-table-column label="状态" align="center" key="cbsh09" prop="cbsh09" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbsh09 == 3 ? "盘点中" : scope.row.cbsh09 == 4 ?
-                                "盘点完" : "未确定状态"
-                                }}
+                            "盘点完" : "未确定状态"
+                            }}
                             </div>
                         </template>
                     </el-table-column>
@@ -77,7 +81,8 @@
                                 v-if="scope.row.cbpg11 == 1 | scope.row.cbpg11 == 2"
                                 v-hasPermi="['system:user:remove']">删除</el-button> -->
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:warehouseinventorysummary:detail']">详情
+                                @click="handleAuthRole(scope.row)"
+                                v-hasPermi="['system:warehouseinventorysummary:detail']">详情
                             </el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
@@ -1032,15 +1037,15 @@ export default {
             console.log(row.cbpc01, 8888);
             this.$modal.confirm('是否确定盘点完成为"' + row.cbpc01 + '"的数据项？').then(() => {
                 Purchaseinboundsho(row).then(response => {
-                if (response.code == "200") {
-                    console.log(this.form.cbpc01, 789)
-                    // this.submitShangpin();
-                    this.getList();
-                    // this.open = false;
-                    this.$message({ message: '盘点成功', type: 'success' });
-                 }else{
-                    this.$message({ message: response.msg, type: 'error' });
-                 }
+                    if (response.code == "200") {
+                        console.log(this.form.cbpc01, 789)
+                        // this.submitShangpin();
+                        this.getList();
+                        // this.open = false;
+                        this.$message({ message: '盘点成功', type: 'success' });
+                    } else {
+                        this.$message({ message: response.msg, type: 'error' });
+                    }
                 });
             }).catch(() => { });
 
@@ -1315,7 +1320,7 @@ export default {
             const userId = row.cbsh01;
             console.log(userId)
             this.$router.push({
-                path:"/system/user-authhhhhhhhhh/role/"+userId,
+                path: "/system/user-authhhhhhhhhh/role/" + userId,
             });
             // this.$router.push("/system/user-pdhz/role/");
         },
@@ -1450,4 +1455,5 @@ export default {
 };
 </script>
 <style src="./WarehouseSummarycss/index.css">
+
 </style>
