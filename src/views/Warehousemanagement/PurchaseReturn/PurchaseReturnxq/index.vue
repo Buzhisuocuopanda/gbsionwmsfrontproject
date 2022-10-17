@@ -174,7 +174,7 @@
 <script>
 import { PurchaseinboundList, Purchaseinboundsho, PurchaseinboundSht } from "@/api/Warehousemanagement/PurchaseReturn";
 export default {
-
+    name: "AuthUser",
     data() {
         return {
             // 遮罩层
