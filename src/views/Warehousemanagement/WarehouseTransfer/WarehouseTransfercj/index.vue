@@ -251,7 +251,7 @@ import Goodsone01 from "@/components/Goodsone";
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
 export default {
-    name: "store",
+    name: "AuthUser",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { kuweixxweihu, supplierMaintenance, ListLists, Goodsone01, CustomerMaintenance },
     data() {

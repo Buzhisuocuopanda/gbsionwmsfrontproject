@@ -466,7 +466,7 @@ export default {
   },
 };
 </script>
-<style src="./SalesShipmentxqcss/index.css">
+<style src="./SalesShipmentxqcss/index.css" scoped>
 
 </style>
 <style>
