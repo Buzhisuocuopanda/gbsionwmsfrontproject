@@ -10,21 +10,23 @@
                         <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入客户名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                     <el-form-item prop="cbsa14" label="联系人">
-                            <!-- <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
+                    <el-form-item prop="cbsa14" label="联系人">
+                        <!-- <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
                                     <el-option v-for="item in fapiaoleix" :key="item.label" :label="item.label"
                                         :value="item.value">
                                     </el-option>
                                 </el-select> -->
-                                <el-input v-model="queryParams.cbsa14" id="miaoshu" placeholder="请输入联系人" clearable style="width: 240px;"
-                                    @keyup.enter.native="handleQuery" />
+                        <el-input v-model="queryParams.cbsa14" id="miaoshu" placeholder="请输入联系人" clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:supplier:list']" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:supplier:add']" @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:supplier:list']"
+                            @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:supplier:add']"
+                            @click="handlechuangjiang">创建</el-button>
 
-                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                                   v-hasPermi="['system:supplier:remove']">删除
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                            @click="handleDelete" v-hasPermi="['system:supplier:remove']">删除
                         </el-button>
 
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -34,11 +36,12 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table :max-height="maxheight"  border :header-cell-style="headClassSPM" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
+                <el-table :max-height="maxheight" border :header-cell-style="headClassSPM" :row-style="{height: '3px'}"
+                    :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="客户名称" width="200"  align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="客户地址"  align="left" key="cbsa13" prop="cbsa13" locationNum />
+                    <el-table-column label="客户名称" width="200" align="left" key="cbsa08" prop="cbsa08" sortable />
+                    <el-table-column label="客户地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
                     <el-table-column label="联系人" width="130px;" align="left" key="cbsa14" prop="cbsa14" sortable />
                     <el-table-column label="联系电话" width="150px;" align="left" key="cbsa15" prop="cbsa15" sortable />
                     <!-- <el-table-column label="发票类型" align="left" key="cbsa18" prop="cbsa18" sortable>
@@ -62,7 +65,8 @@
                                 @click="handlexiangqengSelect(scope.row)" v-hasPermi="['system:supplier:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete01(scope.row)" v-hasPermi="['system:supplier:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" v-hasPermi="['system:supplier:remove']">删除
+                            </el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button> -->
                         </template>
@@ -76,17 +80,20 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title" :visible.sync="open"  class="abow_dialogg">
-            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">供应商信息维护</div>
+        <el-dialog :title="title" :visible.sync="open" class="abow_dialogg">
+            <div
+                style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                供应商信息维护</div>
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
-            <el-form ref="form" :model="form" label-width="55%" lable-height="20%" :rules="rules01" class="chuangjianform">
+            <el-form ref="form" :model="form" label-width="55%" lable-height="20%" :rules="rules01"
+                class="chuangjianform">
                 <div style="margin-top:1.5%;">
-                   <div style="margin-top:3%;margin-bottom:2%;">
+                    <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
-                             基本信息
+                            基本信息
                         </span>
-                        <hr style="width:112%;"/>
+                        <hr style="width:112%;" />
                     </div>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
@@ -94,7 +101,7 @@
                                 <el-input v-model="form.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
-                         <el-col :span="11" v-if="false">
+                        <el-col :span="11" v-if="false">
                             <el-form-item label="公司名称:" prop="cbsa09">
                                 <el-input v-model="form.cbsa09" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
@@ -119,9 +126,9 @@
                     </el-row>
                     <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
-                             发票信息
+                            发票信息
                         </span>
-                        <hr style="width:112%;"/>
+                        <hr style="width:112%;" />
                     </div>
                     <el-row style="margin-left:5%;margin-top:3%;">
                         <el-col :span="11">
@@ -182,16 +189,16 @@
         </el-dialog>
 
         <!-- 详情 -->
-        <el-dialog :title="title" :visible.sync="open1"  class="abow_dialogg">
+        <el-dialog :title="title" :visible.sync="open1" class="abow_dialogg">
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
             <el-form ref="form1" :model="form1" label-width="55%" lable-height="20%" class="chuangjianform">
                 <div style="margin-top:1.5%;">
                     <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
-                             基本信息
+                            基本信息
                         </span>
-                         <hr style="width:112%;"/>
+                        <hr style="width:112%;" />
                     </div>
                     <el-row style="margin-left:5%;">
                         <el-col :span="11">
@@ -199,7 +206,7 @@
                                 <el-input v-model="form1.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
-                         <el-col :span="11" v-if="false">
+                        <el-col :span="11" v-if="false">
                             <el-form-item label="公司名称:" prop="cbsa09">
                                 <el-input v-model="form1.cbsa09" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
@@ -231,9 +238,9 @@
                     </el-row>-->
                     <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
-                             发票信息
+                            发票信息
                         </span>
-                         <hr style="width:112%;"/>
+                        <hr style="width:112%;" />
                     </div>
                     <el-row style="margin-left:5%;margin-top:3%;">
                         <el-col :span="11">
@@ -298,16 +305,17 @@
         </el-dialog>
 
         <!-- 创建 -->
-        <el-dialog :title="title" :visible.sync="open2"  class="abow_dialogg">
-            <div style="margin-top:1%;font-weight: 700;font-size: 17px; color: black;margin-left:44%; position: relative;">供应商信息维护</div>
-            <el-form ref="form2" :model="form2" label-width="45%" :rules="rules"
-                class="chuangjianform">
+        <el-dialog :title="title" :visible.sync="open2" class="abow_dialogg">
+            <div
+                style="margin-top:1%;font-weight: 700;font-size: 17px; color: black;margin-left:44%; position: relative;">
+                供应商信息维护</div>
+            <el-form ref="form2" :model="form2" label-width="45%" :rules="rules" class="chuangjianform">
                 <div style="margin-top:1.5%;">
-                   <div style="margin-top:3%;margin-bottom:2%;">
+                    <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
-                             基本信息
+                            基本信息
                         </span>
-                         <hr style="width:112%;"/>
+                        <hr style="width:112%;" />
                     </div>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
@@ -315,7 +323,7 @@
                                 <el-input v-model="form2.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
-                         <el-col :span="11" v-if="false">
+                        <el-col :span="11" v-if="false">
                             <el-form-item label="公司名称:" prop="cbsa09">
                                 <el-input v-model="form2.cbsa09" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
@@ -347,9 +355,9 @@
                     </el-row>-->
                     <div style="margin-top:3%;margin-bottom:2%;">
                         <span style="margin-left:2%;font-size: 15px;">
-                             发票信息
+                            发票信息
                         </span>
-                         <hr style="width:112%;"/>
+                        <hr style="width:112%;" />
                     </div>
                     <el-row style="margin-left:5%;margin-top:3%;">
                         <el-col :span="11">
@@ -451,7 +459,7 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-    name: "store",
+    name: "SupplierMaintenance",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect },
     data() {
@@ -464,7 +472,7 @@ export default {
             }
         }
         return {
-             maxheight: window.innerHeight - 50,
+            maxheight: window.innerHeight - 50,
             // 遮罩层
             loading: true,
             // 选中数组
@@ -607,7 +615,7 @@ export default {
                 size: 15,
                 total: this.total,
                 cbsa08: undefined,
-                cbsa14:undefined,
+                cbsa14: undefined,
                 address: undefined
             },
             // 列信息
@@ -658,9 +666,9 @@ export default {
                 ]
             },
 
-                //表单校验
+            //表单校验
             rules01: {
-               cbsa08: [
+                cbsa08: [
                     { required: true, message: "公司名称不能为空!", trigger: "blur" }
                 ],
                 cbsa14: [
@@ -673,7 +681,7 @@ export default {
                     { required: true, message: "联系电话不能为空!", trigger: "blur" },
                     { validator: phoneValidator11, trigger: 'blur' }
                 ]
-                 ,
+                ,
                 // cbsa10: [
                 //     { required: true, message: "开户行不能为空!", trigger: "blur" }
                 // ],
@@ -729,14 +737,14 @@ export default {
         //         })
         //     })
         // },
-     //列表表头设置
-      headClassSPM() {
-        return {
-          'text-align': 'left',
-          height: '40px',
-          padding: '0'
-        }
-      },
+        //列表表头设置
+        headClassSPM() {
+            return {
+                'text-align': 'left',
+                height: '40px',
+                padding: '0'
+            }
+        },
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -811,7 +819,7 @@ export default {
             this.reset01();
         },
 
-         cancello() {
+        cancello() {
             this.open = false;
             this.reset01();
         },
@@ -890,13 +898,13 @@ export default {
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
                         if (response.code == "200") {
-                           this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
-                           this.submitShangpin();
-                           this.getList();
-                           this.open2 = false;
-                           this.reset01();
+                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                            // this.getTreeselect();
+                            // this.submitShangpin();
+                            this.submitShangpin();
+                            this.getList();
+                            this.open2 = false;
+                            this.reset01();
                         } else {
                             this.$message({ message: response.msg, type: 'error' });
                         }
@@ -945,49 +953,49 @@ export default {
         /** 修改按钮操作 */
         handleUpdate() {
             // if (this.form.cbsa08 != undefined) {
-                let row = {}
-                row.cbsa07 = this.form.cbsa07;
-                row.cbsa08 = this.form.cbsa08;
-                row.cbsa09 = this.form.cbsa09;
-                row.cbsa10 = this.form.cbsa10;
-                row.cbsa11 = this.form.cbsa11;
-                row.cbsa12 = this.form.cbsa12;
-                row.cbsa13 = this.form.cbsa13;
-                row.cbsa14 = this.form.cbsa14;
-                row.cbsa15 = this.form.cbsa15;
-                row.cbsa16 = this.form.cbsa16;
-                row.cbsa17 = this.form.cbsa17;
-                row.cbsa18 = this.form.cbsa18;
-                row.cbsa01 = this.form.cbsa01;
-                // console.log(this.form.id);
-                 this.$refs["form"].validate((item) => {
+            let row = {}
+            row.cbsa07 = this.form.cbsa07;
+            row.cbsa08 = this.form.cbsa08;
+            row.cbsa09 = this.form.cbsa09;
+            row.cbsa10 = this.form.cbsa10;
+            row.cbsa11 = this.form.cbsa11;
+            row.cbsa12 = this.form.cbsa12;
+            row.cbsa13 = this.form.cbsa13;
+            row.cbsa14 = this.form.cbsa14;
+            row.cbsa15 = this.form.cbsa15;
+            row.cbsa16 = this.form.cbsa16;
+            row.cbsa17 = this.form.cbsa17;
+            row.cbsa18 = this.form.cbsa18;
+            row.cbsa01 = this.form.cbsa01;
+            // console.log(this.form.id);
+            this.$refs["form"].validate((item) => {
                 if (item) {
-                SupplieRedit(JSON.stringify(row)).then(response => {
-                  if (response.code == "200") {
-                    // console.log(response,789)
-                    // this.form = response.data;
-                    // this.name = response.name;
-                    // this.type = response.type;
-                    // this.deliveryPriority = response.deliveryPriority;
-                    // this.enableTotalOrder = response.enableTotalOrder;
-                    // this.enableTakeGoods = response.enableTakeGoods;
-                    // this.manageMode = response.manageMode;
-                    // this.ifEnabled = response.ifEnabled;
-                    // this.sysUserId = response.sysUserId;
-                    console.log(this.form, 789)
-                    // this.submitShangpin();
-                    this.getList();
-                    this.open = false;
-                    this.$message({ message: '修改成功', type: 'success' });
-                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
-                 }
-                });
-           } else {
+                    SupplieRedit(JSON.stringify(row)).then(response => {
+                        if (response.code == "200") {
+                            // console.log(response,789)
+                            // this.form = response.data;
+                            // this.name = response.name;
+                            // this.type = response.type;
+                            // this.deliveryPriority = response.deliveryPriority;
+                            // this.enableTotalOrder = response.enableTotalOrder;
+                            // this.enableTakeGoods = response.enableTakeGoods;
+                            // this.manageMode = response.manageMode;
+                            // this.ifEnabled = response.ifEnabled;
+                            // this.sysUserId = response.sysUserId;
+                            console.log(this.form, 789)
+                            // this.submitShangpin();
+                            this.getList();
+                            this.open = false;
+                            this.$message({ message: '修改成功', type: 'success' });
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
+                    });
+                } else {
                     // alert("不可提交");
                     // this.$message.error('请注意规范');
-        }
-    })
+                }
+            })
 
             // } else {
             //     // this.$message.error('错了哦，商品名称没有填呢');
@@ -996,21 +1004,18 @@ export default {
         },
         /** 详情按钮操作**/
         handleSelect(row) {
-            if(row.cbsa18=="1")
-            {
-                this.form1.cbsa18="增值税专用发票";
-                row.cbsa18= "1";
-            }else if(row.cbsa18=="2")
-            {
-                this.form1.cbsa18="增值税普通发票"
-                row.cbsa18= "2";
-            }else if(row.cbsa18=="3")
-            {
-                this.form1.cbsa18="个人普通发票"
-                row.cbsa18= "3";
-            }else if(row.cbsa18=="4"){
-                this.form1.cbsa18="不开发票"
-                row.cbsa18= "4";
+            if (row.cbsa18 == "1") {
+                this.form1.cbsa18 = "增值税专用发票";
+                row.cbsa18 = "1";
+            } else if (row.cbsa18 == "2") {
+                this.form1.cbsa18 = "增值税普通发票"
+                row.cbsa18 = "2";
+            } else if (row.cbsa18 == "3") {
+                this.form1.cbsa18 = "个人普通发票"
+                row.cbsa18 = "3";
+            } else if (row.cbsa18 == "4") {
+                this.form1.cbsa18 = "不开发票"
+                row.cbsa18 = "4";
             }
             this.open1 = true;
             this.form1.cbsa01 = row.cbsa01;
@@ -1030,27 +1035,24 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-             if(row.cbsa18=="1")
-            {
-                this.form.cbsa18="增值税专用发票";
-                row.cbsa18="1";
-            }else if(row.cbsa18=="2")
-            {
-                this.form.cbsa18="增值税普通发票"
-                row.cbsa18= "2";
-            }else if(row.cbsa18=="3")
-            {
-                this.form.cbsa18="个人普通发票"
-                row.cbsa18= "3";
-            }else if(row.cbsa18=="4"){
-                this.form.cbsa18="不开发票"
-                row.cbsa18= "4";
+            if (row.cbsa18 == "1") {
+                this.form.cbsa18 = "增值税专用发票";
+                row.cbsa18 = "1";
+            } else if (row.cbsa18 == "2") {
+                this.form.cbsa18 = "增值税普通发票"
+                row.cbsa18 = "2";
+            } else if (row.cbsa18 == "3") {
+                this.form.cbsa18 = "个人普通发票"
+                row.cbsa18 = "3";
+            } else if (row.cbsa18 == "4") {
+                this.form.cbsa18 = "不开发票"
+                row.cbsa18 = "4";
             }
             console.log(row)
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-            this.form= row
+            this.form = row
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -1108,14 +1110,14 @@ export default {
             this.$modal.confirm('是否确认删除供应商为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.SupplierRemove(JSON.stringify(item)).then((res) => {
-                     if (res.code == "200") {
-                        console.log(res, 123)
-                        this.submitShangpin();
-                        this.getList();
-                        this.$modal.msgSuccess("删除成功");
-                     } else {
-                         this.$message({ message: res.msg, type: 'error' });
-                     }
+                        if (res.code == "200") {
+                            console.log(res, 123)
+                            this.submitShangpin();
+                            this.getList();
+                            this.$modal.msgSuccess("删除成功");
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1126,29 +1128,29 @@ export default {
 
 
         },
-      /** 普通删除按钮操作 */
-      handleDelete01(row) {
+        /** 普通删除按钮操作 */
+        handleDelete01(row) {
 
-        // row.classifyId = this.form.classifyId;
-        // row.brand = this.form.brand;
-        // row.model = this.form.model;
-        // row.upc = this.form.upc;
-        // row.description = this.form.description;
-        // row.ifEnabled = this.form.ifEnabled;
-        // row.id=this.form.id;
-        // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
-          return SupplierRemove(JSON.stringify(row));
-        }).then((response) => {
-        if (response.code == "200") {
-          this.submitShangpin();
-          this.getList();
-          this.$modal.msgSuccess("删除成功");
-            } else {
-                this.$message({ message: response.msg, type: 'error' });
-            }
-        }).catch(() => { });
-      },
+            // row.classifyId = this.form.classifyId;
+            // row.brand = this.form.brand;
+            // row.model = this.form.model;
+            // row.upc = this.form.upc;
+            // row.description = this.form.description;
+            // row.ifEnabled = this.form.ifEnabled;
+            // row.id=this.form.id;
+            // console.log(row, 2222);
+            this.$modal.confirm('是否确认删除供应商为"' + row.cbsa08 + '"的数据项？').then(function () {
+                return SupplierRemove(JSON.stringify(row));
+            }).then((response) => {
+                if (response.code == "200") {
+                    this.submitShangpin();
+                    this.getList();
+                    this.$modal.msgSuccess("删除成功");
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+            }).catch(() => { });
+        },
         /** 导出按钮操作
          *
          * /dev-api/stage-api/system/supplier/SwJsSupplierexport
@@ -1189,7 +1191,7 @@ export default {
         handleFileUploadProgress(event, file, fileList) {
             this.upload.isUploading = true;
         },
-         // 文件上传成功处理
+        // 文件上传成功处理
         handleFileSuccess(response, file, fileList) {
             this.upload.open = false;
             this.upload.isUploading = false;
@@ -1210,17 +1212,18 @@ export default {
         // handleNodeClick(data) {
         //   console.log(data);
         // }
-    },mounted () {
-    window.onresize = () => {
-      return (() => {
-          this.maxheight = window.innerHeight - 50
-      })()
-    }
-  },
-  activated () {
-    this.maxheight = window.innerHeight - 50
-},
+    }, mounted() {
+        window.onresize = () => {
+            return (() => {
+                this.maxheight = window.innerHeight - 50
+            })()
+        }
+    },
+    activated() {
+        this.maxheight = window.innerHeight - 50
+    },
 };
 </script>
 <style src="./SupplierMaintenancecss/index.css" scoped>
+
 </style>
