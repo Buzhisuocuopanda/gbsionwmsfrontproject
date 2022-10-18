@@ -4,6 +4,12 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
+        <el-form-item  label="日期" style="margin-left: 27px">
+          <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
+                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" >
+          </el-date-picker>
+        </el-form-item>
         <el-form-item label="客户" style="margin-left: 10px"  class="item-r" >
           <el-select v-model="queryParams.cbca08" clearable   filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca08" :label="item.cbca08" :value="item.cbca08"></el-option>
@@ -23,14 +29,11 @@
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>-->
         </el-form-item>
-        <el-form-item  label="日期" style="margin-left: 20px">
-          <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
-                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-          </el-date-picker>
+        <el-form-item label="单据编号">
+          <el-input type="text" style="width: 200px;" v-model="queryParams.cboa07"  placeholder="请输入单据编号" ></el-input>
         </el-form-item>
 
-        <el-form-item style="margin: -10px -10px 1px 30px" >
+        <el-form-item style="margin: 0px -10px 1px 30px" >
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
@@ -127,6 +130,7 @@ export default {
         cbpb01:"",
         caua17:"",
         cbca08:"",
+        cboa07:"",
         startTime:undefined,
         endTime:undefined,
 
@@ -284,6 +288,7 @@ export default {
       this.queryParams.cbca08 = "";
       this.queryParams.caua17 = "";
       this.queryParams.cbpb01 = "";
+      this.queryParams.cboa07 = "";
       this.dateRange=[];
       this.queryParams.pageNum = 1;
       this.getGoods();

@@ -3,7 +3,13 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
-
+        <el-form-item  label="日期"  class="item-r" style="margin-left: 10px" >
+          <el-date-picker size="mini" v-model="dateRange"  type="daterange"
+                          style="height: 35px;width: 250px;margin-left: 20px"
+                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+          </el-date-picker>
+        </el-form-item>
         <el-form-item label="经销商"  class="item-r" label-width="80px">
           <el-select v-model="queryParams.customerId"  style="margin-left: 10px;width: 240px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
@@ -15,13 +21,7 @@
             <el-option v-for="item in cbsaList" :key="item.cbsa01" :label="item.cbsa08" :value="item.cbsa01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item  label="日期"  class="item-r" style="margin-left: 10px" >
-          <el-date-picker size="mini" v-model="dateRange"  type="daterange"
-                          style="height: 35px;width: 250px;margin-left: 20px"
-                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-          </el-date-picker>
-        </el-form-item>
+
 
         <el-form-item label="品牌"   class="item-r" label-width="50px">
           <el-select v-model="queryParams.brand" style="width: 200px;margin-left: 20px" clearable filterable placeholder="请输入关键词" :loading="loading3">
@@ -50,7 +50,7 @@
                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column label="客户名称" align="left" header-align="center" prop="customerName" min-width="270px;" />
         <el-table-column  label="下单时间" align="left" prop="createTime" :formatter="formatTime2" min-width="120px;"/>
-        <el-table-column  label="供应商" align="left" prop="supplier" min-width="140px;">
+        <el-table-column v-if="false" label="供应商" align="left" prop="supplier" min-width="140px;">
           <template slot-scope="scope">
             <div>{{sliceString(scope.row)}}</div>
           </template>

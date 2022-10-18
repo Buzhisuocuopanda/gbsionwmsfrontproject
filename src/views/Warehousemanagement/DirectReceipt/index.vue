@@ -75,9 +75,9 @@
                                     v-hasPermi="['system:user:edit']">
                                     修改
                                 </el-button> -->
-                            <el-button size="mini" type="text" icon="el-icon-delete"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-hasPermi="['system:directly:remove']">删除</el-button>
+                                v-hasPermi="['system:directly:remove']">删除</el-button> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                     @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情
                                 </el-button>
@@ -231,7 +231,7 @@ import supplierMaintenance from "@/components/SupplierMaintenance";
 
 
 export default {
-    name: "store",
+    name: "DirectReceipt",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect, kuweixxweihu, supplierMaintenance },
     data() {

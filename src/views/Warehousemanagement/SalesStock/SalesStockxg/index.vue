@@ -184,6 +184,7 @@ import Goodsone01 from "@/components/Goodsone";
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
 export default {
+  name:'AuthUser',
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -930,7 +931,7 @@ export default {
           this.form2.cbsc08 = response.cbse08;
           this.tableData = response.goods;
           console.log(this.form2, response, 85200000, '年后1');
-          response.goods.forEach((item) => {
+          this.tableData.map((item) => {
             item.cbsc177 = item.orderClass;
             item.cbsc15 = item.supplierId;
             item.cbsd133 = item.brand;
@@ -945,7 +946,7 @@ export default {
             item.cbsc15 = item.remark;
             item.cbsc14 = item.saleOrderId;
             item.cbpc000 =
-              item.brand + "~" + item.model + "~" + item.description;
+              item.pinpai + "~" + item.cbpb12 + "~" + item.cbpb08;
             if (item.cbsc177 == "国内订单") {
               item.cbsc17 = "1";
             } else {

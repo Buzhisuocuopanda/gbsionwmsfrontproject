@@ -508,10 +508,10 @@
         />
       </el-table>
       <pagination
-          v-show="total > 0"
-          :total="total"
-          :page.sync="queryParams.pageNum"
-          :limit.sync="queryParams.pageSize"
+          v-show="totall > 0"
+          :total="totall"
+          :page.sync="queryParams2.pageNum"
+          :limit.sync="queryParams2.pageSize"
           @pagination="getList09"
           :page-sizes="[10, 15, 20, 50, 500]"
         />
@@ -592,7 +592,7 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
 export default {
-  name: "store",
+  name: "Saleslading",
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -844,7 +844,21 @@ export default {
         cbwa09: undefined,
         dateRange: undefined,
       },
-
+      // 查询参数
+      queryParams2: {
+        pageNum: 1,
+        pageSize: 15,
+        page: 1,
+        size: 15,
+        // status:'',
+        total: this.total,
+        totall: this.totall,
+        saleOrderNo:undefined,
+        whName: undefined,
+        orderNo: undefined,
+        cbwa09: undefined,
+        dateRange: undefined,
+      },
       // 列信息
       //  columns: [
       //   {
@@ -1088,7 +1102,7 @@ export default {
     getList09() {
       this.loading = true;
       this.queryParams.status = 5
-      Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams, this.dateRange)).then((response) => {
+      Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
         this.userList01 = response.data.rows;
         this.totall = response.data.total;
         // //供应商
@@ -1195,6 +1209,7 @@ export default {
       Purchaseinbounddingdanxsdd(obj).then((res) =>{
         if(res.code == 200){
           this.userList01 = res.data.rows;
+          this.totall = res.data.total
         }
       })
     },
@@ -1834,6 +1849,9 @@ export default {
             whNameid:this.form2.cbpc10
           },
         });
+        this.form2.cbpc100 = ''
+        this.queryParams.orderNo = ''
+        this.open3 = false
         // location.reload();
       }
 

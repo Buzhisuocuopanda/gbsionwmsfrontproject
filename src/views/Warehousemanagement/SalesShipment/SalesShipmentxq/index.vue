@@ -209,6 +209,7 @@
 <script>
 import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds } from "@/api/Warehousemanagement/SalesShipment";
 export default {
+  name:'AuthUser',
   data() {
     return {
       // 遮罩层

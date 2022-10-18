@@ -4,6 +4,12 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true"   >
+        <el-form-item  label="日期" style="margin-left: 20px">
+          <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
+                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+          </el-date-picker>
+        </el-form-item>
         <el-form-item label="客户" style="margin-left: 10px"  class="item-r" >
           <el-select v-model="queryParams.customerId" clearable   filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
@@ -26,22 +32,17 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item  label="日期" style="margin-left: 20px">
-          <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
-                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-          </el-date-picker>
-        </el-form-item>
+
 
         <el-form-item style="margin: -5px -10px 1px 30px" >
-          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['countQuery:inventorysumsmaryquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['countQuery:saleOrderListCountquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
+          <el-button v-hasPermi="['countQuery:saleOrderListCountquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button v-hasPermi="['countQuery:saleOrderListCountquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="450"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
                  border fit highlight-current-row stripe style="margin-top:1em"  :span-method="objectSpanMethod">
-        <el-table-column label="供料单位" align="left" header-align="center" prop="supplier" min-width="170px;" />
+        <el-table-column label="供料单位" v-if="false" align="left" header-align="center" prop="supplier" min-width="170px;" />
 
         <el-table-column  label="客户名称" align="left" prop="customer" min-width="240px;"/>
         <el-table-column  label="编号" align="left" prop="orderNo" min-width="180px;"/>
@@ -52,7 +53,7 @@
         <el-table-column  label="剩余数量" align="right" :formatter="rounding" prop="remainNum" min-width="100px;"/>
         <el-table-column  label="品牌" align="left" prop="cbpb10" min-width="100px;"/>
         <el-table-column  label="型号" align="left" prop="cbpb12" min-width="160px;"/>
-        <el-table-column  label="商品" align="left" prop="cbpb08" min-width="490px;"/>
+        <el-table-column  label="商品" align="left" prop="cbpb08" min-width="300px;"/>
 
        <!-- <el-table-column  label="入库数量" align="center" prop="cbob10" min-width="100px;"/>
         <el-table-column  label="变更数量" align="center" min-width="100px;"/>
