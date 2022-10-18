@@ -95,7 +95,7 @@ Vue.directive('loadmore', {
 })
 export default {
   components: {},
-  name: "fnInventorysummaryquerys",
+  name: "FnInventorysummaryquerys",
   data() {
     return {
       //下拉列表数据仓库

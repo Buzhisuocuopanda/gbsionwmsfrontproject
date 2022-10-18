@@ -81,9 +81,10 @@
 </template>
 
 <script>
-import { Approvalrecords } from "@/api/Approval";
+import { records } from "@/api/Approval";
 
 export default {
+  name: "Approvalrecords",
   components: {},
   data() {
     return {
@@ -239,9 +240,8 @@ export default {
     this.onSearch()
   },
   created() {
-    //仓库明细初始化
-    // this.getList();
-    },
+    //仓库明细初始化 
+  },
   methods: {
     showDetail(row) {
      // this.$router.push({path: "/approval/saleshowOrderDetail", query: {id: row.id}})
@@ -268,7 +268,7 @@ export default {
         pageSize: this.listQuery.pageSize
       }
       // console.info(param)
-      Approvalrecords(param).then(response => {
+      records(param).then(response => {
         if (response.data != null && response.data.rows != null) {
           this.orderList = response.data.rows
           this.totalItems = response.data.total
@@ -283,7 +283,7 @@ export default {
     },
     getList() {
       this.loading = true;
-      Approvalrecords(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      records(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.userList = response.data.rows;
           this.total = response.data.total;
           // //供应商

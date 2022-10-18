@@ -149,7 +149,7 @@ import ListLists from "@/components/ListMaintenance";
 
 
 export default {
-  name: "store",
+  name: "AuthUser",
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
   components: { kuweixxweihu, supplierMaintenance, ListLists },
   data() {

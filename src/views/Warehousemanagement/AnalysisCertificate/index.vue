@@ -311,7 +311,7 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
 export default {
-    name: "store",
+    name: "AnalysisCertificate",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect, kuweixxweihu, supplierMaintenance },
     data() {
@@ -878,6 +878,7 @@ export default {
         resetQuery() {
             this.dateRange = [];
             this.resetForm("queryForm");
+            this.queryParams.cbqa07 = ''
             this.handleQuery();
         },
         // 多选框选中数据

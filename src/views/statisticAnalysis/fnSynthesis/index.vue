@@ -79,7 +79,7 @@ import { getfnSynthesisList,getSwJsStoreSkuAllList,getSwJsCustomerAllList } from
 //
 // import { formatDate } from '../../../utils';
 export default {
-  name: "fnSynthesis",
+  name: "FnSynthesis",
   data() {
     return {
       //下拉列表数据仓库

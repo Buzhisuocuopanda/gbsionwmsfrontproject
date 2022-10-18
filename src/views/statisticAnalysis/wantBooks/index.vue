@@ -82,7 +82,7 @@
     }
   })
   export default {
-    name: "wantBooks",
+    name: "WantBooks",
     components: {},
     data() {
       return {

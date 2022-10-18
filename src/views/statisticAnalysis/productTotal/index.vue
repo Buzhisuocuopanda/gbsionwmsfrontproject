@@ -86,7 +86,7 @@
   })
 
   export default {
-  name: "productTotal",
+  name: "ProductTotal",
   components: {},
   data() {
     return {
