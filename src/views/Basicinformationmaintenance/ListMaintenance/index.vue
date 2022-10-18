@@ -13,23 +13,27 @@
                     <el-form-item prop="cala10" label="类别">
                         <!-- <el-input v-model="queryParams.cala10" id="miaoshu" placeholder="请输入类别" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" /> -->
-                            <el-select v-model="queryParams.cala10" placeholder="请输入类别" style="width: 240px;" clearable @keyup.enter.native="handleQuery">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select>
+                        <el-select v-model="queryParams.cala10" placeholder="请输入类别" style="width: 240px;" clearable
+                            @keyup.enter.native="handleQuery">
+                            <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
+                                :value="dict.label"></el-option>
+                        </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:list:list']" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:list:add']" @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:list:list']"
+                            @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:list:add']"
+                            @click="handlechuangjiang">创建</el-button>
 
-                        <el-button size="mini"  type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                            v-hasPermi="['system:list:remove']">删除
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                            @click="handleDelete" v-hasPermi="['system:list:remove']">删除
                         </el-button>
 
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassLM" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="470" :data="userList"
+                <el-table border :header-cell-style="headClassLM" :row-style="{height: '3px'}"
+                    :cell-style="{padding: '2px'}" v-loading="loading" height="470" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -38,7 +42,7 @@
                     <el-table-column label="名称" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
-                             <el-button size="mini" type="text" icon="el-icon-share" class="button-caozuoxougai"
+                            <el-button size="mini" type="text" icon="el-icon-share" class="button-caozuoxougai"
                                 @click="handleSelect(scope.row)" v-hasPermi="['system:list:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
@@ -58,10 +62,13 @@
 
         <!-- 修改用户配置对话框 -->
         <el-dialog :title="title2" :visible.sync="open" append-to-body>
-            <div style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">列表管理修改
+            <div
+                style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                列表管理修改
             </div>
-            <el-form ref="form" :model="form" label-width="30%" :rules="rules22" style="margin-left:-15%;margin-top:3%;">           
-                  <el-row style="margin-left:-15%;">
+            <el-form ref="form" :model="form" label-width="30%" :rules="rules22"
+                style="margin-left:-15%;margin-top:3%;">
+                <el-row style="margin-left:-15%;">
                     <el-col style="margin-top:1%;margin-left:5%;">
                         <el-form-item label="类别:" prop="cala10">
                             <!-- <el-input v-model="form2.cala10" placeholder="" maxlength="30" style="width:50%" /> -->
@@ -91,7 +98,9 @@
 
         <!-- 详情 -->
         <el-dialog :title="title" :visible.sync="open1">
-            <div style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">列表管理详情
+            <div
+                style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                列表管理详情
             </div>
             <el-form ref="form1" :model="form1" label-width="25%" lable-height="20%">
                 <div style="margin-top:3%;">
@@ -112,7 +121,7 @@
                             <el-form-item label="名称:" prop="cala08">
                                 <el-input v-model="form1.cala08" placeholder="" maxlength="30" style="width:70%;" />
                             </el-form-item>
-                        </el-col>                     
+                        </el-col>
                     </el-row>
                 </div>
             </el-form>
@@ -124,7 +133,9 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" append-to-body>
-            <div style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">列表管理创建
+            <div
+                style="margin-top:-3%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                列表管理创建
             </div>
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" style="margin-top:3%;">
                 <el-row style="margin-left:-15%;">
@@ -195,7 +206,7 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-    name: "User",
+    name: "ListMaintenance",
     dicts: ['sys_normal_disable', 'sys_user_sex'],
     components: { Treeselect },
     data() {
@@ -268,7 +279,7 @@ export default {
                 cala09: "",
                 cala10: "",
                 cala11: "",
-                cala12:""
+                cala12: ""
             },
             form1: {
                 // classifyId: "",
@@ -331,12 +342,12 @@ export default {
                 cala10: [
                     { required: true, message: "类别不能为空!", trigger: "change" }
                 ],
-                cala02:[
+                cala02: [
                     {
-                    required: true, message: "索引不能为空!", trigger: "blur"
-                }]
+                        required: true, message: "索引不能为空!", trigger: "blur"
+                    }]
             },
-         rules22: {
+            rules22: {
                 cala08: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
@@ -363,14 +374,14 @@ export default {
         // this.form2.ifEnabled = this.ifEnabledoptions[0].label;
     },
     methods: {
-      //列表表头设置
-      headClassLM() {
-        return {
-          'text-align': 'left',
-          height: '30px',
-          padding: '0'
-        }
-      },
+        //列表表头设置
+        headClassLM() {
+            return {
+                'text-align': 'left',
+                height: '30px',
+                padding: '0'
+            }
+        },
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -535,31 +546,31 @@ export default {
         /** 修改按钮操作 */
         handleUpdate() {
             this.open = true;
-                let row = {}
-                row.cala08 = this.form.cala08;
-                row.cala09 = this.form.cala09;
-                row.cala10 = this.form.cala10;
-                row.cala11 = this.form.cala11;
-                row.cala12 = this.form.cala12;
-                row.cala01 = this.form.cala01;
-                console.log(this.form.cala01);
-                 this.$refs["form"].validate((item) => {
+            let row = {}
+            row.cala08 = this.form.cala08;
+            row.cala09 = this.form.cala09;
+            row.cala10 = this.form.cala10;
+            row.cala11 = this.form.cala11;
+            row.cala12 = this.form.cala12;
+            row.cala01 = this.form.cala01;
+            console.log(this.form.cala01);
+            this.$refs["form"].validate((item) => {
                 if (item) {
-                ListEdit(JSON.stringify(row)).then(response => {
+                    ListEdit(JSON.stringify(row)).then(response => {
 
-                    // this.form = response.data;
-                    // this.sort = response.sort;
-                    // this.type = response.type;
-                    // this.typeName = response.typeName;
-                    // this.name = response.name;
+                        // this.form = response.data;
+                        // this.sort = response.sort;
+                        // this.type = response.type;
+                        // this.typeName = response.typeName;
+                        // this.name = response.name;
 
-                    // this.submitShangpin();
-                    this.getList();
-                    this.open = false;
-                    this.$message({ message: '修改成功', type: 'success' });
+                        // this.submitShangpin();
+                        this.getList();
+                        this.open = false;
+                        this.$message({ message: '修改成功', type: 'success' });
 
-                });
-          } else {
+                    });
+                } else {
                     // this.$message.error('请注意规范');
                 }
             })
@@ -568,10 +579,10 @@ export default {
         handlexiangqengSelect(row) {
             this.open = true;
             console.log(row, 7788521);
-             this.form= row;
+            this.form = row;
         },
 
-          /** 详情按钮操作**/
+        /** 详情按钮操作**/
         handleSelect(row) {
             this.open1 = true;
             this.form1.cala01 = row.cala01;
@@ -674,25 +685,25 @@ export default {
 
         },
 
-      /** 普通删除按钮操作 */
-      handleDelete01(row) {
+        /** 普通删除按钮操作 */
+        handleDelete01(row) {
 
-        // row.classifyId = this.form.classifyId;
-        // row.brand = this.form.brand;
-        // row.model = this.form.model;
-        // row.upc = this.form.upc;
-        // row.description = this.form.description;
-        // row.ifEnabled = this.form.ifEnabled;
-        // row.id=this.form.id;
-        // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除类别为"' + row.cala10 + '"的数据项？').then(function () {
-          return ListRemove(JSON.stringify(row));
-        }).then((response) => {
-          this.submitShangpin();
-          this.getList();
-          this.$modal.msgSuccess("删除成功");
-        }).catch(() => { });
-      },
+            // row.classifyId = this.form.classifyId;
+            // row.brand = this.form.brand;
+            // row.model = this.form.model;
+            // row.upc = this.form.upc;
+            // row.description = this.form.description;
+            // row.ifEnabled = this.form.ifEnabled;
+            // row.id=this.form.id;
+            // console.log(row, 2222);
+            this.$modal.confirm('是否确认删除类别为"' + row.cala10 + '"的数据项？').then(function () {
+                return ListRemove(JSON.stringify(row));
+            }).then((response) => {
+                this.submitShangpin();
+                this.getList();
+                this.$modal.msgSuccess("删除成功");
+            }).catch(() => { });
+        },
         /** 导出按钮操作 */
         handleExport() {
             this.download('/system/classify/SwJsGoodsClassifyimportTemplate', {
@@ -751,4 +762,5 @@ export default {
 };
 </script>
 <style src="./ListMaintenanceCss/index.css" scoped>
+
 </style>

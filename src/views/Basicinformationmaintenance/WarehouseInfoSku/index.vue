@@ -7,26 +7,30 @@
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
                     <el-form-item prop="cbwa09" label="仓库名称">
-                        <el-input v-model="queryParams.cbwa09"  id="miaoshu" placeholder="请输入仓库名称"  clearable
+                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbwa11" label="仓库类型">
-                        <el-select v-model="queryParams.cbwa11" placeholder="请输入仓库类型" style="width: 240px;" clearable @keyup.enter.native="handleQuery">
+                        <el-select v-model="queryParams.cbwa11" placeholder="请输入仓库类型" style="width: 240px;" clearable
+                            @keyup.enter.native="handleQuery">
                             <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label">
+                                :value="dict.label">
                             </el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen"  v-hasPermi="['system:sku:list']" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:sku:add']" @click="handlechuangjiang">创建</el-button>
-                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
-                            v-hasPermi="['system:sku:remove']">删除
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:sku:list']"
+                            @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:sku:add']"
+                            @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                            @click="handleDelete" v-hasPermi="['system:sku:remove']">删除
                         </el-button>
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSS" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="490" :data="userList"
+                <el-table border :header-cell-style="headClassWSS" :row-style="{height: '3px'}"
+                    :cell-style="{padding: '2px'}" v-loading="loading" height="490" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92%;height: 8%; margin-left:-1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -71,12 +75,13 @@
                             </div>
                         </template> -->
                     </el-table-column>
-                  <el-table-column label="是否分配库存" width="150px;" align="center" key="allocationFlag" prop="allocationFlag" sortable>
-                     <template scope="scope">
-                        <div>{{ scope.row.allocationFlag == 1 ? "启用" : scope.row.cbwa15 == 2 ? "禁用" :null }}
-                        </div>
-                    </template>
-                  </el-table-column>
+                    <el-table-column label="是否分配库存" width="150px;" align="center" key="allocationFlag"
+                        prop="allocationFlag" sortable>
+                        <template scope="scope">
+                            <div>{{ scope.row.allocationFlag == 1 ? "启用" : scope.row.cbwa15 == 2 ? "禁用" :null }}
+                            </div>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
@@ -97,13 +102,15 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open"  class="abow_dialogy"  append-to-body>
-            <div style="margin-top:0%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">仓库信息维护</div>
+        <el-dialog :title="title1" :visible.sync="open" class="abow_dialogy" append-to-body>
+            <div
+                style="margin-top:0%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                仓库信息维护</div>
             <div style="margin-left:2%;margin-top: 0; font-size: 15px; color: black;"> 修改仓库信息</div>
-            <hr style="margin-bottom:4%;"/>
+            <hr style="margin-bottom:4%;" />
             <!-- <div style="padding-top:-1%;font-weight: 900;font-size: 20px; color: black;">仓库信息</div> -->
             <!-- <hr /> -->
-            <el-form ref="form" :model="form" :rules="rules1" label-width="30%" >
+            <el-form ref="form" :model="form" :rules="rules1" label-width="30%">
                 <div style="margin-top:0%;">
 
                     <el-row>
@@ -116,7 +123,7 @@
                     <el-row>
                         <el-col style="margin-top:0.3%;">
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form.cbwa07"  maxlength="30" style="width:55%;" />
+                                <el-input v-model="form.cbwa07" maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -126,7 +133,7 @@
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa11" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label" >
+                                        :value="dict.label">
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -136,7 +143,7 @@
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa12" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangGuanlimshi" :key="dict.value" :label="dict.label"
-                                        :value="dict.label"  ></el-option>
+                                        :value="dict.label"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -147,7 +154,7 @@
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa13" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value" ></el-option>
+                                        :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -156,7 +163,7 @@
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
                                 <el-select v-model="form.cbwa14" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Tihuodan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value" ></el-option>
+                                        :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -165,22 +172,23 @@
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa08" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label" ></el-option>
+                                        :value="dict.label"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col>
                             <el-form-item label="是否可用:" prop="cbwa15">
                                 <el-select v-model="form.cbwa15" placeholder="" style="width:55%;">
-                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label" :value="dict.value">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                        :value="dict.value">
                                     </el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                         <el-col style="margin-top:3%;">
+                        <el-col style="margin-top:3%;">
                             <div style="margin-left:70%;margin-top: 0%;">
-                               <el-button type="primary" @click="handleUpdate">确定</el-button>
-                               <el-button @click="cancel">取 消</el-button>
+                                <el-button type="primary" @click="handleUpdate">确定</el-button>
+                                <el-button @click="cancel">取 消</el-button>
                             </div>
                         </el-col>
                     </el-row>
@@ -194,8 +202,8 @@
             <!-- <hr /> -->
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-top:3%;">
                 <div style="margin-left:0%;">
-                <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">仓库信息</div>
-                <hr style="margin-bottom:4%;width:100%;"/>
+                    <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">仓库信息</div>
+                    <hr style="margin-bottom:4%;width:100%;" />
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
@@ -206,7 +214,8 @@
                     <el-row>
                         <el-col style="margin-top:2%;">
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form1.cbwa07" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')"  maxlength="30" style="width:55%;" />
+                                <el-input v-model="form1.cbwa07" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')"
+                                    maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -226,7 +235,7 @@
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form1.cbwa12" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangGuanlimshi" :key="dict.value" :label="dict.label"
-                                        :value="dict.label"  ></el-option>
+                                        :value="dict.label"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -237,7 +246,7 @@
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form1.cbwa13" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value" ></el-option>
+                                        :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -246,7 +255,7 @@
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
                                 <el-select v-model="form1.cbwa14" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Tihuodan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value" ></el-option>
+                                        :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -255,14 +264,15 @@
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form1.cbwa08" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label" ></el-option>
+                                        :value="dict.label"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col>
                             <el-form-item label="是否可用:" prop="cbwa15">
                                 <el-select v-model="form1.cbwa15" placeholder="" style="width:55%;">
-                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label" :value="dict.value">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                        :value="dict.value">
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -278,11 +288,13 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" class="abow_dialogy" append-to-body>
-            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">仓库信息维护</div>
+            <div
+                style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                仓库信息维护</div>
             <el-form ref="form2" :model="form2" :rules="rules2" label-width="30%" class="chuangjianformWare">
                 <div style="margin-top:-3%;">
-                <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">创建仓库信息</div>
-                <hr style="margin-bottom:4%;width:110%;"/>
+                    <div style="margin-top:-3%;margin-left:2%; font-size: 15px; color: black;">创建仓库信息</div>
+                    <hr style="margin-bottom:4%;width:110%;" />
                     <el-row>
                         <el-col>
                             <el-form-item label="名称:" prop="cbwa09">
@@ -293,7 +305,7 @@
                     <el-row>
                         <el-col style="margin-top:1%;">
                             <el-form-item label="出库优先级:" prop="cbwa07">
-                                <el-input v-model="form2.cbwa07"   maxlength="30" style="width:55%;" />
+                                <el-input v-model="form2.cbwa07" maxlength="30" style="width:55%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -303,7 +315,7 @@
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa11" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label" >
+                                        :value="dict.label">
                                     </el-option>
                                 </el-select>
                             </el-form-item>
@@ -313,7 +325,7 @@
                                 <!-- <el-input v-model="form2.cbwa12" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa12" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangGuanlimshi" :key="dict.value" :label="dict.label"
-                                        :value="dict.label"  ></el-option>
+                                        :value="dict.label"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -324,7 +336,7 @@
                                 <!-- <el-input v-model="form2.cbwa13" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa13" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZongDingdan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value" ></el-option>
+                                        :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -333,7 +345,7 @@
                                 <!-- <el-input v-model="form2.cbwa14" placeholder="" style="width:55%" maxlength="30" /> -->
                                 <el-select v-model="form2.cbwa14" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Tihuodan" :key="dict.value" :label="dict.label"
-                                        :value="dict.value" ></el-option>
+                                        :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
@@ -342,21 +354,22 @@
                                 <!-- <el-input v-model="form2.cbwa08" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa08" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
-                                        :value="dict.label" ></el-option>
+                                        :value="dict.label"></el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col>
                             <el-form-item label="是否可用:" prop="cbwa15">
-                               <el-select v-model="form2.cbwa15" placeholder="" style="width:55%;">
-                                   <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
-                               </el-select>
+                                <el-select v-model="form2.cbwa15" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                        :value="dict.value"></el-option>
+                                </el-select>
                             </el-form-item>
                         </el-col>
-                         <el-col style="margin-top:3%;">
+                        <el-col style="margin-top:3%;">
                             <div style="margin-left:70%;margin-top: 0%;">
-                               <el-button type="primary" @click="handleAdd">确定</el-button>
-                               <el-button @click="cancells">取 消</el-button>
+                                <el-button type="primary" @click="handleAdd">确定</el-button>
+                                <el-button @click="cancells">取 消</el-button>
                             </div>
                         </el-col>
                     </el-row>
@@ -392,7 +405,7 @@
 
 // import { addUserSysStore, listUserStore, updateUserStore, removeSysStore } from "@/api/WareSys/Cangkuxxguanli";
 
-import { StoreSkuAdd, StoreSkuList01,StoreSkuEdit, StoreyRemove } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
+import { StoreSkuAdd, StoreSkuList01, StoreSkuEdit, StoreyRemove } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 import * as req from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 
 import { getToken } from "@/utils/auth";
@@ -401,22 +414,22 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-    name: "store",
+    name: "WarehouseInfoSku",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect },
     data() {
-         const validateNumber = (rule, value, callback) => {
-         let numberReg = /^\d+$|^\d+[.]?\d+$/
-         if (value !== '') {
-             if (!numberReg.test(value)) {
-                 callback(new Error('出库优先级只能输入数字'))
-              } else {
-                 callback()
-           }
-        } else {
-             callback(new Error('请输入值'))
-             }
-      }
+        const validateNumber = (rule, value, callback) => {
+            let numberReg = /^\d+$|^\d+[.]?\d+$/
+            if (value !== '') {
+                if (!numberReg.test(value)) {
+                    callback(new Error('出库优先级只能输入数字'))
+                } else {
+                    callback()
+                }
+            } else {
+                callback(new Error('请输入值'))
+            }
+        }
 
         return {
             // 遮罩层
@@ -620,14 +633,14 @@ export default {
                 cbwa12: [
                     { required: true, message: "管理模式不能为空!", trigger: "change" }
                 ],
-                cbwa07:[
-                     { required: true, message: "出库优先级不能为空!", trigger: "blur" },
-                     { validator: validateNumber, trigger: 'blur' }
+                cbwa07: [
+                    { required: true, message: "出库优先级不能为空!", trigger: "blur" },
+                    { validator: validateNumber, trigger: 'blur' }
                 ]
             },
-              // 表单校验
+            // 表单校验
             rules1: {
-                 cbwa09: [
+                cbwa09: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
                 ],
                 cbwa13: [
@@ -648,9 +661,9 @@ export default {
                 cbwa12: [
                     { required: true, message: "管理模式不能为空!", trigger: "change" }
                 ],
-                cbwa07:[
-                     { required: true, message: "出库优先级不能为空!", trigger: "blur" },
-                     { validator: validateNumber, trigger: 'blur' }
+                cbwa07: [
+                    { required: true, message: "出库优先级不能为空!", trigger: "blur" },
+                    { validator: validateNumber, trigger: 'blur' }
                 ]
             }
         };
@@ -673,15 +686,15 @@ export default {
         // this.form.type = this.dict[0].label;
     },
     methods: {
-    //下拉框默认选中第一项
-      //列表表头设置
-      headClassWSS() {
-        return {
-          'text-align': 'left',
-          height: '40px',
-          padding: '0'
-        }
-      },
+        //下拉框默认选中第一项
+        //列表表头设置
+        headClassWSS() {
+            return {
+                'text-align': 'left',
+                height: '40px',
+                padding: '0'
+            }
+        },
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -759,7 +772,7 @@ export default {
             this.reset01();
         },
 
-         cancellss() {
+        cancellss() {
             this.open2 = false;
             this.reset01();
         },
@@ -807,7 +820,7 @@ export default {
         handleSelectionChange(selection) {
             this.ids = selection;
             this.idss = selection.map(item => item.cbwa01);
-             this.idsss = selection.map(item => item.cbwa09);
+            this.idsss = selection.map(item => item.cbwa09);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -833,13 +846,13 @@ export default {
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
                         if (response.code == "200") {
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
-                        this.submitShangpin();
-                        this.getList();
-                        this.open2 = false;
-                        this.reset01();
+                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                            // this.getTreeselect();
+                            // this.submitShangpin();
+                            this.submitShangpin();
+                            this.getList();
+                            this.open2 = false;
+                            this.reset01();
                         } else {
                             this.$message({ message: response.msg, type: 'error' });
                         }
@@ -882,46 +895,46 @@ export default {
         },
         /** 修改按钮操作 */
         handleUpdate() {
-                let row = {}
-                row.cbwa07 = this.form.cbwa07;
-                row.cbwa08 = this.form.cbwa08;
-                row.cbwa09 = this.form.cbwa09;
-                row.cbwa10 = this.form.cbwa10;
-                row.cbwa11 = this.form.cbwa11;
-                row.cbwa12 = this.form.cbwa12;
-                row.cbwa13 = this.form.cbwa13;
-                row.cbwa14 = this.form.cbwa14;
-                row.cbwa15 = this.form.cbwa15;
-                row.cbwa01 = this.form.cbwa01;
-                // console.log(this.form.id);
-                 this.$refs["form"].validate((item) => {
+            let row = {}
+            row.cbwa07 = this.form.cbwa07;
+            row.cbwa08 = this.form.cbwa08;
+            row.cbwa09 = this.form.cbwa09;
+            row.cbwa10 = this.form.cbwa10;
+            row.cbwa11 = this.form.cbwa11;
+            row.cbwa12 = this.form.cbwa12;
+            row.cbwa13 = this.form.cbwa13;
+            row.cbwa14 = this.form.cbwa14;
+            row.cbwa15 = this.form.cbwa15;
+            row.cbwa01 = this.form.cbwa01;
+            // console.log(this.form.id);
+            this.$refs["form"].validate((item) => {
                 if (item) {
-                StoreSkuEdit(JSON.stringify(row)).then(response => {
-                    // console.log(response,789)
-                    // this.form = response.data;
-                    // this.name = response.name;
-                    // this.type = response.type;
-                    // this.deliveryPriority = response.deliveryPriority;
-                    // this.enableTotalOrder = response.enableTotalOrder;
-                    // this.enableTakeGoods = response.enableTakeGoods;
-                    // this.manageMode = response.manageMode;
-                    // this.ifEnabled = response.ifEnabled;
-                    // this.sysUserId = response.sysUserId;
-                if (response.code == "200") {
-                    console.log(this.form, 789)
-                    // this.submitShangpin();
-                    this.getList();
-                    this.open = false;
-                    this.$message({ message: '修改成功', type: 'success' });
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
-                    }
-                });
-           } else {
+                    StoreSkuEdit(JSON.stringify(row)).then(response => {
+                        // console.log(response,789)
+                        // this.form = response.data;
+                        // this.name = response.name;
+                        // this.type = response.type;
+                        // this.deliveryPriority = response.deliveryPriority;
+                        // this.enableTotalOrder = response.enableTotalOrder;
+                        // this.enableTakeGoods = response.enableTakeGoods;
+                        // this.manageMode = response.manageMode;
+                        // this.ifEnabled = response.ifEnabled;
+                        // this.sysUserId = response.sysUserId;
+                        if (response.code == "200") {
+                            console.log(this.form, 789)
+                            // this.submitShangpin();
+                            this.getList();
+                            this.open = false;
+                            this.$message({ message: '修改成功', type: 'success' });
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
+                    });
+                } else {
                     // this.$message.error('请注意规范' + this.form.cbwa09 + '');
-       }
-    })
-},
+                }
+            })
+        },
         /** 详情按钮操作**/
         handleSelect(row) {
             this.open1 = true;
@@ -935,59 +948,53 @@ export default {
             this.form1.cbwa13 = row.cbwa13;
             this.form1.cbwa14 = row.cbwa14;
             this.form1.cbwa15 = row.cbwa15;
-            if(this.form1.cbwa13=="0"){
-               this.form1.cbwa13="是"
-            }else if(this.form1.cbwa13=="1")
-            {
-               this.form1.cbwa13="否"
+            if (this.form1.cbwa13 == "0") {
+                this.form1.cbwa13 = "是"
+            } else if (this.form1.cbwa13 == "1") {
+                this.form1.cbwa13 = "否"
             }
 
-             if(this.form1.cbwa14=="0"){
-               this.form1.cbwa14="是"
-            }else if(this.form1.cbwa14=="1")
-            {
-               this.form1.cbwa14="否"
+            if (this.form1.cbwa14 == "0") {
+                this.form1.cbwa14 = "是"
+            } else if (this.form1.cbwa14 == "1") {
+                this.form1.cbwa14 = "否"
             }
-            if(this.form1.cbwa15=="0"){
-               this.form1.cbwa15="是"
-            }else if(this.form1.cbwa15=="1")
-            {
-               this.form1.cbwa15="否"
+            if (this.form1.cbwa15 == "0") {
+                this.form1.cbwa15 = "是"
+            } else if (this.form1.cbwa15 == "1") {
+                this.form1.cbwa15 = "否"
             }
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-            if(row.cbwa13=="0"){
-               this.form.cbwa13="是"
-               row.cbwa13="0"
-            }else if(row.cbwa13=="1")
-            {
-               this.form.cbwa13="否"
-               row.cbwa13="1"
+            if (row.cbwa13 == "0") {
+                this.form.cbwa13 = "是"
+                row.cbwa13 = "0"
+            } else if (row.cbwa13 == "1") {
+                this.form.cbwa13 = "否"
+                row.cbwa13 = "1"
             }
 
 
-             if(row.cbwa14=="0"){
-               this.form.cbwa14="是"
-               row.cbwa14="0"
-            }else if(row.cbwa14=="1")
-            {
-               this.form.cbwa14="否"
-               row.cbwa14="1"
+            if (row.cbwa14 == "0") {
+                this.form.cbwa14 = "是"
+                row.cbwa14 = "0"
+            } else if (row.cbwa14 == "1") {
+                this.form.cbwa14 = "否"
+                row.cbwa14 = "1"
             }
-            if(row.cbwa15=="0"){
-               this.form.cbwa15="是"
-               row.cbwa15="0"
-            }else if(row.cbwa15=="1")
-            {
-               this.form.cbwa15="否"
-                row.cbwa15="1"
+            if (row.cbwa15 == "0") {
+                this.form.cbwa15 = "是"
+                row.cbwa15 = "0"
+            } else if (row.cbwa15 == "1") {
+                this.form.cbwa15 = "否"
+                row.cbwa15 = "1"
             }
             // console.log(row)
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-            this.form= row
+            this.form = row
 
 
         },
@@ -1049,10 +1056,10 @@ export default {
                 userIds.forEach((item) => {
                     req.StoreyRemove(JSON.stringify(item)).then((res) => {
                         if (res.code == "200") {
-                        console.log(res, 123)
-                        this.submitShangpin();
-                        this.getList();
-                        this.$modal.msgSuccess("删除成功");
+                            console.log(res, 123)
+                            this.submitShangpin();
+                            this.getList();
+                            this.$modal.msgSuccess("删除成功");
                         } else {
                             this.$message({ message: res.msg, type: 'error' });
                         }
@@ -1067,29 +1074,29 @@ export default {
 
         },
 
-      /** 普通删除按钮操作 */
-      handleDelete01(row) {
+        /** 普通删除按钮操作 */
+        handleDelete01(row) {
 
-        // row.classifyId = this.form.classifyId;
-        // row.brand = this.form.brand;
-        // row.model = this.form.model;
-        // row.upc = this.form.upc;
-        // row.description = this.form.description;
-        // row.ifEnabled = this.form.ifEnabled;
-        // row.id=this.form.id;
-        // console.log(row, 2222);
-        this.$modal.confirm('是否确认删除仓库为"' + row.cbwa09 + '"的数据项？').then(function () {
-          return StoreyRemove(JSON.stringify(row));
-        }).then((response) => {
-            if (response.code == "200") {
-          this.submitShangpin();
-          this.getList();
-          this.$modal.msgSuccess("删除成功");
-            } else {
-                this.$message({ message: response.msg, type: 'error' });
-            }
-        }).catch(() => { });
-      },
+            // row.classifyId = this.form.classifyId;
+            // row.brand = this.form.brand;
+            // row.model = this.form.model;
+            // row.upc = this.form.upc;
+            // row.description = this.form.description;
+            // row.ifEnabled = this.form.ifEnabled;
+            // row.id=this.form.id;
+            // console.log(row, 2222);
+            this.$modal.confirm('是否确认删除仓库为"' + row.cbwa09 + '"的数据项？').then(function () {
+                return StoreyRemove(JSON.stringify(row));
+            }).then((response) => {
+                if (response.code == "200") {
+                    this.submitShangpin();
+                    this.getList();
+                    this.$modal.msgSuccess("删除成功");
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+            }).catch(() => { });
+        },
         /** 导出按钮操作 */
         handleExport() {
             this.download('/system/classify/SwJsGoodsClassifyimportTemplate', {
@@ -1145,4 +1152,5 @@ export default {
 };
 </script>
 <style src="./WarehouseInfoSkucss/index.css" scoped>
+
 </style>
