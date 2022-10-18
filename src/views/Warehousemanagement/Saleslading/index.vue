@@ -592,7 +592,7 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
 export default {
-  name: "store",
+  name: "Saleslading",
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -1849,6 +1849,9 @@ export default {
             whNameid:this.form2.cbpc10
           },
         });
+        this.form2.cbpc100 = ''
+        this.queryParams.orderNo = ''
+        this.open3 = false
         // location.reload();
       }
 

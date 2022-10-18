@@ -383,7 +383,7 @@ Vue.directive('loadmore', {
   }
 })
 export default {
-  name: "index",
+  name: "addSaleOrder",
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
   props: {
     visible: {
@@ -1010,7 +1010,7 @@ export default {
         province: '',
       })
       this.dataId++
-      console.log(this.tableData);
+      console.log(this.tableData, "123");
     },
     // 删除一行表单
     _ly_delFrom(row) {
