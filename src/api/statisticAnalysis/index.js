@@ -269,4 +269,20 @@ export function auditOutStockEnd(query) {
   })
 }
 
+export function monthlyStockInAndOut(query) {
+  return request({
+    url: '/query/monthlyStockInAndOut',
+    method: 'get',
+    params: query
+  })
+}
+
+
+export function monthlySales(query) {
+  return request({
+    url: '/query/monthlySales',
+    method: 'get',
+    params: query
+  })
+}
 
