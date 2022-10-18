@@ -27,7 +27,7 @@
           <el-input v-model="queryParams.cbig10" class="filter-item"  placeholder="商品SN" />
         </el-form-item>
 
-        <el-form-item style="margin: -5px -10px 1px 1px">
+        <el-form-item style="margin: -15px -10px 1px 1px">
           <el-button v-hasPermi="['query:fnInventorysummaryquery:list']"  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['query:fnInventorysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['query:fnInventorysummaryquery:list']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
