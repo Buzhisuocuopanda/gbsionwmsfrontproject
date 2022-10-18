@@ -67,7 +67,8 @@
   import {formatDate2} from '../../../utils';
   import { getoutStockAdviceList,getSwJsStoreSkuAllList,auditOutStockEnd} from "@/api/statisticAnalysis/index";
   export default {
-    name: "outStockAdviceList",
+    // name: "outStockAdviceList",
+    name: "OutStockAdviceList",
     components: {},
     data() {
       return {

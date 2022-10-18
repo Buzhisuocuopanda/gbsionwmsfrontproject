@@ -1602,6 +1602,6 @@ export default {
   }
 }
 </script>
-<style src="./SalesShipmentcjcss/index.css">
+<style src="./SalesShipmentcjcss/index.css" scoped>
 
 </style>
