@@ -12,10 +12,10 @@
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
 <!--                    </el-form-item>-->
-<!--                    <el-form-item prop="customerName" label="客户名称">
-                        <el-input v-model="queryParams.customerName" id="miaoshu" placeholder="" clearable
+                    <el-form-item prop="customerName" label="sn">
+                        <el-input v-model="queryParams.sn" id="miaoshu" placeholder="" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>-->
+                    </el-form-item>
                     <el-form-item prop="whName" label="仓库">
                         <el-input v-model="queryParams.whName" id="miaoshu" placeholder="" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
