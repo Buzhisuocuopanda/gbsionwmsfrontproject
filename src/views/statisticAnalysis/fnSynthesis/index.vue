@@ -19,27 +19,28 @@
             <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="客户" style="margin-left: 20px;"  class="item-r" >
+        <el-form-item label="客户" style="margin-left: 20px;margin-top: -10px"  class="item-r" >
           <el-select v-model="queryParams.customerId"  style="margin-left: 10px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
           </el-select>
         </el-form-item>
 
 
-        <el-form-item style="margin: 0px -10px 1px 1px;">
+        <el-form-item style="margin: -10px -10px 1px 1px;">
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['query:fnSynthesis:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :header-cell-style="headClasspwfnsyns" :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="430" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
+                 border fit highlight-current-row stripe >
         <el-table-column fixed label="入库时间" align="left" :formatter="formatDate" header-align="center" prop="inWhTime" min-width="100px;" />
         <el-table-column fixed label="出库时间" align="left" prop="outWhTimeMsg"  min-width="100px;"/>
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="180px;"/>
+        <el-table-column  label="生产总订单" align="left" prop="totalOrderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="150px;"/>
         <el-table-column  label="描述" align="left" prop="description" min-width="300px;"/>
-        <el-table-column  label="数量" v-if="false" :formatter="rounding2" align="right" prop="qty" min-width="60px;"/>
+        <el-table-column  label="数量" :formatter="rounding2" align="right" prop="qty" min-width="60px;"/>
         <el-table-column  label="序列号" align="left" prop="sn"  min-width="120px;"/>
         <el-table-column  label="销售单价U" :formatter="rounding3" align="right" prop="uprice" min-width="100px;">
           <!--<template slot-scope="scope">
