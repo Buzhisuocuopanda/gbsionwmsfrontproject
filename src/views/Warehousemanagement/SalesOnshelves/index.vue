@@ -11,11 +11,11 @@
                     <!--<el-form-item prop="cbpc07" label="编号">-->
                         <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                             <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
-                    <!--</el-form-item>-->
-                    <el-form-item prop="customerName" label="客户名称">
+<!--                    </el-form-item>-->
+<!--                    <el-form-item prop="customerName" label="客户名称">
                         <el-input v-model="queryParams.customerName" id="miaoshu" placeholder="" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
-                    </el-form-item>
+                    </el-form-item>-->
                     <el-form-item prop="whName" label="仓库">
                         <el-input v-model="queryParams.whName" id="miaoshu" placeholder="" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
@@ -66,34 +66,34 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%; margin-top: -3%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
-                        sortable  width="160px;"/>
+<!--                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
+                        sortable  width="160px;"/>-->
                     <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
-                        sortable width="110px;">
+                        sortable width="150px;">
                     </el-table-column>
-                    <el-table-column label="客户编号" align="left" key="customerNo" prop="customerNo" sortable width="200px;" />
-                    <el-table-column label="客户名称" align="left" key="customerName" prop="customerName" sortable width="240px;" />
-                    <el-table-column label="客户等级" align="right" key="customerLevel" prop="customerLevel" sortable width="100px;" />
-                    <el-table-column label="联系人" align="left" key="contacts" prop="contacts" sortable width="90px;">
+                    <el-table-column label="品牌" align="left" key="brand" prop="brand" sortable width="150px;" />
+                    <el-table-column label="型号" align="left" key="upc" prop="upc" sortable width="150px;" />
+                    <el-table-column label="描述" align="left" key="detail" prop="detail" sortable width="270px;" />
+                    <el-table-column label="sn" align="left" key="sn" prop="sn" sortable width="150px;">
                     </el-table-column>
-                    <el-table-column label="联系电话" align="left" key="phone" prop="phone" sortable width="110px;">
+                    <el-table-column label="仓库" align="left" key="whName" prop="whName" sortable width="150px;">
                     </el-table-column>
-                    <el-table-column label="销售用户" align="left" key="saleUser" prop="saleUser" sortable width="150px;">
+                    <el-table-column label="库位码" align="left" key="locationName" prop="locationName" sortable width="150px;">
                     </el-table-column>
-                    <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="110px;">
+<!--                    <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="110px;">
                     </el-table-column>
                     <el-table-column label="地址" align="left" key="address" prop="address" sortable width="520px;">
                     </el-table-column>
                     <el-table-column label="检测状态" align="center" key="checkStatusMsg" prop="checkStatusMsg" sortable width="120px;">
                     </el-table-column>
                     <el-table-column label="商品状态" align="center" key="statusMsg" prop="statusMsg" sortable width="120px;">
-                        <!-- <template scope="scope">
+                         <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
                             "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
                             }}
                             </div>
-                        </template> -->
-                    </el-table-column>
+                        </template>
+                    </el-table-column>-->
                     <!-- <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width"> -->
                         <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-edit"
