@@ -3,7 +3,7 @@
 
 
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="" class="demo-ruleForm">
-      <div class="chuangjiancaigous">销售订单</div>
+      <div class="chuangjiancaigous">缺货登记单</div>
       <el-descriptions :column="3" border style="margin-top: 30px">
         <el-descriptions-item label="编号" labelStyle="width: 20%;text-align:center">{{this.formData.orderNo}}
         </el-descriptions-item>
