@@ -332,6 +332,7 @@ Vue.directive('loadmore', {
   }
 })
 export default {
+  name: "SaleGjDistribution",
   components: {
     Goodsone01
 
