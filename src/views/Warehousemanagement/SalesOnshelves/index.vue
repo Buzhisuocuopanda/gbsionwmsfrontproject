@@ -1359,5 +1359,16 @@ export default {
     }
 };
 </script>
-<style src="./SalesOnshelvescss/index.css">
+<style src="./SalesOnshelvescss/index.css" scoped>
+</style>
+<style lang="scss" scoped>
+::v-deep .el-table{
+    height: auto !important;
+}
+::v-deep .el-table__header-wrapper table,::v-deep .el-table__body-wrapper table{
+    width: 100% !important;
+}
+::v-deep .el-table__body-wrapper{
+    height:auto !important;
+}
 </style>
