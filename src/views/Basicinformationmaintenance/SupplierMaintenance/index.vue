@@ -640,10 +640,10 @@ export default {
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
                 // ],
-                cbsa15: [
-                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
-                    { validator: phoneValidator11, trigger: 'blur' }
-                ],
+                // cbsa15: [
+                //     { required: true, message: "联系电话不能为空!", trigger: "blur" },
+                //     { validator: phoneValidator11, trigger: 'blur' }
+                // ],
                 // ,
                 // cbsa10: [
                 //     { required: true, message: "开户行不能为空!", trigger: "blur" }
@@ -661,9 +661,9 @@ export default {
                 // cbsa17: [
                 //     { required: true, message: "发票地址不能为空!", trigger: "blur" }
                 // ],
-                cbsa07: [
-                    { required: true, message: "状态不能为空!", trigger: "blur" }
-                ]
+                // cbsa07: [
+                //     { required: true, message: "状态不能为空!", trigger: "blur" }
+                // ]
             },
 
             //表单校验
@@ -677,11 +677,11 @@ export default {
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
                 // ],
-                cbsa15: [
-                    { required: true, message: "联系电话不能为空!", trigger: "blur" },
-                    { validator: phoneValidator11, trigger: 'blur' }
-                ]
-                ,
+                // cbsa15: [
+                //     { required: true, message: "联系电话不能为空!", trigger: "blur" },
+                //     { validator: phoneValidator11, trigger: 'blur' }
+                // ]
+                // ,
                 // cbsa10: [
                 //     { required: true, message: "开户行不能为空!", trigger: "blur" }
                 // ],
@@ -698,9 +698,9 @@ export default {
                 // cbsa17: [
                 //     { required: true, message: "发票地址不能为空!", trigger: "blur" }
                 // ],
-                cbsa07: [
-                    { required: true, message: "状态不能为空!", trigger: "blur" }
-                ]
+                // cbsa07: [
+                //     { required: true, message: "状态不能为空!", trigger: "blur" }
+                // ]
             },
 
         };
