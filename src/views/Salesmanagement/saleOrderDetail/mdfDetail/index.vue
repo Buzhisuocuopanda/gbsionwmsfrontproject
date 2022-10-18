@@ -382,7 +382,7 @@ Vue.directive('loadmore', {
   }
 })
 export default {
-  name: "index",
+  name: 'mdfSaleOrder',
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
   props: {
     visible: {

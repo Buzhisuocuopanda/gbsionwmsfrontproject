@@ -451,7 +451,7 @@ export default {
         // this.form.type = this.dict[0].label;
         // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
         // console.log(this.userList,123456789);
-    
+
 
         console.log(this.form.cbpc16, 123456);
 
@@ -586,7 +586,9 @@ export default {
         /** 创建操作 */
         handleChuangJiangone: function (row) {
             // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-ckpdmxbfh/role/");
+            // this.$router.push("/system/user-ckpdmxbfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1)
         },
 
 
@@ -603,4 +605,5 @@ export default {
 };
 </script>
 <style src="./WarehouseInventorycjcss/index.css">
+
 </style>

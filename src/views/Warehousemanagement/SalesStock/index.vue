@@ -128,7 +128,7 @@
 
 
        <!--订单创建-->
-        <el-dialog :visible.sync="open3">
+        <el-dialog :visible.sync="open3" @close="close">
             <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
                 <el-col :span="12">
                     <el-input
@@ -291,7 +291,7 @@ import supplierMaintenance from "@/components/SupplierMaintenance";
 
 
 export default {
-    name: "store",
+    name: "SalesStock",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect, kuweixxweihu, supplierMaintenance },
     data() {
@@ -684,6 +684,10 @@ export default {
         this.chen();
     },
     methods: {
+        // 弹框关闭
+        close(){
+            this.queryParams.orderNo = ''
+        },
         handleQuerys(saleNo){
             console.log(saleNo)
             let obj = {
@@ -1343,6 +1347,7 @@ export default {
                         //  JSON.stringify(this.userList)
                 }
             })
+            this.open3 = false
             // location.reload();
         },
         // /** 提交按钮 */

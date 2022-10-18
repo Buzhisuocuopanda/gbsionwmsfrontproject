@@ -2,90 +2,86 @@
   <!--缺货登记-->
   <div class="app-container">
     <div class="filter-container outofstock">
-      <el-form :inline="true" label-width="70px"  >
+      <el-form :inline="true" label-width="70px">
 
-          <el-form-item>
-            <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期" value-format="yyyy-MM-dd HH:mm:ss"
-                            :default-time="'00:00:00'">
-            </el-date-picker>
-            ~
-            <el-date-picker v-model="dateRange.endTime" type="datetime" placeholder="选择结束日期" value-format="yyyy-MM-dd HH:mm:ss"
-                            :default-time="'23:59:59'">
-            </el-date-picker>
-          </el-form-item>
-<!--          <el-form-item>-->
-<!--            <el-button type="primary" @click="onSearch()">查询</el-button>-->
-<!--          </el-form-item>-->
-          <el-form-item label="编号"   class="item-r" >
-            <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />
-          </el-form-item>
+        <el-form-item>
+          <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期"
+            value-format="yyyy-MM-dd HH:mm:ss" :default-time="'00:00:00'">
+          </el-date-picker>
+          ~
+          <el-date-picker v-model="dateRange.endTime" type="datetime" placeholder="选择结束日期"
+            value-format="yyyy-MM-dd HH:mm:ss" :default-time="'23:59:59'">
+          </el-date-picker>
+        </el-form-item>
+        <!--          <el-form-item>-->
+        <!--            <el-button type="primary" @click="onSearch()">查询</el-button>-->
+        <!--          </el-form-item>-->
+        <el-form-item label="编号" class="item-r">
+          <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
+        </el-form-item>
 
-<!--        <el-form-item label="订单号"   class="item-r" >-->
-<!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
-<!--        </el-form-item>-->
+        <!--        <el-form-item label="订单号"   class="item-r" >-->
+        <!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
+        <!--        </el-form-item>-->
 
 
 
 
         <el-form-item style="margin: 0px -10px 1px 1px">
-          <el-button v-hasPermi="['system:outofstockregistrationform:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
-          <el-button v-hasPermi="['system:outofstockregistrationform:add']" class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
+          <el-button v-hasPermi="['system:outofstockregistrationform:list']" class="filter-item" type="primary"
+            icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
+          <el-button v-hasPermi="['system:outofstockregistrationform:add']" class="filter-item" type="primary"
+            style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
-            <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
-<!--          <el-upload-->
-<!--          <el-table-->
-<!--            ref="multipleTable"-->
-<!--            :data="tableData"-->
-<!--            tooltip-effect="dark"-->
-<!--            style="width: 100%"-->
-<!--            border-->
-<!--            @selection-change="handleSelectionChange"-->
-<!--          >-->
-<!--            <el-button type="primary" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >Excel导入</el-button>-->
-<!--          </el-upload>-->
-<!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
-<!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
+          <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
+          <!--          <el-upload-->
+          <!--          <el-table-->
+          <!--            ref="multipleTable"-->
+          <!--            :data="tableData"-->
+          <!--            tooltip-effect="dark"-->
+          <!--            style="width: 100%"-->
+          <!--            border-->
+          <!--            @selection-change="handleSelectionChange"-->
+          <!--          >-->
+          <!--            <el-button type="primary" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >Excel导入</el-button>-->
+          <!--          </el-upload>-->
+          <!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
+          <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" :data="orderList" element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row stripe >
-        <el-table-column fixed label="编号" align="left" prop="cboe07" min-width="60px;"/>
-        <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="180px;"/>
-        <el-table-column  label="日期" align="left" prop="cboe08" min-width="50px;" :formatter="formatDate" />
-        <el-table-column  label="销售人员" align="left" prop="caua15" min-width="70px;" />
-        <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="50px;" :formatter="formatDate" />
-<!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
-<!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
-<!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
-<!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
-<!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作"  min-width="100px;">
-          <template slot-scope="scope" >
-            <el-button class="caozuoxiangqengOut" style="margin-left:8px; margin-top: 2px" icon="el-icon-edit"  size="mini"
-                      type="text" @click="mdfDetail(scope.row)"
-                      v-hasPermi="['system:outofstockregistrationform:edit']"
-            >修改</el-button>
+      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" :data="orderList"
+        element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row stripe>
+        <el-table-column fixed label="编号" align="left" prop="cboe07" min-width="60px;" />
+        <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="180px;" />
+        <el-table-column label="日期" align="left" prop="cboe08" min-width="50px;" :formatter="formatDate" />
+        <el-table-column label="销售人员" align="left" prop="caua15" min-width="70px;" />
+        <el-table-column label="制单时间" align="left" prop="cboe02" min-width="50px;" :formatter="formatDate" />
+        <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
+        <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
+        <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
+        <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
+        <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
+        <el-table-column label="操作" min-width="100px;">
+          <template slot-scope="scope">
+            <el-button class="caozuoxiangqengOut" style="margin-left:8px; margin-top: 2px" icon="el-icon-edit"
+              size="mini" type="text" @click="mdfDetail(scope.row)"
+              v-hasPermi="['system:outofstockregistrationform:edit']">修改</el-button>
 
-            <el-button class="caozuoxiangqengOut" style="margin-left:8px; margin-top: 2px" icon="el-icon-delete"  size="mini"
-                      v-hasPermi="['system:outofstockregistrationform:remove']"
-                      type="text"  @click="delTotalOrder(scope.row)" >删除</el-button>
-            <el-button class="caozuoxiangqengOut" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini"
-                      type="text" v-hasPermi="['system:outofstockregistrationform:detail']"
-                      @click="showDetail(scope.row)">详情</el-button>
+            <el-button class="caozuoxiangqengOut" style="margin-left:8px; margin-top: 2px" icon="el-icon-delete"
+              size="mini" v-hasPermi="['system:outofstockregistrationform:remove']" type="text"
+              @click="delTotalOrder(scope.row)">删除</el-button>
+            <el-button class="caozuoxiangqengOut" style="margin-left:8px; margin-top: 2px" icon="el-icon-share"
+              size="mini" type="text" v-hasPermi="['system:outofstockregistrationform:detail']"
+              @click="showDetail(scope.row)">详情</el-button>
 
           </template>
 
         </el-table-column>
       </el-table>
-      <el-pagination
-        :background="true"
-        :page-sizes="[10, 15, 20, 50, 500]"
-        :total="totalItems"
-        :current-page.sync="listQuery.pageNum"
-        :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="onSearch"
-        @current-change="onSearch"/>
+      <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
+        :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
+        style="padding-top:40px; padding-left: 20px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        @size-change="onSearch" @current-change="onSearch" />
 
 
 
@@ -93,48 +89,42 @@
     <!-- 创建 -->
     <el-dialog :title="title" :visible.sync="open2" append-to-body style="width:70%;margin-left:15%;">
       <div style="margin-top:-8%">创建售后单信息</div>
-      <hr/>
-      <el-form ref="form2" :model="form2"  label-width="20%" class="chuangjianformstore">
+      <hr />
+      <el-form ref="form2" :model="form2" label-width="20%" class="chuangjianformstore">
 
         <el-row style="margin-top:3%; ">
           <el-col style="margin-left:7%;">
             <el-form-item label="销售订单号:" prop="saleOrderNo">
-              <el-input v-model="form2.saleOrderNo" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.saleOrderNo" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="客户:" prop="customerId">
-              <el-input v-model="form2.customerId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.customerId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="商品id:" prop="goodsId">
-              <el-input v-model="form2.goodsId" placeholder="" maxlength="30"
-                        style="width:77%;" />
+              <el-input v-model="form2.goodsId" placeholder="" maxlength="30" style="width:77%;" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="问题原因:" prop="question">
-              <el-input v-model="form2.question" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.question" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="SN:" prop="sn">
-              <el-input v-model="form2.sn" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.sn" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="供料单位:" prop="suplierId">
-              <el-input v-model="form2.suplierId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.suplierId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -142,15 +132,13 @@
           <el-col style="margin-left:7%;">
             <el-form-item label="处理结果:" prop="answerMsg">
 
-                <el-input v-model="form2.answerMsg" placeholder="" style="width:77%;"
-                          maxlength="30" />
+              <el-input v-model="form2.answerMsg" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="进度:" prop="process">
 
-              <el-input v-model="form2.process" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.process" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -164,48 +152,42 @@
 
     <el-dialog :title="title1" :visible.sync="open" append-to-body style="width:70%;margin-left:15%;">
       <div style="margin-top:-8%">修改售后单信息</div>
-      <hr/>
+      <hr />
       <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">
 
         <el-row style="margin-top:3%; ">
           <el-col style="margin-left:7%;">
             <el-form-item label="销售订单号:" prop="saleOrderNo">
-              <el-input v-model="form.saleOrderNo" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.saleOrderNo" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="客户:" prop="customerId">
-              <el-input v-model="form.customerId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.customerId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="商品id:" prop="goodsId">
-              <el-input v-model="form.goodsId" placeholder="" maxlength="30"
-                        style="width:77%;" />
+              <el-input v-model="form.goodsId" placeholder="" maxlength="30" style="width:77%;" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="问题原因:" prop="question">
-              <el-input v-model="form.question" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.question" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="SN:" prop="sn">
-              <el-input v-model="form.sn" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.sn" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="供料单位:" prop="suplierId">
-              <el-input v-model="form.suplierId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.suplierId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -213,15 +195,13 @@
           <el-col style="margin-left:7%;">
             <el-form-item label="处理结果:" prop="answerMsg">
 
-              <el-input v-model="form.answerMsg" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.answerMsg" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="进度:" prop="process">
 
-              <el-input v-model="form.process" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.process" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -253,7 +233,7 @@ export default {
         sn: "",
         suplierId: "",
         answerMsg: "",
-        process:""
+        process: ""
       },
       form2: {
         customerId: "",
@@ -263,7 +243,7 @@ export default {
         sn: "",
         suplierId: "",
         answerMsg: "",
-        process:""
+        process: ""
       },
       title: "",
 
@@ -281,8 +261,8 @@ export default {
         name: "",
       },
       tableData: [],
-      loadingOut:false,
-      loadingState:false,
+      loadingOut: false,
+      loadingState: false,
       listQuery: {
         pageNum: 1,
         pageSize: 15
@@ -319,16 +299,16 @@ export default {
         question: [
           { required: true, message: "问题原因不能为空!", trigger: "blur" }
         ],
-        sn:[
-          { required: true, message: "SN不能为空!", trigger:  'change'  }
+        sn: [
+          { required: true, message: "SN不能为空!", trigger: 'change' }
         ],
-        suplierId:[{
+        suplierId: [{
           required: true, message: "供料单位不能为空!", trigger: "blur"
         }],
         // cbla13:[{
         //     required: true, message: "备注不能为空!", trigger: "blur"
         // }],
-        answerMsg:[{
+        answerMsg: [{
           required: true, message: "处理结果不能为空!", trigger: "blur"
         }]
       },
@@ -404,42 +384,42 @@ export default {
             picker.$emit('pick', [start, end]);
           }
         },
-          {
-            text: '本季度',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '上季度',
-            onClick(picker) {
-              var oDate = new Date()
-              let year = oDate.getFullYear();
-              let month = oDate.getMonth() + 1;
-              let n = Math.ceil(month / 3); // 季度，上一个季度则-1
-              let prevN = n - 1;
-              if (n == 1) {
-                year--
-                prevN = 4;
-              }
-              month = prevN * 3; // 月份
-              const start = new Date(year, month - 3, 1);
-              const end = new Date(year, month, 0);
-              picker.$emit('pick', [start, end]);
-            }
-          },
-          {
-            text: '本年',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setMonth(0);
-              start.setDate(1);
-              picker.$emit('pick', [start, end]);
-            }
+        {
+          text: '本季度',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
           }
+        }, {
+          text: '上季度',
+          onClick(picker) {
+            var oDate = new Date()
+            let year = oDate.getFullYear();
+            let month = oDate.getMonth() + 1;
+            let n = Math.ceil(month / 3); // 季度，上一个季度则-1
+            let prevN = n - 1;
+            if (n == 1) {
+              year--
+              prevN = 4;
+            }
+            month = prevN * 3; // 月份
+            const start = new Date(year, month - 3, 1);
+            const end = new Date(year, month, 0);
+            picker.$emit('pick', [start, end]);
+          }
+        },
+        {
+          text: '本年',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setMonth(0);
+            start.setDate(1);
+            picker.$emit('pick', [start, end]);
+          }
+        }
         ]
       },
 
@@ -455,11 +435,11 @@ export default {
   created() {
     //仓库明细初始化
     // this.getList();
-    },
+  },
   methods: {
 
-    delTotalOrder(row){
-      this.$confirm('确认要删除'+row.orderNo+"售后单？", '确认操作', {
+    delTotalOrder(row) {
+      this.$confirm('确认要删除' + row.orderNo + "售后单？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',
@@ -474,7 +454,7 @@ export default {
         }
         delSales(param).then(response => {
           // console.log(response)
-          if ( response.code === 200) {
+          if (response.code === 200) {
             this.onSearch()
             this.$notify.success("删除成功")
 
@@ -489,16 +469,16 @@ export default {
       // this.formData=row
       // this.showmdfDialog = true
 
-      this.$router.push({path: "/Outofstockregistrationmd/Outofstockregistrationmd", query: {id: row.id}})
+      this.$router.push({ path: "/Outofstockregistrationmd/Outofstockregistrationmd", query: { id: row.id } })
 
     },
     createForm() {
       // this.showaddDialog = true
-      this.$router.push({path: "/Outofstockregistrationadd/Outofstockregistrationadd", query: {id: 1}})
+      this.$router.push({ path: "/Outofstockregistrationadd/Outofstockregistrationadd", query: { id: 1 } })
 
     },
     showDetail(row) {
-      this.$router.push({path: "/Outofstockregistrationmd/Outofstockregistrationdetail", query: {id: row.id}})
+      this.$router.push({ path: "/Outofstockregistrationmd/Outofstockregistrationdetail", query: { id: row.id } })
 
     },
     cancel() {
@@ -509,8 +489,8 @@ export default {
       this.open2 = false;
       this.reset01();
     },
-    onSubmit() {},
-    handleSelectionChange() {},
+    onSubmit() { },
+    handleSelectionChange() { },
     formatStateType(row) {
       if (row != null) {
         if (row.status == 0) {
@@ -561,12 +541,12 @@ export default {
       // row.id=this.form.id;
       // console.log(row, 2222);
       this.$modal.confirm('是否确认删除订单号为"' + row.saleOrderNo + '"的数据项？').then(function () {
-        return  delSales(JSON.stringify(row));
+        return delSales(JSON.stringify(row));
       }).then((response) => {
         this.submitShangpin();
         this.onSearch();
         this.$modal.msgSuccess("删除成功");
-      //  this.onSearch();
+        //  this.onSearch();
 
       }).catch(() => { });
     },
@@ -679,8 +659,8 @@ export default {
     },
     /** 修改详情按钮操作**/
     handlexiangqengSelect(row) {
-      console.log(this.form,111)
-      console.log(row,222)
+      console.log(this.form, 111)
+      console.log(row, 222)
       // console.log(row)
       // this.getList();
       this.open = true;
@@ -689,8 +669,8 @@ export default {
       // this.form.cbpc100=this.form.cbwa09
       // this.
       // console.log(this.form)
-      this.form=row
-      console.log(this.form,1110)
+      this.form = row
+      console.log(this.form, 1110)
     },
   },
 
@@ -699,11 +679,12 @@ export default {
 </script>
 
 <style scoped>
-.outofstock  .el-form--inline {
-    height: 65px !important;
-  }
+.outofstock .el-form--inline {
+  height: 65px !important;
+}
+
 .caozuoxiangqengOut {
-      border: 0 !important;
-      padding:0 !important;
-    }
+  border: 0 !important;
+  padding: 0 !important;
+}
 </style>

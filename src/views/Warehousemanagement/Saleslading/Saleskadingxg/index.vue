@@ -182,6 +182,7 @@ import Goodsone01 from "@/components/Goodsone";
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
 export default {
+  name:'AuthUser',
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",

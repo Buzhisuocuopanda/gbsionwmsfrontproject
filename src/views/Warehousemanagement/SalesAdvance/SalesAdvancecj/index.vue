@@ -239,7 +239,7 @@ import SalesBooking from "@/components/SalesBooking";
 import salerman from "@/components/salerman";
 
 export default {
-  name: "store",
+  name: "AuthUser",
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",

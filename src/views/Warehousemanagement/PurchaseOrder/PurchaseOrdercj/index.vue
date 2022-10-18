@@ -292,7 +292,7 @@ import CustomerMainten from "@/components/CustomerMaintenance";
 import salerman from "@/components/salerman";
 
 export default {
-  name: "store",
+  name: "AuthUser",
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
   props: {
     visible: {
@@ -760,6 +760,11 @@ export default {
       console.log(this.tableData, 333)
       PurchaseinboundAdds(JSON.stringify(this.tableData)).then(response => {
         if (response.code == "200") {
+          this.$message({
+            message: '添加成功',
+            type: 'success',
+            style: 'color:red;!important'
+          });
           this.tableData = []
           this.form2 = {
             cbpc07: "",
@@ -1053,11 +1058,7 @@ export default {
         if (item) {
           PurchaseinboundAdd(this.form2).then(response => {
             if (response.code == "200") {
-              this.$message({
-                message: '添加成功',
-                type: 'success',
-                style: 'color:red;!important'
-              });
+              
               this.submitShangpin();
               this.open2 = false;
               this.reset01()
