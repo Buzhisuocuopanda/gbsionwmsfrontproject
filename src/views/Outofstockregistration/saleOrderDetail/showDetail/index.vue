@@ -8,7 +8,7 @@
         <el-descriptions-item label="编号" labelStyle="width: 20%;text-align:center">{{this.formData.orderNo}}
         </el-descriptions-item>
         <!--        <el-descriptions-item label="客户单号"  labelStyle	="width: 20%;text-align:center">{{this.formData.customerNo}}</el-descriptions-item>-->
-        <el-descriptions-item label="日期" labelStyle="width: 20%;text-align:center">{{this.formData.orderDate }}
+        <el-descriptions-item label="日期" labelStyle="width: 20%;text-align:center">{{formatTime(this.formData.orderDate) }}
         </el-descriptions-item>
         <el-descriptions-item label="客户" labelStyle="width: 20%;text-align:center">{{this.formData.customerName}}
         </el-descriptions-item>
@@ -504,6 +504,7 @@ import ListLists from "@/components/ListMaintenance";
 import { listSales, getSales, delSales, addSales, updateSales, saleOderDetailss } from "@/api/Outofstockregistration/sales";
 
 import Vue from 'vue';
+import {formatDate2} from "../../../../utils";
 Vue.directive('loadmore', {
   bind(el, binding) {
 
@@ -1028,6 +1029,9 @@ export default {
       } else if (columnIndex < 3) {
         return [0, 0];
       }
+    },
+    formatTime(time){
+      return formatDate2(time);
     },
     // 点击右上角关闭弹窗
     _ly_closeDialog(done) {

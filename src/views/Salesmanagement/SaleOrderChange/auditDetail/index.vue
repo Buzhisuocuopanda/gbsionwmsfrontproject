@@ -917,7 +917,7 @@ export default {
     },
   },
   created() {
-
+    console.log("----------4564646456-------------")
 
     // this.getConfigKey("sys.user.initPassword").then(response => {
     //   // this.initPassword = response.msg;

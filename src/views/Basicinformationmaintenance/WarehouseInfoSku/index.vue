@@ -71,6 +71,12 @@
                             </div>
                         </template> -->
                     </el-table-column>
+                  <el-table-column label="是否分配库存" width="150px;" align="center" key="allocationFlag" prop="allocationFlag" sortable>
+                     <template scope="scope">
+                        <div>{{ scope.row.allocationFlag == 1 ? "启用" : scope.row.cbwa15 == 2 ? "禁用" :null }}
+                        </div>
+                    </template>
+                  </el-table-column>
                     <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
@@ -826,7 +832,7 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        if (response.code == "200") {   
+                        if (response.code == "200") {
                         this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                         // this.getTreeselect();
                         // this.submitShangpin();
@@ -836,7 +842,7 @@ export default {
                         this.reset01();
                         } else {
                             this.$message({ message: response.msg, type: 'error' });
-                        } 
+                        }
                         console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
@@ -901,7 +907,7 @@ export default {
                     // this.manageMode = response.manageMode;
                     // this.ifEnabled = response.ifEnabled;
                     // this.sysUserId = response.sysUserId;
-                if (response.code == "200") { 
+                if (response.code == "200") {
                     console.log(this.form, 789)
                     // this.submitShangpin();
                     this.getList();
@@ -1042,14 +1048,14 @@ export default {
             this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idsss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.StoreyRemove(JSON.stringify(item)).then((res) => {
-                        if (res.code == "200") { 
+                        if (res.code == "200") {
                         console.log(res, 123)
                         this.submitShangpin();
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
                         } else {
                             this.$message({ message: res.msg, type: 'error' });
-                        } 
+                        }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1075,13 +1081,13 @@ export default {
         this.$modal.confirm('是否确认删除仓库为"' + row.cbwa09 + '"的数据项？').then(function () {
           return StoreyRemove(JSON.stringify(row));
         }).then((response) => {
-            if (response.code == "200") { 
+            if (response.code == "200") {
           this.submitShangpin();
           this.getList();
           this.$modal.msgSuccess("删除成功");
             } else {
                 this.$message({ message: response.msg, type: 'error' });
-            }  
+            }
         }).catch(() => { });
       },
         /** 导出按钮操作 */
