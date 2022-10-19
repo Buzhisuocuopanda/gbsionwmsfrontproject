@@ -36,10 +36,14 @@
       <el-table-column prop="cbpb08" label="描述" sortable width="360px" align="left"></el-table-column>
       <el-table-column width="100" prop="cbba09" label="订单数量" :formatter="rounding" sortable align="right"></el-table-column>
       <el-table-column width="115" prop="cbba11" label="已发货数量" :formatter="rounding" sortable align="right"></el-table-column>
-      <el-table-column width="115" prop="cbba13" label="已生产数量" :formatter="rounding" sortable align="right"></el-table-column>
+      <el-table-column width="115" prop="cbba13" label="已生产数量" :formatter="rounding" sortable align="right">
+        <template slot-scope="scope">
+          <div>{{parseFloat(scope.row.cbba11+scope.row.cbba13).toFixed(2)}}</div>
+        </template>
+      </el-table-column>
       <el-table-column width="100"  label="缺货数量"  sortable align="center">
         <template slot-scope="scope">
-          <div>{{parseFloat(scope.row.cbba09-scope.row.cbba13).toFixed(2)}}</div>
+          <div>{{parseFloat(scope.row.cbba09-scope.row.cbba13-scope.row.cbba11).toFixed(2)}}</div>
         </template>
       </el-table-column>
       <el-table-column prop="cbba12" label="状态" width="80" :formatter="formatStateType" sortable align="center"></el-table-column>
