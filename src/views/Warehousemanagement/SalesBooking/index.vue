@@ -72,8 +72,10 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
-                        prop="orderNo" sortable />
+                    <el-table-column label="编号" width="160px;" align="left" key="ponumber"
+                        prop="ponumber" sortable />
+                    <el-table-column label="订单编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
+                    prop="orderNo" sortable />
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
                         :formatter="formatDate" sortable>
                     </el-table-column>
