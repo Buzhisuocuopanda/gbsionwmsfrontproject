@@ -33,6 +33,14 @@
             </el-select>
           </el-form-item>
         </el-col>
+        <el-col :span="8">
+          <el-form-item label="结算货币:" prop="saleUserId"><!--v-model="formData.saleUserId" -->
+            <el-select  filterable clearable placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
         <!--        <el-col :span="8">
           <el-form-item label="客户单号:" prop="customerNo">
             <el-input type="text" v-model="formData.customerNo" style="width: 70%;" />
@@ -228,7 +236,7 @@
               <sapn>
                 <el-select @change="goodsOnChange(scope.row)" v-loadmore="loadMore" v-model="scope.row.goodsId"
                   filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
-                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  <el-option @click="optionClick(scope.row,item)" v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
               </sapn>
@@ -236,14 +244,29 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
+          <el-table-column label="标准单价" prop="standardprice" width="150" >
+            <template slot-scope="scope">
+              <el-input disabled   v-model="scope.row.standardprice"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column  label="本次单价" prop="thisprice" width="150" >
+            <template slot-scope="scope">
+              <el-input @input="sum2(scope.row)" v-model="scope.row.thisprice"></el-input>
+            </template>
+          </el-table-column>
           <el-table-column prop="qty" label="数量" width="150">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.qty" placeholder="数量" @input="sum(scope.row)"
+                <el-input  v-model="scope.row.qty" placeholder="数量" @input="sum(scope.row)"
                   oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
                 <!--                @change="goodsQtyChange(scope.row)"-->
                 <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
               </sapn>
+            </template>
+          </el-table-column>
+          <el-table-column label="金额" prop="monery" width="150" >
+            <template slot-scope="scope">
+              <el-input disabled  v-model="scope.row.monery"></el-input>
             </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
@@ -835,7 +858,6 @@ export default {
       options: [],
       saleUseroptions: [],
       customeroptions: [],
-      saleUseroptions: [],
 
       //选择集合
       currencyoptions: [
@@ -843,7 +865,7 @@ export default {
           value: '6',
           label: 'CNY'
         }, {
-          value: '7',
+          value: '5',
           label: 'USD'
         }
       ],
@@ -1218,6 +1240,7 @@ export default {
         if (response.code == "200") {
           this.listQuery.pageNum = this.listQuery.pageNum + 1
           // this.options.push.apply(this.options,response.data.rows)
+          console.log(response.data.rows,1018);
           this.options.push(...response.data.rows)
         } else {
           // this.$message.error(response.msg)
@@ -1307,7 +1330,24 @@ export default {
         this.$message.error("数量不能超过可用库存数量")
       }
     },
+    optionClick(row,item){
+      if (this.formData.customerId == null) {
+        this.$message.error("请先选择客户")
+        return;
+      }
 
+      //检查goodsid是否存在
+      if (this.checkRepeat(this.tableData, row.goodsId)) {
+        row.goodsId = null
+        row.normalPrice = 0
+        row.canUseSku = 0
+        this.$message.error("不能添加重复商品")
+
+        return
+      }
+      row.standardprice = item.standardprice;
+
+    },
     goodsOnChange(row) {
       // console.log(this.formData.customer)
       // console.log("val",val)
@@ -1426,6 +1466,7 @@ export default {
 
       swJsGoodslistBySelect(param).then(response => {
         if (response.code == "200") {
+          console.log(response.data.rows,1018);
           this.options = response.data.rows
         } else {
           // this.$message.error(response.msg)
@@ -1435,14 +1476,14 @@ export default {
 
     /*    /!** 新增按钮操作 *!/
        handleAdd() {
- 
+
          this.$refs["form2"].validate((item) => {
            if (item) {
              addSales(this.form2).then(response => {
                // console.log(this.from.parent_id, 123456789);
                // this.classifyId = response.posts;
                // console.log(response.posts,123456);
- 
+
                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
                // this.getTreeselect();
                // this.submitShangpin();
@@ -1450,7 +1491,7 @@ export default {
                this.onSearch();
                this.open2 = false;
                this.reset01();
- 
+
                // console.log(this.form2.ifEnabled, 123456);
              });
            } else {
@@ -1459,7 +1500,7 @@ export default {
          })
          // if (this.form2.swJsStoreId != undefined || this.form2.locationNum != undefined || this.form2.sort != undefined) {
          //     // console.log(this.form.id, 123456);
- 
+
          //     addUserSysStoreku(this.form2).then(response => {
          //         // console.log(this.from.parent_id, 123456789);
          //         // this.classifyId = response.posts;
@@ -1472,18 +1513,18 @@ export default {
          //         this.getList();
          //         this.open2 = false;
          //         this.reset01();
- 
+
          //         console.log(this.form2.ifEnabled, 123456);
          //     });
          // } else {
          //     this.$message.error('输入的内容不能为空呀');
          // }
- 
+
          // this.reset();
          // } else {
          //   this.$message.error('错了哦，商品名称没有填呢');
          // }
- 
+
        }, */
 
     /** 新增按钮操作 */
@@ -1558,8 +1599,21 @@ export default {
       if (row.qty != null && row.currentPrice != null) {
         row.totalPrice = row.qty * row.currentPrice;
       }
+      this.sum2(row);
     },
-
+    sum2(row) {
+      if (row.qty != null && row.thisprice != null) {
+        row.monery = parseFloat(row.qty * row.thisprice).toFixed(2) ;
+      }else {
+        row.monery = undefined;
+      }
+    },
+  },
+  rounding(row, column) {
+    if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+      return '0.00';
+    }
+    return parseFloat(row[column.property]).toFixed(2)
   },
   mounted() {
     // 初始化表单数据，至少有一行表单数据

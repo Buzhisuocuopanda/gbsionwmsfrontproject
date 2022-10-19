@@ -85,7 +85,7 @@ import {formatDate2} from "../../../utils";
 //
 // import { formatDate } from '../../../utils';
 export default {
-  name: "salesAnalysis",
+  name: "SalesAnalysis",
   data() {
     return {
       //下拉列表数据品牌

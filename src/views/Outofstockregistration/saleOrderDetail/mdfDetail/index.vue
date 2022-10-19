@@ -370,6 +370,15 @@
             </el-select>
           </el-form-item>
         </el-col>
+
+        <el-col :span="8">
+          <el-form-item label="结算货币:" prop="saleUserId"><!--v-model="formData.saleUserId" -->
+            <el-select  filterable clearable placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
         <!--        <el-col :span="8">
                   <el-form-item label="客户单号:" prop="customerNo">
                     <el-input type="text" v-model="formData.customerNo" style="width: 70%;" />
@@ -1171,7 +1180,7 @@ export default {
           value: 6,
           label: 'CNY'
         }, {
-          value: 7,
+          value: 5,
           label: 'USD'
         }
       ],

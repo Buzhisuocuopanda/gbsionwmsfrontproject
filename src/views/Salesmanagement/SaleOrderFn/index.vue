@@ -266,6 +266,7 @@ import { getToken } from '@/utils/auth'
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
 export default {
+  name: "SaleOrderFn",
   components: {
     Goodsone01
 

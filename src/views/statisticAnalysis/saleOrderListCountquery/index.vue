@@ -115,7 +115,7 @@ Vue.directive('loadmore', {
 })
 export default {
   components: {},
-  name: "inventorysmssmary",
+  name: "SaleOrderListCountquery",
   data() {
     return {
 

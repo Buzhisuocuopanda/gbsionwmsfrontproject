@@ -85,6 +85,7 @@
 import { Unfinisheddocuments } from "@/api/Approval";
 
 export default {
+  name: "UnfinishedDocuments",
   components: {},
   data() {
     return {

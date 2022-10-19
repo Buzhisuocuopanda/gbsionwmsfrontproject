@@ -471,7 +471,7 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import ListMaintenance from "@/components/ListMaintenancePp";
 
 export default {
-    name: "User",
+    name: "Goods",
     dicts: ['sys_normal_disable', 'sys_user_sex', 'sw_js_goods_if_enabled'],
     components: { Treeselect, ListMaintenance },
     data() {

@@ -1932,4 +1932,4 @@ export default {
   },
 };
 </script>
-<style src="./SalesShipmentcss/index.css"></style>
+<style src="./SalesShipmentcss/index.css" scoped></style>

@@ -131,7 +131,7 @@ Vue.directive('loadmore', {
 })
 export default {
   components: {},
-  name: "inventorySummary",
+  name: "InventorySummary",
   data() {
     return {
 

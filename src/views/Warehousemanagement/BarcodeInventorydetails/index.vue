@@ -187,7 +187,7 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
 export default {
-    name: "store",
+    name: "BarcodeInventorydetails",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect, kuweixxweihu, supplierMaintenance },
     data() {

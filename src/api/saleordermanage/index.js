@@ -323,3 +323,10 @@ export function goodsShopList(data) {
     params: data
   })
 }
+export function delgoodsShop(data) {
+  return request({
+    url: '/sale/delgoodsShop',
+    method: 'post',
+    data: data
+  })
+}

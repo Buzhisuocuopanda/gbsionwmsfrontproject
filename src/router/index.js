@@ -207,7 +207,7 @@ export const dynamicRoutes = [{
       component: () => import('@/views/Warehousemanagement/SalesStock/SalesStockxg/index'),
 
       meta: {
-        title: '销售退货修改',
+        title: '销售退库单修改',
         activeMenu: '/Warehousemanagement/SalesStock'
       }
     }]

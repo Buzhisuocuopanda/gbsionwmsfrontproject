@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import { parseStrEmpty } from "@/utils/ruoyi";
 // 查询审批记录
-export function Approvalrecords(query) {
+export function records(query) {
   return request({
     url: '/system/Approval/Approvalrecords',
     method: 'get',

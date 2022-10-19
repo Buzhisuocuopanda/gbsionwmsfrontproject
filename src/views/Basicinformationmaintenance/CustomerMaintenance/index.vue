@@ -10,21 +10,23 @@
                         <el-input v-model="queryParams.cbca08" id="miaoshu" placeholder="请输入客户名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                     <el-form-item prop="cbca14" label="联系人">
-                            <!-- <el-select v-model="queryParams.cbca24" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
+                    <el-form-item prop="cbca14" label="联系人">
+                        <!-- <el-select v-model="queryParams.cbca24" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
                                     <el-option v-for="item in fapiaoleix" :key="item.value" :label="item.label"
                                         :value="item.label">
                                     </el-option>
                             </el-select> -->
-                            <el-input v-model="queryParams.cbca14" id="miaoshu" placeholder="请输入联系人" clearable style="width: 240px;"
-                                @keyup.enter.native="handleQuery" />
+                        <el-input v-model="queryParams.cbca14" id="miaoshu" placeholder="请输入联系人" clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:customer:list']" @click="handleQuery">查询</el-button>
-                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:customer:add']" @click="handlechuangjiang">创建</el-button>
+                        <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:customer:list']"
+                            @click="handleQuery">查询</el-button>
+                        <el-button size="mini" class="biaoto-buttonchuangjian" v-hasPermi="['system:customer:add']"
+                            @click="handlechuangjiang">创建</el-button>
 
-                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" v-hasPermi="['system:customer:remove']" :disabled="multiple" @click="handleDelete"
-                            >删除
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu"
+                            v-hasPermi="['system:customer:remove']" :disabled="multiple" @click="handleDelete">删除
                         </el-button>
 
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -34,13 +36,13 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassCMC" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
+                <el-table border :header-cell-style="headClassCMC" :row-style="{height: '3px'}"
+                    :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%; margin-left: -1.5%;" class="tong"
                     @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="客户名称" align="left" key="cbca08" prop="cbca08" fixed width="300"
-                        sortable />
+                    <el-table-column label="客户名称" align="left" key="cbca08" prop="cbca08" fixed width="300" sortable />
                     <!-- <el-table-column label="客户等级" align="left" key="cbca28" prop="cbca28" width="190" sortable /> -->
                     <el-table-column label="客户地址" align="left" key="cbca15" prop="cbca15" width="550" sortable />
                     <el-table-column label="联系人" align="left" key="cbca14" prop="cbca14" width="120" sortable>
@@ -53,15 +55,17 @@
                         </template> -->
                     </el-table-column>
                     <el-table-column label="联系电话" align="left" key="cbca16" prop="cbca16" width="170" sortable />
-                    <el-table-column label="状态"  align="center" key="cbca07" prop="cbca07" width="80" sortable />
+                    <el-table-column label="状态" align="center" key="cbca07" prop="cbca07" width="80" sortable />
                     <el-table-column label="操作" align="center" fixed="right" width="160"
                         class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai"
-                                @click="handlexiangqengSelect(scope.row)" style="border:0px;"  v-hasPermi="['system:customer:edit']">修改
+                                @click="handlexiangqengSelect(scope.row)" style="border:0px;"
+                                v-hasPermi="['system:customer:edit']">修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai"
-                                @click="handleDelete01(scope.row)" style="border:0px;" v-hasPermi="['system:customer:remove']">删除</el-button>
+                                @click="handleDelete01(scope.row)" style="border:0px;"
+                                v-hasPermi="['system:customer:remove']">删除</el-button>
 
                             <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情</el-button> -->
@@ -76,12 +80,14 @@
         </el-row>
 
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3" >
-           <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护修改</div>
-            <el-form ref="form" :model="form" :rules="rules3"  label-width="50%" class="chuangjianformcust">
-                 <div>
-                     <swiper-test style="margin-left:2%;">基本信息</swiper-test>
-                    <hr style="width:190%;"/>
+        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog3">
+            <div
+                style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                客户信息维护修改</div>
+            <el-form ref="form" :model="form" :rules="rules3" label-width="50%" class="chuangjianformcust">
+                <div>
+                    <swiper-test style="margin-left:2%;">基本信息</swiper-test>
+                    <hr style="width:190%;" />
                 </div>
                 <el-row style="margin-top:2%;">
                     <el-col :span="11">
@@ -131,7 +137,7 @@
                             <el-input v-model="form.cbca18" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="联系人1办公室电话:" prop="cbca19">
                             <el-input v-model="form.cbca19" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
@@ -154,15 +160,16 @@
                         <el-form-item label="状态:" prop="cbca07">
                             <!-- <el-input v-model="form.cbca07" placeholder="" style="width:100%;" maxlength="30" /> -->
                             <el-select v-model="form.cbca07" placeholder="" style="width:100%;">
-                                <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label" :value="item.label">
+                                <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
+                                    :value="item.label">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <div style="height:50px;">
-                     <span style="margin-left:2%;">发票信息</span>
-                    <hr style="width:190%;"/>
+                    <span style="margin-left:2%;">发票信息</span>
+                    <hr style="width:190%;" />
                 </div>
                 <el-row>
                     <el-col :span="11">
@@ -177,21 +184,21 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="发票电话:" prop="cbca27">
                             <el-input v-model="form.cbca27" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="发票开户行:" prop="cbca11">
                             <el-input v-model="form.cbca11" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                   <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="银行账号:" prop="cbca12">
-                            <el-input v-model="form.cbca12"  placeholder="" style="width:100%;" maxlength="30" />
+                            <el-input v-model="form.cbca12" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
@@ -233,13 +240,15 @@
         <!-- <el-dialog :title="title" :visible.sync="open">
             <el-form ref="form" :model="form" label-width="45%" class="chuangjianform"> -->
         <el-dialog :title="title2" :visible.sync="open1" class="abow_dialog3">
-           <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护</div>
+            <div
+                style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                客户信息维护</div>
             <el-form ref="form1" :model="form1" label-width="45%" class="chuangjianformcust">
                 <div>
-                     <span style="margin-left:2%;">基本信息</span>
-                    <hr style="width:190%;"/>
+                    <span style="margin-left:2%;">基本信息</span>
+                    <hr style="width:190%;" />
                 </div>
-                 <el-row style="margin-top:2%;">
+                <el-row style="margin-top:2%;">
                     <el-col :span="11">
                         <el-form-item label="客户名称:" prop="cbca08">
                             <el-input v-model="form1.cbca08" placeholder="" style="width:100%;" />
@@ -282,7 +291,7 @@
                             <el-input v-model="form1.cbca18" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="联系人1办公室电话:" prop="cbca19">
                             <el-input v-model="form1.cbca19" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
@@ -302,7 +311,7 @@
                 </el-row>
                 <div style="height:60px;">
                     <span style="margin-left:2%;">发票信息</span>
-                    <hr style="width:190%;"/>
+                    <hr style="width:190%;" />
                 </div>
                 <el-row>
                     <el-col :span="11">
@@ -317,19 +326,19 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="发票电话:" prop="cbca27">
                             <el-input v-model="form1.cbca27" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="发票开户行:" prop="cbca11">
                             <el-input v-model="form1.cbca11" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                   <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="银行账号:" prop="cbca12">
                             <el-input v-model="form1.cbca12" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
@@ -373,11 +382,13 @@
 
         <!-- 创建 -->
         <el-dialog :title="title" :visible.sync="open2" class="abow_dialog3">
-            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">客户信息维护创建</div>
+            <div
+                style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                客户信息维护创建</div>
             <el-form ref="form2" :model="form2" label-width="50%" :rules="rules2" class="chuangjianformcust">
-                 <div>
-                     <span style="margin-left:2%;">基本信息</span>
-                   <hr style="width:190%;"/>
+                <div>
+                    <span style="margin-left:2%;">基本信息</span>
+                    <hr style="width:190%;" />
                 </div>
                 <el-row style="margin-top:2%;">
                     <el-col :span="11">
@@ -427,7 +438,7 @@
                             <el-input v-model="form2.cbca18" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="联系人1办公室电话:" prop="cbca19">
                             <el-input v-model="form2.cbca19" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
@@ -450,15 +461,16 @@
                         <el-form-item label="状态:" prop="cbca07">
                             <!-- <el-input v-model="form.cbca07" placeholder="" style="width:100%;" maxlength="30" /> -->
                             <el-select v-model="form2.cbca07" placeholder="" style="width:100%;">
-                                <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label" :value="item.label">
+                                <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
+                                    :value="item.label">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <div style="height:60px;">
-                     <span style="margin-left:2%;">发票信息</span>
-                    <hr style="width:190%;"/>
+                    <span style="margin-left:2%;">发票信息</span>
+                    <hr style="width:190%;" />
                 </div>
                 <el-row>
                     <el-col :span="11">
@@ -473,19 +485,19 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="发票电话:" prop="cbca27">
                             <el-input v-model="form2.cbca27" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
                     </el-col>
-                     <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="发票开户行:" prop="cbca11">
                             <el-input v-model="form2.cbca11" placeholder="" style="width:100%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
-                   <el-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="银行账号:" prop="cbca12">
                             <el-input v-model="form2.cbca12" placeholder="" style="width:100%;" maxlength="30" />
                         </el-form-item>
@@ -516,8 +528,8 @@
                 </el-row>
                 <el-row>
                     <el-col :span="11" style="margin-left:70%; margin-top: 0%;">
-                            <el-button type="primary" style="margin-left:49%;" @click="handleAdd">确 定</el-button>
-                            <el-button @click="cancells">取 消</el-button>
+                        <el-button type="primary" style="margin-left:49%;" @click="handleAdd">确 定</el-button>
+                        <el-button @click="cancells">取 消</el-button>
                     </el-col>
                 </el-row>
                 <div style="height:50px;"></div>
@@ -562,17 +574,17 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-    name: "store",
+    name: "CustomerMaintenance",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { Treeselect },
     data() {
- var telephoneNumber=(rule, value, callback) =>{
-    if (value && (!(/^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/).test(value))) {
-      callback(new Error('纳税人识别号不符合规范'))
-    } else {
-      callback()
-    }
-  }
+        var telephoneNumber = (rule, value, callback) => {
+            if (value && (!(/^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/).test(value))) {
+                callback(new Error('纳税人识别号不符合规范'))
+            } else {
+                callback()
+            }
+        }
         return {
             // 遮罩层
             loading: true,
@@ -663,21 +675,21 @@ export default {
             // 表单参数
             form: {
 
-                cbca07:"",
-                cbca08:"",
-                cbca10:"",
-                cbca14:"",
-                cbca16:"",
-                cbca15:"",
-                cbca28:"",
-                cbca18:"",
-                cbca19:"",
-                cbca13:"",
-                cbca25:"",
-                cbca27:"",
-                cbca11:"",
-                cbca12:"",
-                cbca24:""
+                cbca07: "",
+                cbca08: "",
+                cbca10: "",
+                cbca14: "",
+                cbca16: "",
+                cbca15: "",
+                cbca28: "",
+                cbca18: "",
+                cbca19: "",
+                cbca13: "",
+                cbca25: "",
+                cbca27: "",
+                cbca11: "",
+                cbca12: "",
+                cbca24: ""
             },
             form1: {
                 // classifyId: "",
@@ -688,21 +700,21 @@ export default {
                 // ifEnabled: ""
             },
             form2: {
-                cbca07:"",
-                cbca08:"",
-                cbca10:"",
-                cbca14:"",
-                cbca16:"",
-                cbca15:"",
-                cbca28:"",
-                cbca18:"",
-                cbca19:"",
-                cbca13:"",
-                cbca25:"",
-                cbca27:"",
-                cbca11:"",
-                cbca12:"",
-                cbca24:""
+                cbca07: "",
+                cbca08: "",
+                cbca10: "",
+                cbca14: "",
+                cbca16: "",
+                cbca15: "",
+                cbca28: "",
+                cbca18: "",
+                cbca19: "",
+                cbca13: "",
+                cbca25: "",
+                cbca27: "",
+                cbca11: "",
+                cbca12: "",
+                cbca24: ""
             },
             defaultProps: {
                 children: "children",
@@ -733,7 +745,7 @@ export default {
                 locationNum: undefined,
                 cbca08: undefined,
                 cbca24: undefined,
-                cbca14:undefined,
+                cbca14: undefined,
                 sort: undefined
             },
             // 列信息
@@ -748,20 +760,20 @@ export default {
             rules2: {
                 cbca08: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
-                  ],
+                ],
                 cbca13: [
                     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
                     { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
                 ],
-                 cbca25: [
+                cbca25: [
                     { required: true, message: "地址不能为空!", trigger: "blur" },
 
                 ],
-                   cbca27: [
+                cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
-                   { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
+                    { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
                 ],
-                 cbca11: [
+                cbca11: [
                     { required: true, message: "发票开户行不能为空!", trigger: "blur" }
                 ],
                 cbca12: [
@@ -770,7 +782,7 @@ export default {
                 cbca28: [
                     { required: true, message: "客户等级不能为空!", trigger: "change" },
                 ],
-                cbca20:[
+                cbca20: [
                     { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },
                     { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
                 ],
@@ -780,33 +792,33 @@ export default {
             },
             // 表单校验
             rules3: {
-                 cbca08: [
+                cbca08: [
                     { required: true, message: "名称不能为空!", trigger: "blur" }
-                  ],
+                ],
                 cbca13: [
                     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
                     { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
                 ],
-                 cbca25: [
+                cbca25: [
                     { required: true, message: "地址不能为空!", trigger: "blur" },
 
                 ],
-                   cbca27: [
+                cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
                     { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
                 ],
-                 cbca11: [
+                cbca11: [
                     { required: true, message: "发票开户行不能为空!", trigger: "blur" }
                 ],
                 cbca12: [
                     { required: true, message: "银行账号不能为空!", trigger: "blur" }
                 ],
-                 cbca28: [
+                cbca28: [
                     { required: true, message: "客户等级不能为空!", trigger: "change" }
                 ],
-                cbca20:[
+                cbca20: [
                     { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },
-                   { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                    { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
                 ],
                 cbca24: [
                     { required: true, message: "发票类型不能为空!", trigger: "change" },
@@ -831,14 +843,14 @@ export default {
         // this.form.type = this.dict[0].label;
     },
     methods: {
-      //列表表头设置
-      headClassCMC() {
-        return {
-          'text-align': 'left',
-          height: '40px',
-          padding: '0'
-        }
-      },
+        //列表表头设置
+        headClassCMC() {
+            return {
+                'text-align': 'left',
+                height: '40px',
+                padding: '0'
+            }
+        },
         /** 查询用户列表 */
         getList() {
             this.loading = true;
@@ -956,7 +968,7 @@ export default {
 
 
             this.queryParams.pageNum = 1;
-             this.getList();
+            this.getList();
         },
         /** 重置按钮操作 */
         resetQuery() {
@@ -993,19 +1005,19 @@ export default {
                         // console.log(this.from.parent_id, 123456789);
                         // this.classifyId = response.posts;
                         // console.log(response.posts,123456);
-                        if (response.code == "200") {     
+                        if (response.code == "200") {
                             console.log(this.form2, 997445);
                             this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        // this.getTreeselect();
-                        // this.submitShangpin();
+                            // this.getTreeselect();
+                            // this.submitShangpin();
                             this.submitShangpin();
                             this.getList();
                             this.open2 = false;
                             this.reset01();
                         } else {
                             this.$message({ message: response.msg, type: 'error' });
-                        } 
-                            console.log(this.form2.ifEnabled, 123456);
+                        }
+                        console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
                     // this.$message.error('请注意规范');
@@ -1046,54 +1058,54 @@ export default {
         /** 修改按钮操作 */
         handleUpdate() {
 
-                let row = {}
-                row.cbca07 = this.form.cbca07;
-                row.cbca08 = this.form.cbca08;
-                row.cbca09 = this.form.cbca09;
-                row.cbca10 = this.form.cbca10;
-                row.cbca11 = this.form.cbca11;
-                row.cbca12 = this.form.cbca12;
-                row.cbca13 = this.form.cbca13;
-                row.cbca14 = this.form.cbca14;
-                row.cbca15 = this.form.cbca15;
-                row.cbca16 = this.form.cbca16;
-                row.cbca17 = this.form.cbca17;
-                row.cbca18 = this.form.cbca18;
-                row.cbca19 = this.form.cbca19;
-                row.cbca20 = this.form.cbca20;
-                row.cbca21 = this.form.cbca21;
-                row.cbca24 = this.form.cbca24;
-                row.cbca25 = this.form.cbca25;
-                row.cbca26 = this.form.cbca26;
-                row.cbca27 = this.form.cbca27;
-                row.cbca28 = this.form.cbca28;
-                row.cbca01 = this.form.cbca01;
+            let row = {}
+            row.cbca07 = this.form.cbca07;
+            row.cbca08 = this.form.cbca08;
+            row.cbca09 = this.form.cbca09;
+            row.cbca10 = this.form.cbca10;
+            row.cbca11 = this.form.cbca11;
+            row.cbca12 = this.form.cbca12;
+            row.cbca13 = this.form.cbca13;
+            row.cbca14 = this.form.cbca14;
+            row.cbca15 = this.form.cbca15;
+            row.cbca16 = this.form.cbca16;
+            row.cbca17 = this.form.cbca17;
+            row.cbca18 = this.form.cbca18;
+            row.cbca19 = this.form.cbca19;
+            row.cbca20 = this.form.cbca20;
+            row.cbca21 = this.form.cbca21;
+            row.cbca24 = this.form.cbca24;
+            row.cbca25 = this.form.cbca25;
+            row.cbca26 = this.form.cbca26;
+            row.cbca27 = this.form.cbca27;
+            row.cbca28 = this.form.cbca28;
+            row.cbca01 = this.form.cbca01;
 
-                console.log(row, 778899);
-                 this.$refs["form"].validate((item) => {
+            console.log(row, 778899);
+            this.$refs["form"].validate((item) => {
                 if (item) {
-                // console.log(this.form.id);
-                CustomeRedit(JSON.stringify(row)).then(response => {
-                    // console.log(response,789)
-                    // this.form = response.data;
-                    // this.name = response.name;
-                    // this.type = response.type;
-                    // this.deliveryPriority = response.deliveryPriority;
-                    // this.enableTotalOrder = response.enableTotalOrder;
-                    // this.enableTakeGoods = response.enableTakeGoods;
-                    // this.manageMode = response.manageMode;
-                    // this.ifEnabled = response.ifEnabled;
-                    // this.sysUserId = response.sysUserId;
-                    if (response.code == "200") {
-                        console.log(this.form, 789)
-                    // this.submitShangpin();
-                        this.getList();
-                        this.open = false;
-                        this.$message({ message: '修改成功', type: 'success' });
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
-                    }
-                });
+                    // console.log(this.form.id);
+                    CustomeRedit(JSON.stringify(row)).then(response => {
+                        // console.log(response,789)
+                        // this.form = response.data;
+                        // this.name = response.name;
+                        // this.type = response.type;
+                        // this.deliveryPriority = response.deliveryPriority;
+                        // this.enableTotalOrder = response.enableTotalOrder;
+                        // this.enableTakeGoods = response.enableTakeGoods;
+                        // this.manageMode = response.manageMode;
+                        // this.ifEnabled = response.ifEnabled;
+                        // this.sysUserId = response.sysUserId;
+                        if (response.code == "200") {
+                            console.log(this.form, 789)
+                            // this.submitShangpin();
+                            this.getList();
+                            this.open = false;
+                            this.$message({ message: '修改成功', type: 'success' });
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
+                    });
 
                 } else {
                     // this.$message.error('请注意规范');
@@ -1102,18 +1114,15 @@ export default {
         },
         /** 详情按钮操作**/
         handleSelect(row) {
-             if(row.cbca28=="1")
-            {
-                this.form1.cbca28="1[1]";
-                row.cbca28="1";
-            }else if(row.cbca28=="2")
-            {
-                this.form1.cbca28="2[2]"
-                row.cbca28= "2";
-            }else if(row.cbca28=="3")
-            {
-                this.form1.cbca28="3[3]"
-                row.cbca28= "3";
+            if (row.cbca28 == "1") {
+                this.form1.cbca28 = "1[1]";
+                row.cbca28 = "1";
+            } else if (row.cbca28 == "2") {
+                this.form1.cbca28 = "2[2]"
+                row.cbca28 = "2";
+            } else if (row.cbca28 == "3") {
+                this.form1.cbca28 = "3[3]"
+                row.cbca28 = "3";
             }
             this.open1 = true;
             this.form1.cbca01 = row.cbca01;
@@ -1140,43 +1149,37 @@ export default {
         /** 修改详情按钮操作 cbca28**/
         handlexiangqengSelect(row) {
 
-             if(row.cbca24=="1")
-            {
-                this.form.cbca24="增值税专用发票";
-                row.cbca24="1";
-            }else if(row.cbca24=="2")
-            {
-                this.form.cbca24="增值税普通发票"
-                row.cbca24= "2";
-            }else if(row.cbca24=="3")
-            {
-                this.form.cbca24="个人普通发票"
-                row.cbca24= "3";
-            }else if(row.cbca24=="4"){
-                this.form.cbca24="不开发票"
-                row.cbca24= "4";
+            if (row.cbca24 == "1") {
+                this.form.cbca24 = "增值税专用发票";
+                row.cbca24 = "1";
+            } else if (row.cbca24 == "2") {
+                this.form.cbca24 = "增值税普通发票"
+                row.cbca24 = "2";
+            } else if (row.cbca24 == "3") {
+                this.form.cbca24 = "个人普通发票"
+                row.cbca24 = "3";
+            } else if (row.cbca24 == "4") {
+                this.form.cbca24 = "不开发票"
+                row.cbca24 = "4";
             }
 
 
-         if(row.cbca28=="1")
-            {
-                this.form.cbca28="1[1]";
-                row.cbca28="1";
-            }else if(row.cbca28=="2")
-            {
-                this.form.cbca28="2[2]"
-                row.cbca28= "2";
-            }else if(row.cbca28=="3")
-            {
-                this.form.cbca28="3[3]"
-                row.cbca28= "3";
+            if (row.cbca28 == "1") {
+                this.form.cbca28 = "1[1]";
+                row.cbca28 = "1";
+            } else if (row.cbca28 == "2") {
+                this.form.cbca28 = "2[2]"
+                row.cbca28 = "2";
+            } else if (row.cbca28 == "3") {
+                this.form.cbca28 = "3[3]"
+                row.cbca28 = "3";
             }
 
             console.log(row)
             // this.getList();
             this.open = true;
             console.log(row, 7788521);
-            this.form= row
+            this.form = row
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -1235,10 +1238,10 @@ export default {
                 userIds.forEach((item) => {
                     req.CustomeRemove(JSON.stringify(item)).then((res) => {
                         if (res.code == "200") {
-                        console.log(res, 123)
-                        this.submitShangpin();
-                        this.getList();
-                        this.$modal.msgSuccess("删除成功");
+                            console.log(res, 123)
+                            this.submitShangpin();
+                            this.getList();
+                            this.$modal.msgSuccess("删除成功");
                         } else {
                             this.$message({ message: res.msg, type: 'error' });
                         }
@@ -1249,29 +1252,29 @@ export default {
             }).catch(() => { });
 
         },
-      /** 普通删除按钮操作 */
-      handleDelete01(row) {
+        /** 普通删除按钮操作 */
+        handleDelete01(row) {
 
-        // row.classifyId = this.form.classifyId;
-        // row.brand = this.form.brand;
-        // row.model = this.form.model;
-        // row.upc = this.form.upc;
-        // row.description = this.form.description;
-        // row.ifEnabled = this.form.ifEnabled;
-        // row.id=this.form.id;
-        // console.log(row, 2222);
-        this.$modal.confirm('是否删除客户为"' + row.cbca08 + '"?').then(function () {
-          return CustomeRemove(JSON.stringify(row));
-        }).then((response) => {
-            if (response.code == "200") { 
-                 this.submitShangpin();
-                 this.getList();
-                 this.$modal.msgSuccess("删除成功");
-            } else {
-                this.$message({ message: response.msg, type: 'error' });
-            }
-        }).catch(() => { });
-      },
+            // row.classifyId = this.form.classifyId;
+            // row.brand = this.form.brand;
+            // row.model = this.form.model;
+            // row.upc = this.form.upc;
+            // row.description = this.form.description;
+            // row.ifEnabled = this.form.ifEnabled;
+            // row.id=this.form.id;
+            // console.log(row, 2222);
+            this.$modal.confirm('是否删除客户为"' + row.cbca08 + '"?').then(function () {
+                return CustomeRemove(JSON.stringify(row));
+            }).then((response) => {
+                if (response.code == "200") {
+                    this.submitShangpin();
+                    this.getList();
+                    this.$modal.msgSuccess("删除成功");
+                } else {
+                    this.$message({ message: response.msg, type: 'error' });
+                }
+            }).catch(() => { });
+        },
         /** 导出按钮操作 
          * 
          * /dev-api/stage-api/system/customer/SwJsCustomerexport
@@ -1333,4 +1336,5 @@ export default {
 };
 </script>
 <style src="./CustomerMaintenancecss/index.css" scoped>
+
 </style>

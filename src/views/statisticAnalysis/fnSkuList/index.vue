@@ -102,7 +102,7 @@ Vue.directive('loadmore', {
   }
 })
 export default {
-  name: "fnSkuList",
+  name: "FnSkuList",
   data() {
     return {
       //下拉列表数据商品
@@ -269,8 +269,6 @@ export default {
     this.getGoods();
   },
   methods: {
-
-
     rounding(row, column) {
       if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
         return '0.00';

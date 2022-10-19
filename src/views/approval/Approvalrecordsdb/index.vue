@@ -86,6 +86,7 @@
 import { Approvalrecordsdb } from "@/api/Approval";
 
 export default {
+  name: "ApprovalRecordSdb",
   components: {},
   data() {
     return {
