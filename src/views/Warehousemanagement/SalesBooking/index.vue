@@ -72,10 +72,10 @@
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="编号" width="160px;" align="left" key="ponumber"
-                        prop="ponumber" sortable />
-                    <el-table-column label="订单编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
-                    prop="orderNo" sortable />
+                    <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
+                        prop="orderNo" sortable />
+                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber" 
+                    prop="ponumber" sortable />
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
                         :formatter="formatDate" sortable>
                     </el-table-column>
@@ -769,8 +769,6 @@ export default {
                     console.log(response, 339688);
                     // this.deleteFlag = response.data.rows.deleteFlag;
                     this.loading = false;
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             }
             );
@@ -793,8 +791,6 @@ export default {
                 if (response.code == "200") {
                     this.postOptions = response.data.rows;
                     // console.log(response.data.rows,551100);
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             });
         },
@@ -804,8 +800,6 @@ export default {
                 if (response.code == "200") {
                     this.KuWeiOptions = response.data.rows;
                     // console.log(response.data.rows,663322);
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             });
         },
@@ -819,8 +813,6 @@ export default {
                     this.XinghaoOptions = response.data.rows;
                     this.ponpaixenghaomiaoshu = response.data.rows;
                     // console.log(response.data.rows, 1655);
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             });
         },
@@ -831,8 +823,6 @@ export default {
                     this.postCangKu = response.data.rows;
                     // this.XinghaoOptions = response.data.rows;
                     // console.log(response.data.rows, 1655);
-                } else {
-                    this.$message({ message: res.msg, type: 'error' });
                 }
             });
         },
@@ -1009,8 +999,6 @@ export default {
                             // console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("审批成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1052,8 +1040,6 @@ export default {
                             // console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("反审成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1074,8 +1060,6 @@ export default {
                         this.getList();
                         // this.open = false;
                         this.$message({ message: '标记完成', type: 'success' });
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -1092,8 +1076,6 @@ export default {
                             // console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("标记完成");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1122,8 +1104,6 @@ export default {
                         this.getList();
                         this.$message({ message: '取消标记成功', type: 'success' });
 
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -1140,8 +1120,6 @@ export default {
                             // console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("取消标记成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
