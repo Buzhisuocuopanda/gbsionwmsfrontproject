@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
+    <el-form ref="formData" :model="formData" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">缺货登记单</div>
 
       <!-- 编号:56221589223 -->
@@ -34,12 +34,18 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="结算货币:" prop="saleUserId"><!--v-model="formData.saleUserId" -->
+          <el-form-item  label="缺货单类型:" prop="cboe21">
+            <el-select v-model="formData.cboe21" filterable clearable placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in orderClass" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <!--<el-form-item label="结算货币:" prop="saleUserId">&lt;!&ndash;v-model="formData.saleUserId" &ndash;&gt;
             <el-select  filterable clearable placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item>-->
         </el-col>
         <!--        <el-col :span="8">
           <el-form-item label="客户单号:" prop="customerNo">
@@ -53,53 +59,6 @@
           </el-form-item>
         </el-col>-->
       </el-row>
-      <!--      <el-row :gutter="20">-->
-      <!--        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="主副表id:" prop="cbpg161">-->
-      <!--            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="供料单位:" prop="cbpc099">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="仓库:" prop="cbpc100">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="结算货币:" prop="cbpc16">-->
-      <!--            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">-->
-      <!--              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">-->
-      <!--              </el-option>-->
-      <!--            </el-select>-->
-      <!--          </el-form-item>-->
-      <!--          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">-->
-      <!--                  <el-popover placement="bottom-start" trigger="click">-->
-      <!--                      <ListLists ref="ListLists" @selected="selected004" />-->
-      <!--                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly-->
-      <!--                          style="border:solid #eee thin; width:77%;">-->
-      <!--                      </el-select>-->
-      <!--                  </el-popover>-->
-      <!--              </el-form-item> &ndash;&gt;-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash;商品信息维护&ndash;&gt;-->
-      <!--        <el-col v-if="false">-->
-      <!--          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
       <!--
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
@@ -736,7 +695,7 @@ export default {
         suplierId: "",
         answerMsg: "",
         process: "",
-
+        cboe21:"",
         orderType: 10,
         orderTypeMsg: "销售订单",
         orderClass: 2,
@@ -837,18 +796,22 @@ export default {
 
 
       rules: {
-        orderDate: [
+       /* orderDate: [
           { required: true, message: '请输入日期', trigger: 'blur' },
           // { type: 'number', message: '优先级必须为数字'}
-        ],
+        ],*/
         saleUserId: [
-          { required: true, message: '请输入销售人员', trigger: 'blur' },
+          { required: true, message: '请选择销售人员', trigger: 'blur' },
         ],
         // goods: [
         //   { required: true, message: '请选择商品', trigger: 'blur' },
         // ],
         customerId: [
-          { required: true, message: '请输入客户', trigger: 'blur' },
+          { required: true, message: '请选择客户', trigger: 'blur' },
+          // { type: 'number', message: '数量必须为数字'}
+        ],
+        cboe21:[
+          { required: true, message: '请选择缺货单类型', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
       },
@@ -867,6 +830,16 @@ export default {
         }, {
           value: '5',
           label: 'USD'
+        }
+      ],
+      //订单类型集合
+      orderClass: [
+        {
+          value: '1',
+          label: '国际'
+        }, {
+          value: '2',
+          label: '国内'
         }
       ],
     };
@@ -1474,120 +1447,32 @@ export default {
       });
     },
 
-    /*    /!** 新增按钮操作 *!/
-       handleAdd() {
-
-         this.$refs["form2"].validate((item) => {
-           if (item) {
-             addSales(this.form2).then(response => {
-               // console.log(this.from.parent_id, 123456789);
-               // this.classifyId = response.posts;
-               // console.log(response.posts,123456);
-
-               this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-               // this.getTreeselect();
-               // this.submitShangpin();
-               //this.submitShangpin();
-               this.onSearch();
-               this.open2 = false;
-               this.reset01();
-
-               // console.log(this.form2.ifEnabled, 123456);
-             });
-           } else {
-             // this.$message.error('请注意规范');
-           }
-         })
-         // if (this.form2.swJsStoreId != undefined || this.form2.locationNum != undefined || this.form2.sort != undefined) {
-         //     // console.log(this.form.id, 123456);
-
-         //     addUserSysStoreku(this.form2).then(response => {
-         //         // console.log(this.from.parent_id, 123456789);
-         //         // this.classifyId = response.posts;
-         //         // console.log(response.posts,123456);
-         //         this.title = "添加用户";
-         //         this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
-         //         // this.getTreeselect();
-         //         // this.submitShangpin();
-         //         this.submitShangpin();
-         //         this.getList();
-         //         this.open2 = false;
-         //         this.reset01();
-
-         //         console.log(this.form2.ifEnabled, 123456);
-         //     });
-         // } else {
-         //     this.$message.error('输入的内容不能为空呀');
-         // }
-
-         // this.reset();
-         // } else {
-         //   this.$message.error('错了哦，商品名称没有填呢');
-         // }
-
-       }, */
 
     /** 新增按钮操作 */
     handleAdd() {
+      this.$refs["formData"].validate((item) => {
+        if (item) {
+          this.formData.goods = this.tableData
+          console.log(this.tableData);
+          console.log(this.formData.goods);
+          addSales(this.formData).then(response => {
+              if (response.code == "200") {
+                this.$message.success("添加成功")
+                this.$store.dispatch("tagsView/delView", this.$route)
+                // this.$router.push({path:"/Outofstockregistrationfh/role"})
+                this.$tab.closePage();
+                this.$router.go(-1);
+              } else {
 
-      this.formData.goods = this.tableData
-      console.log(this.tableData);
-      console.log(this.formData.goods);
-      addSales(this.formData).then(response => {
-        if (response.code == "200") {
-          this.$message.success("添加成功")
-          this.$store.dispatch("tagsView/delView", this.$route)
-          // this.$router.push({path:"/Outofstockregistrationfh/role"})
-          this.$tab.closePage();
-          this.$router.go(-1);
-        } else {
+                // this.$message.error(response.msg)
 
-          // this.$message.error(response.msg)
+                // this.$router.go(-1)
 
-          // this.$router.go(-1)
-
+              }
+            }
+          )
         }
-      }
-      )
-
-
-
-      // this.$refs["form2"].validate((item) => {
-      //   if (item) {
-      //     PurchaseinboundAdd(this.form2).then(response => {
-      //       if (response.code == "200") {
-      //         this.$message({
-      //           message: '添加成功',
-      //           type: 'success',
-      //           style: 'color:red;!important'
-      //         });
-      //         this.submitShangpin();
-      //         this.open2 = false;
-      //         this.reset01()
-      //         this.form2.cbpg161 = response.data.id;
-      //         this.form.cbpc01 = response.data.id;
-      //         // console.log(this.form2.cbpg161,111);
-      //         // console.log(this.form.cbpg01,222);
-      //         console.log(response.data.id, 333);
-      //         this.formArr.forEach((item) => {
-      //           item.cbpc01 = response.data.id
-      //           // item.cbpd08= this.form2.cbpd08;
-      //           // item.cbpd09= this.form.cbpd09;
-      //           // item.cbpd11= this.form.cbpd11;
-      //           // item.cbpd12= this.form.cbpd12;
-      //           let t = item.cbpc000;
-      //           item.cbpd08 = t.substring(t.indexOf(".") + 1);
-      //           console.log(t.substring(t.indexOf(".") + 1), 33333);
-      //         })
-      //         console.log(this.formArr, 888)
-      //         this._ly_ok()
-      //       }
-      //     });
-      //   } else {
-      //     this.$message.error('请注意规范');
-      //   }
-      // })
-      //    this._ly_ok();
+      });
     },
 
     /** 返回操作 */

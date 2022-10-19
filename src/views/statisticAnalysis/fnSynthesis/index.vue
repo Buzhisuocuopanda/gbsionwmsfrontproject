@@ -40,7 +40,7 @@
         <el-table-column  label="生产总订单" align="left" prop="totalOrderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="150px;"/>
         <el-table-column  label="描述" align="left" prop="description" min-width="300px;"/>
-        <el-table-column  label="数量" :formatter="rounding2" align="right" prop="qty" min-width="60px;"/>
+        <el-table-column  label="数量" v-if="false" :formatter="rounding2" align="right" prop="qty" min-width="60px;"/>
         <el-table-column  label="序列号" align="left" prop="sn"  min-width="120px;"/>
         <el-table-column  label="销售单价U" :formatter="rounding3" align="right" prop="uprice" min-width="100px;">
           <!--<template slot-scope="scope">

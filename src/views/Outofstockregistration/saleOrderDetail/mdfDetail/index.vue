@@ -372,12 +372,12 @@
         </el-col>
 
         <el-col :span="8">
-          <el-form-item label="结算货币:" prop="saleUserId"><!--v-model="formData.saleUserId" -->
+          <!--<el-form-item label="结算货币:" prop="saleUserId">&lt;!&ndash;v-model="formData.saleUserId" &ndash;&gt;
             <el-select  filterable clearable placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item>-->
         </el-col>
         <!--        <el-col :span="8">
                   <el-form-item label="客户单号:" prop="customerNo">
@@ -391,53 +391,7 @@
                   </el-form-item>
                 </el-col>-->
       </el-row>
-      <!--      <el-row :gutter="20">-->
-      <!--        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="主副表id:" prop="cbpg161">-->
-      <!--            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="供料单位:" prop="cbpc099">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="仓库:" prop="cbpc100">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="结算货币:" prop="cbpc16">-->
-      <!--            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">-->
-      <!--              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">-->
-      <!--              </el-option>-->
-      <!--            </el-select>-->
-      <!--          </el-form-item>-->
-      <!--          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">-->
-      <!--                  <el-popover placement="bottom-start" trigger="click">-->
-      <!--                      <ListLists ref="ListLists" @selected="selected004" />-->
-      <!--                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly-->
-      <!--                          style="border:solid #eee thin; width:77%;">-->
-      <!--                      </el-select>-->
-      <!--                  </el-popover>-->
-      <!--              </el-form-item> &ndash;&gt;-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash;商品信息维护&ndash;&gt;-->
-      <!--        <el-col v-if="false">-->
-      <!--          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
+
       <!--
             <el-row :gutter="20" style="margin-top: 1px;">
               <el-col :span="8">
@@ -537,31 +491,8 @@
                     </el-form-item>-->
         </el-col>
 
-        <!--        <el-col :span="8">-->
-        <!--          <el-form-item label="备注:" prop="remark">-->
-        <!--            <el-input type="text" v-model="formData.remark" style="width: 120%;" />-->
-        <!--          </el-form-item>-->
-        <!--        </el-col>-->
       </el-row>
 
-      <!--      <el-row v-if="false">-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-      <!--        <el-col>-->
-      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
       <div>
         <el-row>
           <el-col v-if="false" :span="24">
@@ -582,6 +513,16 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
+          <el-table-column label="标准单价" prop="standardprice" width="150" >
+            <template slot-scope="scope">
+              <el-input disabled   v-model="scope.row.standardprice"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column  label="本次单价" prop="thisprice" width="150" >
+            <template slot-scope="scope">
+              <el-input @input="sum2(scope.row)" v-model="scope.row.thisprice"></el-input>
+            </template>
+          </el-table-column>
           <el-table-column prop="qty" label="数量" width="150">
             <template slot-scope="scope">
               <sapn>
@@ -590,6 +531,11 @@
                 <!--                @change="goodsQtyChange(scope.row)"-->
                 <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
               </sapn>
+            </template>
+          </el-table-column>
+          <el-table-column label="金额" prop="monery" width="150" >
+            <template slot-scope="scope">
+              <el-input disabled  v-model="scope.row.monery"></el-input>
             </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
