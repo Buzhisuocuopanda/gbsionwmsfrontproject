@@ -24,6 +24,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" v-hasPermi="['system:directly:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button v-hasPermi="['system:directly:list']" class="biaoto-buttonchuangjiannmnm" size="mini" @click="resetQuery">重置</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <!-- <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:directly:remove']"
@@ -71,8 +72,8 @@
                                 </div>
                             </template>
                     </el-table-column> -->
-                    <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
-                        <template slot-scope="scope" style="margin-left:-10%;">
+                    <!-- <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width"> -->
+                        <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
                             <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                     class="button-caozuoxougai caozuoxiangqeng"
                                     @click="handlexiangqengSelect(scope.row)"
@@ -99,8 +100,8 @@
                                     @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                     v-hasPermi="['system:user:listselect']"
                                     v-if="scope.row.cbpg11 == 3 | scope.row.cbpg11 == 1">标记完成</el-button> -->
-                        </template>
-                    </el-table-column>
+                        <!-- </template> -->
+                    <!-- </el-table-column> -->
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
@@ -616,7 +617,6 @@ export default {
         this.chen();
     },
     methods: {
-
         //列表表头设置
         headClassDR() {
             return {
@@ -750,6 +750,8 @@ export default {
         /** 重置按钮操作 */
         resetQuery() {
             this.dateRange = [];
+            this.queryParams.cbpb12 = ''
+            this.queryParams.cbwa09 = ''
             this.resetForm("queryForm");
             this.handleQuery();
         },
@@ -1187,4 +1189,8 @@ export default {
 </script>
 <style src="./DirectReceiptcss/index.css" scoped>
 </style>
-
+<style lang="scss" scoped>
+::v-deep .el-table__header-wrapper table,::v-deep .el-table__body-wrapper table{
+    width: 100% !important;
+}
+</style>

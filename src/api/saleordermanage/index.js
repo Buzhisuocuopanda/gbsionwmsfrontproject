@@ -330,3 +330,10 @@ export function delgoodsShop(data) {
     data: data
   })
 }
+export function plDelete(data) {
+  return request({
+    url: '/sale/plDelete',
+    method: 'post',
+    data: data
+  })
+}
