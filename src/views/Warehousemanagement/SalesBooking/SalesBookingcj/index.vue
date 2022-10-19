@@ -55,7 +55,7 @@
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select> -->
-          <el-form-item label="销售人员:" prop="salerId">
+          <el-form-item label="销售人员:" prop="cbsb177">
             <el-popover placement="bottom-start" trigger="click" clearable>
               <salerman ref="salerman" @selected="selected011699" style="width:220px!important;" />
               <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly style="width:85%;">
@@ -548,7 +548,7 @@ export default {
 
 
       rules: {
-        cbpc0999: [{
+        cbpc099: [{
           required: true,
           message: "供料单位不能为空!",
           trigger: 'change'
@@ -558,9 +558,15 @@ export default {
           message: "仓库不能为空!",
           trigger: 'change'
         }],
-        cbpc16: [{
+        cbpc0999: [{
           required: true,
-          message: "结算货币不能为空!",
+          message: "客户名称不能为空!",
+          trigger: 'change'
+        }],
+        // cbsb177
+        cbsb177: [{
+          required: true,
+          message: "销售人员不能为空!",
           trigger: 'change'
         }],
         // cbpc07: [
