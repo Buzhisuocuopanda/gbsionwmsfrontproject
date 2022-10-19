@@ -24,6 +24,9 @@
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
+          <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
+            style="margin-bottom:0;margin-left: 1em" @click="pldelete1">批量删除
+          </el-button>
           <el-button v-hasPermi="['system:totalOrder:add']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="createForm">
             创建
@@ -48,13 +51,17 @@
         </el-form-item>
       </el-form>
       <!-- style="height:calc(100% - 10)" -->
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
-        element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe>
-        <el-table-column fixed label="优先级" align="left" prop="priority" min-width="70px;" />
+      <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :data="orderList"
+        :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;"
+        border fit highlight-current-row stripe>
+        <el-table-column type='selection' label="全选" width="55" :reserve-selection="true">
+        </el-table-column>
+        <el-table-column sortable="custom" fixed label="优先级" align="left" prop="priority" min-width="100px;" />
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="140px;" />
         <el-table-column label="型号" align="left" prop="model" min-width="140px;" />
         <el-table-column label="描述" align="left" prop="description" min-width="400px;" />
-        <el-table-column :formatter="rounding" label="订单数量" align="right" prop="orderQty" min-width="76px;" />
+        <el-table-column sortable="custom" :formatter="rounding" label="订单数量" align="right" prop="orderQty"
+          min-width="100px;" />
         <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="76px;" />
         <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="89px;" />
         <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;" />
@@ -291,7 +298,7 @@
 </template>
 <script>
 // import x from ''
-import { totalOrderDetail, swJsGoodslistBySelect, swJsGoodslistBySelectAll, totalOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
+import { pldelete, totalOrderDetail, swJsGoodslistBySelect, swJsGoodslistBySelectAll, totalOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
@@ -372,7 +379,10 @@ export default {
       tableData: [],
       loadingOut: false,
       loadingState: false,
-
+      plDeleIds: [],
+      plDeleRows: [],
+      sortkey: '',
+      sorttype: '',
       orderList: [],
       upload: {
         // 是否显示弹出层（用户导入）
@@ -424,6 +434,7 @@ export default {
   },
   methods: {
 
+
     //列表表头设置
     headClasspw() {
       return {
@@ -436,8 +447,8 @@ export default {
 
     onSubmit() {
     },
-    handleSelectionChange() {
-    },
+    // handleSelectionChange() {
+    // },
 
     //查询商品信息维护
     selected08(e, row) {
@@ -845,14 +856,92 @@ export default {
       }
       return parseFloat(row[column.property]).toFixed(2)
     },
+    pldelete1() {
+      console.log("批量删除")
+      var arr = []
+      //遍历点击选择的对象集合，拿到每一个对象的id添加到新的集合中
+      this.plDeleRows.forEach(row => arr.push(row.id))
+      const param = {
+        ids: arr
+      }
+      this.$confirm('确定删除吗', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'success',
+        callback: action => {
 
-    onSearch() {
+          if (action == 'confirm') {
+            //批量删除
+            pldelete(param).then(response => {
+              if (response.code == 200) {
+                this.$notify({
+                  title: '删除成功',
+                  message: '',
+                  type: 'success',
+                  duration: 2000
+                })
+                this.onSearch()
+              } else {
+
+              }
+
+            }).catch(() => {
+              console.log('error submit')
+            })
+          }
+        }
+      })
+
+    },
+    handleSelectionChange(val) {
+      console.log(val)  //打印选中的行集合
+      this.plDeleRows = val
+      // this.multipleSelection = val;
+    },
+    //点击行触发，选中或不选中复选框
+    handleRowClick(row, column, event) {
+      // this.$refs.handSelectTest_multipleTable.toggleRowSelection(row);
+      console.log(row)  //打印的时当前选中的行
+    },
+    handleTableSort(column) {
+      console.log('1111', column)
+      this.sortkey = column.prop
+      this.sorttype = column.order
       const param = {
         orderNo: this.orderNo,
         model: this.model,
         status: this.status,
         pageNum: this.listQuery.pageNum,
-        pageSize: this.listQuery.pageSize
+        pageSize: this.listQuery.pageSize,
+        sortKey: this.sortkey,
+        sortType: this.sorttype
+
+
+      }
+      // console.info(param)
+      totalOrderList(param).then(response => {
+        if (response.data != null && response.data.rows != null) {
+          this.orderList = response.data.rows
+          this.totalItems = response.data.total
+        } else {
+          this.orderList = []
+          this.totalItems = 0
+        }
+      })
+
+    },
+
+
+    onSearch() {
+      console.log('sort', this.sortkey)
+      const param = {
+        orderNo: this.orderNo,
+        model: this.model,
+        status: this.status,
+        pageNum: this.listQuery.pageNum,
+        pageSize: this.listQuery.pageSize,
+        sortKey: this.sortkey,
+        sortType: this.sorttype
       }
       // console.info(param)
       totalOrderList(param).then(response => {
