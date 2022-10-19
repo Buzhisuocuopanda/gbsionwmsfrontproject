@@ -185,6 +185,14 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                      <el-col>
+                        <el-form-item label="是否可用来分配:" prop="cbwa15">
+                          <el-select v-model="form.allocationFlag" placeholder="" style="width:55%;">
+                            <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                       :value="dict.value"></el-option>
+                          </el-select>
+                        </el-form-item>
+                      </el-col>
                         <el-col style="margin-top:3%;">
                             <div style="margin-left:70%;margin-top: 0%;">
                                 <el-button type="primary" @click="handleUpdate">确定</el-button>
@@ -277,6 +285,14 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                      <el-col>
+                        <el-form-item label="是否可用来分配:" prop="cbwa15">
+                          <el-select v-model="form1.allocationFlag" placeholder="" style="width:55%;">
+                            <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                       :value="dict.value"></el-option>
+                          </el-select>
+                        </el-form-item>
+                      </el-col>
                     </el-row>
                 </div>
             </el-form>
@@ -366,6 +382,14 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                      <el-col>
+                        <el-form-item label="是否可用来分配:" prop="cbwa15">
+                          <el-select v-model="form2.allocationFlag" placeholder="" style="width:55%;">
+                            <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                       :value="dict.value"></el-option>
+                          </el-select>
+                        </el-form-item>
+                      </el-col>
                         <el-col style="margin-top:3%;">
                             <div style="margin-left:70%;margin-top: 0%;">
                                 <el-button type="primary" @click="handleAdd">确定</el-button>
@@ -552,7 +576,8 @@ export default {
                 cbwa12: "",
                 cbwa13: "",
                 cbwa14: "",
-                cbwa15: ""
+                cbwa15: "",
+              allocationFlag: ""
             },
             form1: {
                 // classifyId: "",
@@ -571,7 +596,8 @@ export default {
                 cbwa12: "",
                 cbwa13: "",
                 cbwa14: "",
-                cbwa15: ""
+                cbwa15: "",
+              allocationFlag: ""
             },
             defaultProps: {
                 children: "children",
