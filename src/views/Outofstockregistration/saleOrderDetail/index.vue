@@ -204,9 +204,9 @@
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column label="金额" prop="monery" width="150" >
+          <el-table-column label="金额" prop="money" width="150" >
             <template slot-scope="scope">
-              <el-input disabled  v-model="scope.row.monery"></el-input>
+              <el-input disabled  v-model="scope.row.money"></el-input>
             </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
@@ -1449,9 +1449,9 @@ export default {
     },
     sum2(row) {
       if (row.qty != null && row.thisprice != null) {
-        row.monery = parseFloat(row.qty * row.thisprice).toFixed(2) ;
+        row.money = parseFloat(row.qty * row.thisprice).toFixed(2) ;
       }else {
-        row.monery = undefined;
+        row.money = undefined;
       }
     },
   },
