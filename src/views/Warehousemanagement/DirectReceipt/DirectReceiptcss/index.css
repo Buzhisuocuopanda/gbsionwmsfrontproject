@@ -252,7 +252,32 @@
     -webkit-border-radius: 8px !important;
     border-radius: 8px !important;
 }
+.biaoto-buttonchuangjiannmnm {
+    border: 2px solid #007fdf !important;
+    /*width: 20px;*/
+    /*font-family:"宋体";*/
+    text-decoration: none;
+    font-size: 16px;
+    color: white !important;
+    height: 36px;
+    /*font: bold 14px Arial, Helvetica;*/
+    /*font-family:"微软雅黑";*/
+    background-color: #005ab3;
+    background-image: -moz-linear-gradient(#469ab9, #005ab3);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#469ab9), to(#005ab3));
+    background-image: -webkit-linear-gradient(#469ab9, #005ab3);
+    background-image: -o-linear-gradient(#469ab9, #005ab3);
+    background-image: -ms-linear-gradient(#469ab9, #005ab3);
+    background-image: linear-gradient(#469ab9, #005ab3);
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+    /*-moz-box-shadow: 0 1px 0 rgba(0, 135, 245, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+    /*-webkit-box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+    /*box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
 
+}
 .pagination-container {
     background: #fff;
     padding: 32px 16px;

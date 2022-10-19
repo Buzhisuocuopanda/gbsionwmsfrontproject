@@ -3,7 +3,6 @@
   <div class="app-container">
     <div class="filter-container outofstock">
       <el-form :inline="true" label-width="70px">
-
         <el-form-item>
           <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期"
             value-format="yyyy-MM-dd HH:mm:ss" :default-time="'00:00:00'">
@@ -23,17 +22,13 @@
         <!--        <el-form-item label="订单号"   class="item-r" >-->
         <!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
         <!--        </el-form-item>-->
-
-
-
-
         <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button v-hasPermi="['system:outofstockregistrationform:list']" class="filter-item" type="primary"
             icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
           <el-button v-hasPermi="['system:outofstockregistrationform:add']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
-          <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>
           <!--          <el-upload-->
           <!--          <el-table-->
           <!--            ref="multipleTable"-->
@@ -437,7 +432,25 @@ export default {
     // this.getList();
   },
   methods: {
-
+    reset(){
+      const param = {
+        cboe07: this.orderNo = '',
+        startTime: this.dateRange.startTime = '',
+        endTime: this.dateRange.endTime ='',
+        pageNum: this.listQuery.pageNum,
+        pageSize: this.listQuery.pageSize
+      }
+      // console.info(param)
+      listSales(param).then(response => {
+        if (response.data != null && response.data.rows != null) {
+          this.orderList = response.data.rows
+          this.totalItems = response.data.total
+        } else {
+          this.deviceList = []
+          this.totalItems = 0
+        }
+      })
+    },
     delTotalOrder(row) {
       this.$confirm('确认要删除' + row.orderNo + "售后单？", '确认操作', {
         type: 'warning',
@@ -517,13 +530,7 @@ export default {
           this.deviceList = []
           this.totalItems = 0
         }
-      }
-
-
-      )
-
-
-
+      })
     },
     /** 数形列表的商品分类按钮**/
     submitShangpin() {
