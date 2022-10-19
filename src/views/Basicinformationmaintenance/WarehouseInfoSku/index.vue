@@ -932,6 +932,7 @@ export default {
             row.cbwa14 = this.form.cbwa14;
             row.cbwa15 = this.form.cbwa15;
             row.cbwa01 = this.form.cbwa01;
+            row.allocationFlag = this.form.allocationFlag;
             // console.log(this.form.id);
             this.$refs["form"].validate((item) => {
                 if (item) {
@@ -1015,6 +1016,13 @@ export default {
             } else if (row.cbwa15 == "1") {
                 this.form.cbwa15 = "否"
                 row.cbwa15 = "1"
+            }
+            if(row.allocationFlag == "0"){
+                this.form.allocationFlag = "不启用"
+                row.allocationFlag = "0"
+            }else if(row.allocationFlag == "1"){
+                this.form.allocationFlag = "启用"
+                row.allocationFlag = "1"
             }
             // console.log(row)
             // this.getList();
