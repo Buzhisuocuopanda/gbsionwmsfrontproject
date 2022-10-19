@@ -43,7 +43,7 @@
         <el-table-column  label="占用数量" align="right" :formatter="rounding"  prop="lockQty" min-width="60px;"/>
         <el-table-column  label="订单数量" align="right" :formatter="rounding"  prop="cbob09" min-width="60px;"/>
         <el-table-column label="已发数量" align="right" :formatter="rounding"  prop="cbob10" min-width="60px;" />
-        <el-table-column label="取消数量" v-if="false" align="right" :formatter="rounding" prop="cbob15" min-width="60px;" />
+        <el-table-column label="取消数量"  align="right" :formatter="rounding" prop="cbob15" min-width="60px;" />
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
 
       </el-table>
