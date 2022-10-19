@@ -7,7 +7,11 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-
+                  <el-form-item label="仓库"   class="item-r" >
+                    <el-select  v-model="queryParams.cbwa09" clearable filterable remote reserve-keyword placeholder="请输入关键词"  >
+                      <el-option v-for="item in postCangKu" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
+                    </el-select>
+                  </el-form-item>
                     <el-form-item prop="sn" label="型号">
                         <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
@@ -53,6 +57,7 @@
                     <el-table-column label="型号" align="left" key="cbpb12" width="220px;" prop="cbpb12" sortable />
                     <el-table-column label="描述" align="left" key="cbpb08" prop="cbpb08" width="550px;" sortable />
                     <el-table-column label="SN" align="left" key="cbic10" prop="cbic10" width="130px;" sortable />
+                  <el-table-column label="仓库" width="120px;" align="left" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="库位" width="120px;" align="left" key="cbla09" prop="cbla09" sortable />
                     <el-table-column label="入库日期" align="left" width="100px;" key="cbic02" prop="cbic02" :formatter="formatDate"
                         sortable>
@@ -238,6 +243,8 @@ export default {
         return {
             // 遮罩层
             loading: true,
+          //下拉列表数据仓库
+          storeSkuList:[],
             tianjiahang: [],
             // 选中数组
             ids: [],
@@ -440,7 +447,8 @@ export default {
                 size: 15,
                 total: this.total,
                 cbpb12:undefined,
-                dateRange: undefined
+                dateRange: undefined,
+                cbwa09:'',
             },
             // 列信息
             //  columns: [
@@ -693,7 +701,7 @@ export default {
             StoreSkuList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.postCangKu = response.data.rows;
                 // this.XinghaoOptions = response.data.rows;
-                // console.log(response.data.rows, 1655);
+                console.log(response.data.rows, 1655);
             });
         },
 
