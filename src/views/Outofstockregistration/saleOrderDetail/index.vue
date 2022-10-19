@@ -34,7 +34,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item  label="缺货单类型:" prop="cboe21">
+          <el-form-item  label="订单类型:" prop="cboe21">
             <el-select v-model="formData.cboe21" filterable clearable placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in orderClass" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -164,25 +164,6 @@
         <!--          </el-form-item>-->
         <!--        </el-col>-->
       </el-row>
-
-      <!--      <el-row v-if="false">-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-      <!--        <el-col>-->
-      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
       <div>
         <el-row>
           <el-col :span="24">
@@ -192,10 +173,10 @@
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
-              <sapn>
-                <el-select @change="goodsOnChange(scope.row)" v-loadmore="loadMore" v-model="scope.row.goodsId"
+              <sapn><!--@change="goodsOnChange(scope.row)"-->
+                <el-select  v-loadmore="loadMore" v-model="scope.row.goodsId"
                   filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
-                  <el-option @click="optionClick(scope.row,item)" v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  <el-option @click.native="optionClick(scope.row,item)" v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
               </sapn>
@@ -475,41 +456,6 @@ export default {
         }
         ]
       },
-      treeData: [{ // 树状数据
-        id: 1,
-        label: '一级 1',
-        children: [{
-          id: 4,
-          label: '二级 1-1',
-          children: [{
-            id: 9,
-            label: '三级 1-1-1'
-          }, {
-            id: 10,
-            label: '三级 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: '一级 2',
-        children: [{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 6,
-          label: '二级 2-2'
-        }]
-      }, {
-        id: 3,
-        label: '一级 3',
-        children: [{
-          id: 7,
-          label: '二级 3-1'
-        }, {
-          id: 8,
-          label: '二级 3-2'
-        }]
-      }],
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -687,7 +633,7 @@ export default {
         cbpc01: ""
       },
       formData: {
-        customerId: "",
+        customerId: null,
         saleOrderNo: "",
         goodsId: "",
         question: "",
@@ -695,7 +641,7 @@ export default {
         suplierId: "",
         answerMsg: "",
         process: "",
-        cboe21:"",
+        cboe21:null,
         orderType: 10,
         orderTypeMsg: "销售订单",
         orderClass: 2,
@@ -922,34 +868,7 @@ export default {
             PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
               if (response.code == "200") {
                 this.formArr = []
-                this.form2 = {
-                  cbpc07: "",
-                  cbpc08: "",
-                  cbsa08: "",
-                  cbwa09: "",
-                  cala08: "",
-                  cbpc100: "",
-                  cbpc099: "",
-                  cbpc166: "",
-                  cbpc10: "",
-                  cbpc09: "",
-                  cbpd09: "",
-                  cbpd11: "",
-                  cbpd12: "",
-                  cbpc16: "",
-                  cbpc12: "",
-                  cbpc14: "",
-                  cbpd08: "",
-                  cbph09: "",
-                  cbph10: "",
-                  cbph11: "",
-                  cbpg161: "",
-                  cbpc01: "",
-                  cbpc000: "",
-                  cbpd09: "",
-                  cbpd11: "",
-                  cbpd12: ""
-                }
+
               }
               if (count-- === 1) {
                 this._ly_save()
@@ -1006,6 +925,9 @@ export default {
         canUseSku: 0,
         moner: '',
         province: '',
+        standardprice:undefined,
+        thisprice:undefined,
+        money:undefined
       })
       this.dataId++
       console.log(this.tableData);
@@ -1304,8 +1226,16 @@ export default {
       }
     },
     optionClick(row,item){
+
       if (this.formData.customerId == null) {
         this.$message.error("请先选择客户")
+        row.goodsId = null;
+        return;
+      }
+
+      if (this.formData.cboe21 == null) {
+        this.$message.error("请先选择订单类型")
+        row.goodsId = null;
         return;
       }
 
@@ -1318,7 +1248,38 @@ export default {
 
         return
       }
-      row.standardprice = item.standardprice;
+
+      if(row.goodsId!=null&&this.formData.customerId!=null&&this.formData.cboe21!=null){
+        let monery;
+        if(this.formData.cboe21=="1"){
+          monery = 5;
+        }else if(this.formData.cboe21=="2"){
+          monery = 6;
+        }
+        const param = {
+          goodsId: row.goodsId,
+          customerId: this.formData.customerId,
+          orderClass: this.formData.cboe21,
+          cbobId:undefined,
+          currency:monery
+
+        }
+        goodsPriceAndSku(param).then(response => {
+          if (response.code == "200") {
+            row.standardprice=parseFloat(response.data.normalPrice).toFixed(2)
+            // row.canUseSku=response.data.canUseSku
+
+          }else {
+           /* row.normalPrice=0.0
+            row.canUseSku=0.0*/
+
+            //  this.$message.error(response.msg)
+
+          }
+        });
+      }
+
+
 
     },
     goodsOnChange(row) {
