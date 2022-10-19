@@ -893,8 +893,6 @@ export default {
                             console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("审批成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -936,8 +934,6 @@ export default {
                             console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("反审成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
 
                     }).catch((e) => {
@@ -984,8 +980,6 @@ export default {
                             console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("已标记完成");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1032,8 +1026,6 @@ export default {
                             console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("取消标记成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1243,8 +1235,6 @@ export default {
                             this.submitShangpin();
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
 
                     }).catch((e) => {
@@ -1279,8 +1269,6 @@ export default {
                     this.submitShangpin();
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             }).catch(() => { });
         },

@@ -725,9 +725,7 @@ export default {
               item.id = this.userList[0].id;
             })
 
-          } else {
-            this.$message({ message: res.msg, type: 'error' });
-          }
+          } 
         });
       }
     },
@@ -1100,8 +1098,6 @@ export default {
               //   console.log(response.data.id,8523697412);
               // })
               this._ly_ok();
-            } else {
-              this.$message({ message: response.msg, type: 'error' });
             }
           });
 

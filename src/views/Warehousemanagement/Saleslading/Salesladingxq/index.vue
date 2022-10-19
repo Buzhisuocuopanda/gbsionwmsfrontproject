@@ -477,8 +477,6 @@ export default {
           // this.$router.push("/Warehousemanagement/Saleslading/");
           this.$tab.closePage();
           this.$router.go(-1);
-        } else {
-          // this.$message({ message: res.msg, type: "error" });
         }
       });
     },
@@ -492,8 +490,6 @@ export default {
           // this.$router.push("/Warehousemanagement/Saleslading/");
           this.$tab.closePage();
           this.$router.go(-1);
-        } else {
-          // this.$message({ message: res.msg, type: "error" });
         }
       });
     },
@@ -511,8 +507,6 @@ export default {
           // this.$router.push("/Warehousemanagement/Saleslading/");
           this.$tab.closePage();
           this.$router.go(-1);
-        } else {
-          // this.$message({ message: res.msg, type: "error" });
         }
       });
     },

@@ -1254,8 +1254,6 @@ export default {
                   // console.log(res, 123)
                   this.getList();
                   this.$modal.msgSuccess("取消标记成功");
-                } else {
-                  this.$message({ message: res.msg, type: "error" });
                 }
               })
               .catch((e) => {
@@ -1486,8 +1484,6 @@ export default {
                   this.submitShangpin();
                   this.getList();
                   this.$modal.msgSuccess("删除成功");
-                } else {
-                  this.$message({ message: res.msg, type: "error" });
                 }
               })
               .catch((e) => {
@@ -1529,8 +1525,6 @@ export default {
             this.submitShangpin();
             this.getList();
             this.$modal.msgSuccess("删除成功");
-          } else {
-            this.$message({ message: response.msg, type: "error" });
           }
         })
         .catch(() => { });

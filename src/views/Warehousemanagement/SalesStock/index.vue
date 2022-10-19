@@ -985,8 +985,6 @@ export default {
                         console.log(res, 123)
                         this.getList();
                         this.$modal.msgSuccess("审批成功");
-                     }else{
-                        this.$message({ message: res.msg, type: 'error' });
                      }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1027,8 +1025,6 @@ export default {
                         if(res.code == 200){
                             this.getList();
                             this.$modal.msgSuccess("反审成功");
-                        }else{
-                            // this.$modal.msgError(res.msg)
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1072,8 +1068,6 @@ export default {
                         if(res.code == 200){
                             this.getList();
                             this.$modal.msgSuccess("标记完成");
-                        }else{
-                            // this.$modal.msgError(res.msg)
                         }
 
                     }).catch((e) => {
@@ -1126,9 +1120,7 @@ export default {
                         }else{
                             // this.$modal.msgError(res.msg)
                         }
-                     }else{
-                            this.$message({ message: res.msg, type: 'error' });
-                      }
+                     }
 
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1148,8 +1140,6 @@ export default {
                             this.$modal.msgSuccess("更新库存成功");
                             this.submitShangpin();
                             this.getList();
-                        }else{
-                            this.$modal.msgError(res.msg);
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1191,8 +1181,6 @@ export default {
                     if(response.code == 200){
                         this.getList();
                         this.$message({ message: '修改成功', type: 'success' });
-                    }else{
-                        // this.$modal.msgError(response.msg)
                     }
                     this.open = false;
                 });

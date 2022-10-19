@@ -1359,8 +1359,6 @@ export default {
               // console.log(res, 123)
               this.getList();
               this.$modal.msgSuccess("反审成功");
-            } else {
-              this.$modal.msgError(res.msg);
             }
           })
           .catch((e) => {
@@ -1426,8 +1424,6 @@ export default {
               // console.log(res, 123)
               this.getList();
               this.$modal.msgSuccess("标记完成");
-            } else {
-              this.$modal.msgError(res.msg);
             }
           })
           .catch((e) => {
@@ -1473,8 +1469,6 @@ export default {
               console.log(this.form.id, 789);
               this.getList();
               this.$message({ message: "取消标记成功", type: "success" });
-            } else {
-              this.$modal.msgError(response.msg);
             }
           });
         })
@@ -1500,8 +1494,6 @@ export default {
             if (res.code == 200) {
               this.getList();
               this.$modal.msgSuccess("取消标记成功");
-            } else {
-              this.$modal.msgError(res.msg);
             }
           })
           .catch((e) => {
@@ -1734,8 +1726,6 @@ export default {
                   this.submitShangpin();
                   this.getList();
                   this.$modal.msgSuccess("删除成功");
-                } else {
-                  this.$modal.msgError(res.msg);
                 }
               })
               .catch((e) => {
@@ -1777,8 +1767,6 @@ export default {
             this.submitShangpin();
             this.getList();
             this.$modal.msgSuccess("删除成功");
-          } else {
-            this.$modal.msgError(response.msg);
           }
         })
         .catch(() => {});

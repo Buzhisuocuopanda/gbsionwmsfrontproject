@@ -179,7 +179,7 @@ export default {
                         this.$tab.closePage();
                         this.$router.go(-1);
                     } else {
-                        this.$message({ message: response.msg, type: 'error' });
+                        // this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });

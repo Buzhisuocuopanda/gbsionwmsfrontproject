@@ -269,8 +269,6 @@ export default {
                         // this.$router.push("/system/cangkudiaobudanfh/role/");
                         this.$tab.closePage();
                         this.$router.go(-1);
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -286,8 +284,6 @@ export default {
                         // this.$router.push("/system/cangkudiaobudanfh/role/");
                         this.$tab.closePage();
                         this.$router.go(-1);
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });

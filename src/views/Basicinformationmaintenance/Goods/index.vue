@@ -905,7 +905,7 @@ export default {
                         cbpd12: ""
                     }
                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
                 // if (count-- === 1) {
                 //   this._ly_save()
@@ -1078,7 +1078,7 @@ export default {
                     })
 
                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
 
                 // console.log(response.data.content, 339688);
@@ -1299,7 +1299,7 @@ export default {
                                         cbpc099: ""
                                     }
                                 } else {
-                                    this.$message({ message: response.msg, type: 'error' });
+                                    // this.$message({ message: response.msg, type: 'error' });
                                 }
                                 this.getTreeselect();
                                 // this.submitShangpin();
@@ -1374,7 +1374,7 @@ export default {
                             this.reset01();
                             this.$message({ message: '修改成功', type: 'success' });
                         } else {
-                            this.$message({ message: response.msg, type: 'error' });
+                            // this.$message({ message: response.msg, type: 'error' });
                         }
                     });
 

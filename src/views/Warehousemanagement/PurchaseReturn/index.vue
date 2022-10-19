@@ -916,7 +916,7 @@ export default {
                     this.$modal.msgSuccess(res.msg);
 
                  }else{
-                     this.$message({ message: res.msg, type: 'error' });
+                    //  this.$message({ message: res.msg, type: 'error' });
                  }
 
                 }).catch((e) => {
@@ -963,7 +963,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                 }else{
-                this.$message({ message: res.msg, type: 'error' });
+                // this.$message({ message: res.msg, type: 'error' });
                 }
 
                 }).catch((e) => {
@@ -987,7 +987,7 @@ export default {
                 // this.open = false;
                 this.$message({ message: response.msg, type: 'success' });
              }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
                 }
 
 
@@ -1009,7 +1009,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                  }else{
-                this.$message({ message: res.msg, type: 'error' });
+                // this.$message({ message: res.msg, type: 'error' });
                 }
 
                 }).catch((e) => {
@@ -1029,7 +1029,7 @@ export default {
                    this.getList();
                    this.$message({ message: response.msg, type: 'success' });
                }else{
-                   this.$message({ message: response.msg, type: 'error' });
+                //    this.$message({ message: response.msg, type: 'error' });
                 }
 
 
@@ -1058,7 +1058,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
+                    // this.$message({ message: res.msg, type: 'error' });
                 }
 
                 }).catch((e) => {
@@ -1086,7 +1086,7 @@ export default {
                       this.open = false;
                       this.$message({ message: "修改成功", type: 'success' });
                  }else{
-                      this.$message({ message: response.msg, type: 'error' });
+                    //   this.$message({ message: response.msg, type: 'error' });
                 }
                 });
 
@@ -1248,7 +1248,7 @@ export default {
                            this.getList();
                            this.$modal.msgSuccess("删除成功");
                      }else{
-                           this.$message({ message: res.msg, type: 'error' });
+                        //    this.$message({ message: res.msg, type: 'error' });
                     }
 
                     }).catch((e) => {
@@ -1285,7 +1285,7 @@ export default {
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
              }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
              }
 
             }).catch(() => { });

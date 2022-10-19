@@ -825,7 +825,7 @@ export default {
                     // this.open = false;
                     this.$message({ message: response.msg, type: 'success' });
                 }else{
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
 
 
@@ -846,7 +846,7 @@ export default {
                         this.getList();
                         this.$modal.msgSuccess(res.msg);
                     }else{
-                        this.$message({ message: res.msg, type: 'error' });
+                        // this.$message({ message: res.msg, type: 'error' });
                     }
 
                     }).catch((e) => {
@@ -866,7 +866,7 @@ export default {
                     // this.open = false;
                     this.$message({ message: response.msg, type: 'success' });
                 }else{
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
 
                 });
@@ -887,7 +887,7 @@ export default {
                         this.getList();
                         this.$modal.msgSuccess(res.msg);
                     }else{
-                        this.$message({ message: res.msg, type: 'error' });
+                        // this.$message({ message: res.msg, type: 'error' });
                     }
                       }).catch((e) => {
                         // console.log(e, 456)
@@ -909,7 +909,7 @@ export default {
                 // this.open = false;
                 this.$message({ message: response.msg, type: 'success' });
               }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
               }
 
             });
@@ -927,7 +927,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                   }else{
-                    this.$message({ message: res.msg, type: 'error' });
+                    // this.$message({ message: res.msg, type: 'error' });
                   }
                 }).catch((e) => {
                     // console.log(e, 456)
@@ -943,7 +943,7 @@ export default {
                     this.getList();
                     this.$message({ message: response.msg, type: 'success' });
                  }else{
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                  }
                 });
             }).catch(() => { });
@@ -961,7 +961,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
+                    // this.$message({ message: res.msg, type: 'error' });
                 }
 
                 }).catch((e) => {
@@ -987,7 +987,7 @@ export default {
                     this.$message({ message:  response.msg, type: 'success' });
 
                    }else{
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                   } 
 
                 });
@@ -1024,7 +1024,7 @@ export default {
                 this.open2 = false;
                 this.reset01();
              }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
              }
                 // console.log(this.form2.ifEnabled, 123456);
             });
@@ -1133,7 +1133,7 @@ export default {
                         this.getList();
                         this.$modal.msgSuccess(res.msg);
                     }else{
-                        this.$message({ message: res.msg, type: 'error' });
+                        // this.$message({ message: res.msg, type: 'error' });
                    }
 
                     }).catch((e) => {
@@ -1169,7 +1169,7 @@ export default {
                 this.getList();
                 this.$modal.msgSuccess(response.msg);
             }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
                  }
 
             }).catch(() => { });

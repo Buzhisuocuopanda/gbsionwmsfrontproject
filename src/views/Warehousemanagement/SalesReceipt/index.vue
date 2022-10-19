@@ -753,8 +753,6 @@ export default {
                     console.log(response, 339688);
                     // this.deleteFlag = response.data.rows.deleteFlag;
                     this.loading = false;
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             }
             );
@@ -777,8 +775,6 @@ export default {
 
                 if (response.code == "200") {
                     this.postOptions = response.data.rows;
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
                 // console.log(response.data.rows,551100);
             });
@@ -788,8 +784,6 @@ export default {
             StoreList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 if (response.code == "200") {
                     this.KuWeiOptions = response.data.rows;
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
                 // console.log(response.data.rows,663322);
             });
@@ -804,8 +798,6 @@ export default {
                     this.XinghaoOptions = response.data.rows;
                     this.ponpaixenghaomiaoshu = response.data.rows;
                     // console.log(response.data.rows, 1655);
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             });
         },
@@ -816,8 +808,6 @@ export default {
                     this.postCangKu = response.data.rows;
                     // this.XinghaoOptions = response.data.rows;
                     // console.log(response.data.rows, 1655);
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             });
         },
@@ -997,8 +987,6 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("审批成功");
 
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1015,8 +1003,6 @@ export default {
                         this.getList();
                         // this.open = false;
                         this.$message({ message: '反审成功', type: 'success' });
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -1033,8 +1019,6 @@ export default {
                         if (res.code == "200") {
                             this.getList();
                             this.$modal.msgSuccess("反审成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1055,8 +1039,6 @@ export default {
                         this.getList();
                         // this.open = false;
                         this.$message({ message: '标记完成', type: 'success' });
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -1072,8 +1054,6 @@ export default {
                         if (res.code == "200") {
                             this.getList();
                             this.$modal.msgSuccess("标记完成");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1091,8 +1071,6 @@ export default {
                         console.log(this.form.cbpc01, 789);
                         this.getList();
                         this.$message({ message: '取消标记成功', type: 'success' });
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
 
                 });
@@ -1110,8 +1088,6 @@ export default {
                             // console.log(res, 123)
                             this.getList();
                             this.$modal.msgSuccess("取消标记成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1137,8 +1113,6 @@ export default {
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
 
             });
@@ -1161,8 +1135,6 @@ export default {
                     this.getList();
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
             });
 
@@ -1223,8 +1195,6 @@ export default {
                             this.getList();
                             this.open2 = false;
                             this.reset01();
-                        } else {
-                            this.$message({ message: response.msg, type: 'error' });
                         }
 
                         // console.log(this.form2.ifEnabled, 123456);
@@ -1335,8 +1305,6 @@ export default {
                             this.submitShangpin();
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
-                        } else {
-                            this.$message({ message: res.msg, type: 'error' });
                         }
 
                     }).catch((e) => {
@@ -1372,8 +1340,6 @@ export default {
                     this.submitShangpin();
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
 
             }).catch(() => { });
