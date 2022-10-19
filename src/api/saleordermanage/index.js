@@ -1,5 +1,7 @@
 import request from '@/utils/request'
-import { parseStrEmpty } from "@/utils/ruoyi";
+import {
+  parseStrEmpty
+} from "@/utils/ruoyi";
 // 生产总订单列表
 export function totalOrderList(data) {
   return request({
@@ -125,11 +127,11 @@ export function customerDetailShop(data) {
 }
 // /dev-api/stage-api/sale/goodsShopListcas
 export function customerDetaillists(data) {
-  console.log(data,typeof(data),'后台数据')
+  console.log(data, typeof (data), '后台数据')
   return request({
     url: '/sale/goodsShopListcas',
     method: 'post',
-    data:data,
+    data: data,
   })
 }
 
@@ -330,7 +332,8 @@ export function delgoodsShop(data) {
     data: data
   })
 }
-export function plDelete(data) {
+export function pldelete(data) {
+  console.log(data)
   return request({
     url: '/sale/plDelete',
     method: 'post',
