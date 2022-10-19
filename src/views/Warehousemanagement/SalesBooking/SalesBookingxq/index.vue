@@ -3,7 +3,7 @@
         <section ref="print" class="recordImg" id="printRecord">
             <div class="Purchase_caigou">销售预订单</div>
             <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
-                <span class="Purchase_bianhao">编号：{{ value.orderNo }}</span>
+                <span class="Purchase_bianhao">编号：{{ value.ponumber }}</span>
                 <span class="Purchase_riqi">日期：{{ value.orderDate.slice(0, 10) }}</span>
             </div>
             <div style="width:98%; margin-left: 1%; margin-top: 1%;">
