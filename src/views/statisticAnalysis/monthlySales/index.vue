@@ -4,16 +4,6 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" >
-        <!--<el-form-item  label="日期" style="margin-left: 20px;">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="margin-left: 10px;height: 35px"
-                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-          </el-date-picker>
-        </el-form-item>-->
-
-       <!-- <el-form-item label="SKU"  style="margin-left: 10px"  class="item-r" >
-          <el-input v-model="queryParams.cbpb12" style="margin-left: 10px;" class="filter-item"  placeholder="请输入SKU" />
-        </el-form-item>-->
         <el-form-item label="客户"  class="item-r" label-width="80px">
           <el-select v-model="queryParams.customerId"  style="margin-left: 10px;width: 240px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
@@ -31,9 +21,7 @@
         </el-form-item>
       </el-form>
       <el-table  :header-cell-style="headClasspwfnsyns" :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="430" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em">
-        <!--  <el-table-column fixed label="入库时间" align="left" :formatter="formatDate" header-align="center" prop="inWhTime" min-width="100px;" />
-          <el-table-column fixed label="出库时间" align="left" prop="outWhTimeMsg"  min-width="100px;"/>-->
+                 border fit highlight-current-row stripe >
         <el-table-column  label="月份" prop="yearAndMonth" min-width="100px;"/>
         <el-table-column  label="客户" prop="customerName" min-width="150px;"/>
         <el-table-column  label="出库数量"  :formatter="rounding" align="right" prop="outCount" min-width="100px;"/>
@@ -56,8 +44,6 @@
   </div>
 </template>
 <script>
-  // import x from ''
-  // import { totalOrderList } from "@/api/saleordermanage";
   import { monthlySales,getSwJsStoreSkuAllList,getSwJsCustomerAllList } from "@/api/statisticAnalysis/index";
 
   import SelectMonth from "@/components/SelectMonth"
@@ -244,25 +230,6 @@
         }
       },
 
-      /*    onSubmit() {},*/
-      /*handleSelectionChange() {},*/
-      /* formatStateType(row) {
-         if (row != null) {
-           if (row.status == 0) {
-             return "NO"
-           } else if (row.status == 4) {
-             return "OK"
-           }
-         }
-       },*/
-      RToU(num){
-        if(num!=null){
-          return num*141/1000;
-        }else {
-          return "";
-        }
-
-      },
       /** 重置按钮操作 */
       resetQuery() {
 
