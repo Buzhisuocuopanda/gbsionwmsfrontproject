@@ -1043,8 +1043,6 @@ export default {
                         this.getList();
                         // this.open = false;
                         this.$message({ message: '盘点成功', type: 'success' });
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });

@@ -219,8 +219,6 @@ export default {
                     if (response.code == "200") {
                         this.$message({ message: '标记成功', type: 'success' });
                         this.$router.push("/Warehousemanagement/SalesStock");
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -234,8 +232,6 @@ export default {
                     if (response.code == "200") {
                         this.$message({ message: '取消成功', type: 'success' });
                         this.$router.push("/Warehousemanagement/SalesStock");
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -249,8 +245,6 @@ export default {
                     if (response.code == "200") {
                         this.$message({ message: '审批成功', type: 'success' });
                         this.$router.push("/Warehousemanagement/SalesStock");
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -264,8 +258,6 @@ export default {
                     if (response.code == "200") {
                         this.$message({ message: '反审成功', type: 'success' });
                         this.$router.push("/Warehousemanagement/SalesStock");
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });

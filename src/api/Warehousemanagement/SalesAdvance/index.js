@@ -9,7 +9,14 @@ export function PurchaseinboundAdd(data) {
     data: data
   })
 }
-
+// 新增配置
+export function bgdxz(data) {
+  return request({
+    url: '/system/SalesScheduledOrders/bgdxz',
+    method: 'post',
+    data: data
+  })
+}
 // 销售预订单新增配置
 export function PurchaseinboundAddydd(data) {
   return request({

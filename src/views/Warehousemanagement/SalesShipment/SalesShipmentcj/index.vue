@@ -785,8 +785,6 @@ export default {
             //     cbsb21:"",
             //     cbsb30:""
             // }
-          } else {
-            this.$message({ message: response.msg, type: "error" });
           }
           if (count-- === 1) {
             this._ly_save();
@@ -1203,9 +1201,7 @@ export default {
               //     cbsb21:"",
               //     cbsb30:""
               // }
-            } else {
-              this.$message({ message: response.msg, type: 'error' })
-            }
+            } 
             if (count-- === 1) {
               this._ly_save()
             }
@@ -1478,8 +1474,6 @@ export default {
                 console.log(response.data.id, 123456);
                 // console.log(this.item, 123456);
                 this._ly_ok();
-              } else {
-                // this.$message({ message: response.msg, type: 'error' })
               }
             });
           } else {

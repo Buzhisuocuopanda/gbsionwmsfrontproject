@@ -186,8 +186,6 @@ export default {
                         this.$message({ message: '审批成功', type: 'success' });
                         this.$tab.closePage();
                         this.$router.go(-1);
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });

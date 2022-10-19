@@ -1180,7 +1180,7 @@ export default {
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            // this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         // console.log(e, 456)
@@ -1215,7 +1215,7 @@ export default {
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
             }).catch(() => { });
         },

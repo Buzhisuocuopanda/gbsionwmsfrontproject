@@ -586,8 +586,6 @@
             // console.log(response)
             if ( response.code === 200) {
               this.$message.success("删除成功")
-            } else {
-              this.$message.error(response.data.msg)
             }
           })
         })
@@ -667,9 +665,6 @@
             this.showaddDialog=false
             this.formData={}
             this.onSearch();
-          } else {
-            // this.$notify.error(response.data.msg)
-
           }
         })
 
@@ -694,8 +689,6 @@
             // console.log(response)
             if ( response.code === 200) {
               this.$notify.success("删除成功")
-            } else {
-              this.$notify.error(response.data.msg)
             }
           })
         })
@@ -718,9 +711,6 @@
             this.showmdfDialog=false
             this.formData={}
             this.onSearch();
-          } else {
-            // this.$notify.error(response.data.msg)
-
           }
         })
 
@@ -743,12 +733,12 @@
           this.onSearch()
 
         } else {
-          this.message = res.msg
-          this.$message.warning({
-            dangerouslyUseHTMLString: true,
-            showClose: true,
-            message: this.message.toString()
-          })
+          // this.message = res.msg
+          // this.$message.warning({
+          //   dangerouslyUseHTMLString: true,
+          //   showClose: true,
+          //   message: this.message.toString()
+          // })
           this.loadingState = false
         }
       },
@@ -792,7 +782,7 @@
             if ( response.code === 200) {
               this.$notify.success("提交成功")
             } else {
-              this.$notify.error(response.data.msg)
+              // this.$notify.error(response.data.msg)
             }
           })
         })

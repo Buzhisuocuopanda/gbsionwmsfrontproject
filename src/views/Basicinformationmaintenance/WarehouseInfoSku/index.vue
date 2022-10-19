@@ -880,7 +880,7 @@ export default {
                             this.open2 = false;
                             this.reset01();
                         } else {
-                            this.$message({ message: response.msg, type: 'error' });
+                            // this.$message({ message: response.msg, type: 'error' });
                         }
                         console.log(this.form2.ifEnabled, 123456);
                     });
@@ -932,6 +932,7 @@ export default {
             row.cbwa14 = this.form.cbwa14;
             row.cbwa15 = this.form.cbwa15;
             row.cbwa01 = this.form.cbwa01;
+            row.allocationFlag = this.form.allocationFlag;
             // console.log(this.form.id);
             this.$refs["form"].validate((item) => {
                 if (item) {
@@ -953,7 +954,7 @@ export default {
                             this.open = false;
                             this.$message({ message: '修改成功', type: 'success' });
                         } else {
-                            this.$message({ message: response.msg, type: 'error' });
+                            // this.$message({ message: response.msg, type: 'error' });
                         }
                     });
                 } else {
@@ -1015,6 +1016,13 @@ export default {
             } else if (row.cbwa15 == "1") {
                 this.form.cbwa15 = "否"
                 row.cbwa15 = "1"
+            }
+            if(row.allocationFlag == "0"){
+                this.form.allocationFlag = "不启用"
+                row.allocationFlag = "0"
+            }else if(row.allocationFlag == "1"){
+                this.form.allocationFlag = "启用"
+                row.allocationFlag = "1"
             }
             // console.log(row)
             // this.getList();
@@ -1087,7 +1095,7 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            // this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1119,7 +1127,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
             }).catch(() => { });
         },

@@ -343,7 +343,7 @@ export default {
                         this.reset();
                         this.form.cbpa09 = "0";
                         } else {
-                            this.$message({ message: response.msg, type: 'error' });
+                            // this.$message({ message: response.msg, type: 'error' });
                         }
 
                     });

@@ -765,8 +765,6 @@ export default {
             orderNo: "",
             GsSalesOrders: ""
           }
-        } else {
-          this.$message({ message: response.msg, type: 'error' });
         }
         if (count-- === 1) {
           this._ly_save()
@@ -910,8 +908,6 @@ export default {
               item.orderNo = item.orderNo
             })
 
-          } else {
-            this.$message({ message: res.msg, type: 'error' });
           }
         });
       }

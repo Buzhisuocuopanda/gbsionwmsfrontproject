@@ -734,7 +734,7 @@ export default {
               cbpd12: ""
             }
           } else {
-            this.$message({ message: response.msg, type: 'error' });
+            // this.$message({ message: response.msg, type: 'error' });
           }
           if (count-- === 1) {
             this._ly_save()
@@ -1010,7 +1010,7 @@ export default {
               this.$tab.closePage();
               this.$router.go(-1);
             } else {
-              this.$message({ message: response.msg, type: 'error' });
+              // this.$message({ message: response.msg, type: 'error' });
             }
           });
         } else {

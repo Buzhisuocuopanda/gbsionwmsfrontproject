@@ -786,8 +786,6 @@ export default {
                         orderNo: "",
                         GsSalesOrders: ""
                     }
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
                 if (count-- === 1) {
                     this._ly_save()
@@ -938,8 +936,6 @@ export default {
                             item.goodsclassify = this.userList[0].cbpb12;
                         })
 
-                    } else {
-                        this.$message({ message: res.msg, type: 'error' });
                     }
                 });
             }
@@ -1167,8 +1163,6 @@ export default {
                     this.getList();
                     this.$message({ message: '修改成功', type: 'success' });
 
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
                 }
 
             });

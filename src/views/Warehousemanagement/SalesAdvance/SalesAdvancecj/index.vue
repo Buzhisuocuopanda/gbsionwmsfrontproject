@@ -135,7 +135,7 @@
               <el-popover placement="bottom-start" trigger="click">
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
                   style="width: 600px !important" />
-                <el-input slot="reference" v-model="scope.row.goodsclassify" placeholder="" readonly
+                <el-input slot="reference" v-model="scope.row.goodsclassify" placeholder=""
                   style="width: 100%">
                 </el-input>
               </el-popover>
@@ -158,7 +158,7 @@
           <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
               <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" @change="dateFormat"
-                value-format="yyyy-MM-dd HH:mm:ss" style="width: 100%">
+                value-format="yyyy-MM-dd HH:mm:ss" style="width: 100%" @blur="changedate(scope.row)">
               </el-date-picker>
             </template>
           </el-table-column>
@@ -213,7 +213,7 @@
 // import { PurchaseinboundAdds } from "@/api/Warehousemanagement/SalesShipment";
 
 import {
-  PurchaseinboundAdd,
+  bgdxz,
   saleOrderListdetail,
 } from "@/api/Warehousemanagement/SalesAdvance";
 
@@ -738,6 +738,12 @@ export default {
     //   }
     // },
     dateFormat(row) {
+      // let date =  row.slice(0, 10) + 'T' + row.slice(11, 19) + '.000+08:00'
+      // row = date
+      // console.log(row,date)
+    },
+    changedate(row){
+      // row.orderDate = row.orderDate.slice(0, 10) + 'T' + row.orderDate.slice(11, 19) + '.000+08:00'
       console.log(row)
     },
     //添加模块-销售人员
@@ -790,14 +796,26 @@ export default {
           orderDate: arr1[i].orderDate.slice(0, 10) + 'T' + arr1[i].orderDate.slice(11, 19) + '.000+08:00',
           qty: arr1[i].qty,
           price: arr1[i].price,
-          salerId: arr1[0].salerId,
-          supplierId: arr1[0].supplierId,
+          // salerId: arr1[0].salerId,
+          // supplierId: arr1[0].supplierId,
         });
       }
+      let obj = {
+        "customerId": this.form2.customerId,
+        "goods": arr1,
+        "gsid": this.form2.id,
+        "id": this.form2.id,
+        "orderNo": this.form2.orderNo,
+        "supplierId": this.form2.supplierId,
+        "salerId": this.form2.salerId,
+        "whId": this.form2.whId,
+      }
+      console.log(obj)
+      return
       if (!arr[0].gsSalesOrders) {
         return;
       } else {
-        PurchaseinboundAdd(JSON.stringify(arr)).then((response) => {
+        bgdxz(JSON.stringify(obj)).then((response) => {
           if (response.code == "200") {
             this.tableData = [];
             this.form2 = {
@@ -972,7 +990,7 @@ export default {
           this.tableData.map((item) => {
             item.goodsclassify =
               item.cala08 + " ~ " + item.cbpb12 + " ~ " + item.cbpb08;
-            // item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
+            item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
           });
           this.form2.GsSalesOrders = orderno;
           console.log(this.tableData)
@@ -998,7 +1016,7 @@ export default {
         name.substring(0, name.indexOf(".")),
         555
       );
-      console.log(row, 96325412, strarr);
+      console.log(row, 96325412);
     },
 
     //添加行

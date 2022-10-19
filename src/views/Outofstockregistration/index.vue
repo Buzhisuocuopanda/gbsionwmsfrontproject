@@ -472,7 +472,7 @@ export default {
             this.$notify.success("删除成功")
 
           } else {
-            this.$notify.error(response.data.msg)
+            // this.$notify.error(response.data.msg)
           }
         })
       })
