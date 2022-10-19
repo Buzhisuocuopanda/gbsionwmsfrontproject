@@ -372,6 +372,12 @@
         </el-col>
 
         <el-col :span="8">
+          <el-form-item  label="订单类型:" prop="cboe21">
+            <el-select v-model="formData.cboe21" filterable clearable placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in orderClass" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
           <!--<el-form-item label="结算货币:" prop="saleUserId">&lt;!&ndash;v-model="formData.saleUserId" &ndash;&gt;
             <el-select  filterable clearable placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
@@ -786,41 +792,6 @@ export default {
         }
         ]
       },
-      treeData: [{ // 树状数据
-        id: 1,
-        label: '一级 1',
-        children: [{
-          id: 4,
-          label: '二级 1-1',
-          children: [{
-            id: 9,
-            label: '三级 1-1-1'
-          }, {
-            id: 10,
-            label: '三级 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: '一级 2',
-        children: [{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 6,
-          label: '二级 2-2'
-        }]
-      }, {
-        id: 3,
-        label: '一级 3',
-        children: [{
-          id: 7,
-          label: '二级 3-1'
-        }, {
-          id: 8,
-          label: '二级 3-2'
-        }]
-      }],
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -1128,6 +1099,16 @@ export default {
         }, {
           value: 5,
           label: 'USD'
+        }
+      ],
+      //订单类型集合
+      orderClass: [
+        {
+          value: '1',
+          label: '国际'
+        }, {
+          value: '2',
+          label: '国内'
         }
       ],
     };
