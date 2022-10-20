@@ -197,27 +197,30 @@
     <!--提货单创建-->
     <el-dialog :visible.sync="open3" @close="close">
       <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
-        <el-col :span="12">
+        <el-col :span="10">
           <el-popover placement="bottom-start" trigger="click" clearable>
             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 260px !important" />
             <el-input slot="reference" v-model="form2.cbpc100" placeholder="请选择仓库" readonly style="width: 96%">
             </el-input>
           </el-popover>
         </el-col>
-        <el-col :span="12">
+        <el-col :span="10">
           <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
             @change="handleQuerys(queryParams.orderNo)" />
+        </el-col>
+        <el-col :span="4">
+          <el-button type="primary" @click="found">创建出库单</el-button>
         </el-col>
       </el-row>
       <el-table border :header-cell-style="headClassssmt" v-loading="loading" :data="userList01" height="440"
         :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%; height: 8%; margin-left: -2%"
         @selection-change="handleSelectionChange">
-        <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
-          <template slot-scope="scope" style="margin-left: -10%">
+        <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width" type="selection">
+          <!-- <template slot-scope="scope" style="margin-left: -10%">
             <el-button size="mini" icon="el-icon-share" class="button-caozuoxougai caozuoxiangqeng" type="primary"
               @click="sendParams(scope.row)" v-hasPermi="['system:user:edit']">
             </el-button>
-          </template>
+          </template> -->
         </el-table-column>
         <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable
           style="padding-top: 60px !important" width="260px;" />
@@ -856,6 +859,7 @@ export default {
       Purchaseinbounddingdancx(
         this.addDateRange(this.queryParamss, this.dateRange)
       ).then((response) => {
+        console.log(response)
         this.userList01 = response.data.rows;
         this.totall = response.data.total;
         // //供应商
@@ -1032,8 +1036,9 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection;
-      this.idss = selection.map((item) => item.cbsb07);
+      this.idss = selection.map((item) => item.id);
       this.shenpiids = selection;
+      console.log(this.shenpiids)
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
@@ -1401,6 +1406,47 @@ export default {
       const userId = row.cbsb01;
       // this.$router.push("/system/user-auth/role/");
       this.$router.push("/system/user-xiugaichukuxiugai/role/" + userId);
+    },
+    found() {
+      let isok = true;
+      if (this.shenpiids[0]) {
+        let customerName1 = this.shenpiids[0].customerName
+        for (let i = 0; i < this.shenpiids.length; i++) {
+          if (this.shenpiids[i].customerName !== customerName1) {
+            isok = false
+          }
+        }
+      }
+      if (!this.form2.cbpc10) {
+        this.$message({
+          message: '请选择仓库',
+          type: 'warning'
+        });
+      } else if (!this.shenpiids[0]) {
+        this.$message({
+          message: '请选择订单',
+          type: 'warning'
+        });
+      }
+      else if (!isok) {
+        this.$message({
+          message: '请选择同一客户',
+          type: 'warning'
+        });
+      }
+      else {
+        console.log('跳转到创建界面')
+        this.$router.push({
+          path: "/system/user-authhhchuanj/role/",
+          // name: "AuthUser",
+          query: {
+            data: this.idss,
+            whNameid: this.form2.cbpc10
+          },
+        });
+        this.open3 = false
+        this.close()
+      }
     },
 
     //父子传值

@@ -734,18 +734,19 @@ export default {
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
+      let that = this
       let arr1 = [];
-      for (let i = 0; i < this.tableData.length; i++) {
-        arr1.splice(0, i, {
-          "goodsId": 0,
-          "gsSalesOrders": 0,
-          "inQty": 0,
-          "ponumber": 0,
+      for (let i = 0; i < that.tableData.length; i++) {
+        arr1.push({
+          goodsId: that.tableData[i].goodsId,
+          gsSalesOrders: that.tableData[i].id,
+          inQty: that.tableData[i].qty,
+          ponumber: that.tableData[i].ponumber,
         })
-        arr1[i].goodsId = this.tableData[i].goodsId
-        arr1[i].gsSalesOrders = this.tableData[i].id
-        arr1[i].inQty = this.tableData[i].qty
-        arr1[i].ponumber = this.tableData[i].ponumber
+        // arr1[i].goodsId = this.tableData[i].goodsId
+        // arr1[i].gsSalesOrders = this.tableData[i].id
+        // arr1[i].inQty = this.tableData[i].qty
+        // arr1[i].ponumber = this.tableData[i].ponumber
       }
       PurchaseinboundAdd(JSON.stringify(arr1)).then((response) => {
         if (response.code == "200") {
