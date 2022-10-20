@@ -1090,7 +1090,7 @@ export default {
         // goods: [
         //   { required: true, message: '请选择商品', trigger: 'blur' },
         // ],
-        customerId: [
+        customerName: [
           { required: true, message: '请选择客户', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
