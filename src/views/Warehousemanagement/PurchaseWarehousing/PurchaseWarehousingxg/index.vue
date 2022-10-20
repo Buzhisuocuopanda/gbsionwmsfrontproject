@@ -228,6 +228,7 @@
                 placeholder=""
                 class="shuzicaoyou"
                 style=""
+                readonly
               ></el-input>
             </template>
           </el-table-column>
@@ -890,10 +891,10 @@ export default {
       this.tableData.push({
         "cbpd01": this.form2.cbpd01,
         "cbpc01": this.form2.cbpc01,
-        "cbpd08": this.form2.cbpd08,
-        "cbpd09": this.form2.cbpd09,
-        "cbpd11": this.form2.cbpd11,
-        "cbpd12": this.form2.cbpd12,
+        "cbpd08": "",
+        "cbpd09": '',
+        "cbpd11": '',
+        "cbpd12": '',
         "cbpd13": "",
       });
       this.dataId++;
@@ -1067,22 +1068,25 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-            if(this.form2.cala08s == 'CNY'){
-              this.form2.cbpc16 = 6
-            }else{
-              this.form2.cbpc16 = 5
-            }
-            this.tableData[0] = {
-                "cbpd01": this.form2.cbpd01,
-                "cbpc01": this.form2.cbpc01,
-                "cbpd08": this.form2.cbpd08,
-                "cbpd09": this.form2.cbpd09,
-                "cbpd11": this.form2.cbpd11,
-                "cbpd12": this.form2.cbpd12,
-                "cbpd13": "",
-            }
-            this.form2.goods = this.tableData
-            console.log(this.form2)
+          if(this.form2.cala08s == 'CNY'){
+            this.form2.cbpc16 = 6
+          }else{
+            this.form2.cbpc16 = 5
+          }
+          // 声明空数组，for循环生成新的数组
+          let newarr = []
+          for(let i = 0;i<this.tableData.length;i++){
+            newarr.push({
+              "cbpd01": this.tableData[i].cbpd01,
+              "cbpc01": this.tableData[i].cbpc01,
+              "cbpd08": this.tableData[i].cbpd08,
+              "cbpd09": this.tableData[i].cbpd09,
+              "cbpd11": this.tableData[i].cbpd11,
+              "cbpd12": this.tableData[i].cbpd12,
+              "cbpd13": this.tableData[i].cbpd13,
+            })
+          }
+          this.form2.goods = newarr
           PurchaseinboundEditone(this.form2).then((response) => {
             if (response.code == "200") {
               this.$message({
