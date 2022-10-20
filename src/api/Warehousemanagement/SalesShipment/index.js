@@ -1,5 +1,7 @@
 import request from '@/utils/request'
-import { parseStrEmpty } from "@/utils/ruoyi";
+import {
+  parseStrEmpty
+} from "@/utils/ruoyi";
 
 // 新增配置
 export function PurchaseinboundAdd(data) {
@@ -50,7 +52,7 @@ export function Purchaseinbounddingdancx(data) {
 // 详情
 export function PurchaseinboundLists(CBPC01) {
   return request({
-    url: '/system/Selloutofwarehouse/SwJsSkuBarcodelistss?cbsb01='+ CBPC01,
+    url: '/system/Selloutofwarehouse/SwJsSkuBarcodelistss?cbsb01=' + CBPC01,
     method: 'get'
   })
 }
@@ -58,7 +60,7 @@ export function PurchaseinboundLists(CBPC01) {
 //销售提货单详情
 export function PurchaseinListxiangq(CBPC01) {
   return request({
-    url: '/whmanagement/takeOrderDetail?id='+ CBPC01,
+    url: '/whmanagement/takeOrderDetail?id=' + CBPC01,
     method: 'get'
   })
 }
@@ -67,7 +69,7 @@ export function PurchaseinListxiangq(CBPC01) {
 //销售出库单打印1
 export function PurchaseinListxiandayin(data) {
   return request({
-    url: '/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId='+ data,
+    url: '/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId=' + data,
     method: 'post',
     data: data
   })
@@ -76,7 +78,7 @@ export function PurchaseinListxiandayin(data) {
 //销售出库建议表打印1
 export function PurchaseinListchukujianyibiao(data) {
   return request({
-    url: '/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId='+ data,
+    url: '/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId=' + data,
     method: 'post',
     data: data
   })
@@ -85,7 +87,7 @@ export function PurchaseinListchukujianyibiao(data) {
 //销售扫描记录表
 export function PurchaseinListsaomiaojilubiao(data) {
   return request({
-    url: '/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId='+ data,
+    url: '/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId=' + data,
     method: 'post',
     data: data
   })
@@ -106,7 +108,7 @@ export function PurchaseinboundRemove(data) {
   return request({
     url: '/system/Selloutofwarehouse/Selloutofwarehousedel',
     method: 'post',
-    data:data
+    data: data
   })
 }
 
@@ -202,13 +204,13 @@ export function StoreSkuList(query) {
   })
 }
 // 查询列表2
-export function CustomerLists(whid,goodsid) {
+export function CustomerLists(whid, goodsid) {
   return request({
     url: '/whmanagement/selectGoodsSnByWhIdAndGoodsId',
     method: 'get',
     params: {
-      whId:whid,
-      goodsId:goodsid
+      whId: whid,
+      goodsId: goodsid
     }
   })
 }
@@ -219,7 +221,7 @@ export function SwJsSkuBarcodelistss(id) {
     url: '/system/Selloutofwarehouse/SwJsSkuBarcodelistss',
     method: 'get',
     params: {
-      cbsb01:id
+      cbsb01: id
     }
   })
 }
