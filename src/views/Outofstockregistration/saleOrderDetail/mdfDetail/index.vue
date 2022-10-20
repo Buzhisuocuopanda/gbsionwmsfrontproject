@@ -1095,7 +1095,7 @@ export default {
           // { type: 'number', message: '数量必须为数字'}
         ],
         cboe21:[
-          { required: true, message: '请选择缺货单类型', trigger: 'blur' },
+          { required: true, message: '请选择订单类型', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
         cboe22:[
