@@ -487,9 +487,9 @@ export default {
                 cbpc100: [
                     { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
-                cbla12: [{
-                    required: true, message: "优先型号不能为空!", trigger: "blur"
-                }],
+                // cbla12: [{
+                //     required: true, message: "优先型号不能为空!", trigger: "blur"
+                // }],
                 // cbla13:[{
                 //     required: true, message: "备注不能为空!", trigger: "blur"
                 // }],
@@ -513,9 +513,9 @@ export default {
                 cbpc100: [
                     { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
-                cbla12: [{
-                    required: true, message: "优先型号不能为空!", trigger: "blur"
-                }],
+                // cbla12: [{
+                //     required: true, message: "优先型号不能为空!", trigger: "blur"
+                // }],
                 // cbla13:[{
                 //     required: true, message: "备注不能为空!", trigger: "blur"
                 // }],
