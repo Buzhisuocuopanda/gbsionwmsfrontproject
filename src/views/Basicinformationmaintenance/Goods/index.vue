@@ -27,6 +27,11 @@
                             <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
+                        <el-form-item prop="cbpb15" label="UPC">
+                            <!-- placeholder="描述/助记符/品牌/UPC/" -->
+                            <el-input v-model="queryParams.cbpb15" id="miaoshu" placeholder="请输入型号" clearable
+                                style="width: 240px;" @keyup.enter.native="handleQuery" />
+                        </el-form-item>
                         <el-form-item>
                             <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:goods:list']"
                                 @click="handleQuery">查询</el-button>
@@ -331,6 +336,14 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="类型:" prop="cbpb07">
+                            <el-select v-model="form2.cbpb07" placeholder="" style="width:80%;">
+                                <el-option v-for="item in storeType" :key="item.value" :label="item.label"
+                                    :value="item.label"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
                 <el-row v-if="false">
                     <el-col :span="11">
@@ -576,6 +589,18 @@ export default {
                 label: '禁用'
             }],
             value: '',
+            // 类型
+            storeType: [
+                {
+                    value: "0",
+                    lable: '商品'
+                },
+                {
+                    value: "1",
+                    lable: '配件'
+                }
+            ],
+            typeValue: "",
 
             //客户等级
             kehudengji: [{
@@ -1023,7 +1048,7 @@ export default {
         getList() {
             this.loading = true;
             GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                console.log(response.rows, 123456);
+                console.log(response, 123456);
                 this.userList = response.data.rows;
                 this.userList03 = response.data.rows;
                 this.total = response.data.total;

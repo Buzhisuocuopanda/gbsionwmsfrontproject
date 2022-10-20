@@ -29,25 +29,24 @@
                         <hr />
                         <div class="shangponfenlei-middle">
                             <el-row>
-                              <el-col v-if="false" style="margin-left: 120px;">
-                                <el-form-item label="父字节编号"  prop="cbpa09" >
-                                  <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
-                                </el-form-item>
-                              </el-col>
+                                <el-col v-if="false" style="margin-left: 120px;">
+                                    <el-form-item label="父字节编号" prop="cbpa09">
+                                        <el-input v-model="form.cbpa09" maxlength="30" style="width: 400px;" />
+                                    </el-form-item>
+                                </el-col>
                                 <el-col style="margin-left: 120px;">
-                                    <el-form-item label="名称" prop="cbpa07" >
+                                    <el-form-item label="名称" prop="cbpa07">
                                         <el-input v-model="form.cbpa07" maxlength="30" style="width: 400px;" />
                                     </el-form-item>
                                 </el-col>
                                 <el-col style="margin-left: 120px;">
                                     <el-form-item label="分类编号" prop="cbpa11">
-                                        <el-input v-model="form.cbpa11" maxlength="30" style="width: 400px;"
-                                             />
+                                        <el-input v-model="form.cbpa11" maxlength="30" style="width: 400px;" />
                                     </el-form-item>
                                 </el-col>
 
                                 <el-col v-if="false">
-                                    <el-form-item label="id" prop="cbpa01" >
+                                    <el-form-item label="id" prop="cbpa01">
                                         <el-input v-model="form.cbpa01" maxlength="30" style="width: 400px;" />
                                     </el-form-item>
                                 </el-col>
@@ -55,10 +54,13 @@
                         </div>
                         <div class="shangponfenlei-following">
                             <div class="button-style">
-                                <el-button type="primary" class="button-fontsize-xg" v-hasPermi="['system:classify:edit']" @click="handleUpdate">修改
+                                <el-button type="primary" class="button-fontsize-xg"
+                                    v-hasPermi="['system:classify:edit']" @click="handleUpdate">修改
                                 </el-button>
-                                <el-button type="success" class="button-fontsize-xz" v-hasPermi="['system:classify:add']" @click="handleAdd">新增</el-button>
-                                <el-button type="danger" class="button-fontsize-sc" v-hasPermi="['system:classify:remove']" @click="handleDelete">删除</el-button>
+                                <el-button type="success" class="button-fontsize-xz"
+                                    v-hasPermi="['system:classify:add']" @click="handleAdd">新增</el-button>
+                                <el-button type="danger" class="button-fontsize-sc"
+                                    v-hasPermi="['system:classify:remove']" @click="handleDelete">删除</el-button>
                             </div>
                         </div>
                     </div>
@@ -68,7 +70,8 @@
         </el-row>
 
         <!-- 用户导入对话框 -->
-        <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body class="dialog-yhdrdhk">
+        <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body
+            class="dialog-yhdrdhk">
             <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
                 :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
                 :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
@@ -86,7 +89,7 @@
             <div slot="footer" class="dialog-footer">
                 <!-- <el-button type="success" :underline="false" style="font-size:12px;vertical-align: baseline;"
                     @click="importTemplate" class="dialog-footer-xzmb">下载模板</el-button> -->
-                <el-button type="primary" @click="submitFileForm" >确 定</el-button>
+                <el-button type="primary" @click="submitFileForm">确 定</el-button>
                 <el-button @click="upload.open = false">取 消</el-button>
             </div>
         </el-dialog>
@@ -228,10 +231,10 @@ export default {
                         res.children.forEach((i) => {
                             i.code = i.label ? i.label.substring(i.label.indexOf("~") + 1) : ""
                             i.label = i.label ? i.label.substring(0, i.label.indexOf("~")) : ""
-                            console.log(i.children,666)
-                            if(i.children){
-                                i.children.forEach((it)=>{
-                                     console.log(it)
+                            console.log(i.children, 666)
+                            if (i.children) {
+                                i.children.forEach((it) => {
+                                    console.log(it)
                                     it.code = it.label ? it.label.substring(it.label.indexOf("~") + 1) : ""
                                     it.label = it.label ? it.label.substring(0, it.label.indexOf("~")) : ""
                                 })
@@ -277,9 +280,9 @@ export default {
             this.form.cbpa09 = (data.code.split("~"))[data.code.split("~").length - 1]
             // this.form.cbpa01 = this.form.cbpa011.substring(data.code.indexOf("~")+6);
             this.form.cbpa01 = (this.form.cbpa011.split("~"))[this.form.cbpa011.split("~").length - 1]
-            console.log(this.form.cbpa09,88880099);
-            console.log(this.form.cbpa11,111111111);
-            console.log(this.form.cbpa01,1010101);
+            console.log(this.form.cbpa09, 88880099);
+            console.log(this.form.cbpa11, 111111111);
+            console.log(this.form.cbpa01, 1010101);
             // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
             this.handleQuery();
         },
@@ -328,20 +331,20 @@ export default {
         },
         /** 新增按钮操作 */
         handleAdd() {
-            this.form.cbpa01= "";
+            this.form.cbpa01 = "";
             this.$refs["form"].validate((item) => {
                 if (item) {
                     ClassifyAdd(this.form).then(response => {
                         if (response.code == "200") {
-                        // this.form.parent_id=this.form.id;
-                        // console.log(this.from.parent_id,123456789);
-                        this.title = "添加用户";
-                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                        this.getTreeselect();
-                        this.submitShangpin();
-                        this.getList();
-                        this.reset();
-                        this.form.cbpa09 = "0";
+                            // this.form.parent_id=this.form.id;
+                            // console.log(this.from.parent_id,123456789);
+                            this.title = "添加用户";
+                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                            this.getTreeselect();
+                            this.submitShangpin();
+                            this.getList();
+                            this.reset();
+                            this.form.cbpa09 = "0";
                         } else {
                             // this.$message({ message: response.msg, type: 'error' });
                         }
@@ -375,29 +378,29 @@ export default {
         handleUpdate() {
             this.$refs["form"].validate((item) => {
                 if (item) {
-                let row = Object.assign({}, this.form)
-                // console.log(row)
-                row.cbpa11 = this.form.cbpa11;
-                row.cbpa07 = this.form.cbpa07;
-                row.cbpa09 = this.form.cbpa09;
-                row.cbpa01 = this.form.cbpa01;
-                ClassifyEdit(JSON.stringify(row)).then(response => {
-                 if (response.code == "200") {
-                    this.form = response.data;
-                    this.cbpa07 = response.cbpa07;
-                    this.cbpa11 = response.cbpa11;
-                    this.cbpa09 = response.cbpa09;
-                    this.cbpa01 = response.cbpa01;
-                    this.getTreeselect();
-                    this.submitShangpin();
-                    this.$message({ message: '修改成功', type: 'success' });
-                 } else {
-                     this.$message({ message: response.msg, type: 'error' });
-                 }
-                });
+                    let row = Object.assign({}, this.form)
+                    // console.log(row)
+                    row.cbpa11 = this.form.cbpa11;
+                    row.cbpa07 = this.form.cbpa07;
+                    row.cbpa09 = this.form.cbpa09;
+                    row.cbpa01 = this.form.cbpa01;
+                    ClassifyEdit(JSON.stringify(row)).then(response => {
+                        if (response.code == "200") {
+                            this.form = response.data;
+                            this.cbpa07 = response.cbpa07;
+                            this.cbpa11 = response.cbpa11;
+                            this.cbpa09 = response.cbpa09;
+                            this.cbpa01 = response.cbpa01;
+                            this.getTreeselect();
+                            this.submitShangpin();
+                            this.$message({ message: '修改成功', type: 'success' });
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
+                    });
 
-       }
-     })
+                }
+            })
         },
         /** 数形列表的商品分类按钮**/
         submitShangpin() {
@@ -445,34 +448,34 @@ export default {
         /** 删除按钮操作 */
         handleDelete() {
             this.$refs["form"].validate((item) => {
-            if (item) {
-            let row = {}
-            row.cbpa07 = this.form.cbpa07;
-            row.cbpa11 = this.form.cbpa11;
-            row.cbpa01 = this.form.cbpa01;
-            // removeSys(JSON.stringify(row)).then(response => {
-            //   this.form = response.data;
-            //   this.classifyName = response.classifyName;
-            //   this.classifyNum = response.classifyNum;
+                if (item) {
+                    let row = {}
+                    row.cbpa07 = this.form.cbpa07;
+                    row.cbpa11 = this.form.cbpa11;
+                    row.cbpa01 = this.form.cbpa01;
+                    // removeSys(JSON.stringify(row)).then(response => {
+                    //   this.form = response.data;
+                    //   this.classifyName = response.classifyName;
+                    //   this.classifyNum = response.classifyNum;
 
-            //   this.getTreeselect();
-            //   this.submitShangpin();
-            //   this.$message({ message: '恭喜你，修改成功', type: 'success' });
-            // });
+                    //   this.getTreeselect();
+                    //   this.submitShangpin();
+                    //   this.$message({ message: '恭喜你，修改成功', type: 'success' });
+                    // });
 
 
-            this.$modal.confirm('是否确认删除,名称为"' + JSON.stringify(row.cbpa07) + '"的数据项？').then(function () {
-                return ClassifyRemove(JSON.stringify(row));
-            }).then((response) => {
-                if (response.code == "200") {
-                this.getTreeselect();
-                this.submitShangpin();
-                this.$modal.msgSuccess("删除成功");
-                this.getList();
-                } else {
-                    this.$message({ message: response.msg, type: 'error' });
-                }
-            }).catch(() => { });
+                    this.$modal.confirm('是否确认删除,名称为"' + JSON.stringify(row.cbpa07) + '"的数据项？').then(function () {
+                        return ClassifyRemove(JSON.stringify(row));
+                    }).then((response) => {
+                        if (response.code == "200") {
+                            this.getTreeselect();
+                            this.submitShangpin();
+                            this.$modal.msgSuccess("删除成功");
+                            this.getList();
+                        } else {
+                            this.$message({ message: response.msg, type: 'error' });
+                        }
+                    }).catch(() => { });
 
                 }
             });
@@ -521,4 +524,5 @@ export default {
 };
 </script>
 <style src="./GoodsClassifyCss/index.css">
+
 </style>
