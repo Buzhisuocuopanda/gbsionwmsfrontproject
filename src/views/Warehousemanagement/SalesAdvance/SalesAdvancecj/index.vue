@@ -9,7 +9,7 @@
             <el-popover placement="bottom-start" trigger="click">
               <SalesBooking ref="SalesBooking" @selected="selected0222"
                 style="width: 210px !important; height: 100px !important" />
-              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width: 68%">
+              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" style="width: 68%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -32,7 +32,7 @@
             <el-popover placement="bottom-start" trigger="click">
               <CustomerMainten ref="CustomerMainten" @selected="selected022"
                 style="width: 210px !important; height: 100px !important" />
-              <el-input slot="reference" v-model="form2.customer" placeholder="" readonly style="width: 110%">
+              <el-input slot="reference" v-model="form2.customer" placeholder="" style="width: 110%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -41,7 +41,7 @@
           <el-form-item label="供料单位:" prop="supplier">
             <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width: 210px !important" />
-              <el-input slot="reference" v-model="form2.supplier" placeholder="" readonly style="width: 100%">
+              <el-input slot="reference" v-model="form2.supplier" placeholder="" style="width: 100%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -50,7 +50,7 @@
           <el-form-item label="仓库:" prop="wh">
             <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 210px !important" />
-              <el-input slot="reference" v-model="form2.wh" placeholder="" readonly style="width: 100%">
+              <el-input slot="reference" v-model="form2.wh" placeholder="" style="width: 100%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -63,7 +63,7 @@
           <el-form-item label="销售人员:" prop="saler">
             <el-popover placement="bottom-start" trigger="click" clearable>
               <salerman ref="salerman" @selected="selected011699" style="width: 220px !important" />
-              <el-input slot="reference" v-model="form2.saler" placeholder="" readonly style="width: 85%">
+              <el-input slot="reference" v-model="form2.saler" placeholder="" style="width: 85%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -81,11 +81,11 @@
             <el-input v-model="form2.qty" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
         </el-col>
-        <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
+        <!-- <el-col style="margin-top: 0%; margin-left: -3%" :span="7">
           <el-form-item label="商品型号:" prop="goodsclassify">
             <el-input v-model="form2.goodsclassify" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col style="margin-top: 0%; margin-left: 2%" :span="7">
           <el-form-item label="供应商id:" prop="supplierId">
             <el-input v-model="form2.supplierId" maxlength="30" style="width: 80%; border: solid #eee thin" />
@@ -130,12 +130,12 @@
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
           :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">
-          <el-table-column prop="goodsclassify" label="品牌" width="300">
+          <el-table-column prop="cala08" label="品牌" width="300">
             <template slot-scope="scope" style="width: 200%">
               <el-popover placement="bottom-start" trigger="click">
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
                   style="width: 600px !important" />
-                <el-input slot="reference" v-model="scope.row.goodsclassify" placeholder="" readonly
+                <el-input slot="reference" v-model="scope.row.cala08" placeholder=""
                   style="width: 100%">
                 </el-input>
               </el-popover>
@@ -158,7 +158,7 @@
           <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
               <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" @change="dateFormat"
-                value-format="yyyy-MM-dd HH:mm:ss" style="width: 100%">
+                value-format="yyyy-MM-dd HH:mm:ss" style="width: 100%" @blur="changedate(scope.row)">
               </el-date-picker>
             </template>
           </el-table-column>
@@ -213,7 +213,7 @@
 // import { PurchaseinboundAdds } from "@/api/Warehousemanagement/SalesShipment";
 
 import {
-  PurchaseinboundAdd,
+  bgdxz,
   saleOrderListdetail,
 } from "@/api/Warehousemanagement/SalesAdvance";
 
@@ -738,13 +738,18 @@ export default {
     //   }
     // },
     dateFormat(row) {
-      console.log(row)
+      // let date =  row.slice(0, 10) + 'T' + row.slice(11, 19) + '.000+08:00'
+      // row = date
+      // console.log(row,date)
+    },
+    changedate(row){
+      // console.log(row)
     },
     //添加模块-销售人员
     selected011699(name) {
       console.log(name, 123);
       console.log(name.substring(name.indexOf("~") + 1), 963);
-      this.form2.cbsb177 = name.substring(0, name.indexOf("~"));
+      this.form2.saler = name.substring(0, name.indexOf("~"));
       this.form2.salerId = name.substring(name.indexOf("~") + 1);
       // this.form2.icon = name;
     },
@@ -784,20 +789,31 @@ export default {
         arr.push({
           goodsId: arr1[i].goodsId,
           // goodsclassify: arr1[i].cbpb12,
-          goodsclassify: arr1[i].goodsclassify,
+          goodsclassify: arr1[i].cala08,
           gsSalesOrders: arr1[0].id,
           // .000+08:00
-          orderDate: arr1[i].orderDate.slice(0, 10) + 'T' + arr1[i].orderDate.slice(11, 19) + '.000+08:00',
+          // orderDate: arr1[i].orderDate.slice(0, 10) + 'T' + arr1[i].orderDate.slice(11, 19) + '.000+08:00',
           qty: arr1[i].qty,
+          orderDate:arr1[i].orderDate.replace(' ','T') +'.000+08:00',
           price: arr1[i].price,
-          salerId: arr1[0].salerId,
-          supplierId: arr1[0].supplierId,
+          // salerId: arr1[0].salerId,
+          // supplierId: arr1[0].supplierId,
         });
+      }
+
+      let obj = {
+        "customerId": this.form2.customerId,
+        "goods": arr,
+        "gsid": this.form2.id,
+        "orderNo": this.form2.orderNo,
+        "supplierId": this.form2.supplierId,
+        "salerId": this.form2.salerId,
+        "whId": this.form2.whId,
       }
       if (!arr[0].gsSalesOrders) {
         return;
       } else {
-        PurchaseinboundAdd(JSON.stringify(arr)).then((response) => {
+        bgdxz(JSON.stringify(obj)).then((response) => {
           if (response.code == "200") {
             this.tableData = [];
             this.form2 = {
@@ -846,9 +862,6 @@ export default {
           }
         });
       }
-      console.log(this.tableData, "8520000");
-
-      console.log("_ly_ok:" + JSON.stringify(this.tableData));
     },
 
     // 存储表单数据
@@ -862,7 +875,7 @@ export default {
     _ly_addFrom() {
       this.tableData.push({
         goodsId: '',
-        goodsclassify: '',
+        cala08: '',
         gsSalesOrders: '',
         orderDate: '',
         qty: '',
@@ -926,7 +939,7 @@ export default {
     selected01(name) {
       console.log(name, 123);
       // console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
+      this.form2.wh = name.substring(0, name.indexOf("-"));
       this.form2.whId = name.substring(name.indexOf("-") + 1);
       console.log(this.form2.cbpc10, 8888888);
       // this.form2.icon = name;
@@ -945,7 +958,7 @@ export default {
     selected022(name) {
       console.log(name, 123);
       console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc0999 = name.substring(0, name.indexOf("-"));
+      this.form2.customer = name.substring(0, name.indexOf("-"));
       this.form2.customerId = name.substring(name.indexOf("-") + 1);
       this.form.cbsa08 = name.substring(0, name.indexOf("-"));
       // this.form2.icon = name;
@@ -970,9 +983,9 @@ export default {
           this.form2 = res.data.rows[0];
           this.tableData = res.data.rows;
           this.tableData.map((item) => {
-            item.goodsclassify =
-              item.cala08 + " ~ " + item.cbpb12 + " ~ " + item.cbpb08;
-            // item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
+            item.cala08 =
+            item.cala08 + " ~ " + item.cbpb12 + " ~ " + item.cbpb08;
+            item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
           });
           this.form2.GsSalesOrders = orderno;
           console.log(this.tableData)
@@ -983,7 +996,7 @@ export default {
     selected02(name) {
       console.log(name, 123);
       console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+      this.form2.supplier = name.substring(0, name.indexOf("-"));
       this.form2.supplierId = name.substring(name.indexOf("-") + 1);
     },
 
@@ -992,13 +1005,8 @@ export default {
       console.log(name, 111);
       console.log(row, 222);
       this.$set(row, "goodsId", name.substring(name.indexOf(".") + 1), 8523642);
-      this.$set(
-        row,
-        "goodsclassify",
-        name.substring(0, name.indexOf(".")),
-        555
-      );
-      console.log(row, 96325412, strarr);
+      this.$set(row,"cala08",name.substring(0, name.indexOf(".")),555);
+      console.log(row, 96325412);
     },
 
     //添加行

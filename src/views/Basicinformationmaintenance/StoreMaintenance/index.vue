@@ -487,9 +487,9 @@ export default {
                 cbpc100: [
                     { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
-                cbla12: [{
-                    required: true, message: "优先型号不能为空!", trigger: "blur"
-                }],
+                // cbla12: [{
+                //     required: true, message: "优先型号不能为空!", trigger: "blur"
+                // }],
                 // cbla13:[{
                 //     required: true, message: "备注不能为空!", trigger: "blur"
                 // }],
@@ -513,9 +513,9 @@ export default {
                 cbpc100: [
                     { required: true, message: "仓库不能为空!", trigger: 'change' }
                 ],
-                cbla12: [{
-                    required: true, message: "优先型号不能为空!", trigger: "blur"
-                }],
+                // cbla12: [{
+                //     required: true, message: "优先型号不能为空!", trigger: "blur"
+                // }],
                 // cbla13:[{
                 //     required: true, message: "备注不能为空!", trigger: "blur"
                 // }],
@@ -740,7 +740,7 @@ export default {
                             this.open2 = false;
                             this.reset01();
                         } else {
-                            this.$message({ message: response.msg, type: 'error' });
+                            // this.$message({ message: response.msg, type: 'error' });
                         }
                         // console.log(this.form2.ifEnabled, 123456);
                     });
@@ -808,7 +808,7 @@ export default {
                             this.open = false;
                             this.$message({ message: '修改成功', type: 'success' });
                         } else {
-                            this.$message({ message: response.msg, type: 'error' });
+                            // this.$message({ message: response.msg, type: 'error' });
                         }
                     });
                 } else {
@@ -945,7 +945,7 @@ export default {
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            // this.$message({ message: res.msg, type: 'error' });
                         }
                     }).catch((e) => {
                         console.log(e, 456)
@@ -983,7 +983,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
             }).catch(() => { });
         },

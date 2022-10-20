@@ -26,7 +26,7 @@
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="供应商" style="margin-left: 20px" class="item-r" >
+        <el-form-item label="供应商" style="margin-left: 20px;margin-top: -5px" class="item-r" >
           <el-select v-model="queryParams.supplierId"   clearable filterable placeholder="请输入关键词" :loading="loading6">
             <el-option v-for="item in cbsaList" :key="item.cbsa01" :label="item.cbsa08" :value="item.cbsa01"></el-option>
           </el-select>
@@ -41,19 +41,21 @@
         </el-form-item>
       </el-form>
       <el-table  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="450"  :data="inwuquList" element-loading-text="Loading。。。" width="100%;" v-loading="loading"
-                 border fit highlight-current-row stripe style="margin-top:1em"  :span-method="objectSpanMethod">
-        <el-table-column label="供料单位" v-if="false" align="left" header-align="center" prop="supplier" min-width="170px;" />
+                 border fit highlight-current-row stripe   >
+        <el-table-column label="供料单位" v-if="false" align="left" header-align="center" prop="supplier" min-width="100px;" />
 
-        <el-table-column  label="客户名称" align="left" prop="customer" min-width="240px;"/>
+        <el-table-column  label="客户名称" align="left" prop="customer" min-width="120px;"/>
         <el-table-column  label="编号" align="left" prop="orderNo" min-width="180px;"/>
         <el-table-column  label="销售人员" align="left" prop="saler" min-width="120px;"/>
-        <el-table-column  label="数量" align="right" :formatter="rounding" prop="num" min-width="90px;"/>
-        <el-table-column  label="入库数量" align="right" :formatter="rounding" prop="enterNum" min-width="100px;"/>
-        <el-table-column  label="变更数量" align="right" :formatter="rounding" prop="changeNum" min-width="100px;"/>
-        <el-table-column  label="剩余数量" align="right" :formatter="rounding" prop="remainNum" min-width="100px;"/>
+        <el-table-column  label="供应商" align="left" prop="supplier" min-width="120px;"/>
         <el-table-column  label="品牌" align="left" prop="cbpb10" min-width="100px;"/>
         <el-table-column  label="型号" align="left" prop="cbpb12" min-width="160px;"/>
         <el-table-column  label="商品" align="left" prop="cbpb08" min-width="300px;"/>
+        <el-table-column  label="数量" align="right" :formatter="rounding" prop="qty" min-width="90px;"/>
+       <!-- <el-table-column  label="入库数量" align="right" :formatter="rounding" prop="enterNum" min-width="100px;"/>
+        <el-table-column  label="变更数量" align="right" :formatter="rounding" prop="changeNum" min-width="100px;"/>
+        <el-table-column  label="剩余数量" align="right" :formatter="rounding" prop="remainNum" min-width="100px;"/>-->
+
 
        <!-- <el-table-column  label="入库数量" align="center" prop="cbob10" min-width="100px;"/>
         <el-table-column  label="变更数量" align="center" min-width="100px;"/>

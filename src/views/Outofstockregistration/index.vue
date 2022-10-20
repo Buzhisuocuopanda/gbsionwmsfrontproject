@@ -452,7 +452,7 @@ export default {
       })
     },
     delTotalOrder(row) {
-      this.$confirm('确认要删除' + row.orderNo + "售后单？", '确认操作', {
+      this.$confirm('确认要删除' + row.cboe07 + "售后单？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',
@@ -472,7 +472,7 @@ export default {
             this.$notify.success("删除成功")
 
           } else {
-            this.$notify.error(response.data.msg)
+            // this.$notify.error(response.data.msg)
           }
         })
       })

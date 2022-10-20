@@ -27,6 +27,11 @@
                             <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
+                        <el-form-item prop="cbpb15" label="UPC">
+                            <!-- placeholder="描述/助记符/品牌/UPC/" -->
+                            <el-input v-model="queryParams.cbpb15" id="miaoshu" placeholder="请输入型号" clearable
+                                style="width: 240px;" @keyup.enter.native="handleQuery" />
+                        </el-form-item>
                         <el-form-item>
                             <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:goods:list']"
                                 @click="handleQuery">查询</el-button>
@@ -66,6 +71,7 @@
 
 
                         <el-table-column label="型号" align="left" key="cbpb12" width="180" prop="cbpb12" locationNum />
+                        <el-table-column label="类型" align="left" key="type" width="180" prop="type" locationNum />
                         <el-table-column label="结算类型价格" align="left" key="cbpb13" width="130px;" prop="cbpb13"
                             sortable />
                         <!-- <el-table-column label="库位容量" align="left" key="cbpb13" width="110px;" prop="cbpb14" sortable /> -->
@@ -158,6 +164,20 @@
                             <el-select v-model="form.cbpb07" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <!-- <el-form-item label="类型:" prop="type">
+                        <el-select v-model="form.type" placeholder="" style="width:80%;">
+                            <el-option v-for="dict in storeType" :key="dict.value" :label="dict.label"
+                                :value="dict.label"></el-option>
+                        </el-select>
+                        </el-form-item> -->
+                        <el-form-item label="类型:" prop="type">
+                            <el-select v-model="form.type" placeholder="" style="width:80%;">
+                                <el-option v-for="item in storeType" :key="item.value" :value="item.value"
+                                    :label="item.label"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -328,6 +348,14 @@
                             <el-select v-model="form2.cbpb07" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <el-form-item label="类型:" prop="type">
+                            <el-select v-model="form2.type" placeholder="" style="width:80%;">
+                                <el-option v-for="item in storeType" :key="item.value" :value="item.value"
+                                    :label="item.label"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -576,6 +604,18 @@ export default {
                 label: '禁用'
             }],
             value: '',
+            // 类型
+            storeType: [
+                {
+                    value: "配件",
+                    lable: '0'
+                },
+                {
+                    value: "商品",
+                    lable: '0'
+                }
+            ],
+            typeValue: "",
 
             //客户等级
             kehudengji: [{
@@ -635,7 +675,8 @@ export default {
                 cbpb15: "",
                 cala08: "",
                 cbpa07: "",
-                cbpc099: ""
+                cbpc099: "",
+                tupe: ""
             },
             form5: {
                 cbpf02: "",
@@ -663,7 +704,8 @@ export default {
                 cbpb15: "",
                 cala08: "",
                 cbpa07: "",
-                cbpc099: ""
+                cbpc099: "",
+                type: ""
             },
             defaultProps: {
                 children: "children",
@@ -715,6 +757,9 @@ export default {
                 cbpb15: [
                     { required: true, message: 'upc不能为空', trigger: 'blur' },
                     { validator: validateNumber, trigger: 'blur' }
+                ],
+                type: [
+                    { required: true, message: '类型不能为空', trigger: 'blur' },
                 ],
                 currency: [
                     { required: true, message: '结算货币不能为空', trigger: 'blur' },
@@ -905,7 +950,7 @@ export default {
                         cbpd12: ""
                     }
                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
                 // if (count-- === 1) {
                 //   this._ly_save()
@@ -1023,8 +1068,18 @@ export default {
         getList() {
             this.loading = true;
             GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                console.log(response.rows, 123456);
+                console.log(response, 123456);
                 this.userList = response.data.rows;
+                for (let i = 0; i < this.userList.length; i++) {
+                    if (this.userList[i].type == "0") {
+                        this.userList[i].type = "配件"
+                    } else if (this.userList[i].type == "1") {
+                        this.userList[i].type = "商品"
+                    }
+                }
+
+                console.log(this.userList.type)
+                console.log(this.userList, 'this.userList')
                 this.userList03 = response.data.rows;
                 this.total = response.data.total;
                 console.log(response, 3369);
@@ -1078,7 +1133,7 @@ export default {
                     })
 
                 } else {
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                 }
 
                 // console.log(response.data.content, 339688);
@@ -1217,7 +1272,8 @@ export default {
                 cbpb15: undefined,
                 currency: undefined,
                 fprice: undefined,
-                tprice: undefined
+                tprice: undefined,
+                type: undefined
             };
             this.resetForm("form2");
         },
@@ -1256,6 +1312,11 @@ export default {
         },
         /** 新增按钮操作 GoodsAddss */
         handleAdd() {
+            if (this.form2.type == "配件") {
+                this.form2.type = "0"
+            } else if (this.form2.type == "商品") {
+                this.form2.type = "1"
+            }
             this.$refs["form2"].validate((item) => {
                 if (item) {
 
@@ -1296,10 +1357,11 @@ export default {
                                         cbpb15: "",
                                         cala08: "",
                                         cbpa07: "",
-                                        cbpc099: ""
+                                        cbpc099: "",
+                                        type: ""
                                     }
                                 } else {
-                                    this.$message({ message: response.msg, type: 'error' });
+                                    // this.$message({ message: response.msg, type: 'error' });
                                 }
                                 this.getTreeselect();
                                 // this.submitShangpin();
@@ -1344,6 +1406,13 @@ export default {
             row.cbpb15 = this.form.cbpb15;
             row.cbpb07 = this.form.cbpb07;
             row.cbpb10 = this.form.cbpb10;
+            if (this.form.type == "配件") {
+                this.form.type = "0"
+            } else if (this.form.type == "商品") {
+                this.form.type = "1"
+            }
+            row.type = this.form.type
+            console.log(row)
             console.log(this.form.cbpb01);
             //   this.$refs["form5"].validate((item) => {
             //     if (item) {
@@ -1374,7 +1443,7 @@ export default {
                             this.reset01();
                             this.$message({ message: '修改成功', type: 'success' });
                         } else {
-                            this.$message({ message: response.msg, type: 'error' });
+                            // this.$message({ message: response.msg, type: 'error' });
                         }
                     });
 
@@ -1386,7 +1455,7 @@ export default {
 
             //     }
             // })
-            console.log('_ly_ok:' + JSON.stringify(this.tableData))
+            // console.log('_ly_ok:' + JSON.stringify(this.tableData))
 
         },
         /** 修改详情按钮操作**/

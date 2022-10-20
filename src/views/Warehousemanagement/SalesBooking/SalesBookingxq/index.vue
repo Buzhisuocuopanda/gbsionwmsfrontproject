@@ -142,8 +142,6 @@ export default {
                         // this.$router.push("/system/user-xiaosydd/role/");
                         this.$tab.closePage();
                         this.$router.go(-1);
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -157,8 +155,6 @@ export default {
                         // this.$router.push("/system/user-xiaosydd/role/");
                         this.$tab.closePage();
                         this.$router.go(-1);
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });

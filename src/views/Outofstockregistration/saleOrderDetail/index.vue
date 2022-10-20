@@ -15,19 +15,17 @@
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
             <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable
-              clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+              clearable :filter-method="customerdataFilter"  placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
 
-
-
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUserId">
             <el-select v-loadmore="saleUserloadMore" v-model="formData.saleUserId" filterable clearable
-              :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+              :filter-method="saleUserdataFilter" :remote-method="saleUserloadMore2" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -40,12 +38,14 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <!--<el-form-item label="结算货币:" prop="saleUserId">&lt;!&ndash;v-model="formData.saleUserId" &ndash;&gt;
-            <el-select  filterable clearable placeholder="请选择" style="width: 70%;">
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="结算货币:" prop="cboe22">
+            <el-select  v-model="formData.cboe22" filterable clearable placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
-          </el-form-item>-->
+          </el-form-item>
         </el-col>
         <!--        <el-col :span="8">
           <el-form-item label="客户单号:" prop="customerNo">
@@ -59,6 +59,7 @@
           </el-form-item>
         </el-col>-->
       </el-row>
+
       <!--
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
@@ -204,9 +205,9 @@
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column label="金额" prop="monery" width="150" >
+          <el-table-column label="金额" prop="money" width="150" >
             <template slot-scope="scope">
-              <el-input disabled  v-model="scope.row.monery"></el-input>
+              <el-input disabled  v-model="scope.row.money"></el-input>
             </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
@@ -648,7 +649,8 @@ export default {
         orderClassMsg: '国内订单',
         receiveName: '',
         receivePhone: '',
-        address: ''
+        address: '',
+        cboe22:null,
       },
       form1: {
         // classifyId: "",
@@ -725,6 +727,7 @@ export default {
         pageSize: 10
       },
       saleUserListQuery: {
+        selectMsg:'',
         pageNum: 1,
         pageSize: 10
       },
@@ -757,7 +760,11 @@ export default {
           // { type: 'number', message: '数量必须为数字'}
         ],
         cboe21:[
-          { required: true, message: '请选择缺货单类型', trigger: 'blur' },
+          { required: true, message: '请选择订单类型', trigger: 'blur' },
+          // { type: 'number', message: '数量必须为数字'}
+        ],
+        cboe22:[
+          { required: true, message: '请选择缺货币类型', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
       },
@@ -1087,17 +1094,23 @@ export default {
       this.reset();
     },
     saleUserloadMore() {
-      const param = {
-        selectMsg: this.saleUserId,
-        pageNum: this.saleUserListQuery.pageNum,
-        pageSize: this.saleUserListQuery.pageSize
-      }
-
-
-      SwJsCustomerlistSelect(param).then(response => {
+      systemUserSelect(this.saleUserListQuery).then(response => {
         if (response.code == "200") {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
-          this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
+          this.saleUseroptions.push(...response.data.rows)
+        } else {
+          // this.$message.error(response.msg)
+        }
+      });
+    },
+    saleUserloadMore2(query) {
+      this.saleUserListQuery.selectMsg = query;
+      this.saleUserListQuery.pageNum =1;
+      systemUserSelect(this.saleUserListQuery).then(response => {
+        if (response.code == "200") {
+          this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
+          console.log(response.data.rows,10194);
+          this.saleUseroptions=response.data.rows
         } else {
           // this.$message.error(response.msg)
         }
@@ -1164,14 +1177,9 @@ export default {
     },
     saleUserdataFilter(val) {
       this.saleUserListQuery.pageNum = 1
-      this.saleUserId = val
-      const param = {
-        selectMsg: this.saleUserId,
-        pageNum: this.saleUserListQuery.pageNum,
-        pageSize: this.saleUserListQuery.pageSize
-      }
+      this.saleUserListQuery.selectMsg = val
 
-      systemUserSelect(param).then(response => {
+      systemUserSelect(this.saleUserListQuery).then(response => {
         if (response.code == "200") {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
           this.saleUseroptions = response.data.rows
@@ -1449,9 +1457,9 @@ export default {
     },
     sum2(row) {
       if (row.qty != null && row.thisprice != null) {
-        row.monery = parseFloat(row.qty * row.thisprice).toFixed(2) ;
+        row.money = parseFloat(row.qty * row.thisprice).toFixed(2) ;
       }else {
-        row.monery = undefined;
+        row.money = undefined;
       }
     },
   },

@@ -26,8 +26,8 @@
         <el-table-column  label="客户" prop="customerName" min-width="150px;"/>
         <el-table-column  label="出库数量"  :formatter="rounding" align="right" prop="outCount" min-width="100px;"/>
         <el-table-column  label="出库价值"  :formatter="rounding" align="right" prop="outMoney" min-width="100px;"/>
-        <el-table-column  label="出库总数量"  :formatter="rounding" align="right" prop="outCountTotal" min-width="100px;"/>
-        <el-table-column  label="出库总价值"  :formatter="rounding" align="right" prop="outMoneyTotal" min-width="100px;"/>
+        <el-table-column  label="出库数量占比（%）"   align="right" prop="outCountTotal100" min-width="100px;"/>
+        <el-table-column  label="出库价值占比（%）"   align="right" prop="outMoneyTotal100" min-width="100px;"/>
       </el-table>
       <el-pagination
         :background="true"
@@ -216,11 +216,10 @@
 
       rounding(row, column) {
         if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
-          return '0.00';
+          return '';
         }
         return parseFloat(row[column.property]).toFixed(2)
       },
-
       //列表表头设置
       headClasspwfnsyns() {
         return {

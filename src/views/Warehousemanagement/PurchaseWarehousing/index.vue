@@ -648,6 +648,10 @@ export default {
         console.log(this.form.cbpc16,123456);
 
     },
+    activated(){
+        this.getList()
+        console.log('我被调用')
+    },
     methods: {
 
 
@@ -962,7 +966,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                  }else{
-                        this.$message({ message: res.msg, type: 'error' });
+                        // this.$message({ message: res.msg, type: 'error' });
                   }
 
                 }).catch((e) => {
@@ -1006,7 +1010,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                 }else{
-                        this.$message({ message: res.msg, type: 'error' });
+                        // this.$message({ message: res.msg, type: 'error' });
                   }
 
                 }).catch((e) => {
@@ -1030,7 +1034,7 @@ export default {
                 // this.open = false;
                 this.$message({ message: response.msg, type: 'success' });
               }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
               }
 
             });
@@ -1050,7 +1054,7 @@ export default {
                     this.getList();
                     this.$modal.msgSuccess(res.msg);
                   }else{
-                    this.$message({ message: res.msg, type: 'error' });
+                    // this.$message({ message: res.msg, type: 'error' });
                   }
 
                 }).catch((e) => {
@@ -1070,7 +1074,7 @@ export default {
                        this.getList();
                        this.$message({ message: response.msg, type: 'success' });
                     }else{
-                        this.$message({ message: response.msg, type: 'error' });
+                        // this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -1089,7 +1093,7 @@ export default {
                     this.$modal.msgSuccess(res.msg);
                     console.log(res,8956231);
                 }else{
-                    this.$message({ message: res.msg, type: 'error' });
+                    // this.$message({ message: res.msg, type: 'error' });
                    }
 
                 }).catch((e) => { })
@@ -1116,7 +1120,7 @@ export default {
                     this.open = false;
                     this.$message({ message: response.msg, type: 'success' });
                  }else{
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                  }
 
                 });
@@ -1140,7 +1144,7 @@ export default {
                     this.open = false;
                     this.$message({ message: response.msg, type: 'success' });
                    }else{
-                    this.$message({ message: response.msg, type: 'error' });
+                    // this.$message({ message: response.msg, type: 'error' });
                    }
 
                 });
@@ -1181,7 +1185,7 @@ export default {
                 this.reset01();
 
               }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
               }
 
             });
@@ -1263,7 +1267,7 @@ export default {
                         this.getList();
                         this.$modal.msgSuccess("删除成功");
                       }else{
-                          this.$message({ message: res.msg, type: 'error' });
+                        //   this.$message({ message: res.msg, type: 'error' });
                       }
 
 
@@ -1303,7 +1307,7 @@ export default {
                 this.getList();
                 this.$modal.msgSuccess("删除成功");
              }else{
-                this.$message({ message: response.msg, type: 'error' });
+                // this.$message({ message: response.msg, type: 'error' });
              }
 
             }).catch(() => { });

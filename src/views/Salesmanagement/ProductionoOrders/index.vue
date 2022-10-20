@@ -53,8 +53,8 @@
       <!-- style="height:calc(100% - 10)" -->
       <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :data="orderList"
         :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;"
-        border fit highlight-current-row stripe>
-        <el-table-column type='selection' label="全选" width="55" :reserve-selection="true">
+        border fit highlight-current-row stripe :row-key="getRowKeys">
+        <el-table-column type='selection' label="全选" width="55">
         </el-table-column>
         <el-table-column sortable="custom" fixed label="优先级" align="left" prop="priority" min-width="100px;" />
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="140px;" />
@@ -384,6 +384,7 @@ export default {
       sortkey: '',
       sorttype: '',
       orderList: [],
+
       upload: {
         // 是否显示弹出层（用户导入）
         open: false,
@@ -407,7 +408,8 @@ export default {
           value: 4,
           label: 'OK'
         }
-      ]
+      ],
+      multipleSelection: []
 
     }
   },
@@ -428,12 +430,46 @@ export default {
         this.options = this.optionsAll.slice(0, 50)
         this.current = 50
       } else {
-        this.$message.error(res.msg)
+        // this.$message.error(res.msg)
       }
     })
   },
   methods: {
+    // getRowKeys(row) {
+    //   return row.id
+    // },
+    handleSelectionChange(a) {
+      console.log(a)
+      this.multipleSelection = a.map(item => item.id)
+      console.log(this.multipleSelection)
+    },
+    // 批量删除
+    pldelete1() {
+      this.$confirm('确定删除吗', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'success',
+      }).then(() => {
+        console.log(this.multipleSelection)
+        pldelete({ ids: this.multipleSelection }).then(response => {
+          if (response.code == 200) {
+            this.$notify({
+              title: '删除成功',
+              message: '',
+              type: 'success',
+              duration: 2000
+            })
+            this.multipleSelection = []
+            this.onSearch()
+            // this.$tab.refreshPage()
+            console.log(this.multipleSelection)
 
+          }
+
+        }
+        )
+      })
+    },
 
     //列表表头设置
     headClasspw() {
@@ -447,8 +483,6 @@ export default {
 
     onSubmit() {
     },
-    // handleSelectionChange() {
-    // },
 
     //查询商品信息维护
     selected08(e, row) {
@@ -856,48 +890,57 @@ export default {
       }
       return parseFloat(row[column.property]).toFixed(2)
     },
-    pldelete1() {
-      console.log("批量删除")
-      var arr = []
-      //遍历点击选择的对象集合，拿到每一个对象的id添加到新的集合中
-      this.plDeleRows.forEach(row => arr.push(row.id))
-      const param = {
-        ids: arr
-      }
-      this.$confirm('确定删除吗', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'success',
-        callback: action => {
+    // pldelete1() {
+    //   console.log("批量删除")
+    //   // var arr = []
+    //   //遍历点击选择的对象集合，拿到每一个对象的id添加到新的集合中
+    //   // this.plDeleRows.forEach(row => arr.push(row.id))
+    //   console.log(this.plDeleRows)
+    //   let arr = this.plDeleRows.map(item => item.id)
+    //   console.log(arr)
+    //   const param = {
+    //     ids: arr
+    //   }
+    //   this.$confirm('确定删除吗', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     type: 'success',
+    //     callback: action => {
 
-          if (action == 'confirm') {
-            //批量删除
-            pldelete(param).then(response => {
-              if (response.code == 200) {
-                this.$notify({
-                  title: '删除成功',
-                  message: '',
-                  type: 'success',
-                  duration: 2000
-                })
-                this.onSearch()
-              } else {
+    //       if (action == 'confirm') {
+    //         //批量删除
+    //         pldelete(param).then(response => {
+    //           if (response.code == 200) {
+    //             this.$notify({
+    //               title: '删除成功',
+    //               message: '',
+    //               type: 'success',
+    //               duration: 2000
+    //             })
+    //             console.log(this.plDeleRows)
+    //             this.plDeleRows.slice(0, -1)
 
-              }
+    //             console.log(this.plDeleRows)
+    //             this.onSearch()
 
-            }).catch(() => {
-              console.log('error submit')
-            })
-          }
-        }
-      })
+    //           } else {
 
-    },
-    handleSelectionChange(val) {
-      console.log(val)  //打印选中的行集合
-      this.plDeleRows = val
-      // this.multipleSelection = val;
-    },
+    //           }
+
+    //         }).catch(() => {
+    //           console.log('error submit')
+    //         })
+    //       }
+    //     }
+    //   })
+
+    // },
+    // handleSelectionChange(val) {
+    //   // console.log(val, "------------------")  //打印选中的行集合
+    //   this.plDeleRows.push(...val)
+    //   console.log(this.plDeleRows, "--------------------")
+    //   // this.multipleSelection = val;
+    // },
     //点击行触发，选中或不选中复选框
     handleRowClick(row, column, event) {
       // this.$refs.handSelectTest_multipleTable.toggleRowSelection(row);

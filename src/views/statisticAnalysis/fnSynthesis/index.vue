@@ -37,7 +37,7 @@
         <el-table-column fixed label="入库时间" align="left" :formatter="formatDate" header-align="center" prop="inWhTime" min-width="100px;" />
         <el-table-column fixed label="出库时间" align="left" prop="outWhTimeMsg"  min-width="100px;"/>
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="180px;"/>
-        <el-table-column  label="生产总订单" align="left" prop="totalOrderNo" min-width="180px;"/>
+        <el-table-column  label="生产总订单号" align="left" prop="totalOrderNo" min-width="180px;"/>
         <el-table-column  label="型号" align="left" prop="model" min-width="150px;"/>
         <el-table-column  label="描述" align="left" prop="description" min-width="300px;"/>
         <el-table-column  label="数量" v-if="false" :formatter="rounding2" align="right" prop="qty" min-width="60px;"/>

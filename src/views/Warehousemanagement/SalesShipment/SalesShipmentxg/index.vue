@@ -742,8 +742,6 @@ export default {
                         //     cbsb21:"",
                         //     cbsb30:""
                         // }
-                    } else {
-                        this.$message({ message: response.msg, type: 'error' })
                     }
                     if (count-- === 1) {
                         this._ly_save()

@@ -14,7 +14,8 @@
         </el-descriptions-item>
         <el-descriptions-item label="销售人员" labelStyle="width: 20%;text-align:center">{{this.formData.saleUser}}
         </el-descriptions-item>
-        <!--        <el-descriptions-item label="结算货币"  labelStyle	="width: 20%;text-align:center">{{this.formData.currencyMsg}}</el-descriptions-item>-->
+        <el-descriptions-item label="订单类型"  labelStyle	="width: 20%;text-align:center">{{orderType(this.formData.cboe21)}}</el-descriptions-item>
+        <el-descriptions-item label="结算货币"  labelStyle	="width: 20%;text-align:center">{{moneyType(this.formData.cboe22)}}</el-descriptions-item>
         <!--        <el-descriptions-item label="收货人"  labelStyle	="width: 20%;text-align:center">{{this.formData.receiveName}}</el-descriptions-item>-->
         <!--        <el-descriptions-item label="电话"  labelStyle	="width: 20%;text-align:center">{{this.formData.receivePhone}}</el-descriptions-item>
         <el-descriptions-item label="发票类型"  labelStyle	="width: 20%;text-align:center">{{this.formData.invoiceType}}</el-descriptions-item>
@@ -31,222 +32,6 @@
         <el-descriptions-item label="发票邮寄地址"  labelStyle	="width: 20%;text-align:center">{{this.formData.fpReceiveAddress}}</el-descriptions-item>
         <el-descriptions-item label="其他"  labelStyle	="width: 20%;text-align:center">{{this.formData.other}}</el-descriptions-item>-->
       </el-descriptions>
-      <!-- 编号:56221589223 -->
-
-      <!--      <el-row :gutter="20" style="margin-top: 20px;">-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="编号:" prop="orderNo" class="inputDeep">-->
-      <!--&lt;!&ndash;                        <el-input class="inputDeep" type="text" v-model="formData.orderNo" style="width: 70%;" readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.orderNo}}</span>-->
-      <!--          </el-form-item>-->
-
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="客户单号:" prop="customerNo">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.customerNo" style="width: 70%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.customerNo}}</span>-->
-
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="日期:" prop="orderDate">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.orderDate" style="width: 70%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.customerNo}}</span>-->
-
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
-      <!--      &lt;!&ndash;      <el-row :gutter="20">&ndash;&gt;-->
-      <!--      &lt;!&ndash;        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">&ndash;&gt;-->
-      <!--      &lt;!&ndash;          <el-form-item label="主副表id:" prop="cbpg161">&ndash;&gt;-->
-      <!--      &lt;!&ndash;            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />&ndash;&gt;-->
-      <!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        <el-col style="" :span="8">&ndash;&gt;-->
-      <!--      &lt;!&ndash;          <el-form-item label="供料单位:" prop="cbpc099">&ndash;&gt;-->
-      <!--      &lt;!&ndash;            <el-popover placement="bottom-start" trigger="click">&ndash;&gt;-->
-      <!--      &lt;!&ndash;              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />&ndash;&gt;-->
-      <!--      &lt;!&ndash;              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">&ndash;&gt;-->
-      <!--      &lt;!&ndash;              </el-input>&ndash;&gt;-->
-      <!--      &lt;!&ndash;            </el-popover>&ndash;&gt;-->
-      <!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        <el-col style="" :span="8">&ndash;&gt;-->
-      <!--      &lt;!&ndash;          <el-form-item label="仓库:" prop="cbpc100">&ndash;&gt;-->
-      <!--      &lt;!&ndash;            <el-popover placement="bottom-start" trigger="click">&ndash;&gt;-->
-      <!--      &lt;!&ndash;              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />&ndash;&gt;-->
-      <!--      &lt;!&ndash;              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">&ndash;&gt;-->
-      <!--      &lt;!&ndash;              </el-input>&ndash;&gt;-->
-      <!--      &lt;!&ndash;            </el-popover>&ndash;&gt;-->
-      <!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        <el-col style="" :span="8">&ndash;&gt;-->
-      <!--      &lt;!&ndash;          <el-form-item label="结算货币:" prop="cbpc16">&ndash;&gt;-->
-      <!--      &lt;!&ndash;            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">&ndash;&gt;-->
-      <!--      &lt;!&ndash;              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">&ndash;&gt;-->
-      <!--      &lt;!&ndash;              </el-option>&ndash;&gt;-->
-      <!--      &lt;!&ndash;            </el-select>&ndash;&gt;-->
-      <!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-      <!--      &lt;!&ndash;          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">&ndash;&gt;-->
-      <!--      &lt;!&ndash;                  <el-popover placement="bottom-start" trigger="click">&ndash;&gt;-->
-      <!--      &lt;!&ndash;                      <ListLists ref="ListLists" @selected="selected004" />&ndash;&gt;-->
-      <!--      &lt;!&ndash;                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly&ndash;&gt;-->
-      <!--      &lt;!&ndash;                          style="border:solid #eee thin; width:77%;">&ndash;&gt;-->
-      <!--      &lt;!&ndash;                      </el-select>&ndash;&gt;-->
-      <!--      &lt;!&ndash;                  </el-popover>&ndash;&gt;-->
-      <!--      &lt;!&ndash;              </el-form-item> &ndash;&gt;&ndash;&gt;-->
-      <!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        &lt;!&ndash;商品信息维护&ndash;&gt;&ndash;&gt;-->
-      <!--      &lt;!&ndash;        <el-col v-if="false">&ndash;&gt;-->
-      <!--      &lt;!&ndash;          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">&ndash;&gt;-->
-      <!--      &lt;!&ndash;            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>&ndash;&gt;-->
-      <!--      &lt;!&ndash;          </el-form-item>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        </el-col>&ndash;&gt;-->
-      <!--      &lt;!&ndash;      </el-row>&ndash;&gt;-->
-      <!--      <el-row :gutter="20" style="margin-top: 1px;">-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="客户:" prop="customerName">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.customerName" style="width: 70%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.customerName}}</span>-->
-
-      <!--            &lt;!&ndash;            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable   clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-      <!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-      <!--&lt;!&ndash;                v-for="item in customeroptions"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-      <!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-      <!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-      <!--          </el-form-item>-->
-
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="销售人员:" prop="saleUser">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.saleUser" style="width: 70%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.saleUser}}</span>-->
-
-      <!--            &lt;!&ndash;            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-      <!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-      <!--&lt;!&ndash;                v-for="item in saleUseroptions"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-      <!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-      <!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="结算货币:" prop="currency">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.currency" style="width: 70%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.currency}}</span>-->
-
-      <!--            &lt;!&ndash;            <el-select  v-model="formData.currency"  clearable  placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-      <!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-      <!--&lt;!&ndash;                v-for="item in currencyoptions"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-      <!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-      <!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
-
-
-      <!--      <el-row :gutter="20">-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="收货人:" prop="receiveName">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.receiveName" style="width: 70%;" readonly />&ndash;&gt;-->
-      <!--            <span>{{this.formData.receiveName}}</span>-->
-
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="电话:" prop="receivePhone">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.receivePhone" style="width: 70%;" readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.receivePhone}}</span>-->
-
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="发票类型:" prop="invoiceType">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.invoiceType" style="width: 70%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.invoiceType}}</span>-->
-
-      <!--            &lt;!&ndash;            <el-select  v-model="formData.invoiceType"  clearable  placeholder="请选择" style="width: 70%;">&ndash;&gt;-->
-      <!--&lt;!&ndash;              <el-option&ndash;&gt;-->
-      <!--&lt;!&ndash;                v-for="item in invoiceoptions"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :key="item.value"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :label="item.label"&ndash;&gt;-->
-      <!--&lt;!&ndash;                :value="item.value">&ndash;&gt;-->
-      <!--&lt;!&ndash;              </el-option>&ndash;&gt;-->
-      <!--&lt;!&ndash;            </el-select>&ndash;&gt;-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
-
-      <!--      <el-row :gutter="20">-->
-
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="订单类型:" prop="orderTypeMsg">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.orderTypeMsg" style="width: 70%;" readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.orderTypeMsg}}</span>-->
-
-      <!--          </el-form-item>-->
-
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="工厂账号:" prop="fcNumber">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.fcNumber" style="width: 70%;" readonly />&ndash;&gt;-->
-      <!--            <span>{{this.formData.fcNumber}}</span>-->
-
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="订单分类:" prop="orderClassMsg">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.orderClassMsg" style="width: 70%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.orderClassMsg}}</span>-->
-
-      <!--          </el-form-item>-->
-
-      <!--        </el-col>-->
-      <!--      </el-row>-->
-      <!--      <el-row :gutter="20">-->
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="地址:" prop="address">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.address" style="width: 120%;"  readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.address}}</span>-->
-
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-
-      <!--        <el-col :span="8">-->
-      <!--          <el-form-item label="备注:" prop="remark">-->
-      <!--&lt;!&ndash;            <el-input type="text" v-model="formData.remark" style="width: 120%;" readonly/>&ndash;&gt;-->
-      <!--            <span>{{this.formData.remark}}</span>-->
-
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
-
-      <!--      <el-row v-if="false">-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-      <!--        <el-col>-->
-      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
       <div>
         <el-row>
           <el-col :span="24">
@@ -260,28 +45,17 @@
                 <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
                 <span>{{scope.row.goodsMsg}}</span>
 
-                <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
-                <!--                  <el-option-->
-                <!--                    v-for="item in options"-->
-                <!--                    :key="item.value"-->
-                <!--                    :label="item.label"-->
-                <!--                    :value="item.value">-->
-                <!--                  </el-option>-->
-                <!--                </el-select>-->
               </sapn>
             </template>
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column prop="qty" label="数量" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <!--                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>-->
-                <span>{{scope.row.qty}}</span>
+          <el-table-column label="标准单价" :formatter="rounding" prop="standardprice" width="150" >
+          </el-table-column>
+          <el-table-column  label="本次单价" :formatter="rounding"  prop="thisprice" width="150" >
+          </el-table-column>
+          <el-table-column prop="qty" :formatter="rounding"  label="数量" width="150">
 
-                <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
-              </sapn>
-            </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
             <template slot-scope="scope">
@@ -311,7 +85,8 @@
               </sapn>
             </template>
           </el-table-column>-->
-
+          <el-table-column label="金额" :formatter="rounding"  prop="money" width="150" >
+          </el-table-column>
 
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
@@ -402,10 +177,10 @@
     </el-form>
 
     <el-descriptions :column="2" border>
-      <el-descriptions-item label="本页数量小计" labelStyle="width: 30%;text-align:center">{{this.formData.sumQty}}
+      <el-descriptions-item label="本页数量小计" labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}
       </el-descriptions-item>
       <!--      <el-descriptions-item label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>-->
-      <el-descriptions-item label="合计数量" labelStyle="width: 30%;text-align:center">{{this.formData.sumQty}}
+      <el-descriptions-item label="合计数量" labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}
       </el-descriptions-item>
       <!--      <el-descriptions-item label="合计金额"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>-->
       <!--      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>-->
@@ -817,7 +592,9 @@ export default {
         orderClassMsg: '国内订单',
         receiveName: '',
         receivePhone: '',
-        address: ''
+        address: '',
+        currencyMsg:'',
+        cboe21:''
       },
       form1: {
         // classifyId: "",
@@ -1032,6 +809,26 @@ export default {
     },
     formatTime(time){
       return formatDate2(time);
+    },
+    orderType(value){
+      if(value == "1"){
+        return "国际订单"
+      }else if(value == "2"){
+        return "国内订单"
+      }
+    },
+    moneyType(value){
+      if(value == 5){
+        return "USD"
+      }else if(value == 6){
+        return "CNY"
+      }
+    },
+    rounding(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return '0.00';
+      }
+      return parseFloat(row[column.property]).toFixed(2)
     },
     // 点击右上角关闭弹窗
     _ly_closeDialog(done) {
@@ -1682,14 +1479,16 @@ export default {
         this.formData.CapPrice = response.data.CapPrice
         this.formData.makeUser = response.data.makeUser
         this.formData.auditUser = response.data.auditUser
-        this.formData.fpAdress = response.data.fpAdress
+       /* this.formData.fpAdress = response.data.fpAdress
         this.formData.taxpayerid = response.data.taxpayerid
         this.formData.fpAdress = response.data.fpAdress
         this.formData.fpPhone = response.data.fpPhone
         this.formData.fpbank = response.data.fpbank
         this.formData.fpNumber = response.data.fpNumber
         this.formData.fpReceiveAddress = response.data.fpReceiveAddress
-        this.formData.other = response.data.other
+        this.formData.other = response.data.other*/
+        this.formData.cboe21 = response.data.cboe21
+        this.formData.cboe22 = response.data.cboe22
         this.auditData = response.data.audits
         // this.tableData.push(...response.data.goods)
         this.tableData = response.data.goods
