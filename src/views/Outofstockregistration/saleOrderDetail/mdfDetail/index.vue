@@ -337,7 +337,7 @@
       </div>
     </el-form>
 -->
-    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
+    <el-form ref="formData" :model="formData" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">缺货登记单</div>
 
       <!-- 编号:56221589223 -->
@@ -350,9 +350,9 @@
                 </el-col>-->
 
         <el-col :span="8">
-          <el-form-item label="客户:" prop="customerName">
-            <el-select @change="customerOnChange" v-model="formData.customerId" filterable clearable
-              :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+          <el-form-item label="客户:" prop="customerId">
+            <el-select @change="customerOnChange" v-model="formData.customerName"  filterable clearable
+              :filter-method="customerdataFilter" v-loadmore="customerloadMore" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -363,7 +363,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUser">
-            <el-select v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable
+            <el-select @change="saleUserOnChange" v-loadmore="saleUserloadMore"  v-model="formData.saleUser" filterable clearable
               :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -384,6 +384,14 @@
               </el-option>
             </el-select>
           </el-form-item>-->
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="结算货币:" prop="cboe22">
+            <el-select v-model="formData.cboe22" filterable clearable placeholder="请选择" style="width: 70%;">
+              <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
         </el-col>
         <!--        <el-col :span="8">
                   <el-form-item label="客户单号:" prop="customerNo">
@@ -511,7 +519,7 @@
               <sapn>
                 <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg"
                   filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
-                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  <el-option @click.native="optionClick(scope.row,item)" v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
               </sapn>
@@ -526,10 +534,10 @@
           </el-table-column>
           <el-table-column  label="本次单价" prop="thisprice" width="150" >
             <template slot-scope="scope">
-              <el-input @input="sum2(scope.row)" v-model="scope.row.thisprice"></el-input>
+              <el-input @input="sum2(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''" v-model="scope.row.thisprice"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="qty" label="数量" width="150">
+          <el-table-column  prop="qty" label="数量" width="150">
             <template slot-scope="scope">
               <sapn>
                 <el-input v-model="scope.row.qty" placeholder="数量" @input="sum(scope.row)"
@@ -541,7 +549,7 @@
           </el-table-column>
           <el-table-column label="金额" prop="monery" width="150" >
             <template slot-scope="scope">
-              <el-input disabled  v-model="scope.row.monery"></el-input>
+              <el-input disabled  v-model="scope.row.money"></el-input>
             </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
@@ -978,14 +986,16 @@ export default {
         suplierId: "",
         answerMsg: "",
         process: "",
-
+        cboe21:null,
+        saleUser:null,
         orderType: 10,
         orderTypeMsg: "销售订单",
         orderClass: 2,
         orderClassMsg: '国内订单',
         receiveName: '',
         receivePhone: '',
-        address: ''
+        address: '',
+        cboe22:null,
       },
       form1: {
         // classifyId: "",
@@ -1051,6 +1061,7 @@ export default {
         pageSize: 10
       },
       saleUserListQuery: {
+        selectMsg:'',
         pageNum: 1,
         pageSize: 10
       },
@@ -1068,18 +1079,26 @@ export default {
 
 
       rules: {
-        orderDate: [
-          { required: true, message: '请输入日期', trigger: 'blur' },
-          // { type: 'number', message: '优先级必须为数字'}
-        ],
-        saleUserId: [
-          { required: true, message: '请输入销售人员', trigger: 'blur' },
+        /* orderDate: [
+           { required: true, message: '请输入日期', trigger: 'blur' },
+           // { type: 'number', message: '优先级必须为数字'}
+         ],*/
+        saleUser: [
+          { required: true, message: '请选择销售人员', trigger: 'blur' },
         ],
         // goods: [
         //   { required: true, message: '请选择商品', trigger: 'blur' },
         // ],
         customerId: [
-          { required: true, message: '请输入客户', trigger: 'blur' },
+          { required: true, message: '请选择客户', trigger: 'blur' },
+          // { type: 'number', message: '数量必须为数字'}
+        ],
+        cboe21:[
+          { required: true, message: '请选择缺货单类型', trigger: 'blur' },
+          // { type: 'number', message: '数量必须为数字'}
+        ],
+        cboe22:[
+          { required: true, message: '请选择缺货币类型', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
       },
@@ -1189,34 +1208,6 @@ export default {
             PurchaseinboundAdds(JSON.stringify(this.formArr)).then(response => {
               if (response.code == "200") {
                 this.formArr = []
-                this.form2 = {
-                  cbpc07: "",
-                  cbpc08: "",
-                  cbsa08: "",
-                  cbwa09: "",
-                  cala08: "",
-                  cbpc100: "",
-                  cbpc099: "",
-                  cbpc166: "",
-                  cbpc10: "",
-                  cbpc09: "",
-                  cbpd09: "",
-                  cbpd11: "",
-                  cbpd12: "",
-                  cbpc16: "",
-                  cbpc12: "",
-                  cbpc14: "",
-                  cbpd08: "",
-                  cbph09: "",
-                  cbph10: "",
-                  cbph11: "",
-                  cbpg161: "",
-                  cbpc01: "",
-                  cbpc000: "",
-                  cbpd09: "",
-                  cbpd11: "",
-                  cbpd12: ""
-                }
               }
               if (count-- === 1) {
                 this._ly_save()
@@ -1435,22 +1426,18 @@ export default {
       this.reset();
     },
     saleUserloadMore() {
-      const param = {
-        selectMsg: this.saleUser,
-        pageNum: this.saleUserListQuery.pageNum,
-        pageSize: this.saleUserListQuery.pageSize
-      }
 
-
-      SwJsCustomerlistSelect(param).then(response => {
+      systemUserSelect(this.saleUserListQuery).then(response => {
         if (response.code == "200") {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
-          this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
+          console.log(response.data.rows,10194);
+          this.saleUseroptions.push(...response.data.rows)
         } else {
           // this.$message.error(response.msg)
         }
       });
     },
+
     customerloadMore() {
       const param = {
         selectMsg: this.customerName,
@@ -1469,6 +1456,7 @@ export default {
         }
       });
     },
+
     loadMore() {
       //         console.log("滚动到底部了")
       // // 这里可以做你想做的任何事 到底执行
@@ -1512,14 +1500,9 @@ export default {
     },
     saleUserdataFilter(val) {
       this.saleUserListQuery.pageNum = 1
-      this.saleUser = val
-      const param = {
-        selectMsg: this.saleUser,
-        pageNum: this.saleUserListQuery.pageNum,
-        pageSize: this.saleUserListQuery.pageSize
-      }
+      this.saleUserListQuery.selectMsg = val
 
-      systemUserSelect(param).then(response => {
+      systemUserSelect(this.saleUserListQuery).then(response => {
         if (response.code == "200") {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
           this.saleUseroptions = response.data.rows
@@ -1618,6 +1601,58 @@ export default {
       });*/
 
     },
+    optionClick(row,item){
+
+      if (this.formData.customerId == null) {
+        this.$message.error("请先选择客户")
+        row.goodsId = null;
+        return;
+      }
+
+      if (this.formData.cboe21 == null) {
+        this.$message.error("请先选择订单类型")
+        row.goodsId = null;
+        return;
+      }
+
+      //检查goodsid是否存在
+      if (this.checkRepeat(this.tableData, row.goodsId)) {
+        row.goodsId = null
+        row.normalPrice = 0
+        row.canUseSku = 0
+        this.$message.error("不能添加重复商品")
+        return
+      }
+      if(row.goodsId!=null&&this.formData.customerId!=null&&this.formData.cboe21!=null){
+        let monery;
+        if(this.formData.cboe21=="1"){
+          monery = 5;
+        }else if(this.formData.cboe21=="2"){
+          monery = 6;
+        }
+        const param = {
+          goodsId: row.goodsId,
+          customerId: this.formData.customerId,
+          orderClass: this.formData.cboe21,
+          cbobId:undefined,
+          currency:monery
+
+        }
+        goodsPriceAndSku(param).then(response => {
+          if (response.code == "200") {
+            row.standardprice=parseFloat(response.data.normalPrice).toFixed(2)
+            // row.canUseSku=response.data.canUseSku
+          }else {
+            /* row.normalPrice=0.0
+             row.canUseSku=0.0*/
+
+            //  this.$message.error(response.msg)
+
+          }
+        });
+      }
+    },
+
     getQtyStyle(row) {
       return "color: red"
 
@@ -1646,6 +1681,7 @@ export default {
       this.formData.saleUserId = val
     },
     customerOnChange(val) {
+      this.formData.customerId = val
       // console.log(this.formData.customer)
       // console.log("val",val)
       // console.log("val",row)
@@ -1705,65 +1741,30 @@ export default {
 
     /** 新增按钮操作 */
     handleAdd() {
-      for (let i = 0; i < this.tableData.length; i++) {
-        this.tableData[i].cbof01 = this.tableData[i].id;
-      }
-      this.formData.goods = this.tableData
-      updateSales(this.formData).then(response => {
-        if (response.code == "200") {
-          this.$message.success("修改成功")
-          this.$store.dispatch("tagsView/delView", this.$route)
-          // this.$router.push({path:"/Outofstockregistrationfh/role"})
-          this.$tab.closePage();
-          this.$router.go(-1);
-        } else {
+      this.$refs["formData"].validate((item) => {
+        if (item) {
+          for (let i = 0; i < this.tableData.length; i++) {
+            this.tableData[i].cbof01 = this.tableData[i].id;
+          }
+          this.formData.goods = this.tableData
+          updateSales(this.formData).then(response => {
+              if (response.code == "200") {
+                this.$message.success("修改成功")
+                this.$store.dispatch("tagsView/delView", this.$route)
+                // this.$router.push({path:"/Outofstockregistrationfh/role"})
+                this.$tab.closePage();
+                this.$router.go(-1);
+              } else {
 
-          // this.$message.error(response.msg)
+                // this.$message.error(response.msg)
 
-          // this.$router.go(-1)
+                // this.$router.go(-1)
 
+              }
+            })
         }
-      }
-      )
+      })
 
-
-
-      // this.$refs["form2"].validate((item) => {
-      //   if (item) {
-      //     PurchaseinboundAdd(this.form2).then(response => {
-      //       if (response.code == "200") {
-      //         this.$message({
-      //           message: '添加成功',
-      //           type: 'success',
-      //           style: 'color:red;!important'
-      //         });
-      //         this.submitShangpin();
-      //         this.open2 = false;
-      //         this.reset01()
-      //         this.form2.cbpg161 = response.data.id;
-      //         this.form.cbpc01 = response.data.id;
-      //         // console.log(this.form2.cbpg161,111);
-      //         // console.log(this.form.cbpg01,222);
-      //         console.log(response.data.id, 333);
-      //         this.formArr.forEach((item) => {
-      //           item.cbpc01 = response.data.id
-      //           // item.cbpd08= this.form2.cbpd08;
-      //           // item.cbpd09= this.form.cbpd09;
-      //           // item.cbpd11= this.form.cbpd11;
-      //           // item.cbpd12= this.form.cbpd12;
-      //           let t = item.cbpc000;
-      //           item.cbpd08 = t.substring(t.indexOf(".") + 1);
-      //           console.log(t.substring(t.indexOf(".") + 1), 33333);
-      //         })
-      //         console.log(this.formArr, 888)
-      //         this._ly_ok()
-      //       }
-      //     });
-      //   } else {
-      //     this.$message.error('请注意规范');
-      //   }
-      // })
-      //    this._ly_ok();
     },
 
     /** 返回操作 */
@@ -1774,6 +1775,14 @@ export default {
     sum(row) {
       if (row.qty != null && row.currentPrice != null) {
         row.totalPrice = row.qty * row.currentPrice;
+      }
+      this.sum2(row);
+    },
+    sum2(row) {
+      if (row.qty != null && row.thisprice != null) {
+        row.money = parseFloat(row.qty * row.thisprice).toFixed(2) ;
+      }else {
+        row.money = undefined;
       }
     },
 
@@ -1807,19 +1816,26 @@ export default {
         this.formData.orderNo = response.data.orderNo
         this.formData.customerNo = response.data.customerNo
         this.formData.customerId = response.data.customerId
-        this.formData.customerName = response.data.customerName
+        this.formData.customerName = response.data.cbca08
         this.formData.orderDate = response.data.orderDate
         this.formData.saleUserId = response.data.saleUserId
         this.formData.saleUser = response.data.saleUser
         this.formData.currency = response.data.currency
-        this.formData.receiveName = response.data.receiveName
+  /*      this.formData.receiveName = response.data.receiveName
         this.formData.receivePhone = response.data.receivePhone
         this.formData.invoiceType = response.data.invoiceType
         this.formData.address = response.data.address
-        this.formData.fcNumber = response.data.fcNumber
+        this.formData.fcNumber = response.data.fcNumber*/
         this.formData.orderClassMsg = response.data.orderClassMsg
+        this.formData.cboe21 = response.data.cboe21
+        this.formData.cboe22 = response.data.cboe22
         // this.tableData.push(...response.data.goods)
         this.tableData = response.data.goods
+
+        for (let i = 0; i < this.tableData.length; i++) {
+          this.tableData[i].standardprice = parseFloat(this.tableData[i].standardprice).toFixed(2);
+          this.tableData[i].money = parseFloat(this.tableData[i].money).toFixed(2);
+        }
 
         console.log(response.data, 22222);
 

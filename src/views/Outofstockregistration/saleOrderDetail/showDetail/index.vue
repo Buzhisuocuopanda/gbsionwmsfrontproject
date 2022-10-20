@@ -15,7 +15,7 @@
         <el-descriptions-item label="销售人员" labelStyle="width: 20%;text-align:center">{{this.formData.saleUser}}
         </el-descriptions-item>
         <el-descriptions-item label="订单类型"  labelStyle	="width: 20%;text-align:center">{{orderType(this.formData.cboe21)}}</el-descriptions-item>
-        <el-descriptions-item label="结算货币"  labelStyle	="width: 20%;text-align:center">{{this.formData.currencyMsg}}</el-descriptions-item>
+        <el-descriptions-item label="结算货币"  labelStyle	="width: 20%;text-align:center">{{moneyType(this.formData.cboe22)}}</el-descriptions-item>
         <!--        <el-descriptions-item label="收货人"  labelStyle	="width: 20%;text-align:center">{{this.formData.receiveName}}</el-descriptions-item>-->
         <!--        <el-descriptions-item label="电话"  labelStyle	="width: 20%;text-align:center">{{this.formData.receivePhone}}</el-descriptions-item>
         <el-descriptions-item label="发票类型"  labelStyle	="width: 20%;text-align:center">{{this.formData.invoiceType}}</el-descriptions-item>
@@ -45,28 +45,17 @@
                 <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
                 <span>{{scope.row.goodsMsg}}</span>
 
-                <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
-                <!--                  <el-option-->
-                <!--                    v-for="item in options"-->
-                <!--                    :key="item.value"-->
-                <!--                    :label="item.label"-->
-                <!--                    :value="item.value">-->
-                <!--                  </el-option>-->
-                <!--                </el-select>-->
               </sapn>
             </template>
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column prop="qty" label="数量" width="150">
-            <template slot-scope="scope">
-              <sapn>
-                <!--                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>-->
-                <span>{{scope.row.qty}}</span>
+          <el-table-column label="标准单价" :formatter="rounding" prop="standardprice" width="150" >
+          </el-table-column>
+          <el-table-column  label="本次单价" :formatter="rounding"  prop="thisprice" width="150" >
+          </el-table-column>
+          <el-table-column prop="qty" :formatter="rounding"  label="数量" width="150">
 
-                <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
-              </sapn>
-            </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
             <template slot-scope="scope">
@@ -96,7 +85,8 @@
               </sapn>
             </template>
           </el-table-column>-->
-
+          <el-table-column label="金额" :formatter="rounding"  prop="money" width="150" >
+          </el-table-column>
 
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
@@ -187,10 +177,10 @@
     </el-form>
 
     <el-descriptions :column="2" border>
-      <el-descriptions-item label="本页数量小计" labelStyle="width: 30%;text-align:center">{{this.formData.sumQty}}
+      <el-descriptions-item label="本页数量小计" labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}
       </el-descriptions-item>
       <!--      <el-descriptions-item label="本页金额小计"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>-->
-      <el-descriptions-item label="合计数量" labelStyle="width: 30%;text-align:center">{{this.formData.sumQty}}
+      <el-descriptions-item label="合计数量" labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}
       </el-descriptions-item>
       <!--      <el-descriptions-item label="合计金额"  labelStyle	="width: 30%;text-align:center">{{this.formData.sumPrice}}</el-descriptions-item>-->
       <!--      <el-descriptions-item label="大写"  labelStyle	="width: 30%;text-align:center">{{this.formData.CapPrice}}</el-descriptions-item>-->
@@ -823,9 +813,22 @@ export default {
     orderType(value){
       if(value == "1"){
         return "国际订单"
-      }else {
+      }else if(value == "2"){
         return "国内订单"
       }
+    },
+    moneyType(value){
+      if(value == 5){
+        return "USD"
+      }else if(value == 6){
+        return "CNY"
+      }
+    },
+    rounding(row, column) {
+      if(parseFloat(row[column.property]).toFixed(2)==null||isNaN(parseFloat(row[column.property]).toFixed(2))){
+        return '0.00';
+      }
+      return parseFloat(row[column.property]).toFixed(2)
     },
     // 点击右上角关闭弹窗
     _ly_closeDialog(done) {
@@ -1476,14 +1479,16 @@ export default {
         this.formData.CapPrice = response.data.CapPrice
         this.formData.makeUser = response.data.makeUser
         this.formData.auditUser = response.data.auditUser
-        this.formData.fpAdress = response.data.fpAdress
+       /* this.formData.fpAdress = response.data.fpAdress
         this.formData.taxpayerid = response.data.taxpayerid
         this.formData.fpAdress = response.data.fpAdress
         this.formData.fpPhone = response.data.fpPhone
         this.formData.fpbank = response.data.fpbank
         this.formData.fpNumber = response.data.fpNumber
         this.formData.fpReceiveAddress = response.data.fpReceiveAddress
-        this.formData.other = response.data.other
+        this.formData.other = response.data.other*/
+        this.formData.cboe21 = response.data.cboe21
+        this.formData.cboe22 = response.data.cboe22
         this.auditData = response.data.audits
         // this.tableData.push(...response.data.goods)
         this.tableData = response.data.goods
