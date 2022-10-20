@@ -350,7 +350,7 @@
                 </el-col>-->
 
         <el-col :span="8">
-          <el-form-item label="客户:" prop="customerId">
+          <el-form-item label="客户:" prop="customerName">
             <el-select @change="customerOnChange" v-model="formData.customerName"  filterable clearable
               :filter-method="customerdataFilter" v-loadmore="customerloadMore" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
@@ -996,6 +996,7 @@ export default {
         receivePhone: '',
         address: '',
         cboe22:null,
+        customerName: "",
       },
       form1: {
         // classifyId: "",
