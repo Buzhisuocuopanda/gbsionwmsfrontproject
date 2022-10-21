@@ -14,6 +14,11 @@
             <el-option v-for="item in cblaList" :key="item.cbla09" :label="item.cbla09" :value="item.cbla09"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="品牌"   class="item-r" >
+          <el-select v-model="queryParams.cbpb10"  style="width: 200px" clearable  filterable placeholder="请选择" >
+            <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="商品"   class="item-r" >
           <el-select @change="getGoods" :remote-method="getGoods" v-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
@@ -82,7 +87,7 @@
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getInventorysummaryquerysList,getSwJsGoodsAllList,getSwJsStoreSkuAllList,getSwJsStoreAllList } from "@/api/statisticAnalysis/index";
+import { getInventorysummaryquerysList,getSwJsGoodsAllList,getSwJsStoreSkuAllList,getSwJsStoreAllList,getswJsAllList } from "@/api/statisticAnalysis/index";
 import { formatDate2 } from '../../../utils';
 import Vue from 'vue';
 Vue.directive('loadmore', {
@@ -132,6 +137,8 @@ export default {
       cblaList:[],
       //下拉列表库位多选 选中的数据
       cblas:[],
+      //下拉列表数据品牌
+      calaList:[],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -141,6 +148,7 @@ export default {
         cbla09s: "",
         cbpb01: "",
         cbig10:"",
+        cbpb10:"",
         groudStatus:undefined,
         status:undefined,
       },
@@ -187,6 +195,7 @@ export default {
     this.getStoreSkuList();
     this.getCblaList();
     this.getGoods();
+    this.getCalaList();
   },
   methods: {
 
@@ -231,6 +240,7 @@ export default {
       this.queryParams.cbla09s = [];
       this.queryParams.cbpb01 = "";
       this.queryParams.cbig10 = "";
+      this.queryParams.cbpb10 = "";
       this.queryParams.groudStatus="";
         this.queryParams.status="";
       this.queryParams.pageNum = 1;
@@ -332,6 +342,20 @@ export default {
         }
       },error => {
         this.loading3 = false;
+      });
+    },
+    //下拉列表数据品牌
+    getCalaList(){
+      let param={cala10:"商品品牌"};
+
+      getswJsAllList(param).then(response => {
+        this.loading2 = false;
+        if (response.data != null) {
+          this.calaList = response.data;
+        } else {
+          this.calaList = [];
+        }
+      },error => {
       });
     },
   },

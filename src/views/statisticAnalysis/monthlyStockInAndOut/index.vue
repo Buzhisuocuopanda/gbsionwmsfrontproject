@@ -18,9 +18,9 @@
         </el-form-item>
 
         <el-form-item style="margin: 0px -10px 1px 1px;">
-          <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-          <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['query:fnSynthesis:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['query:monthlyStockInAndOut:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
+          <el-button v-hasPermi="['query:monthlyStockInAndOut:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button v-hasPermi="['query:monthlyStockInAndOut:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :header-cell-style="headClasspwfnsyns" :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="430" v-loading="loading"
