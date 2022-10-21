@@ -11,8 +11,7 @@
         </el-form-item>
 
         <el-form-item label="品牌"   class="item-r" >
-
-          <el-select v-model="queryParams.cbpb10"  style="width: 200px" clearable  filterable placeholder="请选择" :loading="loading3">
+          <el-select v-model="queryParams.cbpb10"  style="width: 200px" clearable  filterable placeholder="请选择" >
             <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
           <!--<el-input v-model="queryParams.cala08" style="width: 300px" class="filter-item"  placeholder="请输入品牌" />-->
