@@ -143,3 +143,13 @@ export function StoreSkuList(query) {
     params: query
   })
 }
+
+// Purchaseinbounddingdancx
+// 不良品列表
+export function SwJsSkuBarcodelists(query) {
+  return request({
+    url: '/system/Purchasereturnorders/SwJsSkuBarcodelists',
+    method: 'get',
+    params: query
+  })
+}

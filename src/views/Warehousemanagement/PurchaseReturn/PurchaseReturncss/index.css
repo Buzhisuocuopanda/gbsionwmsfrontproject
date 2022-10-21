@@ -101,6 +101,7 @@
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
+    margin-left: 10px;
     /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
     /*-moz-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
     /*-webkit-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
@@ -453,4 +454,19 @@
     top: 4%;
     font-weight: 900;
     font-size: 20px;
+}
+.xialaxuanxang{
+    border: 1px solid #005ab3;
+    height: 26px;
+    width:16px;
+    padding: 8.5px 0px 7.5px 0px;
+    border-radius: 0px 10px 10px 0px;
+    margin-left: -6px;
+    background-color: #005ab3;
+    background-image: -moz-linear-gradient(#469ab9, #005ab3);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#469ab9), to(#005ab3));
+    background-image: -webkit-linear-gradient(#469ab9, #005ab3);
+    background-image: -o-linear-gradient(#469ab9, #005ab3);
+    background-image: -ms-linear-gradient(#469ab9, #005ab3);
+    background-image: linear-gradient(#469ab9, #005ab3);
 }

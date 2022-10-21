@@ -47,12 +47,13 @@
           </el-form-item>
         </el-col>
         <el-col style="margin-left: -4%" :span="6">
-          <el-form-item label="仓库:" prop="wh">
-            <el-popover placement="bottom-start" trigger="click">
+          <el-form-item label="工厂:" prop="factory">
+            <el-input v-model="form2.factory" placeholder=""  style="width:100%;"></el-input>
+            <!-- <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 210px !important" />
               <el-input slot="reference" v-model="form2.wh" placeholder="" style="width: 100%">
               </el-input>
-            </el-popover>
+            </el-popover> -->
           </el-form-item>
         </el-col>
         <el-col style="margin-left: -2%" :span="6">
@@ -642,24 +643,31 @@ export default {
       },
 
       rules: {
-        cbpc0999: [
+        customer: [
+          {
+            required: true,
+            message: "客户不能为空!",
+            trigger: "change",
+          },
+        ],
+        supplier: [
           {
             required: true,
             message: "供料单位不能为空!",
             trigger: "change",
           },
         ],
-        cbpc100: [
+        factory: [
           {
             required: true,
-            message: "仓库不能为空!",
+            message: "工厂不能为空!",
             trigger: "change",
           },
         ],
-        cbpc16: [
+        saler: [
           {
             required: true,
-            message: "结算货币不能为空!",
+            message: "销售人员不能为空!",
             trigger: "change",
           },
         ],
@@ -796,6 +804,7 @@ export default {
           qty: arr1[i].qty,
           orderDate:arr1[i].orderDate.replace(' ','T') +'.000+08:00',
           price: arr1[i].price,
+          factory:this.form2.factory,
           // salerId: arr1[0].salerId,
           // supplierId: arr1[0].supplierId,
         });
@@ -808,7 +817,7 @@ export default {
         "orderNo": this.form2.orderNo,
         "supplierId": this.form2.supplierId,
         "salerId": this.form2.salerId,
-        "whId": this.form2.whId,
+        "factory": this.form2.factory,
       }
       if (!arr[0].gsSalesOrders) {
         return;
@@ -853,6 +862,7 @@ export default {
               cbsb177: "",
               orderNo: "",
               GsSalesOrders: "",
+              factory:'',
             };
             this.$message({ message: "创建成功", type: "success" });
             this.handlexiaoshouone();
