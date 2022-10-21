@@ -44,13 +44,14 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-4%;" :span="6">
-                    <el-form-item label="仓库:" prop="cbwa09">
-                        <el-popover placement="bottom-start" trigger="click">
+                    <el-form-item label="工厂:" prop="factory">
+                        <el-input v-model="form2.factory" placeholder=""  style="width:100%;"></el-input>
+                        <!-- <el-popover placement="bottom-start" trigger="click">
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
                             <el-input slot="reference" v-model="form2.cbwa09" placeholder="" readonly
                                 style="width:100%;">
                             </el-input>
-                        </el-popover>
+                        </el-popover> -->
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-2%;" :span="6">
@@ -477,7 +478,7 @@ export default {
                 cbpc07: "",
                 cbpd08: "",
                 cbsa08: "",
-                cbwa09: "",
+                factory: "",
                 cala08: "",
                 cbpc100: "",
                 cbpc099: "",
@@ -507,6 +508,7 @@ export default {
                 whId: "",
                 orderDate: "",
                 cbsb177: "",
+                factory:"",
             },
             defaultProps: {
                 children: "children",
@@ -538,7 +540,7 @@ export default {
                 total: this.total,
                 cbpc07: undefined,
                 cbsa08: undefined,
-                cbwa09: undefined,
+                factory: undefined,
                 dateRange: undefined
             },
 
@@ -549,9 +551,9 @@ export default {
                     message: "供料单位不能为空!",
                     trigger: 'change'
                 }],
-                cbwa09: [{
+                factory: [{
                     required: true,
-                    message: "仓库不能为空!",
+                    message: "工厂不能为空!",
                     trigger: 'change'
                 }],
                 cbpc16: [{
@@ -715,7 +717,7 @@ export default {
                         cbpc07: "",
                         cbpd08: "",
                         cbsa08: "",
-                        cbwa09: "",
+                        factory: "",
                         cala08: "",
                         cbpc100: "",
                         cbpc099: "",
@@ -741,6 +743,7 @@ export default {
                         orderDate: "",
                         cbpc0999: "",
                         cbsb177: "",
+                        factory:'',
                     }
                 }
                 if (count-- === 1) {
@@ -950,6 +953,9 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
+            this.tableData.map((item) =>{
+                item.factory = this.form2.factory
+            })
             let form1 = {
                 "customerId": this.form2.customerId,
                 "goods": this.tableData,
@@ -960,8 +966,9 @@ export default {
                 "status": this.form2.status,
                 "supplierId": this.form2.supplierId,
                 "userId": this.form2.userId,
-                "whId": this.form2.whId,
+                "factory": this.form2.factory,
             }
+            
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     // this.form2.goods = this.tableData
