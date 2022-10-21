@@ -47,7 +47,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-4%;" :span="6">
-                    <el-form-item label="仓库:" prop="cbpc100" class="kuweixxweihu">
+                    <el-form-item label="工厂:" prop="cbpc100" class="kuweixxweihu">
                         <!-- <el-popover placement="bottom-start" trigger="click">
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
                             <el-input :disabled="true" slot="reference" v-model="form2.cbpc100" placeholder="" readonly
@@ -55,7 +55,7 @@
                             </el-input>
                         </el-popover> -->
 
-                        <el-input type="text" :disabled="true" v-model="form2.cbpc100" style="width: 100%;" />
+                        <el-input type="text" :disabled="true" v-model="form2.factory" style="width: 100%;" />
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-2%;" :span="6">
