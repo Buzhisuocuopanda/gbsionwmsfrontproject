@@ -864,7 +864,7 @@ export default {
       console.log(userId, "20221009");
       if (userId) {
         // 获取表详细信息
-        PurchaseinSalesAdvance({ id: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+        PurchaseinSalesAdvance({ icu: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
           if (res.code == "200") {
             this.userList = res.data.rows;
             this.total = res.data.total;

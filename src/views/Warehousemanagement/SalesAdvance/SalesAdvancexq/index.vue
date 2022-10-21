@@ -167,7 +167,7 @@
                     <el-table-column label="数量" width="100" prop="qty">
                         <template slot-scope="scope" style="width:200%;">
                             <el-input :disabled="true" v-model="scope.row.qty"
-                                v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""
+                                 placeholder=""
                                 @keyup="validateMealStandard($event)" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
@@ -191,12 +191,6 @@
                             </el-input>
                         </template>
                     </el-table-column>
-                    <el-table-column v-if="false" prop="goodsclassifyy" label="型号" width="150">
-                        <template slot-scope="scope">
-                            <el-input :disabled="true" v-model="scope.row.goodsclassifyy" placeholder="" style="">
-                            </el-input>
-                        </template>
-                    </el-table-column>
                     <el-table-column v-if="false" prop="goodsId" label="商品编号id" width="150">
                         <template slot-scope="scope">
                             <el-input :disabled="true" v-model="scope.row.goodsId" placeholder="" style=""></el-input>
@@ -213,18 +207,18 @@
                             </el-input>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" align="center" width="80">
+                    <!-- <el-table-column label="操作" align="center" width="80">
                         <template slot-scope="scope">
                             <span @click="_ly_delFrom(scope.row)">
                                 <i class="el-icon-delete" style="color: red;"></i>
                             </span>
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
                 </el-table>
             </div>
         </el-form>
         <div class="tinajia_dingwei">
-            <el-button type="primary" @click="handleUpdate">保 存</el-button>
+            <!-- <el-button type="primary" @click="handleUpdate">保 存</el-button> -->
             <el-button @click="handlexiaoshouone">取 消</el-button>
         </div>
     </div>
@@ -884,7 +878,7 @@ export default {
             console.log(userId, "20221009");
             if (userId) {
                 // 获取表详细信息
-                PurchaseinSalesAdvance({ id: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+                PurchaseinSalesAdvance({ icu: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     if (res.code == "200") {
                         this.userList = res.data.rows;
                         this.total = res.data.total;
@@ -906,9 +900,9 @@ export default {
                         //供应商id
                         this.form2.supplierId = this.userList[0].supplierId;
                         //仓库名称
-                        this.form2.cbpc100 = this.userList[0].wh;
+                        // this.form2.cbpc100 = this.userList[0].wh;
                         //仓库名称ID
-                        this.form2.whId = this.userList[0].whId;
+                        // this.form2.whId = this.userList[0].whId;
                         //销售人员名称
                         this.form2.cbsb177 = this.userList[0].saler;
                         //销售人员ID
@@ -917,23 +911,21 @@ export default {
                         this.form2.goodsId = this.userList[0].goodsId;
                         //品牌、型号、描述
                         // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
-                        this.tableData.forEach((item) => {
+                        this.tableData = res.data.rows
+                        this.tableData.forEach((item,i) => {
                             //  this.form2.goodsId = item.goodsId;
                             //品牌、型号、描述
-                            item.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
+                            item.cbpc000 = this.userList[i].cala08 + "~" + this.userList[i].cbpb12 + "~" + this.userList[i].cbpb08;
                             //商品id
-                            item.goodsId = this.userList[0].goodsId;
+                            item.goodsId = this.userList[i].goodsId;
 
                             this.form2.goodsId = item.goodsId;
-                            //数量
-                            item.qty = this.userList[0].qty;
-                            this.form2.qty = item.qty;
                             //销售预订单主表id
-                            item.gsSalesOrders = this.userList[0].gsSalesOrders;
+                            item.gsSalesOrders = this.userList[i].gsSalesOrders;
                             //订单日期
-                            item.orderDate = this.userList[0].orderDate;
+                            item.orderDate = this.userList[i].orderDate;
                             //型号
-                            item.goodsclassify = this.userList[0].cbpb12;
+                            item.goodsclassify = this.userList[i].cbpb12;
                         })
 
                     }

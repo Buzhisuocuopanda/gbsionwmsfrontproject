@@ -12,9 +12,9 @@
                 <el-descriptions-item>
                     <template slot="label">供料单位</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
-                <el-descriptions-item>
+                <!-- <el-descriptions-item>
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
+                </el-descriptions-item> -->
                 <!-- <el-descriptions-item>
                     <template slot="label">结算货币</template>USD
                 </el-descriptions-item> -->
@@ -24,7 +24,8 @@
 
             <el-table :header-cell-style="headClass" v-loading="loading" border :data="tabData" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
-
+                <el-table-column prop="factory" key="factory" label="工厂">
+                </el-table-column>
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" label="型号">

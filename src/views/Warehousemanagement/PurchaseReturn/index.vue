@@ -37,6 +37,17 @@
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" v-hasPermi="['system:purchasereturnorders:add']" class="biaoto-buttonchuangjian" @click="handlechuangtuione">创建
                         </el-button>
+                        <el-dropdown trigger="click">
+                            <span class="el-dropdown-link xialaxuanxang">
+                                <i class="el-icon-caret-bottom el-icon--right"></i>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item class="clearfix" @click.native="tong">
+                                    通过提货单创建
+                                    <el-badge class="mark" />
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
                         <el-button size="mini" v-hasPermi="['system:purchasereturnorders:remove']" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
                             删除</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -113,12 +124,6 @@
                     class="pagintotal" />
             </el-col>
         </el-row>
-
-
-
-
-
-
        <!--修改-->
         <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
@@ -179,6 +184,48 @@
         <el-dialog :visible.sync="open1" append-to-body>
             <div style="margin-top:-30px;">
                 <span style="font-size:20px;">采购入库单</span>
+                <hr />
+            </div>
+            <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
+                <el-row>
+                    <el-col style="margin-top:1%;">
+                        <el-form-item label="编号:" prop="cbpc07">
+                            <el-input v-model="form1.cbpc07" maxlength="30" style="width:50%" />
+                        </el-form-item>
+                    </el-col>
+                    <!-- <el-col style="margin-top:1%;">
+                        <el-form-item label="日期:" prop="cbpc08">
+                            <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
+                                style="width:50%" />
+                        </el-form-item>
+                    </el-col> -->
+                </el-row>
+                <el-row>
+                    <el-col style="margin-top:1%;">
+                        <el-form-item label="供应商:" prop="cbsa08">
+                            <el-input v-model="form1.cbsa08" placeholder="" maxlength="30" style="width:50%" />
+                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
+                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
+                                    :value="dict.label"></el-option>
+                            </el-select> -->
+                        </el-form-item>
+                    </el-col>
+                    <el-col style="margin-top:1%;">
+                        <el-form-item label="仓库:" prop="cbwa09">
+                            <el-input v-model="form1.cbwa09" placeholder="" maxlength="30" style="width:50%" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <!-- <el-button type="primary" @click="handleAdd">确 定</el-button> -->
+                <!-- <el-button @click="cancells">取 消</el-button> -->
+            </div>
+        </el-dialog>
+        <!-- 基于不良品创建采购退库单 -->
+        <el-dialog :visible.sync="open5" append-to-body>
+            <div style="margin-top:-30px;">
+                <span style="font-size:20px;">销售退库单</span>
                 <hr />
             </div>
             <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
@@ -289,6 +336,7 @@ export default {
             open: false,
             open1: false,
             open2: false,
+            open5:false,
             // 部门名称
             deptName: undefined,
             // 默认密码
@@ -636,10 +684,28 @@ export default {
         this.chen();
     },
     methods: {
+        // 基于不良品创建
+        tong(){
+          this.open5 = true;
+          this.getList09()
+        },
+        // 不良品查询
+        getList09() {
+            this.loading = true;
+            SwJsSkuBarcodelists(this.addDateRange(this.queryParamss, this.dateRange)).then(response => {
+                this.userList01 = response.data.rows;
+                this.totall = response.data.total;
+                // //供应商
+                // this.postOptions = response.data.content;
+                // console.log(this.userList, 3369);
+                console.log(response, 85200000);
+                // this.deleteFlag = response.data.rows.deleteFlag;
+                this.loading = false;
+            }
+            );
+        },
         show() {
             this.showSearch = !this.showSearch;
-
-
         },
         //列表表头设置
         headClasspr() {
@@ -1346,5 +1412,5 @@ export default {
     }
 };
 </script>
-<style src="./PurchaseReturncss/index.css">
+<style src="./PurchaseReturncss/index.css" scoped>
 </style>
