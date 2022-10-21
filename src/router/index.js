@@ -1805,6 +1805,21 @@ export const dynamicRoutes = [{
     }]
   },
   {
+    path: '/system/user-auth',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [{
+      path: 'user/:userId(\\d+)',
+      component: () => import('@/views/system/user/authRole'),
+      name: 'User',
+      meta: {
+        title: '分配角色',
+        activeMenu: '/system/user'
+      }
+    }]
+  },
+  {
     path: '/system/dict-data',
     component: Layout,
     hidden: true,

@@ -777,10 +777,10 @@ export default {
       this.tableData.push({
         "cbpg01": this.form2.cbpg01,
         "cbph01": this.form2.cbph01,
-        "cbph08": this.form2.cbph08,
-        "cbph09": this.form2.cbph09,
-        "cbph10": this.form2.cbph10,
-        "cbph11": this.form2.cbph11,
+        "cbph08": '',
+        "cbph09": '',
+        "cbph10": '',
+        "cbph11": '',
         "cbpg13": "",
       });
       this.dataId++;
@@ -955,18 +955,25 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-          this.form2.cbpg16 = this.form2.cala08
-          this.tableData[0] = {
-            "cbpg01": this.form2.cbpg01,
-            "cbph01": this.form2.cbph01,
-            "cbph08": this.form2.cbph08,
-            "cbph09": this.form2.cbph09,
-            "cbph10": this.form2.cbph10,
-            "cbph11": this.form2.cbph11,
-            "cbph13": "",
+          if(this.form2.cala08 == 'CNY'){
+            this.form2.cbpc16 = 6
+          }else{
+            this.form2.cbpc16 = 5
           }
-          this.form2.goods = this.tableData
-          console.log(this.form2)
+          // 声明空数组，for循环生成新的数组
+          let newarr = []
+          for(let i = 0;i<this.tableData.length;i++){
+            newarr.push({
+              "cbpd01": this.tableData[i].cbpd01,
+              "cbpc01": this.tableData[i].cbpc01,
+              "cbpd08": this.tableData[i].cbpd08,
+              "cbpd09": this.tableData[i].cbpd09,
+              "cbpd11": this.tableData[i].cbpd11,
+              "cbpd12": this.tableData[i].cbpd12,
+              "cbpd13": this.tableData[i].cbpd13,
+            })
+          }
+          this.form2.goods = newarr
           PurchaseinboundEditone(this.form2).then((response) => {
             if (response.code == "200") {
               this.$message({
@@ -979,7 +986,7 @@ export default {
               this.reset01();
               // this.$router.push("/system/user-cktkfh/role/");
                this.$tab.closePage();
-                this.$router.go(-1);
+              this.$router.go(-1);
             }
           });
         } else {
