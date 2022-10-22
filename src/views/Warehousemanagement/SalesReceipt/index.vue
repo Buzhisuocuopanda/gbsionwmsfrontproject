@@ -491,7 +491,8 @@ export default {
                 cbwa09: undefined,
                 ponumber: undefined,
                 dateRange: undefined,
-                cbpb08: undefined
+                cbpb08: undefined,
+                statuss:1,
             },
             // 列信息
             //  columns: [
@@ -972,9 +973,10 @@ export default {
         PurchaseinboundShenpi(row) {
             console.log(row)
             let cbpc01 = row.id;
+            let status = row.status
             console.log(cbpc01)
             // 状态0代表审核
-            this.$router.push({ path: "/Warehousemanagement/SalesReceipt/detail/", query: { id: cbpc01, state: "0" } })
+            this.$router.push({ path: "/Warehousemanagement/SalesReceipt/detail/", query: { id: cbpc01, state: status } })
             // this.$modal.confirm('是否要审批,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
             //     console.log(row.cbpc01, 8888);
 
@@ -1014,16 +1016,22 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
-                // console.log(row.cbpc01, 8888);
-                PurchaseinboundShs(row).then(response => {
-                    if (response.code == "200") {
-                        this.getList();
-                        // this.open = false;
-                        this.$message({ message: '反审成功', type: 'success' });
-                    }
-                });
-            }).catch(() => { });
+            let cbpc01 = row.id;
+            let status = row.status
+            console.log(cbpc01)
+            // 状态1代表反审
+            this.$router.push({ path: "/Warehousemanagement/SalesReceipt/detail/", query: { id: cbpc01, state: status } })
+
+            // this.$modal.confirm('是否要反审,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
+            //     // console.log(row.cbpc01, 8888);
+            //     PurchaseinboundShs(row).then(response => {
+            //         if (response.code == "200") {
+            //             this.getList();
+            //             // this.open = false;
+            //             this.$message({ message: '反审成功', type: 'success' });
+            //         }
+            //     });
+            // }).catch(() => { });
         },
 
         //反审上面的

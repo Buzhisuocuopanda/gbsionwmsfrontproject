@@ -3,19 +3,19 @@
         <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
             <div class="chuangjiancaigous">销售预订单</div>
             <el-row :gutter="20" style="margin-top: 20px;">
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-form-item label="编号:" prop="orderNo">
-                        <el-input type="text" v-model="form2.orderNo" style="width: 60%;" readonly/>
+                        <el-input type="text" v-model="form2.orderNo" style="width: 110%;" readonly/>
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="6" style="margin-left:-2%;">
                     <el-form-item label="订单编号:" prop="ponumber">
-                        <el-input type="text" v-model="form2.ponumber" style="width: 60%;" readonly/>
+                        <el-input type="text" v-model="form2.ponumber" style="width: 100%;" readonly/>
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="6" style="margin-left:-4%;">
                     <el-form-item label="日期:">
-                        <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+                        <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 100%;">
                         </el-date-picker>
                     </el-form-item>
                 </el-col>

@@ -69,7 +69,10 @@ export default {
                 } else {
                  
                     response.data.rows.forEach((item) => {
-                        this.iconList.push(item.orderNo +"-"+item.id);
+                        // this.iconList.push(item.orderNo +"-"+item.id);
+                        if(item.ponumber){
+                            this.iconList.push(item.ponumber +"-"+item.id);
+                        }
                     })
                   
                 }
