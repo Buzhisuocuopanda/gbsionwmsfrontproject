@@ -31,7 +31,8 @@ export function PurchaseinboundAddydd(data) {
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
-    url: '/system/SalesScheduledOrders/seleteSubscribetotheinventoryslip',
+    // SalesScheduledOrders/seleteSubscribetotheinventoryslip
+    url: '/system/SalesScheduledOrders/saleOrderList',
     method: 'get',
     params: query
   })

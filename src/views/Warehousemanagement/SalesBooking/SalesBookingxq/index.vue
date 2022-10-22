@@ -14,7 +14,7 @@
                         <template slot="label">供料单位</template>{{ value.supplier }}
                     </el-descriptions-item>
                     <el-descriptions-item>
-                        <template slot="label">仓库</template>{{ value.wh }}
+                        <template slot="label">工厂</template>{{ value.factory }}
                     </el-descriptions-item>
                     <el-descriptions-item>
                         <template slot="label">销售人员</template>{{ value.saler }}

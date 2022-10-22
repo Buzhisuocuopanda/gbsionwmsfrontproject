@@ -42,12 +42,13 @@
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-4%;" :span="6">
-          <el-form-item label="仓库:" prop="wh">
-            <el-popover placement="bottom-start" trigger="click" disabled>
+          <el-form-item label="工厂:">
+            <el-input v-model="form2.factory" placeholder=""  style="width:100%;"></el-input>
+            <!-- <el-popover placement="bottom-start" trigger="click" disabled>
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
               <el-input slot="reference" v-model="form2.wh" placeholder="" readonly style="width:100%;">
               </el-input>
-            </el-popover>
+            </el-popover> -->
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-2%;" :span="6">
@@ -863,7 +864,7 @@ export default {
       console.log(userId, "20221009");
       if (userId) {
         // 获取表详细信息
-        PurchaseinSalesAdvance({ id: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
+        PurchaseinSalesAdvance({ icu: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
           if (res.code == "200") {
             this.userList = res.data.rows;
             this.total = res.data.total;
@@ -1110,9 +1111,7 @@ export default {
 
     /** 修改按钮操作 */
     handleUpdate() {
-
       let row = {}
-
       //商品id
       this.tableData.forEach((item) => {
         row.goodsId = item.goodsId;
@@ -1141,6 +1140,7 @@ export default {
           qty: this.tableData[i].qty,
           // 主表id
           gsSalesOrders: this.tableData[i].gsSalesOrders,
+          factory: this.tableData[i].factory,
         })
       }
       // row.cbpc16 = this.form.cbpc16;

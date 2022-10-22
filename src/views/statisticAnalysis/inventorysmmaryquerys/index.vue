@@ -5,15 +5,19 @@
     <div class="filter-container">
       <el-form :inline="true"   >
         <el-form-item  label="日期">
-          <el-date-picker size="mini" v-model="dateRange" type="daterange" style="width:400px;height: 32px;"
+          <el-date-picker size="mini" v-model="dateRange" type="daterange"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                           range-separator="至" start-placeholder="单据日期起始" end-placeholder="单据日期截止" align="right">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="单据类型/仓库"   class="item-r" >
-          <el-input v-model="queryParams.cbwa09" class="filter-item" style="width: 300px" placeholder="单据类型/仓库" />
+        <el-form-item label="单据类型"   class="item-r" >
+          <el-input v-model="queryParams.cbib17" class="filter-item"  placeholder="单据类型" />
         </el-form-item>
-
+        <el-form-item label="仓库"   class="item-r" >
+          <el-select  v-model="queryParams.cbwa01"  filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
+            <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="商品"   class="item-r" >
           <el-select @change="getGoods" :remote-method="getGoods" v-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
@@ -74,7 +78,7 @@
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
 import { formatDate2 } from '../../../utils';
-import { getInventorysmmaryquerysList,getSwJsGoodsAllList } from "@/api/statisticAnalysis/index";
+import { getInventorysmmaryquerysList,getSwJsGoodsAllList,getSwJsStoreSkuAllList } from "@/api/statisticAnalysis/index";
 import Vue from 'vue';
 Vue.directive('loadmore', {
   bind(el, binding) {
@@ -110,6 +114,8 @@ export default {
       },
       //下拉列表数据商品
       goodList:[],
+      //下拉列表数据仓库
+      storeSkuList:[],
       dateRange:[],
       tableData: [],
       loadingOut:false,
@@ -126,7 +132,7 @@ export default {
         pageNum: 1,
         pageSize: 15,
         total: this.total,
-        cbwa09: "",
+        cbwa01: "",
         cbib17:"",
         cbpb01:"",
         startTime:undefined,
@@ -271,6 +277,7 @@ export default {
   mounted() { // 自动触发写入的函数
     this.onSearch();
     this.getGoods();
+    this.getStoreSkuList();
   },
   methods: {
 
@@ -307,7 +314,7 @@ export default {
     /** 重置按钮操作 */
     resetQuery() {
       this.queryParams.cbib17 = "";
-      this.queryParams.cbwa09 = "";
+      this.queryParams.cbwa01 = "";
       this.queryParams.cbpb01 ="";
       this.queryParams.pageNum = 1;
       this.getGoods()
@@ -335,7 +342,7 @@ export default {
         this.queryParams.startTime = undefined;
         this.queryParams.endTime = undefined;
       }
-      this.queryParams.cbib17 = this.queryParams.cbwa09;
+      // this.queryParams.cbib17 = this.queryParams.cbwa09;
 
       // this.queryParams.cbpb01 = this.cbpb01;
       this.loading = true;
@@ -390,7 +397,21 @@ export default {
         // this.loading1 = false;
       });
     },
-
+    //下拉列表数据仓库
+    getStoreSkuList(query){
+      let param={cbwa09:query};
+      this.loading3 = true;
+      getSwJsStoreSkuAllList(param).then(response => {
+        this.loading3 = false;
+        if (response.data != null) {
+          this.storeSkuList = response.data;
+        } else {
+          this.storeSkuList = [];
+        }
+      },error => {
+        this.loading3 = false;
+      });
+    },
   },
 };
 </script>

@@ -3,20 +3,20 @@
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">销售预订单入库单</div>
       <el-row :gutter="20" style="margin-top: 20px;">
-        <el-col :span="8">
+        <el-col :span="6">
           <el-form-item label="销售预订单编号:" prop="orderNo">
             <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
             <el-popover placement="bottom-start" trigger="click">
               <SalesBooking ref="SalesBooking" @selected="selected0222"
                 style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width:68%;">
+              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width:110%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="6" style="margin-left:-2%;">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 100%;">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -41,7 +41,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="margin-left:-4%;" :span="6">
+        <!-- <el-col style="margin-left:-4%;" :span="6">
           <el-form-item label="仓库:" prop="cbpc100">
             <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
@@ -49,7 +49,7 @@
               </el-input>
             </el-popover>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col style="margin-left:-2%;" :span="6">
           <!-- <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
@@ -120,6 +120,12 @@
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
           :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
+          <el-table-column label="工厂" width="150" prop="qty">
+            <template slot-scope="scope" style="width: 100%">
+              <el-input v-model="scope.row.qty" placeholder="请输入工厂"
+                class="shuzicaoyou" style=""></el-input>
+            </template>
+          </el-table-column>
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
@@ -742,9 +748,9 @@ export default {
       rowIndex,
       columnIndex
     }) {
-      if (columnIndex === 0) {
-        return [1, 3];
-      } else if (columnIndex < 3) {
+      if (columnIndex === 1) {
+        return [2, 3];
+      } else if (columnIndex < 4 && columnIndex>1) {
         return [0, 0];
       }
     },

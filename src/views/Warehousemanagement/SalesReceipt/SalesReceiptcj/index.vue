@@ -46,7 +46,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="margin-left: -4%" :span="6">
+        <!-- <el-col style="margin-left: -4%" :span="6">
           <el-form-item label="仓库:" prop="wh">
             <el-popover placement="bottom-start" trigger="click" disabled>
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 210px !important" />
@@ -54,7 +54,7 @@
               </el-input>
             </el-popover>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col style="margin-left: -2%" :span="6">
           <!-- <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
@@ -125,8 +125,14 @@
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
           :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="cala08" label="品牌" width="">
-            <template slot-scope="scope" style="width: 200%">
+          <el-table-column label="工厂" width="150" prop="factory">
+            <template slot-scope="scope" style="width: 100%">
+              <el-input v-model="scope.row.factory" placeholder="请输入工厂"
+                class="shuzicaoyou" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="cala08" label="品牌" width="200">
+            <template slot-scope="scope" style="width: 100%">
               <el-popover placement="bottom-start" trigger="click">
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
                   style="width: 850px !important" />
@@ -138,13 +144,13 @@
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
           <el-table-column label="入库数量" width="150" prop="qty">
-            <template slot-scope="scope" style="width: 200%">
+            <template slot-scope="scope" style="width: 100%">
               <el-input v-model="scope.row.qty" v-only-number="{ min: 0, precision: 0.0 }" placeholder=""
                 class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="PONumber" width="150" prop="ponumber">
-            <template slot-scope="scope" style="width: 200%">
+            <template slot-scope="scope" style="width: 100%">
               <el-input v-model="scope.row.ponumber" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
@@ -623,10 +629,10 @@ export default {
             trigger: "change",
           },
         ],
-        cbpc100: [
+        factory: [
           {
             required: true,
-            message: "仓库不能为空!",
+            message: "工厂不能为空!",
             trigger: "change",
           },
         ],
@@ -708,9 +714,9 @@ export default {
     },
     // 合并单元格
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-      if (columnIndex === 0) {
+      if (columnIndex === 1) {
         return [1, 3];
-      } else if (columnIndex < 3) {
+      } else if (columnIndex < 4 && columnIndex>1) {
         return [0, 0];
       }
     },
@@ -738,6 +744,7 @@ export default {
       let arr1 = [];
       for (let i = 0; i < that.tableData.length; i++) {
         arr1.push({
+          factory:that.tableData[i].factory,
           goodsId: that.tableData[i].goodsId,
           gsSalesOrders: that.tableData[i].id,
           inQty: that.tableData[i].qty,
