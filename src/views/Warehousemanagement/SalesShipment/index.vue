@@ -30,9 +30,6 @@
               @click="resetQuery">重置</el-button>
           </el-form-item>
           <el-form-item style="margin-left: 78%">
-            <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
-            <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-            <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlexiaoshouone">创建</el-button> -->
             <el-button size="mini" v-hasPermi="['system:selloutofwarehouse:add']" class="biaoto-buttonchuangjian">创建
             </el-button>
             <el-dropdown trigger="click">
@@ -40,12 +37,12 @@
                 <i class="el-icon-caret-bottom el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <!-- <el-dropdown-item class="clearfix" >
-                              通过订单创建
-                            <el-badge class="mark"/>
-                          </el-dropdown-item> -->
                 <el-dropdown-item class="clearfix" @click.native="tong">
                   通过提货单创建
+                  <el-badge class="mark" />
+                </el-dropdown-item>
+                <el-dropdown-item class="clearfix" @click.native="tong1">
+                  通过销售订单创建
                   <el-badge class="mark" />
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -53,30 +50,6 @@
             <el-button size="mini" type="danger" style="margin-left: 5px" class="biaoto-buttonshanchu"
               :disabled="multiple" v-hasPermi="['system:selloutofwarehouse:remove']" @click="handleDelete">删除
             </el-button>
-            <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
-                            @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
-            <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button> -->
-            <!-- <el-button
-              plain
-              size="mini"
-              class="biaoto-buttondaochu"
-              @click="PurchaseinboundBiaojiWancheng01"
-              :disabled="multiple"
-              v-hasPermi="['system:selloutofwarehouse:bjwc']"
-              >标记完成
-            </el-button>
-            <el-button
-              plain
-              size="mini"
-              class="biaoto-buttonfanshen"
-              @click="PurchaseinboundQuxiaoWangcheng01"
-              :disabled="multiple"
-              v-hasPermi="['system:selloutofwarehouse:qxwc']"
-              >取消完成
-            </el-button> -->
           </el-form-item>
         </el-form>
 
@@ -197,16 +170,22 @@
     <!--提货单创建-->
     <el-dialog :visible.sync="open3" @close="close">
       <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
-        <el-col :span="10">
+        <el-col :span="6">
           <el-popover placement="bottom-start" trigger="click" clearable>
             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 260px !important" />
             <el-input slot="reference" v-model="form2.cbpc100" placeholder="请选择仓库" readonly style="width: 96%">
             </el-input>
           </el-popover>
         </el-col>
-        <el-col :span="10">
-          <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
+        <el-col :span="6">
+          <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入订单编号" clearable style="width: 100%"
             @change="handleQuerys(queryParams.orderNo)" />
+        </el-col>
+        <el-col :span="8">
+          <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
+            <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
         </el-col>
         <el-col :span="4">
           <el-button type="primary" @click="found">创建出库单</el-button>
@@ -216,11 +195,6 @@
         :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%; height: 8%; margin-left: -2%"
         @selection-change="handleSelectionChange">
         <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width" type="selection">
-          <!-- <template slot-scope="scope" style="margin-left: -10%">
-            <el-button size="mini" icon="el-icon-share" class="button-caozuoxougai caozuoxiangqeng" type="primary"
-              @click="sendParams(scope.row)" v-hasPermi="['system:user:edit']">
-            </el-button>
-          </template> -->
         </el-table-column>
         <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable
           style="padding-top: 60px !important" width="260px;" />
@@ -235,6 +209,50 @@
         :limit.sync="queryParamss.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]"
         class="pagintotal" />
     </el-dialog>
+
+    <!-- 销售订单创建 -->
+    <el-dialog :visible.sync="open4" @close="close">
+      <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
+        <el-col :span="6">
+          <el-popover placement="bottom-start" trigger="click" clearable>
+            <kuweixxweihu ref="kuweixxweihu" @selected="selected01xs" style="width: 260px !important;" />
+            <el-input slot="reference" v-model="form2.cbpc100" placeholder="请选择仓库" readonly style="width: 96%">
+            </el-input>
+          </el-popover>
+        </el-col>
+        <el-col :span="6">
+          <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入订单编号" clearable style="width: 100%"
+            @change="handleQuerys(queryParams.orderNo)" />
+        </el-col>
+        <el-col :span="8">
+          <el-select v-model="valuexs" placeholder="请选择客户" @change="helloxs">
+            <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="primary" @click="foundxs">创建出库单</el-button>
+        </el-col>
+      </el-row>
+      <el-table border :header-cell-style="headClassssmt" v-loading="loading" :data="userList01xs" height="440"
+        :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%; height: 8%; margin-left: -2%"
+        @selection-change="handleSelectionChangexs">
+        <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width" type="selection">
+
+        </el-table-column>
+        <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable
+          style="padding-top: 60px !important" width="260px;" />
+        <el-table-column label="单据日期" align="left" key="orderDate" prop="orderDate" width="180px;" sortable />
+        <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
+        <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
+        </el-table-column>
+        <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
+      </el-table>
+      <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamss.pageNum"
+        :limit.sync="queryParamss.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]"
+        class="pagintotal" />
+    </el-dialog>
+
 
     <!--修改-->
     <el-dialog :visible.sync="open">
@@ -313,7 +331,6 @@
   </div>
 </template>
 <script>
-// import { addUserSysPurchaseinbound, listUserPurchaseinbound, updateUserPurchaseinbound, removeSysPurchaseinbound, henUserSysPurchaseinbound, listUserGongyinShangs, listUserShangPxxweihus, listUserKuweisKus, listUsercangkuStore } from "@/api/Warehousemanagement/PurchaseWarehousing";
 import {
   PurchaseinboundAdd,
   PurchaseinboundList,
@@ -323,12 +340,14 @@ import {
   PurchaseinboundShs,
   Purchaseinbounds,
   PurchaseinboundShss,
+  saleOrderListPj,
   SupplierList,
   GoodsList,
   StoreList,
   StoreSkuList,
   PurchaseinboundLists,
   Purchaseinbounddingdancx,
+  Purchaseinbounddingdanck,
 } from "@/api/Warehousemanagement/SalesShipment";
 import * as req from "@/api/Warehousemanagement/SalesShipment";
 import { getToken } from "@/utils/auth";
@@ -341,6 +360,8 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 //供应商
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
+import { CustomerList } from "@/api/Basicinformationmaintenance/CustomerMaintenance";
+
 export default {
   name: "SalesShipment",
   dicts: [
@@ -352,12 +373,16 @@ export default {
   components: { Treeselect, kuweixxweihu, supplierMaintenance },
   data() {
     return {
+      valuexs: "",
+      customerLists: null,
       // 遮罩层
       loading: true,
       tianjiahang: [],
       // 选中数组
       ids: [],
       shenpiids: [],
+      idsxs: [],
+      shenpiidsxs: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -371,6 +396,7 @@ export default {
       userList: null,
       // 用户表格数据
       userList01: null,
+      userList01xs: null,
       // 弹出层标题
       title: "",
       // 部门树选项
@@ -380,6 +406,8 @@ export default {
       open1: false,
       open2: false,
       open3: false,
+      // 销售订单创建
+      open4: false,
       // 部门名称
       deptName: undefined,
       // 默认密码
@@ -737,7 +765,6 @@ export default {
           },
         ],
       },
-      // value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
       daterange: "",
     };
   },
@@ -767,17 +794,55 @@ export default {
     this.getDicts("sw_js_store_type").then((response) => {
       this.form.type = response.rows;
     });
-    // this.form.type = this.dict[0].label;
-    // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
-    // console.log(this.userList,123456789);
     this.chen();
     this.form2.cbsa09 = "20";
+
+    // 获取客户列表
+    CustomerList().then(res => {
+      console.log(res, "res")
+      this.customerLists = res.data.rows.map(item => {
+        return { value: item.cbca08, label: item.cbca08 }
+      })
+      console.log(this.customerLists)
+    })
   },
   methods: {
+    // 通过提货单创建，选择客户后执行
+    hello() {
+      console.log(this.valuexs)
+      let obj = {
+        customerName: this.valuexs,
+        checkStatus: 1
+      }
+      Purchaseinbounddingdanck({ customerName: this.valuexs, }).then((res) => {
+        if (res.code == 200) {
+          this.userList01 = res.data.rows;
+        }
+        console.log(res, 4444444)
+      })
+    },
+    helloxs() {
+      console.log(this.valuexs)
+      let obj = {
+        customerName: this.valuexs,
+        checkStatus: 1
+      }
+      saleOrderListPj({ customerName: this.valuexs, }).then((res) => {
+        if (res.code == 200) {
+          this.userList01xs = res.data.rows;
+        }
+        console.log(res, 4444444)
+      })
+    },
+    // 销售订单创建弹窗关闭
+    close4() {
+
+    },
     // 弹框关闭
     close() {
       this.form2.cbpc100 = ''
       console.log(1111111111)
+      this.valuexs = ""
     },
     // 
     handleQuerys(saleNo) {
@@ -796,6 +861,14 @@ export default {
     tong() {
       this.open3 = true;
     },
+    tong1() {
+      this.open4 = true;
+      saleOrderListPj({}).then(res => {
+        this.userList01xs = res.data.rows;
+        console.log(this.userList01xs)
+      })
+      this.selected01xs('GEW-62')
+    },
 
     //列表表头设置
     headClassssmt() {
@@ -811,11 +884,37 @@ export default {
     },
     //仓库
     selected01(name) {
-      console.log(name, 123);
+      console.log(name, "name");
       console.log(name.substring(name.indexOf("-") + 1), 963);
       this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
-      // this.form2.icon = name;
+      let cus = this.addDateRange(this.queryParams, this.dateRange)
+      cus.whId = this.form2.cbpc10
+      cus.pageSize = 99999
+      this.form2.icon = name;
+      Purchaseinbounddingdanck(
+        cus
+      ).then((response) => {
+        this.userList01 = response.data.rows;
+      });
+    },
+    selected01xs(name) {
+      console.log(name, "name");
+      console.log(name.substring(name.indexOf("-") + 1), 963);
+      this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
+      this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
+      console.log(this.form2.cbpc100, "this.form2.cbpc10 ")
+      let cus = this.addDateRange(this.queryParams, this.dateRange)
+      cus.whId = this.form2.cbpc10
+      cus.pageSize = 99999
+      console.log(cus)
+      this.form2.icon = name;
+      saleOrderListPj(
+        { whId: this.form2.cbpc10 }
+      ).then((response) => {
+        console.log(response, "response")
+        this.userList01xs = response.data.rows;
+      });
     },
     //供应商
     selected02(name) {
@@ -856,8 +955,7 @@ export default {
     /** 查询用户列表 */
     getList09() {
       this.loading = true;
-      Purchaseinbounddingdancx(
-        this.addDateRange(this.queryParamss, this.dateRange)
+      Purchaseinbounddingdanck(
       ).then((response) => {
         console.log(response)
         this.userList01 = response.data.rows;
@@ -871,17 +969,6 @@ export default {
       });
     },
 
-    /** 详情列表 */
-    // getList05() {
-    //     this.loading = true;
-    //     PurchaseinboundLists(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-    //         this.userList = response.data.rows;
-    //         this.total = response.data.total;
-    //         console.log(response, 3396888952);
-    //         this.loading = false;
-    //     }
-    //     );
-    // },
     //供应商
     getList01() {
       SupplierList(this.addDateRange(this.queryParams, this.dateRange)).then(
@@ -923,61 +1010,6 @@ export default {
       );
     },
 
-    // /** 查询部门下拉树结构 */
-    // getTreeselect() {
-    //     treeselectt().then(response => {
-    //         response.data.forEach((res) => {
-    //             res.code = res.label ? res.label.substring(res.label.indexOf("-") + 1) : ""
-    //             res.label = res.label ? res.label.substring(0, res.label.indexOf("-")) : ""
-    //             if (res.children) {
-    //                 res.children.forEach((i) => {
-    //                     i.code = i.label ? i.label.substring(i.label.indexOf("-") + 1) : ""
-    //                     i.label = i.label ? i.label.substring(0, i.label.indexOf("-")) : ""
-    //                 })
-    //             }
-    //         })
-    //         this.deptOptions = response.data;
-    //         // this.deptOptions = response.data[0].label.substring(0, response.data[0].label.indexOf("-"));
-    //         // console.log(response.data[response.data.length].label.substring(0, response.data[response.data.length].label.indexOf("-")),123456789);
-    //         // console.log(response.data.label);
-    //         // console.log(JSON.stringify(Object.assign({}, response.data)));
-    //         // var j = JSON.stringify(Object.assign({}, response.data))
-    //         // for(var key in j)
-    //         // {
-    //         //   //  alert();
-    //         //   // console.log(key);
-    //         // }
-    //         // console.log(response);
-    //         // console.log(response.data);
-    //     });
-    // },
-    // 筛选节点
-    // filterNode(value, data) {
-    //
-    //   if (!value) return true;
-    //   alert("ddd");
-    //   return data.indexOf(value) !== -1;
-    // },
-    // 节点单击事件
-    // handleNodeClick(data) {
-    //     // console.log(data)
-    //     // this.queryParams.deptId = data.id;
-    //     // console.log(data.label,88888);
-    //     // const v1=data.label.substring(0, data.label.indexOf("-"));
-    //     this.form.classifyNum = "";
-    //     for (let i = 0; i < (data.code.split("-")).length - 1; i++) {
-    //         if (i != 0) {
-    //             this.form.classifyNum += ("-" + (data.code.split("-"))[i])
-    //         } else {
-    //             this.form.classifyNum += (data.code.split("-"))[i]
-    //         }
-    //     }
-    //     // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
-    //     this.form.classifyName = data.label
-    //     this.form.id = (data.code.split("-"))[data.code.split("-").length - 1]
-    //     // console.log(data.code ? data.code.substring(data.code.indexOf("-") + 1) : "");
-    //     this.handleQuery();
-    // },
     // 取消按钮
     cancel() {
       this.open2 = false;
@@ -1042,6 +1074,15 @@ export default {
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
+    // 多选框2选中数据
+    handleSelectionChangexs(selection) {
+      this.idsxs = selection;
+      this.idssxs = selection.map((item) => item.id);
+      this.shenpiidsxs = selection;
+      console.log(this.shenpiidsxs)
+      this.singlexs = selection.length != 1;
+      this.multiplexs = !selection.length;
+    },
     // 更多操作触发
     handleCommand(command, row) {
       switch (command) {
@@ -1065,23 +1106,6 @@ export default {
       let cbpc01 = row.cbsb01;
       let status = row.cbsb11;
       this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
-
-      //     this.$modal.confirm('是否要审批,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
-      //     console.log(row.cbpc01, 8888);
-
-      //     PurchaseinboundSH(row).then(response => {
-      //         // console.log(this.form.cbpc01, 789)
-      //         // this.submitShangpin();
-      //         if(response.code == 200){
-      //             this.getList();
-      //             // this.open = false;
-      //             this.$message({ message: '审批成功', type: 'success' });
-      //         }else{
-      //             this.$modal.msgError(response.msg)
-      //         }
-
-      //     });
-      //   }).catch(() => { });
     },
     //审批上面内容
     PurchaseinboundShenpi01(row) {
@@ -1115,20 +1139,6 @@ export default {
       let cbpc01 = row.cbsb01;
       let status = row.cbsb11;
       this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
-      //     // console.log(row.cbpc01, 8888);
-      //     this.$modal.confirm('是否要反审,编号为"' + row.cbsb07 + '"的数据项？').then(() => {
-      //     PurchaseinboundShs(row).then(response => {
-      //         // console.log(this.form.cbpc01, 789)
-      //         // this.submitShangpin();
-      //         if(response.code == 200){
-      //             this.getList();
-      //             // this.open = false;
-      //             this.$message({ message: '反审成功', type: 'success' });
-      //         }else{
-      //             this.$modal.msgError(response.msg)
-      //         }
-      //     });
-      //   }).catch(() => { });
     },
 
     //反审上面的
@@ -1165,22 +1175,6 @@ export default {
       let cbpc01 = row.cbsb01;
       let status = row.cbsb11;
       this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
-      //   this.$modal
-      //     .confirm('是否要标记完成,编号为"' + row.cbsb07 + '"的数据项？')
-      //     .then(() => {
-      //       PurchaseinboundShss(row).then((response) => {
-      //         if (response.code == 200) {
-      //           console.log(this.form.cbpc01, 789);
-      //           // this.submitShangpin();
-      //           this.getList();
-      //           // this.open = false;
-      //           this.$message({ message: "标记完成", type: "success" });
-      //         } else {
-      //           this.$message({ message: response.msg, type: "error" });
-      //         }
-      //       });
-      //     })
-      //     .catch(() => {});
     },
 
     //标记完成上面的按钮
@@ -1200,11 +1194,11 @@ export default {
                   this.getList();
                   this.$modal.msgSuccess("标记完成");
                 } else {
-                  // this.$message({ message: res.msg, type: "error" });
+
                 }
               })
               .catch((e) => {
-                // console.log(e, 456)
+
               });
           });
         })
@@ -1218,30 +1212,6 @@ export default {
       let status = row.cbsb11;
       this.$router.push("/system/user-authhh/role/" + cbpc01 + status);
 
-      // Purchaseinbounds(row).then(response => {
-      //     console.log(this.form.cbpc01, 789)
-      //     // this.submitShangpin();
-      //     this.getList();
-      //     // this.open = false;
-      //     this.$message({ message: '恭喜你，取消标记成功', type: 'success' });
-
-      // });
-
-      // console.log(row.cbpc01, 8888);
-      //   this.$modal
-      //     .confirm('是否要取消标记,编号为"' + row.cbsb07 + '"的数据项？')
-      //     .then(() => {
-      //       Purchaseinbounds(row).then((response) => {
-      //         console.log(this.form.cbpc01, 789);
-      //         if (response.code == 200) {
-      //           this.getList();
-      //           this.$message({ message: "取消标记成功", type: "success" });
-      //         } else {
-      //           this.$message({ message: response.msg, type: "error" });
-      //         }
-      //       });
-      //     })
-      //     .catch(() => {});
     },
     //取消标记上面的
     PurchaseinboundQuxiaoWangcheng01(row) {
@@ -1336,37 +1306,7 @@ export default {
 
         // console.log(this.form2.ifEnabled, 123456);
       });
-      //     } else {
-      //         this.$message.error('请注意规范');
-      //     }
-      // })
 
-      // if (this.form2.name != undefined || this.form2.address != undefined || this.form2.telPeople != undefined) {
-      //     // console.log(this.form.id, 123456);
-
-      //     addUserSysBarcode(this.form2).then(response => {
-      //         // console.log(this.from.parent_id, 123456789);
-      //         // this.classifyId = response.posts;
-      //         // console.log(response.posts,123456);
-      //         this.title = "添加用户";
-      //         this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
-      //         // this.getTreeselect();
-      //         // this.submitShangpin();
-      //         this.submitShangpin();
-      //         this.getList();
-      //         this.open2 = false;
-      //         this.reset01();
-
-      //         console.log(this.form2.ifEnabled, 123456);
-      //     });
-      // } else {
-      //     this.$message.error('输入的内容不能为空呀');
-      // }
-
-      // // this.reset();
-      // // } else {
-      // //   this.$message.error('错了哦，商品名称没有填呢');
-      // // }
     },
     /** 重置密码按钮操作 */
     handleResetPwd(row) {
@@ -1444,11 +1384,49 @@ export default {
             whNameid: this.form2.cbpc10
           },
         });
+        this.valuexs = ""
         this.open3 = false
         this.close()
       }
     },
+    foundxs() {
+      let isok = true;
+      if (this.shenpiidsxs[0]) {
+        let customerName1 = this.shenpiidsxs[0].customerName
+        for (let i = 0; i < this.shenpiidsxs.length; i++) {
+          if (this.shenpiidsxs[i].customerName !== customerName1) {
+            isok = false
+          }
+        }
+      }
+      let customer = this.shenpiidsxs.map(item => item.id)
 
+      if (!this.shenpiidsxs[0]) {
+        this.$message({
+          message: '请选择订单',
+          type: 'warning'
+        });
+      }
+      else if (!isok) {
+        this.$message({
+          message: '请选择同一客户',
+          type: 'warning'
+        });
+      }
+      else {
+        console.log('跳转到创建界面')
+        this.$router.push({
+          path: "/system/user-authhhchuanj/role/",
+          // name: "AuthUser",
+          query: {
+            saleOrderid: customer
+          },
+        });
+        this.valuexs = ""
+        this.open4 = false
+        this.close()
+      }
+    },
     //父子传值
     sendParams(row) {
       if (!this.form2.cbpc10) {
@@ -1468,53 +1446,12 @@ export default {
         this.open3 = false
         this.close()
       }
-      //   this.$router.push({
-      //     path: "/system/user-authhhchuanj/role/",
-      //     // name: 'index',
-      //     query: {
-      //       // name: '页面1',
-      //       // data: this.form2.cbpc01,
-      //       // data: JSON.stringify(this.userList01),
-      //       // data:JSON.stringify([{customerNo : row.customerNo,customerName:row.customerName,
-      //       //                       customerLevel:row.customerLevel,contacts:row.contacts,
-      //       //                     whName:row.whName,phone:row.phone,address:row.address,
-      //       //                     saleUser:row.saleUser,id:row.id}]),
-      //       data: row.id,
-      //       // data01:JSON.stringify(row)
-      //       //  JSON.stringify(this.userList)
-      //     },
-      //   });
-      // location.reload();
+
     },
-    // /** 提交按钮 */
-    // submitForm: function () {
-    //     this.$refs["form"].validate(valid => {
-    //         if (valid) {
-    //             if (this.form.userId != undefined) {
-    //                 updateUserStore(this.form).then(response => {
-    //                     this.$modal.msgSuccess("修改成功");
-    //                     this.open = false;
-    //                     this.getList();
-    //                 });
-    //             } else {
-    //                 addUser(this.form).then(response => {
-    //                     this.$modal.msgSuccess("新增成功");
-    //                     this.open = false;
-    //                     this.getList();
-    //                 });
-    //             }
-    //         }
-    //     });
-    // },
+
     /** 批量删除按钮操作 */
     handleDelete(row) {
-      // row.classifyId = this.form.classifyId;
-      // row.brand = this.form.brand;
-      // row.model = this.form.model;
-      // row.upc = this.form.upc;
-      // row.description = this.form.description;
-      // row.ifEnabled = this.form.ifEnabled;
-      // row.id=this.form.id;
+
       let userIds = this.ids.length > 0 ? this.ids : row;
       this.$modal
         .confirm(
@@ -1553,14 +1490,7 @@ export default {
 
     /** 普通删除按钮操作 */
     handleDelete01(row) {
-      // row.classifyId = this.form.classifyId;
-      // row.brand = this.form.brand;
-      // row.model = this.form.model;
-      // row.upc = this.form.upc;
-      // row.description = this.form.description;
-      // row.ifEnabled = this.form.ifEnabled;
-      // row.id=this.form.id;
-      // console.log(row, 2222);
+
       this.$modal
         .confirm('是否确认删除,编号为"' + row.cbsb07 + '"的数据项？')
         .then(function () {
@@ -1575,25 +1505,7 @@ export default {
         })
         .catch(() => { });
     },
-    // /** 导出按钮操作 */
-    // handleExport() {
-    //     this.download('/system/supplier/SwJsSupplierexport', {
-    //         ...this.queryParams
-    //     }, `user_${new Date().getTime()}.xlsx`)
-    // },
 
-    // handleExport() {
-    //   const queryParams = this.queryParams;
-    //   this.$confirm('是否确认导出所有用户数据项?', "警告", {
-    //     confirmButtonText: "确定",
-    //     cancelButtonText: "取消",
-    //     type: "warning"
-    //   }).then(function () {
-    //     return exportUser(queryParams);
-    //   }).then(response => {
-    //     this.download(response.msg);
-    //   }).catch(function () { });
-    // },
 
     /** 导入按钮操作 */
     handleImport() {
@@ -1617,7 +1529,7 @@ export default {
       this.upload.open = false;
       this.upload.isUploading = false;
       this.$refs.upload.clearFiles();
-      // this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
+
       this.getList();
     },
     // 提交上传文件
@@ -1625,10 +1537,6 @@ export default {
       this.$refs.upload.submit();
     },
 
-    //测试树状菜单
-    // handleNodeClick(data) {
-    //   console.log(data);
-    // }
   },
 };
 </script>

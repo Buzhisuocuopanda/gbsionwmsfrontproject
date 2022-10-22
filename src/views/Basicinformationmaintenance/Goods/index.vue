@@ -176,9 +176,8 @@
                         </el-form-item> -->
                         <el-form-item label="类型:" prop="type">
                             <el-select v-model="form.type" placeholder="" style="width:80%;">
-                              <el-option v-for="item in storeType" :key="item.value" :label="item.label" :value="item.value"></el-option>
-                                <!--<el-option v-for="item in storeType" :key="item.value"
-                                    :label="item.label"  :value="item.value"></el-option>-->
+                                <el-option v-for="item in storeType" :key="item.value" :value="item.value"
+                                    :label="item.label"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -677,7 +676,7 @@ export default {
                 cala08: "",
                 cbpa07: "",
                 cbpc099: "",
-                type: ''
+                tupe: ""
             },
             form5: {
                 cbpf02: "",
@@ -1597,7 +1596,6 @@ export default {
             // row.description = this.form.description;
             // row.ifEnabled = this.form.ifEnabled;
             // row.id=this.form.id;
-
             // console.log(row, 2222);
             this.$modal.confirm('是否确认删除商品分类为"' + row.cbpa07 + '"的数据项？').then(function () {
                 return GoodsRemove(JSON.stringify(row));
