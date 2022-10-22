@@ -1,5 +1,5 @@
 <template>
-  <!--销售上架单-->
+    <!--销售上架单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -9,12 +9,12 @@
                     label-width="68px">
 
                     <!--<el-form-item prop="cbpc07" label="编号">-->
-                        <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
-                            <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
-<!--                    </el-form-item>-->
+                    <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
+                    <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
+                    <!--                    </el-form-item>-->
                     <el-form-item prop="customerName" label="sn">
-                        <el-input v-model="queryParams.sn" id="miaoshu" placeholder="" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                        <el-input v-model="queryParams.sn" id="miaoshu" placeholder="" clearable style="width: 240px;"
+                            @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="whName" label="仓库">
                         <el-input v-model="queryParams.whName" id="miaoshu" placeholder="" clearable
@@ -27,10 +27,12 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:sellinglistings:list']" size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                        <el-button v-hasPermi="['system:sellinglistings:list']" size="mini" class="biaoto-buttonchaxuen"
+                            @click="handleQuery">查询</el-button>
                     </el-form-item>
                     <el-form-item>
-                         <el-button v-hasPermi="['system:sellinglistings:list']" class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button v-hasPermi="['system:sellinglistings:list']" class="biaoto-buttonchuangjian"
+                            size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
                     <el-form-item style="margin-left:40%;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
@@ -62,11 +64,12 @@
                 </el-form>
 
 
-                <el-table border  :header-cell-style="headClasspw"  :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="500"
+                <el-table border :header-cell-style="headClasspw" :row-style="{height: '3px'}"
+                    :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="450"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%; margin-top: -3%;" @selection-change="handleSelectionChange">
+                    style="width:92.5%;margin-left: -2%; margin-top: -3%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-<!--                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
+                    <!--                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
                         sortable  width="160px;"/>-->
                     <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
                         sortable width="150px;">
@@ -78,9 +81,10 @@
                     </el-table-column>
                     <el-table-column label="仓库" align="left" key="whName" prop="whName" sortable width="150px;">
                     </el-table-column>
-                    <el-table-column label="库位码" align="left" key="locationName" prop="locationName" sortable width="150px;">
+                    <el-table-column label="库位码" align="left" key="locationName" prop="locationName" sortable
+                        width="150px;">
                     </el-table-column>
-<!--                    <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="110px;">
+                    <!--                    <el-table-column label="仓库名称" align="left" key="whName" prop="whName" sortable width="110px;">
                     </el-table-column>
                     <el-table-column label="地址" align="left" key="address" prop="address" sortable width="520px;">
                     </el-table-column>
@@ -95,20 +99,20 @@
                         </template>
                     </el-table-column>-->
                     <!-- <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width"> -->
-                        <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
-                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                    <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
+                    <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
                                 v-hasPermi="['system:user:edit']">
                                 修改
                             </el-button> -->
-                            <!-- <el-button size="mini" type="text" icon="el-icon-delete"
+                    <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
 
                                 v-hasPermi="['system:user:remove']">删除</el-button> -->
-                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                    <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"  v-hasPermi="['system:user:listselect']">详情
                             </el-button> -->
-<!--
+                    <!--
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:user:listselect']"
                                 v-if="scope.row.status == 0">审核</el-button>
@@ -122,7 +126,7 @@
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:user:listselect']"
                                 v-if="scope.row.status == 1 | scope.row.status == 1">标记完成</el-button> -->
-                        <!-- </template> -->
+                    <!-- </template> -->
                     <!-- </el-table-column> -->
                 </el-table>
 
@@ -134,13 +138,16 @@
 
 
         <!--修改-->
-        <el-dialog :title="title" :visible.sync="open"  class="abow_dialoggn">
-            <div style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">供应商信息维护</div>
+        <el-dialog :title="title" :visible.sync="open" class="abow_dialoggn">
+            <div
+                style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
+                供应商信息维护</div>
             <!-- <div style="margin-top:-4%;font-weight: 900;font-size: 20px; color: black;">供应商信息维护</div> -->
             <!-- <hr /> -->
-            <el-form ref="form" :model="form" label-width="55%" lable-height="20%" :rules="rules01" class="chuangjianform">
+            <el-form ref="form" :model="form" label-width="55%" lable-height="20%" :rules="rules01"
+                class="chuangjianform">
                 <div style="margin-top:1.5%;">
-                   <div style="margin-top:3%;margin-bottom:2%;">
+                    <div style="margin-top:3%;margin-bottom:2%;">
                     </div>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
@@ -150,14 +157,16 @@
                         </el-col>
                         <el-col :span="11">
                             <el-form-item label="客户名称:" prop="customerName">
-                                <el-input v-model="form.customerName" maxlength="30" placeholder="" style="width:100%;" />
+                                <el-input v-model="form.customerName" maxlength="30" placeholder=""
+                                    style="width:100%;" />
                             </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
                             <el-form-item label="客户等级:" prop="customerLevel">
-                                <el-input v-model="form.customerLevel" placeholder="" maxlength="30" style="width:100%;" />
+                                <el-input v-model="form.customerLevel" placeholder="" maxlength="30"
+                                    style="width:100%;" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="11">
@@ -256,7 +265,7 @@ export default {
             tianjiahang: [],
             // 选中数组
             ids: [],
-            shenpiids:[],
+            shenpiids: [],
             // 非单个禁用
             single: true,
             // 非多个禁用
@@ -398,7 +407,7 @@ export default {
                 customerName: "",
                 customerLevel: "",
                 contacts: "",
-                phone:"",
+                phone: "",
                 saleUser: "",
                 whName: "",
                 address: "",
@@ -410,8 +419,8 @@ export default {
                 cbpd09: "",
                 cbpd11: "",
                 cbpd12: "",
-                cbpc166:"",
-                cbpc16:""
+                cbpc166: "",
+                cbpc16: ""
 
             },
             form1: {
@@ -427,19 +436,19 @@ export default {
                 cbpc08: "",
                 cbsa08: "",
                 cbwa09: "",
-                cala08:"",
-                cbpc100:"",
-                cbpc099:"",
-                cbpc166:"",
+                cala08: "",
+                cbpc100: "",
+                cbpc099: "",
+                cbpc166: "",
                 cbpc10: "",
                 cbpc09: "",
-                cbpd09:"",
-                cbpd11:"",
-                cbpd12:"",
-                cbpc16:"",
-                cbpc12:"",
-                cbpc14:"",
-                cbpd08:""
+                cbpd09: "",
+                cbpd11: "",
+                cbpd12: "",
+                cbpc16: "",
+                cbpc12: "",
+                cbpc14: "",
+                cbpd08: ""
             },
             defaultProps: {
                 children: "children",
@@ -467,9 +476,9 @@ export default {
                 page: 1,
                 size: 15,
                 total: this.total,
-                cbpc07:undefined,
-                customerName:undefined,
-                whName:undefined
+                cbpc07: undefined,
+                customerName: undefined,
+                whName: undefined
             },
             // 列信息
             //  columns: [
@@ -635,15 +644,15 @@ export default {
         // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
         // console.log(this.userList,123456789);
         this.chen();
-        this.form2.cbpd11 ="20"
+        this.form2.cbpd11 = "20"
 
-        console.log(this.form.cbpc16,123456);
+        console.log(this.form.cbpc16, 123456);
 
     },
     methods: {
 
 
-         //列表表头设置
+        //列表表头设置
         headClasspw() {
             return {
                 'text-align': 'left',
@@ -665,8 +674,7 @@ export default {
                 }
             })
         },
-        chen()
-        {
+        chen() {
             this.form2.cbpd11 = "20"
             this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
         },
@@ -851,7 +859,7 @@ export default {
             this.open2 = false;
         },
         //修改的取消按钮
-        cancells(){
+        cancells() {
             this.open = false;
         },
         //添加的取消按钮
@@ -932,96 +940,96 @@ export default {
         //审批
         PurchaseinboundShenpi(row) {
             this.$modal.confirm('是否要审批为ID"' + row.cbpc01 + '"的数据项？').then(() => {
-            console.log(row.cbpc01,8888);
+                console.log(row.cbpc01, 8888);
 
-            PurchaseinboundSH(row).then(response => {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '审批成功', type: 'success' });
-            });
-          }).catch(() => { });
+                PurchaseinboundSH(row).then(response => {
+                    // console.log(this.form.cbpc01, 789)
+                    // this.submitShangpin();
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '审批成功', type: 'success' });
+                });
+            }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
             this.$modal.confirm('是否要审批为ID"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
 
-            userIds.forEach((item) => {
-                req.PurchaseinboundSH(item).then((res) => {
-                    // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("审批成功");
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
-          }).catch(() => { });
+                userIds.forEach((item) => {
+                    req.PurchaseinboundSH(item).then((res) => {
+                        // console.log(res, 123)
+                        this.getList();
+                        this.$modal.msgSuccess("审批成功");
+                    }).catch((e) => {
+                        // console.log(e, 456)
+                    })
+                });
+            }).catch(() => { });
         },
         //反审
         PurchaseinboundFanShenpi(row) {
             this.$modal.confirm('是否要反审为ID"' + row.cbpc01 + '"的数据项？').then(() => {
-            // console.log(row.cbpc01, 8888);
-            PurchaseinboundShs(row).then(response => {
-                // console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '反审成功', type: 'success' });
-            });
-          }).catch(() => { });
+                // console.log(row.cbpc01, 8888);
+                PurchaseinboundShs(row).then(response => {
+                    // console.log(this.form.cbpc01, 789)
+                    // this.submitShangpin();
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '反审成功', type: 'success' });
+                });
+            }).catch(() => { });
         },
 
         //反审上面的
         PurchaseinboundFanShenpi01(row) {
             this.$modal.confirm('是否要反审为ID"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
 
-            userIds.forEach((item) => {
-                req.PurchaseinboundShs(item).then((res) => {
-                    // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("反审成功");
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
-          }).catch(() => { });
+                userIds.forEach((item) => {
+                    req.PurchaseinboundShs(item).then((res) => {
+                        // console.log(res, 123)
+                        this.getList();
+                        this.$modal.msgSuccess("反审成功");
+                    }).catch((e) => {
+                        // console.log(e, 456)
+                    })
+                });
+            }).catch(() => { });
         },
 
 
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
             this.$modal.confirm('是否要标记完成为ID"' + row.cbpc01 + '"的数据项？').then(() => {
-            // console.log(row.cbpc01, 8888);
-            PurchaseinboundShss(row).then(response => {
-                console.log(this.form.cbpc01, 789)
-                // this.submitShangpin();
-                this.getList();
-                // this.open = false;
-                this.$message({ message: '标记完成', type: 'success' });
-            });
-          }).catch(() => { });
+                // console.log(row.cbpc01, 8888);
+                PurchaseinboundShss(row).then(response => {
+                    console.log(this.form.cbpc01, 789)
+                    // this.submitShangpin();
+                    this.getList();
+                    // this.open = false;
+                    this.$message({ message: '标记完成', type: 'success' });
+                });
+            }).catch(() => { });
         },
 
         //标记完成上面的按钮
         PurchaseinboundBiaojiWancheng01(row) {
             this.$modal.confirm('是否要标记完成为ID"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
-            userIds.forEach((item) => {
-                req.PurchaseinboundShss(item).then((res) => {
-                    // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("标记完成");
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
-          }).catch(() => { });
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
+                userIds.forEach((item) => {
+                    req.PurchaseinboundShss(item).then((res) => {
+                        // console.log(res, 123)
+                        this.getList();
+                        this.$modal.msgSuccess("标记完成");
+                    }).catch((e) => {
+                        // console.log(e, 456)
+                    })
+                });
+            }).catch(() => { });
         },
         //取消标记
         PurchaseinboundQuxiaoWangcheng(row) {
@@ -1049,18 +1057,18 @@ export default {
         //取消标记上面的
         PurchaseinboundQuxiaoWangcheng01(row) {
             this.$modal.confirm('是否要取消标记为ID"' + this.idss + '"的数据项？').then(() => {
-            let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
-            // console.log(row.cbpc01, 8888);
+                let userIds = this.shenpiids.length > 0 ? this.shenpiids : row
+                // console.log(row.cbpc01, 8888);
 
-            userIds.forEach((item) => {
-                req.Purchaseinbounds(item).then((res) => {
-                    // console.log(res, 123)
-                    this.getList();
-                    this.$modal.msgSuccess("取消标记成功");
-                }).catch((e) => {
-                    // console.log(e, 456)
-                })
-            });
+                userIds.forEach((item) => {
+                    req.Purchaseinbounds(item).then((res) => {
+                        // console.log(res, 123)
+                        this.getList();
+                        this.$modal.msgSuccess("取消标记成功");
+                    }).catch((e) => {
+                        // console.log(e, 456)
+                    })
+                });
             }).catch(() => { });
         },
 
@@ -1129,7 +1137,7 @@ export default {
         },
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
-            console.log(row,98999)
+            console.log(row, 98999)
             this.open = true;
             // console.log(row, 7788521);
             this.form.id = row.id;
@@ -1155,18 +1163,18 @@ export default {
 
             this.$refs["form2"].validate((item) => {
                 if (item) {
-            PurchaseinboundAdd(this.form2).then(response => {
-                // console.log(response.posts, 12345678);
-                this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
-                // this.getTreeselect();
-                // this.submitShangpin();
-                this.submitShangpin();
-                this.getList();
-                this.open2 = false;
-                this.reset01();
+                    PurchaseinboundAdd(this.form2).then(response => {
+                        // console.log(response.posts, 12345678);
+                        this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                        // this.getTreeselect();
+                        // this.submitShangpin();
+                        this.submitShangpin();
+                        this.getList();
+                        this.open2 = false;
+                        this.reset01();
 
-                // console.log(this.form2.ifEnabled, 123456);
-            });
+                        // console.log(this.form2.ifEnabled, 123456);
+                    });
                 } else {
                     this.$message.error('请注意规范');
                 }
@@ -1354,21 +1362,25 @@ export default {
     computed: {
 
     },
-    mounted () {
+    mounted() {
 
     }
 };
 </script>
 <style src="./SalesOnshelvescss/index.css" scoped>
+
 </style>
 <style lang="scss" scoped>
-::v-deep .el-table{
-    height: auto !important;
-}
-::v-deep .el-table__header-wrapper table,::v-deep .el-table__body-wrapper table{
-    width: 100% !important;
-}
-::v-deep .el-table__body-wrapper{
-    height:auto !important;
-}
+// ::v-deep .el-table {
+//     // height: auto !important;
+// }
+
+// ::v-deep .el-table__header-wrapper table,
+// ::v-deep .el-table__body-wrapper table {
+//     width: 100% !important;
+// }
+
+// ::v-deep .el-table__body-wrapper {
+//     height: auto !important;
+// }
 </style>
