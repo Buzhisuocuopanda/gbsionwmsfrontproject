@@ -668,7 +668,7 @@ export default {
           "cbph11",
           parseFloat(item.cbph09) * parseFloat(item.cbph10)
         );
-        this.form2.cbph11 = item.cbph11
+        // this.form2.cbph11 = item.cbph11
       }
     },
     // 合并单元格
@@ -960,17 +960,18 @@ export default {
           }else{
             this.form2.cbpc16 = 5
           }
+          let that = this
           // 声明空数组，for循环生成新的数组
           let newarr = []
-          for(let i = 0;i<this.tableData.length;i++){
+          for(let i = 0;i<that.tableData.length;i++){
             newarr.push({
-              "cbpd01": this.tableData[i].cbpd01,
-              "cbpc01": this.tableData[i].cbpc01,
-              "cbpd08": this.tableData[i].cbpd08,
-              "cbpd09": this.tableData[i].cbpd09,
-              "cbpd11": this.tableData[i].cbpd11,
-              "cbpd12": this.tableData[i].cbpd12,
-              "cbpd13": this.tableData[i].cbpd13,
+              "cbpg01": that.tableData[i].cbpg01,
+              "cbph01": that.tableData[i].cbph01,
+              "cbph08": that.tableData[i].cbph08,
+              "cbph09": that.tableData[i].cbph09,
+              "cbph11": that.tableData[i].cbph11,
+              "cbph10": that.tableData[i].cbph10,
+              "cbph13": that.tableData[i].cbph13,
             })
           }
           this.form2.goods = newarr
@@ -985,8 +986,8 @@ export default {
               // this.open2 = false;
               this.reset01();
               // this.$router.push("/system/user-cktkfh/role/");
-               this.$tab.closePage();
-              this.$router.go(-1);
+              //  this.$tab.closePage();
+              // this.$router.go(-1);
             }
           });
         } else {
