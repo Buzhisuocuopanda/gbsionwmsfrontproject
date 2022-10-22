@@ -817,6 +817,9 @@ export default {
         goods: arr,
         gsid: this.form2.id,
         orderNo: this.form2.orderNo,
+        salerId: this.form2.salerId,
+        supplierId: this.form2.supplierId,
+        customerId: this.form2.customerId,
       }
       if (!arr[0].gsSalesOrders) {
         return;
