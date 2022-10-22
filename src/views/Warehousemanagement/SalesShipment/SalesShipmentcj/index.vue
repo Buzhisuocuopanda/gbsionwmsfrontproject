@@ -161,11 +161,11 @@
       </el-row>
 
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button plain style="float: left; margin-left: 1%" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
-        </el-row>
+        </el-row> -->
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
           :cell-style="{ padding: '5px' }" style="width: 99%; margin-top: 10px; margin-left: 0.5%">
@@ -206,32 +206,32 @@
           </el-table-column>
           <el-table-column prop="cbsc09" label="数量" width="80">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbsc09" v-only-number="{ max: 100, min: 0, precision: 0.0 }"
-                @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbsc09" v-only-number="{ min: 1, precision: 0.0 }" @blur="chen(scope.row)"
+                placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd11" label="单价" width="80">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc11" v-only-number="{ max: 100, min: 0, precision: 0.0 }"
+              <el-input readonly v-model="scope.row.cbsc11" v-only-number="{  min: 0, precision: 0.0 }"
                 class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbsc12" label="金额" width="80">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc12" v-only-number="{ max: 100, min: 0, precision: 0.0 }"
-                placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input readonly v-model="scope.row.cbsc12" v-only-number="{  precision: 0.0 }" placeholder=""
+                class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-              <el-input readonly="" v-model="scope.row.cbsc13" v-only-number="{ max: 100, min: 0, precision: 0.0 }"
+              <el-input readonly="" v-model="scope.row.cbsc13" v-only-number="{  min: 0, precision: 0.0 }"
                 placeholder=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="订单占用量" width="100">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc144" v-only-number="{ max: 100, min: 0, precision: 0.0 }"
-                placeholder=""></el-input>
+              <el-input readonly v-model="scope.row.cbsc144" v-only-number="{  min: 0, precision: 0.0 }" placeholder="">
+              </el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -287,6 +287,7 @@ import {
   PurchaseinboundAdds,
   PurchaseinboundAdd,
   PurchaseinListxiangq,
+  takeOrderDetailBySaleId
 } from "@/api/Warehousemanagement/SalesShipment";
 import { getToken } from "@/utils/auth";
 //仓库
@@ -332,6 +333,7 @@ export default {
       }
     };
     return {
+      xsIds: null,
       // 表单结构数组
       formArr: [],
       tableData: [],
@@ -696,12 +698,100 @@ export default {
     this.form.cbsc17 = this.form.brand;
     let routerParams = this.$route.query;
     console.log(routerParams.data)
-    this.form2.cbsb20 = routerParams.data.id;
-    //销售提货单详情
-    this.getList();
+
+    if (routerParams.data) {
+      this.form2.cbsb20 = routerParams.data.id;
+      //销售提货单详情
+      this.getList();
+    }
+    if (this.$route.query.saleOrderid) {
+      this.xsIds = this.$route.query.saleOrderid
+      takeOrderDetailBySaleId({ saleOrderIds: this.xsIds, whId: 62 }).then(response => {
+        console.log(response, "------------------------------")
+        // 提货单id
+        // this.form2.takeId = id;
+        // 编号
+        this.form2.cbsb07 = response.data.orderNo;
+        //客户名称
+        this.form2.cbpc0999 = response.data.customerName;
+        //客户名称ID
+        this.form2.cbsb09 = response.data.customerId;
+        //仓库名称
+        this.form2.cbpc100 = response.data.whName;
+        //仓库名称ID
+        this.form2.cbsb10 = response.data.whId;
+        //销售人员名称
+        this.form2.cbsb177 = response.data.saleUserName;
+        //销售人员ID
+        this.form2.cbsb17 = response.data.saleUserId;
+        //联系人
+        this.form2.cbsb18 = response.data.receiver;
+        //电话
+        this.form2.cbsb19 = response.data.phone;
+        // id
+        // this.form2.cbsb20 = id;
+        //客户等级
+        this.form2.cbca28 = response.data.customerLevel;
+        //结算货币名称
+        this.form2.cbsb166 = response.data.currencyMsg;
+        //结算货币名称id
+        this.form2.cbsb16 = response.data.currency;
+        //收货人
+        this.form2.cbsb22 = response.data.receiver;
+        //收货电话
+        this.form2.cbsb29 = response.data.receivPhone;
+        //收货地址
+        this.form2.cbsb28 = response.data.receiveAdress;
+        //收货地址
+        this.form2.cbsb21 = response.data.receiveAdress;
+        //客户订单
+        this.form2.cbsb30 = response.data.customerNo;
+        console.log(this.form2.cbsb09, 85200000);
+        console.log(response)
+        let tableData1 = {}
+        response.data.goods.forEach((item) => {
+          tableData1.cbsc177 = item.orderClass;
+          tableData1.cbsc15 = item.supplierId;
+          tableData1.cbsd133 = item.brand;
+          tableData1.cbsd134 = item.model;
+          tableData1.cbsd135 = item.description;
+          tableData1.cbsc08 = item.goodsId;
+          tableData1.cbsc12 = item.qty * item.price;
+          tableData1.cbsc09 = item.qty;
+          tableData1.cbsc11 = item.price;
+          tableData1.cbsc13 = item.scanQty;
+          tableData1.cbsc144 = item.noSendQty;
+          tableData1.cbsc15 = item.remark;
+          // item.cbsc14 = item.saleOrderId;
+          tableData1.cbsc14 = item.cbob01;
+
+          tableData1.cbpc000 = item.brand + "~" + item.model + "~" + item.description;
+          if (item.cbsc177 == "国内订单") {
+            item.cbsc17 = "1";
+          } else {
+            item.cbsc17 = "2";
+          }
+        });
+        this.tableData.push(tableData1)
+        console.log(this.tableData)
+        //------------
+        this.formArr = response.data;
+
+        // this.tableData = response.data.goods;
+        // console.log(this.tableData, "-----------------")
+        // this.total = response.data.total;
+        // console.log(response.data.goods, 339688);
+
+        // console.log(response.data, 1709916);
+      })
+
+
+    }
+
 
     this.form2.cbca08 = this.ListUser.customerName;
     //父子页面传值
+
 
     // this.getParams();
     this.getConfigKey("sys.user.initPassword").then((response) => {
@@ -902,7 +992,7 @@ export default {
     },
 
     chen(item) {
-      if (item.cbsc09 > 0 && item.cbsc11 > 0) {
+      if (item.cbsc09 >= 0 && item.cbsc11 >= 0) {
         this.$set(
           item,
           "cbsc12",
@@ -1061,9 +1151,10 @@ export default {
       this.formArr = routerParams.data[0];
       let id = this.$route.query.data[0]
       let zhuangh = JSON.parse(this.formArr);
-
+      console.log(this.$route.query.data, "this.$route.query.data")
+      console.log(this.$route.query.data.join(','), "this.$route.query.data.join(',')")
       PurchaseinListxiangq(
-        this.$route.query.data.map(item => Number(item))
+        this.$route.query.data.join(',')
       ).then((response) => {
         console.log(response, "------------------------------")
         // 提货单id
