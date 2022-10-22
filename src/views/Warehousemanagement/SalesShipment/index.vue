@@ -182,7 +182,7 @@
             @change="handleQuerys(queryParams.orderNo)" />
         </el-col>
         <el-col :span="8">
-          <el-select v-model="valuexs" placeholder="请选择" @change="hello">
+          <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
             <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -225,8 +225,10 @@
             @change="handleQuerys(queryParams.orderNo)" />
         </el-col>
         <el-col :span="8">
-          <el-input v-model="queryParams.customerName" id="miaoshu" placeholder="请输入客户信息" clearable style="width: 100%"
-            @change="handleQueryss(queryParams.customerName)" />
+          <el-select v-model="valuexs" placeholder="请选择客户" @change="helloxs">
+            <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
         </el-col>
         <el-col :span="4">
           <el-button type="primary" @click="foundxs">创建出库单</el-button>
@@ -819,6 +821,19 @@ export default {
         console.log(res, 4444444)
       })
     },
+    helloxs() {
+      console.log(this.valuexs)
+      let obj = {
+        customerName: this.valuexs,
+        checkStatus: 1
+      }
+      saleOrderListPj({ customerName: this.valuexs, }).then((res) => {
+        if (res.code == 200) {
+          this.userList01xs = res.data.rows;
+        }
+        console.log(res, 4444444)
+      })
+    },
     // 销售订单创建弹窗关闭
     close4() {
 
@@ -827,6 +842,7 @@ export default {
     close() {
       this.form2.cbpc100 = ''
       console.log(1111111111)
+      this.valuexs = ""
     },
     // 
     handleQuerys(saleNo) {
@@ -1368,6 +1384,7 @@ export default {
             whNameid: this.form2.cbpc10
           },
         });
+        this.valuexs = ""
         this.open3 = false
         this.close()
       }
@@ -1405,6 +1422,7 @@ export default {
             saleOrderid: customer
           },
         });
+        this.valuexs = ""
         this.open4 = false
         this.close()
       }
