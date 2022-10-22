@@ -43,7 +43,7 @@
                             </span>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item class="clearfix" @click.native="tong">
-                                    通过提货单创建
+                                    通过不良品创建
                                     <el-badge class="mark" />
                                 </el-dropdown-item>
                             </el-dropdown-menu>
@@ -223,46 +223,52 @@
             </div>
         </el-dialog>
         <!-- 基于不良品创建采购退库单 -->
-        <el-dialog :visible.sync="open5" append-to-body>
-            <div style="margin-top:-30px;">
-                <span style="font-size:20px;">销售退库单</span>
-                <hr />
-            </div>
-            <el-form ref="form1" :model="form1" label-width="30%" style="margin-left:-15%;margin-top:3%;">
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="编号:" prop="cbpc07">
-                            <el-input v-model="form1.cbpc07" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                    <!-- <el-col style="margin-top:1%;">
-                        <el-form-item label="日期:" prop="cbpc08">
-                            <el-input v-model="form.cbpc08" placeholder="" :formatter="formatDate" maxlength="30"
-                                style="width:50%" />
-                        </el-form-item>
-                    </el-col> -->
-                </el-row>
-                <el-row>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="供应商:" prop="cbsa08">
-                            <el-input v-model="form1.cbsa08" placeholder="" maxlength="30" style="width:50%" />
-                            <!-- <el-select v-model="form.cala10" placeholder="" style="width:50%">
-                                <el-option v-for="dict in pongpaioptions" :key="dict.value" :label="dict.label"
-                                    :value="dict.label"></el-option>
-                            </el-select> -->
-                        </el-form-item>
-                    </el-col>
-                    <el-col style="margin-top:1%;">
-                        <el-form-item label="仓库:" prop="cbwa09">
-                            <el-input v-model="form1.cbwa09" placeholder="" maxlength="30" style="width:50%" />
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <!-- <el-button type="primary" @click="handleAdd">确 定</el-button> -->
-                <!-- <el-button @click="cancells">取 消</el-button> -->
-            </div>
+        <el-dialog :visible.sync="open5" @close="close">
+            <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
+                <el-col :span="12">
+                    <el-input
+                        v-model="queryParamss.orderNo"
+                        id="miaoshu"
+                        placeholder="请输入编号"
+                        clearable
+                        style="width: 100%"
+                        @change="handleQuerys(queryParamss.orderNo)"
+                    />
+                </el-col>
+            </el-row>
+            <el-table border  v-loading="loading" :data="userList01" height="440"
+                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
+                    @selection-change="handleSelectionChange">
+                    <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
+                      <template slot-scope="scope" style="margin-left:-10%;">
+                            <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
+                                v-hasPermi="['system:user:edit']">
+                            </el-button>
+                       </template>
+                       </el-table-column>
+                    <el-table-column label="编号" align="left" key="cbpg07" prop="cbpg07" sortable style="padding-top:60px !important;" width="165px;" />
+                    <el-table-column label="日期" align="left" key="cbpg08" prop="cbpg08" width="130px;" sortable>
+                         <template scope="scope">
+                            <div>{{ scope.row.cbpg08.slice(0,10) || '' }}
+                            </div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" width="150px;" sortable />
+                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="105px;" sortable>
+                    </el-table-column>
+                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="105px;" sortable />
+                    <el-table-column label="状态" align="left" key="cbpg11" prop="cbpg11" width="80px;" sortable>
+                        <template scope="scope">
+                            <div>{{ scope.row.cbpg11 == 0 ? "未审核" : scope.row.cbpg11 == 1 ?
+                            "已审核" : scope.row.cbpg11 == 4 ? "已完成" : ""
+                            }}
+                            </div>
+                        </template>
+                    </el-table-column>
+            </el-table>
+            <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamss.pageNum"
+                :limit.sync="queryParamss.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]"
+                class="pagintotal" />
         </el-dialog>
 
 
@@ -291,7 +297,7 @@
 </template>
 <script>
 // import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList } from "@/api/Warehousemanagement/PurchaseReturn";
-import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList } from "@/api/Warehousemanagement/PurchaseReturn";
+import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList,SwJsSkuBarcodelists } from "@/api/Warehousemanagement/PurchaseReturn";
 import * as req from "@/api/Warehousemanagement/PurchaseReturn";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -326,6 +332,7 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+            totall:0,
             // 用户表格数据
             userList: null,
             // 弹出层标题
@@ -519,6 +526,19 @@ export default {
                 cbwa09:undefined,
                 dateRange: undefined
             },
+            // 查询参数
+            queryParamss: {
+                pageNum: 1,
+                pageSize: 15,
+                page: 1,
+                size: 15,
+                totall: this.totall,
+                cbsb07: undefined,
+                cbca08: undefined,
+                dateRange: undefined,
+                orderNo:'',
+            },
+            userList01:'',
             // 列信息
             //  columns: [
             //   {
@@ -684,6 +704,23 @@ export default {
         this.chen();
     },
     methods: {
+        // 弹框关闭
+        close(){
+            this.queryParams.orderNo = ''
+        },
+        // 搜索
+        handleQuerys(saleNo){
+            let obj = {
+                orderNo:saleNo,
+            }
+            SwJsSkuBarcodelists(obj).then((res) =>{
+                if(res.code == 200){
+                    this.userList01 = res.data.rows;
+                    this.totall = res.data.total
+                }
+                console.log(res,4444444)
+            })
+        },
         // 基于不良品创建
         tong(){
           this.open5 = true;

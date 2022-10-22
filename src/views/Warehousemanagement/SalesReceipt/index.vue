@@ -477,7 +477,7 @@ export default {
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
                 // 上传的地址
-                url: process.env.VUE_APP_BASE_API + "/system/Purchaseinbound/importSwJsGoods"
+                url: process.env.VUE_APP_BASE_API + "/system/SalesScheduledOrders/importSwJsGoodssss"
             },
             // 查询参数
             queryParams: {
@@ -1398,10 +1398,11 @@ export default {
         },
         // 文件上传成功处理
         handleFileSuccess(response, file, fileList) {
+            console.log(response)
             this.upload.open = false;
             this.upload.isUploading = false;
             this.$refs.upload.clearFiles();
-            // this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
+            this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
             this.getList();
         },
         // 提交上传文件

@@ -116,11 +116,11 @@
         </el-col>
       </el-row>
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button plain style="float: left; margin-left: 1%" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
-        </el-row>
+        </el-row> -->
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
           :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">

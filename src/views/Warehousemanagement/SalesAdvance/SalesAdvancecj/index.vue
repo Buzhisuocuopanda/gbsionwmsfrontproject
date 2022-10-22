@@ -805,19 +805,18 @@ export default {
           orderDate:arr1[i].orderDate.replace(' ','T') +'.000+08:00',
           price: arr1[i].price,
           factory:this.form2.factory,
+          salerId: this.form2.salerId,
+          supplierId: this.form2.supplierId,
+          customerId: this.form2.customerId,
           // salerId: arr1[0].salerId,
           // supplierId: arr1[0].supplierId,
         });
       }
 
       let obj = {
-        "customerId": this.form2.customerId,
-        "goods": arr,
-        "gsid": this.form2.id,
-        "orderNo": this.form2.orderNo,
-        "supplierId": this.form2.supplierId,
-        "salerId": this.form2.salerId,
-        "factory": this.form2.factory,
+        goods: arr,
+        gsid: this.form2.id,
+        orderNo: this.form2.orderNo,
       }
       if (!arr[0].gsSalesOrders) {
         return;
