@@ -51,7 +51,7 @@
                     </el-form>
 
                     <el-table :max-height="maxheight" border :header-cell-style="headClassGDC"
-                        :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="490"
+                        :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="440"
                         :data="userList" :default-sort="{ prop: 'name', order: 'descending' }"
                         style="margin-left: -1.5%; width:100%;" @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
