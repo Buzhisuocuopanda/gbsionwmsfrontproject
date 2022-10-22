@@ -78,7 +78,7 @@
                     <el-table-column label="是否分配库存" width="150px;" align="center" key="allocationFlag"
                         prop="allocationFlag" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.allocationFlag == 1 ? "启用" : scope.row.cbwa15 == 2 ? "禁用" :null }}
+                            <div>{{ scope.row.allocationFlag == 1 ? "启用" : "禁用"  }}
                             </div>
                         </template>
                     </el-table-column>

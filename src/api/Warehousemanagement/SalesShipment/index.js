@@ -48,6 +48,41 @@ export function Purchaseinbounddingdancx(data) {
   })
 }
 
+// ​/dev-api​/stage-api​/sale​/saleOrderListPj
+// 通过销售订单创建的出库单列表
+export function saleOrderListPj(query) {
+  return request({
+    url: '/sale/saleOrderListPj',
+    method: 'get',
+    params: query
+  })
+}
+
+export function takeOrderDetailBySaleId(query) {
+  return request({
+    url: '/whmanagement/saleExitDetailByIds',
+    method: 'get',
+    params: query
+  })
+}
+
+// ​/dev-api​/stage-api​/whmanagement​/saleExitDetailByIds
+// 通过销售订单创建的出库单订单详情
+// export function takeOrderDetailBySaleId(query) {
+//   return request({
+//     url: '/whmanagement​/saleExitDetailByIds',
+//     method: 'get',
+//     query: query
+//   })
+// }
+
+export function Purchaseinbounddingdanck(data) {
+  return request({
+    url: '/whmanagement/takeOrderListCk',
+    method: 'get',
+    params: data
+  })
+}
 
 // 详情
 export function PurchaseinboundLists(CBPC01) {
@@ -60,7 +95,7 @@ export function PurchaseinboundLists(CBPC01) {
 //销售提货单详情
 export function PurchaseinListxiangq(CBPC01) {
   return request({
-    url: '/whmanagement/takeOrderDetail?id=' + CBPC01,
+    url: '/whmanagement/takeOrderDetailIds?ids=' + CBPC01,
     method: 'get'
   })
 }
