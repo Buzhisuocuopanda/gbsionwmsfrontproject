@@ -770,8 +770,8 @@ export default {
           // }
           tableData1.cbsc09 = item.qty;
           tableData1.cbsc11 = item.price;
-          tableData1.cbsc13 = item.scanQty;
-          tableData1.cbsc144 = item.noSendQty;
+          tableData1.cbsc13 = item.noSendQty;
+          tableData1.cbsc144 = item.useQty;
           tableData1.cbsc15 = item.remark;
           // item.cbsc14 = item.saleOrderId;
           tableData1.cbsc14 = item.cbob01;
@@ -1219,8 +1219,8 @@ export default {
           item.cbsc09 = item.goodsNum;
           item.cbsc11 = item.price;
           item.cbsc12 = item.cbsc09 * item.cbsc11;
-          item.cbsc13 = item.scanQty;
-          item.cbsc144 = item.noSendQty;
+          item.cbsc13 = item.noSendQty;
+          item.cbsc144 = item.useQty;
           item.cbsc15 = item.remark;
           // item.cbsc14 = item.saleOrderId;
           item.cbsc14 = item.cbob01;
