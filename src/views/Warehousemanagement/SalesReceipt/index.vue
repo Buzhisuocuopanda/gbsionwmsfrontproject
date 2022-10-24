@@ -228,7 +228,10 @@
         <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
             <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
                 :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
-                :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
+                :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag
+                :before-upload="onBeforeUpload">
+            <!-- <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" 
+                action :auto-upload="false" drag :http-request="uploadVersion"> -->
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 <div class="el-upload__tip text-center" slot="tip">
@@ -475,7 +478,10 @@ export default {
                 // 是否更新已经存在的用户数据
                 updateSupport: 0,
                 // 设置上传的请求头部
-                headers: { Authorization: "Bearer " + getToken() },
+                headers: { 
+                    Authorization: "Bearer " + getToken(),
+                    ContentType:"multipart/form-data",
+                },
                 // 上传的地址
                 url: process.env.VUE_APP_BASE_API + "/system/SalesScheduledOrders/importSwJsGoodssss"
             },
@@ -626,8 +632,10 @@ export default {
                 ]
             },
             // value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-            daterange: ''
-
+            daterange: '',
+            ruleForm:{
+                file:''
+            },
         };
     },
     watch: {
@@ -664,7 +672,14 @@ export default {
 
     },
     methods: {
-
+        uploadVersion(param){
+            this.ruleForm.file = param.file
+            console.log(param,11111111)
+        },
+        // 
+        onBeforeUpload(file){
+		 	console.log(file)
+		},
         rounding(row, column) {
             if (parseFloat(row[column.property]).toFixed(2) == null || isNaN(parseFloat(row[column.property]).toFixed(2))) {
                 return '0.00';
@@ -1416,8 +1431,36 @@ export default {
         // 提交上传文件
         submitFileForm() {
             this.$refs.upload.submit();
-        },
-
+            return
+            if(this.ruleForm.file == ""){
+                this.$message.warning("请选择要导入的文件");
+                return false
+            }
+            let postData = {
+                // json 字符串
+                versionCode:parseInt(this.ruleForm.versionCode),
+                versionName:this.ruleForm.versionName,
+                versionDesc:this.ruleForm.versionDesc,
+            };
+            let fileobject = this.ruleForm.file;
+            let formData = new FormData();
+            formData.append("param",JSON.stringify(postData));
+            formData.append( "file", fileobject);
+            let that = this;
+            that.$axios({
+                method: "POST",
+                url: "/system/SalesScheduledOrders/importSwJsGoodssss",
+                header: { ' Content-Type ' : "multipart/form-data"},
+                data: formData
+            }).then((response) =>{
+                if (response.data.success) {
+                    this.$message.success("app版本上传成功");}else {
+                    this.$message.error(response.data.msg);}
+                })
+                .catch((e)=>{
+                this.$message.error( "app版本上传失败");})
+        }
+        
         //测试树状菜单
         // handleNodeClick(data) {
         //   console.log(data);

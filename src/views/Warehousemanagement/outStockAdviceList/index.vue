@@ -24,7 +24,7 @@
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="430" :header-cell-style="headClasspw" :data="tableData" style="width: 100%;margin-top:1em" border :default-sort="{ prop: 'date', order: 'descending' }" v-loading="loading">
+    <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="430" :header-cell-style="headClasspw" :data="tableData" style="width: 100%;margin-top:1em" border  v-loading="loading">
       <el-table-column prop="date" label="序号" type="index" sortable width="80" align="left"></el-table-column>
       <el-table-column prop="saleOrderNo" label="商品订单" align="left" sortable></el-table-column>
       <el-table-column prop="description" label="商品描述" align="left" sortable width="300"></el-table-column>

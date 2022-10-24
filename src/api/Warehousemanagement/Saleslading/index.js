@@ -1,5 +1,21 @@
 import request from '@/utils/request'
-import { parseStrEmpty } from "@/utils/ruoyi";
+import {
+  parseStrEmpty
+} from "@/utils/ruoyi";
+
+
+
+// ​/dev-api​/stage-api​/sale​/saleOrderListGoods
+// 销售订单查询
+export function saleOrderListGoods(data) {
+  console.log(data, 'data')
+  return request({
+    url: '/sale/saleOrderListGoods',
+    method: 'get',
+    params: data
+  })
+
+}
 
 // 新增配置
 export function PurchaseinboundAdd(data) {
@@ -29,13 +45,13 @@ export function Purchaseinbounddingdancx(data) {
 // 销售提货单详情查询
 export function Purchaseinbounddingdanxq(CBPC01) {
   return request({
-    url: '/whmanagement/takeOrderDetail?id='+ CBPC01,
+    url: '/whmanagement/takeOrderDetail?id=' + CBPC01,
     method: 'get',
   })
 }
 // 销售订单查询
 export function Purchaseinbounddingdanxsdd(data) {
-  console.log(data,'data')
+  console.log(data, 'data')
   return request({
     url: '/sale/saleOrderList',
     method: 'get',
@@ -51,9 +67,9 @@ export function Purchaseinbounddingdanxsdd(data) {
 //     method: 'get'
 //   })
 // }
-export function Purchaseinxiaoshoudingdan(CBPC01,whid) {
+export function Purchaseinxiaoshoudingdan(CBPC01, whid) {
   return request({
-    url: '/whmanagement/takeOrderDetailBySaleId?saleOrderId='+CBPC01+'&whId=' + whid,
+    url: '/whmanagement/takeOrderDetailBySaleId?saleOrderId=' + CBPC01 + '&whId=' + whid,
     method: 'get'
   })
 }
@@ -61,7 +77,7 @@ export function Purchaseinxiaoshoudingdan(CBPC01,whid) {
 // 详情
 export function PurchaseinboundLists(CBPC01) {
   return request({
-    url: '/system/Purchaseinbound/SwJsSkuBarcodelist?cbpc01='+ CBPC01,
+    url: '/system/Purchaseinbound/SwJsSkuBarcodelist?cbpc01=' + CBPC01,
     method: 'get'
   })
 }
@@ -78,7 +94,7 @@ export function PurchaseinboundEdit(data) {
 // 删除
 export function PurchaseinboundRemove(id) {
   return request({
-    url: '/whmanagement/delTakeGoodsOrder?id='+id,
+    url: '/whmanagement/delTakeGoodsOrder?id=' + id,
     method: 'post',
   })
 }
@@ -189,25 +205,25 @@ export function auditTakeOrders(data) {
   })
 }
 // 查询列表2
-export function CustomerLists(whid,goodsid) {
+export function CustomerLists(whid, goodsid) {
   return request({
     url: '/whmanagement/selectGoodsSnByWhIdAndGoodsId',
     method: 'get',
     params: {
-      whId:whid,
-      goodsId:goodsid
+      whId: whid,
+      goodsId: goodsid
     }
   })
 }
 
 // 查询列表2
-export function selectGoodsSnByWhIdAndGoodsId(whid,goodsid) {
+export function selectGoodsSnByWhIdAndGoodsId(whid, goodsid) {
   return request({
     url: '/whmanagement/selectGoodsSnByWhIdAndGoodsId',
     method: 'get',
     params: {
-      whId:whid,
-      goodsId:goodsid
+      whId: whid,
+      goodsId: goodsid
     }
   })
 }

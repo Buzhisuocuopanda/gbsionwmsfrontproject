@@ -207,30 +207,30 @@
           <el-table-column prop="cbsc09" label="数量" width="80">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsc09" v-only-number="{ min: 1, precision: 0.0 }" @blur="chen(scope.row)"
-                placeholder="" class="shuzicaoyou" style=""></el-input>
+                placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd11" label="单价" width="80">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc11" v-only-number="{  min: 0, precision: 0.0 }"
+              <el-input readonly v-model="scope.row.cbsc11" v-only-number="{ min: 0, precision: 0.0 }"
                 class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbsc12" label="金额" width="80">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc12" v-only-number="{  precision: 0.0 }" placeholder=""
+              <el-input readonly v-model="scope.row.cbsc12" v-only-number="{ precision: 0.0 }" placeholder=""
                 class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-              <el-input readonly="" v-model="scope.row.cbsc13" v-only-number="{  min: 0, precision: 0.0 }"
-                placeholder=""></el-input>
+              <el-input readonly v-model="scope.row.cbsc13" v-only-number="{ min: 0, precision: 0.0 }" placeholder="">
+              </el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="订单占用量" width="100">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc144" v-only-number="{  min: 0, precision: 0.0 }" placeholder="">
+              <el-input readonly v-model="scope.row.cbsc144" v-only-number="{ min: 0, precision: 0.0 }" placeholder="">
               </el-input>
             </template>
           </el-table-column>
@@ -707,7 +707,7 @@ export default {
     if (this.$route.query.saleOrderid) {
       this.xsIds = this.$route.query.saleOrderid
       takeOrderDetailBySaleId({ saleOrderIds: this.xsIds, whId: 62 }).then(response => {
-        console.log(response, "------------------------------")
+        console.log(response, "这是销售出库单创建的", "------------------------------")
         // 提货单id
         // this.form2.takeId = id;
         // 编号
@@ -758,9 +758,20 @@ export default {
           tableData1.cbsc08 = item.goodsId;
           tableData1.cbsc12 = item.qty * item.price;
           tableData1.cbsc09 = item.qty;
+          // if (this.$route.query.state == 0) {
+          //   tableData1.cbsc09 = item.goodsNum;
+          //   tableData1.cbsc12 = item.goodsNum * item.price;
+          //   console.log("出库单创建")
+          // }
+          // else if (this.$route.query.state == 1) {
+          //   tableData1.cbsc12 = item.qty * item.price;
+          //   tableData1.cbsc09 = item.qty;
+          //   console.log("销售订单创建")
+          // }
+          tableData1.cbsc09 = item.qty;
           tableData1.cbsc11 = item.price;
-          tableData1.cbsc13 = item.scanQty;
-          tableData1.cbsc144 = item.noSendQty;
+          tableData1.cbsc13 = item.noSendQty;
+          tableData1.cbsc144 = item.useQty;
           tableData1.cbsc15 = item.remark;
           // item.cbsc14 = item.saleOrderId;
           tableData1.cbsc14 = item.cbob01;
@@ -1197,6 +1208,7 @@ export default {
         this.form2.cbsb30 = response.data.customerNo;
         console.log(this.form2.cbsb09, 85200000);
         console.log(response)
+        console.log("这是提货单创建的")
         response.data.goods.forEach((item) => {
           item.cbsc177 = item.orderClass;
           item.cbsc15 = item.supplierId;
@@ -1204,11 +1216,11 @@ export default {
           item.cbsd134 = item.model;
           item.cbsd135 = item.description;
           item.cbsc08 = item.goodsId;
-          item.cbsc09 = item.qty;
+          item.cbsc09 = item.goodsNum;
           item.cbsc11 = item.price;
           item.cbsc12 = item.cbsc09 * item.cbsc11;
-          item.cbsc13 = item.scanQty;
-          item.cbsc144 = item.noSendQty;
+          item.cbsc13 = item.noSendQty;
+          item.cbsc144 = item.useQty;
           item.cbsc15 = item.remark;
           // item.cbsc14 = item.saleOrderId;
           item.cbsc14 = item.cbob01;

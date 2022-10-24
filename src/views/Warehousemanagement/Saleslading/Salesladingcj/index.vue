@@ -405,7 +405,7 @@ import Goodsone01 from "@/components/Goodsone";
 import salerman from "@/components/salerman";
 
 export default {
-  name:'AuthUser',
+  name: 'AuthUser',
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -1123,9 +1123,11 @@ export default {
 
               // this.$router.push("/Warehousemanagement/Saleslading/");
 
-              const obj = { path: "/Warehousemanagement/Saleslading/" };
-              this.$tab.closeOpenPage(obj);
+              // const obj = { path: "/Warehousemanagement/Saleslading/" };
+              // this.$tab.closeOpenPage(obj);
 
+              this.$tab.closePage();
+              this.$router.go(-1);
               // this.$router.go(-1);
             }
             // this.tableData.forEach((item) => {

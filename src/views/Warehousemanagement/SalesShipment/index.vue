@@ -78,11 +78,11 @@
             <template scope="scope">
               <div>
                 {{
-                scope.row.cbsb31 == 1
-                ? "是"
-                : scope.row.cbsb31 == 0
-                ? "否"
-                : ""
+                    scope.row.cbsb31 == 1
+                      ? "是"
+                      : scope.row.cbsb31 == 0
+                        ? "否"
+                        : ""
                 }}
               </div>
             </template>
@@ -92,11 +92,11 @@
             <template scope="scope">
               <div>
                 {{
-                scope.row.cbsb31 == 0
-                ? "是"
-                : scope.row.cbsb31 == 1
-                ? "否"
-                : ""
+                    scope.row.cbsb31 == 0
+                      ? "是"
+                      : scope.row.cbsb31 == 1
+                        ? "否"
+                        : ""
                 }}
               </div>
             </template>
@@ -105,13 +105,13 @@
             <template scope="scope">
               <div>
                 {{
-                scope.row.cbsb11 == 0
-                ? "未审核"
-                : scope.row.cbsb11 == 1
-                ? "已审核"
-                : scope.row.cbsb11 == 4
-                ? "已完成"
-                : "未确定状态"
+                    scope.row.cbsb11 == 0
+                      ? "未审核"
+                      : scope.row.cbsb11 == 1
+                        ? "已审核"
+                        : scope.row.cbsb11 == 4
+                          ? "已完成"
+                          : "未确定状态"
                 }}
               </div>
             </template>
@@ -360,7 +360,7 @@ import kuweixxweihu from "@/components/WarehouseInfoSku";
 //供应商
 import supplierMaintenance from "@/components/SupplierMaintenance";
 
-import { CustomerList } from "@/api/Basicinformationmaintenance/CustomerMaintenance";
+import { SwJsCustomerlist } from "@/api/Basicinformationmaintenance/CustomerMaintenance";
 
 export default {
   name: "SalesShipment",
@@ -798,12 +798,12 @@ export default {
     this.form2.cbsa09 = "20";
 
     // 获取客户列表
-    CustomerList().then(res => {
+    SwJsCustomerlist({ pageNum: 1, pageSize: 999999 }).then(res => {
       console.log(res, "res")
       this.customerLists = res.data.rows.map(item => {
         return { value: item.cbca08, label: item.cbca08 }
       })
-      console.log(this.customerLists)
+      console.log(this.customerLists, 'this.customerLists')
     })
   },
   methods: {
@@ -1381,7 +1381,8 @@ export default {
           // name: "AuthUser",
           query: {
             data: this.idss,
-            whNameid: this.form2.cbpc10
+            whNameid: this.form2.cbpc10,
+            state: 0
           },
         });
         this.valuexs = ""
@@ -1419,7 +1420,8 @@ export default {
           path: "/system/user-authhhchuanj/role/",
           // name: "AuthUser",
           query: {
-            saleOrderid: customer
+            saleOrderid: customer,
+            state: 1
           },
         });
         this.valuexs = ""

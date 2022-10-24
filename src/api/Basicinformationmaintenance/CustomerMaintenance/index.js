@@ -38,3 +38,13 @@ export function CustomeRemove(data) {
     data: data
   })
 }
+
+
+// 查询列表
+export function SwJsCustomerlist(query) {
+  return request({
+    url: '/system/customer/SwJsCustomerlist',
+    method: 'get',
+    params: query
+  })
+}
