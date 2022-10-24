@@ -1,6 +1,6 @@
 <template>
   <!--售后-->
-  <div class="app-container saorderdet">
+  <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
         <el-form-item style="margin-left: 10px">
@@ -27,8 +27,8 @@
 
 
         <el-form-item  style="margin: -5px -10px 1px 100px">
-          <el-button  v-hasPermi="['system:aftersales:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
-          <el-button  class="filter-item" type="primary" v-hasPermi="['system:aftersales:add']"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
+          <el-button  v-hasPermi="['system:aftersales:list']"  type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
+          <el-button  class="biaoto-buttonchaxuen" type="primary" v-hasPermi="['system:aftersales:add']"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
             <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
 <!--          <el-upload-->
@@ -46,7 +46,7 @@
 <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="470" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
+      <el-table  :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="470" element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe >
         <el-table-column fixed label="销售订单号" align="left" prop="saleOrderNo" min-width="120px;"/>
         <el-table-column fixed label="销售人员" align="left" prop="salerName" min-width="120px;"/>
         <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="130px;"/>
@@ -54,7 +54,7 @@
         <el-table-column  label="sn" align="left" prop="sn" min-width="140px;" />
         <el-table-column  label="处理结果" align="center" prop="answerMsg" :formatter="formatStateType" min-width="100px;"/>
         <el-table-column  label="反馈时间" align="left" prop="feedbackTime" :formatter="formatTime2" min-width="100px;" />
-        <el-table-column label="操作"  min-width="180px;">
+        <el-table-column label="操作" class="saorderdet"  min-width="180px;">
           <template slot-scope="scope" ><!--style="margin-left:8px; margin-top: 2px"-->
             <el-button class="caozuoxiangqengOut"  icon="el-icon-share"  size="mini"
                        type="text" v-hasPermi="['system:aftersales:detail']"
@@ -78,7 +78,7 @@
           </template>
 
         </el-table-column>
-      </el-table>
+      </el-table >
       <el-pagination
         :background="true"
         :page-sizes="[10, 20, 30, 40]"

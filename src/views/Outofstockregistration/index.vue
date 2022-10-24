@@ -16,7 +16,7 @@
         <!--            <el-button type="primary" @click="onSearch()">查询</el-button>-->
         <!--          </el-form-item>-->
         <el-form-item label="编号" class="item-r">
-          <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
+          <el-input v-model="orderNo" class="filter-item" placeholder="请输入编号" />
         </el-form-item>
 
         <!--        <el-form-item label="订单号"   class="item-r" >-->
@@ -25,10 +25,11 @@
         <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button v-hasPermi="['system:outofstockregistrationform:list']" class="filter-item" type="primary"
             icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>
           <el-button v-hasPermi="['system:outofstockregistrationform:add']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>
+
           <!--          <el-upload-->
           <!--          <el-table-->
           <!--            ref="multipleTable"-->
@@ -48,7 +49,7 @@
         element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row stripe>
         <el-table-column fixed label="编号" align="left" prop="cboe07" min-width="60px;" />
         <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="180px;" />
-        <el-table-column label="日期" align="left" prop="cboe08" min-width="50px;" :formatter="formatDate" />
+        <el-table-column v-if="false" label="日期" align="left" prop="cboe08" min-width="50px;" :formatter="formatDate" />
         <el-table-column label="销售人员" align="left" prop="caua15" min-width="70px;" />
         <el-table-column label="制单时间" align="left" prop="cboe02" min-width="50px;" :formatter="formatDate" />
         <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
