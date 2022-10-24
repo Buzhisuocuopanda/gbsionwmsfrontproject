@@ -126,11 +126,11 @@
           /> -->
           <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width" fixed="right">
             <template slot-scope="scope" style="margin-left: -10%">
-              <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"
-                @click="handlxiaoshochkudanone(scope.row)" v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"
-                v-hasPermi="['system:selloutofwarehouse:edit']">
-                修改
-              </el-button>
+<!--              <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"-->
+<!--                @click="handlxiaoshochkudanone(scope.row)" v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"-->
+<!--                v-hasPermi="['system:selloutofwarehouse:edit']">-->
+<!--                修改-->
+<!--              </el-button>-->
               <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai caozuoxiangqeng"
                 @click="handleDelete01(scope.row)" v-if="scope.row.cbsb11 == 0"
                 v-hasPermi="['system:selloutofwarehouse:remove']">删除</el-button>
