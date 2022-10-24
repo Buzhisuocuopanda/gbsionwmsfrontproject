@@ -406,6 +406,8 @@ export default {
       this.model = ''
       this.orderNo = ''
       this.status = ''
+      this.customer = ''
+      this.dateRange = ''
     },
     createForm() {
       // this.showaddDialog = true
@@ -668,8 +670,27 @@ export default {
     // 文件上传成功处理
     handleFileSuccess(response, file, fileList) {
       if (response.code == 200) {
-        this.$message.success('上传成功')
+        // this.$message.success(response.msg)
+        this.$alert(response.msg, '上传结果', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
       } else {
+
+        this.$alert(response.msg, '上传结果', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
         // this.$message.error(response.msg);
 
 
