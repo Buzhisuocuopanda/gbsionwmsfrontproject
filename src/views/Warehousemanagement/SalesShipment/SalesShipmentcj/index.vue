@@ -207,7 +207,7 @@
           <el-table-column prop="cbsc09" label="数量" width="80">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsc09" v-only-number="{ min: 1, precision: 0.0 }" @blur="chen(scope.row)"
-                placeholder="" class="shuzicaoyou" style=""></el-input>
+                placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd11" label="单价" width="80">
@@ -224,7 +224,7 @@
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-              <el-input readonly="" v-model="scope.row.cbsc13" v-only-number="{  min: 0, precision: 0.0 }"
+              <el-input readonly v-model="scope.row.cbsc13" v-only-number="{  min: 0, precision: 0.0 }"
                 placeholder=""></el-input>
             </template>
           </el-table-column>
