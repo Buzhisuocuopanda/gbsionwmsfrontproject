@@ -27,7 +27,7 @@
                     <el-form-item >
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjianllnm" @click="handlezhijiandanone">创建
                         </el-button> -->
-                        <el-button  size="mini"   class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
+                        <el-button  size="mini" v-hasPermi="['system:qualityin:add']"  class="biaoto-buttonchuangjianllnm" @click="sendParams">创建
                         </el-button>
                         <!-- <el-dropdown trigger="click">
                           <span class="el-dropdown-link xialaxuanxangnnn">
@@ -1152,6 +1152,7 @@ export default {
         /** 详情操作 */
         handleAuthRole: function (row) {
             const userId = row.cbqa01;
+            console.log(10241)
             this.$router.push("/system/user-authhhhhh/role/" + userId);
         },
         /** 创建操作 */

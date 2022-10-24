@@ -219,7 +219,7 @@ export const dynamicRoutes = [{
     permissions: ['system:user:edit'],
     children: [{
       path: 'role/:cbqa01(\\d+)',
-      name: 'AuthUser',
+      name: 'AnalysisCertificateXq',
       component: () => import('@/views/Warehousemanagement/AnalysisCertificate/AnalysisCertificatexq/index'),
       meta: {
         title: '质检单详情',

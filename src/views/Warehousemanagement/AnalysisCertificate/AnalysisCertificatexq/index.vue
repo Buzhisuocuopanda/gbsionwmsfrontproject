@@ -32,7 +32,7 @@
 <script>
 import { QualityinLists } from "@/api/Warehousemanagement/AnalysisCertificate";
 export default {
-
+    name:"AnalysisCertificateXq",
     data() {
         return {
             // 遮罩层
@@ -60,6 +60,7 @@ export default {
 
     },
     created() {
+      console.log(10242)
         this.getList();
 
     },
