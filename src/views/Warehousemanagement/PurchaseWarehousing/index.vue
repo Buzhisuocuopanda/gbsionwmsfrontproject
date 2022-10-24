@@ -943,7 +943,7 @@ export default {
         //     console.log(row.cbpc01,8888);
 
         //     PurchaseinboundSH(row).then(response => {
-        //      if (response.code == "200") {  
+        //      if (response.code == "200") {
         //         this.getList();
         //         // this.open = false;
         //         this.$message({ message: response.msg, type: 'success' });
@@ -984,7 +984,7 @@ export default {
         //     this.$modal.confirm('是否要反审,编号为"' + row.cbpc07 + '"的数据项？').then(() => {
         //     // console.log(row.cbpc01, 8888);
         //     PurchaseinboundShs(row).then(response => {
-        //       if (response.code == "200") {  
+        //       if (response.code == "200") {
         //         this.getList();
         //         // this.open = false;
         //         this.$message({ message: response.msg, type: 'success' });
