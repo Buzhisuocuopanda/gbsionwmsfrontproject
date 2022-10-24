@@ -723,7 +723,7 @@ export default {
         checkStatus: 1
       }
 
-      saleOrderListGoods({ customerName: this.valuexs, pageNum: 1, pageSize: 9999 }).then((res) => {
+      saleOrderListGoods({ customerName: this.valuexs, pageNum: 1, pageSize: 15 }).then((res) => {
 
         if (res.code == 200) {
           console.log(res, "----------------res")
@@ -783,6 +783,7 @@ export default {
       cus.whId = this.form2.cbpc10
       cus.pageSize = 15
       this.form2.icon = name;
+      this.customerName = this.valuexs
       console.log(cus, "cus")
       saleOrderListGoods(cus).then((response) => {
         this.userList01 = response.data.rows;

@@ -22,7 +22,7 @@
 
 <script>
 // import icons from './requireIcons'
-import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+import { GoodsList, swJsGoodslistBySelect } from "@/api/Basicinformationmaintenance/Goods/index";
 // import { StoreSkuList } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 export default {
     name: 'kuweixxweihu',
@@ -38,9 +38,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 999999,
+                pageSize: 15,
                 page: 1,
-                size: 999999,
+                size: 15,
                 total: this.total,
                 dateRange: undefined
             },
@@ -56,8 +56,9 @@ export default {
         filterIcons() {
             let cus = this.addDateRange(this.queryParams)
             cus.cbpb07 = "启用"
+
             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            GoodsList(cus).then(response => {
+            swJsGoodslistBySelect().then(response => {
                 // this.userList = response.data.rows;
                 //this.top = JSON.stringify(this.userList)
                 // console.log(response.data.rows, 3369);
