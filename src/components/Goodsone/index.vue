@@ -38,9 +38,9 @@ export default {
             // 查询参数
             queryParams: {
                 pageNum: 1,
-                pageSize: 15,
+                pageSize: 999999,
                 page: 1,
-                size: 15,
+                size: 999999,
                 total: this.total,
                 dateRange: undefined
             },
@@ -58,7 +58,7 @@ export default {
             cus.cbpb07 = "启用"
 
             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            swJsGoodslistBySelect().then(response => {
+            GoodsList(cus).then(response => {
                 // this.userList = response.data.rows;
                 //this.top = JSON.stringify(this.userList)
                 // console.log(response.data.rows, 3369);
