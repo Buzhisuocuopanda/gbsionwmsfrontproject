@@ -1126,11 +1126,11 @@ export default {
 
               // const obj = { path: "/Warehousemanagement/Saleslading/" };
               // this.$tab.closeOpenPage(obj);
-
+              this._ly_ok();
               this.$tab.closePage();
               this.$router.go(-1);
               // this.$router.go(-1);
-              this._ly_ok();
+
             }
             // this.tableData.forEach((item) => {
             //   item.cbsb01 = response.data.id;
