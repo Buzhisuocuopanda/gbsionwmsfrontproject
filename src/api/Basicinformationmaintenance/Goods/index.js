@@ -1,5 +1,7 @@
 import request from '@/utils/request'
-import { parseStrEmpty } from "@/utils/ruoyi";
+import {
+  parseStrEmpty
+} from "@/utils/ruoyi";
 // 新增配置
 export function GoodsAdd(data) {
   return request({
@@ -28,10 +30,20 @@ export function GoodsList(query) {
   })
 }
 
+// /goods/swJsGoodslistBySelect
+// 查询用户列表（分页）
+export function swJsGoodslistBySelect(query) {
+  return request({
+    url: '/system/goods/swJsGoodslistBySelect',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询用户列表
 export function GoodsListjiesuanhb(CBPC01) {
   return request({
-    url: '/system/goods/SwJsGoodscny?cbpb01='+ CBPC01,
+    url: '/system/goods/SwJsGoodscny?cbpb01=' + CBPC01,
     method: 'get'
   })
 }
@@ -52,7 +64,7 @@ export function GoodsRemove(data) {
   return request({
     url: '/system/goods/SwJsGoodsremove',
     method: 'post',
-    data:data
+    data: data
   })
 }
 
@@ -63,4 +75,3 @@ export function ClassifyTreeselect() {
     method: 'get'
   })
 }
-
