@@ -3,72 +3,30 @@
   <div class="app-container">
     <el-row :gutter="20" style="margin-left: -10%">
       <el-col :span="20" :xs="24" class="tooltup" style="width: 100%">
-        <el-form
-          :model="queryParams"
-          ref="queryForm"
-          size="small"
-          :inline="true"
-          v-show="showSearch"
-          label-width="68px"
-        >
+        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
+          label-width="68px">
           <el-form-item prop="orderNo" label="编号">
-            <el-input
-              v-model="queryParams.orderNo"
-              id="miaoshu"
-              placeholder="请输入编号"
-              clearable
-              style="width: 240px"
-              @keyup.enter.native="handleQuery"
-            />
+            <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入编号" clearable style="width: 240px"
+              @keyup.enter.native="handleQuery" />
           </el-form-item>
           <el-form-item prop="whName" label="仓库">
-            <el-input
-              v-model="queryParams.whName"
-              id="miaoshu"
-              placeholder="请输入仓库"
-              clearable
-              style="width: 240px"
-              @keyup.enter.native="handleQuery"
-            />
+            <el-input v-model="queryParams.whName" id="miaoshu" placeholder="请输入仓库" clearable style="width: 240px"
+              @keyup.enter.native="handleQuery" />
           </el-form-item>
           <el-form-item label="创建时间" style="margin-left: 1%">
-            <el-date-picker
-              :size="mini"
-              v-model="dateRange"
-              type="daterange"
-              :picker-options="pickerOptions"
-              popper-class="elDatePicker"
-              value-format="yyyy-MM-dd"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              align="right"
-            >
+            <el-date-picker :size="mini" v-model="dateRange" type="daterange" :picker-options="pickerOptions"
+              popper-class="elDatePicker" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期"
+              end-placeholder="结束日期" align="right">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-button
-              size="mini"
-              class="biaoto-buttonchaxuen"
-              @click="handleQuery"
-              >查询</el-button
-            >
+            <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
           </el-form-item>
           <el-form-item>
-            <el-button
-              class="biaoto-buttonchuangjian"
-              size="mini"
-              @click="resetQuery"
-              >重置</el-button
-            >
+            <el-button class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
           </el-form-item>
           <el-form-item style="margin-left: 76%">
-            <el-button
-              size="mini"
-              class="biaoto-buttonchuangjian"
-              style="margin-left: -2%"
-              >创建</el-button
-            >
+            <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left: -2%">创建</el-button>
             <el-dropdown trigger="click">
               <span class="xialaxuanxanggdd">
                 <i class="el-icon-caret-bottom el-icon--right"></i>
@@ -82,15 +40,8 @@
             </el-dropdown>
           </el-form-item>
           <el-form-item>
-            <el-button
-              size="mini"
-              type="danger"
-              class="biaoto-buttonshanchu"
-              :disabled="multiple"
-              @click="handleDelete"
-              v-hasPermi="['system:whmanagement:remove']"
-              >删除</el-button
-            >
+            <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete"
+              v-hasPermi="['system:whmanagement:remove']">删除</el-button>
             <!-- <el-button
               plain
               size="mini"
@@ -130,167 +81,38 @@
           </el-form-item>
         </el-form>
 
-        <el-table
-          border
-          :header-cell-style="headClassSld"
-          :row-style="{ height: '3px' }"
-          :cell-style="{ padding: '2px' }"
-          v-loading="loading"
-          :data="userList"
-          height="440"
-          :default-sort="{ prop: 'name', order: 'descending' }"
-          style="width: 92.5%; height: 8%; margin-left: -2%"
-          @selection-change="handleSelectionChange"
-        >
+        <el-table border :header-cell-style="headClassSld" :row-style="{ height: '3px' }"
+          :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="440"
+          :default-sort="{ prop: 'name', order: 'descending' }" style="width: 92.5%; height: 8%; margin-left: -2%"
+          @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column
-            label="编号"
-            align="left"
-            key="orderNo"
-            prop="orderNo"
-            width="155px;"
-            sortable
-            fixed
-          />
-          <el-table-column
-            label="日期"
-            align="left"
-            key="orderDate"
-            prop="orderDate"
-            width="110px;"
-            :formatter="formatDate"
-            sortable
-          >
+          <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" width="155px;" sortable fixed />
+          <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" width="110px;"
+            :formatter="formatDate" sortable>
           </el-table-column>
-          <el-table-column
-            label="客户订单号"
-            align="left"
-            key="customerNo"
-            width="210px;"
-            prop="customerNo"
-            sortable
-          />
-          <el-table-column
-            label="客户"
-            align="left"
-            key="customerName"
-            width="320px;"
-            prop="customerName"
-            sortable
-          />
-          <el-table-column
-            label="客户等级"
-            align="left"
-            key="customerLevel"
-            width="110px;"
-            prop="customerLevel"
-            sortable
-          />
-          <el-table-column
-            label="联系人"
-            align="left"
-            key="contacts"
-            width="90px;"
-            prop="contacts"
-            sortable
-          />
-          <el-table-column
-            label="电话"
-            align="left"
-            key="phone"
-            width="120px;"
-            prop="phone"
-            sortable
-          />
-          <el-table-column
-            label="销售人员"
-            align="left"
-            key="saleUser"
-            width="100px;"
-            prop="saleUser"
-            sortable
-          />
-          <el-table-column
-            label="仓库"
-            align="left"
-            key="whName"
-            width="80px;"
-            prop="whName"
-            sortable
-          />
-          <el-table-column
-            label="结算货币"
-            align="left"
-            key="cala08"
-            width="120px;"
-            prop="cala08"
-            sortable
-          />
-          <el-table-column
-            label="收货地址"
-            align="left"
-            key="address"
-            width="520px;"
-            prop="address"
-            sortable
-          />
-          <el-table-column
-            label="收货人"
-            align="left"
-            key="contactss"
-            width="120px;"
-            prop="contactss"
-            sortable
-          />
-          <el-table-column
-            label="收货电话"
-            align="left"
-            key="phonee"
-            width="120px;"
-            prop="phonee"
-            sortable
-          />
-          <el-table-column
-            label="关联订单"
-            align="left"
-            key="cala089"
-            width="120px;"
-            prop="cala089"
-            sortable
-          />
-          <el-table-column
-            label="状态"
-            align="center"
-            key="statusMsg"
-            width="100px;"
-            prop="statusMsg"
-            sortable
-          >
+          <el-table-column label="客户订单号" align="left" key="customerNo" width="210px;" prop="customerNo" sortable />
+          <el-table-column label="客户" align="left" key="customerName" width="320px;" prop="customerName" sortable />
+          <el-table-column label="客户等级" align="left" key="customerLevel" width="110px;" prop="customerLevel" sortable />
+          <el-table-column label="联系人" align="left" key="contacts" width="90px;" prop="contacts" sortable />
+          <el-table-column label="电话" align="left" key="phone" width="120px;" prop="phone" sortable />
+          <el-table-column label="销售人员" align="left" key="saleUser" width="100px;" prop="saleUser" sortable />
+          <el-table-column label="仓库" align="left" key="whName" width="80px;" prop="whName" sortable />
+          <el-table-column label="结算货币" align="left" key="cala08" width="120px;" prop="cala08" sortable />
+          <el-table-column label="收货地址" align="left" key="address" width="520px;" prop="address" sortable />
+          <el-table-column label="收货人" align="left" key="contactss" width="120px;" prop="contactss" sortable />
+          <el-table-column label="收货电话" align="left" key="phonee" width="120px;" prop="phonee" sortable />
+          <el-table-column label="关联订单" align="left" key="cala089" width="120px;" prop="cala089" sortable />
+          <el-table-column label="状态" align="center" key="statusMsg" width="100px;" prop="statusMsg" sortable>
           </el-table-column>
-          <el-table-column
-            label="提货建议表"
-            align="left"
-            key="checkStatusMsg"
-            width="120px;"
-            prop="checkStatusMsg"
-            sortable
-          >
+          <el-table-column label="提货建议表" align="left" key="checkStatusMsg" width="120px;" prop="checkStatusMsg"
+            sortable>
             <template slot-scope="scope">
-              <el-button size="mini"
-                type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"
-                @click="handlexiangqengSelects(scope.row)"
-                v-if="(scope.row.status == 2)"
-                v-hasPermi="['system:user:edit']"
-                >编辑</el-button>
+              <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"
+                @click="handlexiangqengSelects(scope.row)" v-if="(scope.row.status == 2)"
+                v-hasPermi="['system:user:edit']">编辑</el-button>
             </template>
           </el-table-column>
-          <el-table-column
-            label="操作"
-            align="center"
-            width="250"
-            fixed="right"
-            class-name="small-padding fixed-width"
-          >
+          <el-table-column label="操作" align="center" width="250" fixed="right" class-name="small-padding fixed-width">
             <template slot-scope="scope" style="margin-left: -10%">
               <!-- <el-button
                 size="mini"
@@ -303,239 +125,94 @@
               >
                 修改
               </el-button> -->
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-delete"
-                class="button-caozuoxougai caozuoxiangqeng"
-                @click="handleDelete01(scope.row)"
-                v-if="(scope.row.status == 0)"
-                v-hasPermi="['system:whmanagement:remove']"
-                >删除</el-button
-              >
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-share"
-                class="caozuoxiangqeng"
-                @click="handleAuthRole(scope.row)"
-                v-hasPermi="['system:whmanagement:detail']"
-                >详情
+              <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai caozuoxiangqeng"
+                @click="handleDelete01(scope.row)" v-if="(scope.row.status == 0)"
+                v-hasPermi="['system:whmanagement:remove']">删除</el-button>
+              <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                @click="handleAuthRole(scope.row)" v-hasPermi="['system:whmanagement:detail']">详情
               </el-button>
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-s-order"
-                class="caozuoxiangqeng"
-                @click="PurchaseinboundShenpis(scope.row)"
-                v-hasPermi="['system:whmanagement:auditTakeOrder']"
-                v-if="scope.row.status == 1"
-                >撤销</el-button
-              >
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-s-order"
-                class="caozuoxiangqeng"
-                @click="PurchaseinboundShenpi(scope.row)"
-                v-hasPermi="['system:whmanagement:sh']"
-                v-if="scope.row.status == 1"
-                >审核</el-button
-              >
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-s-order"
-                class="caozuoxiangqeng"
-                @click="PurchaseinboundFanShenpi(scope.row)"
-                v-hasPermi="['system:whmanagement:fs']"
-                v-if="scope.row.status == 2"
-                >反审</el-button
-              >
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-s-order"
-                class="caozuoxiangqeng"
-                @click="PrintRow(scope.row)"
-                v-hasPermi="['system:whmanagement:auditTakeOrder']"
-                v-if="scope.row.checkStatus == 2"
-                >质检</el-button
-              >
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-s-order"
-                class="caozuoxiangqeng"
-                @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
-                v-hasPermi="['system:whmanagement:auditTakeOrder']"
-                v-if="scope.row.status == 3"
-                >取消完成</el-button
-              >
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-s-order"
-                class="caozuoxiangqeng"
-                @click="PurchaseinboundBiaojiWancheng(scope.row)"
-                v-hasPermi="['system:whmanagement:auditTakeOrder']"
-                v-if="(scope.row.status == 2)"
-                >标记完成</el-button
-              >
+              <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                @click="PurchaseinboundShenpis(scope.row)" v-hasPermi="['system:whmanagement:auditTakeOrder']"
+                v-if="scope.row.status == 1">撤销</el-button>
+              <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:whmanagement:sh']"
+                v-if="scope.row.status == 1">审核</el-button>
+              <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:whmanagement:fs']"
+                v-if="scope.row.status == 2">反审</el-button>
+              <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                @click="PrintRow(scope.row)" v-hasPermi="['system:whmanagement:auditTakeOrder']"
+                v-if="scope.row.checkStatus == 2">质检</el-button>
+              <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                @click="PurchaseinboundQuxiaoWangcheng(scope.row)" v-hasPermi="['system:whmanagement:auditTakeOrder']"
+                v-if="scope.row.status == 3">取消完成</el-button>
+              <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                @click="PurchaseinboundBiaojiWancheng(scope.row)" v-hasPermi="['system:whmanagement:auditTakeOrder']"
+                v-if="(scope.row.status == 2)">标记完成</el-button>
             </template>
           </el-table-column>
         </el-table>
 
-        <pagination
-          v-show="total > 0"
-          :total="total"
-          :page.sync="queryParams.pageNum"
-          :limit.sync="queryParams.pageSize"
-          @pagination="getList"
-          :page-sizes="[10, 15, 20, 50, 500]"
-        />
+        <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+          :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]" />
       </el-col>
     </el-row>
 
     <!--订单创建-->
-    <el-dialog :visible.sync="open3">
+    <el-dialog :visible.sync="open3" @close="close">
       <el-row :gutter="20" style="margin-left:-14px;margin-bottom:10px">
-        <el-col :span="12">
+        <el-col :span="8">
+          <!-- <el-popover placement="bottom-start" trigger="click" clearable>
+            <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 260px !important" />
+            <el-input slot="reference" v-model="form2.cbpc100" placeholder="请选择仓库" readonly style="width: 96%">
+            </el-input>
+          </el-popover> -->
           <el-popover placement="bottom-start" trigger="click" clearable>
-            <kuweixxweihu
-              ref="kuweixxweihu"
-              @selected="selected01"
-              style="width: 260px !important"
-            />
-            <el-input
-              slot="reference"
-              v-model="form2.cbpc100"
-              placeholder="请选择仓库"
-              readonly
-              style="width: 96%"
-            >
+            <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 260px !important" />
+            <el-input slot="reference" v-model="form2.cbpc100" placeholder="请选择仓库" readonly style="width: 96%">
             </el-input>
           </el-popover>
         </el-col>
-        <el-col :span="12">
-          <el-input
-              v-model="queryParams.orderNo"
-              id="miaoshu"
-              placeholder="请输入销售订单编号"
-              clearable
-              style="width: 100%"
-              @change="handleQuerys(queryParams.orderNo)"
-            />
+        <el-col :span="8">
+          <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
+            @change="handleQuerys(queryParams.orderNo)" />
+        </el-col>
+
+        <el-col :span="8">
+          <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
+            <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
         </el-col>
       </el-row>
-      <el-table
-        border
-        :header-cell-style="headClassssmtt"
-        v-loading="loading"
-        :data="userList01"
-        height="440"
-        :default-sort="{ prop: 'name', order: 'descending' }"
-        style="width: 100%; height: 8%; margin-left: -2%"
-        @selection-change="handleSelectionChangee"
-      >
-        <el-table-column
-          label=""
-          align="center"
-          width="50"
-          class-name="small-padding fixed-width"
-        >
+      <el-table border :header-cell-style="headClassssmtt" v-loading="loading" :data="userList01" height="440"
+        :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%; height: 8%; margin-left: -2%"
+        @selection-change="handleSelectionChangee">
+        <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
           <template slot-scope="scope" style="margin-left: -10%">
-            <el-button
-              size="mini"
-              icon="el-icon-share"
-              class="button-caozuoxougai caozuoxiangqeng"
-              type="primary"
-              @click="sendParams(scope.row)"
-              v-hasPermi="['system:user:edit']"
-            >
+            <el-button size="mini" icon="el-icon-share" class="button-caozuoxougai caozuoxiangqeng" type="primary"
+              @click="sendParams(scope.row)" v-hasPermi="['system:user:edit']">
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column
-          label="编号"
-          align="left"
-          key="orderNo"
-          prop="orderNo"
-          sortable
-          style="padding-top: 60px !important"
-          width="260px;"
-        />
-        <el-table-column
-          label="单据日期"
-          align="left"
-          key="orderDate"
-          prop="orderDate"
-          width="180px;"
-          sortable
-        />
-        <el-table-column
-          label="客户"
-          align="left"
-          key="customerName"
-          prop="customerName"
-          width="220px;"
-          sortable
-        />
-        <el-table-column
-          label="销售人员"
-          align="left"
-          key="saleUser"
-          prop="saleUser"
-          width="160px;"
-          sortable
-        >
+        <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable
+          style="padding-top: 60px !important" width="260px;" />
+        <el-table-column label="单据日期" align="left" key="orderDate" prop="orderDate" width="180px;" sortable />
+        <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
+        <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
         </el-table-column>
-        <el-table-column
-          label="制单日期"
-          align="left"
-          key="createTime"
-          prop="createTime"
-          width="280px;"
-          sortable
-        />
-        <el-table-column
-          label="订单分类"
-          align="left"
-          key="orderClassMsg"
-          prop="orderClassMsg"
-          width="280px;"
-          sortable
-        />
+        <el-table-column label="制单日期" align="left" key="createTime" prop="createTime" width="280px;" sortable />
+        <el-table-column label="订单分类" align="left" key="orderClassMsg" prop="orderClassMsg" width="280px;" sortable />
       </el-table>
-      <pagination
-          v-show="totall > 0"
-          :total="totall"
-          :page.sync="queryParams2.pageNum"
-          :limit.sync="queryParams2.pageSize"
-          @pagination="getList09"
-          :page-sizes="[10, 15, 20, 50, 500]"
-        />
+      <pagination v-show="totall > 0" :total="totall" :page.sync="queryParams2.pageNum"
+        :limit.sync="queryParams2.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]" />
     </el-dialog>
 
     <!-- 用户导入对话框 -->
-    <el-dialog
-      :title="upload.title"
-      :visible.sync="upload.open"
-      width="400px"
-      append-to-body
-    >
-      <el-upload
-        ref="upload"
-        :limit="1"
-        accept=".xlsx, .xls"
-        :headers="upload.headers"
-        :action="upload.url + '?updateSupport=' + upload.updateSupport"
-        :disabled="upload.isUploading"
-        :on-progress="handleFileUploadProgress"
-        :on-success="handleFileSuccess"
-        :auto-upload="false"
-        drag
-      >
+    <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
+      <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
+        :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
+        :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         <div class="el-upload__tip text-center" slot="tip">
@@ -544,13 +221,8 @@
             是否更新已经存在的用户数据
           </div>
           <span>仅允许导入xls、xlsx格式文件。</span>
-          <el-link
-            type="primary"
-            :underline="false"
-            style="font-size: 12px; vertical-align: baseline"
-            @click="importTemplate"
-            >下载模板</el-link
-          >
+          <el-link type="primary" :underline="false" style="font-size: 12px; vertical-align: baseline"
+            @click="importTemplate">下载模板</el-link>
         </div>
       </el-upload>
       <div slot="footer" class="dialog-footer">
@@ -577,6 +249,7 @@ import {
   StoreSkuList,
   PurchaseinboundLists,
   Purchaseinbounddingdanxsdd,
+  saleOrderListGoods,
   auditTakeOrder,
 } from "@/api/Warehousemanagement/Saleslading";
 
@@ -585,6 +258,9 @@ import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+
+import { SwJsCustomerlist } from "@/api/Basicinformationmaintenance/CustomerMaintenance";
+
 
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -602,6 +278,8 @@ export default {
   components: { Treeselect, kuweixxweihu, supplierMaintenance },
   data() {
     return {
+      valuexs: null,
+      customerLists: null,
       // 遮罩层
       loading: true,
       tianjiahang: [],
@@ -838,7 +516,7 @@ export default {
         // status:'',
         total: this.total,
         totall: this.totall,
-        saleOrderNo:undefined,
+        saleOrderNo: undefined,
         whName: undefined,
         orderNo: undefined,
         cbwa09: undefined,
@@ -853,7 +531,7 @@ export default {
         // status:'',
         total: this.total,
         totall: this.totall,
-        saleOrderNo:undefined,
+        saleOrderNo: undefined,
         whName: undefined,
         orderNo: undefined,
         cbwa09: undefined,
@@ -1028,8 +706,42 @@ export default {
     // console.log(this.userList,123456789);
     this.chen();
     this.form2.cbsa09 = "20";
+
+    // 获取客户列表
+    SwJsCustomerlist({ pageNum: 1, pageSize: 999999 }).then(res => {
+      console.log(res, "res")
+      this.customerLists = res.data.rows.map(item => {
+        return { value: item.cbca08, label: item.cbca08 }
+      })
+      console.log(this.customerLists, 'this.customerLists')
+    })
   },
   methods: {
+    hello() {
+      let obj = {
+        customerName: this.valuexs,
+        checkStatus: 1
+      }
+
+      saleOrderListGoods({ customerName: this.valuexs, pageNum: 1, pageSize: 9999 }).then((res) => {
+        if (res.code == 200) {
+          this.userList01 = res.data.rows;
+          //   this.userList01 = response.data.rows;
+          this.totall = response.data.total;
+          // // //供应商
+          // // this.postOptions = response.data.content;
+          // // console.log(this.userList, 3369);
+          // console.log(response, 199911196914);
+          // // this.deleteFlag = response.data.rows.deleteFlag;
+          // this.loading = false;
+        }
+        console.log(res, 4444444)
+      })
+    },
+    close() {
+      this.form2.cbpc100 = ''
+
+    },
     //列表表头设置
     headClassssmtt() {
       return {
@@ -1059,10 +771,27 @@ export default {
     },
     //仓库
     selected01(name) {
-      console.log(name, 123);
-      console.log(name.substring(name.indexOf("-") + 1), 963);
       this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
+
+
+      this.loading = true;
+      this.queryParams.status = 5
+      let cus = this.addDateRange(this.queryParams, this.dateRange)
+      cus.whId = this.form2.cbpc10
+      cus.pageSize = 15
+      this.form2.icon = name;
+      console.log(cus, "cus")
+      saleOrderListGoods(cus).then((response) => {
+        this.userList01 = response.data.rows;
+        this.totall = response.data.total;
+        // //供应商
+        // this.postOptions = response.data.content;
+        // console.log(this.userList, 3369);
+        console.log(response, 199911196914);
+        // this.deleteFlag = response.data.rows.deleteFlag;
+        this.loading = false;
+      });
     },
     //供应商
     selected02(name) {
@@ -1200,14 +929,14 @@ export default {
       this.queryParams.sn = "";
       console.log(this.queryParams);
     },
-    handleQuerys(saleNo){
+    handleQuerys(saleNo) {
       console.log(saleNo)
       let obj = {
-        orderNo:saleNo,
-        type:''
+        orderNo: saleNo,
+        type: ''
       }
-      Purchaseinbounddingdanxsdd(obj).then((res) =>{
-        if(res.code == 200){
+      Purchaseinbounddingdanxsdd(obj).then((res) => {
+        if (res.code == 200) {
           this.userList01 = res.data.rows;
           this.totall = res.data.total
         }
@@ -1236,16 +965,16 @@ export default {
       this.multiple = !selection.length;
     },
     // 处理多条数据
-    changeMoreArrary(row,type){
+    changeMoreArrary(row, type) {
       let paramss = {
-        goods:[],
+        goods: [],
         opType: type,
         takeOrderId: row.id,
         userId: 1,
       };
       auditTakeOrder(paramss).then((res) => {
         if (res.code == 200) {
-          this.$message({ message:res.msg, type: "success" });
+          this.$message({ message: res.msg, type: "success" });
           this.getList()
         } else {
           // this.$message({ message:res.msg, type: "error" });
@@ -1388,7 +1117,7 @@ export default {
     },
     //标记完成
     PurchaseinboundBiaojiWancheng(row) {
-      this.changeMoreArrary(row,4)
+      this.changeMoreArrary(row, 4)
       // PurchaseinboundShss(row).then((response) => {
       //   if (response.code == 200) {
       //     console.log(this.form.id, 789);
@@ -1408,24 +1137,24 @@ export default {
       // console.log(row.cbpc01, 8888);
       console.log(userIds)
       let paramss = {
-        goods:[],
+        goods: [],
         opType: '',
         takeOrderId: '',
         userId: 1,
       };
       userIds.forEach((item) => {
-        paramss ={
-          opType:4,
-          takeOrderId:item.id,
-          userId:1
+        paramss = {
+          opType: 4,
+          takeOrderId: item.id,
+          userId: 1
         }
         req.auditTakeOrder(paramss).then((res) => {
-            if (res.code == 200) {
-              // console.log(res, 123)
-              this.getList();
-              this.$modal.msgSuccess("标记完成");
-            }
-          })
+          if (res.code == 200) {
+            // console.log(res, 123)
+            this.getList();
+            this.$modal.msgSuccess("标记完成");
+          }
+        })
           .catch((e) => {
             console.log(e, 456)
           });
@@ -1472,30 +1201,30 @@ export default {
             }
           });
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     //取消标记上面的
     PurchaseinboundQuxiaoWangcheng01(row) {
       let userIds = this.shenpiids.length > 0 ? this.shenpiids : row;
       // console.log(row.cbpc01, 8888);
       let paramss = {
-        goods:[],
+        goods: [],
         opType: '',
         takeOrderId: '',
         userId: 1,
       };
       userIds.forEach((item) => {
-        paramss ={
-          opType:5,
-          takeOrderId:item.id,
-          userId:1
+        paramss = {
+          opType: 5,
+          takeOrderId: item.id,
+          userId: 1
         }
         req.auditTakeOrder(paramss).then((res) => {
-            if (res.code == 200) {
-              this.getList();
-              this.$modal.msgSuccess("取消标记成功");
-            }
-          })
+          if (res.code == 200) {
+            this.getList();
+            this.$modal.msgSuccess("取消标记成功");
+          }
+        })
           .catch((e) => {
             console.log(e, 456)
           });
@@ -1519,8 +1248,8 @@ export default {
     },
     // 撤销
     // auditTakeOrder,
-    PurchaseinboundShenpis(row){
-      this.changeMoreArrary(row,2)
+    PurchaseinboundShenpis(row) {
+      this.changeMoreArrary(row, 2)
     },
     /** 修改按钮操作 */
     handleUpdate() {
@@ -1670,7 +1399,7 @@ export default {
             this.$modal.msgSuccess("修改成功，新密码是：" + value);
           });
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     /** 分配角色操作 详情跳转 */
     handleAuthRole: function (row) {
@@ -1715,7 +1444,7 @@ export default {
       // row.ifEnabled = this.form.ifEnabled;
       // row.id=this.form.id;
       let userIds = this.ids.length > 0 ? this.ids : row;
-      console.log([JSON.stringify(this.idss),this.idss,'数据'])
+      console.log([JSON.stringify(this.idss), this.idss, '数据'])
       this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？')
         .then(() => {
           userIds.forEach((item) => {
@@ -1733,7 +1462,7 @@ export default {
               });
           });
         })
-        .catch(() => {});
+        .catch(() => { });
     },
 
     /** 导出按钮操作 */
@@ -1769,7 +1498,7 @@ export default {
             this.$modal.msgSuccess("删除成功");
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     // /** 导出按钮操作 */
     // handleExport() {
@@ -1823,23 +1552,24 @@ export default {
 
     sendParams(row) {
       console.log(this.form2.cbpc10)
-      if(!this.form2.cbpc10){
+      if (!this.form2.cbpc10) {
         this.$message({
           message: '请选择仓库',
           type: 'warning'
         });
-      }else{
+      } else {
         this.$router.push({
           path: "/system/user-authhhxsxiaosdingdantihuo/role/",
           // name: "AuthUser",
           query: {
             data: row.id,
-            whNameid:this.form2.cbpc10
+            whNameid: this.form2.cbpc10
           },
         });
         this.form2.cbpc100 = ''
         this.queryParams.orderNo = ''
         this.open3 = false
+
         // location.reload();
       }
 
@@ -1852,4 +1582,6 @@ export default {
   },
 };
 </script>
-<style src="./Salesladingcss/index.css" scoped ></style>
+<style src="./Salesladingcss/index.css" scoped >
+
+</style>
