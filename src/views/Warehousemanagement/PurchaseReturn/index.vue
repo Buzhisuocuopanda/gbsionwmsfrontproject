@@ -229,7 +229,7 @@
                     <el-input
                         v-model="queryParamss.orderNo"
                         id="miaoshu"
-                        placeholder="请输入编号"
+                        placeholder="请输入sn"
                         clearable
                         style="width: 100%"
                         @change="handleQuerys(queryParamss.orderNo)"
@@ -688,7 +688,7 @@ export default {
         //库位
         this.getList02();
         //商品信息维护
-        this.getList03();
+        // this.getList03();
         //仓库
         this.getList04();
         this.getConfigKey("sys.user.initPassword").then(response => {
@@ -704,6 +704,20 @@ export default {
         this.chen();
     },
     methods: {
+        // 跳转创建页面
+        sendParams(row) {
+            // this.$router.push("/system/user-th/role/");
+            console.log(row)
+            this.$router.push({
+                path: '/system/user-th/role/',
+                name:'PurchaseReturncj',
+                params: {
+                    data:row,
+                }
+            })
+            this.open5 = false
+            // location.reload();
+        },
         // 弹框关闭
         close(){
             this.queryParams.orderNo = ''
@@ -711,14 +725,13 @@ export default {
         // 搜索
         handleQuerys(saleNo){
             let obj = {
-                orderNo:saleNo,
+                sn:saleNo,
             }
             SwJsSkuBarcodelists(obj).then((res) =>{
                 if(res.code == 200){
                     this.userList01 = res.data.rows;
                     this.totall = res.data.total
                 }
-                console.log(res,4444444)
             })
         },
         // 基于不良品创建
