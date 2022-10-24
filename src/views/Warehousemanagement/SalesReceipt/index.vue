@@ -75,7 +75,7 @@
                         sortable /> -->
                     <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
                         prop="orderNo" sortable />
-                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber" 
+                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber"
                     prop="ponumber" sortable />
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
                         :formatter="formatDate" sortable>
@@ -122,7 +122,7 @@
                                 v-if="scope.row.status == 0 | scope.row.status == ' '"
                                 v-hasPermi="['system:salesReceipt:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-hasPermi="['system:salesReceipt:detail']">详情
                             </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"

@@ -101,7 +101,7 @@
                                 v-hasPermi="['system:saleChange:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-if="scope.row.status == 4 | scope.row.status == 1"
-                                v-hasPermi="['system:user:listselect']">详情
+                                v-hasPermi="['system:saleChange:detail']">详情
                             </el-button>
 
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
@@ -1066,7 +1066,7 @@ export default {
                         if (res.code == "200") {
                             this.getList();
                             this.$modal.msgSuccess(res.msg);
-                        } 
+                        }
 
 
                     }).catch((e) => {
@@ -1093,7 +1093,7 @@ export default {
                     this.open = false;
                     this.$message({ message: '修改成功', type: 'success' });
 
-                } 
+                }
 
             });
 
@@ -1176,7 +1176,7 @@ export default {
                             this.getList();
                             this.open2 = false;
                             this.reset01();
-                        } 
+                        }
                         // console.log(this.form2.ifEnabled, 123456);
                     });
                 } else {
