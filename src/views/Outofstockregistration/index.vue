@@ -470,7 +470,7 @@ export default {
           // console.log(response)
           if (response.code === 200) {
             this.onSearch()
-            this.$notify.success("删除成功")
+            this.$message.success("删除成功")
 
           } else {
             // this.$notify.error(response.data.msg)
