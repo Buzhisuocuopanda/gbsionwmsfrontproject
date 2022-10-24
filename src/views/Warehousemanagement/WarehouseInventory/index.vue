@@ -24,7 +24,7 @@
                             class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlepdmxone">创建</el-button>
+                        <el-button size="mini" v-hasPermi="['system:warehouseinventoryschedule:add']" class="biaoto-buttonchuangjian" @click="handlepdmxone">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                             v-hasPermi="['system:warehouseinventoryschedule:remove']" @click="handleDelete">删除
                         </el-button>

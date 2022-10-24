@@ -30,14 +30,14 @@
               @click="resetQuery">重置</el-button>
           </el-form-item>
           <el-form-item style="margin-left: 78%">
-            <el-button size="mini" v-hasPermi="['system:selloutofwarehouse:add']" class="biaoto-buttonchuangjian">创建
+            <el-button size="mini"  class="biaoto-buttonchuangjian">创建
             </el-button>
             <el-dropdown trigger="click">
               <span class="el-dropdown-link xialaxuanxang">
                 <i class="el-icon-caret-bottom el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item class="clearfix" @click.native="tong">
+                <el-dropdown-item class="clearfix" v-hasPermi="['system:selloutofwarehouse:add']" @click.native="tong">
                   通过提货单创建
                   <el-badge class="mark" />
                 </el-dropdown-item>
@@ -817,6 +817,7 @@ export default {
       Purchaseinbounddingdanck({ customerName: this.valuexs, }).then((res) => {
         if (res.code == 200) {
           this.userList01 = res.data.rows;
+          this.totall = res.data.total;
         }
         console.log(res, 4444444)
       })
@@ -830,6 +831,7 @@ export default {
       saleOrderListPj({ customerName: this.valuexs, }).then((res) => {
         if (res.code == 200) {
           this.userList01xs = res.data.rows;
+          this.totall = res.data.total;
         }
         console.log(res, 4444444)
       })
@@ -844,7 +846,7 @@ export default {
       console.log(1111111111)
       this.valuexs = ""
     },
-    // 
+    //
     handleQuerys(saleNo) {
       console.log(saleNo)
       let obj = {
@@ -896,6 +898,7 @@ export default {
         cus
       ).then((response) => {
         this.userList01 = response.data.rows;
+        this.totall = response.data.total
       });
     },
     selected01xs(name) {
@@ -914,6 +917,7 @@ export default {
       ).then((response) => {
         console.log(response, "response")
         this.userList01xs = response.data.rows;
+        this.totall = response.data.total
       });
     },
     //供应商

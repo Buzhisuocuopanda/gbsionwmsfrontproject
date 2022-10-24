@@ -100,7 +100,7 @@
                                 v-if="scope.row.cbpg11 == 0"
                                 v-hasPermi="['system:purchasereturnorders:remove']">删除</el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbpg11 == 4 | scope.row.cbpg11 == 1" v-hasPermi="['system:user:listselect']">详情
+                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbpg11 == 4 | scope.row.cbpg11 == 1" v-hasPermi="['system:purchasereturnorders:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:purchasereturnorders:sh']"
@@ -1004,11 +1004,11 @@ export default {
         //     console.log(row.cbpg01, 8888);
         //     Purchaseinboundsho(row).then(response => {
 
-        //      if (response.code == "200") {      
+        //      if (response.code == "200") {
         //         console.log(this.form.cbpg07, 789)
         //         this.getList();
         //         this.$message({ message: response.msg, type: 'success' });
-            
+
         //     }else{
         //         this.$message({ message: response.msg, type: 'error' });
         //     }
@@ -1052,7 +1052,7 @@ export default {
 
         //     PurchaseinboundSht(row).then(response => {
 
-        //      if (response.code == "200") {     
+        //      if (response.code == "200") {
         //         console.log(this.form.cbpg01, 789)
         //         // this.submitShangpin();
         //         this.getList();

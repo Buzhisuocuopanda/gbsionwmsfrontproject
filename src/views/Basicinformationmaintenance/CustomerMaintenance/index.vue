@@ -768,7 +768,7 @@ export default {
 
                 cbca16: [
                   { required: true, message: "电话不能为空!", trigger: "blur" },
-                  { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                  // { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
                 ],
                 cbca15: [
                   { required: true, message: "地址不能为空!", trigger: "blur" }
@@ -779,7 +779,7 @@ export default {
                 ],
                 cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
-                    { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
+                    // { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
                 ],
                 cbca11: [
                     { required: true, message: "发票开户行不能为空!", trigger: "blur" }
@@ -792,7 +792,7 @@ export default {
                 ],
                 cbca19: [
                   { required: true, message: "联系人1办公室电话不能为空!", trigger: "blur" },
-                  { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                  // { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
                 ],
                /* cbca20: [
                     { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },
@@ -813,7 +813,7 @@ export default {
                 ],
               cbca16: [
                 { required: true, message: "电话不能为空!", trigger: "blur" },
-                { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                // { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
               ],
               cbca15: [
                 { required: true, message: "地址不能为空!", trigger: "blur" }
@@ -824,7 +824,7 @@ export default {
                 ],
                 cbca27: [
                     { required: true, message: "发票电话不能为空!", trigger: "blur" },
-                    { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
+                    // { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的发票电话", trigger: "blur" }
                 ],
                 cbca11: [
                     { required: true, message: "发票开户行不能为空!", trigger: "blur" }
@@ -837,7 +837,7 @@ export default {
                 ],
               cbca19: [
                 { required: true, message: "联系人1办公室电话不能为空!", trigger: "blur" },
-                { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                // { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
               ],
                /* cbca20: [
                     { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },

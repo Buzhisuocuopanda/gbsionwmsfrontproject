@@ -25,7 +25,8 @@
         <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button v-hasPermi="['system:outofstockregistrationform:list']" class="filter-item" type="primary"
             icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
-          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>
+          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
+          </el-button>
           <el-button v-hasPermi="['system:outofstockregistrationform:add']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
@@ -45,7 +46,7 @@
           <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" :data="orderList"
+      <el-table :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" :data="orderList"
         element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row stripe>
         <el-table-column fixed label="编号" align="left" prop="cboe07" min-width="60px;" />
         <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="180px;" />
@@ -433,11 +434,11 @@ export default {
     // this.getList();
   },
   methods: {
-    reset(){
+    reset() {
       const param = {
         cboe07: this.orderNo = '',
         startTime: this.dateRange.startTime = '',
-        endTime: this.dateRange.endTime ='',
+        endTime: this.dateRange.endTime = '',
         pageNum: this.listQuery.pageNum,
         pageSize: this.listQuery.pageSize
       }
