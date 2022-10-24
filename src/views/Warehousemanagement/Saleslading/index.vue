@@ -724,10 +724,12 @@ export default {
       }
 
       saleOrderListGoods({ customerName: this.valuexs, pageNum: 1, pageSize: 9999 }).then((res) => {
+
         if (res.code == 200) {
+          console.log(res, "----------------res")
           this.userList01 = res.data.rows;
           //   this.userList01 = response.data.rows;
-          this.totall = response.data.total;
+          this.totall = res.data.total;
           // // //供应商
           // // this.postOptions = response.data.content;
           // // console.log(this.userList, 3369);
@@ -740,7 +742,7 @@ export default {
     },
     close() {
       this.form2.cbpc100 = ''
-
+      this.valuexs = ""
     },
     //列表表头设置
     headClassssmtt() {
@@ -1569,7 +1571,7 @@ export default {
         this.form2.cbpc100 = ''
         this.queryParams.orderNo = ''
         this.open3 = false
-
+        this.valuexs = ""
         // location.reload();
       }
 

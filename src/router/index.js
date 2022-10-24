@@ -110,7 +110,7 @@ export const dynamicRoutes = [{
     path: '/system/user-auth',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:purchaseinbound:detail'],
     children: [{
       path: 'role/:cbpc01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -125,7 +125,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:purchasereturnorders:detail'],
     children: [{
       path: 'role/:cbpg01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -140,7 +140,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:selloutofwarehouse:detail'],
     children: [{
       path: 'role/:cbsb01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -155,7 +155,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:whmanagement:detail'],
     children: [{
       path: 'role/:cbpc01(\\d+)+:status(\\d+)+:checkStatus(\\d+)+:edit(\\d)',
       name: 'AuthUser',
@@ -170,7 +170,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhxg',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:whmanagement:edit'],
     children: [{
       path: 'role/:cbpc01(\\d+)',
       name: 'AuthUser',
@@ -185,7 +185,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:salesreturnorderss:detail'],
     children: [{
       path: 'role/:cbpg01(\\d+):status(\\d+)',
       name: 'AuthUser',
@@ -200,7 +200,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhs',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:salesreturnorderss:edit'],
     children: [{
       path: 'role/:cbse01(\\d+)',
       name: 'AuthUser',
@@ -216,7 +216,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:qualityin:detail'],
     children: [{
       path: 'role/:cbqa01(\\d+)',
       name: 'AnalysisCertificateXq',
@@ -231,7 +231,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:swJsStorea:detail'],
     children: [{
       path: 'role/:cbie01(\\d+)',
       name: 'AuthUser',
@@ -246,7 +246,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:warehouseInventoryrollup:detail'],
     children: [{
       path: 'role/:cbie01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -261,7 +261,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:warehouseinventoryschedule:detail'],
     children: [{
       path: 'role/:cbpg01(\\d+)',
       name: 'AuthUser',
@@ -291,7 +291,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-authhhhhhhhhh',
     component: Layout,
-    permissions: ['system:user:edit'],
+    permissions: ['system:warehouseinventorysummary:detail'],
     children: [{
       path: 'role/:userId',
       name: 'AuthUser',
@@ -306,7 +306,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-authhhhhhhhhhh',
     component: Layout,
-    permissions: ['system:user:edit'],
+    permissions: ['system:warehousetransferordersController:detail'],
     children: [{
       path: 'role/:cbaa01(\\d+):status(\\d+)',
       name: 'AuthUser',
@@ -322,7 +322,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authxiaoshouyudingdang',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:saleOrder:detail'],
     children: [{
       path: 'role/:id(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -337,7 +337,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-cj',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:purchaseinbound:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -367,7 +367,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-th',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:purchasereturnorders:add'],
     children: [{
       path: 'role/',
       name: 'PurchaseReturncj',
@@ -397,7 +397,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-zjd',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:qualityin:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -412,7 +412,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-kcmx',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:swJsStorea:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -442,7 +442,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-kchz',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:warehouseInventoryrollup:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -457,7 +457,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-xsch',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:selloutofwarehouse:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -502,7 +502,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-pdmx',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:warehouseinventoryschedule:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -517,7 +517,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-pdhz',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:warehouseinventorysummary:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -532,7 +532,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-cgddtj',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:purchaseordertable:detail'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -577,7 +577,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-cjxsydd',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:saleOrder:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -592,7 +592,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-SalesAdvance',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:saleChange:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -622,7 +622,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-SalesAdvancexiugai',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:saleChange:edit'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -638,7 +638,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-SalesReceiptxiugai',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:salesReceipt:edit'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -653,7 +653,7 @@ export const dynamicRoutes = [{
   {
     path: '/Warehousemanagement/SalesReceipt',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:salesReceipt:detail'],
     children: [{
       path: 'detail',
       name: 'detail',
@@ -668,7 +668,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-SalesAdvancexiangqong',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:saleChange:detail'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -699,7 +699,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-ckdb',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:warehousetransferordersController:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -744,7 +744,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-ckrkxg',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:purchaseinbound:edit'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -774,7 +774,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-cktkxg',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:purchasereturnorders:edit'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -806,7 +806,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-xiugaichukuxiugai',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:selloutofwarehouse:edit'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -896,7 +896,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-cangkudiaobodan',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:warehousetransferordersController:edit'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -912,7 +912,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-cangkudiaobodang',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:saleOrder:edit'],
     children: [{
       path: 'role/:id(\\d+)',
       name: 'AuthUser',
@@ -1006,7 +1006,7 @@ export const dynamicRoutes = [{
     path: '/system/user-xsyddrukudang',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:salesReceipt:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -1068,10 +1068,11 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-zhijiandan',
     component: Layout,
-    permissions: ['system:user:add'],
+
     children: [{
         path: 'role/',
         name: 'AuthUser',
+        permissions: ['system:qualityin:add'],
         component: () => import('@/views/Warehousemanagement/AnalysisCertificate/AnalysisCertificatecj/index'),
         meta: {
           title: '质检单创建',
@@ -1081,6 +1082,7 @@ export const dynamicRoutes = [{
       { //质检单修改页面
         path: 'roleXg/',
         name: 'zhijiandanXg',
+        permissions: ['system:qualityin:edit'],
         component: () => import('@/views/Warehousemanagement/AnalysisCertificate/AnalysisCertificatexg/index'),
         meta: {
           title: '质检单修改',
@@ -1141,13 +1143,13 @@ export const dynamicRoutes = [{
   {
     path: '/Salesmanagement/saleOrderDetail',
     component: Layout,
-    permissions: ['system:user:add'],
+
     children: [
 
       {
         // path: 'role/:cbpc01(\\d+)',
         path: 'auditSale',
-
+        permissions: ['sale:saleOrder:audit'],
         name: 'auditSaleOrder',
         component: () => import('@/views/Salesmanagement/saleOrderDetail/auditDetail/index'),
 
@@ -1159,7 +1161,7 @@ export const dynamicRoutes = [{
       {
         // path: 'role/:cbpc01(\\d+)',
         path: 'mdfSale',
-
+        permissions: ['system:user:add'],
         name: 'mdfSaleOrder',
         component: () => import('@/views/Salesmanagement/saleOrderDetail/mdfDetail/index'),
 
@@ -1171,6 +1173,7 @@ export const dynamicRoutes = [{
       {
         path: 'mdfGjSale',
         name: 'mdfGjSaleOrder',
+        permissions: ['sale:saleOrderGj:edit'],
         component: () => import('@/views/Salesmanagement/SaleOrderGJ/mdfDetail/index'),
 
         meta: {
@@ -1181,7 +1184,7 @@ export const dynamicRoutes = [{
       {
         // path: 'role/:cbpc01(\\d+)',
         path: 'addSale',
-
+        permissions: ['sale:saleOrder:add'],
         name: 'addSaleOrder',
         component: () => import('@/views/Salesmanagement/saleOrderDetail/index'),
 
@@ -1193,7 +1196,7 @@ export const dynamicRoutes = [{
       {
         // path: 'role/:cbpc01(\\d+)',
         path: 'showSale',
-
+        permissions: ['system:user:add'],
         name: 'showSaleOrder',
         component: () => import('@/views/Salesmanagement/saleOrderDetail/showDetail/index'),
 
@@ -1204,7 +1207,7 @@ export const dynamicRoutes = [{
       }, {
         // path: 'role/:cbpc01(\\d+)',
         path: 'showGjSale',
-
+        permissions: ['sale:saleOrderGj:detail'],
         name: 'showGjSale',
         component: () => import('@/views/Salesmanagement/SaleOrderGJ/showDetail/index'),
 
@@ -1313,7 +1316,7 @@ export const dynamicRoutes = [{
     path: '/aftersalesDetails',
     component: Layout,
     redirect: 'aftersalesDetails',
-    permissions: ['system:user:add'],
+
     name: 'aftersalesDetails',
     query: {
       id: ''
@@ -1321,7 +1324,7 @@ export const dynamicRoutes = [{
     children: [{
       // path: 'role/:cbpc01(\\d+)',
       path: 'aftersalesDetails',
-
+      permissions: ['system:aftersales:add'],
       name: 'aftersalesDetails',
       component: () => import('@/views/aftersales/saleOrderDetail/index'),
 
@@ -1334,6 +1337,7 @@ export const dynamicRoutes = [{
       // path: 'role/:cbpc01(\\d+)',
       path: 'aftermdsalesDetails',
       name: 'aftermdsalesDetails',
+      permissions: ['system:aftersales:edit'],
       component: () => import('@/views/aftersales/saleOrderDetail/mdfDetail/index'),
 
       meta: {
@@ -1345,6 +1349,7 @@ export const dynamicRoutes = [{
       // path: 'role/:cbpc01(\\d+)',
       path: 'aftermdsalesDetailsShow',
       name: 'aftermdsalesDetailsShow',
+      permissions: ['system:aftersales:detail'],
       component: () => import('@/views/aftersales/saleOrderDetail/mdfDetailShow/index'),
 
       meta: {
@@ -1414,12 +1419,13 @@ export const dynamicRoutes = [{
   {
     path: '/Salesmanagement/saleCgshowOrderDetail',
     component: Layout,
-    permissions: ['system:user:add'],
+
     children: [
 
       {
         path: 'detail',
         name: 'detailSaleChange',
+        permissions: ['system:saleChange:detail'],
         component: () => import('@/views/Salesmanagement/SaleOrderChange/showDetail/index'),
         meta: {
           title: '销售订单变更详情',
@@ -1429,7 +1435,7 @@ export const dynamicRoutes = [{
         // path: 'role/:cbpc01(\\d+)',
         path: 'add',
         name: 'addSaleChange',
-
+        permissions: ['system:saleChange:add'],
         // name: 'saleCgaddOrderDetail',
         component: () => import('@/views/Salesmanagement/SaleOrderChange/addDetail/index'),
 
@@ -1441,7 +1447,7 @@ export const dynamicRoutes = [{
       {
         // path: 'role/:cbpc01(\\d+)',
         path: 'mdf',
-
+        permissions: ['system:saleChange:edit'],
         name: 'mdfSaleChange',
         component: () => import('@/views/Salesmanagement/SaleOrderChange/mdfDetail/index'),
 
@@ -1453,7 +1459,7 @@ export const dynamicRoutes = [{
       {
         // path: 'role/:cbpc01(\\d+)',
         path: 'audit',
-
+        permissions: ['system:saleChange:sh'],
         name: 'auditSaleChange',
         component: () => import('@/views/Salesmanagement/SaleOrderChange/auditDetail/index'),
 
@@ -1618,7 +1624,7 @@ export const dynamicRoutes = [{
     component: Layout,
     redirect: 'Outofstockregistrationadd',
     name: 'Outofstockregistrationadd',
-    permissions: ['system:user:edit'],
+    permissions: ['system:outofstockregistrationform:add'],
     query: {
       id: ''
     },
@@ -1654,20 +1660,20 @@ export const dynamicRoutes = [{
   },
 
 
-  //修改缺货等级
+  //修改缺货登记
   {
     path: '/Outofstockregistrationmd',
     component: Layout,
     redirect: 'Outofstockregistrationmd',
     name: 'Outofstockregistrationmd',
-    permissions: ['system:user:edit'],
+
     query: {
       id: ''
     },
     children: [{
       // path: 'role/:cbpc01(\\d+)',
       path: 'Outofstockregistrationmd',
-
+      permissions: ['system:outofstockregistrationform:edit'],
       name: 'Outofstockregistrationmd',
       component: () => import('@/views/Outofstockregistration/saleOrderDetail/mdfDetail/index'),
 
@@ -1679,7 +1685,7 @@ export const dynamicRoutes = [{
     }, {
       // path: 'role/:cbpc01(\\d+)',
       path: 'Outofstockregistrationdetail',
-
+      permissions: ['system:outofstockregistrationform:detail'],
       name: 'Outofstockregistrationdetail',
       component: () => import('@/views/Outofstockregistration/saleOrderDetail/showDetail/index'),
 
