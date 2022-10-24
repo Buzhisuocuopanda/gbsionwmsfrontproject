@@ -120,7 +120,19 @@ export function SupplierList(query) {
 //商品信息维护
 export function GoodsList(query) {
   return request({
+    // system/goods/swJsGoodslistBySelectAll
+    // /system/goods/SwJsGoodslist
     url: '/system/goods/SwJsGoodslist',
+    method: 'get',
+    params: query
+  })
+}
+//商品信息维护
+export function swJsGoodslistBySelectAll(query) {
+  return request({
+    // system/goods/swJsGoodslistBySelectAll
+    // /system/goods/SwJsGoodslist
+    url: '/system/goods/swJsGoodslistBySelectAll',
     method: 'get',
     params: query
   })

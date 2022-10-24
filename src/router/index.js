@@ -370,7 +370,7 @@ export const dynamicRoutes = [{
     permissions: ['system:user:add'],
     children: [{
       path: 'role/',
-      name: 'AuthUser',
+      name: 'PurchaseReturncj',
       component: () => import('@/views/Warehousemanagement/PurchaseReturn/PurchaseReturncj/index'),
       meta: {
         title: '采购退库创建',

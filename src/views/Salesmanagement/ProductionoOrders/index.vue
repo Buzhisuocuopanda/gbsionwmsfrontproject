@@ -51,7 +51,7 @@
         </el-form-item>
       </el-form>
       <!-- style="height:calc(100% - 10)" -->
-      <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :data="orderList"
+      <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :loading="loading" :data="orderList"
         :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;"
         height="500" border fit highlight-current-row stripe :row-key="getRowKeys">
         <el-table-column type='selection' label="全选" width="55">
@@ -108,7 +108,7 @@
 
             <el-select @change="goodsOnChange($event)" v-el-select-loadmore="loadMore" v-model="formData.goods"
               filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
-              <el-option v-for="item,i in options" :key="i" :label="item.label" :value="item.value">
+              <el-option v-for="item in options" :key="i" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
 
@@ -146,9 +146,9 @@
             </el-input>
           </el-form-item>
           <el-form-item label="订单号" prop="orderNo">
-            <el-input v-model="formData.orderNo" style="width:50%"></el-input>
+            <el-input readonly v-model="formData.orderNo" style="width:50%"></el-input>
           </el-form-item>
-          <el-form-item label="商品" prop="goods">
+          <el-form-item  label="商品" prop="goods">
             <!--            <el-popover placement="bottom-start" trigger="click">-->
             <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
             <!--                          style="width:370px!important;" />-->
@@ -156,7 +156,7 @@
             <!--                        style="width:205.6%;">-->
             <!--              </el-input>-->
             <!--            </el-popover>-->
-            <el-select readonly @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods"
+            <el-select disabled @change="goodsOnChange($event)" v-loadmore="loadMore" v-model="formData.goods"
               filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -300,6 +300,7 @@
 // import x from ''
 import { pldelete, totalOrderDetail, swJsGoodslistBySelect, swJsGoodslistBySelectAll, totalOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
+import { Loading } from 'element-ui';
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
 // import Vue from 'vue'
@@ -384,6 +385,7 @@ export default {
       sortkey: '',
       sorttype: '',
       orderList: [],
+      loading:false,
 
       upload: {
         // 是否显示弹出层（用户导入）
@@ -451,6 +453,7 @@ export default {
         type: 'success',
       }).then(() => {
         console.log(this.multipleSelection)
+        this.loading=true
         pldelete({ ids: this.multipleSelection }).then(response => {
           if (response.code == 200) {
             this.$notify({
@@ -463,6 +466,7 @@ export default {
             this.onSearch()
             // this.$tab.refreshPage()
             console.log(this.multipleSelection)
+            this.loading=false
 
           }
 
@@ -529,6 +533,7 @@ export default {
       this.model = ''
       this.orderNo = ''
       this.status = ''
+
     },
     createForm() {
       this.showaddDialog = true
@@ -866,8 +871,27 @@ export default {
     // 文件上传成功处理
     handleFileSuccess(response, file, fileList) {
       if (response.code == 200) {
-        this.$message.success('上传成功')
+        // this.$message.success(response.msg)
+        this.$alert(response.msg, '上传结果', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
       } else {
+
+        this.$alert(response.msg, '上传结果', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
         // this.$message.error(response.msg);
 
 
