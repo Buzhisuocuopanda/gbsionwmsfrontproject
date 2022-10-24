@@ -68,7 +68,7 @@
                     <el-table-column type="selection" width="50" align="center" />
 <!--                    <el-table-column label="编号" align="left" key="orderNo" :show-overflow-tooltip="true" prop="orderNo"
                         sortable  width="160px;"/>-->
-                    <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
+                    <el-table-column label="上架时间" align="left" key="orderDate" prop="orderDate" :formatter="formatDate"
                         sortable width="150px;">
                     </el-table-column>
                     <el-table-column label="品牌" align="left" key="brand" prop="brand" sortable width="150px;" />

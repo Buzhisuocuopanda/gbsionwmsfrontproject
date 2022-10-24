@@ -475,6 +475,7 @@ export default {
       this.orderNo = ''
       this.goodsId = ''
       this.status = ''
+      this.totalOrderNo=''
       this.listQuery.pageNum = 1;
       this.onSearch()
     },
