@@ -83,7 +83,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUser">
-            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser"
+            <el-select @change="saleUserOnChange($event)" v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUser"
               filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -185,7 +185,7 @@
           <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg"
+                <el-select @change="goodsOnChange(scope.row,$event)" v-el-select-loadmore="loadMore" v-model="scope.row.goodsMsg"
                   filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
