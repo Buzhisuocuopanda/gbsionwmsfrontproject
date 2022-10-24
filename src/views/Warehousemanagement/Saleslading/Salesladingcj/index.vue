@@ -1111,6 +1111,7 @@ export default {
       this.$refs["form2"].validate((item) => {
         if (item) {
           PurchaseinboundAdd(this.form2).then((response) => {
+            console.log(response)
             if (response.code == 200) {
               this.$message({
                 message: "添加成功",
@@ -1129,14 +1130,15 @@ export default {
               this.$tab.closePage();
               this.$router.go(-1);
               // this.$router.go(-1);
+              this._ly_ok();
             }
             // this.tableData.forEach((item) => {
             //   item.cbsb01 = response.data.id;
             // });
             // console.log(response.data.id, 123456);
             // // console.log(this.item, 123456);
-            this._ly_ok();
-          });
+
+          })
         } else {
           // this.$message.error('请注意规范');
         }

@@ -817,6 +817,7 @@ export default {
       Purchaseinbounddingdanck({ customerName: this.valuexs, }).then((res) => {
         if (res.code == 200) {
           this.userList01 = res.data.rows;
+          this.totall = res.data.total;
         }
         console.log(res, 4444444)
       })
@@ -830,6 +831,7 @@ export default {
       saleOrderListPj({ customerName: this.valuexs, }).then((res) => {
         if (res.code == 200) {
           this.userList01xs = res.data.rows;
+          this.totall = res.data.total;
         }
         console.log(res, 4444444)
       })
@@ -896,6 +898,7 @@ export default {
         cus
       ).then((response) => {
         this.userList01 = response.data.rows;
+        this.totall = response.data.total
       });
     },
     selected01xs(name) {
@@ -914,6 +917,7 @@ export default {
       ).then((response) => {
         console.log(response, "response")
         this.userList01xs = response.data.rows;
+        this.totall = response.data.total
       });
     },
     //供应商
