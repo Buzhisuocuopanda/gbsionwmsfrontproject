@@ -12,9 +12,9 @@
                 <el-descriptions-item>
                     <template slot="label">供料单位</template>{{ value.cbsa08 }}
                 </el-descriptions-item>
-                <el-descriptions-item>
+                <!-- <el-descriptions-item>
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
-                </el-descriptions-item>
+                </el-descriptions-item> -->
                 <!-- <el-descriptions-item>
                     <template slot="label">结算货币</template>USD
                 </el-descriptions-item> -->
@@ -24,7 +24,8 @@
 
             <el-table :header-cell-style="headClass" v-loading="loading" border :data="tabData" height="280"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
-
+                <el-table-column prop="factory" key="factory" label="工厂">
+                </el-table-column>
                 <el-table-column prop="cala08" key="cala08" label="品牌">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" label="型号">
@@ -128,6 +129,7 @@
         <div class="tinajia_dingwei" style="margin:5% 0 1% 3%;left:0;">
 
             <el-button @click="_ly_shenhe" type="primary" v-if="state == 0">审 核</el-button>
+            <el-button @click="_ly_shenhes" type="primary" v-if="state == 1">反 审</el-button>
             <el-button @click="_ly_cancelDialog">取 消</el-button>
         </div>
     </div>
@@ -135,7 +137,7 @@
 </template>
 <script>
 
-import { PurchaseinboundSalesReceipt, PurchaseinboundSH } from "@/api/Warehousemanagement/SalesReceipt";
+import { PurchaseinboundSalesReceipt, PurchaseinboundSH,PurchaseinboundShs } from "@/api/Warehousemanagement/SalesReceipt";
 export default {
     name: "AuthUser",
     data() {
@@ -172,14 +174,24 @@ export default {
     },
     methods: {
         _ly_shenhe() {
-            console.log("点击审核按钮")
+            const userId = this.$route.query && this.$route.query.id;
 
             this.$modal.confirm('是否要审批,ponumber为"' + this.userList[0].orderNo + '"的数据项？').then(() => {
-                console.log("进入审批流程")
-                // console.log(row.cbpc01, 8888);
-                // console.log(row)
-                console.log(this.tabData)
-                PurchaseinboundSH({ id: this.userList[0].id }).then(response => {
+                PurchaseinboundSH({ id: userId }).then(response => {
+                    if (response.code == "200") {
+                        // this.getList();
+                        // this.open = false;
+                        this.$message({ message: '审批成功', type: 'success' });
+                        this.$tab.closePage();
+                        this.$router.go(-1);
+                    }
+                });
+            }).catch(() => { });
+        },
+        _ly_shenhes() {
+            const userId = this.$route.query && this.$route.query.id;
+            this.$modal.confirm('是否要反审,ponumber为"' + this.userList[0].orderNo + '"的数据项？').then(() => {
+                PurchaseinboundShs({ id: userId }).then(response => {
                     if (response.code == "200") {
                         // this.getList();
                         // this.open = false;

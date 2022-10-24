@@ -5,9 +5,9 @@
             <el-col :span="20" :xs="24" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px" style="margin-left:2%;">
-                    <el-form-item prop="cbsa08" label="客户名称">
-                        <el-input v-model="queryParams.cbsa08" id="miaoshu" placeholder="请输入客户名称" clearable
+                    label-width="85px" style="margin-left:2%;">
+                    <el-form-item prop="cbsa08" label="供应商名称">
+                        <el-input v-model="queryParams.cbsa08"  placeholder="请输入客户名称" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbsa14" label="联系人">
@@ -16,7 +16,7 @@
                                         :value="item.value">
                                     </el-option>
                                 </el-select> -->
-                        <el-input v-model="queryParams.cbsa14" id="miaoshu" placeholder="请输入联系人" clearable
+                        <el-input v-model="queryParams.cbsa14"  placeholder="请输入联系人" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
@@ -40,8 +40,8 @@
                     :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="客户名称" width="200" align="left" key="cbsa08" prop="cbsa08" sortable />
-                    <el-table-column label="客户地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
+                    <el-table-column label="供应商名称" width="200" align="left" key="cbsa08" prop="cbsa08" sortable />
+                    <el-table-column label="供应商地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
                     <el-table-column label="联系人" width="130px;" align="left" key="cbsa14" prop="cbsa14" sortable />
                     <el-table-column label="联系电话" width="150px;" align="left" key="cbsa15" prop="cbsa15" sortable />
                     <!-- <el-table-column label="发票类型" align="left" key="cbsa18" prop="cbsa18" sortable>
@@ -97,7 +97,7 @@
                     </div>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="公司名称:" prop="cbsa08">
+                            <el-form-item label="供应商名称:" prop="cbsa08">
                                 <el-input v-model="form.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
@@ -114,7 +114,7 @@
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="公司地址:" prop="cbsa13">
+                            <el-form-item label="供应商地址:" prop="cbsa13">
                                 <el-input v-model="form.cbsa13" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
@@ -168,7 +168,7 @@
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="状态:" prop="cbsa07">
+                            <el-form-item label="供应商状态:" prop="cbsa07">
                                 <!-- <el-input v-model="form2.ifEnabled" placeholder="请输入状态" maxlength="30" /> -->
                                 <el-select v-model="form.cbsa07" placeholder="" style="width:100%;">
                                     <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
@@ -177,13 +177,16 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="12" class="GongyingShangjiaoyan">
-                            <el-form-item>
-                                <el-button type="primary" @click="handleUpdate">确定</el-button>
-                                <el-button @click="cancello">取消</el-button>
-                            </el-form-item>
-                        </el-col>
+
                     </el-row>
+                  <el-row>
+                    <el-col :span="24"  style="margin-top: 10px;margin-left: -10%">
+                      <el-form-item >
+                        <el-button type="primary" @click="handleUpdate">确定</el-button>
+                        <el-button @click="cancello">取消</el-button>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
                 </div>
             </el-form>
         </el-dialog>
@@ -202,7 +205,7 @@
                     </div>
                     <el-row style="margin-left:5%;">
                         <el-col :span="11">
-                            <el-form-item label="公司名称:" prop="cbsa08">
+                            <el-form-item label="供应商名称:" prop="cbsa08">
                                 <el-input v-model="form1.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
@@ -219,7 +222,7 @@
                     </el-row>
                     <el-row style="margin-left:5%;">
                         <el-col :span="11">
-                            <el-form-item label="公司地址:" prop="cbsa13">
+                            <el-form-item label="供应商地址:" prop="cbsa13">
                                 <el-input v-model="form1.cbsa13" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
@@ -319,7 +322,7 @@
                     </div>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="公司名称:" prop="cbsa08">
+                            <el-form-item label="供应商名称:" prop="cbsa08">
                                 <el-input v-model="form2.cbsa08" maxlength="30" placeholder="" style="width:100%;" />
                             </el-form-item>
                         </el-col>
@@ -336,7 +339,7 @@
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="公司地址:" prop="cbsa13">
+                            <el-form-item label="供应商地址:" prop="cbsa13">
                                 <el-input v-model="form2.cbsa13" placeholder="" maxlength="30" style="width:100%;" />
                             </el-form-item>
                         </el-col>
@@ -397,7 +400,7 @@
                     </el-row>
                     <el-row style="margin-left:5%;margin-top:2%;">
                         <el-col :span="11">
-                            <el-form-item label="状态:" prop="cbsa07">
+                            <el-form-item label="供应商状态:" prop="cbsa07">
                                 <!-- <el-input v-model="form2.ifEnabled" placeholder="请输入状态" maxlength="30" /> -->
                                 <el-select v-model="form2.cbsa07" placeholder="" style="width:100%;">
                                     <el-option v-for="item in ZhuangTaivalue" :key="item.label" :label="item.label"
@@ -406,7 +409,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="12" class="GongyingShangjiaoyan">
+                        <el-col :span="24"  style="margin-top: 10px">
                             <el-form-item>
                                 <el-button type="primary" @click="handleAdd">确定</el-button>
                                 <el-button @click="cancel">取消</el-button>
@@ -632,11 +635,17 @@ export default {
             //表单校验
             rules: {
                 cbsa08: [
-                    { required: true, message: "公司名称不能为空!", trigger: "blur" }
+                    { required: true, message: "供应商名称不能为空!", trigger: "blur" }
                 ],
                 cbsa14: [
                     { required: true, message: "联系人不能为空!", trigger: "blur" }
                 ],
+              cbsa13: [
+                { required: true, message: "供应商地址不能为空!", trigger: "blur" }
+              ],
+              cbsa07: [
+                { required: true, message: "供应商状态不能为空!", trigger: "blur" }
+              ],
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
                 // ],
@@ -669,10 +678,16 @@ export default {
             //表单校验
             rules01: {
                 cbsa08: [
-                    { required: true, message: "公司名称不能为空!", trigger: "blur" }
+                    { required: true, message: "供应商名称不能为空!", trigger: "blur" }
                 ],
                 cbsa14: [
                     { required: true, message: "联系人不能为空!", trigger: "blur" }
+                ],
+                cbsa13: [
+                  { required: true, message: "供应商地址不能为空!", trigger: "blur" }
+                ],
+                cbsa07: [
+                  { required: true, message: "供应商状态不能为空!", trigger: "blur" }
                 ],
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }

@@ -120,7 +120,19 @@ export function SupplierList(query) {
 //商品信息维护
 export function GoodsList(query) {
   return request({
+    // system/goods/swJsGoodslistBySelectAll
+    // /system/goods/SwJsGoodslist
     url: '/system/goods/SwJsGoodslist',
+    method: 'get',
+    params: query
+  })
+}
+//商品信息维护
+export function swJsGoodslistBySelectAll(query) {
+  return request({
+    // system/goods/swJsGoodslistBySelectAll
+    // /system/goods/SwJsGoodslist
+    url: '/system/goods/swJsGoodslistBySelectAll',
     method: 'get',
     params: query
   })
@@ -139,6 +151,16 @@ export function StoreList(query) {
 export function StoreSkuList(query) {
   return request({
     url: '/system/sku/SwJsStorelist',
+    method: 'get',
+    params: query
+  })
+}
+
+// Purchaseinbounddingdancx
+// 不良品列表
+export function SwJsSkuBarcodelists(query) {
+  return request({
+    url: '/system/Purchasereturnorders/SwJsSkuBarcodelists',
     method: 'get',
     params: query
   })

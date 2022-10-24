@@ -91,7 +91,6 @@
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
           :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
-          <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
@@ -257,7 +256,8 @@
 
 import {
   PurchasereturnordersAdd,
-  PurchasereturnordersAdds
+  PurchasereturnordersAdds,
+  swJsGoodslistBySelectAll,
 } from "@/api/Warehousemanagement/PurchaseReturn";
 import {
   getToken
@@ -274,7 +274,7 @@ import Goodsone01 from "@/components/Goodsone";
 import ListLists from "@/components/ListMaintenance";
 
 export default {
-  name: "AuthUser",
+  name: "PurchaseReturncj",
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
   props: {
     visible: {
@@ -675,12 +675,25 @@ export default {
     // console.log(this.userList,123456789);
     // this.chen();
     //   this.form2.cbph10 = "20"
-
-    console.log(this.form.cbpc16, 123456);
+    this.getlists()
 
   },
   methods: {
-
+    getlists(){
+      const userId = this.$route.params && this.$route.params.data.cbpg01
+      swJsGoodslistBySelectAll({id:userId}).then((res) =>{
+        // this.tableData = res.data.rows
+        if(res.data.rows != []){
+          this.tableData.map((item,i) =>{
+            item.cbpc000 = res.data.rows[i].label
+            item.cbph08 = res.data.rows[i].value
+          })
+        }else{
+          this.tableData = ''
+        }
+        
+      })
+    },
 
     chen(item) {
       if (item.cbph09 > 0 && item.cbph10 > 0) {
@@ -732,6 +745,15 @@ export default {
         // 当count为1时，表示是最后一个表单，则存储数据
         PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(response => {
           if (response.code == "200") {
+            this.$message({
+              message: '添加成功',
+              type: 'success',
+              style: 'color:red;!important'
+            });
+            this.$tab.closePage();
+            this.$router.go(-1);
+            this.submitShangpin();
+            this.reset01()
             this.tableData = []
             this.form2 = {
               cbpc07: "",
@@ -766,7 +788,7 @@ export default {
           if (count-- === 1) {
             this._ly_save()
           }
-          this._ly_addFrom()
+          // this._ly_addFrom()
           //    this.formArr.cbpg01="1234567";
           //    this.form.cbpg01=this.formArr.cbpg01;
           //    console.log(this.form.cbpg01,85203);
@@ -900,34 +922,6 @@ export default {
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
       this.$set(row, "cbph08", e.substring(e.indexOf(".") + 1), 8523642)
-      // console.log(row.cbpc08,96325412);
-      // console.log(name, 111)
-      // console.log(index, 222)
-      // this.$set(this.tableData, "cbpc000", e)
-
-      // this.formArr[index].cbpc000=''
-      // this.formArr[index].cbpc000=e
-      // console.log(this.formArr)
-      // console.log(name.substring(name.indexOf("-") + 1), 963);
-      // this.form.cbpc000 = name.substring(0, name.indexOf("-"));
-      // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
-      // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-      // this.form.cbpc000 = name;
-      // this.form.cbpd08  =  name.substring(name.indexOf(".") +1);
-      // console.log(this.form2.cbpd08,852369421);
-
-      // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
-      //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
-      // this.form.cbpc000 = name;
-      // this.$set(this.tableData,"cbpc000",name);
-      // this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1));
-      // this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
-      // this.$forceUpdate()
-      // console.log(this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
-      // this.tableData.cbpc000 = "123";
-      // this.tableData.num = "23344";
-      // console.log(name,556623);
-      // console.log(this.tableData.cbpc000,20220905);
     },
 
     //添加行
@@ -1003,14 +997,8 @@ export default {
         if (item) {
           PurchasereturnordersAdd(this.form2).then(response => {
             if (response.code == "200") {
-              this.$message({
-                message: '添加成功',
-                type: 'success',
-                style: 'color:red;!important'
-              });
-              this.submitShangpin();
-
-              this.reset01()
+              
+              
               // console.log(this.form2.cbpg161,111);
               // console.log(this.form.cbpg01,222);
               console.log(response.data.id, 333);
@@ -1019,8 +1007,7 @@ export default {
                 console.log(item.cbpg01, 8523697412);
               })
               this._ly_ok()
-              this.$tab.closePage();
-              this.$router.go(-1);
+              
             }
           });
         } else {

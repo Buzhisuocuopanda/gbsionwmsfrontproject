@@ -2,7 +2,7 @@
   <!--生产总订单-->
   <div class="app-container">
     <div class="filter-container shengchuang">
-      <el-form :inline="true" label-width="70px">
+      <el-form :inline="true" label-width="60px">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
@@ -53,7 +53,7 @@
       <!-- style="height:calc(100% - 10)" -->
       <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :loading="loading" :data="orderList"
         :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;"
-        border fit highlight-current-row stripe :row-key="getRowKeys">
+        height="500" border fit highlight-current-row stripe :row-key="getRowKeys">
         <el-table-column type='selection' label="全选" width="55">
         </el-table-column>
         <el-table-column sortable="custom" fixed label="优先级" align="left" prop="priority" min-width="100px;" />

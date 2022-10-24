@@ -44,9 +44,9 @@
                         <el-button type="mini" class="biaoto-buttonshanchu" v-hasPermi="['system:salesReceipt:remove']"
                             :disabled="multiple" @click="handleDelete">
                             删除</el-button>
-                        <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
+                        <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
-                        <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
+                        <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:salesReceipt:sh']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
@@ -54,10 +54,10 @@
                         </el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:salesReceipt:bjwc']">标记完成
-                        </el-button>
+                        </el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttonfanshen"
                             @click="PurchaseinboundQuxiaoWangcheng01" :disabled="multiple"
                             v-hasPermi="['system:salesReceipt:qxwc']">取消完成
@@ -73,8 +73,26 @@
                     <el-table-column type="selection" width="50" align="center" />
                     <!-- <el-table-column label="编号" align="left" key="cbpc07" :show-overflow-tooltip="true" prop="cbpc07"
                         sortable /> -->
-
-                    <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" sortable width="550" />
+                    <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
+                        prop="orderNo" sortable />
+                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber" 
+                    prop="ponumber" sortable />
+                    <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
+                        :formatter="formatDate" sortable>
+                    </el-table-column>
+                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable width="140" />
+                    <el-table-column label="工厂名称" align="left" key="factory" prop="factory" sortable width="120" />
+                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="310" sortable>
+                    </el-table-column>
+                    <el-table-column label="状态" align="center" key="status" width="120" prop="status" sortable>
+                        <template scope="scope">
+                            <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
+                            "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
+                            }}
+                            </div>
+                        </template>
+                    </el-table-column>
+                    <!-- <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" sortable width="550" />
                     <el-table-column label="PONumber" :formatter="rounding" align="right" key="ponumber" prop="ponumber"
                         sortable />
                     <el-table-column label="入库数量" :formatter="rounding" align="right" key="inQty" prop="inQty" sortable>
@@ -89,7 +107,7 @@
                             }}
                             </div>
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
@@ -116,10 +134,10 @@
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
                                 v-hasPermi="['system:salesReceipt:qxwc']" v-if="scope.row.status == 4">取消完成</el-button> -->
-                            <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:salesReceipt:bjwc']"
-                                v-if="scope.row.status == 1 | scope.row.status == 1">标记完成</el-button>
+                                v-if="scope.row.status == 1 | scope.row.status == 1">标记完成</el-button> -->
                         </template>
                     </el-table-column>
                 </el-table>
@@ -459,7 +477,7 @@ export default {
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
                 // 上传的地址
-                url: process.env.VUE_APP_BASE_API + "/system/Purchaseinbound/importSwJsGoods"
+                url: process.env.VUE_APP_BASE_API + "/system/SalesScheduledOrders/importSwJsGoodssss"
             },
             // 查询参数
             queryParams: {
@@ -473,7 +491,8 @@ export default {
                 cbwa09: undefined,
                 ponumber: undefined,
                 dateRange: undefined,
-                cbpb08: undefined
+                cbpb08: undefined,
+                statuss:1,
             },
             // 列信息
             //  columns: [
@@ -954,9 +973,10 @@ export default {
         PurchaseinboundShenpi(row) {
             console.log(row)
             let cbpc01 = row.id;
+            let status = row.status
             console.log(cbpc01)
             // 状态0代表审核
-            this.$router.push({ path: "/Warehousemanagement/SalesReceipt/detail/", query: { id: cbpc01, state: "0" } })
+            this.$router.push({ path: "/Warehousemanagement/SalesReceipt/detail/", query: { id: cbpc01, state: status } })
             // this.$modal.confirm('是否要审批,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
             //     console.log(row.cbpc01, 8888);
 
@@ -996,16 +1016,22 @@ export default {
         },
         //反审
         PurchaseinboundFanShenpi(row) {
-            this.$modal.confirm('是否要反审,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
-                // console.log(row.cbpc01, 8888);
-                PurchaseinboundShs(row).then(response => {
-                    if (response.code == "200") {
-                        this.getList();
-                        // this.open = false;
-                        this.$message({ message: '反审成功', type: 'success' });
-                    }
-                });
-            }).catch(() => { });
+            let cbpc01 = row.id;
+            let status = row.status
+            console.log(cbpc01)
+            // 状态1代表反审
+            this.$router.push({ path: "/Warehousemanagement/SalesReceipt/detail/", query: { id: cbpc01, state: status } })
+
+            // this.$modal.confirm('是否要反审,ponumber为"' + row.ponumber + '"的数据项？').then(() => {
+            //     // console.log(row.cbpc01, 8888);
+            //     PurchaseinboundShs(row).then(response => {
+            //         if (response.code == "200") {
+            //             this.getList();
+            //             // this.open = false;
+            //             this.$message({ message: '反审成功', type: 'success' });
+            //         }
+            //     });
+            // }).catch(() => { });
         },
 
         //反审上面的
@@ -1371,7 +1397,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/Purchaseinbound/importTemplate', {
+            this.download('/system/SalesScheduledOrders/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
@@ -1380,10 +1406,11 @@ export default {
         },
         // 文件上传成功处理
         handleFileSuccess(response, file, fileList) {
+            console.log(response)
             this.upload.open = false;
             this.upload.isUploading = false;
             this.$refs.upload.clearFiles();
-            // this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
+            this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
             this.getList();
         },
         // 提交上传文件

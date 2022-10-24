@@ -3,14 +3,19 @@
         <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
             <div class="chuangjiancaigous">销售预订单</div>
             <el-row :gutter="20" style="margin-top: 20px;">
-                <el-col :span="8">
-                    <el-form-item label="编号:" prop="ponumber">
-                        <el-input type="text" v-model="form2.ponumber" style="width: 60%;" readonly/>
+                <el-col :span="6">
+                    <el-form-item label="编号:" prop="orderNo">
+                        <el-input type="text" v-model="form2.orderNo" style="width: 110%;" readonly/>
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="6" style="margin-left:-2%;">
+                    <el-form-item label="订单编号:" prop="ponumber">
+                        <el-input type="text" v-model="form2.ponumber" style="width: 100%;" readonly/>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="6" style="margin-left:-4%;">
                     <el-form-item label="日期:">
-                        <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+                        <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 100%;">
                         </el-date-picker>
                     </el-form-item>
                 </el-col>
@@ -44,13 +49,14 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-4%;" :span="6">
-                    <el-form-item label="仓库:" prop="cbwa09">
-                        <el-popover placement="bottom-start" trigger="click">
+                    <el-form-item label="工厂:" prop="factory">
+                        <el-input v-model="form2.factory" placeholder=""  style="width:100%;"></el-input>
+                        <!-- <el-popover placement="bottom-start" trigger="click">
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
                             <el-input slot="reference" v-model="form2.cbwa09" placeholder="" readonly
                                 style="width:100%;">
                             </el-input>
-                        </el-popover>
+                        </el-popover> -->
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-2%;" :span="6">
@@ -477,7 +483,7 @@ export default {
                 cbpc07: "",
                 cbpd08: "",
                 cbsa08: "",
-                cbwa09: "",
+                factory: "",
                 cala08: "",
                 cbpc100: "",
                 cbpc099: "",
@@ -507,6 +513,7 @@ export default {
                 whId: "",
                 orderDate: "",
                 cbsb177: "",
+                factory:"",
             },
             defaultProps: {
                 children: "children",
@@ -538,7 +545,7 @@ export default {
                 total: this.total,
                 cbpc07: undefined,
                 cbsa08: undefined,
-                cbwa09: undefined,
+                factory: undefined,
                 dateRange: undefined
             },
 
@@ -549,9 +556,9 @@ export default {
                     message: "供料单位不能为空!",
                     trigger: 'change'
                 }],
-                cbwa09: [{
+                factory: [{
                     required: true,
-                    message: "仓库不能为空!",
+                    message: "工厂不能为空!",
                     trigger: 'change'
                 }],
                 cbpc16: [{
@@ -715,7 +722,7 @@ export default {
                         cbpc07: "",
                         cbpd08: "",
                         cbsa08: "",
-                        cbwa09: "",
+                        factory: "",
                         cala08: "",
                         cbpc100: "",
                         cbpc099: "",
@@ -741,6 +748,7 @@ export default {
                         orderDate: "",
                         cbpc0999: "",
                         cbsb177: "",
+                        factory:'',
                     }
                 }
                 if (count-- === 1) {
@@ -950,6 +958,9 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
+            this.tableData.map((item) =>{
+                item.factory = this.form2.factory
+            })
             let form1 = {
                 "customerId": this.form2.customerId,
                 "goods": this.tableData,
@@ -960,8 +971,9 @@ export default {
                 "status": this.form2.status,
                 "supplierId": this.form2.supplierId,
                 "userId": this.form2.userId,
-                "whId": this.form2.whId,
+                "factory": this.form2.factory,
             }
+            
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     // this.form2.goods = this.tableData

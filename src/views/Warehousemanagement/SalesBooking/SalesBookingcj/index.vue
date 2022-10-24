@@ -47,12 +47,13 @@
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-4%;" :span="6">
-          <el-form-item label="仓库:" prop="cbpc100">
-            <el-popover placement="bottom-start" trigger="click">
+          <el-form-item label="工厂:" prop="factory">
+            <el-input v-model="form2.factory" placeholder=""  style="width:100%;"></el-input>
+            <!-- <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
               <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:100%;">
               </el-input>
-            </el-popover>
+            </el-popover> -->
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-2%;" :span="6">
@@ -487,7 +488,7 @@ export default {
         cbsa08: "",
         cbwa09: "",
         cala08: "",
-        cbpc100: "",
+        // cbpc100: "",
         cbpc099: "",
         cbpc166: "",
         cbpc10: "",
@@ -512,10 +513,11 @@ export default {
         customerId: "",
         salerId: "",
         supplierId: "",
-        whId: "",
+        // whId: "",
         orderDate: "",
         cbsb177: "",
         ponumber:'',
+        factory:'',
       },
       defaultProps: {
         children: "children",
@@ -558,9 +560,9 @@ export default {
           message: "供料单位不能为空!",
           trigger: 'change'
         }],
-        cbpc100: [{
+        factory: [{
           required: true,
-          message: "仓库不能为空!",
+          message: "工厂不能为空!",
           trigger: 'change'
         }],
         cbpc0999: [{
@@ -726,6 +728,7 @@ export default {
             orderDate: "",
             cbpc0999: "",
             cbsb177: ""
+
           }
           this.handlefanhui()
         }
@@ -953,7 +956,9 @@ export default {
       this.$refs["form2"].validate((item) => {
         if (item) {
           this.form2.goods = this.tableData
-          console.log(this.form2.orderDate)
+          this.tableData.map((item) =>{
+            item.factory = this.form2.factory
+          })
           // this.form2.orderDate = this.form2.orderDate.slice(0, 10) + '  ' + this.form2.orderDate.slice(10, -1)
           PurchaseinboundAdd(this.form2).then(response => {
             if (response.code == "200") {

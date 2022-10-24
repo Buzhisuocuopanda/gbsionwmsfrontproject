@@ -78,7 +78,14 @@
                     <el-table-column label="是否分配库存" width="150px;" align="center" key="allocationFlag"
                         prop="allocationFlag" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.allocationFlag == 1 ? "是" : scope.row.allocationFlag == 0 ? "否" :null }}
+                            <div>{{ scope.row.allocationFlag == 1 ? "启用" : "禁用"  }}
+                            </div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="类型" width="100px;" align="center" key="type"
+                        prop="type" sortable>
+                        <template scope="scope">
+                            <div>{{ scope.row.type == 0 ? "配件" : scope.row.type == 1 ? "商品" :null }}
                             </div>
                         </template>
                     </el-table-column>
@@ -129,7 +136,7 @@
                     </el-row>
                     <el-row>
                         <el-col style="margin-top:0.3%;">
-                            <el-form-item label="类型:" prop="cbwa11">
+                            <el-form-item label="仓库类型:" prop="cbwa11">
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form.cbwa11" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
@@ -193,6 +200,15 @@
                           </el-select>
                         </el-form-item>
                       </el-col>
+                      <el-col>
+                            <el-form-item label="类型:" prop="type">
+                                <el-select v-model="form.type" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Leixvalue" :key="dict.value" :label="dict.label"
+                                        :value="dict.value">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
                         <el-col style="margin-top:3%;">
                             <div style="margin-left:70%;margin-top: 0%;">
                                 <el-button type="primary" @click="handleUpdate">确定</el-button>
@@ -229,7 +245,7 @@
                     </el-row>
                     <el-row>
                         <el-col style="margin-top:2%;">
-                            <el-form-item label="类型:" prop="cbwa11">
+                            <el-form-item label="仓库类型:" prop="cbwa11">
                                 <el-input v-model="form1.cbwa11" placeholder="" maxlength="30" style="width:55%" />
                                 <!-- <el-select v-model="form1.cbwa11" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
@@ -293,6 +309,16 @@
                           </el-select>
                         </el-form-item>
                       </el-col>
+                      <el-col>
+                            <el-form-item label="类型:" prop="type">
+                                <el-input v-model="form.type" maxlength="30" style="width:55%" />
+                                <!-- <el-select v-model="form.type" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Leixvalue" :key="dict.value" :label="dict.label"
+                                        :value="dict.value">
+                                    </el-option>
+                                </el-select> -->
+                            </el-form-item>
+                        </el-col>
                     </el-row>
                 </div>
             </el-form>
@@ -303,7 +329,7 @@
         </el-dialog>
 
         <!-- 创建 -->
-        <el-dialog :title="title" :visible.sync="open2" class="abow_dialogy" append-to-body>
+        <el-dialog :title="title" center :visible.sync="open2" class="abow_dialogy" append-to-body>
             <div
                 style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
                 仓库信息维护</div>
@@ -327,7 +353,7 @@
                     </el-row>
                     <el-row>
                         <el-col style="margin-top:1%;">
-                            <el-form-item label="类型:" prop="cbwa11">
+                            <el-form-item label="仓库类型:" prop="cbwa11">
                                 <!-- <el-input v-model="form2.cbwa11" placeholder="" maxlength="30" style="width:55%" /> -->
                                 <el-select v-model="form2.cbwa11" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in CangkuLeixvalue" :key="dict.value" :label="dict.label"
@@ -390,6 +416,15 @@
                           </el-select>
                         </el-form-item>
                       </el-col>
+                      <el-col style="margin-top:1%;">
+                            <el-form-item label="类型:" prop="type">
+                                <el-select v-model="form2.type" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Leixvalue" :key="dict.value" :label="dict.label"
+                                        :value="dict.value">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
                         <el-col style="margin-top:3%;">
                             <div style="margin-left:70%;margin-top: 0%;">
                                 <el-button type="primary" @click="handleAdd">确定</el-button>
@@ -497,13 +532,21 @@ export default {
                 enableTakeGoods: '-1',
                 enableTotalOrder: '-1'
             },
-            //仓库类型
+            // 仓库类型
             CangkuLeixvalue: [{
                 value: '1',
                 label: '普通仓库'
             }, {
                 value: '2',
                 label: 'CDC仓库'
+            }],
+            // 类型
+            Leixvalue: [{
+                value: '0',
+                label: '配件'
+            }, {
+                value: '1',
+                label: '商品'
             }],
             value: '',
             //管理模式
@@ -597,7 +640,8 @@ export default {
                 cbwa13: "",
                 cbwa14: "",
                 cbwa15: "",
-              allocationFlag: ""
+                allocationFlag: "",
+                type:'',
             },
             defaultProps: {
                 children: "children",
@@ -662,7 +706,10 @@ export default {
                 cbwa07: [
                     { required: true, message: "出库优先级不能为空!", trigger: "blur" },
                     { validator: validateNumber, trigger: 'blur' }
-                ]
+                ],
+                type: [
+                    { required: true, message: "类型不能为空!", trigger: "change" }
+                ],
             },
             // 表单校验
             rules1: {
@@ -690,7 +737,10 @@ export default {
                 cbwa07: [
                     { required: true, message: "出库优先级不能为空!", trigger: "blur" },
                     { validator: validateNumber, trigger: 'blur' }
-                ]
+                ],
+                type: [
+                    { required: true, message: "类型不能为空!", trigger: "change" }
+                ],
             }
         };
     },
@@ -824,7 +874,8 @@ export default {
                 cbwa12: undefined,
                 cbwa13: undefined,
                 cbwa14: undefined,
-                cbwa15: undefined
+                cbwa15: undefined,
+                type:undefined,
             };
             this.resetForm("form2");
         },
@@ -933,6 +984,7 @@ export default {
             row.cbwa15 = this.form.cbwa15;
             row.cbwa01 = this.form.cbwa01;
             row.allocationFlag = this.form.allocationFlag;
+            row.type = this.form.type
             // console.log(this.form.id);
             this.$refs["form"].validate((item) => {
                 if (item) {
@@ -977,19 +1029,25 @@ export default {
             this.form1.cbwa15 = row.cbwa15;
             if (this.form1.cbwa13 == "0") {
                 this.form1.cbwa13 = "是"
+                row.cbwa13 = 0
             } else if (this.form1.cbwa13 == "1") {
                 this.form1.cbwa13 = "否"
+                row.cbwa13 = 1
             }
 
             if (this.form1.cbwa14 == "0") {
                 this.form1.cbwa14 = "是"
+                row.cbwa14 = 0
             } else if (this.form1.cbwa14 == "1") {
                 this.form1.cbwa14 = "否"
+                row.cbwa14 = 1
             }
             if (this.form1.cbwa15 == "0") {
                 this.form1.cbwa15 = "是"
+                this.cbwa15 = 0
             } else if (this.form1.cbwa15 == "1") {
                 this.form1.cbwa15 = "否"
+                row.cbwa15 = 1
             }
         },
         /** 修改详情按钮操作**/
@@ -1023,6 +1081,13 @@ export default {
             }else if(row.allocationFlag == "1"){
                 this.form.allocationFlag = "启用"
                 row.allocationFlag = "1"
+            }
+            if (row.type == "0") {
+                this.form.type = "配件"
+                row.type = "0"
+            } else if (row.type == "1") {
+                this.form.type = "商品"
+                row.type = "1"
             }
             // console.log(row)
             // this.getList();
@@ -1187,4 +1252,9 @@ export default {
 </script>
 <style src="./WarehouseInfoSkucss/index.css" scoped>
 
+</style>
+<style lang="scss" scoped>
+    ::v-deep .el-dialog__wrapper{
+        align-items:inherit !important;
+    }
 </style>

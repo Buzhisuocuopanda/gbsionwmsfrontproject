@@ -3,7 +3,8 @@
         <section ref="print" class="recordImg" id="printRecord">
             <div class="Purchase_caigou">销售预订单</div>
             <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1) " :key="key">
-                <span class="Purchase_bianhao">编号：{{ value.ponumber }}</span>
+                <span class="Purchase_bianhao">编号：{{ value.orderNo }}</span>
+                <span class="Purchase_bianhao">订单编号：{{ value.ponumber }}</span>
                 <span class="Purchase_riqi">日期：{{ value.orderDate.slice(0, 10) }}</span>
             </div>
             <div style="width:98%; margin-left: 1%; margin-top: 1%;">
@@ -14,7 +15,7 @@
                         <template slot="label">供料单位</template>{{ value.supplier }}
                     </el-descriptions-item>
                     <el-descriptions-item>
-                        <template slot="label">仓库</template>{{ value.wh }}
+                        <template slot="label">工厂</template>{{ value.factory }}
                     </el-descriptions-item>
                     <el-descriptions-item>
                         <template slot="label">销售人员</template>{{ value.saler }}
@@ -253,7 +254,7 @@ export default {
 <style src="./SalesBookingcss/index.css">
 
 </style>
-<style>
+<style scoped>
 @page {
     size: auto;
     margin: 3mm;

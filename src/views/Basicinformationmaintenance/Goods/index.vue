@@ -1,5 +1,5 @@
 <template>
-    <div class="app-container goodsnance">
+    <div class="app-container ">
         <div style="width:102.5%;">
             <el-row :gutter="20">
                 <!--部门数据-->
@@ -13,23 +13,23 @@
                     </div>
                 </el-col>
                 <!--用户数据-->
-                <el-col :span="45" class="tooltup" style="width:77.7%; margin-left: 1%;">
+                <el-col :span="45"  style="width:77.7%; margin-left: 1%;">
                     <!-- 表头内容  -->
                     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                         label-width="68px">
                         <el-form-item prop="cbpa07" label="商品分类">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
-                            <el-input v-model="queryParams.cbpa07" id="miaoshu" placeholder="请输入商品分类" clearable
+                            <el-input v-model="queryParams.cbpa07"  placeholder="请输入商品分类" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
                         <el-form-item prop="cbpb12" label="型号">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
-                            <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
+                            <el-input v-model="queryParams.cbpb12"  placeholder="请输入型号" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
                         <el-form-item prop="cbpb15" label="UPC">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
-                            <el-input v-model="queryParams.cbpb15" id="miaoshu" placeholder="请输入型号" clearable
+                            <el-input v-model="queryParams.cbpb15"  placeholder="请输入型号" clearable
                                 style="width: 240px;" @keyup.enter.native="handleQuery" />
                         </el-form-item>
                         <el-form-item>
@@ -51,7 +51,7 @@
                     </el-form>
 
                     <el-table :max-height="maxheight" border :header-cell-style="headClassGDC"
-                        :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="490"
+                        :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" height="460"
                         :data="userList" :default-sort="{ prop: 'name', order: 'descending' }"
                         style="margin-left: -1.5%; width:100%;" @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
@@ -71,6 +71,7 @@
 
 
                         <el-table-column label="型号" align="left" key="cbpb12" width="180" prop="cbpb12" locationNum />
+                        <el-table-column label="类型" align="left" key="typeName" width="180" prop="typeName" locationNum />
                         <el-table-column label="结算类型价格" align="left" key="cbpb13" width="130px;" prop="cbpb13"
                             sortable />
                         <!-- <el-table-column label="库位容量" align="left" key="cbpb13" width="110px;" prop="cbpb14" sortable /> -->
@@ -163,6 +164,20 @@
                             <el-select v-model="form.cbpb07" placeholder="" style="width:80%;">
                                 <el-option v-for="dict in ZhuangTaivalue" :key="dict.value" :label="dict.label"
                                     :value="dict.label"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="11">
+                        <!-- <el-form-item label="类型:" prop="type">
+                        <el-select v-model="form.type" placeholder="" style="width:80%;">
+                            <el-option v-for="dict in storeType" :key="dict.value" :label="dict.label"
+                                :value="dict.label"></el-option>
+                        </el-select>
+                        </el-form-item> -->
+                        <el-form-item label="类型:" prop="type">
+                            <el-select v-model="form.type" placeholder="" style="width:80%;">
+                                <el-option v-for="item in storeType" :key="item.value" :value="item.value"
+                                    :label="item.label"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -337,10 +352,10 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="类型:" prop="cbpb07">
-                            <el-select v-model="form2.cbpb07" placeholder="" style="width:80%;">
-                                <el-option v-for="item in storeType" :key="item.value" :label="item.label"
-                                    :value="item.label"></el-option>
+                        <el-form-item label="类型:" prop="type">
+                            <el-select v-model="form2.type" placeholder="" style="width:80%;">
+                                <el-option v-for="item in storeType" :key="item.value" :value="item.value"
+                                    :label="item.label"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -592,12 +607,12 @@ export default {
             // 类型
             storeType: [
                 {
-                    value: "0",
-                    lable: '商品'
+                    value: 0 ,
+                    label: "配件"
                 },
                 {
-                    value: "1",
-                    lable: '配件'
+                    value: 1,
+                    label: "商品"
                 }
             ],
             typeValue: "",
@@ -660,7 +675,8 @@ export default {
                 cbpb15: "",
                 cala08: "",
                 cbpa07: "",
-                cbpc099: ""
+                cbpc099: "",
+                tupe: ""
             },
             form5: {
                 cbpf02: "",
@@ -688,7 +704,8 @@ export default {
                 cbpb15: "",
                 cala08: "",
                 cbpa07: "",
-                cbpc099: ""
+                cbpc099: "",
+                type: ""
             },
             defaultProps: {
                 children: "children",
@@ -740,6 +757,9 @@ export default {
                 cbpb15: [
                     { required: true, message: 'upc不能为空', trigger: 'blur' },
                     { validator: validateNumber, trigger: 'blur' }
+                ],
+                type: [
+                    { required: true, message: '类型不能为空', trigger: 'blur' },
                 ],
                 currency: [
                     { required: true, message: '结算货币不能为空', trigger: 'blur' },
@@ -1050,6 +1070,18 @@ export default {
             GoodsList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 console.log(response, 123456);
                 this.userList = response.data.rows;
+                for (let i = 0; i < this.userList.length; i++) {
+                    if (this.userList[i].type == "0") {
+                      this.userList[i].type = 0;
+                        this.userList[i].typeName = "配件"
+                    } else if (this.userList[i].type == "1") {
+                      this.userList[i].type = 1;
+                        this.userList[i].typeName = "商品"
+                    }
+                }
+
+                console.log(this.userList.type)
+                console.log(this.userList, 'this.userList')
                 this.userList03 = response.data.rows;
                 this.total = response.data.total;
                 console.log(response, 3369);
@@ -1242,7 +1274,8 @@ export default {
                 cbpb15: undefined,
                 currency: undefined,
                 fprice: undefined,
-                tprice: undefined
+                tprice: undefined,
+                type: undefined
             };
             this.resetForm("form2");
         },
@@ -1281,6 +1314,11 @@ export default {
         },
         /** 新增按钮操作 GoodsAddss */
         handleAdd() {
+            if (this.form2.type == "配件") {
+                this.form2.type = "0"
+            } else if (this.form2.type == "商品") {
+                this.form2.type = "1"
+            }
             this.$refs["form2"].validate((item) => {
                 if (item) {
 
@@ -1321,7 +1359,8 @@ export default {
                                         cbpb15: "",
                                         cala08: "",
                                         cbpa07: "",
-                                        cbpc099: ""
+                                        cbpc099: "",
+                                        type: ""
                                     }
                                 } else {
                                     // this.$message({ message: response.msg, type: 'error' });
@@ -1369,6 +1408,13 @@ export default {
             row.cbpb15 = this.form.cbpb15;
             row.cbpb07 = this.form.cbpb07;
             row.cbpb10 = this.form.cbpb10;
+            if (this.form.type == "配件") {
+                this.form.type = "0"
+            } else if (this.form.type == "商品") {
+                this.form.type = "1"
+            }
+            row.type = this.form.type
+            console.log(row)
             console.log(this.form.cbpb01);
             //   this.$refs["form5"].validate((item) => {
             //     if (item) {
@@ -1411,7 +1457,7 @@ export default {
 
             //     }
             // })
-            console.log('_ly_ok:' + JSON.stringify(this.tableData))
+            // console.log('_ly_ok:' + JSON.stringify(this.tableData))
 
         },
         /** 修改详情按钮操作**/

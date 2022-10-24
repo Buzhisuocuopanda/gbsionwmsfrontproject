@@ -3,20 +3,20 @@
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">销售预订单入库单</div>
       <el-row :gutter="20" style="margin-top: 20px;">
-        <el-col :span="8">
+        <el-col :span="6">
           <el-form-item label="销售预订单编号:" prop="orderNo">
             <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
             <el-popover placement="bottom-start" trigger="click">
               <SalesBooking ref="SalesBooking" @selected="selected0222"
                 style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width:68%;">
+              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width:110%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="6" style="margin-left:-2%;">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 100%;">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -41,7 +41,7 @@
             </el-popover>
           </el-form-item>
         </el-col>
-        <el-col style="margin-left:-4%;" :span="6">
+        <!-- <el-col style="margin-left:-4%;" :span="6">
           <el-form-item label="仓库:" prop="cbpc100">
             <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
@@ -49,7 +49,7 @@
               </el-input>
             </el-popover>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col style="margin-left:-2%;" :span="6">
           <!-- <el-select v-model="form2.salerId" placeholder="" style="width:100%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
@@ -120,11 +120,17 @@
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
           :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="cbpc000" label="品牌" width="">
+          <el-table-column label="工厂" width="150" prop="factory">
+            <template slot-scope="scope" style="width: 100%">
+              <el-input v-model="scope.row.factory" placeholder="请输入工厂"
+                class="shuzicaoyou" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="cala08" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:850px!important;" />
-                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
+                <el-input slot="reference" v-model="scope.row.cala08" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
             </template>
@@ -565,9 +571,9 @@ export default {
           message: "供料单位不能为空!",
           trigger: 'change'
         }],
-        cbpc100: [{
+        factory: [{
           required: true,
-          message: "仓库不能为空!",
+          message: "工厂不能为空!",
           trigger: 'change'
         }],
         cbpc16: [{
@@ -649,19 +655,32 @@ export default {
       // //订单日期
       // row.orderDate = this.form2.orderDate;
       //商品id
+      // 明细表内容
+      let arr1 = []
+      this.tableData.map((item) =>{
+        arr1.push({
+          "factory": item.factory,
+          "goodsId": item.goodsId,
+          "gsSalesOrders": item.gsSalesOrders,
+          // "id": item.id,
+          "inQty": item.inQty,
+          "ponumber": item.ponumber,
+        })
+      })
+      // 主表内容
       this.tableData.forEach((item) => {
         row.goodsId = item.goodsId;
         //商品型号
-        row.goodsclassify = item.goodsclassify;
+        // row.goodsclassify = item.goodsclassify;
         //销售预订单入库单
         row.gsSalesOrders = item.gsSalesOrders;
         // id
         row.id = item.id;
         // 入库数量
-        row.inQty = item.inQty
+        // row.inQty = item.inQty
         // pomber
-        row.ponumber = item.ponumber
-
+        // row.ponumber = item.ponumber
+        row.goods = arr1
       })
       PurchaseinboundxiaoshouEdit(JSON.stringify(row)).then(response => {
         if (response.code == "200") {
@@ -711,18 +730,19 @@ export default {
 
             //品牌、型号、描述
             // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
-            this.tableData.forEach((item) => {
+            this.tableData = res.data.rows
+            this.tableData.map((item,i) => {
               //  this.form2.goodsId = item.goodsId;
-              item.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
+              item.cala08 = this.userList[i].cala08 + "~" + this.userList[i].cbpb12 + "~" + this.userList[i].cbpb08;
               //入库数量
-              item.inQty = this.userList[0].inQty;
+              item.inQty = this.userList[i].inQty;
               //ponumber
-              item.ponumber = this.userList[0].ponumber;
+              item.ponumber = this.userList[i].ponumber;
               //商品id
-              item.goodsId = this.userList[0].goodsId;
+              item.goodsId = this.userList[i].goodsId;
               //销售预订单入库单
-              item.gsSalesOrders = this.userList[0].gsSalesOrders;
-              item.id = this.userList[0].id;
+              item.gsSalesOrders = this.userList[i].gsSalesOrders;
+              item.id = this.userList[i].id;
             })
 
           } 
@@ -742,9 +762,9 @@ export default {
       rowIndex,
       columnIndex
     }) {
-      if (columnIndex === 0) {
+      if (columnIndex === 1) {
         return [1, 3];
-      } else if (columnIndex < 3) {
+      } else if (columnIndex < 4 && columnIndex>1) {
         return [0, 0];
       }
     },
@@ -973,7 +993,7 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cala08", e.substring(0, e.indexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)

@@ -370,7 +370,7 @@ export const dynamicRoutes = [{
     permissions: ['system:user:add'],
     children: [{
       path: 'role/',
-      name: 'AuthUser',
+      name: 'PurchaseReturncj',
       component: () => import('@/views/Warehousemanagement/PurchaseReturn/PurchaseReturncj/index'),
       meta: {
         title: '采购退库创建',
@@ -1801,6 +1801,21 @@ export const dynamicRoutes = [{
       meta: {
         title: '分配用户',
         activeMenu: '/system/role'
+      }
+    }]
+  },
+  {
+    path: '/system/user-auth',
+    component: Layout,
+    hidden: true,
+    permissions: ['system:user:edit'],
+    children: [{
+      path: 'user/:userId(\\d+)',
+      component: () => import('@/views/system/user/authRole'),
+      name: 'User',
+      meta: {
+        title: '分配角色',
+        activeMenu: '/system/user'
       }
     }]
   },

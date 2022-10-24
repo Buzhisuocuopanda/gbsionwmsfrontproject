@@ -765,6 +765,14 @@ export default {
                     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
                     { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
                 ],
+
+                cbca16: [
+                  { required: true, message: "电话不能为空!", trigger: "blur" },
+                  { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                ],
+                cbca15: [
+                  { required: true, message: "地址不能为空!", trigger: "blur" }
+                ],
                 cbca25: [
                     { required: true, message: "地址不能为空!", trigger: "blur" },
 
@@ -782,10 +790,14 @@ export default {
                 cbca28: [
                     { required: true, message: "客户等级不能为空!", trigger: "change" },
                 ],
-                cbca20: [
+                cbca19: [
+                  { required: true, message: "联系人1办公室电话不能为空!", trigger: "blur" },
+                  { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+                ],
+               /* cbca20: [
                     { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },
                     { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
-                ],
+                ],*/
                 cbca24: [
                     { required: true, message: "发票类型不能为空!", trigger: "change" },
                 ],
@@ -799,6 +811,13 @@ export default {
                     { required: true, message: "纳税人识别号不能为空!", trigger: "blur" },
                     { pattern: telephoneNumber, message: "请输入正确的纳税人识别号", trigger: "blur" }
                 ],
+              cbca16: [
+                { required: true, message: "电话不能为空!", trigger: "blur" },
+                { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+              ],
+              cbca15: [
+                { required: true, message: "地址不能为空!", trigger: "blur" }
+              ],
                 cbca25: [
                     { required: true, message: "地址不能为空!", trigger: "blur" },
 
@@ -816,10 +835,14 @@ export default {
                 cbca28: [
                     { required: true, message: "客户等级不能为空!", trigger: "change" }
                 ],
-                cbca20: [
+              cbca19: [
+                { required: true, message: "联系人1办公室电话不能为空!", trigger: "blur" },
+                { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
+              ],
+               /* cbca20: [
                     { required: true, message: "联系人2办公室电话不能为空!", trigger: "blur" },
                     { pattern: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/, message: "请输入正确的联系人2办公室电话", trigger: "blur" }
-                ],
+                ],*/
                 cbca24: [
                     { required: true, message: "发票类型不能为空!", trigger: "change" },
                 ],
@@ -1275,8 +1298,8 @@ export default {
                 }
             }).catch(() => { });
         },
-        /** 导出按钮操作 
-         * 
+        /** 导出按钮操作
+         *
          * /dev-api/stage-api/system/customer/SwJsCustomerexport
         */
         handleExport() {
@@ -1303,8 +1326,8 @@ export default {
             this.upload.title = "客户信息维护";
             this.upload.open = true;
         },
-        /** 下载模板操作 
-         * 
+        /** 下载模板操作
+         *
          * /dev-api/stage-api/system/customer/importTemplate
         */
         importTemplate() {

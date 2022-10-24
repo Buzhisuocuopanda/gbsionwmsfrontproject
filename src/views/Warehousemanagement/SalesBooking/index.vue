@@ -80,7 +80,7 @@
                         :formatter="formatDate" sortable>
                     </el-table-column>
                     <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable width="140" />
-                    <el-table-column label="仓库名称" align="left" key="wh" prop="wh" sortable width="120" />
+                    <el-table-column label="工厂名称" align="left" key="factory" prop="factory" sortable width="120" />
                     <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="310" sortable>
                         <!-- <template scope="scope">
                             <div>{{ scope.row.cala08 == 5 ? "USD" : scope.row.cala08 == 6 ?

@@ -381,6 +381,7 @@ export default {
       single: true,
       formData: {},
       editId: '',
+      editName: '',
       showDialog: false,
       showaddDialog: false,
       showmdfDialog: false,
@@ -515,7 +516,7 @@ export default {
     mdfDetail(row) {
 
       this.editId = row.id
-
+      this.editName = row.confirmQty;
       // const  param={
       //   id: row.id
       // }
@@ -535,6 +536,7 @@ export default {
 
     mdfDetailQx(row) {
       this.editId = "";
+      row.confirmQty = this.editName;
     },
 
 

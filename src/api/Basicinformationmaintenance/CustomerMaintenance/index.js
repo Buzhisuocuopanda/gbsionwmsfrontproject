@@ -1,5 +1,7 @@
 import request from '@/utils/request'
-import { parseStrEmpty } from "@/utils/ruoyi";
+import {
+  parseStrEmpty
+} from "@/utils/ruoyi";
 
 // 新增配置
 export function CustomerAdd(data) {
@@ -33,6 +35,6 @@ export function CustomeRemove(data) {
   return request({
     url: '/system/customer/SwJsGoodsClassifyremove',
     method: 'post',
-    data:data
+    data: data
   })
 }

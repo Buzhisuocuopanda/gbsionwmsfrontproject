@@ -37,6 +37,17 @@
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" v-hasPermi="['system:purchasereturnorders:add']" class="biaoto-buttonchuangjian" @click="handlechuangtuione">创建
                         </el-button>
+                        <el-dropdown trigger="click">
+                            <span class="el-dropdown-link xialaxuanxang">
+                                <i class="el-icon-caret-bottom el-icon--right"></i>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item class="clearfix" @click.native="tong">
+                                    通过不良品创建
+                                    <el-badge class="mark" />
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
                         <el-button size="mini" v-hasPermi="['system:purchasereturnorders:remove']" class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
                             删除</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
@@ -113,12 +124,6 @@
                     class="pagintotal" />
             </el-col>
         </el-row>
-
-
-
-
-
-
        <!--修改-->
         <el-dialog :visible.sync="open">
             <div style="margin-top:-30px;">
@@ -217,6 +222,54 @@
                 <!-- <el-button @click="cancells">取 消</el-button> -->
             </div>
         </el-dialog>
+        <!-- 基于不良品创建采购退库单 -->
+        <el-dialog :visible.sync="open5" @close="close">
+            <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
+                <el-col :span="12">
+                    <el-input
+                        v-model="queryParamss.orderNo"
+                        id="miaoshu"
+                        placeholder="请输入sn"
+                        clearable
+                        style="width: 100%"
+                        @change="handleQuerys(queryParamss.orderNo)"
+                    />
+                </el-col>
+            </el-row>
+            <el-table border  v-loading="loading" :data="userList01" height="440"
+                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
+                    @selection-change="handleSelectionChange">
+                    <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
+                      <template slot-scope="scope" style="margin-left:-10%;">
+                            <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
+                                v-hasPermi="['system:user:edit']">
+                            </el-button>
+                       </template>
+                       </el-table-column>
+                    <el-table-column label="编号" align="left" key="cbpg07" prop="cbpg07" sortable style="padding-top:60px !important;" width="165px;" />
+                    <el-table-column label="日期" align="left" key="cbpg08" prop="cbpg08" width="130px;" sortable>
+                         <template scope="scope">
+                            <div>{{ scope.row.cbpg08.slice(0,10) || '' }}
+                            </div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" width="150px;" sortable />
+                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="105px;" sortable>
+                    </el-table-column>
+                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="105px;" sortable />
+                    <el-table-column label="状态" align="left" key="cbpg11" prop="cbpg11" width="80px;" sortable>
+                        <template scope="scope">
+                            <div>{{ scope.row.cbpg11 == 0 ? "未审核" : scope.row.cbpg11 == 1 ?
+                            "已审核" : scope.row.cbpg11 == 4 ? "已完成" : ""
+                            }}
+                            </div>
+                        </template>
+                    </el-table-column>
+            </el-table>
+            <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamss.pageNum"
+                :limit.sync="queryParamss.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]"
+                class="pagintotal" />
+        </el-dialog>
 
 
         <!-- 用户导入对话框 -->
@@ -244,7 +297,7 @@
 </template>
 <script>
 // import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList } from "@/api/Warehousemanagement/PurchaseReturn";
-import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList } from "@/api/Warehousemanagement/PurchaseReturn";
+import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList,SwJsSkuBarcodelists } from "@/api/Warehousemanagement/PurchaseReturn";
 import * as req from "@/api/Warehousemanagement/PurchaseReturn";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -279,6 +332,7 @@ export default {
             showSearch: true,
             // 总条数
             total: 0,
+            totall:0,
             // 用户表格数据
             userList: null,
             // 弹出层标题
@@ -289,6 +343,7 @@ export default {
             open: false,
             open1: false,
             open2: false,
+            open5:false,
             // 部门名称
             deptName: undefined,
             // 默认密码
@@ -471,6 +526,19 @@ export default {
                 cbwa09:undefined,
                 dateRange: undefined
             },
+            // 查询参数
+            queryParamss: {
+                pageNum: 1,
+                pageSize: 15,
+                page: 1,
+                size: 15,
+                totall: this.totall,
+                cbsb07: undefined,
+                cbca08: undefined,
+                dateRange: undefined,
+                orderNo:'',
+            },
+            userList01:'',
             // 列信息
             //  columns: [
             //   {
@@ -620,7 +688,7 @@ export default {
         //库位
         this.getList02();
         //商品信息维护
-        this.getList03();
+        // this.getList03();
         //仓库
         this.getList04();
         this.getConfigKey("sys.user.initPassword").then(response => {
@@ -636,10 +704,58 @@ export default {
         this.chen();
     },
     methods: {
+        // 跳转创建页面
+        sendParams(row) {
+            // this.$router.push("/system/user-th/role/");
+            console.log(row)
+            this.$router.push({
+                path: '/system/user-th/role/',
+                name:'PurchaseReturncj',
+                params: {
+                    data:row,
+                }
+            })
+            this.open5 = false
+            // location.reload();
+        },
+        // 弹框关闭
+        close(){
+            this.queryParams.orderNo = ''
+        },
+        // 搜索
+        handleQuerys(saleNo){
+            let obj = {
+                sn:saleNo,
+            }
+            SwJsSkuBarcodelists(obj).then((res) =>{
+                if(res.code == 200){
+                    this.userList01 = res.data.rows;
+                    this.totall = res.data.total
+                }
+            })
+        },
+        // 基于不良品创建
+        tong(){
+          this.open5 = true;
+          this.getList09()
+        },
+        // 不良品查询
+        getList09() {
+            this.loading = true;
+            SwJsSkuBarcodelists(this.addDateRange(this.queryParamss, this.dateRange)).then(response => {
+                this.userList01 = response.data.rows;
+                this.totall = response.data.total;
+                // //供应商
+                // this.postOptions = response.data.content;
+                // console.log(this.userList, 3369);
+                console.log(response, 85200000);
+                // this.deleteFlag = response.data.rows.deleteFlag;
+                this.loading = false;
+            }
+            );
+        },
         show() {
             this.showSearch = !this.showSearch;
-
-
         },
         //列表表头设置
         headClasspr() {
@@ -1346,5 +1462,5 @@ export default {
     }
 };
 </script>
-<style src="./PurchaseReturncss/index.css">
+<style src="./PurchaseReturncss/index.css" scoped>
 </style>

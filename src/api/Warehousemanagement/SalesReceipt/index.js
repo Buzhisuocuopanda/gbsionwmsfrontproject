@@ -31,7 +31,8 @@ export function PurchaseinboundAddydd(data) {
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
-    url: '/system/SalesScheduledOrders/seleteSubscribetotheinventoryslip',
+    // SalesScheduledOrders/seleteSubscribetotheinventoryslip
+    url: '/system/SalesScheduledOrders/saleOrderList',
     method: 'get',
     params: query
   })
@@ -79,9 +80,12 @@ export function PurchaseinboundRemove(data) {
 //销售预订单入库单详情
 export function PurchaseinboundSalesReceipt(data) {
   return request({
-    url: '/system/SalesScheduledOrders/selectSalesReceiptList?id='+ data,
+    // system/SalesScheduledOrders/selectSalesReceiptList
+    url: '/system/SalesScheduledOrders/selectSalesReceiptList',
     method: 'post',
-    // data:data
+    params:{
+      ids:data
+    }
   })
 }
 // 销售预订单详情

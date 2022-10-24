@@ -271,8 +271,10 @@ color: white !important;
 .abow_dialogy {
     display: flex;
     justify-content: center;
-    align-items: Center;
+    align-items: baseline;
     overflow: hidden;
+    height:90%;
+    overflow-y:auto;
 }
  
 .abow_dialogy  .el-dialog  {
