@@ -675,18 +675,17 @@ export default {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
-              type: 'info',
+              type: 'success',
               message: `action: ${ action }`
             });
           }
         });
       } else {
-
         this.$alert(response.msg, '上传结果', {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
-              type: 'info',
+              type: 'error',
               message: `action: ${ action }`
             });
           }

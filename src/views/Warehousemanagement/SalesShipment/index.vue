@@ -30,7 +30,7 @@
               @click="resetQuery">重置</el-button>
           </el-form-item>
           <el-form-item style="margin-left: 78%">
-            <el-button size="mini"  class="biaoto-buttonchuangjian">创建
+            <el-button size="mini" class="biaoto-buttonchuangjian">创建
             </el-button>
             <el-dropdown trigger="click">
               <span class="el-dropdown-link xialaxuanxang">
@@ -812,7 +812,8 @@ export default {
       console.log(this.valuexs)
       let obj = {
         customerName: this.valuexs,
-        checkStatus: 1
+        checkStatus: 1,
+        whId: this.form.cbpc10
       }
       Purchaseinbounddingdanck({ customerName: this.valuexs, }).then((res) => {
         if (res.code == 200) {
@@ -826,7 +827,8 @@ export default {
       console.log(this.valuexs)
       let obj = {
         customerName: this.valuexs,
-        checkStatus: 1
+        checkStatus: 1,
+        whId: this.form.cbpc10
       }
       saleOrderListPj({ customerName: this.valuexs, }).then((res) => {
         if (res.code == 200) {
@@ -892,7 +894,8 @@ export default {
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
       let cus = this.addDateRange(this.queryParams, this.dateRange)
       cus.whId = this.form2.cbpc10
-      cus.pageSize = 99999
+      cus.pageSize = 999999
+      cus.customerName = this.valuexs
       this.form2.icon = name;
       Purchaseinbounddingdanck(
         cus
@@ -909,7 +912,8 @@ export default {
       console.log(this.form2.cbpc100, "this.form2.cbpc10 ")
       let cus = this.addDateRange(this.queryParams, this.dateRange)
       cus.whId = this.form2.cbpc10
-      cus.pageSize = 99999
+      cus.customerName = this.valuexs
+      cus.pageSize = 15
       console.log(cus)
       this.form2.icon = name;
       saleOrderListPj(
