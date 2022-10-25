@@ -25,7 +25,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
-          <el-form-item label="供料单位:">
+          <el-form-item label="供料单位:" prop="cbpc099">
             <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />
               <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">
@@ -43,7 +43,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
-          <el-form-item label="结算货币:">
+          <el-form-item label="结算货币:" prop="cbpg16">
             <el-select v-model="form2.cbpg16" placeholder="" style="width:80%;">
               <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -117,7 +117,7 @@
           <el-table-column prop="cbph09" label="数量" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input v-only-number="{max: 100, min: 0,precision:0}" v-model="scope.row.cbph09"
+              <el-input v-model="scope.row.cbph09"
                 @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
               <!-- <input type="number"  v-enter-number placeholder="请输入金额" min="0" class="one" v-model="scope.row.cbph09"  @blur="isNull(scope.row.cbph09,1)" > -->
 
@@ -127,7 +127,7 @@
           <el-table-column prop="cbph10" label="单价" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input v-model="scope.row.cbph10" v-only-number="{max: 100, min: 0,precision:0}"
+              <el-input v-model="scope.row.cbph10"
                 @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
               <!-- </sapn> -->
             </template>
@@ -624,6 +624,21 @@ export default {
           message: "结算货币不能为空!",
           trigger: 'change'
         }],
+        cbph09: [{
+          required: true,
+          message: "数量不能为空!",
+          trigger: 'change'
+        }],
+        cbph10: [{
+          required: true,
+          message: "单价不能为空!",
+          trigger: 'change'
+        }],
+        cbpc000: [{
+          required: true,
+          message: "商品不能为空!",
+          trigger: 'change'
+        }],
         // cbpc07: [
         //     { required: true, message: "编号不能为空!", trigger: "blur" }
         // ]
@@ -682,6 +697,7 @@ export default {
     getlists(){
       const userId = this.$route.params && this.$route.params.data.cbpg01
       swJsGoodslistBySelectAll({id:userId}).then((res) =>{
+        console.log(res,'ceshi111')
         // this.tableData = res.data.rows
         if(res.data.rows != []){
           this.tableData.map((item,i) =>{
