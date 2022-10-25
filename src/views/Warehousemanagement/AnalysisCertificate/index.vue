@@ -9,7 +9,7 @@
                     label-width="68px">
 
                     <el-form-item prop="sn" label="编号">
-                        <el-input v-model="queryParams.cbqa07" id="miaoshu" placeholder="请输入编号" clearable
+                        <el-input v-model="queryParams.cbqa07"  placeholder="请输入编号" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item label="创建时间" style="margin-left:2%;">
@@ -669,6 +669,9 @@ export default {
         deptName(val) {
             this.$refs.tree.filter(val);
         },
+      '$route' () {
+        this.getList();
+      }
     },
     created() {
         //仓库明细初始化

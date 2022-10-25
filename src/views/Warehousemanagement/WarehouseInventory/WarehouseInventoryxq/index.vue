@@ -34,19 +34,30 @@
             :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cala08" key="cala08" label="品牌" width="60">
+                <el-table-column prop="cala08" key="cala08" label="品牌" width="100">
                 </el-table-column>
                 <el-table-column prop="cbpb15" key="cbpb15" label="UPC" width="120">
                 </el-table-column>
                 <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="110">
                 </el-table-column>
-                <el-table-column prop="cbpb08" width="450" key="cbpb08" label="描述">
+                <el-table-column prop="cbpb08" width="auto" key="cbpb08" label="描述">
                 </el-table-column>
                 <el-table-column prop="cbsj09" key="cbsj09" label="商品SN" width="110">
                 </el-table-column>
                 <el-table-column prop="cbla09" key="cbla09" label="库位" width="110">
                 </el-table-column>
-                <el-table-column prop="cbsj12" key="cbsj12" label="状态">
+                <el-table-column prop="cbsj11" key="cbsj12" label="状态">
+                    <template scope="scope">
+                        <div>
+                            {{
+                            scope.row.cbsj11 == 0
+                            ? "已入库"
+                            : scope.row.cbsj11 == 1
+                            ? ""
+                            : ""
+                            }}
+                        </div>
+                    </template>
                 </el-table-column>
                  <el-table-column prop="cbwa09" key="cbwa09" label="仓库名称" width="75">
                 </el-table-column>

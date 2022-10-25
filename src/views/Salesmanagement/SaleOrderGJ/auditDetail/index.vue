@@ -220,7 +220,7 @@
               <!--              </sapn>-->
               <div style="text-align: center">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                {{scope.row.goodsMsg}}
+                {{ scope.row.goodsMsg }}
 
                 <!--                {{}}-->
               </div>
@@ -232,7 +232,7 @@
             <template slot-scope="scope">
               <div style="text-align: center">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                {{parseFloat(scope.row.qty).toFixed(2)}}
+                {{ parseFloat(scope.row.qty).toFixed(2) }}
 
                 <!--                {{}}-->
               </div>
@@ -242,7 +242,7 @@
             <template slot-scope="scope">
               <div style="text-align: right">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                {{parseFloat(scope.row.confirmQty).toFixed(2)}}
+                {{ parseFloat(scope.row.confirmQty).toFixed(2) }}
 
                 <!--                {{}}-->
               </div>
@@ -252,7 +252,7 @@
             <template slot-scope="scope">
               <div style="text-align: right">
                 <!--                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>-->
-                {{parseFloat(scope.row.normalPrice==null?0:scope.row.normalPrice).toFixed(2)}}
+                {{ parseFloat(scope.row.normalPrice == null ? 0 : scope.row.normalPrice).toFixed(2) }}
               </div>
             </template>
           </el-table-column>
@@ -263,7 +263,7 @@
               <!--              </sapn>-->
               <div style="text-align: right">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                {{parseFloat(scope.row.currentPrice).toFixed(2)}}
+                {{ parseFloat(scope.row.currentPrice).toFixed(2) }}
 
                 <!--                {{}}-->
               </div>
@@ -277,7 +277,7 @@
               <!--              </sapn>-->
               <div style="text-align: right">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                {{parseFloat(scope.row.totalPrice).toFixed(2)}}
+                {{ parseFloat(scope.row.totalPrice).toFixed(2) }}
 
                 <!--                {{}}-->
               </div>
@@ -291,7 +291,7 @@
               <!--              </sapn>-->
               <div style="text-align: right">
                 <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                {{parseFloat(scope.row.canUseSku).toFixed(2)}}
+                {{ parseFloat(scope.row.canUseSku).toFixed(2) }}
 
                 <!--                {{}}-->
               </div>
@@ -301,7 +301,7 @@
             <template slot-scope="scope">
               <!--              <sapn>-->
               <!--                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注" readonly></el-input>-->
-              {{scope.row.remark}}
+              {{ scope.row.remark }}
               <!--              </sapn>-->
             </template>
           </el-table-column>
@@ -385,13 +385,13 @@
     </el-form>
     <div class="tinajia_dingwei">
       <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
-        <el-button v-if="this.$route.query.status==3" type="primary" @click="auditSaleOrder">审核</el-button>
+        <el-button v-if="this.$route.query.status == 3" type="primary" @click="auditSaleOrder">审核</el-button>
         <!--      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>-->
         <!--      <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleOrder">标记完成</el-button>-->
-        <el-button v-if="this.$route.query.status==5" type="primary" @click="auditSaleOrder">指定结束</el-button>
-        <el-button v-if="this.$route.query.confirmStatus==2" type="primary" @click="confirmSkuSaleOrder(1)">确认库存
+        <el-button v-if="this.$route.query.status == 5" type="primary" @click="auditSaleOrder">指定结束</el-button>
+        <el-button v-if="this.$route.query.confirmStatus == 2" type="primary" @click="confirmSkuSaleOrder(1)">确认库存
         </el-button>
-        <el-button v-if="this.$route.query.confirmStatus==1" type="primary" @click="confirmSkuSaleOrder(2)">取消库存
+        <el-button v-if="this.$route.query.confirmStatus == 1" type="primary" @click="confirmSkuSaleOrder(2)">取消库存
         </el-button>
         <el-button @click="cancel">取 消</el-button>
       </span>
@@ -1175,7 +1175,9 @@ export default {
     // 取消按钮
     cancel() {
       this.$store.dispatch("tagsView/delView", this.$route)
-      this.$router.push({ path: "/Salesmanagement/saleOrderGJ", query: { id: 1 } })
+      // this.$router.push({ path: "/Salesmanagement/saleOrderGJ", query: { id: 1 } })
+      this.$tab.closePage();
+      this.$router.go(-1)
     },
 
     //添加的取消按钮
@@ -1497,8 +1499,10 @@ export default {
         if (response.code == "200") {
           this.$message.success("提交成功")
           this.$store.dispatch("tagsView/delView", this.$route)
-          this.$router.push({ path: "/Salesmanagement/SaleOrderGj", query: { id: 1 } })
 
+          // this.$router.push({ path: "/Salesmanagement/SaleOrderGj", query: { id: 1 } })
+          this.$tab.closePage();
+          this.$router.go(-1)
         } else {
 
           // this.$message.error(response.msg)
@@ -1521,7 +1525,9 @@ export default {
         if (response.code == "200") {
           this.$message.success("提交成功")
           this.$store.dispatch("tagsView/delView", this.$route)
-          this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          // this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          this.$tab.closePage();
+          this.$router.go(-1)
 
         } else {
 
@@ -1545,7 +1551,9 @@ export default {
         if (response.code == "200") {
           this.$message.success("修改成功")
           this.$store.dispatch("tagsView/delView", this.$route)
-          this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          // this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          this.$tab.closePage();
+          this.$router.go(-1)
 
         } else {
 

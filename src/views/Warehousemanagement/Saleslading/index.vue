@@ -278,6 +278,7 @@ export default {
   components: { Treeselect, kuweixxweihu, supplierMaintenance },
   data() {
     return {
+      whId: "",
       valuexs: null,
       customerLists: null,
       // 遮罩层
@@ -742,6 +743,8 @@ export default {
     },
     close() {
       this.form2.cbpc100 = ''
+      this.whId = ""
+      this.form2.cbpc10 = ""
       this.valuexs = ""
     },
     //列表表头设置
@@ -797,6 +800,7 @@ export default {
         this.loading = false;
         cus.whId = ""
         cus.status = ""
+        this.whId = ""
       });
 
     },
@@ -1578,6 +1582,7 @@ export default {
         this.queryParams.orderNo = ''
         this.open3 = false
         this.valuexs = ""
+        this.form2.cbpc10 = ""
         // location.reload();
       }
 
