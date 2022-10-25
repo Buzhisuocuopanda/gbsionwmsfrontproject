@@ -875,10 +875,10 @@ export default {
         this.$alert(response.msg, '上传结果', {
           confirmButtonText: '确定',
           callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
+            // this.$message({
+            //   type: 'info',
+            //   message: `导入完成`
+            // });
           }
         });
       } else {
@@ -886,10 +886,10 @@ export default {
         this.$alert(response.msg, '上传结果', {
           confirmButtonText: '确定',
           callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
+            // this.$message({
+            //   type: 'info',
+            //   message: `导入完成`
+            // });
           }
         });
         // this.$message.error(response.msg);

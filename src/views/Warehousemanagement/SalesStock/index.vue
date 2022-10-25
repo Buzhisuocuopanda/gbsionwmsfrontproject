@@ -79,15 +79,21 @@
                     </el-table-column>
                     <el-table-column label="客户" align="left" key="cbca08" prop="cbca08" width="280px;" sortable />
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="80" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="100" sortable />
-                    <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" sortable />
-                    <el-table-column label="状态" align="center" key="cbse11" prop="cbse11" width="80" sortable>
-                        <template scope="scope">
-                            <div>{{ scope.row.cbse11 == 0 ? "未审核" : scope.row.cbse11 == 1 ?
-                            "已审核" : scope.row.cbse11 == 4 ? "已完成" : "未确定状态"
-                            }}
-                            </div>
-                        </template>
+                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08"  sortable />
+                  <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" width="100" sortable >
+                    <template scope="scope">
+                      <div>{{ scope.row.cbse18 == "1" ? "是" : "否"
+                        }}
+                      </div>
+                    </template>
+                  </el-table-column>
+                    <el-table-column label="状态" align="center" key="cbse11" prop="cbse11" width="100" sortable>
+                      <template scope="scope">
+                        <div>{{ scope.row.cbse11 == 0 ? "未审核" : scope.row.cbse11 == 1 ?
+                          "已审核" : scope.row.cbse11 == 4 ? "已完成" : "未确定状态"
+                          }}
+                        </div>
+                      </template>
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">

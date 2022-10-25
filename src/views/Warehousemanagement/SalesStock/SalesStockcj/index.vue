@@ -162,13 +162,13 @@
             </template>
           </el-table-column>
 
-          <el-table-column prop="cbif09" label="数量" width="100">
+          <el-table-column prop="cbsf09" label="数量" width="100">
             <template slot-scope="scope">
               <el-input v-only-number="{ min: 0, precision:0.00}" v-model="scope.row.cbsf09" @blur="chen(scope.row)"
                 :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbif11" label="单价" width="100">
+          <el-table-column prop="cbsf11" label="单价" width="100">
             <template slot-scope="scope">
               <el-input v-only-number="{ min: 0, precision:0.00}" v-model="scope.row.cbsf11" @blur="chen(scope.row)"
                 :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
@@ -202,7 +202,7 @@
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
-              <span @click="_ly_delFrom(scope.row)">
+              <span @click="_ly_delFrom(scope.$index)">
                 <i class="el-icon-delete" style="color: red"></i>
               </span>
             </template>
@@ -493,8 +493,8 @@ export default {
         cbsb30: "",
         cbse09: "",
         cbse10: "",
-        cbse16: "",
-        cbse18: "",
+        cbse16: "6",
+        cbse18: "0",
         cbse099: "",
       },
       defaultProps: {
@@ -533,7 +533,7 @@ export default {
         cbpc100: [
           { required: true, message: "仓库不能为空!", trigger: "change" },
         ],
-        cbpg16: [
+        /*cbpg16: [
           { required: true, message: "结算货币不能为空!", trigger: "change" },
         ],
         // cbsb07: [
@@ -553,7 +553,7 @@ export default {
         ],
         cbpc099: [
           { required: true, message: "客户不能为空!", trigger: "blur" },
-        ],
+        ],*/
       },
     };
   },
@@ -722,6 +722,7 @@ export default {
 
       this.tableData.push({
         // id: this.dataId,
+        cbsf16:"1",
         date: "",
         num: "",
         address: "",
@@ -900,21 +901,21 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-          /*for(let i=0;i<this.tableData.length;i++){
+          for(let i=0;i<this.tableData.length;i++){
 
             if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
-              return this.$message.error("采购入库单明细的商品不能为空")
+              return this.$message.error("销售退库单明细的商品不能为空")
             }
-            if(this.tableData[i].cbpd09==null||this.tableData[i].cbpd09==0){
-              return this.$message.error("采购入库单明细的数量不能为空")
+            if(this.tableData[i].cbsf09==null||this.tableData[i].cbsf09==0){
+              return this.$message.error("销售退库单明细的数量不能为空")
             }
-            if(this.tableData[i].cbpd11==null||this.tableData[i].cbpd11==0){
-              return this.$message.error("采购入库单明细的单价不能为空")
+            if(this.tableData[i].cbsf11==null||this.tableData[i].cbsf09==0){
+              return this.$message.error("销售退库单明细的单价不能为空")
             }
-            if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+           /* if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
               return this.$message.error("采购入库单明细的金额不能为空")
-            }
-          }*/
+            }*/
+          }
 
           this.form2.goods = this.tableData
           console.log(this.tableData,10251)
@@ -944,7 +945,7 @@ export default {
             }
           });
         } else {
-          this.$message.error("请注意规范");
+          // this.$message.error("请注意规范");
         }
       });
     },
