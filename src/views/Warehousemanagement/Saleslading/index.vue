@@ -1107,7 +1107,7 @@ export default {
     PrintRow(row) {
       let userId = row.id;
       let status = 3;
-      let checkstatus = row.checkStatus
+      let checkstatus = 1
       let edit = 0
       this.$router.push("/system/user-authhhh/role/" + userId + status + checkstatus + edit);
       // this.changeMoreArrary(row,6)

@@ -649,7 +649,7 @@ export default {
 
         }
       })
-
+      this.initSelect()
 
 
     },
