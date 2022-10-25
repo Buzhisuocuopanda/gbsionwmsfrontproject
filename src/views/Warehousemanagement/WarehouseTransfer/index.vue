@@ -50,8 +50,8 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWTf" :row-style="{height: '3px'}"
-                    :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="470"
+                <el-table border :header-cell-style="headClassWTf" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="470"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="left" />
@@ -65,7 +65,7 @@
                     <el-table-column label="关联订单" width="120px;" align="center" key="cbaa18" prop="cbaa18" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa18 == 0 ? "是" : scope.row.cbaa18 == 1 ?
-                            "否" : "未确定状态"
+                                    "否" : "未确定状态"
                             }}
                             </div>
                         </template>
@@ -81,7 +81,7 @@
                     <el-table-column label="状态" width="130px;" align="center" key="cbaa11" prop="cbaa11" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa11 == 0 ? "未审核" : scope.row.cbaa11 == 1 ?
-                            "已审核" : scope.row.cbaa11 == 4 ? "已完成" : "未审核"
+                                    "已审核" : scope.row.cbaa11 == 4 ? "已完成" : "未审核"
                             }}
                             </div>
                         </template>
@@ -90,8 +90,7 @@
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng"
-                                @click="handlcangkudiaobuxiugaione(scope.row)"
-                                v-if="scope.row.cbaa11 == 1 | scope.row.cbaa11 == 2"
+                                @click="handlcangkudiaobuxiugaione(scope.row)" v-if="scope.row.cbaa11 == 0"
                                 v-hasPermi="['system:warehousetransferordersController:edit']">
                                 修改
                             </el-button>
