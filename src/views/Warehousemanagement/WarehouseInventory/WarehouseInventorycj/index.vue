@@ -21,9 +21,9 @@
                 </el-col>
 
                 <el-col style="" :span="7">
-                    <el-form-item label="日期:">
+                    <el-form-item label="日期:" prop="cbsh08">
                         <el-col :span="11">
-                            <el-date-picker type="date" placeholder="" v-model="form2.cbpc08" style="width: 110%;">
+                            <el-date-picker type="date" placeholder="" v-model="form2.cbsh08" style="width: 110%;" value-format="yyyy-MM-dd HH:mm:ss">
                             </el-date-picker>
                         </el-col>
                     </el-form-item>
@@ -425,7 +425,7 @@ export default {
             },
             form2: {
                 cbpc07: "",
-                cbpc08: "",
+                cbsh08: "",
                 cbsa08: "",
                 cbwa09: "",
                 cala08: "",
@@ -481,8 +481,8 @@ export default {
                 cbpc100: [
                     { required: true, message: "仓库不能为空!", trigger: "change" }
                 ],
-                cbpc16: [
-                    { required: true, message: "结算货币不能为空!", trigger: "blur" }
+                cbsh08: [
+                    { required: true, message: "日期不能为空!", trigger: "blur" }
                 ],
                 cbpc07: [
                     { required: true, message: "编号不能为空!", trigger: "blur" }
@@ -671,11 +671,11 @@ export default {
                 arr.push({
                     "cbsh01": zhuid,
                     // "cbsj01": 0,
-                    // "cbsj08": this.tableData[i].id,
+                    "cbsj08": this.tableData[i].goodsId,
                     "cbsj09": this.tableData[i].sn,
-                    "cbsj10": this.tableData[i].id,
+                    "cbsj10": this.tableData[i].locationId,
                     // "cbsj11": 0,
-                    // "cbsj12": "string",
+                    "cbsj12": this.tableData[i].cbpc14,
                 })
             }
             swJsStoreaddss(arr).then((res) =>{
