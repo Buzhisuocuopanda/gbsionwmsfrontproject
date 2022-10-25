@@ -110,7 +110,7 @@ export const dynamicRoutes = [{
     path: '/system/user-auth',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:purchaseinbound:detail'],
     children: [{
       path: 'role/:cbpc01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -125,7 +125,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:purchasereturnorders:detail'],
     children: [{
       path: 'role/:cbpg01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -140,7 +140,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:selloutofwarehouse:detail'],
     children: [{
       path: 'role/:cbsb01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -155,7 +155,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:whmanagement:detail'],
     children: [{
       path: 'role/:cbpc01(\\d+)+:status(\\d+)+:checkStatus(\\d+)+:edit(\\d)',
       name: 'AuthUser',
@@ -170,7 +170,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhxg',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:whmanagement:edit'],
     children: [{
       path: 'role/:cbpc01(\\d+)',
       name: 'AuthUser',
@@ -185,7 +185,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:salesreturnorderss:detail'],
     children: [{
       path: 'role/:cbpg01(\\d+):status(\\d+)',
       name: 'AuthUser',
@@ -200,7 +200,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhs',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:salesreturnorderss:edit'],
     children: [{
       path: 'role/:cbse01(\\d+)',
       name: 'AuthUser',
@@ -216,7 +216,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:qualityin:detail'],
     children: [{
       path: 'role/:cbqa01(\\d+)',
       name: 'AuthUser',
@@ -231,7 +231,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:swJsStorea:detail'],
     children: [{
       path: 'role/:cbie01(\\d+)',
       name: 'AuthUser',
@@ -246,7 +246,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhhhhhh',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:warehouseInventoryrollup:detail'],
     children: [{
       path: 'role/:cbie01(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -306,7 +306,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-authhhhhhhhhhh',
     component: Layout,
-    permissions: ['system:user:edit'],
+    permissions: ['system:warehousetransferordersController:detail'],
     children: [{
       path: 'role/:cbaa01(\\d+):status(\\d+)',
       name: 'AuthUser',
@@ -322,7 +322,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authxiaoshouyudingdang',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:saleOrder:detail'],
     children: [{
       path: 'role/:id(\\d+)+:status(\\d+)',
       name: 'AuthUser',
@@ -337,7 +337,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-cj',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:purchaseinbound:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -367,7 +367,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-th',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:purchasereturnorders:add'],
     children: [{
       path: 'role/',
       name: 'PurchaseReturncj',
@@ -397,7 +397,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-zjd',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['system:qualityin:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',

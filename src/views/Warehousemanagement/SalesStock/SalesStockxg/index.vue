@@ -19,7 +19,7 @@
           </el-popover>
         </el-descriptions-item>
         <el-descriptions-item label-class-name="my-labell01">
-          <template slot="label">仓库</template>
+          <template slot="label"><i style="color: red;margin-right: 1px">*</i>仓库</template>
           <el-popover placement="bottom-start" trigger="click" clearable>
             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 100% !important" />
             <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width: 100%">
@@ -48,7 +48,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;margin-top:10px" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left;margin-left: 1%; " type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
@@ -381,11 +381,11 @@ export default {
       //关联订单状态
       guanliandindan: [
         {
-          value: "1",
+          value: 1,
           label: "是",
         },
         {
-          value: "0",
+          value: 0,
           label: "否",
         },
       ],
@@ -529,6 +529,7 @@ export default {
     },
   },
   created() {
+    console.log(11);
     //销售提货单详情
     this.getList();
     this.form2.cbca08 = this.ListUser.customerName;
@@ -539,7 +540,7 @@ export default {
       // this.initPassword = response.msg;
     });
     this.getDicts("sw_js_store_type").then((response) => {
-      this.form.type = response.rows;
+      // this.form.type = response.rows;
     });
     // this.form.type = this.dict[0].label;
     // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
@@ -555,6 +556,7 @@ export default {
       this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
       this.$set(row, "cbsf08", e.substring(e.indexOf(".") + 1));
       this.form2.cbsf08 = e.substring(e.indexOf(".") + 1)
+      this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
       console.log(this.form2.cbsf08, e, '444', row)
     },
 
@@ -731,36 +733,7 @@ export default {
     },
 
     getParams() {
-      //  let routerParams = this.$route.query;
-      //    this.ListUser = routerParams.data;
-      //    let zhuangh = JSON.parse(this.ListUser);
-      //    //客户
-      //    this.form2.cbse09=zhuangh[0].customerName;
-      //    //仓库
-      //    this.form2.cbpc100 = zhuangh[0].whName;
-      //    //结算货币展示
-      //    this.form2.cbse166 = zhuangh[0].settleCurrentMsg;
-      //    //结算货币id
-      //    this.form2.cbse16 = zhuangh[0].settleCurrent;
-      //    //审核时间
-      //    this.form2.cbse13 = zhuangh[0].createTime;
-      //    //订单分类展示
-      //    this.form.cbsf166 = zhuangh[0].orderClassMsg;
-      //     //订单分类id
-      //    this.form.cbsf16 = zhuangh[0].orderClass;
-      //    //完成日期
-      //    this.form2.cbse15 = zhuangh[0].orderDate;
-      //    //客户等级
-      //    this.form2.cbca28 =zhuangh[0].customerLevel;
-      //    //客户订单
-      //    this.form2.cbsb30 = zhuangh[0].customerNo;
-      //    //关联订单展示
-      //    this.form2.cbse188  = zhuangh[0].orderTypeMsg;
-      //    //关联订单id
-      //    this.form2.cbse18  = zhuangh[0].orderType;
-      // //    this.form2.cbpc16 =zhuangh[0].customerNo;
-      //   console.log(JSON.parse(this.ListUser),852369);
-      // //   console.log(JSON.parse(routerParams.data01),55555);
+
     },
 
     show() {
@@ -768,13 +741,13 @@ export default {
     },
 
     chen(item) {
-      if (item.cbsf09 > 0 && item.cbsf11 > 0) {
-        this.$set(
-          item,
-          "cbsf12",
-          parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
-        );
-      }
+      // if (item.cbsf09 > 0 && item.cbsf11 > 0) {
+      //   this.$set(
+      //     item,
+      //     "cbsf12",
+      //     parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
+      //   );
+      // }
     },
     //添加模块-仓库
     selected01(name) {
@@ -806,7 +779,8 @@ export default {
       console.log(e, 111);
       console.log(row, 222);
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "cbsf15", e.substring(e.indexOf("-") + 1), 8523642);
+      // this.$set(row, "cbsf15", e.substring(e.indexOf("-") + 1), 8523642);
+      row.cbsf15 = e;
       this.form2.cbse15 = row.cbsf15
       console.log(this.form2.cbse15)
     },
@@ -831,7 +805,7 @@ export default {
     //添加的取消按钮
     cancel9() {
       this.open2 = false;
-      this.reset();
+      // this.reset();
     },
     // 表单重置
     reset() {
@@ -912,13 +886,17 @@ export default {
     getList() {
       this.loading = true;
       const userId = this.$route.params && this.$route.params.cbse01;
+      console.log(userId,12)
       if (userId) {
+        console.log(13)
         // 获取表详细信息
         PurchaseinboundList(
           userId,
           this.addDateRange(this.queryParams, this.dateRange)
         ).then((res) => {
+          console.log(res.data,13)
           let response = res.data.rows[0];
+          // let response;
           //客户名称
           this.form2.cbse099 = response.cbca08;
           // 明细表ID
@@ -929,7 +907,9 @@ export default {
           this.form2.cbse166 = response.cala08;
           // 日期
           this.form2.cbsc08 = response.cbse08;
+          this.form2.cbse18 = response.cbse18;
           this.tableData = res.data.rows;
+          console.log(12)
           console.log(this.form2, response, 85200000, '年后1');
           this.tableData.map((item) => {
             item.cbsc177 = item.orderClass;
@@ -958,6 +938,7 @@ export default {
           // this.userList = response.data.rows;
           // this.total = response.data.total;
           console.log(response, 888999,this.tableData);
+          console.log(this.tableData,10245);
           this.loading = false;
         });
       }

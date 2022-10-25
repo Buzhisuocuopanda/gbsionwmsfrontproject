@@ -627,6 +627,9 @@ export default {
         deptName(val) {
             this.$refs.tree.filter(val);
         },
+      '$route' () {
+        this.getList();
+      }
     },
     created() {
         //仓库明细初始化
