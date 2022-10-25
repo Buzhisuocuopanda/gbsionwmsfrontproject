@@ -88,7 +88,7 @@
         <div v-else>
             <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
             </el-button>
-            <el-button v-else type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button v-else-if="status == 1" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
             <el-button @click="handlefanhui">返回</el-button>
         </div>
 
