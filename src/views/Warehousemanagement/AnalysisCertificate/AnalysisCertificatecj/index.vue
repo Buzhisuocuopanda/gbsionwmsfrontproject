@@ -44,8 +44,8 @@
                 </el-select>
               </sapn>-->
               <!--@visible-change="hiddens"-->
-              <el-select @change="slected" filterable :filter-method="getChangeList" v-loadmore="getList"
-                remote v-model="scope.row.f" placeholder="请输入销售订单编号,sn码" style="widith:100%">
+              <el-select @change="slected(scope.row,$event)" filterable :filter-method="getChangeList" v-loadmore="getList"
+                remote v-model="scope.row.f" placeholder="请输入sn码" style="widith:100%">
                 <!-- <el-input v-model="queryParams.orderNo"
                         placeholder="请输入销售订单编号,sn码"
                         clearable
@@ -577,11 +577,13 @@ export default {
         this.loading4 = false;
       });
     },
-    slected(name) {
+    slected(row,name) {
       let sn = name.substring(0, name.indexOf("-"));
       let ysn = name.split("-");
       let a = ysn.length
-      this.ysn = ysn[a - 1]
+      // this.ysn = ysn[a - 1]
+      row.cbqb10 = ysn[a - 1];
+
     },
     hiddens() {
       this.queryParams.orderNo = ''
@@ -720,7 +722,7 @@ export default {
               // });
               this.tableData.forEach((item) => {
                 item.cbqa01 = response.data.id;
-                item.cbqb10 = this.ysn;
+                // item.cbqb10 = this.ysn;
               });
               this._ly_ok();
               // this.$tab.closePage();
