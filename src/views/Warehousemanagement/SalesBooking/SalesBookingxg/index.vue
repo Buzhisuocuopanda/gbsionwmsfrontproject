@@ -633,22 +633,18 @@ export default {
                     this.form2.whId = this.form2.cbwa01;
                     this.form2.orderDate = this.form2.orderDate.slice(0, 10) + ' ' + this.form2.orderDate.slice(11, 19)
                     console.log(this.form2.orderDate, '日期')
-                    let obj = res.data.rows[0]
                     let arr1 = res.data.rows
-                    this.tableData[0].cala08 = obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08;
                     let arr2 = []
                     for (let i = 0; i < arr1.length; i++) {
-                        [
-                            arr2.splice(i, 0, {
-                                "cala08": obj.cala08 + ' ~ ' + obj.cbpb12 + ' ~ ' + obj.cbpb08,
-                                "goodsId": arr1[i].goodsId,
-                                "gsSalesOrders": arr1[i].gsSalesOrders,
-                                "id": arr1[i].id,
-                                "price": arr1[i].price,
-                                "qty": arr1[i].qty,
-                                "remark": arr1[i].remark,
-                            }),
-                        ]
+                        arr2.push({
+                            "cala08": arr1[i].cala08 + ' ~ ' + arr1[i].cbpb12 + ' ~ ' + arr1[i].cbpb08,
+                            "goodsId": arr1[i].goodsId,
+                            "gsSalesOrders": arr1[i].gsSalesOrders,
+                            "id": arr1[i].id,
+                            "price": arr1[i].price,
+                            "qty": arr1[i].qty,
+                            "remark": arr1[i].remark,
+                        })
                     }
                     this.tableData = arr2;
                     console.log(arr2, 8889990000);
@@ -802,8 +798,8 @@ export default {
             this.tableData.push({
                 "cala08": '',
                 "goodsId": '',
-                "gsSalesOrders": '',
-                "id": 0,
+                "gsSalesOrders": this.form2.gsSalesOrders,
+                "id": this.form2.id,
                 "price": '',
                 "qty": '',
                 "remark": '',
