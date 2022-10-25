@@ -9,8 +9,10 @@
           </el-form-item>
         </el-col>
         <el-col :span="7">
-          <el-form-item label="日期:" style="margin-left: 20%" prop="cbsb30">
-            <el-input type="text" placeholder="" v-model="form2.cbse08" style="width: 60%" />
+          <el-form-item label="日期:" style="margin-left: 20%" prop="cbse08">
+            <el-date-picker type="date" placeholder="" v-model="form2.cbse08" style="width: 80%;">
+            </el-date-picker>
+          <!--  <el-input type="text" placeholder="" v-model="form2.cbse08" style="width: 60%" />-->
           </el-form-item>
         </el-col>
         <el-col :span="7" v-if="false">
@@ -46,8 +48,12 @@
                 </el-col> -->
         <!--结算货币展示-->
         <el-col style="margin-left: 2%" :span="5">
-          <el-form-item label="结算货币:" prop="cbse166">
-            <el-input type="text" v-model="form2.cbse166" style="width: 100%" />
+          <el-form-item label="结算货币:" prop="cbse16">
+            <!--<el-input type="text" v-model="form2.cbse166" style="width: 100%" />-->
+            <el-select v-model="form2.cbse16" placeholder="" style="width:80%;">
+              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <!--订单类型展示-->
@@ -584,6 +590,7 @@ export default {
       this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
 
       this.$set(row, "cbsf08", e.substring(e.indexOf(".") + 1));
+      this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
     },
 
     selected088(name) {
@@ -893,6 +900,22 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
+          /*for(let i=0;i<this.tableData.length;i++){
+
+            if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
+              return this.$message.error("采购入库单明细的商品不能为空")
+            }
+            if(this.tableData[i].cbpd09==null||this.tableData[i].cbpd09==0){
+              return this.$message.error("采购入库单明细的数量不能为空")
+            }
+            if(this.tableData[i].cbpd11==null||this.tableData[i].cbpd11==0){
+              return this.$message.error("采购入库单明细的单价不能为空")
+            }
+            if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+              return this.$message.error("采购入库单明细的金额不能为空")
+            }
+          }*/
+
           this.form2.goods = this.tableData
           PurchasereturnordersAdd(this.form2).then((response) => {
             if (response.code == "200") {
@@ -909,7 +932,14 @@ export default {
               });
               console.log(response.data.id, 123456);
               // console.log(this.item, 123456);
-              this._ly_ok();
+              // this._ly_ok();
+              this.$message({
+                message: "添加成功",
+                type: "success",
+                style: "color:red;!important",
+              });
+              this.$tab.closePage();
+              this.$router.go(-1);
             }
           });
         } else {

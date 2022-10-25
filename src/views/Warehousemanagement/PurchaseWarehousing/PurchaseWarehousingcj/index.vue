@@ -105,7 +105,7 @@
                 @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="单价" width="100">
+          <el-table-column prop="cbpd11" label="单价"  width="100">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbpd11" v-only-number="{max: 100000, min: 0, precision:0.0000}"
                 @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
@@ -144,7 +144,7 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei">
+    <div style="text-align: center;margin-top: 10px">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="handlecaigourukudanone">取 消</el-button>
@@ -240,41 +240,7 @@ export default {
         }
         ]
       },
-      treeData: [{ // 树状数据
-        id: 1,
-        label: '一级 1',
-        children: [{
-          id: 4,
-          label: '二级 1-1',
-          children: [{
-            id: 9,
-            label: '三级 1-1-1'
-          }, {
-            id: 10,
-            label: '三级 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: '一级 2',
-        children: [{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 6,
-          label: '二级 2-2'
-        }]
-      }, {
-        id: 3,
-        label: '一级 3',
-        children: [{
-          id: 7,
-          label: '二级 3-1'
-        }, {
-          id: 8,
-          label: '二级 3-2'
-        }]
-      }],
+
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -907,8 +873,24 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
 
+      this.form2.goods = this.tableData;
       this.$refs["form2"].validate((item) => {
         if (item) {
+          for(let i=0;i<this.tableData.length;i++){
+
+            if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
+              return this.$message.error("采购入库单明细的商品不能为空")
+            }
+            if(this.tableData[i].cbpd09==null||this.tableData[i].cbpd09==0){
+              return this.$message.error("采购入库单明细的数量不能为空")
+            }
+            if(this.tableData[i].cbpd11==null||this.tableData[i].cbpd11==0){
+              return this.$message.error("采购入库单明细的单价不能为空")
+            }
+            if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+              return this.$message.error("采购入库单明细的金额不能为空")
+            }
+          }
           PurchaseinboundAdd(this.form2).then(response => {
             if (response.code == "200") {
               this.$message({
@@ -918,15 +900,15 @@ export default {
               });
               this.submitShangpin();
               this.open2 = false;
-              this.reset01()
+              // this.reset01()
               // console.log(this.form2.cbpg161,111);
               // console.log(this.form.cbpg01,222);
-              console.log(response.data.id, 333);
-              this.tableData.forEach((item) => {
-                item.cbpc01 = response.data.id;
-                console.log(item.cbpc01, 8523697412);
-              })
-              this._ly_ok()
+              // console.log(response.data.id, 333);
+              // this.tableData.forEach((item) => {
+              //   item.cbpc01 = response.data.id;
+              //   console.log(item.cbpc01, 8523697412);
+              // })
+              // this._ly_ok()
               this.$tab.closePage();
               this.$router.go(-1);
             }
