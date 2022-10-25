@@ -65,11 +65,11 @@
             <template scope="scope">
               <div>
                 {{
-                scope.row.cbsc17 == 1
-                ? "国际订单"
-                : scope.row.cbsc17 == 2
-                ? "国内订单"
-                : "状态不确定"
+                    scope.row.cbsc17 == 1
+                      ? "国际订单"
+                      : scope.row.cbsc17 == 2
+                        ? "国内订单"
+                        : "状态不确定"
                 }}
               </div>
             </template>
@@ -119,7 +119,7 @@
           <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
             :labelStyle="{ 'text-align': 'center' }">
             <template slot="label">大写</template>人民币:{{
-            smallToBig(totalPrice)
+                smallToBig(totalPrice)
             }}
           </el-descriptions-item>
         </el-descriptions>
@@ -198,7 +198,7 @@
       <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
       </el-button>
       <el-button v-else type="primary" style="margin-left:5%;" @click="PurchaseinboundFanShenpi">反 审</el-button>
-      <el-button v-show="status != 4 && status !=0" type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成
+      <el-button v-show="status != 4 && status != 0" type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成
       </el-button>
       <!-- <el-button v-show="status == 4" type="primary" @click="PurchaseinboundBiaojiWancheng">取消完成</el-button> -->
       <el-button @click="handlefanhui">返回</el-button>
@@ -209,7 +209,7 @@
 <script>
 import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds } from "@/api/Warehousemanagement/SalesShipment";
 export default {
-  name:'AuthUser',
+  name: 'AuthUser',
   data() {
     return {
       // 遮罩层
@@ -250,7 +250,9 @@ export default {
         }).then(response => {
           if (response.code == "200") {
             this.$message({ message: '标记成功', type: 'success' });
-            this.$router.push("/system/user-xsckfh/role/");
+            // this.$router.push("/system/user-xsckfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
           }
         });
       }).catch(() => { });
@@ -263,7 +265,9 @@ export default {
         }).then(response => {
           if (response.code == "200") {
             this.$message({ message: '取消标记成功', type: 'success' });
-            this.$router.push("/system/user-xsckfh/role/");
+            // this.$router.push("/system/user-xsckfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
           }
         });
       }).catch(() => { });

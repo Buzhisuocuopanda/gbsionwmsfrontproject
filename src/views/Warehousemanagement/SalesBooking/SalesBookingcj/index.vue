@@ -132,7 +132,7 @@
           <el-table-column label="数量" width="200px">
             <template slot-scope="scope" style="width:200%;">
               <!-- <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input> -->
-              <el-input v-model="scope.row.qty" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.qty" v-only-number="{ min: 1, precision:0.00}" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="auto">

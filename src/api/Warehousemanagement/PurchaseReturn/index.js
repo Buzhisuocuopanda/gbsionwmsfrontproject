@@ -128,13 +128,13 @@ export function GoodsList(query) {
   })
 }
 //商品信息维护
-export function swJsGoodslistBySelectAll(query) {
+export function swJsGoodslistBySelectAll(data) {
   return request({
     // system/goods/swJsGoodslistBySelectAll
     // /system/goods/SwJsGoodslist
     url: '/system/goods/swJsGoodslistBySelectAll',
     method: 'get',
-    params: query
+    params: data
   })
 }
 
@@ -160,7 +160,7 @@ export function StoreSkuList(query) {
 // 不良品列表
 export function SwJsSkuBarcodelists(query) {
   return request({
-    url: '/system/Purchasereturnorders/SwJsSkuBarcodelists',
+    url: '/system/Purchasereturnorders/SwJsSkuBarcodelistssr',
     method: 'get',
     params: query
   })

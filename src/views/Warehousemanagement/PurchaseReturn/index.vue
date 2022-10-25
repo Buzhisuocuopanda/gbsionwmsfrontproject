@@ -245,9 +245,8 @@
                                 v-hasPermi="['system:user:edit']">
                             </el-button>
                        </template>
-                       </el-table-column>
-                    <el-table-column type="index" width="50" label="编号">
                     </el-table-column>
+                    <!-- <el-table-column type="index" width="50" label="编号"></el-table-column> -->
                     <!-- <el-table-column label="日期" align="left" key="inTime" prop="inTime" width="130px;" sortable>
                          <template scope="scope">
                             <div>{{ scope.row.inTime.slice(0,10) || '' }}
@@ -530,8 +529,6 @@ export default {
             queryParamss: {
                 pageNum: 1,
                 pageSize: 15,
-                page: 1,
-                size: 15,
                 totall: this.totall,
                 cbsb07: undefined,
                 cbca08: undefined,
@@ -742,7 +739,7 @@ export default {
         // 不良品查询
         getList09() {
             this.loading = true;
-            SwJsSkuBarcodelists(this.addDateRange(this.queryParamss, this.dateRange)).then(response => {
+            SwJsSkuBarcodelists().then(response => {
                 this.userList01 = response.data.rows;
                 this.totall = response.data.total;
                 // //供应商

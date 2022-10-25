@@ -126,11 +126,11 @@
           /> -->
           <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width" fixed="right">
             <template slot-scope="scope" style="margin-left: -10%">
-<!--              <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"-->
-<!--                @click="handlxiaoshochkudanone(scope.row)" v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"-->
-<!--                v-hasPermi="['system:selloutofwarehouse:edit']">-->
-<!--                修改-->
-<!--              </el-button>-->
+              <!--              <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"-->
+              <!--                @click="handlxiaoshochkudanone(scope.row)" v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"-->
+              <!--                v-hasPermi="['system:selloutofwarehouse:edit']">-->
+              <!--                修改-->
+              <!--              </el-button>-->
               <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai caozuoxiangqeng"
                 @click="handleDelete01(scope.row)" v-if="scope.row.cbsb11 == 0"
                 v-hasPermi="['system:selloutofwarehouse:remove']">删除</el-button>
@@ -178,8 +178,8 @@
           </el-popover>
         </el-col>
         <el-col :span="6">
-          <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入订单编号" clearable style="width: 100%"
-            @change="handleQuerys(queryParams.orderNo)" />
+          <el-input v-model="orderNo" id="miaoshu" placeholder="请输入订单编号" clearable style="width: 100%"
+            @change="handleQuerys(orderNo)" />
         </el-col>
         <el-col :span="8">
           <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
@@ -373,6 +373,7 @@ export default {
   components: { Treeselect, kuweixxweihu, supplierMaintenance },
   data() {
     return {
+      orderNo: '',
       orderNo1: "",
       tcwhId: "",
       tcOrderNo: "",
@@ -816,7 +817,7 @@ export default {
       let obj = {
         customerName: this.valuexs,
         whId: this.tcwhId,
-        orderNo: this.tcOrderNo
+        orderNo: this.orderNo
       }
 
       console.log(obj)
@@ -857,16 +858,19 @@ export default {
       this.tcOrderNo = ""
       this.queryParams.orderNo = ""
       this.orderNo1 = ""
+      this.orderNo = ""
     },
     //
     handleQuerys(saleNo) {
       console.log(saleNo)
-      this.tcOrderNo = saleNo
+      this.orderNo = saleNo
+      this.queryParams.orderNo = saleNo
       let obj = {
         orderNo: saleNo,
         customerName: this.valuexs,
         whId: this.tcwhId,
       }
+      console.log(obj, "修改订单后")
       Purchaseinbounddingdancx(obj).then((res) => {
         if (res.code == 200) {
           this.userList01 = res.data.rows;
@@ -892,6 +896,13 @@ export default {
     },
     tong() {
       this.open3 = true;
+      Purchaseinbounddingdancx().then((res) => {
+        if (res.code == 200) {
+          this.userList01 = res.data.rows;
+          this.totall = res.data.total
+        }
+        console.log(res, 4444444)
+      })
     },
     tong1() {
       this.open4 = true;
@@ -923,10 +934,11 @@ export default {
       let cus = this.addDateRange(this.queryParams, this.dateRange)
       this.tcwhId = this.form2.cbpc10
       cus.whId = this.form2.cbpc10
-      cus.pageSize = 999999
+      cus.pageSize = 15
       cus.customerName = this.valuexs
-      cus.orderNo = this.tcOrderNo
+      cus.orderNo = this.orderNo
       this.form2.icon = name;
+      console.log(cus, "选中仓库后")
       Purchaseinbounddingdanck(
         cus
       ).then((response) => {
@@ -1429,6 +1441,7 @@ export default {
         this.queryParams.orderNo = ""
         this.valuexs = ""
         this.tcwhId = ""
+        this.orderNo = ""
         this.tcOrderNo = ""
         this.form2.cbpc10 = ""
         this.orderNo1 = ""

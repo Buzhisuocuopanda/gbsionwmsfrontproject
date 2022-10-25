@@ -257,7 +257,7 @@
 import {
   PurchasereturnordersAdd,
   PurchasereturnordersAdds,
-  swJsGoodslistBySelectAll,
+  SwJsSkuBarcodelists,
 } from "@/api/Warehousemanagement/PurchaseReturn";
 import {
   getToken
@@ -695,15 +695,19 @@ export default {
   },
   methods: {
     getlists(){
-      const userId = this.$route.params && this.$route.params.data.cbpg01
-      swJsGoodslistBySelectAll({id:userId}).then((res) =>{
-        console.log(res,'ceshi111')
+      const userId = this.$route.params && this.$route.params.data.sn
+      let obj = {
+        sn:userId
+      }
+      SwJsSkuBarcodelists(obj).then((res) =>{
         // this.tableData = res.data.rows
         if(res.data.rows != []){
           this.tableData.map((item,i) =>{
-            item.cbpc000 = res.data.rows[i].label
-            item.cbph08 = res.data.rows[i].value
+            item.cbpc000 = res.data.rows[i].cbpb10 + res.data.rows[i].cbpb12 + res.data.rows[i].cbpb08
+            item.cbph08 = res.data.rows[i].goodsId
           })
+          this.form2.cbpc100 = res.data.rows[0].wh
+          this.form2.cbpg10 = res.data.rows[0].whId
         }else{
           this.tableData = ''
         }

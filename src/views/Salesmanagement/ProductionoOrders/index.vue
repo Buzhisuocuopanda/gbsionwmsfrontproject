@@ -2,12 +2,12 @@
   <!--生产总订单-->
   <div class="app-container">
     <div class="filter-container shengchuang">
-      <el-form :inline="true" label-width="60px">
-        <el-form-item label="订单号" class="item-r">
+      <el-form :inline="true">
+        <el-form-item label="订单号" class="item-r" label-width="60px">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
 
-        <el-form-item label="商品型号" class="item-r">
+        <el-form-item label="商品型号" class="item-r" label-width="70px">
           <el-input v-model="model" class="filter-item" placeholder="商品型号" />
         </el-form-item>
         <el-form-item label="状态" class="item-r">
@@ -51,9 +51,10 @@
         </el-form-item>
       </el-form>
       <!-- style="height:calc(100% - 10)" -->
-      <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :loading="loading" :data="orderList"
-        :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;"
-        height="500" border fit highlight-current-row stripe :row-key="getRowKeys">
+      <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :loading="loading"
+        :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
+        element-loading-text="Loading。。。" width="100%;" height="500" border fit highlight-current-row stripe
+        :row-key="getRowKeys">
         <el-table-column type='selection' label="全选" width="55">
         </el-table-column>
         <el-table-column sortable="custom" fixed label="优先级" align="left" prop="priority" min-width="100px;" />
@@ -148,7 +149,7 @@
           <el-form-item label="订单号" prop="orderNo">
             <el-input readonly v-model="formData.orderNo" style="width:50%"></el-input>
           </el-form-item>
-          <el-form-item  label="商品" prop="goods">
+          <el-form-item label="商品" prop="goods">
             <!--            <el-popover placement="bottom-start" trigger="click">-->
             <!--              <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"-->
             <!--                          style="width:370px!important;" />-->
@@ -226,11 +227,11 @@
         <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
           <el-form-item label="优先级">
             <!--                  <el-input v-model="formData.priority" style="width:50%" readonly></el-input>-->
-            <span>{{formData.priority}}</span>
+            <span>{{ formData.priority }}</span>
           </el-form-item>
           <el-form-item label="订单号">
             <!--                  <el-input v-model="formData.orderNo" style="width:50%" readonly></el-input>-->
-            <span>{{formData.orderNo}}</span>
+            <span>{{ formData.orderNo }}</span>
           </el-form-item>
           <el-form-item label="商品">
             <!--            <el-popover placement="bottom-start" trigger="click">-->
@@ -244,7 +245,7 @@
             <!--                  <el-input  v-model="formData.goods" placeholder=""-->
             <!--                            style="width:70%;" readonly>-->
             <!--                  </el-input>-->
-            <span>{{formData.goods}}</span>
+            <span>{{ formData.goods }}</span>
 
             <!--                  <template  style="width:200%;">-->
 
@@ -258,7 +259,7 @@
           <el-form-item label="订单数量">
             <!--                  <el-input : v-model="formData.qty" style="width:50%;text-align: right" readonly></el-input>-->
             <span>
-              {{parseFloat(formData.qty).toFixed(2)}}
+              {{ parseFloat(formData.qty).toFixed(2) }}
             </span>
           </el-form-item>
           <!--        <el-form-item >-->
@@ -385,7 +386,7 @@ export default {
       sortkey: '',
       sorttype: '',
       orderList: [],
-      loading:false,
+      loading: false,
 
       upload: {
         // 是否显示弹出层（用户导入）
@@ -453,7 +454,7 @@ export default {
         type: 'success',
       }).then(() => {
         console.log(this.multipleSelection)
-        this.loading=true
+        this.loading = true
         pldelete({ ids: this.multipleSelection }).then(response => {
           if (response.code == 200) {
             this.$notify({
@@ -466,7 +467,7 @@ export default {
             this.onSearch()
             // this.$tab.refreshPage()
             console.log(this.multipleSelection)
-            this.loading=false
+            this.loading = false
 
           }
 
@@ -875,10 +876,10 @@ export default {
         this.$alert(response.msg, '上传结果', {
           confirmButtonText: '确定',
           callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
+            // this.$message({
+            //   type: 'info',
+            //   message: `导入完成`
+            // });
           }
         });
       } else {
@@ -886,10 +887,10 @@ export default {
         this.$alert(response.msg, '上传结果', {
           confirmButtonText: '确定',
           callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
+            // this.$message({
+            //   type: 'info',
+            //   message: `导入完成`
+            // });
           }
         });
         // this.$message.error(response.msg);
