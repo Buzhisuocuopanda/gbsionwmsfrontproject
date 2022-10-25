@@ -561,10 +561,10 @@ export default {
 
       //货币类型
       jiageLeixeng: [{
-        value: '6',
+        value: 6,
         label: 'CNY'
       }, {
-        value: '5',
+        value: 5,
         label: 'USD'
       }],
       //发票类型
@@ -791,7 +791,7 @@ export default {
           value: 6,
           label: 'CNY'
         }, {
-          value: 7,
+          value: 5,
           label: 'USD'
         }
       ],
