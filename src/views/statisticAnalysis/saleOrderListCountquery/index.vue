@@ -16,7 +16,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="销售人员" style="margin-left: 20px"   class="item-r" >
-          <el-select v-model="queryParams.salerId" v-loadmore="getCauaList"  clearable  filterable placeholder="请输入关键词">
+          <el-select v-model="queryParams.salerId" v-el-select-loadmore="getCauaList"  clearable  filterable placeholder="请输入关键词">
             <el-option v-for="item in cauaList" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
 
