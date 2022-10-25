@@ -260,13 +260,13 @@
               <el-input v-model="scope.row.cbsc14" placeholder="销售订单id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" width="80">
+          <!-- <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <span @click="_ly_delFrom(scope.row)">
                 <i class="el-icon-delete" style="color: red"></i>
               </span>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <!-- </el-form> -->
         </el-table>
       </div>
