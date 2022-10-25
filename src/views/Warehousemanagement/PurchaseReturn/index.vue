@@ -246,25 +246,25 @@
                             </el-button>
                        </template>
                        </el-table-column>
-                    <el-table-column label="编号" align="left" key="cbpg07" prop="cbpg07" sortable style="padding-top:60px !important;" width="165px;" />
-                    <el-table-column label="日期" align="left" key="cbpg08" prop="cbpg08" width="130px;" sortable>
+                    <el-table-column type="index" width="50" label="编号">
+                    </el-table-column>
+                    <!-- <el-table-column label="日期" align="left" key="inTime" prop="inTime" width="130px;" sortable>
                          <template scope="scope">
-                            <div>{{ scope.row.cbpg08.slice(0,10) || '' }}
+                            <div>{{ scope.row.inTime.slice(0,10) || '' }}
                             </div>
                         </template>
-                    </el-table-column>
-                    <el-table-column label="供应商" align="left" key="cbsa08" prop="cbsa08" width="150px;" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" width="105px;" sortable>
-                    </el-table-column>
-                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="105px;" sortable />
-                    <el-table-column label="状态" align="left" key="cbpg11" prop="cbpg11" width="80px;" sortable>
+                    </el-table-column> -->
+                    <!-- sn -->
+                    <el-table-column label="SN" align="left" key="sn" prop="sn" width="105px;" sortable />
+                    <!-- <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="105px;" sortable /> -->
+                    <!-- <el-table-column label="状态" align="left" key="status" prop="status" width="80px;" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbpg11 == 0 ? "未审核" : scope.row.cbpg11 == 1 ?
-                            "已审核" : scope.row.cbpg11 == 4 ? "已完成" : ""
+                            <div>{{ scope.row.status == 1 ? "未审核" : scope.row.status == 2 ?
+                            "已审核" : scope.row.status == 3 ? "已完成" : ""
                             }}
                             </div>
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
             </el-table>
             <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamss.pageNum"
                 :limit.sync="queryParamss.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]"
@@ -1463,4 +1463,9 @@ export default {
 };
 </script>
 <style src="./PurchaseReturncss/index.css" scoped>
+</style>
+<style lang="scss" scoped>
+::v-deep .el-table__header,::v-deep .el-table__body{
+    width: 100% !important;
+}
 </style>
