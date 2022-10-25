@@ -93,7 +93,7 @@
               </el-input>
             </el-popover> -->
               <el-select v-model="scope.row.cbsf16" placeholder="" style="width: 100%" >
-                <el-option v-for="item in dingdanfelei" :key="item.label" :label="item.label" :value="item.value">
+                <el-option v-for="item in dingdanfelei" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </template>
@@ -343,11 +343,11 @@ export default {
       //订单分类
       dingdanfelei: [
         {
-          value: "1",
+          value: 1,
           label: "国内订单",
         },
         {
-          value: "2",
+          value: 2,
           label: "国际订单",
         },
       ],
@@ -776,11 +776,10 @@ export default {
       // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
       // this.form2.icon = name;
       this.$set(row, "cbpc099", e.substring(0, e.indexOf("-")));
-      console.log(e, 111);
-      console.log(row, 222);
+
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      // this.$set(row, "cbsf15", e.substring(e.indexOf("-") + 1), 8523642);
-      row.cbsf15 = e;
+      this.$set(row, "cbsf15", e.substring(e.indexOf("-") + 1), 8523642);
+
       this.form2.cbse15 = row.cbsf15
       console.log(this.form2.cbse15)
     },
@@ -926,7 +925,7 @@ export default {
             item.cbsc144 = item.noSendQty;
             item.cbsc15 = item.remark;
             item.cbsc14 = item.saleOrderId;
-            item.cbsf16 = item.cbsf16 == 1?'国际订单':'国内订单'
+            // item.cbsf16 = item.cbsf16 == 1?'国际订单':'国内订单'
             item.cbpc000 =
               item.pinpai == null?'':item.pinpai + "~" + item.cbpb12 == null?'':item.cbpd12 + "~" + item.cbpb08 ==null?'':item.cbpb08;
             // if (item.cbsc177 == "国内订单") {
@@ -947,7 +946,7 @@ export default {
     handleUpdate() {
       const userId = this.$route.params && this.$route.params.cbse01;
       if (this.form.name != undefined) {
-        this.tableData[0].cbsf16 = this.tableData[0].cbsf16 == '国际订单'?1:2
+        // this.tableData[0].cbsf16 = this.tableData[0].cbsf16 == '国际订单'?1:2
         let row = {};
         row.cbse01 = userId;
         // 编号
@@ -970,7 +969,6 @@ export default {
         row.cbse18 = this.form2.cbse18;
         row.change_type = 1;
         row.goods = this.tableData;
-
         // row.invoiceBank = this.form.remark;
         // row.invoiceNumber = this.form.skuName;
         // row.invoicePhone = this.form.sn;
