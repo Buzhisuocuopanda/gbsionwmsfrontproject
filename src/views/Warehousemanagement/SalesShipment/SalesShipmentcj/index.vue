@@ -860,7 +860,9 @@ export default {
             this.reset01();
             this.submitShangpin();
             this.tableData = [];
-            this.$router.push("/system/user-xsckfh/role/");
+            // this.$router.push("/system/user-xsckfh/role/");
+            this.$tab.closePage();
+            this.$router.go(-1);
             // this.form2= {
             //    cbpc07: "",
             //     cbpc08: "",
@@ -922,7 +924,7 @@ export default {
       // this.$message.success('添加成功')
       // 将数据传递给父组件。
       // 如果要将数据存储到后台，可在此处自行实现
-      this.$emit("on-ok", this.formArr);
+      // this.$emit("on-ok", this.formArr);
     },
     // 增加一行表单
     _ly_addFrom() {

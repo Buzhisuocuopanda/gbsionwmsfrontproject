@@ -934,7 +934,7 @@ export default {
       let cus = this.addDateRange(this.queryParams, this.dateRange)
       this.tcwhId = this.form2.cbpc10
       cus.whId = this.form2.cbpc10
-      cus.pageSize = 999999
+      cus.pageSize = 15
       cus.customerName = this.valuexs
       cus.orderNo = this.orderNo
       this.form2.icon = name;
