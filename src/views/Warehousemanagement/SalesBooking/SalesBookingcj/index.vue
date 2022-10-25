@@ -4,7 +4,7 @@
       <div class="chuangjiancaigous">销售预订单</div>
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="6">
-          <el-form-item label="编号:" prop="ponumber">
+          <el-form-item label="编号:" prop="orderNo">
             <el-input type="text" v-model="form2.orderNo" style="width: 110%;" readonly/>
           </el-form-item>
         </el-col>
@@ -576,6 +576,11 @@ export default {
           message: "销售人员不能为空!",
           trigger: 'change'
         }],
+        ponumber: [{
+          required: true,
+          message: "订单编号不能为空!",
+          trigger: 'change'
+        }],
         // cbpc07: [
         //     { required: true, message: "编号不能为空!", trigger: "blur" }
         // ]
@@ -952,7 +957,6 @@ export default {
 
     /** 新增按钮操作 */
     handleAdd() {
-
       this.$refs["form2"].validate((item) => {
         if (item) {
           this.form2.goods = this.tableData
