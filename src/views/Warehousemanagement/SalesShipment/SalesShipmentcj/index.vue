@@ -206,7 +206,7 @@
           </el-table-column>
           <el-table-column prop="cbsc09" label="数量" width="80">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbsc09" v-only-number="{ min: 1, precision: 0.0 }" @blur="chen(scope.row)"
+              <el-input v-model="scope.row.cbsc09" v-only-number="{ precision: 0.0 }" @blur="chen(scope.row)"
                 placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
