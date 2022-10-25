@@ -9,7 +9,14 @@ export function PurchaseinboundAdd(data) {
     data: data
   })
 }
-
+// 新增主表
+export function SwJsStoreadd(data) {
+  return request({
+    url: '/system/Warehouseinventoryschedule/SwJsStoreadd',
+    method: 'post',
+    data: data
+  })
+}
 // 明细新增配置
 export function PurchaseinboundAdds(data) {
   return request({
@@ -18,7 +25,14 @@ export function PurchaseinboundAdds(data) {
     data: data
   })
 }
-
+// 明细新增
+export function swJsStoreaddss(data) {
+  return request({
+    url: '/system/Warehouseinventoryschedule/swJsStoreaddss',
+    method: 'post',
+    data: data
+  })
+}
 // 查询列表
 export function PurchaseinboundList(query) {
   return request({
