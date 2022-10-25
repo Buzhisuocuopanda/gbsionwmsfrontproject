@@ -144,7 +144,7 @@
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
-              <span @click="_ly_delFrom(scope.row)">
+              <span @click="_ly_delFrom(scope.$index)">
                 <i class="el-icon-delete" style="color: red"></i>
               </span>
             </template>
@@ -698,7 +698,7 @@ export default {
         // 供应商ID
         cbsf15: '',
         // 订单类型
-        cbsf16: '',
+        cbsf16:1,
         // user_id
         user_id: '',
       });
@@ -741,13 +741,13 @@ export default {
     },
 
     chen(item) {
-      // if (item.cbsf09 > 0 && item.cbsf11 > 0) {
-      //   this.$set(
-      //     item,
-      //     "cbsf12",
-      //     parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
-      //   );
-      // }
+      if (item.cbsf09 > 0 && item.cbsf11 > 0) {
+        this.$set(
+          item,
+          "cbsf12",
+          parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
+        );
+      }
     },
     //添加模块-仓库
     selected01(name) {
@@ -944,6 +944,21 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate() {
+      for(let i=0;i<this.tableData.length;i++){
+
+         if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
+           return this.$message.error("销售退库单明细的商品不能为空")
+         }
+        if(this.tableData[i].cbsf09==null||this.tableData[i].cbsf09==0){
+          return this.$message.error("销售退库单明细的数量不能为空")
+        }
+        if(this.tableData[i].cbsf11==null||this.tableData[i].cbsf11==0){
+          return this.$message.error("销售退库单明细的单价不能为空")
+        }
+        /* if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+           return this.$message.error("采购入库单明细的金额不能为空")
+         }*/
+      }
       const userId = this.$route.params && this.$route.params.cbse01;
       if (this.form.name != undefined) {
         // this.tableData[0].cbsf16 = this.tableData[0].cbsf16 == '国际订单'?1:2
