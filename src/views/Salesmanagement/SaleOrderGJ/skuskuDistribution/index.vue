@@ -12,7 +12,7 @@
         </el-form-item>
         <el-form-item label="商品" class="item-r">
           <!--:filter-method="saleUserdataFilter"-->
-          <el-select v-loadmore="loadMore" v-model="goodsId" filterable clearable placeholder="请选择">
+          <el-select v-el-select-loadmore="loadMore" v-model="goodsId" :filter-method="loadMore2" filterable clearable placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -422,7 +422,7 @@ export default {
   computed: {},
   mounted() { // 自动触发写入的函数
     this.onSearch()
-    this.loadMore()
+    this.loadMore2()
   },
   methods: {
     onSubmit() {
@@ -829,6 +829,30 @@ export default {
           this.listQuerySelect.pageNum = this.listQuerySelect.pageNum + 1
           // this.options.push.apply(this.options,response.data.rows)
           this.options.push(...response.data.rows)
+        } else {
+          // this.$message.error(response.msg)
+        }
+      });
+    },
+
+    //下拉列表数据商品
+    loadMore2(val) {
+      //         console.log("滚动到底部了")
+      // // 这里可以做你想做的任何事 到底执行
+      //        this.options=this.options2
+      this.listQuerySelect.pageNum = 1;
+      const param = {
+        goodsMsg: val,
+        pageNum: this.listQuerySelect.pageNum,
+        pageSize: this.listQuerySelect.pageSize
+      }
+
+
+      swJsGoodslistBySelect(param).then(response => {
+        if (response.code == "200") {
+          this.listQuerySelect.pageNum = this.listQuerySelect.pageNum + 1
+          // this.options.push.apply(this.options,response.data.rows)
+          this.options =response.data.rows
         } else {
           // this.$message.error(response.msg)
         }
