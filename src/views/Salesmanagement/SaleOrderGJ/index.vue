@@ -655,7 +655,7 @@ export default {
       return extension || extension2
     },
     handleImport() {
-      this.upload.title = "生产总订单";
+      this.upload.title = "国际销售订单";
       this.upload.open = true;
     },
     /** 下载模板操作 */
@@ -680,11 +680,26 @@ export default {
         //     });
         //   }
         // });
-        this.$message({
-          type: 'success',
-          message: `action: ${ action }`
+        this.$alert(response.msg, '上传结果', {
+          confirmButtonText: '确定',
+          callback: action => {
+            // this.$message({
+            //   type: 'info',
+            //   message: `导入完成`
+            // });
+          }
         });
       } else {
+        this.$alert(response.msg, '上传结果', {
+          confirmButtonText: '确定',
+          callback: action => {
+            // this.$message({
+            //   type: 'info',
+            //   message: `导入完成`
+            // });
+          }
+        });
+
         // this.$alert(response.msg, '上传结果', {
         //   confirmButtonText: '确定',
         //   callback: action => {
