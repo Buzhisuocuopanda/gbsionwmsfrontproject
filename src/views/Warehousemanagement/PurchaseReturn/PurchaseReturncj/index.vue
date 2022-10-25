@@ -706,7 +706,7 @@ export default {
             item.cbpc000 = res.data.rows[i].cbpb10 + res.data.rows[i].cbpb12 + res.data.rows[i].cbpb08
             item.cbph08 = res.data.rows[i].goodsId
           })
-          this.form2.cbpc100 = res.data.rows[0].wh
+          this.form2.cbpc100 = res.data.rows[0].cbwa09
           this.form2.cbpg10 = res.data.rows[0].whId
         }else{
           this.tableData = ''

@@ -167,8 +167,11 @@
         <div v-else>
             <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
             </el-button>
-            <el-button v-else-if="status == 1" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
-            <el-button v-else type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成</el-button>
+            <div v-else-if="status == 1" style="display:inline-block;margin-right: 10px;">
+                <el-button type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
+                <el-button type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成</el-button>
+            </div>
+
             <!-- <el-button type="primary" @click="PurchaseinboundBiaojiWancheng">调出标记完成</el-button> -->
             <el-button @click="handlexiaoshouone">返回</el-button>
         </div>

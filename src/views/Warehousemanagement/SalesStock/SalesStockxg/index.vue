@@ -927,7 +927,7 @@ export default {
             item.cbsc14 = item.saleOrderId;
             // item.cbsf16 = item.cbsf16 == 1?'国际订单':'国内订单'
             item.cbpc000 =
-              item.pinpai == null?'':item.pinpai + "~" + item.cbpb12 == null?'':item.cbpd12 + "~" + item.cbpb08 ==null?'':item.cbpb08;
+              item.pinpai + "~" + item.cbpb12 + "~" + item.cbpb08;
             // if (item.cbsc177 == "国内订单") {
             //   item.cbsc17 = "1";
             // } else {

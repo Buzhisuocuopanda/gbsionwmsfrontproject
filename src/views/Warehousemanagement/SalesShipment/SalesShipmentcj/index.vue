@@ -206,7 +206,7 @@
           </el-table-column>
           <el-table-column prop="cbsc09" label="数量" width="80">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbsc09" v-only-number="{ min: 1, precision: 0.0 }" @blur="chen(scope.row)"
+              <el-input v-model="scope.row.cbsc09" v-only-number="{ precision: 0.0 }" @blur="chen(scope.row)"
                 placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
@@ -892,7 +892,7 @@ export default {
             // }
           }
           if (count-- === 1) {
-            this._ly_save();
+            // this._ly_save();
           }
 
           //  this.reset03();
@@ -1137,11 +1137,11 @@ export default {
           PurchaseinboundAdd(this.form2).then((response) => {
             if (response.code == 200) {
               // console.log(response.posts, 12345678);
-              this.$message({
-                message: "添加成功",
-                type: "success",
-                style: "color:red;!important",
-              });
+              // this.$message({
+              //   message: "添加成功",
+              //   type: "success",
+              //   style: "color:red;!important",
+              // });
               // this.getTreeselect();
               // this.submitShangpin();
               this.open2 = false;
@@ -1151,6 +1151,7 @@ export default {
               console.log(response.data.id, 123456);
               // console.log(this.item, 123456);
               this._ly_ok();
+
             }
           });
         } else {

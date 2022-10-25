@@ -255,7 +255,7 @@
                     </el-table-column> -->
                     <!-- sn -->
                     <el-table-column label="SN" align="left" key="sn" prop="sn" width="105px;" sortable />
-                    <!-- <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="105px;" sortable /> -->
+                    <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="105px;" sortable />
                     <!-- <el-table-column label="状态" align="left" key="status" prop="status" width="80px;" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.status == 1 ? "未审核" : scope.row.status == 2 ?
