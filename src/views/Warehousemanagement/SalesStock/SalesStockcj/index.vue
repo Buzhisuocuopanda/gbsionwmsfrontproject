@@ -917,6 +917,7 @@ export default {
           }*/
 
           this.form2.goods = this.tableData
+          console.log(this.tableData,10251)
           PurchasereturnordersAdd(this.form2).then((response) => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);
