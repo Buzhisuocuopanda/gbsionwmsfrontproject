@@ -964,6 +964,7 @@ export default {
         PurchaseinboundShenpi(row) {
             let cbpg01 = row.cbse01
             let status = row.cbse11
+
             this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
 
             // console.log(row.cbse01, 8888);

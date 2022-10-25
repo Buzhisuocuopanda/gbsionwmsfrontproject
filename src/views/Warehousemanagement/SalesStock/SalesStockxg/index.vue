@@ -85,7 +85,7 @@
               <el-input v-model="scope.row.cbsf15" placeholder="供应商id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbsf166" label="订单分类" width="150">
+          <el-table-column v-if="false" prop="cbsf166" label="订单分类" width="150">
             <template slot-scope="scope">
               <!-- <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)" style="width:120px!important;" />
