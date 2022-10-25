@@ -888,7 +888,7 @@ export default {
           callback: action => {
             this.$message({
               type: 'info',
-              message: `action: ${ action }`
+              message: `导入成功`
             });
           }
         });
