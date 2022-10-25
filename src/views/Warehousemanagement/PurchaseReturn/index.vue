@@ -239,13 +239,15 @@
             <el-table border  v-loading="loading" :data="userList01" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
-                    <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
+                    <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width" type="selection">
+                    </el-table-column>
+                    <!-- <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
                       <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
                                 v-hasPermi="['system:user:edit']">
                             </el-button>
                        </template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <!-- <el-table-column type="index" width="50" label="编号"></el-table-column> -->
                     <!-- <el-table-column label="日期" align="left" key="inTime" prop="inTime" width="130px;" sortable>
                          <template scope="scope">
