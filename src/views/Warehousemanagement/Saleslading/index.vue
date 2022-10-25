@@ -723,7 +723,7 @@ export default {
         checkStatus: 1
       }
 
-      saleOrderListGoods({ customerName: this.valuexs, pageNum: 1, pageSize: 9999 }).then((res) => {
+      saleOrderListGoods({ customerName: this.valuexs, pageNum: 1, pageSize: 15 }).then((res) => {
 
         if (res.code == 200) {
           console.log(res, "----------------res")
@@ -778,11 +778,13 @@ export default {
 
 
       this.loading = true;
-      this.queryParams.status = 5
+      // this.queryParams.status = 5
       let cus = this.addDateRange(this.queryParams, this.dateRange)
       cus.whId = this.form2.cbpc10
+      cus.status = 5
       cus.pageSize = 15
       this.form2.icon = name;
+      this.customerName = this.valuexs
       console.log(cus, "cus")
       saleOrderListGoods(cus).then((response) => {
         this.userList01 = response.data.rows;
@@ -793,7 +795,10 @@ export default {
         console.log(response, 199911196914);
         // this.deleteFlag = response.data.rows.deleteFlag;
         this.loading = false;
+        cus.whId = ""
+        cus.status = ""
       });
+
     },
     //供应商
     selected02(name) {
@@ -832,7 +837,8 @@ export default {
     /** 销售订单列表 */
     getList09() {
       this.loading = true;
-      this.queryParams.status = 5
+      // this.queryParams.status = 5
+
       Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
         this.userList01 = response.data.rows;
         this.totall = response.data.total;

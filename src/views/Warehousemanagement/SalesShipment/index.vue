@@ -30,7 +30,7 @@
               @click="resetQuery">重置</el-button>
           </el-form-item>
           <el-form-item style="margin-left: 78%">
-            <el-button size="mini"  class="biaoto-buttonchuangjian">创建
+            <el-button size="mini" class="biaoto-buttonchuangjian">创建
             </el-button>
             <el-dropdown trigger="click">
               <span class="el-dropdown-link xialaxuanxang">
@@ -126,11 +126,11 @@
           /> -->
           <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width" fixed="right">
             <template slot-scope="scope" style="margin-left: -10%">
-              <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"
-                @click="handlxiaoshochkudanone(scope.row)" v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"
-                v-hasPermi="['system:selloutofwarehouse:edit']">
-                修改
-              </el-button>
+<!--              <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"-->
+<!--                @click="handlxiaoshochkudanone(scope.row)" v-if="(scope.row.cbsb11 == 0) | (scope.row.cbsb11 == 2)"-->
+<!--                v-hasPermi="['system:selloutofwarehouse:edit']">-->
+<!--                修改-->
+<!--              </el-button>-->
               <el-button size="mini" type="text" icon="el-icon-delete" class="button-caozuoxougai caozuoxiangqeng"
                 @click="handleDelete01(scope.row)" v-if="scope.row.cbsb11 == 0"
                 v-hasPermi="['system:selloutofwarehouse:remove']">删除</el-button>
@@ -221,8 +221,8 @@
           </el-popover>
         </el-col>
         <el-col :span="6">
-          <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入订单编号" clearable style="width: 100%"
-            @change="handleQuerys(queryParams.orderNo)" />
+          <el-input v-model="orderNo1" id="miaoshu" placeholder="请输入订单编号" clearable style="width: 100%"
+            @change="handleQueryss(orderNo1)" />
         </el-col>
         <el-col :span="8">
           <el-select v-model="valuexs" placeholder="请选择客户" @change="helloxs">
@@ -373,6 +373,9 @@ export default {
   components: { Treeselect, kuweixxweihu, supplierMaintenance },
   data() {
     return {
+      orderNo1: "",
+      tcwhId: "",
+      tcOrderNo: "",
       valuexs: "",
       customerLists: null,
       // 遮罩层
@@ -812,9 +815,12 @@ export default {
       console.log(this.valuexs)
       let obj = {
         customerName: this.valuexs,
-        checkStatus: 1
+        whId: this.tcwhId,
+        orderNo: this.tcOrderNo
       }
-      Purchaseinbounddingdanck({ customerName: this.valuexs, }).then((res) => {
+
+      console.log(obj)
+      Purchaseinbounddingdanck(obj).then((res) => {
         if (res.code == 200) {
           this.userList01 = res.data.rows;
           this.totall = res.data.total;
@@ -826,9 +832,11 @@ export default {
       console.log(this.valuexs)
       let obj = {
         customerName: this.valuexs,
-        checkStatus: 1
+        whId: this.tcwhId,
+        saleNo: this.orderNo1
       }
-      saleOrderListPj({ customerName: this.valuexs, }).then((res) => {
+      console.log(obj, "选择仓库")
+      saleOrderListPj(obj).then((res) => {
         if (res.code == 200) {
           this.userList01xs = res.data.rows;
           this.totall = res.data.total;
@@ -845,17 +853,39 @@ export default {
       this.form2.cbpc100 = ''
       console.log(1111111111)
       this.valuexs = ""
+      this.tcwhId = ""
+      this.tcOrderNo = ""
+      this.queryParams.orderNo = ""
+      this.orderNo1 = ""
     },
     //
     handleQuerys(saleNo) {
       console.log(saleNo)
+      this.tcOrderNo = saleNo
       let obj = {
         orderNo: saleNo,
-        checkStatus: 1
+        customerName: this.valuexs,
+        whId: this.tcwhId,
       }
       Purchaseinbounddingdancx(obj).then((res) => {
         if (res.code == 200) {
           this.userList01 = res.data.rows;
+        }
+        console.log(res, 4444444)
+      })
+    },
+    handleQueryss(saleNo) {
+      this.orderNo1 = saleNo
+
+      let obj = {
+        saleNo: saleNo,
+        customerName: this.valuexs,
+        whId: this.tcwhId,
+      }
+      console.log(obj, "选择订单编号")
+      saleOrderListPj(obj).then((res) => {
+        if (res.code == 200) {
+          this.userList01xs = res.data.rows;
         }
         console.log(res, 4444444)
       })
@@ -891,8 +921,11 @@ export default {
       this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
       let cus = this.addDateRange(this.queryParams, this.dateRange)
+      this.tcwhId = this.form2.cbpc10
       cus.whId = this.form2.cbpc10
-      cus.pageSize = 99999
+      cus.pageSize = 999999
+      cus.customerName = this.valuexs
+      cus.orderNo = this.tcOrderNo
       this.form2.icon = name;
       Purchaseinbounddingdanck(
         cus
@@ -908,12 +941,16 @@ export default {
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
       console.log(this.form2.cbpc100, "this.form2.cbpc10 ")
       let cus = this.addDateRange(this.queryParams, this.dateRange)
+      this.tcwhId = this.form2.cbpc10
       cus.whId = this.form2.cbpc10
-      cus.pageSize = 99999
-      console.log(cus)
+      cus.customerName = this.valuexs
+      cus.saleNo = this.orderNo1
+      cus.pageSize = 15
+      console.log(cus, "cus")
       this.form2.icon = name;
+      console.log(cus, "选择客户之后")
       saleOrderListPj(
-        { whId: this.form2.cbpc10 }
+        cus
       ).then((response) => {
         console.log(response, "response")
         this.userList01xs = response.data.rows;
@@ -1389,9 +1426,15 @@ export default {
             state: 0
           },
         });
+        this.queryParams.orderNo = ""
         this.valuexs = ""
+        this.tcwhId = ""
+        this.tcOrderNo = ""
+        this.form2.cbpc10 = ""
+        this.orderNo1 = ""
         this.open3 = false
         this.close()
+
       }
     },
     foundxs() {
@@ -1428,7 +1471,12 @@ export default {
             state: 1
           },
         });
+        this.queryParams.orderNo = ""
         this.valuexs = ""
+        this.tcwhId = ""
+        this.tcOrderNo = ""
+        this.form2.cbpc10 = ""
+        this.orderNo1 = ""
         this.open4 = false
         this.close()
       }

@@ -671,26 +671,29 @@ export default {
     handleFileSuccess(response, file, fileList) {
       if (response.code == 200) {
         // this.$message.success(response.msg)
-        this.$alert(response.msg, '上传结果', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
-          }
+        // this.$alert(response.msg, '上传结果', {
+        //   confirmButtonText: '确定',
+        //   callback: action => {
+        //     this.$message({
+        //       type: 'success',
+        //       message: `action: ${ action }`
+        //     });
+        //   }
+        // });
+        this.$message({
+          type: 'success',
+          message: `action: ${ action }`
         });
       } else {
-
-        this.$alert(response.msg, '上传结果', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
-          }
-        });
+        // this.$alert(response.msg, '上传结果', {
+        //   confirmButtonText: '确定',
+        //   callback: action => {
+        //     this.$message({
+        //       type: 'error',
+        //       message: `action: ${ action }`
+        //     });
+        //   }
+        // });
         // this.$message.error(response.msg);
 
 

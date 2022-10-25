@@ -12,7 +12,7 @@
                     <!-- <svg-icon :icon-class="item" style="height: 30px;width: 16px;" /> -->
                     <!-- <span>{{ item }}</span> -->
                     <el-row style="margin-top: 0%;">
-                        <el-col :span="24"> <span>{{ item.substring(0,item.lastIndexOf(".")) }}</span></el-col>
+                        <el-col :span="24"> <span>{{ item.substring(0, item.lastIndexOf(".")) }}</span></el-col>
                     </el-row>
                 </div>
             </div>
@@ -22,7 +22,7 @@
 
 <script>
 // import icons from './requireIcons'
-import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+import { GoodsList, swJsGoodslistBySelect } from "@/api/Basicinformationmaintenance/Goods/index";
 // import { StoreSkuList } from "@/api/Basicinformationmaintenance/WarehouseInfoSku/index";
 export default {
     name: 'kuweixxweihu',
@@ -54,8 +54,11 @@ export default {
     },
     methods: {
         filterIcons() {
+            let cus = this.addDateRange(this.queryParams)
+            cus.cbpb07 = "启用"
+
             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            GoodsList(this.addDateRange(this.queryParams)).then(response => {
+            GoodsList(cus).then(response => {
                 // this.userList = response.data.rows;
                 //this.top = JSON.stringify(this.userList)
                 // console.log(response.data.rows, 3369);
