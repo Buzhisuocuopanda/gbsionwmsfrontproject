@@ -141,7 +141,7 @@
             </div>
             <div class="saomiaojlu">扫描记录</div>
             <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border :data="userLists"
-                :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+                :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
                 :default-sort="{ prop: 'name', order: 'descending' }">
                 <el-table-column prop="pinpai" key="pinpai" label="品牌">
                 </el-table-column>
@@ -167,8 +167,8 @@
         <div v-else>
             <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
             </el-button>
-            <el-button v-else type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
-            <el-button type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成</el-button>
+            <el-button v-else-if="status == 1" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button v-else type="primary" @click="PurchaseinboundQuxiaoWangcheng">标记完成</el-button>
             <!-- <el-button type="primary" @click="PurchaseinboundBiaojiWancheng">调出标记完成</el-button> -->
             <el-button @click="handlexiaoshouone">返回</el-button>
         </div>
