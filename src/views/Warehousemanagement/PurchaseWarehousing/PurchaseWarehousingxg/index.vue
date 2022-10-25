@@ -46,7 +46,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
-          <el-form-item label="供料单位:" prop="cbpc099">
+          <el-form-item label="供料单位:" prop="cbsa08">
             <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance
                 ref="supplierMaintenance"
@@ -65,7 +65,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
-          <el-form-item label="仓库:" prop="cbpc100">
+          <el-form-item label="仓库:" prop="cbwa09">
             <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu
                 ref="kuweixxweihu"
@@ -84,7 +84,7 @@
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
-          <el-form-item label="结算货币:" prop="cbpc16">
+          <el-form-item label="结算货币:" prop="cala08s">
             <el-select v-model="form2.cala08s" placeholder="" style="width: 80%">
               <el-option
                 v-for="item in jiageLeixeng"
@@ -146,7 +146,7 @@
           <el-col :span="24">
             <el-button
               plain
-              style="float: right"
+              style="float: left; margin-left:1%;"
               type="primary"
               @click="_ly_addFrom"
               >增行</el-button
@@ -272,7 +272,7 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei">
+    <div style="text-align: center;margin-top: 10px">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>
@@ -378,57 +378,6 @@ export default {
           },
         ],
       },
-      treeData: [
-        {
-          // 树状数据
-          id: 1,
-          label: "一级 1",
-          children: [
-            {
-              id: 4,
-              label: "二级 1-1",
-              children: [
-                {
-                  id: 9,
-                  label: "三级 1-1-1",
-                },
-                {
-                  id: 10,
-                  label: "三级 1-1-2",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: "一级 2",
-          children: [
-            {
-              id: 5,
-              label: "二级 2-1",
-            },
-            {
-              id: 6,
-              label: "二级 2-2",
-            },
-          ],
-        },
-        {
-          id: 3,
-          label: "一级 3",
-          children: [
-            {
-              id: 7,
-              label: "二级 3-1",
-            },
-            {
-              id: 8,
-              label: "二级 3-2",
-            },
-          ],
-        },
-      ],
       defaultProps: {
         children: "children",
         label: "label",
@@ -718,28 +667,6 @@ export default {
       //表格参数
       tableData: [],
       dataId: 0,
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ],
     };
   },
   computed: {
@@ -768,7 +695,7 @@ export default {
     this.form2.cbph10 = "20";
 
     console.log(this.form.cbpc16, 123456);
-    
+
   },
   methods: {
     //返回按钮
@@ -1068,6 +995,21 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
+          for(let i=0;i<this.tableData.length;i++){
+
+            if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
+              return this.$message.error("采购入库单明细的商品不能为空")
+            }
+            if(this.tableData[i].cbpd09==null||this.tableData[i].cbpd09==0){
+              return this.$message.error("采购入库单明细的数量不能为空")
+            }
+            if(this.tableData[i].cbpd11==null||this.tableData[i].cbpd11==0){
+              return this.$message.error("采购入库单明细的单价不能为空")
+            }
+            if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+              return this.$message.error("采购入库单明细的金额不能为空")
+            }
+          }
           if(this.form2.cala08s == 'CNY'){
             this.form2.cbpc16 = 6
           }else{

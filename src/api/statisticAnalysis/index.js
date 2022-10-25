@@ -18,6 +18,16 @@ export function getSwJsStoreSkuAllList(query) {
     params:query,
   })
 }
+// countQuery/Inventorysummaryquerys
+// countQuery/Inventorysummaryquery
+// 获取仓库下拉列表(不分页)
+export function Inventorysummaryquerys(query) {
+  return request({
+    url: '/countQuery/Inventorysummaryquerys',
+    method: 'get',
+    params:query,
+  })
+}
 // 获取品牌下拉列表(不分页)
 export function getswJsAllList(query) {
   return request({

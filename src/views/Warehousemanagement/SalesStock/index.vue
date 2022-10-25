@@ -8,11 +8,11 @@
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
                 <el-form-item prop="cbse07" label="编号">
-                    <el-input v-model="queryParams.cbse07" id="miaoshu" placeholder="请输入编号" clearable
+                    <el-input v-model="queryParams.cbse07"  placeholder="请输入编号" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                 </el-form-item>
                 <el-form-item prop="cbwa09" label="仓库">
-                    <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                    <el-input v-model="queryParams.cbwa09"  placeholder="请输入仓库" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                 </el-form-item>
                 <el-form-item label="日期" style="margin-left:1%;">
@@ -30,9 +30,9 @@
                     <el-form-item style="margin-left:47.5%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" v-hasPermi="['system:salesreturnorderss:add']" class="biaoto-buttonchuangjiannmnm" @click="handletuikuone">创建</el-button>
-                        <el-dropdown trigger="click">
+                        <!--<el-dropdown trigger="click">
                         <span class="el-dropdown-link xialaxuanxangjjj">
-                            <i class="el-icon-caret-bottom el-icon--right "></i>
+                            <i class="el-icon-caret-bottom el-icon&#45;&#45;right "></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item class="clearfix" >
@@ -44,7 +44,7 @@
                             <el-badge class="mark"/>
                         </el-dropdown-item>
                         </el-dropdown-menu>
-                       </el-dropdown>
+                       </el-dropdown>-->
                         <el-button size="mini" type="danger" style="margin-left:5px;" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:salesreturnorderss:remove']"
                             @click="handleDelete">删除</el-button>
@@ -656,7 +656,10 @@ export default {
         // 根据名称筛选部门树
         deptName(val) {
             this.$refs.tree.filter(val);
-        }
+        },
+      '$route' () {
+        this.getList();
+      }
     },
     created() {
         //仓库明细初始化
