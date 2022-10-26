@@ -40,7 +40,7 @@
 
                 <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
                 </el-table-column>
-                <el-table-column prop="cbsf16" key="cbsf16" label="订单分类">
+                <el-table-column prop="cbsf16" v-if="false" key="cbsf16" label="订单分类">
                     <template scope="scope">
                         <div>
                             {{
@@ -289,6 +289,17 @@ export default {
             const userId = this.$route.params && this.$route.params.cbpg01;
             this.ids.id = this.$route.params && this.$route.params.cbpg01;
             this.status = this.$route.params && this.$route.params.status;
+            if(this.status == 0){
+              const obj = Object.assign({}, this.$route, { title: "销售退货单审核" })
+              this.$tab.updatePage(obj);
+              // this.$route.meta.title="销售退货单审核"
+            }else if(this.status==8){
+              const obj = Object.assign({}, this.$route, { title: "销售退货单详情" })
+              this.$tab.updatePage(obj);
+            }else {
+              const obj = Object.assign({}, this.$route, { title: "销售退货单反审" })
+              this.$tab.updatePage(obj);
+            }
             console.log(this.$route)
             if (userId) {
                 // 获取表详细信息

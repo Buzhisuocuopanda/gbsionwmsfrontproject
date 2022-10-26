@@ -85,7 +85,7 @@
               <el-input v-model="scope.row.cbsf15" placeholder="供应商id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbsf166" label="订单分类" width="150">
+          <el-table-column v-if="false" prop="cbsf166" label="订单分类" width="150">
             <template slot-scope="scope">
               <!-- <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)" style="width:120px!important;" />
@@ -927,7 +927,7 @@ export default {
             item.cbsc14 = item.saleOrderId;
             // item.cbsf16 = item.cbsf16 == 1?'国际订单':'国内订单'
             item.cbpc000 =
-              item.pinpai == null?'':item.pinpai + "~" + item.cbpb12 == null?'':item.cbpd12 + "~" + item.cbpb08 ==null?'':item.cbpb08;
+              item.pinpai + "~" + item.cbpb12 + "~" + item.cbpb08;
             // if (item.cbsc177 == "国内订单") {
             //   item.cbsc17 = "1";
             // } else {

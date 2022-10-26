@@ -206,7 +206,7 @@
           </el-table-column>
           <el-table-column prop="cbsc09" label="数量" width="80">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbsc09" v-only-number="{ min: 1, precision: 0.0 }" @blur="chen(scope.row)"
+              <el-input v-model="scope.row.cbsc09" v-only-number="{ precision: 0.0 }" @blur="chen(scope.row)"
                 placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
@@ -846,67 +846,73 @@ export default {
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
       let count = this.tableData.length; // 记录当前有多少个表单
-      for (var index in this.tableData) {
-        var form = this.tableData[index];
-        console.log(form);
-        console.log(JSON.stringify(form));
-        // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-        // this.$refs[form.formName][0].validate((valid, obj) => {
-        // if (valid) {
-        // 如果检查通过，则对count减1。
-        // 当count为1时，表示是最后一个表单，则存储数据
-        PurchaseinboundAdds(JSON.stringify(this.tableData)).then((response) => {
-          if (response.code == "200") {
-            this.reset01();
-            this.submitShangpin();
-            this.tableData = [];
-            // this.$router.push("/system/user-xsckfh/role/");
-            this.$tab.closePage();
-            this.$router.go(-1);
-            // this.form2= {
-            //    cbpc07: "",
-            //     cbpc08: "",
-            //     cbca08: "",
-            //     cbwa09: "",
-            //     cala08: "",
-            //     cbpc100: "",
-            //     cbpc099: "",
-            //     cbpc166: "",
-            //     cbpc10: "",
-            //     cbpc09: "",
-            //     cbpd09: "",
-            //     cbpd11: "",
-            //     cbpd12: "",
-            //     cbpc16: "",
-            //     cbpc12: "",
-            //     cbpc14: "",
-            //     cbpd08: "",
-            //     cbsb07:"",
-            //     cbsb09:"",
-            //     cbsb10:"",
-            //     cbsb17:"",
-            //     cbsb18:"",
-            //     cbsb19:"",
-            //     cbsb21:"",
-            //     cbsb30:""
-            // }
-          }
-          if (count-- === 1) {
-            // this._ly_save();
-          }
+      // for (var index in this.tableData) {
+      //   var form = this.tableData[index];
+      //   console.log(form);
+      //   console.log(JSON.stringify(form));
+      // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
+      // this.$refs[form.formName][0].validate((valid, obj) => {
+      // if (valid) {
+      // 如果检查通过，则对count减1。
+      // 当count为1时，表示是最后一个表单，则存储数据
+      PurchaseinboundAdds(JSON.stringify(this.tableData)).then((response) => {
+        if (response.code == "200") {
+          this.reset01();
+          this.submitShangpin();
+          this.tableData = [];
+          // this.$router.push("/system/user-xsckfh/role/");
+          // this.form2= {
+          //    cbpc07: "",
+          //     cbpc08: "",
+          //     cbca08: "",
+          //     cbwa09: "",
+          //     cala08: "",
+          //     cbpc100: "",
+          //     cbpc099: "",
+          //     cbpc166: "",
+          //     cbpc10: "",
+          //     cbpc09: "",
+          //     cbpd09: "",
+          //     cbpd11: "",
+          //     cbpd12: "",
+          //     cbpc16: "",
+          //     cbpc12: "",
+          //     cbpc14: "",
+          //     cbpd08: "",
+          //     cbsb07:"",
+          //     cbsb09:"",
+          //     cbsb10:"",
+          //     cbsb17:"",
+          //     cbsb18:"",
+          //     cbsb19:"",
+          //     cbsb21:"",
+          //     cbsb30:""
+          // }
+          this.$message({
+            message: "添加成功",
+            type: "success",
+            style: "color:red;!important",
+          });
+          this.$tab.closePage();
+          this.$router.go(-1);
+        }
+        if (count-- === 1) {
+          // this._ly_save();
+        }
 
-          //  this.reset03();
-          //    this.formArr.cbpg01="1234567";
-          //    this.form.cbpg01=this.formArr.cbpg01;
-          //    console.log(this.form.cbpg01,85203);
-        });
 
-        // } else {
-        //     console.log(obj)
-        //     return false
-        // }
-        //   })
-      }
+        //  this.reset03();
+        //    this.formArr.cbpg01="1234567";
+        //    this.form.cbpg01=this.formArr.cbpg01;
+        //    console.log(this.form.cbpg01,85203);
+      })
+
+      // } else {
+      //     console.log(obj)
+      //     return false
+      // }
+      //   })
+      // }
       console.log("_ly_ok:" + JSON.stringify(this.tableData));
     },
 
@@ -1149,8 +1155,11 @@ export default {
                 item.cbsb01 = response.data.id;
               });
               console.log(response.data.id, 123456);
+
               // console.log(this.item, 123456);
               this._ly_ok();
+              // this.$tab.closePage();
+              // this.$router.go(-1);
 
             }
           });

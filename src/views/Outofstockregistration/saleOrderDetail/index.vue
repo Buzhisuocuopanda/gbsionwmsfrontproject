@@ -14,7 +14,7 @@
 
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable
+            <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore" v-model="formData.customerId" filterable
               clearable :filter-method="customerdataFilter"  placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUserId">
-            <el-select v-loadmore="saleUserloadMore" v-model="formData.saleUserId" filterable clearable
+            <el-select v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUserId" filterable clearable
               :filter-method="saleUserdataFilter" :remote-method="saleUserloadMore2" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -175,7 +175,7 @@
           <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
               <sapn><!--@change="goodsOnChange(scope.row)"-->
-                <el-select  v-loadmore="loadMore" v-model="scope.row.goodsId"
+                <el-select  v-el-select-loadmore="loadMore" v-model="scope.row.goodsId"
                   filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option @click.native="optionClick(scope.row,item)" v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>

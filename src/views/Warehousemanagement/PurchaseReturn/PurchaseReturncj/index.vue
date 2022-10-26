@@ -703,7 +703,7 @@ export default {
         // this.tableData = res.data.rows
         if(res.data.rows != []){
           this.tableData.map((item,i) =>{
-            item.cbpc000 = res.data.rows[i].cbpb10 + res.data.rows[i].cbpb12 + res.data.rows[i].cbpb08
+            item.cbpc000 = res.data.rows[i].cbpb10 + ' ~ ' + res.data.rows[i].cbpb12 + ' ~ ' + res.data.rows[i].cbpb08
             item.cbph08 = res.data.rows[i].goodsId
           })
           this.form2.cbpc100 = res.data.rows[0].cbwa09
