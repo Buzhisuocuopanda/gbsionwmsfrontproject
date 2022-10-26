@@ -19,7 +19,7 @@
 
         <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" icon="el-icon-search"
-            style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索
+            style="margin-bottom:0;margin-left: 2em" @click="onSearch1">搜索
           </el-button>
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="reset">重置
@@ -1016,6 +1016,30 @@ export default {
         if (response.data != null && response.data.rows != null) {
           this.orderList = response.data.rows
           this.totalItems = response.data.total
+        } else {
+          this.orderList = []
+          this.totalItems = 0
+        }
+      })
+    },
+
+    onSearch1() {
+      console.log('sort', this.sortkey)
+      const param = {
+        orderNo: this.orderNo,
+        model: this.model,
+        status: this.status,
+        pageNum: 1,
+        pageSize: this.listQuery.pageSize,
+        sortKey: this.sortkey,
+        sortType: this.sorttype
+      }
+      // console.info(param)
+      totalOrderList(param).then(response => {
+        if (response.data != null && response.data.rows != null) {
+          this.orderList = response.data.rows
+          this.totalItems = response.data.total
+          this.listQuery.pageNum = 1
         } else {
           this.orderList = []
           this.totalItems = 0
