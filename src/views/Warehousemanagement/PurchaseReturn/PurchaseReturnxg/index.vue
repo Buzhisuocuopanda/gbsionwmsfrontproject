@@ -860,7 +860,7 @@ export default {
       console.log(row, 222);
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
       this.$set(row, "cbph08", e.substring(e.indexOf(".") + 1), 8523642);
-      this.form2.cbph08 = row.cbph08
+      // this.form2.cbph08 = row.cbph08
       console.log(row, 555);
       // console.log(row.cbpc08,96325412);
       // console.log(name, 111)
