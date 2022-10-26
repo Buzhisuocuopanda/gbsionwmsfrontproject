@@ -89,12 +89,12 @@
             <el-button plain style="float: left; margin-left: 1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-          :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:630px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:630px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -117,8 +117,8 @@
           <el-table-column prop="cbph09" label="数量" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input v-model="scope.row.cbph09"
-                @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbph09" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style="">
+              </el-input>
               <!-- <input type="number"  v-enter-number placeholder="请输入金额" min="0" class="one" v-model="scope.row.cbph09"  @blur="isNull(scope.row.cbph09,1)" > -->
 
               <!-- </sapn> -->
@@ -127,15 +127,15 @@
           <el-table-column prop="cbph10" label="单价" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input v-model="scope.row.cbph10"
-                @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbph10" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style="">
+              </el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
           <el-table-column prop="cbph11" label="金额" width="100">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbph11" v-only-number="{max: 100, min: 0,precision:0}" placeholder=""
+                <el-input v-model="scope.row.cbph11" v-only-number="{ max: 100, min: 0, precision: 0 }" placeholder=""
                   @blur="chen(scope.row)" class="shuzicaoyou" style="" readonly></el-input>
               </sapn>
             </template>
@@ -677,42 +677,70 @@ export default {
     },
   },
   created() {
+    console.log(this.$route.params.data.length, "---------------------------")
+    // if (this.$route.params.data.length) {
 
-
+    // } else {
     this.getConfigKey("sys.user.initPassword").then(response => {
       // this.initPassword = response.msg;
     });
     this.getDicts("sw_js_store_type").then(response => {
       this.form.type = response.rows;
     });
+    // }
+
     // this.form.type = this.dict[0].label;
     // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
     // console.log(this.userList,123456789);
     // this.chen();
     //   this.form2.cbph10 = "20"
-    this.getlists()
 
   },
+  mounted() {
+    // 初始化表单数据，至少有一行表单数据
+    this.tableData = []
+    this._ly_addFrom()
+    this.getlists()
+  },
   methods: {
-    getlists(){
-      const userId = this.$route.params && this.$route.params.data.sn
-      let obj = {
-        sn:userId
+    getlists() {
+      // const userId = this.$route.params && this.$route.params.data.sn
+      // let obj = {
+      //   sn:userId
+      // }
+      // SwJsSkuBarcodelists(obj).then((res) =>{
+      //   // this.tableData = res.data.rows
+      //   if(res.data.rows != []){
+      //     this.tableData.map((item,i) =>{
+      //       item.cbpc000 = res.data.rows[i].cbpb10 + ' ~ ' + res.data.rows[i].cbpb12 + ' ~ ' + res.data.rows[i].cbpb08
+      //       item.cbph08 = res.data.rows[i].goodsId
+      //     })
+      //     this.form2.cbpc100 = res.data.rows[0].cbwa09
+      //     this.form2.cbpg10 = res.data.rows[0].whId
+      //   }else{
+      //     this.tableData = ''
+      //   }
+
+      // })
+      console.log(this.$route,'##########')
+      let arr1 = []
+      let that = this
+      for (let i = 0; i < this.$route.params.data.length; i++) {
+        arr1.push({
+          cbpc000 : that.$route.params.data[i].cbpb10 + ' ~ ' + that.$route.params.data[i].cbpb12 + ' ~ ' + that.$route.params.data[i].cbpb08,
+          cbph08 : that.$route.params.data[i].goodsId
+        })
       }
-      SwJsSkuBarcodelists(obj).then((res) =>{
-        // this.tableData = res.data.rows
-        if(res.data.rows != []){
-          this.tableData.map((item,i) =>{
-            item.cbpc000 = res.data.rows[i].cbpb10 + ' ~ ' + res.data.rows[i].cbpb12 + ' ~ ' + res.data.rows[i].cbpb08
-            item.cbph08 = res.data.rows[i].goodsId
-          })
-          this.form2.cbpc100 = res.data.rows[0].cbwa09
-          this.form2.cbpg10 = res.data.rows[0].whId
-        }else{
-          this.tableData = ''
-        }
-        
-      })
+      this.tableData = arr1
+      this.form2.cbpc100 = that.$route.params.data[0].cbwa09
+      this.form2.cbpg10 = that.$route.params.data[0].whId
+      // let data = this.$route.params.data.map(item => {
+      //   item.cbpc000 = res.data.rows[i].cbpb10 + ' ~ ' + res.data.rows[i].cbpb12 + ' ~ ' + res.data.rows[i].cbpb08
+      //   item.cbph08 = res.data.rows[i].goodsId
+      // })
+      console.log(this.tableData, "this.tableData------------------------this.tableData")
+
+
     },
 
     chen(item) {
@@ -754,10 +782,10 @@ export default {
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
       let count = this.tableData.length // 记录当前有多少个表单
-      for (var index in this.tableData) {
-        var form = this.tableData[index]
-        console.log(form)
-        console.log(JSON.stringify(form))
+      // for (var index in this.tableData) {
+        // var form = this.tableData[index]
+        // console.log(form)
+        // console.log(JSON.stringify(form))
         // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
         // this.$refs[form.formName][0].validate((valid, obj) => {
         // if (valid) {
@@ -819,7 +847,7 @@ export default {
         //     return false
         //   }
         // })
-      }
+      // }
       console.log('_ly_ok:' + JSON.stringify(this.tableData))
     },
 
@@ -1017,8 +1045,8 @@ export default {
         if (item) {
           PurchasereturnordersAdd(this.form2).then(response => {
             if (response.code == "200") {
-              
-              
+
+
               // console.log(this.form2.cbpg161,111);
               // console.log(this.form.cbpg01,222);
               console.log(response.data.id, 333);
@@ -1027,7 +1055,7 @@ export default {
                 console.log(item.cbpg01, 8523697412);
               })
               this._ly_ok()
-              
+
             }
           });
         } else {
@@ -1049,11 +1077,6 @@ export default {
 
 
 
-  },
-  mounted() {
-    // 初始化表单数据，至少有一行表单数据
-    this.tableData = []
-    this._ly_addFrom()
   },
   watch: {
     visible(newVal) {
