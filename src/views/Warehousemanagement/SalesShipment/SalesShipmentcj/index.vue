@@ -190,7 +190,7 @@
               <el-popover placement="bottom-start" trigger="click" disabled>
                 <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event, scope.row)"
                   style="width: 210px !important" />
-                <el-input slot="reference" v-model="scope.row.cbpc099" placeholder="" readonly style="width: 80%">
+                <el-input slot="reference" v-model="scope.row.cbpc099" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
             </template>
@@ -198,7 +198,7 @@
           <el-table-column prop="province" label="订单分类" width="150">
             <template slot-scope="scope">
               <!-- <el-input v-model="scope.row.cbsc177" placeholder=""></el-input> -->
-              <el-select v-model="scope.row.cbsc177" placeholder="" style="width: 80%" disabled>
+              <el-select v-model="scope.row.cbsc177" placeholder="" style="width: 100%" disabled>
                 <el-option v-for="item in jiageLeixengong" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -216,10 +216,10 @@
                 class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbsc12" label="金额" width="80">
+          <el-table-column prop="cbsc12" label="金额" width="150">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc12" v-only-number="{ precision: 0.0 }" placeholder=""
-                class="shuzicaoyou" style=""></el-input>
+              <el-input  v-model="scope.row.cbsc12" v-only-number="{ precision: 0.0 }" placeholder=""
+                class="shuzicaoyou" style="width:100%"></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
