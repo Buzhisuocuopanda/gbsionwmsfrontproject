@@ -982,6 +982,8 @@ export default {
                 type: "success",
                 style: "color:red;!important",
               });
+              this.$tab.closePage();
+              this.$router.go(-1);
               this.submitShangpin();
               // this.open2 = false;
               this.reset01();
