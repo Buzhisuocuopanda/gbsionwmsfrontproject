@@ -509,8 +509,8 @@
 
       <div>
         <el-row>
-          <el-col v-if="false" :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
+          <el-col  :span="24">
+            <el-button plain style="float: left;margin-left: 10px" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
@@ -589,13 +589,13 @@
               </sapn>
             </template>
           </el-table-column>
-          <!--          <el-table-column label="操作" align="center" width="80">
+                    <el-table-column label="操作" align="center" width="80">
                       <template slot-scope="scope">
-                        <span @click="_ly_delFrom(scope.row)">
-                          <i class="el-icon-error" style="color: red;"></i>
+                        <span @click="_ly_delFrom(scope.$index)">
+                          <i class="el-icon-delete" style="color: red;"></i>
                         </span>
                       </template>
-                    </el-table-column>-->
+                    </el-table-column>
         </el-table>
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
@@ -1265,15 +1265,18 @@ export default {
         canUseSku: 0,
         moner: '',
         province: '',
+        standardprice:undefined,
+        thisprice:undefined,
+        money:undefined
       })
       this.dataId++
       console.log(this.tableData);
     },
     // 删除一行表单
-    _ly_delFrom(row) {
+    _ly_delFrom(index) {
       // console.log('index: ' + index)
-      // this.formArr.splice(index, 1)
-      this.tableData.splice(this.tableData.indexOf(row), 1)
+      this.tableData.splice(index, 1)
+      // this.tableData.splice(this.tableData.indexOf(row), 1)
     },
     // 点击select的时候，缓存下行号
     // 如果一行有多个树状结构的select，可以通过缓存列号，区分是哪个select
