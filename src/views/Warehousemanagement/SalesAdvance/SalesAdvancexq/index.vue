@@ -47,7 +47,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="margin-left:-4%;" :span="6">
-                    <el-form-item label="工厂:" prop="cbpc100" class="kuweixxweihu">
+                    <el-form-item label="工厂:" prop="factory" class="kuweixxweihu">
                         <!-- <el-popover placement="bottom-start" trigger="click">
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
                             <el-input :disabled="true" slot="reference" v-model="form2.cbpc100" placeholder="" readonly
@@ -172,6 +172,13 @@
                             </el-input>
                         </template>
                     </el-table-column>
+                    <el-table-column label="价格" width="100" prop="price">
+                        <template slot-scope="scope" style="width:200%;">
+                            <el-input :disabled="true" v-model="scope.row.price"
+                                 placeholder="" class="shuzicaoyou" style="" readonly>
+                            </el-input>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="orderDate" label="订单日期" width="215">
                         <template slot-scope="scope">
                             <el-date-picker :disabled="true" type="date" placeholder="" v-model="scope.row.orderDate"
@@ -219,6 +226,7 @@
         </el-form>
         <div class="tinajia_dingwei">
             <!-- <el-button type="primary" @click="handleUpdate">保 存</el-button> -->
+            <el-button v-show="statuss == 0" type="primary" @click="PurchaseinboundShenpi">审 核</el-button>
             <el-button @click="handlexiaoshouone">取 消</el-button>
         </div>
     </div>
@@ -229,7 +237,7 @@
 
 
 import {
-    PurchaseinboundAdd, PurchaseinSalesAdvance, PurchaseinboundEditSalesAdvance
+    PurchaseinboundAdd, PurchaseinSalesAdvance, PurchaseinboundEditSalesAdvance,PurchaseinboundSH
 } from "@/api/Warehousemanagement/SalesAdvance";
 
 import {
@@ -610,7 +618,8 @@ export default {
                 cbwa09: undefined,
                 dateRange: undefined
             },
-
+            // 状态
+            statuss:'',
 
             rules: {
                 cbpc0999: [{
@@ -685,7 +694,20 @@ export default {
 
     },
     methods: {
-
+        // 审核
+        PurchaseinboundShenpi() {
+            let id = this.$route.params && this.$route.params.id
+            // let id = this.form2.ids
+            this.$modal.confirm('是否要审批,编号为"' + this.form2.GsSalesOrders + '"的数据项？').then(() => {
+                PurchaseinboundSH({id}).then(response => {
+                    if (response.code == "200") {
+                        this.$message({ message: response.msg, type: 'success' });
+                        this.$tab.closePage();
+                        this.$router.go(-1);
+                    }
+                });
+            }).catch(() => { });
+        },
         validateMealStandard(e) {
             let mealStandard = e.target.value.replace(/[^\d.]/g, '').replace(/\.{2,}/g, '.').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.').replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3').replace(/^\./g, '');
             if (mealStandard >= 999999999.99) {
@@ -875,7 +897,7 @@ export default {
         //详情列表
         getList() {
             const userId = this.$route.params && this.$route.params.id;
-            console.log(userId, "20221009");
+            this.statuss = this.$route.params && this.$route.params.ststus
             if (userId) {
                 // 获取表详细信息
                 PurchaseinSalesAdvance({ icu: userId }, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
@@ -885,6 +907,8 @@ export default {
                         console.log(res, "20221009");
                         //主键id
                         this.form2.id = this.userList[0].id;
+                        // 
+                        this.form2.ids = this.userList[0].ids;
                         //销售预订单主表名称
                         this.form2.GsSalesOrders = this.userList[0].orderNo;
                         //销售预订单主表名称id
@@ -900,7 +924,7 @@ export default {
                         //供应商id
                         this.form2.supplierId = this.userList[0].supplierId;
                         //仓库名称
-                        // this.form2.cbpc100 = this.userList[0].wh;
+                        this.form2.cbpc100 = this.userList[0].factory;
                         //仓库名称ID
                         // this.form2.whId = this.userList[0].whId;
                         //销售人员名称
@@ -909,6 +933,7 @@ export default {
                         this.form2.salerId = this.userList[0].salerId;
                         //商品id
                         this.form2.goodsId = this.userList[0].goodsId;
+                        this.form2.factory = this.userList[0].factory;
                         //品牌、型号、描述
                         // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
                         this.tableData = res.data.rows

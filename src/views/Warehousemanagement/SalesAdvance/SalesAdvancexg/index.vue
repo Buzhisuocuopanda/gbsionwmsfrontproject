@@ -15,7 +15,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;">
+            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;" value-format="yyyy-MM-dd HH:mm:ss">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -122,19 +122,19 @@
         </el-col>
       </el-row>
       <div>
-        <!-- <el-row>
+        <el-row>
           <el-col :span="24">
             <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
-        </el-row> -->
+        </el-row>
 
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
           :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="cala08" label="品牌" width="300">
             <template slot-scope="scope" style="width:200%;">
-              <el-popover placement="bottom-start" trigger="click" disabled>
+              <el-popover placement="bottom-start" trigger="click">
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:600px!important;" />
-                <el-input slot="reference" v-model="scope.row.cala08" placeholder="" readonly style="width:100%;">
+                <el-input slot="reference" v-model="scope.row.cala08" placeholder="" style="width:100%;">
                 </el-input>
               </el-popover>
             </template>
@@ -153,13 +153,19 @@
           </el-table-column> -->
           <el-table-column label="数量" width="100" prop="qty">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""
+              <el-input v-model="scope.row.qty" placeholder=""
                 @keyup="validateMealStandard($event)" class="shuzicaoyou" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column label="价格" width="100" prop="qty">
+            <template slot-scope="scope" style="width:200%;">
+              <el-input v-model="scope.row.price"  placeholder=""
+                class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
-              <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;" disabled>
+              <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;" value-format="yyyy-MM-dd HH:mm:ss">
               </el-date-picker>
             </template>
           </el-table-column>
@@ -716,15 +722,21 @@ export default {
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
       console.log(this.tableData, 333)
+      
       this.tableData.forEach((item) => {
         //  this.form2.goodsId = item.goodsId;
         item.supplierId = this.form2.supplierId;
         item.gsSalesOrders = this.form2.gsSalesOrders;
         item.salerId = this.form2.salerId;
-        console.log(item, "1023");
+        item.goodsId = this.tableData[i].goodsId,
+        factory = this.form2.factory,
+        goodsclassify = "string",
+        id = 0,
+        orderDate = '',
+        orderNo = "string",
+        qty = 0
       })
       PurchaseinboundAdd(JSON.stringify(this.tableData)).then(response => {
-
         if (response.code == "200") {
           this.tableData = []
           this.form2 = {
@@ -770,7 +782,7 @@ export default {
         if (count-- === 1) {
           this._ly_save()
         }
-        this._ly_addFrom()
+        // this._ly_addFrom()
         //    this.formArr.cbpg01="1234567";
         //    this.form.cbpg01=this.formArr.cbpg01;
         //    console.log(this.form.cbpg01,85203);
@@ -816,6 +828,7 @@ export default {
       //   cbpc01: this.form2.cbpg161,
       //   cbpd08: this.form2.cbpd08,
       // })
+      let that = this
       this.tableData.push({
         date: '',
         num: '',
@@ -825,7 +838,8 @@ export default {
         cbpc000: '',
         qty: "",
         cbpc099: '',
-        orderDate: ''
+        orderDate: '',
+        factory:that.form2.factory
       })
       this.dataId++
       console.log(this.tableData, 852369);
@@ -878,7 +892,7 @@ export default {
             // //销售预订单主表名称id
             // this.form2.gsSalesOrders = this.userList[0].gsSalesOrders;
             // //日期
-            // this.form2.orderDate = this.userList[0].orderDate;
+            this.form2.orderDate = this.form2.orderDate.slice(0,10)+ ' ' +this.form2.orderDate.slice(11,19);
             // //客户名称
             // this.form2.cbpc0999 = this.userList[0].customerMag;
             // //客户名称id
@@ -907,6 +921,7 @@ export default {
               item.goodsId = item.goodsId;
               // 
               item.orderNo = item.orderNo
+              item.orderDate = item.orderDate.slice(0,10)+ ' ' +item.orderDate.slice(11,19)
             })
 
           }
@@ -1002,34 +1017,6 @@ export default {
       this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
       this.$set(row, "goodsclassifyy", e.substring(e.indexOf("~") + 1), 8523642)
       this.$set(row, "goodsclassify", row.goodsclassifyy.substring(0, row.goodsclassifyy.indexOf("~")), 555)
-      // console.log(row.cbpc08,96325412);
-      // console.log(name, 111)
-      // console.log(index, 222)
-      // this.$set(this.tableData, "cbpc000", e)
-
-      // this.formArr[index].cbpc000=''
-      // this.formArr[index].cbpc000=e
-      // console.log(this.formArr)
-      // console.log(name.substring(name.indexOf("-") + 1), 963);
-      // this.form.cbpc000 = name.substring(0, name.indexOf("-"));
-      // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
-      // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-      // this.form.cbpc000 = name;
-      // this.form.cbpd08  =  name.substring(name.indexOf(".") +1);
-      // console.log(this.form2.cbpd08,852369421);
-
-      // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
-      //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
-      // this.form.cbpc000 = name;
-      // this.$set(this.tableData,"cbpc000",name);
-      // this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1));
-      // this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
-      // this.$forceUpdate()
-      // console.log(this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
-      // this.tableData.cbpc000 = "123";
-      // this.tableData.num = "23344";
-      // console.log(name,556623);
-      // console.log(this.tableData.cbpc000,20220905);
     },
 
 
@@ -1111,49 +1098,73 @@ export default {
 
     /** 修改按钮操作 */
     handleUpdate() {
-      let row = {}
-      //商品id
-      this.tableData.forEach((item) => {
-        row.goodsId = item.goodsId;
-        //商品型号
-        row.goodsclassify = item.goodsclassify;
-        row.qty = item.qty
-      })
-
+      // let row = {}
+      // //商品id
+      // this.tableData.forEach((item) => {
+      //   row.goodsId = item.goodsId;
+      //   //商品型号
+      //   row.goodsclassify = item.goodsclassify;
+      //   row.qty = item.qty
+      // })
+      let obj = {
+        "customerId": this.form2.customerId,
+        "goods": [],
+        // "gsid": 0,
+        "id": this.form2.ids,
+        "orderDate": this.form2.orderDate.replace(' ','T') +'.000+08:00',
+        // "orderDate": this.form2.orderDate,
+        "orderNo": this.form2.orderNo,
+        "salerId": this.form2.salerId,
+        "supplierId": this.form2.supplierId,
+        "whId": this.form2.whId
+      }
       let arr1 = []
       for (let i = 0; i < this.tableData.length; i++) {
-        arr1.push({
+        obj.goods.push({
           //客户id
-          // customer : this.tableData[i].customerId,
+          customerId : this.form2.customerId,
           //供应商id
-          // supplierId : this.tableData[i].supplierId,
+          supplierId : this.form2.supplierId,
           //仓库id 
           // whId : this.tableData[i].whId,
           //销售人员id
-          // salerId : this.tableData[i].salerId,
+          salerId : this.tableData[i].salerId,
           //订单日期
-          // orderDate : this.tableData[i].orderDate,
-          id: this.tableData[i].id,
+          orderDate : this.tableData[i].orderDate.replace(' ','T') +'.000+08:00',
+          // id: this.tableData[i].id,
           goodsId: this.tableData[i].goodsId,
           //商品型号
-          // goodsclassify : this.tableData[i].goodsclassify,
+          goodsclassify : this.tableData[i].cala08,
           qty: this.tableData[i].qty,
           // 主表id
-          gsSalesOrders: this.tableData[i].gsSalesOrders,
-          factory: this.tableData[i].factory,
+          gsSalesOrders: this.form2.gsSalesOrders,
+          factory: this.form2.factory,
+          orderNo : this.form2.orderNo,
+          price:this.tableData[i].price
         })
       }
-      // row.cbpc16 = this.form.cbpc16;
-      // console.log(this.form.id);
-      PurchaseinboundEditSalesAdvance(JSON.stringify(arr1)).then(response => {
-        if (response.code == "200") {
-          // console.log(this.form, 789)
-
-          this.$message({ message: '修改成功', type: 'success' });
-          this.handlexiaoshouone();
+      const bollen = false
+      obj.goods.map((item) =>{
+        if(item.qty <=0){
+          this.$message({message:'数量必须大于0',type:'error'})
+          bollen = true
         }
+      })
+      if(bollen == true){
+        return
+      }else{
+         // row.cbpc16 = this.form.cbpc16;
+        PurchaseinboundEditSalesAdvance(JSON.stringify(obj)).then(response => {
+          if (response.code == "200") {
+            // console.log(this.form, 789)
 
-      });
+            this.$message({ message: '修改成功', type: 'success' });
+            this.handlexiaoshouone();
+          }
+
+        });
+      }
+     
 
     },
 
