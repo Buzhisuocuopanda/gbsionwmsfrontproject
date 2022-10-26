@@ -116,7 +116,7 @@ Vue.directive('loadmore', {
 })
 export default {
   components: {},
-  name: "Inventorysmmaryquerys",
+  name: "Inventorysummaryquerys",
   data() {
     return {
       dateRange:[],
