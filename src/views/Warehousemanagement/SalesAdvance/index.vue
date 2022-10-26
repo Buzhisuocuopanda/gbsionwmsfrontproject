@@ -928,18 +928,20 @@ export default {
 
         //审批
         PurchaseinboundShenpi(row) {
-            this.$modal.confirm('是否要审批,编号为"' + row.orderNo + '"的数据项？').then(() => {
-                console.log(row.cbpc01, 8888);
+            let cbpc01 = row.id;
+            let status = row.status
+            this.$router.push("/system/user-SalesAdvancexiangqong/role/" + cbpc01 + status);
 
-                PurchaseinboundSH(row).then(response => {
-                    if (response.code == "200") {
-                        this.getList();
-                        // this.$message({ message: response.msg, type: 'success' });
-                    } else {
-                        // this.$message({ message: response.msg, type: 'error' });
-                    }
-                });
-            }).catch(() => { });
+            // this.$modal.confirm('是否要审批,编号为"' + row.orderNo + '"的数据项？').then(() => {
+            //     console.log(row.cbpc01, 8888);
+
+            //     PurchaseinboundSH(row).then(response => {
+            //         if (response.code == "200") {
+            //             this.getList();
+            //             // this.$message({ message: response.msg, type: 'success' });
+            //         }
+            //     });
+            // }).catch(() => { });
         },
         //审批上面内容
         PurchaseinboundShenpi01(row) {
@@ -988,8 +990,6 @@ export default {
                         if (res.code == "200") {
                             this.getList();
                             this.$modal.msgSuccess(res.msg);
-                        } else {
-                            // this.$message({ message: res.msg, type: 'error' });
                         }
 
                     }).catch((e) => {
@@ -1011,8 +1011,6 @@ export default {
                         this.getList();
                         // this.open = false;
                         this.$message({ message: response.msg, type: 'success' });
-                    } else {
-                        // this.$message({ message: response.msg, type: 'error' });
                     }
                 });
             }).catch(() => { });
@@ -1028,8 +1026,6 @@ export default {
                         if (res.code == "200") {
                             this.getList();
                             this.$modal.msgSuccess(res.msg);
-                        } else {
-                            // this.$message({ message: res.msg, type: 'error' });
                         }
 
                     }).catch((e) => {
@@ -1047,8 +1043,6 @@ export default {
                         console.log(this.form.cbpc01, 789);
                         this.getList();
                         this.$message({ message: response.msg, type: 'success' });
-                    } else {
-                        // this.$message({ message: response.msg, type: 'error' });
                     }
 
                 });
@@ -1230,8 +1224,8 @@ export default {
         handleAuthRole: function (row) {
             const cbpc01 = row.id;
             console.log(row.cbpc01);
-            // this.$router.push("/system/user-auth/role/");
-            this.$router.push("/system/user-SalesAdvancexiangqong/role/" + cbpc01);
+            let status = row.status
+            this.$router.push("/system/user-SalesAdvancexiangqong/role/" + cbpc01 + status);
         },
 
         /** 创建操作 */

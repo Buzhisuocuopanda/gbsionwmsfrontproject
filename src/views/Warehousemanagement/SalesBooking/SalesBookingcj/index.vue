@@ -132,7 +132,7 @@
           <el-table-column label="数量" width="200px">
             <template slot-scope="scope" style="width:200%;">
               <!-- <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input> -->
-              <el-input v-model="scope.row.qty" v-only-number="{ min: 1, precision:0.00}" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.qty" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="auto">
@@ -960,32 +960,41 @@ export default {
       this.$refs["form2"].validate((item) => {
         if (item) {
           this.form2.goods = this.tableData
+          const bollen = false
           this.tableData.map((item) =>{
             item.factory = this.form2.factory
-          })
-          // this.form2.orderDate = this.form2.orderDate.slice(0, 10) + '  ' + this.form2.orderDate.slice(10, -1)
-          PurchaseinboundAdd(this.form2).then(response => {
-            if (response.code == "200") {
-              this.$message({
-                message: '添加成功',
-                type: 'success',
-                style: 'color:red;!important'
-              });
-              this.submitShangpin();
-              this.open2 = false;
-              this.reset01()
-              // console.log(this.form2.cbpg161,111);
-              // console.log(this.form.cbpg01,222);
-              // console.log(response.data.id, 333);
-              // this.tableData.forEach((item) => {
-              //   item.purchaseOrderId = response.data.id;
-              //   console.log(item.purchaseOrderId, 8523697412);
-              // })
-              // this._ly_ok();
-              this.$tab.closePage();
-              this.$router.go(-1);
+            if(item.qty<=0){
+              this.$message({message:'数量必须大于0',type:'error'})
+              bollen = true
             }
-          });
+          })
+          if(bollen == true){
+            return
+          }else{
+            // this.form2.orderDate = this.form2.orderDate.slice(0, 10) + '  ' + this.form2.orderDate.slice(10, -1)
+            PurchaseinboundAdd(this.form2).then(response => {
+              if (response.code == "200") {
+                this.$message({
+                  message: '添加成功',
+                  type: 'success',
+                  style: 'color:red;!important'
+                });
+                this.submitShangpin();
+                this.open2 = false;
+                this.reset01()
+                // console.log(this.form2.cbpg161,111);
+                // console.log(this.form.cbpg01,222);
+                // console.log(response.data.id, 333);
+                // this.tableData.forEach((item) => {
+                //   item.purchaseOrderId = response.data.id;
+                //   console.log(item.purchaseOrderId, 8523697412);
+                // })
+                // this._ly_ok();
+                this.$tab.closePage();
+                this.$router.go(-1);
+              }
+            });
+          }
         } else {
           // this.$message.error('请注意规范');
         }
