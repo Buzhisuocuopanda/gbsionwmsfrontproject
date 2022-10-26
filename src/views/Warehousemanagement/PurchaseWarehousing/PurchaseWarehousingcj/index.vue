@@ -85,13 +85,13 @@
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-          :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:630px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:630px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -101,19 +101,19 @@
           <el-table-column label="描述" width="" />
           <el-table-column prop="cbpd09" label="数量" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd09" v-only-number="{max: 100000, min: 0,precision:0.0000}"
+              <el-input v-model="scope.row.cbpd09" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
                 @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd11" label="单价"  width="100">
+          <el-table-column prop="cbpd11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd11" v-only-number="{max: 100000, min: 0, precision:0.0000}"
+              <el-input v-model="scope.row.cbpd11" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
                 @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd12" label="金额" width="150">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd12" v-only-number="{max: 100000, min: 0, precision:0.0000}" disabled
+              <el-input v-model="scope.row.cbpd12" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" disabled
                 @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
@@ -767,12 +767,15 @@ export default {
 
     //查询商品信息维护
     selected08(e, row) {
+      console.log(e, row, "e,row--------------e.row")
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      console.log(e.lastIndexOf("."))
+      console.log(e.substring(0, e.lastIndexOf(".")))
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "cbpd08", e.substring(e.indexOf(".") + 1), 8523642)
+      this.$set(row, "cbpd08", e.substring(e.lastIndexOf(".") + 1), 8523642)
       console.log(row, 555)
       // console.log(row.cbpc08,96325412);
       // console.log(name, 111)
@@ -876,18 +879,18 @@ export default {
       this.form2.goods = this.tableData;
       this.$refs["form2"].validate((item) => {
         if (item) {
-          for(let i=0;i<this.tableData.length;i++){
+          for (let i = 0; i < this.tableData.length; i++) {
 
-            if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
+            if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
               return this.$message.error("采购入库单明细的商品不能为空")
             }
-            if(this.tableData[i].cbpd09==null||this.tableData[i].cbpd09==0){
+            if (this.tableData[i].cbpd09 == null || this.tableData[i].cbpd09 == 0) {
               return this.$message.error("采购入库单明细的数量不能为空")
             }
-            if(this.tableData[i].cbpd11==null||this.tableData[i].cbpd11==0){
+            if (this.tableData[i].cbpd11 == null || this.tableData[i].cbpd11 == 0) {
               return this.$message.error("采购入库单明细的单价不能为空")
             }
-            if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+            if (this.tableData[i].cbpd12 == null || this.tableData[i].cbpd12 == 0) {
               return this.$message.error("采购入库单明细的金额不能为空")
             }
           }
