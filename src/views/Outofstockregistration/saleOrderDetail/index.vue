@@ -168,7 +168,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
+            <el-button plain style="float: left;margin-left: 10px" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
@@ -247,13 +247,13 @@
               </sapn>
             </template>
           </el-table-column>
-          <!--          <el-table-column label="操作" align="center" width="80">
+                    <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
-              <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-error" style="color: red;"></i>
+              <span @click="_ly_delFrom(scope.$index)">
+                <i class="el-icon-delete" style="color: red;"></i>
               </span>
             </template>
-          </el-table-column>-->
+          </el-table-column>
         </el-table>
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">

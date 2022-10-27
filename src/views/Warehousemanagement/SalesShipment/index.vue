@@ -1008,7 +1008,12 @@ export default {
     /** 查询用户列表 */
     getList09() {
       this.loading = true;
-      Purchaseinbounddingdanck(
+      let obj = {
+        customerName: this.valuexs,
+        whId: this.tcwhId,
+        orderNo: this.orderNo
+      }
+      Purchaseinbounddingdanck(obj
       ).then((response) => {
         console.log(response)
         this.userList01 = response.data.rows;
@@ -1021,6 +1026,44 @@ export default {
         this.loading = false;
       });
     },
+    getList09xs() {
+      this.loading = true;
+      let obj = {
+        customerName: this.valuexs,
+        whId: this.tcwhId,
+        saleNo: this.orderNo1
+      }
+      saleOrderListPj(obj
+      ).then((response) => {
+        console.log(response)
+        this.userList01xs = response.data.rows;
+        this.totall = response.data.total;
+        // //供应商
+        // this.postOptions = response.data.content;
+        // console.log(this.userList, 3369);
+        console.log(response, 85200000);
+        // this.deleteFlag = response.data.rows.deleteFlag;
+        this.loading = false;
+      });
+    },
+
+
+    // helloxs() {
+    //   console.log(this.valuexs)
+    //   let obj = {
+    //     customerName: this.valuexs,
+    //     whId: this.tcwhId,
+    //     saleNo: this.orderNo1
+    //   }
+    //   console.log(obj, "选择仓库")
+    //   saleOrderListPj(obj).then((res) => {
+    //     if (res.code == 200) {
+    //       this.userList01xs = res.data.rows;
+    //       this.totall = res.data.total;
+    //     }
+    //     console.log(res, 4444444)
+    //   })
+    // },
 
     //供应商
     getList01() {
@@ -1475,13 +1518,15 @@ export default {
         });
       }
       else {
+        console.log(this.form2.cbpc10)
+        console.log(customer)
         console.log('跳转到创建界面')
         this.$router.push({
           path: "/system/user-authhhchuanj/role/",
           // name: "AuthUser",
           query: {
             saleOrderid: customer,
-            state: 1
+            whId: this.form2.cbpc10
           },
         });
         this.queryParams.orderNo = ""

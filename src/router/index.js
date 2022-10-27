@@ -670,7 +670,7 @@ export const dynamicRoutes = [{
     component: Layout,
     permissions: ['system:user:add'],
     children: [{
-      path: 'role/:id(\\d+)',
+      path: 'role/:id(\\d+)+:ststus(\\d+)',
       name: 'AuthUser',
       component: () => import('@/views/Warehousemanagement/SalesAdvance/SalesAdvancexq/index'),
       meta: {

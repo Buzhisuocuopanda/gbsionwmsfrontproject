@@ -72,7 +72,9 @@ export function PurchaseinSalesAdvance(data) {
 //销售预订单变更单修改 
 export function PurchaseinboundEditSalesAdvance(data) {
   return request({
-    url: '/system/SalesScheduledOrders/editGsSalesOrdersChange',
+    // url: '/system/SalesScheduledOrders/editGsSalesOrdersChange',
+    // system/SalesScheduledOrders/bgdxg
+    url: '/system/SalesScheduledOrders/bgdxg',
     method: 'post',
     data: data
   })
@@ -100,7 +102,8 @@ export function PurchaseinboundRemove(data) {
 // 审核
 export function PurchaseinboundSH(data) {
   return request({
-    url: '/system/SalesScheduledOrders/GsSalesOrdersChangesh',
+    // url: '/system/SalesScheduledOrders/GsSalesOrdersChangesh',
+    url: '/system/SalesScheduledOrders/bgdxgsh',
     method: 'post',
     data: data
   })
