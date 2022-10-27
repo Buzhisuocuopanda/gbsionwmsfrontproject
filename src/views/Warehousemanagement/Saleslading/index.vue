@@ -142,7 +142,7 @@
                 v-if="scope.row.status == 2">反审</el-button>
               <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                 @click="PrintRow(scope.row)" v-hasPermi="['system:whmanagement:auditTakeOrder']"
-                v-if="scope.row.checkStatus == 2">质检</el-button>
+                v-if="scope.row.checkStatus == 2 && scope.row.status == 2">质检</el-button>
               <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                 @click="PurchaseinboundQuxiaoWangcheng(scope.row)" v-hasPermi="['system:whmanagement:auditTakeOrder']"
                 v-if="scope.row.status == 3">取消完成</el-button>
