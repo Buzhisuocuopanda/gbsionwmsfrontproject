@@ -1043,7 +1043,7 @@ export default {
   },
   created() {
 
-    console.log("1----------------------4")
+    console.log("1----------------------5")
     // this.getConfigKey("sys.user.initPassword").then(response => {
     //   // this.initPassword = response.msg;
     // });

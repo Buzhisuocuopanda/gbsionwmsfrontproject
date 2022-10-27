@@ -499,7 +499,10 @@
         打印1
       </el-button> -->
       <el-button v-if="state == 3" style="margin-left: 2%" type="primary" @click="toExamine">审核</el-button>
-      <el-button v-if="state == 6" style="margin-left: 2%" type="primary" @click="toExamine">反审</el-button>
+      <el-button v-if="state == 6" style="margin-left: 2%" type="primary" @click="toExamine">反审
+      </el-button>
+      <el-button v-if="state == 4" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
+      <el-button v-if="state == 8" type="primary" @click="auditFinSaleOrder">复核反审</el-button>
       <el-button @click="cancel">取 消</el-button>
       <!-- </span> -->
     </div>
@@ -514,7 +517,7 @@ import {
   PurchaseinboundAdd,
   PurchaseinboundAdds, GoodsList01
 } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { mdfSaleOrder, saleOderDetail, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder, auditSaleOrder } from '@/api/saleordermanage'
+import { mdfSaleOrder, saleOderDetail, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder, auditSaleOrder, auditFinSaleOrder } from '@/api/saleordermanage'
 
 
 import {
@@ -1046,7 +1049,7 @@ export default {
     },
   },
   created() {
-    // console.log(this.$route.query)
+    console.log(this.$route.query)
     console.log("1----------------------4")
     this.state = this.$route.query.status
     // this.getConfigKey("sys.user.initPassword").then(response => {
@@ -1065,6 +1068,30 @@ export default {
 
   },
   methods: {
+    // 复合反审
+    auditFinSaleOrder() {
+      const param = {
+        orderId: this.formData.id,
+        opeateType: this.$route.query.status
+      }
+      auditFinSaleOrder(param).then(response => {
+        if (response.code == "200") {
+          this.$message.success("提交成功")
+          this.$store.dispatch("tagsView/delView", this.$route)
+          this.$router.push({ path: "/Salesmanagement/saleOrderFn", query: { id: 1 } })
+
+        } else {
+
+          // this.$message.error(response.msg)
+
+          // this.$router.go(-1)
+
+        }
+      }
+      )
+
+
+    },
     // 审核按钮
     toExamine() {
       const param = {
