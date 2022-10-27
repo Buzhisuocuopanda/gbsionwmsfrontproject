@@ -110,13 +110,13 @@
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-          :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="230">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:650px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:650px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -126,13 +126,13 @@
           <el-table-column label="描述" width="230" />
           <el-table-column label="数量" width="100">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.qty" placeholder="" v-only-number="{ min: 0, precision:0.00}"
+              <el-input v-model="scope.row.qty" placeholder="" v-only-number="{ min: 0, precision: 0.00 }"
                 class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="100">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.price" v-only-number="{ min: 0, precision:0.00}" placeholder=""
+              <el-input v-model="scope.row.price" v-only-number="{ min: 0, precision: 0.00 }" placeholder=""
                 class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
@@ -949,11 +949,11 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
+      this.$set(row, "goodsId", e.substring(e.lastIndexOf(".") + 1), 8523642)
       console.log(row, 555)
       // console.log(row.cbpc08,96325412);
       // console.log(name, 111)
@@ -1058,7 +1058,7 @@ export default {
         if (item) {
           PurchaseinboundAdd(this.form2).then(response => {
             if (response.code == "200") {
-              
+
               this.submitShangpin();
               this.open2 = false;
               this.reset01()

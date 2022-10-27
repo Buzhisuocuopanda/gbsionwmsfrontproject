@@ -182,7 +182,7 @@ import Goodsone01 from "@/components/Goodsone";
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
 export default {
-  name:'AuthUser',
+  name: 'AuthUser',
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -550,9 +550,9 @@ export default {
   methods: {
     //查询商品信息维护
     selected08(e, row) {
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
-      this.$set(row, "cbsf08", e.substring(e.indexOf(".") + 1));
-      this.form2.cbsf08 = e.substring(e.indexOf(".") + 1)
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
+      this.$set(row, "cbsf08", e.substring(e.lastIndexOf(".") + 1));
+      this.form2.cbsf08 = e.substring(e.lastIndexOf(".") + 1)
       console.log(this.form2.cbsf08, e, '444', row)
     },
 

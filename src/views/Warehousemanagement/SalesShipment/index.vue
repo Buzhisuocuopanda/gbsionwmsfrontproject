@@ -931,7 +931,8 @@ export default {
       console.log(name.substring(name.indexOf("-") + 1), 963);
       this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
-      let cus = this.addDateRange(this.queryParams, this.dateRange)
+      this.queryParamss.
+      let cus = this.addDateRange(this.queryParamss, this.dateRange)
       this.tcwhId = this.form2.cbpc10
       cus.whId = this.form2.cbpc10
       cus.pageSize = 15
@@ -1008,11 +1009,16 @@ export default {
     /** 查询用户列表 */
     getList09() {
       this.loading = true;
-      let obj = {
-        customerName: this.valuexs,
-        whId: this.tcwhId,
-        orderNo: this.orderNo
-      }
+      console.log(this.queryParamss, "queryParams")
+      let obj = this.addDateRange(this.queryParamss, this.dateRange)
+      obj.customerName = this.valuexs
+      obj.whId = this.tcwhId
+      obj.orderNo = this.orderNo
+      // let obj = {
+      //   customerName: this.valuexs,
+      //   whId: this.tcwhId,
+      //   orderNo: this.orderNo
+      // }
       Purchaseinbounddingdanck(obj
       ).then((response) => {
         console.log(response)

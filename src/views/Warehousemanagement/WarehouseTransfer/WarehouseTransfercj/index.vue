@@ -115,13 +115,13 @@
                         </el-button>
                     </el-col>
                 </el-row> -->
-                <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-                    :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left:0.5%;">
+                <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+                    :cell-style="{ padding: '5px' }" style="width: 99%;margin-top: 10px;margin-left:0.5%;">
 
                     <el-table-column prop="cbpc000" label="品牌" width="250">
                         <template slot-scope="scope">
                             <el-popover placement="bottom-start" trigger="click">
-                                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
+                                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
                                     style="width:670px!important;" />
                                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                                     style="width:100%;">
@@ -139,7 +139,7 @@
                     <el-table-column prop="cbpc099" label="供应商" width="180">
                         <template slot-scope="scope">
                             <el-popover placement="bottom-start" trigger="click">
-                                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)"
+                                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event, scope.row)"
                                     style="width:600!important;" />
                                 <el-input slot="reference" v-model="scope.row.cbpc099" placeholder="" readonly
                                     style="width:100%;">
@@ -174,21 +174,21 @@
 
                     <el-table-column prop="cbab09" label="数量" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab09" v-only-number="{max: 100000, min: 0, precision:0.0000}"
+                            <el-input v-model="scope.row.cbab09" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
                                 @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab11" label="单价" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab11" v-only-number="{max: 100000, min: 0, precision:0.0000}"
+                            <el-input v-model="scope.row.cbab11" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
                                 @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab12" label="金额" width="150">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab12" v-only-number="{max: 100000, min: 0, precision:0.0000}"
+                            <el-input v-model="scope.row.cbab12" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
                                 disabled placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
                         </template>
                     </el-table-column>
@@ -574,9 +574,9 @@ export default {
 
         //查询商品信息维护
         selected08(e, row) {
-            this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+            this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
 
-            this.$set(row, "cbab08", e.substring(e.indexOf(".") + 1))
+            this.$set(row, "cbab08", e.substring(e.lastIndexOf(".") + 1))
         },
 
         selected088(name) {

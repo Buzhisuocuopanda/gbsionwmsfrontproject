@@ -92,7 +92,7 @@
               <el-input slot="reference" v-model="scope.row.cbpc0990" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover> -->
-              <el-select v-model="scope.row.cbsf16" placeholder="" style="width: 100%" >
+              <el-select v-model="scope.row.cbsf16" placeholder="" style="width: 100%">
                 <el-option v-for="item in dingdanfelei" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -184,7 +184,7 @@ import Goodsone01 from "@/components/Goodsone";
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
 export default {
-  name:'AuthUser',
+  name: 'AuthUser',
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -553,9 +553,9 @@ export default {
   methods: {
     //查询商品信息维护
     selected08(e, row) {
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
-      this.$set(row, "cbsf08", e.substring(e.indexOf(".") + 1));
-      this.form2.cbsf08 = e.substring(e.indexOf(".") + 1)
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
+      this.$set(row, "cbsf08", e.substring(e.lastIndexOf(".") + 1));
+      this.form2.cbsf08 = e.substring(e.lastIndexOf(".") + 1)
       this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
       console.log(this.form2.cbsf08, e, '444', row)
     },
@@ -698,7 +698,7 @@ export default {
         // 供应商ID
         cbsf15: '',
         // 订单类型
-        cbsf16:1,
+        cbsf16: 1,
         // user_id
         user_id: '',
       });
@@ -885,7 +885,7 @@ export default {
     getList() {
       this.loading = true;
       const userId = this.$route.params && this.$route.params.cbse01;
-      console.log(userId,12)
+      console.log(userId, 12)
       if (userId) {
         console.log(13)
         // 获取表详细信息
@@ -893,7 +893,7 @@ export default {
           userId,
           this.addDateRange(this.queryParams, this.dateRange)
         ).then((res) => {
-          console.log(res.data,13)
+          console.log(res.data, 13)
           let response = res.data.rows[0];
           // let response;
           //客户名称
@@ -936,23 +936,23 @@ export default {
           });
           // this.userList = response.data.rows;
           // this.total = response.data.total;
-          console.log(response, 888999,this.tableData);
-          console.log(this.tableData,10245);
+          console.log(response, 888999, this.tableData);
+          console.log(this.tableData, 10245);
           this.loading = false;
         });
       }
     },
     /** 修改按钮操作 */
     handleUpdate() {
-      for(let i=0;i<this.tableData.length;i++){
+      for (let i = 0; i < this.tableData.length; i++) {
 
-         if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
-           return this.$message.error("销售退库单明细的商品不能为空")
-         }
-        if(this.tableData[i].cbsf09==null||this.tableData[i].cbsf09==0){
+        if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
+          return this.$message.error("销售退库单明细的商品不能为空")
+        }
+        if (this.tableData[i].cbsf09 == null || this.tableData[i].cbsf09 == 0) {
           return this.$message.error("销售退库单明细的数量不能为空")
         }
-        if(this.tableData[i].cbsf11==null||this.tableData[i].cbsf11==0){
+        if (this.tableData[i].cbsf11 == null || this.tableData[i].cbsf11 == 0) {
           return this.$message.error("销售退库单明细的单价不能为空")
         }
         /* if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
@@ -972,12 +972,12 @@ export default {
         row.cbse10 = this.form2.cbse10;
         // 日期
         row.cbse08 = this.form2.cbsc08;
-        if(this.form2.cbse166 == 'USD'){
+        if (this.form2.cbse166 == 'USD') {
           // 结算货币
           row.cbse16 = 5;
-        }else if(this.form2.cbse166 == 'CNY'){
+        } else if (this.form2.cbse166 == 'CNY') {
           row.cbse16 = 5;
-        }else{
+        } else {
           row.cbse16 = this.form2.cbse16;
         }
         // 关联订单
@@ -1007,7 +1007,7 @@ export default {
           // this.manageMode = response.manageMode;
           // this.ifEnabled = response.ifEnabled;
           // this.sysUserId = response.sysUserId;
-          if(response.code == 200){
+          if (response.code == 200) {
             console.log(response, 789);
             this.$message({ message: "修改成功", type: "success" });
             this.$tab.closePage();

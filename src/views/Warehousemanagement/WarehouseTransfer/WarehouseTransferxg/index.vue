@@ -172,22 +172,25 @@
 
                     <el-table-column prop="cbab09" label="数量" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab09" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
-                                @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab09"
+                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" @blur="chen(scope.row)"
+                                :precision="2" placeholder="" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab11" label="单价" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab11" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
-                                @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab11"
+                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" @blur="chen(scope.row)"
+                                :precision="2" placeholder="" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab12" label="金额" width="150">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab12" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
-                                disabled placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
+                            <el-input v-model="scope.row.cbab12"
+                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" disabled placeholder=""
+                                :precision="2" class="shuzicaoyou" style=""></el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab13" label="备注" width="">
@@ -574,9 +577,9 @@ export default {
 
         //查询商品信息维护
         selected08(e, row) {
-            this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+            this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
 
-            this.$set(row, "cbab08", e.substring(e.indexOf(".") + 1))
+            this.$set(row, "cbab08", e.substring(e.lastIndexOf(".") + 1))
         },
 
         selected088(name) {
