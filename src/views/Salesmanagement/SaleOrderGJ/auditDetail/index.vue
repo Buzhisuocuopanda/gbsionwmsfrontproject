@@ -145,16 +145,15 @@
     </section>
 
     <div class="tinajia_dingwei">
-      <!-- <el-button style="margin-left: 2%" type="primary" @click="handleExport">导出</el-button>
-      <el-button style="margin-left: 2%" type="primary" @click="handleExport1">导出1</el-button>
-      <el-button style="margin-left: 2%" type="primary" @click="xiaoschukudandayin">
-        打印
+      <el-button v-if="this.$route.query.status == 3" style="margin-left: 2%" type="primary" @click="toExamine">审核
       </el-button>
-      <el-button style="margin-left: 2%" type="primary" @click="xiaoschukujianyibiao">
-        打印1
-      </el-button> -->
-      <el-button style="margin-left: 2%" type="primary" @click="toExamine">
-        审核
+      <el-button v-if="this.$route.query.status == 5" style="margin-left: 2%" type="primary" @click="toExamine">
+        指定结束</el-button>
+      <el-button v-if="this.$route.query.confirmStatus == 2" style="margin-left: 2%" type="primary"
+        @click="confirmSkuSaleOrder(1)">确认库存
+      </el-button>
+      <el-button v-if="this.$route.query.confirmStatus == 1" style="margin-left: 2%" type="primary"
+        @click="confirmSkuSaleOrder(2)">取消库存
       </el-button>
       <el-button @click="cancel">取 消</el-button>
     </div>
@@ -169,7 +168,7 @@ import {
   PurchaseinboundAdd,
   PurchaseinboundAdds, GoodsList01
 } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { mdfSaleOrder, saleOderDetailGj, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder, auditSaleOrderGj } from '@/api/saleordermanage'
+import { mdfSaleOrder, saleOderDetailGj, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder, auditSaleOrderGj, confirmSkuSaleOrder } from '@/api/saleordermanage'
 
 
 import {
@@ -706,22 +705,25 @@ export default {
   },
   methods: {
 
-    // auditSaleOrder() {
-    //   const param = {
-    //     orderId: this.formData.id,
-    //     opeateType: this.$route.query.status
-    //   }
-    //   auditSaleOrderGj(param).then(response => {
-    //     if (response.code == "200") {
-    //       this.$message.success("提交成功")
-    //       this.$store.dispatch("tagsView/delView", this.$route)
+    confirmSkuSaleOrder(opt) {
+      const param = {
+        id: this.formData.id,
+        opearte: opt
+      }
 
-    //       // this.$router.push({ path: "/Salesmanagement/SaleOrderGj", query: { id: 1 } })
-    //       this.$tab.closePage();
-    //       this.$router.go(-1)
-    //     }
-    //   })
-    // },
+      confirmSkuSaleOrder(param).then(response => {
+        if (response.code == 200) {
+          this.$message.success("修改成功")
+          this.$store.dispatch("tagsView/delView", this.$route)
+          this.$router.push({ path: "/Salesmanagement/saleOrderGJ", query: { id: 1 } })
+          this.onSearch();
+        } else {
+          // this.$message.error(response.msg)
+
+        }
+      })
+
+    },
     // 审核按钮
     toExamine() {
       const param = {

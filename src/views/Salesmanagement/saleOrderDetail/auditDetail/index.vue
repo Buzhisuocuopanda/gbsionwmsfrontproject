@@ -505,8 +505,6 @@
       <el-button v-if="state == 7" style="margin-left: 2%" type="primary" @click="toExamine">标记完成</el-button>
       <el-button v-if="state == 4" style="margin-left: 2%" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
       <el-button v-if="state == 8" style="margin-left: 2%" type="primary" @click="auditFinSaleOrder">已复核反审</el-button>
-
-
       <el-button @click="cancel">取 消</el-button>
       <!-- </span> -->
     </div>
