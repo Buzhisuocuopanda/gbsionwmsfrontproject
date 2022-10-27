@@ -219,12 +219,12 @@
           <el-table-column prop="cbsc12" label="金额" width="150">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsc12" v-only-number="{ precision: 0.0 }" placeholder="" class="shuzicaoyou"
-                style="width:100%"></el-input>
+                style="width:100%" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc13" v-only-number="{ min: 0, precision: 0.0 }" placeholder="">
+              <el-input readonly v-model="scope.row.cbsc133" v-only-number="{ min: 0, precision: 0.0 }" placeholder="">
               </el-input>
             </template>
           </el-table-column>
@@ -234,9 +234,9 @@
               </el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="cbsc13" label="备注" width="">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd13" placeholder=""></el-input>
+              <el-input v-model="scope.row.cbsc13" placeholder=""></el-input>
             </template>
           </el-table-column>
 
@@ -714,7 +714,7 @@ export default {
         // this.form2.takeId = id;
         // 编号
 
-        this.form2.cbsb07 = response.data.orderNo;
+        this.form2.cbsb07 = response.data.saleOrderNo;
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID
@@ -765,9 +765,9 @@ export default {
           obj.cbsc09 = response.data.goods[i].qty;
           obj.cbsc09 = response.data.goods[i].qty;
           obj.cbsc11 = response.data.goods[i].price;
-          obj.cbsc13 = response.data.goods[i].noSendQty;
+          obj.cbsc133 = response.data.goods[i].noSendQty;
           obj.cbsc144 = response.data.goods[i].useQty;
-          obj.cbsc15 = response.data.goods[i].remark;
+          obj.cbsc13 = response.data.goods[i].remark;
           obj.cbsc14 = response.data.goods[i].cbob01;
           obj.cbpc000 = response.data.goods[i].brand + "~" + response.data.goods[i].model + "~" + response.data.goods[i].description;
           if (response.data.goods[i].cbsc177 == "国内订单") {
@@ -862,7 +862,7 @@ export default {
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
-      let count = this.tableData.length; // 记录当前有多少个表单
+      // let count = this.tableData.length; // 记录当前有多少个表单
       // for (var index in this.tableData) {
       //   var form = this.tableData[index];
       //   console.log(form);
@@ -913,9 +913,9 @@ export default {
           this.$tab.closePage();
           this.$router.go(-1);
         }
-        if (count-- === 1) {
-          // this._ly_save();
-        }
+        // if (count-- === 1) {
+        //   // this._ly_save();
+        // }
 
 
         //  this.reset03();
@@ -1201,7 +1201,7 @@ export default {
         // 提货单id
         this.form2.takeId = id;
         // 编号
-        this.form2.cbsb07 = response.data.orderNo;
+        this.form2.cbsb07 = response.data.saleOrderNo;
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID
@@ -1249,9 +1249,9 @@ export default {
           item.cbsc09 = item.qty;
           item.cbsc11 = item.price;
           item.cbsc12 = item.cbsc09 * item.cbsc11;
-          item.cbsc13 = item.noSendQty;
+          item.cbsc133 = item.noSendQty;
           item.cbsc144 = item.useQty;
-          item.cbsc15 = item.remark;
+          item.cbsc13 = item.remark;
           // item.cbsc14 = item.saleOrderId;
           item.cbsc14 = item.cbob01;
 
