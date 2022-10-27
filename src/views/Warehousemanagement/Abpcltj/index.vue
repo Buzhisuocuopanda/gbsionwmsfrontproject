@@ -884,11 +884,11 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "cbpc08", e.substring(e.indexOf(".") + 1), 8523642)
+      this.$set(row, "cbpc08", e.substring(e.lastIndexOf(".") + 1), 8523642)
       // console.log(row.cbpc08,96325412);
       // console.log(name, 111)
       // console.log(index, 222)

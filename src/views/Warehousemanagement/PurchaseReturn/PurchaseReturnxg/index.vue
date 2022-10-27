@@ -690,7 +690,7 @@ export default {
       //   this.$emit("on-close");
       this.reset01()
       // this.$router.push("/system/user-cktkfh/role/");
-       this.$tab.closePage();
+      this.$tab.closePage();
       this.$router.go(-1);
     },
     // 关闭弹窗前，二次询问是否关闭
@@ -855,11 +855,11 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
       console.log(e, 111);
       console.log(row, 222);
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "cbph08", e.substring(e.indexOf(".") + 1), 8523642);
+      this.$set(row, "cbph08", e.substring(e.lastIndexOf(".") + 1), 8523642);
       // this.form2.cbph08 = row.cbph08
       console.log(row, 555);
       // console.log(row.cbpc08,96325412);
@@ -955,15 +955,15 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-          if(this.form2.cala08 == 'CNY'){
+          if (this.form2.cala08 == 'CNY') {
             this.form2.cbpc16 = 6
-          }else{
+          } else {
             this.form2.cbpc16 = 5
           }
           let that = this
           // 声明空数组，for循环生成新的数组
           let newarr = []
-          for(let i = 0;i<that.tableData.length;i++){
+          for (let i = 0; i < that.tableData.length; i++) {
             newarr.push({
               "cbpg01": that.tableData[i].cbpg01,
               "cbph01": that.tableData[i].cbph01,
@@ -1020,7 +1020,7 @@ export default {
             this.userLists = userlistss[0];
             this.form2 = res.data.rows[0];
             this.tableData = res.data.rows;
-            this.tableData.map((item) =>{
+            this.tableData.map((item) => {
               item.cbpc000 = item.pinpai + ' - ' + item.cbpb12 + ' - ' + item.cbpb08
             })
             console.log(this.userLists, 123456);

@@ -186,8 +186,9 @@
           <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row)" v-el-select-loadmore="loadMore" v-model="scope.row.goodsId"
-                  filterable clearable :filter-method="dataFilter" placeholder="请选择" style="width: 100%;">
+                <el-select @change="goodsOnChange(scope.row)" v-el-select-loadmore="loadMore"
+                  v-model="scope.row.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择"
+                  style="width: 100%;">
                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -854,7 +855,7 @@ export default {
     },
   },
   created() {
-
+    console.log("1----------------------1")
     this.getDate()
     this.getConfigKey("sys.user.initPassword").then(response => {
       // this.initPassword = response.msg;

@@ -1,31 +1,31 @@
 <template>
   <div class="app-container">
-
+    <!-- 国际订单详情页面 -->
     <section ref="print" class="recordImg" id="printRecord">
       <el-form ref="form2" :model="form2" label-width="230px" :rules="rules" style="" class="demo-ruleForm">
         <div class="chuangjiancaigous">销售订单</div>
-        <el-descriptions :column="3" border style="margin-top: 30px" :contentStyle="CS" :label-style="LS ">
-          <el-descriptions-item label="编号">{{this.formData.orderNo}}</el-descriptions-item>
-          <el-descriptions-item label="客户单号">{{this.formData.customerNo}}</el-descriptions-item>
-          <el-descriptions-item label="日期">{{this.formData.orderDate}}</el-descriptions-item>
-          <el-descriptions-item label="客户">{{this.formData.customerName}}</el-descriptions-item>
-          <el-descriptions-item label="销售人员">{{this.formData.saleUser}}</el-descriptions-item>
-          <el-descriptions-item label="结算货币">{{this.formData.currencyMsg}}</el-descriptions-item>
-          <el-descriptions-item label="收货人">{{this.formData.receiveName}}</el-descriptions-item>
-          <el-descriptions-item label="电话">{{this.formData.receivePhone}}</el-descriptions-item>
-          <el-descriptions-item label="发票类型">{{this.formData.invoiceType}}</el-descriptions-item>
-          <el-descriptions-item label="订单类型">{{this.formData.orderTypeMsg}}</el-descriptions-item>
-          <el-descriptions-item label="工厂账号">{{this.formData.fcNumber}}</el-descriptions-item>
-          <el-descriptions-item label="订单分类">{{this.formData.orderClassMsg}}</el-descriptions-item>
-          <el-descriptions-item label="地址">{{this.formData.address}}</el-descriptions-item>
-          <el-descriptions-item label="备注">{{this.formData.remark}}</el-descriptions-item>
-          <el-descriptions-item label="纳税人识别号">{{this.formData.taxpayerid}}</el-descriptions-item>
-          <el-descriptions-item label="发票地址">{{this.formData.fpAdress}}</el-descriptions-item>
-          <el-descriptions-item label="发票电话">{{this.formData.fpPhone}}</el-descriptions-item>
-          <el-descriptions-item label="发票开户行">{{this.formData.fpbank}}</el-descriptions-item>
-          <el-descriptions-item label="发票账号">{{this.formData.fpNumber}}</el-descriptions-item>
-          <el-descriptions-item label="发票邮寄地址">{{this.formData.fpReceiveAddress}}</el-descriptions-item>
-          <el-descriptions-item label="其他">{{this.formData.other}}</el-descriptions-item>
+        <el-descriptions :column="3" border style="margin-top: 30px" :contentStyle="CS" :label-style="LS">
+          <el-descriptions-item label="编号">{{ this.formData.orderNo }}</el-descriptions-item>
+          <el-descriptions-item label="客户单号">{{ this.formData.customerNo }}</el-descriptions-item>
+          <el-descriptions-item label="日期">{{ this.formData.orderDate }}</el-descriptions-item>
+          <el-descriptions-item label="客户">{{ this.formData.customerName }}</el-descriptions-item>
+          <el-descriptions-item label="销售人员">{{ this.formData.saleUser }}</el-descriptions-item>
+          <el-descriptions-item label="结算货币">{{ this.formData.currencyMsg }}</el-descriptions-item>
+          <el-descriptions-item label="收货人">{{ this.formData.receiveName }}</el-descriptions-item>
+          <el-descriptions-item label="电话">{{ this.formData.receivePhone }}</el-descriptions-item>
+          <el-descriptions-item label="发票类型">{{ this.formData.invoiceType }}</el-descriptions-item>
+          <el-descriptions-item label="订单类型">{{ this.formData.orderTypeMsg }}</el-descriptions-item>
+          <el-descriptions-item label="工厂账号">{{ this.formData.fcNumber }}</el-descriptions-item>
+          <el-descriptions-item label="订单分类">{{ this.formData.orderClassMsg }}</el-descriptions-item>
+          <el-descriptions-item label="地址">{{ this.formData.address }}</el-descriptions-item>
+          <el-descriptions-item label="备注">{{ this.formData.remark }}</el-descriptions-item>
+          <el-descriptions-item label="纳税人识别号">{{ this.formData.taxpayerid }}</el-descriptions-item>
+          <el-descriptions-item label="发票地址">{{ this.formData.fpAdress }}</el-descriptions-item>
+          <el-descriptions-item label="发票电话">{{ this.formData.fpPhone }}</el-descriptions-item>
+          <el-descriptions-item label="发票开户行">{{ this.formData.fpbank }}</el-descriptions-item>
+          <el-descriptions-item label="发票账号">{{ this.formData.fpNumber }}</el-descriptions-item>
+          <el-descriptions-item label="发票邮寄地址">{{ this.formData.fpReceiveAddress }}</el-descriptions-item>
+          <el-descriptions-item label="其他">{{ this.formData.other }}</el-descriptions-item>
         </el-descriptions>
         <!-- 编号:56221589223 -->
 
@@ -254,7 +254,7 @@
               <template slot-scope="scope">
                 <sapn>
                   <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
-                  <span>{{scope.row.goodsMsg}}</span>
+                  <span>{{ scope.row.goodsMsg }}</span>
 
                   <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
                   <!--                  <el-option-->
@@ -278,7 +278,7 @@
                 <!--                &lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;-->
                 <!--              </sapn>-->
                 <div style="text-align: right">
-                  {{parseFloat(scope.row.qty).toFixed(2)}}
+                  {{ parseFloat(scope.row.qty).toFixed(2) }}
 
                 </div>
               </template>
@@ -288,7 +288,7 @@
               <template slot-scope="scope">
                 <div style="text-align: right">
                   <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
-                  {{parseFloat(scope.row.confirmQty).toFixed(2)}}
+                  {{ parseFloat(scope.row.confirmQty).toFixed(2) }}
 
                   <!--                {{}}-->
                 </div>
@@ -303,7 +303,7 @@
                 <!--              </sapn>-->
                 <div style="text-align: right">
                   <!--                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>-->
-                  {{parseFloat(scope.row.normalPrice==null?0:scope.row.normalPrice).toFixed(2)}}
+                  {{ parseFloat(scope.row.normalPrice == null ? 0 : scope.row.normalPrice).toFixed(2) }}
                 </div>
               </template>
             </el-table-column>
@@ -315,7 +315,7 @@
 
                 <!--              </sapn>-->
                 <div style="text-align: right">
-                  {{parseFloat(scope.row.currentPrice).toFixed(2)}}
+                  {{ parseFloat(scope.row.currentPrice).toFixed(2) }}
 
                 </div>
               </template>
@@ -329,7 +329,7 @@
 
                 <!--              </sapn>-->
                 <div style="text-align: right">
-                  {{parseFloat(scope.row.totalPrice).toFixed(2)}}
+                  {{ parseFloat(scope.row.totalPrice).toFixed(2) }}
 
                 </div>
               </template>
@@ -340,7 +340,7 @@
               <template slot-scope="scope">
                 <sapn>
                   <!--                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注" readonly></el-input>-->
-                  <span>{{scope.row.remark}}</span>
+                  <span>{{ scope.row.remark }}</span>
 
                 </sapn>
               </template>
@@ -424,28 +424,28 @@
         </div>
       </el-form>
 
-      <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS ">
+      <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS">
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页数量小计"
-          labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}
+          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumQty).toFixed(2) }}
         </el-descriptions-item>
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页金额小计"
-          labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}
+          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumPrice).toFixed(2) }}
         </el-descriptions-item>
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="合计数量"
-          labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumQty).toFixed(2)}}
+          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumQty).toFixed(2) }}
         </el-descriptions-item>
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="合计金额"
-          labelStyle="width: 30%;text-align:center">{{parseFloat(this.formData.sumPrice).toFixed(2)}}
+          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumPrice).toFixed(2) }}
         </el-descriptions-item>
-        <el-descriptions-item label="大写" labelStyle="width: 30%;text-align:center">{{this.formData.capPrice}}
+        <el-descriptions-item label="大写" labelStyle="width: 30%;text-align:center">{{ this.formData.capPrice }}
         </el-descriptions-item>
       </el-descriptions>
-      <el-descriptions :column="3" border :contentStyle="CS" :label-style="LS ">
-        <el-descriptions-item label="制单" labelStyle="width: 20%;text-align:center">{{this.formData.makeUser}}
+      <el-descriptions :column="3" border :contentStyle="CS" :label-style="LS">
+        <el-descriptions-item label="制单" labelStyle="width: 20%;text-align:center">{{ this.formData.makeUser }}
         </el-descriptions-item>
-        <el-descriptions-item label="审核" labelStyle="width: 20%;text-align:center">{{this.formData.auditUser}}
+        <el-descriptions-item label="审核" labelStyle="width: 20%;text-align:center">{{ this.formData.auditUser }}
         </el-descriptions-item>
-        <el-descriptions-item label="仓库" labelStyle="width: 20%;text-align:center">{{this.formData.ck}}
+        <el-descriptions-item label="仓库" labelStyle="width: 20%;text-align:center">{{ this.formData.ck }}
         </el-descriptions-item>
       </el-descriptions>
       <div style="margin-top: 30px">
@@ -460,7 +460,7 @@
             <template slot-scope="scope">
               <sapn>
                 <!--              <el-input v-model="scope.row.auditUser" placeholder="审批人" style="" readonly></el-input>-->
-                <span>{{scope.row.auditUser}}</span>
+                <span>{{ scope.row.auditUser }}</span>
 
               </sapn>
             </template>
@@ -469,7 +469,7 @@
             <template slot-scope="scope">
               <sapn>
                 <!--              <el-input v-model="scope.row.description" placeholder="审批详情" style=" "></el-input>-->
-                <span>{{scope.row.description}}</span>
+                <span>{{ scope.row.description }}</span>
 
               </sapn>
             </template>
@@ -479,7 +479,7 @@
             <template slot-scope="scope">
               <div>
                 <!--              <el-input  class="inputDeep" v-model="scope.row.auditResult" placeholder="审批结果" style="" readonly></el-input>-->
-                <span>{{scope.row.auditResult}}</span>
+                <span>{{ scope.row.auditResult }}</span>
 
               </div>
             </template>

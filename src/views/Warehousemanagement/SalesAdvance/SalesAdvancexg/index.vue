@@ -15,7 +15,8 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;" value-format="yyyy-MM-dd HH:mm:ss">
+            <el-date-picker type="date" placeholder="" v-model="form2.orderDate" style="width: 60%;"
+              value-format="yyyy-MM-dd HH:mm:ss">
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -43,7 +44,7 @@
         </el-col>
         <el-col style="margin-left:-4%;" :span="6">
           <el-form-item label="工厂:">
-            <el-input v-model="form2.factory" placeholder=""  style="width:100%;"></el-input>
+            <el-input v-model="form2.factory" placeholder="" style="width:100%;"></el-input>
             <!-- <el-popover placement="bottom-start" trigger="click" disabled>
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
               <el-input slot="reference" v-model="form2.wh" placeholder="" readonly style="width:100%;">
@@ -128,12 +129,12 @@
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-          :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="cala08" label="品牌" width="300">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:600px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:600px!important;" />
                 <el-input slot="reference" v-model="scope.row.cala08" placeholder="" style="width:100%;">
                 </el-input>
               </el-popover>
@@ -153,19 +154,19 @@
           </el-table-column> -->
           <el-table-column label="数量" width="100" prop="qty">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.qty" placeholder=""
-                @keyup="validateMealStandard($event)" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.qty" placeholder="" @keyup="validateMealStandard($event)" class="shuzicaoyou"
+                style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="100" prop="qty">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.price"  placeholder=""
-                class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.price" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="orderDate" label="订单日期" width="215">
             <template slot-scope="scope">
-              <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;" value-format="yyyy-MM-dd HH:mm:ss">
+              <el-date-picker type="date" placeholder="" v-model="scope.row.orderDate" style="width:100%;"
+                value-format="yyyy-MM-dd HH:mm:ss">
               </el-date-picker>
             </template>
           </el-table-column>
@@ -722,19 +723,19 @@ export default {
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
       console.log(this.tableData, 333)
-      
+
       this.tableData.forEach((item) => {
         //  this.form2.goodsId = item.goodsId;
         item.supplierId = this.form2.supplierId;
         item.gsSalesOrders = this.form2.gsSalesOrders;
         item.salerId = this.form2.salerId;
         item.goodsId = this.tableData[i].goodsId,
-        factory = this.form2.factory,
-        goodsclassify = "string",
-        id = 0,
-        orderDate = '',
-        orderNo = "string",
-        qty = 0
+          factory = this.form2.factory,
+          goodsclassify = "string",
+          id = 0,
+          orderDate = '',
+          orderNo = "string",
+          qty = 0
       })
       PurchaseinboundAdd(JSON.stringify(this.tableData)).then(response => {
         if (response.code == "200") {
@@ -839,7 +840,7 @@ export default {
         qty: "",
         cbpc099: '',
         orderDate: '',
-        factory:that.form2.factory
+        factory: that.form2.factory
       })
       this.dataId++
       console.log(this.tableData, 852369);
@@ -892,7 +893,7 @@ export default {
             // //销售预订单主表名称id
             // this.form2.gsSalesOrders = this.userList[0].gsSalesOrders;
             // //日期
-            this.form2.orderDate = this.form2.orderDate.slice(0,10)+ ' ' +this.form2.orderDate.slice(11,19);
+            this.form2.orderDate = this.form2.orderDate.slice(0, 10) + ' ' + this.form2.orderDate.slice(11, 19);
             // //客户名称
             // this.form2.cbpc0999 = this.userList[0].customerMag;
             // //客户名称id
@@ -921,7 +922,7 @@ export default {
               item.goodsId = item.goodsId;
               // 
               item.orderNo = item.orderNo
-              item.orderDate = item.orderDate.slice(0,10)+ ' ' +item.orderDate.slice(11,19)
+              item.orderDate = item.orderDate.slice(0, 10) + ' ' + item.orderDate.slice(11, 19)
             })
 
           }
@@ -1011,7 +1012,7 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cala08", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cala08", e.substring(0, e.ndexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
@@ -1111,7 +1112,7 @@ export default {
         "goods": [],
         // "gsid": 0,
         "id": this.form2.ids,
-        "orderDate": this.form2.orderDate.replace(' ','T') +'.000+08:00',
+        "orderDate": this.form2.orderDate.replace(' ', 'T') + '.000+08:00',
         // "orderDate": this.form2.orderDate,
         "orderNo": this.form2.orderNo,
         "salerId": this.form2.salerId,
@@ -1122,38 +1123,38 @@ export default {
       for (let i = 0; i < this.tableData.length; i++) {
         obj.goods.push({
           //客户id
-          customerId : this.form2.customerId,
+          customerId: this.form2.customerId,
           //供应商id
-          supplierId : this.form2.supplierId,
+          supplierId: this.form2.supplierId,
           //仓库id 
           // whId : this.tableData[i].whId,
           //销售人员id
-          salerId : this.tableData[i].salerId,
+          salerId: this.tableData[i].salerId,
           //订单日期
-          orderDate : this.tableData[i].orderDate.replace(' ','T') +'.000+08:00',
+          orderDate: this.tableData[i].orderDate.replace(' ', 'T') + '.000+08:00',
           // id: this.tableData[i].id,
           goodsId: this.tableData[i].goodsId,
           //商品型号
-          goodsclassify : this.tableData[i].cala08,
+          goodsclassify: this.tableData[i].cala08,
           qty: this.tableData[i].qty,
           // 主表id
           gsSalesOrders: this.form2.gsSalesOrders,
           factory: this.form2.factory,
-          orderNo : this.form2.orderNo,
-          price:this.tableData[i].price
+          orderNo: this.form2.orderNo,
+          price: this.tableData[i].price
         })
       }
       const bollen = false
-      obj.goods.map((item) =>{
-        if(item.qty <=0){
-          this.$message({message:'数量必须大于0',type:'error'})
+      obj.goods.map((item) => {
+        if (item.qty <= 0) {
+          this.$message({ message: '数量必须大于0', type: 'error' })
           bollen = true
         }
       })
-      if(bollen == true){
+      if (bollen == true) {
         return
-      }else{
-         // row.cbpc16 = this.form.cbpc16;
+      } else {
+        // row.cbpc16 = this.form.cbpc16;
         PurchaseinboundEditSalesAdvance(JSON.stringify(obj)).then(response => {
           if (response.code == "200") {
             // console.log(this.form, 789)
@@ -1164,7 +1165,7 @@ export default {
 
         });
       }
-     
+
 
     },
 

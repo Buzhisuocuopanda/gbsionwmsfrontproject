@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">国内销售订单</div>
+      <div class="chuangjiancaigous">销售订单</div>
 
       <!-- 编号:56221589223 -->
 
@@ -13,12 +13,12 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="客户单号:" prop="customerNo">
-            <el-input type="text" v-model="formData.customerNo" style="width: 70%;" />
+            <el-input type="text" v-model="formData.customerNo" style="width: 70%;" readonly />
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:" prop="orderDate">
-            <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;">
+            <el-date-picker type="date" placeholder="" v-model="formData.orderDate" style="width: 70%;" readonly>
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -73,30 +73,45 @@
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerName">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName"
-              filterable clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
-              <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
+            <el-input type="text" v-model="formData.customerName" style="width: 70%;" readonly />
+
+            <!--            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName" filterable   clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">-->
+            <!--              <el-option-->
+            <!--                v-for="item in customeroptions"-->
+            <!--                :key="item.value"-->
+            <!--                :label="item.label"-->
+            <!--                :value="item.value">-->
+            <!--              </el-option>-->
+            <!--            </el-select>-->
           </el-form-item>
 
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUser">
-            <el-select @change="saleUserOnChange($event)" v-el-select-loadmore="saleUserloadMore"
-              v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择"
-              style="width: 70%;">
-              <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
+            <el-input type="text" v-model="formData.saleUser" style="width: 70%;" readonly />
+
+            <!--            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">-->
+            <!--              <el-option-->
+            <!--                v-for="item in saleUseroptions"-->
+            <!--                :key="item.value"-->
+            <!--                :label="item.label"-->
+            <!--                :value="item.value">-->
+            <!--              </el-option>-->
+            <!--            </el-select>-->
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="结算货币:" prop="currency">
-            <el-select v-model="formData.currency" clearable placeholder="请选择" style="width: 70%;">
-              <el-option v-for="item in currencyoptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
+            <el-input type="text" v-model="formData.currencyMsg" style="width: 70%;" readonly />
+
+            <!--            <el-select  v-model="formData.currency"  clearable  placeholder="请选择" style="width: 70%;">-->
+            <!--              <el-option-->
+            <!--                v-for="item in currencyoptions"-->
+            <!--                :key="item.value"-->
+            <!--                :label="item.label"-->
+            <!--                :value="item.value">-->
+            <!--              </el-option>-->
+            <!--            </el-select>-->
           </el-form-item>
         </el-col>
       </el-row>
@@ -105,21 +120,26 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="收货人:" prop="receiveName">
-            <el-input type="text" v-model="formData.receiveName" style="width: 70%;" />
+            <el-input type="text" v-model="formData.receiveName" style="width: 70%;" readonly />
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="电话:" prop="receivePhone">
-            <el-input type="text" v-model="formData.receivePhone" style="width: 70%;" />
+            <el-input type="text" v-model="formData.receivePhone" style="width: 70%;" readonly />
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="发票类型:" prop="invoiceType">
+            <el-input type="text" v-model="formData.invoiceType" style="width: 70%;" readonly />
 
-            <el-select v-model="formData.invoiceType" clearable placeholder="请选择" style="width: 70%;">
-              <el-option v-for="item in invoiceoptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
+            <!--            <el-select  v-model="formData.invoiceType"  clearable  placeholder="请选择" style="width: 70%;">-->
+            <!--              <el-option-->
+            <!--                v-for="item in invoiceoptions"-->
+            <!--                :key="item.value"-->
+            <!--                :label="item.label"-->
+            <!--                :value="item.value">-->
+            <!--              </el-option>-->
+            <!--            </el-select>-->
           </el-form-item>
         </el-col>
       </el-row>
@@ -128,18 +148,18 @@
 
         <el-col :span="8">
           <el-form-item label="订单类型:" prop="orderTypeMsg">
-            <el-input type="text" v-model="formData.orderTypeMsg" style="width: 70%;" disabled />
+            <el-input type="text" v-model="formData.orderTypeMsg" style="width: 70%;" readonly />
           </el-form-item>
 
         </el-col>
         <el-col :span="8">
           <el-form-item label="工厂账号:" prop="fcNumber">
-            <el-input type="text" v-model="formData.fcNumber" style="width: 70%;" />
+            <el-input type="text" v-model="formData.fcNumber" style="width: 70%;" readonly />
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="订单分类:" prop="orderClassMsg">
-            <el-input type="text" v-model="formData.orderClassMsg" style="width: 70%;" disabled />
+            <el-input type="text" v-model="formData.orderClassMsg" style="width: 70%;" readonly />
           </el-form-item>
 
         </el-col>
@@ -147,13 +167,13 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="地址:" prop="address">
-            <el-input type="text" v-model="formData.address" style="width: 120%;" />
+            <el-input type="text" v-model="formData.address" style="width: 120%;" readonly />
           </el-form-item>
         </el-col>
 
         <el-col :span="8">
           <el-form-item label="备注:" prop="remark">
-            <el-input type="text" v-model="formData.remark" style="width: 120%;" />
+            <el-input type="text" v-model="formData.remark" style="width: 120%;" readonly />
           </el-form-item>
         </el-col>
       </el-row>
@@ -177,81 +197,121 @@
       <!--        </el-col>-->
       <!--      </el-row>-->
       <div>
-        <el-row>
-          <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
-          </el-col>
-        </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
+        <!--        <el-row>-->
+        <!--          <el-col :span="24">-->
+        <!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
+        <!--          </el-col>-->
+        <!--        </el-row>-->
+        <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 1px;"
+          :formatter="rounding">
           <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
-              <sapn>
-                <el-select @change="goodsOnChange(scope.row, $event)" v-el-select-loadmore="loadMore"
-                  v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择"
-                  style="width: 100%;">
-                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </sapn>
+              <!--              <sapn>-->
+              <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 120%;" readonly/>-->
+
+              <!--                &lt;!&ndash;                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">&ndash;&gt;-->
+              <!--&lt;!&ndash;                  <el-option&ndash;&gt;-->
+              <!--&lt;!&ndash;                    v-for="item in options"&ndash;&gt;-->
+              <!--&lt;!&ndash;                    :key="item.value"&ndash;&gt;-->
+              <!--&lt;!&ndash;                    :label="item.label"&ndash;&gt;-->
+              <!--&lt;!&ndash;                    :value="item.value">&ndash;&gt;-->
+              <!--&lt;!&ndash;                  </el-option>&ndash;&gt;-->
+              <!--&lt;!&ndash;                </el-select>&ndash;&gt;-->
+              <!--              </sapn>-->
+              <div style="text-align: center">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{ scope.row.goodsMsg }}
+
+                <!--                {{}}-->
+              </div>
             </template>
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column prop="qty" label="数量" width="150">
+          <el-table-column prop="qty" label="数量" width="150" :formatter="rounding">
             <template slot-scope="scope">
-              <sapn>
-                <el-input @change="goodsQtyChange(scope.row)" v-model="scope.row.qty" placeholder="数量"
-                  @input="sum(scope.row)"
-                  oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
-                <!--                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>-->
-              </sapn>
+              <div style="text-align: center">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{ parseFloat(scope.row.qty).toFixed(2) }}
+
+                <!--                {{}}-->
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="confirmQty" label="确认库存数量" width="150" :formatter="rounding">
+            <template slot-scope="scope">
+              <div style="text-align: right">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{ parseFloat(scope.row.confirmQty).toFixed(2) }}
+
+                <!--                {{}}-->
+              </div>
             </template>
           </el-table-column>
           <el-table-column prop="normalPrice" label="标准单价" width="150">
             <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>
-              </sapn>
+              <div style="text-align: right">
+                <!--                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>-->
+                {{ parseFloat(scope.row.normalPrice == null ? 0 : scope.row.normalPrice).toFixed(2) }}
+              </div>
             </template>
           </el-table-column>
           <el-table-column prop="currentPrice" label="本次单价" width="150">
             <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)"
-                  oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>
-              </sapn>
+              <!--              <sapn>-->
+              <!--                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>-->
+              <!--              </sapn>-->
+              <div style="text-align: right">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{ parseFloat(scope.row.currentPrice).toFixed(2) }}
+
+                <!--                {{}}-->
+              </div>
             </template>
           </el-table-column>
 
           <el-table-column prop="totalPrice" label="金额" width="150">
             <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>
-              </sapn>
+              <!--              <sapn>-->
+              <!--                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>-->
+              <!--              </sapn>-->
+              <div style="text-align: right">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{ parseFloat(scope.row.totalPrice).toFixed(2) }}
+
+                <!--                {{}}-->
+              </div>
             </template>
           </el-table-column>
 
           <el-table-column prop="canUseSku" label="可用库存" width="150">
             <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>
-              </sapn>
+              <!--              <sapn>-->
+              <!--                <el-input v-model="scope.row.canUseSku" placeholder="可用库存" style="" readonly></el-input>-->
+              <!--              </sapn>-->
+              <div style="text-align: right">
+                <!--                <el-input    @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" readonly></el-input>-->
+                {{ parseFloat(scope.row.canUseSku).toFixed(2) }}
+
+                <!--                {{}}-->
+              </div>
             </template>
           </el-table-column>
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
-              <sapn>
-                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注"></el-input>
-              </sapn>
+              <!--              <sapn>-->
+              <!--                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注" readonly></el-input>-->
+              {{ scope.row.remark }}
+              <!--              </sapn>-->
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" width="80">
-            <template slot-scope="scope">
-              <span @click="_ly_delFrom(scope.row)">
-                <i class="el-icon-error" style="color: red;"></i>
-              </span>
-            </template>
-          </el-table-column>
+          <!--          <el-table-column label="操作" align="center" width="80">-->
+          <!--            <template slot-scope="scope">-->
+          <!--              <span @click="_ly_delFrom(scope.row)">-->
+          <!--                <i class="el-icon-error" style="color: red;"></i>-->
+          <!--              </span>-->
+          <!--            </template>-->
+          <!--          </el-table-column>-->
         </el-table>
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
@@ -324,10 +384,17 @@
       </div>
     </el-form>
     <div class="tinajia_dingwei">
-      <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-      <el-button type="primary" @click="handleAdd">保 存</el-button>
-      <el-button @click="cancel">取 消</el-button>
-      <!-- </span> -->
+      <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;">
+        <el-button v-if="this.$route.query.status == 3" type="primary" @click="auditSaleOrder">审核</el-button>
+        <!--      <el-button v-if="this.$route.query.status==6" type="primary" @click="auditSaleOrder">反审</el-button>-->
+        <!--      <el-button v-if="this.$route.query.status==7" type="primary" @click="auditSaleOrder">标记完成</el-button>-->
+        <el-button v-if="this.$route.query.status == 5" type="primary" @click="auditSaleOrder">指定结束</el-button>
+        <el-button v-if="this.$route.query.confirmStatus == 2" type="primary" @click="confirmSkuSaleOrder(1)">确认库存
+        </el-button>
+        <el-button v-if="this.$route.query.confirmStatus == 1" type="primary" @click="confirmSkuSaleOrder(2)">取消库存
+        </el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </span>
     </div>
   </div>
 </template>
@@ -340,7 +407,7 @@ import {
   PurchaseinboundAdd,
   PurchaseinboundAdds, GoodsList01
 } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { mdfSaleOrder, saleOderDetail, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder } from '@/api/saleordermanage'
+import { confirmSkuSaleOrder, auditFinSaleOrder, auditSaleOrderGj, mdfSaleOrder, saleOderDetail, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder } from '@/api/saleordermanage'
 
 import {
   getToken
@@ -384,7 +451,7 @@ Vue.directive('loadmore', {
   }
 })
 export default {
-  name: 'mdfSaleOrder',
+  name: "index",
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
   props: {
     visible: {
@@ -563,16 +630,16 @@ export default {
       }],
       //发票类型
       invoiceoptions: [{
-        value: '增值税专用发票',
+        value: '1',
         label: '增值税专用发票'
       }, {
-        value: '增值税普通发票',
+        value: '2',
         label: '增值税普通发票'
       }, {
-        value: '个人普通发票',
+        value: '3',
         label: '个人普通发票'
       }, {
-        value: '不开发票',
+        value: '4',
         label: '不开发票'
       }],
 
@@ -756,10 +823,10 @@ export default {
 
 
       rules: {
-        // orderDate: [
-        //   { required: true, message: '请输入日期', trigger: 'blur' },
-        //   // { type: 'number', message: '优先级必须为数字'}
-        // ],
+        orderDate: [
+          { required: true, message: '请输入日期', trigger: 'blur' },
+          // { type: 'number', message: '优先级必须为数字'}
+        ],
         saleUserId: [
           { required: true, message: '请输入销售人员', trigger: 'blur' },
         ],
@@ -785,7 +852,7 @@ export default {
           value: 6,
           label: 'CNY'
         }, {
-          value: 5,
+          value: 7,
           label: 'USD'
         }
       ],
@@ -853,7 +920,7 @@ export default {
   },
   created() {
 
-    console.log("1----------------------3")
+
     // this.getConfigKey("sys.user.initPassword").then(response => {
     //   // this.initPassword = response.msg;
     // });
@@ -1105,15 +1172,12 @@ export default {
       this.tianjiahang.splice(index, 1);
     },
 
-
-
-
-
-
     // 取消按钮
     cancel() {
       this.$store.dispatch("tagsView/delView", this.$route)
-      this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+      // this.$router.push({ path: "/Salesmanagement/saleOrderGJ", query: { id: 1 } })
+      this.$tab.closePage();
+      this.$router.go(-1)
     },
 
     //添加的取消按钮
@@ -1294,8 +1358,6 @@ export default {
     goodsQtyChange(row) {
       if (row.qty > row.canUseSku) {
         row.qty = 0
-        row.totalPrice = 0
-
         this.$message.error("数量不能超过可用库存数量")
       }
     },
@@ -1325,9 +1387,7 @@ export default {
       const param = {
         goodsId: row.goodsId,
         customerId: this.formData.customerId,
-        orderClass: 2,
-        currency: this.formData.currency
-
+        orderClass: 2
       }
 
       //
@@ -1429,6 +1489,58 @@ export default {
       });
     },
 
+    /** 新增按钮操作 */
+    auditSaleOrder() {
+      const param = {
+        orderId: this.formData.id,
+        opeateType: this.$route.query.status
+      }
+      auditSaleOrderGj(param).then(response => {
+        if (response.code == "200") {
+          this.$message.success("提交成功")
+          this.$store.dispatch("tagsView/delView", this.$route)
+
+          // this.$router.push({ path: "/Salesmanagement/SaleOrderGj", query: { id: 1 } })
+          this.$tab.closePage();
+          this.$router.go(-1)
+        } else {
+
+          // this.$message.error(response.msg)
+
+          // this.$router.go(-1)
+
+        }
+      }
+      )
+
+
+    },
+    /** 新增按钮操作 */
+    auditFinSaleOrder() {
+      const param = {
+        orderId: this.formData.id,
+        opeateType: this.$route.query.status
+      }
+      auditFinSaleOrder(param).then(response => {
+        if (response.code == "200") {
+          this.$message.success("提交成功")
+          this.$store.dispatch("tagsView/delView", this.$route)
+          // this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          this.$tab.closePage();
+          this.$router.go(-1)
+
+        } else {
+
+          // this.$message.error(response.msg)
+
+          // this.$router.go(-1)
+
+        }
+      }
+      )
+
+
+    },
 
 
     /** 新增按钮操作 */
@@ -1439,7 +1551,9 @@ export default {
         if (response.code == "200") {
           this.$message.success("修改成功")
           this.$store.dispatch("tagsView/delView", this.$route)
-          this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          // this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          this.$tab.closePage();
+          this.$router.go(-1)
 
         } else {
 
@@ -1490,12 +1604,37 @@ export default {
       // })
       //    this._ly_ok();
     },
-
+    rounding(row, column) {
+      if (parseFloat(row[column.property]).toFixed(2) == null || isNaN(parseFloat(row[column.property]).toFixed(2))) {
+        return '0.00';
+      }
+      return parseFloat(row[column.property]).toFixed(2)
+    },
     /** 返回操作 */
     handleChuangJiangone: function (row) {
       // this.$router.push("/system/user-auth/role/");
       this.$router.push("/system/user-cktkfh/role/");
     },
+    confirmSkuSaleOrder(opt) {
+      const param = {
+        id: this.formData.id,
+        opearte: opt
+      }
+
+      confirmSkuSaleOrder(param).then(response => {
+        if (response.code == 200) {
+          this.$message.success("修改成功")
+          this.$store.dispatch("tagsView/delView", this.$route)
+          this.$router.push({ path: "/Salesmanagement/saleOrderGJ", query: { id: 1 } })
+          this.onSearch();
+        } else {
+          // this.$message.error(response.msg)
+
+        }
+      })
+
+    },
+
     sum(row) {
       if (row.qty != null && row.currentPrice != null) {
         row.totalPrice = row.qty * row.currentPrice;
@@ -1516,7 +1655,7 @@ export default {
     }
     saleOderDetail(param).then(response => {
       if (response.code == "200") {
-        // this.formData=response.data
+        this.formData = response.data
         // this.formData.id =response.data.id
         // this.formData.orderNo =response.data.orderNo
         // this.formData.customerNo =response.data.customerNo
@@ -1533,8 +1672,6 @@ export default {
         // this.formData.fcNumber =response.data.fcNumber
         // this.formData.orderClassMsg =response.data.orderClassMsg
         // this.tableData.push(...response.data.goods)
-        this.formData = response.data
-
         this.tableData = response.data.goods
         console.log('tableData', this.tableData)
 
@@ -1556,7 +1693,7 @@ export default {
   }
 };
 </script>
-<style src=".././PurchaseWarehousingcjcss/index.css" scoped>
+<style src=".././PurchaseWarehousingcjcss/index.css">
 .normQtyclass {
   background-color: #00afff;
 }

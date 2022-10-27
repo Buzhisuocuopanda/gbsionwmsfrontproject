@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form
-      ref="form2"
-      :model="form2"
-      label-width="130px"
-      :rules="rules"
-      style=""
-    >
+    <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">采购入库单</div>
 
       <!-- 编号:56221589223 -->
@@ -19,47 +13,22 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期:">
-            <el-date-picker
-              type="date"
-              placeholder=""
-              v-model="form2.cbpc08"
-              style="width: 60%"
-              disabled
-            >
+            <el-date-picker type="date" placeholder="" v-model="form2.cbpc08" style="width: 60%" disabled>
             </el-date-picker>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="20">
-        <el-col
-          v-if="false"
-          style="margin-top: -0.4%; margin-left: -3%"
-          :span="7"
-        >
+        <el-col v-if="false" style="margin-top: -0.4%; margin-left: -3%" :span="7">
           <el-form-item label="主副表id:" prop="cbpg161">
-            <el-input
-              v-model="form2.cbpg161"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%"
-            />
+            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width: 80%" />
           </el-form-item>
         </el-col>
         <el-col style="" :span="8">
           <el-form-item label="供料单位:" prop="cbsa08">
             <el-popover placement="bottom-start" trigger="click">
-              <supplierMaintenance
-                ref="supplierMaintenance"
-                @selected="selected02"
-                style="width: 210px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.cbsa08"
-                placeholder=""
-                readonly
-                style="width: 80%"
-              >
+              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width: 210px !important" />
+              <el-input slot="reference" v-model="form2.cbsa08" placeholder="" readonly style="width: 80%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -67,18 +36,8 @@
         <el-col style="" :span="8">
           <el-form-item label="仓库:" prop="cbwa09">
             <el-popover placement="bottom-start" trigger="click">
-              <kuweixxweihu
-                ref="kuweixxweihu"
-                @selected="selected01"
-                style="width: 210px !important"
-              />
-              <el-input
-                slot="reference"
-                v-model="form2.cbwa09"
-                placeholder=""
-                readonly
-                style="width: 80%"
-              >
+              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 210px !important" />
+              <el-input slot="reference" v-model="form2.cbwa09" placeholder="" readonly style="width: 80%">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -86,12 +45,7 @@
         <el-col style="" :span="8">
           <el-form-item label="结算货币:" prop="cala08s">
             <el-select v-model="form2.cala08s" placeholder="" style="width: 80%">
-              <el-option
-                v-for="item in jiageLeixeng"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -109,75 +63,38 @@
       <el-row v-if="false">
         <el-col style="margin-top: -0.4%; margin-left: 2%" :span="7">
           <el-form-item label="供应商id:" prop="cbpc09">
-            <el-input
-              v-model="form2.cbpc09"
-              maxlength="30"
-              style="width: 80%; border: solid #eee thin"
-            />
+            <el-input v-model="form2.cbpc09" maxlength="30" style="width: 80%; border: solid #eee thin" />
           </el-form-item>
         </el-col>
         <el-col style="margin-top: -0.4%; margin-left: -3%" :span="7">
           <el-form-item label="仓库id:" prop="cbpc10">
-            <el-input
-              v-model="form2.cbpc10"
-              placeholder=""
-              maxlength="30"
-              style="width: 80%; border: solid #eee thin"
-            />
+            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30"
+              style="width: 80%; border: solid #eee thin" />
           </el-form-item>
         </el-col>
         <!-- 商品信息维护 -->
         <el-col>
-          <el-form-item
-            label=""
-            v-if="false"
-            prop="cbpd08"
-            style="margin-left: 0.8%"
-          >
-            <el-input
-              v-model="form2.cbpd08"
-              style="border: solid #eee thin; width: 70%"
-            ></el-input>
+          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left: 0.8%">
+            <el-input v-model="form2.cbpd08" style="border: solid #eee thin; width: 70%"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button
-              plain
-              style="float: left; margin-left:1%;"
-              type="primary"
-              @click="_ly_addFrom"
-              >增行</el-button
-            >
+            <el-button plain style="float: left; margin-left:1%;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
-        <el-table
-          :data="tableData"
-          border
-          :span-method="arraySpanMethod"
-          :row-style="{ height: '10px' }"
-          :cell-style="{ padding: '5px' }"
-          style="width: 100%; margin-top: 10px"
-        >
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width: 200%">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01
-                  ref="Goodsone01"
-                  @selected="selected08($event, scope.row)"
-                  style="width: 630px !important"
-                />
-                <el-input
-                  slot="reference"
-                  v-model="scope.row.cbpc000"
-                  placeholder=""
-                  readonly
-                  style="width: 100%"
-                >
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  style="width: 630px !important" />
+                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
             </template>
@@ -198,38 +115,22 @@
           <el-table-column prop="cbpd09" label="数量" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input
-                v-model="scope.row.cbpd09"
-                @blur="chen(scope.row)"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbpd09" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style="">
+              </el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
           <el-table-column prop="cbpd11" label="单价" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input
-                v-model="scope.row.cbpd11"
-                @blur="chen(scope.row)"
-                class="shuzicaoyou"
-                placeholder=""
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbpd11" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style="">
+              </el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
           <el-table-column prop="cbpd12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbpd12"
-                placeholder=""
-                class="shuzicaoyou"
-                style=""
-                readonly
-              ></el-input>
+              <el-input v-model="scope.row.cbpd12" placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -240,25 +141,12 @@
 
           <el-table-column v-if="false" prop="cbpc01" label="id" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbpc01"
-                placeholder="id"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbpc01" placeholder="id" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column
-            v-if="false"
-            prop="cbpd08"
-            label="商品编号"
-            width="150"
-          >
+          <el-table-column v-if="false" prop="cbpd08" label="商品编号" width="150">
             <template slot-scope="scope">
-              <el-input
-                v-model="scope.row.cbpd08"
-                placeholder="商品编号"
-                style=""
-              ></el-input>
+              <el-input v-model="scope.row.cbpd08" placeholder="商品编号" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -681,7 +569,7 @@ export default {
     },
   },
   created() {
-      this.getList();
+    this.getList();
     this.getConfigKey("sys.user.initPassword").then((response) => {
       // this.initPassword = response.msg;
     });
@@ -728,10 +616,10 @@ export default {
     },
     // 点击【取消】按钮关闭弹窗
     _ly_cancelDialog(done) {
-    //   console.log("_ly_cancelDialog");
-    //   this.$emit("on-close");
-        this.reset01()
-         this.$tab.closePage();
+      //   console.log("_ly_cancelDialog");
+      //   this.$emit("on-close");
+      this.reset01()
+      this.$tab.closePage();
       this.$router.go(-1);
     },
     // 关闭弹窗前，二次询问是否关闭
@@ -740,7 +628,7 @@ export default {
         .then((_) => {
           done();
         })
-        .catch((_) => {});
+        .catch((_) => { });
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
@@ -896,11 +784,11 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
       console.log(e, 111);
       console.log(row, 222);
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "cbpd08", e.substring(e.indexOf(".") + 1), 8523642);
+      this.$set(row, "cbpd08", e.substring(e.lastIndexOf(".") + 1), 8523642);
       console.log(row, 555);
       // console.log(row.cbpc08,96325412);
       // console.log(name, 111)
@@ -995,29 +883,29 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-          for(let i=0;i<this.tableData.length;i++){
+          for (let i = 0; i < this.tableData.length; i++) {
 
-            if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
+            if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
               return this.$message.error("采购入库单明细的商品不能为空")
             }
-            if(this.tableData[i].cbpd09==null||this.tableData[i].cbpd09==0){
+            if (this.tableData[i].cbpd09 == null || this.tableData[i].cbpd09 == 0) {
               return this.$message.error("采购入库单明细的数量不能为空")
             }
-            if(this.tableData[i].cbpd11==null||this.tableData[i].cbpd11==0){
+            if (this.tableData[i].cbpd11 == null || this.tableData[i].cbpd11 == 0) {
               return this.$message.error("采购入库单明细的单价不能为空")
             }
-            if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+            if (this.tableData[i].cbpd12 == null || this.tableData[i].cbpd12 == 0) {
               return this.$message.error("采购入库单明细的金额不能为空")
             }
           }
-          if(this.form2.cala08s == 'CNY'){
+          if (this.form2.cala08s == 'CNY') {
             this.form2.cbpc16 = 6
-          }else{
+          } else {
             this.form2.cbpc16 = 5
           }
           // 声明空数组，for循环生成新的数组
           let newarr = []
-          for(let i = 0;i<this.tableData.length;i++){
+          for (let i = 0; i < this.tableData.length; i++) {
             newarr.push({
               "cbpd01": this.tableData[i].cbpd01,
               "cbpc01": this.tableData[i].cbpc01,
@@ -1041,13 +929,13 @@ export default {
               this.reset01();
               // console.log(this.form2.cbpg161,111);
               // console.log(this.form.cbpg01,222);
-            //   console.log(response.data.id, 333);
+              //   console.log(response.data.id, 333);
               this.$tab.closePage();
               this.$router.go(-1);
-            //   this.tableData.forEach((item) => {
-            //     item.cbpc01 = response.data.id;
-            //     console.log(item.cbpc01, 8523697412);
-            //   });
+              //   this.tableData.forEach((item) => {
+              //     item.cbpc01 = response.data.id;
+              //     console.log(item.cbpc01, 8523697412);
+              //   });
             }
           });
         } else {
@@ -1078,7 +966,7 @@ export default {
             this.userLists = userlistss[0];
             this.form2 = res.data.rows[0];
             this.tableData = res.data.rows;
-            this.tableData.map((item) =>{
+            this.tableData.map((item) => {
               item.cbpc000 = item.cala08 + ' ~ ' + item.cbpa07 + ' ~ ' + item.cbpb08
             })
             console.log(this.userLists, 123456);
@@ -1106,4 +994,6 @@ export default {
   },
 };
 </script>
-<style src="./PurchaseWarehousingxgcss/index.css"></style>
+<style src="./PurchaseWarehousingxgcss/index.css">
+
+</style>
