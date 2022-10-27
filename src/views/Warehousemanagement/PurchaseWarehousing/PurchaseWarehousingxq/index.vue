@@ -293,10 +293,10 @@ export default {
     }
 };
 </script>
-<style src="./PurchaseWarehouscss/index.css">
+<style src="./PurchaseWarehouscss/index.css" scoped>
 
 </style>
-<style>
+<style scoped>
 @page {
     size: auto;
     margin: 3mm;

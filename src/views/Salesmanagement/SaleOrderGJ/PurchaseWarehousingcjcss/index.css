@@ -1,55 +1,43 @@
 .right-backtoolss {
-    margin-left: 1100px;
-    margin-top: -55px;
+  margin-left: 1100px;
+  margin-top: -55px;
 }
-
-
-
-
 
 .chuangjiancaigous {
-    margin-top: 1%;
-    margin-left: 46%;
-    font-weight: 900;
-    font-size: 20px;
+  margin-top: 1%;
+  margin-left: 46%;
+  font-weight: 900;
+  font-size: 20px;
 }
 
-
-
-
-
 .buttonbaocuens {
-    margin-top: 2%;
-    margin-left: 85%;
+  margin-top: 2%;
+  margin-left: 85%;
 }
 
 /* .caozuoxiangqengs {
     border: 0 !important;
 } */
 
-
 /*----------*/
 
-
 .pagination-container.hidden {
-    display: none;
+  display: none;
 }
-
 
 .chuangjianzitis {
-    margin-top: 2%;
-    margin-left: 10%;
-    font-size: 15px;
-    font-weight: 600;
-    color: rgba(162, 162, 162, 0.984);
+  margin-top: 2%;
+  margin-left: 10%;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(162, 162, 162, 0.984);
 }
 
-
 .chuangjiandialogs {
-    margin-left: -500px;
-    margin-top: -30px;
-    width: 3000px !important;
-    /* height: 3000px !important; */
+  margin-left: -500px;
+  margin-top: -30px;
+  width: 3000px !important;
+  /* height: 3000px !important; */
 }
 
 /* .xiaobubuttondiv { */
@@ -65,41 +53,36 @@
     margin-top: 2%;
 } */
 
-
-
 .xialakuangyuanjiao {
-    /* border-radius: 30% !important; */
-    /* border: 1px solid #000000 !important; */
+  /* border-radius: 30% !important; */
+  /* border: 1px solid #000000 !important; */
 }
-
-
 
 /* .margin-top {
     margin-top: 2%;
 } */
 
-
-
 /* .el-descriptions-item__content{
     width: 50px;
 } */
 
-.kaichuangcs {}
+.kaichuangcs {
+}
 
 /*
 滚动条
 */
 
 .table-heads {
-    padding-right: 17px;
-    background-color: rgba(249, 249, 249, 0.98);
-    color: #000;
+  padding-right: 17px;
+  background-color: rgba(249, 249, 249, 0.98);
+  color: #000;
 }
 
 .table-bodys {
-    width: 95%;
-    height: 300px;
-    overflow-y: scroll;
+  width: 95%;
+  height: 300px;
+  overflow-y: scroll;
 }
 
 /* .table-heads table,
@@ -113,27 +96,23 @@
     width: 80px !important;
 } */
 
-
-
 /* .table-bodys {
     width: 1629px;
     height: 360px;
     overflow: auto;
 } */
 
-
-.table-style-zhongjiang{
-
-     background-color:rgb(231, 227, 227);
-     position: absolute;
-     left:2%;
+.table-style-zhongjiang {
+  background-color: rgb(231, 227, 227);
+  position: absolute;
+  left: 2%;
 }
-.tinajia_dingwei{
-    position: relative;
-    top:90%;
-    left:80%;
+.tinajia_dingwei {
+  position: relative;
+  top: 92%;
+  left: 0%;
 }
-.shuzicaoyou{
-    text-align: right;
-    direction: rtl;
+.shuzicaoyou {
+  text-align: right;
+  direction: rtl;
 }

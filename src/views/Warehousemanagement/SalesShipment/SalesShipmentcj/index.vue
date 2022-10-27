@@ -218,13 +218,13 @@
           </el-table-column>
           <el-table-column prop="cbsc12" label="金额" width="150">
             <template slot-scope="scope">
-              <el-input  v-model="scope.row.cbsc12" v-only-number="{ precision: 0.0 }" placeholder=""
-                class="shuzicaoyou" style="width:100%"></el-input>
+              <el-input v-model="scope.row.cbsc12" v-only-number="{ precision: 0.0 }" placeholder="" class="shuzicaoyou"
+                style="width:100%" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="剩余未发量" width="100">
             <template slot-scope="scope">
-              <el-input readonly v-model="scope.row.cbsc13" v-only-number="{ min: 0, precision: 0.0 }" placeholder="">
+              <el-input readonly v-model="scope.row.cbsc133" v-only-number="{ min: 0, precision: 0.0 }" placeholder="">
               </el-input>
             </template>
           </el-table-column>
@@ -234,9 +234,9 @@
               </el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="cbsc13" label="备注" width="">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd13" placeholder=""></el-input>
+              <el-input v-model="scope.row.cbsc13" placeholder=""></el-input>
             </template>
           </el-table-column>
 
@@ -701,18 +701,20 @@ export default {
 
     if (routerParams.data) {
       this.form2.cbsb20 = routerParams.data.id;
+      // console.log(this.form2.cbsb20)
       //销售提货单详情
       this.getList();
     }
     if (this.$route.query.saleOrderid) {
       this.xsIds = this.$route.query.saleOrderid
-      takeOrderDetailBySaleId({ saleOrderIds: this.xsIds, whId: 62 }).then(response => {
+      this.whIdxs = this.$route.query.whId
+      takeOrderDetailBySaleId({ saleOrderIds: this.xsIds, whId: this.whIdxs }).then(response => {
         console.log(response, "这是销售出库单创建的", "------------------------------")
         // 提货单id
         // this.form2.takeId = id;
         // 编号
 
-        this.form2.cbsb07 = response.data.orderNo;
+        this.form2.cbsb07 = response.data.saleOrderNo;
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID
@@ -749,43 +751,58 @@ export default {
         this.form2.cbsb30 = response.data.customerNo;
         console.log(this.form2.cbsb09, 85200000);
         console.log(response)
-        let tableData1 = {}
-        response.data.goods.forEach((item) => {
-          tableData1.cbsc177 = item.orderClass;
-          tableData1.cbsc15 = item.supplierId;
-          tableData1.cbsd133 = item.brand;
-          tableData1.cbsd134 = item.model;
-          tableData1.cbsd135 = item.description;
-          tableData1.cbsc08 = item.goodsId;
-          tableData1.cbsc12 = item.qty * item.price;
-          tableData1.cbsc09 = item.qty;
-          // if (this.$route.query.state == 0) {
-          //   tableData1.cbsc09 = item.goodsNum;
-          //   tableData1.cbsc12 = item.goodsNum * item.price;
-          //   console.log("出库单创建")
-          // }
-          // else if (this.$route.query.state == 1) {
-          //   tableData1.cbsc12 = item.qty * item.price;
-          //   tableData1.cbsc09 = item.qty;
-          //   console.log("销售订单创建")
-          // }
-          tableData1.cbsc09 = item.qty;
-          tableData1.cbsc11 = item.price;
-          tableData1.cbsc13 = item.noSendQty;
-          tableData1.cbsc144 = item.useQty;
-          tableData1.cbsc15 = item.remark;
-          // item.cbsc14 = item.saleOrderId;
-          tableData1.cbsc14 = item.cbob01;
+        console.log(response.data.goods)
 
-          tableData1.cbpc000 = item.brand + "~" + item.model + "~" + item.description;
-          if (item.cbsc177 == "国内订单") {
-            item.cbsc17 = "1";
+        for (let i = 0; i < response.data.goods.length; i++) {
+          let obj = {}
+          // obj.cbsc177 = response.data.goods[i].orderClass;
+          obj.cbsc15 = response.data.goods[i].supplierId;
+          obj.cbsd133 = response.data.goods[i].brand;
+          obj.cbsd134 = response.data.goods[i].model;
+          obj.cbsd135 = response.data.goods[i].description;
+          obj.cbsc08 = response.data.goods[i].goodsId;
+          obj.cbsc12 = response.data.goods[i].qty * response.data.goods[i].price;
+          obj.cbsc09 = response.data.goods[i].qty;
+          obj.cbsc09 = response.data.goods[i].qty;
+          obj.cbsc11 = response.data.goods[i].price;
+          obj.cbsc133 = response.data.goods[i].noSendQty;
+          obj.cbsc144 = response.data.goods[i].useQty;
+          obj.cbsc13 = response.data.goods[i].remark;
+          obj.cbsc14 = response.data.goods[i].cbob01;
+          obj.cbpc000 = response.data.goods[i].brand + "~" + response.data.goods[i].model + "~" + response.data.goods[i].description;
+          if (response.data.goods[i].cbsc177 == "国内订单") {
+            obj.cbsc177 = "1";
           } else {
-            item.cbsc17 = "2";
+            obj.cbsc177 = "2";
           }
-        });
-        this.tableData.push(tableData1)
-        console.log(this.tableData)
+          console.log(obj, "obj-------------obj")
+          this.tableData.push(obj)
+        }
+        // response.data.goods.forEach((item) => {
+        //   tableData1.cbsc177 = item.orderClass;
+        //   tableData1.cbsc15 = item.supplierId;
+        //   tableData1.cbsd133 = item.brand;
+        //   tableData1.cbsd134 = item.model;
+        //   tableData1.cbsd135 = item.description;
+        //   tableData1.cbsc08 = item.goodsId;
+        //   tableData1.cbsc12 = item.qty * item.price;
+        //   tableData1.cbsc09 = item.qty;
+        //   tableData1.cbsc09 = item.qty;
+        //   tableData1.cbsc11 = item.price;
+        //   tableData1.cbsc13 = item.noSendQty;
+        //   tableData1.cbsc144 = item.useQty;
+        //   tableData1.cbsc15 = item.remark;
+        //   tableData1.cbsc14 = item.cbob01;
+
+        //   tableData1.cbpc000 = item.brand + "~" + item.model + "~" + item.description;
+        //   if (item.cbsc177 == "国内订单") {
+        //     item.cbsc17 = "1";
+        //   } else {
+        //     item.cbsc17 = "2";
+        //   }
+        // });
+        // this.tableData.push(tableData1)
+        console.log(this.tableData, "this.tableData-----------")
         //------------
         this.formArr = response.data;
 
@@ -845,7 +862,7 @@ export default {
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
-      let count = this.tableData.length; // 记录当前有多少个表单
+      // let count = this.tableData.length; // 记录当前有多少个表单
       // for (var index in this.tableData) {
       //   var form = this.tableData[index];
       //   console.log(form);
@@ -896,9 +913,9 @@ export default {
           this.$tab.closePage();
           this.$router.go(-1);
         }
-        if (count-- === 1) {
-          // this._ly_save();
-        }
+        // if (count-- === 1) {
+        //   // this._ly_save();
+        // }
 
 
         //  this.reset03();
@@ -1184,7 +1201,7 @@ export default {
         // 提货单id
         this.form2.takeId = id;
         // 编号
-        this.form2.cbsb07 = response.data.orderNo;
+        this.form2.cbsb07 = response.data.saleOrderNo;
         //客户名称
         this.form2.cbpc0999 = response.data.customerName;
         //客户名称ID
@@ -1232,9 +1249,9 @@ export default {
           item.cbsc09 = item.qty;
           item.cbsc11 = item.price;
           item.cbsc12 = item.cbsc09 * item.cbsc11;
-          item.cbsc13 = item.noSendQty;
+          item.cbsc133 = item.noSendQty;
           item.cbsc144 = item.useQty;
-          item.cbsc15 = item.remark;
+          item.cbsc13 = item.remark;
           // item.cbsc14 = item.saleOrderId;
           item.cbsc14 = item.cbob01;
 

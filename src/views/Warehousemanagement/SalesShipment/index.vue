@@ -1518,13 +1518,15 @@ export default {
         });
       }
       else {
+        console.log(this.form2.cbpc10)
+        console.log(customer)
         console.log('跳转到创建界面')
         this.$router.push({
           path: "/system/user-authhhchuanj/role/",
           // name: "AuthUser",
           query: {
             saleOrderid: customer,
-            state: 1
+            whId: this.form2.cbpc10
           },
         });
         this.queryParams.orderNo = ""
