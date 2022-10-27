@@ -30,7 +30,9 @@
 
 
          <el-form-item>
-              <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">生成国内销售订单</el-button>
+           <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">生成国内销售订单</el-button>
+
+           <el-button size="mini" :disabled="ids.length==0" class="biaoto-buttonshanchu" @click="batchDel">批量删除</el-button>
          </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
 
@@ -67,21 +69,21 @@
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
 <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-<!--        <el-table-column label="操作"  min-width="120px;">-->
-<!--          <template slot-scope="scope" >-->
-<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
-<!--                       type="text" @click="mdfDetail(scope.row)"-->
-<!--            >生成国内销售订单</el-button>-->
+        <el-table-column label="操作"  min-width="50px;">
+          <template slot-scope="scope" >
+            <!--<el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text" @click="mdfDetail(scope.row)"
+            >生成国内销售订单</el-button>-->
 
-<!--&lt;!&ndash;            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
-<!--                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>&ndash;&gt;-->
-<!--&lt;!&ndash;            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"-->
-<!--                       type="text"-->
-<!--                       @click="showDetail(scope.row)">详情</el-button>&ndash;&gt;-->
+            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
+<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+                       type="text"
+                       @click="showDetail(scope.row)">详情</el-button>-->
 
-<!--          </template>-->
+          </template>
 
-<!--        </el-table-column>-->
+        </el-table-column>
       </el-table>
       <el-pagination
         :background="true"
@@ -244,7 +246,7 @@
 </template>
 
 <script>
-import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder, goodsShopList} from '@/api/saleordermanage'
+import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder, goodsShopList,delgoodsShop,batchDelgoodsShop} from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -470,15 +472,41 @@ export default {
 
      // 多选框选中数据
         handleSelectionChangee(selection) {
-            this.ids = selection;
-            this.idss = selection.map(item => item.goodsId);
-            this.shenpiids = selection;
-            this.single = selection.length != 1;
-            this.multiple = !selection.length;
+          console.log(selection,10271);
+            this.ids = selection.map(item => item.id);
+            // this.idss = selection.map(item => item.id);
+            // this.shenpiids = selection;
+            // this.single = selection.length != 1;
+            // this.multiple = !selection.length;
         },
+    batchDel(){
+      this.$confirm('确认要删除'+"选中的购物车？", '确认操作', {
+        type: 'warning',
+        distinguishCancelAndClose: true,
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        confirmButtonClass: this.confirmClass
+
+      }).then(() => {
+        /*const param = {
+          ids: this.ids,
+
+        }*/
+        batchDelgoodsShop(this.ids).then(response => {
+          // console.log(response)
+          if ( response.code === 200) {
+            this.onSearch()
+            this.$message.success("删除成功")
+
+          } else {
+            // this.$notify.error(response.data.msg)
+          }
+        })
+      })
+    },
 
     delTotalOrder(row){
-      this.$confirm('确认要删除'+row.orderNo+"售后单？", '确认操作', {
+      this.$confirm('确认要删除'+row.description+"购物车？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',
@@ -487,15 +515,15 @@ export default {
 
       }).then(() => {
         const param = {
-          id: row.id,
+          orderId: row.id,
           delete: 1,
 
         }
-        delSales(param).then(response => {
+        delgoodsShop(param).then(response => {
           // console.log(response)
           if ( response.code === 200) {
             this.onSearch()
-            this.$notify.success("删除成功")
+            this.$message.success("删除成功")
 
           } else {
             // this.$notify.error(response.data.msg)
@@ -736,4 +764,88 @@ export default {
 .shopping .el-form--inline {
     height: 50px !important;
   }
+
+.biaoto-buttonchaxuen {
+  color: white !important;
+  /*width: 20px;*/
+  /*font-family:"宋体";*/
+  text-decoration: none;
+  font-size: 16px;
+  /* border: 2px solid #153c4a !important; */
+  height: 34px;
+  /*font: bold 14px Arial, Helvetica;*/
+  /*font-family:"微软雅黑";*/
+  background-color: #153c4a;
+  background-image: -moz-linear-gradient(#3db0d0, #307690);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3db0d0), to(#307690));
+  background-image: -webkit-linear-gradient(#3db0d0, #307690);
+  background-image: -o-linear-gradient(#3db0d0, #307690);
+  background-image: -ms-linear-gradient(#3db0d0, #307690);
+  background-image: linear-gradient(#3db0d0, #307690) !important;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+  /*-moz-box-shadow: 0 1px 0 rgba(0, 135, 245, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+  /*-webkit-box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 3px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+  /*box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 1px 0 rgba(125, 125, 125, 0.7), 0 2px 2px rgba(125, 125, 125, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+
+}
+
+/* .el-button { */
+/*color: white;*/
+/* border: 1px solid #3f93ac !important;
+} */
+
+.biaoto-buttonchuangjian {
+  border: 2px solid #007fdf !important;
+  /*width: 20px;*/
+  /*font-family:"宋体";*/
+  text-decoration: none;
+  font-size: 16px;
+  color: white !important;
+  /*font: bold 14px Arial, Helvetica;*/
+  /*font-family:"微软雅黑";*/
+  background-color: #005ab3;
+  background-image: -moz-linear-gradient(#469ab9, #005ab3);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#469ab9), to(#005ab3));
+  background-image: -webkit-linear-gradient(#469ab9, #005ab3);
+  background-image: -o-linear-gradient(#469ab9, #005ab3);
+  background-image: -ms-linear-gradient(#469ab9, #005ab3);
+  background-image: linear-gradient(#469ab9, #005ab3);
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+  /*-moz-box-shadow: 0 1px 0 rgba(0, 135, 245, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+  /*-webkit-box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+  /*box-shadow: 0 1px 0 rgba(0, 130, 236, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 145, 244, 0.5) inset;*/
+
+}
+
+.biaoto-buttonshanchu {
+  /*width: 20px;*/
+  text-decoration: none;
+  border: 2px solid#a03834 !important;
+  font-size: 16px;
+  color: white !important;
+  height: 34px;
+  /*font: bold 14px Arial, Helvetica;*/
+  /*font-family:"微软雅黑";*/
+  background-color: #a03834 !important;
+  background-image: -moz-linear-gradient(#a03834, #a03834);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#a03834), to(#a03834));
+  background-image: -webkit-linear-gradient(#a03834, #a03834);
+  background-image: -o-linear-gradient(#a03834, #a03834);
+  background-image: -ms-linear-gradient(#a03834, #a03834);
+  background-image: linear-gradient(#f65953, #a03834)!important;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  /*text-shadow: 0 -1px 0 rgba(0,0,0,.8);*/
+  /*-moz-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
+  /*-webkit-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
+  /*box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
+}
+
 </style>

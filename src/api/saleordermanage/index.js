@@ -332,6 +332,16 @@ export function delgoodsShop(data) {
     data: data
   })
 }
+
+export function batchDelgoodsShop(data) {
+  return request({
+    url: '/sale/batchDelgoodsShop',
+    method: 'post',
+    data: data
+  })
+}
+
+
 export function pldelete(data) {
   console.log(data)
   return request({
