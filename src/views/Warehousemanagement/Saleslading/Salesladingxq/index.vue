@@ -62,11 +62,19 @@
           <el-table-column prop="description" key="description" label="描述">
           </el-table-column>
           <!-- goodsNum -->
-          <el-table-column  prop="goodsNum" label="良品数量" v-if="edit == 1 || edit == 0">
+<!--          <el-table-column  prop="goodsNum" label="良品数量" v-if="edit == 1 || edit == 0">-->
+<!--            <template scope="scope">-->
+<!--              <el-input v-model="scope.row.goodsNum" v-if="status == 2 || status == 0?false:true"-->
+<!--                :readonly="status == 2 || status == 0 || checkstatus!=2?true:false"></el-input>-->
+<!--              <div v-text="rounding2(scope.row.goodsNum)" v-if="status == 2 || status == 0?true:false"></div>-->
+<!--            </template>-->
+
+<!--          </el-table-column>-->
+          <el-table-column  prop="goodsNum" label="良品数量">
             <template scope="scope">
-              <el-input v-model="scope.row.goodsNum" v-if="status == 2 || status == 0?false:true"
-                :readonly="status == 2 || status == 0 || checkstatus!=2?true:false"></el-input>
-              <div v-text="rounding2(scope.row.goodsNum)" v-if="status == 2 || status == 0?true:false"></div>
+              <el-input v-model="scope.row.goodsNum" v-if="checkstatus!=2?true:false"
+                        oninput="value=value.replace(/[^\d]/g,'')" ></el-input>
+              <div v-text="rounding2(scope.row.goodsNum)" v-else ></div>
             </template>
 
           </el-table-column>
