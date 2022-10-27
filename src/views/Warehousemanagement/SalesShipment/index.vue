@@ -931,7 +931,7 @@ export default {
       console.log(name.substring(name.indexOf("-") + 1), 963);
       this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
-      this.queryParamss.
+      // this.queryParamss.
       let cus = this.addDateRange(this.queryParamss, this.dateRange)
       this.tcwhId = this.form2.cbpc10
       cus.whId = this.form2.cbpc10
