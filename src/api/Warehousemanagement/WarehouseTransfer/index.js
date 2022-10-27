@@ -1,6 +1,14 @@
 import request from '@/utils/request'
 import { parseStrEmpty } from "@/utils/ruoyi";
-
+// /dev-api/stage-api/system/WarehousetransferordersController/Selloutofwarehouseaupdate
+// 仓库调拨修改
+export function Selloutofwarehouseaupdate(data) {
+  return request({
+    url: '/system/WarehousetransferordersController/Warehousetransferorderseditone',
+    method: 'post',
+    data: data
+  })
+}
 // 主表添加配置
 export function PurchasereturnordersAdd(data) {
   return request({
