@@ -55,7 +55,7 @@
           <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+      <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row stripe
         style="margin-top:1em">
         <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="150px;" />
@@ -80,21 +80,21 @@
             <el-button class="caozuoxiangqengGJ" style="margin-left:8px; margin-top: 2px" size="mini"
               icon="el-icon-share" type="text" @click="showDetail(scope.row)" v-hasPermi="['sale:saleOrderGj:detail']">
               详情</el-button>
-            <el-button style="margin-top: 2px"  v-hasPermi="['sale:saleOrderGj:edit']" v-show="scope.row.status==0" size="mini" type="primary"
-              @click="mdfDetail(scope.row)">修改</el-button>
+            <el-button style="margin-top: 2px" v-hasPermi="['sale:saleOrderGj:edit']" v-show="scope.row.status == 0"
+              size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>
             <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
-            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==1"
-              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,3)"
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 1"
+              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 3)"
               v-hasPermi="['sale:saleOrderGj:audit']">审核</el-button>
             <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==2" size="mini" type="primary" @click="auditDetail(scope.row,6)">反审</el-button>-->
             <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
             <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
-            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==6"
-              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,5)"
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 6"
+              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 5)"
               v-hasPermi="['sale:saleOrderGj:audit']">指定结束</el-button>
             <!--            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,2)" v-hasPermi="['sale:saleOrder:confirm']">确认库存</el-button>-->
             <!--            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,1)" v-hasPermi="['sale:saleOrder:confirm']">取消库存</el-button>-->
-            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==0"
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 0"
               icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)"
               v-hasPermi="['sale:saleOrderGj:remove']">删除</el-button>
           </template>
