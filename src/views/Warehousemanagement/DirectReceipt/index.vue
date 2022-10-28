@@ -1,5 +1,5 @@
 <template>
-  <!--直接入库单-->
+    <!--直接入库单-->
     <div class="app-container directre">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -7,11 +7,13 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                  <el-form-item label="仓库"   class="item-r" >
-                    <el-select  v-model="queryParams.cbwa09" clearable filterable remote reserve-keyword placeholder="请输入关键词"  >
+                    <el-form-item label="仓库" class="item-r">
+                        <!-- <el-select  v-model="queryParams.cbwa09" clearable filterable remote reserve-keyword placeholder="请输入关键词"  >
                       <el-option v-for="item in postCangKu" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
-                    </el-select>
-                  </el-form-item>
+                    </el-select> -->
+                        <el-input v-model="queryParams.cbwa09" id="miaoshu" placeholder="请输入仓库" clearable
+                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                    </el-form-item>
                     <el-form-item prop="sn" label="型号">
                         <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
@@ -23,8 +25,10 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="mini" v-hasPermi="['system:directly:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                        <el-button v-hasPermi="['system:directly:list']" class="biaoto-buttonchuangjiannmnm" size="mini" @click="resetQuery">重置</el-button>
+                        <el-button size="mini" v-hasPermi="['system:directly:list']" class="biaoto-buttonchaxuen"
+                            @click="handleQuery">查询</el-button>
+                        <el-button v-hasPermi="['system:directly:list']" class="biaoto-buttonchuangjiannmnm" size="mini"
+                            @click="resetQuery">重置</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <!-- <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:directly:remove']"
@@ -48,20 +52,21 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassDR" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="470"
+                <el-table border :header-cell-style="headClassDR" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="470"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable  width="120px;"/>
+                    <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable width="120px;" />
                     <el-table-column label="品牌" width="90" align="left" key="cala08" prop="cala08" sortable>
                     </el-table-column>
                     <el-table-column label="型号" align="left" key="cbpb12" width="220px;" prop="cbpb12" sortable />
                     <el-table-column label="描述" align="left" key="cbpb08" prop="cbpb08" width="550px;" sortable />
                     <el-table-column label="SN" align="left" key="cbic10" prop="cbic10" width="130px;" sortable />
-                  <el-table-column label="仓库" width="120px;" align="left" key="cbwa09" prop="cbwa09" sortable />
+                    <el-table-column label="仓库" width="120px;" align="left" key="cbwa09" prop="cbwa09" sortable />
                     <el-table-column label="库位" width="120px;" align="left" key="cbla09" prop="cbla09" sortable />
-                    <el-table-column label="入库日期" align="left" width="100px;" key="cbic02" prop="cbic02" :formatter="formatDate"
-                        sortable>
+                    <el-table-column label="入库日期" align="left" width="100px;" key="cbic02" prop="cbic02"
+                        :formatter="formatDate" sortable>
                     </el-table-column>
                     <!-- <el-table-column label="状态" align="center" key="cbpg11" prop="cbpg11" sortable>
                             <template scope="scope">
@@ -73,18 +78,18 @@
                             </template>
                     </el-table-column> -->
                     <!-- <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width"> -->
-                        <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
-                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                    <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
+                    <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                     class="button-caozuoxougai caozuoxiangqeng"
                                     @click="handlexiangqengSelect(scope.row)"
                                     v-if="scope.row.cbpg11 == 1 | scope.row.cbpg11 == 2"
                                     v-hasPermi="['system:user:edit']">
                                     修改
                                 </el-button> -->
-                            <!-- <el-button size="mini" type="text" icon="el-icon-delete"
+                    <!-- <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-hasPermi="['system:directly:remove']">删除</el-button> -->
-                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                    <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                     @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情
                                 </el-button>
                                 <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
@@ -100,7 +105,7 @@
                                     @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                     v-hasPermi="['system:user:listselect']"
                                     v-if="scope.row.cbpg11 == 3 | scope.row.cbpg11 == 1">标记完成</el-button> -->
-                        <!-- </template> -->
+                    <!-- </template> -->
                     <!-- </el-table-column> -->
                 </el-table>
 
@@ -244,8 +249,8 @@ export default {
         return {
             // 遮罩层
             loading: true,
-          //下拉列表数据仓库
-          storeSkuList:[],
+            //下拉列表数据仓库
+            storeSkuList: [],
             tianjiahang: [],
             // 选中数组
             ids: [],
@@ -447,9 +452,9 @@ export default {
                 page: 1,
                 size: 15,
                 total: this.total,
-                cbpb12:undefined,
+                cbpb12: undefined,
                 dateRange: undefined,
-                cbwa09:'',
+                cbwa09: '',
             },
             // 列信息
             //  columns: [
@@ -1089,11 +1094,11 @@ export default {
             this.$modal.confirm('是否确认删除仓库为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseInboundremove(JSON.stringify(item)).then((res) => {
-                        if(res.code == 200){
+                        if (res.code == 200) {
                             this.submitShangpin();
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
-                        }else{
+                        } else {
                             // this.$modal.msgError(res.msg)
                         }
                     }).catch((e) => {
@@ -1124,11 +1129,11 @@ export default {
             this.$modal.confirm('是否确认删除类型为"' + row.cala08 + '"的数据项？').then(function () {
                 return PurchaseInboundremove(JSON.stringify(row));
             }).then((response) => {
-                if(response.code == 200){
+                if (response.code == 200) {
                     this.submitShangpin();
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
-                }else{
+                } else {
                     // this.$modal.msgError(response.msg)
                 }
             }).catch(() => { });
@@ -1188,9 +1193,11 @@ export default {
 };
 </script>
 <style src="./DirectReceiptcss/index.css" scoped>
+
 </style>
 <style lang="scss" scoped>
-::v-deep .el-table__header-wrapper table,::v-deep .el-table__body-wrapper table{
+::v-deep .el-table__header-wrapper table,
+::v-deep .el-table__body-wrapper table {
     width: 100% !important;
 }
 </style>

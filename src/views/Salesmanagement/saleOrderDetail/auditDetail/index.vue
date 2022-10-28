@@ -498,11 +498,13 @@
       <el-button style="margin-left: 2%" type="primary" @click="xiaoschukujianyibiao">
         打印1
       </el-button> -->
+      <el-button v-if="state == 2" type="primary" @click="toExamine">撤销</el-button>
       <el-button v-if="state == 3" style="margin-left: 2%" type="primary" @click="toExamine">审核</el-button>
-      <el-button v-if="state == 6" style="margin-left: 2%" type="primary" @click="toExamine">反审
-      </el-button>
-      <el-button v-if="state == 4" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
-      <el-button v-if="state == 8" type="primary" @click="auditFinSaleOrder">复核反审</el-button>
+      <el-button v-if="state == 5" type="primary" @click="toExamine">指定结束</el-button>
+      <el-button v-if="state == 6" style="margin-left: 2%" type="primary" @click="toExamine">反审</el-button>
+      <el-button v-if="state == 7" style="margin-left: 2%" type="primary" @click="toExamine">标记完成</el-button>
+      <el-button v-if="state == 4" style="margin-left: 2%" type="primary" @click="auditFinSaleOrder">财务复审</el-button>
+      <el-button v-if="state == 8" style="margin-left: 2%" type="primary" @click="auditFinSaleOrder">已复核反审</el-button>
       <el-button @click="cancel">取 消</el-button>
       <!-- </span> -->
     </div>
@@ -1068,6 +1070,20 @@ export default {
 
   },
   methods: {
+    // auditSaleOrder() {
+    //   const param = {
+    //     orderId: this.formData.id,
+    //     opeateType: this.$route.query.status
+    //   }
+    //   auditSaleOrder(param).then(response => {
+    //     if (response.code == "200") {
+    //       this.$message.success("提交成功")
+    //       this.$store.dispatch("tagsView/delView", this.$route)
+    //       this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+
+    //     }
+    //   })
+    // },
     // 复合反审
     auditFinSaleOrder() {
       const param = {

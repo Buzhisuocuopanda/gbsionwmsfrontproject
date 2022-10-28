@@ -24,7 +24,7 @@
             </el-row>
             <el-row>
                 <el-col style="margin-left: 2%;" :span="5">
-                    <el-form-item label="调出仓库:" prop="cbse099">
+                    <el-form-item label="调出仓库:" prop="cbpc1000">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected011" style="width:160px!important;" />
                             <el-input slot="reference" v-model="form2.cbpc1000" placeholder="" readonly
@@ -508,31 +508,15 @@ export default {
                 dateRange: undefined
             },
             rules: {
-                // cbpc100: [
-                //     { required: true, message: "仓库不能为空!", trigger: 'change' }
-                // ],
-                cbpg16: [
-                    { required: true, message: "结算货币不能为空!", trigger: 'change' }
+                cbpc1000: [
+                    { required: true, message: "调出仓库不能为空!", trigger: 'change' }
+                ],
+                cbaa100: [
+                    { required: true, message: "调入仓库不能为空!", trigger: 'change' }
                 ],
                 // cbsb07: [
                 //     { required: true, message: "编号不能为空!", trigger: "blur" }
                 // ],
-                cbpc1000: [
-                    { required: true, message: "联系人不能为空!", trigger: "blur" }
-                ],
-                cbpc0990: [
-                    { required: true, message: "收货电话不能为空!", trigger: "blur" }
-                ],
-                cbpc10000: [
-                    { required: true, message: "电话不能为空!", trigger: "blur" }
-                ],
-                cbpc100120: [
-                    { required: true, message: "收货地址不能为空!", trigger: "blur" }
-                ],
-                cbpc099: [
-                    { required: true, message: "客户不能为空!", trigger: "blur" }
-                ],
-
             },
 
 
