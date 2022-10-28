@@ -418,7 +418,7 @@ export default {
         "/whmanagement/printTakeOrderOrder?id=" +
         userId,
         {},
-        `销售提货订单表—_${new Date().toLocaleDateString()}.xls`
+        `销售提货订单表—_${new Date().toLocaleDateString()}.pdf`
       );
     },
     // 出库建议表
