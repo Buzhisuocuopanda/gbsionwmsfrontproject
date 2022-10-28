@@ -87,8 +87,8 @@
             <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 1"
               icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 3)"
               v-hasPermi="['sale:saleOrderGj:audit']">审核</el-button>
-            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==2" 
-              icon="el-icon-edit"  size="mini" type="text" @click="auditDetail(scope.row,6)"
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==5" 
+              icon="el-icon-edit"  size="mini" type="text" @click="auditDetail(scope.row,8)"
               v-hasPermi="['sale:saleOrderGj:audit']">反审</el-button>
             <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
             <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->

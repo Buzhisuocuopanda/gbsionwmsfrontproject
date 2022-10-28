@@ -148,7 +148,7 @@
       <el-button v-if="this.$route.query.status == 2" type="primary" @click="toExamine">撤销</el-button>
       <el-button v-if="this.$route.query.status == 3" style="margin-left: 2%" type="primary" @click="toExamine">审核
       </el-button>
-      <el-button v-if="this.$route.query.status == 6" style="margin-left: 2%" type="primary" @click="toExamine">反审
+      <el-button v-if="this.$route.query.status == 8" style="margin-left: 2%" type="primary" @click="toExamines">反审
       </el-button>
       <el-button v-if="this.$route.query.status == 5" style="margin-left: 2%" type="primary" @click="toExamine">
         指定结束</el-button>
@@ -171,7 +171,7 @@ import {
   PurchaseinboundAdd,
   PurchaseinboundAdds, GoodsList01
 } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { mdfSaleOrder, saleOderDetailGj, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder, auditSaleOrderGj, confirmSkuSaleOrder } from '@/api/saleordermanage'
+import { mdfSaleOrder, saleOderDetailGj, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder, auditSaleOrderGj, confirmSkuSaleOrder,auditFinSaleOrder } from '@/api/saleordermanage'
 
 
 import {
@@ -734,6 +734,22 @@ export default {
         opeateType: this.$route.query.status
       }
       auditSaleOrderGj(param).then(response => {
+        if (response.code == "200") {
+          this.$message.success("提交成功")
+          this.$store.dispatch("tagsView/delView", this.$route)
+
+          // this.$router.push({ path: "/Salesmanagement/SaleOrderGj", query: { id: 1 } })
+          this.$tab.closePage();
+          this.$router.go(-1)
+        }
+      })
+    },
+    toExamines() {
+      const param = {
+        orderId: this.formData.id,
+        opeateType: this.$route.query.status
+      }
+      auditFinSaleOrder(param).then(response => {
         if (response.code == "200") {
           this.$message.success("提交成功")
           this.$store.dispatch("tagsView/delView", this.$route)
