@@ -89,7 +89,7 @@
                 <div class="saomiaojlu">扫描记录</div>
                 <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border
                     :data="userLists" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
-                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange" class="saomiao">
                     <el-table-column type="index" width="50" label="序号">
                     </el-table-column>
                     <el-table-column prop="pinpai" key="pinpai" label="品牌">
@@ -355,6 +355,15 @@ export default {
         width: 60 !important;
     }
 
+    /**  表头序号  */
+    #printRecord .saomiao .el-table__header-wrapper .el-table__header .has-gutter tr th:first-child .cell {
+        width: 50 !important;
+    }
+
+    /** 序号内容  */
+    #printRecord .saomiao .el-table__body .el-table__row td:first-child{
+        width: 50 !important;
+    }
     /**  表头数量  */
     /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
       
