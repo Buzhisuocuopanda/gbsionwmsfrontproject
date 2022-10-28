@@ -24,7 +24,7 @@
         </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
-            @click="onSearch">搜索
+            @click="onSearchs">搜索
           </el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
@@ -82,11 +82,14 @@
               详情</el-button>
             <el-button style="margin-top: 2px" v-hasPermi="['sale:saleOrderGj:edit']" v-show="scope.row.status == 0"
               size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button>
-            <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==1" size="mini" type="primary" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==1" 
+              size="mini" type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
             <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 1"
               icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 3)"
               v-hasPermi="['sale:saleOrderGj:audit']">审核</el-button>
-            <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==2" size="mini" type="primary" @click="auditDetail(scope.row,6)">反审</el-button>-->
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==2" 
+              icon="el-icon-edit"  size="mini" type="text" @click="auditDetail(scope.row,6)"
+              v-hasPermi="['sale:saleOrderGj:audit']">反审</el-button>
             <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
             <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 6"
@@ -780,7 +783,36 @@ export default {
         pageNum: this.listQuery.pageNum,
         pageSize: this.listQuery.pageSize
       }
-      // console.info(param)
+      console.log(param)
+      saleOrderListGj(param).then(response => {
+        if (response.data != null && response.data.rows != null) {
+          this.orderList = response.data.rows
+          this.totalItems = response.data.total
+        } else {
+          this.orderList = []
+          this.totalItems = 0
+        }
+      })
+    },
+    onSearchs() {
+      var startTime = null
+      var endTime = null
+      if (this.dateRange != null && this.dateRange.length == 2) {
+        startTime = this.dateRange[0];
+        endTime = this.dateRange[1];
+      }
+
+      const param = {
+        orderNo: this.orderNo,
+        customer: this.customer,
+        model: this.model,
+        type: 1,
+        status: this.status,
+        startTime: startTime,
+        endTime: endTime,
+        pageNum: 1,
+        pageSize: this.listQuery.pageSize
+      }
       saleOrderListGj(param).then(response => {
         if (response.data != null && response.data.rows != null) {
           this.orderList = response.data.rows

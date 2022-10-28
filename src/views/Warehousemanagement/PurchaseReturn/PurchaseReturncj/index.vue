@@ -722,13 +722,13 @@ export default {
       //   }
 
       // })
-      console.log(this.$route,'##########')
+      console.log(this.$route, '##########')
       let arr1 = []
       let that = this
       for (let i = 0; i < this.$route.params.data.length; i++) {
         arr1.push({
-          cbpc000 : that.$route.params.data[i].cbpb10 + ' ~ ' + that.$route.params.data[i].cbpb12 + ' ~ ' + that.$route.params.data[i].cbpb08,
-          cbph08 : that.$route.params.data[i].goodsId
+          cbpc000: that.$route.params.data[i].cbpb10 + ' ~ ' + that.$route.params.data[i].cbpb12 + ' ~ ' + that.$route.params.data[i].cbpb08,
+          cbph08: that.$route.params.data[i].goodsId
         })
       }
       this.tableData = arr1
@@ -783,70 +783,70 @@ export default {
     _ly_ok() {
       let count = this.tableData.length // 记录当前有多少个表单
       // for (var index in this.tableData) {
-        // var form = this.tableData[index]
-        // console.log(form)
-        // console.log(JSON.stringify(form))
-        // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-        // this.$refs[form.formName][0].validate((valid, obj) => {
-        // if (valid) {
-        // 如果检查通过，则对count减1。
-        // 当count为1时，表示是最后一个表单，则存储数据
-        PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(response => {
-          if (response.code == "200") {
-            this.$message({
-              message: '添加成功',
-              type: 'success',
-              style: 'color:red;!important'
-            });
-            this.$tab.closePage();
-            this.$router.go(-1);
-            this.submitShangpin();
-            this.reset01()
-            this.tableData = []
-            this.form2 = {
-              cbpc07: "",
-              cbph08: "",
-              cbsa08: "",
-              cbwa09: "",
-              cala08: "",
-              cbpc100: "",
-              cbpc099: "",
-              cbpc166: "",
-              cbpc10: "",
-              cbpc09: "",
-              cbpd09: "",
-              cbpd11: "",
-              cbpd12: "",
-              cbpc16: "",
-              cbpc12: "",
-              cbpc14: "",
-              cbpd08: "",
-              cbph09: "",
-              cbph10: "",
-              cbph11: "",
-              cbpg161: "",
-              cbpg01: "",
-              cbpc000: "",
-              cbpd09: "",
-              cbpd11: "",
-              cbpd12: "",
-              cbpg16: ""
-            }
+      // var form = this.tableData[index]
+      // console.log(form)
+      // console.log(JSON.stringify(form))
+      // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
+      // this.$refs[form.formName][0].validate((valid, obj) => {
+      // if (valid) {
+      // 如果检查通过，则对count减1。
+      // 当count为1时，表示是最后一个表单，则存储数据
+      PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(response => {
+        if (response.code == "200") {
+          this.$message({
+            message: '添加成功',
+            type: 'success',
+            style: 'color:red;!important'
+          });
+          this.$tab.closePage();
+          this.$router.go(-1);
+          this.submitShangpin();
+          this.reset01()
+          this.tableData = []
+          this.form2 = {
+            cbpc07: "",
+            cbph08: "",
+            cbsa08: "",
+            cbwa09: "",
+            cala08: "",
+            cbpc100: "",
+            cbpc099: "",
+            cbpc166: "",
+            cbpc10: "",
+            cbpc09: "",
+            cbpd09: "",
+            cbpd11: "",
+            cbpd12: "",
+            cbpc16: "",
+            cbpc12: "",
+            cbpc14: "",
+            cbpd08: "",
+            cbph09: "",
+            cbph10: "",
+            cbph11: "",
+            cbpg161: "",
+            cbpg01: "",
+            cbpc000: "",
+            cbpd09: "",
+            cbpd11: "",
+            cbpd12: "",
+            cbpg16: ""
           }
-          if (count-- === 1) {
-            this._ly_save()
-          }
-          // this._ly_addFrom()
-          //    this.formArr.cbpg01="1234567";
-          //    this.form.cbpg01=this.formArr.cbpg01;
-          //    console.log(this.form.cbpg01,85203);
-        });
+        }
+        if (count-- === 1) {
+          this._ly_save()
+        }
+        // this._ly_addFrom()
+        //    this.formArr.cbpg01="1234567";
+        //    this.form.cbpg01=this.formArr.cbpg01;
+        //    console.log(this.form.cbpg01,85203);
+      });
 
-        //   } else {
-        //     console.log(obj)
-        //     return false
-        //   }
-        // })
+      //   } else {
+      //     console.log(obj)
+      //     return false
+      //   }
+      // })
       // }
       console.log('_ly_ok:' + JSON.stringify(this.tableData))
     },
@@ -965,11 +965,11 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "cbph08", e.substring(e.indexOf(".") + 1), 8523642)
+      this.$set(row, "cbph08", e.substring(e.lastIndexOf(".") + 1), 8523642)
     },
 
     //添加行

@@ -147,8 +147,8 @@
                     </el-col>
                 </el-row>
 
-                <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-                    :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+                <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+                    :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
                     <el-table-column prop="cbpc000" label="品牌" width="300">
                         <template slot-scope="scope" style="width:200%;">
                             <!-- <el-popover placement="bottom-start" trigger="click">
@@ -166,16 +166,15 @@
                     <el-table-column label="描述" width="300" />
                     <el-table-column label="数量" width="100" prop="qty">
                         <template slot-scope="scope" style="width:200%;">
-                            <el-input :disabled="true" v-model="scope.row.qty"
-                                 placeholder=""
+                            <el-input :disabled="true" v-model="scope.row.qty" placeholder=""
                                 @keyup="validateMealStandard($event)" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column label="价格" width="100" prop="price">
                         <template slot-scope="scope" style="width:200%;">
-                            <el-input :disabled="true" v-model="scope.row.price"
-                                 placeholder="" class="shuzicaoyou" style="" readonly>
+                            <el-input :disabled="true" v-model="scope.row.price" placeholder="" class="shuzicaoyou"
+                                style="" readonly>
                             </el-input>
                         </template>
                     </el-table-column>
@@ -237,7 +236,7 @@
 
 
 import {
-    PurchaseinboundAdd, PurchaseinSalesAdvance, PurchaseinboundEditSalesAdvance,PurchaseinboundSH
+    PurchaseinboundAdd, PurchaseinSalesAdvance, PurchaseinboundEditSalesAdvance, PurchaseinboundSH
 } from "@/api/Warehousemanagement/SalesAdvance";
 
 import {
@@ -619,7 +618,7 @@ export default {
                 dateRange: undefined
             },
             // 状态
-            statuss:'',
+            statuss: '',
 
             rules: {
                 cbpc0999: [{
@@ -699,7 +698,7 @@ export default {
             let id = this.$route.params && this.$route.params.id
             // let id = this.form2.ids
             this.$modal.confirm('是否要审批,编号为"' + this.form2.GsSalesOrders + '"的数据项？').then(() => {
-                PurchaseinboundSH({id}).then(response => {
+                PurchaseinboundSH({ id }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: response.msg, type: 'success' });
                         this.$tab.closePage();
@@ -937,7 +936,7 @@ export default {
                         //品牌、型号、描述
                         // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
                         this.tableData = res.data.rows
-                        this.tableData.forEach((item,i) => {
+                        this.tableData.forEach((item, i) => {
                             //  this.form2.goodsId = item.goodsId;
                             //品牌、型号、描述
                             item.cbpc000 = this.userList[i].cala08 + "~" + this.userList[i].cbpb12 + "~" + this.userList[i].cbpb08;
@@ -1038,11 +1037,11 @@ export default {
         //查询商品信息维护
         selected08(e, row) {
             // row.cbpc000=e
-            this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+            this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
             console.log(e, 111)
             console.log(row, 222)
             // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-            this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
+            this.$set(row, "goodsId", e.substring(e.lastIndexOf(".") + 1), 8523642)
             this.$set(row, "goodsclassifyy", e.substring(e.indexOf("~") + 1), 8523642)
             this.$set(row, "goodsclassify", row.goodsclassifyy.substring(0, row.goodsclassifyy.indexOf("~")), 555)
             // console.log(row.cbpc08,96325412);

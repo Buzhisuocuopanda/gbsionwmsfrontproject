@@ -12,7 +12,7 @@
           <el-form-item label="日期:" style="margin-left: 20%" prop="cbse08">
             <el-date-picker type="date" placeholder="" v-model="form2.cbse08" style="width: 80%;">
             </el-date-picker>
-          <!--  <el-input type="text" placeholder="" v-model="form2.cbse08" style="width: 60%" />-->
+            <!--  <el-input type="text" placeholder="" v-model="form2.cbse08" style="width: 60%" />-->
           </el-form-item>
         </el-col>
         <el-col :span="7" v-if="false">
@@ -164,19 +164,19 @@
 
           <el-table-column prop="cbsf09" label="数量" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{ min: 0, precision:0.00}" v-model="scope.row.cbsf09" @blur="chen(scope.row)"
+              <el-input v-only-number="{ min: 0, precision: 0.00 }" v-model="scope.row.cbsf09" @blur="chen(scope.row)"
                 :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbsf11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{ min: 0, precision:0.00}" v-model="scope.row.cbsf11" @blur="chen(scope.row)"
+              <el-input v-only-number="{ min: 0, precision: 0.00 }" v-model="scope.row.cbsf11" @blur="chen(scope.row)"
                 :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{ min: 0, precision:0.00}" @blur="chen(scope.row)" v-model="scope.row.cbsf12"
+              <el-input v-only-number="{ min: 0, precision: 0.00 }" @blur="chen(scope.row)" v-model="scope.row.cbsf12"
                 placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
@@ -587,9 +587,9 @@ export default {
   methods: {
     //查询商品信息维护
     selected08(e, row) {
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
 
-      this.$set(row, "cbsf08", e.substring(e.indexOf(".") + 1));
+      this.$set(row, "cbsf08", e.substring(e.lastIndexOf(".") + 1));
       this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
     },
 
@@ -722,7 +722,7 @@ export default {
 
       this.tableData.push({
         // id: this.dataId,
-        cbsf16:"1",
+        cbsf16: "1",
         date: "",
         num: "",
         address: "",
@@ -901,24 +901,24 @@ export default {
     handleAdd() {
       this.$refs["form2"].validate((item) => {
         if (item) {
-          for(let i=0;i<this.tableData.length;i++){
+          for (let i = 0; i < this.tableData.length; i++) {
 
-            if(this.tableData[i].cbpc000==null||this.tableData[i].cbpc000==0){
+            if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
               return this.$message.error("销售退库单明细的商品不能为空")
             }
-            if(this.tableData[i].cbsf09==null||this.tableData[i].cbsf09==0){
+            if (this.tableData[i].cbsf09 == null || this.tableData[i].cbsf09 == 0) {
               return this.$message.error("销售退库单明细的数量不能为空")
             }
-            if(this.tableData[i].cbsf11==null||this.tableData[i].cbsf09==0){
+            if (this.tableData[i].cbsf11 == null || this.tableData[i].cbsf09 == 0) {
               return this.$message.error("销售退库单明细的单价不能为空")
             }
-           /* if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
-              return this.$message.error("采购入库单明细的金额不能为空")
-            }*/
+            /* if(this.tableData[i].cbpd12==null||this.tableData[i].cbpd12==0){
+               return this.$message.error("采购入库单明细的金额不能为空")
+             }*/
           }
 
           this.form2.goods = this.tableData
-          console.log(this.tableData,10251)
+          console.log(this.tableData, 10251)
           PurchasereturnordersAdd(this.form2).then((response) => {
             if (response.code == "200") {
               // console.log(response.posts, 12345678);

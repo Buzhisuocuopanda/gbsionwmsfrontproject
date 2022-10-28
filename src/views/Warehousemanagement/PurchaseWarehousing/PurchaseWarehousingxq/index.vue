@@ -23,7 +23,7 @@
 
                 <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
-                    <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList"
+                    <el-table style="width:100%" :header-cell-style="headClass" v-loading="loading" border :data="userList"
                         :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                         :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                         <el-table-column prop="cala08" key="cala08" label="品牌">
@@ -90,13 +90,15 @@
                 <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border
                     :data="userLists" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                    <el-table-column type="index" width="50" label="序号">
+                    </el-table-column>
                     <el-table-column prop="pinpai" key="pinpai" label="品牌">
                     </el-table-column>
                     <el-table-column prop="lx" key="lx" label="类型">
                     </el-table-column>
                     <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                     </el-table-column>
-                    <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" width="250">
+                    <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" >
                     </el-table-column>
                     <el-table-column prop="sn" key="sn" align="" label="SN">
                     </el-table-column>
@@ -295,6 +297,11 @@ export default {
 </script>
 <style src="./PurchaseWarehouscss/index.css" scoped>
 
+</style>
+<style lang="scss" scoped>
+::v-deep .el-table__header,::v-deep .el-table__body{
+    width: 100% !important;
+}
 </style>
 <style scoped>
 @page {

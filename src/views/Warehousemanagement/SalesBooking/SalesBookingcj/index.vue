@@ -5,7 +5,7 @@
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="6">
           <el-form-item label="编号:" prop="orderNo">
-            <el-input type="text" v-model="form2.orderNo" style="width: 110%;" readonly/>
+            <el-input type="text" v-model="form2.orderNo" style="width: 110%;" readonly />
           </el-form-item>
         </el-col>
         <el-col :span="6" style="margin-left:-2%;">
@@ -15,7 +15,7 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-        <el-col :span="6"  style="margin-left:-4%;">
+        <el-col :span="6" style="margin-left:-4%;">
           <el-form-item label="订单编号:" prop="ponumber">
             <el-input type="text" v-model="form2.ponumber" style="width: 100%;" />
           </el-form-item>
@@ -48,7 +48,7 @@
         </el-col>
         <el-col style="margin-left:-4%;" :span="6">
           <el-form-item label="工厂:" prop="factory">
-            <el-input v-model="form2.factory" placeholder=""  style="width:100%;"></el-input>
+            <el-input v-model="form2.factory" placeholder="" style="width:100%;"></el-input>
             <!-- <el-popover placement="bottom-start" trigger="click">
               <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:210px!important;" />
               <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:100%;">
@@ -115,13 +115,13 @@
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-          :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:780px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:780px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -516,8 +516,8 @@ export default {
         // whId: "",
         orderDate: "",
         cbsb177: "",
-        ponumber:'',
-        factory:'',
+        ponumber: '',
+        factory: '',
       },
       defaultProps: {
         children: "children",
@@ -881,11 +881,11 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
+      this.$set(row, "goodsId", e.substring(e.lastIndexOf(".") + 1), 8523642)
       console.log(row, 555)
     },
 
@@ -961,16 +961,16 @@ export default {
         if (item) {
           this.form2.goods = this.tableData
           const bollen = false
-          this.tableData.map((item) =>{
+          this.tableData.map((item) => {
             item.factory = this.form2.factory
-            if(item.qty<=0){
-              this.$message({message:'数量必须大于0',type:'error'})
+            if (item.qty <= 0) {
+              this.$message({ message: '数量必须大于0', type: 'error' })
               bollen = true
             }
           })
-          if(bollen == true){
+          if (bollen == true) {
             return
-          }else{
+          } else {
             // this.form2.orderDate = this.form2.orderDate.slice(0, 10) + '  ' + this.form2.orderDate.slice(10, -1)
             PurchaseinboundAdd(this.form2).then(response => {
               if (response.code == "200") {

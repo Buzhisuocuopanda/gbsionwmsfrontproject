@@ -111,13 +111,14 @@
             <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-          :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
 
           <el-table-column prop="cbpc000" label="品牌" width="220">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:680px !important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  style="width:680px !important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -133,7 +134,7 @@
           <el-table-column prop="cbpc099" label="供应商" width="150">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)"
+                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event, scope.row)"
                   style="width:120px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc099" placeholder="" readonly style="width:100%;">
                 </el-input>
@@ -149,7 +150,7 @@
             <template slot-scope="scope">
               <!-- <el-input v-model="scope.row.cbpd11"  placeholder="库位" style=""></el-input> -->
               <el-popover placement="bottom-start" trigger="click">
-                <storeMain ref="storeMain" @selected="selected03($event,scope.row)" style="width:120px!important;" />
+                <storeMain ref="storeMain" @selected="selected03($event, scope.row)" style="width:120px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc0999" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -167,7 +168,7 @@
           </el-table-column>
           <el-table-column prop="cbpd11" label="价格" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbig13" v-only-number="{max: 100, min: 0, precision:0.00}" placeholder=""
+              <el-input v-model="scope.row.cbig13" v-only-number="{ max: 100, min: 0, precision: 0.00 }" placeholder=""
                 class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
@@ -883,11 +884,11 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
       // console.log(e,111)
       // console.log(row,222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
-      this.$set(row, "cbig09", e.substring(e.indexOf(".") + 1))
+      this.$set(row, "cbig09", e.substring(e.lastIndexOf(".") + 1))
       // console.log(row.cbpc08,96325412);
       // console.log(name, 111)
       // console.log(index, 222)

@@ -59,7 +59,7 @@
 
         <el-table v-loading="loading" :data="userList" :header-cell-style="headClass" border
           :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
-          <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
+          <!-- <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
           </el-table-column>
           <el-table-column prop="cbsc17" key="cbsc17" label="订单分类">
             <template scope="scope">
@@ -73,7 +73,7 @@
                 }}
               </div>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column prop="cala08" key="cala08" label="品牌">
           </el-table-column>
           <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="180">

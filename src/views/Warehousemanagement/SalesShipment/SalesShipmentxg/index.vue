@@ -170,14 +170,14 @@
                     </el-col>
                 </el-row>
 
-                <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-                    :cell-style="{padding: '5px'}" style="width: 99%;margin-top: 10px;margin-left: 0.5%;">
+                <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+                    :cell-style="{ padding: '5px' }" style="width: 99%;margin-top: 10px;margin-left: 0.5%;">
                     <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
 
                     <el-table-column prop="cbpc000" label="品牌" width="200">
                         <template slot-scope="scope" style="width:200%;">
                             <el-popover placement="bottom-start" trigger="click">
-                                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)"
+                                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
                                     style="width:630px!important;" />
                                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder=""
                                     style="width:100%;">
@@ -191,7 +191,7 @@
                         <template slot-scope="scope">
                             <!-- <el-input v-model="scope.row.cbsc15" placeholder=""></el-input> -->
                             <el-popover placement="bottom-start" trigger="click">
-                                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)"
+                                <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event, scope.row)"
                                     style="width:210px!important;" />
                                 <el-input slot="reference" v-model="scope.row.cbpc099" placeholder=""
                                     style="width:100%;">
@@ -210,20 +210,20 @@
                     </el-table-column>
                     <el-table-column prop="cbsc09" label="数量" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbsc09" v-only-number="{max: 100, min: 0, precision:0.00}"
+                            <el-input v-model="scope.row.cbsc09" v-only-number="{ max: 100, min: 0, precision: 0.00 }"
                                 @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style=""></el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbpd11" label="单价" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbsc11" v-only-number="{max: 100, min: 0, precision:0.00}"
-                                 class="shuzicaoyou" placeholder="" style=""></el-input>
+                            <el-input v-model="scope.row.cbsc11" v-only-number="{ max: 100, min: 0, precision: 0.00 }"
+                                class="shuzicaoyou" placeholder="" style=""></el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbpd12" label="金额" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbsc12" v-only-number="{max: 100, min: 0, precision:0.00}"
-                                 placeholder="" class="shuzicaoyou" style=""></el-input>
+                            <el-input v-model="scope.row.cbsc12" v-only-number="{ max: 100, min: 0, precision: 0.00 }"
+                                placeholder="" class="shuzicaoyou" style=""></el-input>
                         </template>
                     </el-table-column>
                     <!-- <el-table-column prop="province" label="剩余未发量" width="100">
@@ -287,7 +287,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchaseinboundAdds, PurchaseinboundAdd, PurchaseinListxiangq, SwJsSkuBarcodelistss,Selloutofwarehouseeditone } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundAdds, PurchaseinboundAdd, PurchaseinListxiangq, SwJsSkuBarcodelistss, Selloutofwarehouseeditone } from "@/api/Warehousemanagement/SalesShipment";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -673,8 +673,8 @@ export default {
 
     },
     methods: {
-        order(row,value){
-            console.log(value,row)
+        order(row, value) {
+            console.log(value, row)
         },
         // 点击右上角关闭弹窗
         _ly_closeDialog(done) {
@@ -921,14 +921,14 @@ export default {
             this.$set(row, "cbsc15", e.substring(e.indexOf("-") + 1), 8523642)
             // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
             // this.form2.icon = name;
-            console.log(e,row)
+            console.log(e, row)
         },
 
         //查询商品信息维护
         selected08(e, row) {
             // row.cbpc000=e
-            this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")))
-            this.$set(row, "cbsc08", e.substring(e.indexOf(".") + 1), 8523642)
+            this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")))
+            this.$set(row, "cbsc08", e.substring(e.lastIndexOf(".") + 1), 8523642)
         },
 
         //添加行
@@ -999,7 +999,7 @@ export default {
         /** 新增按钮操作 */
         handleAdd() {
             this.form2.goods = this.tableData
-            this.tableData[0].cbsc17 = this.tableData[0].cbsc17 == '国际订单'?'1':'2'
+            this.tableData[0].cbsc17 = this.tableData[0].cbsc17 == '国际订单' ? '1' : '2'
             this.$refs["form2"].validate((item) => {
                 if (item) {
                     Selloutofwarehouseeditone(this.form2).then(response => {
@@ -1072,7 +1072,7 @@ export default {
                 // id
                 this.form2.cbsb01 = res.cbsc01
                 console.log(this.form2, 85200000);
-                response.data.rows.map((item)=>{
+                response.data.rows.map((item) => {
                     this.tableData.push({
                         "cbsb01": item.cbsb01,
                         "cbsc01": item.cbsc01,
@@ -1083,10 +1083,10 @@ export default {
                         "cbsc13": item.cbsc13,
                         "cbsc14": item.cbsc01,
                         "cbsc15": item.cbsc15,
-                        "cbsa08":item.cbsa08,
-                        "cbsc17": item.cbsc17 == 1?'国际订单':'国内订单',
-                        "cbpc000":item.cala08 + "~" + item.cbpa07 + "~" + item.cbpb08,
-                        "cbpc099":item.cbsa08,
+                        "cbsa08": item.cbsa08,
+                        "cbsc17": item.cbsc17 == 1 ? '国际订单' : '国内订单',
+                        "cbpc000": item.cala08 + "~" + item.cbpa07 + "~" + item.cbpb08,
+                        "cbpc099": item.cbsa08,
                     })
                 })
                 // this.tableData.forEach((item) => {

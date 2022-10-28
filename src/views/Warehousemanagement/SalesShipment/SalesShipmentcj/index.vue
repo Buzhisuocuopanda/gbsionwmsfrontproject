@@ -1088,8 +1088,8 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.indexOf(".")));
-      this.$set(row, "cbsc08", e.substring(e.indexOf(".") + 1), 8523642);
+      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
+      this.$set(row, "cbsc08", e.substring(e.lastIndexOf(".") + 1), 8523642);
     },
 
     //添加行
