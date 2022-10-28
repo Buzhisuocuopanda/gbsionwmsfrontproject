@@ -185,7 +185,8 @@
           <el-table-column prop="sn" key="sn" align="" label="SN">
             <template slot-scope="scope" style="width: 200%">
               <!--@change="updsteSn(scope.row,value)"-->
-              <el-select :disabled="scope.row.scanStatus == '已扫码'" v-model="scope.row.sn" style="width: 100%">
+              <el-select :remote-method="getSnList" :disabled="scope.row.scanStatus == '已扫码'" v-loadmore="getLoadmoreSnList"
+                         v-model="scope.row.sn" style="width: 100%"  filterable remote reserve-keyword placeholder="请输入关键词">
                 <el-option @click.native="updsteSn(scope.row, item)" v-for="item in snList" :key="item.sn"
                   :label="item.goodsMsg" :value="item.sn"></el-option>
               </el-select>
@@ -250,9 +251,34 @@ import {
   auditTakeOrders,
   CustomerLists,
   mdfTakeSuggest,
-  selectGoodsSnByWhIdAndGoodsId,
+  selectGoodsSnByStatus,
 } from "@/api/Warehousemanagement/Saleslading";
 import TakeSuggests from "@/components/TakeSuggests"
+
+import Vue from 'vue';
+Vue.directive('loadmore', {
+  bind(el, binding) {
+
+    // 获取element-ui定义好的scroll盒子
+    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+    SELECTWRAP_DOM.addEventListener('scroll', function () {
+
+      /*
+      * scrollHeight 获取元素内容高度(只读)
+      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+      * clientHeight 读取元素的可见高度(只读)
+      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+      */
+      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+      if (CONDITION) {
+        binding.value();
+      }
+    });
+  }
+})
 export default {
   components: {
     TakeSuggests,
@@ -282,6 +308,17 @@ export default {
         address: undefined,
         userId: undefined,
       },
+      // sn查询参数
+      snQueryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        page: 1,
+        size: 10,
+
+        sn: undefined,
+        cbpb08: undefined,
+      },
+
       CBPC01: "",
       paramss: {
         goods: [],
@@ -366,9 +403,14 @@ export default {
       row.locationId = item.locationId;
       console.log(row.goodsId, 10142);
     },
-    getSnList() {
-      selectGoodsSnByWhIdAndGoodsId(this.whid, this.goodsId).then(response => {
-        if (response.data != null) {
+    getSnList(value) {
+      this.snQueryParams.pageNum =1;
+      this.snQueryParams.sn =value
+      this.snQueryParams.cbpb08 =value
+
+      selectGoodsSnByStatus(this.snQueryParams).then(response => {
+        if (response.code == 200) {
+          this.snQueryParams.pageNum +=1;
           this.snList = response.data;
         } else {
           // this.snList = [];
@@ -377,6 +419,20 @@ export default {
       });
     },
 
+    getLoadmoreSnList(value) {
+      this.snQueryParams.sn =value
+      this.snQueryParams.cbpb08 =value
+
+      selectGoodsSnByStatus(this.snQueryParams).then(response => {
+        if (response.code == 200) {
+          this.snQueryParams.pageNum +=1;
+          this.snList.push(...response.data);
+        } else {
+          // this.snList = [];
+        }
+      }, error => {
+      });
+    },
 
     filterIcons() {
       this.checks = true
@@ -572,7 +628,7 @@ export default {
           console.log(this.userLists, 'zgl1')
           this.whid = res.data.whId
           this.goodsId = res.data.goods[0].goodsId
-          this.getSnList();
+          // this.getSnList();
           this.userList1 = res.data.scans.map(item => {
             item.goodClass = item.goodClass + '-' + item.model + '-' + item.description
             return item
@@ -634,6 +690,7 @@ export default {
   mounted() {
     console.log(111, "zgl")
     this.getParams();
+    this.getSnList();
   },
   computed: {
     totalnumber: function () {

@@ -228,6 +228,15 @@ export function selectGoodsSnByWhIdAndGoodsId(whid, goodsid) {
   })
 }
 
+// 查询列表3
+export function selectGoodsSnByStatus(param) {
+  return request({
+    url: '/whmanagement/selectGoodsSnByStatus',
+    method: 'get',
+    params: param
+  })
+}
+
 
 // 更改出货建议
 export function mdfTakeSuggest(data) {

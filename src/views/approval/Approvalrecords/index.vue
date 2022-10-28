@@ -61,7 +61,7 @@
           <template slot-scope="scope" >
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini" class="caozuoxiangqeng"
                        type="text"  v-hasPermi="['approval:approvalrecords:detail']" @click="showDetail(scope.row)">详情</el-button>
-            <!--<el-button v-if="scope.row.status==6" type="primary" @click="auditSaleOrder">反审</el-button>-->
+            <el-button v-if="scope.row.status==3" icon="el-icon-s-order"  size="mini" type="text" @click="auditSaleOrder(scope.row)">反审</el-button>
 <!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">删除</el-button>-->
           </template>
 
@@ -84,7 +84,7 @@
 
 <script>
 import { records } from "@/api/Approval";
-
+import {  auditSaleOrder } from '@/api/saleordermanage'
 export default {
   name: "Approvalrecords",
   components: {},
@@ -253,25 +253,21 @@ export default {
     /** 反审按钮操作 */
     auditSaleOrder(row) {
       const param = {
-        orderId: this.row.id,
+        orderId: row.id,
         opeateType: row.status
       }
       auditSaleOrder(param).then(response => {
           if (response.code == "200") {
             this.$message.success("提交成功")
-            this.$store.dispatch("tagsView/delView", this.$route)
-            this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
-
-          } else {
-
-            // this.$message.error(response.msg)
-
+            this.onSearch();
+            // this.$store.dispatch("tagsView/delView", this.$route)
+            // this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
             // this.$router.go(-1)
-
+          } else {
+            // this.$message.error(response.msg)
+            // this.$router.go(-1)
           }
         });
-
-
     },
     onSubmit() {},
     handleSelectionChange() {},
