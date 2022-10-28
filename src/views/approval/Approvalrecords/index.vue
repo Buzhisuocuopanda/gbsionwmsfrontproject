@@ -48,9 +48,10 @@
       <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="490"  border fit highlight-current-row stripe >
         <el-table-column fixed label="单据类型" align="left" prop="cabraa07" min-width="90px;"/>
         <el-table-column fixed label="单据编号" align="left" prop="cabraa14" min-width="120px;"/>
+        <el-table-column fixed label="客户名称" align="left" prop="cabraa21" min-width="80px;"/>
         <el-table-column  label="单据日期" align="left" prop="cabraa15" min-width="100px;"  :formatter="formatDate"/>
         <el-table-column  label="审核日期" align="left" prop="cabraa02" min-width="100px;" :formatter="formatDate"/>
-        <el-table-column  label="摘要" align="left" prop="cabraa21" min-width="370px;"/>
+        <el-table-column v-if="false" label="摘要" align="left" prop="cabraa21" min-width="370px;"/>
 <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
 <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
 <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
@@ -60,6 +61,7 @@
           <template slot-scope="scope" >
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini" class="caozuoxiangqeng"
                        type="text"  v-hasPermi="['approval:approvalrecords:detail']" @click="showDetail(scope.row)">详情</el-button>
+            <!--<el-button v-if="scope.row.status==6" type="primary" @click="auditSaleOrder">反审</el-button>-->
 <!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">删除</el-button>-->
           </template>
 
@@ -240,12 +242,35 @@ export default {
     this.onSearch()
   },
   created() {
-    //仓库明细初始化 
+    //仓库明细初始化
   },
   methods: {
     showDetail(row) {
      // this.$router.push({path: "/approval/saleshowOrderDetail", query: {id: row.id}})
       this.$router.push({path: "/Salesmanagement/saleshowOrderDetail", query: {id: row.id}})
+
+    },
+    /** 反审按钮操作 */
+    auditSaleOrder(row) {
+      const param = {
+        orderId: this.row.id,
+        opeateType: row.status
+      }
+      auditSaleOrder(param).then(response => {
+          if (response.code == "200") {
+            this.$message.success("提交成功")
+            this.$store.dispatch("tagsView/delView", this.$route)
+            this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+
+          } else {
+
+            // this.$message.error(response.msg)
+
+            // this.$router.go(-1)
+
+          }
+        });
+
 
     },
     onSubmit() {},

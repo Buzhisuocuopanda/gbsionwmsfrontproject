@@ -107,13 +107,13 @@
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                 @click="handleAuthRole(scope.row)" v-hasPermi="['system:qualityin:detail']">详情
                             </el-button>
-                            <el-button size="mini" v-show="false" type="text" icon="el-icon-delete"
+                            <el-button size="mini"  v-if="scope.row.cbqa09 == 2" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-hasPermi="['system:qualityin:remove']">删除</el-button>
                             <el-button v-show="false" size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:qualityin:sh']"
                                 v-if="scope.row.cbqa09 == 0">审核</el-button>
-                            <el-button v-show="false" size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
+                            <el-button  size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:qualityin:fs']"
                                 v-if="scope.row.cbqa09 == 1">反审</el-button>
                             <!-- <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
@@ -761,7 +761,7 @@ export default {
             this.tianjiahang.splice(index, 1);
         },
 
-        /** 查询用户列表 */
+        /** 查询质检单列表 */
         getList() {
             this.loading = true;
             QualityinList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
@@ -966,7 +966,10 @@ export default {
                 req.QualityinfShs(item).then((res) => {
                     // console.log(res, 123)
                     this.getList();
-                    this.$modal.msgSuccess("反审成功");
+                    if(res.code == 200){
+                      this.$modal.msgSuccess("反审成功");
+                    }
+
                 }).catch((e) => {
                     // console.log(e, 456)
                 })

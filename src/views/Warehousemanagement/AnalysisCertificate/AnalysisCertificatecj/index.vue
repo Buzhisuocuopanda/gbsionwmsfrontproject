@@ -163,7 +163,7 @@
     </el-form>
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
-      <el-button type="primary" @click="handleAdd">保 存</el-button>
+      <el-button type="primary" @click="handleAdd">审 核</el-button>
       <el-button type="primary" @click="handlefanhui">取消</el-button>
       <!-- </span> -->
     </div>

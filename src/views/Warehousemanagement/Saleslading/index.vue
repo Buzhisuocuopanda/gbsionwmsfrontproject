@@ -179,10 +179,14 @@
         </el-col>
 
         <el-col :span="8">
-          <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
+          <!-- <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
             <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
+
+          <el-input v-model="valuexs" id="miaoshu" placeholder="请输入客户名称" clearable style="width: 240px"
+            @keyup.enter.native="hello" />
+
         </el-col>
       </el-row>
       <el-table border :header-cell-style="headClassssmtt" v-loading="loading" :data="userList01" height="440"
@@ -843,7 +847,7 @@ export default {
       this.loading = true;
       // this.queryParams.status = 5
 
-      Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
+      saleOrderListGoods(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
         this.userList01 = response.data.rows;
         this.totall = response.data.total;
         // //供应商

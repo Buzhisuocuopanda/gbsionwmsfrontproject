@@ -145,7 +145,10 @@
     </section>
 
     <div class="tinajia_dingwei">
+      <el-button v-if="this.$route.query.status == 2" type="primary" @click="toExamine">撤销</el-button>
       <el-button v-if="this.$route.query.status == 3" style="margin-left: 2%" type="primary" @click="toExamine">审核
+      </el-button>
+      <el-button v-if="this.$route.query.status == 6" style="margin-left: 2%" type="primary" @click="toExamine">反审
       </el-button>
       <el-button v-if="this.$route.query.status == 5" style="margin-left: 2%" type="primary" @click="toExamine">
         指定结束</el-button>

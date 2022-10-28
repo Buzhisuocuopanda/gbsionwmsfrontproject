@@ -146,6 +146,15 @@ export function getInventorysummaryquerysList(query) {
   })
 }
 
+// 获取已出库库明细列表
+export function outInventorysummaryquerys(query) {
+  return request({
+    url: '/countQuery/outInventorysummaryquerys',
+    method: 'get',
+    params: query
+  })
+}
+
 // 获取缺货登记列表
 export function getInvsentorsysummaryqueryList(query) {
   return request({

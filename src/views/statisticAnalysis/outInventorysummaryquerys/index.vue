@@ -1,15 +1,22 @@
 <template>
 
-  <!--库存明细查询-->
+  <!--已出库明细查询-->
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" label-width="70px"  >
+        <el-form-item  label="日期" style="margin-left: 27px">
+          <el-date-picker v-model="dateRange" type="daterange" style="height: 35px"
+                          :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                          range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" >
+          </el-date-picker>
+        </el-form-item>
+
         <el-form-item label="仓库"   class="item-r" >
           <el-select  v-model="queryParams.cbwa09s" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="getStoreSkuList" :loading="loading2">
             <el-option v-for="item in storeSkuList" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="库位"   class="item-r" >
+        <el-form-item v-if="false" label="库位"   class="item-r" >
           <el-select  v-model="queryParams.cbla09s" :remote-method="getCblaList" multiple filterable remote reserve-keyword placeholder="请输入关键词"  :loading="loading3">
             <el-option v-for="item in cblaList" :key="item.cbla09" :label="item.cbla09" :value="item.cbla09"></el-option>
           </el-select>
@@ -19,7 +26,7 @@
             <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="商品"   class="item-r" >
+        <el-form-item v-if="false" label="商品"   class="item-r" >
           <el-select @change="getGoods" :remote-method="getGoods" v-el-select-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
@@ -32,12 +39,12 @@
         <el-form-item label="商品SN"   class="item-r" >
           <el-input v-model="queryParams.cbig10"  class="filter-item"  placeholder="商品SN" />
         </el-form-item>
-        <el-form-item label="商品状态">
+        <el-form-item v-if="false" label="商品状态">
           <el-select v-model="queryParams.status" clearable filterable remote reserve-keyword placeholder="请选择" >
             <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="上架状态">
+        <el-form-item v-if="false" label="上架状态">
           <el-select v-model="queryParams.groudStatus"  clearable filterable remote reserve-keyword placeholder="请选择" >
             <el-option v-for="item in statusType" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
@@ -54,7 +61,7 @@
                 border fit highlight-current-row stripe style="margin-top:1em">
         <el-table-column  v-if="false" align="center" prop="cbig01"  min-width="80px;"/>
         <el-table-column  label="仓库" align="left" prop="cbwa09"  min-width="80px;"/>
-        <el-table-column  label="库位" align="left" prop="cbla09" min-width="110px;"/>
+        <el-table-column  v-if="false"  label="库位" align="left" prop="cbla09" min-width="110px;"/>
         <!--<el-table-column  label="大类" align="center" prop="cala08" min-width="120px;"/>-->
         <el-table-column  label="商品分类" align="left" prop="cbpa07" min-width="100px;"/>
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="100px;"/>
@@ -62,10 +69,10 @@
         <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="150px;"/>
         <!--<el-table-column  label="描述" align="center" prop="lockQty" min-width="260px;"/>-->
         <el-table-column label="商品SN" align="left" prop="sn" min-width="120px;" />
-        <el-table-column  label="入库日期" align="left" prop="inTime" :formatter="formatTime2" min-width="110px;" />
-        <el-table-column prop="status" label="商品状态" width="80" :formatter="formatState" sortable align="center"></el-table-column>
-        <el-table-column prop="groudStatus" width="80" label="上架状态" :formatter="formatStateType" sortable align="center"></el-table-column>
-        <el-table-column prop="repairStatus" width="80" label="质量状态" :formatter="repairStateType" sortable align="center"></el-table-column>
+        <el-table-column  label="出库日期" align="left" prop="outTime" :formatter="formatTime2" min-width="110px;" />
+        <el-table-column v-if="false"  prop="status" label="商品状态" width="80" :formatter="formatState" sortable align="center"></el-table-column>
+        <el-table-column v-if="false" prop="groudStatus" width="80" label="上架状态" :formatter="formatStateType" sortable align="center"></el-table-column>
+        <el-table-column v-if="false" prop="repairStatus" width="80" label="质量状态" :formatter="repairStateType" sortable align="center"></el-table-column>
 
       </el-table>
       <el-pagination
@@ -88,7 +95,7 @@
 <script>
 // import x from ''
 // import { totalOrderList } from "@/api/saleordermanage";
-import { getInventorysummaryquerysList,getSwJsGoodsAllList,getSwJsStoreSkuAllList,getSwJsStoreAllList,getswJsAllList } from "@/api/statisticAnalysis/index";
+import { outInventorysummaryquerys,getSwJsGoodsAllList,getSwJsStoreSkuAllList,getSwJsStoreAllList,getswJsAllList } from "@/api/statisticAnalysis/index";
 import { formatDate2 } from '../../../utils';
 import Vue from 'vue';
 Vue.directive('loadmore', {
@@ -116,7 +123,7 @@ Vue.directive('loadmore', {
 })
 export default {
   components: {},
-  name: "Inventorysummaryquerys",
+  name: "OutInventorysummaryquerys",
   data() {
     return {
       dateRange:[],
@@ -187,7 +194,116 @@ export default {
           label: '已下架',
         }
       ],
-
+      pickerOptions: {
+        shortcuts: [{
+          text: '今日',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime());
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '昨日',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', [start, start]);
+          }
+        }, {
+          text: '本周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            let day = start.getDay();
+            let date = start.getDate();
+            if (day != 0) {
+              start.setDate(date - (day - 1));
+            }
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '上周',
+          onClick(picker) {
+            var oDate = new Date()
+            oDate.setTime(oDate.getTime() - 3600 * 1000 * 24 * 7);
+            let day = oDate.getDay()
+            let start = new Date(),
+              end = new Date();
+            if (day == 0) {
+              start.setDate(oDate.getDate());
+              end.setDate(oDate.getDate() + 6);
+            } else {
+              start.setTime(oDate.getTime() - 3600 * 1000 * 24 * (day - 1));
+              end.setTime(oDate.getTime() + 3600 * 1000 * 24 * (7 - day));
+            }
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '本月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setDate(1);
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '上月',
+          onClick(picker) {
+            var oDate = new Date()
+            let year = oDate.getFullYear();
+            let month = oDate.getMonth();
+            let start, end;
+            if (month == 0) {
+              year--
+              start = new Date(year, 11, 1)
+              end = new Date(year, 11, 31)
+            } else {
+              start = new Date(year, month - 1, 1)
+              end = new Date(year, month, 0);
+            }
+            picker.$emit('pick', [start, end]);
+          }
+        },
+          {
+            text: '本季度',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '上季度',
+            onClick(picker) {
+              var oDate = new Date()
+              let year = oDate.getFullYear();
+              let month = oDate.getMonth() + 1;
+              let n = Math.ceil(month / 3); // 季度，上一个季度则-1
+              let prevN = n - 1;
+              if (n == 1) {
+                year--
+                prevN = 4;
+              }
+              month = prevN * 3; // 月份
+              const start = new Date(year, month - 3, 1);
+              const end = new Date(year, month, 0);
+              picker.$emit('pick', [start, end]);
+            }
+          },
+          {
+            text: '本年',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setMonth(0);
+              start.setDate(1);
+              picker.$emit('pick', [start, end]);
+            }
+          }
+        ]
+      },
     };
   },
   computed: {},
@@ -252,6 +368,7 @@ export default {
       this.queryParams.cbig10 = "";
       this.queryParams.cbpb10 = "";
       this.queryParams.groudStatus="";
+      this.dateRange=[];
         this.queryParams.status="";
       this.queryParams.pageNum = 1;
       this.getGoods()
@@ -265,8 +382,15 @@ export default {
       this.onSearch();
     },
     onSearch() {
+      if(this.dateRange!=null&&this.dateRange.length>=2){
+        this.queryParams.startTime = this.dateRange[0];
+        this.queryParams.endTime = this.dateRange[1];
+      }else {
+        this.queryParams.startTime = undefined;
+        this.queryParams.endTime = undefined;
+      }
       this.loading = true;
-      getInventorysummaryquerysList(this.queryParams).then(response => {
+      outInventorysummaryquerys(this.queryParams).then(response => {
         this.loading = false;
         if (response.data != null && response.data.rows != null) {
           this.inwuquList = response.data.rows

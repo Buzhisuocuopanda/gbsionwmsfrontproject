@@ -1,4 +1,5 @@
 <template>
+  <!-- 提货单列表详情 -->
   <div>
     <div class="Purchase_caigou">销售提货单</div>
     <div class="Purchase_sum">
@@ -62,19 +63,19 @@
           <el-table-column prop="description" key="description" label="描述">
           </el-table-column>
           <!-- goodsNum -->
-<!--          <el-table-column  prop="goodsNum" label="良品数量" v-if="edit == 1 || edit == 0">-->
-<!--            <template scope="scope">-->
-<!--              <el-input v-model="scope.row.goodsNum" v-if="status == 2 || status == 0?false:true"-->
-<!--                :readonly="status == 2 || status == 0 || checkstatus!=2?true:false"></el-input>-->
-<!--              <div v-text="rounding2(scope.row.goodsNum)" v-if="status == 2 || status == 0?true:false"></div>-->
-<!--            </template>-->
+          <!--          <el-table-column  prop="goodsNum" label="良品数量" v-if="edit == 1 || edit == 0">-->
+          <!--            <template scope="scope">-->
+          <!--              <el-input v-model="scope.row.goodsNum" v-if="status == 2 || status == 0?false:true"-->
+          <!--                :readonly="status == 2 || status == 0 || checkstatus!=2?true:false"></el-input>-->
+          <!--              <div v-text="rounding2(scope.row.goodsNum)" v-if="status == 2 || status == 0?true:false"></div>-->
+          <!--            </template>-->
 
-<!--          </el-table-column>-->
-          <el-table-column  prop="goodsNum" label="良品数量">
+          <!--          </el-table-column>-->
+          <el-table-column prop="goodsNum" label="良品数量">
             <template scope="scope">
-              <el-input v-model="scope.row.goodsNum" v-if="checkstatus!=2?true:false"
-                        oninput="value=value.replace(/[^\d]/g,'')" :readonly="edit == 3?true:false"></el-input>
-              <div v-text="rounding2(scope.row.goodsNum)" v-else ></div>
+              <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 ? true : false"
+                oninput="value=value.replace(/[^\d]/g,'')" :readonly="edit == 3 ? true : false"></el-input>
+              <div v-text="rounding2(scope.row.goodsNum)" v-else></div>
             </template>
 
           </el-table-column>
@@ -97,15 +98,15 @@
 
 
         <el-table border :data="userListsss" style="width: 100%;" :default-sort="{ prop: 'name', order: 'descending' }"
-          @selection-change="handleSelectionChange" :span-method="arraySpanMethod">
+          @selection-change="handleSelectionChange">
           <el-table-column type="index" :index="table_index" label="序号" width="50" align="center"></el-table-column>
           <el-table-column prop="brand" key="brand" label="品牌">
           </el-table-column>
           <el-table-column prop="goodClass" key="goodClass" label="类型">
           </el-table-column>
-          <el-table-column label="型号">
+          <el-table-column prop="model" key="model" label="型号">
           </el-table-column>
-          <el-table-column label="描述">
+          <el-table-column prop="description" key="description" label="描述">
           </el-table-column>
           <el-table-column prop="sn" key="sn" align="" label="SN">
           </el-table-column>
@@ -142,25 +143,28 @@
             <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }">
               <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
                 slot="label">本页数量小记</template>{{
-                isNaN(parseFloat(totalnumber).toFixed(2))?'0.00':parseFloat(totalnumber).toFixed(2) }}
+                    isNaN(parseFloat(totalnumber).toFixed(2)) ? '0.00' : parseFloat(totalnumber).toFixed(2)
+                }}
             </el-descriptions-item>
             <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }">
               <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
                 slot="label">本页金额小记</template>{{
-                isNaN(parseFloat(totalnumber).toFixed(2))?'0.00':parseFloat(totalnumber).toFixed(2) }}
+                    isNaN(parseFloat(totalnumber).toFixed(2)) ? '0.00' : parseFloat(totalnumber).toFixed(2)
+                }}
             </el-descriptions-item>
           </el-descriptions>
         </div>
         <!-- 横向 -->
         <el-descriptions class="margin-top" title="" :column="2" border>
           <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }">
-            <template
-              slot="label">合计数量</template>{{isNaN(parseFloat(totalnumber).toFixed(2))?'0.00':parseFloat(totalnumber).toFixed(2)
-              }}
+            <template slot="label">合计数量</template>{{ isNaN(parseFloat(totalnumber).toFixed(2)) ? '0.00' :
+                parseFloat(totalnumber).toFixed(2)
+            }}
           </el-descriptions-item>
           <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }">
             <template slot="label">合计金额</template>{{
-            isNaN(parseFloat(totalPrice).toFixed(2))?'0.00':parseFloat(totalPrice).toFixed(2) }}
+                isNaN(parseFloat(totalPrice).toFixed(2)) ? '0.00' : parseFloat(totalPrice).toFixed(2)
+            }}
           </el-descriptions-item>
         </el-descriptions>
 
@@ -169,7 +173,7 @@
           <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
             :labelStyle="{ 'text-align': 'center' }">
             <template slot="label">大写</template>人民币:{{
-            smallToBig(totalPrice)
+                smallToBig(totalPrice)
             }}
           </el-descriptions-item>
         </el-descriptions>
@@ -181,8 +185,9 @@
           <el-table-column prop="sn" key="sn" align="" label="SN">
             <template slot-scope="scope" style="width: 200%">
               <!--@change="updsteSn(scope.row,value)"-->
-              <el-select :disabled="scope.row.scanStatus=='已扫码'" v-model="scope.row.sn" style="width: 100%">
-                <el-option @click.native="updsteSn(scope.row,item)" v-for="item in snList" :key="item.sn"
+              <el-select :remote-method="getSnList" :disabled="scope.row.scanStatus == '已扫码'" v-loadmore="getLoadmoreSnList"
+                         v-model="scope.row.sn" style="width: 100%"  filterable remote reserve-keyword placeholder="请输入关键词">
+                <el-option @click.native="updsteSn(scope.row, item)" v-for="item in snList" :key="item.sn"
                   :label="item.goodsMsg" :value="item.sn"></el-option>
               </el-select>
               <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
@@ -246,9 +251,34 @@ import {
   auditTakeOrders,
   CustomerLists,
   mdfTakeSuggest,
-  selectGoodsSnByWhIdAndGoodsId,
+  selectGoodsSnByStatus,
 } from "@/api/Warehousemanagement/Saleslading";
 import TakeSuggests from "@/components/TakeSuggests"
+
+import Vue from 'vue';
+Vue.directive('loadmore', {
+  bind(el, binding) {
+
+    // 获取element-ui定义好的scroll盒子
+    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+
+    SELECTWRAP_DOM.addEventListener('scroll', function () {
+
+      /*
+      * scrollHeight 获取元素内容高度(只读)
+      * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+      * clientHeight 读取元素的可见高度(只读)
+      * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+      * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+      */
+      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight;
+
+      if (CONDITION) {
+        binding.value();
+      }
+    });
+  }
+})
 export default {
   components: {
     TakeSuggests,
@@ -278,6 +308,17 @@ export default {
         address: undefined,
         userId: undefined,
       },
+      // sn查询参数
+      snQueryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        page: 1,
+        size: 10,
+
+        sn: undefined,
+        cbpb08: undefined,
+      },
+
       CBPC01: "",
       paramss: {
         goods: [],
@@ -362,9 +403,14 @@ export default {
       row.locationId = item.locationId;
       console.log(row.goodsId, 10142);
     },
-    getSnList() {
-      selectGoodsSnByWhIdAndGoodsId(this.whid, this.goodsId).then(response => {
-        if (response.data != null) {
+    getSnList(value) {
+      this.snQueryParams.pageNum =1;
+      this.snQueryParams.sn =value
+      this.snQueryParams.cbpb08 =value
+
+      selectGoodsSnByStatus(this.snQueryParams).then(response => {
+        if (response.code == 200) {
+          this.snQueryParams.pageNum +=1;
           this.snList = response.data;
         } else {
           // this.snList = [];
@@ -373,6 +419,20 @@ export default {
       });
     },
 
+    getLoadmoreSnList(value) {
+      this.snQueryParams.sn =value
+      this.snQueryParams.cbpb08 =value
+
+      selectGoodsSnByStatus(this.snQueryParams).then(response => {
+        if (response.code == 200) {
+          this.snQueryParams.pageNum +=1;
+          this.snList.push(...response.data);
+        } else {
+          // this.snList = [];
+        }
+      }, error => {
+      });
+    },
 
     filterIcons() {
       this.checks = true
@@ -568,7 +628,7 @@ export default {
           console.log(this.userLists, 'zgl1')
           this.whid = res.data.whId
           this.goodsId = res.data.goods[0].goodsId
-          this.getSnList();
+          // this.getSnList();
           this.userList1 = res.data.scans.map(item => {
             item.goodClass = item.goodClass + '-' + item.model + '-' + item.description
             return item
@@ -576,10 +636,12 @@ export default {
           /*this.userLists = res.data.goods.map(item =>{
             item.goodsNum = item.qty
           })*/
-          this.userListsss = res.data.sugests.map(item => {
-            item.goodClass = item.goodClass + '-' + item.model + '-' + item.description
-            return item
-          });
+          // this.userListsss = res.data.sugests.map(item => {
+          //   item.goodClass = item.goodClass + '-' + item.model + '-' + item.description
+          //   return item
+          // });
+          this.userListsss = res.data.sugests
+          console.log(this.userListsss, "this.userListsss---------this.userListsss")
           if (this.edit == 1) {
             this.userList2 = res.data.sugests.map(item => {
               item.sn2 = item.sn
@@ -628,6 +690,7 @@ export default {
   mounted() {
     console.log(111, "zgl")
     this.getParams();
+    this.getSnList();
   },
   computed: {
     totalnumber: function () {
