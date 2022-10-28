@@ -526,6 +526,9 @@ export default {
       this.model = ''
       this.orderNo = ''
       this.status = ''
+      this.customer = ''
+      this.dateRange = ''
+      this.onSearchs()
     },
     createForm() {
       // this.showaddDialog = true
@@ -851,7 +854,7 @@ export default {
         endTime: endTime,
         pageNum: 1,
         pageSize: this.listQuery.pageSize,
-        // customerName:this.customer
+        customer:this.customer
       }
       console.info(param)
       saleChangeList(param).then(response => {
