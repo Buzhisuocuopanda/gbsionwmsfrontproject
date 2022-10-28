@@ -24,7 +24,7 @@
         </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
           <el-button v-hasPermi="['system:saleChange:list']" class="filter-item" type="primary" icon="el-icon-search"
-            style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索
+            style="margin-bottom:0;margin-left: 2em" @click="onSearchs">搜索
           </el-button>
           <el-button v-hasPermi="['system:saleChange:list']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="reset">重置
@@ -822,6 +822,36 @@ export default {
         endTime: endTime,
         pageNum: this.listQuery.pageNum,
         pageSize: this.listQuery.pageSize
+      }
+      console.info(param)
+      saleChangeList(param).then(response => {
+        if (response.data != null && response.data.rows != null) {
+          this.orderList = response.data.rows
+          this.totalItems = response.data.total
+        } else {
+          this.orderList = []
+          this.totalItems = 0
+        }
+      })
+    },
+    onSearchs() {
+      console.log('dateRange', this.dateRange)
+      var startTime = null
+      var endTime = null
+      if (this.dateRange != null && this.dateRange.length == 2) {
+        startTime = this.dateRange[0];
+        endTime = this.dateRange[1];
+      }
+
+      const param = {
+        orderNo: this.orderNo,
+        model: this.model,
+        status: this.status,
+        startTime: startTime,
+        endTime: endTime,
+        pageNum: 1,
+        pageSize: this.listQuery.pageSize,
+        // customerName:this.customer
       }
       console.info(param)
       saleChangeList(param).then(response => {
