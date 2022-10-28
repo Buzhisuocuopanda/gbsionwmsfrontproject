@@ -23,7 +23,7 @@
         </el-form-item>
         <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
-            @click="onSearch">搜索
+            @click="onSearchs">搜索
           </el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
@@ -514,6 +514,9 @@ export default {
       this.model = ''
       this.orderNo = ''
       this.status = ''
+      this.dateRange = ''
+      this.customer = ''
+      this.onSearchs()
     },
     createForm() {
       // this.showaddDialog = true
@@ -810,6 +813,37 @@ export default {
         endTime: endTime,
         pageNum: this.listQuery.pageNum,
         pageSize: this.listQuery.pageSize
+      }
+      // console.info(param)
+      saleOrderList(param).then(response => {
+        if (response.data != null && response.data.rows != null) {
+          this.orderList = response.data.rows
+          this.totalItems = response.data.total
+        } else {
+          this.orderList = []
+          this.totalItems = 0
+        }
+      })
+    },
+    onSearchs() {
+      console.log('dateRange', this.dateRange)
+      var startTime = null
+      var endTime = null
+      if (this.dateRange != null && this.dateRange.length == 2) {
+        startTime = this.dateRange[0];
+        endTime = this.dateRange[1];
+      }
+
+      const param = {
+        orderNo: this.orderNo,
+        model: this.model,
+        type: 2,
+        status: -1,
+        startTime: startTime,
+        endTime: endTime,
+        pageNum: 1,
+        pageSize: this.listQuery.pageSize,
+        customer:this.customer
       }
       // console.info(param)
       saleOrderList(param).then(response => {

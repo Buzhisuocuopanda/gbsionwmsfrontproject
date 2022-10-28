@@ -24,7 +24,7 @@
         <!--        </el-form-item>-->
         <el-form-item style="margin: 0px -10px 1px 1px">
           <el-button v-hasPermi="['system:outofstockregistrationform:list']" class="filter-item" type="primary"
-            icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
+            icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearchs">搜索</el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
           <el-button v-hasPermi="['system:outofstockregistrationform:add']" class="filter-item" type="primary"
@@ -521,6 +521,25 @@ export default {
         startTime: this.dateRange.startTime,
         endTime: this.dateRange.endTime,
         pageNum: this.listQuery.pageNum,
+        pageSize: this.listQuery.pageSize
+      }
+      // console.info(param)
+      listSales(param).then(response => {
+        if (response.data != null && response.data.rows != null) {
+          this.orderList = response.data.rows
+          this.totalItems = response.data.total
+        } else {
+          this.deviceList = []
+          this.totalItems = 0
+        }
+      })
+    },
+    onSearchs() {
+      const param = {
+        cboe07: this.orderNo,
+        startTime: this.dateRange.startTime,
+        endTime: this.dateRange.endTime,
+        pageNum: 1,
         pageSize: this.listQuery.pageSize
       }
       // console.info(param)
