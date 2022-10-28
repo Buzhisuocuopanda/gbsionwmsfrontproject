@@ -115,7 +115,7 @@
           <el-table-column prop="cbpd09" label="数量" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input v-model="scope.row.cbph09" @blur="chen(scope.row)" placeholder="" class="shuzicaoyou" style="">
+              <el-input v-model="scope.row.cbph09" @input="chen(scope.row)" placeholder="" class="shuzicaoyou" style="">
               </el-input>
               <!-- </sapn> -->
             </template>
@@ -123,14 +123,14 @@
           <el-table-column prop="cbpd11" label="单价" width="100">
             <template slot-scope="scope">
               <!-- <sapn> -->
-              <el-input v-model="scope.row.cbph10" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style="">
+              <el-input v-model="scope.row.cbph10" @input="chen(scope.row)" class="shuzicaoyou" placeholder="" style="">
               </el-input>
               <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="cbpd12" label="金额" width="100">
+          <el-table-column prop="cbph12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbph11" placeholder="" class="shuzicaoyou" style="" readonly></el-input>
+              <el-input v-model="scope.row.cbph12" placeholder="" class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbph13" label="备注" width="">
@@ -637,6 +637,12 @@ export default {
   },
   created() {
     this.getList();
+    console.log()
+    // for (let i = 0; i < this.tableData.length; i++) {
+    //   this.tableData[i].cbph12 = this.tableData[i].cbph10 * this.tableData[i].cbph09
+    //   console.log(this.tableData[i].cbph12, "this.tableData[i].cbph12")
+    // }
+    console.log(this.tableData, "this.tableData------------this.tableData")
     this.getConfigKey("sys.user.initPassword").then((response) => {
       // this.initPassword = response.msg;
     });
@@ -662,10 +668,11 @@ export default {
     },
 
     chen(item) {
+      console.log(item, "item--------------item")
       if (item.cbph09 > 0 && item.cbph10 > 0) {
         this.$set(
           item,
-          "cbph11",
+          "cbph12",
           parseFloat(item.cbph09) * parseFloat(item.cbph10)
         );
         // this.form2.cbph11 = item.cbph11
@@ -1023,6 +1030,18 @@ export default {
             this.tableData.map((item) => {
               item.cbpc000 = item.pinpai + ' - ' + item.cbpb12 + ' - ' + item.cbpb08
             })
+            for (let i = 0; i < this.tableData.length; i++) {
+              console.log(this.tableData)
+              this.tableData[i].cbph12 = this.tableData[i].cbph10 * this.tableData[i].cbph09
+              console.log(this.tableData[i].cbph12, "this.tableData[i].cbph12")
+              console.log(this.tableData[i].cbph10, "this.tableData[i].cbph10")
+              console.log(this.tableData[i].cbph09, "this.tableData[i].cbph09")
+            }
+            console.log(this.tableData, "this.tableDatathis.tableDatathis.tableDatathis.tableData")
+            // for (let i = 0; i < this.tableData.length; i++) {
+            //   this.tableData[i].cbph12 = this.tableData[i].cbph10 * this.tableData[i].cbph09
+            // }
+            console.log(this.tableData, "this.tableData-------------this.tableData")
             console.log(this.userLists, 123456);
             console.log(res, 888999);
             this.loading = false;
@@ -1031,6 +1050,7 @@ export default {
       }
     },
   },
+
   mounted() {
     // 初始化表单数据，至少有一行表单数据
     this.tableData = [];
