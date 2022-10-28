@@ -90,6 +90,8 @@
                 <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border
                     :data="userLists" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                    <el-table-column type="index" width="50" label="序号">
+                    </el-table-column>
                     <el-table-column prop="pinpai" key="pinpai" label="品牌">
                     </el-table-column>
                     <el-table-column prop="lx" key="lx" label="类型">
