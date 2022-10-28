@@ -847,7 +847,7 @@ export default {
       this.loading = true;
       // this.queryParams.status = 5
 
-      Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
+      saleOrderListGoods(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
         this.userList01 = response.data.rows;
         this.totall = response.data.total;
         // //供应商
