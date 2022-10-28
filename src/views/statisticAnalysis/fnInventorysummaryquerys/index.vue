@@ -45,8 +45,8 @@
         <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="240px;"/>
         <el-table-column  label="UPC" align="left" prop="cbpb15" min-width="100px;"/>
         <!--<el-table-column  label="描述" align="center" prop="lockQty" min-width="260px;"/>-->
-        <el-table-column label="商品SN" align="left" prop="cbig10" min-width="80px;" />
-        <el-table-column  label="入库日期" align="left" prop="cbig15" :formatter="formatTime2" min-width="80px;" />
+        <el-table-column label="商品SN" align="left" prop="sn" min-width="80px;" />
+        <el-table-column  label="入库日期" align="left" prop="inTime" :formatter="formatTime2" min-width="80px;" />
 
 
       </el-table>
@@ -146,7 +146,7 @@ export default {
   },
   methods: {
     formatTime2(row){
-      return formatDate2(row.cbig15);
+      return formatDate2(row.inTime);
     },
     onSubmit() {},
     handleSelectionChange() {},
