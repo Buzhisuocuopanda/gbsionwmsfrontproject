@@ -174,8 +174,8 @@
           </el-popover>
         </el-col>
         <el-col :span="8">
-          <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
-            @change="handleQuerys(queryParams.orderNo)" />
+          <el-input v-model="queryParamsxs.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
+            @change="handleQuerys(queryParamsxs.orderNo)" />
         </el-col>
 
         <el-col :span="8">
@@ -184,9 +184,8 @@
             </el-option>
           </el-select> -->
 
-          <el-input v-model="valuexs" id="miaoshu" placeholder="请输入客户名称" clearable style="width: 240px"
-            @keyup.enter.native="hello" />
-
+          <el-input v-model="queryParamsxs.customerName" id="miaoshu" placeholder="请输入客户名称" clearable
+            style="width: 240px" @keyup.enter.native="hello" />
         </el-col>
       </el-row>
       <el-table border :header-cell-style="headClassssmtt" v-loading="loading" :data="userList01" height="440"
@@ -208,8 +207,8 @@
         <el-table-column label="制单日期" align="left" key="createTime" prop="createTime" width="280px;" sortable />
         <el-table-column label="订单分类" align="left" key="orderClassMsg" prop="orderClassMsg" width="280px;" sortable />
       </el-table>
-      <pagination v-show="totall > 0" :total="totall" :page.sync="queryParams2.pageNum"
-        :limit.sync="queryParams2.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]" />
+      <pagination v-show="totall > 0" :total="totall" :page.sync="queryParamsxs.pageNum"
+        :limit.sync="queryParamsxs.pageSize" @pagination="getList09" :page-sizes="[10, 15, 20, 50, 500]" />
     </el-dialog>
 
     <!-- 用户导入对话框 -->
@@ -529,7 +528,7 @@ export default {
       },
       // 查询参数
       queryParams2: {
-        pageNum: 1,
+        pageNum: 1, // 当前页码
         pageSize: 15,
         page: 1,
         size: 15,
@@ -541,6 +540,13 @@ export default {
         orderNo: undefined,
         cbwa09: undefined,
         dateRange: undefined,
+      },
+      queryParamsxs: {
+        pageNum: 1, // 当前页码
+        pageSize: 15,
+        whId: null,
+        saleNo: null,
+        customerName: null
       },
       // 列信息
       //  columns: [
@@ -722,13 +728,37 @@ export default {
     })
   },
   methods: {
-    hello() {
-      let obj = {
-        customerName: this.valuexs,
-        checkStatus: 1
-      }
+    // 创建分页
+    getList09() {
+      this.loading = true;
+      // this.queryParams.status = 5
 
-      saleOrderListGoods({ customerName: this.valuexs, pageNum: 1, pageSize: 15 }).then((res) => {
+      saleOrderListGoods(this.queryParamsxs).then((response) => {
+        this.userList01 = response.data.rows;
+        this.totall = response.data.total;
+        // //供应商
+        // this.postOptions = response.data.content;
+        // console.log(this.userList, 3369);
+        console.log(response, 199911196914);
+        // this.deleteFlag = response.data.rows.deleteFlag;
+        this.loading = false;
+      });
+    },
+    // 选择客户
+    hello() {
+
+      // cus.status = 5
+      // cus.orderNo = this.queryParams.orderNo
+      // cus.customerName = this.valuexs
+      // cus.pageSize = 15
+      // this.form2.icon = name;
+      // this.customerName = this.valuexs
+      this.queryParamsxs.pageNum = 1
+      // this.queryParamsxs.customerName = this.valuexs
+
+      console.log(this.queryParamsxs, "this.queryParamsxs--------------this.queryParamsxs")
+
+      saleOrderListGoods(this.queryParamsxs).then((res) => {
 
         if (res.code == 200) {
           console.log(res, "----------------res")
@@ -750,6 +780,9 @@ export default {
       this.whId = ""
       this.form2.cbpc10 = ""
       this.valuexs = ""
+      this.queryParamsxs.whId = null
+      this.queryParamsxs.orderNo = null
+      this.queryParamsxs.customerName = null
     },
     //列表表头设置
     headClassssmtt() {
@@ -782,18 +815,18 @@ export default {
     selected01(name) {
       this.form2.cbpc100 = name.substring(0, name.indexOf("-"));
       this.form2.cbpc10 = name.substring(name.indexOf("-") + 1);
-
-
       this.loading = true;
-      // this.queryParams.status = 5
-      let cus = this.addDateRange(this.queryParams, this.dateRange)
-      cus.whId = this.form2.cbpc10
-      cus.status = 5
-      cus.pageSize = 15
-      this.form2.icon = name;
-      this.customerName = this.valuexs
-      console.log(cus, "cus")
-      saleOrderListGoods(cus).then((response) => {
+      this.queryParamsxs.whId = this.form2.cbpc10
+      // let cus = this.addDateRange(this.queryParams2, this.dateRange)
+      // cus.whId = this.form2.cbpc10
+      // cus.status = 5
+      // cus.orderNo = this.queryParams2.orderNo
+      // cus.customerName = this.valuexs
+      // cus.pageSize = 15
+      // this.form2.icon = name;
+      // this.customerName = this.valuexs
+      // console.log(cus, "cus")
+      saleOrderListGoods(this.queryParamsxs).then((response) => {
         this.userList01 = response.data.rows;
         this.totall = response.data.total;
         // //供应商
@@ -802,9 +835,10 @@ export default {
         console.log(response, 199911196914);
         // this.deleteFlag = response.data.rows.deleteFlag;
         this.loading = false;
-        cus.whId = ""
-        cus.status = ""
-        this.whId = ""
+        // this.queryParams2.whId = cus.whId
+        // cus.whId = ""
+        // cus.status = ""
+        // this.whId = ""
       });
 
     },
@@ -843,21 +877,21 @@ export default {
     },
 
     /** 销售订单列表 */
-    getList09() {
-      this.loading = true;
-      // this.queryParams.status = 5
+    // getList09() {
+    //   this.loading = true;
+    //   // this.queryParams.status = 5
 
-      saleOrderListGoods(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
-        this.userList01 = response.data.rows;
-        this.totall = response.data.total;
-        // //供应商
-        // this.postOptions = response.data.content;
-        // console.log(this.userList, 3369);
-        console.log(response, 199911196914);
-        // this.deleteFlag = response.data.rows.deleteFlag;
-        this.loading = false;
-      });
-    },
+    //   Purchaseinbounddingdanxsdd(this.addDateRange(this.queryParams2, this.dateRange)).then((response) => {
+    //     this.userList01 = response.data.rows;
+    //     this.totall = response.data.total;
+    //     // //供应商
+    //     // this.postOptions = response.data.content;
+    //     // console.log(this.userList, 3369);
+    //     console.log(response, 199911196914);
+    //     // this.deleteFlag = response.data.rows.deleteFlag;
+    //     this.loading = false;
+    //   });
+    // },
 
     //供应商
     getList01() {
@@ -947,11 +981,12 @@ export default {
     },
     handleQuerys(saleNo) {
       console.log(saleNo)
-      let obj = {
-        orderNo: saleNo,
-        type: ''
-      }
-      Purchaseinbounddingdanxsdd(obj).then((res) => {
+      this.queryParamsxs.saleNo = saleNo;
+      // let obj = {
+      //   orderNo: saleNo,
+      //   type: ''
+      // }
+      saleOrderListGoods(this.queryParamsxs).then((res) => {
         if (res.code == 200) {
           this.userList01 = res.data.rows;
           this.totall = res.data.total
