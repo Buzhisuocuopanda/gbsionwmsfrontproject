@@ -34,10 +34,10 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="" :span="5">
-                    <el-form-item label="调入仓库:" prop="cbpc100">
+                    <el-form-item label="调入仓库:" prop="cbaa100">
                         <el-popover placement="bottom-start" trigger="click" clearable>
                             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:160px!important;" />
-                            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
+                            <el-input slot="reference" v-model="form2.cbaa100" placeholder="" readonly
                                 style="width:100%;">
                             </el-input>
                         </el-popover>
@@ -152,20 +152,15 @@
                             <el-input v-model="scope.row.cbab14" placeholder="供应商id" style=""></el-input>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="cbab15" label="订单分类" width="150">
+                    <!-- <el-table-column prop="cbab15" label="订单分类" width="150">
                         <template slot-scope="scope">
-                            <!-- <el-popover placement="bottom-start" trigger="click">
-              <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)" style="width:120px!important;" />
-              <el-input slot="reference" v-model="scope.row.cbpc0990" placeholder="" readonly style="width:100%;">
-              </el-input>
-            </el-popover> -->
                             <el-select v-model="scope.row.cbab15" placeholder="" style="width:100%;">
                                 <el-option v-for="item in dingdanfelei" :key="item.label" :label="item.label"
                                     :value="item.value">
                                 </el-option>
                             </el-select>
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <el-table-column v-if="false" prop="cbsf16" label="订单分类id" width="150">
                         <template slot-scope="scope">
                             <el-input v-model="scope.row.cbsf16" placeholder="订单分类id" style=""></el-input>
@@ -445,7 +440,7 @@ export default {
             },
             form2: {
                 cbpc1000: "",
-                cbpc100: "",
+                cbaa100: "",
                 cbpc099: "",
                 cbpc000: "",
                 cbab15: "",
@@ -622,7 +617,7 @@ export default {
                         this.tableData = []
                         this.form2 = {
                             cbpc1000: "",
-                            cbpc100: "",
+                            cbaa100: "",
                             cbpc099: "",
                             cbpc000: "",
                             cbab15: "",
@@ -785,7 +780,7 @@ export default {
         selected01(name) {
             console.log(name, 123)
             console.log(name.substring(name.indexOf("-") + 1), 963);
-            this.form2.cbpc100 = name.substring(0, name.indexOf("-"))
+            this.form2.cbaa100 = name.substring(0, name.indexOf("-"))
             this.form2.cbaa10 = name.substring(name.indexOf("-") + 1)
             // this.form2.icon = name;
         },

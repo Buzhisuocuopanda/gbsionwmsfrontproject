@@ -149,7 +149,7 @@
                             <el-input v-model="scope.row.cbab14" placeholder="供应商id" style=""></el-input>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="cbab15" label="订单分类" width="150">
+                    <!-- <el-table-column prop="cbab15" label="订单分类" width="150">
                         <template slot-scope="scope">
                             <el-select v-model="scope.row.cbab15" placeholder="" style="width:100%;" @blur="dingdan(scope.row)">
                                 <el-option v-for="item in dingdanfelei" :key="item.label" :label="item.label"
@@ -157,7 +157,7 @@
                                 </el-option>
                             </el-select>
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <!-- <el-table-column v-if="false" prop="cbab15" label="订单分类id" width="150">
                         <template slot-scope="scope">
                             <el-input v-model="scope.row.cbab15" placeholder="订单分类id" style=""></el-input>
