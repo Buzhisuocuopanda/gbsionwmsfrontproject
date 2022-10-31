@@ -73,8 +73,10 @@
           <!--          </el-table-column>-->
           <el-table-column prop="goodsNum" label="良品数量">
             <template scope="scope">
-              <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status ==3 ? true : false"
-                oninput="value=value.replace(/[^\d]/g,'')" :readonly="edit == 3 ? true : false"></el-input>
+              <!-- <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status ==3 ? true : false"
+                oninput="value=value.replace(/[^\d]/g,'')" :readonly="edit == 3 ? true : false"></el-input> -->
+                <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status ==3 ? true : false"
+                oninput="value=value.replace(/[^\d]/g,'')" readonly></el-input>
               <div v-text="rounding2(scope.row.goodsNum)" v-else></div>
             </template>
 
