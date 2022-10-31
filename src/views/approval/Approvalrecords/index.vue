@@ -61,7 +61,7 @@
           <template slot-scope="scope" >
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share"  size="mini" class="caozuoxiangqeng"
                        type="text"  v-hasPermi="['approval:approvalrecords:detail']" @click="showDetail(scope.row)">详情</el-button>
-            <el-button v-if="scope.row.status==3" icon="el-icon-s-order"  size="mini" type="text" @click="auditSaleOrder(scope.row)">反审</el-button>
+            <el-button v-if="scope.row.status==2" icon="el-icon-s-order"  size="mini" type="text" @click="auditSaleOrder(scope.row)">反审</el-button>
 <!--            <el-button size="small" type="primary" @click="resetPush(scope.row)">删除</el-button>-->
           </template>
 
@@ -254,7 +254,7 @@ export default {
     auditSaleOrder(row) {
       const param = {
         orderId: row.id,
-        opeateType: row.status
+        opeateType: 6
       }
       auditSaleOrder(param).then(response => {
           if (response.code == "200") {
