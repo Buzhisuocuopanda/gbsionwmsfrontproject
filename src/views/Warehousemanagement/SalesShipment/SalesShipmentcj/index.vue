@@ -228,12 +228,12 @@
               </el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="订单占用量" width="100">
+          <!-- <el-table-column prop="province" label="订单占用量" width="100">
             <template slot-scope="scope">
               <el-input readonly v-model="scope.row.cbsc144" v-only-number="{ min: 0, precision: 0.0 }" placeholder="">
               </el-input>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column prop="cbsc13" label="备注" width="">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsc13" placeholder=""></el-input>
