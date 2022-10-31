@@ -1142,7 +1142,8 @@ export const dynamicRoutes = [{
   {
     path: '/Salesmanagement/saleOrderDetail',
     component: Layout,
-    permissions: ['system:user:add'],
+    permissions: ['sale:saleOrderGj:detail','sale:saleOrderGj:edit',
+    'sale:saleOrder:detail'],
     children: [
 
       {
