@@ -169,22 +169,25 @@
 
                     <el-table-column prop="cbab09" label="数量" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab09" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
-                                @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab09"
+                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" @blur="chen(scope.row)"
+                                :precision="2" placeholder="" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab11" label="单价" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab11" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
-                                @blur="chen(scope.row)" :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab11"
+                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" @blur="chen(scope.row)"
+                                :precision="2" placeholder="" class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab12" label="金额" width="150">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab12" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
-                                disabled placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
+                            <el-input v-model="scope.row.cbab12"
+                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" disabled placeholder=""
+                                :precision="2" class="shuzicaoyou" style=""></el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab13" label="备注" width="">
@@ -601,70 +604,72 @@ export default {
         },
         // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
         _ly_ok() {
-            let count = this.tableData.length // 记录当前有多少个表单
-            for (var index in this.tableData) {
-                var form = this.tableData[index]
-                console.log(form)
-                console.log(JSON.stringify(form))
-                // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
-                // this.$refs[form.formName][0].validate((valid, obj) => {
-                //     if (valid) {
-                // 如果检查通过，则对count减1。
-                // 当count为1时，表示是最后一个表单，则存储数据
-                PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(response => {
+            // let count = this.tableData.length // 记录当前有多少个表单
+            // for (var index in this.tableData) {
+            //     var form = this.tableData[index]
+            //     console.log(form)
+            //     console.log(JSON.stringify(form))
+            // 通过refs和表单名找到表单对象，通过自带的validate检查表单内容
+            // this.$refs[form.formName][0].validate((valid, obj) => {
+            //     if (valid) {
+            // 如果检查通过，则对count减1。
+            // 当count为1时，表示是最后一个表单，则存储数据
+            PurchasereturnordersAdds(this.tableData).then(response => {
 
-                    if (response.code == "200") {
-                        this.tableData = []
-                        this.form2 = {
-                            cbpc1000: "",
-                            cbaa100: "",
-                            cbpc099: "",
-                            cbpc000: "",
-                            cbab15: "",
-                            cbaa09: "",
-                            cbaa10: "",
-                            cbaa16: "",
-                            cbaa18: "",
-                            cbab08: "",
-                            cbab14: "",
-                            cbab09: "",
-                            cbab11: "",
-                            cbab12: "",
-                            cbab13: "",
-                            cbaa01: "",
+                if (response.code == "200") {
+                    this.tableData = []
+                    this.form2 = {}
+                    this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+                    //  {
+                    //     cbpc1000: "",
+                    //     cbaa100: "",
+                    //     cbpc099: "",
+                    //     cbpc000: "",
+                    //     cbab15: "",
+                    //     cbaa09: "",
+                    //     cbaa10: "",
+                    //     cbaa16: "",
+                    //     cbaa18: "",
+                    //     cbab08: "",
+                    //     cbab14: "",
+                    //     cbab09: "",
+                    //     cbab11: "",
+                    //     cbab12: "",
+                    //     cbab13: "",
+                    //     cbaa01: "",
 
 
-                            cbpd08: "",
-                            cbsb07: "",
-                            cbsb09: "",
-                            cbsb10: "",
-                            cbsb17: "",
-                            cbsb18: "",
-                            cbsb19: "",
-                            cbsb21: "",
-                            cbsb30: "",
-                            cbse09: "",
-                            cbse10: "",
-                            cbse16: "",
-                            cbse18: ""
-                        }
-                    }
-                    if (count-- === 1) {
-                        this._ly_save()
-                    }
+                    //     cbpd08: "",
+                    //     cbsb07: "",
+                    //     cbsb09: "",
+                    //     cbsb10: "",
+                    //     cbsb17: "",
+                    //     cbsb18: "",
+                    //     cbsb19: "",
+                    //     cbsb21: "",
+                    //     cbsb30: "",
+                    //     cbse09: "",
+                    //     cbse10: "",
+                    //     cbse16: "",
+                    //     cbse18: ""
+                    // }
+                }
+                // if (count-- === 1) {
+                //     this._ly_save()
+                // }
 
-                    //  this.reset03();
-                    //    this.formArr.cbpg01="1234567";
-                    //    this.form.cbpg01=this.formArr.cbpg01;
-                    //    console.log(this.form.cbpg01,85203);
-                });
+                //  this.reset03();
+                //    this.formArr.cbpg01="1234567";
+                //    this.form.cbpg01=this.formArr.cbpg01;
+                //    console.log(this.form.cbpg01,85203);
+            });
 
-                //         } else {
-                //             console.log(obj)
-                //             return false
-                //         }
-                //   })
-            }
+            //         } else {
+            //             console.log(obj)
+            //             return false
+            //         }
+            //   })
+            // }
             console.log('_ly_ok:' + JSON.stringify(this.tableData))
         },
 
@@ -890,7 +895,7 @@ export default {
                     PurchasereturnordersAdd(this.form2).then(response => {
                         if (response.code == "200") {
                             // console.log(response.posts, 12345678);
-                            this.$message({ message: '添加成功', type: 'success', style: 'color:red;!important' });
+
                             // this.getTreeselect();
                             // this.submitShangpin();
                             this.submitShangpin();
