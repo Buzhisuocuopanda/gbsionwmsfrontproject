@@ -814,7 +814,9 @@ export default {
     _ly_cancelDialog(done) {
       console.log("_ly_cancelDialog");
       this.$emit("on-close");
-      this.$router.push("/Warehousemanagement/Saleslading/");
+      // this.$router.push("/Warehousemanagement/Saleslading/");
+      this.$tab.closePage();
+      this.$router.go(-1);
     },
     // 关闭弹窗前，二次询问是否关闭
     _ly_beforeClose(done) {
