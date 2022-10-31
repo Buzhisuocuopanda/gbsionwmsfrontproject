@@ -182,10 +182,12 @@
             @change="handleQuerys(orderNo)" />
         </el-col>
         <el-col :span="8">
-          <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
+          <!-- <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
             <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
+          <el-input v-model="valuexs" id="miaoshu" placeholder="请输入客户名称" clearable style="width: 240px"
+            @keyup.enter.native="hello" />
         </el-col>
         <el-col :span="4">
           <el-button type="primary" @click="found">创建出库单</el-button>
@@ -225,10 +227,12 @@
             @change="handleQueryss(orderNo1)" />
         </el-col>
         <el-col :span="8">
-          <el-select v-model="valuexs" placeholder="请选择客户" @change="helloxs">
+          <!-- <el-select v-model="valuexs" placeholder="请选择客户" @change="helloxs">
             <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
+          <el-input v-model="valuexs" id="miaoshu" placeholder="请输入客户名称" clearable style="width: 240px"
+            @keyup.enter.native="helloxs" />
         </el-col>
         <el-col :span="4">
           <el-button type="primary" @click="foundxs">创建出库单</el-button>

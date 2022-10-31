@@ -242,11 +242,11 @@
               <el-input v-model="scope.row.noSendQty" placeholder="" readonly></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="useQty" label="订单占用量">
+          <!-- <el-table-column prop="useQty" label="订单占用量">
             <template slot-scope="scope">
               <el-input v-model="scope.row.useQty" placeholder="" readonly></el-input>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
               <el-input v-model="scope.row.remark" placeholder=""></el-input>
