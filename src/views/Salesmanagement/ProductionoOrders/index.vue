@@ -55,7 +55,7 @@
         :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="500" border fit highlight-current-row stripe
         :row-key="getRowKeys">
-        <el-table-column type='selection' label="全选" width="55">
+        <el-table-column type='selection' label="全选" width="55" fixed>
         </el-table-column>
         <el-table-column sortable="custom" fixed label="优先级" align="left" prop="priority" min-width="100px;" />
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="140px;" />
@@ -110,7 +110,7 @@
 
             <el-select @change="goodsOnChange($event)" v-el-select-loadmore="loadMore" v-model="formData.goods"
               filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
-              <el-option v-for="item in options" :key="i" :label="item.label" :value="item.value">
+              <el-option v-for="item in options" :key="item" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
 
@@ -1067,5 +1067,15 @@ export default {
 .caozuoxiangqengOrder {
   border: 0 !important;
   padding: 0 !important;
+}
+::v-deep .el-table__header-wrapper{
+  height: 55px;
+}
+::v-deep .el-table__fixed-body-wrapper {
+    position: absolute;
+    left: 0;
+    top: 55px !important;
+    overflow: hidden;
+    z-index: 3;
 }
 </style>

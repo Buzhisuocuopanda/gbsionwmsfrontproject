@@ -18,7 +18,7 @@
                         <el-input v-model="queryParams.cbpb12" id="miaoshu" placeholder="请输入型号" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
-                    <el-form-item label="创建时间" style="margin-left:2%;">
+                    <el-form-item label="创建时间" style="margin-left:1.5%;">
                         <el-date-picker :size="mini" v-model="dateRange" type="daterange"
                             :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
                             range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
@@ -26,13 +26,13 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" v-hasPermi="['system:directly:list']" class="biaoto-buttonchaxuen"
-                            @click="handleQuery">查询</el-button>
+                            @click="handleQuery" style="margin-left:10px;">查询</el-button>
                         <el-button v-hasPermi="['system:directly:list']" class="biaoto-buttonchuangjiannmnm" size="mini"
                             @click="resetQuery">重置</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <!-- <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
+                        <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                                    v-hasPermi="['system:directly:remove']"
-                            @click="handleDelete">删除</el-button> -->
+                            @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
@@ -77,8 +77,8 @@
                                 </div>
                             </template>
                     </el-table-column> -->
-                    <!-- <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width"> -->
-                    <!-- <template slot-scope="scope" style="margin-left:-10%;"> -->
+                    <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
+                    <template slot-scope="scope" style="margin-left:-10%;">
                     <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                     class="button-caozuoxougai caozuoxiangqeng"
                                     @click="handlexiangqengSelect(scope.row)"
@@ -86,9 +86,9 @@
                                     v-hasPermi="['system:user:edit']">
                                     修改
                                 </el-button> -->
-                    <!-- <el-button size="mini" type="text" icon="el-icon-delete"
+                    <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-hasPermi="['system:directly:remove']">删除</el-button> -->
+                                v-hasPermi="['system:directly:remove']">删除</el-button>
                     <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                     @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情
                                 </el-button>
@@ -105,8 +105,8 @@
                                     @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                     v-hasPermi="['system:user:listselect']"
                                     v-if="scope.row.cbpg11 == 3 | scope.row.cbpg11 == 1">标记完成</el-button> -->
-                    <!-- </template> -->
-                    <!-- </el-table-column> -->
+                    </template>
+                    </el-table-column>
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
@@ -1199,5 +1199,11 @@ export default {
 ::v-deep .el-table__header-wrapper table,
 ::v-deep .el-table__body-wrapper table {
     width: 100% !important;
+}
+::v-deep .el-form--inline .el-form-item{
+    margin-right: 0;
+}
+.item-r{
+    margin-left: -2%;
 }
 </style>

@@ -22,6 +22,12 @@
                             <el-input v-model="queryParams.cbpa07" placeholder="请输入商品分类" clearable style="width: 240px;"
                                 @keyup.enter.native="handleQuery" />
                         </el-form-item>
+                      <el-form-item label="品牌"   class="item-r" >
+                        <el-select v-model="queryParams.cala08"  style="width: 240px" clearable  filterable placeholder="请输入关键词" >
+                          <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
+                        </el-select>
+                      </el-form-item>
+
                         <el-form-item prop="cbpb12" label="型号">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
                             <el-input v-model="queryParams.cbpb12" placeholder="请输入型号" clearable style="width: 240px;"
@@ -29,7 +35,7 @@
                         </el-form-item>
                         <el-form-item prop="cbpb15" label="UPC">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
-                            <el-input v-model="queryParams.cbpb15" placeholder="请输入型号" clearable style="width: 240px;"
+                            <el-input v-model="queryParams.cbpb15" placeholder="请输入UPC" clearable style="width: 240px;"
                                 @keyup.enter.native="handleQuery" />
                         </el-form-item>
                         <el-form-item>
@@ -498,7 +504,7 @@ import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-
+import { getswJsAllList } from "@/api/statisticAnalysis/index";
 //列表
 import ListMaintenance from "@/components/ListMaintenancePp";
 
@@ -543,7 +549,8 @@ export default {
 
             userList01: null,
             userList03: null,
-
+          //下拉列表数据品牌
+          calaList:[],
             //存储结算货币
             userList9916: null,
             //存储结算货币存储数据
@@ -742,6 +749,7 @@ export default {
                 cbpb12: undefined,
                 cbpa07: undefined,
                 model: undefined,
+                cala08:undefined,
             },
             // //列信息
             //  columns: [
@@ -826,7 +834,7 @@ export default {
         this.getList();
         // this.getList01();
         this.getTreeselect();
-
+      this.getCalaList();
         // //输入框校验
         // this.modeltext();
         // this.getConfigKey("sys.user.initPassword").then(response => {
@@ -1568,10 +1576,12 @@ export default {
             this.$modal.confirm('是否确认删除商品分类为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.GoodsRemove(JSON.stringify(item)).then((res) => {
-                        console.log(res, 123)
-                        this.submitShangpin();
-                        this.getList();
-                        this.$modal.msgSuccess("删除成功");
+                        if(res.code == 200){
+                            console.log(res, 123)
+                            this.submitShangpin();
+                            this.getList();
+                            this.$modal.msgSuccess("删除成功");
+                        }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1661,6 +1671,21 @@ export default {
         submitFileForm() {
             this.$refs.upload.submit();
         },
+      //下拉列表数据品牌
+      getCalaList(){
+        let param={cala10:"商品品牌"};
+        // this.loading2 = true;
+        getswJsAllList(param).then(response => {
+          // this.loading2 = false;
+          if (response.data != null) {
+            this.calaList = response.data;
+          } else {
+            this.calaList = [];
+          }
+        },error => {
+          // this.loading2 = false;
+        });
+      },
 
         //测试树状菜单
         // handleNodeClick(data) {
@@ -1673,6 +1698,7 @@ export default {
                 this.maxheight = window.innerHeight - 50
             })()
         }
+
     },
     activated() {
         this.maxheight = window.innerHeight - 50
