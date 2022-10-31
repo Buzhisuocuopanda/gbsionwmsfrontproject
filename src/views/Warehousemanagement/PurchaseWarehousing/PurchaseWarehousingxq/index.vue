@@ -307,6 +307,13 @@ export default {
     text-align: center;
     padding-right: 0;
 }
+.saomiao{
+    min-height: 91px;
+}
+::v-deep .el-table__empty-block{
+    width: 100% !important;
+    height: auto !important;
+}
 </style>
 <style scoped>
 @page {
