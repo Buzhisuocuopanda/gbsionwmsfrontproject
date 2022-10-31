@@ -60,10 +60,11 @@
         <el-table-column sortable="custom" fixed label="优先级" align="left" prop="priority" min-width="100px;" />
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="140px;" />
         <el-table-column label="型号" align="left" prop="model" min-width="140px;" />
-        <el-table-column label="描述" align="left" prop="description" min-width="400px;" />
+        <el-table-column label="描述" align="left" prop="description" min-width="380px;" />
         <el-table-column sortable="custom" :formatter="rounding" label="订单数量" align="right" prop="orderQty"
           min-width="100px;" />
-        <el-table-column :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="76px;" />
+        <el-table-column sortable="custom" :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="96px;" />
+        <el-table-column :formatter="rounding" label="占用数量" align="right" prop="useQty" min-width="76px;" />
         <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="89px;" />
         <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;" />
         <el-table-column label="类型" align="left" prop="orderTypeMsg" min-width="95px;" />
