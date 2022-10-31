@@ -65,7 +65,7 @@
               type="text"
               icon="el-icon-edit"
               @click="mdfDetail(scope.row)"
-              v-hasPermi="['system:aftersales:list']"
+              v-hasPermi="['system:aftersales:edit']"
             >修改</el-button>
             <el-button
               size="mini"
