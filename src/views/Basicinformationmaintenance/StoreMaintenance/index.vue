@@ -208,7 +208,7 @@
                             <el-popover placement="bottom-start" trigger="click">
                                 <kuweixxweihu ref="kuweixxweihu" @selected="selected01"
                                     style="width:260px!important;" />
-                                <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly
+                                <el-input slot="reference" v-model="form2.cbpc100" placeholder=""
                                     style="width:77%;">
                                 </el-input>
                             </el-popover>
@@ -683,9 +683,11 @@ export default {
                 cbla10: undefined,
                 cbla11: undefined,
                 cbla12: undefined,
-                cbla13: undefined
+                cbla13: undefined,
+                cbpc100:''
             };
-            this.resetForm("form");
+            // this.$refs[formName].resetFields();
+            this.resetForm("form2");
         },
         /** 搜索按钮操作 */
         handleQuery() {
