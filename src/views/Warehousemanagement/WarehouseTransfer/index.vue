@@ -64,7 +64,7 @@
                     <el-table-column label="结算货币" width="110px;" align="left" key="cala08" prop="cala08" sortable />
                     <el-table-column label="关联订单" width="120px;" align="center" key="cbaa18" prop="cbaa18" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.cbaa18 == 0 ? "是" : scope.row.cbaa18 == 1 ?
+                            <div>{{ scope.row.cbaa18 == 1 ? "是" : scope.row.cbaa18 == 0 ?
                                     "否" : "未确定状态"
                             }}
                             </div>
