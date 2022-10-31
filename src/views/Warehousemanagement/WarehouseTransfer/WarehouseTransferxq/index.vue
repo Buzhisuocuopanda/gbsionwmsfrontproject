@@ -28,8 +28,8 @@
 
                     <el-table-column prop="cbwa09" key="cbsa01" label="供应商">
                     </el-table-column>
-                    <el-table-column prop="cbab15" key="cbab15" label="订单分类">
-                    </el-table-column>
+                    <!-- <el-table-column prop="cbab15" key="cbab15" label="订单分类">
+                    </el-table-column> -->
                     <el-table-column prop="pinpai" key="pinpai" align="left" label="品牌" width="120">
                     </el-table-column>
                     <el-table-column prop="cbpb12" key="cbpb12" align="left" label="型号" width="120">
