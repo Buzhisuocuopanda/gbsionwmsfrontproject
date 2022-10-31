@@ -1067,4 +1067,14 @@ export default {
   border: 0 !important;
   padding: 0 !important;
 }
+::v-deep .el-table__header-wrapper{
+  height: 55px;
+}
+::v-deep .el-table__fixed-body-wrapper {
+    position: absolute;
+    left: 0;
+    top: 55px !important;
+    overflow: hidden;
+    z-index: 3;
+}
 </style>
