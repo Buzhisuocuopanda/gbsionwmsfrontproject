@@ -40,7 +40,7 @@
         <el-table-column  label="分类" align="left" prop="cbpa07" min-width="90px;"/>
         <el-table-column  label="品牌" align="left" prop="cala08" min-width="60px;"/>
         <el-table-column  label="型号" align="left" prop="cbpb12"  min-width="130px;"/>
-        <el-table-column  label="占用数量" align="right" :formatter="rounding"  prop="lockQty" min-width="60px;"/>
+        <el-table-column  label="未发货数量" align="right" :formatter="rounding"  prop="lockQty" min-width="60px;"/>
         <el-table-column  label="订单数量" align="right" :formatter="rounding"  prop="cbob09" min-width="60px;"/>
         <el-table-column label="已发数量" align="right" :formatter="rounding"  prop="cbob10" min-width="60px;" />
         <el-table-column label="取消数量"  align="right" :formatter="rounding" prop="cbob15" min-width="60px;" />
