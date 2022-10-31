@@ -73,7 +73,7 @@
           <!--          </el-table-column>-->
           <el-table-column prop="goodsNum" label="良品数量">
             <template scope="scope">
-              <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 ? true : false"
+              <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status ==3 ? true : false"
                 oninput="value=value.replace(/[^\d]/g,'')" :readonly="edit == 3 ? true : false"></el-input>
               <div v-text="rounding2(scope.row.goodsNum)" v-else></div>
             </template>
@@ -474,32 +474,35 @@ export default {
     // 销售订单打印
     printTakeOrderOrder() {
       const userId = this.$route.params && this.$route.params.cbpc01;
-      this.download(
-        "/whmanagement/printTakeOrderOrder?id=" +
-        userId,
-        {},
-        `销售提货订单表—_${new Date().toLocaleDateString()}.xls`
-      );
+      this.printing("/whmanagement/printTakeOrderOrder",{id:userId},'pdf')
+      // this.download(
+      //   "/whmanagement/printTakeOrderOrder?id=" +
+      //   userId,
+      //   {},
+      //   `销售提货订单表—_${new Date().toLocaleDateString()}.xls`
+      // );
     },
     // 出库建议表
     printTakeOrderSuggest() {
       const userId = this.$route.params && this.$route.params.cbpc01;
-      this.download(
-        "/whmanagement/printTakeOrderSuggest?id=" +
-        userId,
-        {},
-        `出库建议表—_${new Date().toLocaleDateString()}.pdf`
-      );
+      this.printing("/whmanagement/printTakeOrderSuggest",{id:userId},'pdf')
+      // this.download(
+      //   "/whmanagement/printTakeOrderSuggest?id=" +
+      //   userId,
+      //   {},
+      //   `出库建议表—_${new Date().toLocaleDateString()}.pdf`
+      // );
     },
     // 扫描记录表
     printTakeOrderScanLog() {
       const userId = this.$route.params && this.$route.params.cbpc01;
-      this.download(
-        "/whmanagement/printTakeOrderScanLog?id=" +
-        userId,
-        {},
-        `扫描记录表—_${new Date().toLocaleDateString()}.pdf`
-      );
+      this.printing("/whmanagement/printTakeOrderScanLog",{id:userId},'pdf')
+      // this.download(
+      //   "/whmanagement/printTakeOrderScanLog?id=" +
+      //   userId,
+      //   {},
+      //   `扫描记录表—_${new Date().toLocaleDateString()}.pdf`
+      // );
     },
 
     // 合并单元格

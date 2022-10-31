@@ -15,7 +15,7 @@ import plugins from './plugins' // plugins
 import {
   download
 } from '@/utils/request'
-
+import { prient } from '@/utils/Online printing'
 import './assets/icons' // icon
 import './permission' // permission control
 import {
@@ -75,6 +75,7 @@ Vue.prototype.selectDictLabel = selectDictLabel
 Vue.prototype.selectDictLabels = selectDictLabels
 Vue.prototype.download = download
 Vue.prototype.handleTree = handleTree
+Vue.prototype.printing = prient
 
 // 全局组件挂载
 Vue.component('DictTag', DictTag)

@@ -269,3 +269,16 @@ export function Selloutofwarehouseeditone(data) {
     data: data
   })
 }
+
+// 销售出库单打印
+export function saleoutOrderdetailsexport1(data) {
+  return request({
+    url: '/system/Selloutofwarehouse/saleoutOrderdetailsexport1',
+    method: 'post',
+    params: data,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    responseType: 'blob'
+  })
+}

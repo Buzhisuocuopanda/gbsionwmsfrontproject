@@ -772,6 +772,9 @@ export default {
           { required: true, message: '请输入客户', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
+        invoiceType: [
+          { required: true, message: '请输入销售人员', trigger: 'blur' },
+        ],
       },
       //表格参数
       tableData: [],

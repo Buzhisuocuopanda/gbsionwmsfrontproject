@@ -207,7 +207,7 @@
   </div>
 </template>
 <script>
-import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds,saleoutOrderdetailsexport1 } from "@/api/Warehousemanagement/SalesShipment";
 export default {
   name: 'AuthUser',
   data() {
@@ -372,25 +372,58 @@ export default {
     //销售出库单详情打印
     xiaoschukudandayin() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.download(
-        "/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId=" +
-        userId,
-        {},
-        `销售出库单详情— ${new Date().toLocaleDateString()}.pdf`
-      );
-    },
+      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsexport1",{orderId:userId},'pdf')
+      
+      // const userId = this.$route.params && this.$route.params.cbsb01;
+      // saleoutOrderdetailsexport1({orderId:userId}).then((response) =>{
+      //   const content = response
+      //   console.log(content)
+      //   // 主要的是在这里的转换，必须要加上{ type: 'application/pdf' }
+      //   // 要不然无法进行打印
+      //   const blob = new Blob([content], { type: 'application/pdf' })
+      //   var date = (new Date()).getTime()
+      //   var ifr = document.createElement('iframe')
+      //   ifr.style.frameborder = 'no'
+      //   ifr.style.display = 'none'
+      //   ifr.style.pageBreakBefore = 'always'
+      //   ifr.setAttribute('id', 'printPdf' + date)
+      //   ifr.setAttribute('name', 'printPdf' + date)
+      //   ifr.src = window.URL.createObjectURL(blob)
+      //   document.body.appendChild(ifr)
+      //   this.doPrint('printPdf' + date)
+      //   window.URL.revokeObjectURL(ifr.src) // 释放URL 对象
 
+      // })
+      
+
+      // this.download(
+      //   "/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId=" +
+      //   userId,
+      //   {},
+      //   `销售出库单详情— ${new Date().toLocaleDateString()}.pdf`
+      // );
+    },
+    // 打印
+    doPrint(val) {
+      var ordonnance = document.getElementById(val).contentWindow
+      setTimeout(() => {
+        // window.print()
+        ordonnance.print()
+        // this.pdfLoading = false
+      }, 100)
+    },
     //PurchaseinListsaomiaojilubiao
 
     //销售出库建议表打印1
     xiaoschukujianyibiao() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.download(
-        "/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId=" +
-        userId,
-        {},
-        `销售出库建议表— ${new Date().toLocaleDateString()}.pdf`
-      );
+      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1",{orderId:userId},'pdf')
+      // this.download(
+      //   "/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId=" +
+      //   userId,
+      //   {},
+      //   `销售出库建议表— ${new Date().toLocaleDateString()}.pdf`
+      // );
     },
     /** 导入按钮操作 */
     handleImport() {
@@ -401,12 +434,13 @@ export default {
     /** 扫描记录表打印 */
     xiaoschukusaomiaojlubiao() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.download(
-        "/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId=" +
-        userId,
-        {},
-        `扫描记录表—_${new Date().toLocaleDateString()}.pdf`
-      );
+      this.printing("/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1",{orderId:userId},'pdf')
+      // this.download(
+      //   "/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId=" +
+      //   userId,
+      //   {},
+      //   `扫描记录表—_${new Date().toLocaleDateString()}.pdf`
+      // );
     },
 
     /** 导出按钮操作 */
