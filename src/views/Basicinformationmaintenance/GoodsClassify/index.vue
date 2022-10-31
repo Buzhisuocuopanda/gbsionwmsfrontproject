@@ -8,7 +8,7 @@
             </el-col>
         </el-row>
 
-        <el-row :span="50">
+        <el-row :span="50" class="fenleig">
             <el-col style="width:270px;" :span="8">
                 <div class="head-container">
                     <a @click="submitShangpin" class="shuzhuangliebiaofenleig">商品分类</a>
@@ -526,6 +526,6 @@ export default {
     }
 };
 </script>
-<style src="./GoodsClassifyCss/index.css">
+<style src="./GoodsClassifyCss/index.css" scoped>
 
 </style>
