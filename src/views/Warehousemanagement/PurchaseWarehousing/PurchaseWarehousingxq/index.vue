@@ -90,7 +90,7 @@
                 <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border
                     :data="userLists" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange" class="saomiao">
-                    <el-table-column type="index" width="50" label="序号">
+                    <el-table-column type="index" width="50" label="序号" style="width:100px" class="indexss">
                     </el-table-column>
                     <el-table-column prop="pinpai" key="pinpai" label="品牌">
                     </el-table-column>
@@ -302,6 +302,11 @@ export default {
 ::v-deep .el-table__header,::v-deep .el-table__body{
     width: 100% !important;
 }
+::v-deep .el-table--border .el-table__cell:first-child .cell {
+    padding-left: 0;
+    text-align: center;
+    padding-right: 0;
+}
 </style>
 <style scoped>
 @page {
@@ -357,12 +362,12 @@ export default {
 
     /**  表头序号  */
     #printRecord .saomiao .el-table__header-wrapper .el-table__header .has-gutter tr th:first-child .cell {
-        width: 50 !important;
+        width: 70 !important;
     }
 
     /** 序号内容  */
     #printRecord .saomiao .el-table__body .el-table__row td:first-child{
-        width: 50 !important;
+        width: 80 !important;
     }
     /**  表头数量  */
     /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
