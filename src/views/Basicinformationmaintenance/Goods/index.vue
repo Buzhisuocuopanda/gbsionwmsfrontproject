@@ -1576,10 +1576,12 @@ export default {
             this.$modal.confirm('是否确认删除商品分类为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.GoodsRemove(JSON.stringify(item)).then((res) => {
-                        console.log(res, 123)
-                        this.submitShangpin();
-                        this.getList();
-                        this.$modal.msgSuccess("删除成功");
+                        if(res.code == 200){
+                            console.log(res, 123)
+                            this.submitShangpin();
+                            this.getList();
+                            this.$modal.msgSuccess("删除成功");
+                        }
                     }).catch((e) => {
                         console.log(e, 456)
                     })

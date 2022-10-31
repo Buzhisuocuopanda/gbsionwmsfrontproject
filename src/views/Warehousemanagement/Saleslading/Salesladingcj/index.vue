@@ -1110,6 +1110,9 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.form2.goods = this.tableData
+      for (let i = 0; i < this.form2.goods.length; i++) {
+        this.form2.goods[i].totalPrice = this.form2.goods[i].cbsc12
+      }
       this.$refs["form2"].validate((item) => {
         if (item) {
           PurchaseinboundAdd(this.form2).then((response) => {

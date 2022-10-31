@@ -374,11 +374,12 @@ body {
   top: 90%;
   left: 80%;
 }
-/* .el-row {
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap
-} */
+.el-row {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: space-between;
+}
 .shengxiaorqi {
   position: absolute;
   left: 70%;

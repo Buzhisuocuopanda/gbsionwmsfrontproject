@@ -8,7 +8,7 @@
             </el-col>
         </el-row>
 
-        <el-row :span="50">
+        <el-row :span="50" class="fenleig">
             <el-col style="width:270px;" :span="8">
                 <div class="head-container">
                     <a @click="submitShangpin" class="shuzhuangliebiaofenleig">商品分类</a>
@@ -145,7 +145,8 @@ export default {
             form: {
                 cbpa11: "",
                 cbpa07: "",
-                id: ""
+                id: "",
+                children:[]
             },
             defaultProps: {
                 children: "children",
@@ -262,7 +263,7 @@ export default {
         // 节点单击事件
         handleNodeClick(data) {
             // console.log((data.code.split("-")),456)
-            // console.log(data)
+            console.log(data,'----------------')
             // this.queryParams.deptId = data.id;
             // console.log(data.label,88888);
             // const v1=data.label.substring(0, data.label.indexOf("-"));
@@ -331,7 +332,9 @@ export default {
         },
         /** 新增按钮操作 */
         handleAdd() {
+            this.form.cbpa09 = this.form.cbpa01
             this.form.cbpa01 = "";
+            // return
             this.$refs["form"].validate((item) => {
                 if (item) {
                     ClassifyAdd(this.form).then(response => {
@@ -344,7 +347,7 @@ export default {
                             this.submitShangpin();
                             this.getList();
                             this.reset();
-                            this.form.cbpa09 = "0";
+                            // this.form.cbpa09 = "0";
                         } else {
                             // this.$message({ message: response.msg, type: 'error' });
                         }
@@ -523,6 +526,6 @@ export default {
     }
 };
 </script>
-<style src="./GoodsClassifyCss/index.css">
+<style src="./GoodsClassifyCss/index.css" scoped>
 
 </style>
