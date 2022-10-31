@@ -146,7 +146,7 @@ export default {
                 cbpa11: "",
                 cbpa07: "",
                 id: "",
-                children:[]
+                children: []
             },
             defaultProps: {
                 children: "children",
@@ -263,7 +263,7 @@ export default {
         // 节点单击事件
         handleNodeClick(data) {
             // console.log((data.code.split("-")),456)
-            console.log(data,'----------------')
+            console.log(data, '----------------')
             // this.queryParams.deptId = data.id;
             // console.log(data.label,88888);
             // const v1=data.label.substring(0, data.label.indexOf("-"));
@@ -332,8 +332,8 @@ export default {
         },
         /** 新增按钮操作 */
         handleAdd() {
-            this.form.cbpa09 = this.form.cbpa01
-            this.form.cbpa01 = "";
+            // this.form.cbpa09 = this.form.cbpa01
+            // this.form.cbpa01 = "";
             // return
             this.$refs["form"].validate((item) => {
                 if (item) {
