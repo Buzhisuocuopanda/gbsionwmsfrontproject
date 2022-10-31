@@ -1727,3 +1727,18 @@ export default {
 <style src="./GoodsCss/index.css" scoped>
 
 </style>
+<style scoped>
+.el-row {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.shengxiaorqi {
+  position: absolute;
+  left: 70%;
+}
+.goodsnance .el-form--inline {
+  height: 100px !important;
+}
+</style>

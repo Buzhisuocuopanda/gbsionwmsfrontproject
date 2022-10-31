@@ -529,3 +529,26 @@ export default {
 <style src="./GoodsClassifyCss/index.css" scoped>
 
 </style>
+<style scoped>
+.fenleig {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.el-col-24{
+    width: 85%;
+}
+.el-form-item--small.el-form-item {
+    width: 73%;
+}
+.el-form-item--small .el-form-item__label {
+    width: 18% !important;
+}
+.el-form-item--small .el-form-item__content{
+    width: 81%;
+}
+.el-input--small{
+    width: 100% !important;
+}
+</style>
