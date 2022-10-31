@@ -56,9 +56,12 @@
                         style="margin-left: -1.5%; width:100%;" @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
                         <el-table-column label="商品分类" align="left" key="cbpa07" width="190px;" prop="cbpa07" />
+                      <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable>
+                      </el-table-column>
+                      <el-table-column label="型号" align="left" key="cbpb12" width="180" prop="cbpb12" locationNum />
                         <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" width="540px;"
                             locationNum />
-                        <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable>
+
                             <!-- <template scope="scope">
                             <div>{{ scope.row.cbpb10 == 1 ? "Epiphone" : scope.row.cbpb10 == 2 ?
                             "Gibson" : scope.row.cbpb10 == 3 ? "Kramer" : scope.row.cbpb10 == 4 ?
@@ -67,16 +70,16 @@
                             }}
                             </div>
                         </template> -->
-                        </el-table-column>
 
 
-                        <el-table-column label="型号" align="left" key="cbpb12" width="180" prop="cbpb12" locationNum />
+                      <el-table-column label="UPC" align="left" key="cbpb15" width="150" prop="cbpb15" sortable />
+
                         <el-table-column label="类型" align="left" key="typeName" width="180" prop="typeName"
                             locationNum />
                         <el-table-column label="结算类型价格" align="left" key="cbpb13" width="130px;" prop="cbpb13"
                             sortable />
                         <!-- <el-table-column label="库位容量" align="left" key="cbpb13" width="110px;" prop="cbpb14" sortable /> -->
-                        <el-table-column label="UPC" align="left" key="cbpb15" width="150" prop="cbpb15" sortable />
+
                         <el-table-column label="状态" align="left" key="cbpb07" prop="cbpb07" sortable />
                         <el-table-column label="操作" align="center" fixed="right" width="160"
                             class-name="small-padding fixed-width">
