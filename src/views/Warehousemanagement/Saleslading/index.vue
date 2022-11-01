@@ -27,7 +27,7 @@
           </el-form-item>
           <el-form-item style="margin-left: 76%">
             <el-button size="mini" class="biaoto-buttonchuangjian" style="margin-left: -2%">创建</el-button>
-            <el-dropdown trigger="click">
+            <el-dropdown trigger="click" v-hasPermi="['system:whmanagement:add']">
               <span class="xialaxuanxanggdd">
                 <i class="el-icon-caret-bottom el-icon--right"></i>
               </span>
@@ -109,7 +109,7 @@
             <template slot-scope="scope">
               <el-button size="mini" type="text" icon="el-icon-edit" class="button-caozuoxougai caozuoxiangqeng"
                 @click="handlexiangqengSelects(scope.row)" v-if="(scope.row.status == 2)"
-                v-hasPermi="['system:user:edit']">编辑</el-button>
+                v-hasPermi="['system:whmanagement:edit']">编辑</el-button>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="250" fixed="right" class-name="small-padding fixed-width">
@@ -194,7 +194,7 @@
         <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
           <template slot-scope="scope" style="margin-left: -10%">
             <el-button size="mini" icon="el-icon-share" class="button-caozuoxougai caozuoxiangqeng" type="primary"
-              @click="sendParams(scope.row)" v-hasPermi="['system:user:edit']">
+              @click="sendParams(scope.row)" >
             </el-button>
           </template>
         </el-table-column>

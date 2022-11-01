@@ -429,6 +429,11 @@ export default {
   mounted() { // 自动触发写入的函数
     this.onSearch()
   },
+  // watch: {
+  //   '$route'(to, from) {
+  //     this.onSearchs()
+  //   }
+  // },
   created() {
     //仓库明细初始化
     // this.getList();

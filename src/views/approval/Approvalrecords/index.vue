@@ -252,11 +252,16 @@ export default {
     },
     /** 反审按钮操作 */
     auditSaleOrder(row) {
-      const param = {
-        orderId: row.id,
-        opeateType: 6
-      }
-      auditSaleOrder(param).then(response => {
+      this.$confirm('此操作将反审单据编号为'+row.cabraa14+'的订单， 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const param = {
+          orderId: row.id,
+          opeateType: 6
+        }
+        auditSaleOrder(param).then(response => {
           if (response.code == "200") {
             this.$message.success("提交成功")
             this.onSearch();
@@ -268,6 +273,8 @@ export default {
             // this.$router.go(-1)
           }
         });
+      });
+
     },
     onSubmit() {},
     handleSelectionChange() {},

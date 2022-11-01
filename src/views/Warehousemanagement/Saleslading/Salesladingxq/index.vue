@@ -75,7 +75,7 @@
             <template scope="scope">
               <!-- <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status ==3 ? true : false"
                 oninput="value=value.replace(/[^\d]/g,'')" :readonly="edit == 3 ? true : false"></el-input> -->
-                <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status ==3 ? true : false"
+              <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status == 3 ? true : false"
                 oninput="value=value.replace(/[^\d]/g,'')" readonly></el-input>
               <div v-text="rounding2(scope.row.goodsNum)" v-else></div>
             </template>
@@ -180,6 +180,7 @@
           </el-descriptions-item>
         </el-descriptions>
       </div>
+
       <div v-else style="margin-top:1%">
         <el-table v-loading="loading" border :data="userListsss" style="width: 100%;"
           :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange"
@@ -187,9 +188,10 @@
           <el-table-column prop="sn" key="sn" align="" label="SN">
             <template slot-scope="scope" style="width: 200%">
               <!--@change="updsteSn(scope.row,value)"-->
-              <el-select :remote-method="getSnList" :disabled="scope.row.scanStatus == '已扫码'" v-loadmore="getLoadmoreSnList"
-                         v-model="scope.row.sn" style="width: 100%"  filterable remote reserve-keyword placeholder="请输入关键词">
-                <el-option @click.native="updsteSn(scope.row, item)" v-for="item in snList" :key="item.sn"
+              <el-select :remote-method="getSnList" :disabled="scope.row.scanStatus == '已扫码'"
+                v-el-select-loadmore="getLoadmoreSnList" v-model="scope.row.sn" style="width: 100%" filterable remote
+                reserve-keyword placeholder="请输入关键词">
+                <el-option @click.native="updsteSn(scope.row, item)" v-for="item, index in snList" :key="index"
                   :label="item.goodsMsg" :value="item.sn"></el-option>
               </el-select>
               <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
@@ -405,14 +407,16 @@ export default {
       row.locationId = item.locationId;
       console.log(row.goodsId, 10142);
     },
+    // 输入框内容改变时触发
     getSnList(value) {
-      this.snQueryParams.pageNum =1;
-      this.snQueryParams.sn =value
-      this.snQueryParams.cbpb08 =value
+      // console.log(value, "value--------value")
+      this.snQueryParams.pageNum = 1;
+      this.snQueryParams.sn = value
+      this.snQueryParams.cbpb08 = value
 
       selectGoodsSnByStatus(this.snQueryParams).then(response => {
         if (response.code == 200) {
-          this.snQueryParams.pageNum +=1;
+          this.snQueryParams.pageNum += 1;
           this.snList = response.data;
         } else {
           // this.snList = [];
@@ -420,14 +424,15 @@ export default {
       }, error => {
       });
     },
-
+    // 下拉触底时触发
     getLoadmoreSnList(value) {
-      this.snQueryParams.sn =value
-      this.snQueryParams.cbpb08 =value
+      // console.log(this.snQueryParams)
+      this.snQueryParams.sn = value
+      this.snQueryParams.cbpb08 = value
 
       selectGoodsSnByStatus(this.snQueryParams).then(response => {
         if (response.code == 200) {
-          this.snQueryParams.pageNum +=1;
+          this.snQueryParams.pageNum += 1;
           this.snList.push(...response.data);
         } else {
           // this.snList = [];
@@ -476,7 +481,7 @@ export default {
     // 销售订单打印
     printTakeOrderOrder() {
       const userId = this.$route.params && this.$route.params.cbpc01;
-      this.printing("/whmanagement/printTakeOrderOrder",{id:userId},'pdf')
+      this.printing("/whmanagement/printTakeOrderOrder", { id: userId }, 'pdf')
       // this.download(
       //   "/whmanagement/printTakeOrderOrder?id=" +
       //   userId,
@@ -487,7 +492,7 @@ export default {
     // 出库建议表
     printTakeOrderSuggest() {
       const userId = this.$route.params && this.$route.params.cbpc01;
-      this.printing("/whmanagement/printTakeOrderSuggest",{id:userId},'pdf')
+      this.printing("/whmanagement/printTakeOrderSuggest", { id: userId }, 'pdf')
       // this.download(
       //   "/whmanagement/printTakeOrderSuggest?id=" +
       //   userId,
@@ -498,7 +503,7 @@ export default {
     // 扫描记录表
     printTakeOrderScanLog() {
       const userId = this.$route.params && this.$route.params.cbpc01;
-      this.printing("/whmanagement/printTakeOrderScanLog",{id:userId},'pdf')
+      this.printing("/whmanagement/printTakeOrderScanLog", { id: userId }, 'pdf')
       // this.download(
       //   "/whmanagement/printTakeOrderScanLog?id=" +
       //   userId,

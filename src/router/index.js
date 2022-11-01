@@ -457,7 +457,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-xsch',
     component: Layout,
-    permissions: ['system:selloutofwarehouse:add'],
+    permissions: ['system:selloutofwarehouse:add','system:selloutofwarehouse:add'],
 
     children: [{
       path: 'role/',
@@ -975,7 +975,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhchuanj',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:selloutofwarehouse:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -991,7 +991,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhxsdingdan',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:selloutofwarehouse:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
@@ -1039,7 +1039,7 @@ export const dynamicRoutes = [{
     path: '/system/user-authhhxsxiaosdingdantihuo',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ['system:whmanagement:add'],
     children: [{
       path: 'role/',
       name: 'AuthUser',
