@@ -47,7 +47,7 @@
           <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+      <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="470" border fit highlight-current-row stripe
         style="margin-top:0.1em">
         <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="140px;" />
@@ -72,10 +72,10 @@
               size="mini" type="text" @click="showDetail(scope.row)">详情</el-button>
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>-->
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
-            <el-button style="margin-top: 1px" v-show="scope.row.status==2" class="caozuoxiangqengFN"
-              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,4)">复审</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status==5" class="caozuoxiangqengFN"
-              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row,8)">复核反审</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status == 2" class="caozuoxiangqengFN"
+              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 4)">复审</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status == 5" class="caozuoxiangqengFN"
+              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 8)">复核反审</el-button>
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
             <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>-->
@@ -116,7 +116,7 @@
 
             <template style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)" style="width:630px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, 1)" style="width:630px!important;" />
                 <el-input slot="reference" v-model="formData.goods" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -159,7 +159,7 @@
 
             <template style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)" style="width:630px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, 1)" style="width:630px!important;" />
                 <el-input slot="reference" v-model="formData.goods" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -457,6 +457,11 @@ export default {
     }
   },
   computed: {},
+  watch: {
+    '$route'(to, from) {
+      this.onSearchs()
+    }
+  },
   mounted() { // 自动触发写入的函数
     this.onSearch()
   },
@@ -843,7 +848,7 @@ export default {
         endTime: endTime,
         pageNum: 1,
         pageSize: this.listQuery.pageSize,
-        customer:this.customer
+        customer: this.customer
       }
       // console.info(param)
       saleOrderList(param).then(response => {

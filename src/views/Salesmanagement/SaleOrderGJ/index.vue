@@ -82,13 +82,13 @@
               详情</el-button>
             <!-- <el-button style="margin-top: 2px" v-hasPermi="['sale:saleOrderGj:edit']" v-show="scope.row.status == 0"
               size="mini" type="primary" @click="mdfDetail(scope.row)">修改</el-button> -->
-            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==1" 
-              size="mini" type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 1" size="mini"
+              type="text" @click="auditDetail(scope.row, 2)">撤销</el-button>
             <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 1"
               icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 3)"
               v-hasPermi="['sale:saleOrderGj:audit']">审核</el-button>
-            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status==5" 
-              icon="el-icon-edit"  size="mini" type="text" @click="auditDetail(scope.row,8)"
+            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 5"
+              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 8)"
               v-hasPermi="['sale:saleOrderGj:audit']">反审</el-button>
             <!--            <el-button style="margin-top: 2px" v-show="scope.row.status==5" size="mini" type="primary" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
             <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
@@ -348,6 +348,11 @@ export default {
     }
   },
   computed: {},
+  watch: {
+    '$route'(to, from) {
+      this.onSearch()
+    }
+  },
   mounted() { // 自动触发写入的函数
     this.onSearch()
   },

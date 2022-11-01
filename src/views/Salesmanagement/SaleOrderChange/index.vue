@@ -50,7 +50,7 @@
           <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+      <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row stripe
         style="margin-top:1em">
         <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="136px;" />
@@ -75,23 +75,24 @@
               style="margin-left:8px; margin-top: 2px" icon="el-icon-share" size="mini" type="text"
               @click="showDetail(scope.row)">详情</el-button>
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px"
-              v-show="scope.row.status==0" icon="el-icon-edit" size="mini" type="text" @click="mdfDetail(scope.row)">修改
+              v-show="scope.row.status == 0" icon="el-icon-edit" size="mini" type="text" @click="mdfDetail(scope.row)">
+              修改
             </el-button>
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px"
-              v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text"
-              @click=" auditDetail(scope.row,2)">撤销</el-button>
+              v-show="scope.row.status == 1" icon="el-icon-edit" size="mini" type="text"
+              @click="auditDetail(scope.row, 2)">撤销</el-button>
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px"
-              v-show="scope.row.status==1" icon="el-icon-edit" size="mini" type="text"
-              @click="auditDetail(scope.row,3)">审核</el-button>
+              v-show="scope.row.status == 1" icon="el-icon-edit" size="mini" type="text"
+              @click="auditDetail(scope.row, 3)">审核</el-button>
             <!--            <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px" v-show="scope.row.status==2"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,6)">反审</el-button>-->
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit"  size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
             <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <el-button v-hasPermi="['system:saleChange:sh']" class="caozuoxiangqengChange" style="margin-top: 1px"
-              v-show="scope.row.status==6" icon="el-icon-edit" size="mini" type="text"
-              @click="auditDetail(scope.row,5)">指定结束</el-button>
+              v-show="scope.row.status == 6" icon="el-icon-edit" size="mini" type="text"
+              @click="auditDetail(scope.row, 5)">指定结束</el-button>
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==0"  icon="el-icon-edit"  size="mini"   type="text" @click=" reAddDetail(scope.row)">重新提交</el-button>-->
             <el-button v-hasPermi="['system:saleChange:remove']" class="caozuoxiangqengChange" style="margin-top: 1px"
-              v-show="scope.row.status==0" icon="el-icon-delete" size="mini" type="text"
+              v-show="scope.row.status == 0" icon="el-icon-delete" size="mini" type="text"
               @click="delSaleOrder(scope.row)">删除</el-button>
           </template>
 
@@ -128,7 +129,7 @@
 
             <template style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)" style="width:630px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, 1)" style="width:630px!important;" />
                 <el-input slot="reference" v-model="formData.goods" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -171,7 +172,7 @@
 
             <template style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,1)" style="width:630px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, 1)" style="width:630px!important;" />
                 <el-input slot="reference" v-model="formData.goods" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -471,6 +472,11 @@ export default {
   computed: {},
   mounted() { // 自动触发写入的函数
     this.onSearch()
+  },
+  watch: {
+    '$route'(to, from) {
+      this.onSearchs()
+    }
   },
   methods: {
     onSubmit() {
@@ -854,7 +860,7 @@ export default {
         endTime: endTime,
         pageNum: 1,
         pageSize: this.listQuery.pageSize,
-        customer:this.customer
+        customer: this.customer
       }
       console.info(param)
       saleChangeList(param).then(response => {

@@ -63,7 +63,8 @@
         <el-table-column label="描述" align="left" prop="description" min-width="380px;" />
         <el-table-column sortable="custom" :formatter="rounding" label="订单数量" align="right" prop="orderQty"
           min-width="100px;" />
-        <el-table-column sortable="custom" :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="100px;" />
+        <el-table-column sortable="custom" :formatter="rounding" label="生产数量" align="right" prop="makeQty"
+          min-width="100px;" />
         <el-table-column :formatter="rounding" label="占用数量" align="right" prop="useQty" min-width="76px;" />
         <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="89px;" />
         <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;" />
@@ -419,6 +420,11 @@ export default {
   },
 
   computed: {},
+  watch: {
+    '$route'(to, from) {
+      this.onSearch()
+    }
+  },
   mounted() { // 自动触发写入的函数
     this.onSearch()
     this.initSelect()
@@ -1068,14 +1074,16 @@ export default {
   border: 0 !important;
   padding: 0 !important;
 }
-::v-deep .el-table__header-wrapper{
+
+::v-deep .el-table__header-wrapper {
   height: 55px;
 }
+
 ::v-deep .el-table__fixed-body-wrapper {
-    position: absolute;
-    left: 0;
-    top: 55px !important;
-    overflow: hidden;
-    z-index: 3;
+  position: absolute;
+  left: 0;
+  top: 55px !important;
+  overflow: hidden;
+  z-index: 3;
 }
 </style>
