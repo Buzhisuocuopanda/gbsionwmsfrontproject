@@ -3,7 +3,7 @@
         <div class="Purchase_caigou">销售退货单</div>
         <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
             <span class="Purchase_bianhao">编号：{{ value.cbse07 || '' }}</span>
-            <span class="Purchase_riqii">日期：{{ value.cbse08.slice(0,10) }}</span>
+            <span class="Purchase_riqii">日期：{{ value.cbse08.slice(0, 10) }}</span>
         </div>
         <div style="width:90%; margin-left: 5%; margin-top: 1%;">
             <!-- 横向 -->
@@ -11,7 +11,7 @@
                 :key="key">
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">客户</template>{{
-                    value.cbca08
+                            value.cbca08
                     }}
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
@@ -22,13 +22,13 @@
                 </el-descriptions-item>
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">关联订单</template>
-                        {{
+                    {{
                             value.cbse18 == 0
-                            ? "是"
-                            : value.cbse18 == 1
-                            ? "否"
-                            : ""
-                        }}
+                                ? "是"
+                                : value.cbse18 == 1
+                                    ? "否"
+                                    : ""
+                    }}
                 </el-descriptions-item>
             </el-descriptions>
 
@@ -44,11 +44,11 @@
                     <template scope="scope">
                         <div>
                             {{
-                            scope.row.cbsf16 == 1
-                            ? "国际订单"
-                            : scope.row.cbsf16 == 2
-                            ? "国内订单"
-                            : "状态不确定"
+                                    scope.row.cbsf16 == 1
+                                        ? "国际订单"
+                                        : scope.row.cbsf16 == 2
+                                            ? "国内订单"
+                                            : "状态不确定"
                             }}
                         </div>
                     </template>
@@ -218,7 +218,9 @@ export default {
                 }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: '标记成功', type: 'success' });
-                        this.$router.push("/Warehousemanagement/SalesStock");
+                        // this.$router.push("/Warehousemanagement/SalesStock");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
                     }
                 });
             }).catch(() => { });
@@ -231,7 +233,9 @@ export default {
                 }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: '取消成功', type: 'success' });
-                        this.$router.push("/Warehousemanagement/SalesStock");
+                        // this.$router.push("/Warehousemanagement/SalesStock");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
                     }
                 });
             }).catch(() => { });
@@ -244,7 +248,9 @@ export default {
                 }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: '审批成功', type: 'success' });
-                        this.$router.push("/Warehousemanagement/SalesStock");
+                        // this.$router.push("/Warehousemanagement/SalesStock");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
                     }
                 });
             }).catch(() => { });
@@ -257,7 +263,9 @@ export default {
                 }).then(response => {
                     if (response.code == "200") {
                         this.$message({ message: '反审成功', type: 'success' });
-                        this.$router.push("/Warehousemanagement/SalesStock");
+                        // this.$router.push("/Warehousemanagement/SalesStock");
+                        this.$tab.closePage();
+                        this.$router.go(-1);
                     }
                 });
             }).catch(() => { });
@@ -289,23 +297,23 @@ export default {
             const userId = this.$route.params && this.$route.params.cbpg01;
             this.ids.id = this.$route.params && this.$route.params.cbpg01;
             this.status = this.$route.params && this.$route.params.status;
-            if(this.status == 0){
-              const obj = Object.assign({}, this.$route, { title: "销售退货单审核" })
-              this.$tab.updatePage(obj);
-              // this.$route.meta.title="销售退货单审核"
-            }else if(this.status==8){
-              const obj = Object.assign({}, this.$route, { title: "销售退货单详情" })
-              this.$tab.updatePage(obj);
-            }else {
-              const obj = Object.assign({}, this.$route, { title: "销售退货单反审" })
-              this.$tab.updatePage(obj);
+            if (this.status == 0) {
+                const obj = Object.assign({}, this.$route, { title: "销售退货单审核" })
+                this.$tab.updatePage(obj);
+                // this.$route.meta.title="销售退货单审核"
+            } else if (this.status == 8) {
+                const obj = Object.assign({}, this.$route, { title: "销售退货单详情" })
+                this.$tab.updatePage(obj);
+            } else {
+                const obj = Object.assign({}, this.$route, { title: "销售退货单反审" })
+                this.$tab.updatePage(obj);
             }
             console.log(this.$route)
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundList(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
-                    this.userList.map((item) =>{
+                    this.userList.map((item) => {
 
                     })
                     this.total = res.data.total;
