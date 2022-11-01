@@ -29,15 +29,15 @@
             <el-button v-hasPermi="['system:selloutofwarehouse:list']" class="biaoto-buttonchuangjian" size="mini"
               @click="resetQuery">重置</el-button>
           </el-form-item>
-          <el-form-item style="margin-left: 78%">
-            <el-button size="mini" class="biaoto-buttonchuangjian">创建
+          <el-form-item style="margin-left: 78%" >
+            <el-button size="mini" class="biaoto-buttonchuangjian" >创建
             </el-button>
-            <el-dropdown trigger="click">
+            <el-dropdown trigger="click" v-hasPermi="['system:selloutofwarehouse:add']">
               <span class="el-dropdown-link xialaxuanxang">
                 <i class="el-icon-caret-bottom el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item class="clearfix" v-hasPermi="['system:selloutofwarehouse:add']" @click.native="tong">
+                <el-dropdown-item class="clearfix"  @click.native="tong">
                   通过提货单创建
                   <el-badge class="mark" />
                 </el-dropdown-item>
