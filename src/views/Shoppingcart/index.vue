@@ -75,7 +75,7 @@
                        type="text" @click="mdfDetail(scope.row)"
             >生成国内销售订单</el-button>-->
 
-            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+            <el-button style="margin-left:8px; margin-top: 2px ;border: 1px solid transparent" icon="el-icon-share" plain size="mini"
                        type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
 <!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
                        type="text"
