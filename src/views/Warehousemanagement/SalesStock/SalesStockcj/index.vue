@@ -3,14 +3,14 @@
     <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
       <div class="chuangjiancaigous">销售退库单</div>
       <el-row>
-        <el-col :span="7">
-          <el-form-item label="编号:" prop="cbsb07" style="margin-left: 10%">
-            <el-input type="text" disabled v-model="form2.cbsb07" style="width: 50%" />
+        <el-col style="margin-left: 2%" :span="5">
+          <el-form-item label="编号:" prop="cbsb07" style="">
+            <el-input type="text" disabled v-model="form2.cbsb07" style="width: 120%" />
           </el-form-item>
         </el-col>
-        <el-col :span="7">
-          <el-form-item label="日期:" style="margin-left: 20%" prop="cbse08">
-            <el-date-picker type="date" placeholder="" v-model="form2.cbse08" style="width: 80%;">
+        <el-col :span="5">
+          <el-form-item label="日期:" style="" prop="cbse08">
+            <el-date-picker type="date" placeholder="" v-model="form2.cbse08" style="width: 100%;">
             </el-date-picker>
             <!--  <el-input type="text" placeholder="" v-model="form2.cbse08" style="width: 60%" />-->
           </el-form-item>
@@ -532,6 +532,9 @@ export default {
       rules: {
         cbpc100: [
           { required: true, message: "仓库不能为空!", trigger: "change" },
+        ],
+        cbse099: [
+          { required: true, message: "客户不能为空!", trigger: "change" },
         ],
         /*cbpg16: [
           { required: true, message: "结算货币不能为空!", trigger: "change" },
