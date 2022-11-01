@@ -183,7 +183,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col>
+                        <!-- <el-col>
                             <el-form-item label="是否可用:" prop="cbwa15">
                                 <el-select v-model="form.cbwa15" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
@@ -191,9 +191,9 @@
                                     </el-option>
                                 </el-select>
                             </el-form-item>
-                        </el-col>
+                        </el-col> -->
                       <el-col>
-                        <el-form-item label="是否可用来分配:" prop="cbwa15">
+                        <el-form-item label="是否可用来分配:" prop="allocationFlag">
                           <el-select v-model="form.allocationFlag" placeholder="" style="width:55%;">
                             <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
                                        :value="dict.value"></el-option>
@@ -400,16 +400,16 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col>
+                        <!-- <el-col>
                             <el-form-item label="是否可用:" prop="cbwa15">
                                 <el-select v-model="form2.cbwa15" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
                                         :value="dict.value"></el-option>
                                 </el-select>
                             </el-form-item>
-                        </el-col>
+                        </el-col> -->
                       <el-col>
-                        <el-form-item label="是否可用来分配:" prop="cbwa15">
+                        <el-form-item label="是否可用来分配:" prop="allocationFlag">
                           <el-select v-model="form2.allocationFlag" placeholder="" style="width:55%;">
                             <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
                                        :value="dict.value"></el-option>
@@ -710,6 +710,9 @@ export default {
                 type: [
                     { required: true, message: "类型不能为空!", trigger: "change" }
                 ],
+                allocationFlag: [
+                    { required: true, message: "是否可用来分配不能为空!", trigger: "change" }
+                ],
             },
             // 表单校验
             rules1: {
@@ -740,6 +743,9 @@ export default {
                 ],
                 type: [
                     { required: true, message: "类型不能为空!", trigger: "change" }
+                ],
+                allocationFlag: [
+                    { required: true, message: "是否可用来分配不能为空!", trigger: "change" }
                 ],
             }
         };
