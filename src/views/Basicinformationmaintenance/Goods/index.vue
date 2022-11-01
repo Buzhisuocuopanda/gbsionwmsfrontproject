@@ -1727,8 +1727,8 @@ export default {
 <style src="./GoodsCss/index.css" scoped>
 
 </style>
-<style scoped>
-.el-row {
+<style lang="scss" scoped>
+.hasTagsView .el-row {
   width: 100%;
   overflow-x: auto;
   display: flex;
@@ -1740,5 +1740,17 @@ export default {
 }
 .goodsnance .el-form--inline {
   height: 100px !important;
+}
+::v-deep .el-dialog__body {
+    padding: 30px 20px;
+    color: #606266;
+    font-size: 14px;
+    word-break: break-all;
+}
+.abow_dialog5 ::v-deep .el-dialog {
+  margin: 0 auto !important;
+  /* height: 95%; */
+  /* width: 85%; */
+  overflow: hidden;
 }
 </style>
