@@ -1118,11 +1118,14 @@ export default {
         if (response.code == "200") {
           this.$message.success("提交成功")
           this.$store.dispatch("tagsView/delView", this.$route)
-          const obj = { path: "/Salesmanagement/SaleOrderGn" };
-          this.$tab.closeOpenPage(obj).then(() => {
-            const obj = { path: "/Salesmanagement/SaleOrderGn", name: "SaleOrderGn" };
-            this.$tab.refreshPage(obj);
-          })
+
+          // const obj = { path: "/Salesmanagement/SaleOrderGn" };
+          // this.$tab.closeOpenPage(obj).then(() => {
+          //   const obj = { path: "/Salesmanagement/SaleOrderGn", name: "SaleOrderGn" };
+          //   this.$tab.refreshPage(obj);
+          // })
+          this.$tab.closePage();
+          this.$router.go(-1);
         }
       })
     },
