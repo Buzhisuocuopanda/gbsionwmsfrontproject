@@ -3,7 +3,7 @@
   <!--财务综合报表-->
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true" >
+      <el-form :inline="true" style="height:auto;">
         <el-form-item  label="日期" style="margin-left: 20px;">
           <el-date-picker size="mini" v-model="dateRange" type="daterange" style="margin-left: 10px;height: 35px"
                           :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
@@ -19,14 +19,15 @@
             <el-option v-for="item in storeSkuList" :key="item.cbwa01" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="客户" style="margin-left: 20px;margin-top: -10px"  class="item-r" >
+        <el-form-item label="客户" style="margin-left: 20px;"  class="item-r" >
           <el-select v-model="queryParams.customerId"  style="margin-left: 10px" clearable filterable placeholder="请输入关键词" :loading="loading2">
             <el-option v-for="item in cbcaList" :key="item.cbca01" :label="item.cbca08" :value="item.cbca01"></el-option>
           </el-select>
         </el-form-item>
 
 
-        <el-form-item style="margin: -10px -10px 1px 1px;">
+        <!-- <el-form-item style="margin: -10px -10px 1px 1px;"> -->
+        <el-form-item>
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['query:fnSynthesis:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
