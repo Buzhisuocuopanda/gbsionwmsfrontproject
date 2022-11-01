@@ -146,7 +146,7 @@ export default {
                 cbpa11: "",
                 cbpa07: "",
                 id: "",
-                children: []
+                // children: []
             },
             defaultProps: {
                 children: "children",
@@ -333,10 +333,17 @@ export default {
         /** 新增按钮操作 */
         handleAdd() {
             // this.form.cbpa09 = this.form.cbpa01
-            // this.form.cbpa01 = "";
+            this.form.cbpa01 = "";
+            console.log(this.form, "123------------------this.form")
+            this.form.cbpa09 = this.form.cbpa011.substr(this.form.cbpa011.lastIndexOf('~') + 1)
+
+
             // return
             this.$refs["form"].validate((item) => {
                 if (item) {
+
+                    // console.log(item, "item---------item")
+                    // console.log(this.form)
                     ClassifyAdd(this.form).then(response => {
                         if (response.code == "200") {
                             // this.form.parent_id=this.form.id;
@@ -347,14 +354,12 @@ export default {
                             this.submitShangpin();
                             this.getList();
                             this.reset();
-                            // this.form.cbpa09 = "0";
+                            this.form.cbpa09 = "0";
                         } else {
                             // this.$message({ message: response.msg, type: 'error' });
                         }
 
                     });
-                } else {
-
                 }
             })
             // if(this.form.classifyName!=undefined)
