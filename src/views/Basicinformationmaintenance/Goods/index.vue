@@ -1,6 +1,6 @@
 <template>
     <div class="app-container ">
-        <div style="width:102.5%;">
+        <div style="width:102.5%;" class="goodsed">
             <el-row :gutter="20">
                 <!--部门数据-->
                 <el-col :span="40" :xs="24">
@@ -106,7 +106,7 @@
             </el-row>
         </div>
         <!-- 修改用户配置对话框 -->
-        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog5">
+        <el-dialog :title="title1" :visible.sync="open" class="abow_dialog5 abow_dialog6">
             <div
                 style="margin-top:1%;font-weight: 700;font-size: 20px; color: black;margin-left:44%; position: relative;">
                 商品信息维护修改
@@ -790,8 +790,9 @@ export default {
                 cbpb12: [
                     { required: true, message: '型号不能为空', trigger: 'blur' },
                 ],
-                upc: [
+                cbpb15: [
                     { required: true, message: 'upc不能为空', trigger: 'blur' },
+                     { validator: validateNumber, trigger: 'blur' }
                 ],
                 currency: [
                     { required: true, message: '结算货币不能为空', trigger: 'blur' },
@@ -1728,7 +1729,7 @@ export default {
 
 </style>
 <style lang="scss" scoped>
-.hasTagsView .el-row {
+.goodsed .el-row {
   width: 100%;
   overflow-x: auto;
   display: flex;
@@ -1746,6 +1747,9 @@ export default {
     color: #606266;
     font-size: 14px;
     word-break: break-all;
+}
+.abow_dialog6 ::v-deep .el-dialog__body{
+    padding: 16px 20px;
 }
 .abow_dialog5 ::v-deep .el-dialog {
   margin: 0 auto !important;
