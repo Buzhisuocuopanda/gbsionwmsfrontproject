@@ -1,5 +1,5 @@
 <template>
-  <!--销售退库单-->
+    <!--销售退库单-->
     <div class="app-container">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
@@ -7,29 +7,32 @@
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
-                <el-form-item prop="cbse07" label="编号">
-                    <el-input v-model="queryParams.cbse07"  placeholder="请输入编号" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
-                </el-form-item>
-                <el-form-item prop="cbwa09" label="仓库">
-                    <el-input v-model="queryParams.cbwa09"  placeholder="请输入仓库" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
-                </el-form-item>
-                <el-form-item label="日期" style="margin-left:1%;">
-                    <el-date-picker :size="mini" v-model="dateRange" type="daterange"
-                                    :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
-                                    range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
-                    </el-date-picker>
-                </el-form-item>
-                <el-form-item>
-                        <el-button size="mini" v-hasPermi="['system:salesreturnorderss:list']" class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
-                </el-form-item>
-                <el-form-item>
-                        <el-button v-hasPermi="['system:salesreturnorderss:list']" class="biaoto-buttonchuangjiannmnm" size="mini" @click="resetQuery">重置</el-button>
-                </el-form-item>
+                    <el-form-item prop="cbse07" label="编号">
+                        <el-input v-model="queryParams.cbse07" placeholder="请输入编号" clearable style="width: 240px;"
+                            @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                    <el-form-item prop="cbwa09" label="仓库">
+                        <el-input v-model="queryParams.cbwa09" placeholder="请输入仓库" clearable style="width: 240px;"
+                            @keyup.enter.native="handleQuery" />
+                    </el-form-item>
+                    <el-form-item label="日期" style="margin-left:1%;">
+                        <el-date-picker :size="mini" v-model="dateRange" type="daterange"
+                            :picker-options="pickerOptions" popper-class="elDatePicker" value-format="yyyy-MM-dd"
+                            range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" align="right">
+                        </el-date-picker>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button size="mini" v-hasPermi="['system:salesreturnorderss:list']"
+                            class="biaoto-buttonchaxuen" @click="handleQuery">查询</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button v-hasPermi="['system:salesreturnorderss:list']" class="biaoto-buttonchuangjiannmnm"
+                            size="mini" @click="resetQuery">重置</el-button>
+                    </el-form-item>
                     <el-form-item style="margin-left:47.5%;">
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" v-hasPermi="['system:salesreturnorderss:add']" class="biaoto-buttonchuangjiannmnm" @click="handletuikuone">创建</el-button>
+                        <el-button size="mini" v-hasPermi="['system:salesreturnorderss:add']"
+                            class="biaoto-buttonchuangjiannmnm" @click="handletuikuone">创建</el-button>
                         <!--<el-dropdown trigger="click">
                         <span class="el-dropdown-link xialaxuanxangjjj">
                             <i class="el-icon-caret-bottom el-icon&#45;&#45;right "></i>
@@ -45,8 +48,8 @@
                         </el-dropdown-item>
                         </el-dropdown-menu>
                        </el-dropdown>-->
-                        <el-button size="mini" type="danger" style="margin-left:5px;" class="biaoto-buttonshanchu" :disabled="multiple"
-                                   v-hasPermi="['system:salesreturnorderss:remove']"
+                        <el-button size="mini" type="danger" style="margin-left:5px;" class="biaoto-buttonshanchu"
+                            :disabled="multiple" v-hasPermi="['system:salesreturnorderss:remove']"
                             @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
@@ -56,7 +59,7 @@
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:user:export']">反审</el-button> -->
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:salesreturnorderss:import']">导入</el-button>
-                         <el-button plain size="mini" class="biaoto-buttondaochu"
+                        <el-button plain size="mini" class="biaoto-buttondaochu"
                             @click="PurchaseinboundBiaojiWancheng01" :disabled="multiple"
                             v-hasPermi="['system:salesreturnorderss:bjwc']">标记完成
                         </el-button>
@@ -69,7 +72,8 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassSSK" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="440"
+                <el-table border :header-cell-style="headClassSSK" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -79,45 +83,49 @@
                     </el-table-column>
                     <el-table-column label="客户" align="left" key="cbca08" prop="cbca08" width="280px;" sortable />
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="80" sortable />
-                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08"  sortable />
-                  <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" width="100" sortable >
-                    <template scope="scope">
-                      <div>{{ scope.row.cbse18 == "1" ? "是" : "否"
-                        }}
-                      </div>
-                    </template>
-                  </el-table-column>
+                    <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
+                    <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" width="100" sortable>
+                        <template scope="scope">
+                            <div>{{ scope.row.cbse18 == "1" ? "是" : "否"
+                            }}
+                            </div>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="状态" align="center" key="cbse11" prop="cbse11" width="100" sortable>
-                      <template scope="scope">
-                        <div>{{ scope.row.cbse11 == 0 ? "未审核" : scope.row.cbse11 == 1 ?
-                          "已审核" : scope.row.cbse11 == 4 ? "已完成" : "未确定状态"
-                          }}
-                        </div>
-                      </template>
+                        <template scope="scope">
+                            <div>{{ scope.row.cbse11 == 0 ? "未审核" : scope.row.cbse11 == 1 ?
+                                    "已审核" : scope.row.cbse11 == 4 ? "已完成" : "未确定状态"
+                            }}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                         <template slot-scope="scope" style="margin-left:-10%;">
                             <el-button size="mini" type="text" icon="el-icon-edit"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handlexiangqengSelect(scope.row)"
-                                v-if="scope.row.cbse11 == 0 | scope.row.cbse11 == 2" v-hasPermi="['system:salesreturnorderss:edit']">
+                                v-if="scope.row.cbse11 == 0 | scope.row.cbse11 == 2"
+                                v-hasPermi="['system:salesreturnorderss:edit']">
                                 修改
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
-                                v-if="scope.row.cbse11 == 0"
-                                v-hasPermi="['system:salesreturnorderss:remove']">删除</el-button>
+                                v-if="scope.row.cbse11 == 0" v-hasPermi="['system:salesreturnorderss:remove']">删除
+                            </el-button>
                             <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
-                                @click="handleAuthRole(scope.row)"  v-if="scope.row.cbse11 == 1 | scope.row.cbse11 == 4" v-hasPermi="['system:salesreturnorderss:detail']">详情
+                                @click="handleAuthRole(scope.row)" v-if="scope.row.cbse11 == 1 | scope.row.cbse11 == 4"
+                                v-hasPermi="['system:salesreturnorderss:detail']">详情
                             </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundShenpi(scope.row)" v-hasPermi="['system:salesreturnorderss:sh']"
                                 v-if="scope.row.cbse11 == 0">审核</el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundFanShenpi(scope.row)" v-hasPermi="['system:salesreturnorderss:fs']"
-                                v-if="scope.row.cbse11 == 1">反审</el-button>
+                                @click="PurchaseinboundFanShenpi(scope.row)"
+                                v-hasPermi="['system:salesreturnorderss:fs']" v-if="scope.row.cbse11 == 1">反审
+                            </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
-                                @click="PurchaseinboundQuxiaoWangcheng(scope.row)" v-hasPermi="['system:salesreturnorderss:qxwc']"
-                                v-if="scope.row.cbse11 == 4">取消完成</el-button>
+                                @click="PurchaseinboundQuxiaoWangcheng(scope.row)"
+                                v-hasPermi="['system:salesreturnorderss:qxwc']" v-if="scope.row.cbse11 == 4">取消完成
+                            </el-button>
                             <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
                                 @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                 v-hasPermi="['system:salesreturnorderss:bjwc']"
@@ -133,36 +141,32 @@
         </el-row>
 
 
-       <!--订单创建-->
+        <!--订单创建-->
         <el-dialog :visible.sync="open3" @close="close">
             <el-row :gutter="20" style="margin-left: -14px; margin-bottom: 10px">
                 <el-col :span="12">
-                    <el-input
-                        v-model="queryParams.orderNo"
-                        id="miaoshu"
-                        placeholder="请输入销售订单编号"
-                        clearable
-                        style="width: 100%"
-                        @change="handleQuerys(queryParams.orderNo)"
-                    />
+                    <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable
+                        style="width: 100%" @change="handleQuerys(queryParams.orderNo)" />
                 </el-col>
             </el-row>
-            <el-table border  v-loading="loading" :data="userList01" height="440"
-                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
-                    @selection-change="handleSelectionChange">
-                    <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
-                      <template slot-scope="scope" style="margin-left:-10%;">
-                            <el-button size="mini" icon="el-icon-share"   class="button-caozuoxougai caozuoxiangqeng" type="primary" @click="sendParams(scope.row)"
-                                v-hasPermi="['system:user:edit']">
-                            </el-button>
-                       </template>
-                       </el-table-column>
-                    <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable style="padding-top:60px !important;" width="260px;" />
-                     <el-table-column label="单据日期" align="left" key="orderDate" prop="orderDate" width="180px;" sortable />
-                    <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;" sortable />
-                    <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
-                    </el-table-column>
-                    <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
+            <el-table border v-loading="loading" :data="userList01" height="440"
+                :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: -2%;"
+                @selection-change="handleSelectionChange">
+                <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
+                    <template slot-scope="scope" style="margin-left:-10%;">
+                        <el-button size="mini" icon="el-icon-share" class="button-caozuoxougai caozuoxiangqeng"
+                            type="primary" @click="sendParams(scope.row)" v-hasPermi="['system:user:edit']">
+                        </el-button>
+                    </template>
+                </el-table-column>
+                <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable
+                    style="padding-top:60px !important;" width="260px;" />
+                <el-table-column label="单据日期" align="left" key="orderDate" prop="orderDate" width="180px;" sortable />
+                <el-table-column label="客户" align="left" key="customerName" prop="customerName" width="220px;"
+                    sortable />
+                <el-table-column label="销售人员" align="left" key="saleUser" prop="saleUser" width="160px;" sortable>
+                </el-table-column>
+                <el-table-column label="制单日期" align="left" key="orderDate" prop="orderDate" width="280px;" sortable />
 
             </el-table>
             <pagination v-show="total > 0" :total="totall" :page.sync="queryParamss.pageNum"
@@ -283,7 +287,7 @@
 </template>
 <script>
 // import { PurchaseinboundAdd, PurchaseinboundList, PurchaseinboundEdit, PurchaseinboundRemove, PurchaseinboundSH, PurchaseinboundShs, Purchaseinbounds, PurchaseinboundShss, SupplierList, GoodsList, StoreList, StoreSkuList } from "@/api/Warehousemanagement/PurchaseReturn";
-import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList,Purchaseinbounddingdancx } from "@/api/Warehousemanagement/SalesStock";
+import { PurchasereturnordersAdd, SkuBarcodeLists, PurchaseinboundEdit, PurchasereturnorderRemove, Purchaseinboundsho, PurchaseinBoundshf, PurchaseinboundShtt, PurchaseinboundSht, SupplierList, GoodsList, StoreList, StoreSkuList, Purchaseinbounddingdancx } from "@/api/Warehousemanagement/SalesStock";
 import * as req from "@/api/Warehousemanagement/SalesStock";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/api/system/dept";
@@ -333,7 +337,7 @@ export default {
             // 默认密码
             initPassword: undefined,
             // 日期范围
-          dateRange:[],
+            dateRange: [],
             housingTime: [],
             // 供应商选项
             postOptions: [],
@@ -544,118 +548,118 @@ export default {
                     { required: true, message: "金额不能为空!", trigger: "blur" }
                 ]
             },
-          pickerOptions: {
-            shortcuts: [{
-              text: '今日',
-              onClick(picker) {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime());
-                picker.$emit('pick', [start, end]);
-              }
-            }, {
-              text: '昨日',
-              onClick(picker) {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24);
-                picker.$emit('pick', [start, start]);
-              }
-            }, {
-              text: '本周',
-              onClick(picker) {
-                const end = new Date();
-                const start = new Date();
-                let day = start.getDay();
-                let date = start.getDate();
-                if (day != 0) {
-                  start.setDate(date - (day - 1));
+            pickerOptions: {
+                shortcuts: [{
+                    text: '今日',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime());
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '昨日',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24);
+                        picker.$emit('pick', [start, start]);
+                    }
+                }, {
+                    text: '本周',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        let day = start.getDay();
+                        let date = start.getDate();
+                        if (day != 0) {
+                            start.setDate(date - (day - 1));
+                        }
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '上周',
+                    onClick(picker) {
+                        var oDate = new Date()
+                        oDate.setTime(oDate.getTime() - 3600 * 1000 * 24 * 7);
+                        let day = oDate.getDay()
+                        let start = new Date(),
+                            end = new Date();
+                        if (day == 0) {
+                            start.setDate(oDate.getDate());
+                            end.setDate(oDate.getDate() + 6);
+                        } else {
+                            start.setTime(oDate.getTime() - 3600 * 1000 * 24 * (day - 1));
+                            end.setTime(oDate.getTime() + 3600 * 1000 * 24 * (7 - day));
+                        }
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '本月',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setDate(1);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '上月',
+                    onClick(picker) {
+                        var oDate = new Date()
+                        let year = oDate.getFullYear();
+                        let month = oDate.getMonth();
+                        let start, end;
+                        if (month == 0) {
+                            year--
+                            start = new Date(year, 11, 1)
+                            end = new Date(year, 11, 31)
+                        } else {
+                            start = new Date(year, month - 1, 1)
+                            end = new Date(year, month, 0);
+                        }
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: '本季度',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '上季度',
+                    onClick(picker) {
+                        var oDate = new Date()
+                        let year = oDate.getFullYear();
+                        let month = oDate.getMonth() + 1;
+                        let n = Math.ceil(month / 3); // 季度，上一个季度则-1
+                        let prevN = n - 1;
+                        if (n == 1) {
+                            year--
+                            prevN = 4;
+                        }
+                        month = prevN * 3; // 月份
+                        const start = new Date(year, month - 3, 1);
+                        const end = new Date(year, month, 0);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: '本年',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setMonth(0);
+                        start.setDate(1);
+                        picker.$emit('pick', [start, end]);
+                    }
                 }
-                picker.$emit('pick', [start, end]);
-              }
-            }, {
-              text: '上周',
-              onClick(picker) {
-                var oDate = new Date()
-                oDate.setTime(oDate.getTime() - 3600 * 1000 * 24 * 7);
-                let day = oDate.getDay()
-                let start = new Date(),
-                  end = new Date();
-                if (day == 0) {
-                  start.setDate(oDate.getDate());
-                  end.setDate(oDate.getDate() + 6);
-                } else {
-                  start.setTime(oDate.getTime() - 3600 * 1000 * 24 * (day - 1));
-                  end.setTime(oDate.getTime() + 3600 * 1000 * 24 * (7 - day));
-                }
-                picker.$emit('pick', [start, end]);
-              }
-            }, {
-              text: '本月',
-              onClick(picker) {
-                const end = new Date();
-                const start = new Date();
-                start.setDate(1);
-                picker.$emit('pick', [start, end]);
-              }
-            }, {
-              text: '上月',
-              onClick(picker) {
-                var oDate = new Date()
-                let year = oDate.getFullYear();
-                let month = oDate.getMonth();
-                let start, end;
-                if (month == 0) {
-                  year--
-                  start = new Date(year, 11, 1)
-                  end = new Date(year, 11, 31)
-                } else {
-                  start = new Date(year, month - 1, 1)
-                  end = new Date(year, month, 0);
-                }
-                picker.$emit('pick', [start, end]);
-              }
+                ]
             },
-              {
-                text: '本季度',
-                onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                  picker.$emit('pick', [start, end]);
-                }
-              }, {
-                text: '上季度',
-                onClick(picker) {
-                  var oDate = new Date()
-                  let year = oDate.getFullYear();
-                  let month = oDate.getMonth() + 1;
-                  let n = Math.ceil(month / 3); // 季度，上一个季度则-1
-                  let prevN = n - 1;
-                  if (n == 1) {
-                    year--
-                    prevN = 4;
-                  }
-                  month = prevN * 3; // 月份
-                  const start = new Date(year, month - 3, 1);
-                  const end = new Date(year, month, 0);
-                  picker.$emit('pick', [start, end]);
-                }
-              },
-              {
-                text: '本年',
-                onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setMonth(0);
-                  start.setDate(1);
-                  picker.$emit('pick', [start, end]);
-                }
-              }
-            ]
-          },
-          // value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-          daterange: ''
+            // value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+            daterange: ''
         };
     },
     watch: {
@@ -663,9 +667,9 @@ export default {
         deptName(val) {
             this.$refs.tree.filter(val);
         },
-      '$route' () {
-        this.getList();
-      }
+        '$route'() {
+            this.handleQuery();
+        }
     },
     created() {
         //仓库明细初始化
@@ -694,27 +698,27 @@ export default {
     },
     methods: {
         // 弹框关闭
-        close(){
+        close() {
             this.queryParams.orderNo = ''
         },
-        handleQuerys(saleNo){
+        handleQuerys(saleNo) {
             console.log(saleNo)
             let obj = {
-                orderNo:saleNo,
-                checkStatus:1
+                orderNo: saleNo,
+                checkStatus: 1
             }
-            Purchaseinbounddingdancx(obj).then((res) =>{
-                if(res.code == 200){
+            Purchaseinbounddingdancx(obj).then((res) => {
+                if (res.code == 200) {
                     this.userList01 = res.data.rows;
                     this.totall = res.data.total
                 }
-                console.log(res,4444444)
+                console.log(res, 4444444)
             })
         },
-          //销售订单添加
-        tong(){
-          this.open3 = true;
-          this.getList09()
+        //销售订单添加
+        tong() {
+            this.open3 = true;
+            this.getList09()
         },
 
         //列表表头设置
@@ -991,11 +995,11 @@ export default {
             this.$modal.confirm('是否确认审批编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.Purchaseinboundsho(item).then((res) => {
-                    if (res.code == "200") {
-                        console.log(res, 123)
-                        this.getList();
-                        this.$modal.msgSuccess("审批成功");
-                     }
+                        if (res.code == "200") {
+                            console.log(res, 123)
+                            this.getList();
+                            this.$modal.msgSuccess("审批成功");
+                        }
                     }).catch((e) => {
                         console.log(e, 456)
                     })
@@ -1032,7 +1036,7 @@ export default {
                 userIds.forEach((item) => {
                     req.PurchaseinboundSht(item).then((res) => {
                         console.log(res, 123)
-                        if(res.code == 200){
+                        if (res.code == 200) {
                             this.getList();
                             this.$modal.msgSuccess("反审成功");
                         }
@@ -1075,7 +1079,7 @@ export default {
                 userIds.forEach((item) => {
                     req.PurchaseinBoundshf(item).then((res) => {
                         console.log(res, 123)
-                        if(res.code == 200){
+                        if (res.code == 200) {
                             this.getList();
                             this.$modal.msgSuccess("标记完成");
                         }
@@ -1122,15 +1126,15 @@ export default {
             this.$modal.confirm('是否取消标记"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchaseinboundShtt(item).then((res) => {
-                     if (res.code == "200") {
-                        console.log(res, 123)
-                        if(res.code == 200){
-                            this.getList();
-                            this.$modal.msgSuccess("取消标记成功");
-                        }else{
-                            // this.$modal.msgError(res.msg)
+                        if (res.code == "200") {
+                            console.log(res, 123)
+                            if (res.code == 200) {
+                                this.getList();
+                                this.$modal.msgSuccess("取消标记成功");
+                            } else {
+                                // this.$modal.msgError(res.msg)
+                            }
                         }
-                     }
 
                     }).catch((e) => {
                         console.log(e, 456)
@@ -1140,13 +1144,13 @@ export default {
 
         },
         // 人工确认 完成更新库存
-        PurchaseinboundRenGongqueren(row){
+        PurchaseinboundRenGongqueren(row) {
             let userIds = this.ids.length > 0 ? this.ids : row
             this.$modal.confirm('是否确认更新仓库为"' + JSON.stringify(this.idss) + '"的库存量？').then(() => {
                 userIds.forEach((item) => {
                     req.PurchasereturnorderRestKu(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
-                        if(res.code == 200){
+                        if (res.code == 200) {
                             this.$modal.msgSuccess("更新库存成功");
                             this.submitShangpin();
                             this.getList();
@@ -1188,7 +1192,7 @@ export default {
                     // this.sysUserId = response.sysUserId;
                     console.log(this.form, 789)
                     // this.submitShangpin();
-                    if(response.code == 200){
+                    if (response.code == 200) {
                         this.getList();
                         this.$message({ message: '修改成功', type: 'success' });
                     }
@@ -1212,7 +1216,7 @@ export default {
         /** 修改详情按钮操作**/
         handlexiangqengSelect(row) {
             const cbse01 = row.cbse01;
-            console.log(row,cbse01)
+            console.log(row, cbse01)
             this.$router.push("/system/user-authhhhhs/role/" + cbse01);
             this.getList();
 
@@ -1313,14 +1317,14 @@ export default {
         //     this.$router.push("/system/user-authhhhh/role/" + cbpg01);
         // },
 
-         /** 详情操作 */
+        /** 详情操作 */
         handleAuthRole: function (row) {
             // const cbse01 = row.cbse01;
             // console.log(row.cbse01,885522);
 
             // // this.$router.push("/system/user-auth/role/");
             // this.$router.push("/system/user-authhhhh/role/" + cbse01);
-            console.log(row,';;;;')
+            console.log(row, ';;;;')
             let cbpg01 = row.cbse01
             let status = 8
             this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
@@ -1333,7 +1337,7 @@ export default {
         },
 
 
-         //父子传值
+        //父子传值
         sendParams(row) {
             this.$router.push({
                 path: '/system/user-authhhxsdingdan/role/',
@@ -1341,8 +1345,8 @@ export default {
                     // name: '页面1',
                     // data: this.form2.cbpc01,
                     // data: JSON.stringify(this.userList01),
-                    data:row.id,
-                        //  JSON.stringify(this.userList)
+                    data: row.id,
+                    //  JSON.stringify(this.userList)
                 }
             })
             this.open3 = false
@@ -1383,11 +1387,11 @@ export default {
                 userIds.forEach((item) => {
                     req.PurchasereturnorderRemove(JSON.stringify(item)).then((res) => {
                         console.log(res, 123)
-                        if(res.code == 200){
+                        if (res.code == 200) {
                             this.submitShangpin();
                             this.getList();
                             this.$modal.msgSuccess("删除成功");
-                        }else{
+                        } else {
                             // this.$modal.msgError(res.msg);
                         }
                     }).catch((e) => {
@@ -1418,11 +1422,11 @@ export default {
             this.$modal.confirm('是否确认删除用户编号为"' + row.cbse01 + '"的数据项？').then(function () {
                 return PurchasereturnorderRemove(JSON.stringify(row));
             }).then((response) => {
-                if(response.code == 200){
+                if (response.code == 200) {
                     this.submitShangpin();
                     this.getList();
                     this.$modal.msgSuccess("删除成功");
-                }else{
+                } else {
                     // this.$modal.msgError(res.msg)
                 }
             }).catch(() => { });
@@ -1482,4 +1486,5 @@ export default {
 };
 </script>
 <style src="./SalesStockcss/index.css" scoped>
+
 </style>

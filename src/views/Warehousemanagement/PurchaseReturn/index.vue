@@ -689,6 +689,10 @@ export default {
         // 根据名称筛选部门树
         deptName(val) {
             this.$refs.tree.filter(val);
+        },
+        '$route'() {
+            this.getList();
+            console.log("列表已重新调用")
         }
     },
     created() {

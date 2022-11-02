@@ -24,7 +24,8 @@
                             class="biaoto-buttonchuangjian" size="mini" @click="resetQuery">重置</el-button>
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
-                        <el-button size="mini" v-hasPermi="['system:warehouseinventorysummary:add']" class="biaoto-buttonchuangjian" @click="handlepdhzone">创建</el-button>
+                        <el-button size="mini" v-hasPermi="['system:warehouseinventorysummary:add']"
+                            class="biaoto-buttonchuangjian" @click="handlepdhzone">创建</el-button>
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                             v-hasPermi="['system:warehouseinventorysummary:remove']" @click="handleDelete">删除
                         </el-button>
@@ -48,8 +49,8 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSm" :row-style="{height: '3px'}"
-                    :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="470"
+                <el-table border :header-cell-style="headClassWSm" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="470"
                     :default-sort="{ prop: 'name', order: 'descending' }" style="width:92.5%;margin-left: -2%;"
                     @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -64,7 +65,7 @@
                     <el-table-column label="状态" align="center" key="cbsh09" prop="cbsh09" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbsh09 == 3 ? "盘点中" : scope.row.cbsh09 == 4 ?
-                            "盘点完" : "未确定状态"
+                                    "盘点完" : "未确定状态"
                             }}
                             </div>
                         </template>
@@ -778,6 +779,9 @@ export default {
         // 根据名称筛选部门树
         deptName(val) {
             this.$refs.tree.filter(val);
+        },
+        '$route'() {
+            this.getList();
         }
     },
     created() {
