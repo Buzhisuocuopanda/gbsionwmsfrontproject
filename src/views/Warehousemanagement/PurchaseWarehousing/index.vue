@@ -658,10 +658,6 @@ export default {
         console.log(this.form.cbpc16, 123456);
 
     },
-    // activated() {
-    //     // this.getList()
-    //     console.log('我被调用')
-    // },
     methods: {
 
 
