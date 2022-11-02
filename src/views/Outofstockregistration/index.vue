@@ -2,7 +2,7 @@
   <!--缺货登记-->
   <div class="app-container">
     <div class="filter-container outofstock">
-      <el-form :inline="true" label-width="70px">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;">
         <el-form-item>
           <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期"
             value-format="yyyy-MM-dd HH:mm:ss" :default-time="'00:00:00'">
@@ -47,7 +47,7 @@
         </el-form-item>
       </el-form>
       <el-table :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" :data="orderList"
-        element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row stripe>
+        element-loading-text="Loading。。。" width="100%;" height="460" border fit highlight-current-row stripe style="margin-top:1em;flex-grow: 1;">
         <el-table-column fixed label="编号" align="left" prop="cboe07" min-width="60px;" />
         <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="180px;" />
         <el-table-column v-if="false" label="日期" align="left" prop="cboe08" min-width="50px;" :formatter="formatDate" />
@@ -77,7 +77,7 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        style="padding-top:40px; padding-left: 20px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch" @current-change="onSearch" />
 
 
@@ -218,6 +218,7 @@ import { listSales, getSales, delSales, addSales, updateSales } from "@/api/Outo
 import { getToken } from '@/utils/auth'
 
 export default {
+  name: 'Outofstockregistration',
   components: {},
   data() {
     return {
@@ -706,18 +707,22 @@ export default {
       console.log(this.form, 1110)
     },
   },
-
-  name: 'index.vue'
 };
 </script>
 
-<style scoped>
-.outofstock .el-form--inline {
-  height: 65px !important;
+<style lang="scss" scoped>
+::v-deep .el-form-item {
+  margin-bottom: 0;
 }
 
 .caozuoxiangqengOut {
   border: 0 !important;
   padding: 0 !important;
+}
+.outofstock{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
 }
 </style>
