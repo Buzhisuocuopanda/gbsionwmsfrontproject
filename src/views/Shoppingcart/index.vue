@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container shopping">
-      <el-form :inline="true" label-width="70px">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;">
 
         <!--
         <el-form :inline="true">
@@ -60,7 +60,7 @@
       </el-form>
       <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe
-        @selection-change="handleSelectionChangee">
+        @selection-change="handleSelectionChangee" style="flex-grow: 1;">
         <el-table-column type="selection" width="50" align="center" />
         <el-table-column fixed label="品牌" align="left" prop="brand" key="brand" min-width="30px;" />
         <el-table-column fixed label="型号" align="left" prop="model" min-width="50px;" />
@@ -91,7 +91,7 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:30px; padding-left: 20px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        style="padding-top:30px; padding-left: 20px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch" @current-change="onSearch" />
 
 
@@ -833,5 +833,13 @@ export default {
   /*-moz-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
   /*-webkit-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
   /*box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
+}
+</style>
+<style lang="scss" scoped>
+.shopping{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
 }
 </style>
