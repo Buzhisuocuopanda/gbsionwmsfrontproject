@@ -92,7 +92,7 @@
               v-hasPermi="['sale:saleOrder:audit']">指定结束</el-button>
             <el-button class="caozuoxiangqengGN" style="margin-top: 1px" v-show="scope.row.status == 0"
               icon="el-icon-edit" size="mini" type="text" @click="reAddDetail(scope.row)"
-              v-hasPermi="['sale:saleOrder:submit']">重新提交</el-button>
+              v-hasPermi="['sale:saleOrder:submit']">提交</el-button>
             <el-button class="caozuoxiangqengGN" style="margin-top: 1px" v-show="scope.row.status == 0"
               icon="el-icon-delete" size="mini" type="text" @click="delSaleOrder(scope.row)"
               v-hasPermi="['sale:saleOrder:remove']">删除</el-button>
