@@ -3,10 +3,10 @@
     <div class="app-container directre">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
-            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
+            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;display: flex;flex-direction: column;height: calc(93vh - 85px);">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
+                    label-width="68px" style="flex-grow: 0;">
                     <el-form-item label="仓库" class="item-r">
                         <!-- <el-select  v-model="queryParams.cbwa09" clearable filterable remote reserve-keyword placeholder="请输入关键词"  >
                       <el-option v-for="item in postCangKu" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
@@ -53,9 +53,9 @@
                 </el-form>
 
                 <el-table border :header-cell-style="headClassDR" :row-style="{ height: '3px' }"
-                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="470"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
+                    style="width:92.5%;height: 8%;margin-left: -2%;flex-grow: 1;overflow:auto;" @selection-change="handleSelectionChange" class="middle">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable width="120px;" />
                     <el-table-column label="品牌" width="90" align="left" key="cala08" prop="cala08" sortable>
@@ -111,7 +111,7 @@
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
-                    class="pagintotal" />
+                    class="pagintotal" style="flex-grow: 0;"/>
             </el-col>
         </el-row>
 
@@ -1205,5 +1205,23 @@ export default {
 }
 .item-r{
     margin-left: -2%;
+}
+// 
+.pagintotal{
+    // position:fixed;
+    // bottom: 2%;
+    // right: 0%;
+    // left: 0%;
+}
+.pagination-container{
+    height: 5%;
+    padding: 0 !important;
+    margin: 0;
+}
+::v-deep .el-table__header-wrapper{
+    overflow: unset;
+}
+::v-deep .el-table__body-wrapper{
+    overflow: unset;
 }
 </style>
