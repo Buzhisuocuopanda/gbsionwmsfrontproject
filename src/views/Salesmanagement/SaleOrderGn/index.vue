@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true" label-width="70px">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" style="width:200px;" placeholder="订单号" />
         </el-form-item>
@@ -51,7 +51,7 @@
       </el-form>
       <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="450" border fit highlight-current-row stripe
-        style="margin-top:0.5em">
+        style="margin-top:0.5em;flex-grow: 1;">
         <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="140px;" />
         <el-table-column label="客户订单号" align="left" prop="customerNo" max-width="250px;" min-width="230px;" />
         <el-table-column label="日期" align="left" prop="orderDate" min-width="100px;" />
@@ -102,7 +102,7 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:25px; padding-left: 20px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        style="padding-top:25px; padding-left: 20px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch" @current-change="onSearch" />
 
 
@@ -863,5 +863,11 @@ export default {
 .caozuoxiangqengGN {
   border: 0 !important;
   padding: 0 !important;
+}
+.filter-container{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
 }
 </style>
