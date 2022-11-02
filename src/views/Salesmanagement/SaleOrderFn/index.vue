@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container saleOrderfn">
-      <el-form :inline="true" label-width="70px">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
@@ -21,8 +21,8 @@
             end-placeholder="结束日期" align="right">
           </el-date-picker>
         </el-form-item>
-        <el-form-item style="margin: 0px -10px 1px 1px">
-          <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em"
+        <el-form-item style="margin:0">
+          <el-button class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 0em"
             @click="onSearchs">搜索
           </el-button>
           <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置
@@ -49,7 +49,7 @@
       </el-form>
       <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="470" border fit highlight-current-row stripe
-        style="margin-top:0.1em">
+        style="margin-top: 1em;flex-grow: 1;">
         <el-table-column fixed label="编号" align="left" prop="orderNo" min-width="140px;" />
         <el-table-column label="客户订单号" align="left" prop="customerNo" min-width="200px;" />
         <el-table-column label="日期" align="left" prop="orderDate" min-width="108px;" />
@@ -87,7 +87,7 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:30px; padding-left: 10px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        style="padding-top:30px; padding-left: 10px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch" @current-change="onSearch" />
 
 
@@ -873,12 +873,18 @@ export default {
 /*  -webkit-box-sizing: border-box;*/
 /*  box-sizing: border-box*/
 /*}*/
-.saleOrderfn .el-form--inline {
-  height: 50px !important;
-}
 
+::v-deep .el-form-item{
+  margin-bottom: 0;
+}
 .caozuoxiangqengFN {
   border: 0 !important;
   padding: 0 !important;
+}
+.saleOrderfn{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
 }
 </style>
