@@ -227,10 +227,10 @@
                 <el-table :data="tableData" border :row-style="{ height: '10px' }" :cell-style="{ padding: '5px' }"
                     style="width: 99%;margin-top: 10px; margin-left:0.5%;">
                     <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-                    <el-table-column prop="cbpf02" label="客户等级" width="251">
+                    <el-table-column prop="cbpf02" label="客户等级" width="120">
                         <template slot-scope="scope">
                             <!-- <el-input v-model="scope.row.cbpf02" placeholder="" class="shuzicaoyou" style=""></el-input> -->
-                            <el-select v-model="scope.row.cbpf02" placeholder="" style="width:70%;">
+                            <el-select v-model="scope.row.cbpf02" placeholder="" style="width:100%;">
                                 <el-option v-for="dict in kehudengji" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
@@ -239,7 +239,7 @@
                     <el-table-column prop="cbpf06" label="结算类型" width="240">
                         <template slot-scope="scope">
                             <!-- <el-input v-model="scope.row.cbpf06"  placeholder="" class="shuzicaoyou" style=""></el-input> -->
-                            <el-select v-model="scope.row.cbpf06" placeholder="" style="width:68%;">
+                            <el-select v-model="scope.row.cbpf06" placeholder="" style="width:100%;">
                                 <el-option v-for="dict in Currencyhuobi" :key="dict.value" :label="dict.label"
                                     :value="dict.value"></el-option>
                             </el-select>
@@ -1754,7 +1754,10 @@ export default {
 .abow_dialog5 ::v-deep .el-dialog {
   margin: 0 auto !important;
   /* height: 95%; */
-  /* width: 85%; */
+  width: 85%;
   overflow: hidden;
+}
+::v-deep .el-table__header,::v-deep .el-table__body{
+    width: 100% !important;
 }
 </style>
