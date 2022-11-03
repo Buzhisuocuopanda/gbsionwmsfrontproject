@@ -1494,7 +1494,6 @@ export default {
     display: flex;
     flex-direction: column;
     height: calc(93vh - 85px);
-    padding:0;
     padding: 0 !important;
     margin: 0;
 }
