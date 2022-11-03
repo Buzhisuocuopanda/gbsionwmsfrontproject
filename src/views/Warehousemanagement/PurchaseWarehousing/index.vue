@@ -3,7 +3,7 @@
     <div class="app-container">
         <el-row :gutter="20" style="margin:0;width: 100%;">
             <!--用户数据-->
-            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;display: flex;flex-direction: column;height: calc(93vh - 85px);padding:0;">
+            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;display: flex;flex-direction: column;height: calc(93vh - 85px);padding:0;margin:0">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px" style="flex-grow: 0;height: auto;">

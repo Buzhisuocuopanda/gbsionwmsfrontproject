@@ -3,7 +3,7 @@
 <template>
   <div class="app-container outAdvicelist">
     <!-- 搜索 -->
-    <el-form ref="form" :model="queryParams" label-width="80px" inline>
+    <el-form ref="form" :model="queryParams" label-width="80px" inline style="flex-grow: 0;height: auto;">
       <el-form-item label="仓库" style="margin-left: 10px" class="item-r">
         <el-select style="width: 200px;margin-left: 20px" v-model="queryParams.whId" clearable filterable remote
           reserve-keyword placeholder="请输入关键词" :loading="loading3">
@@ -58,7 +58,7 @@
     </el-table>
     <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="total"
       :current-page.sync="queryParams.pageNum" :page-size.sync="queryParams.pageSize"
-      style="padding-top:30px;flex-grow: 0;text-align: right;" layout="total, sizes, prev, pager, next, jumper"
+      style="padding-top:30px;flex-grow: 0;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
       @size-change="onSearch" @current-change="onSearch" />
   </div>
 </template>

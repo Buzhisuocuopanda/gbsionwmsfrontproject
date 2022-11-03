@@ -60,8 +60,8 @@
         <el-table-column label="操作" class="saorderdet" min-width="180px;">
           <template slot-scope="scope">
             <!--style="margin-left:8px; margin-top: 2px"-->
-            <el-button class="caozuoxiangqengOut" icon="el-icon-share" size="mini" type="text"
-              v-hasPermi="['system:aftersales:detail']" @click="showDetail(scope.row)">详情</el-button>
+            <el-button class="caozuoxiangqorderdet" icon="el-icon-share" size="mini" type="text"
+              v-hasPermi="['system:aftersales:detail']" @click="showDetail(scope.row)" style="">详情</el-button>
             <el-button size="mini" class="caozuoxiangqorderdet" type="text" icon="el-icon-edit"
               @click="mdfDetail(scope.row)" v-hasPermi="['system:aftersales:edit']">修改</el-button>
             <el-button size="mini" type="text" class="caozuoxiangqorderdet" icon="el-icon-delete"

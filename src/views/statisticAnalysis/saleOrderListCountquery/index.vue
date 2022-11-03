@@ -26,7 +26,7 @@
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="供应商" style="margin-left: 20px;margin-top: -5px" class="item-r" >
+        <el-form-item label="供应商" style="margin-left: 20px;" class="item-r" >
           <el-select v-model="queryParams.supplierId"   clearable filterable placeholder="请输入关键词" :loading="loading6">
             <el-option v-for="item in cbsaList" :key="item.cbsa01" :label="item.cbsa08" :value="item.cbsa01"></el-option>
           </el-select>
@@ -34,7 +34,7 @@
 
 
 
-        <el-form-item style="margin: -5px -10px 1px 30px" >
+        <el-form-item style="" >
           <el-button v-hasPermi="['countQuery:saleOrderListCountquery:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
           <el-button v-hasPermi="['countQuery:saleOrderListCountquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
           <el-button v-hasPermi="['countQuery:saleOrderListCountquery:export']" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
