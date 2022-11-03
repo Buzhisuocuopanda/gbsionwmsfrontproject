@@ -26,11 +26,11 @@
             <el-option v-for="item in calaList" :key="item.cala01" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala01"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item v-if="false" label="商品"   class="item-r" >
+        <el-form-item  label="商品" v-if="false"  class="item-r" >
           <el-select @change="getGoods" :remote-method="getGoods" v-el-select-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
-         <!-- <el-select v-model="queryParams.cbpb01"  clearable filterable remote reserve-keyword placeholder="请输入关键词"
+          <!--<el-select v-model="queryParams.cbpb01"  clearable filterable remote reserve-keyword placeholder="请输入关键词"
             :remote-method="getGoods"
             :loading="loadingGood">
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>

@@ -218,6 +218,15 @@ export function getfnSynthesisList(query) {
   })
 }
 
+// 获取配件财务综合报表列表
+export function fnSynthesisParts(query) {
+  return request({
+    url: '/query/fnSynthesisParts',
+    method: 'get',
+    params: query
+  })
+}
+
 
 // 获取库存情况报表列表
 export function getfnSkuList(query) {
@@ -227,6 +236,8 @@ export function getfnSkuList(query) {
     params: query
   })
 }
+
+
 
 // 获取财务库存明细列表
 export function getFnInventorysummaryquerysList(query) {
@@ -287,7 +298,7 @@ export function auditOutStockEnd(query) {
     params: query
   })
 }
-
+//月度出入库
 export function monthlyStockInAndOut(query) {
   return request({
     url: '/query/monthlyStockInAndOut',
@@ -296,7 +307,7 @@ export function monthlyStockInAndOut(query) {
   })
 }
 
-
+//月度销售
 export function monthlySales(query) {
   return request({
     url: '/query/monthlySales',

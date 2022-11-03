@@ -2,7 +2,7 @@
   <!--销售订单变更单-->
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true" label-width="70px" style="flex-grow: 0;">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;height: auto;">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
