@@ -1,12 +1,12 @@
 <template>
   <!--销售出库单-->
   <div class="app-container">
-    <el-row :gutter="20" style="margin-left: -10%">
+    <el-row :gutter="20" style="margin:0;width: 100%;">
       <!--用户数据-->
       <el-col :span="20" :xs="24" class="tooltup" style="width: 100%">
         <!-- 表头内容  -->
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-          label-width="68px">
+          label-width="68px" style="flex-grow: 0;height: auto;">
           <el-form-item prop="cbsb07" label="编号">
             <el-input v-model="queryParams.cbsb07" id="miaoshu" placeholder="请输入编号" clearable style="width: 240px"
               @keyup.enter.native="handleQuery" />
@@ -29,7 +29,7 @@
             <el-button v-hasPermi="['system:selloutofwarehouse:list']" class="biaoto-buttonchuangjian" size="mini"
               @click="resetQuery">重置</el-button>
           </el-form-item>
-          <el-form-item style="margin-left: 78%">
+          <el-form-item style="margin-left: 0;">
             <el-button size="mini" class="biaoto-buttonchuangjian">创建
             </el-button>
             <el-dropdown trigger="click" v-hasPermi="['system:selloutofwarehouse:add']">
@@ -55,7 +55,7 @@
 
         <el-table border :header-cell-style="headClassssmt" :row-style="{ height: '3px' }"
           :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="440"
-          :default-sort="{ prop: 'name', order: 'descending' }" style="width: 92.5%; height: 8%; margin-left: -2%"
+          :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;"
           @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column label="编号" align="left" key="cbsb07" prop="cbsb07" sortable
@@ -1669,4 +1669,24 @@ export default {
 </script>
 <style src="./SalesShipmentcss/index.css" scoped>
 
+</style>
+<style lang="scss" scoped>
+.tooltup{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+    padding: 0 !important;
+    margin: 0;
+}
+::v-deep .pagination-container .el-pagination {
+    position: inherit;
+}
+.pagintotal{
+    flex-grow: 0;
+    text-align: right;
+    height:auto;
+    padding:20px 0 0 !important;
+    margin:0;
+}
 </style>
