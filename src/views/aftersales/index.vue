@@ -2,7 +2,7 @@
   <!--售后-->
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true" label-width="70px">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;height: auto;">
         <el-form-item style="margin-left: 10px">
           <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期"
             value-format="yyyy-MM-dd HH:mm:ss" :default-time="'00:00:00'">
@@ -26,10 +26,10 @@
 
 
 
-        <el-form-item style="margin: -5px -10px 1px 100px">
+        <el-form-item style="">
           <el-button v-hasPermi="['system:aftersales:list']" type="primary" icon="el-icon-search"
             style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>
-          <el-button class="biaoto-buttonchaxuen" type="primary" v-hasPermi="['system:aftersales:add']"
+          <el-button  type="primary" v-hasPermi="['system:aftersales:add']"
             style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 
           <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
@@ -49,7 +49,7 @@
         </el-form-item>
       </el-form>
       <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" height="470"
-        element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe>
+        element-loading-text="Loading。。。" width="100%;" border fit highlight-current-row stripe style="flex-grow: 1;">
         <el-table-column fixed label="销售订单号" align="left" prop="saleOrderNo" min-width="120px;" />
         <el-table-column fixed label="销售人员" align="left" prop="salerName" min-width="120px;" />
         <el-table-column fixed label="客户" align="left" prop="cbca08" min-width="130px;" />
@@ -72,7 +72,7 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 20, 30, 40]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:40px; padding-left: 20px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        style="padding-top:40px; padding-left: 20px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch" @current-change="onSearch" />
 
 
@@ -683,7 +683,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .saorderdet .el-form--inline {
   height: 60px !important;
 }
@@ -695,5 +695,11 @@ export default {
 
 .caozuoxiangqorderdet {
   border: 0px !important;
+}
+.filter-container{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
 }
 </style>
