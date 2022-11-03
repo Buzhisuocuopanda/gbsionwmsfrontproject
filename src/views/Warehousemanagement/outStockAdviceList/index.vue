@@ -3,7 +3,7 @@
 <template>
   <div class="app-container outAdvicelist">
     <!-- 搜索 -->
-    <el-form ref="form" :model="queryParams" label-width="80px" inline>
+    <el-form ref="form" :model="queryParams" label-width="80px" inline style="flex-grow: 0;height: auto;">
       <el-form-item label="仓库" style="margin-left: 10px" class="item-r">
         <el-select style="width: 200px;margin-left: 20px" v-model="queryParams.whId" clearable filterable remote
           reserve-keyword placeholder="请输入关键词" :loading="loading3">
@@ -28,8 +28,8 @@
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" height="430" :header-cell-style="headClasspw"
-      :data="tableData" style="width: 100%;margin-top:1em" border v-loading="loading">
+    <el-table :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" height="450" :header-cell-style="headClasspw"
+      :data="tableData" style="width: 100%;flex-grow: 1;" border v-loading="loading">
       <el-table-column prop="date" label="序号" type="index" sortable width="80" align="left"></el-table-column>
       <el-table-column prop="saleOrderNo" label="商品订单" align="left" sortable></el-table-column>
       <el-table-column prop="description" label="商品描述" align="left" sortable width="300"></el-table-column>
@@ -58,7 +58,7 @@
     </el-table>
     <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="total"
       :current-page.sync="queryParams.pageNum" :page-size.sync="queryParams.pageSize"
-      style="padding-top:30px; padding-left: 20px;float: right" layout="total, sizes, prev, pager, next, jumper"
+      style="padding-top:30px;flex-grow: 0;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
       @size-change="onSearch" @current-change="onSearch" />
   </div>
 </template>
@@ -218,9 +218,11 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.outAdvicelist .el-form--inline {
-  height: 60px !important;
-}
+<style lang="scss" scoped>
+  .outAdvicelist{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+  }
 </style>

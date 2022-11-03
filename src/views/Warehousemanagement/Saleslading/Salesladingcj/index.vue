@@ -369,12 +369,10 @@
             </div> -->
       <!-- </div> -->
     </el-form>
-    <div style="height: 100px"></div>
-    <div class="tinajia_dingwei">
+    <div class="tinajia_dingwei" style="margin-top:2%;margin-left:1%">
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>
     </div>
-    <div style="height: 100px"></div>
   </div>
 </template>
 
@@ -1113,6 +1111,7 @@ export default {
       for (let i = 0; i < this.form2.goods.length; i++) {
         this.form2.goods[i].totalPrice = this.form2.goods[i].cbsc12
       }
+      console.log(this.form2)
       this.$refs["form2"].validate((item) => {
         if (item) {
           PurchaseinboundAdd(this.form2).then((response) => {
@@ -1215,6 +1214,7 @@ export default {
           item.cbsc144 = item.noSendQty;
           item.cbsc15 = item.remark;
           item.cbsc14 = item.saleOrderId;
+          item.cbob01 = item.cbob01
           item.cbpc000 = item.brand + "~" + item.model + "~" + item.description;
           if (item.cbsc177 == "国内订单") {
             item.cbsc17 = "1";

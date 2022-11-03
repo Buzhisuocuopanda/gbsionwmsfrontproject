@@ -23,8 +23,8 @@
 
                 <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
-                    <el-table style="width:100%" :header-cell-style="headClass" v-loading="loading" border :data="userList"
-                        :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+                    <el-table style="width:100%" :header-cell-style="headClass" v-loading="loading" border
+                        :data="userList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
                         :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                         <el-table-column prop="cala08" key="cala08" label="品牌">
                         </el-table-column>
@@ -50,34 +50,34 @@
                 <!-- 横向 -->
                 <div style="margin-top:3%;">
                     <el-descriptions class="margin-top" title="" :column="2" border style="margin-top:3%;">
-                        <el-descriptions-item :contentStyle="{'text-align': 'right'}"
-                            :labelStyle="{ 'text-align': 'center'}">
-                            <template :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
-                                slot="label">本页数量小记</template>{{totalCount}}
+                        <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
+                            :labelStyle="{ 'text-align': 'center' }">
+                            <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
+                                slot="label">本页数量小记</template>{{ totalCount }}
                         </el-descriptions-item>
-                        <el-descriptions-item :contentStyle="{'text-align': 'right'}"
-                            :labelStyle="{ 'text-align': 'center'}">
-                            <template :contentStyle="{'text-align': 'right'}" :labelStyle="{ 'text-align': 'center'}"
+                        <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
+                            :labelStyle="{ 'text-align': 'center' }">
+                            <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
                                 slot="label">本页金额小记</template>{{ parseFloat(totalPrice).toFixed(2) }}
                         </el-descriptions-item>
                     </el-descriptions>
                 </div>
                 <!-- 横向 -->
                 <el-descriptions class="margin-top" title="" :column="2" border>
-                    <el-descriptions-item :contentStyle="{ 'text-align': 'right'}"
-                        :labelStyle="{ 'text-align': 'center'}">
-                        <template slot="label">合计数量</template>{{totalCount}}
+                    <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
+                        :labelStyle="{ 'text-align': 'center' }">
+                        <template slot="label">合计数量</template>{{ totalCount }}
                     </el-descriptions-item>
-                    <el-descriptions-item :contentStyle="{'text-align': 'right'}"
-                        :labelStyle="{ 'text-align': 'center'}">
+                    <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
+                        :labelStyle="{ 'text-align': 'center' }">
                         <template slot="label">合计金额</template>{{ parseFloat(totalPrice).toFixed(2) }}
                     </el-descriptions-item>
                 </el-descriptions>
 
                 <!-- 横向 -->
                 <el-descriptions class="margin-top" title="" border>
-                    <el-descriptions-item label-class-name="my-label" :contentStyle="{'text-align': 'left'}"
-                        :labelStyle="{ 'text-align': 'center'}">
+                    <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
+                        :labelStyle="{ 'text-align': 'center' }">
                         <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
                     </el-descriptions-item>
                 </el-descriptions>
@@ -86,10 +86,11 @@
                     <span class="saomiaojluuu">审核:</span>
                     <span class="saomiaojluuuu">财务:</span>
                 </div>
-                <div class="saomiaojlu">扫描记录</div>
+                <div class="saomiaojlu" style="margin-top:20px">扫描记录</div>
                 <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border
-                    :data="userLists" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
-                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange" class="saomiao">
+                    :data="userLists" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
+                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange"
+                    class="saomiao">
                     <el-table-column type="index" width="50" label="序号" style="width:100px" class="indexss">
                     </el-table-column>
                     <el-table-column prop="pinpai" key="pinpai" label="品牌">
@@ -98,7 +99,7 @@
                     </el-table-column>
                     <el-table-column prop="cbpb12" key="cbpb12" align="" label="型号">
                     </el-table-column>
-                    <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述" >
+                    <el-table-column id="miaos" prop="cbpb08" key="cbpb08" align="" label="描述">
                     </el-table-column>
                     <el-table-column prop="sn" key="sn" align="" label="SN">
                     </el-table-column>
@@ -111,13 +112,13 @@
         </section>
         <div style="height:20px;"></div>
         <div v-if="status == 8">
-            <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+            <el-button style="margin-left:1%;" type="primary" @click="PrintRow">打 印</el-button>
             <el-button @click="handlefanhui">返回</el-button>
         </div>
         <div v-else>
-            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
+            <el-button v-if="status == 0" style="margin-left:1%;" type="primary" @click="PurchaseinboundShenpi">审 核
             </el-button>
-            <el-button v-else style="margin-left:5%;" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button v-else style="margin-left:1%;" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
             <el-button @click="handlefanhui">返回</el-button>
         </div>
         <div style="height:20px;"></div>
@@ -299,18 +300,22 @@ export default {
 
 </style>
 <style lang="scss" scoped>
-::v-deep .el-table__header,::v-deep .el-table__body{
+::v-deep .el-table__header,
+::v-deep .el-table__body {
     width: 100% !important;
 }
+
 ::v-deep .el-table--border .el-table__cell:first-child .cell {
     padding-left: 0;
     text-align: center;
     padding-right: 0;
 }
-.saomiao{
+
+.saomiao {
     min-height: 91px;
 }
-::v-deep .el-table__empty-block{
+
+::v-deep .el-table__empty-block {
     width: 100% !important;
     height: auto !important;
 }
@@ -373,9 +378,10 @@ export default {
     }
 
     /** 序号内容  */
-    #printRecord .saomiao .el-table__body .el-table__row td:first-child{
+    #printRecord .saomiao .el-table__body .el-table__row td:first-child {
         width: 80 !important;
     }
+
     /**  表头数量  */
     /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
       

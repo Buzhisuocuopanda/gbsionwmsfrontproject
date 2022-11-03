@@ -50,7 +50,7 @@
       </el-descriptions>
       <div v-if="edit == 0 || edit == 3">
 
-        <el-table :data="userLists" height="250" border :default-sort="{ prop: 'name', order: 'descending' }"
+        <el-table :data="userLists" border :default-sort="{ prop: 'name', order: 'descending' }"
           @selection-change="handleSelectionChange">
           <el-table-column prop="supplierId" key="supplierId" label="供应商">
           </el-table-column>
@@ -91,7 +91,7 @@
           <el-table-column prop="remark" key="remark" label="备注">
           </el-table-column>
         </el-table>
-        <div class="saomiaojlu">出库建议表</div>
+        <div class="saomiaojlu" style="margin-top:3%">出库建议表</div>
         <el-descriptions class="margin-top" style="width: 100%; margin-top: 1%" title="" :column="3" border>
           <el-descriptions-item label-class-name="my-labell012">
             <template slot="label">客户</template>{{ userList.customerName }}
@@ -121,7 +121,7 @@
           </el-table-column>
         </el-table>
 
-        <div class="saomiaojlu">扫描记录</div>
+        <div class="saomiaojlu" style="margin-top:3%">扫描记录</div>
         <el-table style="margin-top: 1%; width: 100%;" border :data="userList1"
           :default-sort="{ prop: 'name', order: 'descending' }" :span-method="arraySpanMethod">
           <el-table-column type="index" :index="table_index" label="序号" width="50" align="center"></el-table-column>
@@ -187,11 +187,11 @@
           :span-method="arraySpanMethods">
           <el-table-column prop="sn" key="sn" align="" label="SN">
             <template slot-scope="scope" style="width: 200%">
-              <!--@change="updsteSn(scope.row,value)"-->
-              <el-select :remote-method="getSnList" :disabled="scope.row.scanStatus == '已扫码'"
-                v-el-select-loadmore="getLoadmoreSnList" v-model="scope.row.sn" style="width: 100%" filterable remote
+              <!-- @change="getSnList(scope.row,value)" :remote-method="getSnList(query,scope.row)" --><!--v-el-select-loadmore="getLoadmoreSnList"-->
+              <el-select  :remote-method="(query) => getSnList(query, scope.row)" :disabled="scope.row.scanStatus == '已扫码'"
+                 v-model="scope.row.sn" style="width: 100%" filterable remote
                 reserve-keyword placeholder="请输入关键词">
-                <el-option @click.native="updsteSn(scope.row, item)" v-for="item, index in snList" :key="index"
+                <el-option @click.native="updsteSn(scope.row, item)" v-for="item, index in scope.row.snList" :key="index"
                   :label="item.goodsMsg" :value="item.sn"></el-option>
               </el-select>
               <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
@@ -315,10 +315,10 @@ export default {
       // sn查询参数
       snQueryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 500,
         page: 1,
         size: 10,
-
+        goodsId:undefined,
         sn: undefined,
         cbpb08: undefined,
       },
@@ -408,16 +408,18 @@ export default {
       console.log(row.goodsId, 10142);
     },
     // 输入框内容改变时触发
-    getSnList(value) {
-      // console.log(value, "value--------value")
+    getSnList(query,row) {
       this.snQueryParams.pageNum = 1;
-      this.snQueryParams.sn = value
-      this.snQueryParams.cbpb08 = value
-
+      this.snQueryParams.sn = query
+      this.snQueryParams.cbpb08 = query
+      this.snQueryParams.goodsId = row.goodsId
+      console.log(this.snQueryParams,11111)
       selectGoodsSnByStatus(this.snQueryParams).then(response => {
         if (response.code == 200) {
           this.snQueryParams.pageNum += 1;
-          this.snList = response.data;
+          // this.snList = response.data;
+          row.snList = response.data;
+          console.log(row.snList,2222)
         } else {
           // this.snList = [];
         }
@@ -654,6 +656,7 @@ export default {
           console.log(this.userListsss, "this.userListsss---------this.userListsss")
           if (this.edit == 1) {
             this.userList2 = res.data.sugests.map(item => {
+              this.getSnList(null,item);
               item.sn2 = item.sn
               /*+ ' - ' + item.goodClass+ ' - '*/
               item.sn = item.sn + ' - ' + item.cbla09 + ' - ' + item.brand + ' - ' + item.model + ' - ' + item.description
@@ -700,7 +703,7 @@ export default {
   mounted() {
     console.log(111, "zgl")
     this.getParams();
-    this.getSnList();
+    // this.getSnList();
   },
   computed: {
     totalnumber: function () {

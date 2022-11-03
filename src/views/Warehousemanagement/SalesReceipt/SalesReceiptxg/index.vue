@@ -23,20 +23,20 @@
       </el-row>
       <el-row :gutter="20">
         <el-col style="" :span="6">
-          <el-form-item label="客户名称:" prop="cbpc0999">
+          <el-form-item label="客户名称:" prop="customerName">
             <el-popover placement="bottom-start" trigger="click">
               <CustomerMainten ref="CustomerMainten" @selected="selected022"
                 style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc0999" placeholder="" readonly style="width:110%;">
+              <el-input slot="reference" v-model="form2.customerName" placeholder="" readonly style="width:110%;">
               </el-input>
             </el-popover>
           </el-form-item>
         </el-col>
         <el-col style="margin-left:-2%;" :span="6">
-          <el-form-item label="供料单位:" prop="cbpc099">
+          <el-form-item label="供料单位:" prop="supplierName">
             <el-popover placement="bottom-start" trigger="click">
               <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:210px!important;" />
-              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:100%;">
+              <el-input slot="reference" v-model="form2.supplierName" placeholder="" readonly style="width:100%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -58,7 +58,7 @@
           <el-form-item label="销售人员:" prop="salerId">
             <el-popover placement="bottom-start" trigger="click" clearable>
               <salerman ref="salerman" @selected="selected011699" style="width:220px!important;" />
-              <el-input slot="reference" v-model="form2.cbsb177" placeholder="" readonly style="width:85%;">
+              <el-input slot="reference" v-model="form2.salerName" placeholder="" readonly style="width:85%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -130,7 +130,7 @@
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:850px!important;" />
-                <el-input slot="reference" v-model="scope.row.cala08" placeholder="" readonly style="width:100%;">
+                <el-input slot="reference" v-model="scope.row.pinpai" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
             </template>
@@ -566,9 +566,9 @@ export default {
 
 
       rules: {
-        cbpc0999: [{
+        customerName: [{
           required: true,
-          message: "供料单位不能为空!",
+          message: "客户不能为空!",
           trigger: 'change'
         }],
         factory: [{
@@ -645,15 +645,18 @@ export default {
 
       let row = {}
       // //客户id
-      // row.customer = this.form2.customerId;
+      row.customerId = this.form2.customerId;
       // //供应商id
-      // row.supplierId = this.form2.supplierId;
+      row.supplierId = this.form2.supplierId;
       // //仓库id 
       // row.whId = this.form2.whId;
       // //销售人员id
-      // row.salerId = this.form2.salerId;
+      row.salerId = this.form2.salerId;
       // //订单日期
       // row.orderDate = this.form2.orderDate;
+      // 预订单主表id
+      row.gsid = this.form2.gsid
+      row.id = this.form2.id
       //商品id
       // 明细表内容
       let arr1 = []
@@ -667,21 +670,21 @@ export default {
           "ponumber": item.ponumber,
         })
       })
+
       // 主表内容
       this.tableData.forEach((item) => {
-        row.goodsId = item.goodsId;
         //商品型号
         // row.goodsclassify = item.goodsclassify;
         //销售预订单入库单
         row.gsSalesOrders = item.gsSalesOrders;
         // id
-        row.id = item.id;
         // 入库数量
         // row.inQty = item.inQty
         // pomber
         // row.ponumber = item.ponumber
         row.goods = arr1
       })
+      console.log(row)
       PurchaseinboundxiaoshouEdit(JSON.stringify(row)).then(response => {
         if (response.code == "200") {
           // console.log(this.form, 789)
@@ -702,47 +705,23 @@ export default {
         // 获取表详细信息
         PurchaseinboundSalesReceipt(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
           if (res.code == "200") {
-            this.userList = res.data.rows;
+            this.form2 = res.data;
             this.total = res.data.total;
-            console.log(res, "20221009");
-            //销售预订单主表名称
-            this.form2.GsSalesOrders = this.userList[0].orderNo;
-            //销售预订单主表名称id
-            this.form2.gsSalesOrders = this.userList[0].gsSalesOrders;
-            //日期
-            this.form2.orderDate = this.userList[0].orderDate;
-            //客户名称
-            this.form2.cbpc0999 = this.userList[0].cbca08;
-            //客户名称id
-            this.form2.customerId = this.userList[0].cbca01;
-            //供应商名称
-            this.form2.cbpc099 = this.userList[0].cbsa08;
-            //供应商id
-            this.form2.supplierId = this.userList[0].cbsa01;
-            //仓库名称
-            this.form2.cbpc100 = this.userList[0].cbwa09;
-            //仓库名称ID
-            this.form2.whId = this.userList[0].cbwa01;
-            //销售人员名称
-            this.form2.cbsb177 = this.userList[0].caua09;
-            //销售人员ID
-            this.form2.salerId = this.userList[0].caua01;
-
             //品牌、型号、描述
             // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
-            this.tableData = res.data.rows
+            this.tableData = res.data.goods
             this.tableData.map((item,i) => {
               //  this.form2.goodsId = item.goodsId;
-              item.cala08 = this.userList[i].cala08 + "~" + this.userList[i].cbpb12 + "~" + this.userList[i].cbpb08;
-              //入库数量
-              item.inQty = this.userList[i].inQty;
-              //ponumber
-              item.ponumber = this.userList[i].ponumber;
-              //商品id
-              item.goodsId = this.userList[i].goodsId;
-              //销售预订单入库单
-              item.gsSalesOrders = this.userList[i].gsSalesOrders;
-              item.id = this.userList[i].id;
+              item.pinpai = item.pinpai + "~" + item.brand + "~" + item.goodsName;
+              // //入库数量
+              // item.inQty = this.userList[i].inQty;
+              // //ponumber
+              // item.ponumber = this.userList[i].ponumber;
+              // //商品id
+              // item.goodsId = this.userList[i].goodsId;
+              // //销售预订单入库单
+              // item.gsSalesOrders = this.userList[i].gsSalesOrders;
+              // item.id = this.userList[i].id;
             })
 
           } 
@@ -964,7 +943,7 @@ export default {
     selected02(name) {
       console.log(name, 123)
       console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+      this.form2.supplierName = name.substring(0, name.indexOf("-"));
       this.form2.supplierId = name.substring(name.indexOf("-") + 1);
       // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
       // this.form2.icon = name;
@@ -974,9 +953,9 @@ export default {
     selected022(name) {
       console.log(name, 123)
       console.log(name.substring(name.indexOf("-") + 1), 963);
-      this.form2.cbpc0999 = name.substring(0, name.indexOf("-"));
+      this.form2.customerName = name.substring(0, name.indexOf("-"));
       this.form2.customerId = name.substring(name.indexOf("-") + 1);
-      this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+      // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
       // this.form2.icon = name;
     },
 
@@ -984,7 +963,7 @@ export default {
     selected011699(name) {
       console.log(name, 123)
       console.log(name.substring(name.indexOf("~") + 1), 963);
-      this.form2.cbsb177 = name.substring(0, name.indexOf("~"))
+      this.form2.salerName = name.substring(0, name.indexOf("~"))
       this.form2.salerId = name.substring(name.indexOf("~") + 1)
       // this.form2.icon = name;
     },
@@ -993,7 +972,7 @@ export default {
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
-      this.$set(row, "cala08", e.substring(0, e.indexOf(".")))
+      this.$set(row, "pinpai", e.substring(0, e.indexOf(".")))
       console.log(e, 111)
       console.log(row, 222)
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)

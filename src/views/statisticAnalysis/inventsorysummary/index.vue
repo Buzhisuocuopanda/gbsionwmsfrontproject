@@ -29,9 +29,9 @@
           <el-button v-hasPermi="['countQuery:inventsorysummaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
 
         </el-form-item>
-      </el-form>
+      </el-form><!--highlight-current-row-->
       <el-table  :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="465" v-loading="loading"
-                border fit highlight-current-row stripe style="margin-top:1em">
+                border fit  stripe style="margin-top:1em">
         <el-table-column fixed align="left" label="序号" type="index" width="50"></el-table-column>
         <el-table-column fixed label="大类" align="left" prop="totalclassify"  min-width="60px;"/>
         <el-table-column fixed label="分类名称" align="left" prop="cbpa07" min-width="100px;"/>

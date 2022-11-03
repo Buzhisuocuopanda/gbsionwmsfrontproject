@@ -28,14 +28,14 @@
 
         <!-- <el-form-item style="margin: -10px -10px 1px 1px;"> -->
         <el-form-item>
-          <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
-          <el-button v-hasPermi="['query:fnSynthesis:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-          <el-button v-hasPermi="['query:fnSynthesis:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+          <el-button v-hasPermi="['query:fnSynthesisParts:list']" class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="handleQuery">搜索</el-button>
+          <el-button v-hasPermi="['query:fnSynthesisParts:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+          <el-button v-hasPermi="['query:fnSynthesisParts:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
         </el-form-item>
       </el-form>
       <el-table  :header-cell-style="headClasspwfnsyns" :data="inwuquList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="430" v-loading="loading"
                  border fit highlight-current-row stripe >
-        <el-table-column fixed label="入库时间" align="left" :formatter="formatDate" header-align="center" prop="inWhTime" min-width="100px;" />
+        <el-table-column v-if="false" fixed label="入库时间" align="left" :formatter="formatDate" header-align="center" prop="inWhTime" min-width="100px;" />
         <el-table-column fixed label="出库时间" align="left" prop="outWhTimeMsg"  min-width="100px;"/>
         <el-table-column fixed label="订单号" align="left" prop="orderNo" min-width="180px;"/>
 <!--        <el-table-column  label="生产总订单号" align="left" prop="totalOrderNo" min-width="180px;"/>-->
@@ -297,9 +297,9 @@ export default {
     },
     //导出
     exprotData(){
-      this.download('/query/fnSynthesisExcelList', {
+      this.download('/query/fnSynthesisPartsExcel', {
         ...this.queryParams
-      }, `财务综合报表查询数据_${new Date().getTime()}.xlsx`)
+      }, `配件财务综合报表查询数据_${new Date().getTime()}.xlsx`)
     },
     onSearch() {
       if(this.dateRange==null){

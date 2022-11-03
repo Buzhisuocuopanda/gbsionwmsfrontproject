@@ -23,7 +23,8 @@
                 <el-col style="" :span="7">
                     <el-form-item label="日期:" prop="cbsh08">
                         <el-col :span="11">
-                            <el-date-picker type="date" placeholder="" v-model="form2.cbsh08" style="width: 110%;" value-format="yyyy-MM-dd HH:mm:ss">
+                            <el-date-picker type="date" placeholder="" v-model="form2.cbsh08" style="width: 110%;"
+                                value-format="yyyy-MM-dd HH:mm:ss">
                             </el-date-picker>
                         </el-col>
                     </el-form-item>
@@ -87,53 +88,49 @@
                         </el-form-item>
                     </el-col> -->
             <!-- </el-row> -->
-            <el-table :data="tableData" border :row-style="{ height: '10px' }"
-            :cell-style="{ padding: '5px' }" style="width: 99%; margin-top: 10px; margin-left: 0.5%">
-                <el-table-column
-                    type="index"
-                    width="50"
-                    label="编号">
+            <el-table :data="tableData" border :row-style="{ height: '10px' }" :cell-style="{ padding: '5px' }"
+                style="width: 99%; margin-top: 10px; margin-left: 0.5%">
+                <el-table-column type="index" width="50" label="编号">
                 </el-table-column>
                 <el-table-column prop="cala08" label="品牌">
                     <template slot-scope="scope">
-                    <el-input readonly v-model="scope.row.cala08" placeholder=""
-                        class="shuzicaoyou" style=""></el-input>
+                        <el-input readonly v-model="scope.row.cala08" placeholder="" class="shuzicaoyou" style="">
+                        </el-input>
                     </template>
                 </el-table-column>
                 <el-table-column prop="cbpb15" label="UPC">
                     <template slot-scope="scope">
-                    <el-input readonly v-model="scope.row.cbpb15" v-only-number="{ precision: 0.0 }" placeholder=""
-                        class="shuzicaoyou" style=""></el-input>
+                        <el-input readonly v-model="scope.row.cbpb15" v-only-number="{ precision: 0.0 }" placeholder=""
+                            class="shuzicaoyou" style=""></el-input>
                     </template>
                 </el-table-column>
                 <el-table-column prop="cbpb12" label="型号">
                     <template slot-scope="scope">
-                    <el-input readonly v-model="scope.row.cbpb12" v-only-number="{ precision: 0.0 }" placeholder=""
-                        class="shuzicaoyou" style=""></el-input>
+                        <el-input readonly v-model="scope.row.cbpb12" v-only-number="{ precision: 0.0 }" placeholder=""
+                            class="shuzicaoyou" style=""></el-input>
                     </template>
                 </el-table-column>
                 <el-table-column prop="cbpb08" label="描述">
                     <template slot-scope="scope">
-                        <el-input readonly v-model="scope.row.cbpb08" placeholder=""
-                        class="shuzicaoyou" style=""></el-input>
+                        <el-input readonly v-model="scope.row.cbpb08" placeholder="" class="shuzicaoyou" style="">
+                        </el-input>
                     </template>
                 </el-table-column>
                 <el-table-column prop="sn" label="商品SN">
                     <template slot-scope="scope">
-                    <el-input readonly v-model="scope.row.sn"  placeholder=""
-                        class="shuzicaoyou" style=""></el-input>
+                        <el-input readonly v-model="scope.row.sn" placeholder="" class="shuzicaoyou" style="">
+                        </el-input>
                     </template>
                 </el-table-column>
                 <el-table-column prop="statuss" label="状态">
                     <template slot-scope="scope">
-                    <el-input readonly v-model="scope.row.statuss" placeholder=""
-                        class="shuzicaoyou" style=""></el-input>
+                        <el-input readonly v-model="scope.row.statuss" placeholder="" class="shuzicaoyou" style="">
+                        </el-input>
                     </template>
                 </el-table-column>
                 <el-table-column prop="cbpc14" label="备注">
                     <template slot-scope="scope">
-                    <el-input v-model="scope.row.cbpc14" placeholder=""
-                        class="shuzicaoyou" style=""></el-input>
+                        <el-input v-model="scope.row.cbpc14" placeholder="" class="shuzicaoyou" style=""></el-input>
                     </template>
                 </el-table-column>
                 <!-- <el-table-column label="操作" align="center" width="80">
@@ -237,15 +234,14 @@
             </div>
         </el-form>
         <div>
-            <div style="height:80px;"></div>
-            <el-button type="primary" class="buttonbaocuens" @click="handleAdd">保存</el-button>
+            <el-button type="primary" @click="handleAdd" style="margin-left:1%;margin-top:3%">保存</el-button>
             <el-button @click="handleChuangJiangone" style="margin-left:1%">取 消</el-button>
         </div>
     </div>
 </template>
 
 <script>
-import { SwJsStoreadd,swJsStoreaddss } from "@/api/Warehousemanagement/PurchaseWarehousing";
+import { SwJsStoreadd, swJsStoreaddss } from "@/api/Warehousemanagement/PurchaseWarehousing";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -488,7 +484,7 @@ export default {
                     { required: true, message: "编号不能为空!", trigger: "blur" }
                 ]
             },
-            tableData:[],
+            tableData: [],
 
 
         };
@@ -532,32 +528,32 @@ export default {
             this.form2.cbsh10 = name.substring(name.indexOf("-") + 1)
             // this.form2.icon = name;
             this.onSearch(this.form2.cbpc100)
-            
+
         },
         onSearch(whName) {
             this.loading = true;
             let obj = {
                 // pageNum:1,
-                pageSize:999999,
-                cbwa09s:[whName],
+                pageSize: 999999,
+                cbwa09s: [whName],
             }
             Inventorysummaryquerys(obj).then(response => {
                 this.loading = false;
                 console.log(response)
                 if (response.data != null && response.data.rows != null) {
                     this.tableData = response.data.rows
-                    this.tableData.map((item) =>{
-                        if(item.status == 1){
+                    this.tableData.map((item) => {
+                        if (item.status == 1) {
                             item.statuss = '已入库'
-                        }else if(item.status == 2){
+                        } else if (item.status == 2) {
                             item.statuss = '出库中'
-                        }else{
+                        } else {
                             item.statuss = '已出库'
                         }
                     })
                     // this.total = response.data.total
                 }
-            },error => {
+            }, error => {
                 this.loading = false;
             })
         },
@@ -651,7 +647,7 @@ export default {
                 if (item) {
                     SwJsStoreadd(this.form2).then(response => {
                         // console.log(response.posts, 12345678);
-                        if(response.code == 200){
+                        if (response.code == 200) {
                             // this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
                             // this.getTreeselect();
                             // this.submitShangpin();
@@ -665,9 +661,9 @@ export default {
             })
 
         },
-        handleAdds(zhuid){
+        handleAdds(zhuid) {
             let arr = []
-            for(let i = 0;i<this.tableData.length;i++){
+            for (let i = 0; i < this.tableData.length; i++) {
                 arr.push({
                     "cbsh01": zhuid,
                     // "cbsj01": 0,
@@ -678,14 +674,14 @@ export default {
                     "cbsj12": this.tableData[i].cbpc14,
                 })
             }
-            swJsStoreaddss(arr).then((res) =>{
-                if(res.code == 200){
+            swJsStoreaddss(arr).then((res) => {
+                if (res.code == 200) {
                     this.$message({ message: '恭喜你，添加成功', type: 'success', style: 'color:red;!important' });
                     this.$tab.closePage();
                     this.$router.go(-1);
                     this.submitShangpin();
                     this.open2 = false;
-                    this.reset01(); 
+                    this.reset01();
                 }
             })
         },

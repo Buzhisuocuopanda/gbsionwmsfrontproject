@@ -1,14 +1,14 @@
 <template>
     <div>
-      <section ref="print" class="recordImg" id="printRecord">
-        <div class="Purchase_caigou">仓库盘点表</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.cbsh07 }}</span>
-            <span class="Purchase_riqii">日期：{{ value.cbsj03.slice(0, 10) }}</span>
-        </div>
-        <div style="width:90%; margin-left: 5%; margin-top: 1%;">
-            <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList.slice(0, 1)"
+        <section ref="print" class="recordImg" id="printRecord">
+            <div class="Purchase_caigou">仓库盘点表</div>
+            <div class="Purchase_sum" v-for="(value, key) in userList.slice(0, 1)" :key="key">
+                <span class="Purchase_bianhao">编号：{{ value.cbsh07 }}</span>
+                <span class="Purchase_riqii">日期：{{ value.cbsj03.slice(0, 10) }}</span>
+            </div>
+            <div style="width:90%; margin-left: 5%; margin-top: 1%;">
+                <!-- 横向 -->
+                <!-- <el-descriptions class="margin-top" title="" :column="4" border v-for="(value, key) in userList.slice(0, 1)"
                 :key="key">
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">客户</template>{{
@@ -27,47 +27,46 @@
             </el-descriptions> -->
 
 
-            <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
+                <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table v-loading="loading" :data="userList"
-            :header-cell-style="headClass"
-            :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
-                :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                <el-table v-loading="loading" :data="userList" :header-cell-style="headClass"
+                    :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
+                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                <el-table-column prop="cala08" key="cala08" label="品牌" width="100">
-                </el-table-column>
-                <el-table-column prop="cbpb15" key="cbpb15" label="UPC" width="120">
-                </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="110">
-                </el-table-column>
-                <el-table-column prop="cbpb08" width="auto" key="cbpb08" label="描述">
-                </el-table-column>
-                <el-table-column prop="cbsj09" key="cbsj09" label="商品SN" width="110">
-                </el-table-column>
-                <el-table-column prop="cbla09" key="cbla09" label="库位" width="110">
-                </el-table-column>
-                <el-table-column prop="cbsj11" key="cbsj12" label="状态">
-                    <template scope="scope">
-                        <div>
-                            {{
-                            scope.row.cbsj11 == 0
-                            ? "已入库"
-                            : scope.row.cbsj11 == 1
-                            ? ""
-                            : ""
-                            }}
-                        </div>
-                    </template>
-                </el-table-column>
-                 <el-table-column prop="cbwa09" key="cbwa09" label="仓库名称" width="75">
-                </el-table-column>
-                <el-table-column prop="cbph10" key="cbph10" label="备注">
-                </el-table-column>
-            </el-table>
-            <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2,5,10,15,20]"
-                class="pagintotal" />
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
+                    <el-table-column prop="cala08" key="cala08" label="品牌" width="100">
+                    </el-table-column>
+                    <el-table-column prop="cbpb15" key="cbpb15" label="UPC" width="120">
+                    </el-table-column>
+                    <el-table-column prop="cbpb12" key="cbpb12" label="型号" width="110">
+                    </el-table-column>
+                    <el-table-column prop="cbpb08" width="auto" key="cbpb08" label="描述">
+                    </el-table-column>
+                    <el-table-column prop="cbsj09" key="cbsj09" label="商品SN" width="110">
+                    </el-table-column>
+                    <el-table-column prop="cbla09" key="cbla09" label="库位" width="110">
+                    </el-table-column>
+                    <el-table-column prop="cbsj11" key="cbsj12" label="状态">
+                        <template scope="scope">
+                            <div>
+                                {{
+                                        scope.row.cbsj11 == 0
+                                            ? "已入库"
+                                            : scope.row.cbsj11 == 1
+                                                ? ""
+                                                : ""
+                                }}
+                            </div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="cbwa09" key="cbwa09" label="仓库名称" width="75">
+                    </el-table-column>
+                    <el-table-column prop="cbph10" key="cbph10" label="备注">
+                    </el-table-column>
+                </el-table>
+                <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
+                    :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
+                    class="pagintotal" />
+                <!-- <el-descriptions title="" direction="vertical" :column="8.5" border>
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="品牌">
                 </el-descriptions-item>
@@ -90,8 +89,8 @@
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="备注"></el-descriptions-item>
             </el-descriptions> -->
-            <!--100 -->
-            <!-- <el-descriptions title="" direction="vertical" :column="8.5" border v-for="(value, key) in userList"
+                <!--100 -->
+                <!-- <el-descriptions title="" direction="vertical" :column="8.5" border v-for="(value, key) in userList"
                 :key="key">
                 <el-descriptions-item :labelStyle="{ 'text-align': 'center'}" :contentStyle="{ 'text-align': 'center'}"
                     label="">{{ value.cbpc07 }}
@@ -116,8 +115,8 @@
                     label="">苏州市</el-descriptions-item>
             </el-descriptions> -->
 
-            <!-- 横向 -->
-            <!-- <div style="margin-top:3%;">
+                <!-- 横向 -->
+                <!-- <div style="margin-top:3%;">
                 <el-descriptions class="margin-top" title="" :column="2" border style="margin-top:3%;">
                     <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                         :labelStyle="{ 'text-align': 'center' }">
@@ -131,8 +130,8 @@
                     </el-descriptions-item>
                 </el-descriptions>
             </div> -->
-            <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" :column="2" border>
+                <!-- 横向 -->
+                <!-- <el-descriptions class="margin-top" title="" :column="2" border>
                 <el-descriptions-item :contentStyle="{ 'text-align': 'right' }"
                     :labelStyle="{ 'text-align': 'center' }">
                     <template slot="label">合计数量</template>{{ totalCount }}
@@ -143,18 +142,18 @@
                 </el-descriptions-item>
             </el-descriptions> -->
 
-            <!-- 横向 -->
-            <!-- <el-descriptions class="margin-top" title="" border>
+                <!-- 横向 -->
+                <!-- <el-descriptions class="margin-top" title="" border>
                 <el-descriptions-item label-class-name="my-label" :contentStyle="{ 'text-align': 'left' }"
                     :labelStyle="{ 'text-align': 'center' }">
                     <template slot="label">大写</template>人民币:{{ smallToBig(totalPrice) }}
                 </el-descriptions-item>
             </el-descriptions> -->
-        </div>
-      </section>
+            </div>
+        </section>
 
-      <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
-      <el-button style="margin-left:5%;" type="primary" @click="cangkupandian" >返 回</el-button>
+        <el-button style="margin-left:5%; margin-top:3%;" type="primary" @click="PrintRow">打 印</el-button>
+        <el-button style="margin-left:2%; margin-top:3%;" type="primary" @click="cangkupandian">返 回</el-button>
     </div>
 
 </template>
@@ -200,15 +199,15 @@ export default {
             this.$router.push("/system/user-cangkupandian/role/");
         },
 
-         //打印
-        PrintRow(index, row){
-            this.$print(this.$refs.print) 
+        //打印
+        PrintRow(index, row) {
+            this.$print(this.$refs.print)
         },
-         //列表表头设置
+        //列表表头设置
         headClass() {
             return {
                 'text-align': 'center',
-                 height: '30px',
+                height: '30px',
                 padding: '0'
             }
         },
@@ -231,7 +230,7 @@ export default {
         getList() {
             this.loading = true;
             const cbsh01 = this.$route.params && this.$route.params.cbpg01;
-            this.queryParams.cbsh01 =this.$route.params && this.$route.params.cbpg01;
+            this.queryParams.cbsh01 = this.$route.params && this.$route.params.cbpg01;
             console.log(45648789)
             if (cbsh01) {
                 // 获取表详细信息
@@ -284,38 +283,41 @@ export default {
 };
 </script>
 <style src="./WarehouseInventoryxqcss/index.css">
+
 </style>
 <style>
-  
 @page {
-  size: auto;
-  margin: 3mm;
+    size: auto;
+    margin: 3mm;
 }
+
 @media print {
-  html {
-    background-color: #ffffff;
-    height: auto;
-    margin: 0px;
-  }
-  body {
-    border: solid 1px #ffffff;
-    /* margin: 10mm 15mm 10mm 15mm; */
-  }
-  #printRecord table {
-    table-layout: auto !important;
-  }
+    html {
+        background-color: #ffffff;
+        height: auto;
+        margin: 0px;
+    }
 
-  #printRecord .el-table__header-wrapper .el-table__header {
-    width: 100% !important;
-    border: solid 1px #f2f2f2;
-  }
-  #printRecord .el-table__body-wrapper .el-table__body {
-    width: 100% !important;
-  }
-  #printRecord #pagetable table {
-    table-layout: fixed !important;
-  }
+    body {
+        border: solid 1px #ffffff;
+        /* margin: 10mm 15mm 10mm 15mm; */
+    }
+
+    #printRecord table {
+        table-layout: auto !important;
+    }
+
+    #printRecord .el-table__header-wrapper .el-table__header {
+        width: 100% !important;
+        border: solid 1px #f2f2f2;
+    }
+
+    #printRecord .el-table__body-wrapper .el-table__body {
+        width: 100% !important;
+    }
+
+    #printRecord #pagetable table {
+        table-layout: fixed !important;
+    }
 }
-
-	
 </style>

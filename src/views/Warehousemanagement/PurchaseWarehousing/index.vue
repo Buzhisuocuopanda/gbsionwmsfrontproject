@@ -1,12 +1,12 @@
 <template>
     <!--采购入库-->
     <div class="app-container">
-        <el-row :gutter="20" style="margin-left:-10%;">
+        <el-row :gutter="20" style="margin:0;width: 100%;">
             <!--用户数据-->
-            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
+            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;display: flex;flex-direction: column;height: calc(93vh - 85px);padding:0;margin:0">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
+                    label-width="68px" style="flex-grow: 0;height: auto;">
                     <el-form-item prop="cbpc07" label="编号">
                         <el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 180px;" @keyup.enter.native="handleQuery" />
@@ -34,7 +34,7 @@
                         <el-button v-hasPermi="['system:purchaseinbound:list']" class="biaoto-buttonchuangjian"
                             size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:54.5%;">
+                    <el-form-item style="margin-left:0;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -67,9 +67,9 @@
 
 
                 <el-table border :header-cell-style="headClasspw" :row-style="{ height: '3px' }"
-                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="430"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="500"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
+                    style="width:100%;height: 8%;flex-grow: 1;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="cbpc07" :show-overflow-tooltip="true" prop="cbpc07"
                         sortable />
@@ -131,7 +131,7 @@
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
-                    class="pagintotal" />
+                    class="pagintotal"/>
             </el-col>
         </el-row>
 
@@ -1356,4 +1356,16 @@ export default {
 </script>
 <style src="./PurchaseWarehousingcss/index.css" scoped>
 
+</style>
+<style lang="scss" scoped>
+::v-deep .pagination-container .el-pagination {
+    position: inherit;
+}
+.pagintotal{
+    flex-grow: 0;
+    text-align: right;
+    height:auto;
+    padding:20px 0 0 !important;
+    margin:0;
+}
 </style>

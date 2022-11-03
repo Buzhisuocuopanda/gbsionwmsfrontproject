@@ -34,13 +34,13 @@
             </el-option>
           </el-select>
         </el-descriptions-item>
-        <el-descriptions-item label-class-name="my-labell01">
+        <!-- <el-descriptions-item label-class-name="my-labell01">
           <template slot="label">关联订单</template>
           <el-select v-model="form2.cbse18" placeholder="" style="width: 77%">
             <el-option v-for="item in guanliandindan" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
-        </el-descriptions-item>
+        </el-descriptions-item> -->
       </el-descriptions>
       <!--  -->
       <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
@@ -152,7 +152,7 @@
           <!-- </el-form> -->
         </el-table>
       </div>
-      <div class="tinajia_dingwei">
+      <div class="tinajia_dingwei" style="left:1%;margin-top:2%">
         <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
         <el-button type="primary" @click="handleUpdate">确 定</el-button>
         <el-button @click="cancells">取 消</el-button>
@@ -967,9 +967,9 @@ export default {
         // 编号
         row.cbpg07 = this.form.cbpc07;
         // 客户id
-        row.cbse09 = this.form2.cbse09;
+        row.cbse09 = this.form2.cbca01;
         // 仓库
-        row.cbse10 = this.form2.cbse10;
+        row.cbse10 = this.form2.cbwa01;
         // 日期
         row.cbse08 = this.form2.cbsc08;
         if (this.form2.cbse166 == 'USD') {

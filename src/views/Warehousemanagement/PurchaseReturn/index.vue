@@ -1,12 +1,12 @@
 <template>
     <!--采购退库单-->
     <div class="app-container">
-        <el-row :gutter="20" style="margin-left:-10%;">
+        <el-row :gutter="20" style="margin:0;width: 100%;">
             <!--用户数据-->
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px" style="margin-left:-10px;">
+                    label-width="68px" style="flex-grow: 0;height: auto;">
                     <el-form-item prop="cbpg07" label="编号">
                         <el-input v-model="queryParams.cbpg07" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 180px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />
@@ -33,7 +33,7 @@
                         <el-button v-hasPermi="['system:purchasereturnorders:list']" class="biaoto-buttonchuangjian"
                             size="mini" @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:59%;">
+                    <el-form-item style="margin-left:0;">
 
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
@@ -76,7 +76,7 @@
                 <el-table border :header-cell-style="headClasspr" :row-style="{ height: '3px' }"
                     :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
+                    style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" width="160" align="left" key="cbpg07" prop="cbpg07" sortable />
                     <el-table-column label="日期" width="120" align="left" key="cbpg08" prop="cbpg08"
@@ -1504,5 +1504,23 @@ export default {
 ::v-deep .el-table__header,
 ::v-deep .el-table__body {
     width: 100% !important;
+}
+.tooltup{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+    padding: 0 !important;
+    margin: 0;
+}
+::v-deep .pagination-container .el-pagination {
+    position: inherit;
+}
+.pagintotal{
+    flex-grow: 0;
+    text-align: right;
+    height:auto;
+    padding:20px 0 0 !important;
+    margin:0;
 }
 </style>

@@ -24,7 +24,7 @@
                 <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
                 <el-table border v-loading="loading" :data="userList" :header-cell-style="headClassprxq"
-                    :cell-style="{ padding:'5px 0' }" :row-style="{ height:'10px' }"
+                    :cell-style="{ padding: '5px 0' }" :row-style="{ height: '10px' }"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                     <el-table-column prop="cala08" key="cala08" label="品牌">
@@ -135,7 +135,7 @@
                     <span class="saomiaojluuu">审核:</span>
                     <span class="saomiaojluuuu">财务:</span>
                 </div>
-                <div class="saomiaojlu">扫描记录</div>
+                <div class="saomiaojlu" style="margin-top:3%">扫描记录</div>
                 <el-table style="margin-top:1%;" :header-cell-style="headClass" v-loading="loading" border
                     :data="userLists" :default-sort="{ prop: 'name', order: 'descending' }"
                     @selection-change="handleSelectionChange">
@@ -155,19 +155,17 @@
                     </el-table-column>
                 </el-table>
             </div>
-            <div style="height:100px;"></div>
         </section>
-        <div v-if="status == 8">
-            <el-button style="margin-left:5%;" type="primary" @click="PrintRow">打 印</el-button>
+        <div v-if="status == 8" style="margin-top:2%">
+            <el-button style="margin-left:2%;" type="primary" @click="PrintRow">打 印</el-button>
             <el-button @click="handlefanhui">返回</el-button>
         </div>
-        <div v-else>
-            <el-button v-if="status == 0" style="margin-left:5%;" type="primary" @click="PurchaseinboundShenpi">审 核
+        <div v-else style="margin-top:2%">
+            <el-button v-if="status == 0" style="margin-left:2%;" type="primary" @click="PurchaseinboundShenpi">审 核
             </el-button>
-            <el-button v-else style="margin-left:5%;" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
+            <el-button v-else style="margin-left:2%;" type="primary" @click="PurchaseinboundFanShenpi">反 审</el-button>
             <el-button @click="handlefanhui">返回</el-button>
         </div>
-        <div style="height:100px;"></div>
     </div>
 
 </template>
