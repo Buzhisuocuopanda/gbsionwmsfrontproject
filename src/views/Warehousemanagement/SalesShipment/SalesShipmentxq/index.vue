@@ -41,9 +41,9 @@
           <el-descriptions-item label-class-name="my-labell01">
             <template slot="label">收货人</template>{{ value.cbsb18 }}
           </el-descriptions-item>
-          <el-descriptions-item label-class-name="my-labell01">
+          <!-- <el-descriptions-item label-class-name="my-labell01">
             <template slot="label">关联订单/提货单</template>{{ value.cbsb31 }}
-          </el-descriptions-item>
+          </el-descriptions-item> -->
         </el-descriptions>
         <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
           :key="key">
@@ -129,7 +129,7 @@
           <span class="saomiaojluuuu">财务:</span>
         </div>
       </div>
-      <div class="saomiaojlu">出库建议表</div>
+      <div class="saomiaojlu" style="margin-top:3%">出库建议表</div>
       <el-descriptions class="margin-top" style="width: 90%; margin-left: 5%; margin-top: 1%" title="" :column="3"
         border v-for="(value, key) in userList.slice(0, 1)" :key="key">
         <el-descriptions-item label-class-name="my-labell012">
@@ -150,8 +150,8 @@
         </el-table-column>
         <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
-        <el-table-column prop="sku" key="sku" align="" label="库位">
-        </el-table-column>
+        <!-- <el-table-column prop="sku" key="sku" align="" label="库位">
+        </el-table-column> -->
         <el-table-column prop="scanStatus" key="scanStatus" label="扫描状态">
           <!-- <template scope="scope">
             <div>
@@ -167,7 +167,7 @@
         </el-table-column>
       </el-table>
 
-      <div class="saomiaojlub">扫描记录</div>
+      <div class="saomiaojlub" style="margin-top:3%">扫描记录</div>
       <el-table style="margin-top: 1%; width: 90%; margin-left: 5%" :header-cell-style="headClass" v-loading="loading"
         border :data="userListed" :default-sort="{ prop: 'name', order: 'descending' }"
         @selection-change="handleSelectionChange">
@@ -182,8 +182,8 @@
         </el-table-column>
         <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
-        <el-table-column prop="kwm" key="kwm" align="" label="库位">
-        </el-table-column>
+        <!-- <el-table-column prop="kwm" key="kwm" align="" label="库位">
+        </el-table-column> -->
       </el-table>
     </div>
     <div style="height: 50px"></div>
@@ -207,7 +207,7 @@
   </div>
 </template>
 <script>
-import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds,saleoutOrderdetailsexport1 } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds, saleoutOrderdetailsexport1 } from "@/api/Warehousemanagement/SalesShipment";
 export default {
   name: 'AuthUser',
   data() {
@@ -372,8 +372,8 @@ export default {
     //销售出库单详情打印
     xiaoschukudandayin() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsexport1",{orderId:userId},'pdf')
-      
+      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsexport1", { orderId: userId }, 'pdf')
+
       // const userId = this.$route.params && this.$route.params.cbsb01;
       // saleoutOrderdetailsexport1({orderId:userId}).then((response) =>{
       //   const content = response
@@ -394,7 +394,7 @@ export default {
       //   window.URL.revokeObjectURL(ifr.src) // 释放URL 对象
 
       // })
-      
+
 
       // this.download(
       //   "/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId=" +
@@ -417,7 +417,7 @@ export default {
     //销售出库建议表打印1
     xiaoschukujianyibiao() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1",{orderId:userId},'pdf')
+      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1", { orderId: userId }, 'pdf')
       // this.download(
       //   "/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId=" +
       //   userId,
@@ -434,7 +434,7 @@ export default {
     /** 扫描记录表打印 */
     xiaoschukusaomiaojlubiao() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.printing("/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1",{orderId:userId},'pdf')
+      this.printing("/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1", { orderId: userId }, 'pdf')
       // this.download(
       //   "/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId=" +
       //   userId,

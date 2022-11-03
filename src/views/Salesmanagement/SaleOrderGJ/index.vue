@@ -2,7 +2,7 @@
   <!--国际销售订单-->
   <div class="app-container">
     <div class="filter-container saleorderGj">
-      <el-form :inline="true" label-width="70px" style="flex-grow: 0;">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;height: auto;">
         <el-form-item label="订单号" class="item-r">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
@@ -98,7 +98,7 @@
             <!--            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==2" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,2)" v-hasPermi="['sale:saleOrder:confirm']">确认库存</el-button>-->
             <!--            <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.confirmSkuStatus==1" icon="el-icon-edit" size="mini" type="text" @click=" showConfirmDetail(scope.row,1)" v-hasPermi="['sale:saleOrder:confirm']">取消库存</el-button>-->
             <el-button class="caozuoxiangqengGJ" style="margin-top: 2px" v-show="scope.row.status == 0"
-              icon="el-icon-edit" size="mini" type="text" @click="delSaleOrder(scope.row)"
+              icon="el-icon-edit" size="mini" type="text" @click="delSaleOrderGj(scope.row)"
               v-hasPermi="['sale:saleOrderGj:remove']">删除</el-button>
           </template>
 
@@ -139,7 +139,7 @@
 </template>
 <script>
 // import x from ''
-import { confirmSkuSaleOrder, delSaleOrderGj, saleOrderListGj, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
+import { confirmSkuSaleOrder, delSaleOrderGj, saleOrderListGj, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder,delSaleOrder } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
@@ -476,7 +476,6 @@ export default {
         const param = {
           orderId: row.id,
           delete: 1,
-
         }
         delSaleOrder(param).then(response => {
           // console.log(response)

@@ -2,15 +2,15 @@
     <!--  销售预订单入库单审核  -->
     <div>
         <div class="Purchase_caigou">销售预订单入库单</div>
-        <div class="Purchase_sum" v-for="(value, key) in userList" :key="key">
-            <span class="Purchase_bianhao">编号：{{ value.orderNo }}</span>
-            <span class="Purchase_riqi">日期：{{ value.orderDate }}</span>
+        <div class="Purchase_sum">
+            <span class="Purchase_bianhao">编号：{{ userList.orderNo }}</span>
+            <span class="Purchase_riqi">日期：{{ userList.orderDate }}</span>
         </div>
         <div style="width:98%; margin-left: 1%; margin-top: 1%;">
             <!-- 横向 -->
-            <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList" :key="key">
+            <el-descriptions class="margin-top" title="" :column="3" border>
                 <el-descriptions-item>
-                    <template slot="label">供料单位</template>{{ value.cbsa08 }}
+                    <template slot="label">供料单位</template>{{ userList.supplierName }}
                 </el-descriptions-item>
                 <!-- <el-descriptions-item>
                     <template slot="label">仓库</template>{{ value.cbwa09 }}
@@ -175,7 +175,6 @@ export default {
     methods: {
         _ly_shenhe() {
             const userId = this.$route.query && this.$route.query.id;
-
             this.$modal.confirm('是否要审批,ponumber为"' + this.userList[0].orderNo + '"的数据项？').then(() => {
                 PurchaseinboundSH({ id: userId }).then(response => {
                     if (response.code == "200") {
@@ -243,9 +242,9 @@ export default {
             if (userId) {
                 // 获取表详细信息
                 PurchaseinboundSalesReceipt(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
-                    this.userList[0] = res.data.rows[0];
-                    this.userList[0].orderDate = this.userList[0].orderDate.slice(0, 10)
-                    this.tabData = res.data.rows;
+                    this.userList = res.data;
+                    this.userList.orderDate = this.userList.orderDate.slice(0, 10)
+                    this.tabData = res.data.goods;
                     this.tabData.map((item) => {
                         item.totalPrice = item.inQty * item.price
                     })

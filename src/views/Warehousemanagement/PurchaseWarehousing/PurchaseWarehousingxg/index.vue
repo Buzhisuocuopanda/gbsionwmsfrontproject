@@ -160,7 +160,7 @@
         </el-table>
       </div>
     </el-form>
-    <div style="text-align: center;margin-top: 10px">
+    <div style="margin-left: 0px;margin-top: 10px">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>

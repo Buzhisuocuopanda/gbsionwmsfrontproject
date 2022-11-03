@@ -2,7 +2,7 @@
   <!--审批记录-->
   <div class="app-container">
     <div class="filter-container approcorde">
-      <el-form :inline="true" label-width="70px">
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;height: auto;">
 
         <el-form-item>
           <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期"
@@ -47,7 +47,7 @@
         </el-form-item>
       </el-form>
       <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
-        element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe>
+        element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe style="flex-grow: 1;">
         <el-table-column fixed label="单据类型" align="left" prop="cabraa07" min-width="90px;" />
         <el-table-column fixed label="单据编号" align="left" prop="cabraa14" min-width="120px;" />
         <el-table-column fixed label="客户名称" align="left" prop="cabraa21" min-width="80px;" />
@@ -72,7 +72,7 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:20px; padding-left: 20px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        style="padding-top:20px; padding-left: 20px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch" @current-change="onSearch" />
     </div>
   </div>
@@ -330,13 +330,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .caozuoxiangqeng {
   border: 0 !important;
   padding: 0 !important;
 }
-
-.approcorde .el-form--inline {
-  height: 60px !important;
+.approcorde{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
 }
+
 </style>

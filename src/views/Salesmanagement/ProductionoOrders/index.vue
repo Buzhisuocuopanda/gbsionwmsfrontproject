@@ -2,7 +2,7 @@
   <!--生产总订单-->
   <div class="app-container">
     <div class="filter-container shengchuang">
-      <el-form :inline="true" style="flex-grow: 0;">
+      <el-form :inline="true" style="flex-grow: 0;height: auto;">
         <el-form-item label="订单号" class="item-r" label-width="60px">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
@@ -94,7 +94,7 @@
 
         <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
           <el-form-item label="优先级" prop="priority">
-            <el-input v-model="formData.priority" style="width:50%" oninput="value=value.replace(/[^\d]/g,'')">
+            <el-input v-model.number="formData.priority" style="width:50%">
             </el-input>
           </el-form-item>
           <el-form-item label="订单号" prop="orderNo">
@@ -340,8 +340,8 @@ export default {
     return {
       rule: {
         priority: [
-          { required: true, message: '请输入优先级', trigger: 'blur' },
-          // { type: 'number', message: '优先级必须为数字'}
+          { required: true, message: '请输入优先级' },
+          { type: 'number', message: '优先级必须为数字',trigger: 'change'}
         ],
         orderNo: [
           { required: true, message: '请输入订单号', trigger: 'blur' },
@@ -455,32 +455,37 @@ export default {
     },
     // 批量删除
     pldelete1() {
-      this.$confirm('确定删除吗', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'success',
-      }).then(() => {
-        console.log(this.multipleSelection)
-        this.loading = true
-        pldelete({ ids: this.multipleSelection }).then(response => {
-          if (response.code == 200) {
-            this.$notify({
-              title: '删除成功',
-              message: '',
-              type: 'success',
-              duration: 2000
-            })
-            this.multipleSelection = []
-            this.onSearch()
-            // this.$tab.refreshPage()
-            console.log(this.multipleSelection)
-            this.loading = false
-
+      if(this.multipleSelection.length == 0){
+        this.$message({
+          message: '请选择要删除的数据',
+          type: 'warning',
+        })
+      }else{
+        this.$confirm('确定删除吗', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'success',
+        }).then(() => {
+          console.log(this.multipleSelection)
+          this.loading = true
+          pldelete({ ids: this.multipleSelection }).then(response => {
+            if (response.code == 200) {
+              this.$notify({
+                title: '删除成功',
+                message: '',
+                type: 'success',
+                duration: 2000
+              })
+              this.multipleSelection = []
+              this.onSearch()
+              // this.$tab.refreshPage()
+              console.log(this.multipleSelection)
+              this.loading = false
+            }
           }
-
-        }
-        )
-      })
+          )
+        })
+      }  
     },
 
     //列表表头设置
@@ -642,9 +647,7 @@ export default {
         orderNo: this.formData.orderNo,
         goodsId: this.formData.goodsId,
         qty: this.formData.qty
-
       }
-
       addTotalOrder(param).then(response => {
         if (response.code == 200) {
           this.$message.success("添加成功")

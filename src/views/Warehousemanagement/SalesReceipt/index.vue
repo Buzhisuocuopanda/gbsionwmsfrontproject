@@ -1,12 +1,12 @@
 <template>
     <!--销售预订单入库单123-->
     <div class="app-container">
-        <el-row :gutter="20" style="margin-left:-10%;">
+        <el-row :gutter="20" style="margin:0;width: 100%;">
             <!--用户数据-->
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
+                    label-width="68px" style="flex-grow: 0;height: auto;">
 
                     <!--<el-form-item prop="cbpc07" label="编号">-->
                     <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
@@ -34,7 +34,7 @@
                         <el-button class="biaoto-buttonchuangjian" v-hasPermi="['system:salesReceipt:list']" size="mini"
                             @click="resetQuery">重置</el-button>
                     </el-form-item>
-                    <el-form-item style="margin-left:51%;">
+                    <el-form-item style="margin-left:0;">
                         <!--<el-button type="mini" @click="show()" class="biaoto-buttonfanshen">搜索</el-button>-->
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建
                         </el-button> -->
@@ -47,11 +47,11 @@
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button> -->
-                        <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
-                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:salesReceipt:sh']">审核</el-button>
-                        <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
+                        <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
+                            @click="PurchaseinboundShenpi01" v-hasPermi="['system:salesReceipt:sh']">审核</el-button> -->
+                        <!-- <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
                             @click="PurchaseinboundFanShenpi01" v-hasPermi="['system:salesReceipt:fs']">反审
-                        </el-button>
+                        </el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu"
@@ -69,7 +69,7 @@
                 <el-table border :header-cell-style="headClasspw" :row-style="{ height: '3px' }"
                     :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="430"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
+                    style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <!-- <el-table-column label="编号" align="left" key="cbpc07" :show-overflow-tooltip="true" prop="cbpc07"
                         sortable /> -->
@@ -79,9 +79,9 @@
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
                         :formatter="formatDate" sortable>
                     </el-table-column>
-                    <el-table-column label="供应商名称" align="left" key="supplier" prop="supplier" sortable width="140" />
+                    <el-table-column label="供应商名称" align="left" key="supplierName" prop="supplierName" sortable width="140" />
                     <el-table-column label="工厂名称" align="left" key="factory" prop="factory" sortable width="120" />
-                    <el-table-column label="客户名称" align="left" key="customer" prop="customer" width="310" sortable>
+                    <el-table-column label="客户名称" align="left" key="customerName" prop="customerName" width="310" sortable>
                     </el-table-column>
                     <el-table-column label="状态" align="center" key="status" width="120" prop="status" sortable>
                         <template scope="scope">
@@ -488,8 +488,8 @@ export default {
             queryParams: {
                 pageNum: 1,
                 pageSize: 15,
-                page: 1,
-                size: 15,
+                // page: 1,
+                // size: 15,
                 total: this.total,
                 cbpc07: undefined,
                 cbsa08: undefined,
@@ -498,6 +498,9 @@ export default {
                 dateRange: undefined,
                 cbpb08: undefined,
                 statuss: 1,
+                status:'',
+                beginTime:'',
+                endTime:'',
             },
             // 列信息
             //  columns: [
@@ -776,7 +779,14 @@ export default {
         /** 查询用户列表 */
         getList() {
             this.loading = true;
-            PurchaseinboundList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+            if(this.dateRange!=null&&this.dateRange.length>=2){
+                this.queryParams.beginTime = this.dateRange[0];
+                this.queryParams.endTime = this.dateRange[1];
+            }else {
+                this.queryParams.beginTime = undefined;
+                this.queryParams.endTime = undefined;
+            }
+            PurchaseinboundList(this.queryParams).then(response => {
                 if (response.code == "200") {
                     this.userList = response.data.rows;
                     this.total = response.data.total;
@@ -1478,4 +1488,24 @@ export default {
 </script>
 <style src="./SalesReceiptcss/index.css">
 
+</style>
+<style lang="scss" scoped>
+.tooltup{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+    padding: 0 !important;
+    margin: 0;
+}
+::v-deep .pagination-container .el-pagination {
+    position: inherit;
+}
+.pagintotal{
+    flex-grow: 0;
+    text-align: right;
+    height:auto;
+    padding:20px 0 0 !important;
+    margin:0;
+}
 </style>

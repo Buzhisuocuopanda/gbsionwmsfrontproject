@@ -4,7 +4,8 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 新增配置
 export function PurchaseinboundAdd(data) {
   return request({
-    url: '/system/SalesScheduledOrders/addSubscribetotheinventoryslip',
+    // /system/SalesScheduledOrders/addSubscribetotheinventoryslip
+    url: '/system/SalesScheduledOrders/rkdxz',
     method: 'post',
     data: data
   })
@@ -32,7 +33,8 @@ export function PurchaseinboundAddydd(data) {
 export function PurchaseinboundList(query) {
   return request({
     // SalesScheduledOrders/seleteSubscribetotheinventoryslip
-    url: '/system/SalesScheduledOrders/saleOrderList',
+    // system/SalesScheduledOrders/saleOrderList
+    url: '/system/Directly/swJsOrderInlist',
     method: 'get',
     params: query
   })
@@ -60,7 +62,7 @@ export function PurchaseinboundEdit(data) {
 // 销售预订单入库单修改
 export function PurchaseinboundxiaoshouEdit(data) {
   return request({
-    url: '/system/SalesScheduledOrders/editSubscribetotheinventoryslip',
+    url: '/system/SalesScheduledOrders/rkdxg',
     method: 'post',
     data: data
   })
@@ -81,10 +83,10 @@ export function PurchaseinboundRemove(data) {
 export function PurchaseinboundSalesReceipt(data) {
   return request({
     // system/SalesScheduledOrders/selectSalesReceiptList
-    url: '/system/SalesScheduledOrders/selectSalesReceiptList',
+    url: '/system/SalesScheduledOrders/rkdxq',
     method: 'post',
     params:{
-      ids:data
+      id:data
     }
   })
 }
@@ -99,7 +101,8 @@ export function saleOrderListdetail(data) {
 // 审核
 export function PurchaseinboundSH(data) {
   return request({
-    url: '/system/SalesScheduledOrders/Subscribetotheinventoryslipsh',
+    // /system/SalesScheduledOrders/Subscribetotheinventoryslipsh
+    url: '/system/SalesScheduledOrders/rkdsh',
     method: 'post',
     data: data
   })

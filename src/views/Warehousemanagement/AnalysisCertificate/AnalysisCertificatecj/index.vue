@@ -25,7 +25,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: left; margin-left: 5%" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left; margin-left: 3%" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
@@ -44,8 +44,8 @@
                 </el-select>
               </sapn>-->
               <!--@visible-change="hiddens"-->
-              <el-select @change="slected(scope.row,$event)" filterable :filter-method="getChangeList" v-el-select-loadmore="getList"
-                remote v-model="scope.row.f" placeholder="请输入sn码" style="widith:100%">
+              <el-select @change="slected(scope.row, $event)" filterable :filter-method="getChangeList"
+                v-el-select-loadmore="getList" remote v-model="scope.row.f" placeholder="请输入sn码" style="widith:100%">
                 <!-- <el-input v-model="queryParams.orderNo"
                         placeholder="请输入销售订单编号,sn码"
                         clearable
@@ -55,7 +55,8 @@
                     &lt;!&ndash; @change="getList(queryParams.orderNo)"&ndash;&gt;
                     <i slot="suffix" class="el-icon-search el-input__icon" />
                   </el-input>-->
-                <el-option @click.native="refreshTables(scope.row,item)" v-for="(item,index) in tableDataed" :key="index" :label="item.f" :value="item.f">
+                <el-option @click.native="refreshTables(scope.row, item)" v-for="(item, index) in tableDataed"
+                  :key="index" :label="item.f" :value="item.f">
                 </el-option>
               </el-select>
               <!-- <el-popover placement="bottom-start" trigger="click" disabled>
@@ -94,7 +95,7 @@
                 style=""
               ></el-input> -->
               <el-select filterable remote v-model="scope.row.cbqd10" style="widith:100%">
-                <el-option v-for="(item,index) in tableDataed" :key="index" :label="item.cbpm09" :value="item.cbpm09">
+                <el-option v-for="(item, index) in tableDataed" :key="index" :label="item.cbpm09" :value="item.cbpm09">
                 </el-option>
               </el-select>
               <!-- </sapn> -->
@@ -104,7 +105,8 @@
             <template slot-scope="scope">
               <!--:filter-method="getLists"-->
               <el-select filterable remote v-model="scope.row.cbqb09" placeholder="请选择" :loading="loading3">
-                <el-option v-for="(item,index) in scope.row.tableDatas" :key="index" :label="item.cbpm09" :value="item.cbpm09">
+                <el-option v-for="(item, index) in scope.row.tableDatas" :key="index" :label="item.cbpm09"
+                  :value="item.cbpm09">
                 </el-option>
               </el-select>
             </template>
@@ -135,7 +137,7 @@
           <el-table-column v-if="false" prop="cbqb10" label="原商品SN" width="150">
             <template slot-scope="scope">
               <el-select filterable remote v-model="scope.row.cbqb09" style="widith:100%">
-                <el-option v-for="(item,index) in tableDataed" :key="index" :label="item.cbpm09" :value="item.cbpm09">
+                <el-option v-for="(item, index) in tableDataed" :key="index" :label="item.cbpm09" :value="item.cbpm09">
                 </el-option>
               </el-select>
             </template>
@@ -161,7 +163,7 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei">
+    <div class="tinajia_dingwei" style="margin-left:3%">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">审 核</el-button>
       <el-button type="primary" @click="handlefanhui">取消</el-button>
@@ -510,7 +512,7 @@ export default {
 
   },
   methods: {
-    refreshTables(row,item){
+    refreshTables(row, item) {
       let id = this.$route.query.data
       row.cbqb09 = undefined;
       // let cbpm08 = this.tableData[0].cbpm08
@@ -518,7 +520,7 @@ export default {
       // console.log(cbpm08 + 'zgl', 111);
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
-        cbpm08:item.cbpm08,
+        cbpm08: item.cbpm08,
         // cbpm09: query
       }).then((response) => {
         // this.loading3 = false;
@@ -577,7 +579,7 @@ export default {
         this.loading4 = false;
       });
     },
-    slected(row,name) {
+    slected(row, name) {
       let sn = name.substring(0, name.indexOf("-"));
       let ysn = name.split("-");
       let a = ysn.length
@@ -599,7 +601,7 @@ export default {
       // console.log(cbpm08 + 'zgl', 111);
       SwJsSkuBarcodeselectsss({
         // cbpk01:id,
-        cbpm08:query,
+        cbpm08: query,
         // cbpm09: query
       }).then((response) => {
         // this.loading3 = false;
@@ -727,7 +729,7 @@ export default {
               this._ly_ok();
               // this.$tab.closePage();
               // this.$router.go(-1);
-            }else {
+            } else {
               this.$message.error(response.message);
             }
           });
@@ -788,7 +790,7 @@ export default {
           this.reset01();
           this.tableData = [];
           this.handlefanhui()
-        }else {
+        } else {
           this.$message.error(response.message());
         }
         //   if (count-- === 1) {
@@ -822,7 +824,7 @@ export default {
         branch: "",
         cbqb09: '',
         cbqb10: '',
-        tableDatas:this.tableDatas
+        tableDatas: this.tableDatas
       });
     },
     // 删除一行表单

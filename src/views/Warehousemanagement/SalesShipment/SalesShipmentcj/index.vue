@@ -271,12 +271,10 @@
         </el-table>
       </div>
     </el-form>
-    <div style="height: 100px"></div>
-    <div class="tinajia_dingwei" style="margin-left: 10%; left: 0">
+    <div class="tinajia_dingwei" style="margin-left: 2%; left: 0;margin-top:3%">
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>
     </div>
-    <div style="height: 100px"></div>
   </div>
 </template>
 

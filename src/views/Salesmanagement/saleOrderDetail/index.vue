@@ -1,4 +1,5 @@
 <template>
+  <!-- 国内销售订单创建 -->
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">国内销售订单</div>
@@ -179,7 +180,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>
+            <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
         </el-row>
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">

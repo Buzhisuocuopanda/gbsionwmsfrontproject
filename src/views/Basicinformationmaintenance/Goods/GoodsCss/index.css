@@ -337,12 +337,12 @@ body {
   height: 40px;
 }
 
-.abow_dialog5 {
+/* .abow_dialog5 {
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-}
+} */
 
 .abow_dialog5 .el-dialog {
   margin: 0 auto !important;
@@ -374,4 +374,3 @@ body {
   top: 90%;
   left: 80%;
 }
-
