@@ -3,10 +3,11 @@
     <div class="app-container directre">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
-            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
+            <el-col :span="20" :xs="24" class="tooltup"
+                style="width:100%;display: flex;flex-direction: column;height: calc(93vh - 85px);">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
+                    label-width="68px" style="flex-grow: 0;">
                     <el-form-item label="仓库" class="item-r">
                         <!-- <el-select  v-model="queryParams.cbwa09" clearable filterable remote reserve-keyword placeholder="请输入关键词"  >
                       <el-option v-for="item in postCangKu" :key="item.cbwa09" :label="item.cbwa09+' ['+item.cbwa10+']'" :value="item.cbwa09"></el-option>
@@ -31,8 +32,7 @@
                             @click="resetQuery">重置</el-button>
                         <!-- <el-button size="mini" class="biaoto-buttonchuangjian" @click="handlechuangjiang">创建</el-button> -->
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
-                                   v-hasPermi="['system:directly:remove']"
-                            @click="handleDelete">删除</el-button>
+                            v-hasPermi="['system:directly:remove']" @click="handleDelete">删除</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
                             v-hasPermi="['system:user:import']">导入</el-button> -->
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
@@ -53,9 +53,10 @@
                 </el-form>
 
                 <el-table border :header-cell-style="headClassDR" :row-style="{ height: '3px' }"
-                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="470"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
+                    style="width:92.5%;height: 8%;margin-left: -2%;flex-grow: 1;overflow:auto;"
+                    @selection-change="handleSelectionChange" class="middle">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable width="120px;" />
                     <el-table-column label="品牌" width="90" align="left" key="cala08" prop="cala08" sortable>
@@ -78,18 +79,18 @@
                             </template>
                     </el-table-column> -->
                     <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
-                    <template slot-scope="scope" style="margin-left:-10%;">
-                    <!-- <el-button size="mini" type="text" icon="el-icon-edit"
+                        <template slot-scope="scope" style="margin-left:-10%;">
+                            <!-- <el-button size="mini" type="text" icon="el-icon-edit"
                                     class="button-caozuoxougai caozuoxiangqeng"
                                     @click="handlexiangqengSelect(scope.row)"
                                     v-if="scope.row.cbpg11 == 1 | scope.row.cbpg11 == 2"
                                     v-hasPermi="['system:user:edit']">
                                     修改
                                 </el-button> -->
-                    <el-button size="mini" type="text" icon="el-icon-delete"
+                            <el-button size="mini" type="text" icon="el-icon-delete"
                                 class="button-caozuoxougai caozuoxiangqeng" @click="handleDelete01(scope.row)"
                                 v-hasPermi="['system:directly:remove']">删除</el-button>
-                    <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
+                            <!-- <el-button size="mini" type="text" icon="el-icon-share" class="caozuoxiangqeng"
                                     @click="handleSelect(scope.row)" v-hasPermi="['system:user:listselect']">详情
                                 </el-button>
                                 <el-button size="mini" type="text" icon="el-icon-s-order" class="caozuoxiangqeng"
@@ -105,13 +106,13 @@
                                     @click="PurchaseinboundBiaojiWancheng(scope.row)"
                                     v-hasPermi="['system:user:listselect']"
                                     v-if="scope.row.cbpg11 == 3 | scope.row.cbpg11 == 1">标记完成</el-button> -->
-                    </template>
+                        </template>
                     </el-table-column>
                 </el-table>
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
-                    class="pagintotal" />
+                    class="pagintotal" style="flex-grow: 0;" />
             </el-col>
         </el-row>
 
@@ -596,6 +597,9 @@ export default {
         // 根据名称筛选部门树
         deptName(val) {
             this.$refs.tree.filter(val);
+        },
+        '$route'() {
+            this.handleQuery();
         }
     },
     created() {
@@ -1200,10 +1204,34 @@ export default {
 ::v-deep .el-table__body-wrapper table {
     width: 100% !important;
 }
-::v-deep .el-form--inline .el-form-item{
+
+::v-deep .el-form--inline .el-form-item {
     margin-right: 0;
 }
-.item-r{
+
+.item-r {
     margin-left: -2%;
+}
+
+// 
+.pagintotal {
+    // position:fixed;
+    // bottom: 2%;
+    // right: 0%;
+    // left: 0%;
+}
+
+.pagination-container {
+    height: 5%;
+    padding: 0 !important;
+    margin: 0;
+}
+
+::v-deep .el-table__header-wrapper {
+    overflow: unset;
+}
+
+::v-deep .el-table__body-wrapper {
+    overflow: unset;
 }
 </style>

@@ -67,15 +67,14 @@
                 </el-form>
 
 
-                <el-table border :header-cell-style="headClasspw" :row-style="{height: '3px'}"
-                    :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="430"
+                <el-table border :header-cell-style="headClasspw" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="430"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
                         prop="orderNo" sortable />
-                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber" 
-                    prop="ponumber" sortable />
+                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber" prop="ponumber" sortable />
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
                         :formatter="formatDate" sortable>
                     </el-table-column>
@@ -92,7 +91,7 @@
                     <el-table-column label="状态" align="center" key="status" width="120" prop="status" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
-                            "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
+                                    "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
                             }}
                             </div>
                         </template>
@@ -628,6 +627,9 @@ export default {
         deptName(val) {
             this.$refs.tree.filter(val);
         },
+        '$route'() {
+            this.getList();
+        }
     },
     created() {
         //仓库明细初始化

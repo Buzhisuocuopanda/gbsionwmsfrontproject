@@ -2,7 +2,7 @@
   <!--生产总订单-->
   <div class="app-container">
     <div class="filter-container shengchuang">
-      <el-form :inline="true">
+      <el-form :inline="true" style="flex-grow: 0;">
         <el-form-item label="订单号" class="item-r" label-width="60px">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
@@ -17,9 +17,9 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item style="margin: 0px -10px 1px 1px">
+        <el-form-item style="">
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" icon="el-icon-search"
-            style="margin-bottom:0;margin-left: 2em" @click="onSearch1">搜索
+            style="margin-bottom:0;margin-left: 1em" @click="onSearch1">搜索
           </el-button>
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="reset">重置
@@ -54,7 +54,7 @@
       <el-table @selection-change="handleSelectionChange" @sort-change="handleTableSort" :loading="loading"
         :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="500" border fit highlight-current-row stripe
-        :row-key="getRowKeys">
+        :row-key="getRowKeys" style="flex-grow: 1;">
         <el-table-column type='selection' label="全选" width="55" fixed>
         </el-table-column>
         <el-table-column sortable="custom" fixed label="优先级" align="left" prop="priority" min-width="100px;" />
@@ -63,7 +63,8 @@
         <el-table-column label="描述" align="left" prop="description" min-width="380px;" />
         <el-table-column sortable="custom" :formatter="rounding" label="订单数量" align="right" prop="orderQty"
           min-width="100px;" />
-        <el-table-column sortable="custom" :formatter="rounding" label="生产数量" align="right" prop="makeQty" min-width="100px;" />
+        <el-table-column sortable="custom" :formatter="rounding" label="生产数量" align="right" prop="makeQty"
+          min-width="100px;" />
         <el-table-column :formatter="rounding" label="占用数量" align="right" prop="useQty" min-width="76px;" />
         <el-table-column :formatter="rounding" label="已发货数量" align="right" prop="shippedQty" min-width="89px;" />
         <el-table-column :formatter="rounding" label="现有订单数量" align="right" prop="currentOrderQty" min-width="100px;" />
@@ -83,7 +84,7 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:20px; padding-left: 10px;float: right" layout="total, sizes, prev, pager, next, jumper"
+        style="padding-top:20px; padding-left: 10px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
         @size-change="onSearch" @current-change="onSearch" />
 
 
@@ -419,6 +420,11 @@ export default {
   },
 
   computed: {},
+  watch: {
+    '$route'(to, from) {
+      this.onSearch()
+    }
+  },
   mounted() { // 自动触发写入的函数
     this.onSearch()
     this.initSelect()
@@ -1060,22 +1066,27 @@ export default {
 /*  -webkit-box-sizing: border-box;*/
 /*  box-sizing: border-box*/
 /*}*/
-.shengchuang .el-form--inline {
-  height: 70px !important;
-}
 
+.shengchuang{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
+}
 .caozuoxiangqengOrder {
   border: 0 !important;
   padding: 0 !important;
 }
-::v-deep .el-table__header-wrapper{
+
+::v-deep .el-table__header-wrapper {
   height: 55px;
 }
+
 ::v-deep .el-table__fixed-body-wrapper {
-    position: absolute;
-    left: 0;
-    top: 55px !important;
-    overflow: hidden;
-    z-index: 3;
+  position: absolute;
+  left: 0;
+  top: 55px !important;
+  overflow: hidden;
+  z-index: 3;
 }
 </style>

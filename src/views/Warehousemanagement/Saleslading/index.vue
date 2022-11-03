@@ -194,7 +194,7 @@
         <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
           <template slot-scope="scope" style="margin-left: -10%">
             <el-button size="mini" icon="el-icon-share" class="button-caozuoxougai caozuoxiangqeng" type="primary"
-              @click="sendParams(scope.row)" >
+              @click="sendParams(scope.row)">
             </el-button>
           </template>
         </el-table-column>
@@ -690,6 +690,9 @@ export default {
     deptName(val) {
       this.$refs.tree.filter(val);
     },
+    '$route'() {
+      this.getList();
+    }
   },
   created() {
     //仓库明细初始化

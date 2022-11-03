@@ -40,9 +40,9 @@
                     </el-table-column>
                     <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量" width="80">
                     </el-table-column>
-                    <el-table-column prop="cbpb10" key="cbpb10" align="right" label="单价" width="60">
+                    <el-table-column prop="cbab11" key="cbab11" align="right" label="单价" width="60">
                     </el-table-column>
-                    <el-table-column prop="cbab11" key="cbab11" align="right" label="金额" width="60">
+                    <el-table-column prop="cbab12" key="cbab12" align="right" label="金额" width="60">
                     </el-table-column>
                     <el-table-column prop="cbpc17" key="cbpb08" label="备注">
                     </el-table-column>
@@ -338,6 +338,10 @@ export default {
                 // 获取表详细信息
                 PurchaseinboundLists(userId, this.addDateRange(this.queryParams, this.dateRange)).then(res => {
                     this.userList = res.data.rows;
+                    for (var i = 0; i < this.userList.length; i++) {
+                        this.userList[i].cbab12 = this.userList[i].cbab11 * this.userList[i].cbab09
+                    }
+                    console.log(this.userList, "this.userList-------------this.userList")
                     this.total = res.data.total;
                     console.log(res, 888999);
                     let userlistss = res.data.rows.map(item => {

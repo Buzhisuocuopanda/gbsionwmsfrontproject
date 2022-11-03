@@ -66,8 +66,8 @@
                 </el-form>
 
 
-                <el-table border :header-cell-style="headClasspw" :row-style="{height: '3px'}"
-                    :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="430"
+                <el-table border :header-cell-style="headClasspw" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="430"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -75,8 +75,7 @@
                         sortable /> -->
                     <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
                         prop="orderNo" sortable />
-                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber"
-                    prop="ponumber" sortable />
+                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber" prop="ponumber" sortable />
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
                         :formatter="formatDate" sortable>
                     </el-table-column>
@@ -87,7 +86,7 @@
                     <el-table-column label="状态" align="center" key="status" width="120" prop="status" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.status == 0 ? "未审核" : scope.row.status == 1 ?
-                            "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
+                                    "已审核" : scope.row.status == 4 ? "已完成" : "未确定状态"
                             }}
                             </div>
                         </template>
@@ -230,7 +229,7 @@
                 :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
                 :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag
                 :before-upload="onBeforeUpload">
-            <!-- <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" 
+                <!-- <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" 
                 action :auto-upload="false" drag :http-request="uploadVersion"> -->
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -478,9 +477,9 @@ export default {
                 // 是否更新已经存在的用户数据
                 updateSupport: 0,
                 // 设置上传的请求头部
-                headers: { 
+                headers: {
                     Authorization: "Bearer " + getToken(),
-                    ContentType:"multipart/form-data",
+                    ContentType: "multipart/form-data",
                 },
                 // 上传的地址
                 url: process.env.VUE_APP_BASE_API + "/system/SalesScheduledOrders/importSwJsGoodssss"
@@ -498,7 +497,7 @@ export default {
                 ponumber: undefined,
                 dateRange: undefined,
                 cbpb08: undefined,
-                statuss:1,
+                statuss: 1,
             },
             // 列信息
             //  columns: [
@@ -633,8 +632,8 @@ export default {
             },
             // value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
             daterange: '',
-            ruleForm:{
-                file:''
+            ruleForm: {
+                file: ''
             },
         };
     },
@@ -672,14 +671,14 @@ export default {
 
     },
     methods: {
-        uploadVersion(param){
+        uploadVersion(param) {
             this.ruleForm.file = param.file
-            console.log(param,11111111)
+            console.log(param, 11111111)
         },
         // 
-        onBeforeUpload(file){
-		 	console.log(file)
-		},
+        onBeforeUpload(file) {
+            console.log(file)
+        },
         rounding(row, column) {
             if (parseFloat(row[column.property]).toFixed(2) == null || isNaN(parseFloat(row[column.property]).toFixed(2))) {
                 return '0.00';
@@ -1432,35 +1431,38 @@ export default {
         submitFileForm() {
             this.$refs.upload.submit();
             return
-            if(this.ruleForm.file == ""){
+            if (this.ruleForm.file == "") {
                 this.$message.warning("请选择要导入的文件");
                 return false
             }
             let postData = {
                 // json 字符串
-                versionCode:parseInt(this.ruleForm.versionCode),
-                versionName:this.ruleForm.versionName,
-                versionDesc:this.ruleForm.versionDesc,
+                versionCode: parseInt(this.ruleForm.versionCode),
+                versionName: this.ruleForm.versionName,
+                versionDesc: this.ruleForm.versionDesc,
             };
             let fileobject = this.ruleForm.file;
             let formData = new FormData();
-            formData.append("param",JSON.stringify(postData));
-            formData.append( "file", fileobject);
+            formData.append("param", JSON.stringify(postData));
+            formData.append("file", fileobject);
             let that = this;
             that.$axios({
                 method: "POST",
                 url: "/system/SalesScheduledOrders/importSwJsGoodssss",
-                header: { ' Content-Type ' : "multipart/form-data"},
+                header: { ' Content-Type ': "multipart/form-data" },
                 data: formData
-            }).then((response) =>{
+            }).then((response) => {
                 if (response.data.success) {
-                    this.$message.success("app版本上传成功");}else {
-                    this.$message.error(response.data.msg);}
+                    this.$message.success("app版本上传成功");
+                } else {
+                    this.$message.error(response.data.msg);
+                }
+            })
+                .catch((e) => {
+                    this.$message.error("app版本上传失败");
                 })
-                .catch((e)=>{
-                this.$message.error( "app版本上传失败");})
         }
-        
+
         //测试树状菜单
         // handleNodeClick(data) {
         //   console.log(data);

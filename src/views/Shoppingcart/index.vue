@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div class="filter-container shopping">
-      <el-form :inline="true" label-width="70px"  >
+      <el-form :inline="true" label-width="70px" style="flex-grow: 0;">
 
-<!--
+        <!--
         <el-form :inline="true">
           <el-form-item>
             <el-date-picker v-model="dateRange.startTime" type="datetime" placeholder="选择开始日期" value-format="yyyy-MM-dd HH:mm:ss"
@@ -23,61 +23,65 @@
         </el-form>
 -->
 
-<!--        <el-form-item label="订单号"   class="item-r" >-->
-<!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
-<!--        </el-form-item>-->
+        <!--        <el-form-item label="订单号"   class="item-r" >-->
+        <!--          <el-input v-model="orderNo" class="filter-item"  placeholder="订单号" />-->
+        <!--        </el-form-item>-->
 
 
 
-         <el-form-item>
-           <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">生成国内销售订单</el-button>
+        <el-form-item>
+          <el-button size="mini" class="biaoto-buttonchaxuen" @click="mdfDetail">生成国内销售订单</el-button>
 
-           <el-button size="mini" :disabled="ids.length==0" class="biaoto-buttonshanchu" @click="batchDel">批量删除</el-button>
-         </el-form-item>
+          <el-button size="mini" :disabled="ids.length == 0" class="biaoto-buttonshanchu" @click="batchDel">批量删除
+          </el-button>
+        </el-form-item>
         <el-form-item style="margin: -5px -10px 1px 1px">
 
-<!--          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>-->
-<!--
+          <!--          <el-button  class="filter-item" type="primary" icon="el-icon-search" style="margin-bottom:0;margin-left: 2em" @click="onSearch">搜索</el-button>-->
+          <!--
           <el-button  class="filter-item" type="primary"  style="margin-bottom:0;margin-left: 2em" @click="createForm">创建</el-button>
 -->
 
-            <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
-<!--          <el-upload-->
-<!--          <el-table-->
-<!--            ref="multipleTable"-->
-<!--            :data="tableData"-->
-<!--            tooltip-effect="dark"-->
-<!--            style="width: 100%"-->
-<!--            border-->
-<!--            @selection-change="handleSelectionChange"-->
-<!--          >-->
-<!--            <el-button type="primary" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >Excel导入</el-button>-->
-<!--          </el-upload>-->
-<!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
-<!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
+          <!--          <el-button class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="reset">重置</el-button>-->
+          <!--          <el-upload-->
+          <!--          <el-table-->
+          <!--            ref="multipleTable"-->
+          <!--            :data="tableData"-->
+          <!--            tooltip-effect="dark"-->
+          <!--            style="width: 100%"-->
+          <!--            border-->
+          <!--            @selection-change="handleSelectionChange"-->
+          <!--          >-->
+          <!--            <el-button type="primary" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >Excel导入</el-button>-->
+          <!--          </el-upload>-->
+          <!--          <el-button type="primary" v-on:click="exprotData()" :loading=loadingOut  style="margin-bottom:0;margin-left: 1em" >导出</el-button>-->
+          <!--          <el-button type="primary" v-on:click="downMub()"  style="margin-bottom:0;margin-left: 1em" >导入模板下载</el-button>-->
         </el-form-item>
       </el-form>
-      <el-table :data="orderList" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe  @selection-change="handleSelectionChangee">
+      <el-table :data="orderList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
+        element-loading-text="Loading。。。" width="100%;" height="490" border fit highlight-current-row stripe
+        @selection-change="handleSelectionChangee" style="flex-grow: 1;">
         <el-table-column type="selection" width="50" align="center" />
-        <el-table-column fixed label="品牌" align="left" prop="brand" key="brand"  min-width="30px;"/>
-        <el-table-column fixed label="型号" align="left" prop="model" min-width="50px;"/>
-        <el-table-column  label="描述" align="left" prop="description" min-width="120px;" />
-<!--        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
+        <el-table-column fixed label="品牌" align="left" prop="brand" key="brand" min-width="30px;" />
+        <el-table-column fixed label="型号" align="left" prop="model" min-width="50px;" />
+        <el-table-column label="描述" align="left" prop="description" min-width="120px;" />
+        <!--        <el-table-column  label="销售人员" align="center" prop="caua15" min-width="200px;" />
         <el-table-column  label="制单时间" align="left" prop="cboe02" min-width="100px;" :formatter="formatDate" />-->
-<!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
-<!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
-<!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
-<!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
-<!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作"  min-width="50px;">
-          <template slot-scope="scope" >
+        <!--        <el-table-column  label="生产数量" align="left" prop="makeQty"  min-width="100px;"/>-->
+        <!--        <el-table-column  label="已发货数量" align="left" prop="shippedQty" min-width="100px;"/>-->
+        <!--        <el-table-column  label="现有订单数量" align="left" prop="currentOrderQty" min-width="100px;"/>-->
+        <!--        <el-table-column  label="类型" align="center" prop="orderTypeMsg" min-width="120px;"/>-->
+        <!--        <el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
+        <el-table-column label="操作" min-width="50px;">
+          <template slot-scope="scope">
             <!--<el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
                        type="text" @click="mdfDetail(scope.row)"
             >生成国内销售订单</el-button>-->
 
-            <el-button style="margin-left:8px; margin-top: 2px ;border: 1px solid transparent" icon="el-icon-share" plain size="mini"
-                       type="text"  @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除</el-button>
-<!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
+            <el-button style="margin-left:8px; margin-top: 2px ;border: 1px solid transparent" icon="el-icon-share"
+              plain size="mini" type="text" @click="delTotalOrder(scope.row)" v-hasPermi="['system:store:remove']">删除
+            </el-button>
+            <!--            <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" plain size="mini"
                        type="text"
                        @click="showDetail(scope.row)">详情</el-button>-->
 
@@ -85,16 +89,10 @@
 
         </el-table-column>
       </el-table>
-      <el-pagination
-        :background="true"
-        :page-sizes="[10, 15, 20, 50, 500]"
-        :total="totalItems"
-        :current-page.sync="listQuery.pageNum"
-        :page-size.sync="listQuery.pageSize"
-        style="padding-top:30px; padding-left: 20px;float: right"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="onSearch"
-        @current-change="onSearch"/>
+      <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
+        :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
+        style="padding-top:30px; padding-left: 20px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
+        @size-change="onSearch" @current-change="onSearch" />
 
 
 
@@ -102,48 +100,42 @@
     <!-- 创建 -->
     <el-dialog :title="title" :visible.sync="open2" append-to-body style="width:70%;margin-left:15%;">
       <div style="margin-top:-8%">创建售后单信息</div>
-      <hr/>
-      <el-form ref="form2" :model="form2"  label-width="20%" class="chuangjianformstore">
+      <hr />
+      <el-form ref="form2" :model="form2" label-width="20%" class="chuangjianformstore">
 
         <el-row style="margin-top:3%; ">
           <el-col style="margin-left:7%;">
             <el-form-item label="销售订单号:" prop="saleOrderNo">
-              <el-input v-model="form2.saleOrderNo" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.saleOrderNo" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="客户:" prop="customerId">
-              <el-input v-model="form2.customerId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.customerId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="商品id:" prop="goodsId">
-              <el-input v-model="form2.goodsId" placeholder="" maxlength="30"
-                        style="width:77%;" />
+              <el-input v-model="form2.goodsId" placeholder="" maxlength="30" style="width:77%;" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="问题原因:" prop="question">
-              <el-input v-model="form2.question" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.question" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="SN:" prop="sn">
-              <el-input v-model="form2.sn" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.sn" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="供料单位:" prop="suplierId">
-              <el-input v-model="form2.suplierId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.suplierId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -151,15 +143,13 @@
           <el-col style="margin-left:7%;">
             <el-form-item label="处理结果:" prop="answerMsg">
 
-                <el-input v-model="form2.answerMsg" placeholder="" style="width:77%;"
-                          maxlength="30" />
+              <el-input v-model="form2.answerMsg" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="进度:" prop="process">
 
-              <el-input v-model="form2.process" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form2.process" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -173,48 +163,42 @@
 
     <el-dialog :title="title1" :visible.sync="open" append-to-body style="width:70%;margin-left:15%;">
       <div style="margin-top:-8%">修改售后单信息</div>
-      <hr/>
+      <hr />
       <el-form ref="form" :model="form" :rules="rules" label-width="20%" class="chuangjianformstore">
 
         <el-row style="margin-top:3%; ">
           <el-col style="margin-left:7%;">
             <el-form-item label="销售订单号:" prop="saleOrderNo">
-              <el-input v-model="form.saleOrderNo" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.saleOrderNo" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="客户:" prop="customerId">
-              <el-input v-model="form.customerId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.customerId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="商品id:" prop="goodsId">
-              <el-input v-model="form.goodsId" placeholder="" maxlength="30"
-                        style="width:77%;" />
+              <el-input v-model="form.goodsId" placeholder="" maxlength="30" style="width:77%;" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="问题原因:" prop="question">
-              <el-input v-model="form.question" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.question" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col style="margin-left:7%;">
             <el-form-item label="SN:" prop="sn">
-              <el-input v-model="form.sn" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.sn" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="供料单位:" prop="suplierId">
-              <el-input v-model="form.suplierId" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.suplierId" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -222,15 +206,13 @@
           <el-col style="margin-left:7%;">
             <el-form-item label="处理结果:" prop="answerMsg">
 
-              <el-input v-model="form.answerMsg" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.answerMsg" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col style="margin-left:7%;">
             <el-form-item label="进度:" prop="process">
 
-              <el-input v-model="form.process" placeholder="" style="width:77%;"
-                        maxlength="30" />
+              <el-input v-model="form.process" placeholder="" style="width:77%;" maxlength="30" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -246,7 +228,7 @@
 </template>
 
 <script>
-import { delSaleOrder,saleOrderList, totalOrderExcelListtmp,addTotalOrder,mdfTotalOrder, goodsShopList,delgoodsShop,batchDelgoodsShop} from '@/api/saleordermanage'
+import { delSaleOrder, saleOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder, goodsShopList, delgoodsShop, batchDelgoodsShop } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -265,7 +247,7 @@ export default {
         sn: "",
         suplierId: "",
         answerMsg: "",
-        process:""
+        process: ""
       },
       form2: {
         customerId: "",
@@ -275,7 +257,7 @@ export default {
         sn: "",
         suplierId: "",
         answerMsg: "",
-        process:""
+        process: ""
       },
       title: "",
 
@@ -284,7 +266,7 @@ export default {
       userList: null,
       total: 0,
 
-       totalItems: 0,
+      totalItems: 0,
       cboe07: "",
 
       orderNo: "",
@@ -293,8 +275,8 @@ export default {
         name: "",
       },
       tableData: [],
-      loadingOut:false,
-      loadingState:false,
+      loadingOut: false,
+      loadingState: false,
       listQuery: {
         pageNum: 1,
         pageSize: 15
@@ -331,16 +313,16 @@ export default {
         question: [
           { required: true, message: "问题原因不能为空!", trigger: "blur" }
         ],
-        sn:[
-          { required: true, message: "SN不能为空!", trigger:  'change'  }
+        sn: [
+          { required: true, message: "SN不能为空!", trigger: 'change' }
         ],
-        suplierId:[{
+        suplierId: [{
           required: true, message: "供料单位不能为空!", trigger: "blur"
         }],
         // cbla13:[{
         //     required: true, message: "备注不能为空!", trigger: "blur"
         // }],
-        answerMsg:[{
+        answerMsg: [{
           required: true, message: "处理结果不能为空!", trigger: "blur"
         }]
       },
@@ -416,42 +398,42 @@ export default {
             picker.$emit('pick', [start, end]);
           }
         },
-          {
-            text: '本季度',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '上季度',
-            onClick(picker) {
-              var oDate = new Date()
-              let year = oDate.getFullYear();
-              let month = oDate.getMonth() + 1;
-              let n = Math.ceil(month / 3); // 季度，上一个季度则-1
-              let prevN = n - 1;
-              if (n == 1) {
-                year--
-                prevN = 4;
-              }
-              month = prevN * 3; // 月份
-              const start = new Date(year, month - 3, 1);
-              const end = new Date(year, month, 0);
-              picker.$emit('pick', [start, end]);
-            }
-          },
-          {
-            text: '本年',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setMonth(0);
-              start.setDate(1);
-              picker.$emit('pick', [start, end]);
-            }
+        {
+          text: '本季度',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+            picker.$emit('pick', [start, end]);
           }
+        }, {
+          text: '上季度',
+          onClick(picker) {
+            var oDate = new Date()
+            let year = oDate.getFullYear();
+            let month = oDate.getMonth() + 1;
+            let n = Math.ceil(month / 3); // 季度，上一个季度则-1
+            let prevN = n - 1;
+            if (n == 1) {
+              year--
+              prevN = 4;
+            }
+            month = prevN * 3; // 月份
+            const start = new Date(year, month - 3, 1);
+            const end = new Date(year, month, 0);
+            picker.$emit('pick', [start, end]);
+          }
+        },
+        {
+          text: '本年',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setMonth(0);
+            start.setDate(1);
+            picker.$emit('pick', [start, end]);
+          }
+        }
         ]
       },
 
@@ -461,26 +443,31 @@ export default {
     };
   },
   computed: {},
+  watch: {
+    '$route'(to, from) {
+      this.onSearch()
+    }
+  },
   mounted() { // 自动触发写入的函数
     this.onSearch()
   },
   created() {
     //仓库明细初始化
     // this.getList();
-    },
+  },
   methods: {
 
-     // 多选框选中数据
-        handleSelectionChangee(selection) {
-          console.log(selection,10271);
-            this.ids = selection.map(item => item.id);
-            // this.idss = selection.map(item => item.id);
-            // this.shenpiids = selection;
-            // this.single = selection.length != 1;
-            // this.multiple = !selection.length;
-        },
-    batchDel(){
-      this.$confirm('确认要删除'+"选中的购物车？", '确认操作', {
+    // 多选框选中数据
+    handleSelectionChangee(selection) {
+      console.log(selection, 10271);
+      this.ids = selection.map(item => item.id);
+      // this.idss = selection.map(item => item.id);
+      // this.shenpiids = selection;
+      // this.single = selection.length != 1;
+      // this.multiple = !selection.length;
+    },
+    batchDel() {
+      this.$confirm('确认要删除' + "选中的购物车？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',
@@ -494,7 +481,7 @@ export default {
         }*/
         batchDelgoodsShop(this.ids).then(response => {
           // console.log(response)
-          if ( response.code === 200) {
+          if (response.code === 200) {
             this.onSearch()
             this.$message.success("删除成功")
 
@@ -505,8 +492,8 @@ export default {
       })
     },
 
-    delTotalOrder(row){
-      this.$confirm('确认要删除'+row.description+"购物车？", '确认操作', {
+    delTotalOrder(row) {
+      this.$confirm('确认要删除' + row.description + "购物车？", '确认操作', {
         type: 'warning',
         distinguishCancelAndClose: true,
         confirmButtonText: '确认',
@@ -521,7 +508,7 @@ export default {
         }
         delgoodsShop(param).then(response => {
           // console.log(response)
-          if ( response.code === 200) {
+          if (response.code === 200) {
             this.onSearch()
             this.$message.success("删除成功")
 
@@ -535,25 +522,25 @@ export default {
     mdfDetail(row) {
       // this.formData=row
       // this.showmdfDialog = true
-    //  this.goodsId=this.orderList[0].goodsId;
-     // console.log(this.goodsId,1111111)
+      //  this.goodsId=this.orderList[0].goodsId;
+      // console.log(this.goodsId,1111111)
 
 
-       let userIds = this.idss.length > 0 ? this.idss : row
-            this.$modal.confirm('编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
-                userIds.forEach((item) => {
-                 this.$router.push( {path: "/Salesmanagement/salemdfOrderDetails", query: { goods: JSON.stringify(this.idss) }})
+      let userIds = this.idss.length > 0 ? this.idss : row
+      this.$modal.confirm('编号为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
+        userIds.forEach((item) => {
+          this.$router.push({ path: "/Salesmanagement/salemdfOrderDetails", query: { goods: JSON.stringify(this.idss) } })
         })
       })
-      console.log(this.userIds,"123");
+      console.log(this.userIds, "123");
     },
     createForm(goodsId) {
       // this.showaddDialog = true
-      this.$router.push({path: "/Salesmanagement/saleOrderDetail", query: {goodsId: goodsId}})
+      this.$router.push({ path: "/Salesmanagement/saleOrderDetail", query: { goodsId: goodsId } })
 
     },
     showDetail(row) {
-      this.$router.push({path: "/Warehousemanagement/Outofstockregistrationdetail", query: {id: row.id}})
+      this.$router.push({ path: "/Warehousemanagement/Outofstockregistrationdetail", query: { id: row.id } })
 
     },
     cancel() {
@@ -564,8 +551,8 @@ export default {
       this.open2 = false;
       this.reset01();
     },
-    onSubmit() {},
-    handleSelectionChange() {},
+    onSubmit() { },
+    handleSelectionChange() { },
     formatStateType(row) {
       if (row != null) {
         if (row.status == 0) {
@@ -582,7 +569,7 @@ export default {
         endTime: this.dateRange.endTime,
         pageNum: this.listQuery.pageNum,
         pageSize: this.listQuery.pageSize,
-        brand : this.brand
+        brand: this.brand
       }
       // console.info(param)
       goodsShopList(param).then(response => {
@@ -619,12 +606,12 @@ export default {
       // row.id=this.form.id;
       // console.log(row, 2222);
       this.$modal.confirm('是否确认删除订单号为"' + row.saleOrderNo + '"的数据项？').then(function () {
-        return  delSales(JSON.stringify(row));
+        return delSales(JSON.stringify(row));
       }).then((response) => {
         this.submitShangpin();
         this.onSearch();
         this.$modal.msgSuccess("删除成功");
-      //  this.onSearch();
+        //  this.onSearch();
 
       }).catch(() => { });
     },
@@ -737,8 +724,8 @@ export default {
     },
     /** 修改详情按钮操作**/
     handlexiangqengSelect(row) {
-      console.log(this.form,111)
-      console.log(row,222)
+      console.log(this.form, 111)
+      console.log(row, 222)
       // console.log(row)
       // this.getList();
       this.open = true;
@@ -747,8 +734,8 @@ export default {
       // this.form.cbpc100=this.form.cbwa09
       // this.
       // console.log(this.form)
-      this.form=row
-      console.log(this.form,1110)
+      this.form = row
+      console.log(this.form, 1110)
     },
   },
 
@@ -762,8 +749,8 @@ export default {
 }
 
 .shopping .el-form--inline {
-    height: 50px !important;
-  }
+  height: 50px !important;
+}
 
 .biaoto-buttonchaxuen {
   color: white !important;
@@ -838,7 +825,7 @@ export default {
   background-image: -webkit-linear-gradient(#a03834, #a03834);
   background-image: -o-linear-gradient(#a03834, #a03834);
   background-image: -ms-linear-gradient(#a03834, #a03834);
-  background-image: linear-gradient(#f65953, #a03834)!important;
+  background-image: linear-gradient(#f65953, #a03834) !important;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px;
@@ -847,5 +834,12 @@ export default {
   /*-webkit-box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
   /*box-shadow: 0 1px 0 rgba(160, 56, 52, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(160, 56, 52, 0.5) inset;*/
 }
-
+</style>
+<style lang="scss" scoped>
+.shopping{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
+}
 </style>

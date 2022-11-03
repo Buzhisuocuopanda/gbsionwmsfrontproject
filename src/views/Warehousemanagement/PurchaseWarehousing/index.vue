@@ -627,9 +627,9 @@ export default {
         deptName(val) {
             this.$refs.tree.filter(val);
         },
-      '$route' () {
-        this.getList();
-      }
+        '$route'() {
+            this.handleQuery();
+        }
     },
     created() {
         //仓库明细初始化
@@ -658,10 +658,6 @@ export default {
         console.log(this.form.cbpc16, 123456);
 
     },
-    // activated() {
-    //     // this.getList()
-    //     console.log('我被调用')
-    // },
     methods: {
 
 
@@ -1356,12 +1352,6 @@ export default {
         //   console.log(data);
         // }
     },
-    computed: {
-
-    },
-    mounted() {
-
-    }
 };
 </script>
 <style src="./PurchaseWarehousingcss/index.css" scoped>

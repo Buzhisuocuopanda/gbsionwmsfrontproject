@@ -109,12 +109,12 @@
                 </el-col>
             </el-row>
             <div>
-                <!-- <el-row>
+                <el-row>
                     <el-col :span="24">
                         <el-button plain style="float: left;margin-left: 1%;" type="primary" @click="_ly_addFrom">增行
                         </el-button>
                     </el-col>
-                </el-row> -->
+                </el-row>
                 <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
                     :cell-style="{ padding: '5px' }" style="width: 99%;margin-top: 10px;margin-left:0.5%;">
 
@@ -686,11 +686,11 @@ export default {
         },
         // 增加一行表单
         _ly_addFrom() {
-            if (this.tableData.length >= 5) {
-                this.$message.warning('最多只能添加5行')
-                // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-                return
-            }
+            // if (this.tableData.length >= 5) {
+            //     this.$message.warning('最多只能添加5行')
+            //     // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
+            //     return
+            // }
 
             this.tableData.push({
                 // id: this.dataId,
