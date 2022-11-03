@@ -6,7 +6,7 @@
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
+                    label-width="68px" style="flex-grow: 0;height: auto;">
 
                     <!--<el-form-item prop="cbpc07" label="编号">-->
                     <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
