@@ -2,7 +2,7 @@
   <!--生产总订单-->
   <div class="app-container">
     <div class="filter-container shengchuang">
-      <el-form :inline="true" style="flex-grow: 0;">
+      <el-form :inline="true" style="flex-grow: 0;height: auto;">
         <el-form-item label="订单号" class="item-r" label-width="60px">
           <el-input v-model="orderNo" class="filter-item" placeholder="订单号" />
         </el-form-item>
