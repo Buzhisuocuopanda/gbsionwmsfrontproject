@@ -193,7 +193,6 @@
 </template>
 
 <script>
-// import { PurchaseinboundAdds } from "@/api/Warehousemanagement/SalesShipment";
 
 import {
   PurchaseinboundAdd,
@@ -755,7 +754,8 @@ export default {
         // arr1[i].inQty = this.tableData[i].qty
         // arr1[i].ponumber = this.tableData[i].ponumber
       }
-      PurchaseinboundAdd(JSON.stringify(arr1)).then((response) => {
+      this.form2.goods = arr1
+      PurchaseinboundAdd(JSON.stringify(this.form2)).then((response) => {
         if (response.code == "200") {
           this.$message({ message: '’创建成功', type: 'success' })
           this.handlxiaoshourukudaneone()
@@ -912,6 +912,7 @@ export default {
             // item.orderDate = item.orderDate.slice(0,10) + ' ' + item.orderDate.slice(11,19)
           });
           this.form2.GsSalesOrders = orderno;
+          this.form2.gsid = this.form2.id
           console.log(this.tableData);
         }
       });
