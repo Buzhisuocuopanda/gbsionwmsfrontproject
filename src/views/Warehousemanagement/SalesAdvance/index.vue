@@ -600,7 +600,7 @@ export default {
         };
     },
     watch: {
-        // 根据名称筛选部门树
+        // 根据名称筛选部门树3
         deptName(val) {
             this.$refs.tree.filter(val);
         },
