@@ -11,7 +11,8 @@
                 <el-col :span="7">
                     <el-form-item label="日期:" style="margin-left:20%;" prop="cbaa08">
                         <!-- <el-input type="text" placeholder="" v-model="form2.CBAA08" style="width: 60%;"/> -->
-                        <el-date-picker type="date" placeholder="" v-model="form2.cbaa08" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss">
+                        <el-date-picker type="date" placeholder="" v-model="form2.cbaa08" style="width: 100%;"
+                            value-format="yyyy-MM-dd HH:mm:ss">
                         </el-date-picker>
                     </el-form-item>
 
@@ -166,9 +167,8 @@
 
                     <el-table-column label="数量" width="100" prop="cbab09">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab09"
-                                 @blur="chen(scope.row)"
-                                :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab09" @blur="chen(scope.row)" :precision="2" placeholder=""
+                                class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
@@ -182,8 +182,8 @@
                     </el-table-column>
                     <el-table-column prop="cbab12" label="金额" width="150">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab12"
-                                readonly placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
+                            <el-input v-model="scope.row.cbab12" readonly placeholder="" :precision="2"
+                                class="shuzicaoyou" style=""></el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab13" label="备注" width="">
@@ -208,7 +208,7 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="80">
                         <template slot-scope="scope">
-                            <span @click="_ly_delFrom(scope.row)">
+                            <span @click="_ly_delFrom(scope)">
                                 <i class="el-icon-delete" style="color: red;"></i>
                             </span>
                         </template>
@@ -229,7 +229,7 @@
 <script>
 // import { PurchaseinboundAdd } from "@/api/Warehousemanagement/PurchaseWarehousing";
 
-import { PurchasereturnordersAdds, PurchasereturnordersAdd, PurchaseinboundLists,Selloutofwarehouseaupdate } from "@/api/Warehousemanagement/WarehouseTransfer";
+import { PurchasereturnordersAdds, PurchasereturnordersAdd, PurchaseinboundLists, Selloutofwarehouseaupdate } from "@/api/Warehousemanagement/WarehouseTransfer";
 import { getToken } from "@/utils/auth";
 //仓库
 import kuweixxweihu from "@/components/WarehouseInfoSku";
@@ -550,12 +550,12 @@ export default {
 
     },
     methods: {
-        price(value){
+        price(value) {
             this.form2.cbaa16 = value
         },
-        dingdan(row){
+        dingdan(row) {
             console.log(row)
-            this.$set(row,cbab15,row.cbab155)
+            this.$set(row, cbab15, row.cbab155)
             console.log(row)
         },
         //查询商品信息维护
@@ -695,26 +695,26 @@ export default {
             }
 
             this.tableData.push({
-                cbaa01 : this.form2.cbaa01,
-                cbab01 : '',
-                cbab08 : '',
-                cbab09 : '',
-                cbab11 : '',
-                cbab12 : '',
-                cbab13 : '',
-                cbab14 : '',
-                cbab144 : '',
-                cbab15 : '',
-                cbpc000 : '',
-                cbab155 : ''
+                cbaa01: this.form2.cbaa01,
+                cbab01: '',
+                cbab08: '',
+                cbab09: '',
+                cbab11: '',
+                cbab12: '',
+                cbab13: '',
+                cbab14: '',
+                cbab144: '',
+                cbab15: '',
+                cbpc000: '',
+                cbab155: ''
             })
             this.dataId++
             console.log(this.tableData, 852369);
         },
         // 删除一行表单
-        _ly_delFrom(index) {
-            console.log('index: ' + index)
-            this.tableData.splice(index, 1)
+        _ly_delFrom(row) {
+            // console.log('index: ' + index)
+            this.tableData.splice(row.$index, row.$index + 1)
         },
         // 点击select的时候，缓存下行号
         // 如果一行有多个树状结构的select，可以通过缓存列号，区分是哪个select
@@ -896,17 +896,17 @@ export default {
 
         /** 新增按钮操作 */
         handleAdd() {
-            this.form2.cbaa08 = this.form2.cbaa08.replace(' ','T') +'.000+08:00'
-            this.form2.goods.map((item) =>{
-                if(item.cbab15 == '国内订单'){
+            this.form2.cbaa08 = this.form2.cbaa08.replace(' ', 'T') + '.000+08:00'
+            this.form2.goods.map((item) => {
+                if (item.cbab15 == '国内订单') {
                     item.cbab15 = 1
-                }else if(item.cbab15 == '国际订单'){
+                } else if (item.cbab15 == '国际订单') {
                     item.cbab15 = 2
                 }
             })
-            if(this.form2.cbaa16 == 'CNY'){
+            if (this.form2.cbaa16 == 'CNY') {
                 this.form2.cbaa16 = 6
-            }else{
+            } else {
                 this.form2.cbaa16 = 5
             }
             console.log(this.form2);
@@ -930,8 +930,8 @@ export default {
                             // this._ly_ok();
                             this.$tab.closePage();
                             this.$router.go(-1);
-                        }else{
-                            this.form2.cbaa08 = this.form2.cbaa08.slice(0,10) + ' ' + res.cbaa08.slice(11,19)
+                        } else {
+                            this.form2.cbaa08 = this.form2.cbaa08.slice(0, 10) + ' ' + res.cbaa08.slice(11, 19)
                         }
                     });
                 } else {
@@ -959,7 +959,7 @@ export default {
             let id = this.$route.params.id
             PurchaseinboundLists(id, this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 let res = response.data.rows[0]
-                console.log(res,'--------------------------------------')
+                console.log(res, '--------------------------------------')
                 // // 日期
                 // this.form2.cbaa08 = res.cbaa08;
                 // // 编号
@@ -981,29 +981,29 @@ export default {
                 this.form2 = {
                     cbaa01: res.cbaa01,
                     cbaa07: res.cbaa07,
-                    cbaa08: res.cbaa08.slice(0,10) + ' ' + res.cbaa08.slice(11,19),
+                    cbaa08: res.cbaa08.slice(0, 10) + ' ' + res.cbaa08.slice(11, 19),
                     cbaa09: res.cbaa09,
-                    cbaa099:res.cbwa09,
+                    cbaa099: res.cbwa09,
                     cbaa10: res.cbaa10,
-                    cbaa100:res.cbwa10,
+                    cbaa100: res.cbwa10,
                     cbaa16: res.cala08,
-                    goods:[]
+                    goods: []
                     // "cbaa18": 0,
                     // "cbaa19": 0,
                 }
                 response.data.rows.map((item) => {
                     this.tableData.push({
-                        cbaa01 : item.cbaa01,
-                        cbab01 : item.cbab01,
-                        cbab08 : item.cbab08,
-                        cbab09 : item.cbab09,
-                        cbab11 : item.cbab11,
-                        cbab12 : item.cbab09 * item.cbab11,
-                        cbab13 : item.cbab13,
-                        cbab14 : item.cbsa01,
-                        cbab144 : item.cbsa08,
-                        cbab15 : item.cbab15 == 1?'国内订单':'国际订单',
-                        cbpc000 : item.pinpai + "~" + item.cbpb12 + "~" + item.cbpb08,
+                        cbaa01: item.cbaa01,
+                        cbab01: item.cbab01,
+                        cbab08: item.cbab08,
+                        cbab09: item.cbab09,
+                        cbab11: item.cbab11,
+                        cbab12: item.cbab09 * item.cbab11,
+                        cbab13: item.cbab13,
+                        cbab14: item.cbsa01,
+                        cbab144: item.cbsa08,
+                        cbab15: item.cbab15 == 1 ? '国内订单' : '国际订单',
+                        cbpc000: item.pinpai + "~" + item.cbpb12 + "~" + item.cbpb08,
                     })
                     // item.cbsc177 = item.orderClass;
                     // item.cbsc15 = item.supplierId;
@@ -1036,7 +1036,7 @@ export default {
         // 初始化表单数据，至少有一行表单数据
         this.tableData = []
         // this._ly_addFrom()
-        
+
     },
     watch: {
         visible(newVal) {
