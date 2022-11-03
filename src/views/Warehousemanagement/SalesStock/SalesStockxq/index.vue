@@ -20,7 +20,7 @@
                 <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">结算货币</template>{{ value.cala08 }}
                 </el-descriptions-item>
-                <el-descriptions-item label-class-name="my-labell01">
+                <!-- <el-descriptions-item label-class-name="my-labell01">
                     <template slot="label">关联订单</template>
                     {{
                             value.cbse18 == 0
@@ -29,7 +29,7 @@
                                     ? "否"
                                     : ""
                     }}
-                </el-descriptions-item>
+                </el-descriptions-item> -->
             </el-descriptions>
 
 

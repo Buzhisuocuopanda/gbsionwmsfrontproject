@@ -11,7 +11,7 @@
             <div style="width:97%; margin-left: 2%; margin-top: 1%;">
 
                 <el-table border :header-cell-style="headClasspwbitd" v-loading="loading" :data="userList"
-                    :row-style="{height: '3px'}" :cell-style="{padding: '2px'}"
+                    :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
                     <el-table-column prop="cbsa08" key="cbsa08" width="100px;" label="供应商">
@@ -49,7 +49,6 @@
                 <span class="saomiaojluuuu">财务:</span>
             </div>
         </section>
-        <div style="height:50px;"></div>
         <div style="margin-top:5%;">
             <div v-if="status == 8">
                 <el-button style="margin-left:3%;" type="primary" @click="PrintRow">打 印</el-button>
@@ -63,7 +62,6 @@
                 <el-button @click="handlefanhui">返回</el-button>
             </div>
         </div>
-        <div style="height:50px;"></div>
     </div>
 </template>
 <script>

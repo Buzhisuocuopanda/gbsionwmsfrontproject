@@ -82,7 +82,7 @@
       <div>
         <el-row>
           <el-col :span="24">
-            <el-button plain style="float: right" type="primary" @click="_ly_addFrom">增行</el-button>
+            <el-button plain style="float: left" type="primary" @click="_ly_addFrom">增行</el-button>
           </el-col>
         </el-row>
 
@@ -160,7 +160,7 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei">
+    <div class="tinajia_dingwei" style="top:0;left:0;margin-top:2%;margin-left:0%;position: relative; ">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>

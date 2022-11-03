@@ -75,7 +75,8 @@
                 <el-table border :header-cell-style="headClassSSK" :row-style="{ height: '3px' }"
                     :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="440"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;" @selection-change="handleSelectionChange">
+                    style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;"
+                    @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="cbse07" prop="cbse07" width="160px;" sortable />
                     <el-table-column label="日期" align="left" key="cbse08" prop="cbse08" :formatter="formatDate"
@@ -84,13 +85,13 @@
                     <el-table-column label="客户" align="left" key="cbca08" prop="cbca08" width="280px;" sortable />
                     <el-table-column label="仓库" align="left" key="cbwa09" prop="cbwa09" width="80" sortable />
                     <el-table-column label="结算货币" align="left" key="cala08" prop="cala08" sortable />
-                    <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" width="100" sortable>
+                    <!-- <el-table-column label="关联订单" align="left" key="cbse18" prop="cbse18" width="100" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbse18 == "1" ? "是" : "否"
                             }}
                             </div>
                         </template>
-                    </el-table-column>
+                    </el-table-column> -->
                     <el-table-column label="状态" align="center" key="cbse11" prop="cbse11" width="100" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbse11 == 0 ? "未审核" : scope.row.cbse11 == 1 ?
@@ -1489,22 +1490,24 @@ export default {
 
 </style>
 <style lang="scss" scoped>
-.tooltup{
-    width:100%;
+.tooltup {
+    width: 100%;
     display: flex;
     flex-direction: column;
     height: calc(93vh - 85px);
     padding: 0 !important;
     margin: 0;
 }
+
 ::v-deep .pagination-container .el-pagination {
     position: inherit;
 }
-.pagintotal{
+
+.pagintotal {
     flex-grow: 0;
     text-align: right;
-    height:auto;
-    padding:20px 0 0 !important;
-    margin:0;
+    height: auto;
+    padding: 20px 0 0 !important;
+    margin: 0;
 }
 </style>

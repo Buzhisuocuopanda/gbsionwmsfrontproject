@@ -106,7 +106,7 @@
                             </tr>
                         </thead>
                     </table>
-                    <div class="table-bodys" style="">
+                    <div class="table-bodys" style="height:auto">
                         <table border="1" style=" border: solid #ffffff thin; width:1610px;height:42px;" cellspacing="0"
                             class="tablebiankuans">
                             <tr style="">
@@ -173,9 +173,8 @@
                 </div>
             </div>
         </el-form>
-        <div>
-            <div style="height:80px;"></div>
-            <el-button type="primary" class="buttonbaocuens" @click="handleAdd">保存</el-button>
+        <div style="margin-left:1%;margin-top:2%">
+            <el-button type="primary" @click="handleAdd">保存</el-button>
             <el-button @click="handleChuangJiangone" style="margin-left:1%">取 消</el-button>
         </div>
     </div>
@@ -598,6 +597,6 @@ export default {
     }
 };
 </script>
-<style src="./WarehouseSummarycjcss/index.css">
+<style src="./WarehouseSummarycjcss/index.css" >
 
 </style>

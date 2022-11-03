@@ -57,15 +57,14 @@
           </el-form-item>
         </el-col>
         <!--订单类型展示-->
-        <el-col style="margin-left: 2%" :span="5">
+        <!-- <el-col style="margin-left: 2%" :span="5">
           <el-form-item label="关联订单:" prop="cbse18">
-            <!-- <el-input type="text" v-model="form2.cbse18" style="width:100%;" /> -->
             <el-select v-model="form2.cbse18" placeholder="" style="width: 77%">
               <el-option v-for="item in guanliandindan" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <!--订单类型id-->
         <!-- <el-col  v-if="false" style="margin-left: 2%;" :span="5">
                     <el-form-item label="关联订单:" prop="cbse18">
@@ -211,7 +210,7 @@
         </el-table>
       </div>
     </el-form>
-    <div class="tinajia_dingwei" style="margin-left:80%; margin-top: 10%;left:0;">
+    <div class="tinajia_dingwei" style="margin-left:1%; margin-top: 2%;left:0;">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <el-button type="primary" @click="handleAdd">保 存</el-button>
       <el-button @click="_ly_cancelDialog">取 消</el-button>

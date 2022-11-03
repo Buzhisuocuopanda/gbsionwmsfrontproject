@@ -41,9 +41,9 @@
           <el-descriptions-item label-class-name="my-labell01">
             <template slot="label">收货人</template>{{ value.cbsb18 }}
           </el-descriptions-item>
-          <el-descriptions-item label-class-name="my-labell01">
+          <!-- <el-descriptions-item label-class-name="my-labell01">
             <template slot="label">关联订单/提货单</template>{{ value.cbsb31 }}
-          </el-descriptions-item>
+          </el-descriptions-item> -->
         </el-descriptions>
         <el-descriptions class="margin-top" title="" :column="3" border v-for="(value, key) in userList.slice(0, 1)"
           :key="key">
@@ -129,7 +129,7 @@
           <span class="saomiaojluuuu">财务:</span>
         </div>
       </div>
-      <div class="saomiaojlu">出库建议表</div>
+      <div class="saomiaojlu" style="margin-top:3%">出库建议表</div>
       <el-descriptions class="margin-top" style="width: 90%; margin-left: 5%; margin-top: 1%" title="" :column="3"
         border v-for="(value, key) in userList.slice(0, 1)" :key="key">
         <el-descriptions-item label-class-name="my-labell012">
@@ -167,7 +167,7 @@
         </el-table-column>
       </el-table>
 
-      <div class="saomiaojlub">扫描记录</div>
+      <div class="saomiaojlub" style="margin-top:3%">扫描记录</div>
       <el-table style="margin-top: 1%; width: 90%; margin-left: 5%" :header-cell-style="headClass" v-loading="loading"
         border :data="userListed" :default-sort="{ prop: 'name', order: 'descending' }"
         @selection-change="handleSelectionChange">

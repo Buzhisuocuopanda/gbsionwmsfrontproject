@@ -50,7 +50,7 @@
       </el-descriptions>
       <div v-if="edit == 0 || edit == 3">
 
-        <el-table :data="userLists" height="250" border :default-sort="{ prop: 'name', order: 'descending' }"
+        <el-table :data="userLists" border :default-sort="{ prop: 'name', order: 'descending' }"
           @selection-change="handleSelectionChange">
           <el-table-column prop="supplierId" key="supplierId" label="供应商">
           </el-table-column>
@@ -91,7 +91,7 @@
           <el-table-column prop="remark" key="remark" label="备注">
           </el-table-column>
         </el-table>
-        <div class="saomiaojlu">出库建议表</div>
+        <div class="saomiaojlu" style="margin-top:3%">出库建议表</div>
         <el-descriptions class="margin-top" style="width: 100%; margin-top: 1%" title="" :column="3" border>
           <el-descriptions-item label-class-name="my-labell012">
             <template slot="label">客户</template>{{ userList.customerName }}
@@ -121,7 +121,7 @@
           </el-table-column>
         </el-table>
 
-        <div class="saomiaojlu">扫描记录</div>
+        <div class="saomiaojlu" style="margin-top:3%">扫描记录</div>
         <el-table style="margin-top: 1%; width: 100%;" border :data="userList1"
           :default-sort="{ prop: 'name', order: 'descending' }" :span-method="arraySpanMethod">
           <el-table-column type="index" :index="table_index" label="序号" width="50" align="center"></el-table-column>
