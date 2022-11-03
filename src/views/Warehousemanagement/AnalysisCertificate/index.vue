@@ -1,12 +1,12 @@
 <template>
   <!--质检单-->
     <div class="app-container ancerficate">
-        <el-row :gutter="20" style="margin-left:-10%;">
+        <el-row :gutter="20" style="margin:0;width: 100%;">
             <!--用户数据-->
             <el-col :span="20" :xs="24" class="tooltup" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-                    label-width="68px">
+                    label-width="68px" style="flex-grow: 0;height: auto;">
 
                     <el-form-item prop="sn" label="编号">
                         <el-input v-model="queryParams.cbqa07"  placeholder="请输入编号" clearable
@@ -71,7 +71,7 @@
 
                 <el-table border :header-cell-style="headClassac" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" v-loading="loading" :data="userList" height="470"
                     :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;" @selection-change="handleSelectionChange">
+                    style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" width="" align="left" key="cbqa07" prop="cbqa07" sortable  />
                     <el-table-column label="日期" width="300px;" align="left" key="cbqa08" prop="cbqa08"
@@ -1295,4 +1295,24 @@ export default {
 };
 </script>
 <style src="./AnalysisCertificatecss/index.css" scoped>
+</style>
+<style lang="scss" scoped>
+.tooltup{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+    padding: 0 !important;
+    margin: 0;
+}
+::v-deep .pagination-container .el-pagination {
+    position: inherit;
+}
+.pagintotal{
+    flex-grow: 0;
+    text-align: right;
+    height:auto;
+    padding:20px 0 0 !important;
+    margin:0;
+}
 </style>
