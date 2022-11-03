@@ -439,3 +439,12 @@ export default {
     }
 }
 </style>
+<style lang="scss" scoped>
+.Purchase_sum {
+    margin-top: 1%;
+    margin-left: 20%;
+    font-weight: 200;
+    display: block;
+    width: 63%;
+}
+</style>
