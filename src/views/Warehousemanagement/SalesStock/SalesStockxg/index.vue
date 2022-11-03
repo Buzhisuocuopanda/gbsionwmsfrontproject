@@ -967,9 +967,9 @@ export default {
         // 编号
         row.cbpg07 = this.form.cbpc07;
         // 客户id
-        row.cbse09 = this.form2.cbse09;
+        row.cbse09 = this.form2.cbca01;
         // 仓库
-        row.cbse10 = this.form2.cbse10;
+        row.cbse10 = this.form2.cbwa01;
         // 日期
         row.cbse08 = this.form2.cbsc08;
         if (this.form2.cbse166 == 'USD') {
