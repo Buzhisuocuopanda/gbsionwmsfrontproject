@@ -25,14 +25,14 @@
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[999999]" class="pagintotal" />
         </div>
 
-        <el-button type="primary" style="margin-left:10%;margin-top:4%;" @click="handlefanhui">返回</el-button>
+        <el-button type="primary" style="margin-left:5%;margin-top:4%;" @click="handlefanhui">返回</el-button>
     </div>
 
 </template>
 <script>
 import { QualityinLists } from "@/api/Warehousemanagement/AnalysisCertificate";
 export default {
-    name:"AnalysisCertificateXq",
+    name: "AnalysisCertificateXq",
     data() {
         return {
             // 遮罩层
@@ -60,7 +60,7 @@ export default {
 
     },
     created() {
-      console.log(10242)
+        console.log(10242)
         this.getList();
 
     },
