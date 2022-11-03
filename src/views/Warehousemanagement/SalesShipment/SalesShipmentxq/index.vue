@@ -150,8 +150,8 @@
         </el-table-column>
         <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
-        <el-table-column prop="sku" key="sku" align="" label="库位">
-        </el-table-column>
+        <!-- <el-table-column prop="sku" key="sku" align="" label="库位">
+        </el-table-column> -->
         <el-table-column prop="scanStatus" key="scanStatus" label="扫描状态">
           <!-- <template scope="scope">
             <div>
@@ -182,8 +182,8 @@
         </el-table-column>
         <el-table-column prop="sn" key="sn" align="" label="SN">
         </el-table-column>
-        <el-table-column prop="kwm" key="kwm" align="" label="库位">
-        </el-table-column>
+        <!-- <el-table-column prop="kwm" key="kwm" align="" label="库位">
+        </el-table-column> -->
       </el-table>
     </div>
     <div style="height: 50px"></div>
@@ -207,7 +207,7 @@
   </div>
 </template>
 <script>
-import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds,saleoutOrderdetailsexport1 } from "@/api/Warehousemanagement/SalesShipment";
+import { PurchaseinboundLists, PurchaseinboundSH, PurchaseinboundShs, PurchaseinboundShss, Purchaseinbounds, saleoutOrderdetailsexport1 } from "@/api/Warehousemanagement/SalesShipment";
 export default {
   name: 'AuthUser',
   data() {
@@ -372,8 +372,8 @@ export default {
     //销售出库单详情打印
     xiaoschukudandayin() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsexport1",{orderId:userId},'pdf')
-      
+      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsexport1", { orderId: userId }, 'pdf')
+
       // const userId = this.$route.params && this.$route.params.cbsb01;
       // saleoutOrderdetailsexport1({orderId:userId}).then((response) =>{
       //   const content = response
@@ -394,7 +394,7 @@ export default {
       //   window.URL.revokeObjectURL(ifr.src) // 释放URL 对象
 
       // })
-      
+
 
       // this.download(
       //   "/system/Selloutofwarehouse/saleoutOrderdetailsexport1?orderId=" +
@@ -417,7 +417,7 @@ export default {
     //销售出库建议表打印1
     xiaoschukujianyibiao() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1",{orderId:userId},'pdf')
+      this.printing("/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1", { orderId: userId }, 'pdf')
       // this.download(
       //   "/system/Selloutofwarehouse/saleoutOrderdetailsuggestsexport1?orderId=" +
       //   userId,
@@ -434,7 +434,7 @@ export default {
     /** 扫描记录表打印 */
     xiaoschukusaomiaojlubiao() {
       const userId = this.$route.params && this.$route.params.cbsb01;
-      this.printing("/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1",{orderId:userId},'pdf')
+      this.printing("/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1", { orderId: userId }, 'pdf')
       // this.download(
       //   "/system/Selloutofwarehouse/salescanOrderdetailsuggestsexport1?orderId=" +
       //   userId,

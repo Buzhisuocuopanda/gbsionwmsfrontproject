@@ -54,8 +54,8 @@
 
                 <el-table border :header-cell-style="headClassDR" :row-style="{ height: '3px' }"
                     :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList"
-                    :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:92.5%;height: 8%;margin-left: -2%;flex-grow: 1;overflow:auto;"
+                    :default-sort="{ prop: 'name', order: 'descending' }" height="500"
+                    style="width:92.5%;height: 8%;margin-left: -2%;flex-grow: 1;"
                     @selection-change="handleSelectionChange" class="middle">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="类型" align="left" key="cbpa07" prop="cbpa07" sortable width="120px;" />
@@ -112,7 +112,7 @@
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
-                    class="pagintotal" style="flex-grow: 0;" />
+                    class="pagintotal" style="flex-grow: 0;text-align: right;" />
             </el-col>
         </el-row>
 
@@ -1214,24 +1214,14 @@ export default {
 }
 
 // 
-.pagintotal {
-    // position:fixed;
-    // bottom: 2%;
-    // right: 0%;
-    // left: 0%;
-}
 
-.pagination-container {
-    height: 5%;
-    padding: 0 !important;
+.pagination-container{
+    height: auto;
+    padding: 20px 0 0 !important;
     margin: 0;
+    width: 90%;
 }
-
-::v-deep .el-table__header-wrapper {
-    overflow: unset;
-}
-
-::v-deep .el-table__body-wrapper {
-    overflow: unset;
+::v-deep .pagination-container .el-pagination {
+    position: inherit;
 }
 </style>
