@@ -945,6 +945,7 @@ export default {
             item.cbsc144 = item.noSendQty;
             item.cbsc15 = item.remark;
             item.cbsc14 = item.saleOrderId;
+            item.cbob01 = item.cbob01
             item.cbpc000 =
               item.brand + "~" + item.model + "~" + item.description;
             if (item.cbsc177 == "国内订单") {
