@@ -12,8 +12,8 @@
                     <!--<el-input v-model="queryParams.cbpc07" id="miaoshu" placeholder="请输入编号" clearable-->
                     <!--style="width: 240px;border:solid #eee thin;" @keyup.enter.native="handleQuery" />-->
                     <!--</el-form-item>-->
-                    <el-form-item prop="cbpb08" label="描述">
-                        <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入描述" clearable
+                    <el-form-item prop="cbpb08" label="编号">
+                        <el-input v-model="queryParams.cbpb08" id="miaoshu" placeholder="请输入编号" clearable
                             style="width: 240px;" @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="ponumber" label="PONumber" style="margin-left:1%;">
@@ -75,7 +75,7 @@
                         sortable /> -->
                     <el-table-column label="编号" width="160px;" align="left" key="orderNo" :show-overflow-tooltip="true"
                         prop="orderNo" sortable />
-                    <el-table-column label="订单编号" width="160px;" align="left" key="ponumber" prop="ponumber" sortable />
+                    <el-table-column label="PONumber" width="160px;" align="left" key="ponumber" prop="ponumber" sortable />
                     <el-table-column label="日期" width="130px;" align="left" key="orderDate" prop="orderDate"
                         :formatter="formatDate" sortable>
                     </el-table-column>
