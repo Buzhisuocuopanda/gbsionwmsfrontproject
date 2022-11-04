@@ -43,7 +43,7 @@
         <el-table-column  label="国内可用库存数量" align="right" prop="lockQty" :formatter="rounding" min-width="100px;"/>
         <!--<el-table-column label="仓库" align="center" prop="cbwa09" min-width="80px;" />-->
         <!--<el-table-column  label="状态" align="center" prop="status" min-width="120px;" :formatter="formatStateType"/>-->
-        <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+        <el-table-column v-if="false" label="操作" align="center" width="160" class-name="small-padding fixed-width">
           <template slot-scope="scope">
 
             <el-button size="mini" type="text"  class="button-caozuoxougai"
