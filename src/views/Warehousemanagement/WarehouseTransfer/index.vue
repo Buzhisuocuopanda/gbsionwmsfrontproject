@@ -31,8 +31,8 @@
                         <el-button size="mini" type="danger" class="biaoto-buttonshanchu" :disabled="multiple"
                             v-hasPermi="['system:warehousetransferordersController:remove']" @click="handleDelete">删除
                         </el-button>
-                        <!-- <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button> -->
+                        <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
+                            v-hasPermi="['system:user:import']">导入</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
@@ -65,7 +65,7 @@
                     <el-table-column label="关联订单" width="120px;" align="center" key="cbaa18" prop="cbaa18" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbaa18 == 1 ? "是" : scope.row.cbaa18 == 0 ?
-                                    "否" : "未确定状态"
+                                    "否" : "否"
                             }}
                             </div>
                         </template>
@@ -453,7 +453,7 @@ export default {
                 // 设置上传的请求头部
                 headers: { Authorization: "Bearer " + getToken() },
                 // 上传的地址
-                url: process.env.VUE_APP_BASE_API + "/system/barcode/importSwJsSkuBarcode"
+                url: process.env.VUE_APP_BASE_API + "/system/WarehousetransferordersController/importSwJsGoods"
             },
             // 查询参数
             queryParams: {
@@ -1301,7 +1301,7 @@ export default {
         },
         /** 下载模板操作 */
         importTemplate() {
-            this.download('/system/barcode/importSwJsSkuBarcodeimportTemplate', {
+            this.download('/system/WarehousetransferordersController/importTemplate', {
             }, `user_template_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
