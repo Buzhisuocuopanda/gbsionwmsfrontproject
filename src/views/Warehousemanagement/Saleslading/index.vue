@@ -175,8 +175,8 @@
           </el-popover>
         </el-col>
         <el-col :span="6">
-          <el-input v-model="queryParamsxs.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
-            @change="handleQuerys(queryParamsxs.orderNo)" />
+          <el-input v-model="queryParamsxs.saleNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
+            @change="handleQuerys(queryParamsxs.saleNo)" />
         </el-col>
 
         <el-col :span="6">
@@ -845,7 +845,7 @@ export default {
       this.form2.cbpc10 = ""
       this.valuexs = ""
       this.queryParamsxs.whId = null
-      this.queryParamsxs.orderNo = null
+      this.queryParamsxs.saleNo = null
       this.queryParamsxs.customerName = null
     },
     //列表表头设置
