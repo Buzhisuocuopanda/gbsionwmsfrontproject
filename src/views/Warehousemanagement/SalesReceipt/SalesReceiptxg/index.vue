@@ -117,19 +117,18 @@
           </el-col>
         </el-row>
 
-        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{height: '10px'}"
-          :cell-style="{padding: '5px'}" style="width: 100%;margin-top: 10px;">
+        <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
+          :cell-style="{ padding: '5px' }" style="width: 100%;margin-top: 10px;">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column label="工厂" width="150" prop="factory">
             <template slot-scope="scope" style="width: 100%">
-              <el-input v-model="scope.row.factory" placeholder="请输入工厂"
-                class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.factory" placeholder="请输入工厂" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cala08" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event,scope.row)" style="width:850px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:850px!important;" />
                 <el-input slot="reference" v-model="scope.row.pinpai" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -139,13 +138,14 @@
           <el-table-column label="描述" width="" />
           <el-table-column label="入库数量" width="150" prop="inQty">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.inQty" placeholder="" class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
+              <el-input v-model="scope.row.inQty" placeholder="" class="shuzicaoyou" style="" @input="chen(scope.row)">
+              </el-input>
             </template>
           </el-table-column>
           <el-table-column label="单价" prop="price">
             <template slot-scope="scope" style="width: 100%">
               <el-input v-model="scope.row.price" v-only-number="{ min: 0, precision: 0.0 }" placeholder=""
-                class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
+                class="shuzicaoyou" style="" @input="chen(scope.row)"></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" prop="qty">
@@ -672,7 +672,7 @@ export default {
       //商品id
       // 明细表内容
       let arr1 = []
-      this.tableData.map((item) =>{
+      this.tableData.map((item) => {
         arr1.push({
           "factory": item.factory,
           "goodsId": item.goodsId,
@@ -722,7 +722,7 @@ export default {
             //品牌、型号、描述
             // this.tableData.cbpc000 = this.userList[0].cala08 + "~" + this.userList[0].cbpb12 + "~" + this.userList[0].cbpb08;
             this.tableData = res.data.goods
-            this.tableData.map((item,i) => {
+            this.tableData.map((item, i) => {
               //  this.form2.goodsId = item.goodsId;
               item.pinpai = item.pinpai + "~" + item.brand + "~" + item.goodsName;
               // //入库数量
@@ -736,14 +736,15 @@ export default {
               // item.id = this.userList[i].id;
             })
 
-          } 
+          }
         });
       }
     },
 
     chen(item) {
-      if (item.qty > 0 && item.price > 0) {
-        this.$set(item, 'totalprice', (parseFloat(item.qty) * parseFloat(item.price)))
+      console.log(item, "123----------4564")
+      if (item.inQty > 0 && item.price > 0) {
+        this.$set(item, 'totalprice', (parseFloat(item.inQty) * parseFloat(item.price)))
       }
     },
     // 合并单元格
@@ -755,7 +756,7 @@ export default {
     }) {
       if (columnIndex === 1) {
         return [1, 3];
-      } else if (columnIndex < 4 && columnIndex>1) {
+      } else if (columnIndex < 4 && columnIndex > 1) {
         return [0, 0];
       }
     },

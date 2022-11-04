@@ -127,8 +127,7 @@
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column label="工厂" prop="factory">
             <template slot-scope="scope" style="width: 100%">
-              <el-input v-model="scope.row.factory" placeholder="请输入工厂"
-                class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.factory" placeholder="请输入工厂" class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cala08" label="品牌">
@@ -146,13 +145,13 @@
           <el-table-column label="入库数量" prop="qty">
             <template slot-scope="scope" style="width: 100%">
               <el-input v-model="scope.row.qty" v-only-number="{ min: 0, precision: 0.0 }" placeholder=""
-                class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
+                class="shuzicaoyou" style="" @input="chen(scope.row)"></el-input>
             </template>
           </el-table-column>
           <el-table-column label="单价" prop="price">
             <template slot-scope="scope" style="width: 100%">
               <el-input v-model="scope.row.price" v-only-number="{ min: 0, precision: 0.0 }" placeholder=""
-                class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
+                class="shuzicaoyou" style="" @input="chen(scope.row)"></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" prop="qty">
@@ -719,13 +718,13 @@ export default {
         this.$set(item, 'totalprice', (parseFloat(item.qty) * parseFloat(item.price)))
         item.totalprice = parseFloat(item.qty) * parseFloat(item.price)
       }
-      console.log(item,'---------------------')
+      console.log(item, '---------------------')
     },
     // 合并单元格
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
       if (columnIndex === 1) {
         return [1, 3];
-      } else if (columnIndex < 4 && columnIndex>1) {
+      } else if (columnIndex < 4 && columnIndex > 1) {
         return [0, 0];
       }
     },
@@ -753,13 +752,13 @@ export default {
       let arr1 = [];
       for (let i = 0; i < that.tableData.length; i++) {
         arr1.push({
-          factory:that.tableData[i].factory,
+          factory: that.tableData[i].factory,
           goodsId: that.tableData[i].goodsId,
           // gsSalesOrders: that.tableData[i].id,
           inQty: that.tableData[i].qty,
           ponumber: that.tableData[i].ponumber,
-          price:that.tableData[i].price,
-          totalprice:that.tableData[i].totalprice
+          price: that.tableData[i].price,
+          totalprice: that.tableData[i].totalprice
         })
         // arr1[i].goodsId = this.tableData[i].goodsId
         // arr1[i].gsSalesOrders = this.tableData[i].id

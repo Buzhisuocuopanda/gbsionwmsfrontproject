@@ -780,7 +780,6 @@ export default {
       }
       const userId = this.$route.params && this.$route.params.cbse01;
       if (this.form.name != undefined) {
-        // this.tableData[0].cbsf16 = this.tableData[0].cbsf16 == '国际订单'?1:2
         let row = {};
         row.cbse01 = userId;
         // 编号
@@ -805,14 +804,14 @@ export default {
         row.goods = this.tableData;
         console.log(row, '数据', this.form2, '列表', this.tableData)
         console.log(row, "row---------------row")
-        PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
-          if (response.code == 200) {
-            console.log(response, 789);
-            this.$message({ message: "修改成功", type: "success" });
-            this.$tab.closePage();
-            this.$router.go(-1);
-          }
-        });
+        // PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
+        //   if (response.code == 200) {
+        //     console.log(response, 789);
+        //     this.$message({ message: "修改成功", type: "success" });
+        //     this.$tab.closePage();
+        //     this.$router.go(-1);
+        //   }
+        // });
       } else {
         this.$message.error("错了哦，商品名称没有填呢");
       }
