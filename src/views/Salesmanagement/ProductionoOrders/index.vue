@@ -145,7 +145,7 @@
 
         <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
           <el-form-item label="优先级" prop="priority">
-            <el-input v-model="formData.priority" style="width:50%" oninput="value=value.replace(/[^\d]/g,'')">
+            <el-input v-model.number="formData.priority" style="width:50%">
             </el-input>
           </el-form-item>
           <el-form-item label="订单号" prop="orderNo">
@@ -341,7 +341,7 @@ export default {
       rule: {
         priority: [
           { required: true, message: '请输入优先级' },
-          { type: 'number', message: '优先级必须为数字',trigger: 'change'}
+          { type: 'number', message: '优先级必须为数字',trigger: 'blur'}
         ],
         orderNo: [
           { required: true, message: '请输入订单号', trigger: 'blur' },
