@@ -3,8 +3,8 @@
   <div class="app-container">
     <el-row :gutter="20" style="margin:0;width: 100%;">
       <el-col :span="20" :xs="24" class="tooltup" style="width: 100%">
-        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
-          label-width="68px" style="flex-grow: 0;height: auto;">
+        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px"
+          style="flex-grow: 0;height: auto;">
           <el-form-item prop="orderNo" label="编号">
             <el-input v-model="queryParams.orderNo" id="miaoshu" placeholder="请输入编号" clearable style="width: 240px"
               @keyup.enter.native="handleQuery" />
@@ -83,8 +83,8 @@
 
         <el-table border :header-cell-style="headClassSld" :row-style="{ height: '3px' }"
           :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="440"
-          :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;"
-          @selection-change="handleSelectionChange">
+          :default-sort="{ prop: 'name', order: 'descending' }"
+          style="width:100%;height: 8%;margin-left: 0;flex-grow: 1;" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" width="155px;" sortable fixed />
           <el-table-column label="日期" align="left" key="orderDate" prop="orderDate" width="110px;"
@@ -154,7 +154,7 @@
         </el-table>
 
         <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
-          :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]" 
+          :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
           class="pagintotal" />
       </el-col>
     </el-row>
@@ -162,7 +162,7 @@
     <!--订单创建-->
     <el-dialog :visible.sync="open3" @close="close">
       <el-row :gutter="20" style="margin-left:-14px;margin-bottom:10px">
-        <el-col :span="8">
+        <el-col :span="6">
           <!-- <el-popover placement="bottom-start" trigger="click" clearable>
             <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 260px !important" />
             <el-input slot="reference" v-model="form2.cbpc100" placeholder="请选择仓库" readonly style="width: 96%">
@@ -174,31 +174,36 @@
             </el-input>
           </el-popover>
         </el-col>
-        <el-col :span="8">
-          <el-input v-model="queryParamsxs.orderNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
-            @change="handleQuerys(queryParamsxs.orderNo)" />
+        <el-col :span="6">
+          <el-input v-model="queryParamsxs.saleNo" id="miaoshu" placeholder="请输入销售订单编号" clearable style="width: 100%"
+            @change="handleQuerys(queryParamsxs.saleNo)" />
         </el-col>
 
-        <el-col :span="8">
+        <el-col :span="6">
           <!-- <el-select v-model="valuexs" placeholder="请选择客户" @change="hello">
             <el-option v-for="item in customerLists" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select> -->
 
           <el-input v-model="queryParamsxs.customerName" id="miaoshu" placeholder="请输入客户名称" clearable
-            style="width: 240px" @keyup.enter.native="hello" />
+            style="width: 100%" @keyup.enter.native="hello" />
+        </el-col>
+        <el-col :span="4">
+          <el-button type="primary" @click="found">创建提货单</el-button>
         </el-col>
       </el-row>
       <el-table border :header-cell-style="headClassssmtt" v-loading="loading" :data="userList01" height="440"
         :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%; height: 8%; margin-left: -2%"
         @selection-change="handleSelectionChangee">
-        <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
+        <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width" type="selection">
+        </el-table-column>
+        <!-- <el-table-column label="" align="center" width="50" class-name="small-padding fixed-width">
           <template slot-scope="scope" style="margin-left: -10%">
             <el-button size="mini" icon="el-icon-share" class="button-caozuoxougai caozuoxiangqeng" type="primary"
               @click="sendParams(scope.row)">
             </el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column label="编号" align="left" key="orderNo" prop="orderNo" sortable
           style="padding-top: 60px !important" width="260px;" />
         <el-table-column label="单据日期" align="left" key="orderDate" prop="orderDate" width="180px;" sortable />
@@ -282,6 +287,7 @@ export default {
   components: { Treeselect, kuweixxweihu, supplierMaintenance },
   data() {
     return {
+      isok: false,
       whId: "",
       valuexs: null,
       customerLists: null,
@@ -732,6 +738,60 @@ export default {
     })
   },
   methods: {
+    found() {
+      let isok = true;
+      if (this.shenpiids[0]) {
+        let customerName1 = this.shenpiids[0].customerName
+        for (let i = 0; i < this.shenpiids.length; i++) {
+          if (this.shenpiids[i].customerName !== customerName1) {
+            isok = false
+          }
+        }
+      }
+      if (!this.form2.cbpc10) {
+        this.$message({
+          message: '请选择仓库',
+          type: 'warning'
+        });
+      } else if (!this.shenpiids[0]) {
+        this.$message({
+          message: '请选择订单',
+          type: 'warning'
+        });
+      }
+      else if (!isok) {
+        this.$message({
+          message: '请选择同一客户',
+          type: 'warning'
+        });
+      }
+      else {
+        console.log('跳转到创建界面')
+        this.$router.push({
+          path: "/system/user-authhhxsxiaosdingdantihuo/role/",
+          // name: "AuthUser",
+          query: {
+            data: this.idss,
+            whNameid: this.form2.cbpc10
+          },
+        });
+        this.form2.cbpc100 = ''
+        this.queryParams.orderNo = ''
+        this.open3 = false
+        this.valuexs = ""
+        this.form2.cbpc10 = ""
+        // this.queryParams.orderNo = ""
+        // this.valuexs = ""
+        // this.tcwhId = ""
+        // this.orderNo = ""
+        // this.tcOrderNo = ""
+        // this.form2.cbpc10 = ""
+        // this.orderNo1 = ""
+        // this.open3 = false
+        this.close()
+
+      }
+    },
     // 创建分页
     getList09() {
       this.loading = true;
@@ -785,7 +845,7 @@ export default {
       this.form2.cbpc10 = ""
       this.valuexs = ""
       this.queryParamsxs.whId = null
-      this.queryParamsxs.orderNo = null
+      this.queryParamsxs.saleNo = null
       this.queryParamsxs.customerName = null
     },
     //列表表头设置
@@ -1018,6 +1078,7 @@ export default {
       this.shenpiids = selection;
       this.single = selection.length != 1;
       this.multiple = !selection.length;
+      console.log(this.idss, "tis.idss------------this.idss")
     },
     // 处理多条数据
     changeMoreArrary(row, type) {
@@ -1642,22 +1703,24 @@ export default {
 
 </style>
 <style lang="scss" scoped>
-.tooltup{
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    height: calc(93vh - 85px);
-    padding: 0 !important;
-    margin: 0;
+.tooltup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
+  padding: 0 !important;
+  margin: 0;
 }
+
 ::v-deep .pagination-container .el-pagination {
-    position: inherit;
+  position: inherit;
 }
-.pagintotal{
-    flex-grow: 0;
-    text-align: right;
-    height:auto;
-    padding:20px 0 0 !important;
-    margin:0;
+
+.pagintotal {
+  flex-grow: 0;
+  text-align: right;
+  height: auto;
+  padding: 20px 0 0 !important;
+  margin: 0;
 }
 </style>

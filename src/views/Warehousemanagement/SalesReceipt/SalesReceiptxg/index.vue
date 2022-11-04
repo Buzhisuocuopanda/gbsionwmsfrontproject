@@ -6,10 +6,10 @@
         <el-col :span="6">
           <el-form-item label="销售预订单编号:" prop="orderNo">
             <!-- <el-input type="text" v-model="form2.orderNo" style="width: 60%;" /> -->
-            <el-popover placement="bottom-start" trigger="click">
+            <el-popover placement="bottom-start" trigger="click" disabled>
               <SalesBooking ref="SalesBooking" @selected="selected0222"
                 style="width:210px!important; height:100px!important;" />
-              <el-input slot="reference" v-model="form2.GsSalesOrders" placeholder="" readonly style="width:110%;">
+              <el-input slot="reference" v-model="form2.orderNo" placeholder="" readonly style="width:110%;">
               </el-input>
             </el-popover>
           </el-form-item>
@@ -139,7 +139,19 @@
           <el-table-column label="描述" width="" />
           <el-table-column label="入库数量" width="150" prop="inQty">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.inQty" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.inQty" placeholder="" class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column label="单价" prop="price">
+            <template slot-scope="scope" style="width: 100%">
+              <el-input v-model="scope.row.price" v-only-number="{ min: 0, precision: 0.0 }" placeholder=""
+                class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column label="价格" prop="qty">
+            <template slot-scope="scope" style="width: 100%">
+              <el-input v-model="scope.row.totalprice" v-only-number="{ min: 0, precision: 0.0 }" placeholder=""
+                class="shuzicaoyou" style="" readonly></el-input>
             </template>
           </el-table-column>
           <el-table-column label="PONumber" width="150" prop="ponumber">
@@ -664,7 +676,7 @@ export default {
         arr1.push({
           "factory": item.factory,
           "goodsId": item.goodsId,
-          "gsSalesOrders": item.gsSalesOrders,
+          // "gsSalesOrders": item.gsSalesOrders,
           // "id": item.id,
           "inQty": item.inQty,
           "ponumber": item.ponumber,
@@ -730,8 +742,8 @@ export default {
     },
 
     chen(item) {
-      if (item.cbpd09 > 0 && item.cbpd11 > 0) {
-        this.$set(item, 'cbpd12', (parseFloat(item.cbpd09) * parseFloat(item.cbpd11)))
+      if (item.qty > 0 && item.price > 0) {
+        this.$set(item, 'totalprice', (parseFloat(item.qty) * parseFloat(item.price)))
       }
     },
     // 合并单元格

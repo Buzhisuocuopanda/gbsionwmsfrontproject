@@ -1153,15 +1153,17 @@ export default {
     getList() {
       let routerParams = this.$route.query;
       this.formArr = routerParams.data;
-      let saleorder = this.$route.query.data
+      // console.log(this.$route.query, "this.$route.query----------this.$route.query")
+      let saleOrderIds = this.$route.query.data
       let whid = this.$route.query.whNameid
       console.log(this.$route)
       //    let zhuangh = JSON.parse(this.formArr);
       // console.log(zhuangh[0].id,889999);
       Purchaseinxiaoshoudingdan(
-        this.formArr,
+        // this.formArr,
+        saleOrderIds,
         whid,
-        this.addDateRange(this.queryParams, this.dateRange)
+        // this.addDateRange(this.queryParams, this.dateRange)
       ).then((response) => {
         this.form3 = response.data
         this.form2 = response.data

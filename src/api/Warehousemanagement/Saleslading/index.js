@@ -69,7 +69,7 @@ export function Purchaseinbounddingdanxsdd(data) {
 // }
 export function Purchaseinxiaoshoudingdan(CBPC01, whid) {
   return request({
-    url: '/whmanagement/takeOrderDetailBySaleId?saleOrderId=' + CBPC01 + '&whId=' + whid,
+    url: '/whmanagement/takeOrderDetailBySaleIds?saleOrderIds=' + CBPC01 + '&whId=' + whid,
     method: 'get'
   })
 }

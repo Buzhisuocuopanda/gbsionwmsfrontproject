@@ -26,7 +26,7 @@
                 <el-table :header-cell-style="headClass" v-loading="loading" border :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
 
-                    <el-table-column prop="cbwa09" key="cbsa01" label="供应商">
+                    <el-table-column prop="cbsa08" key="cbsa08" label="供应商">
                     </el-table-column>
                     <!-- <el-table-column prop="cbab15" key="cbab15" label="订单分类">
                     </el-table-column> -->

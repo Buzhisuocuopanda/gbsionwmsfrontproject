@@ -12,34 +12,38 @@
                 <el-descriptions-item>
                     <template slot="label">供料单位</template>{{ userList.supplierName }}
                 </el-descriptions-item>
-                <!-- <el-descriptions-item>
-                    <template slot="label">仓库</template>{{ value.cbwa09 }}
-                </el-descriptions-item> -->
-                <!-- <el-descriptions-item>
-                    <template slot="label">结算货币</template>USD
-                </el-descriptions-item> -->
+                <el-descriptions-item>
+                    <template slot="label">客户名称</template>{{ userList.customerName }}
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template slot="label">销售人员</template>{{userList.salerName}}
+                </el-descriptions-item>
             </el-descriptions>
 
             <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
 
-            <el-table :header-cell-style="headClass" v-loading="loading" border :data="tabData" height="280"
+            <el-table :header-cell-style="headClass" v-loading="loading" border :data="tabData" 
                 :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                 <el-table-column prop="factory" key="factory" label="工厂">
                 </el-table-column>
-                <el-table-column prop="cala08" key="cala08" label="品牌">
+                <el-table-column prop="pinpai" key="pinpai" label="品牌">
                 </el-table-column>
-                <el-table-column prop="cbpb12" key="cbpb12" label="型号">
+                <el-table-column prop="brand" key="brand" label="型号">
+                </el-table-column>
+                <el-table-column prop="goodsName" key="goodsName" label="描述">
                 </el-table-column>
                 <el-table-column prop="inQty" key="inQty" align="right" label="数量">
                 </el-table-column>
                 <!-- <el-table-column prop="cbpd09" key="cbpd09" align="right" label="已扫数量">
                 </el-table-column> -->
+                <el-table-column prop="ponumber" key="ponumber" align="right" label="PONumber">
+                </el-table-column>
                 <el-table-column prop="price" key="price" align="right" label="单价">
                 </el-table-column>
                 <el-table-column prop="totalPrice" key="totalPrice" align="right" label="金额">
                 </el-table-column>
-                <el-table-column prop="cbpc17" key="cbpc17" label="备注">
-                </el-table-column>
+                <!-- <el-table-column prop="cbpc17" key="cbpc17" label="备注">
+                </el-table-column> -->
             </el-table>
             <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                 :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[2, 5, 10, 15, 20]"
