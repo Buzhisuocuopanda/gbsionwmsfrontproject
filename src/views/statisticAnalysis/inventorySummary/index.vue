@@ -18,7 +18,7 @@
         </el-form-item>
         <!-- multiple-->
         <el-form-item label="商品"   class="item-r" ><!--:loading="loading1"-->
-          <el-select @change="getGoods" :remote-method="getGoods" v-el-select-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
+          <el-select  :remote-method="getGoods" v-el-select-loadmore="getGoodsloadmore"  v-model="queryParams.cbpb01" style="width: 200px" clearable filterable remote  placeholder="请输入关键词"  >
             <el-option v-for="item in goodList" :key="item.cbpb01" :label="item.cala08+' - '+item.cbpb12+' - '+item.cbpb08" :value="item.cbpb01"></el-option>
           </el-select>
 

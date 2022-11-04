@@ -51,7 +51,7 @@
         <el-table-column  label="销售单价R" :formatter="rounding3" align="right" prop="rprice" min-width="100px;"/>
         <el-table-column  label="经销商品名称" align="left" prop="suplierName" min-width="220px;"/>
         <el-table-column  label="品牌" align="left" prop="brand" min-width="100px;"/>
-        <el-table-column  label="工厂" align="left" prop="gc" min-width="100px;"/>
+        <el-table-column v-if="false" label="工厂" align="left" prop="gc" min-width="100px;"/>
         <!--<el-table-column  label="生产总订单号" align="center" prop="cbib16" min-width="100px;"/>-->
       </el-table>
       <el-pagination
