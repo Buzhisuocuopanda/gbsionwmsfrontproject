@@ -2,13 +2,13 @@
     <div class="app-container suppmaintence">
         <el-row :gutter="20">
             <!--用户数据-->
-            <el-col :span="20" :xs="24" style="width:100%;">
+            <el-col :span="20" :xs="24" style="width:100%;" class="prodtotal">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="85px" style="margin-left:2%;">
                     <el-form-item prop="cbsa08" label="供应商名称">
-                        <el-input v-model="queryParams.cbsa08"  placeholder="请输入客户名称" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                        <el-input v-model="queryParams.cbsa08" placeholder="请输入客户名称" clearable style="width: 240px;"
+                            @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item prop="cbsa14" label="联系人">
                         <!-- <el-select v-model="queryParams.cbsa18" placeholder="请输入发票类型" @keyup.enter.native="handleQuery" style="width: 240px;" clearable>
@@ -16,8 +16,8 @@
                                         :value="item.value">
                                     </el-option>
                                 </el-select> -->
-                        <el-input v-model="queryParams.cbsa14"  placeholder="请输入联系人" clearable
-                            style="width: 240px;" @keyup.enter.native="handleQuery" />
+                        <el-input v-model="queryParams.cbsa14" placeholder="请输入联系人" clearable style="width: 240px;"
+                            @keyup.enter.native="handleQuery" />
                     </el-form-item>
                     <el-form-item>
                         <el-button size="mini" class="biaoto-buttonchaxuen" v-hasPermi="['system:supplier:list']"
@@ -36,9 +36,10 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table :max-height="maxheight" border :header-cell-style="headClassSPM" :row-style="{height: '3px'}"
-                    :cell-style="{padding: '2px'}" v-loading="loading" height="480" :data="userList"
-                    :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                <el-table :max-height="maxheight" border :header-cell-style="headClassSPM"
+                    :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" v-loading="loading" height="480"
+                    :data="userList" :default-sort="{ prop: 'name', order: 'descending' }"
+                    @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="供应商名称" width="200" align="left" key="cbsa08" prop="cbsa08" sortable />
                     <el-table-column label="供应商地址" align="left" key="cbsa13" prop="cbsa13" locationNum />
@@ -179,14 +180,14 @@
                         </el-col>
 
                     </el-row>
-                  <el-row>
-                    <el-col :span="24"  style="margin-top: 10px;margin-left: -10%">
-                      <el-form-item >
-                        <el-button type="primary" @click="handleUpdate">确定</el-button>
-                        <el-button @click="cancello">取消</el-button>
-                      </el-form-item>
-                    </el-col>
-                  </el-row>
+                    <el-row>
+                        <el-col :span="24" style="margin-top: 10px;margin-left: -10%">
+                            <el-form-item>
+                                <el-button type="primary" @click="handleUpdate">确定</el-button>
+                                <el-button @click="cancello">取消</el-button>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                 </div>
             </el-form>
         </el-dialog>
@@ -409,7 +410,7 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="24"  style="margin-top: 10px">
+                        <el-col :span="24" style="margin-top: 10px">
                             <el-form-item>
                                 <el-button type="primary" @click="handleAdd">确定</el-button>
                                 <el-button @click="cancel">取消</el-button>
@@ -640,12 +641,12 @@ export default {
                 cbsa14: [
                     { required: true, message: "联系人不能为空!", trigger: "blur" }
                 ],
-              cbsa13: [
-                { required: true, message: "供应商地址不能为空!", trigger: "blur" }
-              ],
-              cbsa07: [
-                { required: true, message: "供应商状态不能为空!", trigger: "blur" }
-              ],
+                cbsa13: [
+                    { required: true, message: "供应商地址不能为空!", trigger: "blur" }
+                ],
+                cbsa07: [
+                    { required: true, message: "供应商状态不能为空!", trigger: "blur" }
+                ],
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
                 // ],
@@ -684,10 +685,10 @@ export default {
                     { required: true, message: "联系人不能为空!", trigger: "blur" }
                 ],
                 cbsa13: [
-                  { required: true, message: "供应商地址不能为空!", trigger: "blur" }
+                    { required: true, message: "供应商地址不能为空!", trigger: "blur" }
                 ],
                 cbsa07: [
-                  { required: true, message: "供应商状态不能为空!", trigger: "blur" }
+                    { required: true, message: "供应商状态不能为空!", trigger: "blur" }
                 ],
                 // cbsa13: [
                 //     { required: true, message: "公司地址不能为空!", trigger: "blur" }
@@ -1239,4 +1240,18 @@ export default {
 </script>
 <style src="./SupplierMaintenancecss/index.css" scoped>
 
+</style>
+
+<style scoped>
+.prodtotal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+}
+
+.prodtotal .el-form--inline {
+    height: auto !important;
+    flex-grow: 0;
+}
 </style>
