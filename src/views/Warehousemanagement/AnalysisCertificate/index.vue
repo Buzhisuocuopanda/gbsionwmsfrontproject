@@ -951,7 +951,10 @@ export default {
                 // this.submitShangpin();
                 this.getList();
                 // this.open = false;
+              if(response.code == 200){
                 this.$message({ message: '反审成功', type: 'success' });
+              }
+
             });
           }).catch(() => { });
         },

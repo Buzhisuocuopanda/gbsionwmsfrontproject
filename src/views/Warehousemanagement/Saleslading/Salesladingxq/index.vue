@@ -298,6 +298,7 @@ export default {
       userLists: [],
       userList1: [],
       userListsss: [],
+      msgList:[],
       userId: undefined,
       //下拉列表sn数据
       snList: [],
@@ -399,6 +400,7 @@ export default {
           this.$message.warning("您已选择该sn号，请勿重复选择")
           row.sn = "";
           row.goodsMsg = "";
+          // row.goodsMsg = this.msgList[index];
           return
         }
       }
@@ -660,6 +662,7 @@ export default {
               item.sn2 = item.sn
               /*+ ' - ' + item.goodClass+ ' - '*/
               item.sn = item.sn + ' - ' + item.cbla09 + ' - ' + item.brand + ' - ' + item.model + ' - ' + item.description
+              this.msgList.push(item.sn);
               return item
             });
           }
