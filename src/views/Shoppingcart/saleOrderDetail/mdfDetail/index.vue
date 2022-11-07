@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
-      <div class="chuangjiancaigous">销售订单</div>
+      <div class="chuangjiancaigous">国内销售订单</div>
 
       <!-- 编号:56221589223 -->
 
@@ -1447,7 +1447,7 @@ export default {
           this.$store.dispatch("tagsView/delView", this.$route)
           this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
 
-        } else {
+              // this.$message.error(response.msg)
 
           // this.$message.error(response.msg)
 
