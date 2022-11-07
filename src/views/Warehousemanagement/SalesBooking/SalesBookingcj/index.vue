@@ -132,14 +132,19 @@
           <el-table-column label="数量" width="200px">
             <template slot-scope="scope" style="width:200%;">
               <!-- <el-input v-model="scope.row.qty" v-only-number="{max: 100, min: 0, precision:0.00}"  placeholder="" class="shuzicaoyou" style=""></el-input> -->
-              <el-input v-model="scope.row.qty" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.qty" placeholder="" class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
             </template>
           </el-table-column>
           <el-table-column label="价格" width="auto">
             <template slot-scope="scope" style="width:200%;">
-              <el-input v-model="scope.row.price" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.price" placeholder="" class="shuzicaoyou" style="" @blur="chen(scope.row)"></el-input>
             </template>
           </el-table-column>
+          <!-- <el-table-column label="价格" width="auto">
+            <template slot-scope="scope" style="width:200%;">
+              <el-input v-model="scope.row.totalprice" placeholder="" class="shuzicaoyou" style="" readonly></el-input>
+            </template>
+          </el-table-column> -->
           <el-table-column prop="remark" label="备注" width="">
             <template slot-scope="scope">
 
@@ -637,6 +642,11 @@ export default {
 
   },
   methods: {
+    chen(item) {
+      if (item.qty > 0 && item.price > 0) {
+        this.$set(item, 'totalprice', (parseFloat(item.qty) * parseFloat(item.price)))
+      }
+    },
     orderdate(date) {
       console.log(date)
     },
@@ -648,12 +658,6 @@ export default {
       this.form2.cbsb177 = name.substring(0, name.indexOf("~"))
       this.form2.salerId = name.substring(name.indexOf("~") + 1)
       // this.form2.icon = name;
-    },
-
-    chen(item) {
-      if (item.cbpd09 > 0 && item.cbpd11 > 0) {
-        this.$set(item, 'cbpd12', (parseFloat(item.cbpd09) * parseFloat(item.cbpd11)))
-      }
     },
     // 合并单元格
     arraySpanMethod({

@@ -1085,13 +1085,14 @@ export default {
     // 销售订单 打印
     xiaoschukujianyibiao() {
       const userId = this.$route.query && this.$route.query.id;
-      console.log([userId, this.$route])
-      this.download(
-        "/sale/printSaleOrder?orderId=" +
-        userId,
-        {},
-        `销售订单表— ${new Date().toLocaleDateString()}.pdf`
-      );
+      this.printing("/sale/printSaleOrder", { orderId: userId }, 'pdf')
+      // console.log([userId, this.$route])
+      // this.download(
+      //   "/sale/printSaleOrder?orderId=" +
+      //   userId,
+      //   {},
+      //   `销售订单表— ${new Date().toLocaleDateString()}.pdf`
+      // );
     },
     // 销售订单打印页面
     xiaoschukudandayin(index, row) {
