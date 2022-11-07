@@ -929,9 +929,12 @@ export default {
     /** 销售提货单列表 查询 */
     getList() {
       this.loading = true;
+      // console.log(this.addDateRange(this.queryParams, this.dateRange), "this.dateRange----this.dateRange")
+      this.queryParams.startTime = this.dateRange[0]
+      this.queryParams.endTime = this.dateRange[1]
       console.log(this.queryParams, this.dateRange, "ceshi");
       Purchaseinbounddingdancx(
-        this.addDateRange(this.queryParams, this.dateRange)
+        this.queryParams
       ).then((response) => {
         this.userList = response.data.rows;
         this.total = response.data.total;
