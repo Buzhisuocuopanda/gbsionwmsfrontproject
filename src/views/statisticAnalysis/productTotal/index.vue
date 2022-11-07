@@ -28,7 +28,7 @@
       </el-form-item>
     </el-form>
     <!-- 表格 -->
-    <el-table :data="tableData" :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="490" style="width: 100%;  margin-top:0.1em" border :default-sort="{ prop: 'date', order: 'descending' }">
+    <el-table :data="tableData" :header-cell-style="headClasspw" :row-style="{height: '3px'}" :cell-style="{padding: '2px'}" height="490" style="width: 100%;  margin-top:0.1em;flex-grow: 1;" border :default-sort="{ prop: 'date', order: 'descending' }">
       <el-table-column prop="date" label="序号" type="index" sortable min-width="50" align="left"></el-table-column>
       <el-table-column prop="cbba07" label="订单号" sortable align="left" min-width="150"></el-table-column>
       <el-table-column prop="cala08" label="品牌" min-width="90" sortable align="left"></el-table-column>
@@ -54,7 +54,7 @@
       :total="total"
       :current-page.sync="queryParams.pageNum"
       :page-size.sync="queryParams.pageSize"
-      style="padding-top:20px; padding-left: 20px;float: right"
+      style="padding-top:20px; padding-left: 20px;text-align: right;flex-grow: 0;"
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="onSearch"
       @current-change="onSearch"/>
@@ -240,9 +240,15 @@
   },
 };
 </script>
-
-<style  scoped>
+<style lang="scss" scoped>
+.prodtotal{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(93vh - 85px);
+}
 .prodtotal .el-form--inline {
-  height: 60px !important;
+    height: auto !important;
+    flex-grow: 0;
 }
 </style>
