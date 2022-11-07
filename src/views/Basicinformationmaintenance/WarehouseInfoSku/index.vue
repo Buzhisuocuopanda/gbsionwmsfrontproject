@@ -2,7 +2,7 @@
     <div class="app-container waresku">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
-            <el-col class="tooltup" style="width:100%;">
+            <el-col class="tooltup prodtotal" style="width:100%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
@@ -29,8 +29,8 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassWSS" :row-style="{height: '3px'}"
-                    :cell-style="{padding: '2px'}" v-loading="loading" height="490" :data="userList"
+                <el-table border :header-cell-style="headClassWSS" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" height="490" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:92%;height: 8%; margin-left:-1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -56,7 +56,7 @@
                     <el-table-column label="启用总订单" width="120px;" align="left" key="cbwa13" prop="cbwa13" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa13 == 0 ? "是" : scope.row.cbwa13 == 1 ?
-                            "否" : "状态不确定"
+                                    "否" : "状态不确定"
                             }}
                             </div>
                         </template>
@@ -64,7 +64,7 @@
                     <el-table-column label="启用提货单" width="120px;" align="left" key="cbwa14" prop="cbwa14" sortable>
                         <template scope="scope">
                             <div>{{ scope.row.cbwa14 == 0 ? "是" : scope.row.cbwa14 == 1 ? "否" :
-                            "状态不确定"
+                                    "状态不确定"
                             }}
                             </div>
                         </template>
@@ -78,14 +78,13 @@
                     <el-table-column label="是否分配库存" width="150px;" align="center" key="allocationFlag"
                         prop="allocationFlag" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.allocationFlag == 1 ? "启用" : "禁用"  }}
+                            <div>{{ scope.row.allocationFlag == 1 ? "启用" : "禁用" }}
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column label="类型" width="100px;" align="center" key="type"
-                        prop="type" sortable>
+                    <el-table-column label="类型" width="100px;" align="center" key="type" prop="type" sortable>
                         <template scope="scope">
-                            <div>{{ scope.row.type == 0 ? "配件" : scope.row.type == 1 ? "商品" :null }}
+                            <div>{{ scope.row.type == 0 ? "配件" : scope.row.type == 1 ? "商品" : null }}
                             </div>
                         </template>
                     </el-table-column>
@@ -192,15 +191,15 @@
                                 </el-select>
                             </el-form-item>
                         </el-col> -->
-                      <el-col>
-                        <el-form-item label="是否可用来分配:" prop="allocationFlag">
-                          <el-select v-model="form.allocationFlag" placeholder="" style="width:55%;">
-                            <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
-                                       :value="dict.value"></el-option>
-                          </el-select>
-                        </el-form-item>
-                      </el-col>
-                      <el-col>
+                        <el-col>
+                            <el-form-item label="是否可用来分配:" prop="allocationFlag">
+                                <el-select v-model="form.allocationFlag" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                        :value="dict.value"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col>
                             <el-form-item label="类型:" prop="type">
                                 <el-select v-model="form.type" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Leixvalue" :key="dict.value" :label="dict.label"
@@ -301,15 +300,15 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                      <el-col>
-                        <el-form-item label="是否可用来分配:" prop="cbwa15">
-                          <el-select v-model="form1.allocationFlag" placeholder="" style="width:55%;">
-                            <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
-                                       :value="dict.value"></el-option>
-                          </el-select>
-                        </el-form-item>
-                      </el-col>
-                      <el-col>
+                        <el-col>
+                            <el-form-item label="是否可用来分配:" prop="cbwa15">
+                                <el-select v-model="form1.allocationFlag" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                        :value="dict.value"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col>
                             <el-form-item label="类型:" prop="type">
                                 <el-input v-model="form.type" maxlength="30" style="width:55%" />
                                 <!-- <el-select v-model="form.type" placeholder="" style="width:55%;">
@@ -408,15 +407,15 @@
                                 </el-select>
                             </el-form-item>
                         </el-col> -->
-                      <el-col>
-                        <el-form-item label="是否可用来分配:" prop="allocationFlag">
-                          <el-select v-model="form2.allocationFlag" placeholder="" style="width:55%;">
-                            <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
-                                       :value="dict.value"></el-option>
-                          </el-select>
-                        </el-form-item>
-                      </el-col>
-                      <el-col style="margin-top:1%;">
+                        <el-col>
+                            <el-form-item label="是否可用来分配:" prop="allocationFlag">
+                                <el-select v-model="form2.allocationFlag" placeholder="" style="width:55%;">
+                                    <el-option v-for="dict in Zhuangshifuokeyu" :key="dict.value" :label="dict.label"
+                                        :value="dict.value"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col style="margin-top:1%;">
                             <el-form-item label="类型:" prop="type">
                                 <el-select v-model="form2.type" placeholder="" style="width:55%;">
                                     <el-option v-for="dict in Leixvalue" :key="dict.value" :label="dict.label"
@@ -620,7 +619,7 @@ export default {
                 cbwa13: "",
                 cbwa14: "",
                 cbwa15: "",
-              allocationFlag: ""
+                allocationFlag: ""
             },
             form1: {
                 // classifyId: "",
@@ -641,7 +640,7 @@ export default {
                 cbwa14: "",
                 cbwa15: "",
                 allocationFlag: "",
-                type:'',
+                type: '',
             },
             defaultProps: {
                 children: "children",
@@ -881,7 +880,7 @@ export default {
                 cbwa13: undefined,
                 cbwa14: undefined,
                 cbwa15: undefined,
-                type:undefined,
+                type: undefined,
             };
             this.resetForm("form2");
         },
@@ -1081,10 +1080,10 @@ export default {
                 this.form.cbwa15 = "否"
                 row.cbwa15 = "1"
             }
-            if(row.allocationFlag == "0"){
+            if (row.allocationFlag == "0") {
                 this.form.allocationFlag = "不启用"
                 row.allocationFlag = "0"
-            }else if(row.allocationFlag == "1"){
+            } else if (row.allocationFlag == "1") {
                 this.form.allocationFlag = "启用"
                 row.allocationFlag = "1"
             }
@@ -1260,7 +1259,20 @@ export default {
 
 </style>
 <style lang="scss" scoped>
-    ::v-deep .el-dialog__wrapper{
-        align-items:inherit !important;
-    }
+::v-deep .el-dialog__wrapper {
+    align-items: inherit !important;
+}
+
+.prodtotal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+}
+
+.prodtotal .el-form--inline {
+    height: auto !important;
+    flex-grow: 0;
+}
 </style>
+

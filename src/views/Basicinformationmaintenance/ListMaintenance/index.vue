@@ -2,7 +2,7 @@
     <div class="app-container listmaince">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
-            <el-col class="tooltup" style="width:92%;">
+            <el-col class="tooltup prodtotal" style="width:92%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
@@ -32,8 +32,8 @@
                     </el-form-item>
                 </el-form>
 
-                <el-table border :header-cell-style="headClassLM" :row-style="{height: '3px'}"
-                    :cell-style="{padding: '2px'}" v-loading="loading" height="470" :data="userList"
+                <el-table border :header-cell-style="headClassLM" :row-style="{ height: '3px' }"
+                    :cell-style="{ padding: '2px' }" v-loading="loading" height="470" :data="userList"
                     :default-sort="{ prop: 'name', order: 'descending' }"
                     style="width:100%;height: 8%;margin-left: -1.5%;" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
@@ -763,4 +763,18 @@ export default {
 </script>
 <style src="./ListMaintenanceCss/index.css" scoped>
 
+</style>
+
+<style lang="scss" scoped>
+.prodtotal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+}
+
+.prodtotal .el-form--inline {
+    height: auto !important;
+    flex-grow: 0;
+}
 </style>

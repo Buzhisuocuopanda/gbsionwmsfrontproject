@@ -133,3 +133,22 @@ export function StoreSkuList(query) {
     params: query
   })
 }
+
+// countQuery/Inventorysummaryquery
+
+// 仓库汇总创建主表
+export function SwJsStoreadd(data) {
+  return request({
+    url: '/system/Warehouseinventorysummary/SwJsStoreadd',
+    method: 'post',
+    data: data
+  })
+}
+// 仓库汇总创建主表
+export function SwJsStoreadds(data) {
+  return request({
+    url: '/system/Warehouseinventorysummary/SwJsStoreadds',
+    method: 'post',
+    data: data
+  })
+}

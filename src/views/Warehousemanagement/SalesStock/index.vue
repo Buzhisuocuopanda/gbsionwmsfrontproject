@@ -1053,7 +1053,7 @@ export default {
         //标记完成
         PurchaseinboundBiaojiWancheng(row) {
             let cbpg01 = row.cbse01
-            let status = row.cbse11
+            let status = 9
             this.$router.push("/system/user-authhhhh/role/" + cbpg01 + status);
 
             // console.log(row.cbse01, 8888);

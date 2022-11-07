@@ -2,7 +2,7 @@
     <div class="app-container custmantencs">
         <el-row :gutter="20" style="margin-left:-10%;">
             <!--用户数据-->
-            <el-col class="tooltup" style="width:92%;">
+            <el-col class="tooltup prodtotal" style="width:92%;">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px">
@@ -1361,4 +1361,18 @@ export default {
 </script>
 <style src="./CustomerMaintenancecss/index.css" scoped>
 
+</style>
+
+<style lang="scss" scoped>
+.prodtotal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(93vh - 85px);
+}
+
+.prodtotal .el-form--inline {
+    height: auto !important;
+    flex-grow: 0;
+}
 </style>
