@@ -107,13 +107,13 @@
           </el-table-column>
           <el-table-column prop="cbpd11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd11" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }"
-                @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
+              <el-input v-model="scope.row.cbpd11" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style="">
+              </el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbpd12" label="金额" width="150">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbpd12" v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" disabled
+              <el-input v-model="scope.row.cbpd12" v-only-number="{ min: 0, precision: 0.0000 }" disabled
                 @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
             </template>
           </el-table-column>
@@ -556,7 +556,7 @@ export default {
 
     chen(item) {
       if (item.cbpd09 > 0 && item.cbpd11 > 0) {
-        this.$set(item, 'cbpd12', (parseFloat(item.cbpd09) * parseFloat(item.cbpd11)))
+        this.$set(item, 'cbpd12', item.cbpd09 * item.cbpd11)
       }
     },
     // 合并单元格
