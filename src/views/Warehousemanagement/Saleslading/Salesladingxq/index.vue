@@ -151,7 +151,7 @@
             <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }">
               <template :contentStyle="{ 'text-align': 'right' }" :labelStyle="{ 'text-align': 'center' }"
                 slot="label">本页金额小记</template>{{
-                    isNaN(parseFloat(totalnumber).toFixed(2)) ? '0.00' : parseFloat(totalnumber).toFixed(2)
+                    isNaN(parseFloat(totalPrice).toFixed(2)) ? '0.00' : parseFloat(totalPrice).toFixed(2)
                 }}
             </el-descriptions-item>
           </el-descriptions>
@@ -187,12 +187,13 @@
           :span-method="arraySpanMethods">
           <el-table-column prop="sn" key="sn" align="" label="SN">
             <template slot-scope="scope" style="width: 200%">
-              <!-- @change="getSnList(scope.row,value)" :remote-method="getSnList(query,scope.row)" --><!--v-el-select-loadmore="getLoadmoreSnList"-->
-              <el-select  :remote-method="(query) => getSnList(query, scope.row)" :disabled="scope.row.scanStatus == '已扫码'"
-                 v-model="scope.row.sn" style="width: 100%" filterable remote
+              <!-- @change="getSnList(scope.row,value)" :remote-method="getSnList(query,scope.row)" -->
+              <!--v-el-select-loadmore="getLoadmoreSnList"-->
+              <el-select :remote-method="(query) => getSnList(query, scope.row)"
+                :disabled="scope.row.scanStatus == '已扫码'" v-model="scope.row.sn" style="width: 100%" filterable remote
                 reserve-keyword placeholder="请输入关键词">
-                <el-option @click.native="updsteSn(scope.row, item)" v-for="item, index in scope.row.snList" :key="index"
-                  :label="item.goodsMsg" :value="item.sn"></el-option>
+                <el-option @click.native="updsteSn(scope.row, item)" v-for="item, index in scope.row.snList"
+                  :key="index" :label="item.goodsMsg" :value="item.sn"></el-option>
               </el-select>
               <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
                 <TakeSuggests
@@ -298,7 +299,7 @@ export default {
       userLists: [],
       userList1: [],
       userListsss: [],
-      msgList:[],
+      msgList: [],
       userId: undefined,
       //下拉列表sn数据
       snList: [],
@@ -319,7 +320,7 @@ export default {
         pageSize: 500,
         page: 1,
         size: 10,
-        goodsId:undefined,
+        goodsId: undefined,
         sn: undefined,
         cbpb08: undefined,
       },
@@ -410,18 +411,18 @@ export default {
       console.log(row.goodsId, 10142);
     },
     // 输入框内容改变时触发
-    getSnList(query,row) {
+    getSnList(query, row) {
       this.snQueryParams.pageNum = 1;
       this.snQueryParams.sn = query
       this.snQueryParams.cbpb08 = query
       this.snQueryParams.goodsId = row.goodsId
-      console.log(this.snQueryParams,11111)
+      console.log(this.snQueryParams, 11111)
       selectGoodsSnByStatus(this.snQueryParams).then(response => {
         if (response.code == 200) {
           this.snQueryParams.pageNum += 1;
           // this.snList = response.data;
           row.snList = response.data;
-          console.log(row.snList,2222)
+          console.log(row.snList, 2222)
         } else {
           // this.snList = [];
         }
@@ -658,7 +659,7 @@ export default {
           console.log(this.userListsss, "this.userListsss---------this.userListsss")
           if (this.edit == 1) {
             this.userList2 = res.data.sugests.map(item => {
-              this.getSnList(null,item);
+              this.getSnList(null, item);
               item.sn2 = item.sn
               /*+ ' - ' + item.goodClass+ ' - '*/
               item.sn = item.sn + ' - ' + item.cbla09 + ' - ' + item.brand + ' - ' + item.model + ' - ' + item.description

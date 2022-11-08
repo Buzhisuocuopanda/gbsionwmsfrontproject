@@ -193,9 +193,8 @@
           <el-table-column label="型号" width="200" />
           <el-table-column label="描述" width="200" />
 
-          <el-table-column prop="province" label="供应商" width="150">
+          <!-- <el-table-column prop="province" label="供应商" width="150">
             <template slot-scope="scope">
-              <!-- <el-input v-model="scope.row.cbsc15" placeholder=""></el-input> -->
               <el-popover placement="bottom-start" trigger="click" disabled>
                 <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event, scope.row)"
                   style="width: 210px !important" />
@@ -203,7 +202,7 @@
                 </el-input>
               </el-popover>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <!-- <el-table-column prop="province" label="订单分类" width="150">
             <template slot-scope="scope">
               <el-select

@@ -90,13 +90,13 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:20px; padding-left: 10px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
-        @size-change="onSearch" @current-change="onSearch" />
+        style="padding-top:20px; padding-left: 10px;text-align: right;flex-grow: 0;"
+        layout="total, sizes, prev, pager, next, jumper" @size-change="onSearch" @current-change="onSearch" />
 
 
       <!--      创建-->
       <el-dialog :visible.sync="showaddDialog" :close-on-click-modal="false" title="创建生产订单" width="55%"
-        @close="closeAddDetail">
+        @close="closeAddDetail" style="top:15%">
 
         <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
           <el-form-item label="优先级" prop="priority">
@@ -147,7 +147,7 @@
 
       <!--      修改生成订单-->
       <el-dialog :visible.sync="showmdfDialog" :close-on-click-modal="false" title="修改生产订单" width="55%"
-        @close="closeMdfDetail">
+        @close="closeMdfDetail" style="top:15%">
 
         <el-form label-position="right" label-width="80px" :model="formData" :rules="rule">
           <el-form-item label="优先级" prop="priority">
@@ -197,7 +197,7 @@
 
       <!--            详情-->
       <el-dialog :visible.sync="showDialog" :close-on-click-modal="false" title="生产订单详情" width="55%"
-        @close="closeDetail">
+        @close="closeDetail" style="top:15%">
         <!--        <el-form ref="infoform" :inline="true" label-width="11em" label-position = "right">-->
         <!--          <div class="divv" >-->
         <!--            <span>基本信息</span>-->
@@ -281,7 +281,7 @@
       </el-dialog>
 
       <!-- 用户导入对话框 -->
-      <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
+      <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body style="top:15%">
         <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers"
           :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
           :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
@@ -347,7 +347,7 @@ export default {
       rule: {
         priority: [
           { required: true, message: '请输入优先级' },
-          { type: 'number', message: '优先级必须为数字',trigger: 'blur'}
+          { type: 'number', message: '优先级必须为数字', trigger: 'blur' }
         ],
         orderNo: [
           { required: true, message: '请输入订单号', trigger: 'blur' },
@@ -472,12 +472,12 @@ export default {
     },
     // 批量删除
     pldelete1() {
-      if(this.multipleSelection.length == 0){
+      if (this.multipleSelection.length == 0) {
         this.$message({
           message: '请选择要删除的数据',
           type: 'warning',
         })
-      }else{
+      } else {
         this.$confirm('确定删除吗', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -1090,12 +1090,13 @@ export default {
 /*  box-sizing: border-box*/
 /*}*/
 
-.shengchuang{
-  width:100%;
+.shengchuang {
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: calc(93vh - 85px);
 }
+
 .caozuoxiangqengOrder {
   border: 0 !important;
   padding: 0 !important;

@@ -513,22 +513,35 @@ export default {
   },
   methods: {
     refreshTables(row, item) {
-      let id = this.$route.query.data
-      row.cbqb09 = undefined;
-      // let cbpm08 = this.tableData[0].cbpm08
-      // this.loading3 = true;
-      // console.log(cbpm08 + 'zgl', 111);
-      SwJsSkuBarcodeselectsss({
-        // cbpk01:id,
-        cbpm08: item.cbpm08,
-        // cbpm09: query
-      }).then((response) => {
-        // this.loading3 = false;
-        row.tableDatas = response.data.rows;
-        // this.totals = response.data.total;
-      }, error => {
-        // this.loading3 = false;
-      });
+      let index =0;
+      let str ="";
+      for(let i=0;i<this.tableData.length;i++){
+        if(str.indexOf(this.tableData[i].cbqb10)>=0){
+          index =1;
+        }
+        str+=this.tableData[i].cbqb10+",";
+      }
+      if(index ==0){
+        let id = this.$route.query.data
+        row.cbqb09 = undefined;
+        // let cbpm08 = this.tableData[0].cbpm08
+        // this.loading3 = true;
+        // console.log(cbpm08 + 'zgl', 111);
+        SwJsSkuBarcodeselectsss({
+          // cbpk01:id,
+          cbpm08: item.cbpm08,
+          // cbpm09: query
+        }).then((response) => {
+          // this.loading3 = false;
+          row.tableDatas = response.data.rows;
+          // this.totals = response.data.total;
+        }, error => {
+          // this.loading3 = false;
+        });
+      }else {
+        this.$message.error("提货单sn不能重复选择，请重新选择！！！");
+      }
+
     },
     //返回按钮
     handlefanhui: function (row) {
@@ -712,7 +725,14 @@ export default {
 
     /** 新增按钮操作 */
     handleAdd() {
-
+      let str ="";
+      for(let i=0;i<this.tableData.length;i++){
+        if(str.indexOf(this.tableData[i].cbqb10)>=0){
+          this.$message.error("提货单原sn重复，请重新选择！！！")
+          return
+        }
+        str+=this.tableData[i].cbqb10+",";
+      }
 
       this.form2.cbqa06 = "0";
       this.$refs["form2"].validate((item) => {
