@@ -187,7 +187,7 @@
           <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row)" v-el-select-loadmore="loadMore"
+                <el-select @change="goodsOnChange(scope.row)" v-el-select-loadmore="loadMore" @clear="clearVal"
                   v-model="scope.row.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择"
                   style="width: 100%;">
                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -877,6 +877,9 @@ export default {
 
   },
   methods: {
+    clearVal() {
+      this.dataFilter()
+    },
     //
     getDate() {
       this.formData.orderDate = new Date()

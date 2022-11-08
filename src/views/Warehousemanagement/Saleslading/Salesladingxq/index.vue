@@ -75,7 +75,7 @@
             <template scope="scope">
               <!-- <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status ==3 ? true : false"
                 oninput="value=value.replace(/[^\d]/g,'')" :readonly="edit == 3 ? true : false"></el-input> -->
-              <el-input v-model="scope.row.goodsNum" v-if="checkstatus != 2 && status == 3 ? true : false"
+              <el-input v-model="scope.row.goodsNum" disabled v-if="checkstatus != 2 && status == 3 ? true : false"
                 oninput="value=value.replace(/[^\d]/g,'')" readonly></el-input>
               <div v-text="rounding2(scope.row.goodsNum)" v-else></div>
             </template>
@@ -596,15 +596,22 @@ export default {
     },
     // 处理多条数据
     changeMoreArrary() {
-      let obj = {
-        "goodQty": 0,
-        "plId": 0
+      // let obj = {
+      //   "goodQty": 0,
+      //   "plId": 0
+      // }
+      // console.log(this.userLists, "this.userLists------------------------------this.userLists")
+      for (let i = 0; i < this.userLists.length; i++) {
+        let obj = {}
+        obj.goodQty = this.userLists[i].goodsNum
+        obj.plId = this.userLists[i].cbplId
+        this.paramss.goods.push(obj)
       }
-      this.paramss.goods = this.userLists.map(item => {
-        obj.goodQty = Number(item.qty);
-        obj.plId = item.cbplId;
-        return obj
-      })
+      // this.paramss.goods = this.userLists.map(item => {
+      //   obj.goodQty = Number(item.goodsNum);
+      //   obj.plId = item.cbplId;
+      //   return obj
+      // })
       console.log(this.paramss.goods, '4444')
     },
     // 多选框选中数据
