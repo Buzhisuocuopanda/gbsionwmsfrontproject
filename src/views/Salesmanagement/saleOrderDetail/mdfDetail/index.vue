@@ -186,9 +186,9 @@
           <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row, $event)" v-el-select-loadmore="loadMore"
-                  v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择"
-                  style="width: 100%;">
+                <el-select @change="goodsOnChange(scope.row, $event)" v-el-select-loadmore="loadMore" @clear="clearVal"
+                  @visible-change="Change" v-model="scope.row.goodsMsg" filterable clearable remote
+                  :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -870,6 +870,12 @@ export default {
 
   },
   methods: {
+    Change() {
+      this.dataFilter()
+    },
+    clearVal() {
+      this.dataFilter()
+    },
     // 合并单元格
     arraySpanMethod({
       row,

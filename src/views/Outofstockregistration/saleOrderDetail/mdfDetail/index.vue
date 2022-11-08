@@ -351,7 +351,7 @@
 
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerName">
-            <el-select @change="customerOnChange" v-model="formData.customerName"  filterable clearable
+            <el-select @change="customerOnChange" v-model="formData.customerName" filterable clearable
               :filter-method="customerdataFilter" v-loadmore="customerloadMore" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -363,8 +363,8 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUser">
-            <el-select @change="saleUserOnChange" v-el-select-loadmore="saleUserloadMore"  v-model="formData.saleUser" filterable clearable
-              :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="saleUserOnChange" v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUser"
+              filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -372,7 +372,7 @@
         </el-col>
 
         <el-col :span="8">
-          <el-form-item  label="订单类型:" prop="cboe21">
+          <el-form-item label="订单类型:" prop="cboe21">
             <el-select v-model="formData.cboe21" filterable clearable placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in orderClass" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -509,7 +509,7 @@
 
       <div>
         <el-row>
-          <el-col  :span="24">
+          <el-col :span="24">
             <el-button plain style="float: left;margin-left: 10px" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
         </el-row>
@@ -517,9 +517,11 @@
           <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
               <sapn>
-                <el-select @change="goodsOnChange(scope.row,$event)" v-el-select-loadmore="loadMore" v-model="scope.row.goodsMsg"
-                  filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
-                  <el-option @click.native="optionClick(scope.row,item)" v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                <el-select @change="goodsOnChange(scope.row, $event)" v-el-select-loadmore="loadMore"
+                  v-model="scope.row.goodsMsg" @clear="clearVal" @visible-change="Change" filterable clearable remote
+                  :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">
+                  <el-option @click.native="optionClick(scope.row, item)" v-for="item in options" :key="item.value"
+                    :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
               </sapn>
@@ -527,17 +529,19 @@
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
-          <el-table-column label="标准单价" prop="standardprice" width="150" >
+          <el-table-column label="标准单价" prop="standardprice" width="150">
             <template slot-scope="scope">
-              <el-input disabled   v-model="scope.row.standardprice"></el-input>
+              <el-input disabled v-model="scope.row.standardprice"></el-input>
             </template>
           </el-table-column>
-          <el-table-column  label="本次单价" prop="thisprice" width="150" >
+          <el-table-column label="本次单价" prop="thisprice" width="150">
             <template slot-scope="scope">
-              <el-input @input="sum2(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''" v-model="scope.row.thisprice"></el-input>
+              <el-input @input="sum2(scope.row)"
+                oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"
+                v-model="scope.row.thisprice"></el-input>
             </template>
           </el-table-column>
-          <el-table-column  prop="qty" label="数量" width="150">
+          <el-table-column prop="qty" label="数量" width="150">
             <template slot-scope="scope">
               <sapn>
                 <el-input v-model="scope.row.qty" placeholder="数量" @input="sum(scope.row)"
@@ -547,9 +551,9 @@
               </sapn>
             </template>
           </el-table-column>
-          <el-table-column label="金额" prop="monery" width="150" >
+          <el-table-column label="金额" prop="monery" width="150">
             <template slot-scope="scope">
-              <el-input disabled  v-model="scope.row.money"></el-input>
+              <el-input disabled v-model="scope.row.money"></el-input>
             </template>
           </el-table-column>
           <!--          <el-table-column prop="normalPrice" label="标准单价" width="150">
@@ -589,13 +593,13 @@
               </sapn>
             </template>
           </el-table-column>
-                    <el-table-column label="操作" align="center" width="80">
-                      <template slot-scope="scope">
-                        <span @click="_ly_delFrom(scope.$index)">
-                          <i class="el-icon-delete" style="color: red;"></i>
-                        </span>
-                      </template>
-                    </el-table-column>
+          <el-table-column label="操作" align="center" width="80">
+            <template slot-scope="scope">
+              <span @click="_ly_delFrom(scope.$index)">
+                <i class="el-icon-delete" style="color: red;"></i>
+              </span>
+            </template>
+          </el-table-column>
         </el-table>
         <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
           <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
@@ -986,8 +990,8 @@ export default {
         suplierId: "",
         answerMsg: "",
         process: "",
-        cboe21:null,
-        saleUser:null,
+        cboe21: null,
+        saleUser: null,
         orderType: 10,
         orderTypeMsg: "销售订单",
         orderClass: 2,
@@ -995,7 +999,7 @@ export default {
         receiveName: '',
         receivePhone: '',
         address: '',
-        cboe22:null,
+        cboe22: null,
         customerName: "",
       },
       form1: {
@@ -1062,7 +1066,7 @@ export default {
         pageSize: 10
       },
       saleUserListQuery: {
-        selectMsg:'',
+        selectMsg: '',
         pageNum: 1,
         pageSize: 10
       },
@@ -1094,11 +1098,11 @@ export default {
           { required: true, message: '请选择客户', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
-        cboe21:[
+        cboe21: [
           { required: true, message: '请选择订单类型', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
-        cboe22:[
+        cboe22: [
           { required: true, message: '请选择缺货币类型', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
         ],
@@ -1163,6 +1167,12 @@ export default {
 
   },
   methods: {
+    Change() {
+      this.dataFilter()
+    },
+    clearVal() {
+      this.dataFilter()
+    },
     // 合并单元格
     arraySpanMethod({
       row,
@@ -1265,9 +1275,9 @@ export default {
         canUseSku: 0,
         moner: '',
         province: '',
-        standardprice:undefined,
-        thisprice:undefined,
-        money:undefined
+        standardprice: undefined,
+        thisprice: undefined,
+        money: undefined
       })
       this.dataId++
       console.log(this.tableData);
@@ -1434,7 +1444,7 @@ export default {
       systemUserSelect(this.saleUserListQuery).then(response => {
         if (response.code == "200") {
           this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
-          console.log(response.data.rows,10194);
+          console.log(response.data.rows, 10194);
           this.saleUseroptions.push(...response.data.rows)
         } else {
           // this.$message.error(response.msg)
@@ -1605,7 +1615,7 @@ export default {
       });*/
 
     },
-    optionClick(row,item){
+    optionClick(row, item) {
 
       if (this.formData.customerId == null) {
         this.$message.error("请先选择客户")
@@ -1627,26 +1637,26 @@ export default {
         this.$message.error("不能添加重复商品")
         return
       }
-      if(row.goodsId!=null&&this.formData.customerId!=null&&this.formData.cboe21!=null){
+      if (row.goodsId != null && this.formData.customerId != null && this.formData.cboe21 != null) {
         let monery;
-        if(this.formData.cboe21=="1"){
+        if (this.formData.cboe21 == "1") {
           monery = 5;
-        }else if(this.formData.cboe21=="2"){
+        } else if (this.formData.cboe21 == "2") {
           monery = 6;
         }
         const param = {
           goodsId: row.goodsId,
           customerId: this.formData.customerId,
           orderClass: this.formData.cboe21,
-          cbobId:undefined,
-          currency:monery
+          cbobId: undefined,
+          currency: monery
 
         }
         goodsPriceAndSku(param).then(response => {
           if (response.code == "200") {
-            row.standardprice=parseFloat(response.data.normalPrice).toFixed(2)
+            row.standardprice = parseFloat(response.data.normalPrice).toFixed(2)
             // row.canUseSku=response.data.canUseSku
-          }else {
+          } else {
             /* row.normalPrice=0.0
              row.canUseSku=0.0*/
 
@@ -1752,20 +1762,20 @@ export default {
           }
           this.formData.goods = this.tableData
           updateSales(this.formData).then(response => {
-              if (response.code == "200") {
-                this.$message.success("修改成功")
-                this.$store.dispatch("tagsView/delView", this.$route)
-                // this.$router.push({path:"/Outofstockregistrationfh/role"})
-                this.$tab.closePage();
-                this.$router.go(-1);
-              } else {
+            if (response.code == "200") {
+              this.$message.success("修改成功")
+              this.$store.dispatch("tagsView/delView", this.$route)
+              // this.$router.push({path:"/Outofstockregistrationfh/role"})
+              this.$tab.closePage();
+              this.$router.go(-1);
+            } else {
 
-                // this.$message.error(response.msg)
+              // this.$message.error(response.msg)
 
-                // this.$router.go(-1)
+              // this.$router.go(-1)
 
-              }
-            })
+            }
+          })
         }
       })
 
@@ -1784,8 +1794,8 @@ export default {
     },
     sum2(row) {
       if (row.qty != null && row.thisprice != null) {
-        row.money = parseFloat(row.qty * row.thisprice).toFixed(2) ;
-      }else {
+        row.money = parseFloat(row.qty * row.thisprice).toFixed(2);
+      } else {
         row.money = undefined;
       }
     },
@@ -1825,11 +1835,11 @@ export default {
         this.formData.saleUserId = response.data.saleUserId
         this.formData.saleUser = response.data.saleUser
         this.formData.currency = response.data.currency
-  /*      this.formData.receiveName = response.data.receiveName
-        this.formData.receivePhone = response.data.receivePhone
-        this.formData.invoiceType = response.data.invoiceType
-        this.formData.address = response.data.address
-        this.formData.fcNumber = response.data.fcNumber*/
+        /*      this.formData.receiveName = response.data.receiveName
+              this.formData.receivePhone = response.data.receivePhone
+              this.formData.invoiceType = response.data.invoiceType
+              this.formData.address = response.data.address
+              this.formData.fcNumber = response.data.fcNumber*/
         this.formData.orderClassMsg = response.data.orderClassMsg
         this.formData.cboe21 = response.data.cboe21
         this.formData.cboe22 = response.data.cboe22
