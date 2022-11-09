@@ -1116,42 +1116,49 @@ export default {
       for (let i = 0; i < this.form2.goods.length; i++) {
         this.form2.goods[i].totalPrice = this.form2.goods[i].cbsc12
       }
-      console.log(this.form2)
-      this.$refs["form2"].validate((item) => {
-        if (item) {
-          PurchaseinboundAdd(this.form2).then((response) => {
-            console.log(response)
-            if (response.code == 200) {
-              this.$message({
-                message: "添加成功",
-                type: "success",
-                style: "color:red;!important",
-              });
-              this.submitShangpin();
-              this.open2 = false;
-              this.reset01();
+      let a = this.form2.goods.every(function (item) {
+        return item.noSendQty - item.qty >= 0
+      })
+      // console.log(a, "a---------------a")
+      if (a) {
+        this.$refs["form2"].validate((item) => {
+          if (item) {
+            PurchaseinboundAdd(this.form2).then((response) => {
+              console.log(response)
+              if (response.code == 200) {
+                this.$message({
+                  message: "添加成功",
+                  type: "success",
+                  style: "color:red;!important",
+                });
+                this.submitShangpin();
+                this.open2 = false;
+                this.reset01();
 
-              // this.$router.push("/Warehousemanagement/Saleslading/");
+                // this.$router.push("/Warehousemanagement/Saleslading/");
 
-              // const obj = { path: "/Warehousemanagement/Saleslading/" };
-              // this.$tab.closeOpenPage(obj);
+                // const obj = { path: "/Warehousemanagement/Saleslading/" };
+                // this.$tab.closeOpenPage(obj);
 
-              this.$tab.closePage();
-              this.$router.go(-1);
-              // this.$router.go(-1);
-              // this._ly_ok();
-            }
-            // this.tableData.forEach((item) => {
-            //   item.cbsb01 = response.data.id;
-            // });
-            // console.log(response.data.id, 123456);
-            // // console.log(this.item, 123456);
+                this.$tab.closePage();
+                this.$router.go(-1);
+                // this.$router.go(-1);
+                // this._ly_ok();
+              }
+              // this.tableData.forEach((item) => {
+              //   item.cbsb01 = response.data.id;
+              // });
+              // console.log(response.data.id, 123456);
+              // // console.log(this.item, 123456);
 
-          })
-        } else {
-          // this.$message.error('请注意规范');
-        }
-      });
+            })
+          } else {
+            // this.$message.error('请注意规范');
+          }
+        });
+      } else {
+        this.$message.error('提货数量不能大于剩余未发量');
+      }
     },
 
     /** 销售提货单 */
