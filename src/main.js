@@ -15,7 +15,9 @@ import plugins from './plugins' // plugins
 import {
   download
 } from '@/utils/request'
-import { prient } from '@/utils/Online printing'
+import {
+  prient
+} from '@/utils/Online printing'
 import './assets/icons' // icon
 import './permission' // permission control
 import {
@@ -65,6 +67,11 @@ import onlyNumber from '@/api/Warehousemanagement/PurchaseWarehousing/el-input'
 //数字保留两位小数
 import limitInput from '@/api/Warehousemanagement/PurchaseWarehousing/limitInput.js'
 
+// 确保计算精度
+import {
+  BigNumber
+} from 'bignumber.js';
+
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
@@ -76,6 +83,7 @@ Vue.prototype.selectDictLabels = selectDictLabels
 Vue.prototype.download = download
 Vue.prototype.handleTree = handleTree
 Vue.prototype.printing = prient
+Vue.prototype.BigNumber = BigNumber
 
 // 全局组件挂载
 Vue.component('DictTag', DictTag)
