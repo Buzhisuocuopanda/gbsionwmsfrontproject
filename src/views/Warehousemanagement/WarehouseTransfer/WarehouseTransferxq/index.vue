@@ -32,7 +32,7 @@
                     </el-table-column> -->
                     <el-table-column prop="pinpai" key="pinpai" align="left" label="品牌" width="120">
                     </el-table-column>
-                    <el-table-column prop="cbpb12" key="cbpb12" align="left" label="型号" width="120">
+                    <el-table-column prop="cbpb12" key="cbpb12" align="left" label="型号" width="130">
                     </el-table-column>
                     <el-table-column prop="cbpb08" key="cbpb08" align="left" label="描述" width="300">
                     </el-table-column>
@@ -40,9 +40,19 @@
                     </el-table-column>
                     <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量" width="80">
                     </el-table-column>
-                    <el-table-column prop="cbab11" key="cbab11" align="right" label="单价" width="60">
+                    <el-table-column prop="cbab11" key="cbab11" align="right" label="单价" width="90">
+                        <template slot-scope="scope">
+                            <div style="text-align: left">
+                            {{ parseFloat(scope.row.cbab11 == null ? 0 : scope.row.cbab11).toFixed(2) }}
+                            </div>
+                        </template>
                     </el-table-column>
-                    <el-table-column prop="cbab12" key="cbab12" align="right" label="金额" width="60">
+                    <el-table-column prop="cbab12" key="cbab12" align="right" label="金额" width="100">
+                        <template slot-scope="scope">
+                            <div style="text-align: left">
+                            {{ parseFloat(scope.row.cbab12 == null ? 0 : scope.row.cbab12).toFixed(2) }}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="cbpc17" key="cbpb08" label="备注">
                     </el-table-column>

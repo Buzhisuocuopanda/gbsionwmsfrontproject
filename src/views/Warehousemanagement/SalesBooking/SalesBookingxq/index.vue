@@ -34,6 +34,11 @@
                     <el-table-column prop="qty" key="qty" align="right" label="数量">
                     </el-table-column>
                     <el-table-column prop="price" key="price" align="right" label="单价">
+                        <template slot-scope="scope">
+                            <div style="text-align: right">
+                            {{ parseFloat(scope.row.price == null ? 0 : scope.row.price).toFixed(2) }}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="cbpd12" key="cbpd12" align="right" label="金额">
                         {{ parseFloat(totalPrice).toFixed(2) }}

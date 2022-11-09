@@ -282,7 +282,7 @@ export default {
     }
 };
 </script>
-<style src="./WarehouseInventoryxqcss/index.css">
+<style src="./WarehouseInventoryxqcss/index.css" scoped>
 
 </style>
 <style>
