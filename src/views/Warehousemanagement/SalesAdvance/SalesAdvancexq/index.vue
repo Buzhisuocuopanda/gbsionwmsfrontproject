@@ -171,10 +171,10 @@
                             </el-input>
                         </template>
                     </el-table-column>
-                    <el-table-column label="价格" width="100" prop="price">
+                    <el-table-column label="价格" width="130" prop="price">
                         <template slot-scope="scope" style="width:200%;">
-                            <el-input :disabled="true" v-model="scope.row.price" placeholder="" class="shuzicaoyou"
-                                style="" readonly>
+                            <el-input :disabled="true" v-model="scope.row.price.toFixed(2)" placeholder="" class="shuzicaoyou"
+                                style="" readonly >
                             </el-input>
                         </template>
                     </el-table-column>

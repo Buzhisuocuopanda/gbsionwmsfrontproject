@@ -1822,3 +1822,29 @@ export default {
 /*width: 100%;*/
 /*}*/
 </style>
+<style lang="scss" scoped>
+@page {
+    size: auto;
+    margin: 3mm;
+}
+
+@media print{
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+
+  body {
+    border: solid 1px #ffffff;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+
+  #printRecord table {
+    table-layout: auto !important;
+  }
+  #printRecord .el-table__body .el-table__row:first-child .el-table__cell {
+    width: 513px !important;
+  }
+}
+</style>
