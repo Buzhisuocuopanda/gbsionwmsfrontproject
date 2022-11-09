@@ -250,7 +250,7 @@
             </el-col>
           </el-row>
           <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-            <el-table-column prop="goodsMsg" label="品牌" width="">
+            <el-table-column prop="goodsMsg" label="品牌" width="150">
               <template slot-scope="scope">
                 <sapn>
                   <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
@@ -267,9 +267,9 @@
                 </sapn>
               </template>
             </el-table-column>
-            <el-table-column label="型号" width="" />
-            <el-table-column label="描述" width="" />
-            <el-table-column prop="qty" label="数量" width="150">
+            <el-table-column label="型号" width="150" />
+            <el-table-column label="描述" width="150" />
+            <el-table-column prop="qty" label="数量" width="100">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
@@ -1823,6 +1823,9 @@ export default {
 /*}*/
 </style>
 <style lang="scss" scoped>
+::v-deep .el-table__header,::v-deep .el-table__body{
+  width: 100% !important;
+}
 @page {
     size: auto;
     margin: 3mm;
@@ -1845,6 +1848,9 @@ export default {
   }
   #printRecord .el-table__body .el-table__row:first-child .el-table__cell {
     width: 513px !important;
+  }
+  #printRecord .el-table__header,#printRecord .el-table__body{
+    width: 100% !important;
   }
 }
 </style>

@@ -22,9 +22,9 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" class="filter-item" type="primary" style="margin-left: 0px" @click="handleQuery">查询</el-button>
-        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
-        <el-button v-hasPermi="['countQuery:inventsorysummaryquery:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery2:list']" class="filter-item" type="primary" style="margin-left: 0px" @click="handleQuery">查询</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery2:list']" class="filter-item" type="primary" style="margin-bottom:0;margin-left: 1em" @click="resetQuery">重置</el-button>
+        <el-button v-hasPermi="['countQuery:inventsorysummaryquery2:export']" class="filter-item" type="primary" v-on:click="exprotData()"  style="margin-bottom:0;margin-left: 1em" >导出</el-button>
       </el-form-item>
     </el-form>
     <!-- 表格 -->
