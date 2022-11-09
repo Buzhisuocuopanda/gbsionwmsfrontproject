@@ -267,13 +267,14 @@ export default {
             // this.queryParams.deptId = data.id;
             // console.log(data.label,88888);
             // const v1=data.label.substring(0, data.label.indexOf("-"));
-            this.form.cbpa11 = "";
+            // this.form.cbpa11 = "";
+            this.form.cbpa11 = data.code.split("~")[0];
             for (let i = 0; i < (data.code.split("~")).length - 1; i++) {
                 if (i != 0) {
                     this.form.cbpa011 += ("~" + (data.code.split("~"))[i])
-                    this.form.cbpa11 += ("~" + (data.code.split("~"))[i]).substring(data.code.indexOf("~") + 1)
+                    // this.form.cbpa11 += ("~" + (data.code.split("~"))[i]).substring(data.code.indexOf("~") + 1)
                 } else {
-                    this.form.cbpa11 += (data.code.split("~"))[i]
+                    // this.form.cbpa11 += (data.code.split("~"))[i]
                 }
             }
             // this.form.classifyNum =  data.code ? data.code.substring(0,data.code.indexOf("-") ):""//data.label.substring(v1.length+1, data.label.length);
@@ -335,8 +336,13 @@ export default {
             // this.form.cbpa09 = this.form.cbpa01
             this.form.cbpa01 = "";
             console.log(this.form, "123------------------this.form")
-            this.form.cbpa09 = this.form.cbpa011.substr(this.form.cbpa011.lastIndexOf('~') + 1)
-
+            console.log(this.form.cbpa011, "this.form.cbpa011--------this.form.cbpa011")
+            // this.form.cbpa09 = this.form.cbpa011.substr(this.form.cbpa011.lastIndexOf('~') + 1)
+            if (this.form.cbpa011) {
+                this.form.cbpa09 = this.form.cbpa011.substr(this.form.cbpa011.lastIndexOf('~') + 1)
+            } else {
+                this.form.cbpa09 = 0
+            }
 
             // return
             this.$refs["form"].validate((item) => {
@@ -541,19 +547,24 @@ export default {
     display: flex;
     justify-content: space-between;
 }
-.el-col-24{
+
+.el-col-24 {
     width: 85%;
 }
+
 .el-form-item--small.el-form-item {
     width: 73%;
 }
+
 .el-form-item--small .el-form-item__label {
     width: 18% !important;
 }
-.el-form-item--small .el-form-item__content{
+
+.el-form-item--small .el-form-item__content {
     width: 81%;
 }
-.el-input--small{
+
+.el-input--small {
     width: 100% !important;
 }
 </style>

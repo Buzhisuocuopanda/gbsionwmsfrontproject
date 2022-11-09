@@ -457,7 +457,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-xsch',
     component: Layout,
-    permissions: ['system:selloutofwarehouse:add','system:selloutofwarehouse:add'],
+    permissions: ['system:selloutofwarehouse:add', 'system:selloutofwarehouse:add'],
 
     children: [{
       path: 'role/',
@@ -1069,7 +1069,7 @@ export const dynamicRoutes = [{
   {
     path: '/system/user-zhijiandan',
     component: Layout,
-    permissions: ['system:qualityin:add','system:qualityin:edit'],
+    permissions: ['system:qualityin:add', 'system:qualityin:edit'],
     children: [{
         path: 'role/',
         name: 'AuthUser',
@@ -1142,8 +1142,9 @@ export const dynamicRoutes = [{
   {
     path: '/Salesmanagement/saleOrderDetail',
     component: Layout,
-    permissions: ['sale:saleOrderGj:detail','sale:saleOrderGj:edit',
-    'sale:saleOrder:detail'],
+    permissions: ['sale:saleOrderGj:detail', 'sale:saleOrderGj:edit',
+      'sale:saleOrder:detail'
+    ],
     children: [
 
       {
@@ -1343,7 +1344,7 @@ export const dynamicRoutes = [{
         icon: 'component',
         noCache: true
       }
-    },{
+    }, {
       // path: 'role/:cbpc01(\\d+)',
       path: 'aftermdsalesDetailsShow',
       name: 'aftermdsalesDetailsShow',
@@ -1416,7 +1417,7 @@ export const dynamicRoutes = [{
   {
     path: '/Salesmanagement/saleCgshowOrderDetail',
     component: Layout,
-    permissions: ['system:saleChange:add','system:saleChange:detail','system:saleChange:edit','system:saleChange:sh'],
+    permissions: ['system:saleChange:add', 'system:saleChange:detail', 'system:saleChange:edit', 'system:saleChange:sh'],
     children: [
 
       {
@@ -1662,7 +1663,7 @@ export const dynamicRoutes = [{
     component: Layout,
     redirect: 'Outofstockregistrationmd',
     name: 'Outofstockregistrationmd',
-    permissions: ['system:outofstockregistrationform:edit','system:outofstockregistrationform:detail'],
+    permissions: ['system:outofstockregistrationform:edit', 'system:outofstockregistrationform:detail'],
     query: {
       id: ''
     },
