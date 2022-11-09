@@ -249,12 +249,12 @@
               <!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
             </el-col>
           </el-row>
-          <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-            <el-table-column prop="goodsMsg" label="品牌" width="150">
+          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;">
+            <el-table-column prop="brand" label="品牌" width="170">
               <template slot-scope="scope">
                 <sapn>
                   <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
-                  <span>{{ scope.row.goodsMsg }}</span>
+                  <span>{{ scope.row.brand }}</span>
 
                   <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
                   <!--                  <el-option-->
@@ -267,8 +267,8 @@
                 </sapn>
               </template>
             </el-table-column>
-            <el-table-column label="型号" width="150" />
-            <el-table-column label="描述" width="150" />
+            <el-table-column prop="model" key="model" label="型号" width="170" />
+            <el-table-column prop="description" label="描述" width="170" />
             <el-table-column prop="qty" label="数量" width="100">
               <template slot-scope="scope">
                 <!--              <sapn>-->
@@ -1823,10 +1823,10 @@ export default {
 /*}*/
 </style>
 <style lang="scss" scoped>
-// ::v-deep .el-table__header,::v-deep .el-table__body{
-//   // width: 100% !important;
-//   // table-layout: auto !important;
-// }
+::v-deep .el-table__header,::v-deep .el-table__body{
+  width: 100% !important;
+  table-layout: auto !important;
+}
 @page {
     size: auto;
     margin: 3mm;
