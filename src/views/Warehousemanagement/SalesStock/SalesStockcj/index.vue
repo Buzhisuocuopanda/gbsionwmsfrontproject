@@ -163,20 +163,20 @@
 
           <el-table-column prop="cbsf09" label="数量" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{ min: 0, precision: 0.00 }" v-model="scope.row.cbsf09" @blur="chen(scope.row)"
-                :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbsf09" @blur="chen(scope.row)" :precision="2" placeholder=""
+                class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbsf11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{ min: 0, precision: 0.00 }" v-model="scope.row.cbsf11" @blur="chen(scope.row)"
-                :precision="2" placeholder="" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbsf11" @blur="chen(scope.row)" :precision="2" placeholder=""
+                class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input v-only-number="{ min: 0, precision: 0.00 }" @blur="chen(scope.row)" v-model="scope.row.cbsf12"
-                placeholder="" :precision="2" class="shuzicaoyou" style=""></el-input>
+              <el-input @blur="chen(scope.row)" v-model="scope.row.cbsf12" placeholder="" :precision="2"
+                class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -798,14 +798,20 @@ export default {
     show() {
       this.showSearch = !this.showSearch;
     },
-
+    // 乘法修正精度
+    mutiply(a, b) {
+      a = this.BigNumber(a);
+      b = this.BigNumber(b);
+      return a.multipliedBy(b).toNumber();
+    },
     chen(item) {
       if (item.cbsf09 > 0 && item.cbsf11 > 0) {
-        this.$set(
-          item,
-          "cbsf12",
-          parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
-        );
+        // this.$set(
+        //   item,
+        //   "cbsf12",
+        //   parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
+        // );
+        this.$set(item, 'cbsf12', this.mutiply(item.cbsf09, item.cbsf11))
       }
     },
     //添加模块-仓库

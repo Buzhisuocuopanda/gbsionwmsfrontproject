@@ -592,13 +592,20 @@ export default {
       this.$router.push("/system/user-zjdfh/role/");
     },
 
+    // 乘法修正精度
+    mutiply(a, b) {
+      a = this.BigNumber(a);
+      b = this.BigNumber(b);
+      return a.multipliedBy(b).toNumber();
+    },
     chen(item) {
       if (item.cbpd09 > 0 && item.cbpd11 > 0) {
-        this.$set(
-          item,
-          "cbpd12",
-          parseFloat(item.cbpd09) * parseFloat(item.cbpd11)
-        );
+        // this.$set(
+        //   item,
+        //   "cbpd12",
+        //   parseFloat(item.cbpd09) * parseFloat(item.cbpd11)
+        // );
+        this.$set(item, 'cbpd12', this.mutiply(item.cbpd09, item.cbpd11))
       }
     },
     // 合并单元格

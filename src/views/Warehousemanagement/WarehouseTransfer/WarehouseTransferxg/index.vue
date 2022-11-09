@@ -174,9 +174,8 @@
                     </el-table-column>
                     <el-table-column prop="cbab11" label="单价" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab11"
-                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" @blur="chen(scope.row)"
-                                :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab11" @blur="chen(scope.row)" :precision="2" placeholder=""
+                                class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
@@ -783,9 +782,16 @@ export default {
             this.showSearch = !this.showSearch;
         },
 
+        // 乘法修正精度
+        mutiply(a, b) {
+            a = this.BigNumber(a);
+            b = this.BigNumber(b);
+            return a.multipliedBy(b).toNumber();
+        },
         chen(item) {
             if (item.cbab09 > 0 && item.cbab11 > 0) {
-                this.$set(item, 'cbab12', (parseFloat(item.cbab09) * parseFloat(item.cbab11)))
+                // this.$set(item, 'cbab12', (parseFloat(item.cbab09) * parseFloat(item.cbab11)))
+                this.$set(item, 'cbab12', this.mutiply(item.cbab09, item.cbab11))
             }
         },
         //添加模块-调入仓库

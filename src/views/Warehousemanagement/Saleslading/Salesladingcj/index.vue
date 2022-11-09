@@ -983,12 +983,18 @@ export default {
     show() {
       this.showSearch = !this.showSearch;
     },
-
-    chen(row) {
+    // 乘法修正精度
+    mutiply(a, b) {
+      a = this.BigNumber(a);
+      b = this.BigNumber(b);
+      return a.multipliedBy(b).toNumber();
+    },
+    chen(item) {
       // this.form2.cbpd11 = "20";
       // this.form2.cbpd12 = this.form2.cbpd11 * this.form2.cbpd09;
-      this.$set(row, "cbsc12", row.cbsc11 * row.qty)
-      console.log([row, row.cbsc11, row.qty])
+      // this.$set(row, "cbsc12", row.cbsc11 * row.qty)
+      this.$set(item, 'cbsc12', this.mutiply(item.cbsc11, item.qty))
+      // console.log([row, row.cbsc11, row.qty])
     },
     //添加模块-仓库
     selected01(name) {

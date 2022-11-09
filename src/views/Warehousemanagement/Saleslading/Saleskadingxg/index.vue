@@ -764,14 +764,20 @@ export default {
     show() {
       this.showSearch = !this.showSearch;
     },
-
+    // 乘法修正精度
+    mutiply(a, b) {
+      a = this.BigNumber(a);
+      b = this.BigNumber(b);
+      return a.multipliedBy(b).toNumber();
+    },
     chen(item) {
       if (item.cbsf09 > 0 && item.cbsf11 > 0) {
-        this.$set(
-          item,
-          "cbsf12",
-          parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
-        );
+        // this.$set(
+        //   item,
+        //   "cbsf12",
+        //   parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
+        // );
+        this.$set(item, 'cbsf12', this.mutiply(item.cbsf09, item.cbsf11))
       }
     },
     //添加模块-仓库
