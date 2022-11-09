@@ -1823,9 +1823,10 @@ export default {
 /*}*/
 </style>
 <style lang="scss" scoped>
-::v-deep .el-table__header,::v-deep .el-table__body{
-  width: 100% !important;
-}
+// ::v-deep .el-table__header,::v-deep .el-table__body{
+//   // width: 100% !important;
+//   // table-layout: auto !important;
+// }
 @page {
     size: auto;
     margin: 3mm;
@@ -1840,9 +1841,19 @@ export default {
 
   body {
     border: solid 1px #ffffff;
-    /* margin: 10mm 15mm 10mm 15mm; */
+    margin: 10mm 15mm 10mm 15mm;
+  }
+  table {
+    table-layout: auto !important;
   }
 
+  .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
   #printRecord table {
     table-layout: auto !important;
   }
