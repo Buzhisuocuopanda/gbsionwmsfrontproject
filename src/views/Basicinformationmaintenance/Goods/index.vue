@@ -156,9 +156,9 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="11">
-                        <el-form-item label="型号:" prop="cbpb12">
+                        <el-form-item label="型号:" prop="cbpb12" >
                             <!-- <el-input v-model="form.ifEnabled" placeholder="是否启用" maxlength="30" /> -->
-                            <el-input v-model="form.cbpb12" placeholder="" maxlength="30" style="width:80%;" />
+                            <el-input v-model="form.cbpb12" placeholder="" maxlength="30"  readonly="readonly" style="width:80%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
