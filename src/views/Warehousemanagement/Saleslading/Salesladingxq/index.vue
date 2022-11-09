@@ -85,6 +85,11 @@
           <el-table-column prop="scanQty" key="scanQty" :formatter="rounding" label="已扫数量">
           </el-table-column>
           <el-table-column prop="price" key="price" :formatter="rounding" label="单价">
+            <template slot-scope="scope">
+                <div style="text-align: left">
+                  {{ parseFloat(scope.row.price == null ? 0 : scope.row.price).toFixed(2) }}
+                </div>
+              </template>
           </el-table-column>
           <el-table-column prop="totalPrice" key="totalPrice" :formatter="rounding" label="金额">
           </el-table-column>
