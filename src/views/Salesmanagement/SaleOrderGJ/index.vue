@@ -47,9 +47,9 @@
           <el-button v-hasPermi="['sale:saleOrderGj:export']" type="primary" v-on:click="exprotData()"
             :loading=loadingOut style="margin-bottom:0;margin-left: 1em">导出
           </el-button>
-          <el-button type="primary" v-on:click="skuDistribution()" :loading=loadingOut
+          <!-- <el-button type="primary" v-on:click="skuDistribution()" :loading=loadingOut
             style="margin-bottom:0;margin-left: 1em">库存分配
-          </el-button>
+          </el-button> -->
 
 
           <!--          <el-button type="primary" v-on:click="downMub()" style="margin-bottom:0;margin-left: 1em">导入模板下载</el-button>-->
@@ -107,8 +107,8 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:25px; padding-left: 10px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
-        @size-change="onSearch" @current-change="onSearch" />
+        style="padding-top:25px; padding-left: 10px;text-align: right;flex-grow: 0;"
+        layout="total, sizes, prev, pager, next, jumper" @size-change="onSearch" @current-change="onSearch" />
 
 
 
@@ -139,7 +139,7 @@
 </template>
 <script>
 // import x from ''
-import { confirmSkuSaleOrder, delSaleOrderGj, saleOrderListGj, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder,delSaleOrder } from '@/api/saleordermanage'
+import { confirmSkuSaleOrder, delSaleOrderGj, saleOrderListGj, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder, delSaleOrder } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
@@ -849,8 +849,8 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
-.saleorderGj{
-  width:100%;
+.saleorderGj {
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: calc(93vh - 85px);
