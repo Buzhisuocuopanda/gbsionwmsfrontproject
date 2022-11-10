@@ -2,8 +2,8 @@
 <template>
     <div class="icon-body" style="width:190px;">
         <el-input v-model="name" style="position: relative;" clearable placeholder="" @clear="filterIcons"
-            @input.native="filterIcons">
-            <i slot="suffix" class="el-icon-search el-input__icon" />
+            @keyup.enter.native="filterIcons">
+            <!-- <i slot="suffix" class="el-icon-search el-input__icon" /> -->
         </el-input>
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
             <div>
@@ -33,6 +33,7 @@ export default {
             params: null,
             top: null,
             total: 0,
+            list: [],
             // iconList: ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
             iconList: [],
             // 查询参数
@@ -49,39 +50,76 @@ export default {
     created() {
         // console.log(JSON.stringify(icons),123);
         // icons=[]
-        this.filterIcons();
+        // this.filterIcons();
+        let cus = this.addDateRange(this.queryParams)
+        cus.cbpb07 = "启用"
+
+        // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
+        GoodsList(cus).then(response => {
+            // this.userList = response.data.rows;
+            //this.top = JSON.stringify(this.userList)
+            // console.log(response.data.rows, 3369);
+            // console.log(this.top,888888);
+            // this.icons =[]
+            this.total = response.data.total;
+            this.iconList = []
+            if (response.data.rows <= 0) {
+                this.iconList = []
+            } else {
+                if (response.data.rows.length > 0) {
+                    response.data.rows.forEach((item) => {
+                        this.iconList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+                        // console.log(item)
+                    })
+                }
+            }
+            if (this.name) {
+                this.iconList = this.iconList.filter(item => item.includes(this.name))
+            }
+            // console.log(response.data.rows, 339688);
+            this.list = this.iconList
+        }
+        );
 
     },
     methods: {
         filterIcons() {
-            let cus = this.addDateRange(this.queryParams)
-            cus.cbpb07 = "启用"
 
-            // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
-            GoodsList(cus).then(response => {
-                // this.userList = response.data.rows;
-                //this.top = JSON.stringify(this.userList)
-                // console.log(response.data.rows, 3369);
-                // console.log(this.top,888888);
-                // this.icons =[]
-                this.total = response.data.total;
-                this.iconList = []
-                if (response.data.rows <= 0) {
-                    this.iconList = []
-                } else {
-                    if (response.data.rows.length > 0) {
-                        response.data.rows.forEach((item) => {
-                            this.iconList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
-                            // console.log(item)
-                        })
-                    }
-                }
-                if (this.name) {
-                    this.iconList = this.iconList.filter(item => item.includes(this.name))
-                }
-                // console.log(response.data.rows, 339688);
+            if (this.name) {
+                this.iconList = this.list.filter(item => item.includes(this.name))
             }
-            );
+            if (!this.name) {
+                this.iconList = this.list
+            }
+
+            /*  let cus = this.addDateRange(this.queryParams)
+             cus.cbpb07 = "启用"
+ 
+             // this.iconList = ['EpiG400TO', 'EpiL400TO', 'EpiR400TO', 'EpiP400TO', 'EpiU400TO']
+             GoodsList(cus).then(response => {
+                 // this.userList = response.data.rows;
+                 //this.top = JSON.stringify(this.userList)
+                 // console.log(response.data.rows, 3369);
+                 // console.log(this.top,888888);
+                 // this.icons =[]
+                 this.total = response.data.total;
+                 this.iconList = []
+                 if (response.data.rows <= 0) {
+                     this.iconList = []
+                 } else {
+                     if (response.data.rows.length > 0) {
+                         response.data.rows.forEach((item) => {
+                             this.iconList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+                             // console.log(item)
+                         })
+                     }
+                 }
+                 if (this.name) {
+                     this.iconList = this.iconList.filter(item => item.includes(this.name))
+                 }
+                 // console.log(response.data.rows, 339688);
+             }
+             ); */
 
         },
         selectedIcon(name) {
