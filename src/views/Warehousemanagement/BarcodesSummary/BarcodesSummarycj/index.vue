@@ -160,8 +160,8 @@
           </el-table-column>
           <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbif12" placeholder="" @blur="chen(scope.row)"
-                v-only-number="{ max: 100, min: 0, precision: 0.00 }" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbif12" placeholder="" @blur="chen(scope.row)" readonly class="shuzicaoyou"
+                style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">

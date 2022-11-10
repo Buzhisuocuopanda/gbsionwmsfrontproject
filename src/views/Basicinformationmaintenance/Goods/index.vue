@@ -667,10 +667,10 @@ export default {
 
             //结算货币
             Currencyhuobi: [{
-                value: '1',
+                value: '6',
                 label: 'CNY'
             }, {
-                value: '2',
+                value: '5',
                 label: 'USD'
             }],
             // 角色选项
@@ -1138,11 +1138,11 @@ export default {
                         }
 
 
-                        if (tableDataItem.cbpf06 == "1") {
-                            tableDataItem.cbpf06 = "1";
+                        if (tableDataItem.cbpf06 == "6") {
+                            tableDataItem.cbpf06 = "6";
 
-                        } else if (tableDataItem.cbpf06 == "2") {
-                            tableDataItem.cbpf06 = "2"
+                        } else if (tableDataItem.cbpf06 == "5") {
+                            tableDataItem.cbpf06 = "5"
                         }
                         this.tableData.push(tableDataItem)
                         console.log(this.tableData, 20220929);
