@@ -90,7 +90,7 @@
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
-              <el-popover placement="bottom-start" trigger="click">
+              <el-popover placement="bottom-start" trigger="click" style="height:250px">
                 <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:630px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>

@@ -250,7 +250,7 @@
             </el-col>
           </el-row>
           <el-table :data="tableData" border style="width: 100%;margin-top: 10px;">
-            <el-table-column prop="brand" label="品牌" width="170">
+            <el-table-column prop="brand" label="品牌" width="">
               <template slot-scope="scope">
                 <sapn>
                   <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
@@ -267,9 +267,9 @@
                 </sapn>
               </template>
             </el-table-column>
-            <el-table-column prop="model" key="model" label="型号" width="170" />
-            <el-table-column prop="description" label="描述" width="170" />
-            <el-table-column prop="qty" label="数量" width="100">
+            <el-table-column prop="model" key="model" label="型号" width="" />
+            <el-table-column prop="description" label="描述" width="" />
+            <el-table-column prop="qty" label="数量" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
@@ -283,7 +283,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="normalPrice" label="标准单价" width="150">
+            <el-table-column prop="normalPrice" label="标准单价" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>&ndash;&gt;-->
@@ -296,7 +296,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="currentPrice" label="本次单价" width="150">
+            <el-table-column prop="currentPrice" label="本次单价" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
@@ -310,7 +310,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column prop="totalPrice" label="金额" width="150">
+            <el-table-column prop="totalPrice" label="金额" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>&ndash;&gt;-->
@@ -413,7 +413,7 @@
         </div>
       </el-form>
 
-      <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS">
+      <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS" style="margin-top:10px">
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页数量小计"
           labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumQty).toFixed(2) }}
         </el-descriptions-item>
@@ -1825,7 +1825,11 @@ export default {
 <style lang="scss" scoped>
 ::v-deep .el-table__header,::v-deep .el-table__body{
   width: 100% !important;
-  table-layout: auto !important;
+  // table-layout: auto !important;
+}
+.el-table::before, .el-table--group::after, .el-table--border::after{
+  content:inherit;
+  position: relative;
 }
 @page {
     size: auto;
@@ -1834,34 +1838,35 @@ export default {
 
 @media print{
   html {
-    background-color: #ffffff;
-    height: auto;
-    margin: 0px;
-  }
+        background-color: #ffffff;
+        height: auto;
+        margin: 0px;
+    }
 
-  body {
-    border: solid 1px #ffffff;
-    margin: 10mm 15mm 10mm 15mm;
-  }
-  table {
-    table-layout: auto !important;
-  }
+    body {
+        border: solid 1px #ffffff;
+        /* margin: 10mm 15mm 10mm 15mm; */
+    }
 
-  .el-table__header-wrapper .el-table__header {
-    width: 100% !important;
-    border: solid 1px #f2f2f2;
-  }
-  .el-table__body-wrapper .el-table__body {
-    width: 100% !important;
-  }
-  #printRecord table {
-    table-layout: auto !important;
-  }
-  #printRecord .el-table__body .el-table__row:first-child .el-table__cell {
-    width: 513px !important;
-  }
-  #printRecord .el-table__header,#printRecord .el-table__body{
-    width: 100% !important;
-  }
+    #printRecord table {
+        table-layout: auto !important;
+    }
+    #printRecord .el-table--border {
+      border: 1px solid #dfe6ec !important;
+      border-bottom: transparent !important;
+      // border-right: transparent !important;
+    }
+    #printRecord .el-table__header-wrapper .el-table__header {
+        width: 100% !important;
+        // border: solid 1px #f2f2f2;
+    }
+
+    #printRecord .el-table__body-wrapper .el-table__body {
+        width: 100% !important;
+    }
+
+    #printRecord #pagetable table {
+        table-layout: fixed !important;
+    }
 }
 </style>
