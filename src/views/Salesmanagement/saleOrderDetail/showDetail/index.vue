@@ -596,7 +596,6 @@ export default {
       goodsMsg: "",
       customerId: "",
       slaeUserId: "",
-      qtyclass: "normQtyclass",
       infoRules: { // 表单规则
         name: [{
           required: true,
@@ -1796,11 +1795,9 @@ export default {
   }
 };
 </script>
-<style src=".././PurchaseWarehousingcjcss/index.css">
-.normQtyclass {
-  background-color: #00afff;
-}
-
+<style src=".././PurchaseWarehousingcjcss/index.css" scoped>
+</style>
+<style scoped>
 .demo-ruleForm>>>.el-input__inner {
   border: 0;
 }
@@ -1811,22 +1808,12 @@ export default {
   top: 90%;
   left: 0;
 }
-
-
-/*.inputDeep >>> .el-input__inner {*/
-/*  -webkit-appearance: none;*/
-/*  background-color: #FFF;*/
-/*  background-image: none;*/
-/*  border-radius: 4px;*/
-/*  border: 0px;*/
-/*width: 100%;*/
-/*}*/
 </style>
 <style lang="scss" scoped>
-::v-deep .el-table__header,::v-deep .el-table__body{
-  width: 100% !important;
-  // table-layout: auto !important;
-}
+// ::v-deep .el-table__header,::v-deep .el-table__body{
+//   width: 100% !important;
+//   // table-layout: auto !important;
+// }
 .el-table::before, .el-table--group::after, .el-table--border::after{
   content:inherit;
   position: relative;
@@ -1851,10 +1838,6 @@ export default {
     body {
         border: solid 1px #ffffff;
         /* margin: 10mm 15mm 10mm 15mm; */
-    }
-
-    #printRecord table {
-        table-layout: auto !important;
     }
     #printRecord .el-table__header-wrapper .el-table__header {
         width: 100% !important;
