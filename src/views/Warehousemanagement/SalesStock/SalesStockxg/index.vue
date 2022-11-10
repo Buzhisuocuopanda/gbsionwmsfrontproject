@@ -1,38 +1,60 @@
 <template>
   <div>
-    <el-form ref="form2" :model="form2" :rules="rules" label-width="35%" style="">
-      <div class="chuangjiancaigous"
-        style="text-align: center;font-size: 20px;font-weight: 900;margin-top: 1%;margin-bottom: 3%;">销售退库单修改
-      </div>
-      <el-row>
-        <el-col style="margin-left: 2%" :span="5">
-          <el-form-item label="客户:" prop="cbse099">
-            <el-popover placement="bottom-start" trigger="click">
-              <CustomerMaintenance ref="CustomerMaintenance" @selected="selected088" style="width:400px; !important;" />
-              <el-input slot="reference" v-model="form2.cbse099" placeholder="" readonly style="width: 120%">
-              </el-input>
-            </el-popover>
-          </el-form-item>
-        </el-col>
-        <el-col style="" :span="5">
-          <el-form-item label="仓库:" prop="cbpc100">
-            <el-popover placement="bottom-start" trigger="click" clearable>
-              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 160px !important" />
-              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width: 100%">
-              </el-input>
-            </el-popover>
-          </el-form-item>
-        </el-col>
-        <el-col style="margin-left: 2%" :span="5">
-          <el-form-item label="结算货币:" prop="cbse16">
-            <!--<el-input type="text" v-model="form2.cbse166" style="width: 100%" />-->
-            <el-select v-model="form2.cbse16" placeholder="" style="width:80%;">
-              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
+    <div class="Purchase_caigou">销售退货单修改</div>
+    <div style="width: 90%; margin-left: 5%; margin-top: 1%">
+      <!-- 横向 -->
+      <!-- <el-descriptions class="margin-top" title="" :column="4" border>
+        <el-descriptions-item label-class-name="my-labell01">
+          <template slot="label">客户</template>
+          <el-popover placement="bottom-start" trigger="click">
+            <CustomerMaintenance ref="CustomerMaintenance" @selected="selected088" style="width:300px; !important;" />
+            <el-input slot="reference" v-model="form2.cbse099" placeholder="" readonly style="width: 100%">
+            </el-input>
+          </el-popover>
+        </el-descriptions-item>
+        <el-descriptions-item label-class-name="my-labell01">
+          <template slot="label"><i style="color: red;margin-right: 1px">*</i>仓库</template>
+          <el-popover placement="bottom-start" trigger="click" clearable>
+            <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 100% !important" />
+            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width: 100%">
+            </el-input>
+          </el-popover>
+        </el-descriptions-item>
+        <el-descriptions-item label-class-name="my-labell01">
+          <template slot="label">结算货币</template>
+          <el-select v-model="form2.cbse166" clearable placeholder="请选择" style="width: 70%;">
+            <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-descriptions-item>
+      </el-descriptions> -->
+      <!--  -->
+      <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
+      <el-form ref="form2" :inline="true" :model="form2" :rules="rules" label-width="100px" style="">
+        <el-form-item label="客户:" prop="cbse099">
+          <el-popover placement="bottom-start" trigger="click">
+            <CustomerMaintenance ref="CustomerMaintenance" @selected="selected088" style="width:400px; !important;" />
+            <el-input slot="reference" v-model="form2.cbse099" placeholder="" readonly style="width: 100%">
+            </el-input>
+          </el-popover>
+        </el-form-item>
+
+        <el-form-item label="仓库:" prop="cbpc100">
+          <el-popover placement="bottom-start" trigger="click" clearable>
+            <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width: 160px !important" />
+            <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width: 100%">
+            </el-input>
+          </el-popover>
+        </el-form-item>
+
+        <el-form-item label="结算货币:" prop="cbse166">
+          <el-select v-model="form2.cbse166" placeholder="" style="width:80%;">
+            <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+
 
       <div>
         <el-row>
@@ -69,13 +91,37 @@
               </el-popover>
             </template>
           </el-table-column>
+          <el-table-column v-if="false" prop="cbsf15" label="供应商id" width="150">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.cbsf15" placeholder="供应商id" style=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="cbsf166" label="订单分类" width="150">
+            <template slot-scope="scope">
+              <!-- <el-popover placement="bottom-start" trigger="click">
+              <supplierMaintenance ref="supplierMaintenance" @selected="selected02($event,scope.row)" style="width:120px!important;" />
+              <el-input slot="reference" v-model="scope.row.cbpc0990" placeholder="" readonly style="width:100%;">
+              </el-input>
+            </el-popover> -->
+              <el-select v-model="scope.row.cbsf16" placeholder="" style="width: 100%">
+                <el-option v-for="item in dingdanfelei" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="cbsf16" label="订单分类id" width="150">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.cbsf16" placeholder="订单分类id" style=""></el-input>
+            </template>
+          </el-table-column>
+
           <el-table-column prop="cbsf09" label="数量" width="100">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsf09" @blur="chen(scope.row)" :precision="2" placeholder=""
                 class="shuzicaoyou" style=""></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="cbsf11" label="单价" width="100">
+          <el-table-column prop="cbif11" label="单价" width="100">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsf11" @blur="chen(scope.row)" :precision="2" placeholder=""
                 class="shuzicaoyou" style=""></el-input>
@@ -83,13 +129,28 @@
           </el-table-column>
           <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input @blur="chen(scope.row)" v-model="scope.row.cbsf12" placeholder="" :precision="2"
-                class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbsf12" placeholder="" :precision="2" class="shuzicaoyou" style="">
+              </el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="province" label="备注" width="">
+          <el-table-column prop="cbsf13" label="备注" width="">
             <template slot-scope="scope">
               <el-input v-model="scope.row.cbsf13" placeholder=""></el-input>
+            </template>
+          </el-table-column>
+
+          <el-table-column v-if="false" prop="cbse01" label="主明细id" width="150">
+            <template slot-scope="scope">
+              <sapn>
+                <el-input v-model="scope.row.cbse01" placeholder="id" style=""></el-input>
+              </sapn>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="false" prop="cbpc08" label="商品编号" width="150">
+            <template slot-scope="scope">
+              <sapn>
+                <el-input v-model="scope.row.cbpc08" placeholder="商品编号" style=""></el-input>
+              </sapn>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
@@ -99,24 +160,25 @@
               </span>
             </template>
           </el-table-column>
+          <!-- </el-form> -->
         </el-table>
       </div>
-    </el-form>
-    <div class="tinajia_dingwei" style="margin-left:1%; margin-top: 2%;left:0;">
-      <el-button type="primary" @click="handleAdd">确 认</el-button>
-      <el-button @click="_ly_cancelDialog">取 消</el-button>
+      <div class="tinajia_dingwei" style="left:1%;margin-top:2%">
+        <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
+        <el-button type="primary" @click="handleUpdate">确 定</el-button>
+        <el-button @click="cancells">取 消</el-button>
+        <!-- </span> -->
+      </div>
     </div>
   </div>
 </template>
-
 <script>
-
+import { PurchaseinboundList } from "@/api/Warehousemanagement/SalesStock";
 import {
   PurchasereturnordersAdds,
   PurchasereturnordersAdd,
   Purchaseinxiaoshoudingdan,
-  PurchaseinboundList,
-  PurchaseinboundEdit
+  PurchaseinboundEdit,
 } from "@/api/Warehousemanagement/SalesStock";
 import { getToken } from "@/utils/auth";
 //仓库
@@ -133,7 +195,7 @@ import Goodsone01 from "@/components/Goodsone";
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
 export default {
-  name: "AuthUser",
+  name: 'AuthUser',
   dicts: [
     "sys_normal_disable",
     "sw_js_store_type",
@@ -149,6 +211,24 @@ export default {
   },
   data() {
     return {
+      // 遮罩层
+      loading: true,
+      // 总条数
+      total: 0,
+      // 用户表格数据
+      userList: null,
+      // 查询参数
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        page: 1,
+        size: 10,
+        total: this.total,
+        name: undefined,
+        address: undefined,
+        userId: undefined,
+      },
+      CBPC01: "",
       // 表单结构数组
       formArr: [],
       tableData: [],
@@ -274,11 +354,11 @@ export default {
       //订单分类
       dingdanfelei: [
         {
-          value: "1",
+          value: 1,
           label: "国内订单",
         },
         {
-          value: "2",
+          value: 2,
           label: "国际订单",
         },
       ],
@@ -312,11 +392,11 @@ export default {
       //关联订单状态
       guanliandindan: [
         {
-          value: "1",
+          value: 1,
           label: "是",
         },
         {
-          value: "0",
+          value: 0,
           label: "否",
         },
       ],
@@ -381,11 +461,17 @@ export default {
         cbsb19: "",
         cbsb21: "",
         cbsb30: "",
+        cbse01: "",
         cbse09: "",
         cbse10: "",
+        cbse15: "",
         cbse16: "",
         cbse18: "",
         cbse099: "",
+        cbse166: "",
+        cbsf01: "",
+        cbsf08: "",
+        cbsf088: "",
       },
       defaultProps: {
         children: "children",
@@ -421,32 +507,14 @@ export default {
       },
       rules: {
         cbpc100: [
-          { required: true, message: "仓库不能为空!", trigger: "change" },
+          { required: true, message: "仓库不能为空!", trigger: "blur" },
+        ],
+        cbse166: [
+          { required: true, message: "结算货币不能为空!", trigger: "blur" },
         ],
         cbse099: [
-          { required: true, message: "客户不能为空!", trigger: "change" },
-        ],
-        /*cbpg16: [
-          { required: true, message: "结算货币不能为空!", trigger: "change" },
-        ],
-        // cbsb07: [
-        //     { required: true, message: "编号不能为空!", trigger: "blur" }
-        // ],
-        cbpc1000: [
-          { required: true, message: "联系人不能为空!", trigger: "blur" },
-        ],
-        cbpc0990: [
-          { required: true, message: "收货电话不能为空!", trigger: "blur" },
-        ],
-        cbpc10000: [
-          { required: true, message: "电话不能为空!", trigger: "blur" },
-        ],
-        cbpc100120: [
-          { required: true, message: "收货地址不能为空!", trigger: "blur" },
-        ],
-        cbpc099: [
           { required: true, message: "客户不能为空!", trigger: "blur" },
-        ],*/
+        ],
       },
     };
   },
@@ -457,6 +525,7 @@ export default {
     },
   },
   created() {
+    console.log(11);
     //销售提货单详情
     this.getList();
     this.form2.cbca08 = this.ListUser.customerName;
@@ -467,7 +536,7 @@ export default {
       // this.initPassword = response.msg;
     });
     this.getDicts("sw_js_store_type").then((response) => {
-      this.form.type = response.rows;
+      // this.form.type = response.rows;
     });
     // this.form.type = this.dict[0].label;
     // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
@@ -477,28 +546,14 @@ export default {
 
     console.log(this.form.cbpc16, 123456);
   },
-  mounted() {
-    // 初始化表单数据，至少有一行表单数据
-    this.tableData = [];
-    this._ly_addFrom();
-  },
-  watch: {
-    visible(newVal) {
-      this.dialogVisible = newVal;
-      if (this.dialogVisible === false) {
-        // 重新打开弹窗时，初始化表单数据，至少有一行表单数据
-        this.tableData = [];
-        this._ly_addFrom();
-      }
-    },
-  },
   methods: {
     //查询商品信息维护
     selected08(e, row) {
       this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
-
       this.$set(row, "cbsf08", e.substring(e.lastIndexOf(".") + 1));
+      this.form2.cbsf08 = e.substring(e.lastIndexOf(".") + 1)
       this.$set(row, "goodsId", e.substring(e.indexOf(".") + 1), 8523642)
+      console.log(this.form2.cbsf08, e, '444', row)
     },
 
     selected088(name) {
@@ -506,6 +561,7 @@ export default {
       console.log(name.substring(name.indexOf("-") + 1), 963);
       this.form2.cbse099 = name.substring(0, name.indexOf("-"));
       this.form2.cbse09 = name.substring(name.indexOf("-") + 1);
+      console.log(this.form2.cbse09, this.form2.cbse099, '客户')
       // this.form2.icon = name;
     },
 
@@ -527,8 +583,6 @@ export default {
     _ly_cancelDialog(done) {
       console.log("_ly_cancelDialog");
       this.$emit("on-close");
-      this.$tab.closePage();
-      this.$router.go(-1);
     },
     // 关闭弹窗前，二次询问是否关闭
     _ly_beforeClose(done) {
@@ -553,13 +607,6 @@ export default {
         PurchasereturnordersAdds(JSON.stringify(this.tableData)).then(
           (response) => {
             if (response.code == "200") {
-              this.$message({
-                message: "添加成功",
-                type: "success",
-                style: "color:red;!important",
-              });
-              this.$tab.closePage();
-              this.$router.go(-1);
               this.tableData = [];
               this.form2 = {
                 cbpc07: "",
@@ -622,21 +669,34 @@ export default {
     },
     // 增加一行表单
     _ly_addFrom() {
-      // if (this.tableData.length >= 5) {
-      //   this.$message.warning("最多只能添加5行");
-      //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-      //   return;
-      // }
+      const cbsf = this.form2.cbsf01;
+      if (this.tableData.length >= 5) {
+        this.$message.warning("最多只能添加5行");
+        // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
+        return;
+      }
 
       this.tableData.push({
-        // id: this.dataId,
-        cbsf16: "1",
-        date: "",
-        num: "",
-        address: "",
-        moner: "",
-        province: "",
-        cbpc000: "",
+        // id
+        cbsf01: cbsf,
+        // 商品ID
+        cbsf08: '',
+        // 数量
+        cbsf09: '',
+        // 单价
+        cbsf11: '',
+        // 金额
+        cbsf12: '',
+        // 备注
+        cbsf13: '',
+        // 销售退货单编号
+        cbse01: '',
+        // 供应商ID
+        cbsf15: '',
+        // 订单类型
+        cbsf16: 1,
+        // user_id
+        user_id: '',
       });
       this.dataId++;
       console.log(this.tableData, 852369);
@@ -667,23 +727,22 @@ export default {
       let formName = this.tableData[index].formName;
       this.$refs[formName + "_select"][0].blur(); // myform1648431132399_select
     },
+
+    getParams() {
+
+    },
+
     show() {
       this.showSearch = !this.showSearch;
     },
-    // 乘法修正精度
-    mutiply(a, b) {
-      a = this.BigNumber(a);
-      b = this.BigNumber(b);
-      return a.multipliedBy(b).toNumber();
-    },
+
     chen(item) {
       if (item.cbsf09 > 0 && item.cbsf11 > 0) {
-        // this.$set(
-        //   item,
-        //   "cbsf12",
-        //   parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
-        // );
-        this.$set(item, 'cbsf12', this.mutiply(item.cbsf09, item.cbsf11))
+        this.$set(
+          item,
+          "cbsf12",
+          parseFloat(item.cbsf09) * parseFloat(item.cbsf11)
+        );
       }
     },
     //添加模块-仓库
@@ -706,11 +765,19 @@ export default {
 
     //添加模块-供应商
     selected02(e, row) {
+      // console.log(name, 123)
+      // console.log(name.substring(name.indexOf("-") + 1), 963);
+      // this.form2.cbpc099 = name.substring(0, name.indexOf("-"));
+      // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
+      // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
+      // this.form2.icon = name;
       this.$set(row, "cbpc099", e.substring(0, e.indexOf("-")));
-      console.log(e, 111);
-      console.log(row, 222);
+
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
       this.$set(row, "cbsf15", e.substring(e.indexOf("-") + 1), 8523642);
+
+      this.form2.cbse15 = row.cbsf15
+      console.log(this.form2.cbse15)
     },
 
     //添加行
@@ -733,7 +800,7 @@ export default {
     //添加的取消按钮
     cancel9() {
       this.open2 = false;
-      this.reset();
+      // this.reset();
     },
     // 表单重置
     reset() {
@@ -771,124 +838,52 @@ export default {
       this.reset();
     },
 
-    /** 新增按钮操作 */
-    handleAdd() {
-      for (let i = 0; i < this.tableData.length; i++) {
-        if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
-          return this.$message.error("销售退库单明细的商品不能为空")
-        }
-        if (this.tableData[i].cbsf09 == null || this.tableData[i].cbsf09 == 0) {
-          return this.$message.error("销售退库单明细的数量不能为空")
-        }
-        if (this.tableData[i].cbsf11 == null || this.tableData[i].cbsf11 == 0) {
-          return this.$message.error("销售退库单明细的单价不能为空")
-        }
-      }
-      const userId = this.$route.params && this.$route.params.cbse01;
-      if (this.form.name != undefined) {
-        let row = {};
-        row.cbse01 = userId;
-        // 编号
-        row.cbpg07 = this.form.cbpc07;
-        // 客户id
-        row.cbse09 = this.form2.cbca01;
-        // 仓库
-        row.cbse10 = this.form2.cbwa01;
-        // 日期
-        row.cbse08 = this.form2.cbsc08;
-        if (this.form2.cbse16 == 'USD') {
-          // 结算货币
-          row.cbse16 = 5;
-        } else if (this.form2.cbse16 == 'CNY') {
-          row.cbse16 = 5;
-        } else {
-          row.cbse16 = this.form2.cbse16;
-        }
-        // 关联订单
-        row.cbse18 = this.form2.cbse18;
-        row.change_type = 1;
-        row.goods = this.tableData;
-        console.log(row, '数据', this.form2, '列表', this.tableData)
-        console.log(row, "row---------------row")
-        // PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
-        //   if (response.code == 200) {
-        //     console.log(response, 789);
-        //     this.$message({ message: "修改成功", type: "success" });
-        //     this.$tab.closePage();
-        //     this.$router.go(-1);
-        //   }
-        // });
-      } else {
-        this.$message.error("错了哦，商品名称没有填呢");
-      }
-      // this.$refs["form2"].validate((item) => {
-      //   if (item) {
-      //     for (let i = 0; i < this.tableData.length; i++) {
-
-      //       if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
-      //         return this.$message.error("销售退库单明细的商品不能为空")
-      //       }
-      //       if (this.tableData[i].cbsf09 == null || this.tableData[i].cbsf09 == 0) {
-      //         return this.$message.error("销售退库单明细的数量不能为空")
-      //       }
-      //       if (this.tableData[i].cbsf11 == null || this.tableData[i].cbsf09 == 0) {
-      //         return this.$message.error("销售退库单明细的单价不能为空")
-      //       }
-      //     }
-
-      //     this.form2.goods = this.tableData
-      //     console.log(this.tableData, 10251)
-      //     PurchasereturnordersAdd(this.form2).then((response) => {
-      //       if (response.code == "200") {
-      //         this.submitShangpin();
-      //         this.open2 = false;
-      //         this.reset01();
-      //         this.tableData.forEach((item) => {
-      //           item.cbse01 = response.data.id;
-      //         });
-      //         console.log(response.data.id, 123456);
-      //         this.$message({
-      //           message: "添加成功",
-      //           type: "success",
-      //           style: "color:red;!important",
-      //         });
-      //         this.$tab.closePage();
-      //         this.$router.go(-1);
-      //       }
-      //     });
-      //   }
-      // });
-    },
-
     /** 创建操作 */
     handleChuangJiangone: function (row) {
+      // this.$router.push("/system/user-auth/role/");
       this.$router.push("/system/user-xsckfh/role/");
     },
     /** 销售提货单 */
+    //详情列表
     getList() {
       this.loading = true;
       const userId = this.$route.params && this.$route.params.cbse01;
+      console.log(userId, 12)
       if (userId) {
         console.log(13)
         // 获取表详细信息
         PurchaseinboundList(
-          userId
+          userId,
+          this.addDateRange(this.queryParams, this.dateRange)
         ).then((res) => {
-          console.log(res, "res---------------res")
+          console.log(res.data, 13)
           let response = res.data.rows[0];
+          // let response;
           //客户名称
           this.form2.cbse099 = response.cbca08;
           // 明细表ID
           this.form2.cbsf01 = response.cbsf01;
           //仓库名称
           this.form2.cbpc100 = response.cbwa09;
+          this.form2.cbse09 = response.cbca01
+          this.form2.cbse10 = response.cbwa01
+
           //结算货币名称
-          this.form2.cbse16 = response.cala08
+          this.form2.cbse166 = response.cala08
+          // if (response.cala08 == "USD") {
+          //   this.form2.cbse166 = 5
+          // } else if (response.cala08 == "CNY") {
+          //   this.form2.cbse166 = 6
+          // } else {
+          //   this.form2.cbse166 = ""
+          // }
+          // this.form2.cbse166 = response.cala08;
           // 日期
           this.form2.cbsc08 = response.cbse08;
           this.form2.cbse18 = response.cbse18;
           this.tableData = res.data.rows;
-
+          console.log(12)
+          console.log(this.form2, response, 85200000, '年后1');
           this.tableData.map((item) => {
             item.cbsc177 = item.orderClass;
             item.cbsc15 = item.supplierId;
@@ -904,16 +899,122 @@ export default {
             item.cbsc144 = item.noSendQty;
             item.cbsc15 = item.remark;
             item.cbsc14 = item.saleOrderId;
-            item.cbpc000 = item.pinpai + "~" + item.cbpb12 + "~" + item.cbpb08;
-            this.loading = false;
+            // item.cbsf16 = item.cbsf16 == 1?'国际订单':'国内订单'
+            item.cbpc000 =
+              item.pinpai + "~" + item.cbpb12 + "~" + item.cbpb08;
+            // if (item.cbsc177 == "国内订单") {
+            //   item.cbsc17 = "1";
+            // } else {
+            //   item.cbsc17 = "2";
+            // }
           });
+          // this.userList = response.data.rows;
+          // this.total = response.data.total;
+          console.log(response, 888999, this.tableData);
+          console.log(this.tableData, 10245);
+          this.loading = false;
+        });
+      }
+    },
+    /** 修改按钮操作 */
+    handleUpdate() {
+      for (let i = 0; i < this.tableData.length; i++) {
 
-          console.log(this.form2, "this.form2---------this.form2")
-        })
+        if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
+          return this.$message.error("销售退库单明细的商品不能为空")
+        }
+        if (this.tableData[i].cbsf09 == null || this.tableData[i].cbsf09 == 0) {
+          return this.$message.error("销售退库单明细的数量不能为空")
+        }
+        if (this.tableData[i].cbsf11 == null || this.tableData[i].cbsf11 == 0) {
+          return this.$message.error("销售退库单明细的单价不能为空")
+        }
+      }
+      console.log(this.form2, "提交时表单数据")
+      const userId = this.$route.params && this.$route.params.cbse01;
+      if (this.form.name != undefined) {
+        // this.tableData[0].cbsf16 = this.tableData[0].cbsf16 == '国际订单'?1:2
+        let row = {};
+        row.cbse01 = userId;
+        // 编号
+        // row.cbpg07 = this.form.cbpc07;
+        // 客户id
+        row.cbse09 = this.form2.cbse09;
+        // 仓库id
+        row.cbse10 = this.form2.cbse10;
+        // 日期
+        // row.cbse08 = this.form2.cbsc08;
+        if (this.form2.cbse166 == 'USD') {
+          // 结算货币
+          row.cbse16 = 5;
+        } else if (this.form2.cbse166 == 'CNY') {
+          row.cbse16 = 6;
+        } else {
+          row.cbse16 = this.form2.cbse166;
+        }
+        console.log(row, "row-------row")
+        // 关联订单
+        row.cbse18 = this.form2.cbse18;
+        row.change_type = 1;
+        row.goods = this.tableData;
+        // row.invoiceBank = this.form.remark;
+        // row.invoiceNumber = this.form.skuName;
+        // row.invoicePhone = this.form.sn;
+        // row.invoiceTaxpayerNumber = this.form.spuplierName;
+        // row.invoiceType = this.form.type;
+        // row.name = this.form.warehusingStatus;
+        // row.phone = this.form.scanStatus;
+        // row.skuSort = this.form.orderType;
+        // row.telPeople = this.form.isQualified;
+        // console.log(this.form.id);
+        console.log(row, '数据', this.form2, '列表', this.tableData)
+        // return
+        PurchaseinboundEdit(JSON.stringify(row)).then((response) => {
+          // console.log(response,789)
+          // this.form = response.data;
+          // this.name = response.name;
+          // this.type = response.type;
+          // this.deliveryPriority = response.deliveryPriority;
+          // this.enableTotalOrder = response.enableTotalOrder;
+          // this.enableTakeGoods = response.enableTakeGoods;
+          // this.manageMode = response.manageMode;
+          // this.ifEnabled = response.ifEnabled;
+          // this.sysUserId = response.sysUserId;
+          if (response.code == 200) {
+            console.log(response, 789);
+            this.$message({ message: "修改成功", type: "success" });
+            this.$tab.closePage();
+            this.$router.go(-1);
+          }
+        });
+      } else {
+        this.$message.error("错了哦，商品名称没有填呢");
+      }
+    },
+    cancells() {
+      // this.$router.push("/Warehousemanagement/SalesStock/")
+      this.$tab.closePage();
+      this.$router.go(-1);
+    }
+  },
+  computed: {},
+  mounted() {
+    // 初始化表单数据，至少有一行表单数据
+    this.tableData = [];
+    this._ly_addFrom();
+  },
+  watch: {
+    visible(newVal) {
+      this.dialogVisible = newVal;
+      if (this.dialogVisible === false) {
+        // 重新打开弹窗时，初始化表单数据，至少有一行表单数据
+        this.tableData = [];
+        this._ly_addFrom();
       }
     },
   },
-
 };
 </script>
+<style src="./SalesStockxgcss/index.css" scoped>
 
+</style>
