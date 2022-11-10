@@ -44,8 +44,9 @@
                 </el-select>
               </sapn>-->
               <!--@visible-change="hiddens"-->
-              <el-select @focus="clearQuery" @change="slected(scope.row, $event)" filterable :filter-method="getChangeList"
-                v-el-select-loadmore="getList" remote v-model="scope.row.f" placeholder="请输入sn码" style="widith:100%">
+              <el-select @focus="clearQuery" @change="slected(scope.row, $event)" filterable
+                :filter-method="getChangeList" v-el-select-loadmore="getList" remote v-model="scope.row.f"
+                placeholder="请输入sn码" style="widith:100%">
                 <!-- <el-input v-model="queryParams.orderNo"
                         placeholder="请输入销售订单编号,sn码"
                         clearable
@@ -513,15 +514,15 @@ export default {
   },
   methods: {
     refreshTables(row, item) {
-      let index =0;
-      let str ="";
-      for(let i=0;i<this.tableData.length;i++){
-        if(str.indexOf(this.tableData[i].cbqb10)>=0){
-          index =1;
+      let index = 0;
+      let str = "";
+      for (let i = 0; i < this.tableData.length; i++) {
+        if (str.indexOf(this.tableData[i].cbqb10) >= 0) {
+          index = 1;
         }
-        str+=this.tableData[i].cbqb10+",";
+        str += this.tableData[i].cbqb10 + ",";
       }
-      if(index ==0){
+      if (index == 0) {
         let id = this.$route.query.data
         row.cbqb09 = undefined;
         // let cbpm08 = this.tableData[0].cbpm08
@@ -534,11 +535,12 @@ export default {
         }).then((response) => {
           // this.loading3 = false;
           row.tableDatas = response.data.rows;
+          // this.$set(response.data.rows, index, row.tableDatas)
           // this.totals = response.data.total;
         }, error => {
           // this.loading3 = false;
         });
-      }else {
+      } else {
         this.$message.error("提货单sn不能重复选择，请重新选择！！！");
       }
 
@@ -592,7 +594,7 @@ export default {
         this.loading4 = false;
       });
     },
-    clearQuery(){
+    clearQuery() {
       this.getChangeList("");
     },
     slected(row, name) {
@@ -725,13 +727,13 @@ export default {
 
     /** 新增按钮操作 */
     handleAdd() {
-      let str ="";
-      for(let i=0;i<this.tableData.length;i++){
-        if(str.indexOf(this.tableData[i].cbqb10)>=0){
+      let str = "";
+      for (let i = 0; i < this.tableData.length; i++) {
+        if (str.indexOf(this.tableData[i].cbqb10) >= 0) {
           this.$message.error("提货单原sn重复，请重新选择！！！")
           return
         }
-        str+=this.tableData[i].cbqb10+",";
+        str += this.tableData[i].cbqb10 + ",";
       }
 
       this.form2.cbqa06 = "0";

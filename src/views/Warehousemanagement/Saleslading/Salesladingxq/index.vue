@@ -86,10 +86,10 @@
           </el-table-column>
           <el-table-column prop="price" key="price" :formatter="rounding" label="单价">
             <template slot-scope="scope">
-                <div style="text-align: left">
-                  {{ parseFloat(scope.row.price == null ? 0 : scope.row.price).toFixed(2) }}
-                </div>
-              </template>
+              <div style="text-align: left">
+                {{ parseFloat(scope.row.price == null ? 0 : scope.row.price).toFixed(2) }}
+              </div>
+            </template>
           </el-table-column>
           <el-table-column prop="totalPrice" key="totalPrice" :formatter="rounding" label="金额">
           </el-table-column>
@@ -194,11 +194,12 @@
             <template slot-scope="scope" style="width: 200%">
               <!-- @change="getSnList(scope.row,value)" :remote-method="getSnList(query,scope.row)" -->
               <!--v-el-select-loadmore="getLoadmoreSnList" reserve-keyword -->
-              <el-select filterable remote
-                :disabled="scope.row.scanStatus == '已扫码'" :remote-method="(query) => getSnList(query, scope.row,scope.$index)" v-model="scope.row.sn" style="width: 100%"
-                         reserve-keyword placeholder="请输入关键词">
-                <el-option v-for="(item,index) in snList[scope.$index]" @click.native="updsteSn(scope.row, item,scope.$index)"
-                  :key="index" :label="item.goodsMsg" :value="item.sn"></el-option>
+              <el-select filterable remote :disabled="scope.row.scanStatus == '已扫码'"
+                :remote-method="(query) => getSnList(query, scope.row, scope.$index)" v-model="scope.row.sn"
+                style="width: 100%" reserve-keyword placeholder="请输入关键词">
+                <el-option v-for="(item, index) in snList[scope.$index]"
+                  @click.native="updsteSn(scope.row, item, scope.$index)" :key="index" :label="item.goodsMsg"
+                  :value="item.sn"></el-option>
               </el-select>
               <!--<el-popover placement="bottom-start" trigger="click" @show="filterIcons">
                 <TakeSuggests
@@ -303,7 +304,7 @@ export default {
       userList: {},
       userLists: [],
       userList1: [],
-      userList2:[],
+      userList2: [],
       userListsss: [],
       msgList: [],
       userId: undefined,
@@ -400,14 +401,14 @@ export default {
         this.$message.error("修改失败")
       });
     },
-    updsteSn(row, item,index) {
+    updsteSn(row, item, index) {
       for (let i = 0; i < this.userListsss.length; i++) {
-        if (this.userListsss[i].sn2 == item.sn &&i!=index) {
+        if (this.userListsss[i].sn2 == item.sn && i != index) {
           this.$message.warning("您已选择该sn号，请勿重复选择")
           // row.sn = "";
           // row.goodsMsg = "";
           row.sn = this.msgList[index];
-          row.sn2 =null;
+          row.sn2 = null;
           return
         }
       }
@@ -417,7 +418,7 @@ export default {
       console.log(row.goodsId, 10142);
     },
     // 输入框内容改变时触发
-    getSnList(query, row,i) {
+    getSnList(query, row, i) {
       this.snQueryParams.pageNum = 1;
       this.snQueryParams.sn = query
       this.snQueryParams.cbpb08 = query
@@ -428,7 +429,7 @@ export default {
           this.snQueryParams.pageNum += 1;
           // this.snList = response.data;
           this.snList[i] = response.data;
-          this.$set(this.snList,i,response.data)
+          this.$set(this.snList, i, response.data)
           console.log(this.snList, 2222)
         } else {
           // this.snList = [];
@@ -452,27 +453,27 @@ export default {
       }, error => {
       });
     },
-/*
-    filterIcons() {
-      this.checks = true
-      this.iconList.whid = this.whid
-      this.iconList.goodsId = this.goodsId
-      console.log(112121)
-      return
-      CustomerLists(this.whid, this.goodsId).then(response => {
-        this.iconList = []
-        if (response.data <= 0) {
-          this.iconList = []
-        } else {
-          if (response.data.length > 0) {
-            response.data.forEach((item) => {
-              this.iconList.push(item.sn + "-" + item.cbla09 + "-" + item.cbpb10 + "-" + item.cbpb12 + "-" + item.cbpb08)
-            })
-          }
-        }
-        console.log(response.data, 339688);
-      })
-    },*/
+    /*
+        filterIcons() {
+          this.checks = true
+          this.iconList.whid = this.whid
+          this.iconList.goodsId = this.goodsId
+          console.log(112121)
+          return
+          CustomerLists(this.whid, this.goodsId).then(response => {
+            this.iconList = []
+            if (response.data <= 0) {
+              this.iconList = []
+            } else {
+              if (response.data.length > 0) {
+                response.data.forEach((item) => {
+                  this.iconList.push(item.sn + "-" + item.cbla09 + "-" + item.cbpb10 + "-" + item.cbpb12 + "-" + item.cbpb08)
+                })
+              }
+            }
+            console.log(response.data, 339688);
+          })
+        },*/
     //查询商品信息维护
     selected08(e, row) {
       // row.cbpc000=e
@@ -669,13 +670,13 @@ export default {
           //   item.goodClass = item.goodClass + '-' + item.model + '-' + item.description
           //   return item
           // });
-          let i=0;
+          let i = 0;
           this.userListsss = res.data.sugests
           console.log(this.userListsss, "this.userListsss---------this.userListsss")
           if (this.edit == 1) {
             this.userList2 = res.data.sugests.map(item => {
               // item.snList = this.snList;
-              this.getSnList(null, item,i);
+              this.getSnList(null, item, i);
               i++;
               item.sn2 = item.sn
               /*+ ' - ' + item.goodClass+ ' - '*/
@@ -687,7 +688,7 @@ export default {
 
           this.paramss.userId = res.data.userId;
           // this.total = res.data.total;
-          console.log( this.msgList, 888999);
+          console.log(this.msgList, 888999);
           this.loading = false;
           console.log(res.data, this.userList);
         });
@@ -756,3 +757,16 @@ export default {
 <style src="./Salesladingxqcss/index.css">
 
 </style>
+
+<style scoped>
+.Purchase_sum {
+  display: flex;
+  justify-content: space-between;
+  width: 88%;
+  margin: 0 auto;
+  margin-top: 1%;
+  /* margin-left: 20%;
+    font-weight: 200; */
+}
+</style>
+
