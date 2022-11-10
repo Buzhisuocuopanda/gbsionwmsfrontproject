@@ -1831,6 +1831,11 @@ export default {
   content:inherit;
   position: relative;
 }
+.el-table--border {
+  border: 1px solid #dfe6ec !important;
+  border-bottom: transparent !important;
+  border-right: transparent !important;
+}
 @page {
     size: auto;
     margin: 3mm;
@@ -1851,14 +1856,8 @@ export default {
     #printRecord table {
         table-layout: auto !important;
     }
-    #printRecord .el-table--border {
-      border: 1px solid #dfe6ec !important;
-      border-bottom: transparent !important;
-      // border-right: transparent !important;
-    }
     #printRecord .el-table__header-wrapper .el-table__header {
         width: 100% !important;
-        // border: solid 1px #f2f2f2;
     }
 
     #printRecord .el-table__body-wrapper .el-table__body {
