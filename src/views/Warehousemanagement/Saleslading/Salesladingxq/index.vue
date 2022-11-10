@@ -757,3 +757,16 @@ export default {
 <style src="./Salesladingxqcss/index.css">
 
 </style>
+
+<style scoped>
+.Purchase_sum {
+  display: flex;
+  justify-content: space-between;
+  width: 88%;
+  margin: 0 auto;
+  margin-top: 1%;
+  /* margin-left: 20%;
+    font-weight: 200; */
+}
+</style>
+
