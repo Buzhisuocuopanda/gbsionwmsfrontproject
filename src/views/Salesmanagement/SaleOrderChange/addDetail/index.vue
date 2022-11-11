@@ -83,8 +83,9 @@
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName"
-              filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore"
+              v-model="formData.customerName" filterable clearable :filter-method="customerdataFilter" placeholder="请选择"
+              style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -93,8 +94,8 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUserId">
-            <el-select @change="saleUserOnChange" v-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable
-              clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="saleUserOnChange" v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUser"
+              filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
