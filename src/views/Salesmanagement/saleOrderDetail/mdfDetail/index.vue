@@ -1,4 +1,5 @@
 <template>
+  <!-- 国内销售订单修改 -->
   <div class="app-container">
     <el-form ref="form2" :model="form2" label-width="130px" :rules="rules" style="">
       <div class="chuangjiancaigous">国内销售订单</div>
@@ -73,8 +74,9 @@
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerName">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName"
-              filterable clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore"
+              v-model="formData.customerName" filterable clearable remote :remote-method="customerdataFilter"
+              placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -1292,6 +1294,7 @@ export default {
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
           this.customeroptions = response.data.rows
+          this.customerListQuery.pageNum++
         } else {
           // this.$message.error(response.msg)
         }
