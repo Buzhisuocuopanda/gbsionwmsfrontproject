@@ -39,8 +39,18 @@
                 <el-table-column prop="ponumber" key="ponumber" align="right" label="PONumber">
                 </el-table-column>
                 <el-table-column prop="price" key="price" align="right" label="单价">
+                    <template slot-scope="scope">
+                        <div style="text-align: right">
+                        {{ parseFloat(scope.row.price == null ? 0 : scope.row.price).toFixed(2) }}
+                        </div>
+                    </template>
                 </el-table-column>
                 <el-table-column prop="totalPrice" key="totalPrice" align="right" label="金额">
+                    <template slot-scope="scope">
+                        <div style="text-align: right">
+                        {{ parseFloat(scope.row.totalPrice == null ? 0 : scope.row.totalPrice).toFixed(2) }}
+                        </div>
+                    </template>
                 </el-table-column>
                 <!-- <el-table-column prop="cbpc17" key="cbpc17" label="备注">
                 </el-table-column> -->

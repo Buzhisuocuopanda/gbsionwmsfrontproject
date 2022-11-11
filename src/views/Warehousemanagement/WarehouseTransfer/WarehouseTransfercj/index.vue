@@ -169,25 +169,22 @@
 
                     <el-table-column prop="cbab09" label="数量" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab09"
-                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" @blur="chen(scope.row)"
-                                :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab09" @blur="chen(scope.row)" :precision="2" placeholder=""
+                                class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab11" label="单价" width="100">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab11"
-                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" @blur="chen(scope.row)"
-                                :precision="2" placeholder="" class="shuzicaoyou" style="">
+                            <el-input v-model="scope.row.cbab11" @blur="chen(scope.row)" :precision="2" placeholder=""
+                                class="shuzicaoyou" style="">
                             </el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab12" label="金额" width="150">
                         <template slot-scope="scope">
-                            <el-input v-model="scope.row.cbab12"
-                                v-only-number="{ max: 100000, min: 0, precision: 0.0000 }" disabled placeholder=""
-                                :precision="2" class="shuzicaoyou" style=""></el-input>
+                            <el-input v-model="scope.row.cbab12" disabled placeholder="" :precision="2"
+                                class="shuzicaoyou" style=""></el-input>
                         </template>
                     </el-table-column>
                     <el-table-column prop="cbab13" label="备注" width="">
@@ -775,10 +772,16 @@ export default {
         show() {
             this.showSearch = !this.showSearch;
         },
-
+        // 乘法修正精度
+        mutiply(a, b) {
+            a = this.BigNumber(a);
+            b = this.BigNumber(b);
+            return a.multipliedBy(b).toNumber();
+        },
         chen(item) {
             if (item.cbab09 > 0 && item.cbab11 > 0) {
-                this.$set(item, 'cbab12', (parseFloat(item.cbab09) * parseFloat(item.cbab11)))
+                // this.$set(item, 'cbab12', (parseFloat(item.cbab09) * parseFloat(item.cbab11)))
+                this.$set(item, 'cbab12', this.mutiply(item.cbab09, item.cbab11))
             }
         },
         //添加模块-调入仓库

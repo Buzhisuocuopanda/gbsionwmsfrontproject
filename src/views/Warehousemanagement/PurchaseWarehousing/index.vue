@@ -3,7 +3,8 @@
     <div class="app-container">
         <el-row :gutter="20" style="margin:0;width: 100%;">
             <!--用户数据-->
-            <el-col :span="20" :xs="24" class="tooltup" style="width:100%;display: flex;flex-direction: column;height: calc(93vh - 85px);padding:0;margin:0">
+            <el-col :span="20" :xs="24" class="tooltup"
+                style="width:100%;display: flex;flex-direction: column;height: calc(93vh - 85px);padding:0;margin:0">
                 <!-- 表头内容  -->
                 <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
                     label-width="68px" style="flex-grow: 0;height: auto;">
@@ -68,8 +69,8 @@
 
                 <el-table border :header-cell-style="headClasspw" :row-style="{ height: '3px' }"
                     :cell-style="{ padding: '2px' }" v-loading="loading" :data="userList" height="500"
-                    :default-sort="{ prop: 'name', order: 'descending' }"
-                    style="width:100%;height: 8%;flex-grow: 1;" @selection-change="handleSelectionChange">
+                    :default-sort="{ prop: 'name', order: 'descending' }" style="width:100%;height: 8%;flex-grow: 1;"
+                    @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
                     <el-table-column label="编号" align="left" key="cbpc07" :show-overflow-tooltip="true" prop="cbpc07"
                         sortable />
@@ -131,7 +132,7 @@
 
                 <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                     :limit.sync="queryParams.pageSize" @pagination="getList" :page-sizes="[10, 15, 20, 50, 500]"
-                    class="pagintotal"/>
+                    class="pagintotal" />
             </el-col>
         </el-row>
 
@@ -628,7 +629,7 @@ export default {
             this.$refs.tree.filter(val);
         },
         '$route'() {
-            this.handleQuery();
+            this.getList();
         }
     },
     created() {
@@ -1361,11 +1362,12 @@ export default {
 ::v-deep .pagination-container .el-pagination {
     position: inherit;
 }
-.pagintotal{
+
+.pagintotal {
     flex-grow: 0;
     text-align: right;
-    height:auto;
-    padding:20px 0 0 !important;
-    margin:0;
+    height: auto;
+    padding: 20px 0 0 !important;
+    margin: 0;
 }
 </style>

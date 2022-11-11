@@ -249,12 +249,12 @@
               <!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
             </el-col>
           </el-row>
-          <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
-            <el-table-column prop="goodsMsg" label="品牌" width="">
+          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;">
+            <el-table-column prop="brand" label="品牌" width="">
               <template slot-scope="scope">
                 <sapn>
                   <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
-                  <span>{{ scope.row.goodsMsg }}</span>
+                  <span>{{ scope.row.brand }}</span>
 
                   <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
                   <!--                  <el-option-->
@@ -267,9 +267,9 @@
                 </sapn>
               </template>
             </el-table-column>
-            <el-table-column label="型号" width="" />
-            <el-table-column label="描述" width="" />
-            <el-table-column prop="qty" label="数量" width="150">
+            <el-table-column prop="model" key="model" label="型号" width="" />
+            <el-table-column prop="description" label="描述" width="" />
+            <el-table-column prop="qty" label="数量" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
@@ -283,7 +283,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="normalPrice" label="标准单价" width="150">
+            <el-table-column prop="normalPrice" label="标准单价" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>&ndash;&gt;-->
@@ -296,7 +296,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="currentPrice" label="本次单价" width="150">
+            <el-table-column prop="currentPrice" label="本次单价" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
@@ -310,7 +310,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column prop="totalPrice" label="金额" width="150">
+            <el-table-column prop="totalPrice" label="金额" width="">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>&ndash;&gt;-->
@@ -413,7 +413,7 @@
         </div>
       </el-form>
 
-      <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS">
+      <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS" style="margin-top:10px">
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页数量小计"
           labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumQty).toFixed(2) }}
         </el-descriptions-item>
@@ -596,7 +596,6 @@ export default {
       goodsMsg: "",
       customerId: "",
       slaeUserId: "",
-      qtyclass: "normQtyclass",
       infoRules: { // 表单规则
         name: [{
           required: true,
@@ -1796,11 +1795,9 @@ export default {
   }
 };
 </script>
-<style src=".././PurchaseWarehousingcjcss/index.css">
-.normQtyclass {
-  background-color: #00afff;
-}
-
+<style src=".././PurchaseWarehousingcjcss/index.css" scoped>
+</style>
+<style scoped>
 .demo-ruleForm>>>.el-input__inner {
   border: 0;
 }
@@ -1811,14 +1808,47 @@ export default {
   top: 90%;
   left: 0;
 }
+</style>
+<style lang="scss" scoped>
+// ::v-deep .el-table__header,::v-deep .el-table__body{
+//   width: 100% !important;
+//   // table-layout: auto !important;
+// }
+.el-table::before, .el-table--group::after, .el-table--border::after{
+  content:inherit;
+  position: relative;
+}
+.el-table--border {
+  border: 1px solid #dfe6ec !important;
+  border-bottom: transparent !important;
+  border-right: transparent !important;
+}
+@page {
+    size: auto;
+    margin: 3mm;
+}
 
+@media print{
+  html {
+        background-color: #ffffff;
+        height: auto;
+        margin: 0px;
+    }
 
-/*.inputDeep >>> .el-input__inner {*/
-/*  -webkit-appearance: none;*/
-/*  background-color: #FFF;*/
-/*  background-image: none;*/
-/*  border-radius: 4px;*/
-/*  border: 0px;*/
-/*width: 100%;*/
-/*}*/
+    body {
+        border: solid 1px #ffffff;
+        /* margin: 10mm 15mm 10mm 15mm; */
+    }
+    #printRecord .el-table__header-wrapper .el-table__header {
+        width: 100% !important;
+    }
+
+    #printRecord .el-table__body-wrapper .el-table__body {
+        width: 100% !important;
+    }
+
+    #printRecord #pagetable table {
+        table-layout: fixed !important;
+    }
+}
 </style>

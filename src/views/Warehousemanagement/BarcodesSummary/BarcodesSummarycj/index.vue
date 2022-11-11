@@ -117,7 +117,8 @@
           <el-table-column prop="cbpc000" label="品牌" width="220">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:680px !important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  style="width:680px !important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -147,20 +148,20 @@
           </el-table-column>
           <el-table-column prop="cbif09" label="数量" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbif09" v-only-number="{ max: 100, min: 0, precision: 0.00 }"
-                @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
+              <el-input v-model="scope.row.cbif09" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style="">
+              </el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbif11" label="单价" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbif11" v-only-number="{ max: 100, min: 0, precision: 0.00 }"
-                @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style=""></el-input>
+              <el-input v-model="scope.row.cbif11" @blur="chen(scope.row)" class="shuzicaoyou" placeholder="" style="">
+              </el-input>
             </template>
           </el-table-column>
           <el-table-column prop="cbif12" label="金额" width="100">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.cbif12" placeholder="" @blur="chen(scope.row)"
-                v-only-number="{ max: 100, min: 0, precision: 0.00 }" class="shuzicaoyou" style=""></el-input>
+              <el-input v-model="scope.row.cbif12" placeholder="" @blur="chen(scope.row)" readonly class="shuzicaoyou"
+                style=""></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="province" label="备注" width="">
@@ -629,10 +630,16 @@ export default {
   },
   methods: {
 
-
+    // 乘法修正精度
+    mutiply(a, b) {
+      a = this.BigNumber(a);
+      b = this.BigNumber(b);
+      return a.multipliedBy(b).toNumber();
+    },
     chen(item) {
       if (item.cbif09 > 0 && item.cbif11 > 0) {
-        this.$set(item, 'cbif12', (parseFloat(item.cbif09) * parseFloat(item.cbif11)))
+        // this.$set(item, 'cbif12', (parseFloat(item.cbif09) * parseFloat(item.cbif11)))
+        this.$set(item, 'cbif12', this.mutiply(item.cbif09, item.cbif11))
       }
     },
     // 合并单元格

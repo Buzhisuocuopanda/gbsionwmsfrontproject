@@ -610,6 +610,14 @@ export default {
 
 
     },
+    getDateString() {
+      let date = new Date()
+      var year = date.getFullYear().toString().padStart(4, "0");
+      var month = (date.getMonth() + 1).toString().padStart(2, "0");
+      var day = date.getDate().toString().padStart(2, "0");
+
+      return `${year}${month}${day}`;
+    },
 
     exprotData() {
       const param = {
@@ -618,10 +626,11 @@ export default {
         status: this.status
       }
       // this.loading=true;
+      let date = this.getDateString()
 
       this.download('/sale/totalOrderExcelList', {
         ...param
-      }, `生产订单数据_${new Date().getTime()}.xlsx`)
+      }, `生产订单数据_${date}.xlsx`)
 
       // totalOrderExcelListtmp(param).then(response => {
       //   if (response.code === 200) {

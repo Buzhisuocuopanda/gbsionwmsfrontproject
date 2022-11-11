@@ -666,16 +666,20 @@ export default {
       this.$tab.closePage();
       this.$router.go(-1);
     },
-
+    // 乘法修正精度
+    mutiply(a, b) {
+      a = this.BigNumber(a);
+      b = this.BigNumber(b);
+      return a.multipliedBy(b).toNumber();
+    },
     chen(item) {
-      console.log(item, "item--------------item")
       if (item.cbph09 > 0 && item.cbph10 > 0) {
-        this.$set(
-          item,
-          "cbph12",
-          parseFloat(item.cbph09) * parseFloat(item.cbph10)
-        );
-        // this.form2.cbph11 = item.cbph11
+        // this.$set(
+        //   item,
+        //   "cbph12",
+        //   parseFloat(item.cbph09) * parseFloat(item.cbph10)
+        // );
+        this.$set(item, 'cbph12', this.mutiply(item.cbph09, item.cbph10))
       }
     },
     // 合并单元格

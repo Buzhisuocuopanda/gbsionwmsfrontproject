@@ -22,11 +22,13 @@
                             <el-input v-model="queryParams.cbpa07" placeholder="请输入商品分类" clearable style="width: 240px;"
                                 @keyup.enter.native="handleQuery" />
                         </el-form-item>
-                      <el-form-item label="品牌"   class="item-r" >
-                        <el-select v-model="queryParams.cala08"  style="width: 240px" clearable  filterable placeholder="请输入关键词" >
-                          <el-option v-for="item in calaList" :key="item.cala08" :label="item.cala08+' ['+item.cala09+']'" :value="item.cala08"></el-option>
-                        </el-select>
-                      </el-form-item>
+                        <el-form-item label="品牌" class="item-r">
+                            <el-select v-model="queryParams.cala08" style="width: 240px" clearable filterable
+                                placeholder="请输入关键词">
+                                <el-option v-for="item in calaList" :key="item.cala08"
+                                    :label="item.cala08 + ' [' + item.cala09 + ']'" :value="item.cala08"></el-option>
+                            </el-select>
+                        </el-form-item>
 
                         <el-form-item prop="cbpb12" label="型号">
                             <!-- placeholder="描述/助记符/品牌/UPC/" -->
@@ -62,13 +64,13 @@
                         style="margin-left: -1.5%; width:100%;" @selection-change="handleSelectionChange">
                         <el-table-column type="selection" width="50" align="center" />
                         <el-table-column label="商品分类" align="left" key="cbpa07" width="190px;" prop="cbpa07" />
-                      <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable>
-                      </el-table-column>
-                      <el-table-column label="型号" align="left" key="cbpb12" width="180" prop="cbpb12" locationNum />
+                        <el-table-column label="商品品牌" align="left" key="cala08" prop="cala08" width="180px;" sortable>
+                        </el-table-column>
+                        <el-table-column label="型号" align="left" key="cbpb12" width="180" prop="cbpb12" locationNum />
                         <el-table-column label="商品描述" align="left" key="cbpb08" prop="cbpb08" width="540px;"
                             locationNum />
 
-                            <!-- <template scope="scope">
+                        <!-- <template scope="scope">
                             <div>{{ scope.row.cbpb10 == 1 ? "Epiphone" : scope.row.cbpb10 == 2 ?
                             "Gibson" : scope.row.cbpb10 == 3 ? "Kramer" : scope.row.cbpb10 == 4 ?
                             "Steinberger" : scope.row.cbpb10 == 5 ?  "Mesa/Boogie" : scope.row.cbpb10 == 6 ?
@@ -78,7 +80,7 @@
                         </template> -->
 
 
-                      <el-table-column label="UPC" align="left" key="cbpb15" width="150" prop="cbpb15" sortable />
+                        <el-table-column label="UPC" align="left" key="cbpb15" width="150" prop="cbpb15" sortable />
 
                         <el-table-column label="类型" align="left" key="typeName" width="180" prop="typeName"
                             locationNum />
@@ -158,7 +160,7 @@
                     <el-col :span="11">
                         <el-form-item label="型号:" prop="cbpb12">
                             <!-- <el-input v-model="form.ifEnabled" placeholder="是否启用" maxlength="30" /> -->
-                            <el-input v-model="form.cbpb12" placeholder="" maxlength="30" style="width:80%;" />
+                            <el-input v-model="form.cbpb12" placeholder="" maxlength="30" disabled style="width:80%;" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -549,8 +551,8 @@ export default {
 
             userList01: null,
             userList03: null,
-          //下拉列表数据品牌
-          calaList:[],
+            //下拉列表数据品牌
+            calaList: [],
             //存储结算货币
             userList9916: null,
             //存储结算货币存储数据
@@ -665,10 +667,10 @@ export default {
 
             //结算货币
             Currencyhuobi: [{
-                value: '1',
+                value: '6',
                 label: 'CNY'
             }, {
-                value: '2',
+                value: '5',
                 label: 'USD'
             }],
             // 角色选项
@@ -749,7 +751,7 @@ export default {
                 cbpb12: undefined,
                 cbpa07: undefined,
                 model: undefined,
-                cala08:undefined,
+                cala08: undefined,
             },
             // //列信息
             //  columns: [
@@ -792,7 +794,7 @@ export default {
                 ],
                 cbpb15: [
                     { required: true, message: 'upc不能为空', trigger: 'blur' },
-                     { validator: validateNumber, trigger: 'blur' }
+                    { validator: validateNumber, trigger: 'blur' }
                 ],
                 currency: [
                     { required: true, message: '结算货币不能为空', trigger: 'blur' },
@@ -835,7 +837,7 @@ export default {
         this.getList();
         // this.getList01();
         this.getTreeselect();
-      this.getCalaList();
+        this.getCalaList();
         // //输入框校验
         // this.modeltext();
         // this.getConfigKey("sys.user.initPassword").then(response => {
@@ -1136,11 +1138,11 @@ export default {
                         }
 
 
-                        if (tableDataItem.cbpf06 == "1") {
-                            tableDataItem.cbpf06 = "1";
+                        if (tableDataItem.cbpf06 == "6") {
+                            tableDataItem.cbpf06 = "6";
 
-                        } else if (tableDataItem.cbpf06 == "2") {
-                            tableDataItem.cbpf06 = "2"
+                        } else if (tableDataItem.cbpf06 == "5") {
+                            tableDataItem.cbpf06 = "5"
                         }
                         this.tableData.push(tableDataItem)
                         console.log(this.tableData, 20220929);
@@ -1577,7 +1579,7 @@ export default {
             this.$modal.confirm('是否确认删除商品分类为"' + JSON.stringify(this.idss) + '"的数据项？').then(() => {
                 userIds.forEach((item) => {
                     req.GoodsRemove(JSON.stringify(item)).then((res) => {
-                        if(res.code == 200){
+                        if (res.code == 200) {
                             console.log(res, 123)
                             this.submitShangpin();
                             this.getList();
@@ -1672,21 +1674,21 @@ export default {
         submitFileForm() {
             this.$refs.upload.submit();
         },
-      //下拉列表数据品牌
-      getCalaList(){
-        let param={cala10:"商品品牌"};
-        // this.loading2 = true;
-        getswJsAllList(param).then(response => {
-          // this.loading2 = false;
-          if (response.data != null) {
-            this.calaList = response.data;
-          } else {
-            this.calaList = [];
-          }
-        },error => {
-          // this.loading2 = false;
-        });
-      },
+        //下拉列表数据品牌
+        getCalaList() {
+            let param = { cala10: "商品品牌" };
+            // this.loading2 = true;
+            getswJsAllList(param).then(response => {
+                // this.loading2 = false;
+                if (response.data != null) {
+                    this.calaList = response.data;
+                } else {
+                    this.calaList = [];
+                }
+            }, error => {
+                // this.loading2 = false;
+            });
+        },
 
         //测试树状菜单
         // handleNodeClick(data) {
@@ -1730,34 +1732,41 @@ export default {
 </style>
 <style lang="scss" scoped>
 .goodsed .el-row {
-  width: 100%;
-  overflow-x: auto;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: space-between;
 }
+
 .shengxiaorqi {
-  position: absolute;
-  left: 70%;
+    position: absolute;
+    left: 70%;
 }
+
 .goodsnance .el-form--inline {
-  height: 100px !important;
+    height: 100px !important;
 }
+
 ::v-deep .el-dialog__body {
     padding: 30px 20px;
     color: #606266;
     font-size: 14px;
     word-break: break-all;
 }
-.abow_dialog6 ::v-deep .el-dialog__body{
+
+.abow_dialog6 ::v-deep .el-dialog__body {
     padding: 16px 20px;
 }
+
 .abow_dialog5 ::v-deep .el-dialog {
-  margin: 0 auto !important;
-  /* height: 95%; */
-  width: 85%;
-  overflow: hidden;
+    margin: 0 auto !important;
+    /* height: 95%; */
+    width: 85%;
+    overflow: hidden;
 }
-::v-deep .el-table__header,::v-deep .el-table__body{
+
+::v-deep .el-table__header,
+::v-deep .el-table__body {
     width: 100% !important;
 }
 </style>

@@ -38,8 +38,18 @@
                     <el-table-column prop="saoma" key="saoma" align="right" label="已扫数量">
                     </el-table-column>
                     <el-table-column prop="cbph10" key="cbph10" align="right" label="单价">
+                        <template slot-scope="scope">
+                            <div style="text-align: left">
+                            {{ parseFloat(scope.row.cbph10 == null ? 0 : scope.row.cbph10).toFixed(2) }}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="cbph11" key="cbph11" align="right" label="金额">
+                        <template slot-scope="scope">
+                            <div style="text-align: left">
+                            {{ parseFloat(scope.row.cbph11 == null ? 0 : scope.row.cbph11).toFixed(2) }}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="cbph13" key="cbph13" label="备注">
                     </el-table-column>

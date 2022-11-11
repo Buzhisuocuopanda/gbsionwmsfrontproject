@@ -132,11 +132,11 @@
               <!-- </sapn> -->
             </template>
           </el-table-column>
-          <el-table-column prop="cbph11" label="金额" width="100">
+          <el-table-column prop="cbph11" label="金额" width="120">
             <template slot-scope="scope">
               <sapn>
-                <el-input v-model="scope.row.cbph11" v-only-number="{ max: 100, min: 0, precision: 0 }" placeholder=""
-                  @blur="chen(scope.row)" class="shuzicaoyou" style="" readonly></el-input>
+                <el-input v-model="scope.row.cbph11" placeholder="" @blur="chen(scope.row)" class="shuzicaoyou" style=""
+                  readonly></el-input>
               </sapn>
             </template>
           </el-table-column>
@@ -742,10 +742,17 @@ export default {
 
 
     },
+    // 乘法修正精度
+    mutiply(a, b) {
+      a = this.BigNumber(a);
+      b = this.BigNumber(b);
+      return a.multipliedBy(b).toNumber();
+    },
 
     chen(item) {
       if (item.cbph09 > 0 && item.cbph10 > 0) {
-        this.$set(item, 'cbph11', (parseFloat(item.cbph09) * parseFloat(item.cbph10)))
+        // this.$set(item, 'cbph11', (parseFloat(item.cbph09) * parseFloat(item.cbph10)))
+        this.$set(item, 'cbph11', this.mutiply(item.cbph09, item.cbph10))
       }
     },
     // 合并单元格

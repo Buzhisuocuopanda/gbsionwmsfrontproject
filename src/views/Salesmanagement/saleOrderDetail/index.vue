@@ -25,53 +25,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <!--      <el-row :gutter="20">-->
-      <!--        <el-col v-if="false" style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="主副表id:" prop="cbpg161">-->
-      <!--            <el-input v-model="form2.cbpg161" placeholder="" maxlength="30" style="width:80%;" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="供料单位:" prop="cbpc099">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <supplierMaintenance ref="supplierMaintenance" @selected="selected02" style="width:220px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc099" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="仓库:" prop="cbpc100">-->
-      <!--            <el-popover placement="bottom-start" trigger="click">-->
-      <!--              <kuweixxweihu ref="kuweixxweihu" @selected="selected01" style="width:260px!important;" />-->
-      <!--              <el-input slot="reference" v-model="form2.cbpc100" placeholder="" readonly style="width:80%;">-->
-      <!--              </el-input>-->
-      <!--            </el-popover>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="" :span="8">-->
-      <!--          <el-form-item label="结算货币:" prop="cbpc16">-->
-      <!--            <el-select v-model="form2.cbpc16" placeholder="" style="width:80%;">-->
-      <!--              <el-option v-for="item in jiageLeixeng" :key="item.value" :label="item.label" :value="item.value">-->
-      <!--              </el-option>-->
-      <!--            </el-select>-->
-      <!--          </el-form-item>-->
-      <!--          &lt;!&ndash; <el-form-item label="结算货币:" prop="cbpc166">-->
-      <!--                  <el-popover placement="bottom-start" trigger="click">-->
-      <!--                      <ListLists ref="ListLists" @selected="selected004" />-->
-      <!--                      <el-select slot="reference" v-model="form2.cbpc166" placeholder="" readonly-->
-      <!--                          style="border:solid #eee thin; width:77%;">-->
-      <!--                      </el-select>-->
-      <!--                  </el-popover>-->
-      <!--              </el-form-item> &ndash;&gt;-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash;商品信息维护&ndash;&gt;-->
-      <!--        <el-col v-if="false">-->
-      <!--          <el-form-item label="" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
+
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
@@ -158,25 +112,6 @@
           </el-form-item>
         </el-col>
       </el-row>
-
-      <!--      <el-row v-if="false">-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: 2%;" :span="7">-->
-      <!--          <el-form-item label="供应商id:" prop="cbpc09">-->
-      <!--            <el-input v-model="form2.cbpc09" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        <el-col style="margin-top:-0.4%;margin-left: -3%;" :span="7">-->
-      <!--          <el-form-item label="仓库id:" prop="cbpc10">-->
-      <!--            <el-input v-model="form2.cbpc10" placeholder="" maxlength="30" style="width:80%;border:solid #eee thin" />-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--        &lt;!&ndash; 商品信息维护 &ndash;&gt;-->
-      <!--        <el-col>-->
-      <!--          <el-form-item label="" v-if="false" prop="cbpd08" style="margin-left:0.8%;">-->
-      <!--            <el-input v-model="form2.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>-->
-      <!--          </el-form-item>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
       <div>
         <el-row>
           <el-col :span="24">
@@ -188,8 +123,8 @@
             <template slot-scope="scope">
               <sapn>
                 <el-select @change="goodsOnChange(scope.row)" v-el-select-loadmore="loadMore" @clear="clearVal"
-                  v-model="scope.row.goodsId" filterable clearable :filter-method="dataFilter" placeholder="请选择"
-                  style="width: 100%;">
+                  @visible-change="Change" v-model="scope.row.goodsId" filterable clearable :filter-method="dataFilter"
+                  placeholder="请选择" style="width: 100%;">
                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -254,74 +189,6 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-          <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-            <div class="box1">
-              <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
-                class="tablebiankuan table-heads" width="95%" height="20px">
-                <thead style="">
-                  <tr style="height:30px; ">
-                    <th style="width: 130px;height: 30px;">品牌</th>
-                    <th style="width: 130px;height: 30px;">型号</th>
-                    <th style="width: 130px;height: 30px;">描述</th>
-                    <th style="width: 140px;height: 30px;">数量</th>
-                    <th style="width: 140px;height: 30px;">单价</th>
-                    <th style="width: 140px;height: 30px;">金额</th>
-                    <th style="width: 350px;height: 30px;">备注</th>
-                    <th style="width: 50px;height: 30px;">操作</th>
-                  </tr>
-                </thead>
-              </table>
-              <div class="table-bodys">
-                <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                  cellspacing="0" class="tablebiankuan">
-                  <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
-                      :ref="form.formName" :inline="true">
-                      <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpc01" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-col style="margin-left: 0%;" :span="7">
-                        <el-form-item label="" prop="cbpc000">
-                          <el-popover placement="bottom-start" trigger="click">
-                            <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                              style="width:370px!important;" />
-                            <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                              style="width:205.6%;">
-                            </el-input>
-                          </el-popover>
-                        </el-form-item>
-                      </el-col>
-                      <el-form-item label="" size="small" prop="nickname" style="margin-left:5.1%;">
-                        <el-input type="text" v-model="form.cbpd09" @blur="chen(form)" style="width:73.2%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd11" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd11" @blur="chen(form)" :min="0" :controls="false"
-                          :precision="2" style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd12" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd12" :min="0" :controls="false" :precision="2"
-                          style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd13" style="margin-left:-5.2%;">
-                        <el-input v-model="form.cbpd13" style="width:184.1%;"></el-input>
-                      </el-form-item>
-
-                      <el-form-item v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
-                        <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" v-if="false" prop="name" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
-                      </el-form-item>
-                      <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;" size="small"
-                        icon="el-icon-delete" circle @click="_ly_delFrom(index)"></el-button>
-                    </el-form>
-                  </el-row>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </el-form>
     <div class="tinajia_dingwei">
@@ -877,6 +744,9 @@ export default {
 
   },
   methods: {
+    Change() {
+      this.dataFilter()
+    },
     clearVal() {
       this.dataFilter()
     },
@@ -1322,6 +1192,7 @@ export default {
       // row.qty=0.5
 
       if (this.formData.customerId == null) {
+        row.goodsId = ''
         this.$message.error("请先选择客户")
         return;
       }
