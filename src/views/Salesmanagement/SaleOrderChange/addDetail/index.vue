@@ -8,7 +8,7 @@
       <el-row :gutter="20" style="margin-top: 20px;">
         <el-col :span="8">
           <el-form-item label="销售订单编号:" prop="orderNo">
-            <el-select @change="orderNoOnChange($event)" v-loadmore="orderloadMore" v-model="formData.orderNo"
+            <el-select @change="orderNoOnChange($event)" v-el-select-loadmore="orderloadMore" v-model="formData.orderNo"
               filterable clearable :filter-method="orderdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in orderoptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
