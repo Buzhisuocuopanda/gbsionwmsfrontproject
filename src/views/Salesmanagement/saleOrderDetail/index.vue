@@ -1192,6 +1192,7 @@ export default {
       // row.qty=0.5
 
       if (this.formData.customerId == null) {
+        row.goodsId = ''
         this.$message.error("请先选择客户")
         return;
       }
