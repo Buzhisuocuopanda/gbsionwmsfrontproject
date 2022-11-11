@@ -15,8 +15,8 @@
 
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable
-              clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore" v-model="formData.customerId"
+              filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -126,8 +126,8 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="SN" prop="sn">
-            <el-select :remote-method="selectSn" v-loadmore="getSn" @clear="clearSn" v-model="formData.sn" filterable
-              clearable remote reserve-keyword placeholder="请选择" style="width: 70%;">
+            <el-select :remote-method="selectSn" v-el-select-loadmore="getSn" @clear="clearSn" v-model="formData.sn"
+              filterable clearable remote reserve-keyword placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in snList" :key="item.sn" @click.native="goodsOnChange(item)" :label="item.sn"
                 :value="item.sn">
               </el-option>
@@ -428,6 +428,7 @@ import { systemUserSelectAll } from '@/api/saleordermanage'
 import { listSales, getSales, delSales, addSales, updateSales, selectGoodsSnSelect } from "@/api/system/sales";
 
 import Vue from 'vue';
+import { createLogger } from 'vuex';
 Vue.directive('loadmore', {
   bind(el, binding) {
 
@@ -1202,24 +1203,25 @@ export default {
     submitShangpin() {
       this.reset();
     },
-    saleUserloadMore() {
-      const param = {
-        selectMsg: this.saleUserId,
-        pageNum: this.saleUserListQuery.pageNum,
-        pageSize: this.saleUserListQuery.pageSize
-      }
+    // saleUserloadMore() {
+    //   const param = {
+    //     selectMsg: this.saleUserId,
+    //     pageNum: this.saleUserListQuery.pageNum,
+    //     pageSize: this.saleUserListQuery.pageSize
+    //   }
 
 
-      SwJsCustomerlistSelect(param).then(response => {
-        if (response.code == "200") {
-          this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
-          this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
-        }
-        // else {
-        //   this.$message.error(response.msg)
-        // }
-      });
-    },
+    //   SwJsCustomerlistSelect(param).then(response => {
+    //     if (response.code == "200") {
+    //       this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
+    //       this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
+    //     }
+    //     // else {
+    //     //   this.$message.error(response.msg)
+    //     // }
+    //   });
+    // },
+    // 客户列表下拉加载数据
     customerloadMore() {
       const param = {
         selectMsg: this.customerId,
@@ -1301,6 +1303,7 @@ export default {
       });
 
     },
+    // 客户下拉搜索
     customerdataFilter(val) {
       this.customerListQuery.pageNum = 1
       this.customerId = val
@@ -1329,12 +1332,14 @@ export default {
       this.form.cbsa08 = name.substring(0, name.indexOf("-"));
       // this.form2.icon = name;
     },
+    // 初始化调取第一页客户数据
     initCustomerSelect() {
       const param = {}
 
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
           this.customeroptions = response.data.rows
+          this.customerListQuery.pageNum = 2
         }
         // else {
         //   this.$message.error(response.msg)
@@ -1572,6 +1577,7 @@ export default {
     this.formData.answerMsg = 1;
     this.formData.feedbackTime = new Date();
     this.getSn()
+    this.snListQuery.pageNum++
   },
   watch: {
     visible(newVal) {
