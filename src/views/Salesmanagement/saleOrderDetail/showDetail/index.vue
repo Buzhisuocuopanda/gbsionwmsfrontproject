@@ -249,7 +249,7 @@
               <!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
             </el-col>
           </el-row>
-          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;">
+          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;">
             <el-table-column prop="brand" label="品牌" width="150">
               <template slot-scope="scope">
                 <sapn>
@@ -494,13 +494,12 @@
 
       </div>
     </section>
-
     <div class="tinajia_dingwei">
       <!-- <span slot="footer" class="dialog-footer" style="margin-left:2%; padding-top:-2%;"> -->
       <!--      <el-button type="primary" @click="handleAdd">保 存</el-button>-->
       <el-button style="margin-left: 2%" type="primary" @click="handleExport">导出</el-button>
       <el-button style="margin-left: 2%" type="primary" @click="handleExport1">导出1</el-button>
-      <el-button style="margin-left: 2%" type="primary" @click="xiaoschukudandayin">
+      <el-button style="margin-left: 2%" type="primary" @click="xiaoschukudandayin" v-print="printObj">
         打印
       </el-button>
       <el-button style="margin-left: 2%" type="primary" @click="xiaoschukujianyibiao">
@@ -593,6 +592,12 @@ export default {
   },
   data() {
     return {
+      printObj: {
+        id: "printRecord", // 这里是要打印元素的ID
+        popTitle: "&nbsp", // 打印的标题
+        extraCss: "", // 打印可引入外部的一个 css 文件
+        extraHead: "", // 打印头部文字
+      },
       CS: {
         'text-align': 'center',
         'min-width': '250px',
@@ -1114,7 +1119,30 @@ export default {
     // 销售订单打印页面
     xiaoschukudandayin(index, row) {
       // window.print()
-      this.$print(this.$refs.print)
+      // this.$print(this.$refs.print)
+      // //判断iframe是否存在，不存在则创建iframe
+      // var iframe=document.getElementById("print-iframe");
+      // if(!iframe){
+      //   // var el = document.querySelector("#printRecord");
+      //   var el = this.$refs.print;
+      //   console.log(this.$refs.print)
+      //   console.log(el,'------------')
+      //   iframe = document.createElement('IFRAME');
+      //   var doc = null;
+      //   iframe.setAttribute("id", "print-iframe");
+      //   iframe.setAttribute('style', 'position:absolute;width:0px;height:0px;left:-500px;top:-500px;');
+      //   document.body.appendChild(iframe);
+      //   doc = iframe.contentWindow.document;
+      //   //这里可以自定义样式
+      //   doc.write('<style media="print">@page {size: auto;margin: 0mm;}</style>'); //解决出现页眉页脚和路径的问题
+      //   doc.write('<div>' + el.innerHTML + '</div>');
+      //   doc.close();
+      //   iframe.contentWindow.focus();
+      // }
+      // setTimeout(function(){ iframe.contentWindow.print();},50)  //解决第一次样式不生效的问题
+      // if (navigator.userAgent.indexOf("MSIE") > 0){
+      //   document.body.removeChild(iframe);
+      // }
     },
     // 合并单元格
     arraySpanMethod({
@@ -1816,12 +1844,11 @@ export default {
 </style>
 <style lang="scss" scoped>
 ::v-deep .el-table__header,::v-deep .el-table__body{
- width: 100% !important;
- table-layout: fixed !important;
+  width: 100% !important;
+  table-layout: fixed !important;
 }
 ::v-deep .el-table::before, ::v-deep .el-table--group::after,::v-deep .el-table--border::after {
-  content: inherit;
-  position: relative;
+  //content: inherit;
 }
 
 ::v-deep .el-table--border {
@@ -1829,9 +1856,11 @@ export default {
   border-bottom: transparent !important;
   border-right: transparent !important;
 }
-::v-deep .el-table th.el-table__cell.is-leaf,::v-deep .el-table td.el-table__cell {
-  border-bottom: 1px solid #dfe6ec !important;
-}
+//::v-deep .el-table th.el-table__cell.is-leaf,::v-deep .el-table td.el-table__cell {
+//  border-bottom: 1px solid #dfe6ec !important;
+//}
+</style>
+<style lang="scss" scoped>
 @page {
   size: auto;
   margin: 3mm;
@@ -1848,60 +1877,65 @@ export default {
     border: solid 1px #ffffff;
     /* margin: 10mm 15mm 10mm 15mm; */
   }
-  #printRecord table {
-    table-layout: fixed !important;
+  #printRecord .el-table--border {
+    border: 1px solid #dfe6ec !important;
+    border-bottom: transparent !important;
+    border-right: transparent !important;
   }
-
-  /**  内容描述  */
-  #printRecord .el-table__body .el-table__row .el-table_1_column_3 .cell {
-    width: 280px !important;
-  }
-
-  /**  表头描述  */
-  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_3 .cell {
-    width: 280px !important;
-  }
-
-  /** 型号内容  */
-  #printRecord .el-table__body .el-table__row .el-table_1_column_2 .cell {
-    width: 200px !important;
-  }
-
-  /**  表头型号  */
-  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell {
-    width: 200px !important;
-  }
-
-  /**  表头品牌  */
-  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell {
-    width: 60px !important;
-  }
-
-  /** 品牌内容  */
-  #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell {
-    width: 60px !important;
-  }
-
-
-  /**  表头数量  */
-  /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
-
-} */
-
-  #printRecord .el-table__header-wrapper .el-table__header {
-    width: 100% !important;
-    border: solid 1px #f2f2f2;
-  }
-  #printRecord .el-table__header-wrapper .el-table__header {
-    width: 100% !important;
-  }
-
-  #printRecord .el-table__body-wrapper .el-table__body {
-    width: 100% !important;
-  }
-
-  #printRecord #pagetable table {
-    table-layout: fixed !important;
-  }
+//  #printRecord table {
+//    table-layout: fixed !important;
+//  }
+//
+//  /**  内容描述  */
+//  #printRecord .el-table__body .el-table__row .el-table_1_column_3 .cell {
+//    width: 280px !important;
+//  }
+//
+//  /**  表头描述  */
+//  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_3 .cell {
+//    width: 280px !important;
+//  }
+//
+//  /** 型号内容  */
+//  #printRecord .el-table__body .el-table__row .el-table_1_column_2 .cell {
+//    width: 200px !important;
+//  }
+//
+//  /**  表头型号  */
+//  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell {
+//    width: 200px !important;
+//  }
+//
+//  /**  表头品牌  */
+//  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell {
+//    width: 60px !important;
+//  }
+//
+//  /** 品牌内容  */
+//  #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell {
+//    width: 60px !important;
+//  }
+//
+//
+//  /**  表头数量  */
+//  /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
+//
+//} */
+//
+//  #printRecord .el-table__header-wrapper .el-table__header {
+//    width: 100% !important;
+//    border: solid 1px #f2f2f2;
+//  }
+//  #printRecord .el-table__header-wrapper .el-table__header {
+//    width: 100% !important;
+//  }
+//
+//  #printRecord .el-table__body-wrapper .el-table__body {
+//    width: 100% !important;
+//  }
+//
+//  #printRecord #pagetable table {
+//    table-layout: fixed !important;
+//  }
 }
 </style>
