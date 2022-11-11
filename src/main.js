@@ -53,7 +53,7 @@ import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
 //打印组件
-// import Print from 'vue-print-nb'
+import Print1 from 'vue-print-nb'
 import '@/utils/directives.js'
 //时间转化
 import dateMoment from '@/api/Warehousemanagement/PurchaseWarehousing/data.js'
@@ -100,6 +100,7 @@ Vue.use(VueMeta)
 Vue.use(dateMoment)
 //打印组件
 Vue.use(Print)
+Vue.use(Print1)
 //数字转换
 Vue.use(onlyNumber)
 //数字保留两位小数
