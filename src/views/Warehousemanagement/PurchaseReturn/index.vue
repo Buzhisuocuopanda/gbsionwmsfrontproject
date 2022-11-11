@@ -1471,7 +1471,7 @@ export default {
         */
         importTemplate() {
             this.download('/system/Purchasereturnorders/importTemplate', {
-            }, `user_template_${new Date().getTime()}.xlsx`)
+            }, `采购退库模板_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
         handleFileUploadProgress(event, file, fileList) {

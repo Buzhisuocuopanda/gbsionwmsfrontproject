@@ -1321,7 +1321,7 @@ export default {
         /** 下载模板操作 */
         importTemplate() {
             this.download('/system/barcode/importSwJsSkuBarcodeimportTemplate', {
-            }, `user_template_${new Date().getTime()}.xlsx`)
+            }, `库存汇总初始化模板_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
         handleFileUploadProgress(event, file, fileList) {
