@@ -463,8 +463,8 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="SN" prop="sn">
-            <el-select :remote-method="selectSn" v-loadmore="getSn" @clear="clearSn" v-model="formData.sn" filterable
-              clearable remote reserve-keyword placeholder="请选择" style="width: 70%;">
+            <el-select :remote-method="selectSn" v-el-select-loadmore="getSn" @clear="clearSn" v-model="formData.sn"
+              filterable clearable remote reserve-keyword placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in snList" :key="item.sn" @click.native="goodsOnChange(item)" :label="item.sn"
                 :value="item.sn">
               </el-option>
@@ -1154,9 +1154,9 @@ export default {
         salerId: [
           { required: true, message: '请输入销售人员', trigger: 'blur' },
         ],
-       /* sn: [
-          { required: true, message: '请选择SN号', trigger: 'blur' },
-        ],*/
+        /* sn: [
+           { required: true, message: '请选择SN号', trigger: 'blur' },
+         ],*/
         customerId: [
           { required: true, message: '请输入客户', trigger: 'blur' },
           // { type: 'number', message: '数量必须为数字'}
@@ -1979,6 +1979,7 @@ export default {
     this.initSaleUserSelect()
     this.getCauaList()
     this.getSn()
+    this.snListQuery.pageNum++
   },
   watch: {
     visible(newVal) {

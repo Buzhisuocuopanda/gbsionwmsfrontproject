@@ -1232,6 +1232,7 @@ export default {
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
           this.customeroptions = response.data.rows
+          this.customerListQuery.pageNum++
         } else {
           // this.$message.error(response.msg)
         }

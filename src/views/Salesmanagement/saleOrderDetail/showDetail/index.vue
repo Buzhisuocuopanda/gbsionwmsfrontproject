@@ -250,7 +250,7 @@
             </el-col>
           </el-row>
           <el-table :data="tableData" border style="width: 100%;margin-top: 10px;">
-            <el-table-column prop="brand" label="品牌" width="">
+            <el-table-column prop="brand" label="品牌" width="150">
               <template slot-scope="scope">
                 <sapn>
                   <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
@@ -267,9 +267,9 @@
                 </sapn>
               </template>
             </el-table-column>
-            <el-table-column prop="model" key="model" label="型号" width="" />
-            <el-table-column prop="description" label="描述" width="" />
-            <el-table-column prop="qty" label="数量" width="">
+            <el-table-column prop="model" key="model" label="型号" width="150"/>
+            <el-table-column prop="description" label="描述" width="150"/>
+            <el-table-column prop="qty" label="数量" width="100">
               <template slot-scope="scope">
                 <!--              <sapn>-->
                 <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
@@ -415,16 +415,24 @@
 
       <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS" style="margin-top:10px">
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页数量小计"
-          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumQty).toFixed(2) }}
+                              labelStyle="width: 30%;text-align:center">{{
+            parseFloat(this.formData.sumQty).toFixed(2)
+          }}
         </el-descriptions-item>
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页金额小计"
-          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumPrice).toFixed(2) }}
+                              labelStyle="width: 30%;text-align:center">{{
+            parseFloat(this.formData.sumPrice).toFixed(2)
+          }}
         </el-descriptions-item>
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="合计数量"
-          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumQty).toFixed(2) }}
+                              labelStyle="width: 30%;text-align:center">{{
+            parseFloat(this.formData.sumQty).toFixed(2)
+          }}
         </el-descriptions-item>
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="合计金额"
-          labelStyle="width: 30%;text-align:center">{{ parseFloat(this.formData.sumPrice).toFixed(2) }}
+                              labelStyle="width: 30%;text-align:center">{{
+            parseFloat(this.formData.sumPrice).toFixed(2)
+          }}
         </el-descriptions-item>
         <el-descriptions-item label="大写" labelStyle="width: 30%;text-align:center">{{ this.formData.capPrice }}
         </el-descriptions-item>
@@ -512,7 +520,16 @@ import {
   PurchaseinboundAdd,
   PurchaseinboundAdds, GoodsList01
 } from "@/api/Warehousemanagement/PurchaseWarehousing";
-import { mdfSaleOrder, saleOderDetail, swJsGoodslistBySelect, SwJsCustomerlistSelect, systemUserSelect, goodsPriceAndSku, customerDetail, addSaleOrder } from '@/api/saleordermanage'
+import {
+  mdfSaleOrder,
+  saleOderDetail,
+  swJsGoodslistBySelect,
+  SwJsCustomerlistSelect,
+  systemUserSelect,
+  goodsPriceAndSku,
+  customerDetail,
+  addSaleOrder
+} from '@/api/saleordermanage'
 
 import {
   getToken
@@ -532,6 +549,7 @@ import ListLists from "@/components/ListMaintenance";
 // import CustomerMainten from "@/components/CustomerMaintenance";
 
 import Vue from 'vue';
+
 Vue.directive('loadmore', {
   bind(el, binding) {
 
@@ -596,50 +614,49 @@ export default {
       goodsMsg: "",
       customerId: "",
       slaeUserId: "",
-      qtyclass: "normQtyclass",
       infoRules: { // 表单规则
         name: [{
           required: true,
           message: '请输入姓名',
           trigger: 'blur'
         },
-        {
-          max: 20,
-          message: '请输入1-20位的字符',
-          trigger: 'blur'
-        }
+          {
+            max: 20,
+            message: '请输入1-20位的字符',
+            trigger: 'blur'
+          }
         ],
         nickname: [{
           required: true,
           message: '请输入昵称',
           trigger: 'blur'
         },
-        {
-          max: 20,
-          message: '请输入1-20位的字符',
-          trigger: 'blur'
-        }
+          {
+            max: 20,
+            message: '请输入1-20位的字符',
+            trigger: 'blur'
+          }
         ],
         code: [{
           required: true,
           message: '请输入编号',
           trigger: 'blur'
         },
-        {
-          max: 20,
-          message: '请输入1-20位的字符',
-          trigger: 'blur'
-        }
+          {
+            max: 20,
+            message: '请输入1-20位的字符',
+            trigger: 'blur'
+          }
         ],
         branch: [{
           required: true,
           message: '请选择部门',
           trigger: 'blur'
         },
-        {
-          message: '请选择部门',
-          trigger: 'blur'
-        }
+          {
+            message: '请选择部门',
+            trigger: 'blur'
+          }
         ]
       },
       treeData: [{ // 树状数据
@@ -946,17 +963,17 @@ export default {
 
       rules: {
         orderDate: [
-          { required: true, message: '请输入日期', trigger: 'blur' },
+          {required: true, message: '请输入日期', trigger: 'blur'},
           // { type: 'number', message: '优先级必须为数字'}
         ],
         saleUserId: [
-          { required: true, message: '请输入销售人员', trigger: 'blur' },
+          {required: true, message: '请输入销售人员', trigger: 'blur'},
         ],
         // goods: [
         //   { required: true, message: '请选择商品', trigger: 'blur' },
         // ],
         customerId: [
-          { required: true, message: '请输入客户', trigger: 'blur' },
+          {required: true, message: '请输入客户', trigger: 'blur'},
           // { type: 'number', message: '数量必须为数字'}
         ],
       },
@@ -996,22 +1013,22 @@ export default {
         value: '选项5',
         label: '北京烤鸭'
       },
-      {
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
+        {
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
       options2: [{
         value: '选项1',
         label: '黄金糕2'
@@ -1085,7 +1102,7 @@ export default {
     // 销售订单 打印
     xiaoschukujianyibiao() {
       const userId = this.$route.query && this.$route.query.id;
-      this.printing("/sale/printSaleOrder", { orderId: userId }, 'pdf')
+      this.printing("/sale/printSaleOrder", {orderId: userId}, 'pdf')
       // console.log([userId, this.$route])
       // this.download(
       //   "/sale/printSaleOrder?orderId=" +
@@ -1101,11 +1118,11 @@ export default {
     },
     // 合并单元格
     arraySpanMethod({
-      row,
-      column,
-      rowIndex,
-      columnIndex
-    }) {
+                      row,
+                      column,
+                      rowIndex,
+                      columnIndex
+                    }) {
       if (columnIndex === 0) {
         return [1, 3];
       } else if (columnIndex < 3) {
@@ -1128,7 +1145,8 @@ export default {
         .then(_ => {
           done()
         })
-        .catch(_ => { })
+        .catch(_ => {
+        })
     },
     // 点击【保存】按钮后，如果每行的表单验证成功则存储数据
     _ly_ok() {
@@ -1191,9 +1209,6 @@ export default {
       }
       console.log('_ly_ok:' + JSON.stringify(this.formArr))
     },
-
-
-
 
 
     // 存储表单数据
@@ -1260,10 +1275,6 @@ export default {
       let formName = this.formArr[index].formName
       this.$refs[formName + '_select'][0].blur() // myform1648431132399_select
     },
-
-
-
-
 
 
     show() {
@@ -1335,10 +1346,6 @@ export default {
     },
 
 
-
-
-
-
     // 取消按钮
     cancel() {
       this.$store.dispatch("tagsView/delView", this.$route)
@@ -1383,7 +1390,6 @@ export default {
       this.resetForm("queryForm");
       this.handleQuery();
     },
-
 
 
     /** 数形列表的商品分类按钮**/
@@ -1658,27 +1664,25 @@ export default {
     },
 
 
-
     /** 新增按钮操作 */
     handleAdd() {
 
       this.formData.goods = this.tableData
       mdfSaleOrder(this.formData).then(response => {
-        if (response.code == "200") {
-          this.$message.success("修改成功")
-          this.$store.dispatch("tagsView/delView", this.$route)
-          this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
+          if (response.code == "200") {
+            this.$message.success("修改成功")
+            this.$store.dispatch("tagsView/delView", this.$route)
+            this.$router.push({path: "/Salesmanagement/SaleOrderGn", query: {id: 1}})
 
-        } else {
+          } else {
 
-          // this.$message.error(response.msg)
+            // this.$message.error(response.msg)
 
-          // this.$router.go(-1)
+            // this.$router.go(-1)
 
+          }
         }
-      }
       )
-
 
 
       // this.$refs["form2"].validate((item) => {
@@ -1743,45 +1747,45 @@ export default {
       orderId: this.$route.query.id
     }
     saleOderDetail(param).then(response => {
-      if (response.code == "200") {
-        // this.formData=response.data
-        // this.formData.id =response.data.id
-        // this.formData.orderNo =response.data.orderNo
-        // this.formData.customerNo =response.data.customerNo
-        // this.formData.customerId =response.data.customerId
-        // this.formData.customerName =response.data.customerName
-        // this.formData.orderDate =response.data.orderDate
-        // this.formData.saleUserId =response.data.saleUserId
-        // this.formData.saleUser =response.data.saleUser
-        // this.formData.currency =response.data.currency
-        // this.formData.receiveName =response.data.receiveName
-        // this.formData.receivePhone =response.data.receivePhone
-        // this.formData.invoiceType =response.data.invoiceType
-        // this.formData.address =response.data.address
-        // this.formData.fcNumber =response.data.fcNumber
-        // this.formData.sumQty =response.data.sumQty
-        // this.formData.sumPrice =response.data.sumPrice
-        // this.formData.CapPrice =response.data.CapPrice
-        // this.formData.makeUser =response.data.makeUser
-        // this.formData.auditUser =response.data.auditUser
-        // this.formData.fpAdress =response.data.fpAdress
-        // this.formData.taxpayerid =response.data.taxpayerid
-        // this.formData.fpAdress =response.data.fpAdress
-        // this.formData.fpPhone =response.data.fpPhone
-        // this.formData.fpbank =response.data.fpbank
-        // this.formData.fpNumber =response.data.fpNumber
-        // this.formData.fpReceiveAddress =response.data.fpReceiveAddress
-        this.formData = response.data
-        this.formData.other = response.data.other
-        this.auditData = response.data.audits
-        // this.tableData.push(...response.data.goods)
-        this.tableData = response.data.goods
-        console.log('tableData', this.tableData)
+        if (response.code == "200") {
+          // this.formData=response.data
+          // this.formData.id =response.data.id
+          // this.formData.orderNo =response.data.orderNo
+          // this.formData.customerNo =response.data.customerNo
+          // this.formData.customerId =response.data.customerId
+          // this.formData.customerName =response.data.customerName
+          // this.formData.orderDate =response.data.orderDate
+          // this.formData.saleUserId =response.data.saleUserId
+          // this.formData.saleUser =response.data.saleUser
+          // this.formData.currency =response.data.currency
+          // this.formData.receiveName =response.data.receiveName
+          // this.formData.receivePhone =response.data.receivePhone
+          // this.formData.invoiceType =response.data.invoiceType
+          // this.formData.address =response.data.address
+          // this.formData.fcNumber =response.data.fcNumber
+          // this.formData.sumQty =response.data.sumQty
+          // this.formData.sumPrice =response.data.sumPrice
+          // this.formData.CapPrice =response.data.CapPrice
+          // this.formData.makeUser =response.data.makeUser
+          // this.formData.auditUser =response.data.auditUser
+          // this.formData.fpAdress =response.data.fpAdress
+          // this.formData.taxpayerid =response.data.taxpayerid
+          // this.formData.fpAdress =response.data.fpAdress
+          // this.formData.fpPhone =response.data.fpPhone
+          // this.formData.fpbank =response.data.fpbank
+          // this.formData.fpNumber =response.data.fpNumber
+          // this.formData.fpReceiveAddress =response.data.fpReceiveAddress
+          this.formData = response.data
+          this.formData.other = response.data.other
+          this.auditData = response.data.audits
+          // this.tableData.push(...response.data.goods)
+          this.tableData = response.data.goods
+          console.log('tableData', this.tableData)
 
-      } else {
-        // this.$message.error(response.msg)
+        } else {
+          // this.$message.error(response.msg)
+        }
       }
-    }
     )
   },
   watch: {
@@ -1796,12 +1800,10 @@ export default {
   }
 };
 </script>
-<style src=".././PurchaseWarehousingcjcss/index.css">
-.normQtyclass {
-  background-color: #00afff;
-}
-
-.demo-ruleForm>>>.el-input__inner {
+<style src=".././PurchaseWarehousingcjcss/index.css" scoped>
+</style>
+<style scoped>
+.demo-ruleForm >>> .el-input__inner {
   border: 0;
 }
 
@@ -1811,61 +1813,95 @@ export default {
   top: 90%;
   left: 0;
 }
-
-
-/*.inputDeep >>> .el-input__inner {*/
-/*  -webkit-appearance: none;*/
-/*  background-color: #FFF;*/
-/*  background-image: none;*/
-/*  border-radius: 4px;*/
-/*  border: 0px;*/
-/*width: 100%;*/
-/*}*/
 </style>
 <style lang="scss" scoped>
 ::v-deep .el-table__header,::v-deep .el-table__body{
-  width: 100% !important;
-  // table-layout: auto !important;
+ width: 100% !important;
+ table-layout: fixed !important;
 }
-.el-table::before, .el-table--group::after, .el-table--border::after{
-  content:inherit;
+::v-deep .el-table::before, ::v-deep .el-table--group::after,::v-deep .el-table--border::after {
+  content: inherit;
   position: relative;
 }
-.el-table--border {
+
+::v-deep .el-table--border {
   border: 1px solid #dfe6ec !important;
   border-bottom: transparent !important;
   border-right: transparent !important;
 }
+::v-deep .el-table th.el-table__cell.is-leaf,::v-deep .el-table td.el-table__cell {
+  border-bottom: 1px solid #dfe6ec !important;
+}
 @page {
-    size: auto;
-    margin: 3mm;
+  size: auto;
+  margin: 3mm;
 }
 
-@media print{
+@media print {
   html {
-        background-color: #ffffff;
-        height: auto;
-        margin: 0px;
-    }
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
 
-    body {
-        border: solid 1px #ffffff;
-        /* margin: 10mm 15mm 10mm 15mm; */
-    }
+  body {
+    border: solid 1px #ffffff;
+    /* margin: 10mm 15mm 10mm 15mm; */
+  }
+  #printRecord table {
+    table-layout: fixed !important;
+  }
 
-    #printRecord table {
-        table-layout: auto !important;
-    }
-    #printRecord .el-table__header-wrapper .el-table__header {
-        width: 100% !important;
-    }
+  /**  内容描述  */
+  #printRecord .el-table__body .el-table__row .el-table_1_column_3 .cell {
+    width: 280px !important;
+  }
 
-    #printRecord .el-table__body-wrapper .el-table__body {
-        width: 100% !important;
-    }
+  /**  表头描述  */
+  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_3 .cell {
+    width: 280px !important;
+  }
 
-    #printRecord #pagetable table {
-        table-layout: fixed !important;
-    }
+  /** 型号内容  */
+  #printRecord .el-table__body .el-table__row .el-table_1_column_2 .cell {
+    width: 200px !important;
+  }
+
+  /**  表头型号  */
+  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell {
+    width: 200px !important;
+  }
+
+  /**  表头品牌  */
+  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell {
+    width: 60px !important;
+  }
+
+  /** 品牌内容  */
+  #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell {
+    width: 60px !important;
+  }
+
+
+  /**  表头数量  */
+  /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
+
+} */
+
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printRecord .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+  }
+
+  #printRecord .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+
+  #printRecord #pagetable table {
+    table-layout: fixed !important;
+  }
 }
 </style>

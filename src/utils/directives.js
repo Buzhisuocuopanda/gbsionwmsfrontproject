@@ -10,7 +10,7 @@ Vue.directive("el-select-loadmore", {
 
     SELECTWRAP_DOM.addEventListener('scroll', function () {
 
-      const CONDITION = this.scrollHeight - this.scrollTop <= (this.clientHeight + 2); //因为我的每次差1px，我就加了2
+      const CONDITION = this.scrollHeight - this.scrollTop <= (this.clientHeight + 1);
 
       if (CONDITION) {
 

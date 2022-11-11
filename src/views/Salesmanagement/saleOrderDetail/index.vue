@@ -29,8 +29,8 @@
       <el-row :gutter="20" style="margin-top: 1px;">
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerId" filterable
-              clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore" v-model="formData.customerId"
+              filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -1071,7 +1071,7 @@ export default {
 
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
-          this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
+          this.customerListQuery.pageNum++
           this.customeroptions.push.apply(this.customeroptions, response.data.rows)
         } else {
           // this.$message.error(response.msg)
@@ -1087,11 +1087,11 @@ export default {
         pageNum: this.listQuery.pageNum,
         pageSize: this.listQuery.pageSize
       }
-
+      console.log(this.listQuery.pageNum, "this.listQuery.pageNumthis.listQuery.pageNumthis.listQuery.pageNum")
 
       swJsGoodslistBySelect(param).then(response => {
         if (response.code == "200") {
-          this.listQuery.pageNum = this.listQuery.pageNum + 1
+          this.listQuery.pageNum++
           // this.options.push.apply(this.options,response.data.rows)
           this.options.push(...response.data.rows)
         } else {
@@ -1171,6 +1171,7 @@ export default {
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
           this.customeroptions = response.data.rows
+          this.customerListQuery.pageNum++
         } else {
           // this.$message.error(response.msg)
         }
@@ -1192,6 +1193,7 @@ export default {
       // row.qty=0.5
 
       if (this.formData.customerId == null) {
+        row.goodsId = ''
         this.$message.error("请先选择客户")
         return;
       }
