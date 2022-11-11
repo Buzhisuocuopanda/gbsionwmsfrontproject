@@ -229,7 +229,7 @@
                 :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
                 :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag
                 :before-upload="onBeforeUpload">
-                <!-- <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" 
+                <!-- <el-upload ref="upload" :limit="1" accept=".xlsx, .xls"
                 action :auto-upload="false" drag :http-request="uploadVersion"> -->
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -678,7 +678,7 @@ export default {
             this.ruleForm.file = param.file
             console.log(param, 11111111)
         },
-        // 
+        //
         onBeforeUpload(file) {
             console.log(file)
         },
@@ -1422,7 +1422,7 @@ export default {
         /** 下载模板操作 */
         importTemplate() {
             this.download('/system/SalesScheduledOrders/importTemplate', {
-            }, `user_template_${new Date().getTime()}.xlsx`)
+            }, `销售预订单入库单模板_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
         handleFileUploadProgress(event, file, fileList) {
