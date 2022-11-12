@@ -873,7 +873,7 @@ export default {
             // this.$modal.confirm('是否确认审核,编号为"' + row.cbaa07 + '"的数据项？').then(function () {
             //     return Purchaseinboundsho(row);
             // }).then(response => {
-            //  if (response.code == "200") { 
+            //  if (response.code == "200") {
             //     console.log(this.form.cbpc01, 789)
             //     // this.submitShangpin();
             //     this.getList();
@@ -881,7 +881,7 @@ export default {
             //     this.$message({ message: '审批成功', type: 'success' });
             //  }else{
             //     this.$message({ message: response.msg, type: 'error' });
-            //   } 
+            //   }
             // }).catch(() => { });
         },
         //审批上面内容
@@ -913,7 +913,7 @@ export default {
             //     return PurchaseinboundSht(row);
             // }).then(response => {
 
-            //  if (response.code == "200") {  
+            //  if (response.code == "200") {
             //     console.log(this.form.cbpc01, 789)
             //     // this.submitShangpin();
             //     this.getList();
@@ -1302,7 +1302,7 @@ export default {
         /** 下载模板操作 */
         importTemplate() {
             this.download('/system/WarehousetransferordersController/importTemplate', {
-            }, `user_template_${new Date().getTime()}.xlsx`)
+            }, `仓库调拨模板_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
         handleFileUploadProgress(event, file, fileList) {

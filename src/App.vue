@@ -17,3 +17,8 @@ export default  {
     }
 }
 </script>
+<style>
+tr,th{
+  border-spacing: 0 !important;
+}
+</style>

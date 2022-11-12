@@ -249,7 +249,7 @@
               <!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
             </el-col>
           </el-row>
-          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;">
+          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;border-spacing: 0 !important;">
             <el-table-column prop="brand" label="品牌" width="150">
               <template slot-scope="scope">
                 <sapn>
@@ -451,7 +451,7 @@
           <!--          &lt;!&ndash;            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>&ndash;&gt;-->
           <!--        </el-col>-->
         </el-row>
-        <el-table :data="auditData" border style="width: 100%;margin-top: 10px; ">
+        <el-table :data="auditData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;border-spacing: 0 !important; ">
 
           <el-table-column prop="auditUser" label=审批人 width="300%" style="text-align:center">
             <template slot-scope="scope">
@@ -1831,9 +1831,7 @@ export default {
 <style src=".././PurchaseWarehousingcjcss/index.css" scoped>
 </style>
 <style scoped>
-.demo-ruleForm >>> .el-input__inner {
-  border: 0;
-}
+
 
 .tinajia_dingwei {
   position: relative;
@@ -1859,6 +1857,9 @@ export default {
 //::v-deep .el-table th.el-table__cell.is-leaf,::v-deep .el-table td.el-table__cell {
 //  border-bottom: 1px solid #dfe6ec !important;
 //}
+::v-deep .el-table .el-table__header-wrapper th,::v-deep .el-table .el-table__fixed-header-wrapper th{
+  height: 44px;
+}
 </style>
 <style lang="scss" scoped>
 @page {

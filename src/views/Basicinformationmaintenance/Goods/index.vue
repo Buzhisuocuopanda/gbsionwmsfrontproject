@@ -1656,7 +1656,7 @@ export default {
         */
         importTemplate() {
             this.download('/system/goods/importTemplate', {
-            }, `user_${new Date().getTime()}.xlsx`)
+            }, `商品信息模板_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
         handleFileUploadProgress(event, file, fileList) {

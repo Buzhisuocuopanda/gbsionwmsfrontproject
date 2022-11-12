@@ -1016,7 +1016,7 @@ export default {
         /** 下载模板操作 */
         importTemplate() {
             this.download('/system/store/importTemplate', {
-            }, `user_template_${new Date().getTime()}.xlsx`)
+            }, `库位信息模板_${new Date().getTime()}.xlsx`)
         },
         // 文件上传中处理
         handleFileUploadProgress(event, file, fileList) {
