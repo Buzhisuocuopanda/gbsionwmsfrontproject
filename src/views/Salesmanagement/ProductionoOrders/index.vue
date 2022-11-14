@@ -30,7 +30,7 @@
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-          <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
+          <el-button v-hasPermi="['system:totalOrder:edit']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="pldelete1">批量删除
           </el-button>
           <el-button v-hasPermi="['system:totalOrder:add']" class="filter-item" type="primary"
