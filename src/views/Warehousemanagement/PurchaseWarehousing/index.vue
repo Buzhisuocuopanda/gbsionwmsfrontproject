@@ -46,7 +46,7 @@
                             class="biaoto-buttonshanchu" :disabled="multiple" @click="handleDelete">
                             删除</el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button>
+                            v-hasPermi="['system:purchaseinbound:import']">导入</el-button>
                         <el-button size="mini" class="biaoto-buttonchaxuen" @click="handleExport">导出</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>

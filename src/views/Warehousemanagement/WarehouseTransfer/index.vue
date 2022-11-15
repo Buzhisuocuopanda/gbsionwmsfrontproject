@@ -32,7 +32,7 @@
                             v-hasPermi="['system:warehousetransferordersController:remove']" @click="handleDelete">删除
                         </el-button>
                         <el-button plain size="mini" class="biaoto-buttondaoru" @click="handleImport"
-                            v-hasPermi="['system:user:import']">导入</el-button>
+                            v-hasPermi="['system:warehousetransferordersController:import']">导入</el-button>
                         <!-- <el-button plain size="mini" class="biaoto-buttondaochu" :disabled="multiple"
                             @click="PurchaseinboundShenpi01" v-hasPermi="['system:user:export']">审核</el-button>
                         <el-button plain size="mini" class="biaoto-buttonfanshen" :disabled="multiple"
