@@ -11,6 +11,7 @@ export function totalOrderList(data) {
   })
 }
 
+
 export function totalOrderExcelListtmp(data) {
   return request({
     url: '/sale/totalOrderExcelListtmp',
@@ -44,6 +45,15 @@ export function saleOrderList(data) {
     params: data
   })
 }
+
+export function finsaleOrderList(data) {
+  return request({
+    url: '/sale/finsaleOrderList',
+    method: 'get',
+    params: data
+  })
+}
+
 //国际销售订单
 export function saleOrderListGj(data) {
   return request({

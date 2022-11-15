@@ -16,6 +16,12 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="订单类型" class="item-r">
+          <el-select v-model="orderClass" placeholder="订单类型" class="middle-input" style="width:100px">
+            <el-option v-for="item in orderClassType" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
 
         <el-form-item style="">
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary" icon="el-icon-search"
@@ -24,7 +30,7 @@
           <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="reset">重置
           </el-button>
-          <el-button v-hasPermi="['system:totalOrder:list']" class="filter-item" type="primary"
+          <el-button v-hasPermi="['system:totalOrder:edit']" class="filter-item" type="primary"
             style="margin-bottom:0;margin-left: 1em" @click="pldelete1">批量删除
           </el-button>
           <el-button v-hasPermi="['system:totalOrder:add']" class="filter-item" type="primary"
@@ -373,6 +379,7 @@ export default {
       // 上传的地址
       ExcelUploadUrl: process.env.VUE_APP_BASE_API + '/sale/importTotalOrder',
       orderNo: '',
+      orderClass:'',
       model: '',
       status: '',
       single: true,
@@ -412,6 +419,16 @@ export default {
         {
           value: 4,
           label: 'OK'
+        }
+      ],
+      orderClassType: [
+        {
+          value: 1,
+          label: '国际订单'
+        },
+        {
+          value: 2,
+          label: '国内订单'
         }
       ],
       multipleSelection: []
@@ -546,6 +563,7 @@ export default {
       this.model = ''
       this.orderNo = ''
       this.status = ''
+      this.orderClass=''
 
     },
     createForm() {
@@ -1025,6 +1043,7 @@ export default {
         orderNo: this.orderNo,
         model: this.model,
         status: this.status,
+        orderClass: this.orderClass,
         pageNum: this.listQuery.pageNum,
         pageSize: this.listQuery.pageSize,
         sortKey: this.sortkey,
@@ -1048,6 +1067,7 @@ export default {
         orderNo: this.orderNo,
         model: this.model,
         status: this.status,
+        orderClass: this.orderClass,
         pageNum: 1,
         pageSize: this.listQuery.pageSize,
         sortKey: this.sortkey,
