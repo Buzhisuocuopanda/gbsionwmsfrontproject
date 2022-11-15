@@ -89,26 +89,15 @@
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
           :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
-          <el-table-column prop="cbpc000" label="品牌" width="">
+          <el-table-column prop="cala08" label="品牌" width="">
             <template slot-scope="scope" style="width: 200%">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
-                  style="width: 630px !important" />
-                <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width: 100%">
+                <Goodsone01 v-if="storeList.length > 0" ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  :storeList="storeList" style="width: 630px !important" />
+                <el-input slot="reference" v-model="scope.row.cala08" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
             </template>
-            <!-- <el-col style="margin-left: 0%;" :span="7">
-              <el-form-item label="" prop="cbpc000">
-                  <el-popover placement="bottom-start" trigger="click">
-                       <Goodsone01 ref="Goodsone01" @selected="selected08"
-                          style="width:100% !important;" />
-                        <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                            style="width:100%;">
-                        </el-input>
-                  </el-popover>
-              </el-form-item>
-            </el-col> -->
           </el-table-column>
           <el-table-column label="型号" width="" />
           <el-table-column label="描述" width="" />
@@ -187,6 +176,8 @@ import supplierMaintenance from "@/components/SupplierMaintenance";
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
 
+import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+
 //供应商
 import ListLists from "@/components/ListMaintenance";
 
@@ -214,6 +205,7 @@ export default {
   },
   data() {
     return {
+      storeList: [],
       dialogVisible: this.visible,
       formArr: [], // 表单结构数组
       infoRules: {
@@ -452,7 +444,7 @@ export default {
         cbpc166: "",
         cbpc16: "",
         cbpc01: "",
-        cbpc000: "",
+        cala08: "",
       },
       form1: {
         // classifyId: "",
@@ -485,7 +477,7 @@ export default {
         cbph11: "",
         cbpg161: "",
         cbpc01: "",
-        cbpc000: "",
+        cala08: "",
         cbpd09: "",
         cbpd11: "",
         cbpd12: "",
@@ -567,6 +559,8 @@ export default {
     deptName(val) {
       this.$refs.tree.filter(val);
     },
+
+
   },
   created() {
     this.getList();
@@ -583,7 +577,23 @@ export default {
     this.form2.cbph10 = "20";
 
     console.log(this.form.cbpc16, 123456);
+    console.log("我是父组件，created")
 
+    // 查询商品列表
+    let cus = {
+      pageNum: 1,
+      pageSize: 999999,
+      page: 1,
+      size: 999999,
+    }
+    GoodsList(cus).then(response => {
+      if (response.data.rows.length > 0) {
+        response.data.rows.forEach((item) => {
+          this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+        })
+      }
+    }
+    );
   },
   methods: {
     //返回按钮
@@ -677,7 +687,7 @@ export default {
             cbph11: "",
             cbpg161: "",
             cbpc01: "",
-            cbpc000: "",
+            cala08: "",
             cbpd09: "",
             cbpd11: "",
             cbpd12: "",
@@ -790,8 +800,8 @@ export default {
 
     //查询商品信息维护
     selected08(e, row) {
-      // row.cbpc000=e
-      this.$set(row, "cbpc000", e.substring(0, e.lastIndexOf(".")));
+      // row.cala08=e
+      this.$set(row, "cala08", e.substring(0, e.lastIndexOf(".")));
       console.log(e, 111);
       console.log(row, 222);
       // row.cbpc08 = e.substring(e.indexOf(".") + 1)
@@ -800,31 +810,31 @@ export default {
       // console.log(row.cbpc08,96325412);
       // console.log(name, 111)
       // console.log(index, 222)
-      // this.$set(this.tableData, "cbpc000", e)
+      // this.$set(this.tableData, "cala08", e)
 
-      // this.formArr[index].cbpc000=''
-      // this.formArr[index].cbpc000=e
+      // this.formArr[index].cala08=''
+      // this.formArr[index].cala08=e
       // console.log(this.formArr)
       // console.log(name.substring(name.indexOf("-") + 1), 963);
-      // this.form.cbpc000 = name.substring(0, name.indexOf("-"));
+      // this.form.cala08 = name.substring(0, name.indexOf("-"));
       // this.form2.cbpc09 = name.substring(name.indexOf("-") + 1);
       // this.form.cbsa08 = name.substring(0, name.indexOf("-"));
-      // this.form.cbpc000 = name;
+      // this.form.cala08 = name;
       // this.form.cbpd08  =  name.substring(name.indexOf(".") +1);
       // console.log(this.form2.cbpd08,852369421);
 
-      // this.$set(this.form,"cbpc000",name.substring(name.indexOf(".") +1))
-      //  this.$set(this.form,"cbpc000",name.substring(0, name.indexOf("-")))
-      // this.form.cbpc000 = name;
-      // this.$set(this.tableData,"cbpc000",name);
-      // this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1));
-      // this.tableData.cbpc000 = name.substring(name.indexOf(".") +1);
+      // this.$set(this.form,"cala08",name.substring(name.indexOf(".") +1))
+      //  this.$set(this.form,"cala08",name.substring(0, name.indexOf("-")))
+      // this.form.cala08 = name;
+      // this.$set(this.tableData,"cala08",name);
+      // this.$set(this.tableData,"cala08",name.substring(name.indexOf(".") +1));
+      // this.tableData.cala08 = name.substring(name.indexOf(".") +1);
       // this.$forceUpdate()
-      // console.log(this.$set(this.tableData,"cbpc000",name.substring(name.indexOf(".") +1)),852369421);
-      // this.tableData.cbpc000 = "123";
+      // console.log(this.$set(this.tableData,"cala08",name.substring(name.indexOf(".") +1)),852369421);
+      // this.tableData.cala08 = "123";
       // this.tableData.num = "23344";
       // console.log(name,556623);
-      // console.log(this.tableData.cbpc000,20220905);
+      // console.log(this.tableData.cala08,20220905);
     },
 
     //添加行
@@ -892,7 +902,7 @@ export default {
         if (item) {
           for (let i = 0; i < this.tableData.length; i++) {
 
-            if (this.tableData[i].cbpc000 == null || this.tableData[i].cbpc000 == 0) {
+            if (this.tableData[i].cala08 == null || this.tableData[i].cala08 == 0) {
               return this.$message.error("采购入库单明细的商品不能为空")
             }
             if (this.tableData[i].cbpd09 == null || this.tableData[i].cbpd09 == 0) {
@@ -974,7 +984,7 @@ export default {
             this.form2 = res.data.rows[0];
             this.tableData = res.data.rows;
             this.tableData.map((item) => {
-              item.cbpc000 = item.cala08 + ' ~ ' + item.cbpa07 + ' ~ ' + item.cbpb08
+              item.cala08 = item.cala08 + ' ~ ' + item.cbpa07 + ' ~ ' + item.cbpb08
             })
             console.log(this.userLists, 123456);
             console.log(res, 888999);

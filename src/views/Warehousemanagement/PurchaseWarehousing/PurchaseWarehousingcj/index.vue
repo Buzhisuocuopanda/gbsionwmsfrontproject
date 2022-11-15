@@ -91,7 +91,8 @@
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope" style="width:200%;">
               <el-popover placement="bottom-start" trigger="click" style="height:250px">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:630px!important;" />
+                <Goodsone01 v-if="storeList.length > 0" ref="Goodsone01" @selected="selected08($event, scope.row)"
+                  :storeList="storeList" style="width:630px!important;" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -171,6 +172,8 @@ import supplierMaintenance from "@/components/SupplierMaintenance";
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
 
+import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+
 //供应商
 import ListLists from "@/components/ListMaintenance";
 
@@ -193,6 +196,7 @@ export default {
   },
   data() {
     return {
+      storeList: [],
       dialogVisible: this.visible,
       formArr: [], // 表单结构数组
       infoRules: { // 表单规则
@@ -542,6 +546,21 @@ export default {
     this.form2.cbph10 = "20"
 
     console.log(this.form.cbpc16, 123456);
+    // 查询商品列表
+    let cus = {
+      pageNum: 1,
+      pageSize: 999999,
+      page: 1,
+      size: 999999,
+    }
+    GoodsList(cus).then(response => {
+      if (response.data.rows.length > 0) {
+        response.data.rows.forEach((item) => {
+          this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+        })
+      }
+    }
+    );
 
   },
   methods: {
