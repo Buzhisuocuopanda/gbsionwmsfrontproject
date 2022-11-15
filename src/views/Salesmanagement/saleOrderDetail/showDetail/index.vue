@@ -1831,9 +1831,7 @@ export default {
 <style src=".././PurchaseWarehousingcjcss/index.css" scoped>
 </style>
 <style scoped>
-.demo-ruleForm >>> .el-input__inner {
-  border: 0;
-}
+
 
 .tinajia_dingwei {
   position: relative;
@@ -1859,6 +1857,9 @@ export default {
 //::v-deep .el-table th.el-table__cell.is-leaf,::v-deep .el-table td.el-table__cell {
 //  border-bottom: 1px solid #dfe6ec !important;
 //}
+::v-deep .el-table .el-table__header-wrapper th,::v-deep .el-table .el-table__fixed-header-wrapper th{
+  height: 44px;
+}
 </style>
 <style lang="scss" scoped>
 @page {

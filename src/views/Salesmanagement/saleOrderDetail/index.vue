@@ -30,7 +30,8 @@
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerId">
             <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore" v-model="formData.customerId"
-              filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+              filterable clearable :filter-method="customerdataFilter" placeholder="请选择" style="width: 70%;"
+              @clear="clearData" @visible-change="ChangeData">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -744,6 +745,12 @@ export default {
 
   },
   methods: {
+    ChangeData() {
+      this.customerdataFilter()
+    },
+    clearData() {
+      this.customerdataFilter()
+    },
     Change() {
       this.dataFilter()
     },
@@ -1072,7 +1079,8 @@ export default {
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
           this.customerListQuery.pageNum++
-          this.customeroptions.push.apply(this.customeroptions, response.data.rows)
+          // this.customeroptions.push.apply(this.customeroptions, response.data.rows)
+          this.customeroptions.push(...response.data.rows)
         } else {
           // this.$message.error(response.msg)
         }

@@ -261,7 +261,7 @@
 </template>
 <script>
 // import x from ''
-import { reAddSaleOrder, delSaleOrder, saleOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
+import { reAddSaleOrder, delSaleOrder, finsaleOrderList,saleOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
@@ -820,7 +820,7 @@ export default {
         pageSize: this.listQuery.pageSize
       }
       // console.info(param)
-      saleOrderList(param).then(response => {
+      finsaleOrderList(param).then(response => {
         if (response.data != null && response.data.rows != null) {
           this.orderList = response.data.rows
           this.totalItems = response.data.total
@@ -851,7 +851,7 @@ export default {
         customer: this.customer
       }
       // console.info(param)
-      saleOrderList(param).then(response => {
+      finsaleOrderList(param).then(response => {
         if (response.data != null && response.data.rows != null) {
           this.orderList = response.data.rows
           this.totalItems = response.data.total
