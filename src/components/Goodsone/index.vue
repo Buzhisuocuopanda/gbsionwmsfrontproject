@@ -2,7 +2,7 @@
 <template>
     <div class="icon-body" style="width:190px;">
         <el-input v-model="name" style="position: relative;" clearable placeholder="" @clear="filterIcons"
-            @keyup.enter.native="filterIcons">
+            @input="filterIcons">
             <!-- <i slot="suffix" class="el-icon-search el-input__icon" /> -->
         </el-input>
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">

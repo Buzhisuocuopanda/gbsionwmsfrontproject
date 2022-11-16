@@ -89,6 +89,7 @@
         <el-table :data="tableData" border :span-method="arraySpanMethod" :row-style="{ height: '10px' }"
           :cell-style="{ padding: '5px' }" style="width: 100%; margin-top: 10px">
           <!-- <el-form ref="form" :model="form" label-width="55%" lable-height="20%" class="chuangjianform"> -->
+          <el-table-column type="index" width="60" />
           <el-table-column prop="cala08" label="品牌" width="">
             <template slot-scope="scope" style="width: 200%">
               <el-popover placement="bottom-start" trigger="click">
@@ -620,9 +621,9 @@ export default {
     },
     // 合并单元格
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-      if (columnIndex === 0) {
+      if (columnIndex === 1) {
         return [1, 3];
-      } else if (columnIndex < 3) {
+      } else if (columnIndex < 4 && columnIndex > 1) {
         return [0, 0];
       }
     },

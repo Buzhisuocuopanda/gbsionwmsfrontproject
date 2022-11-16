@@ -122,7 +122,7 @@
                         <template slot-scope="scope">
                             <el-popover placement="bottom-start" trigger="click">
                                 <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
-                                    style="width:670px!important;" />
+                                    style="width:670px!important;" v-if="storeList.length > 0" :storeList="storeList" />
                                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly
                                     style="width:100%;">
                                 </el-input>
@@ -245,12 +245,15 @@ import Goodsone01 from "@/components/Goodsone";
 //客户信息维护
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
+import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+
 export default {
     name: "AuthUser",
     dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
     components: { kuweixxweihu, supplierMaintenance, ListLists, Goodsone01, CustomerMaintenance },
     data() {
         return {
+            storeList: [],
             // 表单结构数组
             formArr: [],
             tableData: [],
@@ -526,7 +529,20 @@ export default {
     },
     created() {
 
-
+        // 查询商品列表
+        GoodsList({
+            pageNum: 1,
+            pageSize: 999999,
+            page: 1,
+            size: 999999,
+        }).then(response => {
+            if (response.data.rows.length > 0) {
+                response.data.rows.forEach((item) => {
+                    this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+                })
+            }
+        }
+        );
 
 
 

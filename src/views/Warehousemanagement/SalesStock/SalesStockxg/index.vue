@@ -67,8 +67,8 @@
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
-                  style="width:400px; !important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:400px; !important;"
+                  v-if="storeList.length > 0" :storeList="storeList" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
@@ -194,6 +194,8 @@ import Goodsone01 from "@/components/Goodsone";
 //客户信息维护
 import CustomerMaintenance from "@/components/CustomerMaintenance";
 
+import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+
 export default {
   name: 'AuthUser',
   dicts: [
@@ -211,6 +213,7 @@ export default {
   },
   data() {
     return {
+      storeList: [],
       // 遮罩层
       loading: true,
       // 总条数
@@ -538,6 +541,22 @@ export default {
     this.getDicts("sw_js_store_type").then((response) => {
       // this.form.type = response.rows;
     });
+
+    // 查询商品列表
+    GoodsList({
+      pageNum: 1,
+      pageSize: 999999,
+      page: 1,
+      size: 999999,
+    }).then(response => {
+      if (response.data.rows.length > 0) {
+        response.data.rows.forEach((item) => {
+          this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+        })
+      }
+    }
+    );
+
     // this.form.type = this.dict[0].label;
     // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
     // console.log(this.userList,123456789);
@@ -545,6 +564,8 @@ export default {
     this.form2.cbpd11 = "20";
 
     console.log(this.form.cbpc16, 123456);
+
+
   },
   methods: {
     //查询商品信息维护
