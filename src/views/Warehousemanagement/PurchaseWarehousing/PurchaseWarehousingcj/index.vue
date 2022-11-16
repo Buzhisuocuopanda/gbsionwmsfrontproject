@@ -547,13 +547,13 @@ export default {
 
     console.log(this.form.cbpc16, 123456);
     // 查询商品列表
-    let cus = {
+
+    GoodsList({
       pageNum: 1,
       pageSize: 999999,
       page: 1,
       size: 999999,
-    }
-    GoodsList(cus).then(response => {
+    }).then(response => {
       if (response.data.rows.length > 0) {
         response.data.rows.forEach((item) => {
           this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)

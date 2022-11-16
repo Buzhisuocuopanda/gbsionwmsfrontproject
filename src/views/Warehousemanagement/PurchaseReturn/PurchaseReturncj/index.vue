@@ -94,7 +94,8 @@
           <el-table-column prop="cbpc000" label="品牌" width="">
             <template slot-scope="scope">
               <el-popover placement="bottom-start" trigger="click">
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:630px!important;" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width:630px!important;"
+                  v-if="storeList.length > 0" :storeList="storeList" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width:100%;">
                 </el-input>
               </el-popover>
@@ -273,6 +274,8 @@ import Goodsone01 from "@/components/Goodsone";
 //供应商
 import ListLists from "@/components/ListMaintenance";
 
+import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+
 export default {
   name: "PurchaseReturncj",
   dicts: ['sys_normal_disable', 'sw_js_store_type', 'sys_user_sex', 'sw_js_store_type_manage_mode'],
@@ -292,6 +295,7 @@ export default {
   },
   data() {
     return {
+      storeList: [],
       dialogVisible: this.visible,
       formArr: [], // 表单结构数组
       infoRules: { // 表单规则
@@ -677,17 +681,31 @@ export default {
     },
   },
   created() {
-    console.log(this.$route.params.data.length, "---------------------------")
-    // if (this.$route.params.data.length) {
 
-    // } else {
+    // 查询商品列表
+    GoodsList({
+      pageNum: 1,
+      pageSize: 999999,
+      page: 1,
+      size: 999999,
+    }).then(response => {
+      if (response.data.rows.length > 0) {
+        response.data.rows.forEach((item) => {
+          this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+        })
+      }
+    }
+    );
+
+
     this.getConfigKey("sys.user.initPassword").then(response => {
-      // this.initPassword = response.msg;
     });
     this.getDicts("sw_js_store_type").then(response => {
       this.form.type = response.rows;
     });
-    // }
+
+
+
 
     // this.form.type = this.dict[0].label;
     // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));

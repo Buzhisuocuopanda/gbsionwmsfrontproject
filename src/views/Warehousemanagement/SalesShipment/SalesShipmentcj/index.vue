@@ -174,8 +174,8 @@
           <el-table-column prop="cbpc000" label="品牌" width="200">
             <template slot-scope="scope" style="width: 200%">
               <el-popover placement="bottom-start" trigger="click" disabled>
-                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)"
-                  style="width: 630px !important" />
+                <Goodsone01 ref="Goodsone01" @selected="selected08($event, scope.row)" style="width: 630px !important"
+                  v-if="storeList.length > 0" :storeList="storeList" />
                 <el-input slot="reference" v-model="scope.row.cbpc000" placeholder="" readonly style="width: 100%">
                 </el-input>
               </el-popover>
@@ -304,6 +304,8 @@ import Goodsone01 from "@/components/Goodsone";
 //销售人员
 import salerman from "@/components/salerman";
 
+import { GoodsList } from "@/api/Basicinformationmaintenance/Goods/index";
+
 export default {
   name: "AuthUser",
   dicts: [
@@ -330,6 +332,7 @@ export default {
       }
     };
     return {
+      storeList: [],
       xsIds: null,
       // 表单结构数组
       formArr: [],
@@ -692,6 +695,22 @@ export default {
     },
   },
   created() {
+
+    // 查询商品列表
+    GoodsList({
+      pageNum: 1,
+      pageSize: 999999,
+      page: 1,
+      size: 999999,
+    }).then(response => {
+      if (response.data.rows.length > 0) {
+        response.data.rows.forEach((item) => {
+          this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+        })
+      }
+    }
+    );
+
     this.form.cbsc17 = this.form.brand;
     let routerParams = this.$route.query;
     console.log(routerParams.data)
