@@ -43,6 +43,7 @@
       <el-table :data="inwuquList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="460" v-loading="loading" border fit
         highlight-current-row stripe style="margin-top:1em">
+        <el-table-column type="index" width="50" />
         <el-table-column label="大类" align="left" prop="totalclassify" min-width="80px;" />
         <el-table-column label="分类名称" align="left" prop="cbpa07" min-width="120px;" />
         <el-table-column label="品牌" align="left" prop="cala08" min-width="120px;" />

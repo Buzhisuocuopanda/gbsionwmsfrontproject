@@ -26,6 +26,7 @@
                     <el-table style="width:100%;" :header-cell-style="headClass" v-loading="loading" border
                         :data="userList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
                         :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
+                        <el-table-column type="index" width="50"></el-table-column>
                         <el-table-column prop="cala08" key="cala08" label="品牌">
                         </el-table-column>
                         <el-table-column prop="cbpb12" key="cbpb12" label="型号">
