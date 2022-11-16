@@ -22,8 +22,8 @@
                 </el-descriptions>
 
                 <!-- 纵向 v-for="(value, key) in userList" :key="key" {{ value.cbpc01 }}-->
-                <el-form :model="queryParams" ref="queryForm" size="small" :inline="true">
-                    <el-table style="width:100%；height:auto" :header-cell-style="headClass" v-loading="loading" border
+                <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" style="height:auto">
+                    <el-table style="width:100%;" :header-cell-style="headClass" v-loading="loading" border
                         :data="userList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
                         :default-sort="{ prop: 'name', order: 'descending' }" @selection-change="handleSelectionChange">
                         <el-table-column prop="cala08" key="cala08" label="品牌">
