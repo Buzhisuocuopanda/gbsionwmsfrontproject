@@ -569,6 +569,21 @@ export default {
     },
   },
   created() {
+    // 查询商品列表
+    GoodsList({
+      pageNum: 1,
+      pageSize: 999999,
+      page: 1,
+      size: 999999,
+    }).then(response => {
+      if (response.data.rows.length > 0) {
+        response.data.rows.forEach((item) => {
+          this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
+        })
+      }
+    }
+    );
+
     //销售提货单详情
     this.getList();
     this.form2.cbca08 = this.ListUser.customerName;
@@ -588,21 +603,6 @@ export default {
     this.form2.cbpd11 = "20";
 
     console.log(this.form.cbpc16, 123456);
-
-    // 查询商品列表
-    GoodsList({
-      pageNum: 1,
-      pageSize: 999999,
-      page: 1,
-      size: 999999,
-    }).then(response => {
-      if (response.data.rows.length > 0) {
-        response.data.rows.forEach((item) => {
-          this.storeList.push(item.cala08 + "-" + item.cbpb12 + "-" + item.cbpb08 + "." + item.cbpb01)
-        })
-      }
-    }
-    );
   },
   methods: {
     //查询商品信息维护

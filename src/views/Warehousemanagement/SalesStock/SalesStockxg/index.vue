@@ -528,19 +528,6 @@ export default {
     },
   },
   created() {
-    console.log(11);
-    //销售提货单详情
-    this.getList();
-    this.form2.cbca08 = this.ListUser.customerName;
-    //父子页面传值
-
-    this.getParams();
-    this.getConfigKey("sys.user.initPassword").then((response) => {
-      // this.initPassword = response.msg;
-    });
-    this.getDicts("sw_js_store_type").then((response) => {
-      // this.form.type = response.rows;
-    });
 
     // 查询商品列表
     GoodsList({
@@ -556,6 +543,20 @@ export default {
       }
     }
     );
+
+    //销售提货单详情
+    this.getList();
+    this.form2.cbca08 = this.ListUser.customerName;
+    //父子页面传值
+
+    this.getParams();
+    this.getConfigKey("sys.user.initPassword").then((response) => {
+      // this.initPassword = response.msg;
+    });
+    this.getDicts("sw_js_store_type").then((response) => {
+      // this.form.type = response.rows;
+    });
+
 
     // this.form.type = this.dict[0].label;
     // this.userList.housingTime.substring(0, this.userList.housingTime.indexOf("T"));
