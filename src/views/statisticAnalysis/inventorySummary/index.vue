@@ -210,11 +210,11 @@ export default {
     })
   },
   methods: {
-    getSummaries(params) {  //表格数值合计
+    //表格数值合计
+    getSummaries(params) {
       const { columns, data } = params;
       const sums = [];
       columns.forEach((column, index) => {
-        console.log(index, "index ----------------- index")
         if (index === 0) {
           sums[index] = '合计';
           return;

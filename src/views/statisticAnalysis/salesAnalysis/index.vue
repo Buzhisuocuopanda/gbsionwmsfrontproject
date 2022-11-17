@@ -58,7 +58,7 @@
       </el-form>
       <el-table :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" :data="inwuquList"
         element-loading-text="Loading。。。" height="430" width="100%;" v-loading="loading" border fit
-        highlight-current-row stripe style="margin-top:1em">
+        highlight-current-row stripe style="margin-top:1em" show-summary ref="table" :summary-method="getSummaries">
         <!--header-align="center"-->
         <el-table-column label="客户名称" align="left" prop="customerName" min-width="200px;" />
         <el-table-column v-if="false" label="下单时间" align="left" prop="createTime" :formatter="formatTime2"
@@ -253,8 +253,53 @@ export default {
     this.getModelList();
     this.getCbsaList();
   },
+  updated() {
+    this.$nextTick(() => {
+      this.$refs['table'].doLayout()
+      // table是在表格中ref=‘table’
+      // doLayout	对 Table 进行重新布局。当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法
+    })
+  },
   methods: {
-
+    //表格数值合计
+    getSummaries(params) {
+      const { columns, data } = params;
+      const sums = [];
+      columns.forEach((column, index) => {
+        console.log(index, "index ----------------- index")
+        if (index === 0) {
+          sums[index] = '合计';
+          return;
+        } else if (index === 4) {
+          if (this.inwuquList[0].totalqty) {
+            sums[index] = this.inwuquList[0].totalqty;
+            sums[index] = sums[index].toFixed(2)  //保留两位小数
+          }
+        } else if (index === 6) {
+          if (this.inwuquList[0].totalmoney) {
+            sums[index] = this.inwuquList[0].totalmoney;
+            sums[index] = sums[index].toFixed(2)  //保留两位小数
+          }
+        }
+        //  else if (index === 4 || index === 5 || index === 6) {
+        //   const values = data.map(item => Number(item[column.property]));
+        //   if (!values.every(value => isNaN(value))) {
+        //     sums[index] = values.reduce((prev, curr) => {
+        //       const value = Number(curr);
+        //       if (!isNaN(value)) {
+        //         return prev + curr;
+        //       } else {
+        //         return prev;
+        //       }
+        //     }, 0);
+        //     sums[index] = sums[index].toFixed(2)  //保留两位小数
+        //   } else {
+        //     sums[index] = '';  //空
+        //   }
+        // }
+      });
+      return sums;
+    },
     rounding(row, column) {
       if (parseFloat(row[column.property]).toFixed(2) == null || isNaN(parseFloat(row[column.property]).toFixed(2))) {
         return '0.00';
