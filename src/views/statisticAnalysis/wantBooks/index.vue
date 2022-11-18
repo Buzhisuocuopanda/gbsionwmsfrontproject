@@ -40,7 +40,7 @@
     <!-- 表格 -->
     <el-table :data="tableData" :header-cell-style="headClasspw" style="width: 100%;margin-top:0.1em"
       :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" height="460" border
-      :default-sort="{ prop: 'date', order: 'descending' }">
+      :default-sort="{ prop: 'date', order: 'descending' }" show-summary ref="table" :summary-method="getSummaries">
       <el-table-column prop="date" label="序号" type="index" sortable width="50" align="left"></el-table-column>
       <el-table-column prop="cbpa08" label="大类" align="left" sortable width="110"></el-table-column>
       <el-table-column prop="cbpa07" label="分类名称" align="left" width="100" sortable></el-table-column>
@@ -128,8 +128,44 @@ export default {
     this.getCalaList();
     this.getGoods();
   },
+  updated() {
+    this.$nextTick(() => {
+      this.$refs['table'].doLayout()
+      // table是在表格中ref=‘table’
+      // doLayout	对 Table 进行重新布局。当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法
+    })
+  },
   methods: {
-
+    getSummaries(params) {
+      const { columns, data } = params;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合计';
+          return;
+        } else if (index === 7) {
+          if (this.tableData[0]) {
+            sums[index] = this.tableData[0].totalmum;
+            sums[index] = sums[index].toFixed(2)  //保留两位小数
+          }
+          // const values = data.map(item => Number(item[column.property]));
+          // if (!values.every(value => isNaN(value))) {
+          //   sums[index] = values.reduce((prev, curr) => {
+          //     const value = Number(curr);
+          //     if (!isNaN(value)) {
+          //       return prev + curr;
+          //     } else {
+          //       return prev;
+          //     }
+          //   }, 0);
+          //   sums[index] = sums[index].toFixed(2)  //保留两位小数
+          // } else {
+          //   sums[index] = '';  //空
+          // }
+        }
+      });
+      return sums;
+    },
     rounding(row, column) {
       if (parseFloat(row[column.property]).toFixed(2) == null || isNaN(parseFloat(row[column.property]).toFixed(2))) {
         return '0.00';

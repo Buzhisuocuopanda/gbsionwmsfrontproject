@@ -85,7 +85,7 @@
           <el-form-item label="客户:" prop="customerId">
             <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore"
               v-model="formData.customerName" filterable clearable :filter-method="customerdataFilter" placeholder="请选择"
-              style="width: 70%;">
+              style="width: 70%;" @clear="clearData" @visible-change="clearData">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -94,8 +94,9 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUserId">
-            <el-select @change="saleUserOnChange" v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUser"
-              filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable
+              :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;" @clear="clearUser"
+              @visible-change="clearUser">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -871,7 +872,7 @@ export default {
     },
   },
   created() {
-
+    console.log("销售变更订单1")
 
     this.getConfigKey("sys.user.initPassword").then(response => {
       // this.initPassword = response.msg;
@@ -889,6 +890,13 @@ export default {
 
   },
   methods: {
+    clearUser() {
+      this.saleUserdataFilter()
+    },
+
+    clearData() {
+      this.customerdataFilter()
+    },
     // 合并单元格
     arraySpanMethod({
       row,
@@ -1187,10 +1195,11 @@ export default {
       }
 
 
-      SwJsCustomerlistSelect(param).then(response => {
+      systemUserSelect(param).then(response => {
         if (response.code == "200") {
-          this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
-          this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
+          this.saleUserListQuery.pageNum++
+          // this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
+          this.saleUseroptions.push(...response.data.rows)
         } else {
           // this.$message.error(response.msg)
         }

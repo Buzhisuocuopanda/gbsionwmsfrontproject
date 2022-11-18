@@ -41,7 +41,7 @@
       </el-form>
       <el-table :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }" :data="inwuquList"
         element-loading-text="Loading。。。" width="100%;" height="460" v-loading="loading" border fit
-        highlight-current-row stripe style="margin-top:1em">
+        highlight-current-row stripe style="margin-top:1em" show-summary ref="table" :summary-method="getSummaries">
         <el-table-column align="center" label="序号" type="index" width="50" />
         <el-table-column label="销售订单号" align="left" prop="cboa07" min-width="110px;" />
         <el-table-column label="客户" align="left" prop="cbca08" min-width="180px;" />
@@ -158,7 +158,59 @@ export default {
     this.getCbpaList();
     this.getGoods();
   },
+  updated() {
+    this.$nextTick(() => {
+      this.$refs['table'].doLayout()
+      // table是在表格中ref=‘table’
+      // doLayout	对 Table 进行重新布局。当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法
+    })
+  },
   methods: {
+    //表格数值合计
+    getSummaries(params) {
+      const { columns, data } = params;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合计';
+          return;
+        }
+        else if (index === 7) {
+          if (this.inwuquList[0].countNoSendQty) {
+            sums[index] = this.inwuquList[0].countNoSendQty;
+            sums[index] = sums[index].toFixed(2)  //保留两位小数
+          }
+
+          // const values = data.map(item => Number(item[column.property]));
+          // if (!values.every(value => isNaN(value))) {
+          //   sums[index] = values.reduce((prev, curr) => {
+          //     const value = Number(curr);
+          //     if (!isNaN(value)) {
+          //       return prev + curr;
+          //     } else {
+          //       return prev;
+          //     }
+          //   }, 0);
+          //   sums[index] = sums[index].toFixed(2)  //保留两位小数
+          // } else {
+          //   sums[index] = '';  //空
+          // }
+        }
+        else if (index === 8) {
+          if (this.inwuquList[0].countOrderQty) {
+            sums[index] = this.inwuquList[0].countOrderQty;
+            sums[index] = sums[index].toFixed(2)  //保留两位小数
+          }
+        }
+        else if (index === 9) {
+          if (this.inwuquList[0].countSendQty) {
+            sums[index] = this.inwuquList[0].countSendQty;
+            sums[index] = sums[index].toFixed(2)  //保留两位小数
+          }
+        }
+      });
+      return sums;
+    },
 
     rounding(row, column) {
       if (parseFloat(row[column.property]).toFixed(2) == null || isNaN(parseFloat(row[column.property]).toFixed(2))) {

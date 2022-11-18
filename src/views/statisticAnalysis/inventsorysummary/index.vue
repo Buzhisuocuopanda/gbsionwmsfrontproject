@@ -42,7 +42,7 @@
       <!--highlight-current-row-->
       <el-table :data="inwuquList" :row-style="{ height: '3px' }" :cell-style="{ padding: '2px' }"
         element-loading-text="Loading。。。" width="100%;" height="465" v-loading="loading" border fit stripe
-        style="margin-top:1em;flex-grow: 1;">
+        style="margin-top:1em;flex-grow: 1;" show-summary ref="table" :summary-method="getSummaries">
         <el-table-column fixed align="left" label="序号" type="index" width="50"></el-table-column>
         <el-table-column fixed label="大类" align="left" prop="totalclassify" min-width="60px;" />
         <el-table-column fixed label="分类名称" align="left" prop="cbpa07" min-width="100px;" />
@@ -64,10 +64,10 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="total"
+      <!-- <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="total"
         :current-page.sync="queryParams.pageNum" :page-size.sync="queryParams.pageSize"
         style="padding-top:20px; padding-left: 20px;float: right;text-align: right;"
-        layout="total, sizes, prev, pager, next, jumper" @size-change="onSearch" @current-change="onSearch" />
+        layout="total, sizes, prev, pager, next, jumper" @size-change="onSearch" @current-change="onSearch" /> -->
 
       <!--<pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum"
                   :limit.sync="queryParams.pageSize" @pagination="onSearch" :page-sizes="[10, 20, 30]"
@@ -166,7 +166,42 @@ export default {
     this.getgoodsShopList();
     this.getGoods();
   },
+  updated() {
+    this.$nextTick(() => {
+      this.$refs['table'].doLayout()
+      // table是在表格中ref=‘table’
+      // doLayout	对 Table 进行重新布局。当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法
+    })
+  },
   methods: {
+    //表格数值合计
+    getSummaries(params) {
+      const { columns, data } = params;
+      const sums = [];
+      columns.forEach((column, index) => {
+        console.log(index, "index ----------------- index")
+        if (index === 0) {
+          sums[index] = '合计';
+          return;
+        } else if (index === 7 || index === 8) {
+          const values = data.map(item => Number(item[column.property]));
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return prev + curr;
+              } else {
+                return prev;
+              }
+            }, 0);
+            sums[index] = sums[index].toFixed(2)  //保留两位小数
+          } else {
+            sums[index] = '';  //空
+          }
+        }
+      });
+      return sums;
+    },
     //按钮显示文字
     judge(row) {
       if (row.shopping == null || row.shopping == 0) {
