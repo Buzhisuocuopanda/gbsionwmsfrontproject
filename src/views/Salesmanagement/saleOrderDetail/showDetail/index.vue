@@ -243,7 +243,8 @@
         <!--          </el-form-item>-->
         <!--        </el-col>-->
         <!--      </el-row>-->
-        <div>
+        <!-- 注释，暂时不用样式有问题 -->
+        <!-- <div>
           <el-table :data="tableData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;border-spacing: 0 !important;border-right: transparent !important;">
             <el-table-column prop="brand" label="品牌" width="">
             </el-table-column>
@@ -285,9 +286,32 @@
               </template>
             </el-table-column>
           </el-table>
-        </div>
+        </div> -->
       </el-form>
-
+      <div class="news">
+        <table border="0" cellspacing="0">
+          <tr class="table-top">
+            <th>品牌</th>
+            <th>型号</th>
+            <th>描述</th>
+            <th>数量</th>
+            <th>标准单价</th>
+            <th>本次单价</th>
+            <th>金额</th>
+            <th>备注</th>
+          </tr>
+          <tr v-for="(item,index) in tableData" :key="index">
+            <td>{{ item.brand }}</td>
+            <td>{{ item.model }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ parseFloat(item.qty).toFixed(2) }}</td>
+            <td>{{ parseFloat(item.normalPrice).toFixed(2) }}</td>
+            <td>{{ parseFloat(item.currentPrice).toFixed(2) }}</td>
+            <td>{{ parseFloat(item.totalPrice).toFixed(2) }}</td>
+            <td>{{ item.remark }}</td>
+          </tr>
+        </table>
+      </div>
       <el-descriptions :column="2" border :contentStyle="CS" :label-style="LS" style="margin-top:10px">
         <el-descriptions-item :contentStyle="{ 'text-align': 'right' }" label="本页数量小计"
                               labelStyle="width: 30%;text-align:center">{{
@@ -1814,5 +1838,42 @@ export default {
 //  #printRecord #pagetable table {
 //    table-layout: fixed !important;
 //  }
+}
+</style>
+
+<style lang="scss" scoped>
+.news{
+  margin-top: .65rem;
+  width: 100%;
+  color: #606266;
+  font-size: 14px;
+  line-height: 1.7;
+  table{
+    width: 100%;
+    border: 1px solid #dfe6ec;
+    border-bottom: none;
+    border-right: none;
+    tr{
+      th,td{
+        border-bottom: 1px solid #dfe6ec;
+        border-right: 1px solid #dfe6ec;
+        padding: .65rem;
+      }
+      th{
+        width: 12.5%;
+        height: 2rem;
+      }
+      td:nth-child(-n+7):nth-child(n+4){
+        text-align: right;
+      }
+    }
+    .table-top{
+      color: #515a6e;
+      background-color: #f8f8f9;
+      font-weight: inherit;
+      font-size: 13px;
+      text-align: left;
+    }
+  }
 }
 </style>
