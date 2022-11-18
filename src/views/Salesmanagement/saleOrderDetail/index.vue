@@ -40,8 +40,9 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUserId">
-            <el-select v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUserId" filterable clearable
-              :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select v-el-select-loadmore="saleUserdataFilteradd" v-model="formData.saleUserId" filterable clearable
+              :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;" @clear="clearUser"
+              @visible-change="changeUser">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -751,12 +752,126 @@ export default {
     clearData() {
       this.customerdataFilter()
     },
+    clearUser() {
+      this.saleUserdataFilter()
+    },
+    changeUser() {
+      this.saleUserdataFilter()
+    },
     Change() {
       this.dataFilter()
     },
     clearVal() {
       this.dataFilter()
     },
+
+    /* 客户下拉框   开始 */
+    // 切换客户时触发
+    customerOnChange(val) {
+      // console.log(this.formData.customer)
+      // console.log("val",val)
+      // console.log("val",row)
+      // row.qty=0.5
+      if (val == '') {
+        return
+      }
+      const param = {
+        cbca01: val,
+
+      }
+
+      //
+      customerDetail(param).then(response => {
+        if (response.code == "200") {
+          this.formData.receivePhone = response.data.cbca16
+          this.formData.receiveName = response.data.cbca14
+          this.formData.address = response.data.cbca15
+
+
+        } else {
+          this.formData.receivePhone = ''
+          this.formData.receiveName = ''
+          this.formData.address = ''
+          // this.$message.error(response.msg)
+
+        }
+      });
+
+    },
+
+    // 客户下拉触底时触发
+    customerloadMore() {
+      const param = {
+        selectMsg: this.customerId,
+        pageNum: this.customerListQuery.pageNum,
+        pageSize: this.customerListQuery.pageSize
+      }
+
+
+      SwJsCustomerlistSelect(param).then(response => {
+        if (response.code == "200") {
+          this.customerListQuery.pageNum++
+          // this.customeroptions.push.apply(this.customeroptions, response.data.rows)
+          this.customeroptions.push(...response.data.rows)
+        } else {
+          // this.$message.error(response.msg)
+        }
+      });
+    },
+
+    // 客户下拉框自定义搜索方法
+    customerdataFilter(val) {
+      this.customerListQuery.pageNum = 1
+      this.customerId = val
+      const param = {
+        selectMsg: this.customerId,
+        pageNum: this.customerListQuery.pageNum,
+        pageSize: this.customerListQuery.pageSize
+      }
+
+      SwJsCustomerlistSelect(param).then(response => {
+        if (response.code == "200") {
+          this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
+          this.customeroptions = response.data.rows
+        } else {
+          // this.$message.error(response.msg)
+        }
+      });
+
+    },
+
+    /* 客户下拉框  结束 */
+
+
+
+    /*  联系人员下拉列表  开始*/
+    UserChange(val) {
+      if (val == '') {
+        return
+      }
+      const param = {
+        selectMsg: val,
+      }
+
+      //
+      systemUserSelect(param).then(response => {
+        if (response.code == "200") {
+          console.log(response, "changechange---------changechange")
+          // this.formData.receivePhone = response.data.cbca16
+          // this.formData.receiveName = response.data.cbca14
+          // this.formData.address = response.data.cbca15
+        } else {
+          // this.formData.receivePhone = ''
+          // this.formData.receiveName = ''
+          // this.formData.address = ''
+          // this.$message.error(response.msg)
+
+        }
+      });
+    },
+
+    /*  联系人员下拉列表  结束*/
+
     //
     getDate() {
       this.formData.orderDate = new Date()
@@ -1051,13 +1166,13 @@ export default {
     submitShangpin() {
       this.reset();
     },
+
     saleUserloadMore() {
       const param = {
         selectMsg: this.saleUserId,
         pageNum: this.saleUserListQuery.pageNum,
         pageSize: this.saleUserListQuery.pageSize
       }
-
 
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
@@ -1068,24 +1183,7 @@ export default {
         }
       });
     },
-    customerloadMore() {
-      const param = {
-        selectMsg: this.customerId,
-        pageNum: this.customerListQuery.pageNum,
-        pageSize: this.customerListQuery.pageSize
-      }
 
-
-      SwJsCustomerlistSelect(param).then(response => {
-        if (response.code == "200") {
-          this.customerListQuery.pageNum++
-          // this.customeroptions.push.apply(this.customeroptions, response.data.rows)
-          this.customeroptions.push(...response.data.rows)
-        } else {
-          // this.$message.error(response.msg)
-        }
-      });
-    },
     loadMore() {
       //         console.log("滚动到底部了")
       // // 这里可以做你想做的任何事 到底执行
@@ -1138,7 +1236,7 @@ export default {
 
       systemUserSelect(param).then(response => {
         if (response.code == "200") {
-          this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
+          this.saleUserListQuery.pageNum++
           this.saleUseroptions = response.data.rows
         } else {
           // this.$message.error(response.msg)
@@ -1146,25 +1244,27 @@ export default {
       });
 
     },
-    customerdataFilter(val) {
-      this.customerListQuery.pageNum = 1
-      this.customerId = val
+    // 联系人员下拉触底
+    saleUserdataFilteradd(val) {
+      // this.saleUserListQuery.pageNum = 1
       const param = {
-        selectMsg: this.customerId,
-        pageNum: this.customerListQuery.pageNum,
-        pageSize: this.customerListQuery.pageSize
+        selectMsg: this.saleUserId,
+        pageNum: this.saleUserListQuery.pageNum,
+        pageSize: this.saleUserListQuery.pageSize
       }
 
-      SwJsCustomerlistSelect(param).then(response => {
+      systemUserSelect(param).then(response => {
         if (response.code == "200") {
-          this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
-          this.customeroptions = response.data.rows
+          this.saleUserListQuery.pageNum++
+          // this.saleUseroptions = response.data.rows
+          this.saleUseroptions.push(...response.data.rows)
         } else {
           // this.$message.error(response.msg)
         }
       });
 
     },
+
     selected022(name) {
       console.log(name, 123)
       console.log(name.substring(name.indexOf("-") + 1), 963);
@@ -1266,37 +1366,8 @@ export default {
       }
     },
 
-    customerOnChange(val) {
-      // console.log(this.formData.customer)
-      // console.log("val",val)
-      // console.log("val",row)
-      // row.qty=0.5
-      if (val == '') {
-        return
-      }
-      const param = {
-        cbca01: val,
-
-      }
-
-      //
-      customerDetail(param).then(response => {
-        if (response.code == "200") {
-          this.formData.receivePhone = response.data.cbca16
-          this.formData.receiveName = response.data.cbca14
-          this.formData.address = response.data.cbca15
 
 
-        } else {
-          this.formData.receivePhone = ''
-          this.formData.receiveName = ''
-          this.formData.address = ''
-          // this.$message.error(response.msg)
-
-        }
-      });
-
-    },
 
     initSaleUserSelect() {
       const param = {}
@@ -1304,6 +1375,7 @@ export default {
       systemUserSelect(param).then(response => {
         if (response.code == "200") {
           this.saleUseroptions = response.data.rows
+          this.saleUserListQuery.pageNum++
         } else {
           // this.$message.error(response.msg)
         }

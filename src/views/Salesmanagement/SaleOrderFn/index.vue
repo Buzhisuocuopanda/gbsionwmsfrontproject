@@ -89,8 +89,8 @@
       </el-table>
       <el-pagination :background="true" :page-sizes="[10, 15, 20, 50, 500]" :total="totalItems"
         :current-page.sync="listQuery.pageNum" :page-size.sync="listQuery.pageSize"
-        style="padding-top:30px; padding-left: 10px;text-align: right;flex-grow: 0;" layout="total, sizes, prev, pager, next, jumper"
-        @size-change="onSearch" @current-change="onSearch" />
+        style="padding-top:30px; padding-left: 10px;text-align: right;flex-grow: 0;"
+        layout="total, sizes, prev, pager, next, jumper" @size-change="onSearch" @current-change="onSearch" />
 
 
 
@@ -263,7 +263,7 @@
 </template>
 <script>
 // import x from ''
-import { reAddSaleOrder, delSaleOrder, finsaleOrderList,saleOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
+import { reAddSaleOrder, delSaleOrder, finsaleOrderList, saleOrderList, totalOrderExcelListtmp, addTotalOrder, mdfTotalOrder } from '@/api/saleordermanage'
 import { getToken } from '@/utils/auth'
 //商品信息维护
 import Goodsone01 from "@/components/Goodsone";
@@ -876,15 +876,17 @@ export default {
 /*  box-sizing: border-box*/
 /*}*/
 
-::v-deep .el-form-item{
+::v-deep .el-form-item {
   margin-bottom: 0;
 }
+
 .caozuoxiangqengFN {
   border: 0 !important;
   padding: 0 !important;
 }
-.saleOrderfn{
-  width:100%;
+
+.saleOrderfn {
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: calc(93vh - 85px);

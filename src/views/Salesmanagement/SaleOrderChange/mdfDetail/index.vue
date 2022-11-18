@@ -79,8 +79,9 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="客户:" prop="customerName">
-            <el-select @change="customerOnChange" v-loadmore="customerloadMore" v-model="formData.customerName"
-              filterable clearable remote :remote-method="customerdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select @change="customerOnChange" v-el-select-loadmore="customerloadMore"
+              v-model="formData.customerName" filterable clearable remote :filter-method="customerdataFilter"
+              placeholder="请选择" style="width: 70%;" @clear="clearData" @visible-change="clearData">
               <el-option v-for="item in customeroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -89,8 +90,9 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="销售人员:" prop="saleUser">
-            <el-select @change="saleUserOnChange($event)" v-loadmore="saleUserloadMore" v-model="formData.saleUser"
-              filterable clearable :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;">
+            <el-select v-el-select-loadmore="saleUserloadMore" v-model="formData.saleUser" filterable clearable
+              :filter-method="saleUserdataFilter" placeholder="请选择" style="width: 70%;" @clear="clearUser"
+              @visible-change="clearUser">
               <el-option v-for="item in saleUseroptions" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -858,7 +860,7 @@ export default {
     },
   },
   created() {
-
+    console.log("销售变更订单3")
 
     // this.getConfigKey("sys.user.initPassword").then(response => {
     //   // this.initPassword = response.msg;
@@ -876,6 +878,12 @@ export default {
 
   },
   methods: {
+    clearUser() {
+      this.saleUserdataFilter();
+    },
+    clearData() {
+      this.customerdataFilter()
+    },
     // 合并单元格
     arraySpanMethod({
       row,
@@ -1175,10 +1183,11 @@ export default {
       }
 
 
-      SwJsCustomerlistSelect(param).then(response => {
+      systemUserSelect(param).then(response => {
         if (response.code == "200") {
-          this.saleUserListQuery.pageNum = this.saleUserListQuery.pageNum + 1
-          this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
+          this.saleUserListQuery.pageNum++
+          // this.saleUseroptions.push.apply(this.saleUserListQuery, response.data.rows)
+          this.saleUseroptions.push(...response.data.rows)
         } else {
           // this.$message.error(response.msg)
         }
@@ -1268,14 +1277,14 @@ export default {
       this.customerListQuery.pageNum = 1
       this.customerName = val
       const param = {
-        selectMsg: this.customerId,
+        selectMsg: this.customerName,
         pageNum: this.customerListQuery.pageNum,
         pageSize: this.customerListQuery.pageSize
       }
 
       SwJsCustomerlistSelect(param).then(response => {
         if (response.code == "200") {
-          this.customerListQuery.pageNum = this.customerListQuery.pageNum + 1
+          this.customerListQuery.pageNum++
           this.customeroptions = response.data.rows
         } else {
           // this.$message.error(response.msg)
