@@ -69,13 +69,15 @@
         <el-table-column fixed="right" label="操作" min-width="230px;">
           <template slot-scope="scope">
             <el-button style="margin-left:8px; margin-top: 2px" icon="el-icon-share" class="caozuoxiangqengFN"
-              size="mini" type="text" @click="showDetail(scope.row)">详情</el-button>
+              size="mini"
+                       type="text" @click="showDetail(scope.row)" v-hasPermi="['sale:saleOrder:details']">详情</el-button>
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click="mdfDetail(scope.row)">修改</el-button>-->
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==1"  icon="el-icon-edit" plain size="mini"   type="text" @click=" auditDetail(scope.row,2)">撤销</el-button>-->
-            <el-button style="margin-top: 1px" v-show="scope.row.status == 2" class="caozuoxiangqengFN"
-              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 4)">复审</el-button>
-            <el-button style="margin-top: 1px" v-show="scope.row.status == 5" class="caozuoxiangqengFN"
-              icon="el-icon-edit" size="mini" type="text" @click="auditDetail(scope.row, 8)">复核反审</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status == 2"  class="caozuoxiangqengFN" icon="el-icon-edit" size="mini"
+                       type="text" @click="auditDetail(scope.row, 4)" v-hasPermi="['sale:saleOrder:Reviews']">复审</el-button>
+            <el-button style="margin-top: 1px" v-show="scope.row.status == 5"  class="caozuoxiangqengFN"
+              icon="el-icon-edit" size="mini"
+                       type="text" @click="auditDetail(scope.row, 8)" v-hasPermi="['sale:saleOrder:Review']">复核反审</el-button>
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==5"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,7)">标记完成</el-button>-->
             <!--            <el-button size="small" type="primary" @click="auditDetail(scope.row,4)">取消完成</el-button>-->
             <!--            <el-button style="margin-top: 1px" v-show="scope.row.status==6"  icon="el-icon-edit" plain size="mini"   type="text" @click="auditDetail(scope.row,5)">指定结束</el-button>-->
