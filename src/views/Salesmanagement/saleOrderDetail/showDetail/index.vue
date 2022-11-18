@@ -350,7 +350,7 @@
           <!--          &lt;!&ndash;            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>&ndash;&gt;-->
           <!--        </el-col>-->
         </el-row>
-        <el-table :data="auditData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;border-spacing: 0 !important; ">
+        <el-table :data="auditData" border style="width: 100%;margin-top: 10px;border-spacing: 0 !important; ">
 
           <el-table-column prop="auditUser" label=审批人 width="300%" style="text-align:center">
             <template slot-scope="scope">
@@ -1781,63 +1781,36 @@ export default {
 
   body {
     border: solid 1px #ffffff;
+    color: #000000;
     /* margin: 10mm 15mm 10mm 15mm; */
   }
-//  #printRecord table {
-//    table-layout: fixed !important;
-//  }
-//
-//  /**  内容描述  */
-//  #printRecord .el-table__body .el-table__row .el-table_1_column_3 .cell {
-//    width: 280px !important;
-//  }
-//
-//  /**  表头描述  */
-//  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_3 .cell {
-//    width: 280px !important;
-//  }
-//
-//  /** 型号内容  */
-//  #printRecord .el-table__body .el-table__row .el-table_1_column_2 .cell {
-//    width: 200px !important;
-//  }
-//
-//  /**  表头型号  */
-//  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_2 .cell {
-//    width: 200px !important;
-//  }
-//
-//  /**  表头品牌  */
-//  #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_1 .cell {
-//    width: 60px !important;
-//  }
-//
-//  /** 品牌内容  */
-//  #printRecord .el-table__body .el-table__row .el-table_1_column_1 .cell {
-//    width: 60px !important;
-//  }
-//
-//
-//  /**  表头数量  */
-//  /* #printRecord .el-table__header-wrapper .el-table__header .has-gutter .el-table_1_column_4 .cell{
-//
-//} */
-//
-//  #printRecord .el-table__header-wrapper .el-table__header {
-//    width: 100% !important;
-//    border: solid 1px #f2f2f2;
-//  }
-//  #printRecord .el-table__header-wrapper .el-table__header {
-//    width: 100% !important;
-//  }
-//
-//  #printRecord .el-table__body-wrapper .el-table__body {
-//    width: 100% !important;
-//  }
-//
-//  #printRecord #pagetable table {
-//    table-layout: fixed !important;
-//  }
+  #printRecord .news table,#printRecord .news .table-top {
+    border-color: #000000;
+    color: #000000;
+  }
+  #printRecord .news table tr th,#printRecord .news table tr td {
+    border-color: #000000;
+  }
+  ::v-deep .el-descriptions,::v-deep .el-descriptions .el-descriptions__body{
+    color: #000000;
+  }
+  ::v-deep .el-descriptions .is-bordered .el-descriptions-item__cell{
+    border-color: #000000;
+  }
+  ::v-deep .el-table--border{
+    border-color: #000000 !important;
+  }
+  ::v-deep .el-table{
+    color: #000000;
+  }
+  ::v-deep .el-table .el-table__header-wrapper th,::v-deep.el-table .el-table__fixed-header-wrapper th{
+    color: #000000;
+  }
+  ::v-deep .el-table th.el-table__cell.is-leaf,::v-deep .el-table td.el-table__cell{
+    border-bottom:1px solid #000000;
+    border-right: 1px solid #000000;
+  }
+
 }
 </style>
 
