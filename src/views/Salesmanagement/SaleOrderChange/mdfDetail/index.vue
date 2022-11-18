@@ -186,11 +186,11 @@
       <!--        </el-col>-->
       <!--      </el-row>-->
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
-        </el-row>
+        </el-row> -->
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="goodsMsg" label="品牌" width="">
             <template slot-scope="scope">
