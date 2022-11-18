@@ -244,172 +244,47 @@
         <!--        </el-col>-->
         <!--      </el-row>-->
         <div>
-          <el-row>
-            <el-col :span="24">
-              <!--            <el-button plain style="float: right;" type="primary" @click="_ly_addFrom">新增一行</el-button>-->
-            </el-col>
-          </el-row>
-          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;border-spacing: 0 !important;">
-            <el-table-column prop="brand" label="品牌" width="150">
-              <template slot-scope="scope">
-                <sapn>
-                  <!--                <el-input type="text" v-model="scope.row.goodsMsg" style="width: 70%;"  readonly/>-->
-                  <span>{{ scope.row.brand }}</span>
-
-                  <!--                <el-select @change="goodsOnChange(scope.row,$event)" v-loadmore="loadMore" v-model="scope.row.goodsMsg" filterable clearable remote :remote-method="dataFilter" placeholder="请选择" style="width: 100%;">-->
-                  <!--                  <el-option-->
-                  <!--                    v-for="item in options"-->
-                  <!--                    :key="item.value"-->
-                  <!--                    :label="item.label"-->
-                  <!--                    :value="item.value">-->
-                  <!--                  </el-option>-->
-                  <!--                </el-select>-->
-                </sapn>
-              </template>
+          <el-table :data="tableData" border style="width: 100%;margin-top: 10px;border: 1px solid #dfe6ec !important;border-spacing: 0 !important;border-right: transparent !important;">
+            <el-table-column prop="brand" label="品牌" width="">
             </el-table-column>
-            <el-table-column prop="model" key="model" label="型号" width="150"/>
-            <el-table-column prop="description" label="描述" width="150"/>
-            <el-table-column prop="qty" label="数量" width="100">
+            <el-table-column prop="model" key="model" label="型号" width=""/>
+            <el-table-column prop="description" label="描述" width=""/>
+            <el-table-column prop="qty" label="数量" width="">
               <template slot-scope="scope">
-                <!--              <sapn>-->
-                <!--&lt;!&ndash;                <el-input  @change="goodsQtyChange(scope.row)" v-model="scope.row.qty"  placeholder="数量"  @input="sum(scope.row)" oninput="value= value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''"></el-input>&ndash;&gt;-->
-                <!--                <span>{{scope.row.qty}}</span>-->
-
-                <!--                &lt;!&ndash;                <el-input :id="scope.row.goodsId"  :class="this.qtyclass" v-model="scope.row.qty"  placeholder="数量" style="" @input="sum(scope.row)"  ></el-input>&ndash;&gt;-->
-                <!--              </sapn>-->
                 <div style="text-align: right">
                   {{ parseFloat(scope.row.qty).toFixed(2) }}
-
                 </div>
               </template>
             </el-table-column>
             <el-table-column prop="normalPrice" label="标准单价" width="">
               <template slot-scope="scope">
-                <!--              <sapn>-->
-                <!--&lt;!&ndash;                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>&ndash;&gt;-->
-                <!--                <span>{{scope.row.normalPrice}}</span>-->
-
-                <!--              </sapn>-->
                 <div style="text-align: right">
-                  <!--                <el-input v-model="scope.row.normalPrice" placeholder="标准单价" style="" readonly></el-input>-->
                   {{ parseFloat(scope.row.normalPrice == null ? 0 : scope.row.normalPrice).toFixed(2) }}
                 </div>
               </template>
             </el-table-column>
             <el-table-column prop="currentPrice" label="本次单价" width="">
               <template slot-scope="scope">
-                <!--              <sapn>-->
-                <!--&lt;!&ndash;                <el-input v-model="scope.row.currentPrice" placeholder="本次单价" style="" @input="sum(scope.row)" readonly></el-input>&ndash;&gt;-->
-                <!--                <span>{{scope.row.currentPrice}}</span>-->
-
-                <!--              </sapn>-->
                 <div style="text-align: right">
                   {{ parseFloat(scope.row.currentPrice).toFixed(2) }}
-
                 </div>
               </template>
             </el-table-column>
-
             <el-table-column prop="totalPrice" label="金额" width="">
               <template slot-scope="scope">
-                <!--              <sapn>-->
-                <!--&lt;!&ndash;                <el-input  v-model="scope.row.totalPrice" placeholder="金额" style="" readonly></el-input>&ndash;&gt;-->
-                <!--                <span>{{scope.row.totalPrice}}</span>-->
-
-                <!--              </sapn>-->
                 <div style="text-align: right">
                   {{ parseFloat(scope.row.totalPrice).toFixed(2) }}
-
                 </div>
               </template>
             </el-table-column>
-
-
             <el-table-column prop="remark" label="备注" width="">
               <template slot-scope="scope">
                 <sapn>
-                  <!--                <el-input v-model="scope.row.remark" type="textarea" placeholder="备注" readonly></el-input>-->
                   <span>{{ scope.row.remark }}</span>
-
                 </sapn>
               </template>
             </el-table-column>
-            <!--          <el-table-column label="操作" align="center" width="80">-->
-            <!--            <template slot-scope="scope">-->
-            <!--              <span @click="_ly_delFrom(scope.row)">-->
-            <!--                <i class="el-icon-error" style="color: red;"></i>-->
-            <!--              </span>-->
-            <!--            </template>-->
-            <!--          </el-table-column>-->
           </el-table>
-          <!-- <div width="1050px" center :before-close="_ly_beforeClose" @close="_ly_closeDialog">
-          <div class="hello" style="margin-top: 0.5%;margin-left: 3%;">
-            <div class="box1">
-              <table border="1" style="border:solid #eee thin;" cellspacing="0" cellpadding="1"
-                class="tablebiankuan table-heads" width="95%" height="20px">
-                <thead style="">
-                  <tr style="height:30px; ">
-                    <th style="width: 130px;height: 30px;">品牌</th>
-                    <th style="width: 130px;height: 30px;">型号</th>
-                    <th style="width: 130px;height: 30px;">描述</th>
-                    <th style="width: 140px;height: 30px;">数量</th>
-                    <th style="width: 140px;height: 30px;">单价</th>
-                    <th style="width: 140px;height: 30px;">金额</th>
-                    <th style="width: 350px;height: 30px;">备注</th>
-                    <th style="width: 50px;height: 30px;">操作</th>
-                  </tr>
-                </thead>
-              </table>
-              <div class="table-bodys">
-                <table border="1" style=" border: solid #ffffff thin; width:1040px;height:42px; margin-top: 0.5%;"
-                  cellspacing="0" class="tablebiankuan">
-                  <el-row v-for="(form, index) in formArr" style="width:110%;margin-bottom: -1.1%;" :key="index">
-                    <el-form label-position="right" label-width="50px" style="margin-top:1%;" :model="form"
-                      :ref="form.formName" :inline="true">
-                      <el-form-item label="" v-if="false" prop="cbpc01" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpc01" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-col style="margin-left: 0%;" :span="7">
-                        <el-form-item label="" prop="cbpc000">
-                          <el-popover placement="bottom-start" trigger="click">
-                            <Goodsone01 ref="Goodsone01" @selected="selected08($event,index)"
-                              style="width:370px!important;" />
-                            <el-input slot="reference" v-model="form.cbpc000" placeholder="" readonly
-                              style="width:205.6%;">
-                            </el-input>
-                          </el-popover>
-                        </el-form-item>
-                      </el-col>
-                      <el-form-item label="" size="small" prop="nickname" style="margin-left:5.1%;">
-                        <el-input type="text" v-model="form.cbpd09" @blur="chen(form)" style="width:73.2%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd11" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd11" @blur="chen(form)" :min="0" :controls="false"
-                          :precision="2" style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd12" style="margin-left:-5.3%;">
-                        <el-input-number v-model="form.cbpd12" :min="0" :controls="false" :precision="2"
-                          style="width:74%;"></el-input-number>
-                      </el-form-item>
-                      <el-form-item label="" size="small" prop="cbpd13" style="margin-left:-5.2%;">
-                        <el-input v-model="form.cbpd13" style="width:184.1%;"></el-input>
-                      </el-form-item>
-
-                      <el-form-item v-if="false" label="" size="small" prop="cbpd13" style="margin-left:-4%;">
-                        <el-input v-model="form.cbpd13" style="width:70%;"></el-input>
-                      </el-form-item>
-                      <el-form-item label="" v-if="false" prop="name" style="margin-left:0.8%;">
-                        <el-input v-model="form.cbpd08" style="border:solid #eee thin;width:70%;"></el-input>
-                      </el-form-item>
-                      <el-button v-if="index != 0" type="danger" style="position: absolute; left: 103%;" size="small"
-                        icon="el-icon-delete" circle @click="_ly_delFrom(index)"></el-button>
-                    </el-form>
-                  </el-row>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
         </div>
       </el-form>
 
@@ -1843,12 +1718,14 @@ export default {
 <style lang="scss" scoped>
 ::v-deep .el-table__header,::v-deep .el-table__body{
   width: 100% !important;
-  table-layout: fixed !important;
+  table-layout: auto !important;
 }
 ::v-deep .el-table::before, ::v-deep .el-table--group::after,::v-deep .el-table--border::after {
   //content: inherit;
 }
-
+::v-deep .el-table::before{
+  height: 0;
+}
 ::v-deep .el-table--border {
   border: 1px solid #dfe6ec !important;
   border-bottom: transparent !important;
@@ -1858,7 +1735,11 @@ export default {
 //  border-bottom: 1px solid #dfe6ec !important;
 //}
 ::v-deep .el-table .el-table__header-wrapper th,::v-deep .el-table .el-table__fixed-header-wrapper th{
-  height: 44px;
+  height: 40px;
+  padding: 10px 0 0;
+}
+::v-deep .el-table tr:last-child td{
+  border-bottom: none;
 }
 </style>
 <style lang="scss" scoped>
@@ -1877,11 +1758,6 @@ export default {
   body {
     border: solid 1px #ffffff;
     /* margin: 10mm 15mm 10mm 15mm; */
-  }
-  #printRecord .el-table--border {
-    border: 1px solid #dfe6ec !important;
-    border-bottom: transparent !important;
-    border-right: transparent !important;
   }
 //  #printRecord table {
 //    table-layout: fixed !important;
