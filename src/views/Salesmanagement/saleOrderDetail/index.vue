@@ -726,6 +726,17 @@ export default {
     deptName(val) {
       this.$refs.tree.filter(val);
     },
+    tableData: {
+      handler(newValue, oldValue) {
+        for (let i = 0; i < newValue.length; i++) {
+          if (oldValue[i] != newValue[i]) {
+            console.log(newValue)
+          }
+        }
+      },
+      deep: true
+    }
+
   },
   created() {
     console.log("1----------------------1")
@@ -984,23 +995,6 @@ export default {
     },
     // 增加一行表单
     _ly_addFrom() {
-      // if (this.formArr.length >= 10) {
-      //   this.$message.warning('最多只能添加10行')
-      //   this.reset01();
-      //   // 如果需要更多行，可以调整[dialog-content]的高度，或者将界面调整为允许滚动
-      //   return
-
-      // }
-
-      // this.formArr.push({
-      //   formName: 'myform' + (new Date()).getTime(), // myform1648431132399
-      //   cbsc08: '',
-      //   cbsc09: '',
-      //   cbsc10: '',
-      //   branch: '',
-      //   cbpc01: this.form2.cbpg161,
-      //   cbpd08: this.form2.cbpd08,
-      // })
       this.tableData.push({
         goodsId: '',
         // normalPrice: '',
@@ -1297,7 +1291,6 @@ export default {
     goodsOnChange(row) {
       // console.log(this.formData.customer)
       // console.log("val",val)
-      console.log("val", row)
       // row.qty=0.5
 
       if (this.formData.customerId == null) {
@@ -1331,6 +1324,7 @@ export default {
           row.normalPrice = response.data.normalPrice
           row.canUseSku = response.data.canUseSku
 
+
         } else {
           row.normalPrice = 0.0
           row.canUseSku = 0.0
@@ -1339,6 +1333,10 @@ export default {
 
         }
       });
+      let index = this.tableData.length - 1;
+      if (this.tableData[index].goodsId) {
+        this._ly_addFrom()
+      }
 
     },
     getQtyStyle(row) {
@@ -1403,6 +1401,10 @@ export default {
       this.formData.goods = this.tableData
       this.formData.currency = this.formData.currency == 'CNY' ? 6 : 5
       console.log(this.formData.currency)
+      let arr = this.formData.goods.filter(item => {
+        return item.goodsId != '' && item.goodsId != null
+      })
+      this.formData.goods = arr
       addSaleOrder(this.formData).then(response => {
         if (response.code == "200") {
           this.$message.success("添加成功")
@@ -1410,10 +1412,6 @@ export default {
           this.$router.push({ path: "/Salesmanagement/SaleOrderGn", query: { id: 1 } })
 
         } else {
-
-          // this.$message.error(response.msg)
-
-          // this.$router.go(-1)
 
         }
       }

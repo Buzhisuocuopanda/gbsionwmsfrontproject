@@ -188,11 +188,11 @@
       <!--        </el-col>-->
       <!--      </el-row>-->
       <div>
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-button plain style="float: left;" type="primary" @click="_ly_addFrom">新增一行</el-button>
           </el-col>
-        </el-row>
+        </el-row> -->
         <el-table :data="tableData" border :span-method="arraySpanMethod" style="width: 100%;margin-top: 10px;">
           <el-table-column prop="goodsId" label="品牌" width="">
             <template slot-scope="scope">
@@ -1416,6 +1416,12 @@ export default {
         }
       });
 
+      console.log(this.tableData, "this.tableDatathis.tableDatathis.tableData")
+      let index = this.tableData.length - 1;
+      if (this.tableData[index].cbobId) {
+        this._ly_addFrom()
+      }
+
     },
     getQtyStyle(row) {
       return "color: red"
@@ -1565,6 +1571,11 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.formData.goods = this.tableData
+
+      let arr = this.formData.goods.filter(item => {
+        return item.cbobId != '' && item.cbobId != null
+      })
+      this.formData.goods = arr
       addSaleOrderChange(this.formData).then(response => {
         if (response.code == "200") {
           this.$message.success("添加成功")
